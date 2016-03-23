@@ -1,0 +1,28 @@
+<div class="post-card-header">
+    <img ng-src="{{Post.ImageURL}}" class="post-card-image" onerror="this.src = '';">
+    <div class="post-card-image-gradient">
+        <div class="post-card-metadata-text">
+            <p style="margin-bottom:2px; font-weight:700; font"> <i class="zmdi zmdi-tag-more zmdi-hc-fw"></i><span> {{Post.Tags}}</span></p>
+            <i class="zmdi zmdi-calendar zmdi-hc-fw"></i><span style="margin-right:10px"> {{Post.CreationDate}}</span>
+            <i class="zmdi zmdi-accounts-alt zmdi-hc-fw"></i> <span> {{Post.Class.Name}}, {{Post.Class.Teacher}}</span>
+        </div>
+        <p class="card-link-text" style="">
+            <i class="zmdi zmdi-globe-alt zmdi-hc-fw"></i> <span> {{Post.ImageURL}}</span>
+        </p>
+    </div>
+</div>
+<p class="post-card-title">{{Post.Title}}</p>
+<p class="post-card-creator"><span>By {{Post.Creator.Name}}</span><span style="float:right">(<i class="zmdi zmdi-graduation-cap"></i> {{Post.Creator.ClassOf}})</span></p>
+<p id="post_card_description" ng-class="{ 'OverflowShadow': Document.getElementById('post-card-description').scrollHeight > Document.getElementById('post-card-description').clientHeight }">
+    {{Post.Description}}
+</p>
+<md-card-actions layout="row" layout-align="start center">
+    <md-button class="md-icon-button" aria-label="Flag">
+        <md-icon>flag</md-icon>
+    </md-button>
+    <p class="like-counter">{{Post.Likes}}</p>
+    <md-button id="like_thumb_button" class="md-icon-button" aria-label="Like">
+        <md-icon>thumb_up</md-icon>
+    </md-button>
+    <md-button id="open_button" class="md-button md-accent" aria-label="Open resource">Open Resource</md-button>
+</md-card-actions>
