@@ -1,4 +1,5 @@
 /*global app*/
+/*global angular*/
 app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', function ($scope, $mdDialog, $window, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService) {
     $scope.Posts = [];
     $scope.searchTerm = '';
