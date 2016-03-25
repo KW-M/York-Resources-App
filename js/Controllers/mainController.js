@@ -13,7 +13,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
 
     $scope.toggleSidebar = function () { //called by the top left toolbar menu button
         $mdSidenav('left').toggle();
-    }
+    };
 
     $scope.helpDialog = function () { //called by the top right toolbar help button
         $mdDialog.show({
@@ -92,7 +92,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
     };
 
     $window.formatResponse = function (rawResponse) {
-        formmatedResponse = JSON.parse(rawResponse.body);
+        var formmatedResponse = JSON.parse(rawResponse.body);
         console.log(formmatedResponse);
         return (formmatedResponse)
     }
@@ -107,7 +107,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
 
     $window.loginSilent = function (response) {
         loginProcedure(authorizationService.authorizeSilent());
-    }
+    };
             }]);
 
 //called by the google client api when it loads (must be outside the controller)
