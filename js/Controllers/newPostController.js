@@ -40,7 +40,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
                 },
                 "Link": $scope.Link,
                 "FileId": "If present, the link to the resource of the post (haven't setup ui drive integration yet)",
-                "ImageURL": "https://api.pagelr.com/capture?uri=" + $scope.Link + "&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw",
+                "ImageURL": "",
                 "LikeUsers": [],
             });
             console.log(response);
