@@ -32,7 +32,7 @@ app.service('GoogleDriveService', ['$q', function ($q) {
         var promiseArray = [];
         return (self.getListOfFlies().then(function (fileArray) {
             for (var count = 0; count < fileArray.result.files.length; count++) {
-                var file = fileArray.files[count];
+                var file = fileArray.result.files[count];
                 var fileRequest = self.getDriveFileContent(file.id);
                 promiseArray.push(fileRequest);
                 console.log(promiseArray);
