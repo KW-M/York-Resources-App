@@ -69,7 +69,8 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
       console.log(token)
       GoogleDriveService.batchRequest().then(function(response) {
          console.log(response);
-         $scope.Posts = response.result;
+         $scope.Posts = response;
+                 console.log($scope.Posts);
          $scope.$apply();
       });
    }
