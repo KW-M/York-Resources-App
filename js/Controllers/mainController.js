@@ -76,15 +76,9 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
       });
    }
 
-       $scope.makeDate = function(dateRaw) {
-        var date = Date.parse(dateRaw);
-        console.log(date);
-        return((date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear());
-    };
-
-   $window.pushPosts = function(response) {
-
-   }
+   $scope.openLink = function(link) {
+      $window.open(link,'_blank');
+   };
 
    $window.onscroll = function(event) { //called whenever the window scrolls
       var yScroll = $window.pageYOffset;
@@ -102,13 +96,13 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
       });
    };
 
-    $window.formatArrayResponse = function (rawArrayResponse) {
-        var arrayOfPosts = [];
-        for (response of rawArrayResponse) {
-            arrayOfPosts.push(response.result);
-        }
-        return (arrayOfPosts)
-    }
+   $window.formatArrayResponse = function(rawArrayResponse) {
+      var arrayOfPosts = [];
+      for (response of rawArrayResponse) {
+         arrayOfPosts.push(response.result);
+      }
+      return (arrayOfPosts)
+   }
 
    $window.loginSilent = function(response) {
       loginProcedure(authorizationService.authorizeSilent());
