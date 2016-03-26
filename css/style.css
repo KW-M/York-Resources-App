@@ -400,13 +400,16 @@ input.search-field:focus:-ms-input-placeholder {
 
 .post-card-link-text {
     opacity: 0;
-    margin: 27.5px 16px 0 16px;
+    position: absolute;
+    top: 27.5px;
+    margin: 0px 16px;
     color: white;
+    width:100%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     font-weight: bold;
-    transition: opacity 0.2s
+    transition: opacity 0.2s;
 }
 
 .post-card-header:hover .post-card-link-text {
