@@ -404,7 +404,7 @@ input.search-field:focus:-ms-input-placeholder {
     top: 27.5px;
     margin: 0px 16px;
     color: white;
-    width:100%;
+    width:240px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
