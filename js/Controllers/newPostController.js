@@ -10,11 +10,6 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
     $scope.Link = '';
     $scope.readOnly = false;
     $scope.classSearch = "";
-    $scope.makeDate = function(dateRaw) {
-        var date = Date.parse(dateRaw);
-        console.log(date);
-        return((date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear());
-    };
     $scope.courses = ["English III", "Spanish I", "Chemistry", "AP Biology", "Geometry", "Algebra II", "Physics", "calc AB", "Chinese I"];
     $scope.submit = function () {
         GoogleDriveService.getUserInfo().then(function (userInfo) {
