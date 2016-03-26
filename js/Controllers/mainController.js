@@ -1,5 +1,4 @@
-/*global app*/
-/*global angular*/
+                                                                            /*global app*//*global angular*//*global gapi*/
 app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', function ($scope, $mdDialog, $window, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService) {
     $scope.Posts = [];
     $scope.searchTerm = '';
@@ -64,11 +63,8 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
     };
 
     $scope.initiateDrive = function () {
-        GoogleDriveService.batchRequest().then(function (rawResponse) {
+        GoogleDriveService.batchRequest().then(function (response) {
             // make a formatter to convert the http response aray into body array
-            console.log(rawResponse);
-
-            var arrayOfPosts = formatArrayResponse(rawResponse);
             $scope.Posts = arrayOfPosts;
             $scope.$apply();
         });
@@ -92,20 +88,6 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
             columnWidth: '.post-card',
         });
     };
-
-    $window.formatResponse = function (rawResponse) {
-        var formmatedResponse = JSON.parse(rawResponse.body);
-        console.log(formmatedResponse);
-        return (formmatedResponse)
-    }
-
-    $window.formatArrayResponse = function (rawArrayResponse) {
-        var arrayOfPosts = [];
-        for (response of rawArrayResponse) {
-            arrayOfPosts.push(formatResponse(response));
-        }
-        return (arrayOfPosts)
-    }
 
     $window.loginSilent = function (response) {
         loginProcedure(authorizationService.authorizeSilent());
