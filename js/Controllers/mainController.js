@@ -69,8 +69,8 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
       console.log(token)
       GoogleDriveService.batchRequest().then(function(response) {
          console.log(response);
-         $scope.Posts = response;
-                 console.log($scope.Posts);
+         $scope.Posts = formatArrayResponse(response);
+         console.log($scope.Posts);
          $scope.$apply();
       });
    }
@@ -94,6 +94,14 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
          columnWidth: '.post-card',
       });
    };
+
+    $window.formatArrayResponse = function (rawArrayResponse) {
+        var arrayOfPosts = [];
+        for (response of rawArrayResponse) {
+            arrayOfPosts.push(response.result);
+        }
+        return (arrayOfPosts)
+    }
 
    $window.loginSilent = function(response) {
       loginProcedure(authorizationService.authorizeSilent());
