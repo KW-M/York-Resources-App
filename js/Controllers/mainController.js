@@ -76,7 +76,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
       });
    }
 
-       $window.makeDate = function(dateRaw) {
+       $scope.makeDate = function(dateRaw) {
         var date = Date.parse(dateRaw);
         console.log(date);
         return((date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear());
