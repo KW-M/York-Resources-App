@@ -68,6 +68,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
       var token = gapi.auth.getToken()
       console.log(token)
       GoogleDriveService.batchRequest().then(function(response) {
+         console.log(response);
          $scope.Posts = response.result;
          $scope.$apply();
       });
