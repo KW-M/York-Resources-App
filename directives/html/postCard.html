@@ -3,7 +3,7 @@
     <div class="post-card-image-gradient">
         <div class="post-card-metadata-text">
             <p style="margin-bottom:2px; font-weight:700; font"> <i class="zmdi zmdi-tag-more zmdi-hc-fw"></i><span ng-repeat="Tag in Post.Tags"> {{Tag}},</span></p>
-            <i class="zmdi zmdi-calendar zmdi-hc-fw"></i><span style="margin-right:10px"> {{Date.parse(Post.CreationDate).toString()}}</span>
+            <i class="zmdi zmdi-calendar zmdi-hc-fw"></i><span style="margin-right:10px"> {{makeDate(Post.CreationDate)}}</span>
             <i class="zmdi zmdi-accounts-alt zmdi-hc-fw"></i> <span> {{Post.Class.Name}}, {{Post.Class.Teacher}}</span>
         </div>
         <p class="card-link-text" style="">
