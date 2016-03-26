@@ -1,4 +1,4 @@
-/* we don't define the "new post controller" here because it was alredy 
+/* we don't define the "new post controller" here because it was alredy
    defined by the $md-dialog in the newPost function on mainController.   */
 function newPostController($scope, $mdDialog, GoogleDriveService) {
     $scope.close = function () {
@@ -40,7 +40,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
                 },
                 "Link": $scope.Link,
                 "FileId": "If present, the link to the resource of the post (haven't setup ui drive integration yet)",
-                "ImageURL": "http://api.page2images.com/directlink?p2i_url=" + $scope.Link + "&p2i_device=6&p2i_screen=1024x768&p2i_size=300x300&p2i_key=d61e490b7eb862c6",
+                "ImageURL": "https://api.pagelr.com/capture?uri=" + $scope.Link + "&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw",
                 "LikeUsers": [],
             });
             console.log(response);
