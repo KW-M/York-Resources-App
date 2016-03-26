@@ -30,7 +30,7 @@ app.service('GoogleDriveService', ['$q', function ($q) {
 
     this.batchRequest = function () { //do this one
         var promiseArray = [];
-        return (self.getListOfFlies().then(function (fileArrayRaw) {
+        return (self.getListOfFlies().then(function (fileArray) {
             var fileArray = formatResponse(fileArrayRaw);
             for (var count = 0; count < fileArray.files.length; count++) {
                 var file = fileArray.files[count];
