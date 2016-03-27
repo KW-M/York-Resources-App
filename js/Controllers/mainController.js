@@ -77,7 +77,8 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
    }
 
    $scope.openLink = function(link) {
-      $window.open("/"+link);
+      var myWindow = $window.open("");
+      myWindow.location.assign(link);
    };
 
    $window.onscroll = function(event) { //called whenever the window scrolls
