@@ -65,6 +65,17 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
    };
 
    $scope.initiateDrive = function() {
+      var xhr = new XMLHttpRequest();
+      xhr.responseType = 'blob';
+      xhr.onload = function() {
+         var reader = new FileReader();
+         reader.onloadend = function() {
+            console.log(reader.result);
+         }
+         reader.readAsDataURL(xhr.response);
+      };
+      xhr.open('GET', url);
+      xhr.send();
       console.log(new Date());
       var token = gapi.auth.getToken();
       console.log(token);
