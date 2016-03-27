@@ -68,15 +68,15 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
       console.log(new Date());
       var token = gapi.auth.getToken();
       console.log(token);
-      GoogleDriveService.batchRequest().then(function(response) {
-         console.log(response);
-      });
       // GoogleDriveService.batchRequest().then(function(response) {
       //    console.log(response);
-      //    $scope.Posts = formatArrayResponse(response);
-      //    console.log($scope.Posts);
-      //    $scope.$apply();
       // });
+      GoogleDriveService.multiRequest().then(function(response) {
+         console.log(response);
+         $scope.Posts = formatArrayResponse(response);
+         console.log($scope.Posts);
+         $scope.$apply();
+      });
    }
 
    $scope.openLink = function(link) {
