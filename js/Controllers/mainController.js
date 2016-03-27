@@ -78,7 +78,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
 
    $scope.openLink = function(link) {
       var myWindow = $window.open("");
-      myWindow.location = "//" + link;
+      myWindow.location = "//" + "mrhyker.tripod.com/midatlantichikesphotos/id32.html";
    };
 
    $window.onscroll = function(event) { //called whenever the window scrolls
