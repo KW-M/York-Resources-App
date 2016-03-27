@@ -1,4 +1,4 @@
-<div class="post-card-header" ng-click="openLink(Post.Link)">
+<a href="{{Post.Link}}" target="_blank"><div class="post-card-header">
     <img ng-src="{{Post.ImageURL}}" class="post-card-image" onerror="this.src = '';">
     <div class="post-card-image-gradient">
         <p class="post-card-link-text">
@@ -10,7 +10,7 @@
             <i class="zmdi zmdi-accounts-alt zmdi-hc-fw"></i> <span> {{Post.Class.Name}}, {{Post.Class.Teacher}}</span>
         </div>
     </div>
-</div>
+</div></a>
 <p class="post-card-title">{{Post.Title}}</p>
 <p class="post-card-creator"><span>By {{Post.Creator.Name}}</span><span style="float:right">(<i class="zmdi zmdi-graduation-cap"></i> {{Post.Creator.ClassOf}})</span></p>
 <p id="post_card_description" ng-class="{ 'OverflowShadow': Document.getElementById('post-card-description').scrollHeight > Document.getElementById('post-card-description').clientHeight }">
