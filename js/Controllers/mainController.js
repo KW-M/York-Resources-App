@@ -68,16 +68,22 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
       console.log(new Date());
       var token = gapi.auth.getToken();
       console.log(token);
-      var settings = {
-         "async": true,
-         "crossDomain": true,
-         "url": "https://api.pagelr.com/capture?uri=www.google.com&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw",
-         "method": "GET",
-      }
+      var data = null;
 
-      $.ajax(settings).done(function(response) {
-         console.log(response);
+      var xhr = new XMLHttpRequest();
+      xhr.withCredentials = true;
+
+      xhr.addEventListener("readystatechange", function() {
+         if (this.readyState === 4) {
+            console.log(this.responseText);
+         }
       });
+
+      xhr.open("GET", "https://api.pagelr.com/capture?uri=www.google.com&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw");
+      xhr.setRequestHeader("cache-control", "no-cache");
+      xhr.setRequestHeader("postman-token", "cfeeb647-7de3-4185-c9bf-bdd28c01e668");
+
+      xhr.send(data);
       // GoogleDriveService.batchRequest().then(function(response) {
       //    console.log(response);
       //    $scope.Posts = formatArrayResponse(response);
