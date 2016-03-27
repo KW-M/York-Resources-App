@@ -108,7 +108,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
       var settings = {
          "async": true,
          "crossDomain": true,
-         "url": "http://api.pagelr.com/capture?uri=www.google.com&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw",
+         "url": "https://api.pagelr.com/capture?uri=www.google.com&width=400&height=260",
          "method": "GET",
          "headers": {
             "cache-control": "no-cache",
