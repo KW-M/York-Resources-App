@@ -106,14 +106,9 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
 
    $window.loginSilent = function(response) {
       var settings = {
-         "async": true,
          "crossDomain": true,
-         "url": "https://api.pagelr.com/capture?uri=www.google.com&width=400&height=260",
+         "url": "https://api.pagelr.com/capture?uri=www.google.com&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw",
          "method": "GET",
-         "headers": {
-            "cache-control": "no-cache",
-            "postman-token": "f9df523e-e596-7754-8af8-d465aa317224"
-         }
       }
 
       $.ajax(settings).done(function(response) {
