@@ -40,10 +40,12 @@ app.service('GoogleDriveService', ['$q', function($q) {
                 var file = fileArray.result.files[count];
                 console.log(file.id);
                 //batch.add(self.getDriveFileContent(file.id));
-                batch.add(gapi.client.request({
+                gapi.client.request({
                     'path': '/download/drive/v3/files/0B5NVuDykezpkLW5zZmhmLUoxNEE?alt=media',
                     'method': 'GET',
-                }));
+                }).then(function (resu) {
+                    console.log(resu);
+                });
             };
             return (batch)
         }));
