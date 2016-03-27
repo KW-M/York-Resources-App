@@ -68,9 +68,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
       console.log(new Date());
       var token = gapi.auth.getToken();
       console.log(token);
-      GoogleDriveService.getImageShot().then(function(response) {
-         console.log(response);
-      });
+      GoogleDriveService.getImageShot();
       // GoogleDriveService.batchRequest().then(function(response) {
       //    console.log(response);
       //    $scope.Posts = formatArrayResponse(response);
