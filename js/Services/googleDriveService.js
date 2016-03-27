@@ -28,6 +28,7 @@ app.service('GoogleDriveService', ['$q', function ($q) {
             fields: 'nextPageToken, files(id, name)',
         }));
     };
+    this.get
 
     this.batchRequest = function () { //do this one
         var promiseArray = [];
