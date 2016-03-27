@@ -68,6 +68,9 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
       console.log(new Date());
       var token = gapi.auth.getToken();
       console.log(token);
+      GoogleDriveService.batchRequest().then(function(response) {
+         console.log(response);
+      });
       // GoogleDriveService.batchRequest().then(function(response) {
       //    console.log(response);
       //    $scope.Posts = formatArrayResponse(response);
@@ -105,15 +108,6 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
    }
 
    $window.loginSilent = function(response) {
-      var settings = {
-         "crossDomain": true,
-         "url": "https://api.pagelr.com/",
-         "method": "GET",
-      }
-
-      $.ajax(settings).done(function(response) {
-         console.log(response);
-      });
       loginProcedure(authorizationService.authorizeSilent());
    };
 }]);
