@@ -35,23 +35,18 @@ app.service('GoogleDriveService', ['$q', function($q) {
 
     this.batchRequest = function() { //do this one
         var batch = gapi.client.newBatch();
-        gapi.client.request({
-            'path': 'https://drive.google.com/uc?export=download&id=0B5NVuDykezpkNlduRXVza0FCbk0',
-            'method': 'GET',
-        }).then(function(file) {
-            console.log(file)
-        });
-        // return (self.getListOfFlies().then(function(fileArray) {
-        //     for (var count = 0; count < fileArray.result.files.length; count++) {
-        //         var file = fileArray.result.files[count];
-        //         console.log(file.id);
-        //         batch.add(gapi.client.request({
-        //             'path': 'https://www.googleapis.com/download/drive/v3/files/' + file.id,
-        //             'method': 'GET',
-        //         }));
-        //     };
-        //     return (batch)
-        // }));
+        return (self.getListOfFlies().then(function(fileArray) {
+            for (var count = 0; count < fileArray.result.files.length; count++) {
+                var file = fileArray.result.files[count];
+                console.log(file.id);
+                //batch.add(self.getDriveFileContent(file.id));
+                // batch.add(gapi.client.request({
+                //     'path': 'https://content.googleapis.com/download/drive/v3/files/0B5NVuDykezpkLW5zZmhmLUoxNEE?alt=media' + file.id,
+                //     'method': 'GET',
+                // }));
+            };
+            return (batch)
+        }));
     };
 
     this.multiRequest = function() { //do this one
