@@ -33,7 +33,37 @@ app.service('GoogleDriveService', ['$q', function($q) {
 
     };
 
+
+    return (gapi.client.request({
+
+        'path': 'https://www.googleapis.com/drive/v3/files/' + fileId,
+
+        'method': 'GET',
+
+        'params': {
+
+            alt: 'media'
+
+        },
+
+    }));
+
+
+
+
     this.batchRequest = function() { //do this one
+        var batch = gapi.client.newBatch();
+        return (self.getListOfFlies().then(function(fileArray) {
+            for (var count = 0; count < fileArray.result.files.length; count++) {
+                var file = fileArray.files[count];
+                console.log(file.id);
+                batch.add(self.getDriveFileContent(file.id));
+            };
+            return (batch)
+        }));
+    };
+
+    this.multiRequest = function() { //do this one
         var promiseArray = [];
         return (self.getListOfFlies().then(function(fileArray) {
             console.log(fileArray)
