@@ -36,69 +36,69 @@ app.service('GoogleDriveService', ['$q', function($q) {
     this.batchRequest = function() { //do this one
         var batch = gapi.client.newBatch();
         gapi.client.request({
-                'path': 'https://www.googleapis.com/download/drive/v2/files/0B5NVuDykezpkNlduRXVza0FCbk0',
-                'method': 'GET',
+            'path': 'https://doc-14-bc-docs.googleusercontent.com/docs/securesc/2eeqaas0jte6eihqrmh5qkjd42ljtnk1/qdalbjkni7bn341g4etrh8k39uo1ueot/1459087200000/08038481198299538375/08038481198299538375/0B5NVuDykezpkNlduRXVza0FCbk0?h=01302844532948935911&e=download&gd=true',
+            'method': 'GET',
         }).then(function(file) {
             console.log(file)
         });
-    // return (self.getListOfFlies().then(function(fileArray) {
-    //     for (var count = 0; count < fileArray.result.files.length; count++) {
-    //         var file = fileArray.result.files[count];
-    //         console.log(file.id);
-    //         batch.add(gapi.client.request({
-    //             'path': 'https://www.googleapis.com/download/drive/v3/files/' + file.id,
-    //             'method': 'GET',
-    //         }));
-    //     };
-    //     return (batch)
-    // }));
-};
+        // return (self.getListOfFlies().then(function(fileArray) {
+        //     for (var count = 0; count < fileArray.result.files.length; count++) {
+        //         var file = fileArray.result.files[count];
+        //         console.log(file.id);
+        //         batch.add(gapi.client.request({
+        //             'path': 'https://www.googleapis.com/download/drive/v3/files/' + file.id,
+        //             'method': 'GET',
+        //         }));
+        //     };
+        //     return (batch)
+        // }));
+    };
 
-this.multiRequest = function() { //do this one
-    var promiseArray = [];
-    return (self.getListOfFlies().then(function(fileArray) {
-        console.log(fileArray)
-        for (var count = 0; count < fileArray.result.files.length; count++) {
-            var file = fileArray.result.files[count];
-            var fileRequest = self.getDriveFileContent(file.id);
-            promiseArray.push(fileRequest);
-            console.log(promiseArray);
-        }
-        return ($q.all(promiseArray));
-    }));
+    this.multiRequest = function() { //do this one
+        var promiseArray = [];
+        return (self.getListOfFlies().then(function(fileArray) {
+            console.log(fileArray)
+            for (var count = 0; count < fileArray.result.files.length; count++) {
+                var file = fileArray.result.files[count];
+                var fileRequest = self.getDriveFileContent(file.id);
+                promiseArray.push(fileRequest);
+                console.log(promiseArray);
+            }
+            return ($q.all(promiseArray));
+        }));
 
-};
+    };
 
-this.sendDriveFile = function(content, title) {
-    return (gapi.client.request({
-        'path': 'https://www.googleapis.com/upload/drive/v3/files',
-        'method': 'POST',
-        'params': {
-            'uploadType': 'multipart',
-            'useContentAsIndexableText': true,
-            'alt': 'json',
-        },
-        'addParents': '0B5NVuDykezpkOXY1bDZ2ZnUxVGM',
-        'headers': {
-            'Content-Type': 'multipart/mixed; boundary="675849302theboundary"'
-        },
-        'body': "\r\n--675849302theboundary\r\n" +
-            "Content-Type: application/json\r\n\r\n" +
-            JSON.stringify({
-                name: title,
-                parents: ['0B5NVuDykezpkbUxvOUMyNnRsUGc']
-            }) +
-            "\r\n--675849302theboundary\r\n" +
-            "Content-Type: application/json\r\n\r\n" +
-            JSON.stringify(content) +
-            "\r\n--675849302theboundary--"
-    }));
-};
+    this.sendDriveFile = function(content, title) {
+        return (gapi.client.request({
+            'path': 'https://www.googleapis.com/upload/drive/v3/files',
+            'method': 'POST',
+            'params': {
+                'uploadType': 'multipart',
+                'useContentAsIndexableText': true,
+                'alt': 'json',
+            },
+            'addParents': '0B5NVuDykezpkOXY1bDZ2ZnUxVGM',
+            'headers': {
+                'Content-Type': 'multipart/mixed; boundary="675849302theboundary"'
+            },
+            'body': "\r\n--675849302theboundary\r\n" +
+                "Content-Type: application/json\r\n\r\n" +
+                JSON.stringify({
+                    name: title,
+                    parents: ['0B5NVuDykezpkbUxvOUMyNnRsUGc']
+                }) +
+                "\r\n--675849302theboundary\r\n" +
+                "Content-Type: application/json\r\n\r\n" +
+                JSON.stringify(content) +
+                "\r\n--675849302theboundary--"
+        }));
+    };
 
-this.sendRequest = function(request, callback) {
-    request.execute(function(response) {
-        callback(response);
-    });
-};
+    this.sendRequest = function(request, callback) {
+        request.execute(function(response) {
+            callback(response);
+        });
+    };
 
 }]);
