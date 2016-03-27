@@ -30,10 +30,16 @@ app.service('GoogleDriveService', ['$q', function($q) {
     };
 
     this.getImageShot = function() {
-        console.log('getting img')
-        $.get( "https://api.pagelr.com/capture?uri=www.google.com&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw", function( data ) {
-  console.log(data);
-});
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://api.pagelr.com/capture?uri=www.google.com&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw",
+            "method": "GET",
+        }
+
+        $.ajax(settings).done(function(response) {
+            console.log(response);
+        });
     };
 
     this.batchRequest = function() { //do this one

@@ -1,7 +1,7 @@
 /* we don't define the "new post controller" here because it was alredy
    defined by the $md-dialog in the newPost function on mainController.   */
 function newPostController($scope, $mdDialog, GoogleDriveService) {
-    $scope.close = function () {
+    $scope.close = function() {
         $mdDialog.hide();
     };
     $scope.Tags = [];
@@ -11,14 +11,15 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
     $scope.readOnly = false;
     $scope.classSearch = "";
     $scope.courses = ["English III", "Spanish I", "Chemistry", "AP Biology", "Geometry", "Algebra II", "Physics", "calc AB", "Chinese I"];
-    $scope.submit = function () {
-        GoogleDriveService.getUserInfo().then(function (userInfo) {
+    $scope.submit = function() {
+        GoogleDriveService.getUserInfo().then(function(userInfo) {
             console.log(userInfo.result);
             var description = document.querySelector('#DescriptionTxt').textContent;
-            var type = function () {
+            var type = function() {
                 if ($scope.Link === '') {
                     return ('NoLink');
-                } else {
+                }
+                else {
                     return ('Link');
                 }
             };
@@ -45,7 +46,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
             });
             console.log(response);
             console.log('sending...');
-            GoogleDriveService.sendDriveFile(response, $scope.Title).then(function (reply) {
+            GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
                 console.log(reply.result);
                 $scope.close();
             });
