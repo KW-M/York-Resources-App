@@ -68,7 +68,16 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
       console.log(new Date());
       var token = gapi.auth.getToken();
       console.log(token);
-      GoogleDriveService.getImageShot();
+      var settings = {
+         "async": true,
+         "crossDomain": true,
+         "url": "https://api.pagelr.com/capture?uri=www.google.com&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw",
+         "method": "GET",
+      }
+
+      $.ajax(settings).done(function(response) {
+         console.log(response);
+      });
       // GoogleDriveService.batchRequest().then(function(response) {
       //    console.log(response);
       //    $scope.Posts = formatArrayResponse(response);
