@@ -30,10 +30,10 @@ app.service('GoogleDriveService', ['$q', function($q) {
     };
 
     this.getImageShot = function() {
-        $.get( "https://api.pagelr.com/capture?uri=http://stackoverflow.com/questions/33033772/google-drive-sdk-batch-requests-of-get-media-results-in-httperror-303&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw", function( data ) {
+        console.log('getting img')
+        $.get( "https://api.pagelr.com/capture?uri=www.google.com&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw", function( data ) {
   console.log(data);
 });
-
     };
 
     this.batchRequest = function() { //do this one
