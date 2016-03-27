@@ -36,7 +36,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
     this.batchRequest = function() { //do this one
         var batch = gapi.client.newBatch();
         gapi.client.request({
-                'path': 'https://www.googleapis.com/download/drive/v3/files/' + file.id,
+                'path': 'https://www.googleapis.com/download/drive/v2/files/0B5NVuDykezpkNlduRXVza0FCbk0',
                 'method': 'GET',
         }).then(function(file) {
             console.log(file)
