@@ -36,7 +36,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
     this.batchRequest = function() { //do this one
         var batch = gapi.client.newBatch();
         gapi.client.request({
-            'path': 'https://doc-14-bc-docs.googleusercontent.com/docs/securesc/2eeqaas0jte6eihqrmh5qkjd42ljtnk1/qdalbjkni7bn341g4etrh8k39uo1ueot/1459087200000/08038481198299538375/08038481198299538375/0B5NVuDykezpkNlduRXVza0FCbk0?h=01302844532948935911&e=download&gd=true',
+            'path': 'https://drive.google.com/uc?export=download&id=0B5NVuDykezpkNlduRXVza0FCbk0',
             'method': 'GET',
         }).then(function(file) {
             console.log(file)
