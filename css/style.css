@@ -452,6 +452,10 @@ input.search-field:focus:-ms-input-placeholder {
     word-break: break-all;
 }
 
+button.md-icon-button #flag_button{
+    
+}
+
 #like_thumb_button {
     margin-left: -5px;
 }
