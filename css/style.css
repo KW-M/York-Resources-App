@@ -109,11 +109,11 @@ html body {
 }
 
 .signin-icon {
-    height: 1.5em;
-    width: 1.5em;
-    padding-top: 7px;
-    padding-bottom: 7px;
-    padding-right: 7px;
+    height: 1.75em;
+    width: 1.75em;
+    padding-top: 6px;
+    padding-bottom: 5px;
+    padding-right: 6px;
     color: white;
     border-right: #960017 2px solid;
 }
