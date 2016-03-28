@@ -10,6 +10,7 @@
 
 (function(angular, window, undefined) {
   "use strict";
+  console.log('grid loaded');
   //defaults for plugin
   var defaults = {
     gridWidth: 300, //minumum width of a grid, this may increase to take whole space of container

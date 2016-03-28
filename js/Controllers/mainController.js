@@ -1,4 +1,5 @@
 /*global app*/ /*global angular*/ /*global gapi*/
+console.log('app loaded');
 app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdSidenav', '$mdMedia', 'angularGrid', 'authorizationService', 'GoogleDriveService', function($scope, $mdDialog, $window, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService) {
    $scope.Posts = [];
    $scope.searchTerm = '';
