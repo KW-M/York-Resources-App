@@ -7,9 +7,6 @@ app.config(function ($mdThemingProvider, $mdIconProvider) {
         .icon("accountpic", "./assets/svg/avatar-1.svg", 128)
         .icon("driveIcon", "./assets/drive-icon.svg", 18);
 
-
-    $mdThemingProvider.theme('default')
-        .accentPalette('blue');
     var yorkRedMap = $mdThemingProvider.extendPalette('red', {
         '500': '#640000'
     });
@@ -28,6 +25,6 @@ app.config(function ($mdThemingProvider, $mdIconProvider) {
     $mdThemingProvider.theme('default').accentPalette('yorkBlue');
 });
 
-$(document).ready(function () {
-
-});
+// $(document).ready(function () {
+    //...
+// });
