@@ -1,5 +1,5 @@
 /*global app*/ /*global angular*/ /*global gapi*/
-app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', function($scope, $mdDialog, $window, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService) {
+app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdSidenav', '$mdMedia','angularGrid', 'authorizationService', 'GoogleDriveService', function($scope, $mdDialog, $window, $mdSidenav, $mdMedia, angularGrid, authorizationService, GoogleDriveService) {
    $scope.Posts = [];
    $scope.searchTerm = '';
    $scope.searchedPosts = [];
@@ -102,12 +102,12 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
       else {
          $('#speed-dial-container').slideUp(300);
       }
-      $('#Masonry_Container').masonry({
-         // options
-         fitWidth: true,
-         itemSelector: '.post-card',
-         columnWidth: '.post-card',
-      });
+      // $('#Masonry_Container').masonry({
+      //    // options
+      //    fitWidth: true,
+      //    itemSelector: '.post-card',
+      //    columnWidth: '.post-card',
+      // });
    };
 
    $window.formatArrayResponse = function(rawArrayResponse) {
