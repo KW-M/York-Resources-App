@@ -11,7 +11,10 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
     $scope.readOnly = false;
     $scope.classSearch = "";
     $scope.courses = ["English III", "Spanish I", "Chemistry", "AP Biology", "Geometry", "Algebra II", "Physics", "calc AB", "Chinese I"];
-var link = $scope.Link.toString();
+    document.getElementById("newPostLinkInputTxt").addEventListener('input', function(e) {
+        console.log("keyup event detected! coming from this element:", e.target);
+    }, false);
+    var link = $scope.Link.toString();
     $scope.type = function() {
 
         console.log("reached")
@@ -29,7 +32,7 @@ var link = $scope.Link.toString();
                 }
             }
             else {
-                if(link.length > 9) {
+                if (link.length > 9) {
                     $scope.Link = "http://" + link
                 }
                 return ('Link');
