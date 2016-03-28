@@ -13,6 +13,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
     $scope.courses = ["English III", "Spanish I", "Chemistry", "AP Biology", "Geometry", "Algebra II", "Physics", "calc AB", "Chinese I"];
     
     $scope.type = function() {
+        console.log("reached")
         if ($scope.Link === '') {
             return ('NoLink');
         }
