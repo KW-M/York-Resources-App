@@ -12,12 +12,12 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
     $scope.classSearch = "";
     $scope.courses = ["English III", "Spanish I", "Chemistry", "AP Biology", "Geometry", "Algebra II", "Physics", "calc AB", "Chinese I"];
     
-    $scopetype = function() {
+    $scope.type = function() {
         if ($scope.Link === '') {
             return ('NoLink');
         }
         else {
-            if ($scope.Link.match(/(?:http|https):\/\/.{3,}/)) {
+            if ($scope.Link.match(/(?:http|https):\/\/.{2,}/)) {
                 if ($scope.Link.match(/\/(?:d|file|folder)\/([-\w]{25,})\//)) {
                     return ('gDrive');
                 }
@@ -26,7 +26,10 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
                 }
             }
             else {
-                $scope.Link = "http://" + $scope.Link
+                if($scope.Link.length > 9) {
+                    $scope.Link = "http://" + $scope.Link
+                }
+                return ('Link');
             }
         }
     };
