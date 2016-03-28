@@ -20,6 +20,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
                     return ('NoLink');
                 }
                 else {
+                    if ($scope.Link.ma)
                     return ('Link');
                 }
             };
