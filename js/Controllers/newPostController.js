@@ -23,8 +23,10 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
                     if ($scope.Link.match(/\/(?:d|file|folder)\/([-\w]{25,})\//)) {
                         return ('gDrive');
                     }
-                    else if ($scope.Link.match(/(?:http|https):\/\/(.{25,})\//)) {
+                    else if ($scope.Link.match((/(?:http|https):\/\/.{3,}/)) {
                         return ('Link');
+                    } else {
+                        $scope.Link.
                     }
                 }
             };
