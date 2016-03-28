@@ -20,8 +20,11 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
                     return ('NoLink');
                 }
                 else {
-                    if ($scope.Link.ma)
-                    return ('Link');
+                    if ($scope.Link.match(/\/(?:d|file|folder)\/([-\w]{25,})\//)) {
+                        return ('gDrive');
+                    } else {
+                        return ('Link');
+                    }
                 }
             };
             var response = ({
