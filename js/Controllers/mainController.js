@@ -1,5 +1,5 @@
 /*global app*/ /*global angular*/ /*global gapi*/
-app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdSidenav', '$mdMedia','angularGrid', 'authorizationService', 'GoogleDriveService', function($scope, $mdDialog, $window, $mdSidenav, $mdMedia, angularGrid, authorizationService, GoogleDriveService) {
+app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdSidenav', '$mdMedia','angularGrid', 'authorizationService', 'GoogleDriveService', function($scope, $mdDialog, $window, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService) {
    $scope.Posts = [];
    $scope.searchTerm = '';
    $scope.searchedPosts = [];
