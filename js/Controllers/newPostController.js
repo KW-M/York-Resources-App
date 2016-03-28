@@ -11,15 +11,17 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
     $scope.readOnly = false;
     $scope.classSearch = "";
     $scope.courses = ["English III", "Spanish I", "Chemistry", "AP Biology", "Geometry", "Algebra II", "Physics", "calc AB", "Chinese I"];
-    
+var link = $scope.Link.toString();
     $scope.type = function() {
+
         console.log("reached")
-        if ($scope.Link === '') {
+        if (link === '') {
             return ('NoLink');
         }
         else {
-            if ($scope.Link.match(/(?:http|https):\/\/.{2,}/)) {
-                if ($scope.Link.match(/\/(?:d|file|folder)\/([-\w]{25,})\//)) {
+            console.log("reached2")
+            if (link.match(/(?:http|https):\/\/.{2,}/)) {
+                if (link.match(/\/(?:d|file|folder)\/([-\w]{25,})\//)) {
                     return ('gDrive');
                 }
                 else {
@@ -27,8 +29,8 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
                 }
             }
             else {
-                if($scope.Link.length > 9) {
-                    $scope.Link = "http://" + $scope.Link
+                if(link.length > 9) {
+                    $scope.Link = "http://" + link
                 }
                 return ('Link');
             }
