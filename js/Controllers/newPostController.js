@@ -11,10 +11,8 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
     $scope.readOnly = false;
     $scope.classSearch = "";
     $scope.courses = ["English III", "Spanish I", "Chemistry", "AP Biology", "Geometry", "Algebra II", "Physics", "calc AB", "Chinese I"];
-    else {
-        $scope.Link = "http://" + $scope.Link
-    }
-    var type = function() {
+    
+    $scopetype = function() {
         if ($scope.Link === '') {
             return ('NoLink');
         }
@@ -26,6 +24,9 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
                 else {
                     return ('Link');
                 }
+            }
+            else {
+                $scope.Link = "http://" + $scope.Link
             }
         }
     };
