@@ -7,7 +7,7 @@
 */
 
 /* module to create pinterest like responsive masonry grid system for angular */
-;
+
 (function(angular, window, undefined) {
   "use strict";
   //defaults for plugin
