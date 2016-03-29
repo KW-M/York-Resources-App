@@ -123,11 +123,13 @@
 
     <!------------------------------------------------------------>
     <!----- The content, ie posts, resources, etc. ----->
-    <div flex id="all_content" class="ng-cloak" angular-grid="Posts">
+    <div flex id="all_content" class="ng-cloak">
         <div class="blank-textbox new-post-card-top" ng-click="newPost()">
             <p class="new-post-text-top">Share a link or resource</p>
         </div>
-        <div id="Masonry_Container" style="margin: 0 auto;">
+        <div id="Masonry_Container" style="margin: 0 auto;" angular-grid="Posts"              ag-grid-width="200"
+             ag-gutter-size="8"
+             ag-id="shots">
             <md-card post-card class="post-card raise-on-hover" ng-repeat="Post in Posts | filter:searchTerm"></md-card>
         </div>
     </div>
