@@ -1,5 +1,5 @@
 //define the root angular module (app) as a variable named "app"
-var app = angular.module('YorkResourcesApp', ['ngMaterial']);
+var app = angular.module('YorkResourcesApp', ['ngMaterial','angularGrid']);
 
 //universaly applying configurations/options for the angular module (app) named "app" above
 app.config(function ($mdThemingProvider, $mdIconProvider) {
