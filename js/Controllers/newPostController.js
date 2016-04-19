@@ -11,9 +11,9 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
     $scope.readOnly = false;
     $scope.classSearch = "";
     $scope.courses = ["English III", "Spanish I", "Chemistry", "AP Biology", "Geometry", "Algebra II", "Physics", "calc AB", "Chinese I"];
-    document.getElementById("newPostLinkInputTxt").addEventListener('input', function(e) {
-        console.log("keyup event detected! coming from this element:", e.target);
-    }, false);
+    // document.getElementById("newPostLinkInputTxt").addEventListener('input', function(e) {
+    //     console.log("keyup event detected! coming from this element:", e.target);
+    // }, false);
     var link = $scope.Link.toString();
     $scope.type = function() {
 
