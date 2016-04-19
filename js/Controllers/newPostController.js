@@ -44,7 +44,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
             console.log(userInfo.result);
             var description = document.querySelector('#DescriptionTxt').textContent;
             var response = ({
-                "Type": type,
+                "Type": "noLink",
                 "Title": $scope.Title,
                 "Creator": {
                     "Name": userInfo.result.user.displayName,
