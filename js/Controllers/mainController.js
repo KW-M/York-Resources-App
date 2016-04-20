@@ -25,7 +25,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
       });
    };
 
-   $scope.filteredPosts = $scope.Posts.concat([]);
+   $scope.filteredPosts = $scope.Posts
 
             //apply search on the list base on searchTxt which can be binded to an input element
          $scope.$watch('searchTxt', function (val) {
