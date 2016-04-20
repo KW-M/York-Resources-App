@@ -79,6 +79,12 @@
     transition: opacity 1s, margin-top 1s;
 }
 
+#class-dropdown-button {
+    position: absolute;
+    left: -4px;
+    z-index:500
+}
+
 .newPostClassSelector {
     height: 222px;
     width: 180px;
@@ -186,7 +192,6 @@ button#New_Post_Submit.md-button:hover {
     margin: 0 -24px 0 -24px;
     padding: 0;
 }
-
 
 /* general */
 
