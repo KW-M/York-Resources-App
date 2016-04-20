@@ -43,7 +43,7 @@
                     <input type="text" autofocus ng-model="classSearch" placeholder="Search classes" class="raisedTextfield" style="margin: 6px 0 10px 0; transition: background-color .2s, box-shadow .2s;">
                     <div class="newPostClassListContainer">
                         <md-menu-item ng-repeat="class in courses | filter: classSearch">
-                            <md-button style="padding-right:0" ng-click"classSelected(this)">
+                            <md-button style="padding-right:0" ng-click="classSelected(this)">
                                 {{class}}
                                 <md-icon style="float:right; margin-right: 4px; padding-top:4px">keyboard_arrow_right</md-icon>
                             </md-button>

@@ -17,9 +17,10 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
     // }, false);
     var link = $scope.Link.toString();
     $scope.classSelected = function (inputClass) {
-        console.log(inputClass);
+        $scope.class=inputClass.class;
+        console.log(inputClass.class);
     }
-    
+
     $scope.type = function() {
 
         console.log("reached")
@@ -61,8 +62,8 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
                 "Tags": $scope.Tags,
                 "Description": description,
                 "Class": {
-                    "Name": "Name Of Class",
-                    "Teacher": "name of teacher"
+                    "Name": $scope.class,
+                    "Teacher": "Brook"
                 },
                 "Link": $scope.Link,
                 "FileId": "If present, the link to the resource of the post (haven't setup ui drive integration yet)",
