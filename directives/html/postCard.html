@@ -7,7 +7,7 @@
         <div class="post-card-metadata-text">
             <p style="margin-bottom:2px; font-weight:700; font"> <i class="zmdi zmdi-tag-more zmdi-hc-fw"></i><span ng-repeat="Tag in Post.Tags"> {{Tag}},</span></p>
             <i class="zmdi zmdi-calendar zmdi-hc-fw"></i><span style="margin-right:10px"> {{Post.CreationDate | date : "mm/dd/yyyy"}}</span>
-            <i class="zmdi zmdi-accounts-alt zmdi-hc-fw"></i> <span> {{Post.Class.Name}}, {{Post.Class.Teacher}}</span>
+            <i class="zmdi zmdi-accounts-alt zmdi-hc-fw"></i> <span> {{Post.Class.Name}}</span>
         </div>
     </div>
 </div>
@@ -16,7 +16,7 @@
 <p id="post_card_description" ng-class="{ 'OverflowShadow': Document.getElementById('post-card-description').scrollHeight > Document.getElementById('post-card-description').clientHeight }">
     {{Post.Description}}
 </p>
-<md-card-actions layout=row" layout-align="start center">
+<md-card-actions layout="row" layout-align="start center">
     <md-button class="md-icon-button" id="flag_button" area-label="Flag">
         <md-icon>flag</md-icon>
     </md-button>

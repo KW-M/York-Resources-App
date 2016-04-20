@@ -386,6 +386,7 @@ input.search-field:focus:-ms-input-placeholder {
     bottom: 0;
     display: inline-block;
     flex: 1;
+    cursor: pointer;
     height: 56px;
     background-image: linear-gradient(to top, rgba(0, 0, 0, .5), rgba(0, 0, 0, 0));
 }
@@ -415,6 +416,7 @@ input.search-field:focus:-ms-input-placeholder {
     margin: 0px 16px;
     color: white;
     width: 240px;
+    cursor: pointer;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -453,7 +455,7 @@ input.search-field:focus:-ms-input-placeholder {
 }
 
 button.md-icon-button.md #flag_button{
-  margin-left: 0px  
+  margin-left: 0px
 }
 
 #like_thumb_button {
