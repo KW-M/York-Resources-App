@@ -36,11 +36,12 @@ app.service('GoogleDriveService', ['$q', function($q) {
 
     this.pickerLoaded = function() {
                 console.log("loaded my picker")
-        console.log(gapi.auth.getToken())
+        console.log(gapi.auth.getToken().access_token)
         var picker = new google.picker.PickerBuilder().
               addView(google.picker.ViewId.DOCS).
-              setOAuthToken().
-              setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
+              addView(google.picker.ViewId.FOLDERS).
+              setOAuthToken(gapi.auth.getToken().access_token).
+              setDeveloperKey("	AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
               setCallback(self.pickerCallback).
               build();
         picker.setVisible(true);
