@@ -44,6 +44,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
               setDeveloperKey("	AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
               setCallback(self.pickerCallback).
               build();
+        picker.View.DocsView.setIncludeFolders(true);
         picker.setVisible(true);
     };
 
