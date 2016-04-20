@@ -17,7 +17,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
     // }, false);
     var link = $scope.Link.toString();
     $scope.classSelected = function (inputClass) {
-        
+        console.log(inputClass);
     }
     
     $scope.type = function() {
