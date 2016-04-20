@@ -33,22 +33,23 @@ app.service('GoogleDriveService', ['$q', function($q) {
     this.getImageShot = function() {
 
     };
-    
+
     this.pickerLoaded = function() {
-        console.log("loaded my picker")
+                console.log("loaded my picker")
+        console.log(gapi.auth.getToken())
         var picker = new google.picker.PickerBuilder().
-              addView(google.picker.ViewId.PHOTOS).
-              setOAuthToken(oauthToken).
+              addView(google.picker.ViewId.DOCS).
+              setOAuthToken().
               setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
               setCallback(self.pickerCallback).
               build();
         picker.setVisible(true);
     };
-    
+
     this.pickerCallback = function (resp){
         console.log(resp);
     }
-    
+
     this.batchRequest = function() { //do this one
         var batch = gapi.client.newBatch();
         return (self.getListOfFlies().then(function(fileArray) {
