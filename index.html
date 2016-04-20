@@ -1,164 +1,177 @@
 <!DOCTYPE html>
 <html lang="en" style="background-color: #e8e8e8;">
 
-<head>
-    <title>York Student-Made App</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Roboto+Mono|Roboto+Slab|Material+Icons" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-</head>
+    <head>
+        <title>York Student-Made App</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Roboto+Mono|Roboto+Slab|Material+Icons" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    </head>
 
-<body ng-app="YorkResourcesApp" ng-controller="ApplicationController">
-    <link rel="stylesheet" href="templates/css/newPost.css">
+    <body ng-app="YorkResourcesApp" ng-controller="ApplicationController">
+        <link rel="stylesheet" href="templates/css/newPost.css">
 
-    <!------------------------------------------------------->
-    <!-------- The Welcome/Login screen ---------->
-    <div id="overlay_background" class="overlay-background">
-        <div id="welcome_dialog">
-            <h1 style="margin-top:-6px">Welcome</h1>
-            <p>This is a place where any student can post anything they think might help other students in the york community.</p>
-            <p>Some things to keep in  mind:</p>
-            <ul>
-                <li>This website is accessible by anyone at York, so don't post anything you wouldn't want teachers and staff to see!</li>
-                <li>Participation is esensial, you'll need to contribute something at least every semester to keep accesing other student's work.</li>
-                <li>See something counter-productive? Click the flag icon to send an anonymous notice to Ms.Shery about that post.</li>
-            </ul>
-            <p>Sign in with your me@york.org email account.</p>
-            <div class="signin-button-contrainer">
-                <div id="auth_button" class="signin-button" ng-click="signIn()" style="display:none; cursor: pointer;">
-                    <!--<img class="signin-icon" src="/images/Google_G.png"/>-->
-                    <svg class="signin-icon" viewBox="0, 0, 40, 40"><path d="M 22,20 h15 a17,17 0 1,1 -8,-14" fill="none" stroke="#4885ed" stroke-width="6"/></svg>
-                    <p class="signin-text">Sign in</p>
+        <!------------------------------------------------------->
+        <!-------- The Welcome/Login screen ---------->
+        <div id="overlay_background" class="overlay-background">
+            <div id="welcome_dialog">
+                <h1 style="margin-top:-6px">Welcome</h1>
+                <p>This is a place where any student can post anything they think might help other students in the york community.</p>
+                <p>Some things to keep in mind:</p>
+                <ul>
+                    <li>This website is accessible by anyone at York, so don't post anything you wouldn't want teachers and staff to see!</li>
+                    <li>Participation is esensial, you'll need to contribute something at least every semester to keep accesing other student's work.</li>
+                    <li>See something counter-productive? Click the flag icon to send an anonymous notice to Ms.Shery about that post.</li>
+                </ul>
+                <p>Sign in with your me@york.org email account.</p>
+                <div class="signin-button-contrainer">
+                    <div id="auth_button" class="signin-button" ng-click="signIn()" style="display:none; cursor: pointer;">
+                        <!--<img class="signin-icon" src="/images/Google_G.png"/>-->
+                        <svg class="signin-icon" viewBox="0, 0, 40, 40">
+                            <path d="M 22,20 h15 a17,17 0 1,1 -8,-14" fill="none" stroke="#4885ed" stroke-width="6" />
+                        </svg>
+                        <p class="signin-text">Sign in</p>
+                    </div>
+                    <md-progress-circular id="login_spinner" class="md-accent" md-mode="indeterminate" md-diameter="80"></md-progress-circular>
                 </div>
-                <md-progress-circular id="login_spinner" class="md-accent" md-mode="indeterminate" md-diameter="80"></md-progress-circular>
             </div>
         </div>
-    </div>
 
-    <!-------------------------------------------------------->
-    <!----------------- The top toolbar ------------------>
-    <md-toolbar class="toolbar-top ng-cloak">
-        <div class="md-toolbar-tools">
-            <md-button class="md-icon-button" ng-click="toggleSidebar()">
-                <md-icon class="light-icon">menu</md-icon>
-            </md-button>
-            <h2>
+        <!-------------------------------------------------------->
+        <!----------------- The top toolbar ------------------>
+        <md-toolbar class="toolbar-top ng-cloak">
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button" ng-click="toggleSidebar()">
+                    <md-icon class="light-icon">menu</md-icon>
+                </md-button>
+                <h2>
           <span class="unselectable default-mouse" style="font-size: 110%">YORK </span>
           <span class="unselectable default-mouse" style="font-size: 80%" >Study Resources</span>
         </h2>
-            <div style="flex:1"></div>
-            <div class="search-wrapper" layout="column">
-                <md-icon class="search-icon">search</md-icon>
-                <input type=text placeholder="Search" class="search-field unselectable" ng-model="searchTerm">
+                <div style="flex:1"></div>
+                <div class="search-wrapper" layout="column">
+                    <md-icon class="search-icon">search</md-icon>
+                    <input type=text placeholder="Search" class="search-field unselectable" ng-model="searchTerm">
+                </div>
+                <div style="flex:18"></div>
+                <md-button class="md-icon-button" onclick="initiateDrive()">
+                    <md-icon class="light-icon">refresh</md-icon>
+                    <md-tooltip>Refresh</md-tooltip>
+                </md-button>
+                <md-button class="md-icon-button" ng-click="helpDialog()">
+                    <md-icon class="light-icon">help</md-icon>
+                    <md-tooltip>Help</md-tooltip>
+                </md-button>
+                <img src="images/accountPic.png">
             </div>
-            <div style="flex:18"></div>
-            <md-button class="md-icon-button" onclick="initiateDrive()">
-                <md-icon class="light-icon">refresh</md-icon>
-                <md-tooltip>Refresh</md-tooltip>
-            </md-button>
-            <md-button class="md-icon-button" ng-click="helpDialog()">
-                <md-icon class="light-icon">help</md-icon>
-                <md-tooltip>Help</md-tooltip>
-            </md-button>
-        </div>
-    </md-toolbar>
+        </md-toolbar>
 
-    <!----------------------------------------------------------->
-    <!--------------- The side navigation ------------------>
-    <md-sidenav class="ng-cloak side-nav md-sidenav-left md-whiteframe-z2" md-component-id="left" style="height:100vh z-index:0">
-        <md-content layout-padding style="margin-top:54px">
-            <md-list>
-                <md-list-item>
-                    <md-button class="selected">
-                        <md-icon>language</md-icon>
-                        geography
+        <!----------------------------------------------------------->
+        <!--------------- The side navigation ------------------>
+        <md-sidenav class="ng-cloak side-nav md-sidenav-left md-whiteframe-z2" md-component-id="left" style="height:100vh z-index:0">
+            <md-content layout-padding style="margin-top:54px">
+                <md-list>
+                    <md-list-item>
+                        <md-button class="selected">
+                            <md-icon>language</md-icon>
+                            geography
+                        </md-button>
+                    </md-list-item>
+                    <md-list-item>
+                        <md-button class="selected">
+                            <md-icon>group</md-icon>
+                            social studies
+                        </md-button>
+                    </md-list-item>
+                    <md-list-item>
+                        <md-button class="selected">
+                            <md-icon>more</md-icon>
+                            more classes
+                        </md-button>
+                    </md-list-item>
+                </md-list>
+            </md-content>
+        </md-sidenav>
+
+        <!-------------------------------------------------------------->
+        <!--- The "New Resource" floating action button -->
+        <md-fab-speed-dial id="speed-dial-container" md-direction="up" md-open="globals.FABisOpen" class="md-fling md-fab-bottom-right md-hover-full ng-cloak" style="position:fixed; right:0px; bottom:0px; padding: 0 24px 24px 0" ng-mouseenter="globals.FABisOpen=true"
+        ng-mouseleave="globals.FABisOpen=false">
+            <md-fab-trigger>
+                <md-button id="new_post_button" class="md-fab md-accent raise-on-hover" ng-click="newPost()">
+                    <md-tooltip md-direction="left">Add Resource</md-tooltip>
+                    <md-icon class="unselectable">add</md-icon>
+                </md-button>
+            </md-fab-trigger>
+            <md-fab-actions>
+                <md-button class="md-fab md-raised md-mini">
+                    <md-tooltip md-direction="left">Add Drive file</md-tooltip>
+                    <img class="unselectable" style="width:22px; height:22px; margin-top:8px" src="images/drive_icon.svg">
+                </md-button>
+                <md-button class="md-fab md-raised md-mini">
+                    <md-tooltip md-direction="left">Add Link</md-tooltip>
+                    <md-icon class="unselectable" style="color:black">link</md-icon>
+                </md-button>
+                <md-button class="md-fab md-raised md-mini">
+                    <md-tooltip md-direction="left">Upload</md-tooltip>
+                    <md-icon class="unselectable" style="color:black">file_upload</md-icon>
+                </md-button>
+            </md-fab-actions>
+        </md-fab-speed-dial>
+
+        <!------------------------------------------------------------>
+        <!----- The content, ie posts, resources, etc. ----->
+        <div flex id="all_content" class="ng-cloak">
+            <div class="blank-textbox new-post-card-top" ng-click="newPost()">
+                <p class="new-post-text-top">Share a link or resource</p>
+                <div style="float:right">
+                    <md-button class="md-icon-button md-mini">
+                        <md-tooltip md-direction="left">Upload</md-tooltip>
+                        <md-icon class="unselectable" style="color:black">file_upload</md-icon>
                     </md-button>
-                </md-list-item>
-                <md-list-item>
-                    <md-button class="selected">
-                        <md-icon>group</md-icon>
-                        social studies
+                    <md-button class="md-icon-button md-mini">
+                        <md-tooltip md-direction="left">Add Drive file</md-tooltip>
+                        <img class="unselectable" style="width:22px; height:22px; margin-top:0px" src="images/drive_icon.svg">
                     </md-button>
-                </md-list-item>
-                <md-list-item>
-                    <md-button class="selected">
-                        <md-icon>more</md-icon>
-                        more classes
-                    </md-button>
-                </md-list-item>
-            </md-list>
-        </md-content>
-    </md-sidenav>
+                </div>
+                <div id="Masonry_Container" style="margin: 0 auto;" angular-grid="Posts" ag-grid-width="225" ag-gutter-size="8" ag-id="posts">
+                    <md-card post-card class="post-card raise-on-hover" ng-repeat="Post in Posts | filter:searchTerm"></md-card>
+                </div>
+            </div>
 
-    <!-------------------------------------------------------------->
-    <!--- The "New Resource" floating action button -->
-    <md-fab-speed-dial id="speed-dial-container" md-direction="up" md-open="globals.FABisOpen" class="md-fling md-fab-bottom-right md-hover-full ng-cloak" style="position:fixed; right:0px; bottom:0px; padding: 0 24px 24px 0" ng-mouseenter="globals.FABisOpen=true" ng-mouseleave="globals.FABisOpen=false">
-        <md-fab-trigger>
-            <md-button id="new_post_button" class="md-fab md-accent raise-on-hover" ng-click="newPost()">
-                <md-tooltip md-direction="left">Add Resource</md-tooltip>
-                <md-icon class="unselectable">add</md-icon>
-            </md-button>
-        </md-fab-trigger>
-        <md-fab-actions>
-            <md-button class="md-fab md-raised md-mini">
-                <md-tooltip md-direction="left">Add Drive file</md-tooltip>
-                <img class="unselectable" style="width:22px; height:22px; margin-top:8px" src="images/drive_icon.svg">
-            </md-button>
-            <md-button class="md-fab md-raised md-mini">
-                <md-tooltip md-direction="left">Add Link</md-tooltip>
-                <md-icon class="unselectable" style="color:black">link</md-icon>
-            </md-button>
-            <md-button class="md-fab md-raised md-mini">
-                <md-tooltip md-direction="left">Upload</md-tooltip>
-                <md-icon class="unselectable" style="color:black">file_upload</md-icon>
-            </md-button>
-        </md-fab-actions>
-    </md-fab-speed-dial>
+            <!-------------------------------------------------->
+            <!------------------- Libraries ------------------>
+            <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+            <script src="Libraries/angular-grid.js"></script>
+            <!--<script src="https://rawgit.com/desandro/masonry/master/dist/masonry.pkgd.min.js" type="text/javascript"></script>-->
 
-    <!------------------------------------------------------------>
-    <!----- The content, ie posts, resources, etc. ----->
-    <div flex id="all_content" class="ng-cloak">
-        <div class="blank-textbox new-post-card-top" ng-click="newPost()">
-            <p class="new-post-text-top">Share a link or resource</p>
-        </div>
-        <div id="Masonry_Container" style="margin: 0 auto;" angular-grid="Posts" ag-grid-width="225" ag-gutter-size="8" ag-id="posts">
-            <md-card post-card class="post-card raise-on-hover" ng-repeat="Post in Posts | filter:searchTerm"></md-card>
-        </div>
-    </div>
+            <!-- Main Script -->
+            <script src="js/app.js"></script>
 
-    <!-------------------------------------------------->
-    <!------------------- Libraries ------------------>
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
-    <script src="Libraries/angular-grid.js"></script>
-    <!--<script src="https://rawgit.com/desandro/masonry/master/dist/masonry.pkgd.min.js" type="text/javascript"></script>-->
+            <!-- Directives -->
+            <script src="directives/directives.js"></script>
 
-    <!-- Main Script -->
-    <script src="js/app.js"></script>
+            <!-- Services -->
+            <script src="js/Services/authorizationService.js"></script>
+            <script src="js/Services/googleDriveService.js"></script>
 
-    <!-- Directives -->
-    <script src="directives/directives.js"></script>
+            <!-- Controllers -->
+            <script src="js/Controllers/mainController.js"></script>
+            <script src="js/Controllers/newPostController.js"></script>
 
-    <!-- Services -->
-    <script src="js/Services/authorizationService.js"></script>
-    <script src="js/Services/googleDriveService.js"></script>
-
-    <!-- Controllers -->
-    <script src="js/Controllers/mainController.js"></script>
-    <script src="js/Controllers/newPostController.js"></script>
-
-    <script src="https://apis.google.com/js/client.js?onload=gClientLoaded"></script>
-</body>
-<!--
+            <script src="https://apis.google.com/js/client.js?onload=gClientLoaded"></script>
+    </body>
+    <!--
             <div id="ui-div">
                 <span style="display:none">
                      <md-input-container><input type="text" id="title_input" placeholder="Title" style="width:175px"></md-input-container>
