@@ -35,8 +35,8 @@ app.service('GoogleDriveService', ['$q', function($q) {
     };
 
     this.pickerLoaded = function() {
-        var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS);
-        var uploadView = new google.picker.DocsUploadView().setIncludeFolders(true);
+        var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true);
+        var uploadView = new google.picker.DocsUploadView()
         console.log("loaded my picker")
         console.log(gapi.auth.getToken().access_token)
         var picker = new google.picker.PickerBuilder().
