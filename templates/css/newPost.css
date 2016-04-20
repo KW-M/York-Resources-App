@@ -9,7 +9,7 @@
     flex:1;
     position: relative;
     max-height: 900px;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
 }
 
