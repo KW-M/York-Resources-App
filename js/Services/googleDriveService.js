@@ -53,6 +53,10 @@ app.service('GoogleDriveService', ['$q', function($q) {
 
     this.pickerCallback = function (resp){
         console.log(resp);
+        if (data.action == google.picker.Action.PICKED) {
+            var fileId = data.docs[0].id;
+            alert('The user selected: ' + fileId);
+        }
     }
 
     this.batchRequest = function() { //do this one
