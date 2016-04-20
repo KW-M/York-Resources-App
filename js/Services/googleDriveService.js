@@ -5,6 +5,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
     this.initiateAuthLoadDrive = function(callback) {
         console.log("loading drive v3");
         $('#overlay_background').fadeOut(500);
+        gapi.client.load('auth', self.pickerLoaded);
         gapi.client.load('drive', 'v3', callback);
     };
 
@@ -32,7 +33,18 @@ app.service('GoogleDriveService', ['$q', function($q) {
     this.getImageShot = function() {
 
     };
-
+    
+    this.pickerLoaded = function() {
+        console.log("loaded my picker")
+        var picker = new google.picker.PickerBuilder().
+              addView(google.picker.ViewId.PHOTOS).
+              setOAuthToken(oauthToken).
+              setDeveloperKey(developerKey).
+              setCallback(pickerCallback).
+              build();
+        picker.setVisible(true);
+    };
+    
     this.batchRequest = function() { //do this one
         var batch = gapi.client.newBatch();
         return (self.getListOfFlies().then(function(fileArray) {
