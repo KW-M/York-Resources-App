@@ -34,7 +34,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
                     return obj
                     console.log(obj);
                 });
-            });
+            });//here
 
    $scope.newPost = function() { //called by the bottom right plus/add resource button
       $mdDialog.show({
