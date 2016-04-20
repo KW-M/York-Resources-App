@@ -4,7 +4,6 @@ app.service('authorizationService', ['GoogleDriveService', '$q', authService]);
 //The function used in the authorizationService service also called by the google api framwork when it loads.
 function authService(GoogleDriveService, $q) {
     var self = this;
-
     var CLIENT_ID = '475444543746-e3r02g1o1o71kliuoohah04ojqbmo22e.apps.googleusercontent.com';
     var buildAuthRequest = function(immediateMode) {
         var promise = $q.defer();
