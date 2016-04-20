@@ -1,7 +1,7 @@
 /*global app*/ /*global angular*/ /*global gapi*/
 app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', function($scope, $mdDialog, $window, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService) {
    $scope.Posts = [];
-   $scope.searchTerm = '';
+   $scope.searchTxt = '';
    $scope.searchedPosts = [];
    $scope.globals = {
       FABisOpen: false,
@@ -29,8 +29,9 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
             
             //apply search on the list base on searchTxt which can be binded to an input element
          $scope.$watch('searchTxt', function (val) {
+            console.log(val);
                 val = val.toLowerCase();
-                $scope.imageList = imageList.filter(function (obj) {
+                $scope.filteredPosts = $scope.Posts.filter(function (obj) {
                     return obj.title.toLowerCase().indexOf(val) != -1;
                 });
             });
