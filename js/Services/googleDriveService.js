@@ -35,8 +35,8 @@ app.service('GoogleDriveService', ['$q', function($q) {
     };
 
     this.pickerLoaded = function() {
-        var docsView = new google.picker.View(google.picker.ViewId.DOCS).setIncludeFolders(true);
-        var uploadView = new google.picker.DocsUploadView();
+        var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS);
+        var uploadView = new google.picker.DocsUploadView().setIncludeFolders(true);
         console.log("loaded my picker")
         console.log(gapi.auth.getToken().access_token)
         var picker = new google.picker.PickerBuilder().
@@ -50,8 +50,8 @@ app.service('GoogleDriveService', ['$q', function($q) {
         picker.setVisible(true);
     };
 
-    this.pickerCallback = function (resp){
-        console.log(resp);
+    this.pickerCallback = function (data){
+        console.log(data);
         if (data.action == google.picker.Action.PICKED) {
             var fileId = data.docs[0].id;
             alert('The user selected: ' + fileId);
