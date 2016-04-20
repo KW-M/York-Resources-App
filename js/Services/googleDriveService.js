@@ -35,16 +35,16 @@ app.service('GoogleDriveService', ['$q', function($q) {
     };
 
     this.pickerLoaded = function() {
+        var uploadView = new google.picker.DocsUploadView();
                 console.log("loaded my picker")
         console.log(gapi.auth.getToken().access_token)
         var picker = new google.picker.PickerBuilder().
               addView(google.picker.ViewId.DOCS).
-              addView(google.picker.ViewId.FOLDERS).
+              addView(uploadView).
               setOAuthToken(gapi.auth.getToken().access_token).
               setDeveloperKey("	AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
               setCallback(self.pickerCallback).
               build();
-        picker.View.DocsView.setIncludeFolders(true);
         picker.setVisible(true);
     };
 
