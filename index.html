@@ -57,7 +57,7 @@
                 <div style="flex:1"></div>
                 <div class="search-wrapper" layout="column">
                     <md-icon class="search-icon">search</md-icon>
-                    <input type=text placeholder="Search" class="search-field unselectable" ng-model="searchTerm">
+                    <input type=text placeholder="Search" class="search-field unselectable" ng-model="searchTxt">
                 </div>
                 <div style="flex:18"></div>
                 <md-button class="md-icon-button" onclick="initiateDrive()">
@@ -145,7 +145,7 @@
 
                 </div>
                 <div id="Masonry_Container" style="margin: 0 auto;" angular-grid="Posts" ag-grid-width="225" ag-gutter-size="8" ag-id="posts">
-                    <md-card post-card class="post-card raise-on-hover" ng-repeat="Post in Posts | filter:searchTerm"></md-card>
+                    <md-card post-card class="post-card raise-on-hover" ng-repeat="Post in Posts"></md-card>
                 </div>
             </div>
 
@@ -174,7 +174,7 @@
             <script src="js/Controllers/newPostController.js"></script>
 
             <script src="https://apis.google.com/js/client.js?onload=gClientLoaded"></script>
-            
+
     </body>
     <!--
             <div id="ui-div">

@@ -24,7 +24,17 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
          fullscreen: ($mdMedia('xs')),
       });
    };
-
+   
+   $scope.filteredPosts = $scope.Posts.concat([]);
+            
+            //apply search on the list base on searchTxt which can be binded to an input element
+         $scope.$watch('searchTxt', function (val) {
+                val = val.toLowerCase();
+                $scope.imageList = imageList.filter(function (obj) {
+                    return obj.title.toLowerCase().indexOf(val) != -1;
+                });
+            });
+            
    $scope.newPost = function() { //called by the bottom right plus/add resource button
       $mdDialog.show({
          templateUrl: 'templates/html/newPost.html',
