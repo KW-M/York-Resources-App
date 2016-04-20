@@ -56,7 +56,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
         console.log(data);
         if (data.action == google.picker.Action.PICKED) {
             var fileId = data.docs[0].id;
-            alert('The user selected: ' + fileId);
+            alert('File: ' + data.docs[0].name  + " id:" +   fileId + " URL:" + data.docs[0].url);
         }
     }
 
