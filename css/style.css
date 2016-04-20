@@ -394,6 +394,7 @@ input.search-field:focus:-ms-input-placeholder {
 .post-card-metadata-text {
     margin: 10px 16px 0 16px;
     color: white;
+    
     text-shadow: 0px 0px 30px rgba(0, 0, 0, 0.45);
     white-space: nowrap;
     overflow: hidden;
