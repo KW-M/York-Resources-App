@@ -35,6 +35,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
     };
 
     this.pickerLoaded = function() {
+        console.log(gapi.auth.getToken().access_token);
         var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
         var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
         var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
@@ -45,7 +46,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
               addView(sharedView).
               addView(uploadView).
               setOAuthToken(gapi.auth.getToken().access_token).
-              setDeveloperKey("	AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
+              setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
               setCallback(self.pickerCallback).
               build();
               console.log (picker);

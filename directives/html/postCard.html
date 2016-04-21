@@ -1,11 +1,11 @@
 <div class="post-card-header" ng-click="openLink(Post.Link)">
-    <img ng-src="{{Post.ImageURL}}" class="post-card-image" onerror="this.src = '';">
+    <img ng-src="{{Post.ImageURL}}" class="post-card-image" ng-hide="Post.Link == ''" onerror="this.src = '';">
     <div class="post-card-image-gradient">
-        <p class="post-card-link-text">
+        <p class="post-card-link-text" ng-hide="Post.Link == ''">
             <i class="zmdi zmdi-globe-alt zmdi-hc-fw"></i> <span> {{Post.Link}}</span>
         </p>
         <div class="post-card-metadata-text">
-            <p style="margin-bottom:2px; margin-top: 2px; font-size: 15px; font-weight:700; font"> <i class="zmdi zmdi-label zmdi-hc-fw"></i><span ng-repeat="Tag in Post.Tags"> {{Tag}},</span></p>
+            <p style="margin-bottom:2px; margin-top: 6px; font-size: 15px; font-weight:700; font"> <i class="zmdi zmdi-label zmdi-hc-fw"></i><span ng-repeat="Tag in Post.Tags"> {{Tag}},</span></p>
             <i class="zmdi zmdi-calendar zmdi-hc-fw"></i><span style="margin-right:10px"> {{Post.CreationDate | date : "mm/dd/yyyy"}}</span>
             <i class="zmdi zmdi-accounts-alt zmdi-hc-fw"></i> <span> {{Post.Class.Name}}</span>
         </div>
@@ -24,5 +24,5 @@
     <md-button id="like_thumb_button" class="md-icon-button" aria-label="Like">
         <md-icon>thumb_up</md-icon>
     </md-button>
-    <md-button id="open_button" class="md-button md-accent" ng-click="openLink(Post.Link)" aria-label="Open resource">Open Resource</md-button>
+    <md-button id="open_button" ng-hide="Post.Link == ''" class="md-button md-accent" ng-click="openLink(Post.Link)" aria-label="Open resource">Open Resource</md-button>
 </md-card-actions>

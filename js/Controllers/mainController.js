@@ -1,5 +1,7 @@
 /*global app*/ /*global angular*/ /*global gapi*/
 app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', function($scope, $mdDialog, $window, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService) {
+   var self = this
+   var unfilteredPosts = [];
    $scope.Posts = [];
    $scope.searchTxt = '';
    $scope.searchedPosts = [];
@@ -25,16 +27,17 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
       });
    };
 
-   $scope.filteredPosts = $scope.Posts
+   $scope.$watch('searchTxt', filterPosts);
 
-            //apply search on the list base on searchTxt which can be binded to an input element
-         $scope.$watch('searchTxt', function (val) {
-            console.log(val);
-                $scope.filteredPosts = $scope.Posts.filter(function (obj) {
-                    return obj
-                    console.log(obj);
-                });
-            });//here
+   function filterPosts(val) {
+      console.log(val);
+      val = val.toLowerCase();
+      $scope.Posts = unfilteredPosts.filter(function(obj) {
+         return obj.Title.toLowerCase().indexOf(val) != -1;
+      });
+      console.log($scope.Posts + "post from filter");
+   }
+
 
    $scope.newPost = function() { //called by the bottom right plus/add resource button
       $mdDialog.show({
@@ -76,33 +79,21 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
    };
 
    $scope.initiateDrive = function() {
-      var xhr = new XMLHttpRequest();
-      xhr.responseType = 'blob';
-      xhr.onload = function() {
-         var reader = new FileReader();
-         reader.onloadend = function() {
-            console.log(reader.result);
-         }
-         reader.readAsDataURL(xhr.response);
-      };
-      xhr.open('GET', 'https://api.pagelr.com/capture?uri=www.google.com&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw');
-      xhr.send();
-      console.log(new Date());
-      var token = gapi.auth.getToken();
-      console.log(token);
       // GoogleDriveService.batchRequest().then(function(response) {
       //    console.log(response);
       // });
       GoogleDriveService.multiRequest().then(function(response) {
          console.log(response);
-         $scope.Posts = formatArrayResponse(response);
-         console.log($scope.Posts);
+         unfilteredPosts = formatArrayResponse(response);
+         filterPosts($scope.searchTxt);
          $scope.$apply();
       });
    }
 
    $scope.openLink = function(link) {
-      $window.open(link);
+      if (link != "") {
+         $window.open(link);
+      }
    };
 
    $window.onscroll = function(event) { //called whenever the window scrolls
@@ -113,12 +104,6 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
       else {
          $('#speed-dial-container').slideUp(300);
       }
-      // $('#Masonry_Container').masonry({
-      //    // options
-      //    fitWidth: true,
-      //    itemSelector: '.post-card',
-      //    columnWidth: '.post-card',
-      // });
    };
 
    $window.formatArrayResponse = function(rawArrayResponse) {
