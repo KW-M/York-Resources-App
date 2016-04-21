@@ -26,6 +26,10 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
          fullscreen: ($mdMedia('xs')),
       });
    };
+   
+   $scope.showPicker = function() { //called by the top left toolbar menu button
+      GoogleDriveService.
+   };
 
    $scope.$watch('searchTxt', filterPosts);
 

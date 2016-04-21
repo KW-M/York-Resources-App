@@ -1,7 +1,8 @@
 //Define the GoogleDriveController controller for Angular
 app.service('GoogleDriveService', ['$q', function($q) {
     var self = this;
-
+var drivePicker;
+var UploadPicker;
     this.initiateAuthLoadDrive = function(callback) {
         console.log("loading drive v3");
         $('#overlay_background').fadeOut(500);
@@ -31,7 +32,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
     };
 
     this.showPicker = function() {
-        picker.setVisible(true);
+        drivePicker.setVisible(true);
     };
 
     this.pickerLoaded = function() {
@@ -41,10 +42,18 @@ app.service('GoogleDriveService', ['$q', function($q) {
         var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
         console.log("loaded my picker")
         console.log(gapi.auth.getToken().access_token)
-        var picker = new google.picker.PickerBuilder().
+        var drivePicker = new google.picker.PickerBuilder().
               addView(docsView).
               addView(sharedView).
               addView(uploadView).
+              setOAuthToken(gapi.auth.getToken().access_token).
+              setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
+              setCallback(self.pickerCallback).
+              build();
+        var UploadPicker = new google.picker.PickerBuilder().
+              addView(uploadView).
+              addView(docsView).
+              addView(sharedView).
               setOAuthToken(gapi.auth.getToken().access_token).
               setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
               setCallback(self.pickerCallback).
