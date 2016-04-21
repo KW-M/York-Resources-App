@@ -43,6 +43,7 @@ var UploadPicker;
         self.showPicker = function(typ) {
             console.log ("picker");
             if (typ === "Upload"){
+                console.log ("pickerup");
                         var UploadPicker = new google.picker.PickerBuilder().
               addView(uploadView).
               addView(docsView).
@@ -52,7 +53,7 @@ var UploadPicker;
               setCallback(self.pickerCallback).
               build();
                 UploadPicker.setVisible(true);
-            } else if (typ === "drive"){
+            } else if (typ === "Drive"){
                         var drivePicker = new google.picker.PickerBuilder().
               addView(docsView).
               addView(sharedView).

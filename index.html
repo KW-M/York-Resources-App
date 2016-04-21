@@ -112,7 +112,7 @@
                 </md-button>
             </md-fab-trigger>
             <md-fab-actions>
-                <md-button class="md-fab md-raised md-mini" ng-click="showPicker(Drive)">
+                <md-button class="md-fab md-raised md-mini" ng-click="showPicker('Drive')">
                     <md-tooltip md-direction="left">Add Drive file</md-tooltip>
                     <img class="unselectable" style="width:22px; height:22px; margin-top:8px" src="images/drive_icon.svg">
                 </md-button>
@@ -120,7 +120,7 @@
                     <md-tooltip md-direction="left">Add Link</md-tooltip>
                     <md-icon class="unselectable" style="color:black">link</md-icon>
                 </md-button>
-                <md-button class="md-fab md-raised md-mini" ng-click="showPicker(Upload)">
+                <md-button class="md-fab md-raised md-mini" ng-click="showPicker('Upload')">
                     <md-tooltip md-direction="left">Upload</md-tooltip>
                     <md-icon class="unselectable" style="color:black">file_upload</md-icon>
                 </md-button>
@@ -133,11 +133,11 @@
             <div class="blank-textbox new-post-card-top" ng-click="newPost()">
                 <p class="new-post-text-top">Share a link or resource</p>
                 <div style="float:right">
-                                    <md-button class="md-icon-button md-mini"  style="margin-top:0px" ng-click="showPicker(Upload)">
+                                    <md-button class="md-icon-button md-mini"  style="margin-top:0px" ng-click="showPicker('Upload')">
                         <md-tooltip md-direction="down">Upload</md-tooltip>
                         <md-icon class="unselectable" style="margin-top:-10px; color:black">file_upload</md-icon>
                     </md-button>
-                    <md-button class="md-icon-button md-mini" style="margin-top:4px" ng-click="showPicker(Drive)">
+                    <md-button class="md-icon-button md-mini" style="margin-top:4px" ng-click="showPicker('Drive')">
                         <md-tooltip md-direction="down">Add Drive file</md-tooltip>
                         <img class="unselectable" style="width:22px; height:22px; margin-top:0px" src="images/drive_icon.svg">
                     </md-button>
