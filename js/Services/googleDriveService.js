@@ -31,10 +31,6 @@ var UploadPicker;
         }));
     };
 
-    this.showPicker = function() {
-        drivePicker.setVisible(true);
-    };
-
     this.pickerLoaded = function() {
         console.log(gapi.auth.getToken().access_token);
         var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
@@ -59,6 +55,10 @@ var UploadPicker;
               setCallback(self.pickerCallback).
               build();
               console.log (picker);
+        self.showPicker = function(type) {
+            if type = Upload 
+            drivePicker.setVisible(true);
+        };
     };
 
     this.pickerCallback = function (data){
