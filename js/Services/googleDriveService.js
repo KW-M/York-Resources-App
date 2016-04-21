@@ -30,8 +30,8 @@ app.service('GoogleDriveService', ['$q', function($q) {
         }));
     };
 
-    this.getImageShot = function() {
-
+    this.showPicker = function() {
+        picker.setVisible(true);
     };
 
     this.pickerLoaded = function() {
@@ -50,7 +50,6 @@ app.service('GoogleDriveService', ['$q', function($q) {
               setCallback(self.pickerCallback).
               build();
               console.log (picker);
-        picker.setVisible(true);
     };
 
     this.pickerCallback = function (data){
