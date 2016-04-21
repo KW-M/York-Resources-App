@@ -336,7 +336,8 @@ input.search-field:focus:-ms-input-placeholder {
 
 .new-post-text-top {
     display: inline-block;
-    margin: 12px 15px 15px 15px;
+    padding: 12px 225px 15px 15px;
+    margin: 0px;
     font-size: 16px;
     line-height: 19px;
     font-family: 'Roboto Slab', serif;
