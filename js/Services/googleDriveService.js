@@ -39,8 +39,9 @@ var UploadPicker;
         console.log("loaded my picker")
         console.log(gapi.auth.getToken().access_token)
 
-              console.log (picker);
+
         self.showPicker = function(typ) {
+            console.log ("picker");
             if (typ === "Upload"){
                         var UploadPicker = new google.picker.PickerBuilder().
               addView(uploadView).
@@ -62,11 +63,12 @@ var UploadPicker;
               build();
                 drivePicker.setVisible(true);
             }
-           
+
         };
     };
 
     this.pickerCallback = function (data){
+        //drivePicker.dispose();
         console.log(data);
         if (data.action == google.picker.Action.PICKED) {
             var fileId = data.docs[0].id;
