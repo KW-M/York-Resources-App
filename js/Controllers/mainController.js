@@ -27,7 +27,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
       });
    };
    
-   $scope.showPicker = function(typ) { //called by the top left toolbar menu button
+   $scope.showPicker = function(typ) { 
       GoogleDriveService.showPicker(typ);
    };
 

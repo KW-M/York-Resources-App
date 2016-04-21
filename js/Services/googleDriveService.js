@@ -46,7 +46,12 @@ var UploadPicker;
               setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
               setCallback(self.pickerCallback).
               build();
-        var UploadPicker = new google.picker.PickerBuilder().
+
+              console.log (picker);
+        self.showPicker = function(typ) {
+            if (typ = "Upload"){
+                google.picker.Picker.dispose()
+                        var UploadPicker = new google.picker.PickerBuilder().
               addView(uploadView).
               addView(docsView).
               addView(sharedView).
@@ -54,10 +59,19 @@ var UploadPicker;
               setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
               setCallback(self.pickerCallback).
               build();
-              console.log (picker);
-        self.showPicker = function(type) {
-            if type = Upload 
-            drivePicker.setVisible(true);
+                UploadPicker.setVisible(true);
+            } else if (typ = "drive"){
+                google.picker.Picker.dispose()
+                        var drivePicker = new google.picker.PickerBuilder().
+              addView(docsView).
+              addView(sharedView).
+              addView(uploadView).
+              setOAuthToken(gapi.auth.getToken().access_token).
+              setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
+              setCallback(self.pickerCallback).
+              build();
+                drivePicker.setVisible(true);
+            }
         };
     };
 
