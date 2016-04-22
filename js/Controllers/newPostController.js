@@ -9,7 +9,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
     $scope.Description = '';
     $scope.Link = '';
     $scope.readOnly = false;
-    $scope.
+    $scope.driveThumbnail = "";
     $scope.classSearch = "";
     $scope.class = "";
     $scope.courses = ["English III", "Spanish I", "Chemistry", "AP Biology", "Geometry", "Algebra II", "Physics", "calc AB", "Chinese I"];
@@ -21,15 +21,15 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
         $scope.class=inputClass.class;
         console.log(inputClass.class);
     }
-    
+
     $scope.Preview = function(){
     if ($scope.type() === "Link") {
-        return 'https://api.pagelr.com/capture?uri=' + Link + '&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw'
+        return 'https://api.pagelr.com/capture?uri=' + $scope.Link + '&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw'
     } else if ($scope.type() === "gDrive"){
-        return Link + '&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw'
+        return $scope.driveThumbnail
     }
     }
-    
+
 
     $scope.type = function() {
 
@@ -48,7 +48,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
                 }
             }
             else {
-                if (link.length > 9) {
+                if (link.length < 9) {
                     $scope.Link = "http://" + link
                 }
                 return ('Link');
