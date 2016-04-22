@@ -6,6 +6,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
     };
     $scope.Tags = [];
     $scope.Title = '';
+    $scope.Type = '';
     $scope.Description = '';
     $scope.Link = '';
     $scope.readOnly = false;
@@ -23,35 +24,34 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
     }
 
     $scope.Preview = function(){
-    if ($scope.type() === "Link") {
+    if ($scope.Type === "Link") {
         return 'https://api.pagelr.com/capture?uri=' + $scope.Link + '&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw'
     } else if ($scope.type() === "gDrive"){
         return $scope.driveThumbnail
     }
     }
+$scope.$watch('Link',  $scope.findType());
 
-
-    $scope.type = function() {
-
+    $scope.findType = function() {
         console.log("reached")
         if (link === '') {
-            return ('NoLink');
+            $scope.Type = 'NoLink';
         }
         else {
             console.log("reached2")
             if (link.match(/(?:http|https):\/\/.{2,}/)) {
                 if (link.match(/\/(?:d|file|folder)\/([-\w]{25,})\//)) {
-                    return ('gDrive');
+                    $scope.Type = 'gDrive';
                 }
                 else {
-                    return ('Link');
+                    $scope.Type = 'Link';
                 }
             }
             else {
-                if (link.length < 9) {
+                if (link.length > 9) {
                     $scope.Link = "http://" + link
                 }
-                return ('Link');
+                $scope.Type = 'Link';
             }
         }
     };
