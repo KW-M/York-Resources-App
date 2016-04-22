@@ -27,10 +27,10 @@
                     </md-menu-item>
                 </md-menu-content>
             </md-menu>
-            <img ng-src="{{Preview()}}" id="newPostImg">
+            <img ng-src="{{'https://api.pagelr.com/capture?uri=' + Link + '&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw'}}" id="newPostImg">
             <div id="newPostLinkButtons">
                 <md-input-container md-no-float id="newPostLinkInput" class="md-whiteframe-4dp">
-                    <input id="newPostLinkInputTxt" ng-model="Link" ng-change="type()" placeholder="Paste a link" type="url">
+                    <input id="newPostLinkInputTxt" ng-model="Link" placeholder="Paste a link" type="url">
                 </md-input-container>
             </div>
             <div class="newPostImgGradient"></div>
@@ -58,7 +58,7 @@
                 <input type="text" placeholder="Add a tag">
             </md-chips>
             <input ng-model="Title" class="newPostTitle" placeholder="Title">
-            <div id="DescriptionTxt" class="newPostBody" contenteditable="true">{{wink}}</div>
+            <div id="DescriptionTxt" class="newPostBody" contenteditable="true"></div>
         </div>
     </div>
     <md-dialog-actions>
