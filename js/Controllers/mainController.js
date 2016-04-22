@@ -47,8 +47,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
       $mdDialog.show({
          templateUrl: 'templates/html/newPost.html',
          controller: ['$scope', '$mdDialog', 'GoogleDriveService', newPostController],
-         scope: $scope,        // use parent scope in template
-          preserveScope: true,
+         locals: {Link: "http://www.google.com"},        // use parent scope in template
          parent: angular.element(document.body),
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
