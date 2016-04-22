@@ -18,19 +18,20 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
     //     console.log("keyup event detected! coming from this element:", e.target);
     // }, false);
     var link = $scope.Link.toString();
-    $scope.classSelected = function (inputClass) {
-        $scope.class=inputClass.class;
+    $scope.classSelected = function(inputClass) {
+        $scope.class = inputClass.class;
         console.log(inputClass.class);
     }
 
-    $scope.Preview = function(){
-    if ($scope.Type === "Link") {
-        return 'https://api.pagelr.com/capture?uri=' + $scope.Link + '&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw'
-    } else if ($scope.type() === "gDrive"){
-        return $scope.driveThumbnail
+    $scope.Preview = function() {
+        if ($scope.Type === "Link") {
+            return 'https://api.pagelr.com/capture?uri=' + $scope.Link + '&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw'
+        }
+        else if ($scope.type() === "gDrive") {
+            return $scope.driveThumbnail;
+        }
     }
-    }
-$scope.$watch('Link',  $scope.findType());
+    $scope.$watch('Link', $scope.findType());
 
     $scope.findType = function() {
         console.log("reached")
