@@ -31,7 +31,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
             return $scope.driveThumbnail;
         }
     }
-    $scope.$watch('Link', $scope.findType());
+    $scope.$watch('Link', $scope.findType);
 
     $scope.findType = function() {
         console.log("reached")

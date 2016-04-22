@@ -26,8 +26,8 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
          fullscreen: ($mdMedia('xs')),
       });
    };
-   
-   $scope.showPicker = function(typ) { 
+
+   $scope.showPicker = function(typ) {
       GoogleDriveService.showPicker(typ);
    };
 
@@ -47,6 +47,9 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
       $mdDialog.show({
          templateUrl: 'templates/html/newPost.html',
          controller: ['$scope', '$mdDialog', 'GoogleDriveService', newPostController],
+         scope: {
+           Link: "http://www.bing.com"
+         },
          parent: angular.element(document.body),
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
