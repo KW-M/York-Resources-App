@@ -1,5 +1,5 @@
 /*global app*/ /*global angular*/ /*global gapi*/
-app.controller('ApplicationController', ['$scope', '$mdDialog', '$window','$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', function($scope, $mdDialog, $window, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService) {
+app.controller('ApplicationController', ['$scope', '$mdDialog', '$window','$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService) {
    var self = this
    var unfilteredPosts = [];
    $scope.Posts = [];
@@ -93,7 +93,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window','$sce'
          console.log(response);
          unfilteredPosts = formatArrayResponse(response);
          for (var i = 0; i < unfilteredPosts.length; i++) {
-           // alert(unfilteredPosts[i].description);
+          unfilteredPosts[i].description = $sce.trustAsHtml(unfilteredPosts[i].description);
          }
          filterPosts($scope.searchTxt);
          $scope.$apply();
