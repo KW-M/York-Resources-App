@@ -93,7 +93,8 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window','$sce'
          console.log(response);
          unfilteredPosts = formatArrayResponse(response);
          for (var i = 0; i < unfilteredPosts.length; i++) {
-          unfilteredPosts[i].description = $sce.trustAsHtml(unfilteredPosts[i].description);
+          unfilteredPosts[i].Description = $sce.trustAsHtml(unfilteredPosts[i].Description);
+          console.log(unfilteredPosts[i].Description);
          }
          filterPosts($scope.searchTxt);
          $scope.$apply();
