@@ -90,6 +90,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
       GoogleDriveService.multiRequest().then(function(response) {
          console.log(response);
          unfilteredPosts = formatArrayResponse(response);
+         for 
          filterPosts($scope.searchTxt);
          $scope.$apply();
       });
