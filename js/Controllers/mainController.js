@@ -1,5 +1,5 @@
 /*global app*/ /*global angular*/ /*global gapi*/
-app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', function($scope, $mdDialog, $window, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService) {
+app.controller('ApplicationController', ['$scope', '$mdDialog', '$window','$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', function($scope, $mdDialog, $window, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService) {
    var self = this
    var unfilteredPosts = [];
    $scope.Posts = [];
@@ -47,7 +47,9 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
       $mdDialog.show({
          templateUrl: 'templates/html/newPost.html',
          controller: ['$scope', '$mdDialog', 'GoogleDriveService', newPostController],
-         locals: {Link: "http://www.google.com"},        // use parent scope in template
+         locals: {
+            Link: "http://www.google.com"
+         }, // use parent scope in template
          parent: angular.element(document.body),
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
@@ -90,7 +92,9 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
       GoogleDriveService.multiRequest().then(function(response) {
          console.log(response);
          unfilteredPosts = formatArrayResponse(response);
-         for 
+         for (var i = 0; i < unfilteredPosts.length; i++) {
+           // alert(unfilteredPosts[i].description);
+         }
          filterPosts($scope.searchTxt);
          $scope.$apply();
       });
