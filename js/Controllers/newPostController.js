@@ -20,6 +20,8 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
         $scope.class=inputClass.class;
         console.log(inputClass.class);
     }
+    
+    $scope.
 
     $scope.type = function() {
 
