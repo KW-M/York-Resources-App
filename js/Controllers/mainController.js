@@ -47,9 +47,8 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
       $mdDialog.show({
          templateUrl: 'templates/html/newPost.html',
          controller: ['$scope', '$mdDialog', 'GoogleDriveService', newPostController],
-         locals: {
-           wink: "http://www.bing.com"
-         },
+         scope: $scope,        // use parent scope in template
+          preserveScope: true,
          parent: angular.element(document.body),
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),

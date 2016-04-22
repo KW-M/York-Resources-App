@@ -15,10 +15,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
     $scope.classSearch = "";
     $scope.class = "";
     $scope.courses = ["English III", "Spanish I", "Chemistry", "AP Biology", "Geometry", "Algebra II", "Physics", "calc AB", "Chinese I"];
-    // document.getElementById("newPostLinkInputTxt").addEventListener('input', function(e) {
-    //     console.log("keyup event detected! coming from this element:", e.target);
-    // }, false);
-    var link = $scope.Link.toString();
+
     $scope.classSelected = function(inputClass) {
         $scope.class = inputClass.class;
         console.log(inputClass.class);
@@ -28,7 +25,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
         if ($scope.Type === "Link") {
             return 'https://api.pagelr.com/capture?uri=' + $scope.Link + '&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw'
         }
-        else if ($scope.type() === "gDrive") {
+        else if ($scope.type === "gDrive") {
             return $scope.driveThumbnail;
         }
     }
@@ -36,13 +33,13 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
 
     $scope.findType = function() {
         console.log("reached")
-        if (link === '') {
+        if ($scope.Link === '') {
             $scope.Type = 'NoLink';
         }
         else {
             console.log("reached2")
-            if (link.match(/(?:http|https):\/\/.{2,}/)) {
-                if (link.match(/\/(?:d|file|folder)\/([-\w]{25,})\//)) {
+            if ($scope.Link.match(/(?:http|https):\/\/.{2,}/)) {
+                if ($scope.Link.match(/\/(?:d|file|folder)\/([-\w]{25,})\//)) {
                     $scope.Type = 'gDrive';
                 }
                 else {
@@ -50,8 +47,8 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
                 }
             }
             else {
-                if (link.length > 9) {
-                    $scope.Link = "http://" + link
+                if ($scope.Link.length > 9) {
+                    $scope.Link = "http://" + $scope.Link
                 }
                 $scope.Type = 'Link';
             }
