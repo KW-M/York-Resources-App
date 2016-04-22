@@ -434,14 +434,12 @@ input.search-field:focus:-ms-input-placeholder {
 .post-card-title {
     padding: 20px 16px 0px 16px;
     margin: 0px;
-    display: flex;
     flex-direction: row;
     white-space: nowrap;
     overflow: hidden;
-    o-text-overflow: ellipsis;
     text-overflow: ellipsis;
     max-width: 100%;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 400;
     line-height: 32px;
 }
