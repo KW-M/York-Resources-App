@@ -14,7 +14,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
     $scope.driveThumbnail = "";
     $scope.classSearch = "";
     $scope.class = "";
-    $scope.courses = ["English III", "Spanish I", "Chemistry", "AP Biology", "Geometry", "Algebra II", "Physics", "calc AB", "Chinese I"];
+    $scope.courses = ["English III", "Spanish I", "Chemistry", "AP Biology", "Geometry", "Algebra II", "Physics", "calc AB", "Chinese I", "World-history I", "world-history II"];
 
     $scope.classSelected = function(inputClass) {
         $scope.class = inputClass.class;
