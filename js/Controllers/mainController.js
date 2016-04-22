@@ -92,10 +92,10 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window','$sce'
       GoogleDriveService.multiRequest().then(function(response) {
          console.log(response);
          unfilteredPosts = formatArrayResponse(response);
-         for (var i = 0; i < unfilteredPosts.length; i++) {
-          unfilteredPosts[i].Description = $sce.trustAsHtml(unfilteredPosts[i].Description);
-          console.log(unfilteredPosts[i].Description);
-         }
+         // for (var i = 0; i < unfilteredPosts.length; i++) {
+         //  unfilteredPosts[i].Description = $sce.trustAsHtml(unfilteredPosts[i].Description);
+         //  console.log(unfilteredPosts[i].Description);
+         // }
          filterPosts($scope.searchTxt);
          $scope.$apply();
       });
