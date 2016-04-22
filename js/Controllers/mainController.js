@@ -47,8 +47,8 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$mdS
       $mdDialog.show({
          templateUrl: 'templates/html/newPost.html',
          controller: ['$scope', '$mdDialog', 'GoogleDriveService', newPostController],
-         scope: {
-           Link: "http://www.bing.com"
+         locals: {
+           wink: "http://www.bing.com"
          },
          parent: angular.element(document.body),
          clickOutsideToClose: false,
