@@ -141,5 +141,7 @@ var UploadPicker;
             callback(response);
         });
     };
+    
+    this.getIt
 
 }]);
