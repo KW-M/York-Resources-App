@@ -142,6 +142,6 @@ var UploadPicker;
         });
     };
     
-    this.getIt
+    this.getI\
 
 }]);
