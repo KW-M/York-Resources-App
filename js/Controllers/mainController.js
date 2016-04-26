@@ -93,7 +93,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window','$sce'
       for (i = 0; i < requests.length; i++) {
        requests[i].then(function(response) {
          console.log(response);
-         unfilteredPostsn.push(response);
+         unfilteredPosts.push(response.result);
          //formatArrayResponse()
          filterPosts($scope.searchTxt);
          $scope.$apply();
