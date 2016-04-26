@@ -89,9 +89,12 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window','$sce'
       // GoogleDriveService.batchRequest().then(function(response) {
       //    console.log(response);
       // });
-      GoogleDriveService.multiRequest().then(function(response) {
+      var requests = GoogleDriveService.multiRequest()
+      for (i = 0; i < cars.length; i++) { 
+       GoogleDriveService.multiRequest()[i].then(function(response) {
          console.log(response);
-         unfilteredPosts = formatArrayResponse(response);
+         unfilteredPosts = response;
+         //formatArrayResponse()
          // for (var i = 0; i < unfilteredPosts.length; i++) {
          //  unfilteredPosts[i].Description = $sce.trustAsHtml(unfilteredPosts[i].Description);
          //  console.log(unfilteredPosts[i].Description);
@@ -99,6 +102,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window','$sce'
          filterPosts($scope.searchTxt);
          $scope.$apply();
       });
+      }
    }
 
    $scope.openLink = function(link) {
