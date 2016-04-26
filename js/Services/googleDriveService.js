@@ -1,8 +1,9 @@
 //Define the GoogleDriveController controller for Angular
 app.service('GoogleDriveService', ['$q', function($q) {
     var self = this;
-var drivePicker;
-var UploadPicker;
+    var drivePicker;
+    var UploadPicker;
+    
     this.initiateAuthLoadDrive = function(callback) {
         console.log("loading drive v3");
         $('#overlay_background').fadeOut(500);
