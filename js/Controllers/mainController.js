@@ -89,17 +89,16 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window','$sce'
       // GoogleDriveService.batchRequest().then(function(response) {
       //    console.log(response);
       // });
-      var requests = GoogleDriveService.multiRequest().then(function(Arrayesponse) {
-      console.log(requests);
-      for (i = 0; i < requests.length; i++) {
-       requests[i].then(function(response) {
+      GoogleDriveService.multiRequest().then(function(response) {
          console.log(response);
-         unfilteredPosts.push(response.result);
-         //formatArrayResponse()
+         unfilteredPosts = formatArrayResponse(response);
+         // for (var i = 0; i < unfilteredPosts.length; i++) {
+         //  unfilteredPosts[i].Description = $sce.trustAsHtml(unfilteredPosts[i].Description);
+         //  console.log(unfilteredPosts[i].Description);
+         // }
          filterPosts($scope.searchTxt);
          $scope.$apply();
       });
-      }
    }
 
    $scope.openLink = function(link) {
