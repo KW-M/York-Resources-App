@@ -90,15 +90,11 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window','$sce'
       //    console.log(response);
       // });
       var requests = GoogleDriveService.multiRequest()
-      for (i = 0; i < cars.length; i++) { 
-       GoogleDriveService.multiRequest()[i].then(function(response) {
+      for (i = 0; i < requests.length; i++) {
+       requests[i].then(function(response) {
          console.log(response);
-         unfilteredPosts = response;
+         unfilteredPostsn.push(response);
          //formatArrayResponse()
-         // for (var i = 0; i < unfilteredPosts.length; i++) {
-         //  unfilteredPosts[i].Description = $sce.trustAsHtml(unfilteredPosts[i].Description);
-         //  console.log(unfilteredPosts[i].Description);
-         // }
          filterPosts($scope.searchTxt);
          $scope.$apply();
       });
