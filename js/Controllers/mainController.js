@@ -90,6 +90,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window','$sce'
       //    console.log(response);
       // });
       var requests = GoogleDriveService.multiRequest()
+      console.log(requests);
       for (i = 0; i < requests.length; i++) {
        requests[i].then(function(response) {
          console.log(response);

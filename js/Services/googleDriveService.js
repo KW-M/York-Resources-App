@@ -98,7 +98,6 @@ app.service('GoogleDriveService', ['$q', function($q) {
 
     this.multiRequest = function() { //do this one
         var promiseArray = [];
-        console.log("got")
         return (self.getListOfFlies().then(function(fileArray) {
             console.log(fileArray)
             for (var count = 0; count < fileArray.result.files.length; count++) {
