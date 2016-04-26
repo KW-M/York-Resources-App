@@ -103,13 +103,26 @@ var UploadPicker;
                 var file = fileArray.result.files[count];
                 var fileRequest = self.getDriveFileContent(file.id);
                 promiseArray.push(fileRequest);
+            }
+            return (promiseArray);
+        }));
+
+    };
+
+    this.multildfskjmRequest = function() { //do this one
+        var promiseArray = [];
+        return (self.getListOfFlies().then(function(fileArray) {
+            console.log(fileArray)
+            for (var count = 0; count < fileArray.result.files.length; count++) {
+                var file = fileArray.result.files[count];
+                var fileRequest = self.getDriveFileContent(file.id);
+                promiseArray.push(fileRequest);
                 console.log(promiseArray);
             }
             return ($q.all(promiseArray));
         }));
 
     };
-
     this.sendDriveFile = function(content, title) {
         return (gapi.client.request({
             'path': 'https://www.googleapis.com/upload/drive/v3/files',
