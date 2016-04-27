@@ -117,14 +117,6 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window','$sce'
       }
    };
 
-   $window.formatArrayResponse = function(rawArrayResponse) {
-      var arrayOfPosts = [];
-      for (response of rawArrayResponse) {
-         arrayOfPosts.push(response.result);
-      }
-      return (arrayOfPosts)
-   }
-
    $window.loginSilent = function(response) {
       loginProcedure(authorizationService.authorizeSilent());
    };
