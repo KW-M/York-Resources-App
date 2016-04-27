@@ -80,7 +80,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
 
     this.batchRequest = function() { //do this one
         var batch = gapi.client.newBatch();
-        return (RateLimit(self.getListOfFlies().then(function(fileArray)self.getDriveFileContent(file.id), 2000); {
+        return (RateLimit(self.getListOfFlies().then(function(fileArray) {
             for (var count = 0; count < fileArray.result.files.length; count++) {
                 var file = fileArray.result.files[count];
                 console.log(file.id);
@@ -93,12 +93,12 @@ app.service('GoogleDriveService', ['$q', function($q) {
                 });
             };
             return (batch)
-        }));
+        })), 2000);
     };
 
     this.multiRequest = function() { //do this one
         var promiseArray = [];
-        return (self.getListOfFlies().then(function(fileArray) {
+        return (RateLimit(self.getListOfFlies().then(function(fileArray) {
             console.log(fileArray)
             for (var count = 0; count < fileArray.result.files.length; count++) {
                 var file = fileArray.result.files[count];
@@ -107,7 +107,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
                 console.log(promiseArray);
             }
             return ($q.all(promiseArray));
-        }));
+        })), 2000);
     };
 
 
