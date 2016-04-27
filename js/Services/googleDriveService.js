@@ -18,7 +18,6 @@ app.service('GoogleDriveService', ['$q', function($q) {
     };
 
     this.getDriveFileContent = function(fileId) {
-        RateLimit(function(fileId) {
         return (gapi.client.drive.files.get({
             'fileId': fileId,
             'alt': 'media'
@@ -81,7 +80,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
 
     this.batchRequest = function() { //do this one
         var batch = gapi.client.newBatch();
-        return (self.getListOfFlies().then(function(fileArray) {
+        return (RateLimit(self.getListOfFlies().then(function(fileArray)self.getDriveFileContent(file.id), 2000); {
             for (var count = 0; count < fileArray.result.files.length; count++) {
                 var file = fileArray.result.files[count];
                 console.log(file.id);
