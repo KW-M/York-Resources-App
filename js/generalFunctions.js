@@ -27,5 +27,4 @@ function RateLimit(fn, delay, context) {
       timer = setInterval(processQueue, delay);
     }
   }
-
 }

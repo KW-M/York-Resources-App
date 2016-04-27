@@ -18,6 +18,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
     };
 
     this.getDriveFileContent = function(fileId) {
+        RateLimit(function(fileId) {
         return (gapi.client.drive.files.get({
             'fileId': fileId,
             'alt': 'media'
