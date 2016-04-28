@@ -13,19 +13,37 @@
 </div>
 <p class="post-card-title">{{Post.Title}}</p>
 <p class="post-card-creator"><span>By {{Post.Creator.Name}}</span><span style="float:right">(<i class="zmdi zmdi-graduation-cap"></i> {{Post.Creator.ClassOf}})</span></p>
-<p id="post_card_description"  ng-bind-html="Post.Description" ng-class="{ 'OverflowShadow': Document.getElementById('post-card-description').scrollHeight > Document.getElementById('post-card-description').clientHeight }">
+<p id="post_card_description" ng-bind-html="Post.Description" ng-class="{ 'OverflowShadow': Document.getElementById('post-card-description').scrollHeight > Document.getElementById('post-card-description').clientHeight }">
 </p>
 <md-card-actions layout="row" layout-align="start center">
 
-    <p class="like-counter" >{{Post.LikeUsers.length}}</p>
+    <p class="like-counter">{{Post.LikeUsers.length}}</p>
     <md-button id="like_thumb_button" class="md-icon-button" aria-label="Like">
         <md-icon>thumb_up</md-icon>
     </md-button>
-   <!-- <md-button class="md-icon-button" id="flag_button" area-label="Flag" style="margin-left: 0px;">
+    <!-- <md-button class="md-icon-button" id="flag_button" area-label="Flag" style="margin-left: 0px;">
         <md-icon>flag</md-icon>
     </md-button>-->
-    <button class="md-icon-button md-button md-ink-ripple" type="button" style="margin-left: -12px;" ng-transclude="" aria-label="Menu">
-        <md-icon class="ng-scope ng-isolate-scope material-icons">more_vert</md-icon>
-    </button>
-    <md-button id="open_button" ng-hide="Post.Link == ''" class="md-button md-accent" ng-click="openLink(Post.Link)" aria-label="Open resource">Open Resource</md-button>
+    <md-menu md-position-mode="target-right target" md-offset="-6 6">
+        <!-- Trigger element is a md-button with an icon -->
+        <md-button ng-click="openMenu($mdOpenMenu, $event)" class="md-icon-button" style="float:right;margin-right: 0px;position: relative;z-index:50;">
+            <md-icon>more_vert</md-icon>
+        </md-button>
+        <md-menu-content>
+            <md-menu-item>
+                <md-button>
+                    <md-icon>link</md-icon>Add Link</md-button>
+            </md-menu-item>
+            <md-menu-item>
+                <md-button>
+                    <md-icon>cloud_queue</md-icon>Add drive file</md-button>
+            </md-menu-item>
+            <md-menu-item>
+                <md-button>
+                    <md-icon>attach_file</md-icon>upload file</md-button>
+            </md-menu-item>
+        </md-menu-content>
+        <md-button class="md-icon-button" type="button" style="margin-left: -12px;" aria-label="Menu">
+        </md-button>
+        <md-button id="open_button" ng-hide="Post.Link == ''" class="md-button md-accent" ng-click="openLink(Post.Link)" aria-label="Open resource">Open Resource</md-button>
 </md-card-actions>
