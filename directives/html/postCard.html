@@ -24,20 +24,20 @@
     <!-- <md-button class="md-icon-button" id="flag_button" area-label="Flag" style="margin-left: 0px;">
         <md-icon>flag</md-icon>
     </md-button>-->
-    <md-menu>
+    <md-menu md-position-mode="target" md-offset="-6 6">
         <!-- Trigger element is a md-button with an icon -->
-        <md-button ng-click="openMenu($mdOpenMenu, $event)" class="md-icon-button" style="margin-left: -12px;">
+        <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" style="margin-left: -12px;">
             <md-icon>more_vert</md-icon>
         </md-button>
         <md-menu-content>
             <md-menu-item>
-                <md-button><md-icon>Delete</md-icon>Delete</md-button>
+                <md-button><md-icon>flag</md-icon>Flag</md-button>
             </md-menu-item>
             <md-menu-item>
-                <md-button><md-icon>Flag</md-icon>Flag</md-button>
+                <md-button><md-icon>delete</md-icon>Delete</md-button>
             </md-menu-item>
             <md-menu-item>
-                <md-button><md-icon>Edit</md-icon>edit</md-button>
+                <md-button><md-icon>edit</md-icon>Edit</md-button>
             </md-menu-item>
         </md-menu-content>
             </md-menu>
