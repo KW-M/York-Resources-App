@@ -24,25 +24,23 @@
     <!-- <md-button class="md-icon-button" id="flag_button" area-label="Flag" style="margin-left: 0px;">
         <md-icon>flag</md-icon>
     </md-button>-->
-    <md-menu md-position-mode="target-right target" md-offset="-6 6">
+    <md-menu>
         <!-- Trigger element is a md-button with an icon -->
-        <md-button ng-click="openMenu($mdOpenMenu, $event)" class="md-icon-button" style="float:right;margin-right: 0px;position: relative;z-index:50;">
+        <md-button ng-click="openMenu($mdOpenMenu, $event)" class="md-icon-button" style="margin-left: -12px;">
             <md-icon>more_vert</md-icon>
         </md-button>
         <md-menu-content>
             <md-menu-item>
-                <md-button>
-                    <md-icon>link</md-icon>Add Link</md-button>
+                <md-button><md-icon>Delete</md-icon>Delete</md-button>
             </md-menu-item>
             <md-menu-item>
-                <md-button>
-                    <md-icon>cloud_queue</md-icon>Add drive file</md-button>
+                <md-button><md-icon>Flag</md-icon>Flag</md-button>
             </md-menu-item>
             <md-menu-item>
-                <md-button>
-                    <md-icon>attach_file</md-icon>upload file</md-button>
+                <md-button><md-icon>Edit</md-icon>edit</md-button>
             </md-menu-item>
         </md-menu-content>
+            </md-menu>
         <md-button class="md-icon-button" type="button" style="margin-left: -12px;" aria-label="Menu">
         </md-button>
         <md-button id="open_button" ng-hide="Post.Link == ''" class="md-button md-accent" ng-click="openLink(Post.Link)" aria-label="Open resource">Open Resource</md-button>
