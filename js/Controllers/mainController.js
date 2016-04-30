@@ -114,6 +114,10 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
           .cancel('Keep it');
     $mdDialog.show(confirm).then(function() {
        //ok
+       filterPosts($scope.searchTxt);
+       gapi.client.drive.files.trash({
+         'fileId': content.id
+      }).then();
        console.log(content)
     }, function() {
 //cancel
