@@ -103,7 +103,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
       });
    }
 
-  $scope.confirmDelete = function(ev,content) {
+  $scope.confirmDelete = function(ev,content,arrayIndex) {
     // Appending dialog to document.body to cover sidenav in docs app
     var confirm = $mdDialog.confirm()
           .title('Are you sure you want to remove this:')
@@ -115,13 +115,13 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
     $mdDialog.show(confirm).then(function() {
        //ok
        console.log(content)
+arrayIndex
        filterPosts($scope.searchTxt);
          GoogleDriveService.deleteDriveFile(content.ID).then(function(){
-          console.log("deleted")
          })
-
     }, function() {
-//cancel
+       //cancel
+       console.log(content)
     });
   };
 
