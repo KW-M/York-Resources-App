@@ -1,6 +1,7 @@
 function formatArrayResponse (rawArrayResponse) {
       var arrayOfPosts = [];
       for (response of rawArrayResponse) {
+        
          arrayOfPosts.push(response.result);
       }
     return (arrayOfPosts);
