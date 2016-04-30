@@ -103,6 +103,22 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
       });
    }
 
+ $scope.confirmDelete = function(ev) {
+    // Appending dialog to document.body to cover sidenav in docs app
+    var confirm = $mdDialog.confirm()
+          .title('Are you sure you want to delete this?')
+          .ariaLabel('Delete?')
+          .targetEvent(ev)
+          .ok('Delete')
+          .cancel('Keep it');
+    $mdDialog.show(confirm).then(function() {
+       //ok
+      alert("deleted")
+    }, function() {
+//cancel
+    });
+  };
+
    $scope.openLink = function(link) {
       if (link != "") {
          $window.open(link);
