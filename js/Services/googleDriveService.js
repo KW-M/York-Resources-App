@@ -38,7 +38,6 @@ app.service('GoogleDriveService', ['$q', function($q) {
         var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
         var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
         console.log("loaded my picker")
-        console.log(gapi.auth.getToken().access_token)
 
 
         self.showPicker = function(typ) {
