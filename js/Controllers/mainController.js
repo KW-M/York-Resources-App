@@ -103,10 +103,11 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
       });
    }
 
- $scope.confirmDelete = function(ev,content) {
+  $scope.confirmDelete = function(ev,content) {
     // Appending dialog to document.body to cover sidenav in docs app
     var confirm = $mdDialog.confirm()
-          .title('Are you sure you want to delete ' + content.Title + '?')
+          .title('Are you sure you want to remove this:')
+          .textContent(content.Title)
           .ariaLabel('Delete?')
           .targetEvent(ev)
           .ok('Delete')
