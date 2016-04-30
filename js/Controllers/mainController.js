@@ -86,7 +86,11 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
 
    $scope.initiateDrive = function() {
       GoogleDriveService.getUserInfo().then(function(userInfo) {
-         scope
+         $scope.myInfo = {
+            "Name": userInfo.result.user.displayName,
+            "Email": userInfo.result.user.emailAddress,
+            "ClassOf": '2018',
+         }
       });
       // GoogleDriveService.batchRequest().then(function(response) {
       //    console.log(response);
@@ -96,36 +100,35 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
          combinedResponse.files.then(function(fileResponse) {
             unfilteredPosts = formatArrayResponse(fileResponse, combinedResponse.ids);
             console.log(unfilteredPosts)
-            //for (var i = 0; i < unfilteredPosts.length; i++) {
-            //  unfilteredPosts[i].Description = $sce.trustAsHtml(unfilteredPosts[i].Description);
-            //  console.log(unfilteredPosts[i].Description);
-            // }
+               //for (var i = 0; i < unfilteredPosts.length; i++) {
+               //  unfilteredPosts[i].Description = $sce.trustAsHtml(unfilteredPosts[i].Description);
+               //  console.log(unfilteredPosts[i].Description);
+               // }
             filterPosts($scope.searchTxt);
             $scope.$apply();
          });
       });
    }
 
-  $scope.confirmDelete = function(ev,content,arrayIndex) {
-    // Appending dialog to document.body to cover sidenav in docs app
-    var confirm = $mdDialog.confirm()
-          .title('Are you sure you want to remove this:')
-          .textContent(content.Title)
-          .ariaLabel('Delete?')
-          .targetEvent(ev)
-          .ok('Delete')
-          .cancel('Keep it');
-    $mdDialog.show(confirm).then(function() {
-       //ok
-       unfilteredPosts.splice(arrayIndex,1);
-       filterPosts($scope.searchTxt);
-       $scope.$apply();
-         GoogleDriveService.deleteDriveFile(content.ID).then(function(){
-         })
-    }, function() {
-       //cancel
-    });
-  };
+   $scope.confirmDelete = function(ev, content, arrayIndex) {
+      // Appending dialog to document.body to cover sidenav in docs app
+      var confirm = $mdDialog.confirm()
+         .title('Are you sure you want to remove this:')
+         .textContent(content.Title)
+         .ariaLabel('Delete?')
+         .targetEvent(ev)
+         .ok('Delete')
+         .cancel('Keep it');
+      $mdDialog.show(confirm).then(function() {
+         //ok
+         unfilteredPosts.splice(arrayIndex, 1);
+         filterPosts($scope.searchTxt);
+         $scope.$apply();
+         GoogleDriveService.deleteDriveFile(content.ID).then(function() {})
+      }, function() {
+         //cancel
+      });
+   };
 
    $scope.openLink = function(link) {
       if (link != "") {
