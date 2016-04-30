@@ -103,11 +103,12 @@ app.service('GoogleDriveService', ['$q', function($q) {
             for (var count = 0; count < fileArray.result.files.length; count++) {
                 var file = fileArray.result.files[count];
                 var fileRequest = self.getDriveFileContent(file.id);
-                promiseArray.push({file:fileRequest, id:file.id});
+                promiseArray.push(fileRequest);
+                idArray.push(file.id);
                 console.log(promiseArray);
             }
 
-            return ($q.all(promiseArray));
+            return ({files:$q.all(promiseArray), ids:idArray});
         }))
     };
 
