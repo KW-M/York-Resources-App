@@ -89,8 +89,9 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
          $scope.myInfo = {
             "Name": userInfo.result.user.displayName,
             "Email": userInfo.result.user.emailAddress,
-            "ClassOf": '2018',
+            "ClassOf": userInfo.result.user.emailAddress.match(/\d+/),
          }
+         console.log($scope.myInfo)
       });
       // GoogleDriveService.batchRequest().then(function(response) {
       //    console.log(response);
