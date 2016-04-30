@@ -1,7 +1,9 @@
-function formatArrayResponse (rawArrayResponse) {
+function formatArrayResponse (rawArrayResponse,idArray) {
       var arrayOfPosts = [];
-      for (response of rawArrayResponse) {
-        
+     for (var i = 0; i < rawArrayResponse.length; i++) {
+        if(idArray != null){
+          
+        }
          arrayOfPosts.push(response.result);
       }
     return (arrayOfPosts);

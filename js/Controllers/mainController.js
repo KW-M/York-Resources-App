@@ -1,5 +1,5 @@
 /*global app*/ /*global angular*/ /*global gapi*/
-app.controller('ApplicationController', ['$scope', '$mdDialog', '$window','$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService) {
+app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService) {
    var self = this
    var unfilteredPosts = [];
    $scope.Posts = [];
@@ -48,7 +48,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window','$sce'
          templateUrl: 'templates/html/newPost.html',
          controller: ['$scope', '$mdDialog', 'GoogleDriveService', newPostController],
          scope: $scope,
-         preserveScope: true,// use parent scope in template
+         preserveScope: true, // use parent scope in template
          parent: angular.element(document.body),
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
@@ -88,17 +88,17 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window','$sce'
       // GoogleDriveService.batchRequest().then(function(response) {
       //    console.log(response);
       // });
-      var result = GoogleDriveService.multiRequest()
-      console.log(result.Zc);
-      result.then(function(response) {
-         console.log(response);
-         unfilteredPosts = formatArrayResponse(response);
-         //for (var i = 0; i < unfilteredPosts.length; i++) {
-         //  unfilteredPosts[i].Description = $sce.trustAsHtml(unfilteredPosts[i].Description);
-         //  console.log(unfilteredPosts[i].Description);
-         // }
-         filterPosts($scope.searchTxt);
-         $scope.$apply();
+      GoogleDriveService.multiRequest().then(function(combinedResponse) {
+         console.log(combinedResponse);
+         combinedResponse.files.then(function(fileResponse) {
+            unfilteredPosts = formatArrayResponse(fileResponse, combinedResponse.ids);
+            //for (var i = 0; i < unfilteredPosts.length; i++) {
+            //  unfilteredPosts[i].Description = $sce.trustAsHtml(unfilteredPosts[i].Description);
+            //  console.log(unfilteredPosts[i].Description);
+            // }
+            filterPosts($scope.searchTxt);
+            $scope.$apply();
+         });
       });
    }
 
