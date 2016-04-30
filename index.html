@@ -77,7 +77,7 @@
         <!----------------------------------------------------------->
         <!--------------- The side navigation ------------------>
         <md-sidenav class="ng-cloak side-nav md-sidenav-left md-whiteframe-z2" md-component-id="left" style="margin-top:56px; height:100% z-index:0">
-            <md-content layout-padding style="display:flex; flex-direction: column">
+            <md-content style="display:flex; flex-direction: column">
                 <div style="overflow-y:auto; flex:1;">
                 <div style="border-bottom: 1px solid #ddd;">
                     <md-list>
@@ -192,7 +192,7 @@
         <!----- The content, ie posts, resources, etc. ----->
         <div flex id="all_content" class="ng-cloak">
             <div class="blank-textbox new-post-card-top">
-                <p class="new-post-text-top" ng-click="newPost()">Share a link or resource</p>
+                <p class="new-post-text-top" ng-click="newPost()"><md-icon>plus</md-icon> Share a link or resource</p>
                 <div style="float:right">
                     <md-button class="md-icon-button md-mini" style="margin-top:0px" ng-click="showPicker('Upload')">
                         <md-tooltip md-direction="down">Upload</md-tooltip>
