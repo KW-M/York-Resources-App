@@ -2,9 +2,9 @@ function formatArrayResponse (rawArrayResponse,idArray) {
       var arrayOfPosts = [];
      for (var i = 0; i < rawArrayResponse.length; i++) {
         if(idArray != null){
-          
+          rawArrayResponse[i].result.ID = idArray[i].id
         }
-         arrayOfPosts.push(response.result);
+         arrayOfPosts.push(rawArrayResponse.result);
       }
     return (arrayOfPosts);
 }
