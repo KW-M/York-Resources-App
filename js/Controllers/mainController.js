@@ -116,8 +116,10 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
        //ok
        console.log(content)
        filterPosts($scope.searchTxt);
-      GoogleDriveService.trashDriveFile(content.ID)
-       
+         GoogleDriveService.deleteDriveFile(content.ID).then(function(){
+          console.log("deleted")
+         })
+
     }, function() {
 //cancel
     });
