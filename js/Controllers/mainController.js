@@ -89,7 +89,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
          $scope.myInfo = {
             "Name": userInfo.result.user.displayName,
             "Email": userInfo.result.user.emailAddress,
-            "ClassOf": userInfo.result.user.emailAddress.match(/\d+/),
+            "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
          }
          console.log($scope.myInfo)
       });
