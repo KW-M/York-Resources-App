@@ -112,6 +112,11 @@ app.service('GoogleDriveService', ['$q', function($q) {
         }))
     };
 
+    this.deleteDriveFile = function(fileId) {
+        return ( gapi.client.drive.files.trash({
+         'fileId': fileId
+      }));
+    };
 
     this.sendDriveFile = function(content, title) {
         return (gapi.client.request({
