@@ -92,7 +92,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
          console.log(combinedResponse);
          combinedResponse.files.then(function(fileResponse) {
             unfilteredPosts = formatArrayResponse(fileResponse, combinedResponse.ids);
-            console.log()
+            console.log(unfilteredPosts)
             //for (var i = 0; i < unfilteredPosts.length; i++) {
             //  unfilteredPosts[i].Description = $sce.trustAsHtml(unfilteredPosts[i].Description);
             //  console.log(unfilteredPosts[i].Description);
