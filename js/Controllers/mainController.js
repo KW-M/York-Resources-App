@@ -114,17 +114,13 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
           .cancel('Keep it');
     $mdDialog.show(confirm).then(function() {
        //ok
-       console.log(content)
        unfilteredPosts.splice(arrayIndex,1);
        filterPosts($scope.searchTxt);
+       $scope.$apply();
          GoogleDriveService.deleteDriveFile(content.ID).then(function(){
          })
     }, function() {
        //cancel
-       unfilteredPosts.splice(arrayIndex,1);
-       filterPosts($scope.searchTxt);
-       console.log(arrayIndex);
-       console.log(content)
     });
   };
 
