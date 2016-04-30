@@ -105,6 +105,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
                 promiseArray.push(fileRequest);
                 console.log(promiseArray);
             }
+
             return ($q.all(promiseArray));
         }))
     };
