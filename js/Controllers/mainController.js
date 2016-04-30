@@ -85,7 +85,9 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    };
 
    $scope.initiateDrive = function() {
-      
+      GoogleDriveService.getUserInfo().then(function(userInfo) {
+         scope
+      });
       // GoogleDriveService.batchRequest().then(function(response) {
       //    console.log(response);
       // });
