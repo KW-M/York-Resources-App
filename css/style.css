@@ -336,10 +336,12 @@ input.search-field:focus:-ms-input-placeholder {
 
 .md-button.new-post-text-top {
     padding: 6px 10px;
-    width: calc(100% - 49px);
+    width: 100%;
     margin: 0;
+    text-transform: none;
     font-family: 'Roboto Slab', serif;
     color: rgba(0, 0, 0, 0.6);
+    text-align: start;
 }
 .md-button.new-post-text-top:hover {
    background-color: rgba(158,158,158,0.1);
