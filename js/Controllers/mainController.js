@@ -89,7 +89,8 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window','$sce'
       //    console.log(response);
       // });
       var result = GoogleDriveService.multiRequest()
-      result.files.then(function(response) {
+      console.log(result.Zc);
+      result.then(function(response) {
          console.log(response);
          unfilteredPosts = formatArrayResponse(response);
          //for (var i = 0; i < unfilteredPosts.length; i++) {
