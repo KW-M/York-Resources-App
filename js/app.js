@@ -5,19 +5,7 @@ var app = angular.module('YorkResourcesApp', ['ngMaterial','ngRoute','angularGri
 app.config(function ($mdThemingProvider, $mdIconProvider) {
 
         //routing:
-    $routeProvider
-        .when('all-posts',{
-            template:'templates/html/all-post.html'
-        })
-        .when('my-posts',{
-            template:'This is the computers Route'
-        })
-        .when('flaged',{
-            template:'This is the printers Route'
-        })
-        .otherwise({
-            redirectTo:'all-posts'
-        });
+
 
     $mdIconProvider
         .icon("accountpic", "./assets/svg/avatar-1.svg", 128)
