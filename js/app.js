@@ -7,7 +7,7 @@ app.config(function ($mdThemingProvider, $mdIconProvider, $routeProvider) {
         //routing:
     $routeProvider
         .when('all-posts',{
-            template:'<p>templates/html/all-posts.html<p>'
+            template:'templates/html/all-posts.html'
         })
         .when('my-posts',{
             template:'templates/html/my-posts.htm'
