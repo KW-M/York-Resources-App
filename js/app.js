@@ -1,5 +1,5 @@
 //define the root angular module (app) as a variable named "app"
-var app = angular.module('YorkResourcesApp', ['ngMaterial','angularGrid', 'ngSanitize']);
+var app = angular.module('YorkResourcesApp', ['ngMaterial','ngRoute','angularGrid','ngSanitize']);
 
 //universaly applying configurations/options for the angular module (app) named "app" above
 app.config(function ($mdThemingProvider, $mdIconProvider) {
@@ -24,7 +24,3 @@ app.config(function ($mdThemingProvider, $mdIconProvider) {
     $mdThemingProvider.theme('default').primaryPalette('yorkGreen');
     $mdThemingProvider.theme('default').accentPalette('yorkBlue');
 });
-
-// $(document).ready(function () {
-    //...
-// });
