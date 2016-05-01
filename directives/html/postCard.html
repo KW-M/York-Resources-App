@@ -26,7 +26,7 @@
     </md-button>
     <md-menu md-position-mode="target" md-offset="7 0" style="padding:0px" >
         <!-- Trigger element is a md-button with an icon -->
-        <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" style="margin-left: -12px;">
+        <md-button ng-click="$mdOpenMenu($event)" ng-hide="Post.creator.email == myInfo.Email" class="md-icon-button" style="margin-left: -12px;">
             <md-icon>more_vert</md-icon>
         </md-button>
         <md-menu-content>
@@ -44,6 +44,6 @@
             </md-menu-item>
         </md-menu-content>
     </md-menu>
-    
+
     <md-button id="open_button" ng-hide="Post.Link == ''" class="md-button md-accent" ng-click="openLink(Post.Link)" aria-label="Open resource">Open Resource</md-button>
 </md-card-actions>

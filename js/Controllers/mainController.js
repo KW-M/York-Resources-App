@@ -91,7 +91,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
             "Email": userInfo.result.user.emailAddress,
             "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
          }
-         console.log($scope.myInfo)
+         console.log({myInfo:$scope.myInfo})
       });
       // GoogleDriveService.batchRequest().then(function(response) {
       //    console.log(response);
