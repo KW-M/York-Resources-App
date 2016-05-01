@@ -23,4 +23,10 @@ app.config(function ($mdThemingProvider, $mdIconProvider) {
     // Use that theme for the primary intentions
     $mdThemingProvider.theme('default').primaryPalette('yorkGreen');
     $mdThemingProvider.theme('default').accentPalette('yorkBlue');
+    
+    $routeProvider
+        .when('/',{template:'This is the default Route'})
+        .when('/computers',{template:'This is the computers Route'})
+        .when('/printers',{template:'This is the printers Route'})
+        .otherwise({redirectTo:'/'});
 });
