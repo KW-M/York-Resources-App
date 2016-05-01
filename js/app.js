@@ -7,7 +7,7 @@ app.config(function ($mdThemingProvider, $mdIconProvider, $routeProvider) {
         //routing:
     $routeProvider
         .when('/all-posts',{
-            template:'templates/html/all-posts.html',
+            template:'<script>console.log()</script>',
         })
         .otherwise({
             redirectTo:'/all-posts'
