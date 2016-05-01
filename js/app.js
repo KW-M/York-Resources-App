@@ -5,8 +5,12 @@ var app = angular.module('YorkResourcesApp', ['ngMaterial','ngRoute','angularGri
 app.config(function ($mdThemingProvider, $mdIconProvider, $routeProvider) {
 
         //routing:
-    $routeProvider.otherwise({
-            redirectTo:'all-posts'
+    $routeProvider
+        .when('/all-posts',{
+            template:'/templates/html/all-posts.html',
+        })
+        .otherwise({
+            redirectTo:'/all-posts'
         });
 
     $mdIconProvider
