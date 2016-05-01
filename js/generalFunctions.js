@@ -30,6 +30,7 @@ app.factory('P', function($q) {
     }
   }
 });
+
 function RateLimit(fn, delay, context) {
   var queue = [], timer = null;
 
