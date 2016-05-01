@@ -1,0 +1,23 @@
+<md-fab-speed-dial id="speed-dial-container" md-direction="up" md-open="globals.FABisOpen" class="md-fling md-fab-bottom-right md-hover-full ng-cloak" style="position:fixed; right:0px; bottom:0px; padding: 0 24px 24px 0" ng-mouseenter="globals.FABisOpen=true"
+        ng-mouseleave="globals.FABisOpen=false">
+            <md-fab-trigger>
+                <md-button id="new_post_button" class="md-fab md-accent raise-on-hover" ng-click="newPost()">
+                    <md-tooltip md-direction="left">Add Resource</md-tooltip>
+                    <md-icon class="unselectable">add</md-icon>
+                </md-button>
+            </md-fab-trigger>
+            <md-fab-actions>
+                <md-button class="md-fab md-raised md-mini" ng-click="showPicker('Drive')">
+                    <md-tooltip md-direction="left">Add Drive file</md-tooltip>
+                    <img class="unselectable" style="width:22px; height:22px; margin-top:8px" src="images/drive_icon.svg">
+                </md-button>
+                <md-button class="md-fab md-raised md-mini">
+                    <md-tooltip md-direction="left">Add Link</md-tooltip>
+                    <md-icon class="unselectable" style="color:black">link</md-icon>
+                </md-button>
+                <md-button class="md-fab md-raised md-mini" ng-click="showPicker('Upload')">
+                    <md-tooltip md-direction="left">Upload</md-tooltip>
+                    <md-icon class="unselectable" style="color:black">file_upload</md-icon>
+                </md-button>
+            </md-fab-actions>
+        </md-fab-speed-dial>

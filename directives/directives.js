@@ -8,7 +8,20 @@ app.directive('postCard', function () {
 
 app.directive('addBarTop', function () {
     return {
-        restrict: 'EA',
+        restrict: 'E',
         templateUrl: 'directives/html/addBarTop.html'
+    };
+});
+
+app.directive('sideNav', function () {
+    return {
+        restrict: 'E',
+        templateUrl: 'directives/html/sideNav.html'
+    };
+});
+app.directive('addLowerButton', function () {
+    return {
+        restrict: 'E',
+        templateUrl: 'directives/html/addLowerButton.html'
     };
 });
