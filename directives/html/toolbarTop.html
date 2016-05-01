@@ -1,0 +1,28 @@
+<md-toolbar class="toolbar-top ng-cloak">
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" ng-click="toggleSidebar()">
+            <md-icon class="light-icon">menu</md-icon>
+        </md-button>
+        <h2>
+          <span class="unselectable default-mouse" style="font-size: 110%">YORK </span>
+          <span class="unselectable default-mouse" style="font-size: 80%" >Study Resources</span>
+        </h2>
+        <div style="flex:1"></div>
+        <div class="search-wrapper" layout="column">
+            <md-icon class="search-icon">search</md-icon>
+            <input type=text placeholder="Search" class="search-field unselectable" ng-model="searchTxt">
+        </div>
+        <div style="flex:18"></div>
+        <md-button class="md-icon-button" onclick="initiateDrive()">
+            <md-icon class="light-icon">refresh</md-icon>
+            <md-tooltip>Refresh</md-tooltip>
+        </md-button>
+        <md-button class="md-icon-button" ng-click="helpDialog()">
+            <md-icon class="light-icon">help</md-icon>
+            <md-tooltip>Help</md-tooltip>
+        </md-button>
+        <md-button class="md-icon-button md-mini" aria-label="account" style="margin-top:4px">
+            <img class="unselectable" style="width:42px; height:42px; margin-top: -9px; margin-left: -9px; cursor:pointer;" src="images/accountPic.png">
+        </md-button>
+    </div>
+</md-toolbar>
