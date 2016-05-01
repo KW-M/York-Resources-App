@@ -12,16 +12,3 @@ app.directive('addBarTop', function () {
         templateUrl: 'directives/html/addBarTop.html'
     };
 });
-
-app.directive('sideNav', function () {
-    return {
-        restrict: 'E',
-        templateUrl: 'directives/html/sideNav.html'
-    };
-});
-app.directive('addLowerButton', function () {
-    return {
-        restrict: 'E',
-        templateUrl: 'directives/html/addLowerButton.html'
-    };
-});
