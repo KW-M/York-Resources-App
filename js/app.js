@@ -3,9 +3,27 @@ var app = angular.module('YorkResourcesApp', ['ngMaterial','ngRoute','angularGri
 
 //universaly applying configurations/options for the angular module (app) named "app" above
 app.config(function ($mdThemingProvider, $mdIconProvider) {
+
+        //routing:
+    $routeProvider
+        .when('all-posts',{
+            template:'templates/html/all-post.html'
+        })
+        .when('my-posts',{
+            template:'This is the computers Route'
+        })
+        .when('flaged',{
+            template:'This is the printers Route'
+        })
+        .otherwise({
+            redirectTo:'all-posts'
+        });
+
     $mdIconProvider
         .icon("accountpic", "./assets/svg/avatar-1.svg", 128)
         .icon("driveIcon", "./assets/drive-icon.svg", 18);
+
+    //theming stuff
 
     var yorkRedMap = $mdThemingProvider.extendPalette('red', {
         '500': '#640000'
@@ -23,10 +41,4 @@ app.config(function ($mdThemingProvider, $mdIconProvider) {
     // Use that theme for the primary intentions
     $mdThemingProvider.theme('default').primaryPalette('yorkGreen');
     $mdThemingProvider.theme('default').accentPalette('yorkBlue');
-    
-    $routeProvider
-        .when('/',{template:'This is the default Route'})
-        .when('/computers',{template:'This is the computers Route'})
-        .when('/printers',{template:'This is the printers Route'})
-        .otherwise({redirectTo:'/'});
 });
