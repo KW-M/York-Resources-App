@@ -5,3 +5,10 @@ app.directive('postCard', function () {
         templateUrl: 'directives/html/postCard.html'
     };
 });
+
+app.directive('addBarTop', function () {
+    return {
+        restrict: 'EA',
+        templateUrl: 'directives/html/addBarTop.html'
+    };
+});
