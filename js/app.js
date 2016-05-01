@@ -2,10 +2,22 @@
 var app = angular.module('YorkResourcesApp', ['ngMaterial','ngRoute','angularGrid','ngSanitize']);
 
 //universaly applying configurations/options for the angular module (app) named "app" above
-app.config(function ($mdThemingProvider, $mdIconProvider) {
+app.config(function ($mdThemingProvider, $mdIconProvider, $routeProvider) {
 
         //routing:
-
+    $routeProvider
+        .when('all-posts',{
+            template:'templates/html/all-posts.html'
+        })
+        .when('my-posts',{
+            template:'templates/html/my-posts.htm'
+        })
+        .when('flaged',{
+            template:'This is the printers Route'
+        })
+        .otherwise({
+            redirectTo:'all-posts'
+        });
 
     $mdIconProvider
         .icon("accountpic", "./assets/svg/avatar-1.svg", 128)
