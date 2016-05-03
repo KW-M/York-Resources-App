@@ -102,11 +102,7 @@
 }
 
 input.newPostTitle {
-    font-size: 120%;
-    font-weight: bold;
     font-family: 'Roboto Condensed', 'Droid Sans', arial, sans-serif;
-    height: 36px;
-    line-height: 20px;
     outline: none;
     border: none;
 }
@@ -124,10 +120,13 @@ input.newPostTitle {
 }
 
 .newPostBody {
-    font-size: small;
-    position: relative;
-    line-height: 20px;
-    min-height: 121px;
+    font-size: 14px;
+    line-height: 19px;
+    min-height: 46px;
+    padding-top: 12px;
+    font-family: 'Roboto Slab','Times New Roman',serif;
+    white-space: pre-wrap;
+    word-wrap: break-word;
     outline: none;
     word-wrap: break-word;
 }
