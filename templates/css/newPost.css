@@ -51,7 +51,7 @@
 
 #newPostLinkInput {
     width: 100%;
-    margin-top: 6px;
+    margin-top: 16px;
 }
 
 #newPostLinkButtons:hover #newPostLinkInput, #newPostLinkInputTxt:focus #newPostLinkInput{
