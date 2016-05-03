@@ -102,6 +102,7 @@
 }
 
 input.newPostTitle {
+    font-weight: bold;
     font-family: 'Roboto Condensed', 'Droid Sans', arial, sans-serif;
     outline: none;
     border: none;
