@@ -49,13 +49,8 @@
 }
 
 #newPostLinkInput {
-    opacity: 0.5;
-    padding: 2px 6px;
-    height: 34px;
-    width: 240px;
-    border-radius: 2px;
-    background-color: white;
-    transition: opacity 1s, margin-left 1s;
+    width: 100%;
+    margin: 0 12px;
 }
 
 #newPostLinkButtons:hover #newPostLinkInput, #newPostLinkInputTxt:focus #newPostLinkInput{

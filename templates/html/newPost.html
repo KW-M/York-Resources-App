@@ -17,7 +17,11 @@
         </md-button>
       </div>
       <img ng-src="https://api.pagelr.com/capture?uri=www.google.com&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw" id="newPostImg">
-      <div class="newPostImgGradient"></div>
+      <div class="newPostImgGradient">
+        <md-input-container id="newPostLinkInput">
+          <input id="newPostLinkInputTxt" ng-model="Link" placeholder="Paste a link" type="url">
+        </md-input-container>
+      </div>
     </md-toolbar>
     <md-dialog-content>
       <md-chips ng-model="Tags" readonly="readonly">
