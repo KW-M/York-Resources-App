@@ -20,10 +20,9 @@
     -webkit-filter: brightness(85%);
     filter: brightness(85%);
     width: 100%;
-    top: -20px;
-    display: block;
+    z-index: -1;
+    top: 0px;
     position: absolute;
-    min-height: 200px;
     border: 0px;
     background-color: #bccac7;
 }
