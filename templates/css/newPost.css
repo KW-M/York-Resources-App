@@ -5,12 +5,10 @@
 }
 
 #dialog_scroll {
-    min-width: 400px;
-    flex:1;
+    width: 100%;
     position: relative;
     max-height: 900px;
     overflow-y: auto;
-    overflow-x: hidden;
 }
 
 .newPostContent {
