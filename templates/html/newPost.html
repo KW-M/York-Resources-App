@@ -7,7 +7,7 @@
         <div id="dialog_header">
             <md-icon style="margin: 8px 0 0 12px; float:left;color:white;display:block; position:absolute; z-index:50" class="ng-isolate-scope material-icons">group</md-icon>
             <span flex></span>
-            <md-menu md-position-mode="target-right target" md-offset="-6 6">
+            <md-menu md-position-mode="target-right target">
                 <!-- Trigger element is a md-button with an icon -->
                 <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" style="float:right;margin-right: 0px;position: relative;z-index:50;">
                     <md-icon style="color:white;" class="material-icons ng-isolate-scope">more_vert</md-icon>
@@ -29,11 +29,13 @@
             </md-menu>
             <img ng-src="{{'https://api.pagelr.com/capture?uri=' + Link + '&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw'}}" id="newPostImg">
             <div id="newPostLinkButtons">
+
+            </div>
+            <div class="newPostImgGradient">
                 <md-input-container md-no-float id="newPostLinkInput" class="md-whiteframe-4dp">
                     <input id="newPostLinkInputTxt" ng-model="Link" placeholder="Paste a link" type="url">
                 </md-input-container>
             </div>
-            <div class="newPostImgGradient"></div>
         </div>
         <div id="newPostContent">
             <md-menu md-position-mode="target target" md-offset="12 45">
