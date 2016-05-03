@@ -1,18 +1,8 @@
-.container {
-    min-height: 465px;
-    max-height: 600px;
-    max-width: 450px;
-}
-
 #dialog_scroll {
     width: 100%;
     position: relative;
     max-height: 900px;
     overflow-y: auto;
-}
-
-.newPostContent {
-    margin-top: 156px;
 }
 
 #dialog_header {
@@ -64,7 +54,6 @@
     opacity: 0.5;
     margin-top: 40px;
     padding: 2px 6px;
-    margin-left: 0;
     height: 34px;
     width: 240px;
     border-radius: 2px;

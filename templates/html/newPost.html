@@ -21,13 +21,13 @@
       <md-chips ng-model="Tags" readonly="readonly">
         <input type="text" placeholder="Add a tag">
       </md-chips>
-      <input ng-model="Title" class="newPostTitle" placeholder="Title">
-      <div id="DescriptionTxt" class="newPostBody" contenteditable="true"></div>
       <div class="md-dialog-content">
+        <input ng-model="Title" class="newPostTitle" placeholder="Title" md-autofocus>
+        <div id="DescriptionTxt" class="newPostBody" contenteditable="true"></div>
       </div>
     </md-dialog-content>
     <md-dialog-actions layout="row">
-      <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus>
+      <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank">
         More on Wikipedia
       </md-button>
       <span flex></span>
