@@ -108,18 +108,16 @@ input.newPostTitle {
     height: 36px;
     line-height: 20px;
     outline: none;
+    border: none;
 }
 
 .newPostBody:empty:before {
     content: "Say something";
-    display: block;
     font-size: small;
-    position: relative;
     color: #757575;
     font-family: 'Roboto Slab', 'Times New Roman', serif;
     left: 20px;
     line-height: 15px;
-    position: absolute;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
@@ -130,10 +128,8 @@ input.newPostTitle {
     position: relative;
     line-height: 20px;
     min-height: 121px;
-    flex: 1;
     outline: none;
     word-wrap: break-word;
-    overflow: visible;
 }
 
 .dialog_buttons {
