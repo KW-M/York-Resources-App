@@ -33,16 +33,14 @@
       </div>
     </md-dialog-content>
     <md-dialog-actions layout="row">
-      <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank">
-        More on Wikipedia
-      </md-button>
+      <md-button id="New_Post_Submit" ng-click="submit()" class="md-raised">Submit</md-button>
+        <md-button class="text-formating-button md-icon-button " style="font-weight: 800;  margin: 0 -6px 0 0; padding: 0;">B</md-button>
+        <md-button class="md-icon-button textformatingbutton" style="text-decoration: underline;  margin: 0 -6px 0 0; padding: 0;">U</md-button>
+        <md-button class="md-icon-button text-format-button" style="font-style: oblique;  margin: 0 -6px 0 0; padding: 0;">I</md-button>
+        <md-button class="md-icon-button text-format-button" style="margin: 0 -6px 0 0; padding: 0;">
+            <md-icon style="font-size:18px;line-height: 24px;">format_list_bulleted</md-icon>
+        </md-button>
       <span flex></span>
-      <md-button ng-click="answer('not useful')">
-        Not Useful
-      </md-button>
-      <md-button ng-click="answer('useful')" style="margin-right:20px;">
-        Useful
-      </md-button>
     </md-dialog-actions>
   </form>
 </md-dialog>
