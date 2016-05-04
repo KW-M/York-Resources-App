@@ -1,9 +1,22 @@
+.container {
+    min-height: 465px;
+    max-height: 600px;
+    max-width: 450px;
+}
+
+
 #dialog_scroll {
     width: 100%;
     position: relative;
     max-height: 900px;
     overflow-y: auto;
 }
+
+
+.newPostContent {
+    margin-top: 156px;
+}
+
 
 #dialog_header {
     width:100%;
@@ -14,18 +27,22 @@
     position: relative;
     z-index: 1200;
 
+
 }
+
 
 #newPostImg {
     -webkit-filter: brightness(85%);
     filter: brightness(85%);
     width: 100%;
-    z-index: -1;
-    top: 0px;
+    top: -20px;
+    display: block;
     position: absolute;
+    min-height: 200px;
     border: 0px;
     background-color: #bccac7;
 }
+
 
 .newPostImgGradient {
     position: absolute;
@@ -34,9 +51,10 @@
     height: 60px;
     width: 100%;
     bottom: 0;
-    padding: 0 12px;
+    left: 0;
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, .5));
 }
+
 
 #newPostLinkButtons {
         position: absolute;
@@ -49,21 +67,32 @@
     flex-direction: row;
 }
 
+
 #newPostLinkInput {
-    width: 100%;
-    margin-top: 16px;
+    opacity: 0.5;
+    margin-top: 40px;
+    padding: 2px 6px;
+    margin-left: 0;
+    height: 34px;
+    width: 240px;
+    border-radius: 2px;
+    background-color: white;
+    transition: opacity 1s, margin-left 1s;
 }
+
 
 #newPostLinkButtons:hover #newPostLinkInput, #newPostLinkInputTxt:focus #newPostLinkInput{
     opacity: 100;
     transition: opacity 1s, margin-top 1s;
 }
 
+
 #class-dropdown-button {
     position: absolute;
     left: -4px;
     z-index:500
 }
+
 
 .newPostClassSelector {
     height: 222px;
@@ -76,6 +105,7 @@
     box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
 }
 
+
 .newPostClassListContainer {
     width: 253px;
     max-height: 180px;
@@ -86,6 +116,7 @@
     border-radius: 1px;
 }
 
+
 .md-chips:before {
     display: inline-block;
     position: relative;
@@ -95,36 +126,56 @@
     float: left;
 }
 
+
 input.newPostTitle {
+    margin: 20px 0 5px 20px;
+    font-size: 120%;
     font-weight: bold;
     font-family: 'Roboto Condensed', 'Droid Sans', arial, sans-serif;
-    outline: none;
+    height: 20px;
+    width: 100%;
     border: none;
+    box-sizing: border-box;
+    display: inline-block;
+    height: 36px;
+    line-height: 20px;
+    outline: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0;
+    resize: none;
+    vertical-align: middle;
 }
+
 
 .newPostBody:empty:before {
     content: "Say something";
+    display: block;
     font-size: small;
+    position: relative;
     color: #757575;
     font-family: 'Roboto Slab', 'Times New Roman', serif;
     left: 20px;
     line-height: 15px;
+    position: absolute;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
 }
 
+
 .newPostBody {
-    font-size: 14px;
-    line-height: 19px;
-    min-height: 46px;
-    padding-top: 12px;
-    font-family: 'Roboto Slab','Times New Roman',serif;
-    white-space: pre-wrap;
-    word-wrap: break-word;
+    font-size: small;
+    position: relative;
+    line-height: 20px;
+    min-height: 121px;
+    flex: 1;
     outline: none;
+    padding: 0 20px;
     word-wrap: break-word;
+    overflow: visible;
 }
+
 
 .dialog_buttons {
     height: 36px;
@@ -137,6 +188,7 @@ input.newPostTitle {
     position: absolute;
 }
 
+
 button#New_Post_Submit.md-button {
     height: 36px;
     margin: 0px;
@@ -147,21 +199,26 @@ button#New_Post_Submit.md-button {
     color: white;
 }
 
+
 button#New_Post_Submit.md-button:hover {
     background-color: #3972DC;
     box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32)
 }
+
 
 .textformatingbutton {
     margin: 0 -24px 0 -24px;
     padding: 0;
 }
 
+
 /* general */
+
 
 .hover_black:hover {
     color: black;
 }
+
 
 .raisedTextfield {
     height: 36px;
@@ -176,14 +233,94 @@ button#New_Post_Submit.md-button:hover {
     transition: background-color .2s box-shadow .2s;
 }
 
+
 .raisedTextfield:hover {
     background-color: whitesmoke;
     box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
     transition: background-color .2s box-shadow .2s;
 }
 
+
 .raisedTextfield:focus {
     background-color: white;
     box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
     transition: background-color .2s box-shadow .2s;
 }
+
+<md-dialog>
+    <script src="../../templates/js/newPost.js"></script>
+    <div id="dialog_scroll">
+        <div id="dialog_header">
+            <md-icon style="margin: 8px 0 0 12px; float:left;color:white;display:block; position:absolute; z-index:50" class="ng-isolate-scope material-icons">group</md-icon>
+            <span flex></span>
+            <md-menu md-position-mode="target-right target">
+                <!-- Trigger element is a md-button with an icon -->
+                <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" style="float:right;margin-right: 0px;position: relative;z-index:50;">
+                    <md-icon style="color:white;" class="material-icons ng-isolate-scope">more_vert</md-icon>
+                </md-button>
+                <md-menu-content>
+                    <md-menu-item>
+                        <md-button>
+                            <md-icon>link</md-icon>Add Link</md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button>
+                            <md-icon>cloud_queue</md-icon>Add drive file</md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button>
+                            <md-icon>attach_file</md-icon>upload file</md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+            <img ng-src="{{'https://api.pagelr.com/capture?uri=' + Link + '&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw'}}" id="newPostImg">
+            <div id="newPostLinkButtons">
+
+
+            </div>
+            <div class="newPostImgGradient">
+                <md-input-container md-no-float id="newPostLinkInput" class="md-whiteframe-4dp">
+                    <input id="newPostLinkInputTxt" ng-model="Link" placeholder="Paste a link" type="url">
+                </md-input-container>
+            </div>
+        </div>
+        <div id="newPostContent">
+            <md-menu md-position-mode="target target" md-offset="12 45">
+                <md-button id="class-dropdown-button" ng-click="$mdOpenMenu($event)" class="md-warn">
+                    <span>Class</span>
+                    <md-icon>arrow_drop_down</md-icon>
+                </md-button>
+                <md-menu-content width="4" style="padding:6px 6px">
+                    <p style="margin: 3px 0 0 5px; font-size: 12px; color: #6D6D6D;">What class is this?</p>
+                    <input type="text" autofocus ng-model="classSearch" placeholder="Search classes" class="raisedTextfield" style="margin: 6px 0 10px 0; transition: background-color .2s, box-shadow .2s;">
+                    <div class="newPostClassListContainer">
+                        <md-menu-item ng-repeat="class in courses | filter: classSearch">
+                            <md-button style="padding-right:0" ng-click="classSelected(this)">
+                                {{class}}
+                                <md-icon style="float:right; margin-right: 4px; padding-top:4px">keyboard_arrow_right</md-icon>
+                            </md-button>
+                        </md-menu-item>
+                    </div>
+                </md-menu-content>
+            </md-menu>
+            <md-chips ng-model="Tags" readonly="readonly">
+                <input type="text" placeholder="Add a tag">
+            </md-chips>
+            <input ng-model="Title" class="newPostTitle" placeholder="Title">
+            <div id="DescriptionTxt" class="newPostBody" contenteditable="true"></div>
+        </div>
+    </div>
+    <md-dialog-actions>
+        <md-button id="New_Post_Submit" ng-click="submit()" class="md-raised">Submit</md-button>
+        <md-button class="text-formating-button md-icon-button " style="font-weight: 800;  margin: 0 -6px 0 0; padding: 0;">B</md-button>
+        <md-button class="md-icon-button textformatingbutton" style="text-decoration: underline;  margin: 0 -6px 0 0; padding: 0;">U</md-button>
+        <md-button class="md-icon-button text-format-button" style="font-style: oblique;  margin: 0 -6px 0 0; padding: 0;">I</md-button>
+        <!--<md-button class="md-icon-button text-format-button" style="margin: 0 -6px 0 0; padding: 0;">
+            <md-icon style="font-size:18px;line-height: 24px;">format_list_bulleted</md-icon>
+        </md-button>-->
+        <span flex></span>
+        <md-button class="md-icon-button text-format-button hover_black" style="margin-right:0px;" ng-click="close()">
+            <md-icon style="font-size:26px; line-height: 25px">delete</md-icon>
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

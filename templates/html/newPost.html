@@ -1,27 +1,41 @@
-<md-dialog aria-label="Mango (Fruit)" ng-cloak>
-  <form>
-    <md-toolbar style="background-color:rgba(0, 0, 0, 0.5); height: 200px; overflow-y: hidden">
-      <div class="md-toolbar-tools">
-        <md-button class="md-icon-button">
-          <md-icon>group</md-icon>
-        </md-button>
-        <h2>
-          <span>Title</span>
-        </h2>
-        <span flex></span>
-        <md-button class="md-icon-button" aria-label="More">
-          <md-icon>more_vert</md-icon>
-        </md-button>
-      </div>
-      <img ng-src="https://api.pagelr.com/capture/javascript?uri=https://www.google.com/maps/@36.7409281,-5.1619974,14z&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw" id="newPostImg">
-      <div class="newPostImgGradient">
-        <md-input-container md-no-float id="newPostLinkInput">
-          <input id="newPostLinkInputTxt" ng-model="Link" style="color:white" placeholder="Paste a link" type="url">
-        </md-input-container>
-      </div>
-    </md-toolbar>
-    <md-dialog-content>
-       <md-menu md-position-mode="target target" md-offset="12 45">
+<md-dialog>
+    <script src="../../templates/js/newPost.js"></script>
+    <div id="dialog_scroll">
+        <div id="dialog_header">
+            <md-icon style="margin: 8px 0 0 12px; float:left;color:white;display:block; position:absolute; z-index:50" class="ng-isolate-scope material-icons">group</md-icon>
+            <span flex></span>
+            <md-menu md-position-mode="target-right target">
+                <!-- Trigger element is a md-button with an icon -->
+                <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" style="float:right;margin-right: 0px;position: relative;z-index:50;">
+                    <md-icon style="color:white;" class="material-icons ng-isolate-scope">more_vert</md-icon>
+                </md-button>
+                <md-menu-content>
+                    <md-menu-item>
+                        <md-button>
+                            <md-icon>link</md-icon>Add Link</md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button>
+                            <md-icon>cloud_queue</md-icon>Add drive file</md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button>
+                            <md-icon>attach_file</md-icon>upload file</md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+            <img ng-src="{{'https://api.pagelr.com/capture?uri=' + Link + '&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw'}}" id="newPostImg"> 
+            <div id="newPostLinkButtons">
+
+            </div>
+            <div class="newPostImgGradient">
+                <md-input-container md-no-float id="newPostLinkInput" class="md-whiteframe-4dp">
+                    <input id="newPostLinkInputTxt" ng-model="Link" placeholder="Paste a link" type="url">
+                </md-input-container>
+            </div>
+        </div>
+        <div id="newPostContent">
+            <md-menu md-position-mode="target target" md-offset="12 45">
                 <md-button id="class-dropdown-button" ng-click="$mdOpenMenu($event)" class="md-warn">
                     <span>Class</span>
                     <md-icon>arrow_drop_down</md-icon>
@@ -39,26 +53,24 @@
                     </div>
                 </md-menu-content>
             </md-menu>
-      <md-chips ng-model="Tags" readonly="readonly">
-        <input type="text" placeholder="Add a tag">
-      </md-chips>
-      <div class="md-dialog-content">
-        <input ng-model="Title" class="newPostTitle md-title" placeholder="Title" md-autofocus>
-        <div id="DescriptionTxt" class="newPostBody" contenteditable="true"></div>
-      </div>
-    </md-dialog-content>
-    <md-dialog-actions layout="row">
-      <md-button id="New_Post_Submit" ng-click="submit()" class="md-raised">Submit</md-button>
+            <md-chips ng-model="Tags" readonly="readonly">
+                <input type="text" placeholder="Add a tag">
+            </md-chips>
+            <input ng-model="Title" class="newPostTitle" placeholder="Title">
+            <div id="DescriptionTxt" class="newPostBody" contenteditable="true"></div>
+        </div>
+    </div>
+    <md-dialog-actions>
+        <md-button id="New_Post_Submit" ng-click="submit()" class="md-raised">Submit</md-button>
         <md-button class="text-formating-button md-icon-button " style="font-weight: 800;  margin: 0 -6px 0 0; padding: 0;">B</md-button>
         <md-button class="md-icon-button textformatingbutton" style="text-decoration: underline;  margin: 0 -6px 0 0; padding: 0;">U</md-button>
         <md-button class="md-icon-button text-format-button" style="font-style: oblique;  margin: 0 -6px 0 0; padding: 0;">I</md-button>
         <md-button class="md-icon-button text-format-button" style="margin: 0 -6px 0 0; padding: 0;">
             <md-icon style="font-size:18px;line-height: 24px;">format_list_bulleted</md-icon>
         </md-button>
-      <span flex></span>
-              <md-button class="md-icon-button text-format-button hover_black" style="margin-right:0px;" ng-click="close()">
+        <span flex></span>
+        <md-button class="md-icon-button text-format-button hover_black" style="margin-right:0px;" ng-click="close()">
             <md-icon style="font-size:26px; line-height: 25px">delete</md-icon>
         </md-button>
     </md-dialog-actions>
-  </form>
 </md-dialog>
