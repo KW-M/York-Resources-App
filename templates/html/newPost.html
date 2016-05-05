@@ -30,7 +30,7 @@
             </div>
             <div class="newPostImgGradient">
                 <md-input-container md-no-float id="newPostLinkInput" class="md-whiteframe-4dp">
-                    <input id="newPostLinkInputTxt" ng-model="Link" placeholder="Paste a link" type="url">
+                    <input id="newPostLinkInputTxt" ng-model="Link" placeholder="Paste a link" ng-change="findType()" type="url">
                 </md-input-container>
             </div>
         </div>

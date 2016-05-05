@@ -60,21 +60,21 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    };
 
 
-   $scope.newPostBeta = function() { //called by the bottom right plus/add resource button
-      $mdDialog.show({
-         templateUrl: 'templates/html/newPost-new.html',
-         controller: ['$scope', '$mdDialog', 'GoogleDriveService', newPostController],
-         scope: $scope,
-         preserveScope: true, // use parent scope in template
-         parent: angular.element(document.body),
-         clickOutsideToClose: false,
-         fullscreen: ($mdMedia('xs')),
-         openFrom: ('#new_post_button'),
-         closeTo: {
-            left: 1000,
-         }
-      });
-   };
+   // $scope.newPostBeta = function() { //called by the bottom right plus/add resource button
+   //    $mdDialog.show({
+   //       templateUrl: 'templates/html/newPost-new.html',
+   //       controller: ['$scope', '$mdDialog', 'GoogleDriveService', newPostController],
+   //       scope: $scope,
+   //       preserveScope: true, // use parent scope in template
+   //       parent: angular.element(document.body),
+   //       clickOutsideToClose: false,
+   //       fullscreen: ($mdMedia('xs')),
+   //       openFrom: ('#new_post_button'),
+   //       closeTo: {
+   //          left: 1000,
+   //       }
+   //    });
+   // };
 
    function loginProcedure(response) {
       //handles the 'response' promise
