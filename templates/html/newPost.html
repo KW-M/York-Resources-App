@@ -26,12 +26,11 @@
             </md-menu>
             <img ng-src="{{'https://api.pagelr.com/capture?uri=' + Link + '&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw'}}" id="newPostImg">
             <div id="newPostLinkButtons">
-
+                <md-input-container md-no-float id="newPostLinkInput" class="md-whiteframe-4dp">
+                    <input id="newPostLinkInputTxt" ng-model="Link" placeholder="Paste a link"  ng-keyup="findType()" type="url">
+                </md-input-container>
             </div>
             <div class="newPostImgGradient">
-                <md-input-container md-no-float id="newPostLinkInput" class="md-whiteframe-4dp">
-                    <input id="newPostLinkInputTxt" ng-model="Link" placeholder="Paste a link" ng-keyup="findType()" type="url">
-                </md-input-container>
             </div>
         </div>
         <div id="newPostContent">
