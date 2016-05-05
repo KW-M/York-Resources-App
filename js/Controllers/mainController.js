@@ -73,8 +73,12 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    //       }
    //    });
    // };
-   
+
    $scope.showPicker = function(typ) {
+              var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
+        var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
+        var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
+        console.log("loaded my picker")
             console.log ("picker");
             if (typ === "Upload"){
                 console.log ("pickerup");
@@ -101,7 +105,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
             }
 
         };
-        
+
       self.pickerCallback = function (data){
         //drivePicker.dispose();
         console.log(data);
@@ -109,7 +113,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
             var fileId = data.docs[0].id;
 
             alert('File: ' + data.docs[0].name  + " id:" +   fileId + " URL:" + data.docs[0].url);
-            newPost = function(idInput,data.docs[0].url)
+            $scope.newPost(data.docs[0].id,data.docs[0].url);
         }
     }
 
