@@ -62,6 +62,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
               setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
               setCallback(self.pickerCallback).
               build();
+              console.log(drivePicker.setVisible(true));
                 drivePicker.setVisible(true);
             }
 
@@ -73,6 +74,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
         console.log(data);
         if (data.action == google.picker.Action.PICKED) {
             var fileId = data.docs[0].id;
+
             alert('File: ' + data.docs[0].name  + " id:" +   fileId + " URL:" + data.docs[0].url);
         }
     }

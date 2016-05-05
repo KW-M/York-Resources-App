@@ -1,6 +1,6 @@
 /* we don't define the "new post controller" here because it was alredy
    defined by the $md-dialog in the newPost function on mainController.   */
-function newPostController($scope, $mdDialog, GoogleDriveService, Link, id) {
+function newPostController($scope, $mdDialog, GoogleDriveService) {
     console.log($scope.globals);
     $scope.close = function() {
         $mdDialog.hide();
