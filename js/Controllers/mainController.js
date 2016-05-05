@@ -49,8 +49,8 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
          controller: ['$scope', '$mdDialog', 'GoogleDriveService', newPostController],
          scope: $scope,
          locals: {
-            link: linkInput,
-           id: idInput
+            Link: linkInput,
+           Id: idInput
          },
          preserveScope: true, // use parent scope in template
          parent: angular.element(document.body),

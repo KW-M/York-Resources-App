@@ -1,6 +1,6 @@
 /* we don't define the "new post controller" here because it was alredy
    defined by the $md-dialog in the newPost function on mainController.   */
-function newPostController($scope, $mdDialog, GoogleDriveService, link, id) {
+function newPostController($scope, $mdDialog, GoogleDriveService, Link, id) {
     alert(link + "  " + id)
     console.log($scope.globals);
     $scope.close = function() {
@@ -10,8 +10,8 @@ function newPostController($scope, $mdDialog, GoogleDriveService, link, id) {
     $scope.Title = '';
     $scope.Type = '';
     $scope.Description = '';
-    $scope.Link = link;
-    $scope.Id = id;
+    //$scope.Link = link;
+    //$scope.Id = id;
     $scope.readOnly = false;
     $scope.driveThumbnail = "";
     $scope.classSearch = "";
@@ -22,7 +22,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, link, id) {
         $scope.class = inputClass.class;
         console.log(inputClass.class);
     }
-
+    alert(Link + "  " + id + "  " + $scope.Id + "  " + $scope.Link)
     $scope.Preview = function() {
         if ($scope.Type === "Link") {
             return 'https://api.pagelr.com/capture?uri=' + $scope.Link + '&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw'
