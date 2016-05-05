@@ -27,10 +27,6 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
       });
    };
 
-   $scope.showPicker = function(typ) {
-      GoogleDriveService.showPicker(typ);
-   };
-
    $scope.$watch('searchTxt', filterPosts);
 
    function filterPosts(val) {
@@ -62,7 +58,6 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
       });
    };
 
-
    // $scope.newPostBeta = function() { //called by the bottom right plus/add resource button
    //    $mdDialog.show({
    //       templateUrl: 'templates/html/newPost-new.html',
@@ -78,6 +73,45 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    //       }
    //    });
    // };
+   
+   $scope.showPicker = function(typ) {
+            console.log ("picker");
+            if (typ === "Upload"){
+                console.log ("pickerup");
+                        var UploadPicker = new google.picker.PickerBuilder().
+              addView(uploadView).
+              addView(docsView).
+              addView(sharedView).
+              setOAuthToken(gapi.auth.getToken().access_token).
+              setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
+              setCallback(self.pickerCallback).
+              build();
+                UploadPicker.setVisible(true);
+            } else if (typ === "Drive"){
+                        var drivePicker = new google.picker.PickerBuilder().
+              addView(docsView).
+              addView(sharedView).
+              addView(uploadView).
+              setOAuthToken(gapi.auth.getToken().access_token).
+              setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
+              setCallback(self.pickerCallback).
+              build();
+              console.log(drivePicker);
+                drivePicker.setVisible(true);
+            }
+
+        };
+        
+      self.pickerCallback = function (data){
+        //drivePicker.dispose();
+        console.log(data);
+        if (data.action == google.picker.Action.PICKED) {
+            var fileId = data.docs[0].id;
+
+            alert('File: ' + data.docs[0].name  + " id:" +   fileId + " URL:" + data.docs[0].url);
+            newPost = function(idInput,data.docs[0].url)
+        }
+    }
 
    function loginProcedure(response) {
       //handles the 'response' promise

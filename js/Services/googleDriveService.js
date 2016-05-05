@@ -38,46 +38,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
         var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
         var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
         console.log("loaded my picker")
-
-
-        self.showPicker = function(typ) {
-            console.log ("picker");
-            if (typ === "Upload"){
-                console.log ("pickerup");
-                        var UploadPicker = new google.picker.PickerBuilder().
-              addView(uploadView).
-              addView(docsView).
-              addView(sharedView).
-              setOAuthToken(gapi.auth.getToken().access_token).
-              setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
-              setCallback(self.pickerCallback).
-              build();
-                UploadPicker.setVisible(true);
-            } else if (typ === "Drive"){
-                        var drivePicker = new google.picker.PickerBuilder().
-              addView(docsView).
-              addView(sharedView).
-              addView(uploadView).
-              setOAuthToken(gapi.auth.getToken().access_token).
-              setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
-              setCallback(self.pickerCallback).
-              build();
-              console.log(drivePicker);
-                drivePicker.setVisible(true);
-            }
-
-        };
     };
-
-    this.pickerCallback = function (data){
-        //drivePicker.dispose();
-        console.log(data);
-        if (data.action == google.picker.Action.PICKED) {
-            var fileId = data.docs[0].id;
-
-            alert('File: ' + data.docs[0].name  + " id:" +   fileId + " URL:" + data.docs[0].url);
-        }
-    }
 
     this.batchRequest = function() { //do this one
         var batch = gapi.client.newBatch();
