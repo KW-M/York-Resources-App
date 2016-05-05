@@ -62,7 +62,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
               setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
               setCallback(self.pickerCallback).
               build();
-              console.log(drivePicker.setVisible(true));
+              console.log(drivePicker);
                 drivePicker.setVisible(true);
             }
 
