@@ -43,11 +43,15 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    }
 
 
-   $scope.newPost = function() { //called by the bottom right plus/add resource button
+   $scope.newPost = function(id,link) { //called by the bottom right plus/add resource button
       $mdDialog.show({
          templateUrl: 'templates/html/newPost.html',
          controller: ['$scope', '$mdDialog', 'GoogleDriveService', newPostController],
          scope: $scope,
+         locals: {
+            link: link,
+           id: id
+         },
          preserveScope: true, // use parent scope in template
          parent: angular.element(document.body),
          clickOutsideToClose: false,
