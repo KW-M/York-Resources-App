@@ -39,7 +39,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
             console.log("reached2")
 
             if ($scope.Link.match(/(?:http|https):\/\/.{2,}/)) {
-                var isgdrive = g$scope.Link.match(/\/(?:d|file|folder|folders)\/([-\w]{25,})/)
+                var isgdrive = $scope.Link.match(/\/(?:d|file|folder|folders)\/([-\w]{25,})/)
                 if (isgdrive) {
                     $scope.Type = 'gDrive';
                     alert("hey, thats a google drive link with and id of :" + isgdrive);
