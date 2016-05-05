@@ -32,7 +32,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
     $scope.$watch('Link', findType);
 
     var findType = function() {
-        console.log("reached")
+        alert("reached")
         if ($scope.Link === '') {
             $scope.Type = 'NoLink';
         }
