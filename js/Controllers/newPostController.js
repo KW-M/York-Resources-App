@@ -43,7 +43,8 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
                     alert("hey, thats a google drive link");
                 }
                 else {
-                    $scope.Type = 'Link';
+                    $scope.Type = 'Link'; 
+                    alert("hey, that is a link");
                 }
             }
             else {
