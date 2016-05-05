@@ -29,8 +29,9 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
         else if ($scope.type === "gDrive") {
             return $scope.driveThumbnail;
         }
+    }
 
-    var findType = function() {
+    $scope.findType = function() {
      alert("hey");
         if ($scope.Link === '') {
             $scope.Type = 'NoLink';
