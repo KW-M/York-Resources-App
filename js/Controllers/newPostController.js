@@ -29,10 +29,10 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
             return $scope.driveThumbnail;
         }
     }
-    $scope.$watch('Link', findType);
+    $scope.$watch('Link', function(){alert("reached");});
 
     var findType = function() {
-        alert("reached")
+
         if ($scope.Link === '') {
             $scope.Type = 'NoLink';
         }
