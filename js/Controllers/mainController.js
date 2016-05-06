@@ -160,10 +160,10 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
       getFiles('');
 
       function getFiles(pageToken) {
-         GoogleDriveService.multiRequest(pageToken).then(function(combinedResponse) {
+         queue(GoogleDriveService.multiRequest(pageToken),function(combinedResponse) {
             console.log(combinedResponse);
             if (combinedResponse.pageToken) {
-               getFiles(combinedResponse.pageToken)
+               getFiles(combinedResponse.pageToken);
             }
             handleFiles(combinedResponse);
          });
