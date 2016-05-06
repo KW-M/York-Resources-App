@@ -1,5 +1,5 @@
 /*global app*/ /*global angular*/ /*global gapi*/
-app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $) {
+app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q) {
    var self = this
    var unfilteredPosts = [];
    $scope.Posts = [];
@@ -143,7 +143,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    };
 
    $scope.initiateDrive = function() {
-      GoogleDriveService.getUserInfo().then(function(userInfo) {
+      que(GoogleDriveService.getUserInfo(),function(userInfo) {
          $scope.myInfo = {
             "Name": userInfo.result.user.displayName,
             "Email": userInfo.result.user.emailAddress,
