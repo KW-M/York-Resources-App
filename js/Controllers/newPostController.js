@@ -86,6 +86,9 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast) {
                 "LikeUsers": [],
             });
             console.log(response);
+            if (type==="gdrive"){
+                alert("This will allow ")
+            }
             GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
                 console.log(reply.result);
                         $mdToast.hide();
