@@ -151,6 +151,9 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
          }
          console.log({myInfo:$scope.myInfo})
       });
+      queue(GoogleDriveService.getUserInfo(),function(userInfo) {
+         console.log({myInfo:$scope.myInfo})
+      });
       // GoogleDriveService.batchRequest().then(function(response) {
       //    console.log(response);
       // });
@@ -238,7 +241,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
     );
     if (!timer) {
       processTheQueue(); // start immediately on the first invocation
-      timer = setInterval(processTheQueue, 20000);
+      timer = setInterval(processTheQueue, 2000);
     }
   };
 }]);
