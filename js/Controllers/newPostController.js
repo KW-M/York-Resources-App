@@ -91,6 +91,15 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast) {
                     .ok('Ok')
                     .cancel('Cancel');
                 $mdDialog.show(confirm).then(function() {
+                    sendFile();
+                }, function() {
+                    alert("um, that's not going to work") //cancel
+                });
+            }
+            else {
+                //sendFile();
+            }
+            function sendFile(){
                     $mdToast.show({
                         template: '<md-toast><span style="font-size:18px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right:-20px"></md-progress-circular></md-toast>',
                         hideDelay: 30000,
@@ -99,20 +108,6 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast) {
                         console.log(reply.result);
                         $mdToast.hide();
                         $scope.close();
-                    });
-                }, function() {
-                    alert("um, that's not going to work") //cancel
-                });
-            }
-            else {
-                $mdToast.show({
-                    template: '<md-toast><span style="font-size:18px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right:-20px"></md-progress-circular></md-toast>',
-                    hideDelay: 30000,
-                });
-                GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
-                    console.log(reply.result);
-                    $mdToast.hide();
-                    $scope.close();
                 });
             }
         });
