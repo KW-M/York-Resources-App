@@ -16,7 +16,7 @@ function formatArrayResponse(rawArrayResponse, idArray) {
   function processTheQueue() {
     var item = theQueue.shift();
     if (item) {
-      item.promise.then(item.action).catch(item.error)
+      item.Promise.then(item.Action).catch(item.Err)
     }
     if (queue.length === 0){
       clearInterval(timer), timer = null;
@@ -25,7 +25,7 @@ function formatArrayResponse(rawArrayResponse, idArray) {
 
   // Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
    function queue (promise, action, error) {
-    queue.push(
+    theQueue.push(
       {
         Promise: promise,
         Action: action,

@@ -16,17 +16,11 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast) {
     $scope.classSearch = "";
     $scope.class = "";
     $scope.courses = ["English III", "Spanish I", "Chemistry", "AP Biology", "Geometry", "Algebra II", "Physics", "calc AB", "Chinese I", "World-history I", "world-history II"];
-         $mdToast.show(
-            $mdToast.simple()
-        .textContent('Simple Toast!')
-        .position($scope.getToastPosition())
-        .hideDelay(3000)
-    );
     $scope.classSelected = function(inputClass) {
         $scope.class = inputClass.class;
         console.log(inputClass.class);
+        $mdToast.hide();
     }
-    alert($scope.Id + "  " + $scope.Link)
     $scope.Preview = function() {
         if ($scope.Type === "Link") {
             return 'https://api.pagelr.com/capture?uri=' + $scope.Link + '&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw'
