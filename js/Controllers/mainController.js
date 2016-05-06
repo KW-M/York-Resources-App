@@ -39,13 +39,13 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    }
 
 
-   $scope.newPost = function(idInput,linkInput) {
+   $scope.newPost = function(idInput, linkInput) {
       $scope.Link = linkInput;
       $scope.Id = idInput;
       //called by the bottom right plus/add resource button
       $mdDialog.show({
          templateUrl: 'templates/html/newPost.html',
-         controller: ['$scope', '$mdDialog', 'GoogleDriveService','$mdToast', newPostController],
+         controller: ['$scope', '$mdDialog', 'GoogleDriveService', '$mdToast', newPostController],
          scope: $scope,
          preserveScope: true, // use parent scope in template
          parent: angular.element(document.body),
@@ -75,47 +75,48 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    // };
 
    $scope.showPicker = function(typ) {
-              var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
-        var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
-        var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
-        console.log("loaded my picker")
-            console.log ("picker");
-            if (typ === "Upload"){
-                console.log ("pickerup");
-                        var UploadPicker = new google.picker.PickerBuilder().
-              addView(uploadView).
-              addView(docsView).
-              addView(sharedView).
-              setOAuthToken(gapi.auth.getToken().access_token).
-              setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
-              setCallback(self.pickerCallback).
-              build();
-                UploadPicker.setVisible(true);
-            } else if (typ === "Drive"){
-                        var drivePicker = new google.picker.PickerBuilder().
-              addView(docsView).
-              addView(sharedView).
-              addView(uploadView).
-              setOAuthToken(gapi.auth.getToken().access_token).
-              setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
-              setCallback(self.pickerCallback).
-              build();
-              console.log(drivePicker);
-                drivePicker.setVisible(true);
-            }
+      var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
+      var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
+      var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
+      console.log("loaded my picker")
+      console.log("picker");
+      if (typ === "Upload") {
+         console.log("pickerup");
+         var UploadPicker = new google.picker.PickerBuilder().
+         addView(uploadView).
+         addView(docsView).
+         addView(sharedView).
+         setOAuthToken(gapi.auth.getToken().access_token).
+         setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
+         setCallback(self.pickerCallback).
+         build();
+         UploadPicker.setVisible(true);
+      }
+      else if (typ === "Drive") {
+         var drivePicker = new google.picker.PickerBuilder().
+         addView(docsView).
+         addView(sharedView).
+         addView(uploadView).
+         setOAuthToken(gapi.auth.getToken().access_token).
+         setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
+         setCallback(self.pickerCallback).
+         build();
+         console.log(drivePicker);
+         drivePicker.setVisible(true);
+      }
 
-        };
+   };
 
-      self.pickerCallback = function (data){
-        //drivePicker.dispose();
-        console.log(data);
-        if (data.action == google.picker.Action.PICKED) {
-            var fileId = data.docs[0].id;
+   self.pickerCallback = function(data) {
+      //drivePicker.dispose();
+      console.log(data);
+      if (data.action == google.picker.Action.PICKED) {
+         var fileId = data.docs[0].id;
 
-            alert('File: ' + data.docs[0].name  + " id:" +   fileId + " URL:" + data.docs[0].url);
-            $scope.newPost(data.docs[0].id,data.docs[0].url);
-        }
-    }
+         alert('File: ' + data.docs[0].name + " id:" + fileId + " URL:" + data.docs[0].url);
+         $scope.newPost(data.docs[0].id, data.docs[0].url);
+      }
+   }
 
    function loginProcedure(response) {
       //handles the 'response' promise
@@ -143,29 +144,30 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    };
 
    $scope.initiateDrive = function() {
-      queue(GoogleDriveService.getUserInfo(),function(userInfo) {
+      queue(GoogleDriveService.getUserInfo(), function(userInfo) {
          $scope.myInfo = {
             "Name": userInfo.result.user.displayName,
             "Email": userInfo.result.user.emailAddress,
             "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
          };
-         console.log({ myInfo: $scope.myInfo });
+         console.log({
+            myInfo: $scope.myInfo
+         });
       });
       // GoogleDriveService.batchRequest().then(function(response) {
       //    console.log(response);
       // });
       GoogleDriveService.multiRequest().then(function(combinedResponse) {
          console.log(combinedResponse);
-         combinedResponse.files.then(function(fileResponse) {
-            unfilteredPosts = formatArrayResponse(fileResponse, combinedResponse.ids);
-            console.log(unfilteredPosts)
-               //for (var i = 0; i < unfilteredPosts.length; i++) {
-               //  unfilteredPosts[i].Description = $sce.trustAsHtml(unfilteredPosts[i].Description);
-               //  console.log(unfilteredPosts[i].Description);
-               // }
-            filterPosts($scope.searchTxt);
-            $scope.$apply();
-         });
+
+         function getFiles(pageToken) {
+            combinedResponse.files.then(function(fileResponse) {
+               unfilteredPosts = formatArrayResponse(fileResponse, combinedResponse.ids);
+               console.log(unfilteredPosts)
+               filterPosts($scope.searchTxt);
+               $scope.$apply();
+            });
+         }
       });
    }
 

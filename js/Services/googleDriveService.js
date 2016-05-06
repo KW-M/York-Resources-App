@@ -26,9 +26,10 @@ app.service('GoogleDriveService', ['$q', function($q) {
         }));
     };
 
-    this.getListOfFlies = function() {
+    this.getListOfFlies = function(pageToken) {
         return (gapi.client.drive.files.list({
             pageSize: 9,
+            pageToken:pageToken,
             q: "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false",
             fields: 'nextPageToken, files(id, name)',
         }));
@@ -56,10 +57,10 @@ app.service('GoogleDriveService', ['$q', function($q) {
     //     }));
     // };
 
-    this.multiRequest = function() { //do this one
+    this.multiRequest = function(pageToken) { //do this one
         var promiseArray = [];
         var idArray = [];
-        var fileslist = self.getListOfFlies();
+        var fileslist = self.getListOfFlies(pageToken);
 
         return (fileslist.then(function(fileArray) {
             console.log(fileArray)
@@ -73,7 +74,8 @@ app.service('GoogleDriveService', ['$q', function($q) {
 
             return ({
                 files: $q.all(promiseArray),
-                ids: idArray
+                ids: idArray,
+                pageToken: pageToken
             });
         }))
     };
