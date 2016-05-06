@@ -58,7 +58,15 @@ app.service('GoogleDriveService', ['$q', function($q) {
         var promiseArray = [];
         var idArray = [];
         var fileslist = self.getListOfFlies();
-        queue
+        queue(fileslist, function(fileList){
+            for (var count = 0; count < fileList.result.files.length; count++) {
+                var file = fileArray.result.files[count];
+                var fileRequest = self.getDriveFileContent(file.id);
+                promiseArray.push(fileRequest);
+                idArray.push(file.id);
+                console.log(promiseArray);
+            }
+        })
     };
 
     this.multiggRequest = function() { //do this one
