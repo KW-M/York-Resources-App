@@ -7,7 +7,9 @@ app.service('GoogleDriveService', ['$q', function($q) {
     this.initiateAuthLoadDrive = function(callback) {
         console.log("loading drive v3");
         $('#overlay_background').fadeOut(500);
-        gapi.load('picker', {'callback' : self.pickerLoaded});
+        gapi.load('picker', {
+            'callback': self.pickerLoaded
+        });
         gapi.client.load('drive', 'v3', callback);
     };
 
@@ -54,26 +56,11 @@ app.service('GoogleDriveService', ['$q', function($q) {
     //     }));
     // };
 
-    this.multiRequest = function() { //do this one
-        var promiseArray = [];
-        var idArray = [];
-        var fileslist = self.getListOfFlies();
-        queue(fileslist, function(fileList){
-            for (var count = 0; count < fileList.result.files.length; count++) {
-                var file = fileArray.result.files[count];
-                var fileRequest = self.getDriveFileContent(file.id);
-                promiseArray.push(fileRequest);
-                idArray.push(file.id);
-                console.log(promiseArray);
-            }
-        })
-    };
-
     this.multiggRequest = function() { //do this one
         var promiseArray = [];
         var idArray = [];
         var fileslist = self.getListOfFlies();
-        
+
         return (fileslist.then(function(fileArray) {
             console.log(fileArray)
             for (var count = 0; count < fileArray.result.files.length; count++) {
@@ -84,14 +71,17 @@ app.service('GoogleDriveService', ['$q', function($q) {
                 console.log(promiseArray);
             }
 
-            return ({files:$q.all(promiseArray), ids:idArray});
+            return ({
+                files: $q.all(promiseArray),
+                ids: idArray
+            });
         }))
     };
 
     this.deleteDriveFile = function(fileId) {
         return (gapi.client.drive.files.delete({
-         'fileId': fileId
-      }));
+            'fileId': fileId
+        }));
     };
 
     this.sendDriveFile = function(content, title) {
