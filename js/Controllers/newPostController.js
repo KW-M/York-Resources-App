@@ -83,19 +83,37 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast) {
                 "LikeUsers": [],
             });
             console.log(response);
-            if ($scope.Type === "gDrive"){
-               var userOk = window.confirm("This will enable view only link sharing for the file, so other students can see it. (not really right now)")
-            }
-            if (userOk === true){
-                        $mdToast.show({
-            template: '<md-toast><span style="font-size:18px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right:-20px"></md-progress-circular></md-toast>',
-            hideDelay: 30000,
-        });
-               GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
-                 console.log(reply.result);
-                 $mdToast.hide();
-                 $scope.close();
-              });
+if ($scope.Type === "gDrive") {
+                var confirm = $mdDialog.confirm()
+                    .title('This will enable view only link sharing for the file, so other students can see it. (not really right now)')
+                    .textContent('continue?')
+                    .ariaLabel('continue?')
+                    .targetEvent(ev)
+                    .ok('Ok')
+                    .cancel('Cancel');
+                $mdDialog.show(confirm).then(function() {
+                $mdToast.show({
+                    template: '<md-toast><span style="font-size:18px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right:-20px"></md-progress-circular></md-toast>',
+                    hideDelay: 30000,
+                });
+                GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
+                    console.log(reply.result);
+                    $mdToast.hide();
+                    $scope.close();
+                });
+                }, function() {
+                    //cancel
+                });
+            } else {
+                $mdToast.show({
+                    template: '<md-toast><span style="font-size:18px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right:-20px"></md-progress-circular></md-toast>',
+                    hideDelay: 30000,
+                });
+                GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
+                    console.log(reply.result);
+                    $mdToast.hide();
+                    $scope.close();
+                });
             }
         });
     };
