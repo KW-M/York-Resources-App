@@ -171,7 +171,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
 
       function handleFiles(combinedResponse) {
          combinedResponse.files.then(function(fileResponse) {
-            unfilteredPosts = formatArrayResponse(fileResponse, combinedResponse.ids);
+            unfilteredPosts = unfilteredPosts.concat(formatArrayResponse(fileResponse, combinedResponse.ids));
             console.log(unfilteredPosts)
             filterPosts($scope.searchTxt);
             $scope.$apply();

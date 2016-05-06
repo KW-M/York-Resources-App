@@ -75,7 +75,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
             return ({
                 files: $q.all(promiseArray),
                 ids: idArray,
-                pageToken: fileArray.result.nextPageToken
+                pageToken: fileArray.resultv .nextPageToken
             });
         }))
     };
