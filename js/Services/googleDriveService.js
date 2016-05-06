@@ -61,7 +61,8 @@ app.service('GoogleDriveService', ['$q', function($q) {
     this.multiRequest = function() { //do this one
         var promiseArray = [];
         var idArray = [];
-        return (P.queue(self.getListOfFlies(),function(fileArray) {
+        var fileslist=self.getListOfFlies();
+        return (queue(fileslist,function(fileArray) {
             console.log(fileArray)
             for (var count = 0; count < fileArray.result.files.length; count++) {
                 var file = fileArray.result.files[count];
@@ -113,5 +114,40 @@ app.service('GoogleDriveService', ['$q', function($q) {
         });
     };
 
+
+  var P = $q;
+  var theQueue = [],
+    timer = null;
+
+
+  function processTheQueue() {
+    var item = theQueue.shift();
+    if (item) {
+      item.promise.then(item.action).catch(item.error)
+    }
+    if (queue.length === 0){
+      clearInterval(timer), timer = null;
+    }
+  }
+
+  // Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
+   function queue (promise, action, error) {
+       console.log( {
+        Promise: promise,
+        Action: action,
+        Err: error
+      });
+    theQueue.push(
+      {
+        Promise: promise,
+        Action: action,
+        Err: error
+      }
+    );
+    if (!timer) {
+      processTheQueue(); // start immediately on the first invocation
+      timer = setInterval(processTheQueue, 500);
+    }
+  };
 
 }]);

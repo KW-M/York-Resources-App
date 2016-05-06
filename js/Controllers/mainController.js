@@ -208,6 +208,8 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    $window.loginSilent = function(response) {
       loginProcedure(authorizationService.authorizeSilent());
    };
+   
+   
 }]);
 
 //called by the google client api when it loads (must be outside the controller)

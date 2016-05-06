@@ -9,7 +9,6 @@ function formatArrayResponse(rawArrayResponse, idArray) {
   return (arrayOfPosts);
 }
 
-
 app.factory('P', function($q) {
   var P = $q;
   var theQueue = [],
