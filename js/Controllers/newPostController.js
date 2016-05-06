@@ -87,14 +87,16 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast) {
                 "LikeUsers": [],
             });
             console.log(response);
-            if ($scope.Type==="gdrive"){
-                prompt("This will enable ")
+            if ($scope.Type === "gdrive"){
+               var userOk = window.confirm("This will enable view only link shareing for the file, so other yorkies can see it. (not really right now)")
             }
-            GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
-                console.log(reply.result);
-                $mdToast.hide();
-                $scope.close();
-            });
+            if (userOk === true){
+               GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
+                 console.log(reply.result);
+                 $mdToast.hide();
+                 $scope.close();
+              });
+            }
         });
     };
 }
