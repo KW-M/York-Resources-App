@@ -57,8 +57,8 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast) {
         }
     };
         $mdToast.show({
-            template: '<span>hi</span>',
-            hideDelay: 6000,
+            template: '<md-toast><span>Sharing...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate"></md-progress-circular></md-toast>',
+            hideDelay: 30000,
         });
     $scope.submit = function() {
 
