@@ -33,30 +33,26 @@ app.service('GoogleDriveService', ['$q', function($q) {
     };
 
     this.pickerLoaded = function() {
-        console.log(gapi.auth.getToken().access_token);
-        var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
-        var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
-        var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
-        console.log("loaded my picker")
+        console.log("loaded the google drive file picker")
     };
 
-    this.batchRequest = function() { //do this one
-        var batch = gapi.client.newBatch();
-        return (self.getListOfFlies().then(function(fileArray) {
-            for (var count = 0; count < fileArray.result.files.length; count++) {
-                var file = fileArray.result.files[count];
-                console.log(file.id);
-                //batch.add(self.getDriveFileContent(file.id));
-                gapi.client.request({
-                    'path': '/download/drive/v3/files/0B5NVuDykezpkLW5zZmhmLUoxNEE?alt=media',
-                    'method': 'GET',
-                }).then(function (resu) {
-                    console.log(resu);
-                });
-            };
-            return (batch)
-        }));
-    };
+    // this.batchRequest = function() { //do this one
+    //     var batch = gapi.client.newBatch();
+    //     return (self.getListOfFlies().then(function(fileArray) {
+    //         for (var count = 0; count < fileArray.result.files.length; count++) {
+    //             var file = fileArray.result.files[count];
+    //             console.log(file.id);
+    //             //batch.add(self.getDriveFileContent(file.id));
+    //             gapi.client.request({
+    //                 'path': '/download/drive/v3/files/0B5NVuDykezpkLW5zZmhmLUoxNEE?alt=media',
+    //                 'method': 'GET',
+    //             }).then(function (resu) {
+    //                 console.log(resu);
+    //             });
+    //         };
+    //         return (batch)
+    //     }));
+    // };
 
     this.multiRequest = function() { //do this one
         var promiseArray = [];
