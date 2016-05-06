@@ -56,11 +56,12 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast) {
             }
         }
     };
-            $mdToast.show({
+
+    $scope.submit = function() {
+        $mdToast.show({
             template: '<md-toast><span style="font-size:18px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right:-20px"></md-progress-circular></md-toast>',
             hideDelay: 30000,
         });
-    $scope.submit = function() {
         GoogleDriveService.getUserInfo().then(function(userInfo) {
             console.log(userInfo.result);
             var description = document.querySelector('#DescriptionTxt').textContent;
@@ -87,7 +88,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast) {
             });
             console.log(response);
             if (type==="gdrive"){
-                alert("This will allow ")
+                prompt("This will make the file view-able by york students.")
             }
             GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
                 console.log(reply.result);
