@@ -25,7 +25,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast) {
         if ($scope.Type === "Link") {
             return 'https://api.pagelr.com/capture?uri=' + $scope.Link + '&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw'
         }
-        else if ($scope.type === "gDrive") {
+        else if ($scope.Type === "gDrive") {
             return $scope.driveThumbnail;
         }
     }
@@ -57,7 +57,13 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast) {
             }
         }
     };
+
     $scope.submit = function() {
+            $mdToast.show(
+            $mdToast.simple()
+            .textContent('Shareing...')
+            .hideDelay(10000)
+        );
         GoogleDriveService.getUserInfo().then(function(userInfo) {
             console.log(userInfo.result);
             var description = document.querySelector('#DescriptionTxt').textContent;
