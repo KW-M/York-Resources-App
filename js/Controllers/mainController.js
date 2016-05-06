@@ -157,23 +157,25 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
       // GoogleDriveService.batchRequest().then(function(response) {
       //    console.log(response);
       // });
-      var pageToken = '';
+      getFiles('');
+
       function getFiles(pageToken) {
-      GoogleDriveService.multiRequest().then(function(combinedResponse) {
-         console.log(combinedResponse);
-         if (combinedResponse.pageToken){
-            getFiles(combinedResponse.pageToken)
-         }
-         handleFiles(combinedResponse.pageToken);
-      });
+         GoogleDriveService.multiRequest(pageToken).then(function(combinedResponse) {
+            console.log(combinedResponse);
+            if (combinedResponse.pageToken) {
+               getFiles(combinedResponse.pageToken)
+            }
+            handleFiles(combinedResponse);
+         });
       }
-      function handleFiles(pageToken) {
-            combinedResponse.files.then(function(fileResponse) {
-               unfilteredPosts = formatArrayResponse(fileResponse, combinedResponse.ids);
-               console.log(unfilteredPosts)
-               filterPosts($scope.searchTxt);
-               $scope.$apply();
-            });
+
+      function handleFiles(combinedResponse) {
+         combinedResponse.files.then(function(fileResponse) {
+            unfilteredPosts = formatArrayResponse(fileResponse, combinedResponse.ids);
+            console.log(unfilteredPosts)
+            filterPosts($scope.searchTxt);
+            $scope.$apply();
+         });
       }
    }
 
