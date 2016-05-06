@@ -87,12 +87,12 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast) {
                 "LikeUsers": [],
             });
             console.log(response);
-            if (type==="gdrive"){
+            if ($scope.Type==="gdrive"){
                 prompt("This will make the file view-able by york students.")
             }
             GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
                 console.log(reply.result);
-                        $mdToast.hide();
+                $mdToast.hide();
                 $scope.close();
             });
         });
