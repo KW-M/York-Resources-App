@@ -123,7 +123,9 @@ app.service('GoogleDriveService', ['$q', function($q) {
   function processTheQueue() {
     var item = theQueue.shift();
     if (item) {
-      item.promise.then(item.action).catch(item.error)
+        var pom=item.Promise;
+        console.log(pom);
+      pom.then(item.Action)
     }
     if (queue.length === 0){
       clearInterval(timer), timer = null;
@@ -132,11 +134,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
 
   // Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
    function queue (promise, action, error) {
-       console.log( {
-        Promise: promise,
-        Action: action,
-        Err: error
-      });
+       console.log({Promise: promise,Action: action,Err: error});
     theQueue.push(
       {
         Promise: promise,
