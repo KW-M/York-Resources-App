@@ -41,7 +41,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast) {
                 var isgdrive = $scope.Link.match(/\/(?:d|file|folder|folders)\/([-\w]{25,})/)
                 if (isgdrive) {
                     $scope.Type = 'gDrive';
-                    alert("hey, thats a google drive link with and id of :" + isgdrive[1]);
+                    alert("Hey, that's a Google Drive link with and ID of :" + isgdrive[1]);
                 }
                 else {
                     $scope.Type = 'Link';
