@@ -143,7 +143,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    };
 
    $scope.initiateDrive = function() {
-      que(GoogleDriveService.getUserInfo(),function(userInfo) {
+      queue(GoogleDriveService.getUserInfo(),function(userInfo) {
          $scope.myInfo = {
             "Name": userInfo.result.user.displayName,
             "Email": userInfo.result.user.emailAddress,
@@ -208,7 +208,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    $window.loginSilent = function(response) {
       loginProcedure(authorizationService.authorizeSilent());
    };
-   
+
      var P = $q;
   var theQueue = [],
     timer = null;
@@ -238,7 +238,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
     );
     if (!timer) {
       processTheQueue(); // start immediately on the first invocation
-      timer = setInterval(processTheQueue, 500);
+      timer = setInterval(processTheQueue, 20000);
     }
   };
 }]);
