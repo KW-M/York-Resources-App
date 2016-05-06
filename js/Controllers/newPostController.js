@@ -97,7 +97,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast) {
                 });
             }
             else {
-                //sendFile();
+                sendFile();
             }
             function sendFile(){
                     $mdToast.show({
