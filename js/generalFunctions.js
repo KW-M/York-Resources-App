@@ -16,7 +16,9 @@ function formatArrayResponse(rawArrayResponse, idArray) {
   function processTheQueue() {
     var item = theQueue.shift();
     if (item) {
-      item.Promise.then(item.Action).catch(item.Err)
+      var thePromise = item.Promise
+      console.log(thePromise)
+      thePromise.then(item.Action);
     }
     if (queue.length === 0){
       clearInterval(timer), timer = null;

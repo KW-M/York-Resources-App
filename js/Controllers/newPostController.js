@@ -57,7 +57,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast) {
         }
     };
             $mdToast.show({
-            template: '<md-toast><span style="font-size:18px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right:-25px"></md-progress-circular></md-toast>',
+            template: '<md-toast><span style="font-size:18px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right:-20px"></md-progress-circular></md-toast>',
             hideDelay: 30000,
         });
     $scope.submit = function() {
