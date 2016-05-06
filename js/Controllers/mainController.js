@@ -192,9 +192,11 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
          //ok
          unfilteredPosts.splice(arrayIndex, 1);
          filterPosts($scope.searchTxt);
-         $scope.$apply();
+         //$scope.$apply();
          console.log("deleting" + content.ID);
-         GoogleDriveService.deleteDriveFile(content.ID).then(function() {})
+         GoogleDriveService.deleteDriveFile(content.ID).then(function() {
+            console.log("deleted" + content.ID);
+         })
       }, function() {
          //cancel
       });
