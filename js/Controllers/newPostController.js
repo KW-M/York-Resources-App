@@ -58,10 +58,6 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast) {
     };
 
     $scope.submit = function() {
-        $mdToast.show({
-            template: '<md-toast><span style="font-size:18px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right:-20px"></md-progress-circular></md-toast>',
-            hideDelay: 30000,
-        });
         GoogleDriveService.getUserInfo().then(function(userInfo) {
             console.log(userInfo.result);
             var description = document.querySelector('#DescriptionTxt').textContent;
@@ -87,10 +83,14 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast) {
                 "LikeUsers": [],
             });
             console.log(response);
-            if ($scope.Type === "gdrive"){
-               var userOk = window.confirm("This will enable view only link shareing for the file, so other yorkies can see it. (not really right now)")
+            if ($scope.Type === "gDrive"){
+               var userOk = window.confirm("This will enable view only link sharing for the file, so other students can see it. (not really right now)")
             }
             if (userOk === true){
+                        $mdToast.show({
+            template: '<md-toast><span style="font-size:18px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right:-20px"></md-progress-circular></md-toast>',
+            hideDelay: 30000,
+        });
                GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
                  console.log(reply.result);
                  $mdToast.hide();
