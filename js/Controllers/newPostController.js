@@ -32,7 +32,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast) {
     $scope.findType = function() {
         if ($scope.Link === '') {
             $scope.Type = 'NoLink';
-                 alert("hey, that isn't a link");
+            alert("hey, that isn't a link");
         }
         else {
             console.log("reached2");
@@ -83,28 +83,28 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast) {
                 "LikeUsers": [],
             });
             console.log(response);
-if ($scope.Type === "gDrive") {
+            if ($scope.Type === "gDrive") {
                 var confirm = $mdDialog.confirm()
-                    .title('This will enable view only link sharing for the file, so other students can see it. (not really right now)')
-                    .textContent('continue?')
+                    .title('This will enable view only link sharing for the file, \n so other students can see it.')
+                    .textContent('continue?           (not really right now)')
                     .ariaLabel('continue?')
-                    .targetEvent(ev)
                     .ok('Ok')
                     .cancel('Cancel');
                 $mdDialog.show(confirm).then(function() {
-                $mdToast.show({
-                    template: '<md-toast><span style="font-size:18px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right:-20px"></md-progress-circular></md-toast>',
-                    hideDelay: 30000,
-                });
-                GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
-                    console.log(reply.result);
-                    $mdToast.hide();
-                    $scope.close();
-                });
+                    $mdToast.show({
+                        template: '<md-toast><span style="font-size:18px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right:-20px"></md-progress-circular></md-toast>',
+                        hideDelay: 30000,
+                    });
+                    GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
+                        console.log(reply.result);
+                        $mdToast.hide();
+                        $scope.close();
+                    });
                 }, function() {
-                    //cancel
+                    alert("um, that's not going to work") //cancel
                 });
-            } else {
+            }
+            else {
                 $mdToast.show({
                     template: '<md-toast><span style="font-size:18px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right:-20px"></md-progress-circular></md-toast>',
                     hideDelay: 30000,
