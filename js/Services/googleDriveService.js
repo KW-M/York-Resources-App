@@ -26,7 +26,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
 
     this.getListOfFlies = function() {
         return (gapi.client.drive.files.list({
-            maxResults: 3,
+            pageSize: 9,
             q: "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false",
             fields: 'nextPageToken, files(id, name)',
         }));
@@ -113,39 +113,4 @@ app.service('GoogleDriveService', ['$q', function($q) {
             callback(response);
         });
     };
-
-
-  var P = $q;
-  var theQueue = [],
-    timer = null;
-
-
-  function processTheQueue() {
-    var item = theQueue.shift();
-    if (item) {
-        var pom=item.Promise;
-        console.log(pom);
-      pom.then(item.Action)
-    }
-    if (queue.length === 0){
-      clearInterval(timer), timer = null;
-    }
-  }
-
-  // Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
-   function queue (promise, action, error) {
-       console.log({Promise: promise,Action: action,Err: error});
-    theQueue.push(
-      {
-        Promise: promise,
-        Action: action,
-        Err: error
-      }
-    );
-    if (!timer) {
-      processTheQueue(); // start immediately on the first invocation
-      timer = setInterval(processTheQueue, 500);
-    }
-  };
-
 }]);
