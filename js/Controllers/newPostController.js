@@ -1,6 +1,6 @@
 /* we don't define the "new post controller" here because it was alredy
    defined by the $md-dialog in the newPost function on mainController.   */
-function newPostController($scope, $mdDialog, GoogleDriveService) {
+function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast) {
     console.log($scope.globals);
     $scope.close = function() {
         $mdDialog.hide();
@@ -16,7 +16,12 @@ function newPostController($scope, $mdDialog, GoogleDriveService) {
     $scope.classSearch = "";
     $scope.class = "";
     $scope.courses = ["English III", "Spanish I", "Chemistry", "AP Biology", "Geometry", "Algebra II", "Physics", "calc AB", "Chinese I", "World-history I", "world-history II"];
-
+         $mdToast.show(
+            $mdToast.simple()
+        .textContent('Simple Toast!')
+        .position($scope.getToastPosition())
+        .hideDelay(3000)
+    );
     $scope.classSelected = function(inputClass) {
         $scope.class = inputClass.class;
         console.log(inputClass.class);
