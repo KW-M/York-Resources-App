@@ -1,3 +1,6 @@
+  var theQueue = [],
+    timer = null;
+
 function formatArrayResponse(rawArrayResponse, idArray) {
   var arrayOfPosts = [];
   for (var i = 0; i < rawArrayResponse.length; i++) {
@@ -8,11 +11,6 @@ function formatArrayResponse(rawArrayResponse, idArray) {
   }
   return (arrayOfPosts);
 }
-
-app.factory('P', function($q) {
-  var P = $q;
-  var theQueue = [],
-    timer = null;
 
 
   function processTheQueue() {
@@ -39,9 +37,6 @@ app.factory('P', function($q) {
       timer = setInterval(processTheQueue, 500);
     }
   };
-
-  return {Queue:queue};
-});
 
 function RateLimit(fn, delay, context) {
   var queue = [],
