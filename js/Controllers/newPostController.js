@@ -88,7 +88,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast) {
             });
             console.log(response);
             if ($scope.Type==="gdrive"){
-                prompt("This will make the file view-able by york students.")
+                prompt("This will enable ")
             }
             GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
                 console.log(reply.result);
