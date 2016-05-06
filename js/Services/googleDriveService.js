@@ -62,7 +62,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
         var promiseArray = [];
         var idArray = [];
         var fileslist=self.getListOfFlies();
-        return (queue(fileslist,function(fileArray) {
+        return (fileslist.then(function(fileArray) {
             console.log(fileArray)
             for (var count = 0; count < fileArray.result.files.length; count++) {
                 var file = fileArray.result.files[count];

@@ -1,5 +1,5 @@
 /*global app*/ /*global angular*/ /*global gapi*/
-app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', 'P', function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, P) {
+app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $) {
    var self = this
    var unfilteredPosts = [];
    $scope.Posts = [];
@@ -209,7 +209,38 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
       loginProcedure(authorizationService.authorizeSilent());
    };
    
-   
+     var P = $q;
+  var theQueue = [],
+    timer = null;
+
+
+  function processTheQueue() {
+    var item = theQueue.shift();
+    if (item) {
+        var pom=item.Promise;
+        console.log(pom);
+      pom.then(item.Action)
+    }
+    if (queue.length === 0){
+      clearInterval(timer), timer = null;
+    }
+  }
+
+  // Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
+   function queue (promise, action, error) {
+       console.log({Promise: promise,Action: action,Err: error});
+    theQueue.push(
+      {
+        Promise: promise,
+        Action: action,
+        Err: error
+      }
+    );
+    if (!timer) {
+      processTheQueue(); // start immediately on the first invocation
+      timer = setInterval(processTheQueue, 500);
+    }
+  };
 }]);
 
 //called by the google client api when it loads (must be outside the controller)
