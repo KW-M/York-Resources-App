@@ -19,7 +19,6 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast) {
     $scope.classSelected = function(inputClass) {
         $scope.class = inputClass.class;
         console.log(inputClass.class);
-        $mdToast.hide();
     }
     $scope.Preview = function() {
         if ($scope.Type === "Link") {
@@ -57,13 +56,12 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast) {
             }
         }
     };
-
+        $mdToast.show({
+            template: '<span>hi</span>',
+            hideDelay: 6000,
+        });
     $scope.submit = function() {
-            $mdToast.show(
-            $mdToast.simple()
-            .textContent('Shareing...')
-            .hideDelay(10000)
-        );
+
         GoogleDriveService.getUserInfo().then(function(userInfo) {
             console.log(userInfo.result);
             var description = document.querySelector('#DescriptionTxt').textContent;
@@ -89,9 +87,9 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast) {
                 "LikeUsers": [],
             });
             console.log(response);
-            console.log('sending...');
             GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
                 console.log(reply.result);
+                        $mdToast.hide();
                 $scope.close();
             });
         });
