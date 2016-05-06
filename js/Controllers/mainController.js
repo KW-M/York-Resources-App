@@ -149,10 +149,10 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
             "Email": userInfo.result.user.emailAddress,
             "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
          }
-         console.log({myInfo:$scope.myInfo})
+         console.log({myInfo:1})
       });
       queue(GoogleDriveService.getUserInfo(),function(userInfo) {
-         console.log({myInfo:$scope.myInfo})
+         console.log({myInfo:new date()});
       });
       // GoogleDriveService.batchRequest().then(function(response) {
       //    console.log(response);
