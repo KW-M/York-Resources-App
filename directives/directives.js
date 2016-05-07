@@ -40,7 +40,24 @@ app.directive('getPosts', function() {
     restrict: 'AE',
     link: function(scope, elem, attrs) {
         console.log(attrs);
-        
+        scope.getFiles = function(pageToken) {
+         queue(GoogleDriveService.multiRequest(pageToken),function(combinedResponse) {
+            console.log(combinedResponse);
+            if (combinedResponse.pageToken) {
+               getFiles(combinedResponse.pageToken);
+            }
+            //handleFiles(combinedResponse);
+         });
+      }
+
+      function handleFiles(combinedResponse) {
+         combinedResponse.files.then(function(fileResponse) {
+            unfilteredPosts = unfilteredPosts.concat(formatArrayResponse(fileResponse, combinedResponse.ids));
+            console.log(unfilteredPosts)
+            filterPosts($scope.searchTxt);
+            $scope.$apply();
+         });
+      }
     }
   };
 });
