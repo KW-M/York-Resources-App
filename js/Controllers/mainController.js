@@ -194,6 +194,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
          filterPosts($scope.searchTxt);
          //$scope.$apply();
          console.log("deleting" + content.ID);
+         
          GoogleDriveService.deleteDriveFile(content.ID).then(function() {
             console.log("deleted" + content.ID);
          })
