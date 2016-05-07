@@ -41,12 +41,12 @@ app.directive('getPosts', function() {
     link: function(scope, elem, attrs) {
         console.log(attrs);
         scope.getFiles = function(pageToken) {
-         queue(GoogleDriveService.multiRequest(pageToken),function(combinedResponse) {
+         queue(scope.GoogleDriveService.multiRequest(pageToken),function(combinedResponse) {
             console.log(combinedResponse);
             if (combinedResponse.pageToken) {
-               getFiles(combinedResponse.pageToken);
+               scope.getFiles(combinedResponse.pageToken);
             }
-            //handleFiles(combinedResponse);
+            handleFiles(combinedResponse);
          });
       }
 
@@ -54,8 +54,8 @@ app.directive('getPosts', function() {
          combinedResponse.files.then(function(fileResponse) {
             unfilteredPosts = unfilteredPosts.concat(formatArrayResponse(fileResponse, combinedResponse.ids));
             console.log(unfilteredPosts)
-            filterPosts($scope.searchTxt);
-            $scope.$apply();
+            scope.filterPosts($scope.searchTxt);
+            scope.$apply();
          });
       }
     }

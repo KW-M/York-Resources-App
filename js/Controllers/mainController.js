@@ -9,7 +9,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
       FABisOpen: false,
       SidebarIsOpen: false //not used
    };
-   $sc
+   $scope.GoogleDriveService = GoogleDriveService;
 
    $scope.signIn = function() { //called by the signIn button click
       loginProcedure(authorizationService.authorizePopup());
