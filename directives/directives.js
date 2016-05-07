@@ -38,8 +38,6 @@ app.directive('addBarTop', function () {
 app.directive('getPosts', function() {
   return {
     restrict: 'AE',
-    replace: true,
-    template: '<p style="background-color:{{color}}">Hello World',
     link: function(scope, elem, attrs) {
       elem.bind('click', function() {
         elem.css('background-color', 'white');
