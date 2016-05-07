@@ -27,9 +27,9 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
       });
    };
 
-   $scope.$watch('searchTxt', filterPosts);
+   $scope.$watch('searchTxt', $scope.filterPosts);
 
-   function filterPosts(val) {
+   $scope.filterPosts = function(val) {
       console.log(val);
       val = val.toLowerCase();
       $scope.Posts = unfilteredPosts.filter(function(obj) {
@@ -157,26 +157,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
       // GoogleDriveService.batchRequest().then(function(response) {
       //    console.log(response);
       // });
-      getFiles('');
-
-      function getFiles(pageToken) {
-         queue(GoogleDriveService.multiRequest(pageToken),function(combinedResponse) {
-            console.log(combinedResponse);
-            if (combinedResponse.pageToken) {
-               getFiles(combinedResponse.pageToken);
-            }
-            handleFiles(combinedResponse);
-         });
-      }
-
-      function handleFiles(combinedResponse) {
-         combinedResponse.files.then(function(fileResponse) {
-            unfilteredPosts = unfilteredPosts.concat(formatArrayResponse(fileResponse, combinedResponse.ids));
-            console.log(unfilteredPosts)
-            filterPosts($scope.searchTxt);
-            $scope.$apply();
-         });
-      }
+      $scope.getFiles('');
    }
 
    $scope.confirmDelete = function(ev, content, arrayIndex) {
@@ -191,10 +172,10 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
       $mdDialog.show(confirm).then(function() {
          //ok
          unfilteredPosts.splice(arrayIndex, 1);
-         filterPosts($scope.searchTxt);
+         $scope.filterPosts($scope.searchTxt);
          //$scope.$apply();
          console.log("deleting" + content.ID);
-         
+
          GoogleDriveService.deleteDriveFile(content.ID).then(function() {
             console.log("deleted" + content.ID);
          })

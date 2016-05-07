@@ -40,6 +40,7 @@ app.directive('getPosts', function() {
     restrict: 'AE',
     link: function(scope, elem, attrs) {
         console.log(attrs);
+        
     }
   };
 });
