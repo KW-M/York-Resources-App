@@ -53,7 +53,7 @@ app.directive('getPosts', function() {
       function handleFiles(combinedResponse) {
          combinedResponse.files.then(function(fileResponse) {
             scope.unfilteredPosts = scope.unfilteredPosts.concat(formatArrayResponse(fileResponse, combinedResponse.ids));
-            console.log(unfilteredPosts)
+            console.log(scope.unfilteredPosts)
             scope.filterPosts(scope.searchTxt);
             scope.$apply();
          });
