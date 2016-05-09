@@ -8,6 +8,7 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    cursor: url("https://s-media-cache-ak0.pinimg.com/736x/37/fb/ab/37fbab508f28a4d39543b4be50443a34.jpg");
 }
 
 p,
@@ -53,6 +54,7 @@ html body {
 /*-------------- Loading & first launch styles ----------- */
 
 #welcome_dialog {
+     cursor: url("https://s-media-cache-ak0.pinimg.com/736x/37/fb/ab/37fbab508f28a4d39543b4be50443a34.jpg");
     font-family: Helvetica Neue;
     position: fixed;
     background-color: #fff;
