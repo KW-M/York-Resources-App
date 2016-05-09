@@ -1,7 +1,7 @@
 /*global app*/ /*global angular*/ /*global gapi*/
 app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q) {
    var self = this
-   var unfilteredPosts = [];
+   $scope.unfilteredPosts = [];
    $scope.Posts = [];
    $scope.searchTxt = '';
    $scope.searchedPosts = [];
@@ -33,7 +33,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    $scope.filterPosts = function(val) {
       console.log(val);
       val = val.toLowerCase();
-      $scope.Posts = unfilteredPosts.filter(function(obj) {
+      $scope.Posts = $scope.unfilteredPosts.filter(function(obj) {
          return obj.Title.toLowerCase().indexOf(val) != -1;
       });
       console.log($scope.Posts + "post from filter");
@@ -172,7 +172,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
          .cancel('Keep it');
       $mdDialog.show(confirm).then(function() {
          //ok
-         unfilteredPosts.splice(arrayIndex, 1);
+         $scope.unfilteredPosts.splice(arrayIndex, 1);
          $scope.filterPosts($scope.searchTxt);
          //$scope.$apply();
          console.log("deleting" + content.ID);
