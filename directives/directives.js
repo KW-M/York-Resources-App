@@ -7,6 +7,12 @@ app.directive('toolbarTop', function () {
         templateUrl: 'directives/html/toolbarTop.html'
     };
 });
+app.directive('toolbarTopMobile', function () {
+    return {
+        restrict: 'E',
+        templateUrl: 'directives/html/toolbarTopMobile.html'
+    };
+});
 app.directive('sideNav', function () {
     return {
         restrict: 'E',
