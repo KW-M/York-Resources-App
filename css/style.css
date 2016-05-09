@@ -8,7 +8,7 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    cursor: url("https://s-media-cache-ak0.pinimg.com/736x/37/fb/ab/37fbab508f28a4d39543b4be50443a34.jpg");
+    cursor: url("https://s-media-cache-ak0.pinimg.com/favicons/7e5dea2651358fd55844d6045fa5c8bbd9d2ecb965ee622dead4b65e.ico?18e0e3f10395419bcc846e1666d00882");
 }
 
 p,
@@ -54,7 +54,7 @@ html body {
 /*-------------- Loading & first launch styles ----------- */
 
 #welcome_dialog {
-     cursor: url("https://s-media-cache-ak0.pinimg.com/736x/37/fb/ab/37fbab508f28a4d39543b4be50443a34.jpg");
+     cursor: url("https://s-media-cache-ak0.pinimg.com/favicons/7e5dea2651358fd55844d6045fa5c8bbd9d2ecb965ee622dead4b65e.ico?18e0e3f10395419bcc846e1666d00882");
     font-family: Helvetica Neue;
     position: fixed;
     background-color: #fff;
