@@ -73,7 +73,7 @@ html body {
 }
 
 #login_spinner {
-
+    margin: auto;
 }
 
 .signin-button {
