@@ -19,6 +19,12 @@ app.directive('sideNav', function () {
         templateUrl: 'directives/html/sideNav.html'
     };
 });
+app.directive('sideNavInline', function () {
+    return {
+        restrict: 'E',
+        templateUrl: 'directives/html/sideNavInline.html'
+    };
+});
 app.directive('addLowerButton', function () {
     return {
         restrict: 'E',
