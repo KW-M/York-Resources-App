@@ -254,24 +254,6 @@ input.search-field:focus:-ms-input-placeholder {
 
 .side-nav {
     z-index: 60;
-    /*float: left;
-    bottom: 4px;
-    left: 0;
-    overflow: visible;
-    position: fixed;
-    width: 212px;
-    top: 60px;
-    z-index: 1;
-    border-right: solid 2px #ddd;
-    background-color: #e8e8e8;
-    padding: 16px 8px 16px 6px;
-    -----------------------------
-    -webkit-transform: translateX(-242px);
-    transform: translateX(-242px);
-    -webkit-transition: -webkit-transform .15s ease-in-out;
-    transition: transform .15s ease-in-out;
-    will-change: top,left;
-    --------------------------------- */
 }
 
 
