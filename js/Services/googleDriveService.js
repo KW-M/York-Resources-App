@@ -58,26 +58,10 @@ app.service('GoogleDriveService', ['$q', function($q) {
     // };
 
     this.multiRequest = function(fileList, pageToken) { //do this one
-        fileist = self.getListOfFlies(pageToken);
-        return (fileslist.then(function(fileArray) {
-            console.log(fileArray)
-            for (var count = 0; count < fileArray.result.files.length; count++) {
-                var file = fileArray.result.files[count];
-                var fileRequest = self.getDriveFileContent(file.id);
-                promiseArray.push(fileRequest);
-                idArray.push(file.id);
-                console.log(promiseArray);
-            }
- 
-            return ({
-                files: $q.all(promiseArray),
-                ids: idArray,
-                pageToken: fileArray.result.nextPageToken
-            });
-        }))
+        fileList = self.getListOfFlies(pageToken);
     };
 
-    this.multithisisjustabackupRequest = function() { 
+    this.multithisisjustabackupRequest = function() {
                 var promiseArray = [];
         var idArray = [];
         var fileslist = self.getListOfFlies(pageToken);
@@ -98,9 +82,9 @@ app.service('GoogleDriveService', ['$q', function($q) {
                 pageToken: fileArray.result.nextPageToken
             });
         }))
-        
-        
-        
+
+
+
         //older
         var promiseArray = [];
         var idArray = [];
