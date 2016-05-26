@@ -69,7 +69,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    //       clickOutsideToClose: false,
    //       fullscreen: ($mdMedia('xs')),
    //       openFrom: ('#new_post_button'),
-   //       closeTo: {
+   //       closeTo: { 
    //          left: 1000,
    //       }
    //    });
@@ -155,9 +155,6 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
             myInfo: $scope.myInfo
          });
       });
-      // GoogleDriveService.batchRequest().then(function(response) {
-      //    console.log(response);
-      // });
       $scope.getFiles('');
    }
 
