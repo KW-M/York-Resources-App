@@ -1,16 +1,11 @@
 //Define the GoogleDriveController controller for Angular
 app.service('GoogleDriveService', ['$q', function($q) {
     var self = this;
-    var drivePicker;
-    var UploadPicker;
 
-    this.initiateAuthLoadDrive = function(callback) {
-        console.log("loading drive v3");
+    this.initiateAuthLoadDrive = function(driveCallback, pickerCallback) {
         $('#overlay_background').fadeOut(500);
-        gapi.load('picker', {
-            'callback': self.pickerLoaded
-        });
-        gapi.client.load('drive', 'v3', callback);
+        gapi.load('picker', {'callback': pickerCallback});
+        gapi.client.load('drive', 'v3', driveCallback);
     };
 
     this.getUserInfo = function() {
@@ -33,10 +28,6 @@ app.service('GoogleDriveService', ['$q', function($q) {
             q: "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false",
             fields: 'nextPageToken, files(id, name)',
         }));
-    };
-
-    this.pickerLoaded = function() {
-        console.log("loaded the google drive file picker")
     };
 
     // this.batchRequest = function() { //do this one

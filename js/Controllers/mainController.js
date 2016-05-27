@@ -1,10 +1,9 @@
 /*global app*/ /*global angular*/ /*global gapi*/ /*global google*/
 app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q) {
    var self = this
-   $scope.unfilteredPosts = [];
-   $scope.Posts = [];
+   $scope.allPosts = [];
+   $scope.filteredPosts = [];
    $scope.searchTxt = '';
-   $scope.searchedPosts = [];
    $scope.globals = {
       FABisOpen: false,
       SidebarIsOpen: false //not used
@@ -33,10 +32,10 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    $scope.filterPosts = function(val) {
       console.log(val);
       val = val.toLowerCase();
-      $scope.apply($scope.Posts = $scope.unfilteredPosts.filter(function(obj) {
+      $scope.apply($scope.filteredPosts = $scope.allPosts.filter(function(obj) {
          return obj.Title.toLowerCase().indexOf(val) != -1;
       }));
-      console.log($scope.Posts + "post from filter");
+      console.log($scope.filteredPosts + "post from filter");
    }
 
 
@@ -123,7 +122,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
       //handles the 'response' promise
       response.then(function(response) {
             $scope.loginStatus = response;
-            GoogleDriveService.initiateAuthLoadDrive($scope.initiateDrive, $scope.pickerLoa)
+            GoogleDriveService.initiateAuthLoadDrive($scope.initiateDrive, $scope.pickerLoaded)
          }).catch(function(error) {
             if (error.error_subtype !== undefined && error.error_subtype === "access_denied") {
                showLoginButton();
@@ -143,6 +142,10 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
             });
       };
    };
+   
+   $scope.pickerLoaded = function() {
+      
+   }
 
    $scope.initiateDrive = function() {
       queue(GoogleDriveService.getUserInfo(), function(userInfo) {
@@ -174,8 +177,8 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
 
       // function handleFiles(combinedResponse) {
       //    combinedResponse.files.then(function(fileResponse) {
-      //       unfilteredPosts = unfilteredPosts.concat(formatArrayResponse(fileResponse, combinedResponse.ids));
-      //       console.log(unfilteredPosts)
+      //       allPosts = allPosts.concat(formatArrayResponse(fileResponse, combinedResponse.ids));
+      //       console.log(allPosts)
       //       filterPosts($scope.searchTxt);
       //       $scope.$apply();
       //    });
@@ -188,7 +191,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
          metadata: metadata
       });
 
-      $scope.unfilteredPosts = $scope.unfilteredPosts.concat(file.result);
+      $scope.allPosts = $scope.allPosts.concat(file.result);
       $scope.filterPosts($scope.searchTxt);
    }
 
@@ -203,7 +206,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
          .cancel('Keep it');
       $mdDialog.show(confirm).then(function() {
          //ok
-         $scope.unfilteredPosts.splice(arrayIndex, 1);
+         $scope.allPosts.splice(arrayIndex, 1);
          $scope.filterPosts($scope.searchTxt);
          //$scope.$apply();
          console.log("deleting" + content.ID);
