@@ -155,7 +155,26 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
             myInfo: $scope.myInfo
          });
       });
-      $scope.getFiles('');
+      queue(GoogleDriveService.getListOfFlies(pageToken),function(combinedResponse) {
+      
+      //       function getFiles(pageToken) {
+      //    queue(GoogleDriveService.multiRequest(pageToken),function(combinedResponse) {
+      //       console.log(combinedResponse);
+      //       if (combinedResponse.pageToken) {
+      //          getFiles(combinedResponse.pageToken);
+      //       }
+      //       handleFiles(combinedResponse);
+      //    });
+      // }
+
+      // function handleFiles(combinedResponse) {
+      //    combinedResponse.files.then(function(fileResponse) {
+      //       unfilteredPosts = unfilteredPosts.concat(formatArrayResponse(fileResponse, combinedResponse.ids));
+      //       console.log(unfilteredPosts)
+      //       filterPosts($scope.searchTxt);
+      //       $scope.$apply();
+      //    });
+      // }
    }
 
    $scope.confirmDelete = function(ev, content, arrayIndex) {
