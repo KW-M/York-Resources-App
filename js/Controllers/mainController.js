@@ -155,8 +155,8 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
             myInfo: $scope.myInfo
          });
       });
-      queue(GoogleDriveService.getListOfFlies(),function(combinedResponse) {
-         console.log(combinedResponse);
+      queue(GoogleDriveService.getListOfFlies(),function(fileList) {
+         console.log(fileList);
       });
 
       //       function getFiles(pageToken) {
