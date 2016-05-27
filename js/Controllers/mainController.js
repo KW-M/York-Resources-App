@@ -151,11 +151,8 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
             "Email": userInfo.result.user.emailAddress,
             "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
          };
-         console.log({
-            myInfo: $scope.myInfo
-         });
       });
-      queue(GoogleDriveService.getListOfFlies(),function(fileList) {
+      queue(GoogleDriveService.getListOfFlies(), function(fileList) {
          for (var item = 0; item < fileList.result.files.length; item++) {
             var metadata = fileList.result.files[item];
             console.log(metadata.id);
