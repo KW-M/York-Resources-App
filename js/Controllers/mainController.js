@@ -155,6 +155,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
             myInfo: $scope.myInfo
          });
       });
+      console.log("fileListy");
       queue(GoogleDriveService.getListOfFlies(),function(fileList) {
          console.log(fileList);
       });
