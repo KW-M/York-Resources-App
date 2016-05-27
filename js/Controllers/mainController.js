@@ -69,7 +69,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    //       clickOutsideToClose: false,
    //       fullscreen: ($mdMedia('xs')),
    //       openFrom: ('#new_post_button'),
-   //       closeTo: { 
+   //       closeTo: {
    //          left: 1000,
    //       }
    //    });
@@ -155,8 +155,10 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
             myInfo: $scope.myInfo
          });
       });
-      queue(GoogleDriveService.getListOfFlies(pageToken),function(combinedResponse) {
-      
+      queue(GoogleDriveService.getListOfFlies(),function(combinedResponse) {
+         console.log(combinedResponse);
+      });
+
       //       function getFiles(pageToken) {
       //    queue(GoogleDriveService.multiRequest(pageToken),function(combinedResponse) {
       //       console.log(combinedResponse);
