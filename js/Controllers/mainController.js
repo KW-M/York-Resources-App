@@ -1,4 +1,4 @@
-/*global app*/ /*global angular*/ /*global gapi*/
+/*global app*/ /*global angular*/ /*global gapi*//*global google*/
 app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q) {
    var self = this
    $scope.unfilteredPosts = [];
@@ -159,9 +159,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
          for (var item = 0; item < fileList.result.files.length; item++) {
             var metadata = fileList.result.files[item];
             console.log(metadata.id);
-            queue(GoogleDriveService.getFileContent(metadata.id), function(file) {
-               $scope.handleFile(file, metadata)
-            });
+            queue(GoogleDriveService.getFileContent(metadata.id), function(file) {$scope.handleFile(file, metadata);});
          }
       });
 
@@ -186,7 +184,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    }
 
    $scope.handleFile = function(file, metadata) {
-      console.log({file:file,metadata:metadata});
+      console.log({file:file, metadata:metadata});
    }
 
    $scope.confirmDelete = function(ev, content, arrayIndex) {
