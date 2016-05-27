@@ -157,9 +157,9 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
       });
       queue(GoogleDriveService.getListOfFlies(),function(fileList) {
          for (var item = 0; item < fileList.result.files.length; item++) {
-            var file = fileList.result.files[item];
-            console.log(file.id);
-            queue(GoogleDriveService.getFlieContent(file), $scope.handleFile(file));
+            var metadata = fileList.result.files[item];
+            console.log(metadata.id);
+            queue(GoogleDriveService.getFileContent(metadata.id), $scope.handleFile(file));
          }
       });
 
@@ -184,7 +184,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    }
    
    $scope.handleFile = function(file) {
-      
+      console.log file
    }
 
    $scope.confirmDelete = function(ev, content, arrayIndex) {

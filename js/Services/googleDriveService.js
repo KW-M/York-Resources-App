@@ -19,7 +19,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
         }));
     };
 
-    this.getDriveFileContent = function(fileId) {
+    this.getFileContent = function(fileId) {
         return (gapi.client.drive.files.get({
             'fileId': fileId,
             'alt': 'media'
@@ -45,7 +45,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
     //         for (var count = 0; count < fileArray.result.files.length; count++) {
     //             var file = fileArray.result.files[count];
     //             console.log(file.id);
-    //             //batch.add(self.getDriveFileContent(file.id));
+    //             //batch.add(self.getFileContent(file.id));
     //             gapi.client.request({
     //                 'path': '/download/drive/v3/files/0B5NVuDykezpkLW5zZmhmLUoxNEE?alt=media',
     //                 'method': 'GET',
@@ -70,7 +70,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
             console.log(fileArray)
             for (var count = 0; count < fileArray.result.files.length; count++) {
                 var file = fileArray.result.files[count];
-                var fileRequest = self.getDriveFileContent(file.id);
+                var fileRequest = self.getFileContent(file.id);
                 promiseArray.push(fileRequest);
                 idArray.push(file.id);
                 console.log(promiseArray);
@@ -94,7 +94,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
             console.log(fileArray)
             for (var count = 0; count < fileArray.result.files.length; count++) {
                 var file = fileArray.result.files[count];
-                var fileRequest = self.getDriveFileContent(file.id);
+                var fileRequest = self.getFileContent(file.id);
                 promiseArray.push(fileRequest);
                 idArray.push(file.id);
                 console.log(promiseArray);
