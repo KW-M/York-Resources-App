@@ -192,7 +192,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
       });
 
       $scope.allPosts = $scope.allPosts.concat(file.result);
-      $scope.apply($scope.filterPosts($scope.searchTxt));
+      $scope.filterPosts($scope.searchTxt);
    }
 
    $scope.confirmDelete = function(ev, content, arrayIndex) {
