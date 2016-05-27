@@ -33,9 +33,9 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    $scope.filterPosts = function(val) {
       console.log(val);
       val = val.toLowerCase();
-      $scope.Posts = $scope.unfilteredPosts.filter(function(obj) {
+      $scope.apply($scope.Posts = $scope.unfilteredPosts.filter(function(obj) {
          return obj.Title.toLowerCase().indexOf(val) != -1;
-      });
+      }));
       console.log($scope.Posts + "post from filter");
    }
 
@@ -185,6 +185,9 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
 
    $scope.handleFile = function(file, metadata) {
       console.log({file:file, metadata:metadata});
+      $scope.unfilteredPosts = $scope.unfilteredPosts.concat(file.result);
+      console.log($scope.unfilteredPosts);
+      $scope.filterPosts($scope.searchTxt);
    }
 
    $scope.confirmDelete = function(ev, content, arrayIndex) {
