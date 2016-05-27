@@ -156,7 +156,10 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
          });
       });
       queue(GoogleDriveService.getListOfFlies(),function(fileList) {
-         for (var item=1 )
+         for (var item = 0; item < fileList.result.files.length; item++) {
+            var file = fileList.result.files[item];
+            console.log(file.id);
+         }
       });
 
       //       function getFiles(pageToken) {
