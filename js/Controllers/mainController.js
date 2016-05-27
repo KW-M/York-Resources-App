@@ -159,7 +159,9 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
          for (var item = 0; item < fileList.result.files.length; item++) {
             var metadata = fileList.result.files[item];
             console.log(metadata.id);
-            queue(GoogleDriveService.getFileContent(metadata.id), $scope.handleFile(file));
+            queue(GoogleDriveService.getFileContent(metadata.id), function(file) {
+               $scope.handleFile(file, metadata)
+            });
          }
       });
 
@@ -182,9 +184,9 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
       //    });
       // }
    }
-   
-   $scope.handleFile = function(file) {
-      console.log file
+
+   $scope.handleFile = function(file, metadata) {
+      console.log({file:file,metadata:metadata});
    }
 
    $scope.confirmDelete = function(ev, content, arrayIndex) {
