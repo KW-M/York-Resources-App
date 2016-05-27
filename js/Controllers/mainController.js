@@ -1,4 +1,4 @@
-/*global app*/ /*global angular*/ /*global gapi*//*global google*/
+/*global app*/ /*global angular*/ /*global gapi*/ /*global google*/
 app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q) {
    var self = this
    $scope.unfilteredPosts = [];
@@ -123,7 +123,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
       //handles the 'response' promise
       response.then(function(response) {
             $scope.loginStatus = response;
-            GoogleDriveService.initiateAuthLoadDrive($scope.initiateDrive)
+            GoogleDriveService.initiateAuthLoadDrive($scope.initiateDrive, $scope.pickerLoa)
          }).catch(function(error) {
             if (error.error_subtype !== undefined && error.error_subtype === "access_denied") {
                showLoginButton();
@@ -156,7 +156,9 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
          for (var item = 0; item < fileList.result.files.length; item++) {
             var metadata = fileList.result.files[item];
             console.log(metadata.id);
-            queue(GoogleDriveService.getFileContent(metadata.id), function(file) {$scope.handleFile(file, metadata);});
+            queue(GoogleDriveService.getFileContent(metadata.id), function(file) {
+               $scope.handleFile(file, metadata);
+            });
          }
       });
 
@@ -181,8 +183,11 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    }
 
    $scope.handleFile = function(file, metadata) {
-      console.log({file:file, metadata:metadata});
-      
+      console.log({
+         file: file,
+         metadata: metadata
+      });
+
       $scope.unfilteredPosts = $scope.unfilteredPosts.concat(file.result);
       $scope.filterPosts($scope.searchTxt);
    }
