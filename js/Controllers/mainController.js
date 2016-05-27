@@ -32,9 +32,9 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    $scope.filterPosts = function(val) {
       console.log(val);
       val = val.toLowerCase();
-      $scope.apply($scope.filteredPosts = $scope.allPosts.filter(function(obj) {
+      $scope.filteredPosts = $scope.allPosts.filter(function(obj) {
          return obj.Title.toLowerCase().indexOf(val) != -1;
-      }));
+      });
       console.log($scope.filteredPosts + "post from filter");
    }
 
@@ -142,9 +142,9 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
             });
       };
    };
-   
+
    $scope.pickerLoaded = function() {
-      
+
    }
 
    $scope.initiateDrive = function() {
@@ -192,7 +192,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
       });
 
       $scope.allPosts = $scope.allPosts.concat(file.result);
-      $scope.filterPosts($scope.searchTxt);
+      $scope.apply($scope.filterPosts($scope.searchTxt));
    }
 
    $scope.confirmDelete = function(ev, content, arrayIndex) {
