@@ -185,6 +185,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
 
    $scope.handleFile = function(file, metadata) {
       console.log({file:file, metadata:metadata});
+      
       $scope.unfilteredPosts = $scope.unfilteredPosts.concat(file.result);
       $scope.filterPosts($scope.searchTxt);
    }
