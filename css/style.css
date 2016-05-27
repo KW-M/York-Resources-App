@@ -31,8 +31,6 @@ div:focus {
 
 html body {
     font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
     height: 100%;
     margin: 0px;
     padding: 0px;
@@ -53,6 +51,8 @@ html body {
 /*-------------- Loading & first launch styles ----------- */
 
 #welcome_dialog {
+    font-size: 14px;
+    font-weight: 400;
     position: fixed;
     background-color: #fff;
     opacity: 100;
