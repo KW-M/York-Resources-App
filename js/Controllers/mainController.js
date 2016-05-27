@@ -159,6 +159,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
          for (var item = 0; item < fileList.result.files.length; item++) {
             var file = fileList.result.files[item];
             console.log(file.id);
+            queue(GoogleDriveService.getFlieContent(file.id), handleFile(file));
          }
       });
 
