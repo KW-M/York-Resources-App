@@ -1,0 +1,47 @@
+    /*-------------------- sidebar styles --------------------- */
+    
+    .side-nav {
+        z-index: 60;
+        width: 270px;
+        position: fixed;
+        margin-top: 56px;
+        height: 100%;
+    }
+    
+    .side-nav md-menu-item {
+        width: 100%;
+    }
+    
+    .side-nav md-icon {
+        width: 24px;
+        padding: 0;
+    }
+    
+    .side-nav-scroll {
+        overflow-y: auto;
+        padding-bottom: 112px;
+    }
+    
+    .side-nav-classes md-button {
+        border-radius: 2px;
+    }
+    
+    .side-nav md-button {
+        border-radius: 0px;
+    }
+    
+    .side-nav-section {
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .side-nav-classes {
+        margin-left: 12px;
+    }
+    
+    .side-nav-bottom {
+        border-top: 1px solid #ddd;
+        bottom: 0px;
+        position: fixed;
+        width: 100%;
+        background-color: white;
+    }
