@@ -4,7 +4,7 @@
             <div style="border-bottom: 1px solid #ddd;">
                 <md-list>
                     <md-list-item>
-                        <md-menu-item style="width: 100%">
+                        <md-menu-item>
                             <md-button style="border-radius: 2px;">
                                 <md-icon>inbox</md-icon>
                                 All Posts
@@ -12,7 +12,7 @@
                         </md-menu-item>
                     </md-list-item>
                     <md-list-item>
-                        <md-menu-item style="width: 100%">
+                        <md-menu-item>
                             <md-button style="border-radius: 2px;">
                                 <md-icon>person</md-icon>
                                 My Posts
@@ -20,7 +20,7 @@
                         </md-menu-item>
                     </md-list-item>
                     <md-list-item>
-                        <md-menu-item style="width: 100%">
+                        <md-menu-item>
                             <md-button style="border-radius: 2px;">
                                 <md-icon>thumb_up</md-icon>
                                 Most Liked
@@ -28,7 +28,7 @@
                         </md-menu-item>
                     </md-list-item>
                     <md-list-item>
-                        <md-menu-item style="width: 100%">
+                        <md-menu-item>
                             <md-button style="border-radius: 2px;">
                                 <md-icon>flag</md-icon>
                                 Flagged
@@ -40,64 +40,64 @@
             <div>
                 <md-list>
                     <md-list-item>
-                        <md-menu-item style="width: 100%">
+                        <md-menu-item>
                                 <md-icon>group</md-icon>
-                                <span>Classes</span>
-                                <md-icon style="margin-left: 100px;">keyboard_arrow_down</md-icon>
+                                <span style="padding:0">Classes</span>
+                                <md-icon>keyboard_arrow_down</md-icon>
                         </md-menu-item>
                     </md-list-item>
                     <md-list style="margin-left:12px">
                         <md-list-item>
-                            <md-menu-item style="width: 100%">
+                            <md-menu-item>
                                 <md-button style="border-radius: 2px;">
                                     Geography
                                 </md-button>
                             </md-menu-item>
                         </md-list-item>
                         <md-list-item>
-                            <md-menu-item style="width: 100%">
+                            <md-menu-item>
                                 <md-button style="border-radius: 2px;">
                                     World History
                                 </md-button>
                             </md-menu-item>
                         </md-list-item>
                                                 <md-list-item>
-                            <md-menu-item style="width: 100%">
+                            <md-menu-item>
                                 <md-button style="border-radius: 2px;">
                                     Chemistry
                                 </md-button>
                             </md-menu-item>
                         </md-list-item>
                         <md-list-item>
-                            <md-menu-item style="width: 100%">
+                            <md-menu-item>
                                 <md-button style="border-radius: 2px;">
                                     Physics
                                 </md-button>
                             </md-menu-item>
                         </md-list-item>
                                                 <md-list-item>
-                            <md-menu-item style="width: 100%">
+                            <md-menu-item>
                                 <md-button style="border-radius: 2px;">
                                     Algebra II
                                 </md-button>
                             </md-menu-item>
                         </md-list-item>
                         <md-list-item>
-                            <md-menu-item style="width: 100%">
+                            <md-menu-item>
                                 <md-button style="border-radius: 2px;">
                                     Marine Biology
                                 </md-button>
                             </md-menu-item>
                         </md-list-item>
                         <md-list-item>
-                            <md-menu-item style="width: 100%">
+                            <md-menu-item>
                                 <md-button style="border-radius: 2px;">
                                     Marine Biology
                                 </md-button>
                             </md-menu-item>
                         </md-list-item>
                         <md-list-item>
-                            <md-menu-item style="width: 100%">
+                            <md-menu-item>
                                 <md-button style="border-radius: 2px;">
                                     Marine Biology
                                 </md-button>
@@ -110,7 +110,7 @@
         <div style="border-top: 1px solid #ddd; bottom: 0px; position:fixed; width:100%; background-color:white">
             <md-list style="padding: 6px 0 0 0;">
                 <md-list-item>
-                    <md-menu-item style="width: 100%">
+                    <md-menu-item>
                         <md-button style="border-radius: 2px;">
                             <md-icon>settings</md-icon>
                             Settings
@@ -118,7 +118,7 @@
                     </md-menu-item>
                 </md-list-item>
                 <md-list-item>
-                    <md-menu-item style="width: 100%">
+                    <md-menu-item>
                         <md-button style="border-radius: 2px;" href="mailto:worcester-moorek2018@york.org?Subject=York%20App%20Problem" target="_blank">
                             <md-icon>feedback</md-icon>
                             Feedback
@@ -134,7 +134,10 @@
 .side-nav {
     z-index: 60;
 }
-.side-nav md-list md-list-item md-menu-item{
+.side-nav md-menu-item{
+    width: 100%;
+}
+.side-nav md-icon{
     width: 100%;
 }
 </style>
