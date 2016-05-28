@@ -46,7 +46,7 @@ html body {
 
 .content_container {
     margin: 0 72px;
-    padding-top: 88px;
+    margin-top: 88px;
     height:100%;
     background-color: #e8e8a1;
 }

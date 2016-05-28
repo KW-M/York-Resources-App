@@ -47,17 +47,18 @@
         <!------------------- The top toolbar -------------------->
         <toolbar-top></toolbar-top>
         <!--<toolbar-top-mobile hide-gt-sm></toolbar-top-mobile>-->
+        <side-nav></side-nav>
         <!-------------------------------------------------------->
         <add-lower-button></add-lower-button>
         <!-------------------------------------------------------->
-        <div class="horizontalLayout">
+        <div class="horizontalContainer">
             <!---------------------------------------------------->
-            <side-nav></side-nav>
+            <side-nav-inline></side-nav-inline>
             <!----- The content, ie posts, resources, etc. ------->
-            <div flex id="content_container" class="" style="margin: 0 120px">
+            <div class="content_container">
                 <add-bar-top></add-bar-top>
                 <get-posts my-attrobute="m"></get-posts>
-                <div id="gri_Container" style="margin: 0 auto;" angular-grid="Posts" ag-grid-width="225" ag-gutter-size="8" ag-id="posts">
+                <div id="grid_Container" style="margin: 0 auto;" angular-grid="Posts" ag-grid-width="225" ag-gutter-size="8" ag-id="posts">
                     <md-card post-card class="post-card raise-on-hover" ng-repeat="Post in allPosts"></md-card>
                 </div>
             </div>
