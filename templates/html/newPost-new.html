@@ -1,255 +1,256 @@
 <md-dialog ng-cloak>
-  <form>
-    <md-toolbar style="background-color:rgba(0, 0, 0, 0.5); height: 200px; overflow-y: hidden">
-      <div class="md-toolbar-tools">
-        <md-button class="md-icon-button">
-          <md-icon>group</md-icon>
-        </md-button>
-        <h2>
+   <form>
+      <md-toolbar style="background-color:rgba(0, 0, 0, 0.5); height: 200px; overflow-y: hidden">
+         <div class="md-toolbar-tools">
+            <md-button class="md-icon-button">
+               <md-icon>group</md-icon>
+            </md-button>
+            <h2>
           <span>Title</span>
         </h2>
-        <span flex></span>
-        <md-button class="md-icon-button" aria-label="More">
-          <md-icon>more_vert</md-icon>
-        </md-button>
-      </div>
-      <img ng-src="https://api.pagelr.com/capture/javascript?uri=https://www.google.com/maps/@36.7409281,-5.1619974,14z&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw" id="newPostImg">
-      <div class="newPostImgGradient">
-        <md-input-container md-no-float id="newPostLinkInput">
-          <input id="newPostLinkInputTxt" ng-model="Link" style="color:white" placeholder="Paste a link" type="url">
-        </md-input-container>
-      </div>
-    </md-toolbar>
-    <md-dialog-content>
-       <md-menu md-position-mode="target target" md-offset="12 45">
-                <md-button id="class-dropdown-button" ng-click="$mdOpenMenu($event)" class="md-warn">
-                    <span>Class</span>
-                    <md-icon>arrow_drop_down</md-icon>
-                </md-button>
-                <md-menu-content width="4" style="padding:6px 6px">
-                    <p style="margin: 3px 0 0 5px; font-size: 12px; color: #6D6D6D;">What class is this?</p>
-                    <input type="text" autofocus ng-model="classSearch" placeholder="Search classes" class="raisedTextfield" style="margin: 6px 0 10px 0; transition: background-color .2s, box-shadow .2s;">
-                    <div class="newPostClassListContainer">
-                        <md-menu-item ng-repeat="class in courses | filter: classSearch">
-                            <md-button style="padding-right:0" ng-click="classSelected(this)">
-                                {{class}}
-                                <md-icon style="float:right; margin-right: 4px; padding-top:4px">keyboard_arrow_right</md-icon>
-                            </md-button>
-                        </md-menu-item>
-                    </div>
-                </md-menu-content>
-            </md-menu>
-      <md-chips ng-model="Tags" readonly="readonly">
-        <input type="text" placeholder="Add a tag">
-      </md-chips>
-      <div class="md-dialog-content">
-        <input ng-model="Title" class="newPostTitle md-title" placeholder="Title" md-autofocus>
-        <div id="DescriptionTxt" class="newPostBody" contenteditable="true"></div>
-      </div>
-    </md-dialog-content>
-    <md-dialog-actions layout="row">
-      <md-button id="New_Post_Submit" ng-click="submit()" class="md-raised">Submit</md-button>
-        <md-button class="text-formating-button md-icon-button " style="font-weight: 800;  margin: 0 -6px 0 0; padding: 0;">B</md-button>
-        <md-button class="md-icon-button textformatingbutton" style="text-decoration: underline;  margin: 0 -6px 0 0; padding: 0;">U</md-button>
-        <md-button class="md-icon-button text-format-button" style="font-style: oblique;  margin: 0 -6px 0 0; padding: 0;">I</md-button>
-        <md-button class="md-icon-button text-format-button" style="margin: 0 -6px 0 0; padding: 0;">
+            <span flex></span>
+            <md-button class="md-icon-button" aria-label="More">
+               <md-icon>more_vert</md-icon>
+            </md-button>
+         </div>
+         <img ng-src="https://api.pagelr.com/capture/javascript?uri=https://www.google.com/maps/@36.7409281,-5.1619974,14z&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw" id="newPostImg">
+         <div class="newPostImgGradient">
+            <md-input-container md-no-float id="newPostLinkInput">
+               <input id="newPostLinkInputTxt" ng-model="Link" style="color:white" placeholder="Paste a link" type="url">
+            </md-input-container>
+         </div>
+      </md-toolbar>
+      <md-dialog-content>
+         <md-menu md-position-mode="target target" md-offset="12 45">
+            <md-button id="class-dropdown-button" ng-click="$mdOpenMenu($event)" class="md-warn">
+               <span>Class</span>
+               <md-icon>arrow_drop_down</md-icon>
+            </md-button>
+            <md-menu-content width="4" style="padding:6px 6px">
+               <p style="margin: 3px 0 0 5px; font-size: 12px; color: #6D6D6D;">What class is this?</p>
+               <input type="text" autofocus ng-model="classSearch" placeholder="Search classes" class="raisedTextfield" style="margin: 6px 0 10px 0; transition: background-color .2s, box-shadow .2s;">
+               <div class="newPostClassListContainer">
+                  <md-menu-item ng-repeat="class in courses | filter: classSearch">
+                     <md-button style="padding-right:0" ng-click="classSelected(this)">
+                        {{class}}
+                        <md-icon style="float:right; margin-right: 4px; padding-top:4px">keyboard_arrow_right</md-icon>
+                     </md-button>
+                  </md-menu-item>
+               </div>
+            </md-menu-content>
+         </md-menu>
+         <md-chips ng-model="Tags" readonly="readonly">
+            <input type="text" placeholder="Add a tag">
+         </md-chips>
+         <div class="md-dialog-content">
+            <input ng-model="Title" class="newPostTitle md-title" placeholder="Title" md-autofocus>
+            <div id="DescriptionTxt" class="newPostBody" contenteditable="true"></div>
+         </div>
+      </md-dialog-content>
+      <md-dialog-actions layout="row">
+         <md-button id="New_Post_Submit" ng-click="submit()" class="md-raised">Submit</md-button>
+         <md-button class="text-formating-button md-icon-button " style="font-weight: 800;  margin: 0 -6px 0 0; padding: 0;">B</md-button>
+         <md-button class="md-icon-button textformatingbutton" style="text-decoration: underline;  margin: 0 -6px 0 0; padding: 0;">U</md-button>
+         <md-button class="md-icon-button text-format-button" style="font-style: oblique;  margin: 0 -6px 0 0; padding: 0;">I</md-button>
+         <md-button class="md-icon-button text-format-button" style="margin: 0 -6px 0 0; padding: 0;">
             <md-icon style="font-size:18px;line-height: 24px;">format_list_bulleted</md-icon>
-        </md-button>
-      <span flex></span>
-              <md-button class="md-icon-button text-format-button hover_black" style="margin-right:0px;" ng-click="close()">
+         </md-button>
+         <span flex></span>
+         <md-button class="md-icon-button text-format-button hover_black" style="margin-right:0px;" ng-click="close()">
             <md-icon style="font-size:26px; line-height: 25px">delete</md-icon>
-        </md-button>
-    </md-dialog-actions>
-  </form>
+         </md-button>
+      </md-dialog-actions>
+   </form>
 </md-dialog>
 <style>
-/*-- new post dialog styles*/
-#dialog_scroll {
-    width: 100%;
-    position: relative;
-    max-height: 900px;
-    overflow-y: auto;
-}
-#dialog_header {
-    width:100%;
-    height: 156px;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    overflow: hidden;
-    position: relative;
-    z-index: 1200;
-
-}
-
-#newPostImg {
-    -webkit-filter: brightness(85%);
-    filter: brightness(85%);
-    width: 100%;
-    z-index: -1;
-    top: 0px;
-    position: absolute;
-    border: 0px;
-    background-color: #bccac7;
-}
-
-.newPostImgGradient {
-    position: absolute;
-    display: block;
-    z-index: 20;
-    height: 60px;
-    width: 100%;
-    bottom: 0;
-    padding: 0 12px;
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, .5));
-}
-
-#newPostLinkButtons {
-        position: absolute;
-    opacity: 1.00;
-    height:100%;
-    width:100%;
-    display: flex;
-     justify-content: space-around;
-    align-content: center;
-    flex-direction: row;
-}
-
-#newPostLinkInput {
-    width: 100%;
-    margin-top: 16px;
-}
-
-#newPostLinkButtons:hover #newPostLinkInput, #newPostLinkInputTxt:focus #newPostLinkInput{
-    opacity: 100;
-    transition: opacity 1s, margin-top 1s;
-}
-
-#class-dropdown-button {
-    position: absolute;
-    left: -4px;
-    z-index:500
-}
-
-.newPostClassSelector {
-    height: 222px;
-    width: 180px;
-    padding: 10px 13px;
-    background-color: white;
-    position: absolute;
-    z-index: 1001;
-    margin: 58px 0px 0px 12px;
-    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
-}
-
-.newPostClassListContainer {
-    width: 253px;
-    max-height: 180px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    border: 1px solid #d6d2cb;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12);
-    border-radius: 1px;
-}
-
-.md-chips:before {
-    display: inline-block;
-    position: relative;
-    width: 100px;
-    height: 40px;
-    content: "";
-    float: left;
-}
-
-input.newPostTitle {
-    font-weight: bold;
-    font-family: 'Roboto Condensed', 'Droid Sans', arial, sans-serif;
-    outline: none;
-    border: none;
-}
-
-.newPostBody:empty:before {
-    content: "Say something";
-    font-size: small;
-    color: #757575;
-    font-family: 'Roboto Slab', 'Times New Roman', serif;
-    left: 20px;
-    line-height: 15px;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-}
-
-.newPostBody {
-    font-size: 14px;
-    line-height: 19px;
-    min-height: 46px;
-    padding-top: 12px;
-    font-family: 'Roboto Slab','Times New Roman',serif;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    outline: none;
-    word-wrap: break-word;
-}
-
-.dialog_buttons {
-    height: 36px;
-    padding-top: 14px;
-    padding-bottom: 14px;
-    padding-left: 20px;
-    padding-right: 0px;
-    left: 0px;
-    right: 0px;
-    position: absolute;
-}
-
-button#New_Post_Submit.md-button {
-    height: 36px;
-    margin: 0px;
-    margin-left: 0;
-    padding: 0px;
-    vertical-align: top;
-    background-color: #3a76e5;
-    color: white;
-}
-
-button#New_Post_Submit.md-button:hover {
-    background-color: #3972DC;
-    box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32)
-}
-
-.textformatingbutton {
-    margin: 0 -24px 0 -24px;
-    padding: 0;
-}
-
-/* general */
-
-.hover_black:hover {
-    color: black;
-}
-
-.raisedTextfield {
-    height: 36px;
-    font-size: 16px;
-    background: 0;
-    border: 0;
-    border-radius: 2px;
-    padding: 0 8px;
-    outline: none;
-    background-color: white;
-    box-shadow: 0 1px 5px -1px rgba(0, 0, 0, .5);
-    transition: background-color .2s box-shadow .2s;
-}
-
-.raisedTextfield:hover {
-    background-color: whitesmoke;
-    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
-    transition: background-color .2s box-shadow .2s;
-}
-
-.raisedTextfield:focus {
-    background-color: white;
-    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
-    transition: background-color .2s box-shadow .2s;
-}
+   /*-- new post dialog styles*/
+   
+   #dialog_scroll {
+      width: 100%;
+      position: relative;
+      max-height: 900px;
+      overflow-y: auto;
+   }
+   
+   #dialog_header {
+      width: 100%;
+      height: 156px;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      z-index: 1200;
+   }
+   
+   #newPostImg {
+      -webkit-filter: brightness(85%);
+      filter: brightness(85%);
+      width: 100%;
+      z-index: -1;
+      top: 0px;
+      position: absolute;
+      border: 0px;
+      background-color: #bccac7;
+   }
+   
+   .newPostImgGradient {
+      position: absolute;
+      display: block;
+      z-index: 20;
+      height: 60px;
+      width: 100%;
+      bottom: 0;
+      padding: 0 12px;
+      background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, .5));
+   }
+   
+   #newPostLinkButtons {
+      position: absolute;
+      opacity: 1.00;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-content: center;
+      flex-direction: row;
+   }
+   
+   #newPostLinkInput {
+      width: 100%;
+      margin-top: 16px;
+   }
+   
+   #newPostLinkButtons:hover #newPostLinkInput,
+   #newPostLinkInputTxt:focus #newPostLinkInput {
+      opacity: 100;
+      transition: opacity 1s, margin-top 1s;
+   }
+   
+   #class-dropdown-button {
+      position: absolute;
+      left: -4px;
+      z-index: 500
+   }
+   
+   .newPostClassSelector {
+      height: 222px;
+      width: 180px;
+      padding: 10px 13px;
+      background-color: white;
+      position: absolute;
+      z-index: 1001;
+      margin: 58px 0px 0px 12px;
+      box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
+   }
+   
+   .newPostClassListContainer {
+      width: 253px;
+      max-height: 180px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      border: 1px solid #d6d2cb;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12);
+      border-radius: 1px;
+   }
+   
+   .md-chips:before {
+      display: inline-block;
+      position: relative;
+      width: 100px;
+      height: 40px;
+      content: "";
+      float: left;
+   }
+   
+   input.newPostTitle {
+      font-weight: bold;
+      font-family: 'Roboto Condensed', 'Droid Sans', arial, sans-serif;
+      outline: none;
+      border: none;
+   }
+   
+   .newPostBody:empty:before {
+      content: "Say something";
+      font-size: small;
+      color: #757575;
+      font-family: 'Roboto Slab', 'Times New Roman', serif;
+      left: 20px;
+      line-height: 15px;
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+   }
+   
+   .newPostBody {
+      font-size: 14px;
+      line-height: 19px;
+      min-height: 46px;
+      padding-top: 12px;
+      font-family: 'Roboto Slab', 'Times New Roman', serif;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      outline: none;
+      word-wrap: break-word;
+   }
+   
+   .dialog_buttons {
+      height: 36px;
+      padding-top: 14px;
+      padding-bottom: 14px;
+      padding-left: 20px;
+      padding-right: 0px;
+      left: 0px;
+      right: 0px;
+      position: absolute;
+   }
+   
+   button#New_Post_Submit.md-button {
+      height: 36px;
+      margin: 0px;
+      margin-left: 0;
+      padding: 0px;
+      vertical-align: top;
+      background-color: #3a76e5;
+      color: white;
+   }
+   
+   button#New_Post_Submit.md-button:hover {
+      background-color: #3972DC;
+      box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32)
+   }
+   
+   .textformatingbutton {
+      margin: 0 -24px 0 -24px;
+      padding: 0;
+   }
+   /* general */
+   
+   .hover_black:hover {
+      color: black;
+   }
+   
+   .raisedTextfield {
+      height: 36px;
+      font-size: 16px;
+      background: 0;
+      border: 0;
+      border-radius: 2px;
+      padding: 0 8px;
+      outline: none;
+      background-color: white;
+      box-shadow: 0 1px 5px -1px rgba(0, 0, 0, .5);
+      transition: background-color .2s box-shadow .2s;
+   }
+   
+   .raisedTextfield:hover {
+      background-color: whitesmoke;
+      box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
+      transition: background-color .2s box-shadow .2s;
+   }
+   
+   .raisedTextfield:focus {
+      background-color: white;
+      box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
+      transition: background-color .2s box-shadow .2s;
+   }
 </style>
