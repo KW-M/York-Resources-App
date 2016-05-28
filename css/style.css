@@ -27,7 +27,7 @@ div:focus {
 
 html body {
     display:flex;
-    flex-direction: row;
+    flex-direction: column;
     box-sizing: border-box;
     height: 100vh;
     width: 100vw;
@@ -47,7 +47,8 @@ html body {
 #all_content {
     margin: 0 72px;
     padding-top: 88px;
-    background-color: #e8e8e8;
+    height:100%;
+    background-color: #e8e8a1;
 }
 
 
