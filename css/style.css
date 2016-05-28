@@ -86,6 +86,10 @@ toolbar-top {
     margin: auto;
 }
 
+#loading_spinner {
+    margin: 0 auto;
+}
+
 .signin-button {
     display: inline-box;
     margin: auto;
