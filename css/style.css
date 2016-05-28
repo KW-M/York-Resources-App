@@ -47,7 +47,7 @@ html body {
 .content_container {
     flex: 1;
     overflow: auto;
-    padding: 72px 100px 100px 100px;
+    padding: 58px 108px 120px 100px;
     background-color: #e8e8a1;
 }
 
