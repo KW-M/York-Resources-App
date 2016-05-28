@@ -27,11 +27,12 @@ div:focus {
 
 html body {
     font-family: 'Roboto', sans-serif;
-    height: 100%;
     margin: 0px;
     padding: 0px;
     background-color: #e8e8e8;
     box-sizing: border-box;
+    display:flex;
+    flex-direction:column;
 }
 
 #all_content {
