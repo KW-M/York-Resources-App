@@ -45,8 +45,9 @@ html body {
 }
 
 .content_container {
+    flex: 1;
     margin: 0 72px;
-    margin-top: 88px;
+    padding-top: 88px;
     background-color: #e8e8a1;
 }
 
