@@ -47,7 +47,7 @@ html body {
 .content_container {
     flex: 1;
     overflow: auto;
-    padding: 58px 108px 120px 100px;
+    padding: 58px 108px 20px 100px;
     background-color: #e8e8a1;
 }
 
@@ -87,7 +87,8 @@ toolbar-top {
 }
 
 #loading_spinner {
-    margin: 0 auto;
+    margin: 80px auto 40px auto;
+    height: flex;
 }
 
 .signin-button {
