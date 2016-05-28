@@ -18,8 +18,8 @@
     </head>
 
     <body ng-app="YorkResourcesApp" ng-controller="ApplicationController">
-        <!------------------------------------------------------->
-        <!-------- The Welcome/Login screen ---------->
+        <!-------------------------------------------------------->
+        <!-------------- The Welcome/Login screen ---------------->
         <div id="overlay_background" class="overlay-background">
             <div id="welcome_dialog">
                 <h1 style="margin-top:-6px">Welcome</h1>
@@ -44,28 +44,30 @@
             </div>
         </div>
         <!-------------------------------------------------------->
-        <!----------------- The top toolbar ------------------>
+        <!------------------- The top toolbar -------------------->
         <toolbar-top></toolbar-top>
         <!--<toolbar-top-mobile hide-gt-sm></toolbar-top-mobile>-->
-        <!------------------------------------------------------->
+        <!-------------------------------------------------------->
+        <add-lower-button></add-lower-button>
+        <!-------------------------------------------------------->
         <div class="horizontalLayout">
-        <side-nav></side-nav>
-        <!------------------------------------------------------->
-        <!----- The content, ie posts, resources, etc. ----->
-        <div style="display:flex; flex-direction:column; width:100vw; height:100vh">
-            <div flex id="all_content" class="" style="margin: 0 120px">
-                <add-bar-top></add-bar-top>
-                <get-posts my-attrobute="m"></get-posts>
-                <div id="Masonry_Container" style="margin: 0 auto;" angular-grid="Posts" ag-grid-width="225" ag-gutter-size="8" ag-id="posts">
-                    <md-card post-card class="post-card raise-on-hover" ng-repeat="Post in allPosts"></md-card>
+            <!---------------------------------------------------->
+            <side-nav></side-nav>
+            <!----- The content, ie posts ------->
+            <div style="display:flex; flex-direction:column; width:100vw; height:100vh">
+                <div flex id="all_content" class="" style="margin: 0 120px">
+                    <add-bar-top></add-bar-top>
+                    <get-posts my-attrobute="m"></get-posts>
+                    <div id="Masonry_Container" style="margin: 0 auto;" angular-grid="Posts" ag-grid-width="225" ag-gutter-size="8" ag-id="posts">
+                        <md-card post-card class="post-card raise-on-hover" ng-repeat="Post in allPosts"></md-card>
+                    </div>
                 </div>
+                <span class="unselectable default-mouse" style="font-size: 150%; background-color:rgba(0,0,0,0.5); position:fixed; bottom:0px;left:0px; color:white;">PRE-ALPHA version</span>
             </div>
-            <span class="unselectable default-mouse" style="font-size: 150%; background-color:rgba(0,0,0,0.5); position:fixed; bottom:0px;left:0px; color:white;">PRE-ALPHA version</span>
-        </div>
         </div>
 
-        <!-------------------------------------------------->
-        <!------------------- Libraries ------------------>
+        <!-------------------------------------------------------->
+        <!---------------------- Libraries ----------------------->
         <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
