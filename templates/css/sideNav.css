@@ -1,5 +1,5 @@
     /*-------------------- sidebar styles --------------------- */
-    
+    side-nav-inline > md-sidenav > div.side-nav-scroll > div.side-nav-section > md-list > md-list-item:nth-child(4) > md-menu-item
     .side-nav {
         z-index: 60;
         width: 270px;

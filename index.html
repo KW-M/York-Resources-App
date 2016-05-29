@@ -15,6 +15,7 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Roboto+Mono|Roboto+Slab|Material+Icons" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
         <link rel="shortcut icon" href="https://scontent.xx.fbcdn.net/v/t1.0-1/c0.0.160.160/p160x160/10418519_10154327468015085_5519923068710858644_n.jpg?oh=731f220566f8bcd629726b0d0458a5dc&oe=57B6E81B">
+        <style src="templates/css/sideNav.css"></style>
     </head>
 
     <body ng-app="YorkResourcesApp" ng-controller="ApplicationController">
@@ -58,7 +59,7 @@
             <div id="content_container">
                 <add-bar-top></add-bar-top>
                 <get-posts my-attrobute="m"></get-posts>
-                <div id="grid_Container" style="margin: 0 auto;" angular-grid="allPosts" ag-scroll-container="#content-container" ag-infinite-scroll="getFiles()" ag-grid-width="225" ag-gutter-size="8" ag-id="posts">
+                <div id="grid_Container" style="margin: 0 auto;" angular-grid="allPosts" ag-scroll-container="content_container" ag-infinite-scroll="getFiles()" ag-grid-width="225" ag-gutter-size="8" ag-id="posts">
                     <md-card post-card class="post-card raise-on-hover" ng-repeat="Post in allPosts"></md-card>
                 </div>
                 <md-progress-circular id="loading_spinner" class="md-accent" md-mode="indeterminate" md-diameter="60"></md-progress-circular>
