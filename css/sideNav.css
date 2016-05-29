@@ -10,6 +10,7 @@
         z-index: 0;
         width: 252px;
         height: 100%;
+        border-right: 1px solid #ddd;
     }
 
     md-sidenav md-menu-item {
@@ -29,10 +30,9 @@
     md-sidenav.sidenav-inline .side-nav-scroll {
         overflow-y: hidden;
         width: 100%;
-        border-right: 1px solid #ddd;
     }
 
-    md-sidenav.sidenav-inline .side-nav-scroll:hover {
+    md-sidenav.sidenav-inline:hover .side-nav-scroll {
         overflow-y: auto;
     }
 
@@ -54,8 +54,6 @@
 
     .side-nav-bottom {
         border-top: 1px solid #ddd;
-        bottom: 0px;
-        position: fixed;
+        position: relative;
         width: 100%;
-        background-color: white;
     }
