@@ -198,7 +198,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
       }
    };
 
-   $window.onscroll = function(event) { //called whenever the window scrolls
+   document.getElementById("main").onscroll = function(event) { //called whenever the window scrolls
       var yScroll = $window.pageYOffset;
       if (yScroll >= 100) {
          $('#speed-dial-container').slideDown(300)
