@@ -1,6 +1,7 @@
 /*global app*/ /*global angular*/ /*global gapi*/ /*global google*/
 app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q) {
    var self = this
+   var content_container = document.getElementById("content_container");
    $scope.allPosts = [];
    $scope.filteredPosts = [];
    $scope.searchTxt = '';
@@ -198,8 +199,8 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
       }
    };
 
-   document.getElementById("main").onscroll = function(event) { //called whenever the window scrolls
-      var yScroll = $window.pageYOffset;
+   content_container.onscroll = function(event) { //called whenever the window scrolls
+      var yScroll = content_container.pageYOffset;
       if (yScroll >= 100) {
          $('#speed-dial-container').slideDown(300)
       }
