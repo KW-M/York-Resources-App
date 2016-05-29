@@ -156,7 +156,6 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
          }
          $scope.nextPageToken = fileList.nextPageToken;
          console.log($scope.nextPageToken);
-         $scope.getFiles("");
       });
    }
 
