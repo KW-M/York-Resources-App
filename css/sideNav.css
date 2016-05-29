@@ -6,7 +6,7 @@
         height: 100%;
     }
     md-sidenav.sidenav-inline {
-        background-color: #e8e8e8;
+        background-color: #f2f2f2;
         z-index: 0;
         width: 252px;
         height: 100%;
@@ -24,6 +24,13 @@
 
     .side-nav-scroll {
         overflow-y: auto;
+    }
+
+    .side-nav-scroll::-webkit-scrollbar {
+        background: transparent;
+        width: 8px;
+    }::-webkit-scrollbar-thumb {
+    background: #bdbdbd;
     }
 
     md-sidenav.sidenav-inline .side-nav-scroll {
