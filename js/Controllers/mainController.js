@@ -139,15 +139,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
             "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
          };
       });
-      queue(GoogleDriveService.getListOfFlies(), function(fileList) {
-         for (var item = 0; item < fileList.result.files.length; item++) {
-            var metadata = fileList.result.files[item];
-            console.log(metadata.id);
-            queue(GoogleDriveService.getFileContent(metadata.id), function(file) {
-               $scope.handleFile(file, metadata);
-            });
-         }
-      });
+
 
       //       function getFiles(pageToken) {
       //    queue(GoogleDriveService.multiRequest(pageToken),function(combinedResponse) {
@@ -168,12 +160,13 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
       //    });
       // }
    }
+   
 
    $scope.handleFile = function(file, metadata) {
       console.log({
          file: file,
          metadata: metadata
-      });
+      });$scope.$apply()
       $scope.allPosts = $scope.allPosts.concat(file.result);
       $scope.$apply($scope.filterPosts($scope.searchTxt));
    }
