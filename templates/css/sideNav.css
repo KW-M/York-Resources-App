@@ -1,6 +1,5 @@
     /*-------------------- sidebar styles --------------------- */
-    side-nav-inline > md-sidenav > div.side-nav-scroll > div.side-nav-section > md-list > md-list-item:nth-child(4) > md-menu-item
-    .side-nav {
+    md-sidenav {
         z-index: 60;
         width: 270px;
         position: fixed;
@@ -8,11 +7,11 @@
         height: 100%;
     }
     
-    .side-nav md-menu-item {
+    md-sidenav md-menu-item {
         width: 100%;
     }
     
-    .side-nav md-icon {
+    md-sidenav md-icon {
         width: 24px;
         padding: 0;
     }
@@ -26,7 +25,7 @@
         border-radius: 2px;
     }
     
-    .side-nav md-button {
+    md-sidenav md-button {
         border-radius: 0px;
     }
     
