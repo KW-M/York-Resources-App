@@ -1,4 +1,4 @@
-<md-fab-speed-dial id="speed-dial-container" md-direction="up" md-open="globals.FABisOpen" class="md-fling md-fab-bottom-right md-hover-full ng-cloak" style="position:fixed; right:0px; bottom:0px; padding: 0 24px 24px 0" ng-mouseenter="globals.FABisOpen=true"
+<md-fab-speed-dial id="speed_dial_container" md-direction="up" md-open="globals.FABisOpen" class="md-fling md-fab-bottom-right md-hover-full ng-cloak" style="position:fixed; right:0px; bottom:0px; padding: 0 24px 24px 0" ng-mouseenter="globals.FABisOpen=true"
         ng-mouseleave="globals.FABisOpen=false">
             <md-fab-trigger>
                 <md-button id="new_post_button" class="md-fab md-accent raise-on-hover" ng-click="newPost()">
@@ -24,15 +24,15 @@
 <style>
 /*------------ FAB "add resource" styles ------------- */
 #speed_dial_container {
-    display: none;
-    transition: transform 0.2s;
-    z-index: 41
+    /*display: none;*/
 }
-.speed-dial-off-screen {
-    transition: transform 0.3s;
+
+#speed_dial_container #new_post_button {
+    transition: box-shadow 1s;
 }
-.new-post-FAButton {
-    transition: box-shadow .2s;
+
+#speed_dial_container:hover #new_post_button {
+    transition: box-shadow 1s;
     box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32);
 }
 </style>
