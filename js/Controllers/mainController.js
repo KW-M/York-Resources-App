@@ -4,6 +4,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    $scope.allPosts = [];
    $scope.filteredPosts = [];
    $scope.searchTxt = '';
+   $scope.nextPageToken = '';
    $scope.globals = {
       FABisOpen: false,
       SidebarIsOpen: false //not used
@@ -139,11 +140,11 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
             "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
          };
       });
-      $scope.getFiles("","");
+      $scope.getFiles("");
    }
 
-   $scope.getFiles = function(query, pageToken) {
-      queue(GoogleDriveService.getListOfFlies(query, pageToken), function(fileList) {
+   $scope.getFiles = function(query) {
+      queue(GoogleDriveService.getListOfFlies(query, $scope.nextPageToken), function(fileList) {
          for (var item = 0; item < fileList.result.files.length; item++) {
             var metadata = fileList.result.files[item];
             console.log(metadata.id);
@@ -151,6 +152,9 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
                $scope.handleFile(file, metadata);
             });
          }
+         $scope.nextPageToken = fileList.nextPageToken;
+         console.log($scope.nextPageToken);
+         $scope.getFiles("");
       });
    }
 
