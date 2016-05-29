@@ -24,7 +24,6 @@
 
     .side-nav-scroll {
         overflow-y: auto;
-        padding-bottom: 112px;
     }
 
     md-sidenav.sidenav-inline .side-nav-scroll {
@@ -53,7 +52,5 @@
     }
 
     .side-nav-bottom {
-        border-top: 1px solid #ddd;
-        position: relative;
         width: 100%;
     }
