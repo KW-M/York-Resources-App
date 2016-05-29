@@ -144,6 +144,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    }
 
    $scope.getFiles = function(query) {
+      console.log($scope.myInfo)
       queue(GoogleDriveService.getListOfFlies(query, $scope.nextPageToken), function(fileList) {
          for (var item = 0; item < fileList.result.files.length; item++) {
             var metadata = fileList.result.files[item];

@@ -51,25 +51,25 @@ app.directive('getPosts', function() {
   return {
     restrict: 'AE',
     link: function(scope, elem, attrs) {
-        console.log(attrs);
-        scope.getFiles = function(pageToken) {
-         queue(scope.GoogleDriveService.multiRequest(pageToken),function(combinedResponse) {
-            console.log(combinedResponse);
-            if (combinedResponse.pageToken) {
-               scope.getFiles(combinedResponse.pageToken);
-            }
-            handleFiles(combinedResponse);
-         });
-      }
+    //     console.log(attrs);
+    //     scope.getFiles = function(pageToken) {
+    //      queue(scope.GoogleDriveService.multiRequest(pageToken),function(combinedResponse) {
+    //         console.log(combinedResponse);
+    //         if (combinedResponse.pageToken) {
+    //           scope.getFiles(combinedResponse.pageToken);
+    //         }
+    //         handleFiles(combinedResponse);
+    //      });
+    //   }
 
-      function handleFiles(combinedResponse) {
-         combinedResponse.files.then(function(fileResponse) {
-            scope.unfilteredPosts = scope.unfilteredPosts.concat(formatArrayResponse(fileResponse, combinedResponse.ids));
-            console.log(scope.unfilteredPosts)
-            scope.filterPosts(scope.searchTxt);
-            scope.$apply();
-         });
-      }
+    //   function handleFiles(combinedResponse) {
+    //      combinedResponse.files.then(function(fileResponse) {
+    //         scope.unfilteredPosts = scope.unfilteredPosts.concat(formatArrayResponse(fileResponse, combinedResponse.ids));
+    //         console.log(scope.unfilteredPosts)
+    //         scope.filterPosts(scope.searchTxt);
+    //         scope.$apply();
+    //      });
+    //   }
     }
   };
 });
