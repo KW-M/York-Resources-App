@@ -158,7 +158,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
       console.log({
          file: file,
          metadata: metadata
-      });$scope.$apply()
+      });
       $scope.allPosts = $scope.allPosts.concat(file.result);
       $scope.$apply($scope.filterPosts($scope.searchTxt));
    }

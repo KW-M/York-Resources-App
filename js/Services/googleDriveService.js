@@ -21,11 +21,11 @@ app.service('GoogleDriveService', ['$q', function($q) {
         }));
     };
 
-    this.getListOfFlies = function(qwery, pageToken) {
+    this.getListOfFlies = function(query, pageToken) {
         return (gapi.client.drive.files.list({
             pageSize: 9,
-            pageToken:pageToken,
-            q: "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false",
+            pageToken: pageToken,
+            q: "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false and " + query,
             fields: 'nextPageToken, files(id, name)',
         }));
     };
