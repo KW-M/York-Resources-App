@@ -139,28 +139,20 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
             "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
          };
       });
-
-
-      //       function getFiles(pageToken) {
-      //    queue(GoogleDriveService.multiRequest(pageToken),function(combinedResponse) {
-      //       console.log(combinedResponse);
-      //       if (combinedResponse.pageToken) {
-      //          getFiles(combinedResponse.pageToken);
-      //       }
-      //       handleFiles(combinedResponse);
-      //    });
-      // }
-
-      // function handleFiles(combinedResponse) {
-      //    combinedResponse.files.then(function(fileResponse) {
-      //       allPosts = allPosts.concat(formatArrayResponse(fileResponse, combinedResponse.ids));
-      //       console.log(allPosts)
-      //       filterPosts($scope.searchTxt);
-      //       $scope.$apply();
-      //    });
-      // }
+      $scope.getFiles("","");
    }
-   
+
+   $scope.getFiles = function(query, pageToken) {
+      queue(GoogleDriveService.getListOfFlies(query, pageToken), function(fileList) {
+         for (var item = 0; item < fileList.result.files.length; item++) {
+            var metadata = fileList.result.files[item];
+            console.log(metadata.id);
+            queue(GoogleDriveService.getFileContent(metadata.id), function(file) {
+               $scope.handleFile(file, metadata);
+            });
+         }
+      });
+   }
 
    $scope.handleFile = function(file, metadata) {
       console.log({

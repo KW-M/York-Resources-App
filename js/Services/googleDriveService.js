@@ -21,7 +21,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
         }));
     };
 
-    this.getListOfFlies = function(pageToken) {
+    this.getListOfFlies = function(qwery, pageToken) {
         return (gapi.client.drive.files.list({
             pageSize: 9,
             pageToken:pageToken,
@@ -47,10 +47,6 @@ app.service('GoogleDriveService', ['$q', function($q) {
     //         return (batch)
     //     }));
     // };
-
-    this.multiRequest = function(fileList, pageToken) { //do this one
-        fileList = self.getListOfFlies(pageToken);
-    };
 
     this.multithisisjustabackupRequest = function() {
                 var promiseArray = [];
