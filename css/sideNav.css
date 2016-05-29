@@ -1,13 +1,13 @@
     /*-------------------- sidebar styles --------------------- */
-    side-nav md-sidenav {
+    md-sidenav.sidenav-overlay {
         z-index: 60;
         position: fixed;
         margin-top: 56px;
         height: 100%;
     }
-    side-nav-inline md-sidenav {
+    md-sidenav.sidenav-inline {
         z-index: 0;
-        width: 240px;
+        width: 252px;
         height: 100%;
     }
 

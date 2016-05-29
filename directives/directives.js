@@ -13,10 +13,10 @@ app.directive('toolbarTopMobile', function () {
         templateUrl: 'directives/html/toolbarTopMobile.html'
     };
 });
-app.directive('sideNav', function () {
+app.directive('sideNavInsides', function () {
     return {
-        restrict: 'EA',
-        templateUrl: 'directives/html/sideNav.html'
+        restrict: 'A',
+        templateUrl: 'directives/html/sideNavInsides.html'
     };
 });
 app.directive('sideNavInline', function () {
