@@ -15,13 +15,13 @@ app.directive('toolbarTopMobile', function () {
 });
 app.directive('sideNav', function () {
     return {
-        restrict: 'E',
+        restrict: 'EA',
         templateUrl: 'directives/html/sideNav.html'
     };
 });
 app.directive('sideNavInline', function () {
     return {
-        restrict: 'E',
+        restrict: 'EA',
         templateUrl: 'directives/html/sideNavInline.html'
     };
 });
