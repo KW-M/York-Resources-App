@@ -44,7 +44,7 @@ html body {
     flex-direction: row;
 }
 
-.content_container {
+#content_container {
     flex: 1;
     overflow: auto;
     padding: 58px 108px 20px 100px;
