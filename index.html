@@ -55,7 +55,7 @@
             <!---------------------------------------------------->
             <md-sidenav side-nav-insides class="ng-cloak side-nav md-sidenav-left sidenav-inline" md-is-locked-open="globals.sidenavIsOpen" md-component-id="sidenav_inline"></md-sidenav>
             <!----- The content, ie posts, resources, etc. ------->
-            <div id="content_container" ng-class="{ 'sidenav-open': globals.SidenavIsOpen }">
+            <div id="content_container" ng-class="{ sidenav-open : globals.sidenavIsOpen }">
                 <add-bar-top></add-bar-top>
                 <get-posts my-attrobute="m"></get-posts>
                 <div id="grid_Container" style="margin: 0 auto;" angular-grid="allPosts" ag-scroll-container="content_container" ag-infinite-scroll="getFiles()" ag-grid-width="225" ag-gutter-size="8" ag-id="posts">
