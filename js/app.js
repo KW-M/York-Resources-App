@@ -6,7 +6,7 @@ app.config(function ($mdThemingProvider, $mdIconProvider, $routeProvider, $locat
     $locationProvider.html5Mode(true);
         //routing:
     $routeProvider
-        .when("",{
+        .when("/",{
             templateUrl: "templates/html/all-posts.html",
         })
         .when("my-posts",{
@@ -19,7 +19,7 @@ app.config(function ($mdThemingProvider, $mdIconProvider, $routeProvider, $locat
             templateUrl: "templates/html/most-liked.html",
         })
         .otherwise({
-            redirectTo:"",
+            redirectTo:"/my-posts",
         });
 
     $mdIconProvider
