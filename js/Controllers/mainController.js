@@ -200,12 +200,12 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    };
 
    content_container.onscroll = function(event) { //called whenever the window scrolls
-      var yScroll = content_container.pageYOffset;
-      if (yScroll >= 100) {
-         $('#speed-dial-container').slideDown(300);
+      var yScroll = content_container.scrollTop;
+      if (yScroll >= 120) {
+         $('#speed_dial_container').slideDown(300);
       }
       else {
-         $('#speed-dial-container').slideUp(300);
+         $('#speed_dial_container').slideUp(300);
       }
    };
 
