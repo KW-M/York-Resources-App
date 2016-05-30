@@ -47,7 +47,7 @@
         <!------------------- The top toolbar -------------------->
         <toolbar-top></toolbar-top>
         <!--<toolbar-top-mobile hide-gt-sm></toolbar-top-mobile>-->
-        <md-sidenav side-nav-insides class="ng-cloak side-nav md-sidenav-left md-whiteframe-z2 sidenav-overlay" md-component-id="left"></md-sidenav>
+        <!--<md-sidenav side-nav-insides class="ng-cloak side-nav md-sidenav-left md-whiteframe-z2 sidenav-overlay" md-component-id="left"></md-sidenav>
         <!-------------------------------------------------------->
         <add-lower-button></add-lower-button>
         <!-------------------------------------------------------->
@@ -55,7 +55,7 @@
             <!---------------------------------------------------->
             <md-sidenav side-nav-insides class="ng-cloak side-nav md-sidenav-left sidenav-inline" md-is-locked-open="globals.sidenavIsOpen" md-component-id="left"></md-sidenav>
             <!----- The content, ie posts, resources, etc. ------->
-            <div id="content_container" ng-class="{'sidenav-open': globals.idenavIsOpen}">
+            <div id="content_container" ng-class="{ 'sidenav-open': globals.SidenavIsOpen }">
                 <add-bar-top></add-bar-top>
                 <get-posts my-attrobute="m"></get-posts>
                 <div id="grid_Container" style="margin: 0 auto;" angular-grid="allPosts" ag-scroll-container="content_container" ag-infinite-scroll="getFiles()" ag-grid-width="225" ag-gutter-size="8" ag-id="posts">
