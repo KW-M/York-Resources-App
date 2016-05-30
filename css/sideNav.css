@@ -45,10 +45,15 @@
         border-radius: 2px;
     }
 
-    md-sidenav md-button {
-        border-radius: 0px;
+    md-sidenav.sidenav-inline md-button {
+        border-top-right-radius: 2px;
+        border-top-right-radius: 2px;
     }
 
+    md-sidenav.sidenav-overlay md-button {
+        border-radius: 0px;
+    }
+    
     .side-nav-section {
         border-bottom: 1px solid #ddd;
     }

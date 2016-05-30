@@ -6,11 +6,11 @@ app.config(function ($mdThemingProvider, $mdIconProvider, $routeProvider) {
 
         //routing:
     $routeProvider
-        .when("all-posts",{
+        .when("/all-posts",{
             templateUrl: "templates/html/all-posts.html",
         })
         .otherwise({
-            redirectTo:"all-posts",
+            redirectTo:"/all-posts",
         });
 
     $mdIconProvider
