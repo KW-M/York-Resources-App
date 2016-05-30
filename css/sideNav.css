@@ -41,19 +41,19 @@
         overflow-y: auto;
     }
 
-    .side-nav-classes md-button {
-        border-radius: 2px;
-    }
-
-    md-sidenav.sidenav-inline md-button {
-        border-top-right-radius: 2px;
-        border-top-right-radius: 2px;
-    }
-
-    md-sidenav.sidenav-overlay md-button {
+    md-sidenav md-button {
         border-radius: 0px;
     }
-    
+
+    md-sidenav.sidenav-inline md-menu-item>.md-button {
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+    }
+
+    .side-nav-classes md-menu-item>.md-button {
+        border-radius: 3px;
+    }
+
     .side-nav-section {
         border-bottom: 1px solid #ddd;
     }
