@@ -49,9 +49,10 @@ html body {
     overflow: auto;
     padding: 58px 108px 20px 100px;
     background-color: #f2f2f2;
+    transition: padding-left 0.3s;
 }
 
-.sidenav-open{
+#content_container.sidenav-open{
     padding-left: 2px;
 }
 
