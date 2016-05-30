@@ -202,10 +202,10 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    content_container.onscroll = function(event) { //called whenever the window scrolls
       var yScroll = content_container.scrollTop;
       if (yScroll >= 120) {
-         $('#speed_dial_container').slideDown(300);
+         $scope.globals.FABisOpen = false;
       }
       else {
-         $('#speed_dial_container').slideUp(300);
+         $scope.globals.FABisOpen = true;
       }
    };
 
