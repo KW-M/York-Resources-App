@@ -3,7 +3,7 @@ var app = angular.module('YorkResourcesApp', ['ngMaterial','ngRoute','angularGri
 
 //universaly applying configurations/options for the angular module (app) named "app" above
 app.config(function ($mdThemingProvider, $mdIconProvider, $routeProvider, $locationProvider) {
-    $locationProvider.html5Mode(true).hashPrefix('!');
+    $locationProvider.html5Mode(true);
         //routing:
     $routeProvider
         .when("/",{
@@ -19,7 +19,7 @@ app.config(function ($mdThemingProvider, $mdIconProvider, $routeProvider, $locat
             templateUrl: "templates/html/most-liked.html",
         })
         .otherwise({
-            redirectTo:"/",
+            redirectTo:"/myposts/",
         });
 
     $mdIconProvider
