@@ -4,7 +4,7 @@
             <md-list>
                 <md-list-item>
                     <md-menu-item>
-                        <md-button href="/all-posts">
+                        <md-button href="gotoPath('/')">
                             <md-icon>inbox</md-icon>
                             All Posts
                         </md-button>
@@ -12,7 +12,7 @@
                 </md-list-item>
                 <md-list-item>
                     <md-menu-item>
-                        <md-button href="/my-posts">
+                        <md-button ng-click="gotoPath('/my-posts')">
                             <md-icon>person</md-icon>
                             My Posts
                         </md-button>

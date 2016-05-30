@@ -1,5 +1,5 @@
 /*global app*/ /*global angular*/ /*global gapi*/ /*global google*/
-app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q) {
+app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location) {
    var self = this
    var content_container = document.getElementById("content_container");
    $scope.allPosts = [];
@@ -20,6 +20,10 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    $scope.toggleSidebar = function() { //called by the top left toolbar menu button
       $scope.globals.sidenavIsOpen = !$scope.globals.sidenavIsOpen
       //$mdSidenav('left').toggle();
+   };
+
+   $scope.gotoPath = function(path) { //called by the signIn button click
+      $location.path = path;
    };
 
    $scope.helpDialog = function() { //called by the top right toolbar help button
