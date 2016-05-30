@@ -172,8 +172,9 @@
             }
 
             function getScrollContainerInfo() {
-              var container = $(document.querySelector(options.scrollContainer)),
-                contElm = container[0];
+              var container = $(document.querySelector(options.scrollContainer))
+              console.log(container[0]);
+                var contElm = container[0];
 
               return {
                 height: contElm.offsetHeight,
