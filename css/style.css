@@ -53,7 +53,7 @@ html body {
 }
 
 #content_container.sidenav-open{
-    transition: padding-left 0.15s;
+    transition: padding-left 0.s;
     padding-left: 2px;
 }
 
