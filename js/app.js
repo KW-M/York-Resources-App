@@ -3,10 +3,10 @@ var app = angular.module('YorkResourcesApp', ['ngMaterial','ngRoute','angularGri
 
 //universaly applying configurations/options for the angular module (app) named "app" above
 app.config(function ($mdThemingProvider, $mdIconProvider, $routeProvider, $locationProvider) {
-    $locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(true).hashPrefix('!');
         //routing:
     $routeProvider
-        .when("/all-posts",{
+        .when("/",{
             templateUrl: "templates/html/all-posts.html",
         })
         .when("/my-posts",{
@@ -15,11 +15,11 @@ app.config(function ($mdThemingProvider, $mdIconProvider, $routeProvider, $locat
         .when("/flaged",{
             templateUrl: "templates/html/flaged.html",
         })
-        .when("/liked",{
+        .when("/liked/",{
             templateUrl: "templates/html/most-liked.html",
         })
         .otherwise({
-            redirectTo:"/all-posts",
+            redirectTo:"/",
         });
 
     $mdIconProvider
