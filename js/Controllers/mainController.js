@@ -9,7 +9,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    $scope.globals = {
       FABisOpen: false,
       FABisHidden: true,
-      SidenavIsOpen: false //not used
+      SidenavIsOpen: true,
    };
    $scope.GoogleDriveService = GoogleDriveService;
 
