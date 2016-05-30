@@ -8,7 +8,8 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    $scope.nextPageToken = '';
    $scope.globals = {
       FABisOpen: false,
-      SidebarIsOpen: false //not used
+      FABisHidden: true,
+      SidenavIsOpen: false //not used
    };
    $scope.GoogleDriveService = GoogleDriveService;
 
@@ -17,6 +18,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    };
 
    $scope.toggleSidebar = function() { //called by the top left toolbar menu button
+      $scope.globals.sidenavIsOpen = !$scope.globals.sidenavIsOpen
       $mdSidenav('left').toggle();
    };
 
