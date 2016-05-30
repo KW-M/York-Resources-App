@@ -20,7 +20,7 @@
     cssGrid: false,
     performantScroll: false,
     pageSize: 'auto', //decide based on screen size
-    scrollContainer: 'body',
+    scrollContainer: '#content_container',
     infiniteScrollDelay: 3000,
     infiniteScrollDistance: 100,
   };
