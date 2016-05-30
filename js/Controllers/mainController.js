@@ -205,6 +205,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
       var yScroll = content_container.scrollTop;
       if (yScroll >= 120) {
          $scope.globals.FABisHidden = false;
+         $scope.globals.FABisOpen = false;
       }
       else {
          $scope.globals.FABisOpen = false;
