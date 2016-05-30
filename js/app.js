@@ -2,8 +2,8 @@
 var app = angular.module('YorkResourcesApp', ['ngMaterial','ngRoute','angularGrid','ngSanitize']);
 
 //universaly applying configurations/options for the angular module (app) named "app" above
-app.config(function ($mdThemingProvider, $mdIconProvider, $routeProvider) {
-
+app.config(function ($mdThemingProvider, $mdIconProvider, $routeProvider, $locationProvider) {
+    $locationProvider.html5Mode(true);
         //routing:
     $routeProvider
         .when("/all-posts",{

@@ -41,10 +41,6 @@
         overflow-y: auto;
     }
 
-    md-sidenav md-button {
-        border-radius: 0px;
-    }
-
     md-sidenav.sidenav-inline md-menu-item>.md-button {
         border-top-right-radius: 3px;
         border-bottom-right-radius: 3px;
