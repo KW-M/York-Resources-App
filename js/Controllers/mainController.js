@@ -204,10 +204,11 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    content_container.onscroll = function(event) { //called whenever the window scrolls
       var yScroll = content_container.scrollTop;
       if (yScroll >= 120) {
-         $scope.globals.FABisOpen = false;
+         $scope.globals.FABisHidden = false;
       }
       else {
-         $scope.globals.FABisOpen = true;
+         $scope.globals.FABisOpen = false;
+         $scope.globals.FABisHidden = true;
       }
    };
 
