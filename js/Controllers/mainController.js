@@ -1,6 +1,6 @@
 /*global app*/ /*global angular*/ /*global gapi*/ /*global google*/
-var dependancies = ['$scope', '$mdDialog', '$window', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', '$routeParams']
-app.controller('ApplicationController', dependancies.concat([function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location) {
+var dependancies = ['$scope', '$mdDialog', '$window', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', '$routeParams', 'angularGridInstance']
+app.controller('ApplicationController', dependancies.concat([function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, $routeParams, angularGridInstance) {
    var self = this
    var content_container = document.getElementById("content_container");
    $scope.allPosts = [];
@@ -220,7 +220,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
    };
 
-   content_container.onscroll = function(event) { //called whenever the window scrolls
+   content_container.onscroll = function(event) { //called whenever the content_container scrolls
       var yScroll = content_container.scrollTop;
       if (yScroll >= 120) {
          $scope.globals.FABisHidden = false;
