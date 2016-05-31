@@ -53,3 +53,15 @@ app.directive('getPosts', function() {
     }
   };
 });
+
+app.directive('filterPosts', function() {
+  return {
+    restrict: 'AE',
+    link: function(scope, elem, attrs) {
+        if (attrs.showflaged !== true) {
+            query = query + ' and not fullText contains \'"Flagged":true\''
+        }
+        console.log(query);
+    }
+  };
+});
