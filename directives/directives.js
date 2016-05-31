@@ -45,10 +45,11 @@ app.directive('getPosts', function() {
   return {
     restrict: 'AE',
     link: function(scope, elem, attrs) {
-        var query = '';
+        var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false";
         if (attrs.showflaged !== true) {
-            query = query + ' and not fulltext'
+            query = query + 'and not fullText contains \'"Type":"noLink"\''
         }
+        console.log(query)
     }
   };
 });
