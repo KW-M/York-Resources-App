@@ -213,18 +213,12 @@ toolbar-top {
 /* --------------------------- Animations ------------------- */
 
 .post-card {
-  position: absolute;
-  list-style: none;
-  background: #ffffff;;
-  box-sizing: border-box;
   -webkit-transition: all 400ms ease;
   transition: all 400ms ease;
-  overflow: hidden;
-  border-radius: 10px;
 }
 .post-card.ng-leave {
-  -webkit-transition: all ease 400ms;
-  transition: all ease 400ms;
+  -webkit-transition: all ease-in 400ms;
+  transition: all ease-in 400ms;
 }
 .post-card.ng-leave.ng-leave-active {
   -webkit-transform: scale(0.5);
@@ -236,8 +230,8 @@ toolbar-top {
   transition: all ease 400ms;
   -webkit-transition-delay: 500ms;
   transition-delay: 500ms;
-  -webkit-transform: scale(0.5);
-   transform: scale(0.5);
+  -webkit-transform-y: (0.5);
+   transform-y: scale(0.5);
   opacity: 0;
 }
 .post-card.ng-enter.ng-enter-active {
