@@ -19,7 +19,7 @@ app.config(function ($mdThemingProvider, $mdIconProvider, $routeProvider, $locat
             templateUrl: "templates/html/most-liked.html",
         })
         .otherwise({
-            redirectTo:"my-posts",
+            redirectTo:"/",
         });
 
     $mdIconProvider
