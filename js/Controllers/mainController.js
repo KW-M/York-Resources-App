@@ -26,6 +26,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
       console.log(path + query + id);
       if (path !== null) {
          $location.path(path);
+          $location.hash(id);
       }
       if (query !== null) {
          $location.search(query);
