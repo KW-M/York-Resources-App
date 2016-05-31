@@ -45,7 +45,10 @@ app.directive('getPosts', function() {
   return {
     restrict: 'AE',
     link: function(scope, elem, attrs) {
-        if attrs.showflaged !== true
+        var query = '';
+        if (attrs.showflaged !== true) {
+            query = query + ' and '
+        }
     }
   };
 });
