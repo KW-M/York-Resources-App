@@ -45,7 +45,7 @@ app.directive('getPosts', function() {
   return {
     restrict: 'AE',
     link: function(scope, elem, attrs) {
-        attrs;
+        if attrs.showflaged !== true
     }
   };
 });
