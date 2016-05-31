@@ -221,8 +221,8 @@ toolbar-top {
   transition: all ease-in 400ms;
 }
 .post-card.ng-leave.ng-leave-active {
-  -webkit-transform: scale(0.5);
-  transform: scale(0.5);
+  -webkit-transform: translateY(100px);
+  transform: translateY(100px);
   opacity: 0;
 }
 .post-card.ng-enter {
@@ -230,21 +230,12 @@ toolbar-top {
   transition: all ease 400ms;
   -webkit-transition-delay: 500ms;
   transition-delay: 500ms;
-  -webkit-transform-y: -10;
-   transform-y: -10;
+  -webkit-transform: translateY(100px);
+  transform: translateY(100px);
   opacity: 0;
-  -webkit-transform: translateY(200px);
-  transform: translateY(200px);
-  -webkit-animation: moveUp 0.65s ease forwards;
-   animation: moveUp 0.65s ease forwards;
-}
-
-@-webkit-keyframes moveUp {
-	0% { }
-	100% { -webkit-transform: translateY(0); opacity: 1; }
 }
 .post-card.ng-enter.ng-enter-active {
-  -webkit-transform: scale(1);
-  transform: scale(1);
-  opacity: 1;
+   -webkit-transform: translateY(0);
+   transform: translateY(0);
+   opacity: 1;
 }
