@@ -18,6 +18,9 @@ app.config(function ($mdThemingProvider, $mdIconProvider, $routeProvider, $locat
         .when("/liked",{
             templateUrl: "templates/html/most-liked.html",
         })
+        .when("/:class",{
+            templateUrl: "templates/html/class.html",
+        })
         .otherwise({
             redirectTo:"/",
         });
