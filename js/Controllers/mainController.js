@@ -22,7 +22,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
       $scope.globals.sidenavIsOpen = !$scope.globals.sidenavIsOpen
          //$mdSidenav('left').toggle();
-      setTimeout(angularGridInstance.posts.refresh(), 1000)
+      $window.setTimeout(angularGridInstance.posts.refresh, 400);
    };
 
    $scope.gotoRoute = function(path, query, id) {
