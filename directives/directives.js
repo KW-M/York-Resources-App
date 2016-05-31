@@ -50,7 +50,6 @@ app.directive('getPosts', function() {
             query = query + ' and not fullText contains \'"Flagged":true\''
         }
         console.log(query);
-        console.log();
     }
   };
 });
