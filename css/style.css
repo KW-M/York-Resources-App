@@ -213,23 +213,23 @@ toolbar-top {
 /* --------------------------- Animations ------------------- */
 
 .post-card {
-  -webkit-transition: all 400ms ease;
-  transition: all 400ms ease;
+  -webkit-transition: opacity translateY 400ms ease-in;
+  transition: opacity translateY 400ms ease-in;
 }
 .post-card.ng-leave {
   -webkit-transition: all ease-in 400ms;
   transition: all ease-in 400ms;
 }
 .post-card.ng-leave.ng-leave-active {
-  -webkit-transform: translateY(100px);
-  transform: translateY(100px);
+  -webkit-transform: scale(0.5);
+  transform: scale(0.5);
   opacity: 0;
 }
 .post-card.ng-enter {
   -webkit-transition: all ease 400ms;
   transition: all ease 400ms;
-  -webkit-transition-delay: 500ms;
-  transition-delay: 500ms;
+  -webkit-transition-delay: 60ms;
+  transition-delay: 60ms;
   -webkit-transform: translateY(100px);
   transform: translateY(100px);
   opacity: 0;
