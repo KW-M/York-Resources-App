@@ -19,6 +19,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
    $scope.toggleSidebar = function() { //called by the top left toolbar menu button
+   angularGridInstance..refresh()
       $scope.globals.sidenavIsOpen = !$scope.globals.sidenavIsOpen
          //$mdSidenav('left').toggle();
    };
