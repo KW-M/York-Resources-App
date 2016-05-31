@@ -6,7 +6,7 @@ app.config(function ($mdThemingProvider, $mdIconProvider, $routeProvider, $locat
     $locationProvider.html5Mode(true);
         //routing:
     $routeProvider
-        .when("/",{
+        .when("/all-posts",{
             templateUrl: "templates/html/all-posts.html",
         })
         .when("/my-posts",{
@@ -15,14 +15,11 @@ app.config(function ($mdThemingProvider, $mdIconProvider, $routeProvider, $locat
         .when("/flaged",{
             templateUrl: "templates/html/flaged.html",
         })
-        .when("/liked",{
-            templateUrl: "templates/html/most-liked.html",
-        })
         .when("/:class",{
             templateUrl: "templates/html/class.html",
         })
         .otherwise({
-            redirectTo:"/",
+            redirectTo:"/all-posts",
         });
 
     $mdIconProvider

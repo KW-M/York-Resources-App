@@ -24,13 +24,13 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
 
    $scope.gotoRoute = function(path, query, id) {
       console.log(path + query + id);
-      if (path !== null) {
+      if (path) {
          $location.path(path);
       }
-      if (query !== null) {
+      if (query) {
          $location.search(query);
       }
-      if (id !== null) {
+      if (id) {
          $location.hash(id);
       }
    };
