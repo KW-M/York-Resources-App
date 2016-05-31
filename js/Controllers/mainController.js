@@ -23,6 +23,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    };
 
    $scope.gotoRoute = function(path, query, id) {
+      console.log(path + query + id);
       if (path !== null) {
          $location.path(path);
       }
