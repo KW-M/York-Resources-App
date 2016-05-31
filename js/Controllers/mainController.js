@@ -23,7 +23,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    };
 
    $scope.gotoPath = function(path) { //called by the signIn button click
-      $location.path = path;
+      $location.path(path);
    };
 
    $scope.helpDialog = function() { //called by the top right toolbar help button
