@@ -1,5 +1,6 @@
 /*global app*/ /*global angular*/ /*global gapi*/ /*global google*/
-app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location) {
+var dependancies = ['$scope', '$mdDialog', '$window', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', '$routeParams']
+app.controller('ApplicationController', dependancies.concat([function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location) {
    var self = this
    var content_container = document.getElementById("content_container");
    $scope.allPosts = [];
@@ -55,6 +56,11 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
       console.log($scope.filteredPosts + "post from filter");
    }
 
+   $scope.$on('$routeUpdate', function() {
+      $scope.sort = $location.search().sort;
+      $scope.order = $location.search().order;
+      $scope.offset = $location.search().offset;
+   });
 
    $scope.newPost = function(idInput, linkInput) {
       $scope.Link = linkInput;
@@ -229,7 +235,7 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
    $window.loginSilent = function(response) {
       loginProcedure(authorizationService.authorizeSilent());
    };
-}]);
+}]));
 
 //called by the google client api when it loads (must be outside the controller)
 function gClientLoaded() {
