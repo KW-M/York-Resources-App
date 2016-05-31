@@ -9,13 +9,13 @@ app.config(function ($mdThemingProvider, $mdIconProvider, $routeProvider, $locat
         .when("/",{
             templateUrl: "templates/html/all-posts.html",
         })
-        .when("my-posts",{
+        .when("/my-posts",{
             templateUrl: "templates/html/my-posts.html",
         })
-        .when("flaged",{
+        .when("/flaged",{
             templateUrl: "templates/html/flaged.html",
         })
-        .when("liked",{
+        .when("/liked",{
             templateUrl: "templates/html/most-liked.html",
         })
         .otherwise({
