@@ -213,8 +213,8 @@ toolbar-top {
 /* --------------------------- Animations ------------------- */
 
 .post-card {
-  -webkit-transition: opacity 350ms ease, -webkit-transform 350ms ease;
-  transition: opacity 350ms ease, transform 350ms ease;
+  -webkit-transition: all 350ms;
+  transition: all 350ms;
 }
 .post-card.ng-leave {
   -webkit-transition: opacity 350ms ease, -webkit-transform 350ms ease;
