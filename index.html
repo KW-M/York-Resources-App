@@ -58,6 +58,10 @@
             <!----- The content, ie posts, resources, etc. ------->
             <div id="content_container" ng-class="{ 'sidenav-open' : globals.sidenavIsOpen }">
                 <ng-view></ng-view>
+                <div id="grid_Container" style="margin: 0 auto;" angular-grid="allPosts" ag-infinite-scroll="getFiles()" ag-grid-width="230" ag-gutter-size="8" ag-id="posts">
+                    <md-card post-card class="post-card raise-on-hover" ng-repeat="Post in allPosts"></md-card>
+                </div>
+                <md-progress-circular id="loading_spinner" class="md-accent" md-mode="indeterminate" md-diameter="60"></md-progress-circular>
             </div>
             <!--<span class="unselectable default-mouse" style="font-size: 150%; background-color:rgba(0,0,0,0.5); position:fixed; bottom:0px;right:0px; color:white;">PRE-ALPHA version</span>-->
         </div>
