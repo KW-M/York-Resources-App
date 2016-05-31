@@ -47,9 +47,10 @@ app.directive('getPosts', function() {
     link: function(scope, elem, attrs) {
         var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false";
         if (attrs.showflaged !== true) {
-            query = query + 'and not fullText contains \'"Type":"noLink"\''
+            query = query + ' and not fullText contains \'"Flagged":true\''
         }
-        console.log(query)
+        console.log(query);
+        console.log();
     }
   };
 });
