@@ -211,31 +211,3 @@ toolbar-top {
 
 
 /* --------------------------- Animations ------------------- */
-
-.post-card {
-  -webkit-transition: all 350ms;
-  transition: all 350ms;
-}
-.post-card.ng-leave {
-  -webkit-transition: opacity 350ms ease, -webkit-transform 350ms ease;
-  transition: opacity 350ms ease, transform 350ms ease;
-}
-.post-card.ng-leave.ng-leave-active {
-  -webkit-transform: scale(0.5);
-  transform: scale(0.5);
-  opacity: 0;
-}
-.post-card.ng-enter {
-  -webkit-transition: opacity 350ms ease, -webkit-transform 350ms ease;
-  transition: opacity 350ms ease, transform 350ms ease;
-  -webkit-transition-delay: 200ms;
-  transition-delay: 200ms;
-  -webkit-transform: translateY(150px);
-  transform: translateY(150px);
-  opacity: 0;
-}
-.post-card.ng-enter.ng-enter-active {
-   -webkit-transform: translateY(0);
-   transform: translateY(0);
-   opacity: 1;
-}
