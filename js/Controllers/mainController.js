@@ -19,11 +19,19 @@ app.controller('ApplicationController', ['$scope', '$mdDialog', '$window', '$sce
 
    $scope.toggleSidebar = function() { //called by the top left toolbar menu button
       $scope.globals.sidenavIsOpen = !$scope.globals.sidenavIsOpen
-      //$mdSidenav('left').toggle();
+         //$mdSidenav('left').toggle();
    };
 
-   $scope.gotoPath = function(path) { //called by the signIn button click
-      window.location="/my-posts"
+   $scope.gotoRoute = function(path, query, id) {
+      if (path != null) {
+         $location.path(path);
+      }
+      if (query != null) {
+         $location.search({'id':query});
+      }
+      if (id != null) {
+         $location.hash(id);
+      }
    };
 
    $scope.helpDialog = function() { //called by the top right toolbar help button
