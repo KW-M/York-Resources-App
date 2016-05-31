@@ -245,15 +245,3 @@ toolbar-top {
   transform: scale(1);
   opacity: 1;
 }
-.post-card-img {
-  width: 100%;
-  vertical-align: middle;
-  background-color: #fff;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.2s;
-}
-.post-card-img.img-loaded {
-  visibility: visible;
-  opacity: 1;
-}
