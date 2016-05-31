@@ -47,7 +47,7 @@ app.directive('getPosts', function() {
     link: function(scope, elem, attrs) {
         var query = '';
         if (attrs.showflaged !== true) {
-            query = query + ' and '
+            query = query + ' and not fulltext'
         }
     }
   };
