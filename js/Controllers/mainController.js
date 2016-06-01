@@ -169,13 +169,14 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.getFilesInitial = function() {
       console.log('getting files');
       queue(GoogleDriveService.getListOfFlies('', $scope.nextPageToken, 12), function(fileList) {
+         var tempFileAray = [];
          for (var item = 0; item < fileList.result.files.length; item++) {
             var metadata = fileList.result.files[item];
             queue(GoogleDriveService.getFileContent(metadata.id), function(file) {
                $scope.handleFile(file, metadata);
             });
          }
-         $scope.$apply();
+         $scope.$apply($scope.allPosts.concat([]));
          $scope.nextPageToken = '';
       });
    }
