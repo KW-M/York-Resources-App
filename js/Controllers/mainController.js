@@ -170,14 +170,18 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       console.log('getting files');
       queue(GoogleDriveService.getListOfFlies('', $scope.nextPageToken, 12), function(fileList) {
          var tempFileAray = [];
+         var fileCount = 0;
          for (var item = 0; item < fileList.result.files.length; item++) {
             var metadata = fileList.result.files[item];
             queue(GoogleDriveService.getFileContent(metadata.id), function(file) {
                $scope.handleFile(file, metadata, tempFileAray);
+               fileCount++;
+               if (fileCount = 12) {
+                  console.log (tempFileAray);
+                  $scope.$apply($scope.allPosts.concat(tempFileAray));
+               }
             });
          }
-         console.log (tempFileAray);
-         $scope.$apply($scope.allPosts.concat(tempFileAray));
          $scope.nextPageToken = '';
       });
    }
