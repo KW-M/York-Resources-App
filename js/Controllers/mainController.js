@@ -272,5 +272,5 @@ function gClientLoaded() {
 }
 
 var classes = [
-  {name:english, color:"red"} 
+  {name:english, color:"hsla(282, 38%, 68%, 1)"} 
 ];
