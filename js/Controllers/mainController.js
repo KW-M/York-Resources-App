@@ -10,7 +10,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.globals = {
       FABisOpen: false,
       FABisHidden: true,
-      SidenavIsOpen: true,
+      sidenavIsOpen: true,
    };
    $scope.GoogleDriveService = GoogleDriveService;
 
@@ -185,7 +185,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    $scope.getFiles = function(query) {
-      if ($scope.allPosts >= 12){
+      if ($scope.allPosts.length >= 12){
       console.log('getting files');
       queue(GoogleDriveService.getListOfFlies(query, $scope.nextPageToken, 8), function(fileList) {
          var tempFileArray = [];
