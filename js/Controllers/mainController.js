@@ -270,3 +270,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 function gClientLoaded() {
    gapi.auth.init(loginSilent());
 }
+
+var classes = [
+  {name:english, color:"red"} 
+];
