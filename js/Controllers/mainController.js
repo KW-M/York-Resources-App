@@ -56,6 +56,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          return obj.Title.toLowerCase().indexOf(val) != -1;
       });
    }
+   
+   $scope.pathSelected = function(path) {
+if (path)
+   }
 
    $scope.$on('$routeUpdate', function() {
       $scope.sort = $location.search().sort;
