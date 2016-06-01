@@ -46,7 +46,9 @@
         border-bottom-right-radius: 3px;
     }
     md-sidenav md-menu-item>.md-button.selected {
-           rgba(0,0,0,.05)
+           background-color: rgba(0,0,0,.05);
+           font-style: oblique;
+           color: rgb(68,138,255);
     }
 
     .side-nav-classes md-menu-item>.md-button {
