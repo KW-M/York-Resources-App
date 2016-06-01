@@ -38,59 +38,10 @@
                     </md-menu-item>
                 </md-list-item>
                 <md-list class="side-nav-classes side-nav-section">
-                    <md-list-item>
+                    <md-list-item ng-repeat="class in classList">
                         <md-menu-item>
-                            <md-button ng-style="{'background-color':classList['English III'].color}">
-                                Geography
-                            </md-button>
-                        </md-menu-item>
-                    </md-list-item>
-                    <md-list-item>
-                        <md-menu-item>
-                            <md-button>
-                                World History
-                            </md-button>
-                        </md-menu-item>
-                    </md-list-item>
-                    <md-list-item>
-                        <md-menu-item>
-                            <md-button>
-                                Chemistry
-                            </md-button>
-                        </md-menu-item>
-                    </md-list-item>
-                    <md-list-item>
-                        <md-menu-item>
-                            <md-button>
-                                Physics
-                            </md-button>
-                        </md-menu-item>
-                    </md-list-item>
-                    <md-list-item>
-                        <md-menu-item>
-                            <md-button>
-                                Algebra II
-                            </md-button>
-                        </md-menu-item>
-                    </md-list-item>
-                    <md-list-item>
-                        <md-menu-item>
-                            <md-button>
-                                Marine Biology
-                            </md-button>
-                        </md-menu-item>
-                    </md-list-item>
-                    <md-list-item>
-                        <md-menu-item>
-                            <md-button>
-                                Marine Biology
-                            </md-button>
-                        </md-menu-item>
-                    </md-list-item>
-                    <md-list-item>
-                        <md-menu-item>
-                            <md-button>
-                                Marine Biology
+                            <md-button ng-style="{'background-color':class.color}">
+                                {{class}}
                             </md-button>
                         </md-menu-item>
                     </md-list-item>
