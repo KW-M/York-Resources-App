@@ -269,8 +269,14 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 //called by the google client api when it loads (must be outside the controller)
 function gClientLoaded() {
    gapi.auth.init(loginSilent());
-}
+}\
+
+/* 
+use this chart for color chosing:
+purple: hsl(300,70%,90%)
+green: hsl(120,70%,90%)
+*/
 
 var classes = [
-  {name:english, color:"hsla(282, 38%, 68%, 1)"} 
+  {name:'English', color:'hsl(300,70%,90%)'}
 ];
