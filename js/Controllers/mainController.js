@@ -1,7 +1,7 @@
 /*global app*/ /*global angular*/ /*global gapi*/ /*global google*/
 var dependancies = ['$scope', '$mdDialog', '$window', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', '$routeParams', 'angularGridInstance']
 app.controller('ApplicationController', dependancies.concat([function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, $routeParams, angularGridInstance) {
-   var self = this
+   var self = this;
    var content_container = document.getElementById("content_container");
    $scope.allPosts = [];
    $scope.filteredPosts = [];
@@ -163,10 +163,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          };
          console.log($scope.myInfo)
       });
-      $scope.getFiles("");
+      $scope.getFilesInitial("");
    }
 
-   $scope.getFiles = function(query) {
+   $scope.getFilesInitial = function() {
       console.log('getting files');
       queue(GoogleDriveService.getListOfFlies(query, $scope.nextPageToken), function(fileList) {
          for (var item = 0; item < fileList.result.files.length; item++) {
@@ -178,6 +178,22 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $scope.$apply();
          $scope.nextPageToken = '';
       });
+   }
+
+   $scope.getFiles = function(query) {
+      if ($scope.allPosts > 12){
+      console.log('getting files');
+      queue(GoogleDriveService.getListOfFlies(query, $scope.nextPageToken), function(fileList) {
+         for (var item = 0; item < fileList.result.files.length; item++) {
+            var metadata = fileList.result.files[item];
+            queue(GoogleDriveService.getFileContent(metadata.id), function(file) {
+               $scope.handleFile(file, metadata);
+            });
+         }
+         $scope.$apply();
+         $scope.nextPageToken = '';
+      });
+      }
    }
 
    $scope.handleFile = function(file, metadata) {
