@@ -50,12 +50,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.$watch('searchTxt', $scope.filterPosts);
 
    $scope.filterPosts = function(val) {
-      console.log(val);
       val = val.toLowerCase();
       $scope.filteredPosts = $scope.allPosts.filter(function(obj) {
          return obj.Title.toLowerCase().indexOf(val) != -1;
       });
-      console.log($scope.filteredPosts + "post from filter");
    }
 
    $scope.$on('$routeUpdate', function() {
