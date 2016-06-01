@@ -176,8 +176,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                tempFileArray = $scope.handleFile(file, metadata, tempFileArray);
                if (tempFileArray.length === 12) {
                   console.log(tempFileArray);
-                  $scope.allPosts.concat(tempFileArray);
-                  console.log($scope.allPosts);
+                  $scope.$apply(function(){$scope.allPosts = $scope.allPosts.concat(tempFileArray);});
                }
             });
          }
@@ -189,13 +188,17 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       if ($scope.allPosts >= 12){
       console.log('getting files');
       queue(GoogleDriveService.getListOfFlies(query, $scope.nextPageToken, 8), function(fileList) {
+         var tempFileArray = [];
          for (var item = 0; item < fileList.result.files.length; item++) {
             var metadata = fileList.result.files[item];
             queue(GoogleDriveService.getFileContent(metadata.id), function(file) {
-               $scope.handleFile(file, metadata);
+               tempFileArray = $scope.handleFile(file, metadata, tempFileArray);
+               if (tempFileArray.length === 12) {
+                  console.log(tempFileArray);
+                  $scope.$apply(function(){$scope.allPosts = $scope.allPosts.concat(tempFileArray);});
+               }
             });
          }
-         $scope.$apply($scope.allPosts);
          $scope.nextPageToken = '';
       });
       }
