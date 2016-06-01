@@ -181,11 +181,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    $scope.handleFile = function(file, metadata) {
-      // console.log({
-      //    file: file,
-      //    metadata: metadata
-      // });
+      console.log({
+          file: file,
+          metadata: metadata
+       });
       $scope.allPosts = $scope.allPosts.concat(file.result);
+      $scope.filteredPosts = $scope.allPosts;
    }
    $scope.combineset = function(newSet) {
 
