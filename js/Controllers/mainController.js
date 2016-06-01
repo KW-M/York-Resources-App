@@ -274,8 +274,9 @@ function gClientLoaded() {
 /*
 use this chart for color chosing:
 purple: hsl(300,70%,90%)
-purple: hsl(300,70%,90%)
-green: hsl(120,70%,90%)
+blue: hsl(232,70%,92%)
+light-blue: hsl(186,60%,90%)
+green: hsl(120,68%,90%)
 orange: hsl(40,76%,90%)
 red: hsl(8,70%,90%)
 */
