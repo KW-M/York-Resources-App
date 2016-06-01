@@ -271,10 +271,13 @@ function gClientLoaded() {
    gapi.auth.init(loginSilent());
 }\
 
-/* 
+/*
 use this chart for color chosing:
 purple: hsl(300,70%,90%)
+purple: hsl(300,70%,90%)
 green: hsl(120,70%,90%)
+orange: hsl(40,76%,90%)
+red: hsl(8,70%,90%)
 */
 
 var classes = [
