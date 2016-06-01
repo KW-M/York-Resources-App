@@ -272,6 +272,6 @@ function gClientLoaded() {
 }
 
 
-var classes = [
-  {name:'English', color:'background-color: var(--pBlue);'}
-];
+var classes = {
+     'English III':{color:'{background-color: var(--pBlue)}'},
+};
