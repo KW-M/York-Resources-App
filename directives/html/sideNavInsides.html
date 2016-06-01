@@ -4,7 +4,7 @@
             <md-list>
                 <md-list-item>
                     <md-menu-item>
-                        <md-button ng-click="gotoRoute('/','hi','bye')">
+                        <md-button ng-click="gotoRoute('/','hi','bye')" ng-class="{ 'selected' : $location.path()='/' }">
                             <md-icon>inbox</md-icon>
                             All Posts
                         </md-button>

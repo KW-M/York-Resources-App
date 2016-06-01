@@ -45,6 +45,9 @@
         border-top-right-radius: 3px;
         border-bottom-right-radius: 3px;
     }
+    md-sidenav md-menu-item>.md-button.selected {
+           rgba(0,0,0,.05)
+    }
 
     .side-nav-classes md-menu-item>.md-button {
         border-radius: 3px;
