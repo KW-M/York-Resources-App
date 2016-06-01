@@ -174,9 +174,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          for (var item = 0; item < fileList.result.files.length; item++) {
             var metadata = fileList.result.files[item];
             queue(GoogleDriveService.getFileContent(metadata.id), function(file) {
-               $scope.handleFile(file, metadata, tempFileAray);
+               var $scope.handleFile(file, metadata, tempFileAray);
                fileCount++;
-               if (fileCount = 12) {
+               if (fileCount === 12) {
                   console.log (tempFileAray);
                   $scope.$apply($scope.allPosts.concat(tempFileAray));
                }
@@ -205,9 +205,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.handleFile = function(file, metadata, destination) {
       console.log({
           file: file,
-          metadata: metadata
+          metadata: metadata,
+          fileArray: destination
        });
       destination = destination.concat(file.result);
+      return destination;
    }
 
    $scope.combineset = function(newSet) {
