@@ -40,7 +40,7 @@
                 <md-list class="side-nav-classes side-nav-section">
                     <md-list-item ng-repeat="class in classList">
                         <md-menu-item>
-                            <md-button ng-style="{'background-color':class.color}">
+                            <md-button ng-hover="angular.element(e.srcElement)setAttribute('style', 'background-color':class.color)">
                                 {{class}}
                             </md-button>
                         </md-menu-item>
