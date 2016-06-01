@@ -175,8 +175,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                $scope.handleFile(file, metadata);
             });
          }
+         $scope.$apply();
          $scope.nextPageToken = '';
-         console.log($scope.nextPageToken);
       });
    }
 
@@ -186,7 +186,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       //    metadata: metadata
       // });
       $scope.allPosts = $scope.allPosts.concat(file.result);
-      $scope.$apply($scope.filterPosts($scope.searchTxt));
+   }
+   $scope.combineset = function(newSet) {
+
+
    }
 
    $scope.confirmDelete = function(ev, content, arrayIndex) {
