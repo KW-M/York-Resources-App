@@ -1,3 +1,3 @@
 <add-bar-top></add-bar-top>
-<div ng-repeat="class in classList " ng-style="class.color">{{class.color}}</div>
+<div ng-repeat="class in classList | orderBy: class.color" ng-style="{{class.color}}">{{class.color}}</div>
 <get-posts showflaged="false"></get-posts>
