@@ -23,7 +23,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
 
     this.getListOfFlies = function(query, pageToken) {
         return (gapi.client.drive.files.list({
-            pageSize: 9,
+            pageSize: 5,
             pageToken: pageToken,
             q: "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false",
             fields: 'nextPageToken, files(id, name)',
