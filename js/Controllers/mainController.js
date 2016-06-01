@@ -274,7 +274,7 @@ function gClientLoaded() {
 
 
 var classes = {
-     'English III':{color:'{background-color: var(--pBlue)}'},
+     'English III':{color:{'background-color': 'var(--pBlue)'}},
      'World History II':{color:'{background-color: var(--pRed)}'},
      'Asian History':{color:'background-color: var(--pGreen)'},
 };
