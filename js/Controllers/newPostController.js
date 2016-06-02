@@ -51,8 +51,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
                 .textContent('Select a class for this post.');
         }
         if ($scope.class = '') {
-            var toast = $mdToast.simple()
-                .textContent('Posts must have a title.')
+            $mdToast.show($mdToast.simple().textContent('Posts must have a title.'))
         }
         if ($scope.Type === "gDrive") {
             var toast = $mdToast.simple()
