@@ -74,7 +74,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.newPost = function(idInput, linkInput, postObj, operation) {
       //called by the bottom right plus/add resource button
       $mdDialog.show({
-         templateUrl: 'templates/html/newPost-new.html',
+         templateUrl: 'templates/html/new-post.html',
          controller: ['$scope', '$mdDialog', 'GoogleDriveService', '$mdToast', newPostController],
          scope: $scope,
          preserveScope: true, 
