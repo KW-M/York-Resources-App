@@ -53,6 +53,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
             var description = document.querySelector('#DescriptionTxt').textContent;
             var response = ({
                 "Type": "noLink",
+                "Flagged": false,
                 "Title": $scope.Title,
                 "Creator": {
                     "Name": userInfo.result.user.displayName,
@@ -102,13 +103,29 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
             }
         });
     };
-    
+
     $scope.fillInValues = function() {
-        
-    }
-    $scope.Tags = [];
+        if (postObj.Type != undefined || ""){
+            $scope.Type = postObj.Type;
+        }
+        if (postObj.Title != undefined || ""){
+            $scope.Title = postObj.Title;
+        }
+        if (postObj.flaged = undefined || ""){
+            $scope.Type = '';
+        }
+        if (postObj.type != undefined || ""){
+            $scope.Type = '';
+        }
+        if (postObj.type != undefined || ""){
+            $scope.Type = '';
+        }
+        if (postObj.type != undefined || ""){
+            $scope.Type = '';
+        }
+            $scope.Tags = [];
     $scope.Title = '';
-    $scope.Type = '';
     $scope.Description = '';
     $scope.class = "";
+    }
 }
