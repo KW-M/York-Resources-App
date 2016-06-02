@@ -24,7 +24,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
         }
     };
 
-    function convertImgToDataURLviaCanvas(callback, outputFormat){
+    function convertImgToDataURLviaCanvas(callback, outputFormat) {
         var canvas = document.createElement('CANVAS');
         var ctx = canvas.getContext('2d');
         var dataURL;
@@ -34,8 +34,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
         dataURL = canvas.toDataURL(outputFormat);
         callback(dataURL);
         canvas = null;
-    };
-}
+    }
 
     $scope.submit = function() {
         GoogleDriveService.getUserInfo().then(function(userInfo) {
@@ -114,7 +113,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
         }
     };
 
-    function fillInValues () {
+    function fillInValues() {
         if (postObj != undefined) {
             if (postObj.Type != undefined || "") {
                 $scope.Type = postObj.Type;

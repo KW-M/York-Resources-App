@@ -76,8 +76,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $mdDialog.show({
          templateUrl: 'templates/html/new-post.html',
          controller: ['$scope', '$mdDialog', 'GoogleDriveService', '$mdToast', newPostController],
-         scope: $scope,
-         preserveScope: true, 
+         preserveScope: true,
          locals: {
            postObj: $scope.items,
            operation: operation
