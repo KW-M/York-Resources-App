@@ -2,17 +2,19 @@
    defined by the $md-dialog in the newPost function on mainController.   */
 function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
     fillInValues();
+    headerImg = document.getElementById("header_image");
+    console.log(headerImg);
     $scope.driveThumbnail = "";
     $scope.classSearch = "";
-    
+
     $scope.close = function() {
         $mdDialog.hide();
     };
-    
+
     $scope.classSelected = function(inputClass) {
         $scope.Class = inputClass.class;
     };
-    
+
     $scope.Preview = function() {
         if ($scope.Type === "Link") {
             return 'https://api.pagelr.com/capture?uri=' + $scope.Link + '&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw'
@@ -21,7 +23,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
             return $scope.driveThumbnail;
         }
     };
-    
+
     function convertImgToDataURLviaCanvas(callback, outputFormat){
         var canvas = document.createElement('CANVAS');
         var ctx = canvas.getContext('2d');
@@ -31,7 +33,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
         ctx.drawImage(this, 0, 0);
         dataURL = canvas.toDataURL(outputFormat);
         callback(dataURL);
-        canvas = null; 
+        canvas = null;
     };
 }
 
@@ -84,7 +86,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
             }
         });
     };
-    
+
     $scope.findType = function() {
         if ($scope.Link === '') {
             $scope.Type = 'NoLink';
@@ -111,7 +113,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
             }
         }
     };
-    
+
     function fillInValues () {
         if (postObj != undefined) {
             if (postObj.Type != undefined || "") {
