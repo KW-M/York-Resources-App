@@ -71,7 +71,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $scope.offset = $location.search().offset;
    });
 
-   $scope.newPost = function(idInput, linkInput) {
+   $scope.newPost = function(idInput, linkInput, postObj, operation) {
       //called by the bottom right plus/add resource button
       $mdDialog.show({
          templateUrl: 'templates/html/newPost-new.html',
@@ -80,7 +80,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          preserveScope: true, 
          locals: {
            postObj: $scope.items,
-           id: dklfj,
+           operation: operation
          },
          parent: angular.element(document.body),
          clickOutsideToClose: false,
