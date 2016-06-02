@@ -230,7 +230,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.sortByLikes = function () {
       $scope.filteredPosts.sort(function (a, b) {
-         return b.likeUsers.length - a.likeUsers.length;
+         return b.LikeUsers.length - a.LikeUsers.length;
       });
    }
 
