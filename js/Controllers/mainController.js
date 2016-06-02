@@ -2,7 +2,7 @@
 var dependancies = ['$scope', '$mdDialog', '$window', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', '$routeParams', 'angularGridInstance']
 app.controller('ApplicationController', dependancies.concat([function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, $routeParams, angularGridInstance) {
    var self = this;
-   var content_container = window;
+   var content_container = document.getElementById("content_container");
    $scope.classList = classes;
    $scope.allPosts = [];
    $scope.filteredPosts = [];

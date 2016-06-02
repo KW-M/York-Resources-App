@@ -2,7 +2,7 @@
    defined by the $md-dialog in the newPost function on mainController.   */
 function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
     fillInValues();
-    var headerImg = document.getElementById("header_image");
+    var headerImg = $wind;
     console.log(headerImg);
     $scope.driveThumbnail = "";
     $scope.classSearch = "";
