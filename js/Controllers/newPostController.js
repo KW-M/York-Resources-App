@@ -24,7 +24,8 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
         }
     };
 
-    function convertImgToDataURLviaCanvas(callback, outputFormat) {
+    function convertImg() {
+    if (headerImg.complete = true) {
         var canvas = document.createElement('CANVAS');
         var ctx = canvas.getContext('2d');
         var dataURL;
@@ -34,6 +35,11 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
         dataURL = canvas.toDataURL(outputFormat);
         callback(dataURL);
         canvas = null;
+    } else {
+       headerImg.onload = function(){
+           convertImg()
+       }
+    }
     }
 
     $scope.submit = function() {
