@@ -123,7 +123,9 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
         if (postObj.Description != undefined || ""){
             $scope.Description = postObj.Description;
         } else {$scope.Description = "";}
-    $scope.Description = '';
-    $scope.class = "";
+        
+        if (postObj.Class != undefined || ""){
+            $scope.Class = postObj.Class;
+        } else {$scope.Class = "";}
     }
 }
