@@ -1,5 +1,6 @@
 var headerImg = document.getElementById("header_image");
-var description = document.querySelector('#DescriptionTxt')
+var description = document.querySelector('#DescriptionTxt');
+var dialogElement = document.querySelector('#new_post_dialog');
     /* we don't define the "new post controller" here because it was alredy
        defined by the $md-dialog in the newPost function on mainController.   */
 function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
@@ -45,7 +46,14 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
     }
 
     $scope.isReadyToSubmit = function() {
-        if $scope.class 
+        if ($scope.class = '') {
+            var toast = $mdToast.simple()
+                .textContent('Select a class for this post.');
+        }
+        if ($scope.class = '') {
+            var toast = $mdToast.simple()
+                .textContent('Posts must have a title.')
+        }
         if ($scope.Type === "gDrive") {
             var toast = $mdToast.simple()
                 .textContent('This will allow people at York to view the file.')
