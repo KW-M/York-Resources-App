@@ -1,4 +1,5 @@
 var headerImg = document.getElementById("header_image");
+var description = document.querySelector('#DescriptionTxt')
 /* we don't define the "new post controller" here because it was alredy
    defined by the $md-dialog in the newPost function on mainController.   */
 function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
@@ -6,8 +7,6 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
     console.log(headerImg);
     $scope.driveThumbnail = "";
     $scope.classSearch = "";
-            var description = document.querySelector('#DescriptionTxt').textContent;
-            console.log(description);
     $scope.close = function() {
         $mdDialog.hide();
     };
@@ -52,7 +51,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
                 "Flagged": false,
                 "Title": $scope.Title,
                 "Tags": $scope.Tags,
-                "Description": description,
+                "Description": description.textContent,
                 "Class": {
                     "Name": $scope.class,
                 },
