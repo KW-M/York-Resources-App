@@ -44,7 +44,30 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
         }
     }
     
-    $scope.isReadyToSubmit = function (){}
+    $scope.isReadyToSubmit = function (){
+        if ($scope.Type === "gDrive") {
+            var toast = $mdToast.simple()
+                .textContent('This will allow people at York to view the file.')
+                .action('OK')
+                .highlightAction(true)
+                .highlightClass('md-primary') // Accent is used by default, this just demonstrates the usage.
+            $mdToast.show(toast).then(function(response) {
+                if (response == 'ok') {
+                    
+                }
+            });
+    }
+    
+    function checkHeaderImg () {
+        if (headerImg.complete !== true) {
+            headerImg.onload = function() {
+                $scope.submit();
+                return 'retrying'
+            }
+        }
+    }
+        
+    }
 
     $scope.submit = function() {
         if (headerImg.complete !== true) {
@@ -70,17 +93,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
             "LikeUsers": [],
         });
         console.log(response);
-        if ($scope.Type === "gDrive") {
-            var toast = $mdToast.simple()
-                .textContent('')
-                .action('OK')
-                .highlightAction(true)
-                .highlightClass('md-primary') // Accent is used by default, this just demonstrates the usage.
-            $mdToast.show(toast).then(function(response) {
-                if (response == 'ok') {
-                    
-                }
-            });
+        
             var confirm = $mdDialog.confirm()
                 .title('This will enable view only link sharing for the file, \n so other students can see it.')
                 .textContent('continue?           (not really right now)')
@@ -98,10 +111,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
         }
 
         function sendFile() {
-            $mdToast.show({
-                template: '<md-toast><span style="font-size:18px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right:-20px"></md-progress-circular></md-toast>',
-                hideDelay: 3000000,
-            });
+
             GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
                 console.log(reply.result);
                 $mdToast.hide();
