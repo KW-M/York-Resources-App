@@ -38,10 +38,10 @@
                     </md-menu-item>
                 </md-list-item>
                 <md-list class="side-nav-classes side-nav-section">
-                    <md-list-item ng-repeat="class in classList">
+                    <md-list-item ng-repeat="(key,val) in classList">
                         <md-menu-item>
-                            <md-button ng-hover="angular.element(e.srcElement)setAttribute('style', 'background-color':class.color)">
-                                {{class}}
+                            <md-button ng-hover="angular.element(e.srcElement)setAttribute('style', 'background-color':val.color)">
+                                {{key}}
                             </md-button>
                         </md-menu-item>
                     </md-list-item>
