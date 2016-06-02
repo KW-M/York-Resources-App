@@ -1,7 +1,7 @@
 var headerImg = document.getElementById("header_image");
 var description = document.querySelector('#DescriptionTxt')
-/* we don't define the "new post controller" here because it was alredy
-   defined by the $md-dialog in the newPost function on mainController.   */
+    /* we don't define the "new post controller" here because it was alredy
+       defined by the $md-dialog in the newPost function on mainController.   */
 function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
     fillInValues();
     $scope.driveThumbnail = "";
@@ -25,80 +25,89 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
     };
 
     function convertImg() {
-    if (headerImg.complete = true) {
-        var canvas = document.createElement('CANVAS');
-        var ctx = canvas.getContext('2d');
-        var dataURL;
-        canvas.height = this.height;
-        canvas.width = this.width;
-        ctx.drawImage(this, 0, 0);
-        dataURL = canvas.toDataURL('png');
-        callback(dataURL);
-        canvas = null;
-        return dataURL;
-    } else {
-       headerImg.onload = function(){
-           convertImg();
-       }
+        if (headerImg.complete = true) {
+            var canvas = document.createElement('CANVAS');
+            var ctx = canvas.getContext('2d');
+            var dataURL;
+            canvas.height = this.height;
+            canvas.width = this.width;
+            ctx.drawImage(this, 0, 0);
+            dataURL = canvas.toDataURL('png');
+            callback(dataURL);
+            canvas = null;
+            return dataURL;
+        }
+        else {
+            headerImg.onload = function() {
+                convertImg();
+            }
+        }
     }
-    }
+    
+    $scope.isReadyToSubmit = function (){}
 
     $scope.submit = function() {
-    if (headerImg.complete !== true) {
-       headerImg.onload = function(){
-           $scope.submit();
-           return 'retrying'
-       }
-    }
-            var description = document.querySelector('#DescriptionTxt').textContent;
-            console.log(description);
-            var response = ({
-                "Type": "noLink",
-                "Flagged": false,
-                "Title": $scope.Title,
-                "Tags": $scope.Tags,
-                "Description": description.textContent,
-                "Class": {
-                    "Name": $scope.Class,
-                },
-                "Link": $scope.Link,
-                "FileId": $scope.Id,
-                "ImageURL": convertImg(),
-                "LikeUsers": [],
+        if (headerImg.complete !== true) {
+            headerImg.onload = function() {
+                $scope.submit();
+                return 'retrying'
+            }
+        }
+        var description = document.querySelector('#DescriptionTxt').textContent;
+        console.log(description);
+        var response = ({
+            "Type": "noLink",
+            "Flagged": false,
+            "Title": $scope.Title,
+            "Tags": $scope.Tags,
+            "Description": description.textContent,
+            "Class": {
+                "Name": $scope.Class,
+            },
+            "Link": $scope.Link,
+            "FileId": $scope.Id,
+            "ImageURL": convertImg(),
+            "LikeUsers": [],
+        });
+        console.log(response);
+        if ($scope.Type === "gDrive") {
+            var toast = $mdToast.simple()
+                .textContent('')
+                .action('OK')
+                .highlightAction(true)
+                .highlightClass('md-primary') // Accent is used by default, this just demonstrates the usage.
+            $mdToast.show(toast).then(function(response) {
+                if (response == 'ok') {
+                    
+                }
             });
-            console.log(response);
-            if ($scope.Type === "gDrive") {
-                 $mdToast.show({
-                    template: 'This will share the file with people at york.',
-                    hideDelay: 30000,
-                });
-                var confirm = $mdDialog.confirm()
-                    .title('This will enable view only link sharing for the file, \n so other students can see it.')
-                    .textContent('continue?           (not really right now)')
-                    .ariaLabel('continue?')
-                    .ok('Ok')
-                    .cancel('Cancel');
-                $mdDialog.show(confirm).then(function() {
-                    sendFile();
-                }, function() {
-                    alert("um, that's not going to work") //cancel
-                });
-            }
-            else {
+            var confirm = $mdDialog.confirm()
+                .title('This will enable view only link sharing for the file, \n so other students can see it.')
+                .textContent('continue?           (not really right now)')
+                .ariaLabel('continue?')
+                .ok('Ok')
+                .cancel('Cancel');
+            $mdDialog.show(confirm).then(function() {
                 sendFile();
-            }
+            }, function() {
+                alert("um, that's not going to work") //cancel
+            });
+        }
+        else {
+            sendFile();
+        }
 
-            function sendFile() {
-                $mdToast.show({
-                    template: '<md-toast><span style="font-size:18px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right:-20px"></md-progress-circular></md-toast>',
-                    hideDelay: 3000000,
-                });
-                GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
-                    console.log(reply.result);
-                    $mdToast.hide();
-                    $scope.close();
-                });
-            }
+        function sendFile() {
+            $mdToast.show({
+                template: '<md-toast><span style="font-size:18px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right:-20px"></md-progress-circular></md-toast>',
+                hideDelay: 3000000,
+            });
+            GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
+                console.log(reply.result);
+                $mdToast.hide();
+                $scope.close();
+            });
+        }
     };
 
     $scope.findType = function() {
