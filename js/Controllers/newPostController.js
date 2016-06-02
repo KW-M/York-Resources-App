@@ -1,15 +1,9 @@
 /* we don't define the "new post controller" here because it was alredy
    defined by the $md-dialog in the newPost function on mainController.   */
 function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
-    $scope.Tags = [];
-    $scope.Title = '';
-    $scope.Type = '';
-    $scope.Description = '';
-    $scope.readOnly = false;
+    $scope.fillInValues();//see function at bottom
     $scope.driveThumbnail = "";
     $scope.classSearch = "";
-    $scope.class = "";
-    $scope.courses = ["English III", "Spanish I", "Chemistry", "AP Biology", "Geometry", "Algebra II", "Physics", "calc AB", "Chinese I", "World-history I", "world-history II"];
     $scope.classSelected = function(inputClass) {
         $scope.class = inputClass.class;
         console.log(inputClass.class);
@@ -108,4 +102,13 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
             }
         });
     };
+    
+    $scope.fillInValues = function() {
+        
+    }
+    $scope.Tags = [];
+    $scope.Title = '';
+    $scope.Type = '';
+    $scope.Description = '';
+    $scope.class = "";
 }
