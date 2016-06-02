@@ -22,7 +22,6 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
     $scope.findType = function() {
         if ($scope.Link === '') {
             $scope.Type = 'NoLink';
-            alert("hey, that isn't a link");
         }
         else {
             console.log("reached2");
@@ -55,18 +54,10 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
                 "Type": "noLink",
                 "Flagged": false,
                 "Title": $scope.Title,
-                "Creator": {
-                    "Name": userInfo.result.user.displayName,
-                    "Email": userInfo.result.user.emailAddress,
-                    "ClassOf": '2018',
-                },
-                "CreationDate": new Date(),
-                "UpdateDate": new Date(),
                 "Tags": $scope.Tags,
                 "Description": description,
                 "Class": {
                     "Name": $scope.class,
-                    "Teacher": "Brook"
                 },
                 "Link": $scope.Link,
                 "FileId": $scope.id,
@@ -107,28 +98,31 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
     $scope.fillInValues = function() {
         if (postObj.Type != undefined || ""){
             $scope.Type = postObj.Type;
-        }
+        } else {$scope.Type = "noLink";}
+
         if (postObj.Flagged = true){
             $scope.Flagged = true;
-        }
+        } else {$scope.Flagged = false;}
+
         if (postObj.Title != undefined || ""){
             $scope.Title = postObj.Title;
-        }
+        } else {$scope.Title = "";}
+
         if (postObj.CreationDate != undefined || ""){
             $scope.CreationDate = postObj.CreationDate;
-        } else { $scope.CreationDate = new Date()}
+        } else { $scope.CreationDate = new Date();}
+
         if (postObj.UpdateDate != undefined || ""){
             $scope.UpdateDate = postObj.UpdateDate;
-        } else { $scope.UpdateDate = new Date()}
-        
+        } else { $scope.UpdateDate = new Date();}
+
         if (postObj.Tags != undefined || []){
             $scope.Tags = postObj.Tags;
         } else {$scope.Tags = [];}
-        if (postObj.type != undefined || ""){
-            $scope.Type = '';
-        }
-            $scope.Tags = [];
-    $scope.Title = '';
+
+        if (postObj.Description != undefined || ""){
+            $scope.Description = postObj.Description;
+        } else {$scope.Description = "";}
     $scope.Description = '';
     $scope.class = "";
     }
