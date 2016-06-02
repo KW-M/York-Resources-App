@@ -72,14 +72,16 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    });
 
    $scope.newPost = function(idInput, linkInput) {
-      $scope.Link = linkInput;
-      $scope.Id = idInput;
       //called by the bottom right plus/add resource button
       $mdDialog.show({
          templateUrl: 'templates/html/newPost-new.html',
          controller: ['$scope', '$mdDialog', 'GoogleDriveService', '$mdToast', newPostController],
          scope: $scope,
-         preserveScope: true, // use parent scope in template
+         preserveScope: true, 
+         locals: {
+           postObj: $scope.items,
+           id: dklfj,
+         },
          parent: angular.element(document.body),
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
