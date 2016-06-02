@@ -10,8 +10,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
     };
     
     $scope.classSelected = function(inputClass) {
-        $scope.class = inputClass.class;
-        console.log(inputClass.class);
+        $scope.lass = inputClass.class;
     };
     
     $scope.Preview = function() {
@@ -20,33 +19,6 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
         }
         else if ($scope.Type === "gDrive") {
             return $scope.driveThumbnail;
-        }
-    };
-    
-    $scope.findType = function() {
-        if ($scope.Link === '') {
-            $scope.Type = 'NoLink';
-        }
-        else {
-            console.log("reached2");
-
-            if ($scope.Link.match(/(?:http|https):\/\/.{2,}/)) {
-                var isgdrive = $scope.Link.match(/\/(?:d|file|folder|folders)\/([-\w]{25,})/)
-                if (isgdrive) {
-                    $scope.Type = 'gDrive';
-                    alert("Hey, that's a Google Drive link with and ID of :" + isgdrive[1]);
-                }
-                else {
-                    $scope.Type = 'Link';
-                    alert("hey, that is a link");
-                }
-            }
-            else {
-                if ($scope.Link.length > 9) {
-                    $scope.Link = "http://" + $scope.Link
-                }
-                $scope.Type = 'Link';
-            }
         }
     };
 
@@ -99,6 +71,34 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
             }
         });
     };
+    
+    $scope.findType = function() {
+        if ($scope.Link === '') {
+            $scope.Type = 'NoLink';
+        }
+        else {
+            console.log("reached2");
+
+            if ($scope.Link.match(/(?:http|https):\/\/.{2,}/)) {
+                var isgdrive = $scope.Link.match(/\/(?:d|file|folder|folders)\/([-\w]{25,})/)
+                if (isgdrive) {
+                    $scope.Type = 'gDrive';
+                    alert("Hey, that's a Google Drive link with and ID of :" + isgdrive[1]);
+                }
+                else {
+                    $scope.Type = 'Link';
+                    alert("hey, that is a link");
+                }
+            }
+            else {
+                if ($scope.Link.length > 9) {
+                    $scope.Link = "http://" + $scope.Link
+                }
+                $scope.Type = 'Link';
+            }
+        }
+    };
+    
     function fillInValues () {
         if (postObj != undefined) {
             if (postObj.Type != undefined || "") {
