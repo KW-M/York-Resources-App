@@ -68,6 +68,10 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
             });
             console.log(response);
             if ($scope.Type === "gDrive") {
+                 $mdToast.show({
+                    template: 'This will share the file with people at york.',
+                    hideDelay: 30000,
+                });
                 var confirm = $mdDialog.confirm()
                     .title('This will enable view only link sharing for the file, \n so other students can see it.')
                     .textContent('continue?           (not really right now)')
@@ -87,7 +91,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
             function sendFile() {
                 $mdToast.show({
                     template: '<md-toast><span style="font-size:18px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right:-20px"></md-progress-circular></md-toast>',
-                    hideDelay: 30000,
+                    hideDelay: 3000000,
                 });
                 GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
                     console.log(reply.result);
