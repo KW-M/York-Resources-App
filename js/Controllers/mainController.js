@@ -228,9 +228,15 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    }
 
-   $scope.sortByLikes = function () {
-      $scope.filteredPosts.sort(function (a, b) {
+   $scope.sortByLikes = function (thingToSort) {
+      thingToSort.sort(function (a, b) {
          return b.LikeUsers.length - a.LikeUsers.length;
+      });
+   }
+
+   $scope.sortByDate = function (thingToSort) {
+      thingToSort.sort(function (a, b) {
+         return b.UpdateDate - a.UpdateDate;
       });
    }
 
