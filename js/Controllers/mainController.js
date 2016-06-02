@@ -51,7 +51,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.$watch('searchTxt', $scope.filterPosts);
 
    $scope.filterPosts = function(val) {
-      
+      val = val.toLowerCase();
+      $scope.allPosts = $scope.allPosts.filter(function(obj) {
+         return obj.Title.toLowerCase().indexOf(val) != -1;
+      });
    }
 
    $scope.pathSelected = function(path) {
