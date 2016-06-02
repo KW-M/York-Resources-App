@@ -22,10 +22,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
         }
     };
     
-    function convertImgToDataURLviaCanvas(url, callback, outputFormat){
-    var img = new Image();
-    img.crossOrigin = 'Anonymous';
-    img.onload = function(){
+    function convertImgToDataURLviaCanvas(callback, outputFormat){
         var canvas = document.createElement('CANVAS');
         var ctx = canvas.getContext('2d');
         var dataURL;
@@ -36,7 +33,6 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
         callback(dataURL);
         canvas = null; 
     };
-    img.src = url;
 }
 
     $scope.submit = function() {
