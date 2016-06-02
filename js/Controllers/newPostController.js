@@ -53,10 +53,10 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
                 "Tags": $scope.Tags,
                 "Description": description.textContent,
                 "Class": {
-                    "Name": $scope.class,
+                    "Name": $scope.Class,
                 },
                 "Link": $scope.Link,
-                "FileId": $scope.id,
+                "FileId": $scope.Id,
                 "ImageURL": convertImg(),
                 "LikeUsers": [],
             });
@@ -174,6 +174,24 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
             }
             else {
                 $scope.Class = "";
+            }
+            if (postObj.Link != undefined || "") {
+                $scope.Link = postObj.Link;
+            }
+            else {
+                $scope.Link = "";
+            }
+            if (postObj.FileId != undefined || "") {
+                $scope.FileId = postObj.FileId;
+            }
+            else {
+                $scope.FileId = "";
+            }
+            if (postObj.ImageURL != undefined || "") {
+                $scope.ImageURL = postObj.ImageURL;
+            }
+            else {
+                $scope.ImageURL = "";
             }
         }
     }
