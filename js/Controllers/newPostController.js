@@ -1,8 +1,9 @@
 /* we don't define the "new post controller" here because it was alredy
    defined by the $md-dialog in the newPost function on mainController.   */
+       var headerImg = window;
 function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
     fillInValues();
-    var headerImg = window;
+
     console.log(headerImg);
     $scope.driveThumbnail = "";
     $scope.classSearch = "";
