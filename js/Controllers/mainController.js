@@ -2,7 +2,7 @@
 var dependancies = ['$scope', '$mdDialog', '$window', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', '$routeParams', 'angularGridInstance']
 app.controller('ApplicationController', dependancies.concat([function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, $routeParams, angularGridInstance) {
    var self = this;
-   var content_container = document.getElementById("content_container");
+   var content_container = window;
    $scope.classList = classes;
    $scope.allPosts = [];
    $scope.filteredPosts = [];
@@ -76,6 +76,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $mdDialog.show({
          templateUrl: 'templates/html/new-post.html',
          controller: ['$scope', '$mdDialog', 'GoogleDriveService', '$mdToast', newPostController],
+         scope: $scope,
          preserveScope: true,
          locals: {
            postObj: $scope.items,
