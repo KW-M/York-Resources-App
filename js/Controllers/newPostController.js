@@ -6,7 +6,8 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
     console.log(headerImg);
     $scope.driveThumbnail = "";
     $scope.classSearch = "";
-
+            var description = document.querySelector('#DescriptionTxt').textContent;
+            console.log(description);
     $scope.close = function() {
         $mdDialog.hide();
     };
@@ -35,6 +36,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
         dataURL = canvas.toDataURL('png');
         callback(dataURL);
         canvas = null;
+        return dataURL;
     } else {
        headerImg.onload = function(){
            convertImg();
@@ -43,9 +45,8 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
     }
 
     $scope.submit = function() {
-        GoogleDriveService.getUserInfo().then(function(userInfo) {
-            console.log(userInfo.result);
             var description = document.querySelector('#DescriptionTxt').textContent;
+            console.log(description);
             var response = ({
                 "Type": "noLink",
                 "Flagged": false,
@@ -57,7 +58,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
                 },
                 "Link": $scope.Link,
                 "FileId": $scope.id,
-                "ImageURL": "https://api.pagelr.com/capture?uri=" + $scope.Link + "&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw",
+                "ImageURL": convertImg(),
                 "LikeUsers": [],
             });
             console.log(response);
@@ -89,7 +90,6 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
                     $scope.close();
                 });
             }
-        });
     };
 
     $scope.findType = function() {
