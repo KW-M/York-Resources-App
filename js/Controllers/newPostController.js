@@ -108,18 +108,22 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
         if (postObj.Type != undefined || ""){
             $scope.Type = postObj.Type;
         }
+        if (postObj.Flagged = true){
+            $scope.Flagged = true;
+        }
         if (postObj.Title != undefined || ""){
             $scope.Title = postObj.Title;
         }
-        if (postObj.flaged = undefined || ""){
-            $scope.Type = '';
-        }
-        if (postObj.type != undefined || ""){
-            $scope.Type = '';
-        }
-        if (postObj.type != undefined || ""){
-            $scope.Type = '';
-        }
+        if (postObj.CreationDate != undefined || ""){
+            $scope.CreationDate = postObj.CreationDate;
+        } else { $scope.CreationDate = new Date()}
+        if (postObj.UpdateDate != undefined || ""){
+            $scope.UpdateDate = postObj.UpdateDate;
+        } else { $scope.UpdateDate = new Date()}
+        
+        if (postObj.Tags != undefined || []){
+            $scope.Tags = postObj.Tags;
+        } else {$scope.Tags = [];}
         if (postObj.type != undefined || ""){
             $scope.Type = '';
         }
