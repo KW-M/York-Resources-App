@@ -32,12 +32,12 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
         canvas.height = this.height;
         canvas.width = this.width;
         ctx.drawImage(this, 0, 0);
-        dataURL = canvas.toDataURL(outputFormat);
+        dataURL = canvas.toDataURL('png');
         callback(dataURL);
         canvas = null;
     } else {
        headerImg.onload = function(){
-           convertImg()
+           convertImg();
        }
     }
     }
