@@ -169,29 +169,39 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
                 $scope.Description = "";
             }
 
-            if (postObj.Class != undefined || "") {
-                $scope.Class = postObj.Class;
+            if (postObj.Class.Name != undefined || "") {
+                $scope.Class.Name = postObj.Class.Name;
             }
             else {
-                $scope.Class = "";
+                $scope.Class.Name = '';
             }
+
             if (postObj.Link != undefined || "") {
                 $scope.Link = postObj.Link;
             }
             else {
                 $scope.Link = "";
             }
+
             if (postObj.FileId != undefined || "") {
                 $scope.FileId = postObj.FileId;
             }
             else {
                 $scope.FileId = "";
             }
+
             if (postObj.ImageURL != undefined || "") {
                 $scope.ImageURL = postObj.ImageURL;
             }
             else {
                 $scope.ImageURL = "";
+            }
+
+            if (postObj.LikeUsers != undefined || "") {
+                $scope.LikeUsers = postObj.LikeUsers;
+            }
+            else {
+                $scope.LikeUsers = [];
             }
         }
     }
