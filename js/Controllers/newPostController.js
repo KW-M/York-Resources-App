@@ -1,16 +1,19 @@
 /* we don't define the "new post controller" here because it was alredy
    defined by the $md-dialog in the newPost function on mainController.   */
 function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
-    $scope.fillInValues();//see function at bottom
+    fillInValues();
     $scope.driveThumbnail = "";
     $scope.classSearch = "";
-    $scope.classSelected = function(inputClass) {
-        $scope.class = inputClass.class;
-        console.log(inputClass.class);
-    }
+    
     $scope.close = function() {
         $mdDialog.hide();
     };
+    
+    $scope.classSelected = function(inputClass) {
+        $scope.class = inputClass.class;
+        console.log(inputClass.class);
+    };
+    
     $scope.Preview = function() {
         if ($scope.Type === "Link") {
             return 'https://api.pagelr.com/capture?uri=' + $scope.Link + '&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw'
@@ -18,7 +21,8 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
         else if ($scope.Type === "gDrive") {
             return $scope.driveThumbnail;
         }
-    }
+    };
+    
     $scope.findType = function() {
         if ($scope.Link === '') {
             $scope.Type = 'NoLink';
@@ -81,51 +85,77 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
             else {
                 sendFile();
             }
-            function sendFile(){
-                    $mdToast.show({
-                        template: '<md-toast><span style="font-size:18px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right:-20px"></md-progress-circular></md-toast>',
-                        hideDelay: 30000,
-                    });
-                    GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
-                        console.log(reply.result);
-                        $mdToast.hide();
-                        $scope.close();
+
+            function sendFile() {
+                $mdToast.show({
+                    template: '<md-toast><span style="font-size:18px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right:-20px"></md-progress-circular></md-toast>',
+                    hideDelay: 30000,
+                });
+                GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
+                    console.log(reply.result);
+                    $mdToast.hide();
+                    $scope.close();
                 });
             }
         });
     };
+    function fillInValues () {
+        if (postObj != undefined) {
+            if (postObj.Type != undefined || "") {
+                $scope.Type = postObj.Type;
+            }
+            else {
+                $scope.Type = "noLink";
+            }
 
-    $scope.fillInValues = function() {
-        if (postObj.Type != undefined || ""){
-            $scope.Type = postObj.Type;
-        } else {$scope.Type = "noLink";}
+            if (postObj.Flagged = true) {
+                $scope.Flagged = true;
+            }
+            else {
+                $scope.Flagged = false;
+            }
 
-        if (postObj.Flagged = true){
-            $scope.Flagged = true;
-        } else {$scope.Flagged = false;}
+            if (postObj.Title != undefined || "") {
+                $scope.Title = postObj.Title;
+            }
+            else {
+                $scope.Title = "";
+            }
 
-        if (postObj.Title != undefined || ""){
-            $scope.Title = postObj.Title;
-        } else {$scope.Title = "";}
+            if (postObj.CreationDate != undefined || "") {
+                $scope.CreationDate = postObj.CreationDate;
+            }
+            else {
+                $scope.CreationDate = new Date();
+            }
 
-        if (postObj.CreationDate != undefined || ""){
-            $scope.CreationDate = postObj.CreationDate;
-        } else { $scope.CreationDate = new Date();}
+            if (postObj.UpdateDate != undefined || "") {
+                $scope.UpdateDate = postObj.UpdateDate;
+            }
+            else {
+                $scope.UpdateDate = new Date();
+            }
 
-        if (postObj.UpdateDate != undefined || ""){
-            $scope.UpdateDate = postObj.UpdateDate;
-        } else { $scope.UpdateDate = new Date();}
+            if (postObj.Tags != undefined || []) {
+                $scope.Tags = postObj.Tags;
+            }
+            else {
+                $scope.Tags = [];
+            }
 
-        if (postObj.Tags != undefined || []){
-            $scope.Tags = postObj.Tags;
-        } else {$scope.Tags = [];}
+            if (postObj.Description != undefined || "") {
+                $scope.Description = postObj.Description;
+            }
+            else {
+                $scope.Description = "";
+            }
 
-        if (postObj.Description != undefined || ""){
-            $scope.Description = postObj.Description;
-        } else {$scope.Description = "";}
-        
-        if (postObj.Class != undefined || ""){
-            $scope.Class = postObj.Class;
-        } else {$scope.Class = "";}
+            if (postObj.Class != undefined || "") {
+                $scope.Class = postObj.Class;
+            }
+            else {
+                $scope.Class = "";
+            }
+        }
     }
 }
