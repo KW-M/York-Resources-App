@@ -4,9 +4,9 @@ var description = document.querySelector('#DescriptionTxt')
    defined by the $md-dialog in the newPost function on mainController.   */
 function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
     fillInValues();
-    console.log(headerImg);
     $scope.driveThumbnail = "";
     $scope.classSearch = "";
+
     $scope.close = function() {
         $mdDialog.hide();
     };
@@ -44,6 +44,12 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
     }
 
     $scope.submit = function() {
+    if (headerImg.complete !== true) {
+       headerImg.onload = function(){
+           $scope.submit();
+           return 'retrying'
+       }
+    }
             var description = document.querySelector('#DescriptionTxt').textContent;
             console.log(description);
             var response = ({
