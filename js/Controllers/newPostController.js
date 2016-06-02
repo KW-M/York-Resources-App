@@ -47,26 +47,32 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
 
     $scope.isReadyToSubmit = function() {
         if ($scope.class = '') {
-            var toast = $mdToast.simple()
-                .textContent('Select a class for this post.');
+            var classToast = $mdToast.simple().textContent('Select a class for this post.');
         }
         if ($scope.class = '') {
-            $mdToast.show($mdToast.simple().textContent('Posts must have a title.'))
+            var titleToast = $mdToast.simple().textContent('Posts must have a title.');
+            titleToast.hideDelay = 2500;
+            titleToast.hideDelay = 2500;
+            $mdToast.show()
         }
         if ($scope.Type === "gDrive") {
-            var toast = $mdToast.simple()
+            var shareToast = $mdToast.simple()
                 .textContent('This will allow people at York to view the file.')
                 .action('OK')
                 .highlightAction(true)
-                .highlightClass('md-primary') // Accent is used by default, this just demonstrates the usage.
+                .highlightClass('md-primary');
+            shareToast.hideDelay = 30000;// Accent is used by default, this just demonstrates the usage.
             $mdToast.show(toast).then(function(response) {
                 if (response == 'ok') {
-
+                    checkHeaderImg();
                 }
             });
+        } else {
+            checkHeaderImg();
         }
 
         function checkHeaderImg() {
+            
             if (headerImg.complete === true) {
                 $mdToast.show({
                     template: '<md-toast><span style="font-size:18px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right:-20px"></md-progress-circular></md-toast>',
