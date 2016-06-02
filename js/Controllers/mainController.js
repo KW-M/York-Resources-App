@@ -228,6 +228,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    }
 
+   $scope.sortByLikes = function () {
+      $scope.filteredPosts.sort(function (a, b) {
+         return b.likeUsers.length - a.likeUsers.length;
+      });
+   }
+
    $scope.confirmDelete = function(ev, content, arrayIndex) {
       // Appending dialog to document.body to cover sidenav in docs app
       var confirm = $mdDialog.confirm()
