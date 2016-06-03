@@ -82,6 +82,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
            postObj: $scope.items,
            operation: operation
          },
+         onComplete: function () {
+                    var headerImg = angular.element(document.getElementById("header_image"));
+        var description = angular.element(document.querySelector('#DescriptionTxt'));
+        var dialogElement = angular.element(document.querySelector('#new_post_dialog'));
+         }
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
          openFrom: ('#new_post_button'),
