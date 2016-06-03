@@ -4,7 +4,7 @@
             <md-list>
                 <md-list-item>
                     <md-menu-item>
-                        <md-button ng-click="gotoRoute('/all-posts','hi','bye')" ng-class="{ 'selected' : pathSelected('/all-posts') }">
+                        <md-button ng-click="::gotoRoute('/all-posts','hi','bye')" ng-class="{ 'selected' : pathSelected('/all-posts') }">
                             <md-icon>inbox</md-icon>
                             All Posts
                         </md-button>
@@ -12,7 +12,7 @@
                 </md-list-item>
                 <md-list-item>
                     <md-menu-item>
-                        <md-button ng-click="gotoRoute('/my-posts')">
+                        <md-button ng-click="::gotoRoute('/my-posts')">
                             <md-icon>person</md-icon>
                             My Posts
                         </md-button>
@@ -20,7 +20,7 @@
                 </md-list-item>
                 <md-list-item>
                     <md-menu-item>
-                        <md-button ng-click="gotoRoute('/flaged')">
+                        <md-button ng-click="::gotoRoute('/flaged')">
                             <md-icon>flag</md-icon>
                             Flagged
                         </md-button>
@@ -38,10 +38,10 @@
                     </md-menu-item>
                 </md-list-item>
                 <md-list class="side-nav-classes side-nav-section">
-                    <md-list-item ng-repeat="(key,val) in classList">
+                    <md-list-item ng-repeat="::(key,val) in classList">
                         <md-menu-item>
                             <md-button ng-hover="angular.element(e.srcElement)setAttribute('style', 'background-color':val.color)">
-                                {{key}}
+                                {{::key}}
                             </md-button>
                         </md-menu-item>
                     </md-list-item>
