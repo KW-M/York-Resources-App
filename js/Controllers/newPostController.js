@@ -36,7 +36,6 @@
         }
 
         $scope.isReadyToSubmit = function() {
-            console.log($scope.Class)
             if ($scope.Class === undefined) {
                 $mdToast.show({
                     template: '<md-toast>Please select a class for this post.</md-toast>',
@@ -44,7 +43,7 @@
                     parent: $scope.dialogElement,
                 });
             } else {
-                if ($scope.Title === undefined) {
+                if ($scope.Title === '' || undefined || null) {
                     $mdToast.show({
                         template: '<md-toast>Posts must have a title.</md-toast>',
                         hideDelay: 1500,
@@ -63,7 +62,7 @@
                     }
                 }
             }
-            
+
 
             function checkHeaderImg() {
 
@@ -222,4 +221,4 @@
                 }
             }
         }
-    }
+}
