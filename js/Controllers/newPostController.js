@@ -58,13 +58,13 @@
                         });
                     }
                     else {
-                        $scope.checKheaderImg();
+                        $scope.checkHeaderImg();
                     }
                 }
             }
 
 
-             $scope.checKheaderImg = function () {
+             $scope.checkHeaderImg = function () {
 
                 if ($scope.newPostHeaderImg.complete === true) {
                     $mdToast.show({
@@ -100,11 +100,15 @@
                 "ImageURL": '',
                 "LikeUsers": [],
             });
+            if (operation === 'new') {
             // GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
             //     console.log(reply.result);
             //     $mdToast.hide();
             //     $scope.close();
             // });
+            } else if (operation === 'update') {
+                
+            }
         }
 
         $scope.findType = function() {
