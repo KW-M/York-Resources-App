@@ -212,7 +212,6 @@ toolbar-top {
 }
 
 .raise-on-hover:hover {
-    transition: box-shadow .2s;
     box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32);
 }
 
@@ -222,8 +221,3 @@ toolbar-top {
 
 /* --------------------------- Animations ------------------- */
 
-
-.post-card {
-  -webkit-transition: 1s;
-  transition: 1s;
-}
