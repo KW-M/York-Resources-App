@@ -5,7 +5,6 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
     $scope.driveThumbnail = "";
     $scope.classSearch = "";
 
-
     $scope.close = function() {
         $mdDialog.hide();
     };
@@ -24,7 +23,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
     };
 
     function convertImg() {
-        if (headerImg.complete = true) {
+        if ($scope.newPostHeaderImg.complete = true) {
             var canvas = document.createElement('CANVAS');
             var ctx = canvas.getContext('2d');
             var dataURL;
@@ -37,7 +36,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
             return dataURL;
         }
         else {
-            headerImg.onload = function() {
+            $scope.newPostHeaderImg.onload = function() {
                 convertImg();
             }
         }
@@ -74,7 +73,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
 
         function checkHeaderImg() {
 
-            if (headerImg.complete === true) {
+            if ($scope.newPostHeaderImg.complete === true) {
                 $mdToast.show({
                     template: '<md-toast><span style="font-size:18px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right:-20px"></md-progress-circular></md-toast>',
                     hideDelay: 3000000,
@@ -86,7 +85,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
                     template: '<md-toast><span style="font-size:18px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right:-20px"></md-progress-circular></md-toast>',
                     hideDelay: 3000000,
                 });
-                headerImg.onload = function() {
+                $scope.newPostHeaderImg.onload = function() {
                     $scope.submit();
                 }
             }

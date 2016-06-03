@@ -83,10 +83,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
            operation: operation
          },
          onComplete: function () {
-                    var headerImg = angular.element(document.getElementById("header_image"));
-        var description = angular.element(document.querySelector('#DescriptionTxt'));
-        var dialogElement = angular.element(document.querySelector('#new_post_dialog'));
-         }
+            $scope.newPostHeaderImg = document.getElementById("header_image");
+            $scope.newPostDescription = document.querySelector('#DescriptionTxt');
+            $scope.dialogElement = document.querySelector('#new_post_dialog');
+            console.log($scope.headerImg);
+         },
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
          openFrom: ('#new_post_button'),
