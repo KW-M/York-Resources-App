@@ -222,7 +222,6 @@ toolbar-top {
 
 /* --------------------------- Animations ------------------- */
 
-
 .post-card.ng-leave {
   -webkit-transition: opacity 450ms ease, -webkit-transform 450ms ease;
   transition: opacity 450ms ease, transform 450ms ease;
@@ -243,7 +242,7 @@ toolbar-top {
 }
 .post-card.ng-enter-stagger {
   /* this will have a 100ms delay between each successive leave animation */
-  transition-delay: 1s;
+  transition-delay: 0.s;
 
   /* As of 1.4.4, this must always be set: it signals ngAnimate
     to not accidentally inherit a delay property from another CSS class */
