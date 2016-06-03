@@ -1,15 +1,29 @@
 /*
-    angularGrid.js v 0.5.4
+    angularGrid.js v 0.6.0
     Author: Sudhanshu Yadav
     Copyright (c) 2015-2016 Sudhanshu Yadav - ignitersworld.com , released under the MIT license.
-    Demo on: http://ignitersworld.com/lab/angulargrid/demo1.html
+    Demo on: http://ignitersworld.com/lab/angulargrid/
     Documentation and download on https://github.com/s-yadav/angulargrid
 */
 
 /* module to create pinterest like responsive masonry grid system for angular */
 
-(function(angular, window, undefined) {
+;(function (root, factory) {
+  if (typeof module !== 'undefined' && module.exports) {
+    // CommonJS
+    module.exports = factory(require('angular'), root);
+  } else if (typeof define === 'function' && define.amd) {
+    // AMD
+    define(['angular'], function (angular) {
+        return (global.PatternLock = factory(angular, root));
+    });
+  } else {
+    // Global Variables
+    factory(root.angular, root);
+  }
+}(this, function (angular, window, undefined) {
   "use strict";
+
   //defaults for plugin
   var defaults = {
     gridWidth: 300, //minumum width of a grid, this may increase to take whole space of container
@@ -20,7 +34,7 @@
     cssGrid: false,
     performantScroll: false,
     pageSize: 'auto', //decide based on screen size
-    scrollContainer: '#content_container',
+    scrollContainer: 'body',
     infiniteScrollDelay: 3000,
     infiniteScrollDistance: 100,
   };
@@ -57,8 +71,6 @@
     return Array.prototype.slice.call(list);
   }
 
-
-
   //add required css
   $(document.head).append('<style>' +
     '.ag-no-transition{' +
@@ -69,7 +81,8 @@
     '.angular-grid > *{opacity : 0} ' +
     '.angular-grid > .angular-grid-item{opacity : 1}' + '</style>');
 
-  angular.module('angularGrid', []).directive('angularGrid', ['$timeout', '$window', '$q', 'angularGridInstance',
+  return angular.module('angularGrid', [])
+    .directive('angularGrid', ['$timeout', '$window', '$q', 'angularGridInstance',
       function($timeout, $window, $q, angularGridInstance) {
         return {
           restrict: 'A',
@@ -172,9 +185,8 @@
             }
 
             function getScrollContainerInfo() {
-              var container = $(document.querySelector(options.scrollContainer))
-              console.log(container[0]);
-                var contElm = container[0];
+              var container = $(document.querySelector(options.scrollContainer)),
+                contElm = container[0];
 
               return {
                 height: contElm.offsetHeight,
@@ -353,6 +365,7 @@
                 loadedImgPromises = [];
 
               domToAry(allImg).forEach(function(img) {
+                if(!img.src) return;
                 beforeLoad(img);
                 if (!imageLoaded(img) && !ignoreCheck(img)) {
                   loadedImgPromises.push($q(function(resolve, reject) {
@@ -669,6 +682,7 @@
 
       return angularGridInstance;
 
-    });
+    })
+    .name;
 
-}(angular, window));
+}));
