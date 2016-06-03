@@ -40,15 +40,16 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
         if ($scope.Class === undefined) {
             console.log('undefined')
             var classToast = $mdToast.simple().textContent('Select a class for this post.');
-            ClassToast.hideDelay = 2500;
-            ClassToast.parent = $scope.dialogElement;
+            classToast.hideDelay = 2500;
+            classToast.parent = $scope.dialogElement;
+            $mdToast.show(classToast);
         }
-        if ($scope.Title === null) {
+        if ($scope.Title === undefined) {
             console.log('null')
             var titleToast = $mdToast.simple().textContent('Posts must have a title.');
             titleToast.hideDelay = 2500;
             titleToast.parent = $scope.dialogElement;
-            $mdToast.show()
+            $mdToast.show(titleToast);
         }
         if ($scope.Type === "gDrive") {
             var shareToast = $mdToast.simple()
