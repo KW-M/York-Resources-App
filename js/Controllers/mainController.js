@@ -292,7 +292,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          performantScrollEnabled = true;
       }
       //called whenever the content_container scrolls
-      content_container.style = 'pointer-events:none'
       var yScroll = content_container.scrollTop;
       if (yScroll >= 120) {
          $scope.globals.FABisHidden = false;
