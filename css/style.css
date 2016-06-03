@@ -217,6 +217,7 @@ toolbar-top {
 }
 
 
+
 /*---------------------------------------------------------------- */
 
 
@@ -251,4 +252,5 @@ toolbar-top {
 .post-card.angular-grid-item.ng-enter.ng-enter-active {
    -webkit-transform: translateY(0);
    transform: translateY(0);
+   opacity: 1;
 }
