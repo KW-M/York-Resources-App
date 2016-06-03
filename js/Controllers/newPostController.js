@@ -33,21 +33,16 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
             callback(dataURL);
             canvas = null;
             return dataURL;
-        }
-        else {
-            $scope.newPostHeaderImg.onload = function() {
-                convertImg();
-            }
-        }
     }
 
     $scope.isReadyToSubmit = function() {
-        if ($scope.Class = '' || undefined) {
+        console.log ($scope.Class)
+        if ($scope.Class === '' || undefined) {
             var classToast = $mdToast.simple().textContent('Select a class for this post.');
             titleToast.hideDelay = 2500;
             titleToast.parent = $scope.dialogElement;
         }
-        if ($scope.Title = '' || undefined) {
+        if ($scope.Title === '' || undefined) {
             var titleToast = $mdToast.simple().textContent('Posts must have a title.');
             titleToast.hideDelay = 2500;
             titleToast.parent = $scope.dialogElement;
@@ -141,85 +136,85 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
     };
 
     function fillInValues() {
-        if (postObj != undefined) {
-            if (postObj.Type != undefined || "") {
+        if (postObj !== undefined) {
+            if (postObj.Type !== undefined || "") {
                 $scope.Type = postObj.Type;
             }
             else {
                 $scope.Type = "noLink";
             }
 
-            if (postObj.Flagged = true) {
+            if (postObj.Flagged === true) {
                 $scope.Flagged = true;
             }
             else {
                 $scope.Flagged = false;
             }
 
-            if (postObj.Title != undefined || "") {
+            if (postObj.Title !== undefined || "") {
                 $scope.Title = postObj.Title;
             }
             else {
                 $scope.Title = "";
             }
 
-            if (postObj.CreationDate != undefined || "") {
+            if (postObj.CreationDate !== undefined || "") {
                 $scope.CreationDate = postObj.CreationDate;
             }
             else {
                 $scope.CreationDate = new Date();
             }
 
-            if (postObj.UpdateDate != undefined || "") {
+            if (postObj.UpdateDate !== undefined || "") {
                 $scope.UpdateDate = postObj.UpdateDate;
             }
             else {
                 $scope.UpdateDate = new Date();
             }
 
-            if (postObj.Tags != undefined || []) {
+            if (postObj.Tags !== undefined || []) {
                 $scope.Tags = postObj.Tags;
             }
             else {
                 $scope.Tags = [];
             }
 
-            if (postObj.Description != undefined || "") {
+            if (postObj.Description !== undefined || "") {
                 $scope.newPostDescription = postObj.Description;
             }
             else {
                 $scope.newPostDescription = "";
             }
 
-            if (postObj.Class.Name != undefined || "") {
+            if (postObj.Class.Name !== undefined || "") {
                 $scope.Class.Name = postObj.Class.Name;
             }
             else {
                 $scope.Class.Name = '';
             }
 
-            if (postObj.Link != undefined || "") {
+            if (postObj.Link !== undefined || "") {
                 $scope.Link = postObj.Link;
             }
             else {
                 $scope.Link = "";
             }
 
-            if (postObj.FileId != undefined || "") {
+            if (postObj.FileId !== undefined || "") {
                 $scope.FileId = postObj.FileId;
             }
             else {
                 $scope.FileId = "";
             }
 
-            if (postObj.ImageURL != undefined || "") {
+            if (postObj.ImageURL !== undefined || "") {
                 $scope.ImageURL = postObj.ImageURL;
             }
             else {
                 $scope.ImageURL = "";
             }
 
-            if (postObj.LikeUsers != undefined || "") {
+            if (postObj.LikeUsers !== undefined || "") {
                 $scope.LikeUsers = postObj.LikeUsers;
             }
             else {
