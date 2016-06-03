@@ -118,11 +118,9 @@
                     var isgdrive = $scope.Link.match(/\/(?:d|file|folder|folders)\/([-\w]{25,})/)
                     if (isgdrive) {
                         $scope.Type = 'gDrive';
-                        alert("Hey, that's a Google Drive link with and ID of :" + isgdrive[1]);
                     }
                     else {
                         $scope.Type = 'Link';
-                        alert("hey, that is a link");
                     }
                 }
                 else {
