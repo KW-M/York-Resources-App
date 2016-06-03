@@ -239,8 +239,8 @@ toolbar-top {
 .post-card.ng-enter {
   -webkit-transition: opacity 350ms ease, -webkit-transform 350ms ease;
   transition: opacity 350ms ease, transform 350ms ease;
-  -webkit-transition-delay: 200ms;
-  transition-delay: 200ms;
+  -webkit-transition-delay: 2000ms;
+  transition-delay: 2000ms;
   -webkit-transform: translateY(150px);
   transform: translateY(150px);
   opacity: 0;

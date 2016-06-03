@@ -71,7 +71,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $scope.offset = $location.search().offset;
    });
 
-   $scope.newPost = function(idInput, linkInput, postObj, operation) {
+   $scope.newPost = function(postObj, operation) {
       //called by the bottom right plus/add resource button
       $mdDialog.show({
          templateUrl: 'templates/html/new-post.html',
@@ -86,7 +86,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             $scope.newPostHeaderImg = document.getElementById("header_image");
             $scope.newPostDescription = document.querySelector('#DescriptionTxt');
             $scope.dialogElement = document.querySelector('#new_post_dialog');
-            console.log($scope.headerImg);
          },
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
