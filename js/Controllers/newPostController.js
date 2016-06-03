@@ -23,7 +23,6 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
     };
 
     function convertImg() {
-        if ($scope.newPostHeaderImg.complete = true) {
             var canvas = document.createElement('CANVAS');
             var ctx = canvas.getContext('2d');
             var dataURL;
@@ -46,12 +45,12 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
         if ($scope.Class = '' || undefined) {
             var classToast = $mdToast.simple().textContent('Select a class for this post.');
             titleToast.hideDelay = 2500;
-            titleToast.parent = dialogElement;
+            titleToast.parent = $scope.dialogElement;
         }
         if ($scope.Title = '' || undefined) {
             var titleToast = $mdToast.simple().textContent('Posts must have a title.');
             titleToast.hideDelay = 2500;
-            titleToast.parent = dialogElement;
+            titleToast.parent = $scope.dialogElement;
             $mdToast.show()
         }
         if ($scope.Type === "gDrive") {
@@ -61,7 +60,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
                 .highlightAction(true)
                 .highlightClass('md-primary');
             shareToast.hideDelay = 30000;
-            shareToast.parent = dialogElement;// Accent is used by default, this just demonstrates the usage.
+            shareToast.parent = $scope.dialogElement;// Accent is used by default, this just demonstrates the usage.
             $mdToast.show(toast).then(function(response) {
                 if (response == 'ok') {
                     checkHeaderImg();
@@ -98,13 +97,13 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
             "Flagged": false,
             "Title": $scope.Title,
             "Tags": $scope.Tags,
-            "Description": description.textContent,
+            "Description": $scope.newPostDescription.textContent,
             "Class": {
                 "Name": $scope.Class,
             },
             "Link": $scope.Link,
             "FileId": $scope.Id,
-            "ImageURL": convertImg(),
+            "ImageURL": '',
             "LikeUsers": [],
         });
         GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
@@ -186,10 +185,10 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
             }
 
             if (postObj.Description != undefined || "") {
-                $scope.Description = postObj.Description;
+                $scope.newPostDescription = postObj.Description;
             }
             else {
-                $scope.Description = "";
+                $scope.newPostDescription = "";
             }
 
             if (postObj.Class.Name != undefined || "") {
