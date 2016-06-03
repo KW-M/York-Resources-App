@@ -10,7 +10,7 @@
         };
 
         $scope.classSelected = function(inputClass) {
-            $scope.Class = inputClass.class;
+            $scope.Class = inputClass;
         };
 
         $scope.Preview = function() {
