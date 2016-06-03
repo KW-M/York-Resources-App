@@ -1,24 +1,24 @@
 <div class="post-card-header" ng-click="openLink(Post.Link)">
-    <img ng-src="{{Post.ImageURL}}" class="post-card-image" ng-hide="Post.Link == ''" onerror="this.src = '';">
+    <img ng-src="{{::Post.ImageURL}}" class="post-card-image" ng-hide="Post.Link == ''" onerror="this.src = '';">
     <div class="post-card-image-gradient">
         <p class="post-card-link-text" ng-hide="Post.Link == ''">
-            <i class="zmdi zmdi-globe-alt zmdi-hc-fw"></i> <span> {{Post.Link}}</span>
+            <i class="zmdi zmdi-globe-alt zmdi-hc-fw"></i> <span> {{::Post.Link}}</span>
         </p>
         <div class="post-card-metadata-text">
-            <p style="margin-bottom:2px; margin-top: 6px; font-size: 15px; font-weight:700; font"> <i class="zmdi zmdi-label zmdi-hc-fw" ng-hide="Post.Tags === ''"></i><span ng-repeat="Tag in Post.Tags"> {{Tag}},</span></p>
-            <i class="zmdi zmdi-calendar zmdi-hc-fw"></i><span style="margin-right:10px"> {{Post.CreationDate | date : "m/dd/yyyy"}}</span>
-            <i class="zmdi zmdi-accounts-alt zmdi-hc-fw"></i> <span> {{Post.Class.Name}}</span>
+            <p style="margin-bottom:2px; margin-top: 6px; font-size: 15px; font-weight:700; font"> <i class="zmdi zmdi-label zmdi-hc-fw" ng-hide="Post.Tags === ''"></i><span ng-repeat="::Tag in Post.Tags"> {{::Tag}},</span></p>
+            <i class="zmdi zmdi-calendar zmdi-hc-fw"></i><span style="margin-right:10px"> {{::Post.CreationDate | date : "m/dd/yyyy"}}</span>
+            <i class="zmdi zmdi-accounts-alt zmdi-hc-fw"></i> <span> {{::Post.Class.Name}}</span>
         </div>
     </div>
 </div>
-<p class="post-card-title">{{Post.Title}}</p>
-<p class="post-card-creator"><span>By {{Post.Creator.Name}}</span><span style="float:right">(<i class="zmdi zmdi-graduation-cap"></i> {{Post.Creator.ClassOf}})</span></p>
+<p class="post-card-title">{{::Post.Title}}</p>
+<p class="post-card-creator"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<i class="zmdi zmdi-graduation-cap"></i> {{Post.Creator.ClassOf}})</span></p>
 <p id="post_card_description" ng-bind-html="Post.Description" ng-class="{ 'OverflowShadow': Document.getElementById('post-card-description').scrollHeight > Document.getElementById('post-card-description').clientHeight }">
 
 </p>
 <md-card-actions layout="row" layout-align="start center">
 
-    <p class="like-counter">{{Post.LikeUsers.length}}</p>
+    <p class="like-counter">{{::Post.LikeUsers.length}}</p>
     <md-button id="like_thumb_button" class="md-icon-button" aria-label="Like">
         <md-icon>thumb_up</md-icon>
     </md-button>
