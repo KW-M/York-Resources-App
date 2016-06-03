@@ -7,7 +7,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
     fillInValues();
     $scope.driveThumbnail = "";
     $scope.classSearch = "";
-
+console.log()
     $scope.close = function() {
         $mdDialog.hide();
     };
@@ -63,7 +63,8 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
                 .action('OK')
                 .highlightAction(true)
                 .highlightClass('md-primary');
-            shareToast.hideDelay = 30000;// Accent is used by default, this just demonstrates the usage.
+            shareToast.hideDelay = 30000;
+            shareToast.parent = dialogElement;// Accent is used by default, this just demonstrates the usage.
             $mdToast.show(toast).then(function(response) {
                 if (response == 'ok') {
                     checkHeaderImg();
