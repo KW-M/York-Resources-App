@@ -37,12 +37,14 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
 
     $scope.isReadyToSubmit = function() {
         console.log ($scope.Class)
-        if ($scope.Class === '' || undefined) {
+        if ($scope.Class === undefined) {
+            console.log('undefined')
             var classToast = $mdToast.simple().textContent('Select a class for this post.');
-            titleToast.hideDelay = 2500;
-            titleToast.parent = $scope.dialogElement;
+            ClassToast.hideDelay = 2500;
+            ClassToast.parent = $scope.dialogElement;
         }
-        if ($scope.Title === '' || undefined) {
+        if ($scope.Title === null) {
+            console.log('null')
             var titleToast = $mdToast.simple().textContent('Posts must have a title.');
             titleToast.hideDelay = 2500;
             titleToast.parent = $scope.dialogElement;
@@ -101,11 +103,11 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
             "ImageURL": '',
             "LikeUsers": [],
         });
-        GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
-            console.log(reply.result);
-            $mdToast.hide();
-            $scope.close();
-        });
+        // GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
+        //     console.log(reply.result);
+        //     $mdToast.hide();
+        //     $scope.close();
+        // });
     }
 
     $scope.findType = function() {
