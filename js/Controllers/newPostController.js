@@ -4,13 +4,12 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
     fillInValues();
     $scope.driveThumbnail = "";
     $scope.classSearch = "";
-    $scope.getDomElements = function () {
+   (function () {
         var headerImg = angular.element(document.getElementById("header_image"));
         var description = angular.element(document.querySelector('#DescriptionTxt'));
         var dialogElement = angular.element(document.querySelector('#new_post_dialog'));
-        console.log 
-    }
-    $scope.getDomElements();
+    })();
+
     $scope.close = function() {
         $mdDialog.hide();
     };
