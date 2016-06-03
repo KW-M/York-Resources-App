@@ -52,7 +52,7 @@
                 }else {
                     if ($scope.Type === "gDrive") {
                         $mdToast.show({
-                            template: '<md-toast>This will allow people at York to view the file.</md-toast>',
+                            template: '<md-toast>This will allow people at York to view the file. <md-button>Ok</md-button></md-toast>',
                             hideDelay: 3000000,
                             parent: $scope.dialogElement,
                         });
