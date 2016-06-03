@@ -43,13 +43,14 @@
                     hideDelay: 1500,
                     parent: $scope.dialogElement,
                 });
+            } else {
                 if ($scope.Title === undefined) {
                     $mdToast.show({
                         template: '<md-toast>Posts must have a title.</md-toast>',
                         hideDelay: 1500,
                         parent: $scope.dialogElement,
                     });
-
+                }else {
                     if ($scope.Type === "gDrive") {
                         $mdToast.show({
                             template: '<md-toast>This will allow people at York to view the file.</md-toast>',
@@ -62,6 +63,7 @@
                     }
                 }
             }
+            
 
             function checkHeaderImg() {
 

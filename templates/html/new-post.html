@@ -29,7 +29,7 @@
                <p style="margin: 3px 0 0 5px; font-size: 12px; color: #6D6D6D;">What class is this?</p>
                <input type="text" autofocus ng-model="classSearch" placeholder="Search classes" class="raisedTextfield" style="margin: 6px 0 10px 0; transition: background-color .2s, box-shadow .2s;">
                <div class="newPostClassListContainer">
-                  <md-menu-item ng-repeat="class in classList | filter: classSearch">
+                  <md-menu-item ng-repeat="class in classList">
                      <md-button style="padding-right:0" ng-click="classSelected(this)">
                         {{class}}
                         <md-icon style="float:right; margin-right: 4px; padding-top:4px">keyboard_arrow_right</md-icon>
