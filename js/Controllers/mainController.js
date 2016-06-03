@@ -9,7 +9,14 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.filteredPosts = [];
    $scope.searchTxt = '';
    $scope.nextPageToken = '';
-   $scope.angularGridOptions = {}
+   $scope.angularGridOptions = {
+     gridWidth:300,
+     infiniteScroll: $scope.getFiles(),
+     scrollContainer:'#content_container',
+     pageSize: 1.5,
+     performantScroll:false,
+     gutterSize:12,
+   }
    $scope.globals = {
       FABisOpen: false,
       FABisHidden: true,
@@ -280,6 +287,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    content_container.onscroll = function(event) {
       if (performantScrollEnabled === false) {
+         $scope.angularGridOptions.performantScroll = true;
          performantScrollEnabled = true;
       }
       //called whenever the content_container scrolls
@@ -294,10 +302,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $scope.globals.FABisHidden = true;
       }
    };
-   
+
 window.addEventListener("resize", function () {
-      if (performantScrollEnabled === false) {
-         performantScrollEnabled = true;
+      if (performantScrollEnabled === true) {
+         $scope.angularGridOptions.performantScroll = false;
+         performantScrollEnabled = false;
       }
 });
 
