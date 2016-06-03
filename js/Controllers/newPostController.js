@@ -36,14 +36,14 @@
         }
 
         $scope.isReadyToSubmit = function() {
-            if ($scope.Class === undefined) {
+            if ($scope.Class === '' || $scope.Class === undefined) {
                 $mdToast.show({
                     template: '<md-toast>Please select a class for this post.</md-toast>',
                     hideDelay: 1500,
                     parent: $scope.dialogElement,
                 });
             } else {
-                if ($scope.Title === '' || undefined || null) {
+                if ($scope.Title === '' || $scope.Title === undefined) {
                     $mdToast.show({
                         template: '<md-toast>Posts must have a title.</md-toast>',
                         hideDelay: 1500,
@@ -136,7 +136,7 @@
 
         function fillInValues() {
             if (postObj !== undefined) {
-                if (postObj.Type !== undefined || "") {
+                if (postObj.Type !== undefined || postObj.Type !== "") {
                     $scope.Type = postObj.Type;
                 }
                 else {
@@ -150,21 +150,21 @@
                     $scope.Flagged = false;
                 }
 
-                if (postObj.Title !== undefined || "") {
+                if (postObj.Title !== undefined || postObj.Title !== "") {
                     $scope.Title = postObj.Title;
                 }
                 else {
                     $scope.Title = "";
                 }
 
-                if (postObj.CreationDate !== undefined || "") {
+                if (postObj.CreationDate !== undefined || postObj.CreationDate !== "") {
                     $scope.CreationDate = postObj.CreationDate;
                 }
                 else {
                     $scope.CreationDate = new Date();
                 }
 
-                if (postObj.UpdateDate !== undefined || "") {
+                if (postObj.UpdateDate !== undefined || postObj.UpdateDate !== "") {
                     $scope.UpdateDate = postObj.UpdateDate;
                 }
                 else {
