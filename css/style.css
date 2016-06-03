@@ -59,11 +59,11 @@ html body {
     overflow: auto;
     padding: 58px 108px 20px 100px;
     background-color: #f2f2f2;
-    
+    transition: padding-left 0.4s;
 }
 
 #content_container.sidenav-open{
-    
+    transition: padding-left 0.s;
     padding-left: 2px;
 }
 
@@ -220,10 +220,6 @@ toolbar-top {
 
 
 /* --------------------------- Animations ------------------- */
-.post-card {
-  -webkit-transition: all 2s;
-  transition: all 2s;
-}
 
 .post-card.ng-leave {
   -webkit-transition: opacity 450ms ease, -webkit-transform 450ms ease;
