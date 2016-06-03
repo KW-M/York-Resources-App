@@ -1,5 +1,5 @@
     /* we don't define the "new post controller" here because it was alredy
-                   defined by the $md-dialog in the newPost function on mainController.   */
+                       defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
         fillInValues();
         $scope.driveThumbnail = "";
@@ -38,29 +38,29 @@
         $scope.isReadyToSubmit = function() {
             console.log($scope.Class)
             if ($scope.Class === undefined) {
-                console.log('undefined')
                 $mdToast.show({
-                    template: '<md-toast>Select a class for this post.</md-toast>',
-                    hideDelay: 3000000,
+                    template: '<md-toast>Please select a class for this post.</md-toast>',
+                    hideDelay: 1500,
                     parent: $scope.dialogElement,
                 });
-            }
-            if ($scope.Title === undefined) {
-                console.log('null')
-                var titleToast = $mdToast.simple().textContent('Posts must have a title.');
-                titleToast.hideDelay = 2500;
-                titleToast.parent = $scope.dialogElement;
-                $mdToast.show(titleToast);
-            }
-            if ($scope.Type === "gDrive") {
-                $mdToast.show({
-                    template: '<md-toast>This will allow people at York to view the file. </md-toast>',
-                    hideDelay: 3000000,
-                    parent: $scope.dialogElement,
-                });
-            }
-            else {
-                checkHeaderImg();
+                if ($scope.Title === undefined) {
+                    $mdToast.show({
+                        template: '<md-toast>Posts must have a title.</md-toast>',
+                        hideDelay: 1500,
+                        parent: $scope.dialogElement,
+                    });
+
+                    if ($scope.Type === "gDrive") {
+                        $mdToast.show({
+                            template: '<md-toast>This will allow people at York to view the file.</md-toast>',
+                            hideDelay: 3000000,
+                            parent: $scope.dialogElement,
+                        });
+                    }
+                    else {
+                        checkHeaderImg();
+                    }
+                }
             }
 
             function checkHeaderImg() {
