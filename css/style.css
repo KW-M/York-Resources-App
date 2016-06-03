@@ -385,8 +385,8 @@ toolbar-top {
 .post-card.angular-grid-item.ng-enter {
   -webkit-transition: opacity 450ms ease, -webkit-transform 450ms ease;
   transition: opacity 450ms ease, transform 450ms ease;
-  -webkit-transition-delay: 500ms;
-  transition-delay: 500ms;
+  -webkit-transition-delay: 00ms;
+  transition-delay: 300ms;
   -webkit-transform: translateY(150px);
   transform: translateY(150px);
   opacity: 1;
