@@ -236,11 +236,11 @@ toolbar-top {
   transform: scale(0.5);
   opacity: 0;
 }
-.post-card.ng-enter {
+.post-card.ng-enter-stagger {
   -webkit-transition: opacity 350ms ease, -webkit-transform 350ms ease;
   transition: opacity 350ms ease, transform 350ms ease;
-  -webkit-transition-delay: 2000ms;
-  transition-delay: 2000ms;
+  -webkit-transition-delay: 500ms;
+  transition-delay: 500ms;
   -webkit-transform: translateY(150px);
   transform: translateY(150px);
   opacity: 0;
