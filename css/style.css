@@ -393,7 +393,7 @@ toolbar-top {
 }
 .post-card.ng-enter-stagger {
   /* this will have a 100ms delay between each successive enter animation */
-  transition-delay: 0.2s;
+  transition-delay: 0.4s;
 
   /* As of 1.4.4, this must always be set: it signals ngAnimate
     to not accidentally inherit a delay property from another CSS class */
