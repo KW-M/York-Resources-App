@@ -52,19 +52,19 @@
                 }else {
                     if ($scope.Type === "gDrive") {
                         $mdToast.show({
-                            template: '<md-toast><div style="flex-direction: column; height: 100%;" class="md-toast-content"><p style="margin-top:10px">This will allow people at York to view the linked file.</p><md-button style="width:100%" on-click="checkHeaderImg()">Ok</md-button><div></md-toast>',
+                            template: '<md-toast><div style="flex-direction: column; height: 100%;" class="md-toast-content"><p style="margin-top:10px">This will allow people at York to view the linked file.</p><md-button style="width:100%" ng-click="checkHeaderImg()">Ok</md-button><div></md-toast>',
                             hideDelay: 3000000,
                             parent: $scope.dialogElement,
                         });
                     }
                     else {
-                        checkHeaderImg();
+                        $scope.checKheaderImg();
                     }
                 }
             }
 
 
-            function checkHeaderImg() {
+             $scope.checKheaderImg = function () {
 
                 if ($scope.newPostHeaderImg.complete === true) {
                     $mdToast.show({
