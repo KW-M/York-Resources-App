@@ -46,13 +46,15 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
     }
 
     $scope.isReadyToSubmit = function() {
-        if ($scope.class = '') {
+        if ($scope.Class = '' || undefined) {
             var classToast = $mdToast.simple().textContent('Select a class for this post.');
+            titleToast.hideDelay = 2500;
+            titleToast.parent = dialogElement;
         }
-        if ($scope.class = '') {
+        if ($scope.Title = '' || undefined) {
             var titleToast = $mdToast.simple().textContent('Posts must have a title.');
             titleToast.hideDelay = 2500;
-            titleToast.hideDelay = 2500;
+            titleToast.parent = dialogElement;
             $mdToast.show()
         }
         if ($scope.Type === "gDrive") {
@@ -72,7 +74,7 @@ function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, post
         }
 
         function checkHeaderImg() {
-            
+
             if (headerImg.complete === true) {
                 $mdToast.show({
                     template: '<md-toast><span style="font-size:18px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right:-20px"></md-progress-circular></md-toast>',
