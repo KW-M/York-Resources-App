@@ -82,7 +82,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
            postObj: $scope.items,
            operation: operation
          },
-         parent: angular.element(document.body),
+         
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
          openFrom: ('#new_post_button'),
