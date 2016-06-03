@@ -9,14 +9,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.filteredPosts = [];
    $scope.searchTxt = '';
    $scope.nextPageToken = '';
-   $scope.angularGridOptions = {
-     gridWidth:300,
-     infiniteScroll: $scope.getFiles(),
-     scrollContainer:'#content_container',
-     pageSize: 1.5,
-     performantScroll:false,
-     gutterSize:12,
-   }
    $scope.globals = {
       FABisOpen: false,
       FABisHidden: true,
@@ -284,6 +276,15 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $window.open(link);
       }
    };
+   
+   $scope.angularGridOptions = {
+     gridWidth:300,
+     infiniteScroll: $scope.getFiles(),
+     scrollContainer:'#content_container',
+     pageSize: 1.5,
+     performantScroll:false,
+     gutterSize:12,
+   }
 
    content_container.onscroll = function(event) {
       if (performantScrollEnabled === false) {
