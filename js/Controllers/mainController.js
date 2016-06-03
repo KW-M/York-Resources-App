@@ -3,11 +3,13 @@ var dependancies = ['$scope', '$mdDialog', '$window', '$sce', '$mdSidenav', '$md
 app.controller('ApplicationController', dependancies.concat([function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, $routeParams, angularGridInstance) {
    var self = this;
    var content_container = document.getElementById("content_container");
+   var performantScrollEnabled = false;
    $scope.classList = classes;
    $scope.allPosts = [];
    $scope.filteredPosts = [];
    $scope.searchTxt = '';
    $scope.nextPageToken = '';
+   $scope.angularGridOptions = {}
    $scope.globals = {
       FABisOpen: false,
       FABisHidden: true,
@@ -277,6 +279,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
    content_container.onscroll = function(event) {
+      if (performantScrollEnabled === false) {
+         performantScrollEnabled = true;
+      }
       //called whenever the content_container scrolls
       content_container.style = 'pointer-events:none'
       var yScroll = content_container.scrollTop;
@@ -289,6 +294,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $scope.globals.FABisHidden = true;
       }
    };
+   
+window.addEventListener("resize", function () {
+      if (performantScrollEnabled === false) {
+         performantScrollEnabled = true;
+      }
+});
 
    $window.loginSilent = function(response) {
       loginProcedure(authorizationService.authorizeSilent());
