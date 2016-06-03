@@ -12,7 +12,7 @@
                 </md-list-item>
                 <md-list-item>
                     <md-menu-item>
-                        <md-button ng-click="::gotoRoute('/my-posts')">
+                        <md-button ng-click="::gotoRoute('/my-posts')" ng-class="{ 'selected' : pathSelected('/my-posts') }">
                             <md-icon>person</md-icon>
                             My Posts
                         </md-button>
@@ -20,7 +20,7 @@
                 </md-list-item>
                 <md-list-item>
                     <md-menu-item>
-                        <md-button ng-click="::gotoRoute('/flaged')">
+                        <md-button ng-click="::gotoRoute('/flagged')" ng-class="{ 'selected' : pathSelected('/flagged') }">
                             <md-icon>flag</md-icon>
                             Flagged
                         </md-button>
@@ -40,7 +40,7 @@
                 <md-list class="side-nav-classes side-nav-section">
                     <md-list-item ng-repeat="::(key,val) in classList">
                         <md-menu-item>
-                            <md-button ng-hover="angular.element(e.srcElement)setAttribute('style', 'background-color':val.color)">
+                            <md-button ng-hover="angular.element(e.srcElement)setAttribute('style', 'background-color':val.color)" ng-class="{ 'selected' : pathSelected('/' + key) }">
                                 {{::key}}
                             </md-button>
                         </md-menu-item>
