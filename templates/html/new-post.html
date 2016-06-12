@@ -29,7 +29,7 @@
                   <md-select-header class="demo-select-header">
             <input ng-model="classSearch"
                    type="search"
-                   placeholder="Search for a vegetable.."
+                   placeholder="Search for a class.."
                    class="demo-header-searchbox _md-text">
           </md-select-header>
                   <md-menu-item ng-repeat="(key, val) in classList">
@@ -37,8 +37,6 @@
                         {{key}}
                         <md-icon style="float:right; margin-right: 4px; padding-top:4px">keyboard_arrow_right</md-icon>
                      </md-button>
-                  </md-menu-item>
-               </div>
             </md-menu-content>
          </md-menu>
          <md-chips ng-model="Tags" readonly="readonly">
@@ -73,7 +71,7 @@
 
 
 <style>
-   /*-- new post dialog styles
+   /*-- new post dialog styles --*
 
    #dialog_scroll {
       width: 100%;
