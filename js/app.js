@@ -105,7 +105,5 @@ $mdThemingProvider.definePalette('YorkOrange', {
 });
 
 $mdThemingProvider.theme('Default')
-	.primaryPalette('YorkRed')
-	.accentPalette('YorkBlue')
-	.warnPalette('YorkOrange');
+	.primaryPalette('YorkGreen');
 });
