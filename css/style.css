@@ -70,11 +70,6 @@ html body {
 
 /*---------------------------------------------------------------- */
 
-toolbar-top {
-    width: 100vw;
-    z-index: 61;
-}
-
 /*-------------- Loading & first launch styles ----------- */
 
 #welcome_dialog {
