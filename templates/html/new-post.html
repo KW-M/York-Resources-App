@@ -39,14 +39,24 @@
          <!--            </md-button>-->
          <!--   </md-menu-content>-->
          <!--</md-menu>-->
+         <md-menu md-position-mode="target target" md-offset="12 45">
             <md-button id="class-dropdown-button" ng-click="$mdOpenMenu($event)" class="md-warn">
                <span>Class</span>
                <md-icon>arrow_drop_down</md-icon>
-               <md-select ng-model="size">
-                  <md-option value="hi">size</md-option>
-                  <md-option value="hi">size</md-option>
-               </md-select>
             </md-button>
+            <md-menu-content width="3">
+                  <md-select-header class="">
+            <input ng-model="classSearch"
+                   type="search"
+                   placeholder="Search for a class.."
+                   class="no-border no-padding full-width">
+          </md-select-header>
+                  <md-option ng-repeat="(key, val) in classList">
+                        {{key}}
+                        <md-icon style="float:right; margin-right: 4px; padding-top:4px">keyboard_arrow_right</md-icon>
+                     </md-option>
+            </md-menu-content>
+         </md-menu>
          <md-chips ng-model="Tags" readonly="readonly">
             <input type="text" placeholder="Add a tag">
          </md-chips>
