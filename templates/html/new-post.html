@@ -25,12 +25,12 @@
                <span>Class</span>
                <md-icon>arrow_drop_down</md-icon>
             </md-button>
-            <md-menu-content width="4">
-                  <md-select-header class="demo-select-header">
+            <md-menu-content width="3">
+                  <md-select-header class="">
             <input ng-model="classSearch"
                    type="search"
                    placeholder="Search for a class.."
-                   class="no-border no-padding">
+                   class="no-border no-padding full-width">
           </md-select-header>
                   <md-menu-item ng-repeat="(key, val) in classList">
                      <md-button style="padding-right:0" ng-click="classSelected(key)">
