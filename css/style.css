@@ -179,14 +179,16 @@ html body {
 .no-border {
     border: none;
     outline: none;
-}:focus {
+}
+.no-border:focus {
     border: none;
     outline: none;
 }
 
 .dark-icon {
     color: rgba(0, 0, 0, 0.8);
-}:hover {
+}
+.dark-icon:hover {
     color: black;
 }
 
