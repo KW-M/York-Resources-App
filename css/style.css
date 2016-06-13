@@ -10,13 +10,6 @@
     user-select: none;
 }
 
-p,
-ul,
-li,
-h1,
-div {
-    cursor: default;
-}
 
 button:focus,
 div:focus {
@@ -193,6 +186,14 @@ html body {
 
 .dark-icon:hover {
     color: black;
+}
+
+input.no-border{
+
+}
+
+.full-height{
+ height: 100%;
 }
 
 .overlay-background {
