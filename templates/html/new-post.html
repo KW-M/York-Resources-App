@@ -18,18 +18,14 @@
       </div>
    </md-toolbar>
    <md-dialog-content>
-         <md-button id="class-dropdown-button" ng-click="$mdOpenMenu($event)" class="md-warn">
-            <span>Class</span>
-            <md-icon>arrow_drop_down</md-icon>
-         </md-button>
-         <md-input-container class="md-button md-warn">
+         <md-input-container id="class_dropdown_button" class="md-button md-warn">
         <label class="md-warn">Vegetables</label>
-        <md-select id="class_select"ng-model="selectedClass">
-          <md-select-header class="demo-select-header">
-            <input type="search" placeholder="Search for a vegetable.." class="demo-header-searchbox _md-text">
+        <md-select id="class_select" ng-model="selectedClass">
+          <md-select-header class="class-select-header">
+            <input type="search" placeholder="Search for a vegetable.." class="class-select-searchbox _md-text">
           </md-select-header>
           <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">
-            <md-option ng-value="vegetable" ng-repeat="Class in Catagory.Classes">{{Class}}</md-option>
+            <md-option ng-value="{{Class}}" ng-repeat="Class in Catagory.Classes">{{Class}}</md-option>
           </md-optgroup>
         </md-select>
       </md-input-container>
@@ -51,6 +47,7 @@
       <!--   </md-menu-content>-->
       <!--</md-menu>-->
       <md-chips ng-model="Tags" readonly="readonly">
+         hi
          <input type="text" placeholder="Add a tag">
       </md-chips>
       <div class="md-dialog-content">
@@ -149,7 +146,7 @@
       transition: opacity 1s, margin-top 1s;
    }
    
-   #class-dropdown-button {
+   #class_dropdown_button {
       position: absolute;
       left: -4px;
       z-index: 500
