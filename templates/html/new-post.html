@@ -1,7 +1,9 @@
 <md-dialog ng-cloak id="new_post_dialog">
    <md-toolbar style="background-color:rgba(0, 0, 0, 0.5); height: 200px; overflow-y: hidden">
       <div class="md-toolbar-tools">
-         <md-button class="md-icon-button"><md-icon>group</md-icon></md-button>
+         <md-button class="md-icon-button">
+            <md-icon>group</md-icon>
+         </md-button>
          <h2><span>Title</span></h2>
          <span flex></span>
          <md-button class="md-icon-button" aria-label="More">
@@ -44,10 +46,12 @@
             <md-select-header class="">
                <input ng-model="classSearch" type="search" placeholder="Search for a class.." class="no-border no-padding full-width">
             </md-select-header>
-            <md-option ng-repeat="(key, val) in classList">
-               {{key}}
-               <md-icon style="float:right; margin-right: 4px; padding-top:4px">keyboard_arrow_right</md-icon>
-            </md-option>
+            <md-optgroup label="Meats">
+               <md-option ng-repeat="Class in classList">
+                  {{key}}
+                  <md-icon style="float:right; margin-right: 4px; padding-top:4px">keyboard_arrow_right</md-icon>
+               </md-option>
+            </md-optgroup>
          </md-menu-content>
       </md-menu>
       <md-chips ng-model="Tags" readonly="readonly">
