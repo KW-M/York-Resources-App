@@ -347,7 +347,7 @@ var classes = [
  'Name':'History',
  'Color':'pOrange',
  'Classes':[
-   'Ancient History'
+   'Ancient History',
    'World History I',
    'World History II',
    'Asian History',
@@ -358,15 +358,26 @@ var classes = [
 {
  'Name':'Mathematics',
  'Color':'pPurple',
- 'Classes':[]
+ 'Classes':[
+   'Algebra I',
+   'Geometry',
+   'Algebra II',
+   'Precalculus',
+   'Precalculus Honors',
+   'Calculus',
+   'Algebra II',
+   'Algebra II',
+   ]
 },
 {
  'Name':'Physical Sciences',
  'Color':'pTerquois',
  'Classes':[
-    'Physical Science (8th)'
-    'Chemistry'
-    
+    'Physical Science (8th)',
+    'Chemistry',
+    'AP Chemistry',
+    'Physics',
+    'AP Physics'
   ]
 },
 {
@@ -374,9 +385,11 @@ var classes = [
  'Color':'pGreen',
  'Classes':[
     ''
-    'Biology I'
-    'Enviromental Science',
+    'Biology I',
+    'Marine Biology',
     'Anatomy & Physiology',
+    'Enviromental Science',
+    'AP Biology'
   ]
 },
 {
