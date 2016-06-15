@@ -47,7 +47,7 @@
          <!--      </md-optgroup>-->
          <!--   </md-menu-content>-->
          <!--</md-menu>-->
-         <md-chips ng-model="Tags" readonly="readonly">
+         <md-chips ng-model="Tags">
             <input type="text" placeholder="Add a tag">
          </md-chips>
       </div>
@@ -178,13 +178,9 @@
       border-radius: 1px;
    }
    
-   .md-chips:before {
-      display: inline-block;
-      position: relative;
-      width: 100px;
-      height: 40px;
-      content: "";
-      float: left;
+   md-chips md-chips-wrap {
+      padding-left: 1000px;
+      margin-left: -1000px;
    }
    
    input.newPostTitle {
