@@ -22,10 +22,15 @@
             <span>Class</span>
             <md-icon>arrow_drop_down</md-icon>
          </md-button>
-         <md-input-container>
-        <label>Vegetables</label>
-        <md-select ng-model="selectedClass">
-          
+         <md-input-container class="md-button md-warn">
+        <label class="md-warn">Vegetables</label>
+        <md-select id="class_"ng-model="selectedClass">
+          <md-select-header class="demo-select-header">
+            <input type="search" placeholder="Search for a vegetable.." class="demo-header-searchbox _md-text">
+          </md-select-header>
+          <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">
+            <md-option ng-value="vegetable" ng-repeat="Class in Catagory.Classes">{{Class}}</md-option>
+          </md-optgroup>
         </md-select>
       </md-input-container>
       <!--<md-menu md-position-mode="target target" md-offset="0 45">-->
