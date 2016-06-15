@@ -24,16 +24,8 @@
          </md-button>
          <md-input-container>
         <label>Vegetables</label>
-        <md-select 
-                   md-on-close="clearSearchTerm()"
-                   data-md-container-class="selectdemoSelectHeader"
-                   multiple>
-          <md-select-header class="demo-select-header">
-            <input type="search" placeholder="Search for a vegetable.." class="demo-header-searchbox _md-text">
-          </md-select-header>
-          <md-optgroup label="vegetables">
-            <md-option ng-value="vegetable" ng-repeat="vegetable in classlist">{{vegetable}}</md-option>
-          </md-optgroup>
+        <md-select>
+
         </md-select>
       </md-input-container>
       <!--<md-menu md-position-mode="target target" md-offset="0 45">-->
