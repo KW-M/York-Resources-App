@@ -22,7 +22,7 @@
         <label class="md-warn">Vegetables</label>
         <md-select id="class_select" ng-model="selectedClass">
           <md-select-header class="class-select-header">
-            <input type="search" placeholder="Search for a vegetable.." class="class-select-searchbox _md-text">
+            <!--<input type="search" placeholder="Search for a vegetable.." class="class-select-searchbox _md-text">-->
           </md-select-header>
           <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">
             <md-option ng-value="{{Class}}" ng-repeat="Class in Catagory.Classes">{{Class}}</md-option>
@@ -49,8 +49,8 @@
       <md-chips ng-model="Tags" readonly="readonly">
          
          <input type="text" placeholder="Add a tag">
-         <div height="10" widhstyle="background-color:red;">
-         <div>
+         <div height="10" width="10" style="background-color:red;">
+         </div>
       </md-chips>
       <div class="md-dialog-content">
          <input ng-model="Title" class="newPostTitle md-title" placeholder="Title" md-autofocus>
