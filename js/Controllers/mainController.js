@@ -321,8 +321,15 @@ function gClientLoaded() {
 }
 
 
-var classes = {
-     'English III':{color:'var(--pBlue)'},
-     'World History II':{color:'var(--pRed)'},
-     'Algebra II':{color:'var(--pPurple)'},
-};
+var classes = [
+{
+ 'name':'English Language',
+ 'color':'pLightBlue',
+ 'classes':[]
+},
+{
+ 'name':'Clasical Languages',
+ 'color':'pRed',
+ 'classes':[]
+},
+]
