@@ -103,5 +103,5 @@ app.config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $locati
         'contrastDefaultColor': 'light',
         'contrastDarkColors': '50 100 200 300 400 500 A100 A200 A400'
     });
-    $mdThemingProvider.theme('default').accentPalette('YorkBlue').primaryPalette('YorkRed')
+    $mdThemingProvider.theme('default').accentPalette('blue').primaryPalette('YorkRed')
 });
