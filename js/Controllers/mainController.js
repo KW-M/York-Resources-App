@@ -341,9 +341,15 @@ var classes = [
    ]
 },
 {
- 'Name':'Mathematics',
+ 'Name':'History',
  'Color':'pPurple',
- 'Classes':[]
+ 'Classes':[
+   'World History I',
+   'World History II',
+   'Asian History',
+   'US History',
+   'AP US History'
+  ]
 },
 {
  'Name':'Mathematics',
