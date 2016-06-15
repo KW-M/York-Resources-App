@@ -364,9 +364,10 @@ var classes = [
    'Algebra II',
    'Precalculus',
    'Precalculus Honors',
+   'Statistics',
    'Calculus',
-   'Algebra II',
-   'Algebra II',
+   'AP Calculus AB',
+   'AP Calculus BC'
    ]
 },
 {
@@ -384,7 +385,6 @@ var classes = [
  'Name':'Biological Sciences',
  'Color':'pGreen',
  'Classes':[
-    ''
     'Biology I',
     'Marine Biology',
     'Anatomy & Physiology',
