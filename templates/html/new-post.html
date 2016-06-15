@@ -18,42 +18,41 @@
       </div>
    </md-toolbar>
    <md-dialog-content>
-      <!--<md-menu md-position-mode="target target" md-offset="12 45">-->
+         <md-button id="class-dropdown-button" ng-click="$mdOpenMenu($event)" class="md-warn">
+            <span>Class</span>
+            <md-icon>arrow_drop_down</md-icon>
+         </md-button>
+         <md-input-container>
+        <label>Vegetables</label>
+        <md-select 
+                   md-on-close="clearSearchTerm()"
+                   data-md-container-class="selectdemoSelectHeader"
+                   multiple>
+          <md-select-header class="demo-select-header">
+            <input type="search" placeholder="Search for a vegetable.." class="demo-header-searchbox _md-text">
+          </md-select-header>
+          <md-optgroup label="vegetables">
+            <md-option ng-value="vegetable" ng-repeat="vegetable in classlist">{{vegetable}}</md-option>
+          </md-optgroup>
+        </md-select>
+      </md-input-container>
+      <!--<md-menu md-position-mode="target target" md-offset="0 45">-->
       <!--   <md-button id="class-dropdown-button" ng-click="$mdOpenMenu($event)" class="md-warn">-->
       <!--      <span>Class</span>-->
       <!--      <md-icon>arrow_drop_down</md-icon>-->
       <!--   </md-button>-->
       <!--   <md-menu-content width="3">-->
-      <!--         <md-select-header class="">-->
-      <!--   <input ng-model="classSearch"-->
-      <!--          type="search"-->
-      <!--          placeholder="Search for a class.."-->
-      <!--          class="no-border no-padding full-width">-->
-      <!-- </md-select-header>-->
-      <!--         <md-menu-item ng-repeat="(key, val) in classList">-->
-      <!--            <md-button style="padding-right:0" ng-click="classSelected(key)">-->
-      <!--               {{key}}-->
-      <!--               <md-icon style="float:right; margin-right: 4px; padding-top:4px">keyboard_arrow_right</md-icon>-->
-      <!--            </md-button>-->
+      <!--      <md-select-header class="">-->
+      <!--         <input ng-model="classSearch" type="search" placeholder="Search for a class.." class="no-border no-padding full-width">-->
+      <!--      </md-select-header>-->
+      <!--      <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">-->
+      <!--         <md-option ng-repeat="Class in Catagory.Classes">-->
+      <!--            {{Class}}-->
+                  <!--<md-icon style="float:right; margin-right: 4px; padding-top:4px">keyboard_arrow_right</md-icon>-->
+      <!--         </md-option>-->
+      <!--      </md-optgroup>-->
       <!--   </md-menu-content>-->
       <!--</md-menu>-->
-      <md-menu md-position-mode="target target" md-offset="0 45">
-         <md-button id="class-dropdown-button" ng-click="$mdOpenMenu($event)" class="md-warn">
-            <span>Class</span>
-            <md-icon>arrow_drop_down</md-icon>
-         </md-button>
-         <md-menu-content width="3">
-            <md-select-header class="">
-               <input ng-model="classSearch" type="search" placeholder="Search for a class.." class="no-border no-padding full-width">
-            </md-select-header>
-            <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">
-               <md-option ng-repeat="Class in Catagory.Classes">
-                  {{Class}}
-                  <!--<md-icon style="float:right; margin-right: 4px; padding-top:4px">keyboard_arrow_right</md-icon>-->
-               </md-option>
-            </md-optgroup>
-         </md-menu-content>
-      </md-menu>
       <md-chips ng-model="Tags" readonly="readonly">
          <input type="text" placeholder="Add a tag">
       </md-chips>
