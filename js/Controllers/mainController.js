@@ -323,13 +323,37 @@ function gClientLoaded() {
 
 var classes = [
 {
- 'name':'English Language',
- 'color':'pLightBlue',
- 'classes':[]
+ 'Name':'English',
+ 'Color':'pLightBlue',
+ 'Classes':[]
 },
 {
- 'name':'Clasical Languages',
- 'color':'pRed',
- 'classes':[]
+ 'Name':'Clasical Languages',
+ 'Color':'pRed',
+ 'Classes':[]
+},
+{
+ 'Name':'Modern Languages',
+ 'Color':'pYellow',
+ 'Classes':[]
+},
+{
+ 'Name':'Mathematics',
+ 'Color':'pPurple',
+ 'Classes':[]
+},
+{
+ 'Name':'Physical Sciences',
+ 'Color':'pTerquois',
+ 'Classes':[]
+},
+{
+ 'Name':'Biological Sciences',
+ 'Color':'pGreen',
+ 'Classes':[]
+},
+ 'Name':'Visual Arts',
+ 'Color':'pGreen',
+ 'Classes':[]
 },
 ]
