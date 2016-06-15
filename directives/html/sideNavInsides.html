@@ -38,13 +38,10 @@
                 </md-menu-item>
             </md-list-item>
             <md-list class="side-nav-classes side-nav-section">
-                <md-list-item ng-repeat="Catagory in classList">
-                    <md-list-item><md-menu-item>
-                            <md-button ng-class="{ 'selected' : pathSelected('/' + Class) }">
-                                {{Catagory.Name}}
-                            </md-button>
-                            </md-menu-item>
-                        </md-list-item>
+                <md-list-item ng-repeat="Catagory in classList" style="flex-direction: column">
+                        <md-menu-item>
+                        {{Catagory.Name}}
+                        </md-menu-item>
                     <md-list class="side-nav-classes side-nav-section">
                         <md-list-item ng-repeat="Class in Catagory.Classes">
                              <md-menu-item>
@@ -55,6 +52,7 @@
                         </md-list-item>
                     </md-list>
                 </md-list-item>
+            </md-list>
             </md-list>
     </div>
     <div class="side-nav-bottom">
