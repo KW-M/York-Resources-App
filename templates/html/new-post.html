@@ -18,40 +18,39 @@
       </div>
    </md-toolbar>
    <md-dialog-content>
+      <div flex layout="row">
          <md-input-container id="class_dropdown_button" class="md-button md-warn">
-        <label class="md-warn">Vegetables</label>
-        <md-select id="class_select" ng-model="selectedClass">
-          <md-select-header class="class-select-header">
-            <!--<input type="search" placeholder="Search for a vegetable.." class="class-select-searchbox _md-text">-->
-          </md-select-header>
-          <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">
-            <md-option ng-value="{{Class}}" ng-repeat="Class in Catagory.Classes">{{Class}}</md-option>
-          </md-optgroup>
-        </md-select>
-      </md-input-container>
-      <!--<md-menu md-position-mode="target target" md-offset="0 45">-->
-      <!--   <md-button id="class-dropdown-button" ng-click="$mdOpenMenu($event)" class="md-warn">-->
-      <!--      <span>Class</span>-->
-      <!--      <md-icon>arrow_drop_down</md-icon>-->
-      <!--   </md-button>-->
-      <!--   <md-menu-content width="3">-->
-      <!--      <md-select-header class="">-->
-      <!--         <input ng-model="classSearch" type="search" placeholder="Search for a class.." class="no-border no-padding full-width">-->
-      <!--      </md-select-header>-->
-      <!--      <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">-->
-      <!--         <md-option ng-repeat="Class in Catagory.Classes">-->
-      <!--            {{Class}}-->
-                  <!--<md-icon style="float:right; margin-right: 4px; padding-top:4px">keyboard_arrow_right</md-icon>-->
-      <!--         </md-option>-->
-      <!--      </md-optgroup>-->
-      <!--   </md-menu-content>-->
-      <!--</md-menu>-->
-      <md-chips ng-model="Tags" readonly="readonly">
-         
-         <input type="text" placeholder="Add a tag">
-         <div height="10" width="10" style="background-color:red;">
-         </div>
-      </md-chips>
+            <label class="md-warn">Vegetables</label>
+            <md-select id="class_select" ng-model="selectedClass">
+               <md-select-header class="class-select-header">
+                  <!--<input type="search" placeholder="Search for a vegetable.." class="class-select-searchbox _md-text">-->
+               </md-select-header>
+               <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">
+                  <md-option ng-value="{{Class}}" ng-repeat="Class in Catagory.Classes">{{Class}}</md-option>
+               </md-optgroup>
+            </md-select>
+         </md-input-container>
+         <!--<md-menu md-position-mode="target target" md-offset="0 45">-->
+         <!--   <md-button id="class-dropdown-button" ng-click="$mdOpenMenu($event)" class="md-warn">-->
+         <!--      <span>Class</span>-->
+         <!--      <md-icon>arrow_drop_down</md-icon>-->
+         <!--   </md-button>-->
+         <!--   <md-menu-content width="3">-->
+         <!--      <md-select-header class="">-->
+         <!--         <input ng-model="classSearch" type="search" placeholder="Search for a class.." class="no-border no-padding full-width">-->
+         <!--      </md-select-header>-->
+         <!--      <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">-->
+         <!--         <md-option ng-repeat="Class in Catagory.Classes">-->
+         <!--            {{Class}}-->
+         <!--<md-icon style="float:right; margin-right: 4px; padding-top:4px">keyboard_arrow_right</md-icon>-->
+         <!--         </md-option>-->
+         <!--      </md-optgroup>-->
+         <!--   </md-menu-content>-->
+         <!--</md-menu>-->
+         <md-chips ng-model="Tags" readonly="readonly">
+            <input type="text" placeholder="Add a tag">
+         </md-chips>
+      </div>
       <div class="md-dialog-content">
          <input ng-model="Title" class="newPostTitle md-title" placeholder="Title" md-autofocus>
          <div id="DescriptionTxt" class="newPostBody" contenteditable="true">hu</div>
@@ -149,11 +148,9 @@
    }
    
    #class_dropdown_button {
-      position: absolute;
-      left: -4px;
-          border-bottom: 0px;
-    padding: 0px;
-    padding-bottom: 2px;
+      border-bottom: 0px;
+      padding: 0px;
+      padding-bottom: 2px;
    }
    
    .newPostClassSelector {
@@ -166,6 +163,7 @@
       margin: 58px 0px 0px 12px;
       box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
    }
+   
    #class_select md-select-value {
       border-bottom: 0px;
    }
