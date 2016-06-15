@@ -323,9 +323,21 @@ function gClientLoaded() {
 
 var classes = [
 {
+ 'Name':'',
+ 'Color':'White',
+ 'Classes':[
+    'Other/Not Associated'
+  ]
+},
+{
  'Name':'English',
  'Color':'pLightBlue',
- 'Classes':[]
+ 'Classes':[
+    'English I',
+    'English II',
+    'English III',
+    'English IV American Studies',
+   ]
 },
 {
  'Name':'Clasical Languages',
