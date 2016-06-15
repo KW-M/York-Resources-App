@@ -363,12 +363,21 @@ var classes = [
 {
  'Name':'Physical Sciences',
  'Color':'pTerquois',
- 'Classes':[]
+ 'Classes':[
+    'Physical Science (8th)'
+    'Chemistry'
+    
+  ]
 },
 {
  'Name':'Biological Sciences',
  'Color':'pGreen',
- 'Classes':[]
+ 'Classes':[
+    ''
+    'Biology I'
+    'Enviromental Science',
+    'Anatomy & Physiology',
+  ]
 },
 {
  'Name':'Modern Languages',
@@ -382,7 +391,7 @@ var classes = [
 },
 {
  'Name':'Humanities',
- 'Color':'pRed',
+ 'Color':'pYellowGreen',
  'Classes':[
     'Economics',
     'AP US Government',
