@@ -1,57 +1,63 @@
-<link rel="stylesheet" href="css/sideNav.css"/>
+<link rel="stylesheet" href="css/sideNav.css" />
 <div class="side-nav-scroll">
-        <div class="side-nav-section">
-            <md-list>
-                <md-list-item>
-                    <md-menu-item>
-                        <md-button ng-click="::gotoRoute('/all-posts')" ng-class="{ 'selected' : pathSelected('/all-posts') }">
-                            <md-icon>inbox</md-icon>
-                            All Posts
-                        </md-button>
-                    </md-menu-item>
-                </md-list-item>
-                <md-list-item>
-                    <md-menu-item>
-                        <md-button ng-click="::gotoRoute('/my-posts')" ng-class="{ 'selected' : pathSelected('/my-posts') }">
-                            <md-icon>person</md-icon>
-                            My Posts
-                        </md-button>
-                    </md-menu-item>
-                </md-list-item>
-                <md-list-item>
-                    <md-menu-item>
-                        <md-button ng-click="::gotoRoute('/flagged')" ng-class="{ 'selected' : pathSelected('/flagged') }">
-                            <md-icon>flag</md-icon>
-                            Flagged
-                        </md-button>
-                    </md-menu-item>
-                </md-list-item>
-            </md-list>
-        </div>
-        <div>
-            <md-list>
-                <md-list-item>
-                    <md-menu-item>
-                        <md-icon>group</md-icon>
-                        <span>Classes</span>
-                        <md-icon>search</md-icon>
-                    </md-menu-item>
-                </md-list-item>
-                <md-list class="side-nav-classes side-nav-section">
-                    <md-list-item ng-repeat="Catagory in classList">
-                        {{Catagory.Name}}</md-menu-item></md-list-item>
-                        <md-list class="">
-                        <md-list-item ng-repeat="Class in Catagory.Classes"
-                        <md-menu-item>
+    <div class="side-nav-section">
+        <md-list>
+            <md-list-item>
+                <md-menu-item>
+                    <md-button ng-click="::gotoRoute('/all-posts')" ng-class="{ 'selected' : pathSelected('/all-posts') }">
+                        <md-icon>inbox</md-icon>
+                        All Posts
+                    </md-button>
+                </md-menu-item>
+            </md-list-item>
+            <md-list-item>
+                <md-menu-item>
+                    <md-button ng-click="::gotoRoute('/my-posts')" ng-class="{ 'selected' : pathSelected('/my-posts') }">
+                        <md-icon>person</md-icon>
+                        My Posts
+                    </md-button>
+                </md-menu-item>
+            </md-list-item>
+            <md-list-item>
+                <md-menu-item>
+                    <md-button ng-click="::gotoRoute('/flagged')" ng-class="{ 'selected' : pathSelected('/flagged') }">
+                        <md-icon>flag</md-icon>
+                        Flagged
+                    </md-button>
+                </md-menu-item>
+            </md-list-item>
+        </md-list>
+    </div>
+    <div>
+        <md-list>
+            <md-list-item>
+                <md-menu-item>
+                    <md-icon>group</md-icon>
+                    <span>Classes</span>
+                    <md-icon>search</md-icon>
+                </md-menu-item>
+            </md-list-item>
+            <md-list class="side-nav-classes side-nav-section">
+                <md-list-item ng-repeat="Catagory in classList">
+                    <md-list-item><md-menu-item>
+                            <md-button ng-class="{ 'selected' : pathSelected('/' + Class) }">
+                                {{Catagory.Name}}
+                            </md-button>
+                            </md-menu-item>
+                        </md-list-item>
+                    <md-list class="side-nav-classes side-nav-section">
+                        <md-list-item ng-repeat="Class in Catagory.Classes">
+                             <md-menu-item>
                             <md-button ng-class="{ 'selected' : pathSelected('/' + Class) }">
                                 {{Class}}
                             </md-button>
-                        </md-menu-item>
-                    </md-list-item>
-                </md-list>
+                            </md-menu-item>
+                        </md-list-item>
+                    </md-list>
+                </md-list-item>
             </md-list>
-        </div>
-        <div class="side-nav-bottom">
+    </div>
+    <div class="side-nav-bottom">
         <md-list style="padding: 6px 0 0 0;">
             <md-list-item>
                 <md-menu-item>
@@ -71,5 +77,5 @@
             </md-list-item>
         </md-list>
     </div>
-    </div>
+</div>
 </md-content>
