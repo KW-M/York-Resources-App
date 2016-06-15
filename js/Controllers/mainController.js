@@ -326,7 +326,8 @@ var classes = [
  'Name':'',
  'Color':'White',
  'Classes':[
-    'Other/Not Associated'
+    'Other',
+    'Not Associated'
   ]
 },
 {
@@ -340,13 +341,8 @@ var classes = [
    ]
 },
 {
- 'Name':'Clasical Languages',
- 'Color':'pRed',
- 'Classes':[]
-},
-{
- 'Name':'Modern Languages',
- 'Color':'pYellow',
+ 'Name':'Mathematics',
+ 'Color':'pPurple',
  'Classes':[]
 },
 {
@@ -364,8 +360,19 @@ var classes = [
  'Color':'pGreen',
  'Classes':[]
 },
- 'Name':'Visual Arts',
- 'Color':'pGreen',
+{
+ 'Name':'Modern Languages',
+ 'Color':'pYellow',
+ 'Classes':[]
+},
+{
+ 'Name':'Clasical Languages',
+ 'Color':'pRed',
+ 'Classes':[]
+},
+{
+ 'Name':'Arts',
+ 'Color':'pPink',
  'Classes':[]
 },
 ]
