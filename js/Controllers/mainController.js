@@ -337,13 +337,17 @@ var classes = [
     'English I',
     'English II',
     'English III',
-    'English IV American Studies',
+    'English IV',
+    'English IV Honors',
+    'English V',
+    'AP Liturature'
    ]
 },
 {
  'Name':'History',
- 'Color':'pPurple',
+ 'Color':'pOrange',
  'Classes':[
+   'Ancient History'
    'World History I',
    'World History II',
    'Asian History',
@@ -375,6 +379,15 @@ var classes = [
  'Name':'Clasical Languages',
  'Color':'pRed',
  'Classes':[]
+},
+{
+ 'Name':'Humanities',
+ 'Color':'pRed',
+ 'Classes':[
+    'Economics',
+    'AP US Government',
+    'YAS Psycology Honors'
+  ]
 },
 {
  'Name':'Arts',
