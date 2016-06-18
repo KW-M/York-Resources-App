@@ -1,0 +1,42 @@
+<md-input-container id="class_dropdown_button" flex class="md-button md-warn">
+    <label class="md-warn">Vegetables</label>
+    <md-select id="class_select" ng-model="selectedClass">
+        <md-select-header class="class-select-header">
+            <!--<input type="search" placeholder="Search for a vegetable.." class="class-select-searchbox _md-text">-->
+        </md-select-header>
+        <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">
+            <md-option ng-value="{{Class}}" ng-repeat="Class in Catagory.Classes">{{Class}}</md-option>
+        </md-optgroup>
+    </md-select>
+</md-input-container>
+
+<style>
+    /*--------- new post and new post element styles ------------ */
+    
+    .new-post-card-top {
+        position: relative;
+        background-color: white;
+        display: block;
+        height: 46px;
+        max-width: 570px;
+        min-width: 322px;
+        margin: 0px auto 30px auto;
+        border-radius: 2px;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    }
+    
+    .md-button.new-post-text-top {
+        padding: 6px 10px;
+        width: 100%;
+        margin: 0;
+        position: absolute;
+        text-transform: none;
+        font-family: 'Roboto Slab', serif;
+        color: rgba(0, 0, 0, 0.6);
+        text-align: start;
+    }
+    
+    .md-button.new-post-text-top:hover {
+        background-color: rgba(158, 158, 158, 0.1);
+    }
+</style>

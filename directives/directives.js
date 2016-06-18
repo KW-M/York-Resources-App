@@ -41,6 +41,7 @@ app.directive('addBarTop', function () {
     };
 });
 
+
 app.directive('getPosts', function() {
   return {
     restrict: 'AE',
@@ -64,4 +65,12 @@ app.directive('filterPosts', function() {
         console.log(query);
     }
   };
+});
+
+// ----New post pieces----
+app.directive('classSelectMenu', function () {
+    return {
+        restrict: 'E',
+        templateUrl: 'directives/html/classSelectMenu.html'
+    };
 });
