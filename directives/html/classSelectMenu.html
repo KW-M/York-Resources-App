@@ -1,11 +1,11 @@
 <md-input-container id="" flex class="">
     <label class="">Vegetables</label>
-    <md-select id="" ng-model="selectedClass">
+    <md-select id="" ng-model="selectedClasr">
         <md-select-header class="">
             <!--<input type="search" placeholder="Search for a vegetable.." class="class-select-searchbox _md-text">-->
         </md-select-header>
-        <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">
-            <md-option ng-value="{{Class}}" ng-repeat="Class in Catagory.Classes">{{Class}}</md-option>
+        <md-optgroup label="catogoyu">
+            <md-option ng-value="{{Class}}" ng-repeat="Class in classList[1].Classes">{{Class}}</md-option>
         </md-optgroup>
     </md-select>
 </md-input-container>
