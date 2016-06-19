@@ -38,9 +38,16 @@
                 </md-menu-item>
             </md-list-item>
             <md-list>
+                    <md-option>
+                        <md-button ng-class="{ 'selected' : pathSelected('/' + Class) }">
+                              Other / Not associated
+                        </md-button>
+                    </md-option>
                 <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">
                     <md-option ng-repeat="Class in Catagory.Classes" value="{{Class}}">
-                        {{Class}}
+                        <md-button ng-class="{ 'selected' : pathSelected('/' + Class) }">
+                                {{Class}}
+                        </md-button>
                     </md-option>
                 </md-optgroup>
                 <!--<md-list-item ng-repeat="Catagory in classList" style="flex-direction: column">-->
