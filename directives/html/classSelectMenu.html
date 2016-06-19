@@ -1,9 +1,9 @@
 <md-input-container>
     <label>Class</label>
-            <md-select-header class="demo-select-header">
-        </md-select-header>
     <md-select ng-model="selectedClass">
-
+        <md-select-header>
+          <input></input>
+        </md-select-header>
         <md-option ng-repeat="Class in Catagory.Classes" value="Other">
                 Other / Not associated
         </md-option>
