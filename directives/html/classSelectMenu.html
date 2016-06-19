@@ -1,9 +1,12 @@
 <md-input-container>
-    <label>State</label>
+    <label>Class</label>
     <md-select ng-model="selectedClass">
-        <md-optgroup ng-repeat="catagory in classList" label="Meats">
-            <md-option ng-repeat="catagory in classList" value="{{catagory.Name}}" ng-disabled="$index === 1">
-                {{catagory.Name}}
+        <md-option ng-repeat="Class in Catagory.Classes" value="Other">
+                Other / Not associated
+        </md-option>
+        <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">
+            <md-option ng-repeat="Class in Catagory.Classes" value="{{Class}}">
+                {{Class}}
             </md-option>
         </md-optgroup>
     </md-select>

@@ -323,14 +323,6 @@ function gClientLoaded() {
 
 var classes = [
 {
- 'Name':'',
- 'Color':'White',
- 'Classes':[
-    'Other',
-    'Not Associated'
-  ]
-},
-{
  'Name':'English',
  'Color':'pLightBlue',
  'Classes':[
