@@ -37,7 +37,12 @@
                     <md-icon>search</md-icon>
                 </md-menu-item>
             </md-list-item>
-            <md-list >
+            <md-list>
+                <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">
+                    <md-option ng-repeat="Class in Catagory.Classes" value="{{Class}}">
+                        {{Class}}
+                    </md-option>
+                </md-optgroup>
                 <!--<md-list-item ng-repeat="Catagory in classList" style="flex-direction: column">-->
                 <!--        <md-menu-item>-->
                 <!--        {{Catagory.Name}}-->
@@ -53,7 +58,7 @@
                 <!--    </md-list>-->
                 <!--</md-list-item>-->
             </md-list>
-            </md-list>
+        </md-list>
     </div>
     <div class="side-nav-bottom">
         <md-list style="padding: 6px 0 0 0;">
