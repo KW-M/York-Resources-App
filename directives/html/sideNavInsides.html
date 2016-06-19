@@ -38,20 +38,20 @@
                 </md-menu-item>
             </md-list-item>
             <md-list >
-                <md-list-item ng-repeat="Catagory in classList" style="flex-direction: column">
-                        <md-menu-item>
-                        {{Catagory.Name}}
-                        </md-menu-item>
-                    <md-list style="width:90%">
-                        <md-list-item ng-repeat="Class in Catagory.Classes">
-                             <md-menu-item>
-                            <md-button ng-class="{ 'selected' : pathSelected('/' + Class) }">
-                                {{Class}}
-                            </md-button>
-                            </md-menu-item>
-                        </md-list-item>
-                    </md-list>
-                </md-list-item>
+                <!--<md-list-item ng-repeat="Catagory in classList" style="flex-direction: column">-->
+                <!--        <md-menu-item>-->
+                <!--        {{Catagory.Name}}-->
+                <!--        </md-menu-item>-->
+                <!--    <md-list style="width:90%">-->
+                <!--        <md-list-item ng-repeat="Class in Catagory.Classes">-->
+                <!--             <md-menu-item>-->
+                <!--            <md-button ng-class="{ 'selected' : pathSelected('/' + Class) }">-->
+                <!--                {{Class}}-->
+                <!--            </md-button>-->
+                <!--            </md-menu-item>-->
+                <!--        </md-list-item>-->
+                <!--    </md-list>-->
+                <!--</md-list-item>-->
             </md-list>
             </md-list>
     </div>
