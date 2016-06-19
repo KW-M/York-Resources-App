@@ -1,4 +1,4 @@
-<div class="post-card-header" ng-click="::openLink(Post.Link)">
+<div class="post-card-header" md-ink-ripple="true" ng-click="::penLink(Post.Link)">
     <img ng-src="{{::Post.ImageURL}}" class="post-card-image" ng-hide="::Post.Link == ''" onerror="this.src = '';">
     <div class="post-card-image-gradient">
         <p class="post-card-link-text" ng-hide="::Post.Link == ''">
