@@ -200,6 +200,10 @@ html body {
  width: 100%;
 }
 
+.darken-on-hover:hover{
+    background-color: rgba(158,158,158,0.2);
+}
+
 .overlay-background {
     position: fixed;
     top: 0;

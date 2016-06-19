@@ -42,8 +42,8 @@
                         <!--      Other / Not associated-->
                         <!--</md-button>-->
                 <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">
-                    <md-option ng-repeat="Class in Catagory.Classes" value="{{Class}}" style="padding-right:0px">
-                        <span class="md-button full-width" md-ro>{{Class}}</span>
+                    <md-option ng-repeat="Class in Catagory.Classes" value="{{Class}}" md-ripple-container class="">
+                        {{Class}}
                     </md-option>
                 </md-optgroup>
                 <!--<md-list-item ng-repeat="Catagory in classList" style="flex-direction: column">-->
