@@ -64,5 +64,5 @@
 
     .side-nav-bottom {
         width: 100%;
-        border-bottom-width: 1px solid #ddd;
+        border-top: 1px solid #ddd;
     }
