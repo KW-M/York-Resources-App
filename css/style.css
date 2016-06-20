@@ -233,6 +233,10 @@ html body {
     z-index: 75;
     transition: opacity .3s;
 }
+
+md-input-container.button-select md-select-value {
+    border-bottom: 0px !important;
+}
     /*-------------- post card styles ----------- */
 
     .posts-content {
