@@ -35,15 +35,17 @@
                     <md-icon>group</md-icon>
                     <span>Classes</span>
                     <md-icon>search</md-icon>
+                    <div class="md-ripple-container"></div>
                 </md-menu-item>
             </md-list-item>
             <md-list>
-                <div md-ink-ripple class="darken-on-hover md-text" ng-class="{ 'selected' : pathSelected('/' + Class) }">
+                <div  class="darken-on-hover md-text" ng-class="{ 'selected' : pathSelected('/Other') }">
                         Other / Not associated
                 </div>
                 <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">
-                    <md-option ng-repeat="Class in Catagory.Classes" value="{{Class}}" md-ink-ripple class="darken-on-hover rounded-right" ng-class="{ 'selected' : pathSelected('/' + Class) }">
+                    <md-option ng-repeat="Class in Catagory.Classes" value="{{Class}}" md-ink-ripple="true" class="darken-on-hover rounded-right" ng-class="{ 'selected' : pathSelected('/' + Class) }">
                         {{Class}}
+                        
                     </md-option>
                 </md-optgroup>
                 <!--<md-list-item ng-repeat="Catagory in classList" style="flex-direction: column">-->
