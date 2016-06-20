@@ -201,30 +201,21 @@ html body {
 }
 
 .rounded{
- border-radius: 2px
+ border-radius: 3px;
 }
 
 .rounded-right{
-  border-: 2px
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 
 .rounded-left{
- width: 100%;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
 }
 
 .darken-on-hover:hover{
     background-color: rgba(158,158,158,0.2);
-}
-
-.overlay-background {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, .7);
-    z-index: 75;
-    transition: opacity .3s;
 }
 
 .raise-on-hover:hover {
