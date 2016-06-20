@@ -6,6 +6,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    var performantScrollEnabled = false;
    $scope.classList = classes;
    $scope.allPosts = [];
+   $scope.Tags = [];
    $scope.filteredPosts = [];
    $scope.searchTxt = '';
    $scope.nextPageToken = '';
