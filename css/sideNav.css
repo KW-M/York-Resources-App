@@ -29,7 +29,7 @@
         background: transparent;
         width: 8px;
     }::-webkit-scrollbar-thumb {
-    background: #bdbdbd;
+        background: #bdbdbd;
     }
 
     md-sidenav.sidenav-inline .side-nav-scroll {
@@ -64,4 +64,5 @@
 
     .side-nav-bottom {
         width: 100%;
+        border-bottom-width: 1px solid #ddd;
     }
