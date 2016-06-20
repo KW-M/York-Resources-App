@@ -200,6 +200,18 @@ html body {
  width: 100%;
 }
 
+.rounded{
+ border-radius: 2px
+}
+
+.rounded-right{
+  border-: 2px
+}
+
+.rounded-left{
+ width: 100%;
+}
+
 .darken-on-hover:hover{
     background-color: rgba(158,158,158,0.2);
 }
