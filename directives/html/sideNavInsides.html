@@ -38,12 +38,12 @@
                 </md-menu-item>
             </md-list-item>
             <md-list>
-                <div  class="darken-on-hover" ng-class="{ 'selected' : pathSelected('/Other') }">
+                <div  class="darken-on-hover"  ng-class="{ 'selected' : pathSelected('/Other') }">
                     Other / Not associated
                 </div>
                 <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">
-                    <md-option ng-repeat="Class in Catagory.Classes" value="{{Class}}" class="darken-on-hover rounded-right" ng-class="{ 'selected' : pathSelected('/' + Class) }">
-                        <div class="md-ripple-container">{{Class}}</div>
+                    <md-option ng-repeat="Class in Catagory.Classes" value="{{Class}}" md-ink-ripple="true" class="darken-on-hover rounded-right" ng-class="{ 'selected' : pathSelected('/' + Class) }">
+                        {{Class}}
                     </md-option>
                 </md-optgroup>
                 <!--<md-list-item ng-repeat="Catagory in classList" style="flex-direction: column">-->
