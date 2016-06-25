@@ -15,10 +15,11 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Roboto+Mono|Roboto+Slab|Material+Icons" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
-        <link rel="shortcut icon" href="https://scontent.xx.fbcdn.net/v/t1.0-1/c0.0.160.160/p160x160/10418519_10154327468015085_5519923068710858644_n.jpg?oh=731f220566f8bcd629726b0d0458a5dc&oe=57B6E81B">
     </head>
 
     <body ng-app="YorkResourcesApp" ng-controller="ApplicationController">
+        <md-button>hi</md-button>
+       <md-input-container><input type="text" name=""/></md-input-container>
         <!-------------------------------------------------------->
         <!-------------- The Welcome/Login screen ---------------->
        <!-- <div id="overlay_background" class="overlay-background">
@@ -63,11 +64,11 @@
                 </div>
                 <md-progress-circular id="loading_spinner" class="md-accent" md-mode="indeterminate" md-diameter="60"></md-progress-circular>
             </div>
-            <!--<span class="unselectable default-mouse" style="font-size: 150%; background-color:rgba(0,0,0,0.5); position:fixed; bottom:0px;right:0px; color:white;">PRE-ALPHA version</span>-->
+            <!--<span class="unselectable default-mouse" style="font-size: 150%; background-color:rgba(0,0,0,0.5); position:fixed; bottom:0px;right:0px; color:white;">PRE-ALPHA version</span>
         </div>-->
 
         <!-------------------------------------------------------->
-        <!---------------------- Libraries -----------------------
+        <!---------------------- Libraries ----------------------->
         <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
@@ -77,22 +78,22 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
         <script src="Libraries/angular-grid.js"></script>
 
-        <!-- Main Scripts --
+        <!-- Main Scripts -->
         <script src="js/app.js"></script>
         <script src="js/generalFunctions.js"></script>
 
-        <!-- Directives --
+        <!-- Directives -->
         <script src="directives/directives.js"></script>
 
-        <!-- Services --
+        <!-- Services -->
         <script src="js/Services/authorizationService.js"></script>
         <script src="js/Services/googleDriveService.js"></script>
 
-        <!-- Controllers --
+        <!-- Controllers -->
         <script src="js/Controllers/mainController.js"></script>
         <script src="js/Controllers/newPostController.js"></script>
 
-        <!-- Google API library (must be loaded last) --
+        <!-- Google API library (must be loaded last) -->
         <script src="https://apis.google.com/js/client.js?onload=gClientLoaded"></script>
 
     </body>
