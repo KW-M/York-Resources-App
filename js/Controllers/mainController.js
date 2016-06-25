@@ -184,6 +184,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    $scope.getFilesInitial = function() {
+      
       console.log('getting files');
       queue(GoogleDriveService.getListOfFlies('', $scope.nextPageToken, 12), function(fileList) {
          var tempFileArray = [];
