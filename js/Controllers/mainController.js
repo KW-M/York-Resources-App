@@ -2,7 +2,7 @@
 var dependancies = ['$scope', '$mdDialog', '$window', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', '$routeParams', 'angularGridInstance']
 app.controller('ApplicationController', dependancies.concat([function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, $routeParams, angularGridInstance) {
    var self = this;
-   var content_container = document.getElementById("content_container");
+   //var content_container = document.getElementById("content_container");
    var performantScrollEnabled = false;
    $scope.classList = classes;
    $scope.allPosts = [];
@@ -184,7 +184,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    $scope.getFilesInitial = function() {
-      /*
       console.log('getting files');
       queue(GoogleDriveService.getListOfFlies('', $scope.nextPageToken, 12), function(fileList) {
          var tempFileArray = [];
@@ -200,7 +199,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          }
          $scope.nextPageToken = '';
       });
-      */
    }
 
    $scope.getFiles = function(query) {
@@ -289,22 +287,22 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
      gutterSize: 12,
    }
 
-   content_container.onscroll = function(event) {
-            //called whenever the content_container scrolls
-      if (performantScrollEnabled === false) {
-         $scope.angularGridOptions.performantScroll = true;
-         performantScrollEnabled = true;
-      }
-      var yScroll = content_container.scrollTop;
-      if (yScroll >= 120) {
-         $scope.globals.FABisHidden = false;
-         $scope.globals.FABisOpen = false;
-      }
-      else {
-         $scope.globals.FABisOpen = false;
-         $scope.globals.FABisHidden = true;
-      }
-   };
+   // content_container.onscroll = function(event) {
+   //          //called whenever the content_container scrolls
+   //    if (performantScrollEnabled === false) {
+   //       $scope.angularGridOptions.performantScroll = true;
+   //       performantScrollEnabled = true;
+   //    }
+   //    var yScroll = content_container.scrollTop;
+   //    if (yScroll >= 120) {
+   //       $scope.globals.FABisHidden = false;
+   //       $scope.globals.FABisOpen = false;
+   //    }
+   //    else {
+   //       $scope.globals.FABisOpen = false;
+   //       $scope.globals.FABisHidden = true;
+   //    }
+   // };
 
 window.addEventListener("resize", function () {
       if (performantScrollEnabled === true) {
