@@ -21,7 +21,7 @@
     <body ng-app="YorkResourcesApp" ng-controller="ApplicationController">
         <!-------------------------------------------------------->
         <!-------------- The Welcome/Login screen ---------------->
-        <div id="overlay_background" class="overlay-background">
+       <!-- <div id="overlay_background" class="overlay-background">
             <div id="welcome_dialog">
                 <h1 style="margin-top:-6px">Welcome</h1>
                 <p>This is a place where any student can post anything they think might help other students in the york community.</p>
@@ -34,7 +34,7 @@
                 <p>Sign in with your me@york.org email account.</p>
                 <div class="signin-button-container">
                     <div id="auth_button" class="signin-button" ng-click="signIn()" style="display:none; cursor: pointer;">
-                        <!--<img class="signin-icon" src="/images/Google_G.png"/>-->
+                        
                         <svg class="signin-icon" viewBox="0, 0, 40, 40">
                             <path d="M 22,20 h15 a17,17 0 1,1 -8,-14" fill="none" stroke="#4885ed" stroke-width="6" />
                         </svg>  
@@ -45,17 +45,17 @@
             </div>
         </div>
         <!-------------------------------------------------------->
-        <!------------------- The top toolbar -------------------->
+        <!------------------- The top toolbar --------------------
         <toolbar-top hide-xs show-gt-xs></toolbar-top>
         <toolbar-top-mobile show-xs hide-gt-xs></toolbar-top-mobile>
         <md-sidenav side-nav-insides class="ng-cloak side-nav md-sidenav-left md-whiteframe-z2 sidenav-overlay" md-component-id="sidenav_overlay"></md-sidenav>
-        <!-------------------------------------------------------->
+        <!--------------------------------------------------------
         <add-lower-button></add-lower-button>
-        <!-------------------------------------------------------->
+        <!--------------------------------------------------------
         <div class="horizontalContainer">
-            <!---------------------------------------------------->
+            <!----------------------------------------------------
             <md-sidenav side-nav-insides class="ng-cloak side-nav md-sidenav-left sidenav-inline" md-is-locked-open="globals.sidenavIsOpen" md-component-id="sidenav_inline" hide-xs show-gt-sm></md-sidenav>
-            <!----- The content, ie posts, resources, etc. ------->
+            <!----- The content, ie posts, resources, etc. -------
             <div id="content_container" ng-class="{ 'sidenav-open' : globals.sidenavIsOpen }">
                 <ng-view></ng-view>
                 <div angular-grid="allPosts" ag-options="angularGridOptions" ag-id="posts">
@@ -64,10 +64,10 @@
                 <md-progress-circular id="loading_spinner" class="md-accent" md-mode="indeterminate" md-diameter="60"></md-progress-circular>
             </div>
             <!--<span class="unselectable default-mouse" style="font-size: 150%; background-color:rgba(0,0,0,0.5); position:fixed; bottom:0px;right:0px; color:white;">PRE-ALPHA version</span>-->
-        </div>
+        </div>-->
 
         <!-------------------------------------------------------->
-        <!---------------------- Libraries ----------------------->
+        <!---------------------- Libraries -----------------------
         <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
@@ -77,22 +77,22 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
         <script src="Libraries/angular-grid.js"></script>
 
-        <!-- Main Scripts -->
+        <!-- Main Scripts --
         <script src="js/app.js"></script>
         <script src="js/generalFunctions.js"></script>
 
-        <!-- Directives -->
+        <!-- Directives --
         <script src="directives/directives.js"></script>
 
-        <!-- Services -->
+        <!-- Services --
         <script src="js/Services/authorizationService.js"></script>
         <script src="js/Services/googleDriveService.js"></script>
 
-        <!-- Controllers -->
+        <!-- Controllers --
         <script src="js/Controllers/mainController.js"></script>
         <script src="js/Controllers/newPostController.js"></script>
 
-        <!-- Google API library (must be loaded last) -->
+        <!-- Google API library (must be loaded last) --
         <script src="https://apis.google.com/js/client.js?onload=gClientLoaded"></script>
 
     </body>
