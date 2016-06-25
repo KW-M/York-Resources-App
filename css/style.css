@@ -16,7 +16,7 @@ div:focus {
     outline: 0;
 }
 
-/*this chart specifies the css variables for the class background pastel colors :  */
+/*this chart specifies the css variables for the class background pastel colors : 
 :root {
 --pPurple: hsl(300,70%,93%);
 --pBlue: hsl(232,70%,95%);
@@ -25,7 +25,7 @@ div:focus {
 --pOrange: hsl(40,76%,93%);
 --pRed: hsl(8,70%,93%);
 }
-
+ */
 /*------------ background and layout styles ----------- */
 
 html body {
@@ -56,7 +56,7 @@ html body {
 }
 
 #content_container.sidenav-open{
-    transition: padding-left 0.s;
+    transition: padding-left 0s;
     padding-left: 2px;
 }
 
@@ -236,8 +236,8 @@ html body {
 
 md-input-container.button-select md-select-value {
     border-bottom: 0px !important;
-    padding:0px;!important
-    padding-bottom: :2px;!important
+    padding:0px !important;
+    padding-bottom: 2px  !important;
 }
     /*-------------- post card styles ----------- */
 
