@@ -76,18 +76,14 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.newPost = function(postObj, operation) {
       //called by the bottom right plus/add resource button
       $mdDialog.show({
-         contentElement: document.querySelector('#new_post_preload'),
+         contentElement: '#new_post_preload',
          controller: ['$scope', '$mdDialog', 'GoogleDriveService', '$mdToast', newPostController],
          scope: $scope,
+         parent: angular.element(document.body),
          preserveScope: true,
          locals: {
            postObj: $scope.items,
            operation: operation
-         },
-         onComplete: function () {
-            $scope.newPostHeaderImg = document.getElementById("header_image");
-            $scope.newPostDescription = document.querySelector('#DescriptionTxt');
-            $scope.dialogElement = document.querySelector('#new_post_dialog');
          },
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
