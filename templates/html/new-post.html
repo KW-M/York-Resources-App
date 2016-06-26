@@ -10,7 +10,10 @@
       <img ng-src="https://api.pagelr.com/capture/javascript?uri=https://www.google.com/maps/@36.7409281,-5.1619974,14z&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw" id="header_image">
       <div class="newPostImgGradient" flex layout="column">
          <md-input-container md-no-float id="newPostLinkInput">
-            <input id="newPostLinkInputTxt" ng-model="Link" style="color:white" placeholder="http://" ng-change="findType()" type="url">
+            <input id="newPostLinkInputTxt" ng-model="Link" style="color:white" placeholder="http://" ng-change="findType()" type="text" ng-patern='#(?i)\b((?:[a-z][\w-]+:(?:/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))#iS'">
+            <div ng-message="pattern">
+               You should charge exactly $1,234.
+          </div>
          </md-input-container>
          <md-button class="md-icon-button" aria-label="More">
             <md-icon>more_vert</md-icon>
