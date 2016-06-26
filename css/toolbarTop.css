@@ -1,87 +1,80 @@
-      /*-------------------- sidebar styles --------------------- */
-    md-sidenav.sidenav-overlay {
-        margin-top: 56px;
-    }
-    md-sidenav.sidenav-inline {
-        width: 252px;
-        background-color: #f2f2f2;
-    }
-
-    md-sidenav md-menu-item {
-       width: 100%;
-    }
-
-    md-sidenav md-icon {
-        width: 24px;
-        padding: 0;
-    }
-
-    .side-nav-scroll {
-        overflow-y: auto;
-    }
-
-    .side-nav-scroll::-webkit-scrollbar {
-        background: transparent;
-        width: 8px;
-    }::-webkit-scrollbar-thumb {
-        background: #bdbdbd;
-    }
-
-    md-sidenav.sidenav-inline .side-nav-scroll {
-        overflow-y: hidden;
-    }
-
-    md-sidenav.sidenav-inline:hover .side-nav-scroll {
-        overflow-y: auto;
-    }
-
-    md-sidenav.sidenav-inline md-menu-item>.md-button {
-        border-top-right-radius: 3px;
-        border-bottom-right-radius: 3px;
-    }
-    md-sidenav .md-button.selected {
-           background-color: rgba(0,0,0,.05);
-           color: #306acf;
-    }
-
-    .side-nav-classes md-menu-item>.md-button {
-        border-radius: 3px;
-    }
-
-    .side-nav-section {
-        border-bottom: 1px solid #ddd;
+    /*---------- toolbar and toolbar element styles -------- */
+    #york_study_logo {
+        margin: 16px 24px 16px 0;
     }
     
-    .side-nav-header {
-        display: block;
+    #account_picture {
+        Height: 3.5em;
+        Width: 3.5em;
+    }
+    
+    input.search-field {
         font-size: 14px;
-        text-transform: uppercase;
-        padding: 16px;
-        font-weight: 500;
-    }
-    .side-nav-option {
-        text-transform: none;
-        font-weight: 400;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-align-items: center;
-        -ms-flex-align: center;
-        align-items: center;
-        margin: 0 2px;
-        padding: 0 32px;
-        height: 48px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        font-size: 16px;
+        background: 0;
+        outline: none;
+        border: 0;
+        height: 36px;
+        margin: 0;
+        padding: 8px 8px 8px 72px;
+        transition: color .2s;
+        display: block;
     }
     
-    .side-nav-classes {
-        margin-left: 12px;
+    md-icon.search-icon.material-icons {
+        color: rgba(30, 30, 30, 1);
+        position: relative;
+        margin-top: -24px;
+        top: 29.5px;
+        margin-left: 24px;
+        margin-right: 0px;
+        transition: color .2s;
     }
-
-    .side-nav-bottom {
-        /*width: 100%;*/
-        border-top: 1px solid #ddd;
+    
+    .search-wrapper {
+        margin: auto 26px auto 26px;
+        height: 36px;
+        flex: 104;
+        max-width: 525px;
+        border-radius: 3px;
+        background: rgba(255, 255, 255, 0.32);
+        transition: background .2s;
+    }
+    
+    .search-wrapper:hover {
+        background: rgba(255, 255, 255, 0.4);
+    }
+    
+    .search-wrapper .search-field:focus {
+        background: rgba(255, 255, 255, 1);
+        border-radius: 3px;
+        box-shadow: 0 0 4px rgba(0, 0, 0, .12), 0 2px 4px rgba(0, 0, 0, .24);
+    }
+    
+    md-icon.search-icon.ng-isolate-scope.material-icons .search-field:focus {
+        color: rgba(255, 255, 255, 0.8);
+    }
+    /* Search field placeholder colors to be compatable with all browsers */
+    
+    input.search-field::-webkit-input-placeholder {
+        color: #fff;
+    }
+    
+    input.search-field:focus::-webkit-input-placeholder {
+        color: #757575;
+    }
+    
+    input.search-field:-moz-placeholder {
+        color: #fff;
+    }
+    
+    input.search-field:focus:-moz-placeholder {
+        color: #757575;
+    }
+    
+    input.search-field:-ms-input-placeholder {
+        color: #fff;
+    }
+    
+    input.search-field:focus:-ms-input-placeholder {
+        color: #757575;
     }
