@@ -6,12 +6,12 @@
         height: 100%;
     }
     md-sidenav.sidenav-inline {
+        z-index: 0;
         background-color: #f2f2f2;
-        height: initial;
     }
 
     md-sidenav md-menu-item {
-        width: 100%;
+       width: 100%;
     }
 
     md-sidenav md-icon {
@@ -32,7 +32,7 @@
 
     md-sidenav.sidenav-inline .side-nav-scroll {
         overflow-y: hidden;
-        width: 100%;
+        /*width: 100%;*/
     }
 
     md-sidenav.sidenav-inline:hover .side-nav-scroll {
@@ -72,7 +72,6 @@
         -webkit-align-items: center;
         -ms-flex-align: center;
         align-items: center;
-        width: auto;
         margin: 0 2px;
         padding: 0 32px;
         height: 48px;
@@ -87,6 +86,6 @@
     }
 
     .side-nav-bottom {
-        width: 100%;
+        /*width: 100%;*/
         border-top: 1px solid #ddd;
     }
