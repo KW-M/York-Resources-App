@@ -41,6 +41,13 @@ app.directive('addBarTop', function () {
     };
 });
 
+app.directive('newPostContent', function () {
+    return {
+        restrict: 'E',
+        templateUrl: 'directives/html/newPostContent.html'
+    };
+});
+
 
 app.directive('getPosts', function() {
   return {
