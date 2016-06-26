@@ -170,6 +170,9 @@ html body {
     cursor: default;
 }
 
+.not-visible{
+    visibility: none;
+}
 .no-margin {
     margin: 0 !important;
 }
@@ -239,8 +242,14 @@ md-input-container.button-select md-select-value {
     padding:0px !important;
     padding-bottom: 2px  !important;
 }
+.new_post_preload{
+    display:none;
+}
+md-dialog.new_post_preload{
+    display:initial;
+}
 
-#new_post_preload
+
 
 
 /* --------------------------- Animations ------------------- */
