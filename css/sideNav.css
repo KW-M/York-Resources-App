@@ -6,7 +6,6 @@
         height: 100%;
     }
     md-sidenav.sidenav-inline {
-        z-index: 0;
         background-color: #f2f2f2;
     }
 
