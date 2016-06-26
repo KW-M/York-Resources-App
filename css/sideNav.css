@@ -7,10 +7,7 @@
     }
     md-sidenav.sidenav-inline {
         background-color: #f2f2f2;
-        z-index: 0;
-        width: 252px;
         height: initial;
-        
     }
 
     md-sidenav md-menu-item {
