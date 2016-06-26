@@ -42,13 +42,13 @@
                 <div  class="darken-on-hover"  ng-class="{ 'selected' : pathSelected('/Other') }">
                     Other / Not associated
                 </div>
-                <div ng-repeat="Catagory in classList">
-                    <md-header>{{Catagory.Name}}</md-header>
-                    <md-button ng-repeat="Class in Catagory.Classes" value="{{Class}}" md-ink-ripple="true" class="darken-on-hover rounded-right" ng-class="{ 'selected' : pathSelected('/' + Class) }">
-                        {{Class}}
-                    </md-button>
-                </div>
-                <!--<md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">
+                <!--<div ng-repeat="Catagory in classList">-->
+                <!--    <md-header>{{Catagory.Name}}</md-header>-->
+                <!--    <md-button ng-repeat="Class in Catagory.Classes" value="{{Class}}" md-ink-ripple="true" class="darken-on-hover rounded-right" ng-class="{ 'selected' : pathSelected('/' + Class) }">-->
+                <!--        {{Class}}-->
+                <!--    </md-button>-->
+                <!--</div>-->
+                <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">
                     <md-option ng-repeat="Class in Catagory.Classes" value="{{Class}}" md-ink-ripple="true" class="darken-on-hover rounded-right" ng-class="{ 'selected' : pathSelected('/' + Class) }">
                         {{Class}}
                     </md-option>
