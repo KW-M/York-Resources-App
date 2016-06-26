@@ -39,9 +39,11 @@
                 </md-menu-item>
             </md-list-item>
             <md-list>
-               <md-button class="side-nav-option" class="rounded-right" ng-class="{ 'selected' : pathSelected('/' + Class) }">
+                <div  flex layout="column">
+                <md-button class="side-nav-option" class="rounded-right" ng-class="{ 'selected' : pathSelected('/Other') }">
                     Other / Not associated
                 </md-button>
+                </div>
                 <div ng-repeat="Catagory in classList" flex layout="column">
                     <label class="side-nav-header">{{Catagory.Name}}</label>
                     <md-button class="side-nav-option" ng-repeat="Class in Catagory.Classes"  ng-class="{ 'selected' : pathSelected('/' + Class) }">
