@@ -1,11 +1,9 @@
-    /*-------------------- sidebar styles --------------------- */
+      /*-------------------- sidebar styles --------------------- */
     md-sidenav.sidenav-overlay {
-        z-index: 60;
-        position: fixed;
         margin-top: 56px;
-        height: 100%;
     }
     md-sidenav.sidenav-inline {
+        width: 252px;
         background-color: #f2f2f2;
     }
 
@@ -31,7 +29,6 @@
 
     md-sidenav.sidenav-inline .side-nav-scroll {
         overflow-y: hidden;
-        /*width: 100%;*/
     }
 
     md-sidenav.sidenav-inline:hover .side-nav-scroll {
