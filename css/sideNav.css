@@ -66,6 +66,17 @@
         font-weight: 500;
     }
     .side-nav-option {
+        cursor: pointer;
+        position: relative;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        width: auto;
+        padding: 0 16px;
+        height: 48px;
         width: auto;
         white-space: nowrap;
         overflow: hidden;

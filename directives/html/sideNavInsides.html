@@ -42,17 +42,17 @@
                 <div  class="darken-on-hover"  ng-class="{ 'selected' : pathSelected('/Other') }">
                     Other / Not associated
                 </div>
-                <!--<div ng-repeat="Catagory in classList">-->
-                <!--    <md-header>{{Catagory.Name}}</md-header>-->
-                <!--    <md-button ng-repeat="Class in Catagory.Classes" value="{{Class}}" md-ink-ripple="true" class="darken-on-hover rounded-right" ng-class="{ 'selected' : pathSelected('/' + Class) }">-->
-                <!--        {{Class}}-->
-                <!--    </md-button>-->
-                <!--</div>-->
-                <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">
-                    <md-option ng-repeat="Class in Catagory.Classes" value="{{Class}}" md-ink-ripple="true" class="darken-on-hover rounded-right" ng-class="{ 'selected' : pathSelected('/' + Class) }">
+                <div ng-repeat="Catagory in classList">-->
+                    <label class="sidenav-header">{{Catagory.Name}}</label>
+                    <md-button class="sidenav-header" ng-repeat="Class in Catagory.Classes" value="{{Class}}" md-ink-ripple="true" class="darken-on-hover rounded-right" ng-class="{ 'selected' : pathSelected('/' + Class) }">
                         {{Class}}
-                    </md-option>
-                </md-optgroup>
+                    </md-button>
+                </div>
+                <!--<md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">-->
+                <!--    <md-option ng-repeat="Class in Catagory.Classes" value="{{Class}}" md-ink-ripple="true" class="darken-on-hover rounded-right" ng-class="{ 'selected' : pathSelected('/' + Class) }">-->
+                <!--        {{Class}}-->
+                <!--    </md-option>-->
+                <!--</md-optgroup>-->
                 <!--<md-list-item ng-repeat="Catagory in classList" style="flex-direction: column">-->
                 <!--        <md-menu-item>-->
                 <!--        {{Catagory.Name}}-->
