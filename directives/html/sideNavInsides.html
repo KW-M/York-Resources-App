@@ -39,12 +39,12 @@
                 </md-menu-item>
             </md-list-item>
             <md-list>
-                <div  class="darken-on-hover"  ng-class="{ 'selected' : pathSelected('/Other') }">
+               <md-button class="sidenav-option" class="rounded-right" ng-class="{ 'selected' : pathSelected('/' + Class) }">
                     Other / Not associated
-                </div>
-                <div ng-repeat="Catagory in classList">-->
+                </md-button>
+                <div ng-repeat="Catagory in classList" flex layout="column">
                     <label class="sidenav-header">{{Catagory.Name}}</label>
-                    <md-button class="sidenav-header" ng-repeat="Class in Catagory.Classes" value="{{Class}}" md-ink-ripple="true" class="darken-on-hover rounded-right" ng-class="{ 'selected' : pathSelected('/' + Class) }">
+                    <md-button class="sidenav-option" ng-repeat="Class in Catagory.Classes"  ng-class="{ 'selected' : pathSelected('/' + Class) }">
                         {{Class}}
                     </md-button>
                 </div>
