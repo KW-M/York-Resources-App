@@ -75,23 +75,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.newPost = function(postObj, operation) {
       //called by the bottom right plus/add resource button
-      $mdDialog.show({
-         contentElement: '#new_post_preload',
-         controller: ['$scope', '$mdDialog', 'GoogleDriveService', '$mdToast', newPostController],
-         scope: $scope,
-         parent: angular.element(document.body),
-         preserveScope: true,
-         locals: {
-           postObj: $scope.items,
-           operation: operation
-         },
-         clickOutsideToClose: false,
-         fullscreen: ($mdMedia('xs')),
-         openFrom: ('#new_post_button'),
-         closeTo: {
-            left: 1000,
-         }
-      });
+        $mdDialog.show({
+    contentElement: '#myStaticDialog',
+    parent: angular.element(document.body)
+  });
    };
 
    $scope.showPicker = function(typ) {
