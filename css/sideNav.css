@@ -65,7 +65,14 @@
         padding: 16px;
         font-weight: 500;
     }
-
+    .side-nav-option {
+        width: auto;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 16px;
+    }
+    
     .side-nav-classes {
         margin-left: 12px;
     }
