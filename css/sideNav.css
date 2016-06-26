@@ -75,7 +75,8 @@
         -ms-flex-align: center;
         align-items: center;
         width: auto;
-        padding: 0 16px;
+        margin: 0 0 0 32px;
+        padding-right: 32px;
         height: 48px;
         width: auto;
         white-space: nowrap;

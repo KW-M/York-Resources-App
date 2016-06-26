@@ -42,17 +42,17 @@
                <md-button class="side-nav-option" class="rounded-right" ng-class="{ 'selected' : pathSelected('/' + Class) }">
                     Other / Not associated
                 </md-button>
-                <!--<div ng-repeat="Catagory in classList" flex layout="column">-->
-                <!--    <label class="side-nav-header">{{Catagory.Name}}</label>-->
-                <!--    <md-button class="side-nav-option" ng-repeat="Class in Catagory.Classes"  ng-class="{ 'selected' : pathSelected('/' + Class) }">-->
-                <!--        {{Class}}-->
-                <!--    </md-button>-->
-                </div>
-                <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">
-                    <md-option ng-repeat="Class in Catagory.Classes" value="{{Class}}" md-ink-ripple="true" class="darken-on-hover rounded-right" ng-class="{ 'selected' : pathSelected('/' + Class) }">
+                <div ng-repeat="Catagory in classList" flex layout="column">
+                    <label class="side-nav-header">{{Catagory.Name}}</label>
+                    <md-button class="side-nav-option" ng-repeat="Class in Catagory.Classes"  ng-class="{ 'selected' : pathSelected('/' + Class) }">
                         {{Class}}
-                    </md-option>
-                </md-optgroup>
+                    </md-button>
+                </div>
+                <!--<md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">-->
+                <!--    <md-option ng-repeat="Class in Catagory.Classes" value="{{Class}}" md-ink-ripple="true" class="darken-on-hover rounded-right" ng-class="{ 'selected' : pathSelected('/' + Class) }">-->
+                <!--        {{Class}}-->
+                <!--    </md-option>-->
+                <!--</md-optgroup>-->
                 <!--<md-list-item ng-repeat="Catagory in classList" style="flex-direction: column">-->
                 <!--        <md-menu-item>-->
                 <!--        {{Catagory.Name}}-->
