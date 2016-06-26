@@ -66,8 +66,8 @@
         font-weight: 500;
     }
     .side-nav-option {
-        cursor: pointer;
-        position: relative;
+        text-transform: none;
+        font-weight: 400;
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
@@ -75,10 +75,9 @@
         -ms-flex-align: center;
         align-items: center;
         width: auto;
-        margin: 0 0 0 32px;
-        padding-right: 32px;
+        margin: 0 2px;
+        padding: 0 32px;
         height: 48px;
-        width: auto;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
