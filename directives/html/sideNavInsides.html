@@ -40,13 +40,13 @@
             </md-list-item>
             <md-list>
                 <div  flex layout="column">
-                <md-button class="side-nav-option" ng-click="::gotoRoute('other')" ng-class="{ 'selected' : pathSelected('/other') }">
+                <md-button class="side-nav-option" ng-click="gotoRoute('other')" ng-class="{ 'selected' : pathSelected('/other') }">
                     Other / Not associated
                 </md-button>
                 </div>
                 <div ng-repeat="Catagory in classList" flex layout="column">
                     <label class="side-nav-header">{{Catagory.Name}}</label>
-                    <md-button class="side-nav-option" ng-repeat="Class in Catagory.Classes" ng-click="::gotoRoute('/' + Class)" ng-class="{ 'selected' : pathSelected('/' + Class) }">
+                    <md-button class="side-nav-option" ng-repeat="Class in Catagory.Classes" ng-click="gotoRoute('/' + Class)" ng-class="{ 'selected' : pathSelected('/' + Class) }">
                         {{Class}}
                     </md-button>
                 </div>

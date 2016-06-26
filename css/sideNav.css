@@ -45,7 +45,7 @@
         border-top-right-radius: 3px;
         border-bottom-right-radius: 3px;
     }
-    md-sidenav md-menu-item>.md-button.selected {
+    md-sidenav .md-button.selected {
            background-color: rgba(0,0,0,.05);
            color: #306acf;
     }
