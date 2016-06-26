@@ -256,14 +256,12 @@ md-input-container.button-select md-select-value {
     }
 
     .post-card-header {
-        width: 100%;
-        height: auto;
         min-height: 42px;
         cursor: pointer;
         background-color: grey;
-        max-height: 20em;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
         position: relative;
-        overflow: hidden;
     }
 
     .post-card-image {
@@ -271,8 +269,6 @@ md-input-container.button-select md-select-value {
         box-sizing: border-box;
         display: flex;
         flex: 0 0 auto;
-        width: 100%;
-        height: auto;
         opacity: 0;
         visibility: hidden;
     }
