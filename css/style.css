@@ -1,4 +1,4 @@
-/*---------------------universal styles---------------------- */
+/*---------------------universal styles---------------------- 
 
 * {
     -webkit-tap-highlight-color: transparent;
@@ -9,7 +9,7 @@
     -ms-user-select: none;
     user-select: none;
 }
-
+*/
 
 button:focus,
 div:focus {
