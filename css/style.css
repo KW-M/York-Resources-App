@@ -19,8 +19,13 @@ div:focus{
 /*------------ background and layout styles ----------- */
 
 html body {
+    display:-webkit-box;
+    display:-ms-flexbox;
     display:flex;
-    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;
@@ -30,20 +35,31 @@ html body {
 .horizontalContainer {
     /* The body is the vertical layout container*/
     position: relative;
-    flex:1;
+    -webkit-box-flex:1;
+        -ms-flex:1;
+            flex:1;
+    display:-webkit-box;
+    display:-ms-flexbox;
     display:flex;
-    flex-direction: row;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
 }
 
 #content_container {
-    flex: 1;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
     overflow: auto;
     padding: 58px 108px 20px 100px;
     background-color: #f2f2f2;
+    -webkit-transition: padding-left 0.4s;
     transition: padding-left 0.4s;
 }
 
 #content_container.sidenav-open{
+    -webkit-transition: padding-left 0s;
     transition: padding-left 0s;
     padding-left: 2px;
 }
@@ -54,8 +70,13 @@ html body {
 /*-------------- Loading & first launch styles ----------- */
 
 #welcome_dialog {
+    display:-webkit-box;
+    display:-ms-flexbox;
     display:flex;
-    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
     font-size: 14px;
     font-weight: 400;
     position: fixed;
@@ -87,13 +108,18 @@ html body {
 }
 
 .signin-button-container {
-    flex: 1;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
 }
 
 .signin-button {
     display: inline-box;
     margin: auto;
+    -webkit-transition: box-shadow .2s, background-color .2s;
     transition: box-shadow .2s, background-color .2s;
     background-color: #AF001A;
     width: 86px;
@@ -106,12 +132,14 @@ html body {
 }
 
 .signin-button:hover {
+    -webkit-transition: box-shadow .2s, background-color .2s;
     transition: box-shadow .2s, background-color .2s;
     box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32);
     background-color: #A20019;
 }
 
 .signin-button:active {
+    -webkit-transition: box-shadow .2s;
     transition: box-shadow .2s;
     box-shadow: 0 7px 8px -4px rgba(0, 0, 0, .2);
 }
@@ -148,7 +176,6 @@ html body {
 .unselectable {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
-    -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -210,6 +237,7 @@ html body {
 }
 
 .raise-on-hover:hover {
+    -webkit-transition: .2s;
     transition: .2s;
     box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32);
 }
@@ -222,6 +250,7 @@ html body {
     right: 0;
     background-color: rgba(0, 0, 0, .7);
     z-index: 75;
+    -webkit-transition: opacity .3s;
     transition: opacity .3s;
 }
 
@@ -236,4 +265,40 @@ md-input-container.button-select md-select-value {
 
 /* --------------------------- Animations ------------------- */
 
+.post-card.angular-grid-item.ng-leave {
+  -webkit-transition: opacity 450ms ease, -webkit-transform 450ms ease;
+  transition: opacity 450ms ease, -webkit-transform 450ms ease;
+  transition: opacity 450ms ease, transform 450ms ease;
+  transition: opacity 450ms ease, transform 450ms ease, -webkit-transform 450ms ease;
+}
+.post-card.angular-grid-item.ng-leave.ng-leave-active {
+  -webkit-transform: scale(0.5);
+  transform: scale(0.5);
+  opacity: 0;
+}
+.post-card.angular-grid-item.ng-enter {
+  -webkit-transition: opacity 450ms ease, -webkit-transform 450ms ease;
+  transition: opacity 450ms ease, -webkit-transform 450ms ease;
+  transition: opacity 450ms ease, transform 450ms ease;
+  transition: opacity 450ms ease, transform 450ms ease, -webkit-transform 450ms ease;
+  -webkit-transition-delay: 00ms;
+  transition-delay: 300ms;
+  -webkit-transform: translateY(150px);
+  transform: translateY(150px);
+  opacity: 1;
+}
+.post-card.ng-enter-stagger {
+  /* this will have a 100ms delay between each successive enter animation */
+  -webkit-transition-delay: 0.4s;
+          transition-delay: 0.4s;
 
+  /* As of 1.4.4, this must always be set: it signals ngAnimate
+    to not accidentally inherit a delay property from another CSS class */
+  -webkit-transition-duration: 0s;
+          transition-duration: 0s;
+}
+.post-card.angular-grid-item.ng-enter.ng-enter-active {
+   -webkit-transform: translateY(0);
+   transform: translateY(0);
+   opacity: 1;
+}
