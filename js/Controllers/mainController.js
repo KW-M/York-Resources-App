@@ -276,12 +276,13 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.angularGridOptions = {
      gridWidth: 250,
-     infiniteScroll: $scope.getFiles(),
+     infiniteScroll: $scope.getFiles,
      scrollContainer: '#content_container',
      pageSize: 1.5,
      performantScroll:false,
      gutterSize: 12,
-   }
+   };
+   console.log($scope.angularGridOptions);
 
    content_container.onscroll = function(event) {
             //called whenever the content_container scrolls

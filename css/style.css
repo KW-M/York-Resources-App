@@ -1,8 +1,7 @@
-/*---------------------universal styles---------------------- *
+/*---------------------universal styles---------------------- */
 
 button:focus,
-div:focus,
-input:focus{
+div:focus{
     outline: 0;
 }
 
