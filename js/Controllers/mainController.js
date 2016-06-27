@@ -3,8 +3,6 @@ var dependancies = ['$scope', '$mdDialog', '$window', '$sce', '$mdSidenav', '$md
 app.controller('ApplicationController', dependancies.concat([function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, $routeParams, angularGridInstance) {
    var self = this;
    var content_container = document.getElementById("content_container");
-   var newPostPreload = angular.element(document.getElementById("myStaticDialog"));
-   console.log(newPostPreload);
    var performantScrollEnabled = false;
    $scope.classList = classes;
    $scope.allPosts = [];
@@ -77,10 +75,23 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.newPost = function(postObj, operation) {
       //called by the bottom right plus/add resource button
-        $mdDialog.show({
-    contentElement: newPostPreload,
-    parent: angular.element(document.body)
-  });
+      $mdDialog.show({
+         contentElement: '#new_post_preload',
+         controller: ['$scope', '$mdDialog', 'GoogleDriveService', '$mdToast', newPostController],
+         scope: $scope,
+         parent: angular.element(document.body),
+         preserveScope: true,
+         locals: {
+           postObj: $scope.items,
+           operation: operation
+         },
+         clickOutsideToClose: false,
+         fullscreen: ($mdMedia('xs')),
+         openFrom: ('#new_post_button'),
+         closeTo: {
+            left: 1000,
+         }
+      });
    };
 
    $scope.showPicker = function(typ) {
