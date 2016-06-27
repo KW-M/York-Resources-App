@@ -288,7 +288,7 @@ md-input-container.button-select md-select-value {
   opacity: 1;
 }
 .post-card.ng-enter-stagger {
-  /* this will have a 100ms delay between each successive enter animation */
+  /* this will have a 400ms delay between each successive enter animation */
   -webkit-transition-delay: 0.4s;
           transition-delay: 0.4s;
 
