@@ -236,34 +236,4 @@ md-input-container.button-select md-select-value {
 
 /* --------------------------- Animations ------------------- */
 
-.post-card.angular-grid-item.ng-leave {
-  -webkit-transition: opacity 450ms ease, -webkit-transform 450ms ease;
-  transition: opacity 450ms ease, transform 450ms ease;
-}
-.post-card.angular-grid-item.ng-leave.ng-leave-active {
-  -webkit-transform: scale(0.5);
-  transform: scale(0.5);
-  opacity: 0;
-}
-.post-card.angular-grid-item.ng-enter {
-  -webkit-transition: opacity 450ms ease, -webkit-transform 450ms ease;
-  transition: opacity 450ms ease, transform 450ms ease;
-  -webkit-transition-delay: 00ms;
-  transition-delay: 300ms;
-  -webkit-transform: translateY(150px);
-  transform: translateY(150px);
-  opacity: 1;
-}
-.post-card.ng-enter-stagger {
-  /* this will have a 100ms delay between each successive enter animation */
-  transition-delay: 0.4s;
 
-  /* As of 1.4.4, this must always be set: it signals ngAnimate
-    to not accidentally inherit a delay property from another CSS class */
-  transition-duration: 0s;
-}
-.post-card.angular-grid-item.ng-enter.ng-enter-active {
-   -webkit-transform: translateY(0);
-   transform: translateY(0);
-   opacity: 1;
-}

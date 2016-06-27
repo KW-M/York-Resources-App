@@ -1,151 +1,152 @@
 /*-------------- post card styles ----------- */
 
-    .posts-content {
-        position: relative;
-    }
+.posts-content {
+    position: relative;
+}
 
-    .post-card.angular-grid-item {
-  min-width: 100px;
-  max-width: 400px;
-  margin: 8px;
-  opacity: 0;
-  -webkit-transition: .4s;
-  transition: .4s;
-    }
+.post-card.angular-grid-item {
+    min-width: 100px;
+    max-width: 400px;
+    margin: 8px;
+    /*opacity: 0;*
+    -webkit-transition: .4s;
+    transition: .4s;
+}
 
-    .post-card-header {
-        min-height: 42px;
-        cursor: pointer;
-        background-color: grey;
-        border-top-left-radius: 3px;
-        border-top-right-radius: 3px;
-        position: relative;
-    }
+.post-card-header {
+    min-height: 42px;
+    cursor: pointer;
+    background-color: grey;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    position: relative;
+}
 
-    .post-card-image {
-        border-radius: 2px 2px 0 0;
-        box-sizing: border-box;
-        display: flex;
-        flex: 0 0 auto;
-        width: 100%;
-        height: auto;
-        opacity: 0;
-        visibility: hidden;
-    }
+.post-card-image {
+    border-radius: 2px 2px 0 0;
+    box-sizing: border-box;
+    display: flex;
+    flex: 0 0 auto;
+    width: 100%;
+    height: auto;
+    opacity: 0;
+    visibility: hidden;
+}
 
-    .post-card-image.img-loaded {
-        visibility: visible;
-        opacity: 1;
-    }
+.post-card-image.img-loaded {
+    visibility: visible;
+    opacity: 1;
+}
 
-    .post-card-image-gradient {
-        z-index: 1;
-        position: absolute;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        display: inline-block;
-        flex: 1;
-        cursor: pointer;
-        height: 56px;
-        background-image: linear-gradient(to top, rgba(0, 0, 0, .5), rgba(0, 0, 0, 0));
-    }
+.post-card-image-gradient {
+    z-index: 1;
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: inline-block;
+    flex: 1;
+    cursor: pointer;
+    height: 56px;
+    background-image: linear-gradient(to top, rgba(0, 0, 0, .5), rgba(0, 0, 0, 0));
+}
 
-    .post-card-metadata-text {
-        margin: 10px 16px 0 16px;
-        color: white;
-        cursor: pointer;
-        text-shadow: 0px 0px 30px rgba(0, 0, 0, 0.45);
-        white-space: nowrap;
-        overflow: hidden;
-        text-align: center;
-        text-overflow: ellipsis;
-        font-weight: normal;
-        font-size: 12px;
-        transition: opacity 0.2s
-    }
+.post-card-metadata-text {
+    margin: 10px 16px 0 16px;
+    color: white;
+    cursor: pointer;
+    text-shadow: 0px 0px 30px rgba(0, 0, 0, 0.45);
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+    font-weight: normal;
+    font-size: 12px;
+    transition: opacity 0.2s
+}
 
-    .post-card-header:hover .post-card-metadata-text {
-        opacity: 0;
-        transition: opacity 0.2s
-    }
+.post-card-header:hover .post-card-metadata-text {
+    opacity: 0;
+    transition: opacity 0.2s
+}
 
-    .post-card-link-text {
-        opacity: 0;
-        position: absolute;
-        top: 27.5px;
-        margin: 0px 16px;
-        color: white;
-        width: 240px;
-        cursor: pointer;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        font-weight: bold;
-        transition: opacity 0.2s;
-    }
+.post-card-link-text {
+    opacity: 0;
+    position: absolute;
+    top: 27.5px;
+    margin: 0px 16px;
+    color: white;
+    width: 240px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: bold;
+    transition: opacity 0.2s;
+}
 
-    .post-card-header:hover .post-card-link-text {
-        opacity: 1;
-        transition: opacity 0.2s
-    }
+.post-card-header:hover .post-card-link-text {
+    opacity: 1;
+    transition: opacity 0.2s
+}
 
-    .post-card-title {
-        padding: 20px 16px 0px 16px;
-        margin: 0px;
-        flex-direction: row;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 100%;
-        font-size: 20px;
-        font-weight: 400;
-        line-height: 32px;
-    }
+.post-card-title {
+    padding: 20px 16px 0px 16px;
+    margin: 0px;
+    flex-direction: row;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 32px;
+}
 
-    .post-card-creator {
-        color: rgba(0, 0, 0, .54);
-        font-size: 12px;
-        margin: 0px 16px 16px 16px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        word-break: break-all;
-    }
+.post-card-creator {
+    color: rgba(0, 0, 0, .54);
+    font-size: 12px;
+    margin: 0px 16px 16px 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
+}
 
-    button.md-icon-button.md #flag_button {
-        margin-left: 0px
-    }
+button.md-icon-button.md #flag_button {
+    margin-left: 0px
+}
 
-    #like_thumb_button {
-        margin-left: -5px;
-    }
+#like_thumb_button {
+    margin-left: -5px;
+}
 
-    #open_button {
-        margin-left: auto;
-    }
+#open_button {
+    margin-left: auto;
+}
 
-    .like-counter {
-        margin-bottom: 6px;
-        margin-left: 4px;
-    }
+.like-counter {
+    margin-bottom: 6px;
+    margin-left: 4px;
+}
 
-    #post_card_description {
-        overflow: hidden;
-        display: block;
-        margin: 0 16px 0 16px;
-        padding: 0;
-        color: black;
-    }
+#post_card_description {
+    overflow: hidden;
+    display: block;
+    margin: 0 16px 0 16px;
+    padding: 0;
+    color: black;
+}
 
-    .overflow-shadow {
-        background-color: rgba(250, 250, 250, 0.05);
-        box-shadow: inset 0px -32px 25px -30px rgba(0, 18, 25, 0.4);
-        border-style: groove;
-        border-width: 0px;
-        border-bottom-width: 1px;
-        border-color: rgb(68, 138, 255);
-        border-radius: 2px;
-    }
+.overflow-shadow {
+    background-color: rgba(250, 250, 250, 0.05);
+    box-shadow: inset 0px -32px 25px -30px rgba(0, 18, 25, 0.4);
+    border-style: groove;
+    border-width: 0px;
+    border-bottom-width: 1px;
+    border-color: rgb(68, 138, 255);
+    border-radius: 2px;
+}
+
 
 /*---------------------------------------------------------------- */
