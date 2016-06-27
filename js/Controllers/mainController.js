@@ -3,7 +3,7 @@ var dependancies = ['$scope', '$mdDialog', '$window', '$sce', '$mdSidenav', '$md
 app.controller('ApplicationController', dependancies.concat([function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, $routeParams, angularGridInstance) {
    var self = this;
    var content_container = document.getElementById("content_container");
-   var newPostPreload = document.getElementById("myStaticDialog");
+   var newPostPreload = angular.element(document.getElementById("myStaticDialog"));
    console.log(newPostPreload);
    var performantScrollEnabled = false;
    $scope.classList = classes;
