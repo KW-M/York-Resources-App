@@ -3,7 +3,7 @@ var dependancies = ['$scope', '$mdDialog', '$window', '$sce', '$mdSidenav', '$md
 app.controller('ApplicationController', dependancies.concat([function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, $routeParams, angularGridInstance) {
    var self = this;
    var content_container = document.getElementById("content_container");
-   var newPostPreload = document.getElementById("new_post_preload");
+   var newPostPreload = document.getElementById("myStaticDialog");
    console.log(newPostPreload);
    var performantScrollEnabled = false;
    $scope.classList = classes;
@@ -78,7 +78,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.newPost = function(postObj, operation) {
       //called by the bottom right plus/add resource button
         $mdDialog.show({
-    contentElement: '#myStaticDialog',
+    contentElement: newPostPreload,
     parent: angular.element(document.body)
   });
    };
