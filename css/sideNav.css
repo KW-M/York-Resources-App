@@ -65,9 +65,7 @@
         display: -ms-flexbox;
         display: -webkit-box;
         display: flex;
-        -ms-flex-align: center;
-        -webkit-box-align: center;
-        align-items: center;
+        text-align: start;
         margin: 0 2px;
         padding: 0 32px;
         height: 48px;
