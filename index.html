@@ -33,17 +33,17 @@
                         <!--<img class="signin-icon" src="/images/Google_G.png"/>-->
                         <svg class="signin-icon" viewBox="0, 0, 40, 40">
                             <path d="M 22,20 h15 a17,17 0 1,1 -8,-14" fill="none" stroke="#4885ed" stroke-width="6" />
-                        </svg>  
+                        </svg>
                         <p class="signin-text">Sign in</p>
                     </div>
                     <md-progress-circular id="login_spinner" class="md-accent" md-mode="indeterminate" md-diameter="36"></md-progress-circular>
                 </div>
             </div>
         </div>
-        
+
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" media="none" onload="if(media!='all')media='all'">
-         <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Roboto+Mono|Roboto+Slab|Material+Icons" rel="stylesheet" media="none" onload="if(media!='all')media='all'">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Roboto+Mono|Roboto+Slab|Material+Icons" rel="stylesheet" media="none" onload="if(media!='all')media='all'">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
         <!-------------------------------------------------------->
         <!------------------- The top toolbar -------------------->
@@ -66,14 +66,9 @@
             </div>
             <!--<span class="unselectable default-mouse" style="font-size: 150%; background-color:rgba(0,0,0,0.5); position:fixed; bottom:0px;right:0px; color:white;">PRE-ALPHA version</span>-->
         </div>
-        <div style="visibility: hidden">
-  <div class="md-dialog-container" id="myStaticDialog">
-    <md-dialog>
-      This is a pre-rendered dialog.
-    </md-dialog>
-  </div>
-</div>
-<div class="not-visible"><new-post-content id="new_post_preload" class="md-dialog-container"></new-post-content></div>
+        <div class="">
+            <new-post-content id="new_post_preload" class="md-dialog-container"></new-post-content>
+        </div>
         <!-------------------------------------------------------->
         <!---------------------- Libraries ----------------------->
         <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -108,4 +103,5 @@
     <link rel="stylesheet" href="css/sideNav.css" />
     <link rel="stylesheet" href="css/postCard.css" />
     <link rel="stylesheet" href="css/newPost.css" />
+
 </html>
