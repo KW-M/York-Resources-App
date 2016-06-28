@@ -92,7 +92,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             left: 1000,
          }
       });
-      console.log(dialog);
+      console.log(dialog());
       
    };
 
