@@ -75,7 +75,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.newPost = function(postObj, operation) {
       //called by the bottom right plus/add resource button
-      console.log($mdDialog.show({
+      var dialog = $mdDialog.show({
          contentElement: '#new_post_preload',
          controller: ['$scope', '$mdDialog', 'GoogleDriveService', '$mdToast', newPostController],
          scope: $scope,
@@ -91,7 +91,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          closeTo: {
             left: 1000,
          }
-      }));
+      });
+      console.log(dialog);
       
    };
 
