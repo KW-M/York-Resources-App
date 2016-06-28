@@ -54,7 +54,8 @@
    }
    
    #newPostLinkInput {
-      margin:0;
+      margin:0  0 0;
+      flex: 1;
    }
    
    #newPostLinkInput .md-errors-spacer {
