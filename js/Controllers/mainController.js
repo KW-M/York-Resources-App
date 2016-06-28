@@ -85,6 +85,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
            postObj: $scope.items,
            operation: operation
          },
+         onComplete: function(){
+            console.log(this);
+         },
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
          openFrom: ('#new_post_button'),
