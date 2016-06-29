@@ -83,14 +83,15 @@
                         });
                     }
                     else {
+                        alert('here');
                         $scope.checkHeaderImg();
                     }
                 }
             }
-
-
-             $scope.checkHeaderImg = function () {
-alert('here');
+        }
+        
+        $scope.checkHeaderImg = function () {
+            alert('here`1');
                 if ($scope.newPostHeaderImg.complete === true) {
                     $mdToast.show({
                         template: '<md-toast><span style="font-size:18px; max-width: 200px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right:-20px"></md-progress-circular></md-toast>',
@@ -108,8 +109,7 @@ alert('here');
                         $scope.submit();
                     }
                 }
-            }
-        }
+        };
 
         $scope.submit = function() {
             var response = ({
