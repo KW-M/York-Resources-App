@@ -1,5 +1,5 @@
 <md-dialog ng-cloak id="new_post_dialog">
-   <md-toolbar class="dialog-header">
+   <md-toolbar id="dialog_header">
       <div class="md-toolbar-tools">
          <div class="md-icon-button">
             <md-icon>group</md-icon>
@@ -27,7 +27,7 @@
          </md-menu>
       </div>
    </md-toolbar>
-   <md-dialog-content>
+   <md-dialog-content id="dialog_scroll">
       <div flex layout="row">
          <class-select-menu></class-select-menu>
          <md-chips ng-model="Tags" flex md-separator-keys="[32,188,13]">
