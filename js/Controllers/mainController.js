@@ -62,7 +62,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.pathSelected = function(path) {
       if ($location.path() === path) {
          return true;
-      } else {
+      }
+      else {
          return false;
       }
    }
@@ -82,11 +83,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          parent: angular.element(document.body),
          preserveScope: true,
          locals: {
-           postObj: $scope.items,
-           operation: operation
+            postObj: $scope.items,
+            operation: operation
          },
-         onComplete: function(){
-            console.log(this);
+         onComplete: function() {
+            
          },
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
@@ -192,7 +193,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                tempFileArray = $scope.handleFile(file, metadata, tempFileArray);
                if (tempFileArray.length === 12) {
                   console.log(tempFileArray);
-                  $scope.$apply(function(){$scope.allPosts = $scope.allPosts.concat(tempFileArray);});
+                  $scope.$apply(function() {
+                     $scope.allPosts = $scope.allPosts.concat(tempFileArray);
+                  });
                }
             });
          }
@@ -201,31 +204,33 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    $scope.getFiles = function(query) {
-      if ($scope.allPosts.length >= 12){
-      console.log('getting files');
-      queue(GoogleDriveService.getListOfFlies(query, $scope.nextPageToken, 10), function(fileList) {
-         var tempFileArray = [];
-         for (var item = 0; item < fileList.result.files.length; item++) {
-            var metadata = fileList.result.files[item];
-            queue(GoogleDriveService.getFileContent(metadata.id), function(file) {
-               tempFileArray = $scope.handleFile(file, metadata, tempFileArray);
-               if (tempFileArray.length === 10) {
-                  console.log(tempFileArray);
-                  $scope.$apply(function(){$scope.allPosts = $scope.allPosts.concat(tempFileArray);});
-               }
-            });
-         }
-         $scope.nextPageToken = '';
-      });
+      if ($scope.allPosts.length >= 12) {
+         console.log('getting files');
+         queue(GoogleDriveService.getListOfFlies(query, $scope.nextPageToken, 10), function(fileList) {
+            var tempFileArray = [];
+            for (var item = 0; item < fileList.result.files.length; item++) {
+               var metadata = fileList.result.files[item];
+               queue(GoogleDriveService.getFileContent(metadata.id), function(file) {
+                  tempFileArray = $scope.handleFile(file, metadata, tempFileArray);
+                  if (tempFileArray.length === 10) {
+                     console.log(tempFileArray);
+                     $scope.$apply(function() {
+                        $scope.allPosts = $scope.allPosts.concat(tempFileArray);
+                     });
+                  }
+               });
+            }
+            $scope.nextPageToken = '';
+         });
       }
    }
 
    $scope.handleFile = function(file, metadata, destination) {
       console.log({
-          file: file,
-          metadata: metadata,
-          fileArray: destination
-       });
+         file: file,
+         metadata: metadata,
+         fileArray: destination
+      });
       destination = destination.concat(file.result);
       return destination;
    }
@@ -235,14 +240,14 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    }
 
-   $scope.sortByLikes = function (thingToSort) {
-      thingToSort.sort(function (a, b) {
+   $scope.sortByLikes = function(thingToSort) {
+      thingToSort.sort(function(a, b) {
          return b.LikeUsers.length - a.LikeUsers.length;
       });
    }
 
-   $scope.sortByDate = function (thingToSort) {
-      thingToSort.sort(function (a, b) {
+   $scope.sortByDate = function(thingToSort) {
+      thingToSort.sort(function(a, b) {
          return b.UpdateDate - a.UpdateDate;
       });
    }
@@ -278,17 +283,17 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
    $scope.angularGridOptions = {
-     gridWidth: 250,
-     infiniteScroll: $scope.getFiles,
-     scrollContainer: '#content_container',
-     pageSize: 1.5,
-     performantScroll:false,
-     gutterSize: 12,
+      gridWidth: 250,
+      infiniteScroll: $scope.getFiles,
+      scrollContainer: '#content_container',
+      pageSize: 1.5,
+      performantScroll: false,
+      gutterSize: 12,
    };
    console.log($scope.angularGridOptions);
 
    content_container.onscroll = function(event) {
-            //called whenever the content_container scrolls
+      //called whenever the content_container scrolls
       if (performantScrollEnabled === false) {
          $scope.angularGridOptions.performantScroll = true;
          performantScrollEnabled = true;
@@ -304,12 +309,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
    };
 
-window.addEventListener("resize", function () {
+   window.addEventListener("resize", function() {
       if (performantScrollEnabled === true) {
          $scope.angularGridOptions.performantScroll = false;
          performantScrollEnabled = false;
       }
-});
+   });
 
    $window.loginSilent = function(response) {
       loginProcedure(authorizationService.authorizeSilent());
@@ -322,91 +327,81 @@ function gClientLoaded() {
 }
 
 
-var classes = [
-{
- 'Name':'English',
- 'Color':'pLightBlue',
- 'Classes':[
-    'English I',
-    'English II',
-    'English III',
-    'English IV',
-    'English IV Honors',
-    'English V',
-    'AP Liturature'
+var classes = [{
+   'Name': 'English',
+   'Color': 'pLightBlue',
+   'Classes': [
+      'English I',
+      'English II',
+      'English III',
+      'English IV',
+      'English IV Honors',
+      'English V',
+      'AP Liturature'
    ]
-},
-{
- 'Name':'History',
- 'Color':'pOrange',
- 'Classes':[
-   'Ancient History',
-   'World History I',
-   'World History II',
-   'Asian History',
-   'US History',
-   'AP US History'
-  ]
-},
-{
- 'Name':'Mathematics',
- 'Color':'pPurple',
- 'Classes':[
-   'Algebra I',
-   'Geometry',
-   'Algebra II',
-   'Precalculus',
-   'Precalculus Honors',
-   'Statistics',
-   'Calculus',
-   'AP Calculus AB',
-   'AP Calculus BC'
+}, {
+   'Name': 'History',
+   'Color': 'pOrange',
+   'Classes': [
+      'Ancient History',
+      'World History I',
+      'World History II',
+      'Asian History',
+      'US History',
+      'AP US History'
    ]
-},
-{
- 'Name':'Physical Sciences',
- 'Color':'pTerquois',
- 'Classes':[
-    'Physical Science (8th)',
-    'Chemistry',
-    'AP Chemistry',
-    'Physics',
-    'AP Physics'
-  ]
-},
-{
- 'Name':'Biological Sciences',
- 'Color':'pGreen',
- 'Classes':[
-    'Biology I',
-    'Marine Biology',
-    'Anatomy & Physiology',
-    'Enviromental Science',
-    'AP Biology'
-  ]
-},
-{
- 'Name':'Modern Languages',
- 'Color':'pYellow',
- 'Classes':[]
-},
-{
- 'Name':'Clasical Languages',
- 'Color':'pRed',
- 'Classes':[]
-},
-{
- 'Name':'Humanities',
- 'Color':'pYellowGreen',
- 'Classes':[
-    'Economics',
-    'AP US Government',
-    'YAS Psycology Honors'
-  ]
-},
-{
- 'Name':'Arts',
- 'Color':'pPink',
- 'Classes':[]
-},
-]
+}, {
+   'Name': 'Mathematics',
+   'Color': 'pPurple',
+   'Classes': [
+      'Algebra I',
+      'Geometry',
+      'Algebra II',
+      'Precalculus',
+      'Precalculus Honors',
+      'Statistics',
+      'Calculus',
+      'AP Calculus AB',
+      'AP Calculus BC'
+   ]
+}, {
+   'Name': 'Physical Sciences',
+   'Color': 'pTerquois',
+   'Classes': [
+      'Physical Science (8th)',
+      'Chemistry',
+      'AP Chemistry',
+      'Physics',
+      'AP Physics'
+   ]
+}, {
+   'Name': 'Biological Sciences',
+   'Color': 'pGreen',
+   'Classes': [
+      'Biology I',
+      'Marine Biology',
+      'Anatomy & Physiology',
+      'Enviromental Science',
+      'AP Biology'
+   ]
+}, {
+   'Name': 'Modern Languages',
+   'Color': 'pYellow',
+   'Classes': []
+}, {
+   'Name': 'Clasical Languages',
+   'Color': 'pRed',
+   'Classes': []
+}, {
+   'Name': 'Humanities',
+   'Color': 'pYellowGreen',
+   'Classes': [
+      'Economics',
+      'AP US Government',
+      'YAS Psycology Honors'
+   ]
+}, {
+   'Name': 'Arts',
+   'Color': 'pPink',
+   'Classes': []
+}, ]
