@@ -64,7 +64,7 @@
             if ($scope.Class === '' || $scope.Class === undefined) {
                 $mdToast.show({
                     template: '<md-toast>Please select a class for this post.</md-toast>',
-                    hideDelay: 1500,
+                    hideDelay: 10500,
                     parent: $scope.dialogElement,
                 });
             } else {
