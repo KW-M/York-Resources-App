@@ -87,6 +87,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             operation: operation
          },
          onComplete: function() {
+            $scope.newPostHeaderImg = document.getElementById("header_image");
+            $scope.newPostDescription = document.querySelector('#DescriptionTxt');
+            $scope.dialogElement = document.querySelector('#new_post_dialog');
             var newPostScroll = document.getElementById('dialog_scroll');
             alert(document.getElementById('dialog_scroll'));
             newPostScroll.onscroll = function() {
