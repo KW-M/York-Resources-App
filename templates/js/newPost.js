@@ -1,4 +1,4 @@
-console.log(document.getElementById('dialog_scroll'));
+console.log(document.getElementsByClassName('dialog_scroll'));
 console.log('dialog_scroll');
 var newPostScroll = document.getElementById('dialog_scroll');
 newPostScroll.onscroll = function () {
