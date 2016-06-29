@@ -290,11 +290,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.confirmDelete = function(ev, content, arrayIndex) {
       // Appending dialog to document.body to cover sidenav in docs app
       var confirm = $mdDialog.confirm()
-         .title('Are you sure you want to remove this:')
+         .title('Are you sure you want to permanently delete this?')
          .textContent(content.Title)
          .ariaLabel('Delete?')
          .targetEvent(ev)
-         .ok('Delete')
+         .ok('Delete i')
          .cancel('Keep it');
       $mdDialog.show(confirm).then(function() {
          //ok
