@@ -83,6 +83,7 @@
                         });
                     }
                     else {
+                        alert(here);
                         $scope.checkHeaderImg();
                     }
                 }
