@@ -87,7 +87,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             operation: operation
          },
          onComplete: function() {
-            
+            alert('hi');
          },
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
