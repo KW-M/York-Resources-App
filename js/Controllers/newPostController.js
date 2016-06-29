@@ -4,11 +4,20 @@
         $scope.Type = 'noLink';
         $scope.Flagged = false;
         $scope.Title = '';
-        $scope.CreationDate = new date;
+        $scope.CreationDate = new Date();
         $scope.UpdateDate = 'noLink';
         $scope.Tags = [];
-        $scope.Title = 'noLink';
-        $scope.CreationDate = false;
+        $scope.Description = 'noLink';
+        $scope.Class = {
+            Catagory: '',
+            Name: '',
+            Color: '',
+        };
+        $scope.Link = '';
+        $scope.FileId = '';
+        $scope.ImageURL = '';
+        $scope.LikeUsers = [];
+        
         fillInValues();
         $scope.driveThumbnail = "";
         $scope.classSearch = "";
