@@ -1,6 +1,14 @@
     /* we don't define the "new post controller" here because it was alredy
                        defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
+        $scope.Type = 'noLink';
+        $scope.Flagged = false;
+        $scope.Title = '';
+        $scope.CreationDate = new date;
+        $scope.UpdateDate = 'noLink';
+        $scope.Tags = [];
+        $scope.Title = 'noLink';
+        $scope.CreationDate = false;
         fillInValues();
         $scope.driveThumbnail = "";
         $scope.classSearch = "";
