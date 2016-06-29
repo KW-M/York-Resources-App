@@ -19,6 +19,7 @@
         $scope.LikeUsers = [];
         
         fillInValues();
+        
         $scope.driveThumbnail = "";
         $scope.classSearch = "";
 
