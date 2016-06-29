@@ -54,6 +54,7 @@
         }
 
         $scope.isReadyToSubmit = function() {
+            console.log($scope.dialogElement);
             if ($scope.Class === '' || $scope.Class === undefined) {
                 $mdToast.show({
                     template: '<md-toast>Please select a class for this post.</md-toast>',
