@@ -54,14 +54,16 @@
                     template: '<md-toast><div class="md-toast-content">Please select a class for this post.</div><md-toast>',
                     hideDelay: 10500,
                     parent: document.getElementById('header_image'),
+                    position: 'top left'
                 });
             } else {
                 if ($scope.Title === '' || $scope.Title === undefined) {
                     console.log ('no Title');
                     $mdToast.show({
-                        template: '<md-toast>Posts must have a title.</md-toast>',
+                        template: '<md-toast><div class="md-toast-content">Posts must have a title.</div></md-toast>',
                         hideDelay: 1500,
-                        parent: $scope.dialogElement,
+                        parent: angular.element(document.body),
+                    position: 'top left'
                     });
                 }else {
                     if ($scope.Type === "gDrive") {
