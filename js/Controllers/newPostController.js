@@ -55,7 +55,7 @@
 
         $scope.isReadyToSubmit = function() {
             console.log($scope.dialogElement);
-alert($scope.Class);
+console.log($scope.Class);
             if ($scope.Class === '' || $scope.Class === undefined) {
                 
                 $mdToast.show({
