@@ -47,13 +47,13 @@
 
         $scope.isReadyToSubmit = function() {
             console.log($scope.dialogElement);
-            console.log(document.getElementById('dialog_scroll'));
+            console.log(document.getElementById('header_image'));
             if ($scope.Class === '' || $scope.Class === undefined) {
                 console.log ('no class');
                 $mdToast.show({
                     template: '<md-toast><div class="md-toast-content">Please select a class for this post.</div><md-toast>',
                     hideDelay: 10500,
-                    parent: document.getElementById(''),
+                    parent: document.getElementById('header_image'),
                 });
             } else {
                 if ($scope.Title === '' || $scope.Title === undefined) {
