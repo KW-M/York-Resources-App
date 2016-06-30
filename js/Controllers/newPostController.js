@@ -8,11 +8,7 @@
         $scope.UpdateDate = 'noLink';
         $scope.Tags = [];
         $scope.Description = 'noLink';
-        $scope.Class = {
-            Catagory: '',
-            Name: '',
-            Color: '',
-        };
+        $scope.Class = '';
         $scope.Link = '';
         $scope.FileId = '';
         $scope.ImageURL = '';
@@ -25,10 +21,6 @@
 
         $scope.close = function() {
             $mdDialog.hide();
-        };
-
-        $scope.classSelected = function(inputClass) {
-            $scope.Class = inputClass;
         };
 
         $scope.Preview = function() {
@@ -57,7 +49,6 @@
             console.log($scope.dialogElement);
 console.log($scope.Class);
             if ($scope.Class === '' || $scope.Class === undefined) {
-                
                 $mdToast.show({
                     template: '<div class="md-toast-content">Please select a class for this post.<div class="md-toast-content">',
                     hideDelay: 10500,
