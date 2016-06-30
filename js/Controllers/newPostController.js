@@ -47,8 +47,9 @@
 
         $scope.isReadyToSubmit = function() {
             console.log($scope.dialogElement);
-console.log($scope.Class);
+            console.log($scope.Class);
             if ($scope.Class === '' || $scope.Class === undefined) {
+                console.log ('no class');
                 $mdToast.show({
                     template: '<div class="md-toast-content">Please select a class for this post.<div class="md-toast-content">',
                     hideDelay: 10500,
@@ -56,6 +57,7 @@ console.log($scope.Class);
                 });
             } else {
                 if ($scope.Title === '' || $scope.Title === undefined) {
+                    console.log ('no Title')
                     $mdToast.show({
                         template: '<md-toast>Posts must have a title.</md-toast>',
                         hideDelay: 1500,
@@ -63,6 +65,7 @@ console.log($scope.Class);
                     });
                 }else {
                     if ($scope.Type === "gDrive") {
+                        console.log ('gdive type');
                         $mdToast.show({
                             template: '<md-toast><div style="flex-direction: column; height: 100%;" class="md-toast-content"><p style="margin-top:10px">This will allow people at York to view the linked file.</p><md-button style="width:100%" ng-click="checkHeaderImg()">Ok</md-button><div></md-toast>',
                             hideDelay: 3000000,
@@ -199,10 +202,10 @@ console.log($scope.Class);
                 }
 
                 if (postObj.Class.Name !== undefined || "") {
-                    $scope.Class.Name = postObj.Class.Name;
+                    $scope.Class = postObj.Class;
                 }
                 else {
-                    $scope.Class.Name = '';
+                    $scope.Class = '';
                 }
 
                 if (postObj.Link !== undefined || "") {
