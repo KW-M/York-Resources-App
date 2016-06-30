@@ -55,15 +55,11 @@
 
         $scope.isReadyToSubmit = function() {
             console.log($scope.dialogElement);
-            $mdToast.show(
-                $mdToast.simple()
-                .textContent('Simple Toast!')
-                .hideDelay(30000)
-            );
-
+alert($scope.Class);
             if ($scope.Class === '' || $scope.Class === undefined) {
+                
                 $mdToast.show({
-                    template: '<md-toast>Please select a class for this post.</md-toast>',
+                    template: '<div class="md-toast-content">Please select a class for this post.<div class="md-toast-content">',
                     hideDelay: 10500,
                     parent: $scope.dialogElement,
                 });
