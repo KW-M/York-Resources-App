@@ -53,7 +53,7 @@
                 $mdToast.show({
                     template: '<md-toast><div class="md-toast-content">Please select a class for this post.</div><md-toast>',
                     hideDelay: 10500,
-                    parent: document.getElementById('header_image'),
+                    parent: angular.element(document.getElementById('header_image')),
                     position: 'top left'
                 });
             } else {
@@ -61,7 +61,7 @@
                     console.log ('no Title');
                     $mdToast.show({
                         template: '<md-toast><div class="md-toast-content">Posts must have a title.</div></md-toast>',
-                        hideDelay: 1500,
+                        hideDelay: 10500,
                         parent: angular.element(document.body),
                     position: 'top left'
                     });
