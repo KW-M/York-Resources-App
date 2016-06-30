@@ -52,7 +52,7 @@
                 console.log ('no class');
                 $mdToast.show({
                     template: '<md-toast><div class="md-toast-content">Please select a class for this post.</div><md-toast>',
-                    hideDelay: 100500,
+                    hideDelay: 1500,
                     parent: document.getElementById('new_post_dialog'),
                 });
             } else {
@@ -60,7 +60,7 @@
                     console.log ('no Title');
                     $mdToast.show({
                         template: '<md-toast><div class="md-toast-content">Posts must have a title.</div></md-toast>',
-                        hideDelay: 100500,
+                        hideDelay: 1500,
                         parent: document.getElementById('new_post_dialog'),
                     });
                 }else {
