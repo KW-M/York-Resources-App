@@ -51,13 +51,13 @@
             if ($scope.Class === '' || $scope.Class === undefined) {
                 console.log ('no class');
                 $mdToast.show({
-                    template: '<div class="md-toast-content">Please select a class for this post.<div class="md-toast-content">',
+                    template: '<md-toast><div class="md-toast-content">Please select a class for this post.</div><md-toast>',
                     hideDelay: 10500,
-                    parent: $scope.dialogElement,
+                    parent: document.getElementById('side_nav'),
                 });
             } else {
                 if ($scope.Title === '' || $scope.Title === undefined) {
-                    console.log ('no Title')
+                    console.log ('no Title');
                     $mdToast.show({
                         template: '<md-toast>Posts must have a title.</md-toast>',
                         hideDelay: 1500,
