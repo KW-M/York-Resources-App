@@ -11,7 +11,7 @@
         $scope.Class = '';
         $scope.Link = '';
         $scope.FileId = '';
-        $scope.ImageURL = '';
+        $scope.HeaderImage = '';
         $scope.LikeUsers = [];
         
         fillInValues();
@@ -81,11 +81,10 @@
         }
         
         $scope.checkHeaderImg = function () {
-                    $mdToast.show({
-                        template: '<md-toast><span style="font-size:18px; max-width: 200px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right:-20px"></md-progress-circular></md-toast>',
-                        hideDelay: 3000000,
-                    });
-            if ($scope.newPostHeaderImg.complete === true) {        
+                $mdToast.show({
+                    template: '<md-toast><span style="font-size:18px; max-width: 200px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right:-20px"></md-progress-circular></md-toast>',
+                    hideDelay: 3000000,
+                });
                 if ($scope.newPostHeaderImg.complete === true) {
                     $scope.submit();
                 }
@@ -108,7 +107,7 @@
                 },
                 "Link": $scope.Link,
                 "FileId": $scope.Id,
-                "ImageURL": '',
+                "HeaderImage": convertImg(),
                 "LikeUsers": [],
             });
             if (operation === 'new') {
@@ -219,11 +218,11 @@
                     $scope.FileId = "";
                 }
 
-                if (postObj.ImageURL !== undefined || "") {
-                    $scope.ImageURL = postObj.ImageURL;
+                if (postObj.HeaderImage !== undefined || "") {
+                    $scope.HeaderImage = postObj.HeaderImage;
                 }
                 else {
-                    $scope.ImageURL = "";
+                    $scope.HeaderImage = "";
                 }
 
                 if (postObj.LikeUsers !== undefined || "") {
