@@ -19,10 +19,6 @@
         $scope.driveThumbnail = "";
         $scope.classSearch = "";
 
-        $scope.close = function() {
-            $mdDialog.hide();
-        };
-
         $scope.Preview = function() {
             if ($scope.Type === "Link") {
                 return 'https://api.pagelr.com/capture?uri=' + $scope.Link + '&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw'
@@ -32,7 +28,7 @@
             }
         };
 
-        function convertImg(ImageElement) 
+        function convertImg(ImageElement)  {
             var canvas = document.createElement('CANVAS');
             console.log(ImageElement);
             var ctx = canvas.getContext('2d');
