@@ -33,7 +33,7 @@
         };
 
         function convertImg() {
-            var canvas = document.createElement('CANVAS');
+            var canvas = document.createElement('ProccesingCanvas');
             var ctx = canvas.getContext('2d');
             var dataURL;
             canvas.height = this.height;
