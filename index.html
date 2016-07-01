@@ -59,6 +59,7 @@
             <!----- The content, ie posts, resources, etc. ------->
             <div id="content_container" ng-class="{ 'sidenav-open' : globals.sidenavIsOpen }">
                 <ng-view></ng-view>
+                <md-card post-card class="post-card raise-on-hover" ng-repeat="Post in allPosts" ng-style="classList[Post.Class.Name].color"></md-card>
                 <!--<div angular-grid="allPosts" ag-options="angularGridOptions" ag-id="posts">
                     <md-card post-card class="post-card raise-on-hover" ng-repeat="Post in allPosts" ng-style="classList[Post.Class.Name].color"></md-card>
                 </div>-->
