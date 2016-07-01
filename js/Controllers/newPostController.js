@@ -32,15 +32,14 @@
             }
         };
 
-        function convertImg() {
+        function convertImg(ImageElement) {
             var canvas = document.createElement('ProccesingCanvas');
             var ctx = canvas.getContext('2d');
             var dataURL;
-            canvas.height = this.height;
-            canvas.width = this.width;
-            ctx.drawImage(this, 0, 0);
+            canvas.height = ImageElement.height;
+            canvas.width = ImageElement.width;
+            ctx.drawImage(ImageElement, 0, 0);
             dataURL = canvas.toDataURL('png');
-            callback(dataURL);
             canvas = null;
             return dataURL;
         }
