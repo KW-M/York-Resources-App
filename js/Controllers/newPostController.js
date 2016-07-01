@@ -33,8 +33,9 @@
         };
 
         function convertImg(ImageElement) {
+            ImageElement.crossOrigin = 'Anonymous';
             var canvas = document.createElement('CANVAS');
-            console.log(canvas);
+            console.log(ImageElement);
             var ctx = canvas.getContext('2d');
             var dataURL;
             canvas.height = ImageElement.height;
