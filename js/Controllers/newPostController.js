@@ -32,8 +32,7 @@
             }
         };
 
-        function convertImg(ImageElement) {
-            ImageElement.crossOrigin = 'Anonymous';
+        function convertImg(ImageElement) 
             var canvas = document.createElement('CANVAS');
             console.log(ImageElement);
             var ctx = canvas.getContext('2d');
