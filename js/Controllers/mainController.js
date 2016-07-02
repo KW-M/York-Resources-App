@@ -44,8 +44,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $window.setTimeout(angularGridInstance.posts.refresh, 500);
       }
       else {
-         $mdSidenav('left').toggle();
-         scope.globals.sidenavIsOpen = false
+         $mdSidenav('sidenav_overlay').toggle();
       }
    };
 
