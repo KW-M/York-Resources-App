@@ -18,18 +18,18 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
 
-var data = null;
+   var data = null;
 
-var xhr = new XMLHttpRequest();
-xhr.addEventListener("readystatechange", function () {
-  if (this.readyState === 4) {
-        console.log(this);
-   var imagey = document.createElement('img');
-   //imagey.src = imageUrl;
-  }
-});
-xhr.open("GET", "https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=www.amazon.com&width=400&height=260&ads=0&format=png&maxage=32000000&key=Ca7GOVe9BkGefE_rvwN2Bw");
-xhr.send(data);
+   var xhr = new XMLHttpRequest();
+   xhr.addEventListener("readystatechange", function() {
+      if (this.readyState === 4) {
+         console.log(this);
+         var imagey = document.createElement('img');
+         //imagey.src = imageUrl;
+      }
+   });
+   xhr.open("GET", "https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=www.amazon.com&width=400&height=260&ads=0&format=png&maxage=32000000&key=Ca7GOVe9BkGefE_rvwN2Bw");
+   xhr.send(data);
 
 
    $scope.GoogleDriveService = GoogleDriveService;
@@ -39,10 +39,14 @@ xhr.send(data);
    };
 
    $scope.toggleSidebar = function() { //called by the top left toolbar menu button
-
-      $scope.globals.sidenavIsOpen = !$scope.globals.sidenavIsOpen
-         //$mdSidenav('left').toggle();
-      $window.setTimeout(angularGridInstance.posts.refresh, 500);
+      if ($mdMedia('gt-sm')) {
+         $scope.globals.sidenavIsOpen = !$scope.globals.sidenavIsOpen
+         $window.setTimeout(angularGridInstance.posts.refresh, 500);
+      }
+      else {
+         $mdSidenav('left').toggle();
+         scope.globals.sidenavIsOpen = false
+      }
    };
 
    $scope.gotoRoute = function(path, query, id) {
