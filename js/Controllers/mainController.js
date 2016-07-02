@@ -29,7 +29,6 @@ xhr.addEventListener("readystatechange", function () {
   }
 });
 xhr.open("GET", "https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=www.amazon.com&width=400&height=260&ads=0&format=jpg&maxage=32000000&key=Ca7GOVe9BkGefE_rvwN2Bw");
-xhr.responseType = "blob";
 xhr.send(data);
 
    $scope.GoogleDriveService = GoogleDriveService;
