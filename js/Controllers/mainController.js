@@ -19,12 +19,15 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
 
 var xhr = new XMLHttpRequest();
-xhr.responseType =  
+xhr.responseType = "blob"
+ xhr.async = true;
 xhr.open("GET", "https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=www.amazon.com&width=400&height=260&ads=0&maxage=32000000&key=Ca7GOVe9BkGefE_rvwN2Bw");
-xhr.onload = function (e) {
-   console.log(this);
+xhr.onreadystatechange = function (e) {
+   if (this.readyState === 4) {
+    console.log(this);
    var imagey = document.createElement('img');
    //imagey.src = imageUrl;
+   }
 };
 xhr.send();
 
