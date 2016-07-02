@@ -16,6 +16,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       FABisHidden: true,
       sidenavIsOpen: true,
    };
+   
+   $scope.getimages = 
+   
    $scope.GoogleDriveService = GoogleDriveService;
 
    $scope.signIn = function() { //called by the signIn button click
