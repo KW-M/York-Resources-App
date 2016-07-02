@@ -16,9 +16,23 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       FABisHidden: true,
       sidenavIsOpen: true,
    };
-   
-   $scope.getimages = 
-   
+
+
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://api.pagelr.com/capture?uri=www.google.com&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw",
+  "method": "GET",
+  "headers": {
+    "cache-control": "no-cache",
+    "postman-token": "77e6c81f-46cc-1776-8fdc-d22f6bddcf18"
+  }
+}
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+
    $scope.GoogleDriveService = GoogleDriveService;
 
    $scope.signIn = function() { //called by the signIn button click
