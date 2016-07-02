@@ -21,7 +21,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 var settings = {
   "async": true,
   "crossDomain": true,
-  "url": "https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=www.amazon.com&width=400&height=260&ads=0&format=jpg&maxage=32000000&key=Ca7GOVe9BkGefE_rvwN2Bw",
+  "url": "https://api.pagelr.com/capture/javascript?uri=www.amazon.com&width=400&height=260&ads=0&format=jpg&maxage=32000000&key=Ca7GOVe9BkGefE_rvwN2Bw",
   "method": "GET",
 }
 
