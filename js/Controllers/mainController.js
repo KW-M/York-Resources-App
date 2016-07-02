@@ -18,16 +18,15 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
 
-var settings = {
-  "async": true,
-  "crossDomain": true,
-  "url": "https://api.pagelr.com/capture/javascript?uri=www.amazon.com&width=400&height=260&ads=0&format=jpg&maxage=32000000&key=Ca7GOVe9BkGefE_rvwN2Bw",
-  "method": "GET",
-}
-
-$.ajax(settings).done(function (response) {
-  console.log(response);
+var data = null;
+var xhr = new XMLHttpRequest();
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === 4) {
+    console.log(this.responseText);
+  }
 });
+xhr.open("GET", "https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=www.amazon.com&width=400&height=260&ads=0&format=jpg&maxage=32000000&key=Ca7GOVe9BkGefE_rvwN2Bw");
+xhr.send(data);
 
    $scope.GoogleDriveService = GoogleDriveService;
 
