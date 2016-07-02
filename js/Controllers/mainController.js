@@ -7,6 +7,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.classList = classes;
    $scope.allPosts = [];
    $scope.Tags = [];
+   $scope.ImageURL = '';
    $scope.filteredPosts = [];
    $scope.searchTxt = '';
    $scope.nextPageToken = '';
