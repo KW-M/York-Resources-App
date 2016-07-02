@@ -11,11 +11,11 @@
 <!--        </div>-->
 <!--    </div>-->
 <!--</div>-->
-<!--<p class="post-card-title">{{::Post.Title}}</p>-->
-<!--<p class="post-card-creator"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<i class="zmdi zmdi-graduation-cap"></i> {{Post.Creator.ClassOf}})</span></p>-->
-<!--<p id="post_card_description" ng-bind-html="::Post.Description" ng-class="{ 'OverflowShadow': Document.getElementById('post-card-description').scrollHeight > Document.getElementById('post-card-description').clientHeight }">-->
+<p class="post-card-title">{{::Post.Title}}</p>
+<p class="post-card-creator"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<i class="zmdi zmdi-graduation-cap"></i> {{Post.Creator.ClassOf}})</span></p>
+<p id="post_card_description" ng-bind-html="::Post.Description" ng-class="{ 'OverflowShadow': Document.getElementById('post-card-description').scrollHeight > Document.getElementById('post-card-description').clientHeight }">
 
-<!--</p>-->
+</p>
 <md-card-actions layout="row" layout-align="start center">
 
     <p class="like-counter">{{::Post.LikeUsers.length}}</p>
