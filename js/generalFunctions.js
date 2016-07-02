@@ -16,12 +16,14 @@
   
   function processTheQueue() {
     var item = theQueue.shift();
+    console.log(item);
     if (item) {
       var thePromise = item.Promise
       thePromise.then(item.Action);
     }
     if (queue.length === 0) {
-      clearInterval(timer), timer = null;
+      clearInterval(timer);
+       timer = null;
     }
   }
 
