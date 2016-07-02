@@ -24,11 +24,12 @@ var xhr = new XMLHttpRequest();
 xhr.addEventListener("readystatechange", function () {
   if (this.readyState === 4) {
         console.log(this);
+        new Blob(this.responseText, {type : 'image/png'});
    var imagey = document.createElement('img');
    //imagey.src = imageUrl;
   }
 });
-xhr.open("GET", "https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=www.amazon.com&width=400&height=260&ads=0&format=jpg&maxage=32000000&key=Ca7GOVe9BkGefE_rvwN2Bw");
+xhr.open("GET", "https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=www.amazon.com&width=400&height=260&ads=0&format=png&maxage=32000000&key=Ca7GOVe9BkGefE_rvwN2Bw");
 xhr.send(data);
 
    $scope.GoogleDriveService = GoogleDriveService;
