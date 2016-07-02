@@ -57,7 +57,7 @@
             <!---------------------------------------------------->
             <md-sidenav side-nav-insides class="ng-cloak side-nav md-sidenav-left sidenav-inline" md-is-locked-open="globals.sidenavIsOpen && $mdMedia('gt-sm')" md-component-id="sidenav_inline" hide-xs show-gt-sm></md-sidenav>
             <!----- The content, ie posts, resources, etc. ------->
-            <div id="content_container" ng-class="{ 'sidenav-open' : globals.sidenavIsOpen && $mdMedia('gt-sm') }">
+            <div id="content_container" ng-class="{ 'sidenav-open' : {{globals.sidenavIsOpen && $mdMedia('gt-sm')}} }">
                 <ng-view></ng-view>
                 <md-card post-card class="post-card raise-on-hover" ng-repeat="Post in allPosts" ng-style="classList[Post.Class.Name].color"></md-card>
                 <!--<div angular-grid="allPosts" ag-options="angularGridOptions" ag-id="posts">
