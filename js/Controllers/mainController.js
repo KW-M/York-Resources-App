@@ -21,8 +21,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 var data = null;
 
 var xhr = new XMLHttpRequest();
-xhr.responseType = "blob";
-xhr.async = true;
 xhr.addEventListener("readystatechange", function () {
   if (this.readyState === 4) {
         console.log(this);
@@ -31,6 +29,7 @@ xhr.addEventListener("readystatechange", function () {
   }
 });
 xhr.open("GET", "https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=www.amazon.com&width=400&height=260&ads=0&format=jpg&maxage=32000000&key=Ca7GOVe9BkGefE_rvwN2Bw");
+xhr.responseType = "blob";
 xhr.send(data);
 
    $scope.GoogleDriveService = GoogleDriveService;
