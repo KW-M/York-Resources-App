@@ -237,9 +237,9 @@ html body {
 }
 
 .raise-on-hover:hover {
-    /*-webkit-transition: .2s;
+    -webkit-transition: .2s;
     transition: .2s;
-    box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32);*/
+    box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32);
 }
 
 .overlay-background {
