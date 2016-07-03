@@ -8,9 +8,9 @@
     min-width: 100px;
     max-width: 400px;
     margin: 8px;
-    /*Sopacity: 0;*/
-    -webkit-transition: .4s;
-    transition: .4s;
+    /*opacity: 0;*/
+    /*-webkit-transition: .4s;*/
+    /*transition: .4s;*/
 }
 
 .post-card-header {
@@ -29,8 +29,8 @@
     flex: 0 0 auto;
     width: 100%;
     height: auto;
-    opacity: 0;
-    visibility: hidden;
+    /*opacity: 0;*/
+    /*visibility: hidden;*/
 }
 
 .post-card-image.img-loaded {
