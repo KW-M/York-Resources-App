@@ -74,9 +74,10 @@
     opacity: 0;
     position: absolute;
     top: 27.5px;
-    margin: 0px 16px;
+    width: 100%;
+    padding: 0px 16px;
+    box-sizing: border-box;
     color: white;
-    width: 240px;
     cursor: pointer;
     white-space: nowrap;
     overflow: hidden;
