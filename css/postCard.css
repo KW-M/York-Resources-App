@@ -52,9 +52,9 @@
 }
 
 .post-card-metadata-text {
-    margin: 10px 16px 0 16px;
+    margin: 0 auto 0 auto;
+    padding: 0 16px;
     color: white;
-    cursor: pointer;
     text-shadow: 0px 0px 30px rgba(0, 0, 0, 0.45);
     white-space: nowrap;
     overflow: hidden;
