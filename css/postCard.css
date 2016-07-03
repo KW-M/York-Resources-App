@@ -44,8 +44,8 @@
     right: 0;
     left: 0;
     bottom: 0;
-    display: inline-block;
-    flex: 1;
+    display: flex;
+    align-items: center;
     cursor: pointer;
     height: 56px;
     background-image: linear-gradient(to top, rgba(0, 0, 0, .5), rgba(0, 0, 0, 0));
