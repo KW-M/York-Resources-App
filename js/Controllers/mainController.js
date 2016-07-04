@@ -26,7 +26,7 @@ function getFile(url) {
     xhr.responseType = 'arraybuffer';
 
     xhr.onload = function(e) {
-        var blob = new WebKitBlobBuilder();
+        var blob = new Blob();
 
         blob.append(xhr.response);
 
