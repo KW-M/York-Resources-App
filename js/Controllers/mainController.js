@@ -22,13 +22,13 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    xhr.addEventListener("readystatechange", function() {
       if(xhr.readyState === 4 && xhr.status === 200){
          console.log(this);
-         console.log(this.response.);
-         console.log(xhr);
+         var encodedData = window.btoa(xhr.responseText)
+         console.log(encodedData);
          var imagey = document.createElement('img');
          //imagey.src = imageUrl;
       }
    });
-   xhr.responseType = "blob";
+   xhr.responseType = "";
    xhr.open("GET", "https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=www.amazon.com&width=400&height=260&ads=0&format=png&maxage=32000000&key=Ca7GOVe9BkGefE_rvwN2Bw");
    xhr.send();
 
