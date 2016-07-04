@@ -22,7 +22,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    var xhr = new XMLHttpRequest();
    xhr.addEventListener("readystatechange", function() {
-      if (this.readyState === 4) {
+      if(xhr.readyState === 4 && xhr.status === 200){
          console.log(this);
          var imagey = document.createElement('img');
          //imagey.src = imageUrl;
