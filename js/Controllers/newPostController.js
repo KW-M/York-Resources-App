@@ -21,7 +21,7 @@
 
         $scope.Preview = function() {
             if ($scope.Type === "Link") {
-                return 'https://api.pagelr.com/capture?uri=' + $scope.Link + '&width=400&height=260&key=Ca7GOVe9BkGefE_rvwN2Bw'
+                return 'https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=' + $scope.Link + '&width=400&height=260&ads=0&format=png&maxage=32000000&key=Ca7GOVe9BkGefE_rvwN2Bw'
             }
             else if ($scope.Type === "gDrive") {
                 return $scope.driveThumbnail;
@@ -43,6 +43,7 @@
         }
 
         $scope.isReadyToSubmit = function() {
+            convertImg($scope.newPostHeaderImg)
             console.log($scope.dialogElement);
             console.log(document.getElementById('header_image'));
             if ($scope.Class === '' || $scope.Class === undefined) {
