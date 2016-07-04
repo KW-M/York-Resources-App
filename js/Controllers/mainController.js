@@ -22,12 +22,13 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    xhr.addEventListener("readystatechange", function() {
       if (xhr.readyState === 4 && xhr.status === 200) {
          console.log(this);
-         var data = btoa(encodeURIComponent(xhr.responseText).replace(/%([0-9A-F]{2})/g, function(match, p1) {return String.fromCharCode('0x' + p1);}));
+         var base64Img = window.btoa( unescape( encodeURIComponent( xhr.response ) ) );
+         console.log(base64Img);
          var imagey = document.getElementById('testImg');
-         imagey.src = "data:image/png;base64," + data;
+         imagey.src = "data:image/png;base64," + base64Img;
       }
    });
-   xhr.responseType = "";
+   xhr.reponseType = 'arraybuffer';
    xhr.open("GET", "https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=www.amazon.com&width=400&height=260&ads=0&format=png&maxage=32000000&key=Ca7GOVe9BkGefE_rvwN2Bw");
    xhr.send();
 
