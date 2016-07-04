@@ -22,7 +22,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    xhr.addEventListener("readystatechange", function() {
       if (xhr.readyState === 4 && xhr.status === 200) {
          console.log(this);
-         var base64Img = window.btoa( unescape( encodeURIComponent( xhr.response ) ) );
+         var base64Img = window.btoa(encodeURIComponent( xhr.response ));
          console.log(base64Img);
          var imagey = document.getElementById('testImg');
          imagey.src = "data:image/png;base64," + base64Img;
