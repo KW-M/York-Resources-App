@@ -20,10 +20,15 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    var xhr = new XMLHttpRequest();
    xhr.addEventListener("readystatechange", function() {
-      if(xhr.readyState === 4 && xhr.status === 200){
+      if (xhr.readyState === 4 && xhr.status === 200) {
+         function b64EncodeUnicode(str) {
+            return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+               return String.fromCharCode('0x' + p1);
+            }));
+         }
          console.log(this);
-         var encodedData = window.btoa(xhr.responseText)
-         console.log(encodedData);
+         var data = b64DecodeUnicode(xhr.responseText);
+         console.log(data);
          var imagey = document.createElement('img');
          //imagey.src = imageUrl;
       }
