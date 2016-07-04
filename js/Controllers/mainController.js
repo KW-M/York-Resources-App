@@ -22,7 +22,7 @@ function getFile(url) {
     var xhr = new XMLHttpRequest();
 
     xhr.open('GET', url, true);
-    xhr.overrideMimeType('text/plain; charset=x-user-defined');
+    xhr.overrideMimeType('text/plain;)
     xhr.responseType = 'arraybuffer';
 
     xhr.onload = function(e) {
