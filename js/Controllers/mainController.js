@@ -21,16 +21,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    var xhr = new XMLHttpRequest();
    xhr.addEventListener("readystatechange", function() {
       if (xhr.readyState === 4 && xhr.status === 200) {
-         function b64EncodeUnicode(str) {
-            return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
-               return String.fromCharCode('0x' + p1);
-            }));
-         }
          console.log(this);
-         var data = b64DecodeUnicode(xhr.responseText);
-         console.log(data);
+         var data = btoa(encodeURIComponent(xhr.responseText).replace(/%([0-9A-F]{2})/g, function(match, p1) {return String.fromCharCode('0x' + p1);}));
          var imagey = document.createElement('img');
-         //imagey.src = imageUrl;
+         imagey.src = "data:image/png;base64," + data;
       }
    });
    xhr.responseType = "";
