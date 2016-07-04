@@ -18,20 +18,19 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
 
-   var data = null;
-
    var xhr = new XMLHttpRequest();
    xhr.addEventListener("readystatechange", function() {
       if(xhr.readyState === 4 && xhr.status === 200){
          console.log(this);
+         console.log(this.response.);
          console.log(xhr);
          var imagey = document.createElement('img');
          //imagey.src = imageUrl;
       }
    });
-   xhr.open("GET", "https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=www.amazon.com&width=400&height=260&ads=0&format=png&maxage=32000000&key=Ca7GOVe9BkGefE_rvwN2Bw");
-   xhr.send(data);
    xhr.responseType = "blob";
+   xhr.open("GET", "https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=www.amazon.com&width=400&height=260&ads=0&format=png&maxage=32000000&key=Ca7GOVe9BkGefE_rvwN2Bw");
+   xhr.send();
 
 
    $scope.GoogleDriveService = GoogleDriveService;
