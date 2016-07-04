@@ -23,7 +23,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       if (xhr.readyState === 4 && xhr.status === 200) {
          console.log(this);
          var data = btoa(encodeURIComponent(xhr.responseText).replace(/%([0-9A-F]{2})/g, function(match, p1) {return String.fromCharCode('0x' + p1);}));
-         var imagey = document.createElement('img');
+         var imagey = document.getElementById('testImg');
          imagey.src = "data:image/png;base64," + data;
       }
    });
