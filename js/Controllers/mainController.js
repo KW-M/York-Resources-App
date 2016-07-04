@@ -18,19 +18,25 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
 
-   var data = null;
+function getFile(url) {
+    var xhr = new XMLHttpRequest();
 
-   var xhr = new XMLHttpRequest();
-   xhr.addEventListener("readystatechange", function() {
-      if(xhr.readyState === 4 && xhr.status === 200){
-         console.log(this);
-         var imagey = document.createElement('img');
-         //imagey.src = imageUrl;
-      }
-   });
-   xhr.open("GET", "https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=www.amazon.com&width=400&height=260&ads=0&format=png&maxage=32000000&key=Ca7GOVe9BkGefE_rvwN2Bw");
-   xhr.send(data);
-   xhr.responseType = "blob";
+    xhr.open('GET', url, true);
+    xhr.overrideMimeType('text/plain; charset=x-user-defined');
+    xhr.responseType = 'arraybuffer';
+
+    xhr.onload = function(e) {
+        var blob = new WebKitBlobBuilder();
+
+        blob.append(xhr.response);
+
+        console.log(blob.getBlob());
+    };
+
+    xhr.send(null);
+}
+
+getFile('https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=www.amazon.com&width=400&height=260&ads=0&format=png&maxage=32000000&key=Ca7GOVe9BkGefE_rvwN2Bw');
 
 
    $scope.GoogleDriveService = GoogleDriveService;
