@@ -8,7 +8,7 @@
                 Other / Not associated
         </md-option>
         <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">
-            <md-option ng-repeat="Class in Catagory.Classes" value="{{Class}}">
+            <md-option ng-repeat="Class in Catagory.Classes" value="{{'{Name:'+Class+',Catagory:'+}}">
                 {{Class}}
             </md-option>
         </md-optgroup>

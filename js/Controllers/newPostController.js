@@ -93,7 +93,7 @@
         $scope.submit = function() {
             var response = ({
                 "Type": $scope.Type,
-                "Flagged": false,
+                "Flagged": $scope.Flagged,
                 "Title": $scope.Title,
                 "Tags": $scope.Tags,
                 "Description": $scope.newPostDescription.textContent,
@@ -192,4 +192,8 @@
                 }
             }
         }
+        
+    $scope.close = function() {
+        $mdDialog.hide();
+    };
 }
