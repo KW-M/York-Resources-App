@@ -99,7 +99,7 @@
                 "Title": $scope.Title,
                 "Tags": $scope.Tags,
                 "Description": $scope.newPostDescription.textContent,
-                "Class": JSON.parse($scope.Class),
+                "Class": $scope.Class,
                 "Link": $scope.Link,
                 "FileId": $scope.Id,
                 "HeaderImage": convertImg($scope.newPostHeaderImg),
