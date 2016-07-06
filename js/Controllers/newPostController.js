@@ -32,7 +32,6 @@
 
         function convertImg(ImageElement)  {
             var canvas = document.createElement('CANVAS');
-            console.log(ImageElement);
             var ctx = canvas.getContext('2d');
             var dataURL;
             canvas.height = ImageElement.height;
