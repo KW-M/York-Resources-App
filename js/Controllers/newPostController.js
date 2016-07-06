@@ -145,85 +145,49 @@
                 if (postObj.Type !== undefined || postObj.Type !== "") {
                     $scope.Type = postObj.Type;
                 }
-                else {
-                    $scope.Type = "noLink";
-                }
 
                 if (postObj.Flagged === true) {
                     $scope.Flagged = true;
-                }
-                else {
-                    $scope.Flagged = false;
                 }
 
                 if (postObj.Title !== undefined || postObj.Title !== "") {
                     $scope.Title = postObj.Title;
                 }
-                else {
-                    $scope.Title = "";
-                }
 
                 if (postObj.CreationDate !== undefined || postObj.CreationDate !== "") {
                     $scope.CreationDate = postObj.CreationDate;
-                }
-                else {
-                    $scope.CreationDate = new Date();
                 }
 
                 if (postObj.UpdateDate !== undefined || postObj.UpdateDate !== "") {
                     $scope.UpdateDate = postObj.UpdateDate;
                 }
-                else {
-                    $scope.UpdateDate = new Date();
-                }
 
                 if (postObj.Tags !== undefined || []) {
                     $scope.Tags = postObj.Tags;
-                }
-                else {
-                    $scope.Tags = [];
                 }
 
                 if (postObj.Description !== undefined || "") {
                     $scope.newPostDescription = postObj.Description;
                 }
-                else {
-                    $scope.newPostDescription = "";
-                }
 
                 if (postObj.Class.Name !== undefined || "") {
                     $scope.Class = postObj.Class;
-                }
-                else {
-                    $scope.Class = '';
                 }
 
                 if (postObj.Link !== undefined || "") {
                     $scope.Link = postObj.Link;
                 }
-                else {
-                    $scope.Link = "";
-                }
 
                 if (postObj.FileId !== undefined || "") {
                     $scope.FileId = postObj.FileId;
-                }
-                else {
-                    $scope.FileId = "";
                 }
 
                 if (postObj.HeaderImage !== undefined || "") {
                     $scope.HeaderImage = postObj.HeaderImage;
                 }
-                else {
-                    $scope.HeaderImage = "";
-                }
 
                 if (postObj.LikeUsers !== undefined || "") {
                     $scope.LikeUsers = postObj.LikeUsers;
-                }
-                else {
-                    $scope.LikeUsers = [];
                 }
             }
         }
