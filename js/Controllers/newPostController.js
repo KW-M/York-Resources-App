@@ -5,9 +5,9 @@
         $scope.Flagged = false;
         $scope.Title = '';
         $scope.CreationDate = new Date();
-        $scope.UpdateDate = 'noLink';
+        $scope.UpdateDate = new Date();
         $scope.Tags = [];
-        $scope.Description = 'noLink';
+        $scope.Description = '';
         $scope.Class = '';
         $scope.Link = '';
         $scope.FileId = '';
@@ -142,7 +142,7 @@
 
         function fillInValues() {
             if (postObj !== undefined) {
-                if (postObj.Type !== undefined || postObj.Type !== "") {
+                if (postObj.Type !== undefined && postObj.Type !== "") {
                     $scope.Type = postObj.Type;
                 }
 
@@ -150,43 +150,43 @@
                     $scope.Flagged = true;
                 }
 
-                if (postObj.Title !== undefined || postObj.Title !== "") {
+                if (postObj.Title !== undefined) {
                     $scope.Title = postObj.Title;
                 }
 
-                if (postObj.CreationDate !== undefined || postObj.CreationDate !== "") {
+                if (postObj.CreationDate !== undefined) {
                     $scope.CreationDate = postObj.CreationDate;
                 }
 
-                if (postObj.UpdateDate !== undefined || postObj.UpdateDate !== "") {
+                if (postObj.UpdateDate !== undefined) {
                     $scope.UpdateDate = postObj.UpdateDate;
                 }
 
-                if (postObj.Tags !== undefined || []) {
+                if (postObj.Tags !== undefined) {
                     $scope.Tags = postObj.Tags;
                 }
 
-                if (postObj.Description !== undefined || "") {
+                if (postObj.Description !== undefined) {
                     $scope.newPostDescription = postObj.Description;
                 }
 
-                if (postObj.Class.Name !== undefined || "") {
+                if (postObj.Class.Name !== undefined) {
                     $scope.Class = postObj.Class;
                 }
 
-                if (postObj.Link !== undefined || "") {
+                if (postObj.Link !== undefined) {
                     $scope.Link = postObj.Link;
                 }
 
-                if (postObj.FileId !== undefined || "") {
+                if (postObj.FileId !== undefined) {
                     $scope.FileId = postObj.FileId;
                 }
 
-                if (postObj.HeaderImage !== undefined || "") {
+                if (postObj.HeaderImage !== undefined) {
                     $scope.HeaderImage = postObj.HeaderImage;
                 }
 
-                if (postObj.LikeUsers !== undefined || "") {
+                if (postObj.LikeUsers !== undefined) {
                     $scope.LikeUsers = postObj.LikeUsers;
                 }
             }
