@@ -19,11 +19,14 @@
         //temproary variables
         $scope.driveThumbnail = "";
         $scope.classSearch = "";
+        var canvas = document.getElementById('image_renderer');
+        var ctx = canvas.getContext('2d');
+        var dataURL;
         
 
         $scope.Preview = function() {
             if ($scope.Type === "Link") {
-                $scope.HeaderImage = 'https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=' + $scope.Link + '&width=400&height=260&ads=0&format=png&maxage=32000000&key=Ca7GOVe9BkGefE_rvwN2Bw'
+                $scope.HeaderImage = 'https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=' + $scope.Link + '&width=400&height=260&ads=0&format=jpg&maxage=32000000&key=Ca7GOVe9BkGefE_rvwN2Bw'
             }
             else if ($scope.Type === "gDrive") {
                  $scope.HeaderImage = $scope.driveThumbnail;
@@ -31,13 +34,10 @@
         };
 
         function convertImg(ImageElement)  {
-            var canvas = document.createElement('CANVAS');
-            var ctx = canvas.getContext('2d');
-            var dataURL;
             canvas.height = ImageElement.height;
             canvas.width = ImageElement.width;
             ctx.drawImage(ImageElement, 0, 0);
-            dataURL = canvas.toDataURL('png');
+            dataURL = canvas.toDataURL('jpg');
             canvas = null;
             console.log(dataURL);
             return dataURL;
