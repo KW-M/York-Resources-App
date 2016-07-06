@@ -44,7 +44,8 @@
         }
 
         $scope.isReadyToSubmit = function() {
-            convertImg($scope.newPostHeaderImg)
+            console.log($scope.Class);
+            //convertImg($scope.newPostHeaderImg)
             console.log($scope.dialogElement);
             console.log(document.getElementById('header_image'));
             if ($scope.Class === '' || $scope.Class === undefined) {
@@ -97,9 +98,7 @@
                 "Title": $scope.Title,
                 "Tags": $scope.Tags,
                 "Description": $scope.newPostDescription.textContent,
-                "Class": {
-                    "Name": $scope.Class,
-                },
+                "Class": $scope.Class,
                 "Link": $scope.Link,
                 "FileId": $scope.Id,
                 "HeaderImage": convertImg($scope.newPostHeaderImg),
