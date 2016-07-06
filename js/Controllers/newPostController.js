@@ -1,6 +1,7 @@
     /* we don't define the "new post controller" here because it was alredy
                        defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
+        //database variables
         $scope.Type = 'noLink';
         $scope.Flagged = false;
         $scope.Title = '';
@@ -13,18 +14,19 @@
         $scope.FileId = '';
         $scope.HeaderImage = '';
         $scope.LikeUsers = [];
-        
         fillInValues();
         
+        //temproary variables
         $scope.driveThumbnail = "";
         $scope.classSearch = "";
+        
 
         $scope.Preview = function() {
             if ($scope.Type === "Link") {
-                return 'https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=' + $scope.Link + '&width=400&height=260&ads=0&format=png&maxage=32000000&key=Ca7GOVe9BkGefE_rvwN2Bw'
+                $scope.HeaderImage = 'https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=' + $scope.Link + '&width=400&height=260&ads=0&format=png&maxage=32000000&key=Ca7GOVe9BkGefE_rvwN2Bw'
             }
             else if ($scope.Type === "gDrive") {
-                return $scope.driveThumbnail;
+                 $scope.HeaderImage = $scope.driveThumbnail;
             }
         };
 
