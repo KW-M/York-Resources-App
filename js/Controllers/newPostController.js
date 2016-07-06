@@ -44,7 +44,8 @@
         }
 
         $scope.isReadyToSubmit = function() {
-            console.log($scope.Class);
+             console.log($scope.Class);
+            console.log(JSON.parse($scope.Class));
             //convertImg($scope.newPostHeaderImg)
             console.log($scope.dialogElement);
             console.log(document.getElementById('header_image'));
@@ -98,7 +99,7 @@
                 "Title": $scope.Title,
                 "Tags": $scope.Tags,
                 "Description": $scope.newPostDescription.textContent,
-                "Class": $scope.Class,
+                "Class": JSON.parse($scope.Class),
                 "Link": $scope.Link,
                 "FileId": $scope.Id,
                 "HeaderImage": convertImg($scope.newPostHeaderImg),
