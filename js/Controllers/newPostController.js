@@ -12,8 +12,8 @@
         $scope.Class = '';
         $scope.Link = '';
         $scope.FileId = '';
-        $scope.HeaderImage = '';
         $scope.LikeUsers = [];
+        $scope.HeaderImage = '';
         fillInValues();
         
         //temproary variables
@@ -45,8 +45,6 @@
 
         $scope.isReadyToSubmit = function() {
              console.log($scope.Class);
-            console.log(JSON.parse($scope.Class));
-            //convertImg($scope.newPostHeaderImg)
             console.log($scope.dialogElement);
             console.log(document.getElementById('header_image'));
             if ($scope.Class === '' || $scope.Class === undefined) {
@@ -102,15 +100,15 @@
                 "Class": $scope.Class,
                 "Link": $scope.Link,
                 "FileId": $scope.Id,
-                "HeaderImage": convertImg($scope.newPostHeaderImg),
                 "LikeUsers": [],
+                "HeaderImage": convertImg($scope.newPostHeaderImg),
             });
             if (operation === 'new') {
-            // GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
-            //     console.log(reply.result);
-            //     $mdToast.hide();
-            //     $scope.close();
-            // });
+            GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
+                console.log(reply.result);
+                $mdToast.hide();
+                $scope.close();
+            });
             } else if (operation === 'update') {
                 
             }
@@ -183,13 +181,14 @@
                     $scope.FileId = postObj.FileId;
                 }
 
+                if (postObj.LikeUsers !== undefined) {
+                    $scope.LikeUsers = postObj.LikeUsers;
+                }
+
                 if (postObj.HeaderImage !== undefined) {
                     $scope.HeaderImage = postObj.HeaderImage;
                 }
 
-                if (postObj.LikeUsers !== undefined) {
-                    $scope.LikeUsers = postObj.LikeUsers;
-                }
             }
         }
         
