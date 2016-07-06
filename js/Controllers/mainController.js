@@ -230,6 +230,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          var tempFileArray = [];
          for (var item = 0; item < fileList.result.files.length; item++) {
             var metadata = fileList.result.files[item];
+            console.log(metadata);
             queue(GoogleDriveService.getFileContent(metadata.id), function(file) {
                tempFileArray = $scope.handleFile(file, metadata, tempFileArray);
                if (tempFileArray.length === 12) {
