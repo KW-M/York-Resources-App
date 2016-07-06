@@ -227,10 +227,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.getFilesInitial = function() {
       console.log('getting first 12 files');
       queue(GoogleDriveService.getListOfFlies('', $scope.nextPageToken, 12), function(fileList) {
+         console.log(fileList);
          var tempFileArray = [];
          for (var item = 0; item < fileList.result.files.length; item++) {
             var metadata = fileList.result.files[item];
-            console.log(metadata);
+            
             queue(GoogleDriveService.getFileContent(metadata.id), function(file) {
                tempFileArray = $scope.handleFile(file, metadata, tempFileArray);
                if (tempFileArray.length === 12) {
@@ -252,7 +253,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             var tempFileArray = [];
             for (var item = 0; item < fileList.result.files.length; item++) {
                var metadata = fileList.result.files[item];
-               
                queue(GoogleDriveService.getFileContent(metadata.id), function(file) {
                   tempFileArray = $scope.handleFile(file, metadata, tempFileArray);
                   if (tempFileArray.length === 10) {
