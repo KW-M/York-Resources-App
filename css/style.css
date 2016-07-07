@@ -19,13 +19,10 @@ div:focus{
 /*------------ background and layout styles ----------- */
 
 html body {
-    display:-webkit-box;
     display:-ms-flexbox;
     display:flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;
@@ -45,6 +42,7 @@ html body {
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
             flex-direction: row;
+            z-index: 0;
 }
 
 #content_container {
