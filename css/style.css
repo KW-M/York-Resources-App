@@ -6,7 +6,7 @@ div:focus{
 }
 
 
-/*this chart specifies the css variables for the class background pastel colors : 
+/*this chart specifies the css variables for the class background pastel colors :
 :root {
 --pPurple: hsl(300,70%,93%);
 --pBlue: hsl(232,70%,95%);
@@ -159,7 +159,11 @@ html body {
     cursor: pointer;
 }
 
-
+.fadeOut() {
+    opacity: 0
+    display:none;
+    transition
+}
 /* ---------------------- Genral Styles---------------------- */
 
 [ng\:cloak],
