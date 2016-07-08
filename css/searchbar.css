@@ -1,10 +1,10 @@
     /*---------- searchbar styles -------- */
-    
+
     search-bar {
         flex: 1;
         padding-left: 24px;
     }
-    
+
     .searchBar {
         max-width: 720px;
         background: rgba(255, 255, 255, 0.16);
@@ -15,6 +15,7 @@
         -webkit-transition: background 100ms ease-in, width 100ms ease-out;
         transition: background 100ms ease-in, width 100ms ease-out
     }
-    .searchBar input {
-        background-color: red;
+    .searchBar md-autocomplete-wrap {
+        background-color: green;
+        box-shadow: none;
     }
