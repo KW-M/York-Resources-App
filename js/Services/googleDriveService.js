@@ -1,4 +1,4 @@
-//Define the GoogleDriveController controller for Angular
+//Define the GoogleDriveController controller for Angular.
 app.service('GoogleDriveService', ['$q', function($q) {
     var self = this;
 
