@@ -19,9 +19,9 @@ div:focus{
 /*------------ background and layout styles ----------- */
 
 html body {
-    display:-ms-flexbox;
+    /*display:-ms-flexbox;*/
     display:flex;
-    -ms-flex-direction: column;
+    /*-ms-flex-direction: column;*/
     flex-direction: column;
     box-sizing: border-box;
     margin: 0px;
@@ -32,21 +32,16 @@ html body {
 .horizontalContainer {
     /* The body is the vertical layout container*/
     position: relative;
-    -webkit-box-flex:1;
         -ms-flex:1;
             flex:1;
-    display:-webkit-box;
     display:-ms-flexbox;
     display:flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
         -ms-flex-direction: row;
             flex-direction: row;
             z-index: 0;
 }
 
 #content_container {
-    -webkit-box-flex: 1;
         -ms-flex: 1;
             flex: 1;
     overflow: auto;

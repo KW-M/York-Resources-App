@@ -1,4 +1,4 @@
-<md-fab-speed-dial id="speed_dial_container" md-direction="up" md-open="globals.FABisOpen" ng-class="{'button_showing' : globals.FABisHidden}" class="md-fling md-fab-bottom-right md-hover-full ng-cloak" ng-mouseenter="globals.FABisOpen=true"
+<md-fab-speed-dial id="speed_dial_container" md-direction="up" md-open="globals.FABisOpen" ng-class="{'button_showing' : globals.FABisHidden=false}" class="md-fling md-fab-bottom-right md-hover-full ng-cloak" ng-mouseenter="globals.FABisOpen=true"
         ng-mouseleave="globals.FABisOpen=false">
             <md-fab-trigger>
                 <md-button id="new_post_button" class="md-fab md-accent raise-on-hover" ng-click="::newPost({},'new')">
@@ -26,10 +26,10 @@
 #speed_dial_container {
    padding-bottom: 20px;
    bottom: 0px;
-   margin-bottom:-20px;
+   margin-bottom:-25px;
    opacity:0;
    pointer-events:none;
-   transition: margin 0.5s ease, opacity 0.4s;
+   transition: margin-bottom 0.5s ease, opacity 0.4s;
 }
 
 #speed_dial_container.button_showing {
@@ -37,8 +37,8 @@
     margin-bottom: 0px;
    bottom: 0px;
    opacity: 1;
-   pointer-events: initial;
-   transition: margin 0.5s ease, opacity 0.4s;
+   pointer-events: inherit;
+   transition: margin-bottom 0.5s ease, opacity 0.4s;
 }
 
 #speed_dial_container #new_post_button {
