@@ -26,27 +26,9 @@ app.service('GoogleDriveService', ['$q', function($q) {
             pageSize: pageSize,
             pageToken: pageToken,
             q: "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false",
-            fields: 'nextPageToken,files(id,name,createdTime,modifiedTime,owners(displayName,emailAddress))',
+            fields: 'nextPageToken, files(id,name,createdTime,modifiedTime,owners(displayName,emailAddress))',
         }));
     };
-
-    // this.batchRequest = function() { //do this one
-    //     var batch = gapi.client.newBatch();
-    //     return (self.getListOfFlies().then(function(fileArray) {
-    //         for (var count = 0; count < fileArray.result.files.length; count++) {
-    //             var file = fileArray.result.files[count];
-    //             console.log(file.id);
-    //             //batch.add(self.getFileContent(file.id));
-    //             gapi.client.request({
-    //                 'path': '/download/drive/v3/files/0B5NVuDykezpkLW5zZmhmLUoxNEE?alt=media',
-    //                 'method': 'GET',
-    //             }).then(function (resu) {
-    //                 console.log(resu);
-    //             });
-    //         };
-    //         return (batch)
-    //     }));
-    // };
 
     this.multithisisjustabackupRequest = function() {
                 var promiseArray = [];
