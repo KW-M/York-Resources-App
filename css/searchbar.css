@@ -1,6 +1,9 @@
     /*---------- searchbar styles -------- */
+    search-bar{
+        padding-left: 24px;
+        width: 100%;
+    }
     .searchBar{
-        margin-left: 24px;
         width: 100%;
         max-width: 274px
     }
