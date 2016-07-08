@@ -36,6 +36,35 @@ app.service('GoogleDriveService', ['$q', function($q) {
         }));
     };
     
+    this.updateDriveFile = function(content, title) {
+        
+    };
+
+    this.sendDriveFileWContent = function(content, title) {
+        return (gapi.client.request({
+            'path': 'https://www.googleapis.com/upload/drive/v3/files',
+            'method': 'POST',
+            'params': {
+                'uploadType': 'multipart',
+                'useContentAsIndexableText': true,
+                'alt': 'json',
+            },
+            'addParents': '0B5NVuDykezpkOXY1bDZ2ZnUxVGM',
+            'headers': {
+                'Content-Type': 'multipart/mixed; boundary="675849302theboundary"'
+            },
+            'body': "\r\n--675849302theboundary\r\n" +
+                "Content-Type: application/json\r\n\r\n" +
+                JSON.stringify({
+                    name: title,
+                    parents: ['0B5NVuDykezpkbUxvOUMyNnRsUGc']
+                }) +
+                "\r\n--675849302theboundary\r\n" +
+                "Content-Type: application/json\r\n\r\n" +
+                JSON.stringify(content) +
+                "\r\n--675849302theboundary--"
+        }));
+    };
 
     this.multithisisjustabackupRequest = function() {
                 var promiseArray = [];
