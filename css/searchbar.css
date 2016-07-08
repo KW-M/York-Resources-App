@@ -1,11 +1,7 @@
     /*---------- searchbar styles -------- */
     search-bar{
         padding-left: 24px;
-        width: 100%;
     }
     .searchBar{
-        display: initial;
-width: 100%;
-min-width: 100%;
-max-width: 274px
+      
     }
