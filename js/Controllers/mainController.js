@@ -16,7 +16,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       FABisHidden: true,
       sidenavIsOpen: true,
    };
-   $scope.searchExtra = [
+   $scope.searchExtra = [''];
 
 
    $scope.GoogleDriveService = GoogleDriveService;

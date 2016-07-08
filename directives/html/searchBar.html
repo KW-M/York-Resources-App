@@ -1,9 +1,9 @@
-<md-autocomplete md-search-text-change="ctrl.searchTextChange(ctrl.searchText)" md-search-text="ctrl.searchText" md-items="ui in searchExtra" md-min-length="0" placeholder="What is your favorite US state?">
+<md-autocomplete md-items="ui in searchExtra" md-min-length="0" placeholder="What is your favorite US state?">
         <md-item-template>
-          <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+          <span>wow</span>
         </md-item-template>
         <md-not-found>
-          No states matching "{{ctrl.searchText}}" were found.
-          <a ng-click="ctrl.newState(ctrl.searchText)">Create a new one!</a>
+          No states matching "wow" were found.
+          <a>Create a new one!</a>
         </md-not-found>
       </md-autocomplete>

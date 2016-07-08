@@ -13,6 +13,12 @@ app.directive('toolbarTopMobile', function () {
         templateUrl: 'directives/html/toolbarTopMobile.html'
     };
 });
+app.directive('searchBar', function () {
+    return {
+        restrict: 'E',
+        templateUrl: 'directives/html/searchBar.html'
+    };
+});
 app.directive('sideNavInsides', function () {
     return {
         restrict: 'A',
