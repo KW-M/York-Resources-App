@@ -14,13 +14,6 @@ app.service('GoogleDriveService', ['$q', function($q) {
         }));
     };
 
-    this.getFileContent = function(fileId) {
-        return (gapi.client.drive.files.get({
-            'fileId': fileId,
-            'alt': 'media'
-        }));
-    };
-
     this.getListOfFlies = function(query, pageToken, pageSize) {
         return (gapi.client.drive.files.list({
             pageSize: pageSize,
@@ -29,6 +22,20 @@ app.service('GoogleDriveService', ['$q', function($q) {
             fields: 'nextPageToken, files(id,name,createdTime,modifiedTime,owners(displayName,emailAddress))',
         }));
     };
+    
+    this.getFileContent = function(fileId) {
+        return (gapi.client.drive.files.get({
+            'fileId': fileId,
+            'alt': 'media'
+        }));
+    };
+
+    this.deleteDriveFile = function(fileId) {
+        return (gapi.client.drive.files.delete({
+            'fileId': fileId
+        }));
+    };
+    
 
     this.multithisisjustabackupRequest = function() {
                 var promiseArray = [];
@@ -74,65 +81,6 @@ app.service('GoogleDriveService', ['$q', function($q) {
                 ids: idArray
             });
         }))
-    };
-
-    this.deleteDriveFile = function(fileId) {
-        console.log(fileId);
-        return (gapi.client.drive.files.delete({
-            'fileId': fileId
-        }));
-    };
-
-    this.sendDriveFile = function(content, title) {
-        return (gapi.client.request({
-            'path': 'https://www.googleapis.com/upload/drive/v3/files',
-            'method': 'POST',
-            'params': {
-                'uploadType': 'multipart',
-                'useContentAsIndexableText': true,
-                'alt': 'json',
-            },
-            'addParents': '0B5NVuDykezpkOXY1bDZ2ZnUxVGM',
-            'headers': {
-                'Content-Type': 'multipart/mixed; boundary="675849302theboundary"'
-            },
-            'body': "\r\n--675849302theboundary\r\n" +
-                "Content-Type: application/json\r\n\r\n" +
-                JSON.stringify({
-                    name: title,
-                    parents: ['0B5NVuDykezpkbUxvOUMyNnRsUGc']
-                }) +
-                "\r\n--675849302theboundary\r\n" +
-                "Content-Type: application/json\r\n\r\n" +
-                JSON.stringify(content) +
-                "\r\n--675849302theboundary--"
-        }));
-    };
-    
-    this.updateDriveFile = function(content, title) {
-        return (gapi.client.request({
-            'path': 'https://www.googleapis.com/upload/drive/v3/files',
-            'method': 'POST',
-            'params': {
-                'uploadType': 'multipart',
-                'useContentAsIndexableText': true,
-                'alt': 'json',
-            },
-            'addParents': '0B5NVuDykezpkOXY1bDZ2ZnUxVGM',
-            'headers': {
-                'Content-Type': 'multipart/mixed; boundary="675849302theboundary"'
-            },
-            'body': "\r\n--675849302theboundary\r\n" +
-                "Content-Type: application/json\r\n\r\n" +
-                JSON.stringify({
-                    name: title,
-                    parents: ['0B5NVuDykezpkbUxvOUMyNnRsUGc']
-                }) +
-                "\r\n--675849302theboundary\r\n" +
-                "Content-Type: application/json\r\n\r\n" +
-                JSON.stringify(content) +
-                "\r\n--675849302theboundary--"
-        }));
     };
 
     this.sendRequest = function(request, callback) {
