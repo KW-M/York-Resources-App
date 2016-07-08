@@ -159,13 +159,13 @@ html body {
     cursor: pointer;
 }
 
-.fadeOut() {
-    opacity: 0
+.fadeOut {
+    opacity: 0;
     display: none;
     transition: opacity 0.5s ease;
 }
 
-.fadeIn() {
+.fadeIn {
     opacity: 1;
     display: none;
     transition: opacity 0.5s ease;
