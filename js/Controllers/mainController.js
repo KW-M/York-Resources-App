@@ -201,9 +201,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          })
          //called to show the login button (& hide the loading spinner)
       function showLoginButton() {
-         document.querySelector('#login_spinner').addClass('fadeOut');
+         angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
          setTimeout(function() {
-            document.querySelector('#auth_button').addClass('fadeIn');
+             angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
          },500);
       };
    };
