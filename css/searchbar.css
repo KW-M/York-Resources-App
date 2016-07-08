@@ -1,4 +1,6 @@
     /*---------- searchbar styles -------- */
     .searchBar{
-        
+        margin-left: 24px;
+        width: 100%;
+        max-width: 274px
     }
