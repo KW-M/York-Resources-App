@@ -343,7 +343,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
       var yScroll = content_container.scrollTop;
       if (yScroll >= 120) {
-         $scope.globals.FABisHidden = false;
+         angular.element(document.querySelector('#speed_dial_container')).addClass('button_showing');
          $scope.globals.FABisOpen = false;
       }
       else {
