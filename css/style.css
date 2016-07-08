@@ -161,7 +161,7 @@ html body {
 
 .fadeOut {
     opacity: 0;
-    display: none;
+    pointer-events:none;
     transition: opacity 0.5s ease;
 }
 
