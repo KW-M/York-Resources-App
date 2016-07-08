@@ -1,15 +1,20 @@
     /*---------- searchbar styles -------- */
-    search-bar{
-        flex:1;
+    
+    search-bar {
+        flex: 1;
         padding-left: 24px;
     }
-    .searchBar{
-      max-width: 720px;
-      border: 1px solid rgba(0, 0, 0, 0);
-    -webkit-border-radius: 4px;
-border-radius: 4px;
-max-width: 720px;
-position: relative;
--webkit-transition: background 100ms ease-in, width 100ms ease-out;
-transition: background 100ms ease-in, width 100ms ease-out
+    
+    .searchBar {
+        max-width: 720px;
+        background: rgba(255, 255, 255, 0.16);
+        border: 1px solid rgba(0, 0, 0, 0);
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+        position: relative;
+        -webkit-transition: background 100ms ease-in, width 100ms ease-out;
+        transition: background 100ms ease-in, width 100ms ease-out
+    }
+    .searchBar input {
+        background-color: red;
     }
