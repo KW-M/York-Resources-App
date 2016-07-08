@@ -28,8 +28,15 @@
    opacity:0;
 }
 
-#speed_dial_container.ng-hide-add, #speed_dial_container.ng-hide-remove {
-  transition: all linear 0.5s;
+#speed_dial_container.ng-hide-remove {
+  transition: opacity 2s;
+  opacity:0;
+}
+#speed_dial_container.ng-hide-add{
+  padding-bottom: 20px;
+   bottom: 0px;
+   opacity: 1;
+   transition: opacity 2s;
 }
 
 #speed_dial_container {
