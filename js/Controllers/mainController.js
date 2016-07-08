@@ -343,11 +343,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
       var yScroll = content_container.scrollTop;
       if (yScroll >= 120) {
-         angular.element(document.querySelector('#speed_dial_container')).addClass('button_showing');
+         $scope.globals.FABisHidden = false;
          $scope.globals.FABisOpen = false;
       }
       else {
-         angular.element(document.querySelector('#speed_dial_container')).removeClass('button_showing');
+         $scope.globals.FABisOpen = false;
          $scope.globals.FABisHidden = true;
       }
    };
