@@ -347,7 +347,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $scope.globals.FABisOpen = false;
       }
       else {
-         $scope.globals.FABisOpen = false;
+         angular.element(document.querySelector('#speed_dial_container')).removeClass('button_showing');
          $scope.globals.FABisHidden = true;
       }
    };
