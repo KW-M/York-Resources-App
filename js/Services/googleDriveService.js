@@ -19,7 +19,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
             pageSize: pageSize,
             pageToken: pageToken,
             q: "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false",
-            fields: 'nextPageToken, files(id,name,createdTime,modifiedTime,owners(displayName,emailAddress))',
+            fields: 'files(appProperties,properties,contentHints/thumbnail,createdTime,description,fullFileExtension,id,modifiedTime,name,owners(displayName,emailAddress),permissions(displayName,emailAddress)),nextPageToken',
         }));
     };
     
