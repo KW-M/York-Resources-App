@@ -16,6 +16,12 @@
         transition: background 100ms ease-in, width 100ms ease-out
     }
     .searchBar md-autocomplete-wrap {
-        background-color: green;
         box-shadow: none;
+    }
+
+    .searchBar md-autocomplete-wrap input {
+        background-color:blue;
+        padding-top: 7px;
+        padding-bottom: 7px;
+        height: 26px;
     }
