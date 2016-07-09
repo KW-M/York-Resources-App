@@ -17,14 +17,13 @@
     }
     .searchBar md-autocomplete-wrap {
         box-shadow: none;
-        padding: 7px 0;
     }
 
     .searchBar md-autocomplete-wrap input {
-        background-color:blue;
-        height: 26px;
+        padding-top: 7px;
+        padding-bottom: 7px;
     }
     .searchBar>md-autocomplete-wrap input:focus {
-        background-color:blue;
-        
+        background-color:green;
+        box-shadow: none;
     }
