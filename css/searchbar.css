@@ -28,7 +28,7 @@
         box-shadow: none;
     }
     
-    .searchbar>md-autocomplete-wrap>input::-webkit-input-placeholder {
+    .searchbar>md-autocomplete-wrap>input:-webkit-input-placeholder {
         color: #fff;
     }
     
