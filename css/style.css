@@ -107,10 +107,12 @@ html body {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    position: relative;
 }
 
 .signin-button {
-    display: inline-box;
+    opacity: 0;
+    display: inline-block;
     margin: auto;
     -webkit-transition: box-shadow .2s, background-color .2s, opacity .5s;
     transition: box-shadow .2s, background-color .2s, opacity .5s;
@@ -120,8 +122,13 @@ html body {
     padding-left: 7px;
     padding-right: 6px;
     border-radius: 2px;
-    color: white;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
 }
 
 .signin-button:hover {
@@ -162,7 +169,7 @@ html body {
 
 .fadeIn {
     opacity: 1;
-    display: none;
+    pointer-events:initial;
     transition: opacity 0.5s ease;
 }
 /* ---------------------- Genral Styles---------------------- */
