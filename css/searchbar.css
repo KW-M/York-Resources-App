@@ -23,9 +23,10 @@
         padding-top: 7px;
         padding-bottom: 7px;
     }
-    .searchBar md-autocomplete-wrap>input:focus {
-        background-color:green;
+    md-autocomplete-wrap>input:focus < .searchBar {
+        background-color:red;
         box-shadow: none;
+        padding:7px;
     }
     
     .searchbar md-autocomplete-wrap input {
