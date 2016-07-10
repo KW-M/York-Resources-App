@@ -262,14 +262,19 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.formatPost = function(unformatedFile) {
       var formatedFile = {}
-      var tag1 = JSON.parse(unformatedFile.properties.tag), tag2 = JSON.parse(unformatedFile.properties.tag2), tag3 = JSON.parse(unformatedFile.properties.tag3), tag4 = JSON.parse(unformatedFile.properties.tag4), tag5 = JSON.parse(unformatedFile.properties.tag5)
-      var titleAndURL = unformatedFile.split("|%9]{_7^/|")
-      formatedFile.Type = "";
+      var tag1 = JSON.parse(unformatedFile.properties.tag), tag2 = JSON.parse(unformatedFile.properties.tag2);//, tag3 = JSON.parse(unformatedFile.properties.tag3), tag4 = JSON.parse(unformatedFile.properties.tag4), tag5 = JSON.parse(unformatedFile.properties.tag5)
+      var titleAndURL = unformatedFile.split("|%9]{_7^/|");
+      
+      
+      formatedFile.Type = unformatedFile.properties.type;
       formatedFile.Title = titleAndURL[0];
       formatedFile.Link = titleAndURL[1];
+      formatedFile.Description = titleAndURL[0];
+      formatedFile.Id = unformatedFile.properties.fileID;
+      formatedFile.attachmentId = unformatedFile.properties.fileID;
       formatedFile.CreationDate
       formatedFile.UpdateDate
-      formatedFile.Tags = [].concat(tag1,tag2)
+      formatedFile.Tags = tag1.concat(tag2);
       formatedFile.Creator = {
          Name:"",
          Email:'',
@@ -280,7 +285,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          Catagory:"",
          Color:"",
       }
-      destination = destination.concat(file.result);
       return formatedFile;
    }
 
