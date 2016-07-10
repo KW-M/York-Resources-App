@@ -1,17 +1,9 @@
-              <md-icon style="position: absolute;color: #757575;z-index: 1;pointer-events: none;margin: 8px 15px;">search</md-icon>
-      <md-chips class="searchBarChips" ng-model="selectedGroups" md-autocomplete-snap md-require-match="false" md-separator-keys="" secondary-placeholder="+Tag">
-        <md-autocomplete 
-                         class="searchBar md-accent" 
-                         md-search-text="searchTxt"
-                         md-items="ui in searchExtra" 
-                         md-min-length="0" 
-                         md-autoselect="false"
-                         md-select-on-match="false"
-                         md-require-match="false"
-                         placeholder="Find a group..">
-            <span md-highlight-text="searchText">{{item}}</span>
-        </md-autocomplete>
-        <md-chip-template>
-            <span>{{$chip}}</span>
-        </md-chip-template>
-    </md-chips>
+<md-icon style="position: absolute;color: #757575;z-index: 1;pointer-events: none;margin: 8px 15px;">search</md-icon>
+<md-chips class="searchBarChips" ng-model="selectedGroups" md-autocomplete-snap md-require-match="false" md-separator-keys="" secondary-placeholder="+Tag">
+  <md-autocomplete class="searchBar md-accent" md-search-text="searchTxt" md-items="ui in searchExtra" md-min-length="0" md-autoselect="false" md-select-on-match="false" md-require-match="false" placeholder="Find a group..">
+    <span md-highlight-text="searchText">{{item}}</span>
+  </md-autocomplete>
+  <!--<md-chip-template>-->
+  <!--    <span>{{$chip}}</span>-->
+  <!--</md-chip-template>-->
+</md-chips>
