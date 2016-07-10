@@ -16,7 +16,7 @@
     
     .searchBarChips md-chips-wrap.md-chips md-chip{
         z-index:60;
-        margin: 4px 8px 4px 0;
+        margin: 4px 8px 4px 52px;
     }
 
     .md-chips ._md-chip-input-container md-autocomplete.searchBar {
