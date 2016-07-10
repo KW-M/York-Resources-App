@@ -7,14 +7,15 @@
     
     .searchBarChips md-chips-wrap.md-chips{
         max-width: 720px;
-        padding: 0px;
         border: 0px;
         padding: 0px;
         margin: 0px;
     }
 
-    .searchBar {
+    .md-chips ._md-chip-input-container md-autocomplete.searchBar {
         max-width: 720px;
+        height: 40px
+        box-shadow: initial;
         /*background: rgba(255, 255, 255, 0.16);*/
         background: rgb(255,255,255);
         -webkit-transition: background 100ms ease-in, width 100ms ease-out;
