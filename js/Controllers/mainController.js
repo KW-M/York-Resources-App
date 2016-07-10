@@ -262,7 +262,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.formatPost = function(unformatedFile) {
       var formatedFile = {}
-      formatedFile.CreationDate
+      var titleAndURL = unformatedFile.split("|%9]_7^/|")
+      formatedFile.Type = "";
+      formatedFile.Title = "";
       formatedFile.CreationDate
       formatedFile.UpdateDate
       formatedFile.Tags = []
