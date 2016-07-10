@@ -2,7 +2,11 @@
 <md-chips class="searchBarChips" ng-model="selectedGroups" md-autocomplete-snap md-require-match="false" md-separator-keys="" secondary-placeholder="+Tag">
   <md-autocomplete class="searchBar md-accent" md-search-text="searchTxt" md-items="ui in searchExtra" md-min-length="0" md-autoselect="false" md-select-on-match="false" md-require-match="false" placeholder="Find a group..">
         <md-item-template>
-          <span><class-select-menu></class-select-menu><md-button>wow</md-button></span>
+          <span><class-select-menu></class-select-menu><md-button>wow</md-button><md-button class="md-icon-button">link</md-button><md-radio-group ng-model="selected">
+  <md-radio-button ng-repeat="d in colorOptions" ng-value="d.value" aria-label="{{ d.label }}">
+         {{ d.label }}
+  </md-radio-button>
+</md-radio-group></span>
         </md-item-template>
         <!--<md-not-found>-->
         <!--  No states matching "wow" were found.-->
