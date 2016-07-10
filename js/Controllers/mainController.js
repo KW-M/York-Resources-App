@@ -18,8 +18,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       sidenavIsOpen: true,
    };
    $scope.searchExtra = [''];
-
-
    $scope.GoogleDriveService = GoogleDriveService;
 
    $scope.signIn = function() { //called by the signIn button click
