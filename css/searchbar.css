@@ -7,7 +7,7 @@
 
     .searchBar {
         max-width: 720px;
-        background: rgba(255, 255, 255, 0.16);
+        /*background: rgba(255, 255, 255, 0.16);*/
         -webkit-transition: background 100ms ease-in, width 100ms ease-out;
         transition: background 100ms ease-in, width 100ms ease-out
     }
@@ -21,6 +21,8 @@
     }
    .searchBar md-autocomplete-wrap input#input-0:focus  {
         background-color:white;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
     }
     
     .searchbar md-autocomplete-wrap input#input-0 {
