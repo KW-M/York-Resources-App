@@ -12,9 +12,9 @@
         margin: 0px;
     }
     
-    .searchBarChips md-chips-wrap md-chip{
+    .searchBarChips md-chips-wrap.md-chips md-chip{
         z-index:60;
-        
+        margin: 4px 8px 4px ;
     }
 
     .md-chips ._md-chip-input-container md-autocomplete.searchBar {
