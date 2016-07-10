@@ -260,14 +260,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
    }
 
-   $scope.compilePost = function(unformatedFile, ) {
-      console.log({
-         file: file,
-         metadata: metadata,
-         fileArray: destination
-      });
+   $scope.formatPost = function(unformatedFile) {
+      var formatedFile = {}
+         
       destination = destination.concat(file.result);
-      return destination;
+      return formatedFile;
    }
 
    $scope.combineset = function(newSet) {
