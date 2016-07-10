@@ -16,19 +16,25 @@
     .searchBar {
         max-width: 720px;
         /*background: rgba(255, 255, 255, 0.16);*/
+        background: rgb(255,255,255);
         -webkit-transition: background 100ms ease-in, width 100ms ease-out;
         transition: background 100ms ease-in, width 100ms ease-out
     }
+    
     .searchBar md-autocomplete-wrap {
-        display: block;
         position: relative;
         overflow: visible;
         height: 40px;
     }
+    
+    .searchBar md-autocomplete-wrap ._md-chip-input-container{
+       float: none; 
+    }
 
     .searchBar md-autocomplete-wrap input {
-        padding-top: 6px;
-        padding-bottom: 6px;
+       /* padding-top: 6px;
+        padding-bottom: 6px;*/
+        line-height: 40px
     }
     
     .searchBarChips md-chips-wrap.md-chips md-autocomplete button {
