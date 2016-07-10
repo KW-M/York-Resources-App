@@ -262,7 +262,20 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.formatPost = function(unformatedFile) {
       var formatedFile = {}
-         
+      formatedFile.CreationDate
+      formatedFile.CreationDate
+      formatedFile.UpdateDate
+      formatedFile.Tags = []
+      formatedFile.Creator = {
+         Name:"",
+         Email:'',
+         ClassOf:"",
+      }
+      formatedFile.Class = {
+         Name:"",
+         Catagory:"",
+         Color:"",
+      }
       destination = destination.concat(file.result);
       return formatedFile;
    }
