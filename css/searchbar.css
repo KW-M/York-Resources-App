@@ -15,7 +15,6 @@
     .md-chips ._md-chip-input-container md-autocomplete.searchBar {
         max-width: 720px;
         height: 40px;
-        box-shadow: initial;
         /*background: rgba(255, 255, 255, 0.16);*/
         background: rgb(255,255,255);
         -webkit-transition: background 100ms ease-in, width 100ms ease-out;
@@ -26,6 +25,7 @@
         position: relative;
         overflow: visible;
         height: 40px;
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 2px 1px -1px rgba(0,0,0,.12);
     }
     
     .searchBarChips .md-chips ._md-chip-input-container {
