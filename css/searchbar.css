@@ -23,14 +23,16 @@
         padding-top: 7px;
         padding-bottom: 7px;
     }
-    md-autocomplete-wrap input:focus .searchBar {
+   .searchBar md-autocomplete-wrap input#input-0:focus  {
         background-color:red;
         box-shadow: none;
         padding:7px;
     }
     
-    .searchbar md-autocomplete-wrap input {
+    .searchbar md-autocomplete-wrap input#input-0 {
         color: red;
+        background-color: rgb(176,48,61);
+        border-radius: 4px;
     }
     
     .searchbar>md-autocomplete-wrap>input:focus::-webkit-input-placeholder {
