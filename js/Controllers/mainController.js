@@ -227,7 +227,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.getFilesInitial = function() {
       queue(GoogleDriveService.getListOfFlies('', $scope.nextPageToken, 12), function(fileList) {
-         $scope.nextPageToken = fileList
+         $scope.nextPageToken = fileList.result.nextPageToken;
          console.log(fileList);
          // for (var item = 0; item < fileList.result.files.length; item++) {
          //    fileList.result.files[item] = $scope.compilePost(metadata, tempFileArray);
@@ -260,7 +260,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
    }
 
-   $scope.compilePost = function(metadata, destination) {
+   $scope.compilePost = function(unformatedFile, ) {
       console.log({
          file: file,
          metadata: metadata,
