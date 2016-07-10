@@ -1,22 +1,23 @@
 <md-icon style="position: absolute;color: #757575;z-index: 1;pointer-events: none;margin: 8px 15px;">search</md-icon>
 <md-chips class="searchBarChips" ng-model="selectedGroups" md-autocomplete-snap md-require-match="false" md-separator-keys="" secondary-placeholder="+Tag">
-  <md-autocomplete class="searchBar md-accent" md-search-text="searchTxt" md-items="ui in searchExtra" md-min-length="0" md-autoselect="false" md-select-on-match="false" md-require-match="false" placeholder="Find a group..">
-        <md-item-template>
-          <span>
-            <class-select-menu></class-select-menu>
-            <md-button>wow</md-button>
-            <md-button class="md-icon-button"><md-icon>link</md-icon></md-button>
-            <md-button class="md-icon-button"><md-icon>insert_drive_file</md-icon></md-button>
-            <md-button class="md-icon-button"><md-icon><img stylesrc="./images/quizlet logo.png"></img></md-icon></md-button>
+   <md-autocomplete class="searchBar md-accent" md-search-text="searchTxt" md-items="ui in searchExtra" md-min-length="0" md-autoselect="false" md-select-on-match="false" md-require-match="false" placeholder="Find a group..">
+      <md-item-template>
+         <span>
+           <class-select-menu></class-select-menu>
+           <span>
+             <md-button class="md-icon-button"><md-icon>link</md-icon></md-button>
             <md-button class="md-icon-button"><md-icon>short_text</md-icon></md-button>
-          </span>
-        </md-item-template>
-        <!--<md-not-found>-->
-        <!--  No states matching "wow" were found.-->
-        <!--  <a>Create a new one!</a>-->
-        <!--</md-not-found>-->
-  </md-autocomplete>
-  <!--<md-chip-template>-->
-  <!--    <span>{{$chip}}</span>-->
-  <!--</md-chip-template>-->
+             <md-button class="md-icon-button"><md-icon>insert_drive_file</md-icon></md-button>
+             <md-button class="md-icon-button"><md-icon><img style="height: 24px; width: 4px; opacity: 0.6;" src="./images/quizlet logo.png"></img></md-icon></md-button>
+           </span>
+         </span>
+      </md-item-template>
+      <!--<md-not-found>-->
+      <!--  No states matching "wow" were found.-->
+      <!--  <a>Create a new one!</a>-->
+      <!--</md-not-found>-->
+   </md-autocomplete>
+   <!--<md-chip-template>-->
+   <!--    <span>{{$chip}}</span>-->
+   <!--</md-chip-template>-->
 </md-chips>
