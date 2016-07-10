@@ -82,7 +82,10 @@
     .searchbar>md-autocomplete-wrap>input:focus:-ms-input-placeholder {
         color: #757575;
     }
-    .search-menu st
+    
+    .search-menu-style {
+        z-index
+    }
     
     .md-virtual-repeat-offsetter .md-autocomplete-suggestions li:hover,.md-virtual-repeat-offsetter .md-autocomplete-suggestions li:focus {
         background-color: rgb(255,255,255)
