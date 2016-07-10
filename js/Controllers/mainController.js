@@ -267,11 +267,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       
       
       formatedFile.Type = unformatedFile.properties.type;
+      formatedFile.Id = unformatedFile.id;
+      
       formatedFile.Title = titleAndURL[0];
-      formatedFile.Link = titleAndURL[1];
-      formatedFile.Description = titleAndURL[0];
-      formatedFile.Id = unformatedFile.properties.fileID;
-      formatedFile.attachmentId = unformatedFile.properties.fileID;
+      formatedFile.Description = unformatedFile.description;
       formatedFile.CreationDate
       formatedFile.UpdateDate
       formatedFile.Tags = tag1.concat(tag2);
@@ -285,6 +284,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          Catagory:"",
          Color:"",
       }
+      
+      formatedFile.Link = titleAndURL[1];
+      formatedFile.attachmentId = unformatedFile.properties.fileID;
+      formatedFile.PreviewImg = titleAndURL[1];
+
       return formatedFile;
    }
 
