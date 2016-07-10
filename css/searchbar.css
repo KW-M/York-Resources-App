@@ -20,7 +20,10 @@
         transition: background 100ms ease-in, width 100ms ease-out
     }
     .searchBar md-autocomplete-wrap {
-        
+        display: block;
+        position: relative;
+        overflow: visible;
+        height: 40px;
     }
 
     .searchBar md-autocomplete-wrap input {
