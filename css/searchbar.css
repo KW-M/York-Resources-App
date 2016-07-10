@@ -83,7 +83,7 @@
         color: #757575;
     }
     
-    .md-virtual-repeat-offsetter .md-autocomplete-suggestions li:hover {
+    .md-virtual-repeat-offsetter .md-autocomplete-suggestions li:hover,.md-virtual-repeat-offsetter .md-autocomplete-suggestions li:focus {
         background-color: rgb(255,255,255)
     }
     .searchBar md-progress-linear ._md-container._md-mode-indeterminate {
