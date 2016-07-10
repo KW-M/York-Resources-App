@@ -79,7 +79,9 @@
     .searchbar>md-autocomplete-wrap>input:-ms-input-placeholder {
         color: #fff;
     }
-    
     .searchbar>md-autocomplete-wrap>input:focus:-ms-input-placeholder {
         color: #757575;
+    }
+    .md-virtual-repeat-offsetter .md-autocomplete-suggestions li:hover {
+        background-color: rgb(255,255,255)
     }
