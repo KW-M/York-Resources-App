@@ -82,6 +82,13 @@
     .searchbar>md-autocomplete-wrap>input:focus:-ms-input-placeholder {
         color: #757575;
     }
+    
     .md-virtual-repeat-offsetter .md-autocomplete-suggestions li:hover {
         background-color: rgb(255,255,255)
+    }
+    .searchBar md-progress-linear ._md-container._md-mode-indeterminate {
+        background-color: rgb(170,209,249);
+    }
+    .searchBar md-progress-linear ._md-container._md-mode-indeterminate ._md-bar{
+        background-color: rgb(170,209,249);
     }
