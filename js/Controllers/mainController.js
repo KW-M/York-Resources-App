@@ -7,6 +7,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.classList = classes;
    $scope.allPosts = [];
    $scope.Tags = [];
+   $scope.searchChips = ["clubo"]
    $scope.ImageURL = 'http://static.adzerk.net/Advertisers/6da49c1a7b624b01b982600430dbbf50.png';
    $scope.filteredPosts = [];
    $scope.searchTxt = '';
