@@ -16,12 +16,12 @@
         transition: background 100ms ease-in, width 100ms ease-out
     }
     .searchBar md-autocomplete-wrap {
-        box-shadow: none;
+        
     }
 
     .searchBar md-autocomplete-wrap input {
-        padding-top: 7px;
-        padding-bottom: 7px;
+        padding-top: 6px;
+        padding-bottom: 6px;
     }
    .searchBar md-autocomplete-wrap input#input-0:focus  {
         background-color:red;
@@ -35,7 +35,7 @@
         border-radius: 4px;
     }
     
-    .searchbar>md-autocomplete-wrap>input:focus::-webkit-input-placeholder {
+    .searchBar md-autocomplete-wrap input#input-0:focus::-webkit-input-placeholder {
         color: #757575;
     }
     
