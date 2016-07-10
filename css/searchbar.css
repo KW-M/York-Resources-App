@@ -14,7 +14,7 @@
 
     .md-chips ._md-chip-input-container md-autocomplete.searchBar {
         max-width: 720px;
-        height: 40px
+        height: 40px;
         box-shadow: initial;
         /*background: rgba(255, 255, 255, 0.16);*/
         background: rgb(255,255,255);
@@ -22,7 +22,7 @@
         transition: background 100ms ease-in, width 100ms ease-out
     }
     
-    .searchBar md-autocomplete-wrap {
+    .md-chips ._md-chip-input-container md-autocomplete.searchBar md-autocomplete-wrap {
         position: relative;
         overflow: visible;
         height: 40px;
@@ -33,10 +33,19 @@
        margin: 0;
     }
 
-    .searchBar md-autocomplete-wrap input {
+    .md-chips ._md-chip-input-container md-autocomplete.searchBar input {
        /* padding-top: 6px;
         padding-bottom: 6px;*/
-        line-height: 40px
+        font-size: 14px;
+        box-sizing: border-box;
+        border: none;
+        box-shadow: none;
+        outline: 0;
+        background: 0 0;
+        width: 100%;
+        padding: 0 15px;
+        line-height: 40px;
+        height: 40px;
     }
     
     .searchBarChips md-chips-wrap.md-chips md-autocomplete button {
