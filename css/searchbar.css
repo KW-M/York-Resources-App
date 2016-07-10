@@ -27,8 +27,9 @@
         height: 40px;
     }
     
-    .searchBar md-autocomplete-wrap ._md-chip-input-container{
-       float: none; 
+    .searchBarChips .md-chips ._md-chip-input-container {
+       float: none;
+       margin: 0;
     }
 
     .searchBar md-autocomplete-wrap input {
