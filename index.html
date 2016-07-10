@@ -17,11 +17,10 @@
     <body ng-app="YorkResourcesApp" ng-controller="ApplicationController">
         
         
-<md-chips ng-model="selectedGroups" md-autocomplete-snap md-require-match="true">
+<md-chips ng-model="selectedGroups" md-autocomplete-snap md-require-match="false" md-separator-keys="">
         <md-autocomplete
                          md-search-text="searchText"
                          md-items="item in queryGroups(searchText)"
-                         md-item-text="item"
                          md-autoselect="false"
                          md-select-on-match="false"
                          md-require-match="false"
