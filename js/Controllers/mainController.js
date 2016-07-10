@@ -18,6 +18,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       sidenavIsOpen: true,
    };
    $scope.searchExtra = [''];
+   
    $scope.GoogleDriveService = GoogleDriveService;
 
    $scope.signIn = function() { //called by the signIn button click
@@ -228,21 +229,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       console.log('getting first 12 files');
       queue(GoogleDriveService.getListOfFlies('', $scope.nextPageToken, 12), function(fileList) {
          console.log(fileList);
-         var tempFileArray = [];
          for (var item = 0; item < fileList.result.files.length; item++) {
-            var metadata = fileList.result.files[item];
-            
-            queue(GoogleDriveService.getFileContent(metadata.id), function(file) {
-               tempFileArray = $scope.handleFile(file, metadata, tempFileArray);
-               if (tempFileArray.length === 12) {
-                  console.log(tempFileArray);
-                  $scope.$apply(function() {
-                     $scope.allPosts = $scope.allPosts.concat(tempFileArray);
-                  });
-               }
+            fileList.result.files[item] = $scope.compilePost(metadata, tempFileArray);
+            $scope.$apply(function() {
+               scope.allPosts = $scope.allPosts.concat(tempFileArray);
             });
          }
-         $scope.nextPageToken = '';
       });
    }
 
@@ -268,7 +260,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
    }
 
-   $scope.handleFile = function(file, metadata, destination) {
+   $scope.compilePost = function(metadata, destination) {
       console.log({
          file: file,
          metadata: metadata,
