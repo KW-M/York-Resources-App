@@ -5,10 +5,12 @@
         padding-left: 24px;
     }
     
-    .searchBarChips md-chips-wrap{
+    .searchBarChips md-chips-wrap.md-chips{
         max-width: 720px;
         padding: 0px;
         border: 0px;
+        padding: 0px;
+        margin: 0px;
     }
 
     .searchBar {
@@ -26,7 +28,9 @@
         padding-bottom: 6px;
     }
     
-    .md-chips md-autocomplete button {
+    .searchBarChips md-chips-wrap.md-chips md-autocomplete button {
+        display: block;
+    }
     
    .searchBar md-autocomplete-wrap input#input-0:focus  {
         background-color:white;
