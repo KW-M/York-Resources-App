@@ -4,6 +4,12 @@
         flex: 1;
         padding-left: 24px;
     }
+    
+    .searchBarChips md-chips-wrap{
+        max-width: 720px;
+        padding: 0px;
+        border: 0px;
+    }
 
     .searchBar {
         max-width: 720px;
@@ -19,6 +25,9 @@
         padding-top: 6px;
         padding-bottom: 6px;
     }
+    
+    .md-chips md-autocomplete button {
+    
    .searchBar md-autocomplete-wrap input#input-0:focus  {
         background-color:white;
         border-top-left-radius: 2px;
