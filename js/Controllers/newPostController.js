@@ -210,21 +210,20 @@
         
     $scope.compilePostToMetadata = function() {
       var metadata = {}
-      var tagString = JSON.stringify($scope.tags);
+      var tagString = JSON.stringify($scope.Tags);
       
-      metadata.properties.tag1 = tagString.match(/[\s\S]{1,3}/g) || "[]";
-      metadata.properties.tag2 = tagString.match(/[\s\S]{1,3}/g) || "[]";
-      metadata.properties.tag3 = tagString.match(/[\s\S]{1,3}/g) || "[]";
-      metadata.properties.tag4 = tagString.match(/[\s\S]{1,3}/g) || "[]";
-      metadata.properties.tag5 = tagString.match(/[\s\S]{1,3}/g) || "[]";
+      metadata.properties.Tag1 = tagString.match(/[\s\S]{1,3}/g) || "[]";
+      metadata.properties.Tag2 = tagString.match(/[\s\S]{1,3}/g) || "[]";
+      metadata.properties.Tag3 = tagString.match(/[\s\S]{1,3}/g) || "[]";
+      metadata.properties.Tag4 = tagString.match(/[\s\S]{1,3}/g) || "[]";
+      metadata.properties.Tag5 = tagString.match(/[\s\S]{1,3}/g) || "[]";
       
-      metadata.Name = $scope.Title+"|%9]{_7^/|"+$scope.Link
+      metadata.name = $scope.Title+"|%9]{_7^/|"+$scope.Link
      
       metadata.properties.Type = $scope.Type;
       metadata.properties.Flagged = $scope.Flagged;
       
-      formatedFile.Title = titleAndURL[0];
-      formatedFile.Description = unformatedFile.description;
+      metadata.description = ;
       formatedFile.Tags = tag1.concat(tag2);
       formatedFile.Creator = {
          Name:"",
