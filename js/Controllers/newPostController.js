@@ -94,24 +94,12 @@
         };
 
         $scope.submit = function() {
-            var response = ({
-                "Type": $scope.Type,
-                "Flagged": $scope.Flagged,
-                "Title": $scope.Title,
-                "Tags": $scope.Tags,
-                "Description": $scope.newPostDescription.innerHTML,
-                "Class": $scope.Class,
-                "Link": $scope.Link,
-                "FileId": $scope.Id,
-                "LikeUsers": [],
-                "HeaderImage": $scope.ImagePreview,
-            });
             if (operation === 'new') {
-            GoogleDriveService.sendDriveFile(response, $scope.Title).then(function(reply) {
-                console.log(reply.result);
-                $mdToast.hide();
-                $scope.close();
-            });
+                Queue(GoogleDriveService.sendDriveFile(response, $scope.Title), function(reply) {
+                    console.log(reply.result);
+                    $mdToast.hide();
+                    $scope.close();
+                }));
             } else if (operation === 'update') {
                 
             }
@@ -195,19 +183,6 @@
             }
         }
         
-        $scope.Type = 'noLink';//
-        $scope.Flagged = false;//
-        $scope.Title = '';//
-        $scope.CreationDate = new Date();//
-        $scope.UpdateDate = new Date();//
-        $scope.Tags = [];//
-        $scope.Description = '';//
-        $scope.Class = '';//
-        $scope.Link = '';//
-        $scope.FileId = '';//
-        $scope.LikeUsers = [];//
-        $scope.HeaderImage = '';
-        
     $scope.compilePostToMetadata = function() {
       var metadata = {}
       var tagString = JSON.stringify($scope.Tags);
@@ -218,10 +193,10 @@
       metadata.properties.Tag4 = tagString.match(/[\s\S]{1,3}/g) || "[]";
       metadata.properties.Tag5 = tagString.match(/[\s\S]{1,3}/g) || "[]";
       
-      metadata.name = $scope.Title+"|%9]{_7^/|"+$scope.Link//
+      metadata.name = $scope.Title+"|%9]{_7^/|"+$scope.Link;
      
-      metadata.properties.Type = $scope.Type;//
-      metadata.properties.Flagged = $scope.Flagged;//
+      metadata.properties.Type = $scope.Type;
+      metadata.properties.Flagged = $scope.Flagged;
       
       metadata.description = $scope.newPostDescription.innerHTML;
       
@@ -231,6 +206,11 @@
       
       metadata.properties.attachmentId = $scope.FileId;
 
+      metadata.contentHints.thumbnail = $scope.ImagePreview();
+      metadata.contentHints.mimeType = "image/png";
+      
+      console.log(metadata);
+      
       return metadata;
    }
         
