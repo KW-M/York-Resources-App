@@ -12,7 +12,7 @@
         $scope.Description = '';
         $scope.Class = '';
         $scope.Link = '';
-        $scope.FileId = '';
+        $scope.AttachmentId = '';
         $scope.LikeUsers = [];
         $scope.HeaderImage = '';
         fillInValues();
@@ -169,8 +169,8 @@
                     $scope.Link = postObj.Link;
                 }
 
-                if (postObj.FileId !== undefined) {
-                    $scope.FileId = postObj.FileId;
+                if (postObj.AttachmentId !== undefined) {
+                    $scope.AttachmentId = postObj.AttachmentId;
                 }
 
                 if (postObj.LikeUsers !== undefined) {
@@ -190,10 +190,12 @@
           contentHints:{},
       }
       var tagString = JSON.stringify($scope.Tags);
+      console.log(tagString);
+      var classObject = JSON.parse($scope.Class);
       
       metadata.properties.Tag1 = tagString.match(/[\s\S]{1,3}/g) || "[]";
-      metadata.properties.Tag2 = tagString.match(/[\s\S]{1,3}/g) || "[]";
-      metadata.properties.Tag3 = tagString.match(/[\s\S]{1,3}/g) || "[]";
+      metadata.properties.Tag2 = tagString.match(/[\s\S]{4,10}/g) || "[]";
+      metadata.properties.Tag3 = tagString.match(/[\s\S]{11,15}/g) || "[]";
       metadata.properties.Tag4 = tagString.match(/[\s\S]{1,3}/g) || "[]";
       metadata.properties.Tag5 = tagString.match(/[\s\S]{1,3}/g) || "[]";
       
@@ -204,11 +206,11 @@
       
       metadata.description = $scope.newPostDescription.innerHTML;
       
-      metadata.properties.ClassName = $scope.Class.Name;
-      metadata.properties.ClassCatagory = $scope.Class.Catagory;
-      metadata.properties.ClassColor = $scope.Class.Color;
+      metadata.properties.ClassName = classObject.Name;
+      metadata.properties.ClassCatagory = classObject.Catagory;
+      metadata.properties.ClassColor = classObject.Color;
       
-      metadata.properties.attachmentId = $scope.FileId;
+      metadata.properties.attachmentId = $scope.AttachmentId;
 
       metadata.contentHints.thumbnail = $scope.ImagePreview();
       metadata.contentHints.mimeType = "image/png";

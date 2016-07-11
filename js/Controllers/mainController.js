@@ -177,9 +177,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       //drivePicker.dispose();
       console.log(data);
       if (data.action == google.picker.Action.PICKED) {
-         var fileId = data.docs[0].id;
+         var AttachmentId = data.docs[0].id;
 
-         alert('File: ' + data.docs[0].name + " id:" + fileId + " URL:" + data.docs[0].url);
+         alert('File: ' + data.docs[0].name + " id:" + AttachmentId + " URL:" + data.docs[0].url);
          $scope.newPost(data.docs[0].id, data.docs[0].url);
       }
    }
@@ -286,7 +286,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
       
       formatedFile.Link = titleAndURL[1];
-      formatedFile.attachmentId = unformatedFile.properties.fileID;
+      formatedFile.attachmentId = unformatedFile.properties.AttachmentId;
       formatedFile.PreviewImg = "";
 
       return formatedFile;
