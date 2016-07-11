@@ -205,7 +205,9 @@
         function getImagePreview (isSubmit) {
             if (isSubmit) {
                 if ($scope.Type === "Link") {
-                    return convertImg($scope.newPostHeaderImg);
+                    var base64 = convertImg($scope.newPostHeaderImg)
+                    var base64url = base64.substring(22).replace(/\+/g, '-').replace(/\//g, '_');;
+                    return base64url;
                 }else {
                     return "";
                 }
