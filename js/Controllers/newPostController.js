@@ -94,9 +94,9 @@
         };
 
         $scope.submit = function() {
-            //$scope.compilePostToMetadata();
+            var metadata = $scope.compilePostToMetadata();
             if (operation === 'new') {
-                queue(GoogleDriveService.createDriveFile($scope.compilePostToMetadata), function(reply) {
+                queue(GoogleDriveService.createDriveFile(metadata), function(reply) {
                     console.log(reply.result);
                     $mdToast.hide();
                     $scope.close();
