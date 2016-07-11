@@ -194,8 +194,9 @@
 
             }
         }
-      $scope.compilePostToMetadata = function() {
-      var formatedFile = {}
+        
+    $scope.compilePostToMetadata = function() {
+      var metadata = {}
       var tag1 = JSON.parse(unformatedFile.properties.tag), tag2 = JSON.parse(unformatedFile.properties.tag2);//, tag3 = JSON.parse(unformatedFile.properties.tag3), tag4 = JSON.parse(unformatedFile.properties.tag4), tag5 = JSON.parse(unformatedFile.properties.tag5)
       var titleAndURL = unformatedFile.split("|%9]{_7^/|");
       
