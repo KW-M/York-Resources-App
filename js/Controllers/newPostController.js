@@ -189,17 +189,17 @@
           properties:{},
           contentHints:{},
       }
-      var tagString = JSON.stringify($scope.Tags).match(/[\s\S]{1,3}/g) || "[]";
+      var tagString = JSON.stringify($scope.Tags).replace('"','').match(/[\s\S]{1,116}/g) || "[]";
       console.log(tagString);
       var classObject = JSON.parse($scope.Class);
       
-      metadata.properties.Tag1 = tagString.match(/[\s\S]{1,3}/g) || "[]";
-      metadata.properties.Tag2 = tagString.match(/[\s\S]{4,10}/g) || "[]";
-      metadata.properties.Tag3 = tagString.match(/[\s\S]{11,15}/g) || "[]";
-      metadata.properties.Tag4 = tagString.match(/[\s\S]{1,3}/g) || "[]";
-      metadata.properties.Tag5 = tagString.match(/[\s\S]{1,3}/g) || "[]";
+      metadata.properties.Tag1 = tagString[0] || "[]";
+      metadata.properties.Tag2 = tagString[1] || "[]";
+      metadata.properties.Tag3 = tagString[2] || "[]";
+      metadata.properties.Tag4 = tagString[3] || "[]";
+      metadata.properties.Tag5 = tagString[4] || "[]";
       
-      metadata.name = $scope.Title+"|%9]{_7^/|"+$scope.Link;
+      metadata.name = $scope.Title+"|%9]^8}~/7)|"+$scope.Link;
      
       metadata.properties.Type = $scope.Type;
       metadata.properties.Flagged = $scope.Flagged;
