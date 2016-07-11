@@ -189,16 +189,14 @@
           properties:{},
           contentHints:{},
       }
-      var tagString = JSON.stringify($scope.Tags).replace('"','').replace(']','').replace('[','').match(/[\s\S]{1,116}/g) || "[]";
+      var tagString = JSON.stringify($scope.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || "[]";
       console.log(tagString);
       var classObject = JSON.parse($scope.Class);
       
       metadata.properties.Tag1 = tagString[0] || "";
       metadata.properties.Tag2 = tagString[1] || "";
-      metadata.properties.Tag3 = tagString[2] || "";
-
       
-      metadata.name = $scope.Title+"|%9]^8}~/7)|"+$scope.Link;
+      metadata.name = $scope.Title+"|%9]^8}~/7)|"+($scope.Link || "");
      
       metadata.properties.Type = $scope.Type;
       metadata.properties.Flagged = $scope.Flagged;
