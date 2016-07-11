@@ -37,9 +37,7 @@
     return (arrayOfPosts);
   }
   
-  Date.prototype.setRFC3339 = function(dString){ var utcOffset, offsetSplitChar; var offsetMultiplier = 1; var dateTime = dString.split("T"); var date = dateTime[0].split("-"); var time = dateTime[1].split(":"); var offsetField = time[time.length - 1]; var offsetString; offsetFieldIdentifier = offsetField.charAt(offsetField.length - 1); if (offsetFieldIdentifier == "Z") { utcOffset = 0; time[time.length - 1] = offsetField.substr(0, offsetField.length - 2); } else { if (offsetField[offsetField.length - 1].indexOf("+") != -1) { offsetSplitChar = "+"; offsetMultiplier = 1; } else { offsetSplitChar = "-"; offsetMultiplier = -1; } offsetString = offsetField.split(offsetSplitChar); time[time.length - 1] == offsetString[0]; offsetString = offsetString[1].split(":"); utcOffset = (offsetString[0] * 60) + offsetString[1]; utcOffset = utcOffset * 60 * 1000; } this.setTime(Date.UTC(date[0], date[1] - 1, date[2], time[0], time[1], time[2]) + (utcOffset * offsetMultiplier )); return this; };
-
-  // function RateLimit(fn, delay, context) {
+    // function RateLimit(fn, delay, context) {
   //   var queue = [],
   //     timer = null;
 
@@ -62,3 +60,53 @@
   //     }
   //   }
   // }
+  
+  
+  
+  /*
+ * rfc3339date.js version 0.1.3
+ * Copyright (c) 2010 Paul GALLAGHER http://tardate.com
+ * Licensed under the MIT license:
+ *   http://www.opensource.org/licenses/mit-license.php
+ */
+  
+  /*
+ * Date.parseRFC3339
+ * extend Date with a method parsing ISO8601 / RFC 3339 date strings.
+ * Usage: var d = Date.parseRFC3339( "2010-07-20T15:00:00Z" );
+ */
+  
+  Date.prototype.setRFC3339 = function(dString){ var utcOffset, offsetSplitChar; var offsetMultiplier = 1; var dateTime = dString.split("T"); var date = dateTime[0].split("-"); var time = dateTime[1].split(":"); var offsetField = time[time.length - 1]; var offsetString; offsetFieldIdentifier = offsetField.charAt(offsetField.length - 1); if (offsetFieldIdentifier == "Z") { utcOffset = 0; time[time.length - 1] = offsetField.substr(0, offsetField.length - 2); } else { if (offsetField[offsetField.length - 1].indexOf("+") != -1) { offsetSplitChar = "+"; offsetMultiplier = 1; } else { offsetSplitChar = "-"; offsetMultiplier = -1; } offsetString = offsetField.split(offsetSplitChar); time[time.length - 1] == offsetString[0]; offsetString = offsetString[1].split(":"); utcOffset = (offsetString[0] * 60) + offsetString[1]; utcOffset = utcOffset * 60 * 1000; } this.setTime(Date.UTC(date[0], date[1] - 1, date[2], time[0], time[1], time[2]) + (utcOffset * offsetMultiplier )); return this; };
+
+/*
+ * Number.prototype.toPaddedString
+ * Number instance method used to left-pad numbers to the specified length
+ * Used by the Date.prototype.toRFC3339XXX methods
+ */
+Number.prototype.toPaddedString = function(len , fillchar) {
+  var result = this.toString();
+  if(typeof(fillchar) == 'undefined'){ fillchar = '0' };
+  while(result.length < len){ result = fillchar + result; };
+  return result;
+}
+
+/*
+ * Date.prototype.toRFC3339UTCString
+ * Date instance method to format the date as ISO8601 / RFC 3339 string (in UTC format).
+ * Usage: var d = new Date().toRFC3339UTCString();   => "2010-07-25T11:51:31.427Z"
+ * Parameters:
+ *  supressFormating : if supplied and 'true', will force to remove date/time separators
+ *  supressMillis : if supplied and 'true', will force not to include milliseconds
+ */
+Date.prototype.toRFC3339UTCString = function(supressFormating , supressMillis){
+  var dSep = ( supressFormating ? '' : '-' );
+  var tSep = ( supressFormating ? '' : ':' );
+  var result = this.getUTCFullYear().toString();
+  result += dSep + (this.getUTCMonth() + 1).toPaddedString(2);
+  result += dSep + this.getUTCDate().toPaddedString(2);
+  result += 'T' + this.getUTCHours().toPaddedString(2);
+  result += tSep + this.getUTCMinutes().toPaddedString(2);
+  result += tSep + this.getUTCSeconds().toPaddedString(2);
+  if((!supressMillis)&&(this.getUTCMilliseconds()>0)) result += '.' + this.getUTCMilliseconds().toPaddedString(3);
+  return result + 'Z';
+}
