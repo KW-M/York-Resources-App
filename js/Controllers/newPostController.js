@@ -187,6 +187,7 @@
     $scope.compilePostToMetadata = function() {
       var metadata = {
           properties:{},
+          contentHints:{},
       }
       var tagString = JSON.stringify($scope.Tags);
       
