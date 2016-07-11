@@ -22,13 +22,6 @@ app.service('GoogleDriveService', ['$q', function($q) {
             fields: 'files(name,id,modifiedTime,appProperties,properties,contentHints/thumbnail,createdTime,description,fullFileExtension,owners(displayName,emailAddress),permissions(displayName,emailAddress)),nextPageToken',
         }));
     };
-    
-    this.getFileContent = function(fileId) {
-        return (gapi.client.drive.files.get({
-            'fileId': fileId,
-            'alt': 'media'
-        }));
-    };
 
     this.deleteDriveFile = function(fileId) {
         return (gapi.client.drive.files.delete({
@@ -44,8 +37,15 @@ app.service('GoogleDriveService', ['$q', function($q) {
     };
     
     this.createDriveFile = function(metadata) {
-        var metadata.'addParents': '0B5NVuDykezpkOXY1bDZ2ZnUxVGM',
-        return (gapi.client.drive.files.create());
+        metadata.Parents = ['0B5NVuDykezpkOXY1bDZ2ZnUxVGM'];
+        return (gapi.client.drive.files.create(metadata));
+    };
+    
+    this.getFileContent = function(fileId) {
+        return (gapi.client.drive.files.get({
+            'fileId': fileId,
+            'alt': 'media'
+        }));
     };
 
     this.sendDriveFileWContent = function(content, title) {
