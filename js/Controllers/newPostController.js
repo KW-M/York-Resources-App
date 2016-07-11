@@ -40,8 +40,7 @@
             canvas.height = ImageElement.height;
             canvas.width = ImageElement.width;
             ctx.drawImage(ImageElement, 0, 0);
-            dataURL = canvas.toDataURL(');
-            canvas = null;
+            dataURL = canvas.toDataURL();
             console.log(dataURL);
             return dataURL;
         }
@@ -187,7 +186,9 @@
     $scope.compilePostToMetadata = function() {
       var metadata = {
           properties:{},
-          contentHints:{},
+          contentHints:{
+              thumbnail:{}
+          },
       }
       var tagString = JSON.stringify($scope.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || [];
       console.log(tagString);
@@ -209,8 +210,8 @@
       
       metadata.properties.attachmentId = $scope.AttachmentId;
 
-      metadata.contentHints.thumbnail = $scope.ImagePreview();
-      metadata.contentHints.mimeType = "image/png";
+      metadata.contentHints.thumbnail.image = $scope.ImagePreview();
+      metadata.contentHints.thumbnail.mimeType = "image/png";
       
       console.log(metadata);
       
