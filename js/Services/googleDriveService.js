@@ -36,7 +36,11 @@ app.service('GoogleDriveService', ['$q', function($q) {
         }));
     };
     
-    this.updateDriveFile = function(content, title) {
+    this.updateDriveFile = function(metadata, title) {
+        
+    };
+    
+    this.createDriveFile = function(metadata) {
         
     };
 

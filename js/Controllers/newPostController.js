@@ -194,6 +194,37 @@
 
             }
         }
+      $scope.compilePostToMetadata = function() {
+      var formatedFile = {}
+      var tag1 = JSON.parse(unformatedFile.properties.tag), tag2 = JSON.parse(unformatedFile.properties.tag2);//, tag3 = JSON.parse(unformatedFile.properties.tag3), tag4 = JSON.parse(unformatedFile.properties.tag4), tag5 = JSON.parse(unformatedFile.properties.tag5)
+      var titleAndURL = unformatedFile.split("|%9]{_7^/|");
+      
+      
+      formatedFile.Type = unformatedFile.properties.type;
+      formatedFile.Id = unformatedFile.id;
+      
+      formatedFile.Title = titleAndURL[0];
+      formatedFile.Description = unformatedFile.description;
+      formatedFile.CreationDate
+      formatedFile.UpdateDate
+      formatedFile.Tags = tag1.concat(tag2);
+      formatedFile.Creator = {
+         Name:"",
+         Email:'',
+         ClassOf:"",
+      }
+      formatedFile.Class = {
+         Name:"",
+         Catagory:"",
+         Color:"",
+      }
+      
+      formatedFile.Link = titleAndURL[1];
+      formatedFile.attachmentId = unformatedFile.properties.fileID;
+      formatedFile.PreviewImg = "";
+
+      return formatedFile;
+   }
         
     $scope.close = function() {
         $mdDialog.hide();
