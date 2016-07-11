@@ -37,7 +37,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
     };
     
     this.createDriveFile = function(metadata) {
-        metadata.parents = ['0B5NVuDykezpkOXY1bDZ2ZnUxVGM'];
+        metadata.parents = ['0B5NVuDykezpkbUxvOUMyNnRsUGc'];
         return (gapi.client.drive.files.create(metadata));
     };
     
