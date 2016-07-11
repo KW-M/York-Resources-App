@@ -40,7 +40,7 @@
             canvas.height = ImageElement.height;
             canvas.width = ImageElement.width;
             ctx.drawImage(ImageElement, 0, 0);
-            dataURL = canvas.toDataURL('jpg');
+            dataURL = canvas.toDataURL('png');
             canvas = null;
             console.log(dataURL);
             return dataURL;
