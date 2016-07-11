@@ -99,7 +99,7 @@
                 "Flagged": $scope.Flagged,
                 "Title": $scope.Title,
                 "Tags": $scope.Tags,
-                "Description": $scope.newPostDescription.textContent,
+                "Description": $scope.newPostDescription.innerHTML,
                 "Class": $scope.Class,
                 "Link": $scope.Link,
                 "FileId": $scope.Id,
@@ -195,17 +195,17 @@
             }
         }
         
-        $scope.Type = 'noLink';
-        $scope.Flagged = false;
-        $scope.Title = '';
-        $scope.CreationDate = new Date();
-        $scope.UpdateDate = new Date();
-        $scope.Tags = [];
-        $scope.Description = '';
-        $scope.Class = '';
-        $scope.Link = '';
-        $scope.FileId = '';
-        $scope.LikeUsers = [];
+        $scope.Type = 'noLink';//
+        $scope.Flagged = false;//
+        $scope.Title = '';//
+        $scope.CreationDate = new Date();//
+        $scope.UpdateDate = new Date();//
+        $scope.Tags = [];//
+        $scope.Description = '';//
+        $scope.Class = '';//
+        $scope.Link = '';//
+        $scope.FileId = '';//
+        $scope.LikeUsers = [];//
         $scope.HeaderImage = '';
         
     $scope.compilePostToMetadata = function() {
@@ -218,29 +218,20 @@
       metadata.properties.Tag4 = tagString.match(/[\s\S]{1,3}/g) || "[]";
       metadata.properties.Tag5 = tagString.match(/[\s\S]{1,3}/g) || "[]";
       
-      metadata.name = $scope.Title+"|%9]{_7^/|"+$scope.Link
+      metadata.name = $scope.Title+"|%9]{_7^/|"+$scope.Link//
      
-      metadata.properties.Type = $scope.Type;
-      metadata.properties.Flagged = $scope.Flagged;
+      metadata.properties.Type = $scope.Type;//
+      metadata.properties.Flagged = $scope.Flagged;//
       
-      metadata.description = ;
-      formatedFile.Tags = tag1.concat(tag2);
-      formatedFile.Creator = {
-         Name:"",
-         Email:'',
-         ClassOf:"",
-      }
-      formatedFile.Class = {
-         Name:"",
-         Catagory:"",
-         Color:"",
-      }
+      metadata.description = $scope.newPostDescription.innerHTML;
       
-      formatedFile.Link = titleAndURL[1];
-      formatedFile.attachmentId = unformatedFile.properties.fileID;
-      formatedFile.PreviewImg = "";
+      metadata.properties.ClassName = $scope.Class.Name;
+      metadata.properties.ClassCatagory = $scope.Class.Catagory;
+      metadata.properties.ClassColor = $scope.Class.Color;
+      
+      metadata.properties.attachmentId = $scope.FileId;
 
-      return formatedFile;
+      return metadata;
    }
         
     $scope.close = function() {
