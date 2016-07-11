@@ -194,7 +194,7 @@
 
             metadata.properties.attachmentId = $scope.AttachmentId;
 
-            metadata.contentHints.thumbnail.image = $scope.getImagePreview(true);
+            metadata.contentHints.thumbnail.image = getImagePreview(true);
             metadata.contentHints.thumbnail.mimeType = "image/png";
 
             console.log(metadata);
