@@ -195,10 +195,30 @@
             }
         }
         
+        $scope.Type = 'noLink';
+        $scope.Flagged = false;
+        $scope.Title = '';
+        $scope.CreationDate = new Date();
+        $scope.UpdateDate = new Date();
+        $scope.Tags = [];
+        $scope.Description = '';
+        $scope.Class = '';
+        $scope.Link = '';
+        $scope.FileId = '';
+        $scope.LikeUsers = [];
+        $scope.HeaderImage = '';
+        
     $scope.compilePostToMetadata = function() {
       var metadata = {}
-      var tag1 = JSON.parse(unformatedFile.properties.tag), tag2 = JSON.parse(unformatedFile.properties.tag2);//, tag3 = JSON.parse(unformatedFile.properties.tag3), tag4 = JSON.parse(unformatedFile.properties.tag4), tag5 = JSON.parse(unformatedFile.properties.tag5)
-      var titleAndURL = unformatedFile.split("|%9]{_7^/|");
+      var tagString = JSON.stringify($scope.tags);
+      
+      metadata.properties.tag1 = tagString.match(/[\s\S]{1,3}/g) || "[]";
+      metadata.properties.tag2 = tagString.match(/[\s\S]{1,3}/g) || "[]";
+      metadata.properties.tag3 = tagString.match(/[\s\S]{1,3}/g) || "[]";
+      metadata.properties.tag4 = tagString.match(/[\s\S]{1,3}/g) || "[]";
+      metadata.properties.tag5 = tagString.match(/[\s\S]{1,3}/g) || "[]";
+      
+      metadata.Name = $scope.Title+"|%9]{_7^/|"+$scope.Link
      
       metadata.properties.Type = $scope.Type;
       metadata.properties.Flagged = $scope.Flagged;
