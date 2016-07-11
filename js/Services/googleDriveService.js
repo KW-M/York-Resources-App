@@ -36,12 +36,17 @@ app.service('GoogleDriveService', ['$q', function($q) {
         }));
     };
     
-    this.updateDriveFile = function(metadata, title) {
-        
+    this.updateDriveFile = function(metadata, id) {
+        return (gapi.client.drive.files.update({
+            'fileId': id,
+            'alt': 'media'
+        }));
     };
     
     this.createDriveFile = function(metadata) {
-        
+        return (gapi.client.drive.files.create({
+            'name': 'ok',
+        }));
     };
 
     this.sendDriveFileWContent = function(content, title) {
