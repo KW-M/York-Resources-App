@@ -187,7 +187,7 @@
       var metadata = {
           properties:{},
           contentHints:{
-              thumbnail:{}
+              thumbnail:{},
           },
       }
       var tagString = JSON.stringify($scope.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || [];
@@ -210,8 +210,8 @@
       
       metadata.properties.attachmentId = $scope.AttachmentId;
 
-      metadata.contentHints.thumbnail.image = $scope.ImagePreview();
-      metadata.contentHints.thumbnail.mimeType = "image/png";
+      //metadata.contentHints.thumbnail.image = $scope.ImagePreview();
+      //metadata.contentHints.thumbnail.mimeType = "image/png";
       
       console.log(metadata);
       
