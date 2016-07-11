@@ -189,7 +189,7 @@
           properties:{},
           contentHints:{},
       }
-      var tagString = JSON.stringify($scope.Tags);
+      var tagString = JSON.stringify($scope.Tags).match(/[\s\S]{1,3}/g) || "[]";
       console.log(tagString);
       var classObject = JSON.parse($scope.Class);
       
