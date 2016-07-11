@@ -287,7 +287,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       
       formatedFile.Link = titleAndURL[1];
       formatedFile.attachmentId = unformatedFile.properties.fileID;
-      formatedFile.PreviewImg = titleAndURL[1];
+      formatedFile.PreviewImg = "";
 
       return formatedFile;
    }
