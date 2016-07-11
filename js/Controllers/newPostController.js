@@ -202,7 +202,6 @@
      
       metadata.properties.Type = $scope.Type;
       metadata.properties.Flagged = $scope.Flagged;
-      formatedFile.Id = unformatedFile.id;
       
       formatedFile.Title = titleAndURL[0];
       formatedFile.Description = unformatedFile.description;
