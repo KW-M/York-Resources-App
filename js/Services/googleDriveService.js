@@ -44,9 +44,8 @@ app.service('GoogleDriveService', ['$q', function($q) {
     };
     
     this.createDriveFile = function(metadata) {
-        return (gapi.client.drive.files.create({
-            'name': 'ok',
-        }));
+        var metadata.'addParents': '0B5NVuDykezpkOXY1bDZ2ZnUxVGM',
+        return (gapi.client.drive.files.create());
     };
 
     this.sendDriveFileWContent = function(content, title) {
