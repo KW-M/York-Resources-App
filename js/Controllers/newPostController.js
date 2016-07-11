@@ -94,13 +94,13 @@
         };
 
         $scope.submit = function() {
-            $scope.compilePostToMetadata();
+            //$scope.compilePostToMetadata();
             if (operation === 'new') {
-                // Queue(GoogleDriveService.sendDriveFile(response), function(reply) {
-                //     console.log(reply.result);
-                //     $mdToast.hide();
-                //     $scope.close();
-                // });
+                Queue(GoogleDriveService.createDriveFile($scope.compilePostToMetadata), function(reply) {
+                    console.log(reply.result);
+                    $mdToast.hide();
+                    $scope.close();
+                });
             } else if (operation === 'update') {
                 
             }
