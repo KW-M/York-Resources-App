@@ -94,12 +94,13 @@
         };
 
         $scope.submit = function() {
+            $scope.compilePostToMetadata();
             if (operation === 'new') {
-                Queue(GoogleDriveService.sendDriveFile(response, $scope.Title), function(reply) {
-                    console.log(reply.result);
-                    $mdToast.hide();
-                    $scope.close();
-                }));
+                // Queue(GoogleDriveService.sendDriveFile(response), function(reply) {
+                //     console.log(reply.result);
+                //     $mdToast.hide();
+                //     $scope.close();
+                // });
             } else if (operation === 'update') {
                 
             }
@@ -184,7 +185,9 @@
         }
         
     $scope.compilePostToMetadata = function() {
-      var metadata = {}
+      var metadata = {
+          properties:{},
+      }
       var tagString = JSON.stringify($scope.Tags);
       
       metadata.properties.Tag1 = tagString.match(/[\s\S]{1,3}/g) || "[]";
