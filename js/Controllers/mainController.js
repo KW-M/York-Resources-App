@@ -36,7 +36,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
    $scope.gotoRoute = function(path, query, id) {
-      console.log(path + query + id);
       if (path) {
          $location.path(path);
       }
@@ -76,9 +75,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    $scope.$on('$routeUpdate', function() {
+      console.log("urlUpdated");
       $scope.selectedClass = $location.path();
-      $scope.order = $location.search().order;
-      $scope.offset = $location.search().offset;
+      $scope.searchTerm = $location.search();
+      $scope.selectedId = $location.hash();
    });
 
    $scope.newPost = function(postObj, operation) {
