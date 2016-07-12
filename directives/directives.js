@@ -59,9 +59,12 @@ app.directive('getPosts', function() {
   return {
     restrict: 'AE',
     link: function(scope, elem, attrs) {
-        var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false";
+        var query = "";
+        if (attrs.flagged !== true) {
+            query = query + " and properties has { key='Flagged' and value='True' }"
+        }
         if (attrs.showflaged !== true) {
-            query = query + ' and not fullText contains \'"Flagged":true\''
+            query = query + " and properties has { key='Flagged' and value='True' }"
         }
         console.log(query);
     }
