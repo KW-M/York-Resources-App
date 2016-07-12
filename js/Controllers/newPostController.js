@@ -201,7 +201,9 @@
 
             metadata.properties.attachmentId = $scope.AttachmentId;
             
-            metadata.mimeType = 
+            metadata.mimeType = "application/vnd.google-apps.unknown"
+            
+            metadata.contentHints.thumbnail.image = getImagePreview(true);
 
             metadata.contentHints.thumbnail.image = getImagePreview(true);
             metadata.contentHints.thumbnail.mimeType = "image/png";
