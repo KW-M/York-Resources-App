@@ -207,8 +207,8 @@
             
             metadata.contentHints.indexableText = " class: " + classObject.Name +" class-catagory: " + classObject.Catagory + " tags: " + tagString + " attachmentId: " + $scope.AttachmentId;
 
-            //metadata.contentHints.thumbnail.image = getImagePreview(true);
-            //metadata.contentHints.thumbnail.mimeType = "image/png";
+            metadata.contentHints.thumbnail.image = getImagePreview(true);
+            metadata.contentHints.thumbnail.mimeType = "image/png";
 
             console.log(metadata);
 
