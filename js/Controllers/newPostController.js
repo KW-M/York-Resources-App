@@ -94,14 +94,13 @@
                 $scope.Type = 'NoLink';
             }
             else {
-                xhttp.open('HEAD', $scope.link);
+                xhttp.open('HEAD', $scope.link); // to implement: img checking and icon for non existant thumnail drive docs
                 xhttp.onreadystatechange = function() {
                     if (this.readyState == this.DONE) {
                         console.log(this.getResponseHeader("Content-Type"));
                     }
                 };
                 xhttp.send();
-
                 if ($scope.Link.match(/(?:http|https):\/\/.{2,}/)) {
                     var isgdrive = $scope.Link.match(/\/(?:d|file|folder|folders)\/([-\w]{25,})/)
                     if (isgdrive) {
