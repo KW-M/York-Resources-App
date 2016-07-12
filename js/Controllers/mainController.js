@@ -274,9 +274,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       formatedFile.UpdateDate = Date.parseRFC3339(unformatedFile.modifiedTime);
       formatedFile.Tags = JSON.parse(tagsRaw.replace(/,/g,"\",\""));;
       formatedFile.Creator = {
-         Name:"",
-         Email:'',
-         ClassOf:"",
+         Name: unformatedFile.createdTime,
+         Email: unformatedFile.createdTime,
+         ClassOf: unformatedFile.createdTime,
       }
       formatedFile.Class = {
          Name:"",
