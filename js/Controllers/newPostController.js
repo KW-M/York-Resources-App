@@ -215,7 +215,7 @@
             return metadata;
         }
 
-        document.getElementById("header_image").onload = function(){
+        function onPreviewLoad(){
             $scope.previewLoading = false;
         }
 
