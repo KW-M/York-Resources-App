@@ -312,12 +312,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.confirmDelete = function(ev, content, arrayIndex) {
       // Appending dialog to document.body to cover sidenav in docs app
       var confirm = $mdDialog.confirm()
-         .title('Are you sure you want to permanently delete this?')
-         .textContent(content.Title)
+         .title('Permanently delete this?')
          .ariaLabel('Delete?')
          .targetEvent(ev)
-         .ok('Delete it')
-         .cancel('Keep it');
+         .ok('Delete')
+         .cancel('Cancel');
       $mdDialog.show(confirm).then(function() {
          //ok
          $scope.allPosts.splice(arrayIndex, 1);
