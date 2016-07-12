@@ -262,6 +262,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.formatPost = function(unformatedFile) {
       var formatedFile = {}
+      var tags = unformatedFile.properties.tag + unformatedFile.properties.tag2 + "\"]";
       var tag1 = JSON.parse(unformatedFile.properties.tag), tag2 = JSON.parse(unformatedFile.properties.tag2);//, tag3 = JSON.parse(unformatedFile.properties.tag3), tag4 = JSON.parse(unformatedFile.properties.tag4), tag5 = JSON.parse(unformatedFile.properties.tag5)
       var titleAndURL = unformatedFile.split("|%9]{_7^/|");
       
