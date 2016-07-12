@@ -262,15 +262,15 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.formatPost = function(unformatedFile) {
       var formatedFile = {}
-      var tagsRaw = "[\"" + unformatedFile.properties.tag + unformatedFile.properties.tag2 + "\"]";
+      var tagsRaw = "[\"" + unformatedFile.properties.Tag1 + unformatedFile.properties.Tag2 + "\"]";
       var titleAndURL = unformatedFile.name.split("{]|[}");
       
-      formatedFile.Type = unformatedFile.properties.type;
+      formatedFile.Type = unformatedFile.properties.Type;
+      formatedFile.Flagged = unformatedFile.properties.Flagged;
       formatedFile.Id = unformatedFile.id;
       
       formatedFile.Title = titleAndURL[0];
       formatedFile.Description = unformatedFile.description;
-      console.log(Date.prototype);
       formatedFile.CreationDate = unformatedFile.createdTime //Date.prototype.parseRFC3339(unformatedFile.createdTime);
       formatedFile.UpdateDate = unformatedFile.modifiedTime //Date.prototype.parseRFC3339(unformatedFile.modifiedTime);
       formatedFile.Tags = JSON.parse(tagsRaw.replace(/,/g,"\",\""));;
@@ -281,13 +281,13 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          ClassOf: unformatedFile.owners[0].emailAddress.match(/\d+/)[0],
       }
       formatedFile.Class = {
-         Name: unformatedFile.properties.className,
-         Catagory: unformatedFile.properties.classCatagory,
-         Color: unformatedFile.properties.classColor,
+         Name: unformatedFile.properties.ClassName,
+         Catagory: unformatedFile.properties.ClassCatagory,
+         Color: unformatedFile.properties.ClassColor,
       }
       
       formatedFile.Link = titleAndURL[1];
-      formatedFile.attachmentId = unformatedFile.properties.AttachmentId;
+      formatedFile.attachmentId = unformatedFile.properties.attachmentId;
       formatedFile.PreviewImg = "";
       
       console.log({unformated: unformatedFile, formated: formatedFile})
