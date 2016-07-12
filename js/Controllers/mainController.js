@@ -274,15 +274,15 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       formatedFile.UpdateDate = Date.parseRFC3339(unformatedFile.modifiedTime);
       formatedFile.Tags = JSON.parse(tagsRaw.replace(/,/g,"\",\""));;
       formatedFile.Creator = {
-         Name: unformatedFile.owners[0],
-         me
-         Email: unformatedFile.createdTime,
-         ClassOf: unformatedFile.createdTime,
+         Name: unformatedFile.owners[0].displayName,
+         Me: unformatedFile.owners[0].me,
+         Email: unformatedFile.owners[0].emailAddress,
+         ClassOf: unformatedFile.owners[0].emailAddress.match(/\d+/)[0],
       }
       formatedFile.Class = {
-         Name:"",
-         Catagory:"",
-         Color:"",
+         Name: unformatedFile.properties.className,
+         Catagory: unformatedFile.properties.classCatagory,
+         Color: unformatedFile.properties.classColor,
       }
       
       formatedFile.Link = titleAndURL[1];
