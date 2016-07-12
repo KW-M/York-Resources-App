@@ -200,6 +200,8 @@
             metadata.properties.ClassColor = classObject.Color;
 
             metadata.properties.attachmentId = $scope.AttachmentId;
+            
+            metadata.mimeType = 
 
             metadata.contentHints.thumbnail.image = getImagePreview(true);
             metadata.contentHints.thumbnail.mimeType = "image/png";
