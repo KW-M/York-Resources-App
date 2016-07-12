@@ -19,6 +19,7 @@
 
         //temproary variables
         $scope.previewThumbnail = "";
+        $scope.previewLoading = false;
         $scope.classSearch = "";
         var xhttp = new XMLHttpRequest();
         var canvas = document.getElementById('image_renderer');
@@ -96,6 +97,7 @@
                 $scope.Type = 'NoLink';
             }
             else {
+                $scope.previewLoading = true
                 xhttp.open('HEAD', $scope.link); // to implement: img checking and icon for non existant thumnail drive docs
                 xhttp.onreadystatechange = function() {
                     if (this.readyState == this.DONE) {
@@ -211,6 +213,10 @@
             console.log(metadata);
 
             return metadata;
+        }
+
+        document.getElementById("header_image").onload = function(){
+            $scope.previewLoading = false;
         }
 
         function getImagePreview(isSubmit) {
