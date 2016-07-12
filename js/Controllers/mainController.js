@@ -5,21 +5,23 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    var content_container = document.getElementById("content_container");
    var performantScrollEnabled = false;
    
-   $scope.classList = classes;
-   $scope.allPosts = [];
-   $scope.Tags = [];
-   $scope.searchChips = ["clubo"]
-   $scope.ImageURL = 'http://static.adzerk.net/Advertisers/6da49c1a7b624b01b982600430dbbf50.png';
-   $scope.filteredPosts = [];
-   $scope.searchTxt = '';
    $scope.nextPageToken = '';
+   $scope.allPosts = [];
+   $scope.searchPosts = [];
+   $scope.visiblePosts = [];
+
+   $scope.searchTxt = '';
+   $scope.searchExtra = [''];
+   $scope.searchChips = ["clubo"]
+   
+   $scope.classList = classes;
+   $scope.Tags = [];
    $scope.globals = {
       FABisOpen: false,
       FABisHidden: true,
       sidenavIsOpen: true,
    };
-   $scope.searchExtra = [''];
-   
+
    $scope.GoogleDriveService = GoogleDriveService;
 
    $scope.signIn = function() { //called by the signIn button click
@@ -57,14 +59,14 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       });
    };
 
-   $scope.$watch('searchTxt', $scope.filterPosts);
-
    $scope.filterPosts = function(val) {
       val = val.toLowerCase();
       $scope.allPosts = $scope.allPosts.filter(function(obj) {
          return obj.Title.toLowerCase().indexOf(val) != -1;
       });
    }
+   
+   //routing------------
 
    $scope.pathSelected = function(path) {
       if ($location.path() === path) {
@@ -81,6 +83,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $scope.idParam = $location.hash();
       $scope.selectedClass =  $scope.classParam.replace(/\//g,"")
    });
+   
+   //creating posts---------
 
    $scope.newPost = function(postObj, operation) {
       //called by the bottom right plus/add resource button
@@ -328,7 +332,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       performantScroll: false,
       gutterSize: 12,
    };
-   console.log($scope.angularGridOptions);
+   
+   //event watchers
+   
+   $scope.$watch('searchTxt', $scope.filterPosts);
 
    content_container.onscroll = function(event) {
       //called whenever the content_container scrolls
@@ -353,6 +360,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          performantScrollEnabled = false;
       }
    });
+   
+   //sub functions
 
    $window.loginSilent = function(response) {
       loginProcedure(authorizationService.authorizeSilent());
