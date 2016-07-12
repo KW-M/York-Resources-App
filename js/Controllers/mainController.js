@@ -23,26 +23,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
    $scope.GoogleDriveService = GoogleDriveService;
-
-   $scope.gotoRoute = function(path, query, id) {
-      if (path) {
-         $location.path(path);
-      }
-      if (query) {
-         $location.search(query);
-      }
-      if (id) {
-         $location.hash(id);
-      }
-   };
-
-
-   $scope.filterPosts = function(val) {
-      val = val.toLowerCase();
-      $scope.allPosts = $scope.allPosts.filter(function(obj) {
-         return obj.Title.toLowerCase().indexOf(val) != -1;
-      });
-   }
    
    //-routing-------------
 
@@ -54,6 +34,18 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          return false;
       }
    }
+   
+   $scope.gotoRoute = function(path, query, id) {
+      if (path) {
+         $location.path(path);
+      }
+      if (query) {
+         $location.search(query);
+      }
+      if (id) {
+         $location.hash(id);
+      }
+   };
 
    $scope.$on('$routeChangeSuccess', function() {
       $scope.classParam = $location.path();
@@ -123,6 +115,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       });
    };
    
+   $scope.pickerLoaded = function() {
+
+   }
 
    $scope.showPicker = function(typ) {
       var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
@@ -168,43 +163,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
    }
 
-   function loginProcedure(response) {
-      //handles the 'response' promise
-      response.then(function(response) {
-            $scope.loginStatus = response;
-            GoogleDriveService.initiateAuthLoadDrive($scope.initiateDrive, $scope.pickerLoaded)
-         }).catch(function(error) {
-            if (error.error_subtype !== undefined && error.error_subtype === "access_denied") {
-               showLoginButton();
-            }
-            else if (error.error !== undefined && error.error === "access_denied") {
-               showLoginButton();
-            }
-            else {
-               console.log(error);
-            }
-         })
-         //called to show the login button (& hide the loading spinner)
-      function showLoginButton() {
-         angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
-         setTimeout(function() {
-             angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
-         },500);
-      };
-   };
-
-   $scope.initiateDrive = function() {
-      queue(GoogleDriveService.getUserInfo(), function(userInfo) {
-         $scope.myInfo = {
-            "Name": userInfo.result.user.displayName,
-            "Email": userInfo.result.user.emailAddress,
-            "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
-         };
-         console.log($scope.myInfo)
-      });
-      $scope.getFilesInitial("");
-   }
-
+   
+   //-loading and filtering posts---------
+   
    $scope.getFiles = function() {
       queue(GoogleDriveService.getListOfFlies($scope.queryProperties, $scope.nextPageToken, 12), function(fileList) {
          $scope.nextPageToken = fileList.result.nextPageToken;
@@ -253,7 +214,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       return formatedFile;
    }
    
-   //-filtering---------
+   $scope.filterPosts = function(val) {
+      val = val.toLowerCase();
+      $scope.allPosts = $scope.allPosts.filter(function(obj) {
+         return obj.Title.toLowerCase().indexOf(val) != -1;
+      });
+   }
 
    $scope.sortByLikes = function(thingToSort) {
       thingToSort.sort(function(a, b) {
@@ -279,7 +245,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
    };
    
-   $scope.helpDialog = function() { //called by the top right toolbar help button
+   $scope.openHelpDialog = function() { //called by the top right toolbar help button
       $mdDialog.show({
          templateUrl: 'templates/html/help.html',
          parent: angular.element(document.body),
@@ -317,7 +283,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
    };
    
-   //-signin------------
+   //-signin & initiation------------
 
    $scope.signIn = function() { //called by the signIn button click
       loginProcedure(authorizationService.authorizePopup());
@@ -326,6 +292,43 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $window.loginSilent = function(response) {
       loginProcedure(authorizationService.authorizeSilent());
    };
+   
+   function loginProcedure(response) {
+      //handles the 'response' promise
+      response.then(function(response) {
+            $scope.loginStatus = response;
+            GoogleDriveService.initiateAuthLoadDrive($scope.initiateDrive, $scope.pickerLoaded)
+         }).catch(function(error) {
+            if (error.error_subtype !== undefined && error.error_subtype === "access_denied") {
+               showLoginButton();
+            }
+            else if (error.error !== undefined && error.error === "access_denied") {
+               showLoginButton();
+            }
+            else {
+               console.log(error);
+            }
+         })
+         //called to show the login button (& hide the loading spinner)
+      function showLoginButton() {
+         angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
+         setTimeout(function() {
+             angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
+         },500);
+      };
+   };
+
+   $scope.initiateDrive = function() {
+      queue(GoogleDriveService.getUserInfo(), function(userInfo) {
+         $scope.myInfo = {
+            "Name": userInfo.result.user.displayName,
+            "Email": userInfo.result.user.emailAddress,
+            "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
+         };
+         console.log($scope.myInfo)
+      });
+      $scope.getFilesInitial("");
+   }
 
    $scope.angularGridOptions = {
       gridWidth: 250,
@@ -335,6 +338,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       performantScroll: false,
       gutterSize: 12,
    };
+   
    
    //-event watchers---------
    
