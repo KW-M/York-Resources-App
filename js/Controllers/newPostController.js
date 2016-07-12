@@ -1,5 +1,5 @@
     /* we don't define the "new post controller" here because it was alredy
-                           defined by the $md-dialog in the newPost function on mainController.   */
+                               defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
         operation = 'new'
             //database variables
@@ -20,6 +20,7 @@
         //temproary variables
         $scope.previewThumbnail = "";
         $scope.classSearch = "";
+        var xhttp = new XMLHttpRequest();
         var canvas = document.getElementById('image_renderer');
         var ctx = canvas.getContext('2d');
         var dataURL;
@@ -93,7 +94,13 @@
                 $scope.Type = 'NoLink';
             }
             else {
-                console.log("reached2");
+                xhttp.open('HEAD', $scope.link);
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == this.DONE) {
+                        console.log(this.getResponseHeader("Content-Type"));
+                    }
+                };
+                xhttp.send();
 
                 if ($scope.Link.match(/(?:http|https):\/\/.{2,}/)) {
                     var isgdrive = $scope.Link.match(/\/(?:d|file|folder|folders)\/([-\w]{25,})/)
@@ -201,17 +208,19 @@
 
             return metadata;
         }
-        
-        function getImagePreview (isSubmit) {
+
+        function getImagePreview(isSubmit) {
             if (isSubmit) {
                 if ($scope.Type === "Link") {
                     var base64 = convertImg($scope.newPostHeaderImg)
                     var base64url = base64.substring(22).replace(/\+/g, '-').replace(/\//g, '_');;
                     return base64url;
-                }else {
+                }
+                else {
                     return "";
                 }
-            } else {
+            }
+            else {
                 if ($scope.Type === "Link") {
                     $scope.previewThumbnail = 'https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=' + encodeURIComponent($scope.Link) + '&width=400&height=260&ads=0&maxage=32000000&key=Ca7GOVe9BkGefE_rvwN2Bw';
                 }
@@ -219,11 +228,11 @@
                     $scope.previewThumbnail = "https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + $scope.AttachmentId;
                 }
                 else {
-                   $scope.previewThumbnail = "";
+                    $scope.previewThumbnail = "";
                 }
                 return $scope.previewThumbnail;
             }
-            
+
         };
 
         function convertImg(ImageElement) {
