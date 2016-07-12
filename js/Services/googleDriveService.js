@@ -18,7 +18,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
         return (gapi.client.drive.files.list({
             pageSize: pageSize,
             pageToken: pageToken,
-            q: "trashed = false",//'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false
+            q: "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false" ,//'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false
             fields: 'files(name,id,modifiedTime,appProperties,properties,contentHints/thumbnail,createdTime,description,fullFileExtension,owners(displayName,emailAddress),permissions(displayName,emailAddress)),nextPageToken',//
         }));
     };
