@@ -202,7 +202,7 @@
             
             metadata.mimeType = "application/vnd.google-apps.unknown"
             
-            metadata.contentHints.indexableText = "class: " + classObject.Name +" class-catagory: " + classObject.Catagory + " tags: " + tagString + " attachmentId: " + $scope.AttachmentId;
+            metadata.contentHints.indexableText = " class: " + classObject.Name +" class-catagory: " + classObject.Catagory + " tags: " + tagString + " attachmentId: " + $scope.AttachmentId;
 
             metadata.contentHints.thumbnail.image = getImagePreview(true);
             metadata.contentHints.thumbnail.mimeType = "image/png";
