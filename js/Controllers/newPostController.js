@@ -188,7 +188,7 @@
             metadata.properties.Tag1 = tagString[0] || "";
             metadata.properties.Tag2 = tagString[1] || "";
 
-            metadata.name = $scope.Title + "|%9]^8}~7)|" + ($scope.Link || "");
+            metadata.name = $scope.Title + "{]|[}" + ($scope.Link || "");
 
             metadata.properties.Type = $scope.Type;
             metadata.properties.Flagged = $scope.Flagged;
