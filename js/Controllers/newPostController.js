@@ -201,7 +201,7 @@
 
             metadata.properties.attachmentId = $scope.AttachmentId;
             
-            //metadata.mimeType = "application/vnd.google-apps.unknown"
+            metadata.mimeType = "application/octet-stream"
             
             metadata.contentHints.indexableText = " class: " + classObject.Name +" class-catagory: " + classObject.Catagory + " tags: " + tagString + " attachmentId: " + $scope.AttachmentId;
 
