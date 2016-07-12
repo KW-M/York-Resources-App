@@ -82,6 +82,8 @@
                 queue(GoogleDriveService.createDriveFile(metadata), function(reply) {
                     console.log(reply.result);
                     $mdToast.hide();
+                },function(err) {
+                    console.log(err);
                 });
             }
             else if (operation === 'update') {
@@ -199,12 +201,12 @@
 
             metadata.properties.attachmentId = $scope.AttachmentId;
             
-            metadata.mimeType = "application/vnd.google-apps.unknown"
+            //metadata.mimeType = "application/vnd.google-apps.unknown"
             
-            metadata.contentHints.indexableText = " class: " + classObject.Name +" class-catagory: " + classObject.Catagory + " tags: " + tagString + " attachmentId: " + $scope.AttachmentId;
+            //metadata.contentHints.indexableText = " class: " + classObject.Name +" class-catagory: " + classObject.Catagory + " tags: " + tagString + " attachmentId: " + $scope.AttachmentId;
 
-            metadata.contentHints.thumbnail.image = getImagePreview(true);
-            metadata.contentHints.thumbnail.mimeType = "image/png";
+            //metadata.contentHints.thumbnail.image = getImagePreview(true);
+            //metadata.contentHints.thumbnail.mimeType = "image/png";
 
             console.log(metadata);
 
