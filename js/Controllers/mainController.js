@@ -74,8 +74,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
    }
 
-   $scope.$on('$routeUpdate', function() {
-      console.log("urlUpdated");
+   $scope.$on('$routeChangeSuccess', function() {
       $scope.selectedClass = $location.path();
       $scope.searchTerm = $location.search();
       $scope.selectedId = $location.hash();
