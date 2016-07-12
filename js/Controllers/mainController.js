@@ -231,9 +231,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          console.log(fileList);
          for (var item = 0; item < fileList.result.files.length; item++) {
             fileList.result.files[item] = $scope.formatPost(fileList.result.files[item]);
-            // $scope.$apply(function() {
-            //    scope.allPosts = $scope.allPosts.concat(tempFileArray);
-            // });
+            $scope.$apply(function() {
+                $scope.allPosts = $scope.allPosts.concat(fileList.result.files);
+            });
          }
       });
    }
