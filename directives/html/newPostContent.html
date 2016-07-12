@@ -9,10 +9,9 @@
       </div>
       <img ng-src="{{previewThumbnail}}" crossorigin="anonymous" id="header_image">
       <div class="newPostImgGradient" flex layout="column">
-         hi            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
          <md-input-container md-no-float id="newPostLinkInput">
             <input id="newPostLinkInputTxt" ng-model="Link" style="color:white" placeholder="http://" ng-change="findType()" type="text">
-
+           <md-progress-linear class="link-loading" md-mode="indeterminate"></md-progress-linear>
          </md-input-container>
          <md-menu md-position-mode="target-right target" md-offset="0 -45">
             <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
