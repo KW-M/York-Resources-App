@@ -263,7 +263,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.formatPost = function(unformatedFile) {
       var formatedFile = {}
       var tagsRaw = "[\"" + unformatedFile.properties.tag + unformatedFile.properties.tag2 + "\"]";
-      var tags = JSON.parse(tagsRaw.replace(/,/g,"\",\""));
       var titleAndURL = unformatedFile.split("{]|[}");
       
       formatedFile.Type = unformatedFile.properties.type;
@@ -271,9 +270,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       
       formatedFile.Title = titleAndURL[0];
       formatedFile.Description = unformatedFile.description;
-      formatedFile.CreationDate = unformatedFile.description;
-      formatedFile.UpdateDate
-      formatedFile.Tags = tag1.concat(tag2);
+      formatedFile.CreationDate = Date.parseRFC3339(unformatedFile.createdTime);
+      formatedFile.UpdateDate = Date.parseRFC3339(unformatedFile.modifiedTime);
+      formatedFile.Tags = JSON.parse(tagsRaw.replace(/,/g,"\",\""));;
       formatedFile.Creator = {
          Name:"",
          Email:'',
