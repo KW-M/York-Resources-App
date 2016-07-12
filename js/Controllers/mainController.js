@@ -76,7 +76,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    $scope.$on('$routeUpdate', function() {
-      $scope.sort = $location.search().sort;
+      $scope.selectedClass = $location.path();
       $scope.order = $location.search().order;
       $scope.offset = $location.search().offset;
    });
