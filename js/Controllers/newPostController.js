@@ -75,12 +75,12 @@
         };
 
         $scope.submit = function() {
+            $scope.close();
             var metadata = $scope.compilePostToMetadata();
             if (operation === 'new') {
                 queue(GoogleDriveService.createDriveFile(metadata), function(reply) {
                     console.log(reply.result);
                     $mdToast.hide();
-                    $scope.close();
                 });
             }
             else if (operation === 'update') {
