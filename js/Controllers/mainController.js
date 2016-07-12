@@ -229,15 +229,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       queue(GoogleDriveService.getListOfFlies('', $scope.nextPageToken, 12), function(fileList) {
          $scope.nextPageToken = fileList.result.nextPageToken;
          console.log(fileList);
-         for (item = 0; item  fileList.result.files.length; item++) {
-            console.log(fileList.result.files.length);
-            fileList.result.files[item] = $scope.formatPost(fileList.result.files[item]);
-            if (item = 4){
-               $scope.$apply(function() {
-                  $scope.allPosts = $scope.allPosts.concat(fileList.result.files);
-               });
-            }
+         for (o = 0; o < fileList.result.files.length; o++) { 
+            fileList.result.files[o] = $scope.formatPost(fileList.result.files[o]);
          }
+         $scope.$apply(function() {
+            $scope.allPosts = $scope.allPosts.concat(fileList.result.files);
+         });
       });
    }
 
