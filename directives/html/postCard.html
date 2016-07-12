@@ -1,6 +1,5 @@
 <div class="post-card-header" md-ink-ripple="true" ng-click="::openLink(Post.Link)">
-    {{Post.PreviewImg}}
-    <img ng-src="{{Post.PreviewImg}}" class="post-card-image" ng-hide="::Post.Link == ''">
+    <img ng-src="{{::Post.PreviewImg}}" class="post-card-image" ng-hide="::Post.Link == ''">
     <div class="post-card-image-gradient">
         <p class="post-card-link-text" ng-hide="::Post.Link == ''">
             <i class="zmdi zmdi-globe-alt zmdi-hc-fw"></i> <span> {{::Post.Link}}</span>

@@ -288,7 +288,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       
       formatedFile.Link = titleAndURL[1];
       formatedFile.attachmentId = unformatedFile.properties.attachmentId;
-      formatedFile.PreviewImg = unformatedFile.thumnailLink//"https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + formatedFile.Id;
+      formatedFile.PreviewImg = unformatedFile.thumbnailLink//"https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + formatedFile.Id;
       
       console.log({unformated: unformatedFile, formated: formatedFile})
       
