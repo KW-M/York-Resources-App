@@ -75,9 +75,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    $scope.$on('$routeChangeSuccess', function() {
-      $scope.selectedClass = $location.path();
-      $scope.searchTerm = $location.search();
-      $scope.selectedId = $location.hash();
+      $scope.ClassParam = $location.path();
+      $scope.queryParam = $location.search();
+      $scope.IdParam = $location.hash();
+      $scope.selectedClass =  $scope.ClassParam.match(/\//g,"")
    });
 
    $scope.newPost = function(postObj, operation) {
