@@ -67,7 +67,7 @@ app.directive('getPosts', function() {
             query = query + " and properties has { key='ClassName' and value='" + attrs.class + "' }"
         }
         // if (attrs.creatorEmail !== true) {
-        //     query = query + " and properties has { key='' and value='True' }"
+        //     query = query + " and properties has { key='' and value='" + attrs.creatorEmail + "' }"
         // }
         if (attrs.type !== undefined) {
             query = query + " and properties has { key='Type' and value='" + attrs.type + "' }"

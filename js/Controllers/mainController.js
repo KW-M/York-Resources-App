@@ -4,6 +4,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    var self = this;
    var content_container = document.getElementById("content_container");
    var performantScrollEnabled = false;
+   
    $scope.classList = classes;
    $scope.allPosts = [];
    $scope.Tags = [];
@@ -225,8 +226,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $scope.getFilesInitial("");
    }
 
-   $scope.getFilesInitial = function() {
-      queue(GoogleDriveService.getListOfFlies('', $scope.nextPageToken, 12), function(fileList) {
+   $scope.getFiles = function() {
+      queue(GoogleDriveService.getListOfFlies($scope.queryProperties, $scope.nextPageToken, 12), function(fileList) {
          $scope.nextPageToken = fileList.result.nextPageToken;
          console.log(fileList);
          for (o = 0; o < fileList.result.files.length; o++) { 
@@ -236,28 +237,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             $scope.allPosts = $scope.allPosts.concat(fileList.result.files);
          });
       });
-   }
-
-   $scope.getFiles = function(query) {
-      // if ($scope.allPosts.length >= 12) {
-      //    console.log('getting more files');
-      //    queue(GoogleDriveService.getListOfFlies(query, $scope.nextPageToken, 10), function(fileList) {
-      //       var tempFileArray = [];
-      //       for (var item = 0; item < fileList.result.files.length; item++) {
-      //          var metadata = fileList.result.files[item];
-      //          queue(GoogleDriveService.getFileContent(metadata.id), function(file) {
-      //             tempFileArray = $scope.handleFile(file, metadata, tempFileArray);
-      //             if (tempFileArray.length === 10) {
-      //                console.log(tempFileArray);
-      //                $scope.$apply(function() {
-      //                   $scope.allPosts = $scope.allPosts.concat(tempFileArray);
-      //                });
-      //             }
-      //          });
-      //       }
-      //       $scope.nextPageToken = '';
-      //    });
-      // }
    }
 
    $scope.formatPost = function(unformatedFile) {
