@@ -63,8 +63,14 @@ app.directive('getPosts', function() {
         if (attrs.flagged !== true) {
             query = query + " and properties has { key='Flagged' and value='True' }"
         }
-        if (attrs.showflaged !== true) {
+        if (attrs.class !== undefined) {
+            query = query + " and properties has { key='ClassName' and value='" + attrs.class + "' }"
+        }
+        if (attrs.creatorEmai !== true) {
             query = query + " and properties has { key='Flagged' and value='True' }"
+        }
+        if (attrs.type !== undefined) {
+            query = query + " and properties has { key='Type' and value='" + attrs.type + "' }"
         }
         console.log(query);
     }
