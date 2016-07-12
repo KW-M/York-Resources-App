@@ -24,20 +24,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.GoogleDriveService = GoogleDriveService;
 
-   $scope.signIn = function() { //called by the signIn button click
-      loginProcedure(authorizationService.authorizePopup());
-   };
-
-   $scope.toggleSidebar = function() { //called by the top left toolbar menu button
-      if ($mdMedia('gt-sm')) {
-         $scope.globals.sidenavIsOpen = !$scope.globals.sidenavIsOpen
-         $window.setTimeout(angularGridInstance.posts.refresh, 500);
-      }
-      else {
-         $mdSidenav('sidenav_overlay').toggle();
-      }
-   };
-
    $scope.gotoRoute = function(path, query, id) {
       if (path) {
          $location.path(path);
@@ -50,14 +36,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
    };
 
-   $scope.helpDialog = function() { //called by the top right toolbar help button
-      $mdDialog.show({
-         templateUrl: 'templates/html/help.html',
-         parent: angular.element(document.body),
-         clickOutsideToClose: true,
-         fullscreen: ($mdMedia('xs')),
-      });
-   };
 
    $scope.filterPosts = function(val) {
       val = val.toLowerCase();
@@ -66,7 +44,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       });
    }
    
-   //routing------------
+   //-routing-------------
 
    $scope.pathSelected = function(path) {
       if ($location.path() === path) {
@@ -84,7 +62,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $scope.selectedClass =  $scope.classParam.replace(/\//g,"")
    });
    
-   //creating posts---------
+   //-creating posts---------
 
    $scope.newPost = function(postObj, operation) {
       //called by the bottom right plus/add resource button
@@ -144,6 +122,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          }
       });
    };
+   
 
    $scope.showPicker = function(typ) {
       var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
@@ -214,10 +193,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       };
    };
 
-   $scope.pickerLoaded = function() {
-
-   }
-
    $scope.initiateDrive = function() {
       queue(GoogleDriveService.getUserInfo(), function(userInfo) {
          $scope.myInfo = {
@@ -277,11 +252,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       
       return formatedFile;
    }
-
-   $scope.combineset = function(newSet) {
-
-
-   }
+   
+   //-filtering---------
 
    $scope.sortByLikes = function(thingToSort) {
       thingToSort.sort(function(a, b) {
@@ -294,7 +266,28 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          return b.UpdateDate - a.UpdateDate;
       });
    }
-
+   
+   //-UI actions---------
+   
+   $scope.toggleSidebar = function() { //called by the top left toolbar menu button
+      if ($mdMedia('gt-sm')) {
+         $scope.globals.sidenavIsOpen = !$scope.globals.sidenavIsOpen
+         $window.setTimeout(angularGridInstance.posts.refresh, 500);
+      }
+      else {
+         $mdSidenav('sidenav_overlay').toggle();
+      }
+   };
+   
+   $scope.helpDialog = function() { //called by the top right toolbar help button
+      $mdDialog.show({
+         templateUrl: 'templates/html/help.html',
+         parent: angular.element(document.body),
+         clickOutsideToClose: true,
+         fullscreen: ($mdMedia('xs')),
+      });
+   };
+   
    $scope.confirmDelete = function(ev, content, arrayIndex) {
       // Appending dialog to document.body to cover sidenav in docs app
       var confirm = $mdDialog.confirm()
@@ -323,6 +316,16 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $window.open(link);
       }
    };
+   
+   //-signin------------
+
+   $scope.signIn = function() { //called by the signIn button click
+      loginProcedure(authorizationService.authorizePopup());
+   };
+   
+   $window.loginSilent = function(response) {
+      loginProcedure(authorizationService.authorizeSilent());
+   };
 
    $scope.angularGridOptions = {
       gridWidth: 250,
@@ -333,7 +336,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       gutterSize: 12,
    };
    
-   //event watchers
+   //-event watchers---------
    
    $scope.$watch('searchTxt', $scope.filterPosts);
 
@@ -361,11 +364,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
    });
    
-   //sub functions
-
-   $window.loginSilent = function(response) {
-      loginProcedure(authorizationService.authorizeSilent());
-   };
 }]));
 
 //called by the google client api when it loads (must be outside the controller)
