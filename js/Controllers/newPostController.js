@@ -182,7 +182,6 @@
                 },
             }
             var tagString = JSON.stringify($scope.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || [];
-            console.log(tagString);
             var classObject = JSON.parse($scope.Class);
 
             metadata.properties.Tag1 = tagString[0] || "";
@@ -203,7 +202,7 @@
             
             metadata.mimeType = "application/vnd.google-apps.unknown"
             
-            metadata.contentHints.thumbnail.image = getImagePreview(true);
+            metadata.contentHints.indexableText = "class: " + classObject.Name +" class-catagory: " + classObject.Catagory + " tags: " + tagString + " attachmentId: " + $scope.AttachmentId;
 
             metadata.contentHints.thumbnail.image = getImagePreview(true);
             metadata.contentHints.thumbnail.mimeType = "image/png";
