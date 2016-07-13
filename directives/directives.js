@@ -60,12 +60,14 @@ app.directive('getPosts', function() {
         restrict: 'AE',
         link: function(scope, elem, attrs) {
             scope.$parent.getQueryProperties = function() {
+                console.log("getting query props")
                 scope.$parent.queryProperties.Flagged = attrs.flagged;
                 scope.$parent.queryProperties.Class = attrs.class;
                 scope.$parent.queryProperties.CreatorEmail = attrs.creatorEmail;
                 scope.$parent.queryProperties.Type = attrs.type;
 
-                if (attrs.refresh === true) {
+                if (attrs.refresh === "true") {
+                    console.log("getting query props - loading files")
                     scope.$parent.getFiles();
                 }
             }
