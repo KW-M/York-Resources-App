@@ -329,7 +329,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          };
          console.log($scope.myInfo)
       });
-      $scope.getFilesInitial("");
+      $scope.getFiles("");
    }
 
    $scope.angularGridOptions = {
