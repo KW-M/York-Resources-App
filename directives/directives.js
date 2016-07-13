@@ -75,9 +75,9 @@ app.directive('getPosts', function() {
             query = query + " and properties has { key='Type' and value='" + attrs.type + "' }"
         }
         scope.$parent.queryProperties = query;
-        if (attrs.refresh === true) {
+        //if (attrs.refresh === true) {
             scope.$parent.getFiles();
-        }
+        //}
     }
   };
 });
