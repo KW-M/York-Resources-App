@@ -264,7 +264,19 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.filterPosts = function() {
       $scope.visiblePosts = $scope.visiblePosts.filter(function(post) {
-         return post.Class.Name === $scope.queryProperties
+         var Flagged = post.Flagged === $scope.queryProperties.Flagged || false;
+         if ($scope.queryProperties.Class !== "any" && $scope.queryProperties.Class !== undefined) {
+            var Class = post.Class.Name === $scope.queryProperties.Class;
+         } else {
+            var Class = true;
+         }
+         if ($scope.queryProperties.CreatorEmail !== "any" && $scope.queryProperties.CreatorEmail !== undefined) {
+            var Class = post.Creator.Name === $scope.queryProperties.CreatorEmail;
+         } else {
+            var Class = true;
+         }
+         
+         return post.Flagged === $scope.queryProperties.Flagged && post.Class.Name === $scope.queryProperties.Class && 
       });
    }
 
