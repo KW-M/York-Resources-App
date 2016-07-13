@@ -202,14 +202,14 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    
    $scope.generateQueryString = function(){
         var query = $scope.queryPropertyString;
-        query = query + " and properties has { key='Flagged' and value='" + $scope.queryProperties.Flagged || "" + "' }"
-        if ($scope.queryProperties.Class !== "any" || $scope.queryProperties.Class !== undefined) {
+        query = query + " and properties has { key='Flagged' and value='" + $scope.queryProperties.Flagged + "' }"
+        if ($scope.queryProperties.Class !== "any" && $scope.queryProperties.Class !== undefined) {
             query = query + " and properties has { key='ClassName' and value='" + $scope.queryProperties.Class + "' }"
         }
-        if ($scope.queryProperties.CreatorEmail !== "any" || $scope.queryProperties.CreatorEmail !== undefined) {
+        if ($scope.queryProperties.CreatorEmail !== "any" && $scope.queryProperties.CreatorEmail !== undefined) {
             query = query + " and '" + $scope.queryProperties.CreatorEmail + "' in owners "
         }
-        if ($scope.queryProperties.Type !== "any" || $scope.queryProperties.Type !== undefined) {
+        if ($scope.queryProperties.Type !== "any" && $scope.queryProperties.Type !== undefined) {
             query = query + " and properties has { key='Type' and value='" + $scope.queryProperties.Type + "' }"
         }
         console.log(query);
