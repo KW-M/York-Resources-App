@@ -1,31 +1,31 @@
 // Put any directives you make here and the html template in a file in the directives/html/ folder
 
 // ----Outer UI----
-app.directive('toolbarTop', function () {
+app.directive('toolbarTop', function() {
     return {
         restrict: 'E',
         templateUrl: 'directives/html/toolbarTop.html'
     };
 });
-app.directive('toolbarTopMobile', function () {
+app.directive('toolbarTopMobile', function() {
     return {
         restrict: 'E',
         templateUrl: 'directives/html/toolbarTopMobile.html'
     };
 });
-app.directive('searchBar', function () {
+app.directive('searchBar', function() {
     return {
         restrict: 'E',
         templateUrl: 'directives/html/searchBar.html'
     };
 });
-app.directive('sideNavInsides', function () {
+app.directive('sideNavInsides', function() {
     return {
         restrict: 'A',
         templateUrl: 'directives/html/sideNavInsides.html'
     };
 });
-app.directive('addLowerButton', function () {
+app.directive('addLowerButton', function() {
     return {
         restrict: 'E',
         templateUrl: 'directives/html/addLowerButton.html'
@@ -33,21 +33,21 @@ app.directive('addLowerButton', function () {
 });
 
 // ----Posts layout pieces----
-app.directive('postCard', function () {
+app.directive('postCard', function() {
     return {
         restrict: 'EA',
         templateUrl: 'directives/html/postCard.html'
     };
 });
 
-app.directive('addBarTop', function () {
+app.directive('addBarTop', function() {
     return {
         restrict: 'E',
         templateUrl: 'directives/html/addBarTop.html'
     };
 });
 
-app.directive('newPostContent', function () {
+app.directive('newPostContent', function() {
     return {
         restrict: 'E',
         templateUrl: 'directives/html/newPostContent.html'
@@ -56,35 +56,37 @@ app.directive('newPostContent', function () {
 
 
 app.directive('getPosts', function() {
-  return {
-    restrict: 'AE',
-    link: function(scope, elem, attrs) {
-        scope.$parent.queryProperties.Flagged = attrs.flagged;
-        scope.$parent.queryProperties.Class = attrs.class;
-        scope.$parent.queryProperties.CreatorEmail = attrs.creatorEmail;
-        scope.$parent.queryProperties.Type = attrs.type;
-        
-        if (attrs.refresh === true) {
-            scope.$parent.getFiles();
+    return {
+        restrict: 'AE',
+        link: function(scope, elem, attrs) {
+            scope.$parent.getQueryProperties = function() {
+                scope.$parent.queryProperties.Flagged = attrs.flagged;
+                scope.$parent.queryProperties.Class = attrs.class;
+                scope.$parent.queryProperties.CreatorEmail = attrs.creatorEmail;
+                scope.$parent.queryProperties.Type = attrs.type;
+
+                if (attrs.refresh === true) {
+                    scope.$parent.getFiles();
+                }
+            }
         }
-    }
-  };
+    };
 });
 
 app.directive('filterPosts', function() {
-  return {
-    restrict: 'AE',
-    link: function(scope, elem, attrs) {
-        if (attrs.showflaged !== true) {
-            query = query + ' and not fullText contains \'"Flagged":true\''
+    return {
+        restrict: 'AE',
+        link: function(scope, elem, attrs) {
+            if (attrs.showflaged !== true) {
+                query = query + ' and not fullText contains \'"Flagged":true\''
+            }
+            console.log(query);
         }
-        console.log(query);
-    }
-  };
+    };
 });
 
 // ----New post pieces----
-app.directive('classSelectMenu', function () {
+app.directive('classSelectMenu', function() {
     return {
         restrict: 'E',
         templateUrl: 'directives/html/classSelectMenu.html'

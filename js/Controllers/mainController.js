@@ -63,6 +63,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $scope.queryParam = $location.search();
       $scope.idParam = $location.hash();
       $scope.selectedClass = $scope.classParam.replace(/\//g, "")
+      $scope.getQueryProperties();
+      $scope.getFilterProperties();
    });
 
    //-creating posts---------
