@@ -58,7 +58,7 @@ app.directive('newPostContent', function () {
 app.directive('getPosts', function() {
   return {
     restrict: 'AE',
-    link: function(scope, elem, attrs) {
+    link: function($scope, elem, attrs) {
         var query = "";
         if (attrs.flagged === true) {
             query = query + " and properties has { key='Flagged' and value='true' }"
