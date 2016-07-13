@@ -31,12 +31,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       Class: "any",
       CreatorEmail: "any",
    };
-   $scope.filterProperties = {
-      Flagged: false,
-      Type: "any",
-      Class: "any",
-      CreatorEmail: "any",
-   };
 
    //-routing-------------
 
@@ -268,10 +262,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       return formatedFile;
    }
 
-   $scope.filterPosts = function(val) {
-      val = val.toLowerCase();
-      $scope.visiblePosts = $scope.visiblePosts.filter(function(obj) {
-         return obj.Title.toLowerCase().indexOf(val) != -1;
+   $scope.filterPosts = function() {
+      $scope.visiblePosts = $scope.visiblePosts.filter(function(post) {
+         
       });
    }
 
