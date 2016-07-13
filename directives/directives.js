@@ -59,21 +59,12 @@ app.directive('getPosts', function() {
   return {
     restrict: 'AE',
     link: function(scope, elem, attrs) {
-        var query = "";
-        if (attrs.flagged === true) {
-            query = query + " and properties has { key='Flagged' and value='true' }"
-        } else {
-           query = query + " and properties has { key='Flagged' and value='false' }" 
-        }
-        if (attrs.class !== undefined) {
-            query = query + " and properties has { key='ClassName' and value='" + attrs.class + "' }"
-        }
-        if (attrs.creatorEmail !== undefined) {
-            query = query + " and '" + attrs.creatorEmail + "' in owners"
-        }
-        if (attrs.type !== undefined) {
-            query = query + " and properties has { key='Type' and value='" + attrs.type + "' }"
-        }
+        var queryProperties = scope.$parent.queryProperties;
+        attrs.flagged
+        attrs.class
+        attrs.creatorEmail 
+        attrs.type
+        
         scope.$parent.queryProperties = query;
         if (attrs.refresh === true) {
             scope.$parent.getFiles();

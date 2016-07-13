@@ -24,7 +24,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
    
    $scope.nextPageToken = '';
-   $scope.queryProperty = {
+   $scope.queryPropertyString = '';
    $scope.queryProperties = {
       Flagged: false,
       Type: "any",
@@ -179,7 +179,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.getFiles = function() {
       $scope.tempPosts = []; //clear the temporary posts (for de-duplication with next page token).
-      queue(GoogleDriveService.getListOfFlies($scope.queryProperties, $scope.nextPageToken, 2), function(fileList) {
+      queue(GoogleDriveService.getListOfFlies($scope.generateQueryString(), $scope.nextPageToken, 2), function(fileList) {
          console.log(fileList);
          if (fileList.result.files.length > 0) {
             //format every file:
@@ -201,16 +201,18 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
    
    $scope.generateQueryString = function(){
-         query = query + " and properties has { key='Flagged' and value='"+$scope.queryProperties.flagged+"' }"
-        if ($scope.queryProperties.class !== undefined) {
+        var query = $scope.queryPropertyString;
+        query = query + " and properties has { key='Flagged' and value='" + $scope.queryProperties.flagged + "' }"
+        if ($scope.queryProperties.class !== "any") {
             query = query + " and properties has { key='ClassName' and value='" + $scope.queryProperties.class + "' }"
         }
-        if ($scope.queryProperties.creatorEmail !== undefined) {
-            query = query + " and '" + $scope.queryProperties.creatorEmail + "' in owners"
+        if ($scope.queryProperties.creatorEmail !== "any") {
+            query = query + " and '" + $scope.queryProperties.creatorEmail + "' in owners "
         }
-        if ($scope.queryProperties.type !== undefined) {
+        if ($scope.queryProperties.type !== "any") {
             query = query + " and properties has { key='Type' and value='" + $scope.queryProperties.type + "' }"
         }
+        return query;
    }
 
    $scope.formatPost = function(unformatedFile) {
