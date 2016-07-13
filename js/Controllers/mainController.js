@@ -196,7 +196,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                $scope.tempPosts = fileList.result.files;
             }
             $scope.$apply(function() {
-               $scope.visiblePosts = $scope.allPosts.concat($scope.tempPosts);
+               $scope.filterPosts($scope.allPosts.concat($scope.tempPosts), $scope.visiblePosts);
                console.log({
                   allPosts: $scope.allPosts,
                   tempPosts: $scope.tempPosts,
@@ -223,8 +223,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       return query;
    }
 
-   $scope.filterPosts = function() {
-      $scope.visiblePosts = $scope.visiblePosts.filter(function(post) {
+   $scope.filterPosts = function(inputSet, outputSet) {
          var Flagged = post.Flagged === $scope.queryProperties.Flagged || post.Flagged;
          if ($scope.queryProperties.Class !== "any" && $scope.queryProperties.Class !== undefined) {
             var Class = post.Class.Name === $scope.queryProperties.Class;
@@ -241,6 +240,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          } else {
             var Creator = true;
          }
+      outputSet = inputSet.filter(function(post) {
          return Flagged && Class && Type && Creator;
       });
    }
