@@ -223,6 +223,40 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       return query;
    }
 
+   $scope.filterPosts = function() {
+      $scope.visiblePosts = $scope.visiblePosts.filter(function(post) {
+         var Flagged = post.Flagged === $scope.queryProperties.Flagged || post.Flagged;
+         if ($scope.queryProperties.Class !== "any" && $scope.queryProperties.Class !== undefined) {
+            var Class = post.Class.Name === $scope.queryProperties.Class;
+         } else {
+            var Class = true;
+         }
+         if ($scope.queryProperties.CreatorEmail !== "any" && $scope.queryProperties.CreatorEmail !== undefined) {
+            var Type = post.Type === $scope.queryProperties.Type;
+         } else {
+            var Type = true;
+         }
+         if ($scope.queryProperties.CreatorEmail !== "any" && $scope.queryProperties.CreatorEmail !== undefined) {
+            var Creator = post.Creator.Email === $scope.queryProperties.CreatorEmail;
+         } else {
+            var Creator = true;
+         }
+         return Flagged && Class && Type && Creator;
+      });
+   }
+
+   $scope.sortByLikes = function(thingToSort) {
+      thingToSort.sort(function(a, b) {
+         return b.LikeUsers.length - a.LikeUsers.length;
+      });
+   }
+
+   $scope.sortByDate = function(thingToSort) {
+      thingToSort.sort(function(a, b) {
+         return b.UpdateDate - a.UpdateDate;
+      });
+   }
+   
    $scope.formatPost = function(unformatedFile) {
       var formatedFile = {}
       var tagsRaw = "[\"" + unformatedFile.properties.Tag1 + unformatedFile.properties.Tag2 + "\"]";
@@ -260,36 +294,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       })
 
       return formatedFile;
-   }
-
-   $scope.filterPosts = function() {
-      $scope.visiblePosts = $scope.visiblePosts.filter(function(post) {
-         var Flagged = post.Flagged === $scope.queryProperties.Flagged || false;
-         if ($scope.queryProperties.Class !== "any" && $scope.queryProperties.Class !== undefined) {
-            var Class = post.Class.Name === $scope.queryProperties.Class;
-         } else {
-            var Class = true;
-         }
-         if ($scope.queryProperties.CreatorEmail !== "any" && $scope.queryProperties.CreatorEmail !== undefined) {
-            var Class = post.Creator.Name === $scope.queryProperties.CreatorEmail;
-         } else {
-            var Class = true;
-         }
-         
-         return post.Flagged === $scope.queryProperties.Flagged && post.Class.Name === $scope.queryProperties.Class && 
-      });
-   }
-
-   $scope.sortByLikes = function(thingToSort) {
-      thingToSort.sort(function(a, b) {
-         return b.LikeUsers.length - a.LikeUsers.length;
-      });
-   }
-
-   $scope.sortByDate = function(thingToSort) {
-      thingToSort.sort(function(a, b) {
-         return b.UpdateDate - a.UpdateDate;
-      });
    }
 
    //-UI actions---------
