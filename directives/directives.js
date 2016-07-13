@@ -75,7 +75,7 @@ app.directive('getPosts', function() {
         console.log(query);
         $scope.queryProperties = query
         if (attrs.refresh === true) {
-            $scope.
+            $scope.getFiles()
         }
     }
   };

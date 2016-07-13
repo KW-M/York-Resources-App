@@ -167,7 +167,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    //-loading and filtering posts---------
    
    $scope.getFiles = function() {
-      queue(GoogleDriveService.getListOfFlies($scope.queryProperties, $scope.nextPageToken, 12), function(fileList) {
+      queue(GoogleDriveService.getListOfFlies($scope.queryProperties, $scope.nextPageToken, 2), function(fileList) {
          $scope.nextPageToken = fileList.result.nextPageToken;
          console.log(fileList);
          for (o = 0; o < fileList.result.files.length; o++) { 
