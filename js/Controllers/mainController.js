@@ -366,7 +366,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    function loginProcedure(response) {
       //handles the 'response' promise
-      response.then(function(response) {
+         response.then(function(response) {
             $scope.loginStatus = response;
             GoogleDriveService.initiateAuthLoadDrive($scope.initiateDrive, $scope.pickerLoaded)
          }).catch(function(error) {
