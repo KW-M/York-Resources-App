@@ -62,7 +62,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $scope.idParam = $location.hash();
       $scope.selectedClass = $scope.classParam.replace(/\//g, "")
       if ($scope.firstFiles !== undefined) {// check  if firstFiles have been loaded
-         $scope.getFiles();
+         $window.setTimeout(function(){
+            $scope.getFiles();
+         }, 500);
       }
    });
 
