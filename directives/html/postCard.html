@@ -5,7 +5,7 @@
             <i class="zmdi zmdi-globe-alt zmdi-hc-fw"></i> <span> {{::Post.Link}}</span>
         </p>
         <div class="post-card-metadata-text">
-            <p style="margin: 0 0 2px 0; font-size: 14px; font-weight:700;"> <i class="zmdi zmdi-label zmdi-hc-fw" ng-hide="::Post.Tags === ''"></i><span ng-repeat="Tag in Post.Tags"> {{Tag}},</span></p>
+            <p style="margin: 0 0 2px 0; font-size: 14px; font-weight:700;"> <i class="zmdi zmdi-label zmdi-hc-fw" ng-hide="::Post.Tags === ''"></i><span>{{Post.Tags}}</span></p>
             <i class="zmdi zmdi-calendar zmdi-hc-fw"></i><span style="margin-right:10px"> {{::Post.CreationDate | date : "m/dd/yyyy"}}</span>
             <i class="zmdi zmdi-accounts-alt zmdi-hc-fw"></i> <span> {{::Post.Class.Name}}</span>
         </div>
