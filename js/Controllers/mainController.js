@@ -6,7 +6,13 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    var performantScrollEnabled = false;
 
    $scope.nextPageToken = '';
-   $scope.queryProperties = '';
+   $scope.queryProperties = {
+      
+   };
+   $scope.fProperties = {
+      
+   };
+   
    $scope.allPosts = [];
    $scope.tempPosts = [];
    $scope.searchPosts = [];
@@ -185,9 +191,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                $scope.tempPosts = fileList.result.files;
             }
             $scope.$apply(function() {
-                  $scope.visiblePosts = $scope.allPosts.concat(tempPosts);
+                  $scope.visiblePosts = $scope.allPosts.concat($scope.tempPosts);
             });
-             
          }
       });
    }
@@ -233,7 +238,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.filterPosts = function(val) {
       val = val.toLowerCase();
-      $scope.allPosts = $scope.allPosts.filter(function(obj) {
+      $scope.visiblePosts = $scope.visiblePosts.filter(function(obj) {
          return obj.Title.toLowerCase().indexOf(val) != -1;
       });
    }
@@ -281,7 +286,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          .cancel('Cancel');
       $mdDialog.show(confirm).then(function() {
          //ok
-         $scope.allPosts.splice(arrayIndex, 1);
+         $scope.visiblePosts.splice(arrayIndex, 1);
          $scope.filterPosts($scope.searchTxt);
          //$scope.$apply();
          console.log("deleting" + content.ID);
