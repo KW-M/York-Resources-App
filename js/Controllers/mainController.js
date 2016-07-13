@@ -23,6 +23,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       sidenavIsOpen: true,
    };
 
+   $scope.firstFiles = false;
    $scope.nextPageToken = '';
    $scope.queryPropertyString = '';
    $scope.queryProperties = {
@@ -60,7 +61,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $scope.queryParam = $location.search();
       $scope.idParam = $location.hash();
       $scope.selectedClass = $scope.classParam.replace(/\//g, "")
-      que
+      if ($scope.firstFiles !== undefined) {// check  if firstFiles have been loaded
+         $scope.getFiles()
+      }
    });
 
    //-creating posts---------
@@ -176,6 +179,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    //-loading and filtering posts---------
 
    $scope.getFiles = function() {
+      $scope.firstFiles = true;
       $scope.getQueryProperties();
       console.log("clearing tempPosts...")
       $scope.tempPosts = []; //clear the temporary posts (for de-duplication with next page token).
