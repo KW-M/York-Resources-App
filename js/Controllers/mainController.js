@@ -224,6 +224,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    $scope.filterPosts = function(inputSet, outputSet) {
+      outputSet = inputSet.filter(function(post) {
          var Flagged = post.Flagged === $scope.queryProperties.Flagged || post.Flagged;
          if ($scope.queryProperties.Class !== "any" && $scope.queryProperties.Class !== undefined) {
             var Class = post.Class.Name === $scope.queryProperties.Class;
@@ -240,7 +241,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          } else {
             var Creator = true;
          }
-      outputSet = inputSet.filter(function(post) {
          return Flagged && Class && Type && Creator;
       });
    }
