@@ -189,10 +189,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             }
             //if we haven't reached the end of our search:
             if (fileList.result.nextPageToken !== undefined) {
+               console.log("more posts coming...")
                $scope.nextPageToken = fileList.result.nextPageToken;
                $scope.allPosts = $scope.allPosts.concat(fileList.result.files);
             }
             else {
+             console.log("end of the line posts coming...")
                $scope.tempPosts = fileList.result.files;
             }
             $scope.$apply(function() {
