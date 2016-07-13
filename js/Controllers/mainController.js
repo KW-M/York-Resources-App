@@ -195,7 +195,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             }
             $scope.$apply(function() {
                   $scope.visiblePosts = $scope.allPosts.concat($scope.tempPosts);
-                  console.log(visiblePosts);
+                  console.log($scope.allPosts);
+                  console.log($scope.tempPosts);
+                  console.log($scope.visiblePosts);
             });
          }
       });
