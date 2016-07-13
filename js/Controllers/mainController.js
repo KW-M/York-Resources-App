@@ -179,10 +179,14 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    //-loading and filtering posts---------
 
    $scope.getFiles = function() {
+      console.log("clearing tempPosts...")
       $scope.tempPosts = []; //clear the temporary posts (for de-duplication with next page token).
-      queue(GoogleDriveService.getListOfFlies($scope.generateQueryString(), $scope.nextPageToken, 2), function(fileList) {
-         console.log(fileList);
+      var queryParamString = $scope.generateQueryString()
+      console.log("query params: " + queryParamString)
+      queue(GoogleDriveService.getListOfFlies(queryParamString, $scope.nextPageToken, 2), function(fileList) {
+         console.log({fileList: fileList});
          if (fileList.result.files.length > 0) {
+            console.log("filelist > 0");
             //format every file:
             for (o = 0; o < fileList.result.files.length; o++) {
                fileList.result.files[o] = $scope.formatPost(fileList.result.files[o]);
@@ -194,7 +198,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                $scope.allPosts = $scope.allPosts.concat(fileList.result.files);
             }
             else {
-             console.log("end of the line posts coming...")
+             console.log("end of the line - saving to tempPosts...")
                $scope.tempPosts = fileList.result.files;
             }
             $scope.$apply(function() {
@@ -221,7 +225,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       if ($scope.queryProperties.Type !== "any" && $scope.queryProperties.Type !== undefined) {
          query = query + " and properties has { key='Type' and value='" + $scope.queryProperties.Type + "' }"
       }
-      console.log(query);
       return query;
    }
 
