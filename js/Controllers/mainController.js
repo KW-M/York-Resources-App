@@ -264,7 +264,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.filterPosts = function() {
       $scope.visiblePosts = $scope.visiblePosts.filter(function(post) {
-         
+         return post.Class.Name === $scope.queryProperties
       });
    }
 
