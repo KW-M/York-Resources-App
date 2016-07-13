@@ -4,17 +4,18 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    var self = this;
    var content_container = document.getElementById("content_container");
    var performantScrollEnabled = false;
-   
+
    $scope.nextPageToken = '';
    $scope.queryProperties = '';
    $scope.allPosts = [];
+   $scope.tempPosts = [];
    $scope.searchPosts = [];
    $scope.visiblePosts = [];
 
    $scope.searchTxt = '';
    $scope.searchExtra = [''];
    $scope.searchChips = ["clubo"]
-   
+
    $scope.classList = classes;
    $scope.Tags = [];
    $scope.globals = {
@@ -24,7 +25,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
    $scope.GoogleDriveService = GoogleDriveService;
-   
+
    //-routing-------------
 
    $scope.pathSelected = function(path) {
@@ -35,7 +36,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          return false;
       }
    }
-   
+
    $scope.gotoRoute = function(path, query, id) {
       if (path) {
          $location.path(path);
@@ -52,9 +53,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $scope.classParam = $location.path();
       $scope.queryParam = $location.search();
       $scope.idParam = $location.hash();
-      $scope.selectedClass =  $scope.classParam.replace(/\//g,"")
+      $scope.selectedClass = $scope.classParam.replace(/\//g, "")
    });
-   
+
    //-creating posts---------
 
    $scope.newPost = function(postObj, operation) {
@@ -115,7 +116,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          }
       });
    };
-   
+
    $scope.pickerLoaded = function() {
 
    }
@@ -164,20 +165,25 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
    }
 
-   
+
    //-loading and filtering posts---------
-   
+
    $scope.getFiles = function() {
-      console.log($scope.queryProperties);
       queue(GoogleDriveService.getListOfFlies($scope.queryProperties, $scope.nextPageToken, 2), function(fileList) {
-         $scope.nextPageToken = fileList.result.nextPageToken;
-         console.log(fileList);
-         for (o = 0; o < fileList.result.files.length; o++) { 
-            fileList.result.files[o] = $scope.formatPost(fileList.result.files[o]);
+         if (fileList.result.files.length > 0) {
+            console.log(fileList);
+            for (o = 0; o < fileList.result.files.length; o++) {
+               fileList.result.files[o] = $scope.formatPost(fileList.result.files[o]);
+            }
+            if (fileList.result.nextPageToken !== undefined) {
+               $scope.nextPageToken = fileList.result.nextPageToken;
+               $scope.$apply(function() {
+                  $scope.allPosts = $scope.allPosts.concat(fileList.result.files);
+               });
+            } else {
+               
+            }
          }
-         $scope.$apply(function() {
-            $scope.allPosts = $scope.allPosts.concat(fileList.result.files);
-         });
       });
    }
 
@@ -185,16 +191,16 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       var formatedFile = {}
       var tagsRaw = "[\"" + unformatedFile.properties.Tag1 + unformatedFile.properties.Tag2 + "\"]";
       var titleAndURL = unformatedFile.name.split("{]|[}");
-      
+
       formatedFile.Type = unformatedFile.properties.Type;
       formatedFile.Flagged = unformatedFile.properties.Flagged;
       formatedFile.Id = unformatedFile.id;
-      
+
       formatedFile.Title = titleAndURL[0];
       formatedFile.Description = unformatedFile.description;
       formatedFile.CreationDate = unformatedFile.createdTime //Date.prototype.parseRFC3339(unformatedFile.createdTime);
       formatedFile.UpdateDate = unformatedFile.modifiedTime //Date.prototype.parseRFC3339(unformatedFile.modifiedTime);
-      formatedFile.Tags = JSON.parse(tagsRaw.replace(/,/g,"\",\""));;
+      formatedFile.Tags = JSON.parse(tagsRaw.replace(/,/g, "\",\""));;
       formatedFile.Creator = {
          Name: unformatedFile.owners[0].displayName,
          Me: unformatedFile.owners[0].me,
@@ -206,16 +212,19 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          Catagory: unformatedFile.properties.ClassCatagory,
          Color: unformatedFile.properties.ClassColor,
       }
-      
+
       formatedFile.Link = titleAndURL[1];
       formatedFile.attachmentId = unformatedFile.properties.attachmentId;
-      formatedFile.PreviewImg = unformatedFile.thumbnailLink//"https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + formatedFile.Id;
-      
-      console.log({unformated: unformatedFile, formated: formatedFile})
-      
+      formatedFile.PreviewImg = unformatedFile.thumbnailLink //"https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + formatedFile.Id;
+
+      console.log({
+         unformated: unformatedFile,
+         formated: formatedFile
+      })
+
       return formatedFile;
    }
-   
+
    $scope.filterPosts = function(val) {
       val = val.toLowerCase();
       $scope.allPosts = $scope.allPosts.filter(function(obj) {
@@ -234,9 +243,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          return b.UpdateDate - a.UpdateDate;
       });
    }
-   
+
    //-UI actions---------
-   
+
    $scope.toggleSidebar = function() { //called by the top left toolbar menu button
       if ($mdMedia('gt-sm')) {
          $scope.globals.sidenavIsOpen = !$scope.globals.sidenavIsOpen
@@ -246,7 +255,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $mdSidenav('sidenav_overlay').toggle();
       }
    };
-   
+
    $scope.openHelpDialog = function() { //called by the top right toolbar help button
       $mdDialog.show({
          templateUrl: 'templates/html/help.html',
@@ -255,7 +264,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          fullscreen: ($mdMedia('xs')),
       });
    };
-   
+
    $scope.confirmDelete = function(ev, content, arrayIndex) {
       // Appending dialog to document.body to cover sidenav in docs app
       var confirm = $mdDialog.confirm()
@@ -284,17 +293,17 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $window.open(link);
       }
    };
-   
+
    //-signin & initiation------------
 
    $scope.signIn = function() { //called by the signIn button click
       loginProcedure(authorizationService.authorizePopup());
    };
-   
+
    $window.loginSilent = function(response) {
       loginProcedure(authorizationService.authorizeSilent());
    };
-   
+
    function loginProcedure(response) {
       //handles the 'response' promise
       response.then(function(response) {
@@ -315,8 +324,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       function showLoginButton() {
          angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
          setTimeout(function() {
-             angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
-         },500);
+            angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
+         }, 500);
       };
    };
 
@@ -340,10 +349,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       performantScroll: false,
       gutterSize: 12,
    };
-   
-   
+
+
    //-event watchers---------
-   
+
    $scope.$watch('searchTxt', $scope.filterPosts);
 
    content_container.onscroll = function(event) {
@@ -369,7 +378,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          performantScrollEnabled = false;
       }
    });
-   
+
 }]));
 
 //called by the google client api when it loads (must be outside the controller)
