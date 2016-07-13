@@ -65,6 +65,7 @@ app.directive('getPosts', function() {
         } else {
            query = query + " and properties has { key='Flagged' and value='false' }" 
         }
+        console.log(attrs.class);
         if (attrs.class !== undefined) {
             query = query + " and properties has { key='ClassName' and value='" + attrs.class + "' }"
         }
