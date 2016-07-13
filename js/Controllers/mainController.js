@@ -5,7 +5,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.GoogleDriveService = GoogleDriveService;
    var content_container = document.getElementById("content_container");
    var performantScrollEnabled = false;
-   
+
    $scope.allPosts = [];
    $scope.tempPosts = [];
    $scope.searchPosts = [];
@@ -13,7 +13,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.searchTxt = '';
    $scope.searchExtra = [''];
-   $scope.searchChips = ["clubo"]
+   $scope.searchChips = ["Class: "]
 
    $scope.classList = classes;
    $scope.Tags = [];
@@ -22,7 +22,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       FABisHidden: true,
       sidenavIsOpen: true,
    };
-   
+
    $scope.nextPageToken = '';
    $scope.queryPropertyString = '';
    $scope.queryProperties = {
@@ -32,7 +32,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       CreatorEmail: "any",
    };
    $scope.filterProperties = {
-      
+      Flagged: false,
+      Type: "any",
+      Class: "any",
+      CreatorEmail: "any",
    };
 
    //-routing-------------
@@ -63,8 +66,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $scope.queryParam = $location.search();
       $scope.idParam = $location.hash();
       $scope.selectedClass = $scope.classParam.replace(/\//g, "")
-      $scope.getQueryProperties();
-      $scope.getFilterProperties();
+      if ($scope.myInfo !== undefined) {// check  if almost everything is loaded
+         $scope.getQueryProperties();
+         //$scope.getFilterProperties();
+      }
    });
 
    //-creating posts---------
@@ -192,33 +197,34 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             if (fileList.result.nextPageToken !== undefined) {
                $scope.nextPageToken = fileList.result.nextPageToken;
                $scope.allPosts = $scope.allPosts.concat(fileList.result.files);
-            } else {
+            }
+            else {
                $scope.tempPosts = fileList.result.files;
             }
             $scope.$apply(function() {
-                  $scope.visiblePosts = $scope.allPosts.concat($scope.tempPosts);
-                  console.log($scope.allPosts);
-                  console.log($scope.tempPosts);
-                  console.log($scope.visiblePosts);
+               $scope.visiblePosts = $scope.allPosts.concat($scope.tempPosts);
+               console.log($scope.allPosts);
+               console.log($scope.tempPosts);
+               console.log($scope.visiblePosts);
             });
          }
       });
    }
-   
-   $scope.generateQueryString = function(){
-        var query = $scope.queryPropertyString;
-        query = query + " and properties has { key='Flagged' and value='" + $scope.queryProperties.Flagged + "' }"
-        if ($scope.queryProperties.Class !== "any" && $scope.queryProperties.Class !== undefined) {
-            query = query + " and properties has { key='ClassName' and value='" + $scope.queryProperties.Class + "' }"
-        }
-        if ($scope.queryProperties.CreatorEmail !== "any" && $scope.queryProperties.CreatorEmail !== undefined) {
-            query = query + " and '" + $scope.queryProperties.CreatorEmail + "' in owners "
-        }
-        if ($scope.queryProperties.Type !== "any" && $scope.queryProperties.Type !== undefined) {
-            query = query + " and properties has { key='Type' and value='" + $scope.queryProperties.Type + "' }"
-        }
-        console.log(query);
-        return query;
+
+   $scope.generateQueryString = function() {
+      var query = $scope.queryPropertyString;
+      query = query + " and properties has { key='Flagged' and value='" + $scope.queryProperties.Flagged + "' }"
+      if ($scope.queryProperties.Class !== "any" && $scope.queryProperties.Class !== undefined) {
+         query = query + " and properties has { key='ClassName' and value='" + $scope.queryProperties.Class + "' }"
+      }
+      if ($scope.queryProperties.CreatorEmail !== "any" && $scope.queryProperties.CreatorEmail !== undefined) {
+         query = query + " and '" + $scope.queryProperties.CreatorEmail + "' in owners "
+      }
+      if ($scope.queryProperties.Type !== "any" && $scope.queryProperties.Type !== undefined) {
+         query = query + " and properties has { key='Type' and value='" + $scope.queryProperties.Type + "' }"
+      }
+      console.log(query);
+      return query;
    }
 
    $scope.formatPost = function(unformatedFile) {
