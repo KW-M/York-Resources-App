@@ -202,15 +202,15 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    
    $scope.generateQueryString = function(){
         var query = $scope.queryPropertyString;
-        query = query + " and properties has { key='Flagged' and value='" + $scope.queryProperties.flagged + "' }"
-        if ($scope.queryProperties.class !== "any") {
-            query = query + " and properties has { key='ClassName' and value='" + $scope.queryProperties.class + "' }"
+        query = query + " and properties has { key='Flagged' and value='" + $scope.queryProperties.Flagged || "" + "' }"
+        if ($scope.queryProperties.Class !== "any" || $scope.queryProperties.Class !== undefined) {
+            query = query + " and properties has { key='ClassName' and value='" + $scope.queryProperties.Class + "' }"
         }
-        if ($scope.queryProperties.creatorEmail !== "any") {
-            query = query + " and '" + $scope.queryProperties.creatorEmail + "' in owners "
+        if ($scope.queryProperties.CreatorEmail !== "any" || $scope.queryProperties.CreatorEmail !== undefined) {
+            query = query + " and '" + $scope.queryProperties.CreatorEmail + "' in owners "
         }
-        if ($scope.queryProperties.type !== "any") {
-            query = query + " and properties has { key='Type' and value='" + $scope.queryProperties.type + "' }"
+        if ($scope.queryProperties.Type !== "any" || $scope.queryProperties.Type !== undefined) {
+            query = query + " and properties has { key='Type' and value='" + $scope.queryProperties.Type + "' }"
         }
         console.log(query);
         return query;

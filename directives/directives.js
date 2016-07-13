@@ -61,7 +61,7 @@ app.directive('getPosts', function() {
     link: function(scope, elem, attrs) {
         scope.$parent.queryProperties.Flagged = attrs.flagged;
         scope.$parent.queryProperties.Class = attrs.class;
-        scope.$parent.queryProperties.creatorEmail = attrs.creatorEmail;
+        scope.$parent.queryProperties.CreatorEmail = attrs.creatorEmail;
         scope.$parent.queryProperties.Type = attrs.type;
         
         if (attrs.refresh === true) {
