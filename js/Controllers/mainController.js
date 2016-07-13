@@ -24,10 +24,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
    
    $scope.nextPageToken = '';
+   $scope.queryProperty = {
    $scope.queryProperties = {
       Flagged: false,
       Type: "any",
-      Class: "any"
+      Class: "any",
+      CreatorEmail: "any",
    };
    $scope.filterProperties = {
       
@@ -196,6 +198,19 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             });
          }
       });
+   }
+   
+   $scope.generateQueryString = function(){
+         query = query + " and properties has { key='Flagged' and value='"+$scope.queryProperties.flagged+"' }"
+        if ($scope.queryProperties.class !== undefined) {
+            query = query + " and properties has { key='ClassName' and value='" + $scope.queryProperties.class + "' }"
+        }
+        if ($scope.queryProperties.creatorEmail !== undefined) {
+            query = query + " and '" + $scope.queryProperties.creatorEmail + "' in owners"
+        }
+        if ($scope.queryProperties.type !== undefined) {
+            query = query + " and properties has { key='Type' and value='" + $scope.queryProperties.type + "' }"
+        }
    }
 
    $scope.formatPost = function(unformatedFile) {
