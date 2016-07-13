@@ -58,7 +58,8 @@ app.directive('newPostContent', function () {
 app.directive('getPosts', function() {
   return {
     restrict: 'AE',
-    link: function($scope, elem, attrs) {
+    scope: $scope,
+    link: function(scope, elem, attrs) {
         var query = "";
         if (attrs.flagged === true) {
             query = query + " and properties has { key='Flagged' and value='true' }"
@@ -74,10 +75,9 @@ app.directive('getPosts', function() {
         if (attrs.type !== undefined) {
             query = query + " and properties has { key='Type' and value='" + attrs.type + "' }"
         }
-        console.log(query);
-        $scope.queryProperties = query;
+        scope.queryProperties = query;
         if (attrs.refresh === true) {
-            $scope.getFiles();
+            scope.getFiles();
         }
     }
   };

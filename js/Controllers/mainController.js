@@ -238,6 +238,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    //-UI actions---------
    
    $scope.toggleSidebar = function() { //called by the top left toolbar menu button
+   console.log( $scope.queryProperties);
       if ($mdMedia('gt-sm')) {
          $scope.globals.sidenavIsOpen = !$scope.globals.sidenavIsOpen
          $window.setTimeout(angularGridInstance.posts.refresh, 500);
