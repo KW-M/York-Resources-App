@@ -60,15 +60,17 @@ app.directive('getPosts', function() {
     restrict: 'AE',
     link: function(scope, elem, attrs) {
         var query = "";
-        if (attrs.flagged !== true) {
-            query = query + " and properties has { key='Flagged' and value='True' }"
+        if (attrs.flagged === true) {
+            query = query + " and properties has { key='Flagged' and value='true' }"
+        } else {
+           query = query + " and properties has { key='Flagged' and value='false' }" 
         }
         if (attrs.class !== undefined) {
             query = query + " and properties has { key='ClassName' and value='" + attrs.class + "' }"
         }
-        // if (attrs.creatorEmail !== true) {
-        //     query = query + " and properties has { key='' and value='" + attrs.creatorEmail + "' }"
-        // }
+        if (attrs.creatorEmail !== undefined) {
+            query = query + " and " + attrs.creatorEmail + " in owners"
+        }
         if (attrs.type !== undefined) {
             query = query + " and properties has { key='Type' and value='" + attrs.type + "' }"
         }

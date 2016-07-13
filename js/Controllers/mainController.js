@@ -6,6 +6,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    var performantScrollEnabled = false;
    
    $scope.nextPageToken = '';
+   $scope.queryProperties = '';
    $scope.allPosts = [];
    $scope.searchPosts = [];
    $scope.visiblePosts = [];
@@ -167,6 +168,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    //-loading and filtering posts---------
    
    $scope.getFiles = function() {
+      console.log($scope.queryProperties);
       queue(GoogleDriveService.getListOfFlies($scope.queryProperties, $scope.nextPageToken, 2), function(fileList) {
          $scope.nextPageToken = fileList.result.nextPageToken;
          console.log(fileList);
