@@ -59,13 +59,11 @@ app.directive('getPosts', function() {
   return {
     restrict: 'AE',
     link: function(scope, elem, attrs) {
-        var queryProperties = scope.$parent.queryProperties;
-        attrs.flagged
-        attrs.class
-        attrs.creatorEmail 
-        attrs.type
+        scope.$parent.queryProperties.Flagged = attrs.flagged;
+        scope.$parent.queryProperties.Class = attrs.class;
+        scope.$parent.queryProperties.creatorEmail = attrs.creatorEmail;
+        scope.$parent.queryProperties.Type = attrs.type;
         
-        scope.$parent.queryProperties = query;
         if (attrs.refresh === true) {
             scope.$parent.getFiles();
         }
