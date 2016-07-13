@@ -170,18 +170,22 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.getFiles = function() {
       queue(GoogleDriveService.getListOfFlies($scope.queryProperties, $scope.nextPageToken, 2), function(fileList) {
+         console.log(fileList);
          if (fileList.result.files.length > 0) {
-            console.log(fileList);
+            //format every file:
             for (o = 0; o < fileList.result.files.length; o++) {
                fileList.result.files[o] = $scope.formatPost(fileList.result.files[o]);
             }
+            //if we haven't reached the end of our search:
             if (fileList.result.nextPageToken !== undefined) {
                $scope.nextPageToken = fileList.result.nextPageToken;
                $scope.$apply(function() {
                   $scope.allPosts = $scope.allPosts.concat(fileList.result.files);
                });
             } else {
-               
+               $scope.$apply(function() {
+                  $scope.tempPosts = fileList.result.files;
+               });
             }
          }
       });
@@ -200,7 +204,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       formatedFile.Description = unformatedFile.description;
       formatedFile.CreationDate = unformatedFile.createdTime //Date.prototype.parseRFC3339(unformatedFile.createdTime);
       formatedFile.UpdateDate = unformatedFile.modifiedTime //Date.prototype.parseRFC3339(unformatedFile.modifiedTime);
-      formatedFile.Tags = JSON.parse(tagsRaw.replace(/,/g, "\",\""));;
+      formatedFile.Tags = JSON.parse(tagsRaw.replace(/,/g, "\",\""));
+      formatedFile.TagString = unformatedFile.properties.Tag1 + unformatedFile.properties.Tag2;
       formatedFile.Creator = {
          Name: unformatedFile.owners[0].displayName,
          Me: unformatedFile.owners[0].me,
