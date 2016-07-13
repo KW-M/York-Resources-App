@@ -68,7 +68,7 @@ app.directive('getPosts', function() {
 
                 if (attrs.refresh === "true") {
                     console.log("getting query props - loading files")
-                    scope.$parent.getFiles();
+                    //scope.$parent.getFiles();
                 }
             }
         }

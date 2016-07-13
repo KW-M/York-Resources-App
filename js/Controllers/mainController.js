@@ -61,7 +61,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $scope.idParam = $location.hash();
       $scope.selectedClass = $scope.classParam.replace(/\//g, "")
       if ($scope.myInfo !== undefined) {// check  if almost everything is loaded
-         $scope.getQueryProperties();
+        // $scope.getQueryProperties();
          //$scope.getFilterProperties();
       }
    });
@@ -182,7 +182,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       console.log("clearing tempPosts...")
       $scope.tempPosts = []; //clear the temporary posts (for de-duplication with next page token).
       var queryParamString = $scope.generateQueryString()
-      console.log("query params: " + queryParamString)
+      console.log("query params: " + queryParamString);
       queue(GoogleDriveService.getListOfFlies(queryParamString, $scope.nextPageToken, 2), function(fileList) {
          console.log({fileList: fileList});
          if (fileList.result.files.length > 0) {
@@ -209,11 +209,13 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                   visiblePosts: $scope.visiblePosts,
                });
             });
+            console.log("-----------------------");
          }
       });
    }
 
    $scope.generateQueryString = function() {
+      $scope.getQueryProperties();
       var query = $scope.queryPropertyString;
       query = query + " and properties has { key='Flagged' and value='" + $scope.queryProperties.Flagged + "' }"
       if ($scope.queryProperties.Class !== "any" && $scope.queryProperties.Class !== undefined) {
