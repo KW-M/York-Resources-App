@@ -15,10 +15,11 @@ app.service('GoogleDriveService', ['$q', function($q) {
     };
 
     this.getListOfFlies = function(query, pageToken, pageSize) {
+        var query = query || "";
         return (gapi.client.drive.files.list({
             pageSize: pageSize,
             pageToken: pageToken,
-            q: "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false" ,//'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false
+            q: "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false" + query,
             fields: 'files(name,id,modifiedTime,appProperties,properties,iconLink,thumbnailLink,createdTime,description,fullFileExtension,owners(displayName,emailAddress),permissions(displayName,emailAddress)),nextPageToken',//
         }));
     };
