@@ -69,15 +69,15 @@ app.directive('getPosts', function() {
             query = query + " and properties has { key='ClassName' and value='" + attrs.class + "' }"
         }
         if (attrs.creatorEmail !== undefined) {
-            query = query + " and " + attrs.creatorEmail + " in owners"
+            query = query + " and '" + attrs.creatorEmail + "' in owners"
         }
         if (attrs.type !== undefined) {
             query = query + " and properties has { key='Type' and value='" + attrs.type + "' }"
         }
         console.log(query);
-        $scope.queryProperties = query
+        $scope.queryProperties = query;
         if (attrs.refresh === true) {
-            $scope.getFiles()
+            $scope.getFiles();
         }
     }
   };
