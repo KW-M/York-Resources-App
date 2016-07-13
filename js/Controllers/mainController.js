@@ -2,16 +2,9 @@
 var dependancies = ['$scope', '$mdDialog', '$window', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', '$routeParams', 'angularGridInstance']
 app.controller('ApplicationController', dependancies.concat([function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, $routeParams, angularGridInstance) {
    var self = this;
+   $scope.GoogleDriveService = GoogleDriveService;
    var content_container = document.getElementById("content_container");
    var performantScrollEnabled = false;
-
-   $scope.nextPageToken = '';
-   $scope.queryProperties = {
-      
-   };
-   $scope.fProperties = {
-      
-   };
    
    $scope.allPosts = [];
    $scope.tempPosts = [];
@@ -29,8 +22,16 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       FABisHidden: true,
       sidenavIsOpen: true,
    };
-
-   $scope.GoogleDriveService = GoogleDriveService;
+   
+   $scope.nextPageToken = '';
+   $scope.queryProperties = {
+      Flagged: false,
+      Type: "any",
+      Class: "any"
+   };
+   $scope.filterProperties = {
+      
+   };
 
    //-routing-------------
 
