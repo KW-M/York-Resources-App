@@ -180,14 +180,14 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             //if we haven't reached the end of our search:
             if (fileList.result.nextPageToken !== undefined) {
                $scope.nextPageToken = fileList.result.nextPageToken;
-               $scope.$apply(function() {
-                  $scope.allPosts = $scope.allPosts.concat(fileList.result.files);
-               });
+               $scope.allPosts = $scope.allPosts.concat(fileList.result.files);
             } else {
-               $scope.$apply(function() {
-                  $scope.tempPosts = fileList.result.files;
-               });
+               $scope.tempPosts = fileList.result.files;
             }
+            $scope.$apply(function() {
+                  $scope.visiblePosts = $scope.allPosts.concat(tempPosts);
+            });
+             
          }
       });
    }
