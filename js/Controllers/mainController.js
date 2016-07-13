@@ -60,10 +60,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $scope.queryParam = $location.search();
       $scope.idParam = $location.hash();
       $scope.selectedClass = $scope.classParam.replace(/\//g, "")
-      if ($scope.myInfo !== undefined) {// check  if almost everything is loaded
-        // $scope.getQueryProperties();
-         //$scope.getFilterProperties();
-      }
+      que
    });
 
    //-creating posts---------
@@ -179,6 +176,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    //-loading and filtering posts---------
 
    $scope.getFiles = function() {
+      $scope.getQueryProperties();
       console.log("clearing tempPosts...")
       $scope.tempPosts = []; //clear the temporary posts (for de-duplication with next page token).
       var queryParamString = $scope.generateQueryString()
@@ -215,9 +213,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    $scope.generateQueryString = function() {
-      $scope.getQueryProperties();
-      var query = $scope.queryPropertyString;
-      query = query + " and properties has { key='Flagged' and value='" + $scope.queryProperties.Flagged + "' }"
+      var query = '';
+         query = query + " and properties has { key='Flagged' and value='" + $scope.queryProperties.Flagged + "' }"
       if ($scope.queryProperties.Class !== "any" && $scope.queryProperties.Class !== undefined) {
          query = query + " and properties has { key='ClassName' and value='" + $scope.queryProperties.Class + "' }"
       }

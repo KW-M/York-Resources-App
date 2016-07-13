@@ -65,11 +65,6 @@ app.directive('getPosts', function() {
                 scope.$parent.queryProperties.Class = attrs.class;
                 scope.$parent.queryProperties.CreatorEmail = attrs.creatorEmail;
                 scope.$parent.queryProperties.Type = attrs.type;
-
-                if (attrs.refresh === "true") {
-                    console.log("getting query props - loading files")
-                    //scope.$parent.getFiles();
-                }
             }
         }
     };
