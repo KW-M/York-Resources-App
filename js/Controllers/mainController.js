@@ -169,6 +169,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    //-loading and filtering posts---------
 
    $scope.getFiles = function() {
+      $scope.tempPosts = []; //clear the temporary posts (for de-duplication with next page token).
       queue(GoogleDriveService.getListOfFlies($scope.queryProperties, $scope.nextPageToken, 2), function(fileList) {
          console.log(fileList);
          if (fileList.result.files.length > 0) {
