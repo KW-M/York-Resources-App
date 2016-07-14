@@ -188,9 +188,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       var queryParamString = $scope.generateQueryString()
       console.log("query params: " + queryParamString);
       queue(GoogleDriveService.getListOfFlies(queryParamString, $scope.nextPageToken, 2), function(fileList) {
-         console.log({fileList: fileList});
+         console.log(fileList);
          if (fileList.result.files.length > 0) {
-            console.log("filelist > 0");
             //format every file:
             for (o = 0; o < fileList.result.files.length; o++) {
                fileList.result.files[o] = $scope.formatPost(fileList.result.files[o]);
@@ -206,7 +205,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                $scope.tempPosts = fileList.result.files;
             }
             $scope.$apply(function() {
-               $scope.filterPosts($scope.allPosts.concat($scope.tempPosts), $scope.visiblePosts);
+               $scope.visiblePosts = $scope.allPosts.concat($scope.tempPosts)
+               //$scope.filterPosts($scope.allPosts.concat($scope.tempPosts), $scope.visiblePosts);
                console.log({
                   allPosts: $scope.allPosts,
                   tempPosts: $scope.tempPosts,
@@ -399,7 +399,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
          };
          console.log($scope.myInfo);
-         //$scope.getFiles("");
+         $scope.getFiles("");
       });
    }
 
