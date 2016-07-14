@@ -213,6 +213,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                   visiblePosts: $scope.visiblePosts,
                });
             });
+            $scope.$apply();
             console.log("-----------------------");
          }
       });
