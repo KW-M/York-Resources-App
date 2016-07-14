@@ -416,12 +416,13 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    //-event watchers---------
 
-   $scope.$watch('searchTxt', $scope.filterPosts);
+   //$scope.$watch('searchTxt', $scope.filterPosts);
 
    content_container.onscroll = function(event) {
       //called whenever the content_container scrolls
-      if (performantScrollEnabled === false && $scope.angularGridOptions.performantScroll = false) {
+      if (performantScrollEnabled === false && $scope.angularGridOptions.performantScroll === false) {
          $scope.angularGridOptions.performantScroll = true;
+         console.log("scrolling");
          performantScrollEnabled = true;
       }
       var yScroll = content_container.scrollTop;
@@ -436,7 +437,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
    window.addEventListener("resize", function() {
-      if (performantScrollEnabled === true && $scope.angularGridOptions.performantScroll = true) {
+      if (performantScrollEnabled === true && $scope.angularGridOptions.performantScroll === true) {
+         console.log("resiszeing");
          $scope.angularGridOptions.performantScroll = false;
          performantScrollEnabled = false;
       }
