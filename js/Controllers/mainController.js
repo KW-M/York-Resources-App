@@ -420,7 +420,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    content_container.onscroll = function(event) {
       //called whenever the content_container scrolls
-      if (performantScrollEnabled === false) {
+      if (performantScrollEnabled === false && $scope.angularGridOptions.performantScroll = false) {
          $scope.angularGridOptions.performantScroll = true;
          performantScrollEnabled = true;
       }
@@ -436,7 +436,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
    window.addEventListener("resize", function() {
-      if (performantScrollEnabled === true && $scope.angularGridOptions.performantScroll = false) {
+      if (performantScrollEnabled === true && $scope.angularGridOptions.performantScroll = true) {
          $scope.angularGridOptions.performantScroll = false;
          performantScrollEnabled = false;
       }
