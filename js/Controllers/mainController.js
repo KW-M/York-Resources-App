@@ -436,7 +436,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
    window.addEventListener("resize", function() {
-      if (performantScrollEnabled === true) {
+      if (performantScrollEnabled === true && $scope.angularGridOptions.performantScroll = false) {
          $scope.angularGridOptions.performantScroll = false;
          performantScrollEnabled = false;
       }
