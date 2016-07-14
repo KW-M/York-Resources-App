@@ -61,7 +61,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $scope.queryParam = $location.search();
       $scope.idParam = $location.hash();
       $scope.selectedClass = $scope.classParam.replace(/\//g, "")
-      if ($scope.firstFiles !== undefined) {// check  if firstFiles have been loaded
+      if ($scope.firstFiles == true) {// check  if firstFiles have been loaded
          $window.setTimeout(function(){
             $scope.getFiles();
          }, 100);
@@ -399,18 +399,18 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
          };
          console.log($scope.myInfo);
-         $scope.getFiles("");
+         //$scope.getFiles("");
       });
    }
 
-   $scope.angularGridOptions = {
-      gridWidth: 250,
-      infiniteScroll: $scope.getFiles,
-      scrollContainer: '#content_container',
-      pageSize: 1.5,
-      performantScroll: false,
-      gutterSize: 12,
-   };
+   // $scope.angularGridOptions = {
+   //    gridWidth: 250,
+   //    infiniteScroll: $scope.getFiles,
+   //    scrollContainer: '#content_container',
+   //    pageSize: 1.5,
+   //    performantScroll: false,
+   //    gutterSize: 12,
+   // };
 
 
    //-event watchers---------
