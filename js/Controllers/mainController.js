@@ -64,7 +64,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       if ($scope.firstFiles !== undefined) {// check  if firstFiles have been loaded
          $window.setTimeout(function(){
             $scope.getFiles();
-         }, 500);
+         }, 100);
       }
    });
 
@@ -398,9 +398,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             "Email": userInfo.result.user.emailAddress,
             "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
          };
-         console.log($scope.myInfo)
+         console.log($scope.myInfo);
+         $scope.getFiles("");
       });
-      $scope.getFiles("");
    }
 
    $scope.angularGridOptions = {
