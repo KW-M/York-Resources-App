@@ -339,9 +339,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $mdDialog.show(confirm).then(function() {
          //ok
          $scope.visiblePosts.splice(arrayIndex, 1);
-         console.log(content.i);
          GoogleDriveService.deleteDriveFile(content.Id).then(function() {
-            console.log("deleted" + content.ID);
+            console.log("deleted" + content.Id);
          })
       }, function() {
          //cancel
