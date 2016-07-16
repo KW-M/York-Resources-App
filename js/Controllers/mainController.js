@@ -8,6 +8,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.allPosts = [];
    var deDuplicationIndex = {};
+   var classSelectionIndex = {};
    $scope.searchPosts = [];
    $scope.visiblePosts = [];
 
@@ -186,10 +187,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.getFiles = function() {
       $scope.firstFiles = true;
       $scope.getQueryProperties();
-      console.log("clearing tempPosts...")
-      $scope.tempPosts = []; //clear the temporary posts (for de-duplication with next page token).
       var queryParamString = $scope.generateQueryString();
       console.log("query params:" + queryParamString);
+      var nextPageToken = "";
+      if ($scope.previouslySelectedClass !== $scope.selectedClass) {
+      }
       queue(GoogleDriveService.getListOfFlies(queryParamString, $scope.nextPageToken, 2), function(fileList) {
          console.log(fileList);
          if (fileList.result.files.length > 0) {
@@ -203,13 +205,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             }
             //if we haven't reached the end of our search:
             if (fileList.result.nextPageToken !== undefined) {
-               if ($scope.previouslySelectedClass == $scope.selectedClass) {
                   console.log("more posts coming...")
                   $scope.nextPageToken = fileList.result.nextPageToken;
                   $scope.allPosts = $scope.allPosts.concat(fileList.result.files);
-               } else {
-                  $scope.nextPageToken = "";
-               }
             }
             else {
                console.log("end of the line");
