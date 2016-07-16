@@ -185,43 +185,45 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.getFiles = function() {
       $scope.firstFiles = true;
-      $scope.getQueryProperties();
-      var queryParamString = $scope.generateQueryString();
-      console.log("query params:" + queryParamString);
       var nextPageToken = classSelectionIndex[$scope.selectedClass] || "";
-      queue(GoogleDriveService.getListOfFlies(queryParamString, nextPageToken, 2), function(fileList) {
-         console.log(fileList);
-         if (fileList.result.files.length > 0) {
-            //format every file:
-            for (o = 0; o < fileList.result.files.length;) {
-               if (deDuplicationIndex[fileList.result.files[o].id] === undefined) {//if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
-                  fileList.result.files[o] = $scope.formatPost(fileList.result.files[o]);
-                  deDuplicationIndex[fileList.result.files[o].Id] = 1;//mark this id as used with a one.
-                  o++;
+      if (nextPageToken !== "end") {
+         $scope.getQueryProperties();
+         var queryParamString = $scope.generateQueryString();
+         console.log("query params:" + queryParamString);
+         queue(GoogleDriveService.getListOfFlies(queryParamString, nextPageToken, 2), function(fileList) {
+            console.log(fileList);
+            if (fileList.result.files.length > 0) {
+               //format every file:
+               for (o = 0; o < fileList.result.files.length;) {
+                  if (deDuplicationIndex[fileList.result.files[o].id] === undefined) { //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
+                     fileList.result.files[o] = $scope.formatPost(fileList.result.files[o]);
+                     deDuplicationIndex[fileList.result.files[o].Id] = 1; //mark this id as used with a one.
+                     o++;
+                  }
                }
-            }
-            //if we haven't reached the end of our search:
-            if (fileList.result.nextPageToken !== undefined) {
+               if (fileList.result.nextPageToken !== undefined) { //if we haven't reached the end of our search:
                   console.log("more posts coming...")
                   classSelectionIndex[$scope.selectedClass] = fileList.result.nextPageToken;
-                  $scope.allPosts = $scope.allPosts.concat(fileList.result.files);
-            }
-            else {
-               console.log("end of the line");
-               classSelectionIndex[$scope.selectedClass] = "end";
-            }
-            $scope.$apply(function() {
-               $scope.visiblePosts = $scope.allPosts
-               //$scope.filterPosts($scope.allPosts.concat($scope.tempPosts), $scope.visiblePosts);
-               console.log({
-                  allPosts: $scope.allPosts,
-                  tempPosts: $scope.tempPosts,
-                  visiblePosts: $scope.visiblePosts,
+               }
+               else { //if we havene reached the end of our search:
+                  console.log("end of the line");
+                  classSelectionIndex[$scope.selectedClass] = "end";
+               }
+
+               $scope.allPosts = $scope.allPosts.concat(fileList.result.files);
+               $scope.$apply(function() {
+                  $scope.visiblePosts = $scope.allPosts;
+                  //$scope.filterPosts($scope.allPosts.concat($scope.tempPosts), $scope.visiblePosts);
+                  console.log({
+                     allPosts: $scope.allPosts,
+                     tempPosts: $scope.tempPosts,
+                     visiblePosts: $scope.visiblePosts,
+                  });
                });
-            });
-            console.log("-----------------------");
-         }
-      });
+               console.log("-----------------------");
+            }
+         });
+      }
       $scope.previouslySelectedClass = $scope.selectedClass;
    }
 
