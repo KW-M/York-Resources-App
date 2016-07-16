@@ -197,7 +197,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             for (o = 0; o < fileList.result.files.length;) {
                if (deDuplicationIndex[fileList.result.files[o].id] === undefined) {//if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
                   fileList.result.files[o] = $scope.formatPost(fileList.result.files[o]);
-                  deDuplicationIndex[fileList.result.files[o].Id] = 1;
+                  deDuplicationIndex[fileList.result.files[o].Id] = 1;//mark this id as used with a one.
                   o++;
                }
             }
