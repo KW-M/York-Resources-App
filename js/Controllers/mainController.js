@@ -16,6 +16,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.searchChips = ["Class: "]
 
    $scope.classList = classes;
+      $scope.classList = classes;
    $scope.Tags = [];
    $scope.globals = {
       FABisOpen: false,
