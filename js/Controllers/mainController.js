@@ -16,7 +16,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.searchChips = ["Class: "]
 
    $scope.classList = classes;
-      $scope.classList = classes;
+   $scope.nextPageTokenList = {};
    $scope.Tags = [];
    $scope.globals = {
       FABisOpen: false,
@@ -195,16 +195,16 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             for (o = 0; o < fileList.result.files.length; o++) {
                fileList.result.files[o] = $scope.formatPost(fileList.result.files[o]);
             }
+            $scope.selectedClass
             //if we haven't reached the end of our search:
             if (fileList.result.nextPageToken !== undefined) {
                console.log("more posts coming...")
                $scope.nextPageToken = fileList.result.nextPageToken;
                $scope.allPosts = $scope.allPosts.concat(fileList.result.files);
-            }
-            else {
+            } else {
+               if ($scope.nextPageTokenList.$scope.selectedClass)
              console.log("end of the line - saving to tempPosts...")
-               $scope.tempPosts = fileList.result.files;
-            }
+            
             $scope.$apply(function() {
                $scope.visiblePosts = $scope.allPosts.concat($scope.tempPosts)
                //$scope.filterPosts($scope.allPosts.concat($scope.tempPosts), $scope.visiblePosts);
