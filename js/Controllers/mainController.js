@@ -201,9 +201,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                }
                //if we haven't reached the end of our search:
                if (fileList.result.nextPageToken !== undefined) {
-                  console.log("more posts coming...")
-                  $scope.nextPageToken = fileList.result.nextPageToken;
-                  $scope.allPosts = $scope.allPosts.concat(fileList.result.files);
+                  if ($scope.previouslySelectedClass == $scope.selectedClass {
+                     console.log("more posts coming...")
+                     $scope.nextPageToken = fileList.result.nextPageToken;
+                     $scope.allPosts = $scope.allPosts.concat(fileList.result.files);
+                  }
                }
                else {
                   console.log("end of the line")
@@ -223,6 +225,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             }
          });
       }
+      $scope.previouslySelectedClass = $scope.selectedClass;
    }
 
    $scope.generateQueryString = function() {
