@@ -62,8 +62,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $scope.queryParam = $location.search();
       $scope.idParam = $location.hash();
       $scope.selectedClass = $scope.classParam.replace(/\//g, "")
-      if ($scope.firstFiles == true) {// check  if firstFiles have been loaded
-         $window.setTimeout(function(){
+      if ($scope.firstFiles == true) { // check  if firstFiles have been loaded
+         $window.setTimeout(function() {
             $scope.getFiles();
          }, 100);
       }
@@ -183,46 +183,48 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.getFiles = function() {
       $scope.firstFiles = true;
-      $scope.getQueryProperties();
-      console.log("clearing tempPosts...")
-      $scope.tempPosts = []; //clear the temporary posts (for de-duplication with next page token).
-      var queryParamString = $scope.generateQueryString()
-      console.log("query params: " + queryParamString);
-      queue(GoogleDriveService.getListOfFlies(queryParamString, $scope.nextPageToken, 2), function(fileList) {
-         console.log(fileList);
-         if (fileList.result.files.length > 0) {
-            //format every file:
-            for (o = 0; o < fileList.result.files.length; o++) {
-               fileList.result.files[o] = $scope.formatPost(fileList.result.files[o]);
+      if ($scope.nextPageTokenList.$scope.selectedClass !== "no_more_posts") {
+         $scope.getQueryProperties();
+         console.log("clearing tempPosts...")
+         $scope.tempPosts = []; //clear the temporary posts (for de-duplication with next page token).
+         var queryParamString = $scope.generateQueryString()
+         console.log("query params: " + queryParamString);
+         queue(GoogleDriveService.getListOfFlies(queryParamString, $scope.nextPageToken, 2), function(fileList) {
+            console.log(fileList);
+            if (fileList.result.files.length > 0) {
+               //format every file:
+               for (o = 0; o < fileList.result.files.length; o++) {
+                  fileList.result.files[o] = $scope.formatPost(fileList.result.files[o]);
+               }
+               //if we haven't reached the end of our search:
+               if (fileList.result.nextPageToken !== undefined) {
+                  console.log("more posts coming...")
+                  $scope.nextPageToken = fileList.result.nextPageToken;
+                  $scope.allPosts = $scope.allPosts.concat(fileList.result.files);
+               }
+               else {
+                  console.log("end of the line")
+
+                  $scope.$apply(function() {
+                     $scope.visiblePosts = $scope.allPosts.concat($scope.tempPosts)
+                        //$scope.filterPosts($scope.allPosts.concat($scope.tempPosts), $scope.visiblePosts);
+                     console.log({
+                        allPosts: $scope.allPosts,
+                        tempPosts: $scope.tempPosts,
+                        visiblePosts: $scope.visiblePosts,
+                     });
+                  });
+                  $scope.$apply();
+                  console.log("-----------------------");
+               }
             }
-            $scope.selectedClass
-            //if we haven't reached the end of our search:
-            if (fileList.result.nextPageToken !== undefined) {
-               console.log("more posts coming...")
-               $scope.nextPageToken = fileList.result.nextPageToken;
-               $scope.allPosts = $scope.allPosts.concat(fileList.result.files);
-            } else {
-               if ($scope.nextPageTokenList.$scope.selectedClass)
-             console.log("end of the line - saving to tempPosts...")
-            
-            $scope.$apply(function() {
-               $scope.visiblePosts = $scope.allPosts.concat($scope.tempPosts)
-               //$scope.filterPosts($scope.allPosts.concat($scope.tempPosts), $scope.visiblePosts);
-               console.log({
-                  allPosts: $scope.allPosts,
-                  tempPosts: $scope.tempPosts,
-                  visiblePosts: $scope.visiblePosts,
-               });
-            });
-            $scope.$apply();
-            console.log("-----------------------");
-         }
-      });
+         });
+      }
    }
 
    $scope.generateQueryString = function() {
       var query = '';
-         query = query + " and properties has { key='Flagged' and value='" + $scope.queryProperties.Flagged + "' }"
+      query = query + " and properties has { key='Flagged' and value='" + $scope.queryProperties.Flagged + "' }"
       if ($scope.queryProperties.Class !== "any" && $scope.queryProperties.Class !== undefined) {
          query = query + " and properties has { key='ClassName' and value='" + $scope.queryProperties.Class + "' }"
       }
@@ -240,17 +242,20 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          var Flagged = post.Flagged === $scope.queryProperties.Flagged || post.Flagged;
          if ($scope.queryProperties.Class !== "any" && $scope.queryProperties.Class !== undefined) {
             var Class = post.Class.Name === $scope.queryProperties.Class;
-         } else {
+         }
+         else {
             var Class = true;
          }
          if ($scope.queryProperties.CreatorEmail !== "any" && $scope.queryProperties.CreatorEmail !== undefined) {
             var Type = post.Type === $scope.queryProperties.Type;
-         } else {
+         }
+         else {
             var Type = true;
          }
          if ($scope.queryProperties.CreatorEmail !== "any" && $scope.queryProperties.CreatorEmail !== undefined) {
             var Creator = post.Creator.Email === $scope.queryProperties.CreatorEmail;
-         } else {
+         }
+         else {
             var Creator = true;
          }
          return Flagged && Class && Type && Creator;
@@ -268,7 +273,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          return b.UpdateDate - a.UpdateDate;
       });
    }
-   
+
    $scope.formatPost = function(unformatedFile) {
       var formatedFile = {}
       var tagsRaw = "[\"" + unformatedFile.properties.Tag1 + unformatedFile.properties.Tag2 + "\"]";
@@ -366,7 +371,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    function loginProcedure(response) {
       //handles the 'response' promise
-         response.then(function(response) {
+      response.then(function(response) {
             $scope.loginStatus = response;
             GoogleDriveService.initiateAuthLoadDrive($scope.initiateDrive, $scope.pickerLoaded)
          }).catch(function(error) {
