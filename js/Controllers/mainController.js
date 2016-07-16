@@ -7,7 +7,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    var performantScrollEnabled = false;
 
    $scope.allPosts = [];
-   $scope.deDuplicationIndex = {};
+   var deDuplicationIndex = {};
    $scope.searchPosts = [];
    $scope.visiblePosts = [];
 
@@ -194,8 +194,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          console.log(fileList);
          if (fileList.result.files.length > 0) {
             //format every file:
-            for (o = 0; o < fileList.result.files.length) {
-               if (deDuplicationIndex[fileList.result.files[o].id] === undefined) {
+            for (o = 0; o < fileList.result.files.length;) {
+               if (deDuplicationIndex[fileList.result.files[o].id] === undefined) {//if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
                   fileList.result.files[o] = $scope.formatPost(fileList.result.files[o]);
                   deDuplicationIndex[fileList.result.files[o].Id] = 1;
                   o++;
@@ -208,7 +208,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                   $scope.nextPageToken = fileList.result.nextPageToken;
                   $scope.allPosts = $scope.allPosts.concat(fileList.result.files);
                } else {
-                  $scope.nextPageToken = ";
+                  $scope.nextPageToken = "";
                }
             }
             else {
