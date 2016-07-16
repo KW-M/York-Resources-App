@@ -194,9 +194,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          console.log(fileList);
          if (fileList.result.files.length > 0) {
             //format every file:
-            for (o = 0; o < fileList.result.files.length; o++) {
-               if {               fileList.result.files[o].id = }
-               fileList.result.files[o] = $scope.formatPost(fileList.result.files[o]);
+            for (o = 0; o < fileList.result.files.length) {
+               if (deDuplicationIndex[fileList.result.files[o].id] === undefined) {
+                  fileList.result.files[o] = $scope.formatPost(fileList.result.files[o]);
+                  deDuplicationIndex[fileList.result.files[o].Id] = 1;
+                  o++;
+               }
             }
             //if we haven't reached the end of our search:
             if (fileList.result.nextPageToken !== undefined) {
@@ -205,7 +208,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                   $scope.nextPageToken = fileList.result.nextPageToken;
                   $scope.allPosts = $scope.allPosts.concat(fileList.result.files);
                } else {
-                  $scope.nextPageToken = [];
+                  $scope.nextPageToken = ";
                }
             }
             else {
