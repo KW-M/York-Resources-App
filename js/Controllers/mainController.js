@@ -203,23 +203,23 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             //if we haven't reached the end of our search:
             if (fileList.result.nextPageToken !== undefined) {
                   console.log("more posts coming...")
-                  nextPageToken = fileList.result.nextPageToken;
+                  classSelectionIndex[$scope.selectedClass] = fileList.result.nextPageToken;
                   $scope.allPosts = $scope.allPosts.concat(fileList.result.files);
             }
             else {
                console.log("end of the line");
-               $scope.$apply(function() {
-                  $scope.visiblePosts = $scope.allPosts.concat($scope.tempPosts)
-                  //$scope.filterPosts($scope.allPosts.concat($scope.tempPosts), $scope.visiblePosts);
-                  console.log({
-                     allPosts: $scope.allPosts,
-                     tempPosts: $scope.tempPosts,
-                     visiblePosts: $scope.visiblePosts,
-                  });
-               });
-               $scope.$apply();
-               console.log("-----------------------");
+               classSelectionIndex[$scope.selectedClass] = "end";
             }
+            $scope.$apply(function() {
+               $scope.visiblePosts = $scope.allPosts
+               //$scope.filterPosts($scope.allPosts.concat($scope.tempPosts), $scope.visiblePosts);
+               console.log({
+                  allPosts: $scope.allPosts,
+                  tempPosts: $scope.tempPosts,
+                  visiblePosts: $scope.visiblePosts,
+               });
+            });
+            console.log("-----------------------");
          }
       });
       $scope.previouslySelectedClass = $scope.selectedClass;
