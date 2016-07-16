@@ -7,7 +7,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    var performantScrollEnabled = false;
 
    $scope.allPosts = [];
-   $scope.tempPosts = [];
+   $scope.deDuplicationIndex = {};
    $scope.searchPosts = [];
    $scope.visiblePosts = [];
 
@@ -195,6 +195,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          if (fileList.result.files.length > 0) {
             //format every file:
             for (o = 0; o < fileList.result.files.length; o++) {
+               if {               fileList.result.files[o].id = }
                fileList.result.files[o] = $scope.formatPost(fileList.result.files[o]);
             }
             //if we haven't reached the end of our search:
