@@ -211,7 +211,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                console.log("end of the line");
                $scope.$apply(function() {
                   $scope.visiblePosts = $scope.allPosts.concat($scope.tempPosts)
-                     //$scope.filterPosts($scope.allPosts.concat($scope.tempPosts), $scope.visiblePosts);
+                  //$scope.filterPosts($scope.allPosts.concat($scope.tempPosts), $scope.visiblePosts);
                   console.log({
                      allPosts: $scope.allPosts,
                      tempPosts: $scope.tempPosts,
