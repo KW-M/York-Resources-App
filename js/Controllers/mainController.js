@@ -186,8 +186,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.getFiles = function() {
       $scope.firstFiles = true;
       var selectedClass = $scope.selectedClass
-      console.log($scope.nextPageTokenList.selectedClass);
-      if ($scope.nextPageTokenList.selectedClass !== "no_more_posts") {
+      if ($scope.nextPageTokenList[selectedClass] !== "no_more_posts") {
          $scope.getQueryProperties();
          console.log("clearing tempPosts...")
          $scope.tempPosts = []; //clear the temporary posts (for de-duplication with next page token).
