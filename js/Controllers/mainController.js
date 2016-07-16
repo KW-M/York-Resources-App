@@ -28,7 +28,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
    $scope.firstFiles = false;
-   $scope.nextPageToken = '';
    $scope.queryPropertyString = '';
    $scope.queryProperties = {
       Flagged: false,
@@ -189,10 +188,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $scope.getQueryProperties();
       var queryParamString = $scope.generateQueryString();
       console.log("query params:" + queryParamString);
-      var nextPageToken = "";
-      if ($scope.previouslySelectedClass !== $scope.selectedClass) {
-      }
-      queue(GoogleDriveService.getListOfFlies(queryParamString, $scope.nextPageToken, 2), function(fileList) {
+      var nextPageToken = classSelectionIndex[$scope.selectedClass] || "";
+      queue(GoogleDriveService.getListOfFlies(queryParamString, nextPageToken, 2), function(fileList) {
          console.log(fileList);
          if (fileList.result.files.length > 0) {
             //format every file:
@@ -206,7 +203,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             //if we haven't reached the end of our search:
             if (fileList.result.nextPageToken !== undefined) {
                   console.log("more posts coming...")
-                  $scope.nextPageToken = fileList.result.nextPageToken;
+                  nextPageToken = fileList.result.nextPageToken;
                   $scope.allPosts = $scope.allPosts.concat(fileList.result.files);
             }
             else {
