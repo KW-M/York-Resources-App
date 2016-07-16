@@ -16,7 +16,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.searchChips = ["Class: "]
 
    $scope.classList = classes;
-   $scope.nextPageTokenList = {};
+   $scope.nextPageTokenList = {
+      'English I' : "123"
+   };
    $scope.Tags = [];
    $scope.globals = {
       FABisOpen: false,
@@ -183,7 +185,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.getFiles = function() {
       $scope.firstFiles = true;
-      if ($scope.nextPageTokenList.$scope.selectedClass !== "no_more_posts") {
+      var selectedClass = $scope.selectedClass
+      console.log($scope.nextPageTokenList.selectedClass);
+      if ($scope.nextPageTokenList.selectedClass !== "no_more_posts") {
          $scope.getQueryProperties();
          console.log("clearing tempPosts...")
          $scope.tempPosts = []; //clear the temporary posts (for de-duplication with next page token).
