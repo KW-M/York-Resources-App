@@ -227,6 +227,14 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                   console.log("-----------------------");
                }
                else {
+                  if (fileList.result.nextPageToken !== undefined) { //if we haven't reached the end of our search:
+                     console.log("duplicate posts - more posts coming...")
+                     classSelectionIndex[$scope.selectedClass] = fileList.result.nextPageToken;
+                  }
+                  else { //if we havene reached the end of our search:
+                     console.log("duplicate posts - end of the line");
+                     classSelectionIndex[$scope.selectedClass] = "end";
+                  }
                   $scope.getFiles();
                }
             }
