@@ -74,7 +74,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
     this.unLikeFile = function(fileID, permissionID) {
         return (gapi.client.drive.permissions.delete({
             fileId: fileID,
-            permissionId: permissionID;
+            permissionId: permissionID,
         }));
     };
     

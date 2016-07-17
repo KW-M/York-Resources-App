@@ -436,9 +436,28 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          
       }
    };
+   
+   $scope.likePost = function(ev, content, arrayIndex) {
+      $scope.visiblePosts.splice(arrayIndex, 1);
+      $scope.flaggedPosts.splice(arrayIndex, 1);
+      GoogleDriveService.flagDriveFile(content.Id, 'Flagged', false).then(function() {
+         console.log("flagged: " + content.Id);
+      })
+   };
+
+   $scope.unLikePost = function(ev, content, arrayIndex) {
+      if ($scope.myInfo.Moderator === true) {
+         $scope.flaggedPosts.splice(arrayIndex, 1);
+         GoogleDriveService.updateFileProperty(content.Id, 'Flagged', false).then(function() {
+            console.log("unflagged: " + content.Id);
+         });
+      } else {
+         
+      }
+   };
 
    $scope.openLink = function(link) {
-      if (link != "") {
+      if (link !== "" && link !== undefined) {
          $window.open(link);
       }
    };
