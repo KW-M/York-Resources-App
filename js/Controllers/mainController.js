@@ -198,37 +198,40 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                var fileCount = 0;
                var formattedFileList = [];
                for (o = 0; o < fileList.result.files.length; o++) {
-                  console.log('loopdy doo');
                   if (deDuplicationIndex[fileList.result.files[o].id] === undefined) { //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
                      formattedFileList[fileCount] = $scope.formatPost(fileList.result.files[o]);
                      deDuplicationIndex[fileList.result.files[o].id] = 1; //mark this id as used with a one.
                      fileCount++;
                   }
                }
-               if (fileList.result.nextPageToken !== undefined) { //if we haven't reached the end of our search:
-                  console.log("more posts coming...")
-                  classSelectionIndex[$scope.selectedClass] = fileList.result.nextPageToken;
-               }
-               else { //if we havene reached the end of our search:
-                  console.log("end of the line");
-                  classSelectionIndex[$scope.selectedClass] = "end";
-               }
+               if (formattedFileList.length !== 0) {
+                  if (fileList.result.nextPageToken !== undefined) { //if we haven't reached the end of our search:
+                     console.log("more posts coming...")
+                     classSelectionIndex[$scope.selectedClass] = fileList.result.nextPageToken;
+                  }
+                  else { //if we havene reached the end of our search:
+                     console.log("end of the line");
+                     classSelectionIndex[$scope.selectedClass] = "end";
+                  }
 
-               $scope.allPosts = $scope.allPosts.concat(formattedFileList);
-               $scope.$apply(function() {
-                  $scope.visiblePosts = $scope.allPosts;
-                  //$scope.filterPosts($scope.allPosts.concat($scope.tempPosts), $scope.visiblePosts);
-                  console.log({
-                     allPosts: $scope.allPosts,
-                     tempPosts: $scope.tempPosts,
-                     visiblePosts: $scope.visiblePosts,
+                  $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+                  $scope.$apply(function() {
+                     $scope.visiblePosts = $scope.allPosts;
+                     //$scope.filterPosts($scope.allPosts.concat($scope.tempPosts), $scope.visiblePosts);
+                     console.log({
+                        allPosts: $scope.allPosts,
+                        tempPosts: $scope.tempPosts,
+                        visiblePosts: $scope.visiblePosts,
+                     });
                   });
-               });
-               console.log("-----------------------");
+                  console.log("-----------------------");
+               }
+               else {
+                  $scope.getFiles();
+               }
             }
          });
       }
-      $scope.previouslySelectedClass = $scope.selectedClass;
    }
 
    $scope.generateQueryString = function() {
