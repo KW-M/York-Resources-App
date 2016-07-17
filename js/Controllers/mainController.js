@@ -426,7 +426,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $scope.visiblePosts.splice(arrayIndex, 1);
          $scope.flaggedPosts.push(content);
       });
-      GoogleDriveService.flagDriveFile(content.Id, 'Flagged', false).then(function() {
+      GoogleDriveService.flagDriveFile(content.Id, 'Flagged', true).then(function() {
          console.log("flagged: " + content.Id);
       })
    };
@@ -442,7 +442,16 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          });
       }
       else {
-
+         $mdDialog.show($mdDialog.confirm()
+            .title('Permanently delete this?')
+            .ariaLabel('Delete?')
+            .targetEvent(ev)
+            .ok('Delete')
+            .cancel('Cancel')
+         );
+         GoogleDriveService.updateFileProperty(content.Id, 'toBeUnFlagged', true).then(function() {
+            console.log("unflagged: " + content.Id);
+         });
       }
    };
 
