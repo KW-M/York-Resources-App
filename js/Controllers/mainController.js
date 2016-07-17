@@ -223,13 +223,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                      $scope.flaggedPosts = $scope.flaggedPosts.concat(formattedFileList);
                      $scope.$apply(function() {
                         $scope.visiblePosts = $scope.flaggedPosts;
-                        //$scope.filterPosts($scope.allPosts.concat($scope.tempPosts), $scope.visiblePosts);
                      });
                   } else if ($scope.selectedClass === 'my-posts'){
                      $scope.flaggedPosts = $scope.flaggedPosts.concat(formattedFileList);
                      $scope.$apply(function() {
-                        $scope.visiblePosts = $scope.flaggedPosts.concat($scope.flaggedPosts);
-                        $scope.filterPosts($scope.allPosts.concat($scope.tempPosts), $scope.visiblePosts);
+                        $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts), $scope.visiblePosts);
                      });
                   } else {
                      $scope.allPosts = $scope.allPosts.concat(formattedFileList);
