@@ -37,8 +37,15 @@ app.service('GoogleDriveService', ['$q', function($q) {
     };
     
     this.updateFileProperty = function(id, property) {
-        property.fileId = id;
-        return (gapi.client.drive.files.update(property));
+        var metadata = {
+            properties: {},
+            contentHints: {
+                thumbnail: {},
+            },
+        }
+        metadata.fileId = id;
+        metadata[property];
+        return (gapi.client.drive.files.update(metadata));
     };
     
     this.createDriveFile = function(metadata) {
