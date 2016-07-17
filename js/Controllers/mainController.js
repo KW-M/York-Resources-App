@@ -257,13 +257,13 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             if (formattedFileList !== undefined) {
                $scope.allPosts = $scope.allPosts.concat(formattedFileList);
             }
-            $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts), $scope.visiblePosts);
+            $scope.visiblePosts = $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts));
          }
          else {
             if (formattedFileList !== undefined) {
                $scope.allPosts = $scope.allPosts.concat(formattedFileList);
             }
-            $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts), $scope.visiblePosts);
+            $scope.visiblePosts = $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts));
          }
       })
    }
@@ -285,7 +285,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.filterPosts = function(inputSet) {
 
-      return (inputSet.filter(function(post) {
+      return inputSet.filter(function(post) {
          var Flagged = post.Flagged === $scope.queryProperties.Flagged || post.Flagged;
          if ($scope.queryProperties.Class !== "any" && $scope.queryProperties.Class !== undefined) {
             var Class = post.Class.Name === $scope.queryProperties.Class;
@@ -314,10 +314,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             Creator: Creator,
          });
          return Flagged && Class && Type && Creator;
-      }); console.log({
-         Input: inputSet,
-         Output: outputSet,
-      });)
+      }); 
    }
 
    $scope.sortByLikes = function(thingToSort) {
