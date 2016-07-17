@@ -521,12 +521,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
             "Moderator": moderators[userInfo.result.user.emailAddress] !== undefined,
          };
-         console.log($scope.myInfo);
-         $scope.getFiles("");
+         queue(GoogleDriveService.getUserSettingsSpreadsheet($scope.myInfo.Email), function(spreadsheetRow) {
+            
+         });
       });
-      queue(GoogleDriveService.updateFileProperty(content.Id, 'Flagged', false),function() {
-         console.log("unflagged: " + content.Id);
-      });
+      console.log($scope.myInfo);
+      $scope.getFiles("");
    }
 
    $scope.angularGridOptions = {

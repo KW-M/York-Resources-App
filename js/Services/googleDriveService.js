@@ -13,6 +13,8 @@ app.service('GoogleDriveService', ['$q', function($q) {
             'fields': 'user(displayName,emailAddress,photoLink),appInstalled'
         }));
     };
+    
+    this.getUserSettingsSpreadsheet = function (emailAddress){}
 
     this.getListOfFlies = function(query, pageToken, pageSize) {
         var query = query || "";
