@@ -48,16 +48,12 @@ app.service('GoogleDriveService', ['$q', function($q) {
         return (gapi.client.drive.files.update(metadata));
     };
     
-    this.likeFile = function(id, property, value) {
-        var metadata = {
-            properties: {},
-            contentHints: {
-                thumbnail: {},
-            },
-        }
-        metadata.fileId = id;
-        metadata.proprerties[property] = value;
-        return (gapi.client.drive.files.update(metadata));
+    this.likeFile = function(fileID, email, ) {
+        return (gapi.client.drive.permissions.create({
+            sendNotificationEmail:false
+            emailMessage:'Please ignore this error from York Study Resources.',
+            fileId: fileID,
+        }));
     };
     
     this.createDriveFile = function(metadata) {
