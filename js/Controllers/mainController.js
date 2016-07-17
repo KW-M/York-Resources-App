@@ -513,21 +513,29 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       };
    };
 
-var run
+   var runCounter = 0;
    $scope.initiateDrive = function() {
-      queue(GoogleDriveService.getUserInfo(), function(userInfo) {
-         $scope.myInfo = {
-            "Name": userInfo.result.user.displayName,
-            "Email": userInfo.result.user.emailAddress,
-            "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
-            "Moderator": moderators[userInfo.result.user.emailAddress] !== undefined,
-         };
+      runCounter++;
+      if (runCounter === 1) {
+         queue(GoogleDriveService.getUserInfo(), function(userInfo) {
+            $scope.myInfo = {
+               "Name": userInfo.result.user.displayName,
+               "Email": userInfo.result.user.emailAddress,
+               "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
+            };
+         });
+      } else if (runCounter === 2) {
+         queue(GoogleDriveService.getUserSettingsSpreadsheet($scope.myInfo.Email), function(spreadsheetRow) {
+            $scope.myInfo.Moderator =moderators[userInfo.result.user.emailAddress] !== undefined,
+         });
+      } else if (runCounter === 3) {
          queue(GoogleDriveService.getUserSettingsSpreadsheet($scope.myInfo.Email), function(spreadsheetRow) {
             
          });
-      });
+      }
       console.log($scope.myInfo);
       $scope.getFiles("");
+      }
    }
 
    $scope.angularGridOptions = {
