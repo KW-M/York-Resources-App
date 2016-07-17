@@ -525,18 +525,31 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          });
       } else if (loaded === "sheets") {
          if ($scope.myInfo !== undefined) {
-            queue(GoogleDriveService.getUserSettingsSpreadsheet($scope.myInfo.Email), function(spreadsheetRow) {
-               $scope.myInfo.Moderator = moderators[userInfo.result.user.emailAddress] !== undefined,
-            });
+            handleUserPrefsSheet ()
          }else{
-            
+            document.addEventListener('userInfoLoaded', function () {
+               handleUserPrefsSheet (); 
+            });
          }
-         $scope.getFiles("");
+         
       } else if (loaded === "picker") {
-        angular.element(document.querySelector('#overlay_background')).addClass('fadeOut');
+         if ($scope.myInfo !== undefined) {
+            
+         }else{
+            document.addEventListener('userInfoLoaded', function () {
+               
+            });
+         }
       }
       console.log($scope.myInfo);
       }
+   }
+   
+   function handleUserPrefsSheet () {
+      queue(GoogleDriveService.getUserSettingsSpreadsheet($scope.myInfo.Email), function(spreadsheetRow) {
+         $scope.myInfo.Moderator = moderators[userInfo.result.user.emailAddress] !== undefined,
+      });
+      $scope.getFiles("");
    }
 
    $scope.angularGridOptions = {
