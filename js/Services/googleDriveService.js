@@ -36,6 +36,18 @@ app.service('GoogleDriveService', ['$q', function($q) {
         }));
     };
     
+    this.createDriveFile = function(metadata) {
+        metadata.parents = ['0B5NVuDykezpkbUxvOUMyNnRsUGc'];
+        return (gapi.client.drive.files.create(metadata));
+    };
+    
+    this.getFileContent = function(fileId) {
+        return (gapi.client.drive.files.get({
+            'fileId': fileId,
+            'alt': 'media'
+        }));
+    };
+
     this.updateFileProperty = function(id, property, value) {
         var metadata = {
             properties: {},
@@ -49,17 +61,6 @@ app.service('GoogleDriveService', ['$q', function($q) {
     };
     
     this.likeFile = function(fileID, email) {
-        return (gapi.client.drive.permissions.delete({
-            sendNotificationEmail: false,
-            emailMessage:'Please ignore this error from York Study Resources.',
-            fileId: fileID,
-            emailAddress: email,
-            role: 'writer',
-            type: "user",
-        }));
-    };
-    
-    this.unLikeFile = function(fileID, permissionID) {
         return (gapi.client.drive.permissions.create({
             sendNotificationEmail: false,
             emailMessage:'Please ignore this error from York Study Resources.',
@@ -70,19 +71,14 @@ app.service('GoogleDriveService', ['$q', function($q) {
         }));
     };
     
-    this.createDriveFile = function(metadata) {
-        metadata.parents = ['0B5NVuDykezpkbUxvOUMyNnRsUGc'];
-        return (gapi.client.drive.files.create(metadata));
-    };
-    
-    
-    
-    this.getFileContent = function(fileId) {
-        return (gapi.client.drive.files.get({
-            'fileId': fileId,
-            'alt': 'media'
+    this.unLikeFile = function(fileID, permissionID) {
+        return (gapi.client.drive.permissions.delete({
+            fileId: fileID,
+            permissionId: permissionID;
         }));
     };
+    
+    // --not used functions--
 
     this.sendDriveFileWContent = function(content, title) {
         return (gapi.client.request({
