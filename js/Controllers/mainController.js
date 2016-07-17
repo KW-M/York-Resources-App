@@ -31,7 +31,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.firstFiles = false;
    $scope.queryPropertyString = '';
    $scope.queryProperties = {
-      SelectedType: 'allPosts',
       Flagged: false,
       Type: "any",
       Class: "any",
@@ -226,10 +225,15 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                         $scope.visiblePosts = $scope.flaggedPosts;
                         //$scope.filterPosts($scope.allPosts.concat($scope.tempPosts), $scope.visiblePosts);
                      });
+                  } else if ($scope.selectedClass === 'my-posts'){
+                     $scope.flaggedPosts = $scope.flaggedPosts.concat(formattedFileList);
+                     $scope.$apply(function() {
+                        $scope.visiblePosts = $scope.flaggedPosts.concat($scope.flaggedPosts);
+                        $scope.filterPosts($scope.allPosts.concat($scope.tempPosts), $scope.visiblePosts);
+                     });
                   } else {
                      $scope.allPosts = $scope.allPosts.concat(formattedFileList);
                      $scope.$apply(function() {
-                        $scope.visiblePosts = $scope.allPosts;
                         //$scope.filterPosts($scope.allPosts.concat($scope.tempPosts), $scope.visiblePosts);
                      });
                   }
