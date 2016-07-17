@@ -36,7 +36,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       Class: "any",
       CreatorEmail: "any",
    };
-   
+
    var moderators = {
       'worcester-moorek2018@york.org': true,
    }
@@ -243,7 +243,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                sortPostsByType();
             }
          });
-      } else {
+      }
+      else {
          sortPostsByType();
       }
    }
@@ -409,7 +410,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          .cancel('Cancel');
       $mdDialog.show(confirm).then(function() {
          //ok
-         $scope.visiblePosts.splice(arrayIndex, 1);
+         $timeout(function() {//makes angular update values
+            $scope.visiblePosts.splice(arrayIndex, 1);
+         });
          GoogleDriveService.deleteDriveFile(content.Id).then(function() {
             console.log("deleted" + content.Id);
          })
@@ -417,10 +420,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          //cancel
       });
    };
-   
+
    $scope.flagPost = function(ev, content, arrayIndex) {
-      $scope.visiblePosts.splice(arrayIndex, 1);
-      $scope.flaggedPosts.push(arrayIndex, 1);
+      $timeout(function() {//makes angular update values
+         $scope.visiblePosts.splice(arrayIndex, 1);
+         $scope.flaggedPosts.push(content);
+      });
       GoogleDriveService.flagDriveFile(content.Id, 'Flagged', false).then(function() {
          console.log("flagged: " + content.Id);
       })
@@ -428,15 +433,19 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.unFlagPost = function(ev, content, arrayIndex) {
       if ($scope.myInfo.Moderator === true) {
-         $scope.flaggedPosts.splice(arrayIndex, 1);
+         $timeout(function() {//makes angular update values
+            $scope.flaggedPosts.splice(arrayIndex, 1);
+         });
+
          GoogleDriveService.updateFileProperty(content.Id, 'Flagged', false).then(function() {
             console.log("unflagged: " + content.Id);
          });
-      } else {
-         
+      }
+      else {
+
       }
    };
-   
+
    $scope.likePost = function(ev, content, arrayIndex) {
       GoogleDriveService.flagDriveFile(content.Id, 'Flagged', false).then(function() {
          console.log("flagged: " + content.Id);
@@ -445,12 +454,13 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.unLikePost = function(ev, content, arrayIndex) {
       if ($scope.myInfo.Moderator === true) {
-         $scope.flaggedPosts.splice(arrayIndex, 1);
-         GoogleDriveService.updateFileProperty(content.Id, 'Flagged', false).then(function() {
+         var permissionID = "needs to be created"
+         GoogleDriveService.unLikeFile(content.Id, permissionID).then(function() {
             console.log("unflagged: " + content.Id);
          });
-      } else {
-         
+      }
+      else {
+
       }
    };
 
