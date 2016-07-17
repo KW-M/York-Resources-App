@@ -225,14 +225,14 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                         $scope.visiblePosts = $scope.flaggedPosts;
                      });
                   } else if ($scope.selectedClass === 'my-posts'){
-                     $scope.flaggedPosts = $scope.flaggedPosts.concat(formattedFileList);
+                     $scope.allPosts = $scope.allPosts.concat(formattedFileList);
                      $scope.$apply(function() {
                         $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts), $scope.visiblePosts);
                      });
                   } else {
                      $scope.allPosts = $scope.allPosts.concat(formattedFileList);
                      $scope.$apply(function() {
-                        //$scope.filterPosts($scope.allPosts.concat($scope.tempPosts), $scope.visiblePosts);
+                        $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts), $scope.visiblePosts);
                      });
                   }
                   console.log({
