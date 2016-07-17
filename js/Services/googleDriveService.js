@@ -6,7 +6,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
         console.log("loading APIS");
         gapi.client.load('drive', 'v3', function(){APILoadedCallback("drive");});
         gapi.client.load('sheets', 'v4', function(){APILoadedCallback("sheets");});
-        gapi.load('picker', {'callback': function(){APILoadedCallback("picker");}});
+        gapi.load('picker', {'callback': APILoadedCallback("picker")});
     };
 
     this.getUserInfo = function() {

@@ -532,7 +532,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          }
          
       } else if (loaded === "picker") {
-         if ($scope.myInfo.Moderator !== undefined) {
+         if ($scope.myInfo !== undefined) {
             angular.element(document.querySelector('#overlay_background')).addClass('fadeOut');
          }else{
             document.addEventListener('sheetPrefsLoaded', function () {
