@@ -37,10 +37,19 @@ app.service('GoogleDriveService', ['$q', function($q) {
         }));
     };
     
+    this.updateFileProperty = function(metadata, id) {
+        return (gapi.client.drive.files.update({
+            'fileId': id,
+            'alt': 'media'
+        }));
+    };
+    
     this.createDriveFile = function(metadata) {
         metadata.parents = ['0B5NVuDykezpkbUxvOUMyNnRsUGc'];
         return (gapi.client.drive.files.create(metadata));
     };
+    
+    
     
     this.getFileContent = function(fileId) {
         return (gapi.client.drive.files.get({
