@@ -514,16 +514,19 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.initiateDrive = function(loaded) {
       console.log("API loaded: " + loaded)
       if (loaded === "drive") {
-         console.log(GoogleDriveService.getUserInfo());
-         var getUserInfo = 
-         queue(GoogleDriveService.getUserInfo(), function(userInfo) {
+         queue(GoogleDriveService.getUserInfo(), function(userInfo){
             $scope.myInfo = {
                "Name": userInfo.result.user.displayName,
-               "Email": userInfo.result.user.emailAddress,
-               "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
             };
-            document.dispatchEvent(new Event('userInfoLoaded'));
          });
+         // function(userInfo) {
+         //    $scope.myInfo = {
+         //       "Name": userInfo.result.user.displayName,
+         //       "Email": userInfo.result.user.emailAddress,
+         //       "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
+         //    };
+         //    document.dispatchEvent(new Event('userInfoLoaded'));
+         // }
       } else if (loaded === "sheets") {
          if ($scope.myInfo !== undefined) {
             handleUserPrefsSheet ()

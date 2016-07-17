@@ -18,6 +18,7 @@
     var item = theQueue.shift();
     if (item) {
       var thePromise = item.Promise
+      console.log(thePromise);
       thePromise.then(item.Action);
     }
     if (theQueue.length === 0) {
