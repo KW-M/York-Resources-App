@@ -2,7 +2,7 @@
 app.service('GoogleDriveService', ['$q', function($q) {
     var self = this;
 
-    this.initiateAuthLoadDrive = function(driveCallback) {
+    this.loadAPIs = function(APILoadedCallback) {
         gapi.client.load('drive', 'v3', driveCallback("drive"));
         gapi.client.load('sheets', 'v4', driveCallback("sheets"));
         gapi.load('picker', {'callback': driveCallback("picker")});

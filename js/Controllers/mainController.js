@@ -489,7 +489,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       //handles the 'response' promise
       response.then(function(response) {
             $scope.loginStatus = response;
-            GoogleDriveService.initiateAuthLoadDrive($scope.initiateDrive, $scope.pickerLoaded)
+            GoogleDriveService.loadAPIs($scope.initiateDrive);
          }).catch(function(error) {
             if (error.error_subtype !== undefined && error.error_subtype === "access_denied") {
                showLoginButton();
@@ -511,11 +511,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
    //var userInfoLoaded = 
-   var sheetPrefsLoaded = new Event('sheetPrefsLoaded');
+   //var sheetPrefsLoaded = new Event('sheetPrefsLoaded');
    $scope.initiateDrive = function(loaded) {
-console.log("loaded: "+ loaded)
+      console.log("API loaded: " + loaded)
       if (loaded === "drive") {
-         console.log("driveLoaded")
          queue(GoogleDriveService.getUserInfo(), function(userInfo) {
             $scope.myInfo = {
                "Name": userInfo.result.user.displayName,
