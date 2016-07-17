@@ -421,7 +421,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.flagPost = function(ev, content, arrayIndex) {
       $scope.visiblePosts.splice(arrayIndex, 1);
       $scope.flaggedPosts.splice(arrayIndex, 1);
-      GoogleDriveService.flagDriveFile(content.Id).then(function() {
+      GoogleDriveService.flagDriveFile(content.Id, 'Flagged', false).then(function() {
          console.log("flagged: " + content.Id);
       })
    };
@@ -429,7 +429,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.unFlagPost = function(ev, content, arrayIndex) {
       if ($scope.myInfo.Moderator === true) {
          $scope.flaggedPosts.splice(arrayIndex, 1);
-         GoogleDriveService.updateFileProperty(content.Id).then(function() {
+         GoogleDriveService.updateFileProperty(content.Id, 'Flagged', false).then(function() {
             console.log("unflagged: " + content.Id);
          });
       } else {
