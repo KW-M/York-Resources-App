@@ -1,4 +1,4 @@
-/*global app*/ /*global angular*/ /*global gapi*/ /*global google*/
+/*global app*/ /*global angular*/ /*global gapi*/ /*global google*//*global queue*/
 var dependancies = ['$scope', '$mdDialog', '$window', '$timeout', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', '$routeParams', 'angularGridInstance']
 app.controller('ApplicationController', dependancies.concat([function($scope, $mdDialog, $window, $timeout, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, $routeParams, angularGridInstance) {
    var self = this;
@@ -413,9 +413,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $timeout(function() {//makes angular update values
             $scope.visiblePosts.splice(arrayIndex, 1);
          });
-         GoogleDriveService.deleteDriveFile(content.Id).then(function() {
+         queue(GoogleDriveService.deleteDriveFile(content.Id),function() {
             console.log("deleted" + content.Id);
-         })
+         });
       }, function() {
          //cancel
       });
@@ -426,9 +426,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $scope.visiblePosts.splice(arrayIndex, 1);
          $scope.flaggedPosts.push(content);
       });
-      GoogleDriveService.flagDriveFile(content.Id, 'Flagged', true).then(function() {
+      queue(GoogleDriveService.flagDriveFile(content.Id, 'Flagged', true),function() {
          console.log("flagged: " + content.Id);
-      })
+      });
    };
 
    $scope.unFlagPost = function(ev, content, arrayIndex) {
@@ -437,7 +437,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             $scope.flaggedPosts.splice(arrayIndex, 1);
          });
 
-         GoogleDriveService.updateFileProperty(content.Id, 'Flagged', false).then(function() {
+         queue(GoogleDriveService.updateFileProperty(content.Id, 'Flagged', false),function() {
             console.log("unflagged: " + content.Id);
          });
       }
@@ -450,7 +450,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             .cancel('Cancel')
          );
          GoogleDriveService.updateFileProperty(content.Id, 'toBeUnFlagged', true).then(function() {
-            console.log("unflagged: " + content.Id);
          });
       }
    };
@@ -524,6 +523,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          };
          console.log($scope.myInfo);
          $scope.getFiles("");
+      });
+      queue(GoogleDriveService.updateFileProperty(content.Id, 'Flagged', false),function() {
+         console.log("unflagged: " + content.Id);
       });
    }
 
