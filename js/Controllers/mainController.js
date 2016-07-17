@@ -513,6 +513,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       };
    };
 
+var run
    $scope.initiateDrive = function() {
       queue(GoogleDriveService.getUserInfo(), function(userInfo) {
          $scope.myInfo = {
