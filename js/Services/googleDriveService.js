@@ -4,13 +4,12 @@ app.service('GoogleDriveService', ['$q', function($q) {
 
     this.loadAPIs = function(APILoadedCallback) {
         console.log("loading APIS");
-        gapi.client.load('drive', 'v3', APILoadedCallback("drive"));
-        gapi.client.load('sheets', 'v4', APILoadedCallback("sheets"));
-        gapi.load('picker', {'callback': APILoadedCallback("picker")});
+        gapi.client.load('drive', 'v3', function(){APILoadedCallback("drive");});
+        gapi.client.load('sheets', 'v4', function(){APILoadedCallback("sheets");});
+        gapi.load('picker', {'callback': function(){APILoadedCallback("picker");}});
     };
 
     this.getUserInfo = function() {
-        console.log(gapi.client);
         return (gapi.client.drive.about.get({
             'fields': 'user(displayName,emailAddress,photoLink),appInstalled'
         }));
