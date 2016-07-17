@@ -215,16 +215,22 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                      console.log("end of the line");
                      classSelectionIndex[$scope.selectedClass] = "end";
                   }
-                  if ($scope.selectedClass !== 'flagged'){
+                  if ($scope.selectedClass === 'all-posts'){
                      $scope.allPosts = $scope.allPosts.concat(formattedFileList);
                      $scope.$apply(function() {
                         $scope.visiblePosts = $scope.allPosts;
                         //$scope.filterPosts($scope.allPosts.concat($scope.tempPosts), $scope.visiblePosts);
                      });
-                  } else {
+                  } else if ($scope.selectedClass === 'flagged'){
                      $scope.flaggedPosts = $scope.flaggedPosts.concat(formattedFileList);
                      $scope.$apply(function() {
                         $scope.visiblePosts = $scope.flaggedPosts;
+                        //$scope.filterPosts($scope.allPosts.concat($scope.tempPosts), $scope.visiblePosts);
+                     });
+                  } else {
+                     $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+                     $scope.$apply(function() {
+                        $scope.visiblePosts = $scope.allPosts;
                         //$scope.filterPosts($scope.allPosts.concat($scope.tempPosts), $scope.visiblePosts);
                      });
                   }
