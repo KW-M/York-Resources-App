@@ -8,6 +8,11 @@
       Action: action,
       Err: error
     });
+          console.log({
+      Promise: promise,
+      Action: action.toString(),
+      Err: error
+    });
     if (!timer) {
       processTheQueue(); // start immediately on the first invocation
       timer = setInterval(processTheQueue, 150);
