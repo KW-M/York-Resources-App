@@ -1,6 +1,6 @@
 /*global app*/ /*global angular*/ /*global gapi*/ /*global google*/
-var dependancies = ['$scope', '$mdDialog', '$window', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', '$routeParams', 'angularGridInstance']
-app.controller('ApplicationController', dependancies.concat([function($scope, $mdDialog, $window, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, $routeParams, angularGridInstance) {
+var dependancies = ['$scope', '$mdDialog', '$window','$timeout', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', '$routeParams', 'angularGridInstance']
+app.controller('ApplicationController', dependancies.concat([function($scope, $mdDialog, $window, $timeout, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, $routeParams, angularGridInstance) {
    var self = this;
    $scope.GoogleDriveService = GoogleDriveService;
    var content_container = document.getElementById("content_container");
@@ -304,6 +304,15 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          else {
             var Creator = true;
          }
+         console.log({
+            filter: "",
+            Flagged: Flagged,
+            Class: Class,
+            Type, Type,
+            Creator: Creator,
+            Input: inputSet,
+            Output: outputSet,
+         })
          return Flagged && Class && Type && Creator;
       });
    }
