@@ -1,5 +1,5 @@
 /*global app*/ /*global angular*/ /*global gapi*/ /*global google*/
-var dependancies = ['$scope', '$mdDialog', '$window','$timeout', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', '$routeParams', 'angularGridInstance']
+var dependancies = ['$scope', '$mdDialog', '$window', '$timeout', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', '$routeParams', 'angularGridInstance']
 app.controller('ApplicationController', dependancies.concat([function($scope, $mdDialog, $window, $timeout, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, $routeParams, angularGridInstance) {
    var self = this;
    $scope.GoogleDriveService = GoogleDriveService;
@@ -283,8 +283,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       return query;
    }
 
-   $scope.filterPosts = function(inputSet, outputSet) {
-      outputSet = inputSet.filter(function(post) {
+   $scope.filterPosts = function(inputSet) {
+
+      return (inputSet.filter(function(post) {
          var Flagged = post.Flagged === $scope.queryProperties.Flagged || post.Flagged;
          if ($scope.queryProperties.Class !== "any" && $scope.queryProperties.Class !== undefined) {
             var Class = post.Class.Name === $scope.queryProperties.Class;
@@ -305,16 +306,18 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             var Creator = true;
          }
          console.log({
-            filter: "",
+            filterdPost: post,
             Flagged: Flagged,
             Class: Class,
-            Type, Type,
+            Type,
+            Type,
             Creator: Creator,
-            Input: inputSet,
-            Output: outputSet,
-         })
+         });
          return Flagged && Class && Type && Creator;
-      });
+      }); console.log({
+         Input: inputSet,
+         Output: outputSet,
+      });)
    }
 
    $scope.sortByLikes = function(thingToSort) {
