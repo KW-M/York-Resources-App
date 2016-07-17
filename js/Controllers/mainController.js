@@ -138,10 +138,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       });
    };
 
-   $scope.pickerLoaded = function() {
-
-   }
-
    $scope.showPicker = function(typ) {
       var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
       var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
@@ -513,10 +509,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       };
    };
 
-   var runCounter = 0;
-   $scope.initiateDrive = function() {
-      runCounter++;
-      if (runCounter === 1) {
+   $scope.initiateDrive = function(loaded) {
+      if (loaded === "drive") {
          queue(GoogleDriveService.getUserInfo(), function(userInfo) {
             $scope.myInfo = {
                "Name": userInfo.result.user.displayName,
@@ -524,17 +518,15 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
             };
          });
-      } else if (runCounter === 2) {
+      } else if (loaded === "s") {
          queue(GoogleDriveService.getUserSettingsSpreadsheet($scope.myInfo.Email), function(spreadsheetRow) {
-            $scope.myInfo.Moderator =moderators[userInfo.result.user.emailAddress] !== undefined,
+            $scope.myInfo.Moderator = moderators[userInfo.result.user.emailAddress] !== undefined,
          });
+         $scope.getFiles("");
       } else if (runCounter === 3) {
-         queue(GoogleDriveService.getUserSettingsSpreadsheet($scope.myInfo.Email), function(spreadsheetRow) {
-            
-         });
+        angular.element(document.querySelector('#overlay_background')).addClass('fadeOut');
       }
       console.log($scope.myInfo);
-      $scope.getFiles("");
       }
    }
 

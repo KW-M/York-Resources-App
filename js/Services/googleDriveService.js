@@ -3,10 +3,9 @@ app.service('GoogleDriveService', ['$q', function($q) {
     var self = this;
 
     this.initiateAuthLoadDrive = function(driveCallback) {
-        angular.element(document.querySelector('#overlay_background')).addClass('fadeOut');
-        gapi.client.load('drive', 'v3', driveCallback);
-        gapi.client.load('sheets', 'v4', driveCallback);//when drive callback is
-        gapi.load('picker', {'callback': driveCallback});
+        gapi.client.load('drive', 'v3', driveCallback("drive"));
+        gapi.client.load('sheets', 'v4', driveCallback("sheets"));
+        gapi.load('picker', {'callback': driveCallback("picker")});
     };
 
     this.getUserInfo = function() {
