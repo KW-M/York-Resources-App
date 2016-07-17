@@ -16,7 +16,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
     };
     
     this.getUserSettingsSpreadsheet = function (emailAddress){
-      return (gapi.client.drive.files.delete({
+      return (gapi.client.sheets.({
             'fileId': fileId
         }));  
     }
