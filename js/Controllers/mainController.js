@@ -214,27 +214,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                      console.log("end of the line");
                      classSelectionIndex[$scope.selectedClass] = "end";
                   }
-                  if ($scope.selectedClass === 'all-posts'){
-                     $scope.allPosts = $scope.allPosts.concat(formattedFileList);
-                     $scope.$apply(function() {
-                        $scope.visiblePosts = $scope.allPosts;
-                     });
-                  } else if ($scope.selectedClass === 'flagged'){
-                     $scope.flaggedPosts = $scope.flaggedPosts.concat(formattedFileList);
-                     $scope.$apply(function() {
-                        $scope.visiblePosts = $scope.flaggedPosts;
-                     });
-                  } else if ($scope.selectedClass === 'my-posts'){
-                     $scope.allPosts = $scope.allPosts.concat(formattedFileList);
-                     $scope.$apply(function() {
-                        $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts), $scope.visiblePosts);
-                     });
-                  } else {
-                     $scope.allPosts = $scope.allPosts.concat(formattedFileList);
-                     $scope.$apply(function() {
-                        $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts), $scope.visiblePosts);
-                     });
-                  }
+                  sortPostsByType(formattedFileList);
                   console.log({
                      allPosts: $scope.allPosts,
                      visiblePosts: $scope.visiblePosts,
@@ -253,6 +233,41 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                   $scope.getFiles();
                }
             }
+         });
+      }
+   }
+
+   function sortPostsByType(formattedFileList) {
+      if ($scope.selectedClass === 'all-posts') {
+         if (formattedFileList !== undefined) {
+            $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+         }
+         $scope.$apply(function() {
+            $scope.visiblePosts = $scope.allPosts;
+         });
+      }
+      else if ($scope.selectedClass === 'flagged') {
+         if (formattedFileList !== undefined) {
+            $scope.flaggedPosts = $scope.flaggedPosts.concat(formattedFileList);
+         }
+         $scope.$apply(function() {
+            $scope.visiblePosts = $scope.flaggedPosts;
+         });
+      }
+      else if ($scope.selectedClass === 'my-posts') {
+         if (formattedFileList !== undefined) {
+            $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+         }
+         $scope.$apply(function() {
+            $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts), $scope.visiblePosts);
+         });
+      }
+      else {
+         if (formattedFileList !== undefined) {
+            $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+         }
+         $scope.$apply(function() {
+            $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts), $scope.visiblePosts);
          });
       }
    }
