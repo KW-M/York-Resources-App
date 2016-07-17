@@ -420,7 +420,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    
    $scope.flagPost = function(ev, content, arrayIndex) {
       $scope.visiblePosts.splice(arrayIndex, 1);
-      $scope.flaggedPosts.splice(arrayIndex, 1);
+      $scope.flaggedPosts.push(arrayIndex, 1);
       GoogleDriveService.flagDriveFile(content.Id, 'Flagged', false).then(function() {
          console.log("flagged: " + content.Id);
       })
@@ -438,8 +438,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
    
    $scope.likePost = function(ev, content, arrayIndex) {
-      $scope.visiblePosts.splice(arrayIndex, 1);
-      $scope.flaggedPosts.splice(arrayIndex, 1);
       GoogleDriveService.flagDriveFile(content.Id, 'Flagged', false).then(function() {
          console.log("flagged: " + content.Id);
       })
