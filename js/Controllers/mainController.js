@@ -4,6 +4,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    var self = this;
    $scope.GoogleDriveService = GoogleDriveService;
    var content_container = document.getElementById("content_container");
+   //var event_handeler = document.getElementById("event_handeler");
    var performantScrollEnabled = false;
 
    $scope.allPosts = [];
@@ -509,7 +510,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       };
    };
 
+   var userInfoLoaded = new Event('userInfoLoaded');
+   var sheetPrefsLoaded = new Event('sheetPrefsLoaded');
+   var pickerLoaded = new Event('pickerLoaded');
    $scope.initiateDrive = function(loaded) {
+
       if (loaded === "drive") {
          queue(GoogleDriveService.getUserInfo(), function(userInfo) {
             $scope.myInfo = {
