@@ -48,13 +48,25 @@ app.service('GoogleDriveService', ['$q', function($q) {
         return (gapi.client.drive.files.update(metadata));
     };
     
-    this.likeFile = function(fileID, email, ) {
-        return (gapi.client.drive.permissions.create({
-            sendNotificationEmail:false,
+    this.likeFile = function(fileID, email) {
+        return (gapi.client.drive.permissions.delete({
+            sendNotificationEmail: false,
             emailMessage:'Please ignore this error from York Study Resources.',
             fileId: fileID,
             emailAddress: email,
-            role
+            role: 'writer',
+            type: "user",
+        }));
+    };
+    
+    this.unLikeFile = function(fileID, permissionID) {
+        return (gapi.client.drive.permissions.create({
+            sendNotificationEmail: false,
+            emailMessage:'Please ignore this error from York Study Resources.',
+            fileId: fileID,
+            emailAddress: email,
+            role: 'writer',
+            type: "user",
         }));
     };
     
