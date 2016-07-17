@@ -66,6 +66,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $scope.idParam = $location.hash();
       $scope.selectedClass = $scope.classParam.replace(/\//g, "")
       if ($scope.firstFiles == true) { // check  if firstFiles have been loaded
+         sortPostsByType();
          $window.setTimeout(function() {
             $scope.getFiles();
          }, 100);
@@ -238,6 +239,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    function sortPostsByType(formattedFileList) {
+      console.log("sorting");
       if ($scope.selectedClass === 'all-posts') {
          if (formattedFileList !== undefined) {
             $scope.allPosts = $scope.allPosts.concat(formattedFileList);
