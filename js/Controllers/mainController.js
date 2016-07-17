@@ -66,7 +66,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $scope.idParam = $location.hash();
       $scope.selectedClass = $scope.classParam.replace(/\//g, "")
       if ($scope.firstFiles == true) { // check  if firstFiles have been loaded
-         sortPostsByType();
+         //sortPostsByType();
          $window.setTimeout(function() {
             $scope.getFiles();
          }, 100);
@@ -223,6 +223,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                   console.log("-----------------------");
                }
                else {
+                  sortPostsByType();
                   if (fileList.result.nextPageToken !== undefined) { //if we haven't reached the end of our search:
                      console.log("duplicate posts - more posts coming...")
                      classSelectionIndex[$scope.selectedClass] = fileList.result.nextPageToken;
@@ -234,7 +235,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                   $scope.getFiles();
                }
             }
+            else {
+               sortPostsByType();
+            }
          });
+      } else {
+         sortPostsByType();
       }
    }
 
@@ -293,7 +299,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          else {
             var Class = true;
          }
-         if ($scope.queryProperties.CreatorEmail !== "any" && $scope.queryProperties.CreatorEmail !== undefined) {
+         if ($scope.queryProperties.Type !== "any" && $scope.queryProperties.Type !== undefined) {
             var Type = post.Type === $scope.queryProperties.Type;
          }
          else {
@@ -314,7 +320,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             Creator: Creator,
          });
          return Flagged && Class && Type && Creator;
-      }); 
+      });
    }
 
    $scope.sortByLikes = function(thingToSort) {
