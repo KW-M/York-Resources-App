@@ -239,39 +239,33 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    function sortPostsByType(formattedFileList) {
-      console.log("sorting");
-      if ($scope.selectedClass === 'all-posts') {
-         if (formattedFileList !== undefined) {
-            $scope.allPosts = $scope.allPosts.concat(formattedFileList);
-         }
-         $scope.$apply(function() {
+      $timeout(function() {
+         console.log("sorting");
+         if ($scope.selectedClass === 'all-posts') {
+            if (formattedFileList !== undefined) {
+               $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+            }
             $scope.visiblePosts = $scope.allPosts;
-         });
-      }
-      else if ($scope.selectedClass === 'flagged') {
-         if (formattedFileList !== undefined) {
-            $scope.flaggedPosts = $scope.flaggedPosts.concat(formattedFileList);
          }
-         $scope.$apply(function() {
+         else if ($scope.selectedClass === 'flagged') {
+            if (formattedFileList !== undefined) {
+               $scope.flaggedPosts = $scope.flaggedPosts.concat(formattedFileList);
+            }
             $scope.visiblePosts = $scope.flaggedPosts;
-         });
-      }
-      else if ($scope.selectedClass === 'my-posts') {
-         if (formattedFileList !== undefined) {
-            $scope.allPosts = $scope.allPosts.concat(formattedFileList);
          }
-         $scope.$apply(function() {
+         else if ($scope.selectedClass === 'my-posts') {
+            if (formattedFileList !== undefined) {
+               $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+            }
             $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts), $scope.visiblePosts);
-         });
-      }
-      else {
-         if (formattedFileList !== undefined) {
-            $scope.allPosts = $scope.allPosts.concat(formattedFileList);
          }
-         $scope.$apply(function() {
+         else {
+            if (formattedFileList !== undefined) {
+               $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+            }
             $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts), $scope.visiblePosts);
-         });
-      }
+         }
+      })
    }
 
    $scope.generateQueryString = function() {
