@@ -413,6 +413,23 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          //cancel
       });
    };
+   
+   $scope.flagPost = function(ev, content, arrayIndex) {
+      $scope.visiblePosts.splice(arrayIndex, 1);
+      $scope.flaggedPosts.splice(arrayIndex, 1);
+      GoogleDriveService.deleteDriveFile(content.Id).then(function() {
+         console.log("flagged" + content.Id);
+      })
+   };
+
+   $scope.unFlagPost = function(ev, content, arrayIndex) {
+      if (user.)
+      $scope.flaggedPosts.splice(arrayIndex, 1);
+      
+      GoogleDriveService.deleteDriveFile(content.Id).then(function() {
+         console.log("flagged" + content.Id);
+      })
+   };
 
    $scope.openLink = function(link) {
       if (link != "") {
