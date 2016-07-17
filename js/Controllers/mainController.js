@@ -215,16 +215,22 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                      console.log("end of the line");
                      classSelectionIndex[$scope.selectedClass] = "end";
                   }
-
-                  $scope.allPosts = $scope.allPosts.concat(formattedFileList);
-                  $scope.$apply(function() {
-                     $scope.visiblePosts = $scope.allPosts;
-                     //$scope.filterPosts($scope.allPosts.concat($scope.tempPosts), $scope.visiblePosts);
-                     console.log({
-                        allPosts: $scope.allPosts,
-                        tempPosts: $scope.tempPosts,
-                        visiblePosts: $scope.visiblePosts,
+                  if ($scope.selectedClass !== 'flagged'){
+                     $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+                     $scope.$apply(function() {
+                        $scope.visiblePosts = $scope.allPosts;
+                        //$scope.filterPosts($scope.allPosts.concat($scope.tempPosts), $scope.visiblePosts);
                      });
+                  } else {
+                     $scope.flaggedPosts = $scope.flaggedPosts.concat(formattedFileList);
+                     $scope.$apply(function() {
+                        $scope.visiblePosts = $scope.flaggedPosts;
+                        //$scope.filterPosts($scope.allPosts.concat($scope.tempPosts), $scope.visiblePosts);
+                     });
+                  }
+                  console.log({
+                     allPosts: $scope.allPosts,
+                     visiblePosts: $scope.visiblePosts,
                   });
                   console.log("-----------------------");
                }
