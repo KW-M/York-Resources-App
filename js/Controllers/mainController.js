@@ -38,7 +38,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
    
    var moderators = {
-      'worcester-moorek2018@york.org':true,
+      'worcester-moorek2018@york.org': true,
    }
 
    //-routing-------------
@@ -422,17 +422,19 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $scope.visiblePosts.splice(arrayIndex, 1);
       $scope.flaggedPosts.splice(arrayIndex, 1);
       GoogleDriveService.flagDriveFile(content.Id).then(function() {
-         console.log("flagged" + content.Id);
+         console.log("flagged: " + content.Id);
       })
    };
 
    $scope.unFlagPost = function(ev, content, arrayIndex) {
-      if ($scope.myInfo.Moderator === true)
+      if ($scope.myInfo.Moderator === true) {
          $scope.flaggedPosts.splice(arrayIndex, 1);
-      
-      GoogleDriveService.unflagDriveFile(content.Id).then(function() {
-         console.log("unflaggedflagged" + content.Id);
-      })
+         GoogleDriveService.updateFileProperty(content.Id).then(function() {
+            console.log("unflagged: " + content.Id);
+         });
+      } else {
+         
+      }
    };
 
    $scope.openLink = function(link) {
@@ -482,7 +484,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             "Name": userInfo.result.user.displayName,
             "Email": userInfo.result.user.emailAddress,
             "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
-            "Moderator": moderators[userInfo.result.user.emailAddress] !== undefined
+            "Moderator": moderators[userInfo.result.user.emailAddress] !== undefined,
          };
          console.log($scope.myInfo);
          $scope.getFiles("");
