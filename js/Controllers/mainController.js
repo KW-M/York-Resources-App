@@ -510,10 +510,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       };
    };
 
-   var userInfoLoaded = new Event('userInfoLoaded');
+   //var userInfoLoaded = 
    var sheetPrefsLoaded = new Event('sheetPrefsLoaded');
    $scope.initiateDrive = function(loaded) {
-
+console.log("loaded: "+ loaded)
       if (loaded === "drive") {
          console.log("driveLoaded")
          queue(GoogleDriveService.getUserInfo(), function(userInfo) {
@@ -522,6 +522,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                "Email": userInfo.result.user.emailAddress,
                "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
             };
+            document.dispatchEvent(new Event('userInfoLoaded'));
          });
       } else if (loaded === "sheets") {
          if ($scope.myInfo !== undefined) {
@@ -542,6 +543,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          }
       }
    }
+            // document.addEventListener('userInfoLoaded', function () {
+            //    handleUserPrefsSheet (); 
+            // });
    
    function handleUserPrefsSheet () {
       queue(GoogleDriveService.getUserSettingsSpreadsheet($scope.myInfo.Email), function(spreadsheetRow) {

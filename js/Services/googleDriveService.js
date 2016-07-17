@@ -9,6 +9,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
     };
 
     this.getUserInfo = function() {
+        console.log(gapi.client);
         return (gapi.client.drive.about.get({
             'fields': 'user(displayName,emailAddress,photoLink),appInstalled'
         }));
