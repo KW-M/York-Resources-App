@@ -7,10 +7,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    var performantScrollEnabled = false;
 
    $scope.allPosts = [];
+   $scope.searchPosts = [];
+   $scope.flaggedPosts = [];
+   $scope.visiblePosts = [];
    var deDuplicationIndex = {};
    var classSelectionIndex = {};
-   $scope.searchPosts = [];
-   $scope.visiblePosts = [];
 
    $scope.searchTxt = '';
    $scope.searchExtra = [''];
