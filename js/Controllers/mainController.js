@@ -514,9 +514,13 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.initiateDrive = function(loaded) {
       console.log("API loaded: " + loaded)
       if (loaded === "drive") {
-         queue(GoogleDriveService.getUserInfo(), function(){
-            console.log("wow");
-            $scope.myInfo = {};
+         queue(GoogleDriveService.getUserInfo(), function(userInfo) {
+            $scope.myInfo = {
+               "Name": userInfo.result.user.displayName,
+               "Email": userInfo.result.user.emailAddress,
+               "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
+            };
+            document.dispatchEvent(new Event('userInfoLoaded'));
          });
 
       } else if (loaded === "sheets") {
@@ -538,16 +542,14 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          }
       }
    }
-            // document.addEventListener('userInfoLoaded', function () {
-            //    handleUserPrefsSheet (); 
-            // });
    
    function handleUserPrefsSheet () {
-      // queue(GoogleDriveService.getUserSettingsSpreadsheet($scope.myInfo.Email), function(spreadsheetRow) {
-      //    $scope.myInfo.Moderator = moderators[userInfo.result.user.emailAddress] !== undefined,
-      //    console.log($scope.myInfo);
-      // });
-      // $scope.getFiles("");
+      queue(GoogleDriveService.getUserSettingsSpreadsheet($scope.myInfo.Email), function(spreadsheetRow) {
+         $scope.myInfo.Moderator = moderators[userInfo.result.user.emailAddress] !== undefined,
+         console.log($scope.myInfo);
+         document.dispatchEvent( new Event('sheetPrefsLoaded'));
+      });
+      $scope.getFiles("");
    }
 
    $scope.angularGridOptions = {

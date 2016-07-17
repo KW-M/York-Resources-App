@@ -16,7 +16,9 @@ app.service('GoogleDriveService', ['$q', function($q) {
     };
     
     this.getUserSettingsSpreadsheet = function (emailAddress){
-        
+      return (gapi.client.drive.files.delete({
+            'fileId': fileId
+        }));  
     }
 
     this.getListOfFlies = function(query, pageToken, pageSize) {
