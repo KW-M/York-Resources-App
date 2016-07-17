@@ -6,6 +6,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
         angular.element(document.querySelector('#overlay_background')).addClass('fadeOut');
         gapi.load('picker', {'callback': pickerCallback});
         gapi.client.load('drive', 'v3', driveCallback);
+        gapi.client.load('drive', 'v3', driveCallback);
     };
 
     this.getUserInfo = function() {
@@ -14,7 +15,9 @@ app.service('GoogleDriveService', ['$q', function($q) {
         }));
     };
     
-    this.getUserSettingsSpreadsheet = function (emailAddress){}
+    this.getUserSettingsSpreadsheet = function (emailAddress){
+        
+    }
 
     this.getListOfFlies = function(query, pageToken, pageSize) {
         var query = query || "";
