@@ -30,6 +30,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.firstFiles = false;
    $scope.queryPropertyString = '';
    $scope.queryProperties = {
+      SelectedType = 'allPosts',
       Flagged: false,
       Type: "any",
       Class: "any",
