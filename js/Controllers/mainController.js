@@ -512,10 +512,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    var userInfoLoaded = new Event('userInfoLoaded');
    var sheetPrefsLoaded = new Event('sheetPrefsLoaded');
-   var pickerLoaded = new Event('pickerLoaded');
    $scope.initiateDrive = function(loaded) {
 
       if (loaded === "drive") {
+         console.log("driveLoaded")
          queue(GoogleDriveService.getUserInfo(), function(userInfo) {
             $scope.myInfo = {
                "Name": userInfo.result.user.displayName,
@@ -533,21 +533,20 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          }
          
       } else if (loaded === "picker") {
-         if ($scope.myInfo !== undefined) {
-            
+         if ($scope.myInfo.Moderator !== undefined) {
+            angular.element(document.querySelector('#overlay_background')).addClass('fadeOut');
          }else{
-            document.addEventListener('userInfoLoaded', function () {
-               
+            document.addEventListener('sheetPrefsLoaded', function () {
+               angular.element(document.querySelector('#overlay_background')).addClass('fadeOut');
             });
          }
-      }
-      console.log($scope.myInfo);
       }
    }
    
    function handleUserPrefsSheet () {
       queue(GoogleDriveService.getUserSettingsSpreadsheet($scope.myInfo.Email), function(spreadsheetRow) {
          $scope.myInfo.Moderator = moderators[userInfo.result.user.emailAddress] !== undefined,
+         console.log($scope.myInfo);
       });
       $scope.getFiles("");
    }
