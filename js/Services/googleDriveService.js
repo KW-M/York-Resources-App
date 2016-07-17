@@ -50,9 +50,11 @@ app.service('GoogleDriveService', ['$q', function($q) {
     
     this.likeFile = function(fileID, email, ) {
         return (gapi.client.drive.permissions.create({
-            sendNotificationEmail:false
+            sendNotificationEmail:false,
             emailMessage:'Please ignore this error from York Study Resources.',
             fileId: fileID,
+            emailAddress: email,
+            role
         }));
     };
     
