@@ -518,12 +518,16 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
             };
          });
-      } else if (loaded === "s") {
-         queue(GoogleDriveService.getUserSettingsSpreadsheet($scope.myInfo.Email), function(spreadsheetRow) {
-            $scope.myInfo.Moderator = moderators[userInfo.result.user.emailAddress] !== undefined,
-         });
+      } else if (loaded === "sheets") {
+         if ($scope.myInfo !== undefined) {
+            queue(GoogleDriveService.getUserSettingsSpreadsheet($scope.myInfo.Email), function(spreadsheetRow) {
+               $scope.myInfo.Moderator = moderators[userInfo.result.user.emailAddress] !== undefined,
+            });
+         }else{
+            
+         }
          $scope.getFiles("");
-      } else if (runCounter === 3) {
+      } else if (loaded === "picker") {
         angular.element(document.querySelector('#overlay_background')).addClass('fadeOut');
       }
       console.log($scope.myInfo);
