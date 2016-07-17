@@ -514,6 +514,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.initiateDrive = function(loaded) {
       console.log("API loaded: " + loaded)
       if (loaded === "drive") {
+         console.log(GoogleDriveService.getUserInfo());
+         var getUserInfo = 
          queue(GoogleDriveService.getUserInfo(), function(userInfo) {
             $scope.myInfo = {
                "Name": userInfo.result.user.displayName,
