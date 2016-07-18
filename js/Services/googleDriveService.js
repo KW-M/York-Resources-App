@@ -61,11 +61,11 @@ app.service('GoogleDriveService', ['$q', function($q) {
                 thumbnail: {},
             },
         }
-        metadata.fileId = id;
-        console.log(metadata.properties);
-        console.log(property);
-        metadata.proprerties.Flagged = value;
-        return (gapi.client.drive.files.update(metadata));
+
+        return (gapi.client.drive.files.update({
+           'fileId': id,
+           'resource': metadata
+        }));
     };
     
     this.likeFile = function(fileID, email) {
