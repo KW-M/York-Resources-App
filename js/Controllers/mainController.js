@@ -430,7 +430,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
    $scope.unFlagPost = function(ev, content, arrayIndex) {
-      if ($scope.myInfo.moderator=== true) {
+      if ($scope.myInfo.moderator === false) {
          content.Flagged = false;
          $timeout(function() {//makes angular update values
             $scope.flaggedPosts.splice(arrayIndex, 1);
@@ -444,7 +444,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       else {
          $mdDialog.show($mdDialog.alert({
             title: 'Uh oh',
-            textContent: 'You have had a post flagged',
+            textContent: 'You have had one of your posts flagged within the past two weeks, if no more of your posts get flagged, you may unflag posts again.',
             ok: 'Close'
          }));
       }

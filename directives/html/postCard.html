@@ -31,6 +31,10 @@
             <md-icon>more_vert</md-icon>
         </md-button>
         <md-menu-content>
+            <md-menu-item ng-show="{{Post.Flagged === true}}">
+                <md-button ng-click="::flagPost($event,Post,$index)">
+                    <md-icon>flag</md-icon>Flag</md-button>
+            </md-menu-item>
             <md-menu-item>
                 <md-button ng-click="::flagPost($event,Post,$index)">
                     <md-icon>flag</md-icon>Flag</md-button>
