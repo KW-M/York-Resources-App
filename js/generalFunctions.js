@@ -8,11 +8,6 @@
       Action: action,
       Err: error
     });
-          console.log({
-      Promise: promise,
-      Action: action.toString(),
-      Err: error
-    });
     if (!timer) {
       processTheQueue(); // start immediately on the first invocation
       timer = setInterval(processTheQueue, 150);
@@ -23,7 +18,6 @@
     var item = theQueue.shift();
     if (item) {
       var thePromise = item.Promise
-      console.log(thePromise);
       thePromise.then(item.Action);
     }
     if (theQueue.length === 0) {

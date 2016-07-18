@@ -524,7 +524,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          });
 
       } else if (loaded === "sheets") {
-                 console.log(gapi)
+         console.log(gapi.client);
          if ($scope.myInfo !== undefined) {
             handleUserPrefsSheet ()
          }else{
