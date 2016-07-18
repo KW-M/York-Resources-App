@@ -395,6 +395,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          fullscreen: ($mdMedia('xs')),
       });
    };
+   
+   $scope.logPostToConsole = function(content, arrayIndex) {
+      console.log({'loggedPostContent':content,'arrayIndex':arrayIndex});
+   };
 
    $scope.confirmDelete = function(ev, content, arrayIndex) {
       // Appending dialog to document.body to cover sidenav in docs app
