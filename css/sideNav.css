@@ -9,6 +9,7 @@
 
     md-sidenav md-menu-item {
        width: 100%;
+       height: 40px;
     }
 
     md-sidenav md-icon {
