@@ -15,11 +15,14 @@
 
 .post-card-header {
     min-height: 42px;
-    cursor: pointer;
     background-color: grey;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     position: relative;
+}
+
+.post-card-header:not(.noLink) {
+    cursor: pointer;
 }
 
 .post-card-image {
@@ -66,7 +69,7 @@
     transition: opacity 0.2s
 }
 
-.post-card-header:hover .post-card-metadata-text:not(.noLink) {
+.post-card-header:not(.noLink):hover .post-card-metadata-text {
     opacity: 0;
     transition: opacity 0.2s
 }
@@ -85,7 +88,7 @@
     transition: opacity 0.2s;
 }
 
-.post-card-header:hover .post-card-link-text {
+.post-card-header:hover:not(.noLink) .post-card-link-text {
     opacity: 1;
     transition: opacity 0.2s
 }
