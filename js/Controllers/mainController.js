@@ -448,7 +448,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       else {
          $mdDialog.show($mdDialog.alert({
             title: 'Uh Oh.',
-            textContent: 'One of your posts has been flagged within the past two weeks.\n To unlock the ability to unflag posts, make sure none of your posts get flagged this week.',
+            htmlContent: '<p style="margin: 0px">One of your posts has been flagged within the past two weeks.</p><p>To unlock the ability to unflag posts, make sure none of your posts get flagged this week.</p>',
             ok: 'Ok'
          }));
       }
