@@ -442,13 +442,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          });
       }
       else {
-         $mdDialog.show($mdDialog.confirm()
-            .title('Permanently delete this?')
-            .ariaLabel('Delete?')
-            .targetEvent(ev)
-            .ok('Delete')
-            .cancel('Cancel')
-         );
+         $mdDialog.show($mdDialog.alert({
+            title: 'Uh oh',
+            textContent: 'You have had a post flagged',
+            ok: 'Close'
+         }));
       }
    };
 
