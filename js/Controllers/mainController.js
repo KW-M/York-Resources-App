@@ -418,7 +418,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
    $scope.flagPost = function(ev, content, arrayIndex) {
-      console.log("flagging")
+      content.Flagged = true;
       $timeout(function() {//makes angular update values
          $scope.visiblePosts.splice(arrayIndex, 1);
          $scope.flaggedPosts.push(content);
@@ -430,11 +430,13 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
    $scope.unFlagPost = function(ev, content, arrayIndex) {
-      if ($scope.myInfo.Moderator === true) {
+      if ($scope.myInfo.moderator=== true) {
+         content.Flagged = false;
          $timeout(function() {//makes angular update values
             $scope.flaggedPosts.splice(arrayIndex, 1);
+            $scope.visiblePosts.push(content);
          });
-
+         
          queue(GoogleDriveService.updateFileProperty(content.Id, 'Flagged', false),function() {
             console.log("unflagged: " + content.Id);
          });
@@ -447,8 +449,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             .ok('Delete')
             .cancel('Cancel')
          );
-         GoogleDriveService.updateFileProperty(content.Id, 'toBeUnFlagged', true).then(function() {
-         });
       }
    };
 
@@ -511,8 +511,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       };
    };
 
-   //var userInfoLoaded = 
-   //var sheetPrefsLoaded = new Event('sheetPrefsLoaded');
    $scope.initiateDrive = function(loaded) {
       console.log("API loaded: " + loaded)
       if (loaded === "drive") {
