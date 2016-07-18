@@ -12,8 +12,8 @@ app.config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $locati
         .when("/my-posts", {
             templateUrl: "templates/html/my-posts.html",
         })
-        .when("/flaged", {
-            templateUrl: "templates/html/flaged.html",
+        .when("/flagged", {
+            templateUrl: "templates/html/flagged.html",
         })
         .when("/:class", {
             templateUrl: "templates/html/class.html",
