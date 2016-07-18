@@ -55,15 +55,17 @@ app.service('GoogleDriveService', ['$q', function($q) {
 
     this.updateFileProperty = function(id, property, value) {
         var metadata = {
-            properties: {},
+            properties: {
+                Flagged: {whyISThisHere:true},
+            },
             contentHints: {
                 thumbnail: {},
             },
         }
         metadata.fileId = id;
-        console.log(metadata.pro);
+        console.log(metadata.properties);
         console.log(property);
-        metadata.proprerties.Flagged = value;
+        metadata.proprerties;
         return (gapi.client.drive.files.update(metadata));
     };
     
