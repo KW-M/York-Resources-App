@@ -33,7 +33,7 @@
         <md-menu-content>
             <md-menu-item>
                 <md-button>
-                    <md-icon>flag</md-icon>Flag</md-button>
+                    <md-icon ng-click="::flagPost($event,Post,$index)">flag</md-icon>Flag</md-button>
             </md-menu-item>
             <md-menu-item>
                 <md-button ng-click="::confirmDelete($event,Post,$index)">

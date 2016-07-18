@@ -37,7 +37,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       CreatorEmail: "any",
    };
 
-   var moderators = {
+   var moderators = {//temporary
       'worcester-moorek2018@york.org': true,
    }
 
