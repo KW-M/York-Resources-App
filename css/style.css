@@ -22,6 +22,7 @@ html body {
     /*display:-ms-flexbox;*/
     display:flex;
     /*-ms-flex-direction: column;*/
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     flex-direction: column;
     box-sizing: border-box;
     margin: 0px;
