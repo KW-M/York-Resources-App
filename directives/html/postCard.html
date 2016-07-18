@@ -1,4 +1,4 @@
-<div class="post-card-header" md-ink-ripple="true" ng-click="::openLink(Post.Link)" ng-class="{ 'noLink' : Post.Type === 'noLink' }">
+<div class="post-card-header" md-ink-ripple="{{Post.Type !== 'noLink'}}" ng-click="::openLink(Post.Link)" ng-class="{ 'noLink' : Post.Type === 'noLink' }">
     <img ng-src="{{::Post.PreviewImg}}" class="post-card-image" ng-hide="::Post.Link == ''">
     <div class="post-card-image-gradient">
         <p class="post-card-link-text" ng-hide="::Post.Link == ''">
