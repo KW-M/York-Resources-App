@@ -418,11 +418,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
    $scope.flagPost = function(ev, content, arrayIndex) {
+      console.log("flagging")
       $timeout(function() {//makes angular update values
          $scope.visiblePosts.splice(arrayIndex, 1);
          $scope.flaggedPosts.push(content);
       });
-      queue(GoogleDriveService.flagDriveFile(content.Id, 'Flagged', true),function() {
+      queue(GoogleDriveService.updateFileProperty(content.Id, 'Flagged', true),function() {
          console.log("flagged: " + content.Id);
       });
    };

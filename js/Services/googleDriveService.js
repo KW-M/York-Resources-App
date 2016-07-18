@@ -61,6 +61,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
             },
         }
         metadata.fileId = id;
+        console.log(property)
         metadata.proprerties[property] = value;
         return (gapi.client.drive.files.update(metadata));
     };
