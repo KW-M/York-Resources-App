@@ -66,7 +66,7 @@
     transition: opacity 0.2s
 }
 
-.post-card-header:hover .post-card-metadata-text {
+.post-card-header:hover .post-card-metadata-text:not(.noLink) {
     opacity: 0;
     transition: opacity 0.2s
 }
