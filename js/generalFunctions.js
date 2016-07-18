@@ -17,7 +17,7 @@
   function processTheQueue() {
     var item = theQueue.shift();
     if (item) {
-      var thePromise = item.Promise
+      var thePromise = item.Promise;
       thePromise.then(item.Action);
     }
     if (theQueue.length === 0) {
