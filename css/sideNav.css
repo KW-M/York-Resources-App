@@ -41,7 +41,8 @@
     }
     md-sidenav .md-button.selected {
            background-color: rgba(0,0,0,.05);
-           color: #306acf;
+           font-weight: bold
+           color: #000000;
     }
 
     .side-nav-classes md-menu-item>.md-button {
