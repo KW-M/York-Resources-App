@@ -524,6 +524,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          });
 
       } else if (loaded === "sheets") {
+                 console.log(gapi)
          if ($scope.myInfo !== undefined) {
             handleUserPrefsSheet ()
          }else{
@@ -544,11 +545,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
    
    function handleUserPrefsSheet () {
-      queue(GoogleDriveService.getUserSettingsSpreadsheet($scope.myInfo.Email), function(spreadsheetRow) {
-         $scope.myInfo.Moderator = moderators[userInfo.result.user.emailAddress] !== undefined,
-         console.log($scope.myInfo);
+      // queue(GoogleDriveService.getUserSettingsSpreadsheet($scope.myInfo.Email), function(spreadsheetRow) {
+      //    $scope.myInfo.Moderator = moderators[userInfo.result.user.emailAddress] !== undefined,
+      //    console.log($scope.myInfo);
          document.dispatchEvent( new Event('sheetPrefsLoaded'));
-      });
+      // });
       $scope.getFiles("");
    }
 

@@ -10,15 +10,14 @@ app.service('GoogleDriveService', ['$q', function($q) {
     };
 
     this.getUserInfo = function() {
+
         return (gapi.client.drive.about.get({
             'fields': 'user(displayName,emailAddress,photoLink),appInstalled'
         }));
     };
     
     this.getUserSettingsSpreadsheet = function (emailAddress){
-      return (gapi.client.sheets.({
-            'fileId': fileId
-        }));  
+
     }
 
     this.getListOfFlies = function(query, pageToken, pageSize) {
