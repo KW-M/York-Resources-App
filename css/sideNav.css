@@ -1,6 +1,6 @@
       /*-------------------- sidebar styles --------------------- */
     md-sidenav.sidenav-overlay {
-        margin-top: 56px;
+        padding-top: 56px;
     }
     md-sidenav.sidenav-inline {
         max-width: 252px;
