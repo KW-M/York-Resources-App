@@ -426,6 +426,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       queue(GoogleDriveService.updateFileProperty(content.Id, 'Flagged', true),function() {
          console.log("flagged: " + content.Id);
       });
+//set the user's has flagged date back
    };
 
    $scope.unFlagPost = function(ev, content, arrayIndex) {
