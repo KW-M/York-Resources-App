@@ -15,6 +15,9 @@ app.config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $locati
         .when("/flagged", {
             templateUrl: "templates/html/flagged.html",
         })
+        .when("/unflagpending", {
+            templateUrl: "templates/html/unflagpending.html",
+        })
         .when("/:class", {
             templateUrl: "templates/html/class.html",
         })
