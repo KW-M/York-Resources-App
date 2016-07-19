@@ -3,18 +3,17 @@
         padding-top: 56px;
     }
     .sidenav-inline {
-        max-width: 252px;
+        width: 252px;
         background-color: #f2f2f2;
         overflow: Hidden;
         margin-right: 100px;
-        position: relative;
-        left: -100%;
-        transition: left 1s ease, margin 1s;
+        transform: translate3d(-100%, 0, 0);
+        transition: transform 1s ease, margin 1s;
     }
     
     .sidenav-inline.side-nav-open {
         left: -100%;
-        margin-right: px;
+        margin-right: 8px;
         transition: left 1s ease, margin 1s;
     }
     
