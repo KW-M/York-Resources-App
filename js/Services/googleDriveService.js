@@ -64,6 +64,13 @@ app.service('GoogleDriveService', ['$q', function($q) {
         }));
     };
     
+    this.updateFileMetadata = function(id, metadata) {
+        return (gapi.client.drive.files.update({
+           'fileId': id,
+           'resource': metadata,
+        }));
+    };
+    
     this.likeFile = function(fileID, email) {
         return (gapi.client.drive.permissions.create({
             sendNotificationEmail: false,

@@ -109,6 +109,7 @@
                     var isgdrive = $scope.Link.match(/\/(?:d|file|folder|folders)\/([-\w]{25,})/)
                     if (isgdrive) {
                         $scope.Type = 'gDrive';
+                        console.log(isgdrive);
                     }
                     else {
                         $scope.Type = 'Link';
@@ -173,7 +174,6 @@
                 if (postObj.HeaderImage !== undefined) {
                     $scope.HeaderImage = postObj.HeaderImage;
                 }
-
             }
         }
 
@@ -184,6 +184,7 @@
                     thumbnail: {},
                 },
             }
+            
             var tagString = JSON.stringify($scope.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || [];
             var classObject = JSON.parse($scope.Class);
 
@@ -214,6 +215,56 @@
 
             return metadata;
         }
+        
+        function compileUpdateForFile() {
+                var metadata = {
+                    properties: {},
+                    contentHints: {
+                        thumbnail: {},
+                    },
+                }
+                
+                if (postObj.Type !== $scope.Type) {
+                    metadata.properties.Type = $scope.Type;
+                }
+
+                if (postObj.Flagged !== $scope.Flagged) {
+                    metadata.properties.Flagged = $scope.Flagged;
+                }
+
+                if (postObj.Title !== $scope.Title) {
+                    metadata.name = $scope.Title + "{]|[}" + ($scope.Link || "") + "{]|[}";
+                }
+
+                if (postObj.Tags !== $scope.Tags) {
+                    var tagString = JSON.stringify($scope.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || [];
+                    metadata.properties.Tag1 = tagString[0] || "";
+                    metadata.properties.Tag2 = tagString[1] || "";
+                }
+
+                if (postObj.Description !== $scope.newPostDescription) {
+                    metadata.description = $scope.newPostDescription.innerHTML;
+                }
+
+                if (postObj.Class.Name !== $scope.Class.Name) {
+                    var classObject = JSON.parse($scope.Class);
+                    metadata.properties.ClassName = classObject.Name;
+                    metadata.properties.ClassCatagory = classObject.Catagory;
+                    metadata.properties.ClassColor = classObject.Color;
+                }
+
+                if (postObj.Link !== $scope.Link) {
+                    metadata.name = $scope.Title + "{]|[}" + ($scope.Link || "") + "{]|[}";
+                }
+
+                if (postObj.AttachmentId !== $scope.AttachmentId) {
+                    metadata.properties.attachmentId = $scope.AttachmentId;    
+                }
+                
+                console.log(metadata);
+
+                return metadata;
+        }
 
         function onPreviewLoad(){
             $scope.previewLoading = false;
@@ -238,7 +289,7 @@
                     $scope.previewThumbnail = "https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + $scope.AttachmentId;
                 }
                 else {
-                    $scope.previewThumbnail = "";
+                    $scope.previewThumbnail = ""; 
                 }
                 return $scope.previewThumbnail;
             }

@@ -450,7 +450,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             title: 'Uh Oh.',
             htmlContent: '<p style="margin: 0px; margin-bottom: 2px">One of your posts has been flagged within the past two weeks.</p><p style="margin: 0px">To unlock the ability to unflag posts, make sure none of your posts get flagged this week.</p>',
             ok: 'Ok'
-         }));
+         })); 
       }
    };
 
