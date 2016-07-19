@@ -21,7 +21,7 @@ app.directive('searchBar', function() {
 });
 app.directive('sideNavInsides', function() {
     return {
-        restrict: 'A',
+        restrict: 'AE',
         templateUrl: 'directives/html/sideNavInsides.html'
     };
 });
