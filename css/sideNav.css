@@ -7,17 +7,15 @@
         background-color: #f2f2f2;
         overflow: Hidden;
         margin-right: 100px;
-        transform: translate3d(-100%, 0, 0);
-        transition: transform 1s ease, margin 1s;
+        position: relative;
+        left: -100%;
+        transition: left 1s ease, margin 1s;
     }
     
     .sidenav-inline.side-nav-open {
-        max-width: 252px;
-        background-color: #f2f2f2;
-        overflow: Hidden;
-        margin-right: 100px;
-        transform: translate3d(-100%, 0, 0);
-        transition: transform 1s ease, margin 1s;
+        left: -100%;
+        margin-right: px;
+        transition: left 1s ease, margin 1s;
     }
     
 
