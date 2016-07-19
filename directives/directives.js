@@ -22,6 +22,7 @@ app.directive('searchBar', function() {
 app.directive('sideNavInsides', function() {
     return {
         restrict: 'AE',
+        replace: true,
         templateUrl: 'directives/html/sideNavInsides.html'
     };
 });
