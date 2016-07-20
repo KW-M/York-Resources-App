@@ -183,6 +183,7 @@
                     $scope.HeaderImage = postObj.HeaderImage;
                 }
             }
+            console.log($scope.Class);
         }
 
         $scope.compilePostToMetadata = function() {
