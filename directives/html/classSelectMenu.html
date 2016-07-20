@@ -1,7 +1,7 @@
 {{Class.Name}}
 <md-input-container class="button-select md-button" md-ink-ripple="true">
     <label>Class</label>
-    <md-select ng-model="Class" ng-model-options="{trackBy: 'Class.Name'}">
+    <md-select ng-model="Class" ng-model-options='{trackBy: "{\"Name\":\""+Class.Name+"\",\"Catagory\":\""+Class.Catagory+"\",\"Color\":\""+Class.Color+"\"}"}'>
         <md-select-header>
           <md-input></md-input>
         </md-select-header>
