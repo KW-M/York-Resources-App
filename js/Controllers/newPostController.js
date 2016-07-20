@@ -78,8 +78,8 @@
 
         $scope.submit = function() {
             $scope.close();
-            var metadata = $scope.compilePostToMetadata();
             if (operation === 'new') {
+                var metadata = $scope.compilePostToMetadata();
                 queue(GoogleDriveService.createDriveFile(metadata), function(reply) {
                     console.log(reply.result);
                     $mdToast.hide();
@@ -88,7 +88,13 @@
                 });
             }
             else if (operation === 'update') {
-
+                var metadata = $scope.compilePostToMetadata();
+                queue(GoogleDriveService.createDriveFile(metadata), function(reply) {
+                    console.log(reply.result);
+                    $mdToast.hide();
+                },function(err) {
+                    console.log(err);
+                });
             }
         }
 
@@ -255,11 +261,15 @@
 
                 if (postObj.Link !== $scope.Link) {
                     metadata.name = $scope.Title + "{]|[}" + ($scope.Link || "") + "{]|[}";
+                    metadata.contentHints.thumbnail.image = getImagePreview(true);
+                    metadata.contentHints.thumbnail.mimeType = "image/png";
                 }
 
                 if (postObj.AttachmentId !== $scope.AttachmentId) {
                     metadata.properties.attachmentId = $scope.AttachmentId;    
                 }
+                
+                metadata.contentHints.indexableText = " class: " + classObject.Name +" class-catagory: " + classObject.Catagory + " tags: " + tagString + " attachmentId: " + $scope.AttachmentId;
                 
                 console.log(metadata);
 
