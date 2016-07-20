@@ -14,8 +14,12 @@ app.service('GoogleDriveService', ['$q', function($q) {
         }));
     };
     
-    this.getUserSettingsSpreadsheet = function (emailAddress){
-
+    this.getUserSettings = function (emailAddress){
+        //gets a named range in a google spreadsheet
+        gapi.client.sheets.spreadsheets.values.get({
+          spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
+          range: emailAddress,
+        })
     }
 
     this.getListOfFlies = function(query, pageToken, pageSize) {
