@@ -84,12 +84,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       console.log(postObj)
       $mdDialog.show({
          templateUrl: '/directives/html/newPostContent.html',
-         controller: ['$scope', '$mdDialog', 'GoogleDriveService', '$mdToast', newPostController],
+         controller: ['$scope', '$mdDialog', 'GoogleDriveService', '$mdToast', "postObj", "operation", newPostController],
          scope: $scope,
          parent: angular.element(document.body),
          preserveScope: true,
          locals: {
-            postObj: $scope.items,
+            postObj: postObj,
             operation: operation
          },
          onComplete: function() {
