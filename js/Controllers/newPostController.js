@@ -224,7 +224,7 @@
             return metadata;
         }
 
-        function compileUpdateToMetadata() {
+        $scope.compileUpdateToMetadata = function() {
             var metadata = {
                 properties: {},
                 contentHints: {
