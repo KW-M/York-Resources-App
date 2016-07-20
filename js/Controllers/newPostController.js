@@ -132,6 +132,8 @@
         };
 
         function fillInValues() {
+            console.log("postObj");
+            console.log(postObj);
             if (postObj !== undefined) {
                 if (postObj.Type !== undefined && postObj.Type !== "") {
                     $scope.Type = postObj.Type;
