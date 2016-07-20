@@ -1,5 +1,5 @@
     /* we don't define the "new post controller" here because it was alredy
-                               defined by the $md-dialog in the newPost function on mainController.   */
+                                   defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
         operation = 'new'
             //database variables
@@ -83,16 +83,16 @@
                 queue(GoogleDriveService.createDriveFile(metadata), function(reply) {
                     console.log(reply.result);
                     $mdToast.hide();
-                },function(err) {
+                }, function(err) {
                     console.log(err);
                 });
             }
             else if (operation === 'update') {
-                var metadata = $scope.compilePostToMetadata();
-                queue(GoogleDriveService.createDriveFile(metadata), function(reply) {
+                var metadata = $scope.compileUpdateToMetadata();
+                queue(GoogleDriveService.updateFileMetadata(postObj.Id,metadata), function(reply) {
                     console.log(reply.result);
                     $mdToast.hide();
-                },function(err) {
+                }, function(err) {
                     console.log(err);
                 });
             }
@@ -107,7 +107,7 @@
                 xhttp.open('HEAD', $scope.link); // to implement: img checking and icon for non existant thumnail drive docs
                 xhttp.onreadystatechange = function() {
                     if (this.readyState == this.DONE) {
-                        console.log(this.getResponseHeader("Content-Type"));
+                        console.log(this);
                     }
                 };
                 xhttp.send();
@@ -190,7 +190,7 @@
                     thumbnail: {},
                 },
             }
-            
+
             var tagString = JSON.stringify($scope.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || [];
             var classObject = JSON.parse($scope.Class);
 
@@ -209,10 +209,10 @@
             metadata.properties.ClassColor = classObject.Color;
 
             metadata.properties.attachmentId = $scope.AttachmentId;
-            
+
             metadata.mimeType = "application/octet-stream"
-            
-            metadata.contentHints.indexableText = " class: " + classObject.Name +" class-catagory: " + classObject.Catagory + " tags: " + tagString + " attachmentId: " + $scope.AttachmentId;
+
+            metadata.contentHints.indexableText = " class: " + classObject.Name + " class-catagory: " + classObject.Catagory + " tags: " + tagString + " attachmentId: " + $scope.AttachmentId;
 
             metadata.contentHints.thumbnail.image = getImagePreview(true);
             metadata.contentHints.thumbnail.mimeType = "image/png";
@@ -221,62 +221,60 @@
 
             return metadata;
         }
-        
-        function compileUpdateForFile() {
-                var metadata = {
-                    properties: {},
-                    contentHints: {
-                        thumbnail: {},
-                    },
-                }
-                
-                if (postObj.Type !== $scope.Type) {
-                    metadata.properties.Type = $scope.Type;
-                }
 
-                if (postObj.Flagged !== $scope.Flagged) {
-                    metadata.properties.Flagged = $scope.Flagged;
-                }
+        function compileUpdateToMetadata() {
+            var metadata = {
+                properties: {},
+                contentHints: {
+                    thumbnail: {},
+                },
+            }
+            var classObject = JSON.parse($scope.Class);
 
-                if (postObj.Title !== $scope.Title) {
-                    metadata.name = $scope.Title + "{]|[}" + ($scope.Link || "") + "{]|[}";
-                }
+            if (postObj.Type !== $scope.Type) {
+                metadata.properties.Type = $scope.Type;
+            }
 
-                if (postObj.Tags !== $scope.Tags) {
-                    var tagString = JSON.stringify($scope.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || [];
-                    metadata.properties.Tag1 = tagString[0] || "";
-                    metadata.properties.Tag2 = tagString[1] || "";
-                }
+            if (postObj.Flagged !== $scope.Flagged) {
+                metadata.properties.Flagged = $scope.Flagged;
+            }
 
-                if (postObj.Description !== $scope.newPostDescription) {
-                    metadata.description = $scope.newPostDescription.innerHTML;
-                }
+            if (postObj.Title !== $scope.Title) {
+                metadata.name = $scope.Title + "{]|[}" + ($scope.Link || "") + "{]|[}";
+            }
 
-                if (postObj.Class.Name !== $scope.Class.Name) {
-                    var classObject = JSON.parse($scope.Class);
-                    metadata.properties.ClassName = classObject.Name;
-                    metadata.properties.ClassCatagory = classObject.Catagory;
-                    metadata.properties.ClassColor = classObject.Color;
-                }
+            if (postObj.Tags !== $scope.Tags) {
+                var tagString = JSON.stringify($scope.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || [];
+                metadata.properties.Tag1 = tagString[0] || "";
+                metadata.properties.Tag2 = tagString[1] || "";
+            }
 
-                if (postObj.Link !== $scope.Link) {
-                    metadata.name = $scope.Title + "{]|[}" + ($scope.Link || "") + "{]|[}";
-                    metadata.contentHints.thumbnail.image = getImagePreview(true);
-                    metadata.contentHints.thumbnail.mimeType = "image/png";
-                }
+            if (postObj.Description !== $scope.newPostDescription) {
+                metadata.description = $scope.newPostDescription.innerHTML;
+            }
 
-                if (postObj.AttachmentId !== $scope.AttachmentId) {
-                    metadata.properties.attachmentId = $scope.AttachmentId;    
-                }
-                
-                metadata.contentHints.indexableText = " class: " + classObject.Name +" class-catagory: " + classObject.Catagory + " tags: " + tagString + " attachmentId: " + $scope.AttachmentId;
-                
-                console.log(metadata);
+            if (postObj.Class.Name !== $scope.Class.Name) {
+                metadata.properties.ClassName = classObject.Name;
+                metadata.properties.ClassCatagory = classObject.Catagory;
+                metadata.properties.ClassColor = classObject.Color;
+            }
 
-                return metadata;
+            if (postObj.Link !== $scope.Link) {
+                metadata.name = $scope.Title + "{]|[}" + ($scope.Link || "") + "{]|[}";
+                metadata.contentHints.thumbnail.image = getImagePreview(true);
+                metadata.contentHints.thumbnail.mimeType = "image/png";
+            }
+
+            if (postObj.AttachmentId !== $scope.AttachmentId) {
+                metadata.properties.attachmentId = $scope.AttachmentId;
+            }
+            metadata.contentHints.indexableText = " class: " + classObject.Name + " class-catagory: " + classObject.Catagory + " tags: " + tagString + " attachmentId: " + $scope.AttachmentId;
+            console.log(metadata);
+
+            return metadata;
         }
 
-        function onPreviewLoad(){
+        function onPreviewLoad() {
             $scope.previewLoading = false;
         }
 
@@ -299,7 +297,7 @@
                     $scope.previewThumbnail = "https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + $scope.AttachmentId;
                 }
                 else {
-                    $scope.previewThumbnail = ""; 
+                    $scope.previewThumbnail = "";
                 }
                 return $scope.previewThumbnail;
             }
