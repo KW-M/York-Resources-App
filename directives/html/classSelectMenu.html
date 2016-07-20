@@ -1,10 +1,11 @@
+{{Class.Name}}
 <md-input-container class="button-select md-button" md-ink-ripple="true">
     <label>Class</label>
     <md-select ng-model="Class" ng-model-options="{trackBy: 'Class.Name'}">
         <md-select-header>
           <md-input></md-input>
         </md-select-header>
-        <md-option ng-repeat="Class in Catagory.Classes" value="Other">
+        <md-option value='{{"{\"Name\":\"Other\",\"Catagory\":\"Other\",\"Color\":\"toBeMade\"}"}}'>
                 Other / Not associated
         </md-option>
         <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">
