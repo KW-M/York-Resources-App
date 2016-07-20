@@ -548,11 +548,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
    
    function handleUserPrefsSheet () {
-      // queue(GoogleDriveService.getUserSettingsSpreadsheet($scope.myInfo.Email), function(spreadsheetRow) {
-      //    $scope.myInfo.Moderator = moderators[userInfo.result.user.emailAddress] !== undefined,
-      //    console.log($scope.myInfo);
+      queue(GoogleDriveService.getUserSettings($scope.myInfo.Email), function(spreadsheetRow) {
+         $scope.myInfo.Moderator = moderators[userInfo.result.user.emailAddress] !== undefined,
+         console.log($scope.myInfo);
          document.dispatchEvent( new Event('sheetPrefsLoaded'));
-      // });
+      });
       $scope.getFiles("");
    }
 
