@@ -5,15 +5,15 @@
             <i class="zmdi zmdi-globe-alt zmdi-hc-fw"></i> <span> {{::Post.Link}}</span>
         </p>
         <div class="post-card-metadata-text">
-            <p style="margin: 0 0 2px 0; font-size: 14px; font-weight:700;"><md-icon class=""></md-icon><span>{{Post.Tags.join(', ')}}</span></p>
-            <i class="zmdi zmdi-calendar zmdi-hc-fw"></i><span style="margin-right:10px"> {{::Post.CreationDate | date : "m/dd/yyyy"}}</span>
-            <i class="zmdi zmdi-accounts-alt zmdi-hc-fw"></i> <span> {{::Post.Class.Name}}</span>
+            <p style="margin: 0 0 2px 0; font-size: 14px; font-weight:700;"><md-icon class="small-icons"></md-icon><span>{{Post.Tags.join(', ')}}</span></p>
+            <md-icon class="small-icons">calendar</md-icon><span style="margin-right:10px"> {{::Post.CreationDate | date : "m/dd/yyyy"}}</span>
+            <md-icon class="small-icons">people_outline</md-icon><span> {{::Post.Class.Name}}</span>
         </div>
     </div>
 </div>
 
 <p class="post-card-title">{{::Post.Title}}</p>
-<p class="post-card-creator"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<i class="zmdi zmdi-graduation-cap"></i> {{Post.Creator.ClassOf}})</span></p>
+<p class="post-card-creator"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icons">school</md-icon> {{Post.Creator.ClassOf}})</span></p>
 <p id="post_card_description" ng-bind-html="::Post.Description">
 
 </p>
