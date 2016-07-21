@@ -5,7 +5,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
   // $scope.GoogleDriveService = GoogleDriveService;
    var content_container = document.getElementById("content_container");
    var performantScrollEnabled = false;
- console.log($mdMedia('xs'))
+
    $scope.allPosts = [];
    $scope.searchPosts = [];
    $scope.flaggedPosts = [];
@@ -37,6 +37,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       Class: "any",
       CreatorEmail: "any",
    };
+   
+   $scope.screenSm = $mdMedia('sm');
+   $scope.screenXs = $mdMedia('xs');
 
    var moderators = {//temporary
       'worcester-moorek2018@york.org': true,
