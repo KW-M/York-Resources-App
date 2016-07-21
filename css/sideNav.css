@@ -13,6 +13,12 @@
         padding-right: 4px;
     }
     
+    .sidenav-inline.xs {
+        margin-right: 0px;
+        margin-left: -256px;
+        padding-right: 0px;
+    }
+    
     .sidenav-inline.side-nav-open {
         margin-left: 0px;
         margin-right: 4px;

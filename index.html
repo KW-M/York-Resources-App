@@ -52,7 +52,7 @@
         <!-------------------------------------------------------->
         <div class="horizontalContainer">
             <!---------------------------------------------------->
-            <side-nav-insides class="ng-cloak side-nav md-sidenav-left sidenav-inline" ng-class="{'side-nav-open' : globals.sidenavIsOpen}" hide-xs show-gt-sm></side-nav-insides>
+            <side-nav-insides class="ng-cloak side-nav md-sidenav-left sidenav-inline" ng-class="{'side-nav-open' : globals.sidenavIsOpen === true && $mdMedia('gt-sm'), 'xs': $mdMedia('xs'),}"></side-nav-insides>
             <!----- The content, ie posts, resources, etc. ------->
             <div id="content_container" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'gt-sm': $mdMedia('gt-sm')}" class="">
                 <ng-view></ng-view>
