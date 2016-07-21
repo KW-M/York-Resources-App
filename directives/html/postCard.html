@@ -2,18 +2,18 @@
     <img ng-src="{{::Post.PreviewImg}}" class="post-card-image" ng-hide="::Post.Link == ''">
     <div class="post-card-image-gradient">
         <p class="post-card-link-text" ng-hide="::Post.Link == ''">
-            <i class="zmdi zmdi-globe-alt zmdi-hc-fw"></i> <span> {{::Post.Link}}</span>
+            <md-icon class="small-icon">language</md-icon><span> {{::Post.Link}}</span>
         </p>
         <div class="post-card-metadata-text">
-            <p style="margin: 0 0 2px 0; font-size: 14px; font-weight:700;"><md-icon class="small-icons"></md-icon><span>{{Post.Tags.join(', ')}}</span></p>
-            <md-icon class="small-icons">calendar</md-icon><span style="margin-right:10px"> {{::Post.CreationDate | date : "m/dd/yyyy"}}</span>
-            <md-icon class="small-icons">people_outline</md-icon><span> {{::Post.Class.Name}}</span>
+            <p style="margin: 0 0 2px 0; font-size: 14px; font-weight:700;"><md-icon class="small-icon"></md-icon><span>{{Post.Tags.join(', ')}}</span></p>
+            <md-icon class="small-icon">event</md-icon><span style="margin-right:10px"> {{::Post.CreationDate | date : "m/dd/yyyy"}}</span>
+            <md-icon class="small-icon">people_outline</md-icon><span> {{::Post.Class.Name}}</span>
         </div>
     </div>
 </div>
 
 <p class="post-card-title">{{::Post.Title}}</p>
-<p class="post-card-creator"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icons">school</md-icon> {{Post.Creator.ClassOf}})</span></p>
+<p class="post-card-creator"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{Post.Creator.ClassOf}})</span></p>
 <p id="post_card_description" ng-bind-html="::Post.Description">
 
 </p>
