@@ -22,7 +22,7 @@ html body {
     /*display:-ms-flexbox;*/
     display:flex;
     /*-ms-flex-direction: column;*/
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, "Roboto", Arial, sans-serif;
     flex-direction: column;
     box-sizing: border-box;
     margin: 0px;
@@ -46,7 +46,7 @@ html body {
     -ms-flex: 1;
     flex: 1;
     overflow: auto;
-    padding: 32px108px 20px 100px;
+    padding: 32px 108px 20px 100px;
     background-color: #f2f2f2;
 }
 
