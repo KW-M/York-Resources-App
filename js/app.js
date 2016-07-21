@@ -28,8 +28,8 @@ app.config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $locati
     //defining icons
     $mdIconProvider
         .icon("accountpic", "./assets/svg/avatar-1.svg", 128)
-        .icon("driveIcon", "./assets/drive-icon.svg", 18);
-        .icon("driveIcon", "./images/drive_icon.svg", 18)
+        .icon("driveIconNot", "./assets/drive-icon.svg", 18)
+        .icon("driveIcon", "./images/drive_icon.svg", 18);
 
     //theming stuff
     $mdThemingProvider.definePalette('YorkRed', {
