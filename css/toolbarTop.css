@@ -5,6 +5,7 @@
     }
     
     .hover-search {
+        z-index: 100;
         left: 0px;
         background-color: rgb(161, 10, 25);
         position: absolute;
