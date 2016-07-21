@@ -1,19 +1,17 @@
-<div class="blank-textbox new-post-card-top" md-ink-ripple="false">
+<div class="blank-textbox new-post-card-top" md-ink-ripple="true">
     <span class="new-post-text-top" ng-click="::newPost({},'new')">
         <md-icon style="margin-top: -3px;">add_circle</md-icon>
         <span>Share a link or resource...</span>
     </span>
-    <span>
-        <md-button class="md-icon-button md-mini" ng-click="::showPicker('Upload')">
-            <md-tooltip md-direction="::down">Upload</md-tooltip>
-            <md-icon class="unselectable" style="color:black">file_upload</md-icon>
-        </md-button>
-        <md-button class="md-icon-button md-mini" ng-click="::showPicker('Drive')">
-            <md-tooltip md-direction="::down">Add Drive file</md-tooltip>
-            <img class="unselectable" style="width:22px; height:22px;" src="images/drive_icon.svg">
-        </md-button>
+    <span class="new-post-option-button" ng-click="::showPicker('Upload')">
+        <md-tooltip md-direction="::down">Upload</md-tooltip>
+        <md-icon class="unselectable" style="color:black">file_upload</md-icon>
     </span>
-    </div>
+    <span class="new-post-option-button" ng-click="::showPicker('Drive')">
+        <md-tooltip md-direction="::down">Add Drive file</md-tooltip>
+        <img class="unselectable" style="width:22px; height:22px;" src="images/drive_icon.svg">
+    </span>
+</div>
 <style>
 /*--------- new post and new post element styles ------------ */
 .new-post-card-top {
