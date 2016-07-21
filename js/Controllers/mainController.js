@@ -388,6 +388,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $mdSidenav('sidenav_overlay').toggle();
       }
    };
+   
+   $scope.toggleMobileSearch = function () {
+      $scope.globals.mobileSearchOpen = !$scope.globals.mobileSearchOpen;
+   }
 
    $scope.openHelpDialog = function() { //called by the top right toolbar help button
       $mdDialog.show({
