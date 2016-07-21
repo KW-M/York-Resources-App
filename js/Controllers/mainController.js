@@ -40,6 +40,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    
    $scope.screenSm = $mdMedia('sm');
    $scope.screenXs = $mdMedia('xs');
+   $scope.screenGtSm = $mdMedia('gt-sm');
 
    var moderators = {//temporary
       'worcester-moorek2018@york.org': true,
@@ -598,6 +599,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
    window.addEventListener("resize", function() {
+      $scope.screenSm = $mdMedia('sm');
+      $scope.screenXs = $mdMedia('xs');
+      $scope.screenGtSm = $mdMedia('gt-sm');
       if (performantScrollEnabled === true && $scope.angularGridOptions.performantScroll === true) {
          $scope.angularGridOptions.performantScroll = false;
          performantScrollEnabled = false;
