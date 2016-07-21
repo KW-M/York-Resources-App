@@ -5,7 +5,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
   // $scope.GoogleDriveService = GoogleDriveService;
    var content_container = document.getElementById("content_container");
    var performantScrollEnabled = false;
-
+ console.log($mdMedia('xs'))
    $scope.allPosts = [];
    $scope.searchPosts = [];
    $scope.flaggedPosts = [];
