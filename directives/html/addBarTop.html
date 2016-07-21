@@ -3,6 +3,7 @@
         <md-icon style="margin-top: -3px;">add_circle</md-icon>
         <span>Share a link or resource...</span>
     </span>
+    <span flex ></span>
     <span class="new-post-option-button" ng-click="::showPicker('Upload')">
         <md-tooltip md-direction="::down">Upload</md-tooltip>
         <md-icon class="unselectable" style="color:black">file_upload</md-icon>
@@ -18,11 +19,12 @@
 .new-post-card-top {
 position: relative;
 background-color: white;
-display: block;
+display: flex;
 height: 46px;
 max-width: 570px;
 box-sizing: border-box;
 margin: 0px auto 16px auto;
+padding-right: 10px;
 border-radius: 2px;
 box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
@@ -40,6 +42,18 @@ color: rgba(0, 0, 0, 0.6);
    background-color: rgba(158,158,158,0.1);
 }
 .new-post-option-button {
-    
+    height: 46px;
+top: 0px;
+padding: 12px 0 12px 10px;
+box-sizing: border-box;
+display: inline-block;
+color: rgba(0, 0, 0, 0.6);
+margin: 0 6px;
+height: 40px;
+min-width: 0;
+line-height: 24px;
+padding: 8px;
+width: 40px;
+border-radius: 50%
 }
 </style>
