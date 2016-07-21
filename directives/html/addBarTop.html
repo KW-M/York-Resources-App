@@ -1,16 +1,16 @@
-<div class="blank-textbox new-post-card-top" md-ink-ripple="true">
-    <span class="new-post-text-top" ng-click="::newPost({},'new')">
+<div class="new-post-card-top" md-ink-ripple="true">
+    <span class="new-post-text-top unselectable" ng-click="::newPost({},'new')">
         <md-icon style="margin-top: -3px;">add_circle</md-icon>
         <span>Share a link or resource...</span>
     </span>
     <span flex ></span>
     <span class="new-post-option-button" ng-click="::showPicker('Upload')">
         <md-tooltip md-direction="::down">Upload</md-tooltip>
-        <md-icon class="unselectable" style="color:black">file_upload</md-icon>
+        <md-icon class="unselectable" style="color: black;">file_upload</md-icon>
     </span>
     <span class="new-post-option-button" ng-click="::showPicker('Drive')">
         <md-tooltip md-direction="::down">Add Drive file</md-tooltip>
-        <md-icon class="unselectable" style="color:black" md-svg-icon="driveIcon"></md-icon>
+        <md-icon class="unselectable" md-svg-icon="driveIcon"></md-icon>
         <!--<img class="unselectable" style="width:22px; height:22px;" src="images/drive_icon.svg">-->
     </span>
 </div>
@@ -45,20 +45,16 @@ color: rgba(0, 0, 0, 0.6);
 .new-post-option-button {
 height: 46px;
 top: 0px;
-padding: 12px 0 12px 10px;
+padding: 12px 8px 12px 8px;
 box-sizing: border-box;
 display: inline-block;
 color: black;
 opacity: 0.6;
 margin: 0 6px;
-height: 40px;
 min-width: 0;
-line-height: 24px;
-padding: 8px;
 width: 40px;
-border-radius: 50%
 }
 .new-post-option-button:hover{
-    
+   opacity: 1;
 }
 </style>

@@ -187,6 +187,10 @@ html body {
     user-select: none;
 }
 
+.unselectable:focus {
+ outline:none;
+}
+
 .default-mouse {
     cursor: default;
 }
