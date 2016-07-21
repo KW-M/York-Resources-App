@@ -7,12 +7,13 @@
           <span class="unselectable default-mouse" style="font-size: 110%">YORK </span>
           <span class="unselectable default-mouse" style="font-size: 80%" >Study Resources </span>
         </h2>
-        <search-bar hide-s show-gt-s ></search-bar>
-        <md-button hide-s show-gt-s class="md-icon-button" onclick="initiateDrive()">
+        <search-bar hide-sm hide-xs show-gt-sm ></search-bar>
+        <span flex hide-gt-sm show-sm show-xs></span>
+        <md-button hide-gt-sm show-sm show-xs class="md-icon-button" onclick="initiateDrive()">
             <md-icon>search</md-icon>
             <md-tooltip>Search</md-tooltip>
         </md-button>
-        <md-button class="md-icon-button" style="margin-right: 0px;margin-left: 12px;" onclick="initiateDrive()">
+        <md-button class="md-icon-button" onclick="initiateDrive()">
             <md-icon>refresh</md-icon>
             <md-tooltip>Refresh</md-tooltip>
         </md-button>
@@ -25,21 +26,3 @@
         </md-button>
     </div>
     <!------------------mobile version--------------------->
-    <div  class="md-toolbar-tools">
-        <h2>
-          <span class="unselectable default-mouse" style="font-size: 110%">YORK </span>
-          <span class="unselectable default-mouse" style="font-size: 80%" >Mobile</span>
-        </h2>
-        <div style="flex:1"></div>
-        <md-button class="md-icon-button" onclick="initiateDrive()">
-            <md-icon class="light-icon">refresh</md-icon>
-            <md-tooltip>Refresh</md-tooltip>
-        </md-button>
-        <md-button class="md-icon-button" ng-click="helpDialog()">
-            <md-icon class="light-icon">help</md-icon>
-            <md-tooltip>Help</md-tooltip>
-        </md-button>
-        <md-button class="md-icon-button md-mini" aria-label="account" style="margin-top:4px">
-            <img class="unselectable" style="width:42px; height:42px; margin-top: -9px; margin-left: -9px; cursor:pointer;" src="images/accountPic.png">
-        </md-button>
-    </div>
