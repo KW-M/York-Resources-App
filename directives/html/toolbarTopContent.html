@@ -5,9 +5,16 @@
         </md-button>
         <h2>
           <span class="unselectable default-mouse" style="font-size: 110%">YORK </span>
-          <span class="unselectable default-mouse" style="font-size: 80%" >Study Resources </span>
+          <span show-gt-xs hide-xs class="unselectable default-mouse" style="font-size: 80%" >Study Resources </span>
         </h2>
-        <search-bar hide-sm hide-xs show-gt-sm ></search-bar>
+        <search-bar hide-sm hide-xs show-gt-sm  style="margin-right: 12px;"></search-bar>
+        <div class="hover-search-visible">
+            <md-button hide-gt-sm show-sm show-xs class="md-icon-button" onclick="initiateDrive()">
+                <md-icon>close</md-icon>
+                <md-tooltip>Close</md-tooltip>
+            </md-button>
+            <search-bar hide-sm hide-xs show-gt-sm  style="margin-right: 12px;"></search-bar>
+        </div>
         <span flex hide-gt-sm show-sm show-xs></span>
         <md-button hide-gt-sm show-sm show-xs class="md-icon-button" onclick="initiateDrive()">
             <md-icon>search</md-icon>
