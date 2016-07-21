@@ -122,7 +122,7 @@
                     }
                 }
                 else {
-                    if ($scope.Link.length > 9) {
+                    if ($scope.Link.length > 9) { 
                         $scope.Link = "http://" + $scope.Link
                     }
                     $scope.Type = 'Link';

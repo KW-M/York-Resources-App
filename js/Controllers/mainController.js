@@ -595,7 +595,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $scope.globals.FABisOpen = false;
          $scope.globals.FABisHidden = true;
       }
-   };
+   }; 
 
    window.addEventListener("resize", function() {
       if (performantScrollEnabled === true && $scope.angularGridOptions.performantScroll === true) {
