@@ -19,17 +19,17 @@
     if (item) {
       var delay = 0;
       runPromise();
-      var runPromise = function() {
+      function runPromise() {
         var thePromise = item.Promise;
-        thePromise.then(item.Action).catch(function(error) {
-          console.log({Error: error, backoffCount: delay})
+        thePromise.then(item.Action, function(error) {
+          console.log({'Error': error, 'BackOffCount': delay})
           if (delay < 8) {
             setTimeout(function() {
               runPromise();
             }, (delay = Math.max(delay *= 2, 1)) * 1000);
           }
           else {
-            item.Err(error);
+            item.Err(error) || "";
           }
         });
       }
