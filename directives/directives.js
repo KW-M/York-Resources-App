@@ -1,16 +1,10 @@
 // Put any directives you make here and the html template in a file in the directives/html/ folder
 
 // ----Outer UI----
-app.directive('toolbarTop', function() {
+app.directive('toolbarTopContent', function() {
     return {
         restrict: 'E',
-        templateUrl: 'directives/html/toolbarTop.html'
-    };
-});
-app.directive('toolbarTopMobile', function() {
-    return {
-        restrict: 'E',
-        templateUrl: 'directives/html/toolbarTopMobile.html'
+        templateUrl: 'directives/html/toolbarTopContent.html'
     };
 });
 app.directive('searchBar', function() {
