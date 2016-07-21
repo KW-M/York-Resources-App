@@ -1,7 +1,9 @@
 <div class="blank-textbox new-post-card-top">
-    <md-button class="new-post-text-top" ng-click="::newPost({},'new')">
-        <md-icon style="margin-top: -3px;">add_circle</md-icon> <span style="">Share a link or resource...</span></md-button>
-    <div style="float:right">
+    <div class="new-post-text-top" ng-click="::newPost({},'new')">
+        <md-icon style="margin-top: -3px;">add_circle</md-icon>
+        <span>Share a link or resource...</span>
+    </div>
+    <div>
         <md-button class="md-icon-button md-mini" ng-click="::showPicker('Upload')">
             <md-tooltip md-direction="::down">Upload</md-tooltip>
             <md-icon class="unselectable" style="color:black">file_upload</md-icon>
@@ -11,7 +13,7 @@
             <img class="unselectable" style="width:22px; height:22px;" src="images/drive_icon.svg">
         </md-button>
     </div>
-</div>
+    </div>
 <style>
 /*--------- new post and new post element styles ------------ */
 .new-post-card-top {
@@ -25,11 +27,12 @@
     border-radius: 2px;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
-.md-button.new-post-text-top {
+.new-post-text-top {
     padding: 6px 10px;
     width: 100%;
+    height: 46px;
     margin: 0;
-    position: absolute;
+    display: inline-block;
     text-transform: none;
     font-family: 'Roboto Slab', serif;
     color: rgba(0, 0, 0, 0.6);
