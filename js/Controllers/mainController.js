@@ -391,6 +391,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    
    $scope.toggleMobileSearch = function () {
       $scope.globals.mobileSearchOpen = !$scope.globals.mobileSearchOpen;
+      console.log($scope.globals.mobileSearchOpen);
    }
 
    $scope.openHelpDialog = function() { //called by the top right toolbar help button
