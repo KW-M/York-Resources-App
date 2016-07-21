@@ -1,5 +1,5 @@
     <!------------------desktop version--------------------->
-    <div hide-xs show-gt-xs class="md-toolbar-tools">
+    <div  class="md-toolbar-tools">
         <md-button class="md-icon-button" ng-click="::toggleSidebar()">
             <md-icon>menu</md-icon>
         </md-button>
@@ -7,11 +7,11 @@
           <span class="unselectable default-mouse" style="font-size: 110%">YORK </span>
           <span class="unselectable default-mouse" style="font-size: 80%" >Study Resources </span>
         </h2>
-        <search-bar></search-bar>
-        <!--<md-input-container md-no-float class="md-accent" flex="50" style="margin-left:25px">-->
-        <!--    <md-icon style="color:white margin-right: -15px" class="material-icons">&#xE8B6;</md-icon>-->
-        <!--    <input ng-model="searchInput" placeholder="Search" style="color:white;padding-left:25px">-->
-        <!--</md-input-container>-->
+        <search-bar hide-s show-gt-s ></search-bar>
+        <md-button hide-s show-gt-s class="md-icon-button" onclick="initiateDrive()">
+            <md-icon>search</md-icon>
+            <md-tooltip>Search</md-tooltip>
+        </md-button>
         <md-button class="md-icon-button" style="margin-right: 0px;margin-left: 12px;" onclick="initiateDrive()">
             <md-icon>refresh</md-icon>
             <md-tooltip>Refresh</md-tooltip>
@@ -25,10 +25,7 @@
         </md-button>
     </div>
     <!------------------mobile version--------------------->
-    <div class="md-toolbar-tools">
-        <md-button class="md-icon-button" ng-click="toggleSidebar()">
-            <md-icon class="light-icon">menu</md-icon>
-        </md-button>
+    <div  class="md-toolbar-tools">
         <h2>
           <span class="unselectable default-mouse" style="font-size: 110%">YORK </span>
           <span class="unselectable default-mouse" style="font-size: 80%" >Mobile</span>

@@ -3,7 +3,7 @@
 // ----Outer UI----
 app.directive('toolbarTopContent', function() {
     return {
-        restrict: 'E',
+        restrict: 'EA',
         templateUrl: 'directives/html/toolbarTopContent.html'
     };
 });
