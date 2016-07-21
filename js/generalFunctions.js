@@ -21,6 +21,7 @@
       runPromise();
       function runPromise() {
         var thePromise = item.Promise;
+        console.log({'Exicuting Promise': thePromise.hg.hg})
         thePromise.then(item.Action, function(error) {
           console.log({'Error': error, 'BackOffCount': delay})
           if (delay < 8) {
