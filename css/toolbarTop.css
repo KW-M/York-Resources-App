@@ -1,7 +1,7 @@
     /*---------- toolbar and toolbar element styles -------- */
     
     .toolbar-top {
-        z-index: 100;
+        z-index: 65;
     }
     
     .hover-search {
