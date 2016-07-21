@@ -54,8 +54,9 @@
             <!---------------------------------------------------->
             <side-nav-insides class="ng-cloak side-nav md-sidenav-left sidenav-inline" md-is-locked-open="" ng-class=" 'side-nav-open' : globals.sidenavIsOpen" hide-xs show-gt-sm></side-nav-insides>
             <!----- The content, ie posts, resources, etc. ------->
-            <div id="content_container" ng-class="{xs: $mdMedia('xs'), sm: $mdMedia('sm'), gt-sm: $mdMedia('gt-sm')}">
+            <div id="content_container" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'gt-sm': $mdMedia('gt-sm')}" class="">
                 <ng-view></ng-view>
+                {{$mdMedia('xs')}}
                 <md-card post-card class="post-card raise-on-hover" ng-repeat="Post in visiblePosts" ></md-card><!--ng-style="classList[Post.Class.Name].color"-->
                 <!--<div angular-grid="allPosts" ag-options="angularGridOptions" ag-id="posts">
                     <md-card post-card class="post-card raise-on-hover" ng-repeat="Post in allPosts" ng-style="classList[Post.Class.Name].color"></md-card>
