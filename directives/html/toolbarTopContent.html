@@ -8,7 +8,7 @@
         </h2>
         <search-bar hide-xs show-gt-xs  style="margin-right: 12px;"></search-bar>
         <div hide-gt-xs show-xs class="hover-search" ng-class="{'hover-search-visible' : globals.mobileSearchOpen}">
-            <md-button class="md-icon-button" style="margin-right: -20px" ng-click="$scope.globals.mobileSearchOpen = !$scope.globals.mobileSearchOpen">
+            <md-button class="md-icon-button" style="margin-right: -20px" ng-click="toggleMobileSearch()">
                 <md-icon>close</md-icon>
             </md-button>
             <search-bar></search-bar>
@@ -22,7 +22,7 @@
             <md-icon>refresh</md-icon>
             <md-tooltip>Refresh</md-tooltip>
         </md-button>
-        <md-button class="md-icon-button" ng-click="::helpDialog()">
+        <md-button hide-sm show-gt-sm class="md-icon-button" ng-click="::helpDialog()">
             <md-icon>help</md-icon>
             <md-tooltip>Help</md-tooltip>
         </md-button>
@@ -30,4 +30,3 @@
             <img class="unselectable" style="width:42px; height:42px; margin-top: -9px; margin-left: -9px; cursor:pointer;" src="images/accountPic.png">
         </md-button>
     </div>
-    <!------------------mobile version--------------------->
