@@ -5,7 +5,7 @@
             <md-icon class="small-icon">language</md-icon><span> {{::Post.Link}}</span>
         </p>
         <div class="post-card-metadata-text">
-            <p style="margin: 0 0 2px 0; font-size: 14px; font-weight:700;"><md-icon class="small-icon" style="color:white"></md-icon><span>{{Post.Tags.join(', ')}}</span></p>
+            <p style="margin: 0 0 2px 0; font-size: 14px; font-weight:700;"><md-icon class="small-icon" style="color:white">label</md-icon><span>{{Post.Tags.join(', ')}}</span></p>
             <md-icon class="small-icon" style="color:white">event</md-icon><span style="margin-right:10px"> {{::Post.CreationDate | date : "m/dd/yyyy"}}</span>
             <md-icon class="small-icon" style="color:white">people</md-icon><span> {{::Post.Class.Name}}</span>
         </div>
