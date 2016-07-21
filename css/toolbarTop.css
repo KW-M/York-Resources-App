@@ -27,7 +27,9 @@
     
     .hover-search.hover-search-visible {
         opacity: 1;
+        top: -100%;
         pointer-events: initial;
+        transition: top 0.2s ease, opacity 0.2s ease;
     }
     
     #york_study_logo {

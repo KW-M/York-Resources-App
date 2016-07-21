@@ -26,6 +26,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       FABisOpen: false,
       FABisHidden: true,
       sidenavIsOpen: true,
+      mobileSearchOpen:false,
    };
 
    $scope.firstFiles = false;

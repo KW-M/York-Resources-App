@@ -8,8 +8,8 @@
           <span show-gt-sm hide-xs hide-sm class="unselectable default-mouse" style="font-size: 80%" >Study Resources </span>
         </h2>
         <search-bar hide-xs show-gt-xs  style="margin-right: 12px;"></search-bar>
-        <div hide-gt-xs show-xs class="hover-search hover-search-visible">
-            <md-button class="md-icon-button" style="margin-right: -20px" onclick="initiateDrive()">
+        <div hide-gt-xs show-xs class="hover-search" ng-class="'hover-search-visible': globals.mobileSearchOpen">
+            <md-button class="md-icon-button" style="margin-right: -20px" onclick="globals.mobileSearchOpen = !globals.mobileSearchOpen">
                 <md-icon>close</md-icon>
                 <md-tooltip>Close</md-tooltip>
             </md-button>
