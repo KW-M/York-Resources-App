@@ -1,9 +1,8 @@
 <div class="new-post-card-top" md-ink-ripple="true">
-    <span class="new-post-text-top unselectable" ng-click="::newPost({},'new')">
+    <span class="new-post-text-top unselectable" flex ng-click="::newPost({},'new')">
         <md-icon style="margin-top: -3px;">add_circle</md-icon>
         <span>Share a link or resource...</span>
     </span>
-    <span flex ></span>
     <span class="new-post-option-button" ng-click="::showPicker('Upload')">
         <md-tooltip md-direction="::down">Upload</md-tooltip>
         <md-icon class="unselectable" style="color: black;">file_upload</md-icon>
@@ -38,6 +37,10 @@ text-transform: none;
 font-family: 'Roboto Slab', serif;
 color: rgba(0, 0, 0, 0.6);
 }
+
+.new-post-text-top:hover>md-icon {
+color:black;
+}
 .new-post-card-top:hover {
    background-color: rgba(158,158,158,0.1);
 }
@@ -51,6 +54,7 @@ display: inline-block;
 color: black;
 opacity: 0.6;
 margin: 0 6px;
+outline: none;
 min-width: 0;
 width: 40px;
 }
