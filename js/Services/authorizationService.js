@@ -6,8 +6,9 @@ function authService(GoogleDriveService, $q) {
     var self = this;
     var client_id ='475444543746-e3r02g1o1o71kliuoohah04ojqbmo22e.apps.googleusercontent.com';
     var scopes =  ['https://www.googleapis.com/auth/drive']
+    
     this.initilize = function(callback) {
-        gapi.client.setApiKey(apiKey);
+        //gapi.client.setApiKey(apiKey);
     }
     
     this.buildAuthRequest = function(immediateMode) {
@@ -44,11 +45,7 @@ function authService(GoogleDriveService, $q) {
     }
 
     this.loginNoPopup = function() {
-        return( gapi.auth2.init({
-            client_id: client_id,
-            scope: scopes,
-            hosted_domain: "york.org",
-        }));
+        return('halo');
     };
 
 
@@ -57,6 +54,7 @@ function authService(GoogleDriveService, $q) {
             client_id: client_id,
             scope: scopes,
             hosted_domain: "york.org",
+            immediate: false,
         }));
     };
 }

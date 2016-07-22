@@ -492,6 +492,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    
    gapi.load('client:auth2', function(){
       //authorizationService.inlitialize();
+      console.log("gapiLoaded")
       authorizationService.loginNoPopup().then(loginProcedure,loginError())
       var signinButton = document.getElementById('auth_button');
       signinButton.addEventListener("click", authorizationService.loginNoPopup().then(loginProcedure));
@@ -526,7 +527,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
          }, 500);
       };
-   };
 
    $scope.initiateDrive = function(loaded) {
       console.log("API loaded: " + loaded)
