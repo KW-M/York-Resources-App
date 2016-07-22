@@ -43,15 +43,16 @@
                 </ul>
                 <p>Sign in with your me@york.org email account.</p>
                 <div class="signin-button-container">
-                    <div id="auth_button" class="signin-button">
+                    <div id="signin_button" class="signin-button">
                         <!--<img class="signin-icon" src="/images/Google_G.png"/>-->
                         <svg class="signin-icon" viewBox="0, 0, 40, 40">
                             <path d="M 22,20 h15 a17,17 0 1,1 -8,-14" fill="none" stroke="#4885ed" stroke-width="6" />
                         </svg>
                         <p class="signin-text">Sign in</p>
                     </div>
-                    <md-progress-circular id="login_spinner" class="md-accent" md-mode="indeterminate" md-diameter="36"></md-progress-circular>
+                    <md-progress-circular id="signin_spinner" class="md-accent" md-mode="indeterminate" md-diameter="36"></md-progress-circular>
                 </div>
+                <md-button id="signout_button">sign-Out</md-button>
             </div>
         </div>
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
@@ -106,9 +107,7 @@
         <!-- Controllers -->
         <script src="js/Controllers/mainController.js"></script>
         <script src="js/Controllers/newPostController.js"></script>
-
-        <!-- Google API library (must be loaded last) -->
-        <script src="https://apis.google.com/js/client.js?onload=gClientLoaded"></script>
+        
         <canvas style="display:none;position: absolute;pointer-events: none;" width="400" height="260" id="image_renderer">
     </body>
     <link rel="stylesheet" href="css/toolbarTop.css" />
