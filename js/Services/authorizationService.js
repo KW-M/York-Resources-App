@@ -45,7 +45,9 @@ function authService(GoogleDriveService, $q) {
     }
 
     this.loginNoPopup = function() {
-        return('halo');
+        return(gapi.auth2.init({
+            client_id: client_id,
+        }));
     };
 
 
