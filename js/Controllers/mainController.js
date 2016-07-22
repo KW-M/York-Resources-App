@@ -136,35 +136,35 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
    $scope.showPicker = function(typ) {
-      var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
-      var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
-      var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
-      console.log("loaded my picker")
-      console.log("picker");
-      if (typ === "Upload") {
-         console.log("pickerup");
-         var UploadPicker = new google.picker.PickerBuilder().
-         addView(uploadView).
-         addView(docsView).
-         addView(sharedView).
-         setOAuthToken(gapi.auth.getToken().access_token).
-         setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
-         setCallback(self.pickerCallback).
-         build();
-         UploadPicker.setVisible(true);
-      }
-      else if (typ === "Drive") {
-         var drivePicker = new google.picker.PickerBuilder().
-         addView(docsView).
-         addView(sharedView).
-         addView(uploadView).
-         setOAuthToken(gapi.auth.getToken().access_token).
-         setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
-         setCallback(self.pickerCallback).
-         build();
-         console.log(drivePicker);
-         drivePicker.setVisible(true);
-      }
+      // var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
+      // var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
+      // var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
+      // console.log("loaded my picker")
+      // console.log("picker");
+      // if (typ === "Upload") {
+      //    console.log("pickerup");
+      //    var UploadPicker = new google.picker.PickerBuilder().
+      //    addView(uploadView).
+      //    addView(docsView).
+      //    addView(sharedView).
+      //    setOAuthToken(gapi.auth.getToken().access_token).
+      //    setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
+      //    setCallback(self.pickerCallback).
+      //    build();
+      //    UploadPicker.setVisible(true);
+      // }
+      // else if (typ === "Drive") {
+      //    var drivePicker = new google.picker.PickerBuilder().
+      //    addView(docsView).
+      //    addView(sharedView).
+      //    addView(uploadView).
+      //    setOAuthToken(gapi.auth.getToken().access_token).
+      //    setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
+      //    setCallback(self.pickerCallback).
+      //    build();
+      //    console.log(drivePicker);
+      //    drivePicker.setVisible(true);
+      // }
 
    };
 
@@ -482,10 +482,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    //-signin & initiation------------
    
-   gapi.load('client:auth2', function(){
+   window.gapiLoaded = function() {
       authorizationService.initilize(loginSucessful);
-   });
-
+   }
+   
    function loginSucessful() {
       GoogleDriveService.loadAPIs($scope.initiateDrive);
    }
@@ -509,7 +509,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                   textContent: "York Study Resources only works with emails ending in @york.org. If you have a York email, please login with it, or contact Mr.Brookhouser if you don't have one.",
                   ok: 'Ok'
                })).then(function(){
-                  gapi.auth2.getAuthInstance().signOut();
                   angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
                   setTimeout(function() {
                      angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
@@ -592,9 +591,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 }]));
 
 //called by the google client api when it loads (must be outside the controller)
-// function gClientLoaded() {
-//    gapi.auth.init(loginSilent());
-// }
+   gapi.load('client:auth2', function(){
+      gapiLoaded();
+   });
 
 
 var classes = [{
