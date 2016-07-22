@@ -532,6 +532,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                "Email": userInfo.result.user.emailAddress,
                "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
             };
+            var domain = $scope.myInfo.substr($scope.myInfo.length - 9)
+            cosole.log(domain);
+            if (domain === "@york.org") {
             document.dispatchEvent(new Event('userInfoLoaded'));
          });
 
@@ -561,6 +564,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       queue(GoogleDriveService.getUserSettings($scope.myInfo.Email), function(spreadsheetRow) {
          console.log('spreadsheetRow');
          console.log(spreadsheetRow);
+         document.dispatchEvent( new Event('sheetPrefsLoaded'));
+      }), function(Error) {
+         console.log(Error);
          document.dispatchEvent( new Event('sheetPrefsLoaded'));
       });
       $scope.getFiles("");
