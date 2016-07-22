@@ -626,7 +626,14 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
    });
    
-   gapi.load('client', init);
+   gapi.load('client', function(){
+      gapi.auth2.init({
+            client_id: clientId,
+            scope: scopes
+      });
+      var signinButton = document.getElementById('auth_button');
+      signinButton.addEventListener("click", auth);
+   };
 
 }]));
 

@@ -7,7 +7,7 @@ function authService(GoogleDriveService, $q) {
     var CLIENT_ID = '475444543746-e3r02g1o1o71kliuoohah04ojqbmo22e.apps.googleusercontent.com';
     
     this.logIn = function(callback) {
-        
+
     }
     
     this.buildAuthRequest = function(immediateMode) {
