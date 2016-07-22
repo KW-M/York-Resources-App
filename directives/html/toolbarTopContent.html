@@ -2,10 +2,10 @@
         <md-button class="md-icon-button" ng-click="::toggleSidebar()">
             <md-icon>menu</md-icon>
         </md-button>
-        <img src="./images/logo.png"/>
-        <h2>
+        <img hide-gt-sm show-xs show-sm  style="height: 60px; margin-bottom: -13px" src="./images/logo.png"/>
+        <h2 show-gt-sm hide-xs hide-sm >
           <span class="unselectable default-mouse" style="font-size: 110%">YORK </span>
-          <span show-gt-sm hide-xs hide-sm class="unselectable default-mouse" style="font-size: 80%" >Study Resources </span>
+          <span class="unselectable default-mouse" style="font-size: 80%" >Study Resources </span>
         </h2>
         <search-bar hide-xs show-gt-xs  style="margin-right: 12px;"></search-bar>
         <div hide-gt-xs show-xs class="hover-search" ng-class="{'hover-search-visible' : globals.mobileSearchOpen}">
