@@ -20,19 +20,22 @@ function authService(GoogleDriveService, $q) {
             // Handle the initial sign-in state.
             updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
 
-            signinButton.addEventListener("click", handleSigninClick);
-            signoutButton.addEventListener("click", handleSignoutClick);
+            //signinButton.addEventListener("click", handleSigninClick);
+            //signoutButton.addEventListener("click", handleSignoutClick);
         });
 
         function updateSigninStatus(isSignedIn) {
             if (isSignedIn) {
-                signinButton.style.display = 'none';
-                signoutButton.style.display = 'block';
+                // signinButton.style.display = 'none';
+                // signoutButton.style.display = 'block';
+                console.log(gapi.auth2.getAuthInstance());
+                 console.log(gapi.auth2.getAuthInstance().getBasicProfile());
                 callback();
             }
             else {
-                signinButton.style.display = 'block';
-                signoutButton.style.display = 'none';
+                console.log('not sined in')
+                // signinButton.style.display = 'block';
+                // signoutButton.style.display = 'none';
             }
         }
     }
