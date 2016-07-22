@@ -18,7 +18,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
         //gets a named range in a google spreadsheet (in this case each row is created with a named range of its email).
        return(gapi.client.sheets.spreadsheets.values.get({
           spreadsheetId: '1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0',
-          
+          range: emailAddress.replace(/\W/g, '')
         }));
     }
 
