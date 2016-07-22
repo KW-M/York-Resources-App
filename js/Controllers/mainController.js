@@ -491,15 +491,14 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    //-signin & initiation------------
    
    gapi.load('client:auth2', function(){
-      console.log("gapiLoaded")
-      authorizationService.initilize();
+      authorizationService.initilize(loginSucessful);
    });
 
-         function loginSucessful(authResponse) {
-            console.log(authResponse)
-            $scope.loginStatus = authResponse;
-            GoogleDriveService.loadAPIs($scope.initiateDrive);
-         }
+   function loginSucessful(authResponse) {
+      console.log(authResponse)
+      $scope.loginStatus = authResponse;
+      GoogleDriveService.loadAPIs($scope.initiateDrive);
+   }
          
          function loginError(error) {
             console.log(authResponse);
