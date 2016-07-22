@@ -491,22 +491,24 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    //-signin & initiation------------
    
    gapi.load('client:auth2', function(){
-      authorizationService.inlitialize();
-      authorizationService.loginNoPopup(loginProcedure);
+      //authorizationService.inlitialize();
+      authorizationService.loginNoPopup().then(loginProcedure,loginError())
       var signinButton = document.getElementById('auth_button');
-      signinButton.addEventListener("click", authorizationService.loginPopup(loginProcedure));
-   };
+      signinButton.addEventListener("click", authorizationService.loginNoPopup().then(loginProcedure));
+   });
 
-   function loginProcedure(response) {
-      //handles the 'response' promise
-      response.then(function(response) {
+         function loginSucessful(authResponse) {
+            console.log(authResponse)
             $scope.loginStatus = response;
             GoogleDriveService.loadAPIs($scope.initiateDrive);
             angular.element(document.querySelector('#login_spinner')).removeClass('fadeOut');
             setTimeout(function() {
                angular.element(document.querySelector('#auth_button')).removeClass('fadeIn');
             });
-         }).catch(function(error) {
+         }
+         
+         function loginError(error) {
+            console.log(authResponse);
             if (error.error_subtype !== undefined && error.error_subtype === "access_denied") {
                showLoginButton();
             }
@@ -516,7 +518,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             else {
                console.log(error);
             }
-         })
+         }
          //called to show the login button (& hide the loading spinner)
       function showLoginButton() {
          angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
