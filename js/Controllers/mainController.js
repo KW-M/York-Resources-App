@@ -17,9 +17,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.searchChips = ["Class: "]
 
    $scope.classList = classes;
-   $scope.nextPageTokenList = {
-      'English I': "123"
-   };
+
    $scope.Tags = [];
    $scope.globals = {
       FABisOpen: false,
@@ -37,12 +35,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       CreatorEmail: "any",
    };
    
-   
    $scope.$mdMedia = $mdMedia;
-
-   var moderators = {//temporary
-      'worcester-moorek2018@york.org': true,
-   }
 
    //-routing-------------
 
