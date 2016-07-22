@@ -81,9 +81,10 @@ function authService(GoogleDriveService, $q) {
     }
 
     function handleSigninClick(event) {
-        gapi.auth2.getAuthInstance().signIn().then(function(){
+        gapi.auth2.getAuthInstance().signIn()
             console.log('logged in')
-        });
+            console.log(gapi.auth2.getAuthInstance());
+            console.log({basicprofile:gapi.auth2.getAuthInstance().getBasicProfile()});
     }
 
     function handleSignoutClick(event) {
