@@ -19,6 +19,8 @@ function authService(GoogleDriveService, $q) {
         gapi.auth2.init({
             client_id: clientId,
             scope: scopes,
+            fetch_basic_profile: false,
+            hosted_domain: 'york.org'
         }).then(function() {
             // Listen for sign-in state changes.
             gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
@@ -57,11 +59,11 @@ function authService(GoogleDriveService, $q) {
     };
     
     this.hideSigninDialog = function() {
-        signinSpiner.addClass('fadeOut');
+        signinDialog.addClass('fadeOut');
     };
     
     this.showSigninDialog = function() {
-        signinSpiner.removeClass('fadeOut');
+        signinDialog.removeClass('fadeOut');
     };
 
     function handleSigninClick(event) {
