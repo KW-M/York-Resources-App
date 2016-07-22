@@ -9,6 +9,7 @@ function authService(GoogleDriveService, $q) {
     var scopes = 'https://www.googleapis.com/auth/drive';
 
     var signinButton = angular.element(document.getElementById('signin_button'));
+    console.log
     var signinSpiner = angular.element(document.getElementById('signin_spinner'));
     var signinDialog = angular.element(document.getElementById('overlay_background'));
     var signoutButton = angular.element(document.getElementById('signout_button'));
@@ -33,33 +34,33 @@ function authService(GoogleDriveService, $q) {
             if (isSignedIn) {
                 console.log('signed in')
                 callback();
-                hideSigninButton();
+                self.hideSigninButton();
             }
             else {
-                showSigninButton()
+                self.showSigninButton()
             }
         }
     }
 
-    function showSigninButton() {
+    this.showSigninButton = function() {
         signinSpiner.addClass('fadeOut');
         setTimeout(function() {
             signinButton.addClass('fadeIn');
         }, 500);
     };
     
-    function hideSigninButton() {
+    this.hideSigninButton = function() {
         signinSpiner.removeClass('fadeOut');
         setTimeout(function() {
             signinButton.removeClass('fadeIn');
         }, 500);
     };
     
-    function hideSigninDialog() {
+    this.hideSigninDialog = function() {
         signinSpiner.addClass('fadeOut');
     };
     
-    function showSigninDialog() {
+    this.showSigninDialog = function() {
         signinSpiner.removeClass('fadeOut');
     };
 
