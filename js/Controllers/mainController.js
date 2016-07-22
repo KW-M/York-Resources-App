@@ -489,13 +489,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
    //-signin & initiation------------
-
-   $scope.signIn = function() { //called by the signIn button click
-      loginProcedure(authorizationService.authorizePopup());
-   };
-
-   $window.loginSilent = function(response) {
-      loginProcedure(authorizationService.authorizeSilent());
+   
+   gapi.load('client', function(){
+      authorizationService.inlitialize();
+      authorizationService.loginNoPopup(loginProcedure);
+      var signinButton = document.getElementById('auth_button');
+      signinButton.addEventListener("click", authorizationService.loginPopup(loginProcedure));
    };
 
    function loginProcedure(response) {
@@ -625,15 +624,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          performantScrollEnabled = false;
       }
    });
-   
-   gapi.load('client', function(){
-      gapi.auth2.init({
-            client_id: clientId,
-            scope: scopes
-      });
-      var signinButton = document.getElementById('auth_button');
-      signinButton.addEventListener("click", auth);
-   };
 
 }]));
 

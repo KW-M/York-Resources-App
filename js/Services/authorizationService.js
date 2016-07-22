@@ -4,10 +4,14 @@ app.service('authorizationService', ['GoogleDriveService', '$q', authService]);
 //The function used in the authorizationService service also called by the google api framwork when it loads.
 function authService(GoogleDriveService, $q) {
     var self = this;
-    var CLIENT_ID = '475444543746-e3r02g1o1o71kliuoohah04ojqbmo22e.apps.googleusercontent.com';
+    var CLIENT_ID = ;
     
-    this.logIn = function(callback) {
-
+    this.initilize = function(callback) {
+        gapi.client.setApiKey(apiKey);
+        gapi.auth2.init({
+            client_id: '475444543746-e3r02g1o1o71kliuoohah04ojqbmo22e.apps.googleusercontent.com',
+            scope: ['https://www.googleapis.com/auth/drive'],
+        });
     }
     
     this.buildAuthRequest = function(immediateMode) {
