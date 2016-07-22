@@ -550,7 +550,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                   angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
                   setTimeout(function() {
                      angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
-               }, 500);
+                  }, 500);
                }); 
             }
          });
@@ -625,13 +625,15 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          performantScrollEnabled = false;
       }
    });
+   
+   gapi.load('client', init);
 
 }]));
 
 //called by the google client api when it loads (must be outside the controller)
-function gClientLoaded() {
-   gapi.auth.init(loginSilent());
-}
+// function gClientLoaded() {
+//    gapi.auth.init(loginSilent());
+// }
 
 
 var classes = [{
