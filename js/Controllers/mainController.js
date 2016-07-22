@@ -493,19 +493,15 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    gapi.load('client:auth2', function(){
       //authorizationService.inlitialize();
       console.log("gapiLoaded")
-      //authorizationService.loginNoPopup().then(loginSucessful(),loginError())
-      var signinButton = document.getElementById('auth_button');
-      signinButton.addEventListener("click", authorizationService.loginNoPopup().then(loginSucessful()));
+      authorizationService.initilize();
+
+      //signinButton.addEventListener("click", authorizationService.loginNoPopup().then(loginSucessful()));
    });
 
          function loginSucessful(authResponse) {
             console.log(authResponse)
             $scope.loginStatus = authResponse;
             GoogleDriveService.loadAPIs($scope.initiateDrive);
-            angular.element(document.querySelector('#login_spinner')).removeClass('fadeOut');
-            setTimeout(function() {
-               angular.element(document.querySelector('#auth_button')).removeClass('fadeIn');
-            });
          }
          
          function loginError(error) {
