@@ -535,7 +535,14 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             var domain = $scope.myInfo.substr($scope.myInfo.length - 9)
             cosole.log(domain);
             if (domain === "@york.org") {
-            document.dispatchEvent(new Event('userInfoLoaded'));
+               document.dispatchEvent(new Event('userInfoLoaded'));
+            } else {
+               $mdDialog.show($mdDialog.alert({
+                  title: 'Sorry.',
+                  textContent: "York Study Resources only works with emails ending in @york.org, please login with that email, or contact Mr.Brookhouser if you don't have one",
+                  ok: 'Ok'
+               })); 
+            }
          });
 
       } else if (loaded === "sheets") {
