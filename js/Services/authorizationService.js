@@ -12,7 +12,7 @@ function authService(GoogleDriveService, $q) {
     console.log(signinButton)
     var signinSpiner = angular.element(document.getElementById('signin_spinner'));
     var signinDialog = angular.element(document.getElementById('overlay_background'));
-    var signoutButton = angular.element(document.getElementById('signout_button'));
+    var signoutButton = angular.element(document.getElementById('account_button'));
 
     this.initilize = function(callback) {
         gapi.client.setApiKey(apiKey);
