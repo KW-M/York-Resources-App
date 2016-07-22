@@ -559,7 +559,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    function handleUserPrefsSheet () {
       console.log(GoogleDriveService.getUserSettings($scope.myInfo.Email));
       queue(GoogleDriveService.getUserSettings($scope.myInfo.Email), function(spreadsheetRow) {
-         $scope.myInfo.Moderator = moderators[userInfo.result.user.emailAddress] !== undefined,
          console.log('spreadsheetRow');
          console.log(spreadsheetRow);
          document.dispatchEvent( new Event('sheetPrefsLoaded'));
