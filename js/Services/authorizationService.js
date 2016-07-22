@@ -9,6 +9,8 @@ function authService(GoogleDriveService, $q) {
     var scopes = 'https://www.googleapis.com/auth/drive';
     
     var signinButton = document.getElementById('signin_button');
+    var signinSpiner = document.getElementById('signout_button');
+    var signinDialog = document.getElementById('signout_button');
     var signoutButton = document.getElementById('signout_button');
 
     this.initilize = function(callback) {
@@ -28,21 +30,21 @@ function authService(GoogleDriveService, $q) {
         });
 
         function updateSigninStatus(isSignedIn) {
-            console.log('listening')
             if (isSignedIn) {
+                console.log('signed in')
                 angular.element(document.querySelector('#login_spinner')).removeClass('fadeOut');
                 setTimeout(function() {
                     angular.element(document.querySelector('#auth_button')).removeClass('fadeIn');
                 });
                 console.log(gapi.auth2.getAuthInstance());
-                 console.log(gapi.auth2.getAuthInstance().getBasicProfile());
                 callback();
-                console.log('not signed in')
             }
             else {
                 console.log('not signed in')
-                // signinButton.style.display = 'block';
-                // signoutButton.style.display = 'none';
+                angular.element(document.querySelector('#login_spinner')).removeClass('fadeOut');
+                setTimeout(function() {
+                    angular.element(document.querySelector('#auth_button')).removeClass('fadeIn');
+                });
             }
         }
     }
