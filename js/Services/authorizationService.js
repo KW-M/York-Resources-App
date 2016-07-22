@@ -32,26 +32,35 @@ function authService(GoogleDriveService, $q) {
         function updateSigninStatus(isSignedIn) {
             if (isSignedIn) {
                 console.log('signed in')
-                signinSpiner.removeClass('fadeOut');
-                signinButton.removeClass('fadeIn');
-                console.log(gapi.auth2.getAuthInstance());
                 callback();
+                hideSigninButton();
             }
             else {
-                console.log('not signed in')
-                angular.element(document.querySelector('#login_spinner')).removeClass('fadeOut');
-                setTimeout(function() {
-                    angular.element(document.querySelector('#auth_button')).removeClass('fadeIn');
-                });
+                showSigninButton()
             }
         }
     }
 
-    function showLoginButton() {
-        angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
+    function showSigninButton() {
+        signinSpiner.addClass('fadeOut');
         setTimeout(function() {
-            angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
+            signinButton.addClass('fadeIn');
         }, 500);
+    };
+    
+    function hideSigninButton() {
+        signinSpiner.removeClass('fadeOut');
+        setTimeout(function() {
+            signinButton.removeClass('fadeIn');
+        }, 500);
+    };
+    
+    function hideSigninDialog() {
+        signinSpiner.addClass('fadeOut');
+    };
+    
+    function showSigninDialog() {
+        signinSpiner.removeClass('fadeOut');
     };
 
     function handleSigninClick(event) {
