@@ -490,7 +490,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    //-signin & initiation------------
    
-   gapi.load('client', function(){
+   gapi.load('client:auth2', function(){
       authorizationService.inlitialize();
       authorizationService.loginNoPopup(loginProcedure);
       var signinButton = document.getElementById('auth_button');

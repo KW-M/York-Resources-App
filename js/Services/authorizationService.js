@@ -4,13 +4,13 @@ app.service('authorizationService', ['GoogleDriveService', '$q', authService]);
 //The function used in the authorizationService service also called by the google api framwork when it loads.
 function authService(GoogleDriveService, $q) {
     var self = this;
-    var CLIENT_ID = ;
     
     this.initilize = function(callback) {
         gapi.client.setApiKey(apiKey);
         gapi.auth2.init({
             client_id: '475444543746-e3r02g1o1o71kliuoohah04ojqbmo22e.apps.googleusercontent.com',
             scope: ['https://www.googleapis.com/auth/drive'],
+            hosted_domain: "york.org",
         });
     }
     
@@ -47,12 +47,12 @@ function authService(GoogleDriveService, $q) {
         }
     }
 
-    this.authorizeSilent = function() {
-        return (buildAuthRequest(true));
+    this.loginNoPopup = function() {
+        return(gapi.auth2.getAuthInstance().signIn())
     };
 
 
-    this.authorizePopup = function() {
-        return (buildAuthRequest(false));
+    this.loginPopup = function() {
+        return(gapi.auth2.getAuthInstance().signIn())
     };
 }
