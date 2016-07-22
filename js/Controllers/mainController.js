@@ -493,9 +493,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    gapi.load('client:auth2', function(){
       //authorizationService.inlitialize();
       console.log("gapiLoaded")
-      authorizationService.loginNoPopup().then(loginProcedure,loginError())
+      //authorizationService.loginNoPopup().then(loginProcedure(),loginError())
       var signinButton = document.getElementById('auth_button');
-      signinButton.addEventListener("click", authorizationService.loginNoPopup().then(loginProcedure));
+      signinButton.addEventListener("click", authorizationService.loginNoPopup());
+      
    });
 
          function loginSucessful(authResponse) {
