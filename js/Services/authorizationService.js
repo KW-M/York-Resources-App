@@ -5,14 +5,14 @@ app.service('authorizationService', ['GoogleDriveService', '$q', authService]);
 function authService(GoogleDriveService, $q) {
     var self = this;
     var clientId = '475444543746-e3r02g1o1o71kliuoohah04ojqbmo22e.apps.googleusercontent.com';
-    //var apiKey = 'YOUR API KEY';
+    var apiKey = 'AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo';
     var scopes = 'https://www.googleapis.com/auth/drive';
     
     var signinButton = document.getElementById('signin_button');
     var signoutButton = document.getElementById('signout_button');
 
     this.initilize = function(callback) {
-        //gapi.client.setApiKey(apiKey);
+        gapi.client.setApiKey(apiKey);
         gapi.auth2.init({
             client_id: clientId,
             scope: scopes,
