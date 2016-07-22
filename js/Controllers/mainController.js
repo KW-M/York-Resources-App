@@ -539,9 +539,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             } else {
                $mdDialog.show($mdDialog.alert({
                   title: 'Sorry.',
-                  textContent: "York Study Resources only works with emails ending in @york.org, please login with that email, or contact Mr.Brookhouser if you don't have one",
+                  textContent: "York Study Resources only works with emails ending in @york.org. If you have a York email please login with it, or contact Mr.Brookhouser if you don't have one.",
                   ok: 'Ok'
-               })); 
+               })).then(function()); 
             }
          });
 
