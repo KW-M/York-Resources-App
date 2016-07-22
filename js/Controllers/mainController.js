@@ -2,6 +2,7 @@
 var dependancies = ['$scope', '$mdDialog', '$window', '$timeout', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', '$routeParams', 'angularGridInstance']
 app.controller('ApplicationController', dependancies.concat([function($scope, $mdDialog, $window, $timeout, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, $routeParams, angularGridInstance) {
    var self = this;
+  // $scope.GoogleDriveService = GoogleDriveService;
    var content_container = document.getElementById("content_container");
    var performantScrollEnabled = false;
 
@@ -17,7 +18,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.searchChips = ["Class: "]
 
    $scope.classList = classes;
-
+   $scope.nextPageTokenList = {
+      'English I': "123"
+   };
    $scope.Tags = [];
    $scope.globals = {
       FABisOpen: false,
@@ -35,7 +38,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       CreatorEmail: "any",
    };
    
+   
    $scope.$mdMedia = $mdMedia;
+
+   var moderators = {//temporary
+      'worcester-moorek2018@york.org': true,
+   }
 
    //-routing-------------
 
@@ -136,35 +144,35 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
    $scope.showPicker = function(typ) {
-      // var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
-      // var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
-      // var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
-      // console.log("loaded my picker")
-      // console.log("picker");
-      // if (typ === "Upload") {
-      //    console.log("pickerup");
-      //    var UploadPicker = new google.picker.PickerBuilder().
-      //    addView(uploadView).
-      //    addView(docsView).
-      //    addView(sharedView).
-      //    setOAuthToken(gapi.auth.getToken().access_token).
-      //    setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
-      //    setCallback(self.pickerCallback).
-      //    build();
-      //    UploadPicker.setVisible(true);
-      // }
-      // else if (typ === "Drive") {
-      //    var drivePicker = new google.picker.PickerBuilder().
-      //    addView(docsView).
-      //    addView(sharedView).
-      //    addView(uploadView).
-      //    setOAuthToken(gapi.auth.getToken().access_token).
-      //    setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
-      //    setCallback(self.pickerCallback).
-      //    build();
-      //    console.log(drivePicker);
-      //    drivePicker.setVisible(true);
-      // }
+      var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
+      var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
+      var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
+      console.log("loaded my picker")
+      console.log("picker");
+      if (typ === "Upload") {
+         console.log("pickerup");
+         var UploadPicker = new google.picker.PickerBuilder().
+         addView(uploadView).
+         addView(docsView).
+         addView(sharedView).
+         setOAuthToken(gapi.auth.getToken().access_token).
+         setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
+         setCallback(self.pickerCallback).
+         build();
+         UploadPicker.setVisible(true);
+      }
+      else if (typ === "Drive") {
+         var drivePicker = new google.picker.PickerBuilder().
+         addView(docsView).
+         addView(sharedView).
+         addView(uploadView).
+         setOAuthToken(gapi.auth.getToken().access_token).
+         setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
+         setCallback(self.pickerCallback).
+         build();
+         console.log(drivePicker);
+         drivePicker.setVisible(true);
+      }
 
    };
 
@@ -273,18 +281,18 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    $scope.generateQueryString = function() {
-      // var query = '';
-      // query = query + " and properties has { key='Flagged' and value='" + $scope.queryProperties.Flagged + "' }"
-      // if ($scope.queryProperties.Class !== "any" && $scope.queryProperties.Class !== undefined) {
-      //    query = query + " and properties has { key='ClassName' and value='" + $scope.queryProperties.Class + "' }"
-      // }
-      // if ($scope.queryProperties.CreatorEmail !== "any" && $scope.queryProperties.CreatorEmail !== undefined) {
-      //    query = query + " and '" + $scope.queryProperties.CreatorEmail + "' in owners "
-      // }
-      // if ($scope.queryProperties.Type !== "any" && $scope.queryProperties.Type !== undefined) {
-      //    query = query + " and properties has { key='Type' and value='" + $scope.queryProperties.Type + "' }"
-      // }
-      // return query;
+      var query = '';
+      query = query + " and properties has { key='Flagged' and value='" + $scope.queryProperties.Flagged + "' }"
+      if ($scope.queryProperties.Class !== "any" && $scope.queryProperties.Class !== undefined) {
+         query = query + " and properties has { key='ClassName' and value='" + $scope.queryProperties.Class + "' }"
+      }
+      if ($scope.queryProperties.CreatorEmail !== "any" && $scope.queryProperties.CreatorEmail !== undefined) {
+         query = query + " and '" + $scope.queryProperties.CreatorEmail + "' in owners "
+      }
+      if ($scope.queryProperties.Type !== "any" && $scope.queryProperties.Type !== undefined) {
+         query = query + " and properties has { key='Type' and value='" + $scope.queryProperties.Type + "' }"
+      }
+      return query;
    }
 
    $scope.filterPosts = function(inputSet) {
@@ -355,7 +363,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          ClassOf: unformatedFile.owners[0].emailAddress.match(/\d+/)[0],
       }
       formatedFile.Class = {
- //        Name: unformatedFile.properties.ClassName,
+         Name: unformatedFile.properties.ClassName,
          Catagory: unformatedFile.properties.ClassCatagory,
          Color: unformatedFile.properties.ClassColor,
       }
@@ -483,13 +491,43 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    //-signin & initiation------------
    
    gapi.load('client:auth2', function(){
-      authorizationService.initilize(loginSucessful);
+      //authorizationService.inlitialize();
+      console.log("gapiLoaded")
+      //authorizationService.loginNoPopup().then(loginSucessful(),loginError())
+      var signinButton = document.getElementById('auth_button');
+      signinButton.addEventListener("click", authorizationService.loginNoPopup().then(loginSucessful()));
    });
 
-   function loginSucessful() {
-      GoogleDriveService.loadAPIs($scope.initiateDrive);
-   }
+         function loginSucessful(authResponse) {
+            console.log(authResponse)
+            $scope.loginStatus = authResponse;
+            GoogleDriveService.loadAPIs($scope.initiateDrive);
+            angular.element(document.querySelector('#login_spinner')).removeClass('fadeOut');
+            setTimeout(function() {
+               angular.element(document.querySelector('#auth_button')).removeClass('fadeIn');
+            });
+         }
          
+         function loginError(error) {
+            console.log(authResponse);
+            if (error.error_subtype !== undefined && error.error_subtype === "access_denied") {
+               showLoginButton();
+            }
+            else if (error.error !== undefined && error.error === "access_denied") {
+               showLoginButton();
+            }
+            else {
+               console.log(error);
+            }
+         }
+         //called to show the login button (& hide the loading spinner)
+      function showLoginButton() {
+         angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
+         setTimeout(function() {
+            angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
+         }, 500);
+      };
+
    $scope.initiateDrive = function(loaded) {
       console.log("API loaded: " + loaded)
       if (loaded === "drive") {
@@ -509,6 +547,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                   textContent: "York Study Resources only works with emails ending in @york.org. If you have a York email, please login with it, or contact Mr.Brookhouser if you don't have one.",
                   ok: 'Ok'
                })).then(function(){
+                  gapi.auth2.getAuthInstance().signOut();
                   angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
                   setTimeout(function() {
                      angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
@@ -589,6 +628,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    });
 
 }]));
+
+//called by the google client api when it loads (must be outside the controller)
+// function gClientLoaded() {
+//    gapi.auth.init(loginSilent());
+// }
+
 
 var classes = [{
    'Name': 'English',
