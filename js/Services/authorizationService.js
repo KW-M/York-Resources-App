@@ -1,4 +1,4 @@
-//Define the authorizationService service for Angular /* k*/global:angular
+/*Define the authorizationService service for Angular */ /*global angular*/ /*global gapi*/ /*global app*/
 app.service('authorizationService', ['GoogleDriveService', '$q', authService]);
 
 //The function used in the authorizationService service also called by the google api framwork when it loads.
@@ -8,9 +8,9 @@ function authService(GoogleDriveService, $q) {
     var apiKey = 'AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo';
     var scopes = 'https://www.googleapis.com/auth/drive';
 
-    var signinButton = document.getElementById('signin_button');
-    var signinSpiner = document.getElementById('signout_button');
-    var signinDialog = angular.element(document.getElementById('signout_button'));
+    var signinButton = angular.element(document.getElementById('signin_button'));
+    var signinSpiner = angular.element(document.getElementById('signin_spinner'));
+    var signinDialog = angular.element(document.getElementById('overlay_background'));
     var signoutButton = angular.element(document.getElementById('signout_button'));
 
     this.initilize = function(callback) {
@@ -32,10 +32,8 @@ function authService(GoogleDriveService, $q) {
         function updateSigninStatus(isSignedIn) {
             if (isSignedIn) {
                 console.log('signed in')
-                angular.element(document.querySelector('#login_spinner')).removeClass('fadeOut');
-                setTimeout(function() {
-                    angular.element(document.querySelector('#auth_button')).removeClass('fadeIn');
-                });
+                signinSpiner.removeClass('fadeOut');
+                signinButton.removeClass('fadeIn');
                 console.log(gapi.auth2.getAuthInstance());
                 callback();
             }
@@ -56,26 +54,8 @@ function authService(GoogleDriveService, $q) {
         }, 500);
     };
 
-
-
-    function isTokenValid() {
-        var promiseVar = $q.defer();
-        var token = gapi.auth.getToken();
-        if (token && Date.now() < token.expires_at) {
-            promiseVar.resolve();
-        }
-        else {
-            gapi.auth.authorize(request);
-        }
-    }
-
     function handleSigninClick(event) {
-        gapi.auth2.getAuthInstance().signIn()
-        console.log('logged in')
-        console.log(gapi.auth2.getAuthInstance());
-        console.log({
-            basicprofile: gapi.auth2.getAuthInstance().getBasicProfile()
-        });
+        gapi.auth2.getAuthInstance().signIn();
     }
 
     function handleSignoutClick(event) {
