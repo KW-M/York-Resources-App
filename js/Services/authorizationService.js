@@ -9,7 +9,7 @@ function authService(GoogleDriveService, $q) {
     var scopes = 'https://www.googleapis.com/auth/drive';
 
     var signinButton = angular.element(document.getElementById('signin_button'));
-    console.log
+    console.log(signinButton)
     var signinSpiner = angular.element(document.getElementById('signin_spinner'));
     var signinDialog = angular.element(document.getElementById('overlay_background'));
     var signoutButton = angular.element(document.getElementById('signout_button'));
@@ -26,8 +26,8 @@ function authService(GoogleDriveService, $q) {
             // Handle the initial sign-in state.
             updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
 
-            signinButton.addEventListener("click", handleSigninClick);
-            signoutButton.addEventListener("click", handleSignoutClick);
+            signinButton[0].addEventListener("click", handleSigninClick);
+            signoutButton[0].addEventListener("click", handleSignoutClick);
         });
 
         function updateSigninStatus(isSignedIn) {
