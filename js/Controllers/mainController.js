@@ -503,7 +503,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       response.then(function(response) {
             $scope.loginStatus = response;
             GoogleDriveService.loadAPIs($scope.initiateDrive);
-         }).catch(function(error) {
+            angular.element(document.querySelector('#login_spinner')).removeClass('fadeOut');
+            setTimeout(function() {
+               angular.element(document.querySelector('#auth_button')).removeClass('fadeIn');
+            });
+            }).catch(function(error) {
             if (error.error_subtype !== undefined && error.error_subtype === "access_denied") {
                showLoginButton();
             }
@@ -541,7 +545,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                   title: 'Sorry.',
                   textContent: "York Study Resources only works with emails ending in @york.org. If you have a York email please login with it, or contact Mr.Brookhouser if you don't have one.",
                   ok: 'Ok'
-               })).then(function()); 
+               })).then(function(){
+                  gapi.auth2.getAuthInstance().signOut();
+               }); 
             }
          });
 
@@ -572,9 +578,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          console.log('spreadsheetRow');
          console.log(spreadsheetRow);
          document.dispatchEvent( new Event('sheetPrefsLoaded'));
-      }), function(Error) {
+      }, function(Error) {
          console.log(Error);
-         document.dispatchEvent( new Event('sheetPrefsLoaded'));
       });
       $scope.getFiles("");
    }
