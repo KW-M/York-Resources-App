@@ -6,7 +6,7 @@ function authService(GoogleDriveService, $q) {
     var self = this;
     var CLIENT_ID = '475444543746-e3r02g1o1o71kliuoohah04ojqbmo22e.apps.googleusercontent.com';
     
-    var buildAuthRequest = function(immediateMode) {
+    this.buildAuthRequest = function(immediateMode) {
         var promise = $q.defer();
         var request = {
             hd: 'york.org',
