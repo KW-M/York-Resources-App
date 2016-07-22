@@ -2,6 +2,8 @@
 var dependancies = ['$scope', '$mdDialog', '$window', '$timeout', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', '$routeParams', 'angularGridInstance']
 app.controller('ApplicationController', dependancies.concat([function($scope, $mdDialog, $window, $timeout, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, $routeParams, angularGridInstance) {
    var self = this;
+   
+   
    var content_container = document.getElementById("content_container");
    var performantScrollEnabled = false;
 
@@ -591,9 +593,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 }]));
 
 //called by the google client api when it loads (must be outside the controller)
+function loadgapi() {
    gapi.load('client:auth2', function(){
       gapiLoaded();
    });
+}
 
 
 var classes = [{
