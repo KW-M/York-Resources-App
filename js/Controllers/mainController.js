@@ -280,18 +280,18 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    $scope.generateQueryString = function() {
-      var query = '';
-      query = query + " and properties has { key='Flagged' and value='" + $scope.queryProperties.Flagged + "' }"
-      if ($scope.queryProperties.Class !== "any" && $scope.queryProperties.Class !== undefined) {
-         query = query + " and properties has { key='ClassName' and value='" + $scope.queryProperties.Class + "' }"
-      }
-      if ($scope.queryProperties.CreatorEmail !== "any" && $scope.queryProperties.CreatorEmail !== undefined) {
-         query = query + " and '" + $scope.queryProperties.CreatorEmail + "' in owners "
-      }
-      if ($scope.queryProperties.Type !== "any" && $scope.queryProperties.Type !== undefined) {
-         query = query + " and properties has { key='Type' and value='" + $scope.queryProperties.Type + "' }"
-      }
-      return query;
+      // var query = '';
+      // query = query + " and properties has { key='Flagged' and value='" + $scope.queryProperties.Flagged + "' }"
+      // if ($scope.queryProperties.Class !== "any" && $scope.queryProperties.Class !== undefined) {
+      //    query = query + " and properties has { key='ClassName' and value='" + $scope.queryProperties.Class + "' }"
+      // }
+      // if ($scope.queryProperties.CreatorEmail !== "any" && $scope.queryProperties.CreatorEmail !== undefined) {
+      //    query = query + " and '" + $scope.queryProperties.CreatorEmail + "' in owners "
+      // }
+      // if ($scope.queryProperties.Type !== "any" && $scope.queryProperties.Type !== undefined) {
+      //    query = query + " and properties has { key='Type' and value='" + $scope.queryProperties.Type + "' }"
+      // }
+      // return query;
    }
 
    $scope.filterPosts = function(inputSet) {
@@ -362,7 +362,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          ClassOf: unformatedFile.owners[0].emailAddress.match(/\d+/)[0],
       }
       formatedFile.Class = {
-         Name: unformatedFile.properties.ClassName,
+ //        Name: unformatedFile.properties.ClassName,
          Catagory: unformatedFile.properties.ClassCatagory,
          Color: unformatedFile.properties.ClassColor,
       }
