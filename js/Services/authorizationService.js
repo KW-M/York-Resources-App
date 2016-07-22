@@ -16,7 +16,6 @@ function authService(GoogleDriveService, $q) {
         gapi.auth2.init({
             client_id: clientId,
             scope: scopes,
-            fetch_basic_profile: false,
         }).then(function() {
             // Listen for sign-in state changes.
             gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
@@ -29,6 +28,7 @@ function authService(GoogleDriveService, $q) {
         });
 
         function updateSigninStatus(isSignedIn) {
+            console.log('listening')
             if (isSignedIn) {
                 angular.element(document.querySelector('#login_spinner')).removeClass('fadeOut');
                 setTimeout(function() {
@@ -81,7 +81,9 @@ function authService(GoogleDriveService, $q) {
     }
 
     function handleSigninClick(event) {
-        gapi.auth2.getAuthInstance().signIn();
+        gapi.auth2.getAuthInstance().signIn().then(function(){
+            console.log('logged in')
+        });
     }
 
     function handleSignoutClick(event) {
