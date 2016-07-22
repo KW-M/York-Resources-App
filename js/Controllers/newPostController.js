@@ -257,7 +257,7 @@
             }
 
             if (postObj.Class.Name !== $scope.Class.Name) {
-                //metadata.properties.ClassName = classObject.Name;
+                metadata.properties.ClassName = classObject.Name;
                 metadata.properties.ClassCatagory = classObject.Catagory;
                 metadata.properties.ClassColor = classObject.Color;
             }
