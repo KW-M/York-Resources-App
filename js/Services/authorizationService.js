@@ -5,7 +5,7 @@ app.service('authorizationService', ['GoogleDriveService', '$q', authService]);
 function authService(GoogleDriveService, $q) {
     var self = this;
     var clientId = '475444543746-e3r02g1o1o71kliuoohah04ojqbmo22e.apps.googleusercontent.comD';
-    var apiKey = 'YOUR API KEY';
+    //var apiKey = 'YOUR API KEY';
     var scopes = 'https://www.googleapis.com/auth/drive';
 
     this.initilize = function(callback) {
@@ -23,6 +23,18 @@ function authService(GoogleDriveService, $q) {
             signinButton.addEventListener("click", handleSigninClick);
             signoutButton.addEventListener("click", handleSignoutClick);
         });
+
+        function updateSigninStatus(isSignedIn) {
+            if (isSignedIn) {
+                signinButton.style.display = 'none';
+                signoutButton.style.display = 'block';
+                callback();
+            }
+            else {
+                signinButton.style.display = 'block';
+                signoutButton.style.display = 'none';
+            }
+        }
     }
 
     this.buildAuthRequest = function(immediateMode) {
@@ -58,20 +70,11 @@ function authService(GoogleDriveService, $q) {
         }
     }
 
-    this.loginNoPopup = function() {
-        gapi.auth2.init({
-            client_id: client_id,
-        });
-        console.log(gapi.auth2.getAuthInstance().logIn());
-    };
+    function handleSigninClick(event) {
+        gapi.auth2.getAuthInstance().signIn();
+    }
 
-
-    this.loginPopup = function() {
-        return (gapi.auth2.init({
-            client_id: client_id,
-            scope: scopes,
-            hosted_domain: "york.org",
-            immediate: false,
-        }));
-    };
+    function handleSignoutClick(event) {
+        gapi.auth2.getAuthInstance().signOut();
+    }
 }
