@@ -507,7 +507,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             setTimeout(function() {
                angular.element(document.querySelector('#auth_button')).removeClass('fadeIn');
             });
-            }).catch(function(error) {
+         }).catch(function(error) {
             if (error.error_subtype !== undefined && error.error_subtype === "access_denied") {
                showLoginButton();
             }
@@ -531,19 +531,19 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       console.log("API loaded: " + loaded)
       if (loaded === "drive") {
          queue(GoogleDriveService.getUserInfo(), function(userInfo) {
-            $scope.myInfo = {
-               "Name": userInfo.result.user.displayName,
-               "Email": userInfo.result.user.emailAddress,
-               "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
-            };
-            var domain = $scope.myInfo.substr($scope.myInfo.length - 9)
-            cosole.log(domain);
+            var domain = userInfo.result.user.emailAddress.substr(userInfo.result.user.emailAddress.length - 9)
+            console.log(domain);
             if (domain === "@york.org") {
+               $scope.myInfo = {
+                  "Name": userInfo.result.user.displayName,
+                  "Email": userInfo.result.user.emailAddress,
+                  "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
+               };
                document.dispatchEvent(new Event('userInfoLoaded'));
             } else {
                $mdDialog.show($mdDialog.alert({
                   title: 'Sorry.',
-                  textContent: "York Study Resources only works with emails ending in @york.org. If you have a York email please login with it, or contact Mr.Brookhouser if you don't have one.",
+                  textContent: "York Study Resources only works with emails ending in @york.org. If you have a York email, please login with it, or contact Mr.Brookhouser if you don't have one.",
                   ok: 'Ok'
                })).then(function(){
                   gapi.auth2.getAuthInstance().signOut();
