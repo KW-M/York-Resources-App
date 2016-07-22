@@ -491,11 +491,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    //-signin & initiation------------
    
    gapi.load('client:auth2', function(){
-      //authorizationService.inlitialize();
       console.log("gapiLoaded")
       authorizationService.initilize();
-
-      //signinButton.addEventListener("click", authorizationService.loginNoPopup().then(loginSucessful()));
    });
 
          function loginSucessful(authResponse) {

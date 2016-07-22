@@ -4,15 +4,19 @@ app.service('authorizationService', ['GoogleDriveService', '$q', authService]);
 //The function used in the authorizationService service also called by the google api framwork when it loads.
 function authService(GoogleDriveService, $q) {
     var self = this;
-    var clientId = '475444543746-e3r02g1o1o71kliuoohah04ojqbmo22e.apps.googleusercontent.comD';
+    var clientId = '475444543746-e3r02g1o1o71kliuoohah04ojqbmo22e.apps.googleusercontent.com';
     //var apiKey = 'YOUR API KEY';
     var scopes = 'https://www.googleapis.com/auth/drive';
+    
+    var signinButton = document.getElementById('signin_button');
+    var signoutButton = document.getElementById('signout_button');
 
     this.initilize = function(callback) {
         //gapi.client.setApiKey(apiKey);
         gapi.auth2.init({
             client_id: clientId,
-            scope: scopes
+            scope: scopes,
+            fetch_basic_profile: false,
         }).then(function() {
             // Listen for sign-in state changes.
             gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
