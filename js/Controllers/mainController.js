@@ -547,6 +547,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                   ok: 'Ok'
                })).then(function(){
                   gapi.auth2.getAuthInstance().signOut();
+                  angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
+                  setTimeout(function() {
+                     angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
+               }, 500);
                }); 
             }
          });
