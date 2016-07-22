@@ -493,32 +493,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       authorizationService.initilize(loginSucessful);
    });
 
-   function loginSucessful(authResponse) {
-      console.log(authResponse)
-      $scope.loginStatus = authResponse;
+   function loginSucessful() {
       GoogleDriveService.loadAPIs($scope.initiateDrive);
    }
          
-         function loginError(error) {
-            console.log(authResponse);
-            if (error.error_subtype !== undefined && error.error_subtype === "access_denied") {
-               showLoginButton();
-            }
-            else if (error.error !== undefined && error.error === "access_denied") {
-               showLoginButton();
-            }
-            else {
-               console.log(error);
-            }
-         }
-         //called to show the login button (& hide the loading spinner)
-      function showLoginButton() {
-         angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
-         setTimeout(function() {
-            angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
-         }, 500);
-      };
-
    $scope.initiateDrive = function(loaded) {
       console.log("API loaded: " + loaded)
       if (loaded === "drive") {
