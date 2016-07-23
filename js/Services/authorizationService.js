@@ -12,7 +12,7 @@ function authService(GoogleDriveService, $q) {
     var signinSpinner = angular.element(document.getElementById('signin_spinner'));
     var signinDialog = angular.element(document.getElementById('overlay_background'));
     var signoutButton = angular.element(document.getElementById('account_button'));
-    
+
     this.initilize = function(callback) {
         gapi.client.setApiKey(apiKey);
         gapi.auth2.init({
@@ -36,7 +36,11 @@ function authService(GoogleDriveService, $q) {
                 console.log('signed in')
                 console.log(gapi.auth2.getAuthInstance().currentUser.get());
                 console.log(gapi.auth2.getAuthInstance().currentUser.get().getHostedDomain());
-                console.log(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile()BasicProfile.getName());
+                console.log(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getName());
+                console.log(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getGivenName());
+                console.log(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getFamilyName());
+                console.log(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getImageUrl());
+                console.log(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getEmail());
                 callback();
                 self.hideSigninButton();
             }
@@ -52,18 +56,18 @@ function authService(GoogleDriveService, $q) {
             signinButton.addClass('fadeIn');
         }, 500);
     };
-    
+
     this.hideSigninButton = function() {
         signinSpinner.removeClass('fadeOut');
         setTimeout(function() {
             signinButton.removeClass('fadeIn');
         }, 500);
     };
-    
+
     this.hideSigninDialog = function() {
         signinDialog.addClass('fadeOut');
     };
-    
+
     this.showSigninDialog = function() {
         signinDialog.removeClass('fadeOut');
     };
