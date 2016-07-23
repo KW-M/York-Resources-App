@@ -2,7 +2,6 @@
 var dependancies = ['$scope', '$mdDialog', '$window', '$timeout', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', '$routeParams', 'angularGridInstance']
 app.controller('ApplicationController', dependancies.concat([function($scope, $mdDialog, $window, $timeout, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, $routeParams, angularGridInstance) {
    var self = this;
-  // $scope.GoogleDriveService = GoogleDriveService;
    var content_container = document.getElementById("content_container");
    var performantScrollEnabled = false;
 
@@ -59,6 +58,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.gotoRoute = function(path, query, id) {
       if (path) {
          $location.path(path);
+         $scope.toggleSidebar(true);
       }
       if (query) {
          $location.search(query);
@@ -382,7 +382,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    //-UI actions---------
 
-   $scope.toggleSidebar = function() { //called by the top left toolbar menu button
+   $scope.toggleSidebar = function(estting) { //called by the top left toolbar menu button
       if ($mdMedia('gt-sm')) {
          $scope.globals.sidenavIsOpen = !$scope.globals.sidenavIsOpen
          $window.setTimeout(angularGridInstance.posts.refresh, 500);
@@ -496,8 +496,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    function loginSucessful(authResponse) {
       console.log(authResponse)
-            $scope.loginStatus = authResponse;
-            GoogleDriveService.loadAPIs($scope.initiateDrive);
+      GoogleDriveService.loadAPIs($scope.initiateDrive);
    }
 
    $scope.initiateDrive = function(loaded) {
