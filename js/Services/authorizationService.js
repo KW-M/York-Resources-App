@@ -33,14 +33,21 @@ function authService(GoogleDriveService, $q) {
 
         function updateSigninStatus(isSignedIn) {
             if (isSignedIn) {
+                var authInstance = gapi.auth2.getAuthInstance()
+                var currentUser = authInstance.currentUser.get()
+                var userProfile = currentUser.getBasicProfile()
+                var accountDomain = currentUser
+                
+                
                 console.log('signed in')
                 console.log(gapi.auth2.getAuthInstance().currentUser.get());
-                //console.log(gapi.auth2.getAuthInstance().currentUser.get().getHostedDomain());
-                console.log(gapi.auth2.getAuthInstance().getBasicProfile().getName());
-                console.log(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getGivenName());
-                console.log(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getFamilyName());
-                console.log(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getImageUrl());
-                console.log(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getEmail());
+                console.log(gapi.auth2.getAuthInstance().currentUser.get().getHostedDomain());
+                console.log(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile());
+                // console.log(gapi.auth2.getAuthInstance().getBasicProfile().getName());
+                // console.log(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getGivenName());
+                // console.log(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getFamilyName());
+                // console.log(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getImageUrl());
+                // console.log(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getEmail());
                 callback();
                 self.hideSigninButton();
             }
