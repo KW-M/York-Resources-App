@@ -524,13 +524,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                handleUserPrefsSheet (); 
             });
          }
-         
       } else if (loaded === "picker") {
          if ($scope.myInfo !== undefined) {
-            angular.element(document.querySelector('#overlay_background')).addClass('fadeOut');
+            authorizationService.hideSigninDialog();
          }else{
             document.addEventListener('sheetPrefsLoaded', function () {
-               angular.element(document.querySelector('#overlay_background')).addClass('fadeOut');
+               authorizationService.hideSigninDialog();
             });
          }
       }
@@ -560,7 +559,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    //-event watchers---------
 
-   //$scope.$watch('searchTxt', $scope.filterPosts);
+   $scope.$watch('searchTxt', $scope.gotoRoute());
 
    content_container.onscroll = function(event) {
       //called whenever the content_container scrolls
