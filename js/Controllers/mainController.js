@@ -382,8 +382,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    //-UI actions---------
 
-   $scope.toggleSidebar = function(setting) { //called by the top left toolbar menu button
-   if (setting === true) {
+   $scope.toggleSidebar = function(urlPathChanged) { //called by the top left toolbar menu button
+   if (urlPathChanged === true) {
       if ($mdMedia('gt-sm') !== true) {
          $mdSidenav('sidenav_overlay').toggle();
       }
@@ -391,6 +391,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       if ($mdMedia('gt-sm')) {
          $scope.globals.sidenavIsOpen = !$scope.globals.sidenavIsOpen;
          $window.setTimeout(angularGridInstance.posts.refresh, 500);
+      } else {
+         $mdSidenav('sidenav_overlay').toggle();
       }
    }
    };
