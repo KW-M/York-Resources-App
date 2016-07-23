@@ -600,11 +600,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
 }]));
 
-//called by the google client api when it loads (must be outside the controller)
-// function gClientLoaded() {
-//    gapi.auth.init(loginSilent());
-// }
-
 
 var classes = [{
    'Name': 'English',
