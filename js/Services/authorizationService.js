@@ -35,7 +35,6 @@ function authService(GoogleDriveService, $q) {
             if (isSignedIn) {
                 var authInstance = gapi.auth2.getAuthInstance()
                 var currentUser = authInstance.currentUser.get()
-                var userProfile = currentUser.getBasicProfile()
                 var accountDomain = currentUser.getHostedDomain()
                 
                 console.log(authInstance);
