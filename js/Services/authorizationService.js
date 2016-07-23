@@ -18,7 +18,7 @@ function authService(GoogleDriveService, $q) {
         gapi.auth2.init({
             client_id: clientId,
             scope: scopes,
-            fetch_basic_profile: false,
+            fetch_basic_profile: true,
             hosted_domain: 'york.org'
         }).then(function() {
             // Listen for sign-in state changes.
