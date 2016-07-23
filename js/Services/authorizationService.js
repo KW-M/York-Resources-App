@@ -36,28 +36,28 @@ function authService($mdDialog) {
                 var authInstance = gapi.auth2.getAuthInstance()
                 var currentUser = authInstance.currentUser.get()
                 var accountDomain = currentUser.getHostedDomain()
-            
-            if(accountDomain = 'york.org'){
-                console.log(authInstance);
-                console.log(currentUser);
-                console.log(userProfile);
-                console.log(accountDomain);
-                console.log('signed in')
-                callback();
-                self.hideSigninButton();
-            } else {
-               $mdDialog.show($mdDialog.alert({
-                  title: 'Sorry.',
-                  textContent: "York Study Resources only works with emails ending in @york.org. If you have a York email, please login with it, or contact Mr.Brookhouser if you don't have one.",
-                  ok: 'Ok'
-               })).then(function(){
-                  gapi.auth2.getAuthInstance().signOut();
-                  angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
-                  setTimeout(function() {
-                     angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
-                  }, 500);
-               }); 
-            }
+
+                if (accountDomain = 'york.org') {
+                    console.log(authInstance);
+                    console.log(currentUser);
+                    console.log(accountDomain);
+                    console.log('signed in')
+                    callback();
+                    self.hideSigninButton();
+                }
+                else {
+                    $mdDialog.show($mdDialog.alert({
+                        title: 'Sorry.',
+                        textContent: "York Study Resources only works york google accounts. If you have an email , please login with it, or contact Mr.Brookhouser if you don't have one.",
+                        ok: 'Ok'
+                    })).then(function() {
+                        gapi.auth2.getAuthInstance().signOut();
+                        angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
+                        setTimeout(function() {
+                            angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
+                        }, 500);
+                    });
+                }
             }
             else {
                 self.showSigninButton()
