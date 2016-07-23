@@ -382,8 +382,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    //-UI actions---------
 
-   $scope.toggleSidebar = function(estting) { //called by the top left toolbar menu button
-      if ($mdMedia('gt-sm')) {
+   $scope.toggleSidebar = function(setting) { //called by the top left toolbar menu button
+      if ($mdMedia('gt-sm') && setting !== true) {
          $scope.globals.sidenavIsOpen = !$scope.globals.sidenavIsOpen
          $window.setTimeout(angularGridInstance.posts.refresh, 500);
       }
@@ -491,7 +491,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    //-signin & initiation------------
    
    gapi.load('client:auth2', function(){
-      authorizationService.inlitialize(loginSucessful);
+      authorizationService.initilize(loginSucessful);
    });
 
    function loginSucessful(authResponse) {
