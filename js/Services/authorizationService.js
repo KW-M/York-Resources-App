@@ -36,13 +36,13 @@ function authService(GoogleDriveService, $q) {
                 var authInstance = gapi.auth2.getAuthInstance()
                 var currentUser = authInstance.currentUser.get()
                 var userProfile = currentUser.getBasicProfile()
-                var accountDomain = currentUser
+                var accountDomain = currentUser.getHostedDomain()
                 
-                
+                console.log(authInstance);
+                console.log(currentUser);
+                console.log(userProfile);
+                console.log(accountDomain);
                 console.log('signed in')
-                console.log(gapi.auth2.getAuthInstance().currentUser.get());
-                console.log(gapi.auth2.getAuthInstance().currentUser.get().getHostedDomain());
-                console.log(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile());
                 // console.log(gapi.auth2.getAuthInstance().getBasicProfile().getName());
                 // console.log(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getGivenName());
                 // console.log(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getFamilyName());
