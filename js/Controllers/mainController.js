@@ -383,13 +383,16 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    //-UI actions---------
 
    $scope.toggleSidebar = function(setting) { //called by the top left toolbar menu button
-      if ($mdMedia('gt-sm') && setting === false) {
-         $scope.globals.sidenavIsOpen = !$scope.globals.sidenavIsOpen
-         $window.setTimeout(angularGridInstance.posts.refresh, 500);
-      }
-      if ($mdMedia('gt-sm') !== true && setting === true) {
+   if (setting === true) {
+      if ($mdMedia('gt-sm') !== true) {
          $mdSidenav('sidenav_overlay').toggle();
       }
+   }else{
+      if ($mdMedia('gt-sm')) {
+         $scope.globals.sidenavIsOpen = !$scope.globals.sidenavIsOpen;
+         $window.setTimeout(angularGridInstance.posts.refresh, 500);
+      }
+   }
    };
    
    $scope.toggleMobileSearch = function () {
