@@ -34,6 +34,7 @@ function authService(GoogleDriveService, $q) {
         function updateSigninStatus(isSignedIn) {
             if (isSignedIn) {
                 console.log('signed in')
+                gapi.auth2.getAuthInstance().
                 callback();
                 self.hideSigninButton();
             }
