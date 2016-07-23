@@ -491,42 +491,14 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    //-signin & initiation------------
    
    gapi.load('client:auth2', function(){
-      //authorizationService.inlitialize();
-      console.log("gapiLoaded")
-      //authorizationService.loginNoPopup().then(loginSucessful(),loginError())
-      var signinButton = document.getElementById('auth_button');
-      //signinButton.addEventListener("click", authorizationService.loginNoPopup().then(loginSucessful()));
+      authorizationService.inlitialize(loginSucessful);
    });
 
-         function loginSucessful(authResponse) {
-            console.log(authResponse)
+   function loginSucessful(authResponse) {
+      console.log(authResponse)
             $scope.loginStatus = authResponse;
             GoogleDriveService.loadAPIs($scope.initiateDrive);
-            angular.element(document.querySelector('#login_spinner')).removeClass('fadeOut');
-            setTimeout(function() {
-               angular.element(document.querySelector('#auth_button')).removeClass('fadeIn');
-            });
-         }
-         
-         function loginError(error) {
-            console.log(authResponse);
-            if (error.error_subtype !== undefined && error.error_subtype === "access_denied") {
-               showLoginButton();
-            }
-            else if (error.error !== undefined && error.error === "access_denied") {
-               showLoginButton();
-            }
-            else {
-               console.log(error);
-            }
-         }
-         //called to show the login button (& hide the loading spinner)
-      function showLoginButton() {
-         angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
-         setTimeout(function() {
-            angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
-         }, 500);
-      };
+   }
 
    $scope.initiateDrive = function(loaded) {
       console.log("API loaded: " + loaded)
