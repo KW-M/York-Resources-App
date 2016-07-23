@@ -561,7 +561,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    //-event watchers---------
 
    $scope.$watch('searchTxt', function(){
-      console.log(searchTxt);
+      console.log($scope.searchTxt);
       $scope.gotoRoute(undefined, $scope.searchTxt, undefined)
    });
 
