@@ -40,7 +40,7 @@ function authService($mdDialog) {
                 if (accountDomain = 'york.org') {
                     console.log(authInstance);
                     console.log(currentUser);
-                    console.log(accountDomain);
+                    console.log("User's Domain" accountDomain);
                     console.log('signed in')
                     callback();
                     self.hideSigninButton();
@@ -48,7 +48,7 @@ function authService($mdDialog) {
                 else {
                     $mdDialog.show($mdDialog.alert({
                         title: 'Sorry.',
-                        textContent: "York Study Resources only works york google accounts. If you have an email , please login with it, or contact Mr.Brookhouser if you don't have one.",
+                        htmlContent: "<p>York Study Resources only works with York Google accounts right now.</p><p>If you have an email account ending with @york.org, please login with it, or contact Mr.Brookhouser if you don't have one.<p>",
                         ok: 'Ok'
                     })).then(function() {
                         gapi.auth2.getAuthInstance().signOut();
