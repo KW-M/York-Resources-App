@@ -56,6 +56,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    $scope.gotoRoute = function(path, query, id) {
+      console.log(query)
       if (path) {
          $location.path(path);
          $scope.toggleSidebar(true);
@@ -559,7 +560,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    //-event watchers---------
 
-   $scope.$watch('searchTxt', $scope.gotoRoute(undefined, undefined, $scope.searchTxt));
+   $scope.$watch('searchTxt', function(){
+      console.log(searchTxt);
+      $scope.gotoRoute(undefined, $scope.searchTxt, undefined)
+   });
 
    content_container.onscroll = function(event) {
       //called whenever the content_container scrolls
