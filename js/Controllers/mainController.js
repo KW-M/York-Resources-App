@@ -383,11 +383,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    //-UI actions---------
 
    $scope.toggleSidebar = function(setting) { //called by the top left toolbar menu button
-      if ($mdMedia('gt-sm') && setting !== true) {
+      if ($mdMedia('gt-sm') && setting === false) {
          $scope.globals.sidenavIsOpen = !$scope.globals.sidenavIsOpen
          $window.setTimeout(angularGridInstance.posts.refresh, 500);
       }
-      else {
+      if ($mdMedia('gt-sm') !== true && setting === true) {
          $mdSidenav('sidenav_overlay').toggle();
       }
    };
