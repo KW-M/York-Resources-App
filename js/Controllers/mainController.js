@@ -495,7 +495,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    });
 
    function loginSucessful(authResponse) {
-      console.log(authResponse)
+      console.log(authResponse);
       GoogleDriveService.loadAPIs($scope.initiateDrive);
    }
 
