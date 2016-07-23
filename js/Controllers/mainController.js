@@ -495,7 +495,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       console.log("gapiLoaded")
       //authorizationService.loginNoPopup().then(loginSucessful(),loginError())
       var signinButton = document.getElementById('auth_button');
-      signinButton.addEventListener("click", authorizationService.loginNoPopup().then(loginSucessful()));
+      //signinButton.addEventListener("click", authorizationService.loginNoPopup().then(loginSucessful()));
    });
 
          function loginSucessful(authResponse) {
