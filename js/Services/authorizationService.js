@@ -44,10 +44,10 @@ function authService(GoogleDriveService, $q) {
                 console.log(accountDomain);
                 console.log('signed in')
                 // console.log(gapi.auth2.getAuthInstance().getBasicProfile().getName());
-                // console.log(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getGivenName());
-                // console.log(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getFamilyName());
-                // console.log(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getImageUrl());
-                // console.log(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getEmail());
+                console.log(userProfile.getGivenName());
+                console.log(userProfile.getFamilyName());
+                console.log(userProfile.getImageUrl());
+                console.log(userProfile.getEmail());
                 callback();
                 self.hideSigninButton();
             }
