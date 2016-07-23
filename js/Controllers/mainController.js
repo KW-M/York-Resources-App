@@ -559,7 +559,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    //-event watchers---------
 
-   $scope.$watch('searchTxt', $scope.gotoRoute($scope.searchTxt));
+   $scope.$watch('searchTxt', $scope.gotoRoute(undefined, undefined, $scope.searchTxt));
 
    content_container.onscroll = function(event) {
       //called whenever the content_container scrolls
