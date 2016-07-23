@@ -508,30 +508,13 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       console.log("API loaded: " + loaded)
       if (loaded === "drive") {
          queue(GoogleDriveService.getUserInfo(), function(userInfo) {
-            var domain = userInfo.result.user.emailAddress.substr(userInfo.result.user.emailAddress.length - 9)
-            console.log(domain);
-            if (domain === "@york.org") {
                $scope.myInfo = {
                   "Name": userInfo.result.user.displayName,
                   "Email": userInfo.result.user.emailAddress,
                   "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
                };
                document.dispatchEvent(new Event('userInfoLoaded'));
-            } else {
-               $mdDialog.show($mdDialog.alert({
-                  title: 'Sorry.',
-                  textContent: "York Study Resources only works with emails ending in @york.org. If you have a York email, please login with it, or contact Mr.Brookhouser if you don't have one.",
-                  ok: 'Ok'
-               })).then(function(){
-                  gapi.auth2.getAuthInstance().signOut();
-                  angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
-                  setTimeout(function() {
-                     angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
-                  }, 500);
-               }); 
-            }
          });
-
       } else if (loaded === "sheets") {
          console.log(gapi.client);
          if ($scope.myInfo !== undefined) {

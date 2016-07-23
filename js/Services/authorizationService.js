@@ -1,8 +1,8 @@
 /*Define the authorizationService service for Angular */ /*global angular*/ /*global gapi*/ /*global app*/
-app.service('authorizationService', ['GoogleDriveService', '$q', authService]);
+app.service('authorizationService', ['$mdDialog', authService]);
 
 //The function used in the authorizationService service also called by the google api framwork when it loads.
-function authService(GoogleDriveService, $q) {
+function authService($mdDialog) {
     var self = this;
     var clientId = '475444543746-e3r02g1o1o71kliuoohah04ojqbmo22e.apps.googleusercontent.com';
     var apiKey = 'AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo';
@@ -36,19 +36,28 @@ function authService(GoogleDriveService, $q) {
                 var authInstance = gapi.auth2.getAuthInstance()
                 var currentUser = authInstance.currentUser.get()
                 var accountDomain = currentUser.getHostedDomain()
-                
+            
+            if(accountDomain = 'york.org'){
                 console.log(authInstance);
                 console.log(currentUser);
                 console.log(userProfile);
                 console.log(accountDomain);
                 console.log('signed in')
-                // console.log(gapi.auth2.getAuthInstance().getBasicProfile().getName());
-                console.log(userProfile.getGivenName());
-                console.log(userProfile.getFamilyName());
-                console.log(userProfile.getImageUrl());
-                console.log(userProfile.getEmail());
                 callback();
                 self.hideSigninButton();
+            } else {
+               $mdDialog.show($mdDialog.alert({
+                  title: 'Sorry.',
+                  textContent: "York Study Resources only works with emails ending in @york.org. If you have a York email, please login with it, or contact Mr.Brookhouser if you don't have one.",
+                  ok: 'Ok'
+               })).then(function(){
+                  gapi.auth2.getAuthInstance().signOut();
+                  angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
+                  setTimeout(function() {
+                     angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
+                  }, 500);
+               }); 
+            }
             }
             else {
                 self.showSigninButton()
