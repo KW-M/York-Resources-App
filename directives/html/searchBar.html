@@ -1,6 +1,6 @@
 <md-icon style="position: absolute;color: #757575;z-index: 60;pointer-events: none;margin: 8px 15px;">search</md-icon>
 <md-chips class="searchBarChips md-accent" ng-model="searchChips" md-autocomplete-snap md-require-match="false" md-separator-keys="">
-   <md-autocomplete class="searchBar md-accent" md-search-text="searchTxt" md-search-text-change="gotoRoute(undefined, searchTxt, undefined)" md-items="ui in searchExtra" md-min-length="-1" md-autoselect="false" md-select-on-match="false" md-require-match="false" placeholder="Search" md-menu-class="search-menu-style">
+   <md-autocomplete class="searchBar md-accent" md-search-text="searchTxt" md-search-text-change="gotoRoute(undefined, searchTxt, undefined)" md-delay="300" md-items="ui in searchExtra" md-min-length="-1" md-autoselect="false" md-select-on-match="false" md-require-match="false" placeholder="Search" md-menu-class="search-menu-style">
       <md-item-template>
          <span>
             
