@@ -17,9 +17,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.searchChips = ["Class: "]
 
    $scope.classList = classes;
-   $scope.nextPageTokenList = {
-      'English I': "123"
-   };
    $scope.Tags = [];
    $scope.globals = {
       FABisOpen: false,
@@ -62,6 +59,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $scope.toggleSidebar(true);
       }
       if (query) {
+         
          $location.search(query);
       }
       if (id) {
