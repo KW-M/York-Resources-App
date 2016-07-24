@@ -58,12 +58,13 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $location.path(path);
          $scope.toggleSidebar(true);
       }
-      if (query) {
-         
-         $location.search(query);
-      }
       if (id) {
          $location.hash(id);
+      }
+      if (query) {
+         $location.search(query);
+         var searchPromise = $q.defer();
+         return (searchPromise.promise);
       }
    };
 
@@ -72,6 +73,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $scope.queryParam = $location.search();
       $scope.idParam = $location.hash();
       $scope.selectedClass = $scope.classParam.replace(/\//g, "")
+      if ($scope.queryParam !== ) {
+         
+      }
       if ($scope.firstFiles == true) { // check  if firstFiles have been loaded
          //sortPostsByType();
          $window.setTimeout(function() {
