@@ -33,8 +33,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       Class: "any",
       CreatorEmail: "any",
    };
-   
-   
+
+
    $scope.$mdMedia = $mdMedia;
 
    var moderators = {//temporary
@@ -253,7 +253,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    function sortPostsByType(formattedFileList) {
       $timeout(function() {
          console.log("sorting");
-         if ($scope.queryParam === "" || $scope.queryParam === undefined) {
          if ($scope.selectedClass === 'all-posts') {
             if (formattedFileList !== undefined) {
                $scope.allPosts = $scope.allPosts.concat(formattedFileList);
@@ -272,16 +271,16 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             }
             $scope.visiblePosts = $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts));
          }
+         else if ($scope.queryParam == "" || $scope.queryParam === undefined) {
+         
+            
+         }
          else {
             if (formattedFileList !== undefined) {
                $scope.allPosts = $scope.allPosts.concat(formattedFileList);
             }
             $scope.visiblePosts = $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts));
          }
-                  
-      } else {
-         //put search code here
-      }
       })
    }
 
@@ -401,7 +400,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
    }
    };
-   
+
    $scope.toggleMobileSearch = function () {
       $scope.globals.mobileSearchOpen = !$scope.globals.mobileSearchOpen;
       console.log($scope.globals.mobileSearchOpen);
@@ -415,7 +414,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          fullscreen: ($mdMedia('xs')),
       });
    };
-   
+
    $scope.logPostToConsole = function(content, arrayIndex) {
       console.log({'loggedPostContent':content,'arrayIndex':arrayIndex});
    };
@@ -460,7 +459,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             $scope.flaggedPosts.splice(arrayIndex, 1);
             $scope.visiblePosts.push(content);
          });
-         
+
          queue(GoogleDriveService.updateFileProperty(content.Id, 'Flagged', false),function() {
             console.log("unflagged: " + content.Id);
          });
@@ -470,7 +469,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             title: 'Uh Oh.',
             htmlContent: '<p style="margin: 0px; margin-bottom: 2px">One of your posts has been flagged within the past two weeks.</p><p style="margin: 0px">To unlock the ability to unflag posts, make sure none of your posts get flagged this week.</p>',
             ok: 'Ok'
-         })); 
+         }));
       }
    };
 
@@ -499,7 +498,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
    //-signin & initiation------------
-   
+
    gapi.load('client:auth2', function(){
       authorizationService.initilize(loginSucessful);
    });
@@ -526,7 +525,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             handleUserPrefsSheet ()
          }else{
             document.addEventListener('userInfoLoaded', function () {
-               handleUserPrefsSheet (); 
+               handleUserPrefsSheet ();
             });
          }
       } else if (loaded === "picker") {
@@ -539,7 +538,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          }
       }
    }
-   
+
    function handleUserPrefsSheet () {
       console.log(GoogleDriveService.getUserSettings($scope.myInfo.Email));
       queue(GoogleDriveService.getUserSettings($scope.myInfo.Email), function(spreadsheetRow) {
@@ -579,7 +578,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $scope.globals.FABisOpen = false;
          $scope.globals.FABisHidden = true;
       }
-   }; 
+   };
 
    window.addEventListener("resize", function() {
       if (performantScrollEnabled === true && $scope.angularGridOptions.performantScroll === true) {
