@@ -560,11 +560,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    //-event watchers---------
 
-   $scope.$watch('searchTxt', function(){
-      console.log($scope.searchTxt);
-      $scope.gotoRoute(undefined, $scope.searchTxt, undefined)
-   });
-
    content_container.onscroll = function(event) {
       //called whenever the content_container scrolls
       if (performantScrollEnabled === false && $scope.angularGridOptions.performantScroll === false) {
