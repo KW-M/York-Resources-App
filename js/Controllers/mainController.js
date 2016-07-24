@@ -73,9 +73,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $scope.queryParam = $location.search();
       $scope.idParam = $location.hash();
       $scope.selectedClass = $scope.classParam.replace(/\//g, "")
-      if ($scope.queryParam === "") {
-         
-      } else 
       if ($scope.firstFiles == true) { // check  if firstFiles have been loaded
          //sortPostsByType();
          $window.setTimeout(function() {
@@ -256,6 +253,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    function sortPostsByType(formattedFileList) {
       $timeout(function() {
          console.log("sorting");
+         if ($scope.queryParam === "" || $scope.queryParam === undefined) {
          if ($scope.selectedClass === 'all-posts') {
             if (formattedFileList !== undefined) {
                $scope.allPosts = $scope.allPosts.concat(formattedFileList);
@@ -280,6 +278,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             }
             $scope.visiblePosts = $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts));
          }
+                  
+      } else {
+         //put search code here
+      }
       })
    }
 
