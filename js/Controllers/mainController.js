@@ -66,7 +66,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          var searchPromise = $q.defer();
          $window.setTimeout(function() {
             console.log('searchDone');
-            
+            searchPromise.resolve('done searchi ng')
          }, 2000);
          return (searchPromise.promise);
       }
