@@ -64,6 +64,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       if (query) {
          $location.search(query);
          var searchPromise = $q.defer();
+         $window.setTimeout(function() {
+            console.log('searchDone');
+            
+         }, 2000);
          return (searchPromise.promise);
       }
    };
