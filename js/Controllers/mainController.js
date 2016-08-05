@@ -173,7 +173,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       var nextPageToken = classPageTokenSelectionIndex[$scope.selectedClass] || "";
       if (nextPageToken !== "end") {
          $scope.getQueryProperties();
-         loading_spinner.style.display = 'initial'//////
+         loading_spinner.style.display = 'inherit' ;//////
          var queryParamString = $scope.generateQueryString();
          console.log("query params:" + queryParamString);
          queue(GoogleDriveService.getListOfFlies(queryParamString, nextPageToken, 2), function(fileList) {
@@ -218,8 +218,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                   }
                   $scope.getFiles();
                }
+               loading_spinner.style.display = 'none'
             }
             else {
+               loading_spinner.style.display = 'none'
                sortPostsByType();
             }
          });
@@ -228,7 +230,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          loading_spinner.style.display = 'none'
          sortPostsByType();
       }
-      loading_spinner.style.display = 'none'
    }
 
    function sortPostsByType(formattedFileList) {
