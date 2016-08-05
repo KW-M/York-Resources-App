@@ -10,7 +10,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.flaggedPosts = [];
    $scope.visiblePosts = [];
    var deDuplicationIndex = {};
-   var classSelectionIndex = {};
+   var classPageTokenSelectionIndex = {};
 
    $scope.searchTxt = '';
    $scope.searchExtra = [''];
@@ -169,7 +169,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.getFiles = function() {
       $scope.firstFiles = true;
-      var nextPageToken = classSelectionIndex[$scope.selectedClass] || "";
+      var nextPageToken = classPageTokenSelectionIndex[$scope.selectedClass] || "";
       if (nextPageToken !== "end") {
          $scope.getQueryProperties();
          var queryParamString = $scope.generateQueryString();
@@ -191,11 +191,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                if (formattedFileList.length !== 0) {
                   if (fileList.result.nextPageToken !== undefined) { //if we haven't reached the end of our search:
                      console.log("more posts coming...")
-                     classSelectionIndex[$scope.selectedClass] = fileList.result.nextPageToken;
+                     classPageTokenSelectionIndex[$scope.selectedClass] = fileList.result.nextPageToken;
                   }
                   else { //if we havene reached the end of our search:
                      console.log("end of the line");
-                     classSelectionIndex[$scope.selectedClass] = "end";
+                     classPageTokenSelectionIndex[$scope.selectedClass] = "end";
                   }
                   sortPostsByType(formattedFileList);
                   console.log({
@@ -208,11 +208,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                   sortPostsByType();
                   if (fileList.result.nextPageToken !== undefined) { //if we haven't reached the end of our search:
                      console.log("duplicate posts - more posts coming...")
-                     classSelectionIndex[$scope.selectedClass] = fileList.result.nextPageToken;
+                     classPageTokenSelectionIndex[$scope.selectedClass] = fileList.result.nextPageToken;
                   }
                   else { //if we havene reached the end of our search:
                      console.log("duplicate posts - end of the line");
-                     classSelectionIndex[$scope.selectedClass] = "end";
+                     classPageTokenSelectionIndex[$scope.selectedClass] = "end";
                   }
                   $scope.getFiles();
                }
