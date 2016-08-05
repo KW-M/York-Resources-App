@@ -1,4 +1,4 @@
-/*global app*/ /*global angular*/ /*global gapi*/ /*global google*//*global queue*/
+/*global app*/ /*global angular*/ /*global gapi*/ /*global google*/ /*global queue*/
 var dependancies = ['$scope', '$mdDialog', '$window', '$timeout', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', '$routeParams', 'angularGridInstance']
 app.controller('ApplicationController', dependancies.concat([function($scope, $mdDialog, $window, $timeout, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, $routeParams, angularGridInstance) {
    var self = this;
@@ -22,7 +22,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       FABisOpen: false,
       FABisHidden: true,
       sidenavIsOpen: true,
-      mobileSearchOpen:false,
+      mobileSearchOpen: false,
    };
 
    $scope.firstFiles = false;
@@ -37,7 +37,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.$mdMedia = $mdMedia;
 
-   var moderators = {//temporary
+   var moderators = { //temporary
       'worcester-moorek2018@york.org': true,
    }
 
@@ -63,18 +63,13 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
       if (query) {
          $location.search(query);
-         var searchPromise = $q.defer();
+         var searchPromise = new $q
          return $q(function(resolve, reject) {
             setTimeout(function() {
-      if (okToGreet(name)) {
-        resolve('Hello, ' + name + '!');
-      } else {
-        reject('Greeting ' + name + ' is not allowed.');
-      }
-    }, 1000);
-  });
-         console.log(searchPromise);
-         return (searchPromise.promise);
+                  resolve('Hello!');
+                  console.log('search promise resovled hello')
+            }, 1000);
+         });
       }
    };
 
@@ -249,8 +244,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             $scope.visiblePosts = $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts));
          }
          else if ($scope.queryParam == "" || $scope.queryParam === undefined) {
-         
-            
+
+
          }
          else {
             if (formattedFileList !== undefined) {
@@ -364,21 +359,23 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    //-UI actions---------
 
    $scope.toggleSidebar = function(urlPathChanged) { //called by the top left toolbar menu button
-   if (urlPathChanged === true) {
-      if ($mdMedia('gt-sm') !== true) {
-         $mdSidenav('sidenav_overlay').toggle();
+      if (urlPathChanged === true) {
+         if ($mdMedia('gt-sm') !== true) {
+            $mdSidenav('sidenav_overlay').toggle();
+         }
       }
-   }else{
-      if ($mdMedia('gt-sm')) {
-         $scope.globals.sidenavIsOpen = !$scope.globals.sidenavIsOpen;
-         $window.setTimeout(angularGridInstance.posts.refresh, 500);
-      } else {
-         $mdSidenav('sidenav_overlay').toggle();
+      else {
+         if ($mdMedia('gt-sm')) {
+            $scope.globals.sidenavIsOpen = !$scope.globals.sidenavIsOpen;
+            $window.setTimeout(angularGridInstance.posts.refresh, 500);
+         }
+         else {
+            $mdSidenav('sidenav_overlay').toggle();
+         }
       }
-   }
    };
 
-   $scope.toggleMobileSearch = function () {
+   $scope.toggleMobileSearch = function() {
       $scope.globals.mobileSearchOpen = !$scope.globals.mobileSearchOpen;
       console.log($scope.globals.mobileSearchOpen);
    }
@@ -393,7 +390,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
    $scope.logPostToConsole = function(content, arrayIndex) {
-      console.log({'loggedPostContent':content,'arrayIndex':arrayIndex});
+      console.log({
+         'loggedPostContent': content,
+         'arrayIndex': arrayIndex
+      });
    };
 
    $scope.confirmDelete = function(ev, content, arrayIndex) {
@@ -406,10 +406,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          .cancel('Cancel');
       $mdDialog.show(confirm).then(function() {
          //ok
-         $timeout(function() {//makes angular update values
+         $timeout(function() { //makes angular update values
             $scope.visiblePosts.splice(arrayIndex, 1);
          });
-         queue(GoogleDriveService.deleteDriveFile(content.Id),function() {
+         queue(GoogleDriveService.deleteDriveFile(content.Id), function() {
             console.log("deleted" + content.Id);
          });
       }, function() {
@@ -419,25 +419,25 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.flagPost = function(ev, content, arrayIndex) {
       content.Flagged = true;
-      $timeout(function() {//makes angular update values
+      $timeout(function() { //makes angular update values
          $scope.visiblePosts.splice(arrayIndex, 1);
          $scope.flaggedPosts.push(content);
       });
-      queue(GoogleDriveService.updateFileProperty(content.Id, 'Flagged', true),function() {
+      queue(GoogleDriveService.updateFileProperty(content.Id, 'Flagged', true), function() {
          console.log("flagged: " + content.Id);
       });
-   //set the user's has flagged date back
+      //set the user's has flagged date back
    };
 
    $scope.unFlagPost = function(ev, content, arrayIndex) {
       if ($scope.myInfo.moderator === false) {
          content.Flagged = false;
-         $timeout(function() {//makes angular update values
+         $timeout(function() { //makes angular update values
             $scope.flaggedPosts.splice(arrayIndex, 1);
             $scope.visiblePosts.push(content);
          });
 
-         queue(GoogleDriveService.updateFileProperty(content.Id, 'Flagged', false),function() {
+         queue(GoogleDriveService.updateFileProperty(content.Id, 'Flagged', false), function() {
             console.log("unflagged: " + content.Id);
          });
       }
@@ -476,7 +476,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    //-signin & initiation------------
 
-   gapi.load('client:auth2', function(){
+   gapi.load('client:auth2', function() {
       authorizationService.initilize(loginSucessful);
    });
 
@@ -489,39 +489,43 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       console.log("API loaded: " + loaded)
       if (loaded === "drive") {
          queue(GoogleDriveService.getUserInfo(), function(userInfo) {
-               $scope.myInfo = {
-                  "Name": userInfo.result.user.displayName,
-                  "Email": userInfo.result.user.emailAddress,
-                  "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
-               };
-               document.dispatchEvent(new Event('userInfoLoaded'));
+            $scope.myInfo = {
+               "Name": userInfo.result.user.displayName,
+               "Email": userInfo.result.user.emailAddress,
+               "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
+            };
+            document.dispatchEvent(new Event('userInfoLoaded'));
          });
-      } else if (loaded === "sheets") {
+      }
+      else if (loaded === "sheets") {
          console.log(gapi.client);
          if ($scope.myInfo !== undefined) {
-            handleUserPrefsSheet ()
-         }else{
-            document.addEventListener('userInfoLoaded', function () {
-               handleUserPrefsSheet ();
+            handleUserPrefsSheet()
+         }
+         else {
+            document.addEventListener('userInfoLoaded', function() {
+               handleUserPrefsSheet();
             });
          }
-      } else if (loaded === "picker") {
+      }
+      else if (loaded === "picker") {
          if ($scope.myInfo !== undefined) {
             authorizationService.hideSigninDialog();
-         }else{
-            document.addEventListener('sheetPrefsLoaded', function () {
+         }
+         else {
+            document.addEventListener('sheetPrefsLoaded', function() {
                authorizationService.hideSigninDialog();
             });
          }
       }
    }
 
-   function handleUserPrefsSheet () {
+   function handleUserPrefsSheet() {
       console.log(GoogleDriveService.getUserSettings($scope.myInfo.Email));
       queue(GoogleDriveService.getUserSettings($scope.myInfo.Email), function(spreadsheetRow) {
          console.log('spreadsheetRow');
          console.log(spreadsheetRow);
-         document.dispatchEvent( new Event('sheetPrefsLoaded'));
+         document.dispatchEvent(new Event('sheetPrefsLoaded'));
       }, function(Error) {
          console.log(Error);
       });
