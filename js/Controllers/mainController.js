@@ -64,10 +64,15 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       if (query) {
          $location.search(query);
          var searchPromise = $q.defer();
-         $window.setTimeout(function() {
-            console.log('searchDone');
-            searchPromise.resolve('done searchi ng');
-         }, 2000);
+         return $q(function(resolve, reject) {
+            setTimeout(function() {
+      if (okToGreet(name)) {
+        resolve('Hello, ' + name + '!');
+      } else {
+        reject('Greeting ' + name + ' is not allowed.');
+      }
+    }, 1000);
+  });
          console.log(searchPromise);
          return (searchPromise.promise);
       }
