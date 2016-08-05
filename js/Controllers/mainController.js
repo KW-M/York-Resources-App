@@ -64,18 +64,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
       if (query) {
          $location.search(query);
-         var searchPromise = new $q
-         return $q(function(resolve, reject) {
-            setTimeout(function() {
-               if ($scope.searchExtra[1] === '') {
-                  $scope.searchExtra[1] = 't'
-               }else{
-                  $scope.searchExtra[1] = ''
-               }
-                  resolve('Hello!');
-                  console.log('search promise resovled hello')
-            }, 1000);
-         });
+         deferred = $q.defer();
+        $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
+        return deferred.promise;
       }
    };
 
