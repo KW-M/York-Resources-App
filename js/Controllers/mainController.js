@@ -66,6 +66,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          var searchPromise = new $q
          return $q(function(resolve, reject) {
             setTimeout(function() {
+               if ($scope.searchExtra[1] === '') {
+                  $scope.searchExtra[1] = 't'
+               }else{
+                  $scope.searchExtra[1] = ''
+               }
                   resolve('Hello!');
                   console.log('search promise resovled hello')
             }, 1000);
