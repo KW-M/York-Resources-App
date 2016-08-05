@@ -3,6 +3,7 @@ var dependancies = ['$scope', '$mdDialog', '$window', '$timeout', '$sce', '$mdSi
 app.controller('ApplicationController', dependancies.concat([function($scope, $mdDialog, $window, $timeout, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, $routeParams, angularGridInstance) {
    var self = this;
    var content_container = document.getElementById("content_container");
+   var loading_spinner = document.getElementById("loading_spinner");
    var performantScrollEnabled = false;
 
    $scope.allPosts = [];
@@ -172,6 +173,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       var nextPageToken = classPageTokenSelectionIndex[$scope.selectedClass] || "";
       if (nextPageToken !== "end") {
          $scope.getQueryProperties();
+         loading_spinner.style.display//////
          var queryParamString = $scope.generateQueryString();
          console.log("query params:" + queryParamString);
          queue(GoogleDriveService.getListOfFlies(queryParamString, nextPageToken, 2), function(fileList) {
