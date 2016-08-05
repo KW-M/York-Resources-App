@@ -218,16 +218,15 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                   }
                   $scope.getFiles();
                }
-               loading_spinner.style.display = 'none'
             }
             else {
-               loading_spinner.style.display = 'none'
+               //loading_spinner.style.display = 'none'
                sortPostsByType();
             }
          });
       }
       else {
-         loading_spinner.style.display = 'none'
+         //loading_spinner.style.display = 'none'
          sortPostsByType();
       }
    }
