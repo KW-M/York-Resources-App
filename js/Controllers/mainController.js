@@ -68,19 +68,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          var deferred;
          deferred = $q.defer();
         $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
-        return deferred.promise;
-         return $q(function(resolve, reject) {
-            setTimeout(function() {
-               if ($scope.searchExtra[1] === '') {
-                  $scope.searchExtra[1] = 't'
-               }else{
-                  $scope.searchExtra[1] = ''
-               }
-                  resolve('Hello!');
-                  console.log('search promise resovled hello')
-            }, 1000);
-         });
       }
+      return deferred.promise;
    };
 
    $scope.$on('$routeChangeSuccess', function() {
