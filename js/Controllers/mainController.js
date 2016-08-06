@@ -231,6 +231,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    function sortPostsByType(formattedFileList) {
       $timeout(function() {
          console.log("sorting");
+         else if ($scope.queryParam === "" || $scope.queryParam === undefined) {
+
+         }
          if ($scope.selectedClass === 'all-posts') {
             $scope.searchPlaceholder = 'Search'
             if (formattedFileList !== undefined) {
@@ -239,24 +242,21 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             $scope.visiblePosts = $scope.allPosts;
          }
          else if ($scope.selectedClass === 'flagged') {
-            $scope.searchPlaceholder = 'Search flagged posts'
+            $scope.searchPlaceholder = 'Search Flagged Posts'
             if (formattedFileList !== undefined) {
                $scope.flaggedPosts = $scope.flaggedPosts.concat(formattedFileList);
             }
             $scope.visiblePosts = $scope.flaggedPosts;
          }
          else if ($scope.selectedClass === 'my-posts') {
-            $scope.searchPlaceholder = 'Search within my posts'
+            $scope.searchPlaceholder = 'Search My Posts'
             if (formattedFileList !== undefined) {
                $scope.allPosts = $scope.allPosts.concat(formattedFileList);
             }
             $scope.visiblePosts = $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts));
          }
-         else if ($scope.queryParam === "" || $scope.queryParam === undefined) {
-
-         }
          else {
-            $scope.searchPlaceholder = 'Search within ' + $scope.selectedClass;
+            $scope.searchPlaceholder = 'Search ' + $scope.selectedClass;
             if (formattedFileList !== undefined) {
                $scope.allPosts = $scope.allPosts.concat(formattedFileList);
             }
