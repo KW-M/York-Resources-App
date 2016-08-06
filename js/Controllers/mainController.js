@@ -13,7 +13,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    var deDuplicationIndex = {};
    var classPageTokenSelectionIndex = {};
 
-   //$scope.searchTxt = ''; disabled to make popunder show with no text in  field
+   $scope.searchTxt = undefined; //undefined to make popunder show with no text in  field
+   $scope.searchPlaceholder = 'Search';
    $scope.searchExtra = [undefined];
    $scope.searchChips = ["Class: "]
 
@@ -52,7 +53,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          return false;
       }
    }
-
 
    $scope.gotoRoute = function(path, query, id) {
       console.log(query)
@@ -232,28 +232,31 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $timeout(function() {
          console.log("sorting");
          if ($scope.selectedClass === 'all-posts') {
+            $scope.searchPlaceholder = 'Search'
             if (formattedFileList !== undefined) {
                $scope.allPosts = $scope.allPosts.concat(formattedFileList);
             }
             $scope.visiblePosts = $scope.allPosts;
          }
          else if ($scope.selectedClass === 'flagged') {
+            $scope.searchPlaceholder = 'Search flagged posts'
             if (formattedFileList !== undefined) {
                $scope.flaggedPosts = $scope.flaggedPosts.concat(formattedFileList);
             }
             $scope.visiblePosts = $scope.flaggedPosts;
          }
          else if ($scope.selectedClass === 'my-posts') {
+            $scope.searchPlaceholder = 'Search within my posts'
             if (formattedFileList !== undefined) {
                $scope.allPosts = $scope.allPosts.concat(formattedFileList);
             }
             $scope.visiblePosts = $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts));
          }
-         else if ($scope.queryParam == "" || $scope.queryParam === undefined) {
-
+         else if ($scope.queryParam === "" || $scope.queryParam === undefined) {
 
          }
          else {
+            $scope.searchPlaceholder = 'Search within ' + $scope.selectedClass;
             if (formattedFileList !== undefined) {
                $scope.allPosts = $scope.allPosts.concat(formattedFileList);
             }
