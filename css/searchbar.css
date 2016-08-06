@@ -5,6 +5,10 @@
         padding-left: 24px;
     }
     
+    md-autocomplete.searchBar {
+        max-width:;
+    }
+    
     md-autocomplete.searchBar md-autocomplete-wrap {
         padding-left: 52px;
     }

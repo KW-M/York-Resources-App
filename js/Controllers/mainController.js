@@ -13,7 +13,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    var deDuplicationIndex = {};
    var classPageTokenSelectionIndex = {};
 
-   //$scope.searchTxt = ''; disabled to make popunder show with no text in  fie
+   //$scope.searchTxt = ''; disabled to make popunder show with no text in  field
    $scope.searchExtra = ['1'];
    $scope.searchChips = ["Class: "]
 
@@ -64,13 +64,13 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
       if (query) {
          $location.search('q='+query);
-         var deferred;
-         deferred = $q.defer();
+         var deferred = $q.defer();
+         console.log(deferred);
          $timeout(function () { 
             deferred.resolve(['o']);
          }, Math.random() * 1000, false);
+               return deferred.promise;
       }
-      return deferred.promise;
    };
 
    $scope.$on('$routeChangeSuccess', function() {
