@@ -70,6 +70,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             deferred.resolve(['o']);
          }, Math.random() * 1000, false);
                return deferred.promise;
+      } else {
+         $location.search('');
       }
    };
 

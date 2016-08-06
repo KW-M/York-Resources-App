@@ -6,7 +6,7 @@
     }
     
     md-autocomplete.searchBar {
-        max-width:;
+        max-width: 720px;
     }
     
     md-autocomplete.searchBar md-autocomplete-wrap {
