@@ -14,6 +14,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    var classPageTokenSelectionIndex = {};
 
    $scope.searchTxt = undefined; //undefined to make popunder show with no text in  field
+   $scope.previousSearch = '';
    $scope.searchPlaceholder = 'Search';
    $scope.searchExtra = [undefined];
    $scope.searchChips = ["Class: "]
@@ -231,9 +232,13 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    function sortPostsByType(formattedFileList) {
       $timeout(function() {
          console.log("sorting");
-         else if ($scope.queryParam === "" || $scope.queryParam === undefined) {
-
-         }
+         if ($scope.queryParam !== "" && $scope.queryParam !== undefined) {
+            if (formattedFileList !== undefined) {
+               if ( === $scope.previousSearch === '' || $scope.previousSearch === undefined)
+               $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+            }
+            $scope.visiblePosts = $scope.allPosts;
+         } else {
          if ($scope.selectedClass === 'all-posts') {
             $scope.searchPlaceholder = 'Search'
             if (formattedFileList !== undefined) {
@@ -261,6 +266,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                $scope.allPosts = $scope.allPosts.concat(formattedFileList);
             }
             $scope.visiblePosts = $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts));
+         }
          }
       })
    }
