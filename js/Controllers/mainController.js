@@ -65,6 +65,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       if (query) {
          $location.search(query);
          var searchPromise = new $q
+         var deferred;
+         deferred = $q.defer();
+        $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
+        return deferred.promise;
          return $q(function(resolve, reject) {
             setTimeout(function() {
                if ($scope.searchExtra[1] === '') {
