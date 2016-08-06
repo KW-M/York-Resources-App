@@ -19,57 +19,12 @@
         z-index:60;
         margin: 4px 8px 4px 0px;
     }
-
-    .md-chips ._md-chip-input-container md-autocomplete.searchBar {
-        height: 40px;
-        /*background: rgba(255, 255, 255, 0.16);*/
-
-        -webkit-transition: background 100ms ease-in, width 100ms ease-out;
-        transition: background 100ms ease-in, width 100ms ease-out
-    }
     
     md-autocomplete.searchBar md-autocomplete-wrap {
-
-    height: 40px;
-    width: 100%;
-    padding-left: 52px;
+        padding-left: 37px;
     }
-    
-    .searchBarChips .md-chips ._md-chip-input-container {
-       float: none;
-       margin: 0;
-    }
-
-    .md-chips ._md-chip-input-container md-autocomplete.searchBar input {
-       /* padding-top: 6px;
-        padding-bottom: 6px;*/
-        font-size: 14px;
-        box-sizing: border-box;
-        border: none;
-        box-shadow: none;
-        outline: 0;
-        padding: 0 0 0 52px;
-        background: 0 0;
-        width: 100%;
-        padding: 0 15px 0 0;
-        line-height: 40px;
-        height: 40px;
-    }
-    
     .searchBarChips md-chips-wrap.md-chips md-autocomplete button {
         display: block;
-    }
-    
-   .searchBar md-autocomplete-wrap input#input-0:focus  {
-        background-color:white;
-        border-top-left-radius: 2px;
-        border-top-right-radius: 2px;
-    }
-    
-    .searchbar md-autocomplete-wrap input#input-0 {
-        color: red;
-        background-color: rgb(176,48,61);
-        border-radius: 4px;
     }
     
     .searchBar md-autocomplete-wrap input#input-0:focus::-webkit-input-placeholder {
@@ -89,10 +44,6 @@
     }
     .searchbar>md-autocomplete-wrap>input:focus:-ms-input-placeholder {
         color: #757575;
-    }
-    
-    .search-menu-style {
-        z-index
     }
     
     .md-virtual-repeat-offsetter .md-autocomplete-suggestions li:hover,.md-virtual-repeat-offsetter .md-autocomplete-suggestions li:focus {
