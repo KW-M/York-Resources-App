@@ -29,9 +29,11 @@
     }
     
     .md-chips ._md-chip-input-container md-autocomplete.searchBar md-autocomplete-wrap {
-        position: relative;
-        overflow: visible;
-        height: 40px;
+    position: absolute;
+    overflow: visible;
+    height: 40px;
+    width: 100%;
+    padding-left: 52px;
     }
     
     .searchBarChips .md-chips ._md-chip-input-container {
