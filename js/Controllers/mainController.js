@@ -14,7 +14,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    var classPageTokenSelectionIndex = {};
 
    //$scope.searchTxt = ''; disabled to make popunder show with no text in  field
-   $scope.searchExtra = ['1'];
+   $scope.searchExtra = [undefined];
    $scope.searchChips = ["Class: "]
 
    $scope.classList = classes;
