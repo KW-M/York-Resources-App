@@ -29,8 +29,7 @@
     }
     
     md-autocomplete.searchBar md-autocomplete-wrap {
-    position: absolute;
-    overflow: visible;
+
     height: 40px;
     width: 100%;
     padding-left: 52px;
