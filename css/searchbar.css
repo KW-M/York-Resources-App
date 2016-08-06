@@ -28,7 +28,7 @@
         transition: background 100ms ease-in, width 100ms ease-out
     }
     
-    .md-chips ._md-chip-input-container md-autocomplete.searchBar md-autocomplete-wrap {
+    md-autocomplete.searchBar md-autocomplete-wrap {
     position: absolute;
     overflow: visible;
     height: 40px;
