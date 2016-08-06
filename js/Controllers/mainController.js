@@ -14,7 +14,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    var classPageTokenSelectionIndex = {};
 
    $scope.searchTxt = undefined; //undefined to make popunder show with no text in  field
-   $scope.previousSearch = '';
+   $scope.previousSearch = undefined;
    $scope.searchPlaceholder = 'Search';
    $scope.searchExtra = [undefined];
    $scope.searchChips = ["Class: "]
@@ -234,10 +234,14 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          console.log("sorting");
          if ($scope.queryParam !== "" && $scope.queryParam !== undefined) {
             if (formattedFileList !== undefined) {
-               if ( === $scope.previousSearch === '' || $scope.previousSearch === undefined)
-               $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+               if ($scope.searchTxt === $scope.previousSearch) {
+                     $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
+               } else {
+                     $scope.searchPosts = formattedFileList;
+               }
+               $scope.previousSearch = $scope.searchTxt 
             }
-            $scope.visiblePosts = $scope.allPosts;
+            $scope.visiblePosts = $scope.searchPosts = [];
          } else {
          if ($scope.selectedClass === 'all-posts') {
             $scope.searchPlaceholder = 'Search'
