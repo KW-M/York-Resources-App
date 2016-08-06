@@ -63,7 +63,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $location.hash(id);
       }
       if (query) {
-         $location.search(query);
+         $location.search('q='+query);
          var searchPromise = new $q
          var deferred;
          deferred = $q.defer();
