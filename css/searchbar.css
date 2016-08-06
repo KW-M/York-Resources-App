@@ -5,23 +5,12 @@
         padding-left: 24px;
     }
     
-    .searchBarChips md-chips-wrap.md-chips{
-        max-width: 720px;
-        background: rgb(255,255,255);
-        box-shadow: 0 1px 3px 0 rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 2px 1px -1px rgba(0,0,0,.12);
-        border: 0px;
-        padding: 0;
-        padding-left: 52px;
-        margin: 0px;
-    }
-    
-    .searchBarChips md-chips-wrap.md-chips md-chip{
-        z-index:60;
-        margin: 4px 8px 4px 0px;
-    }
-    
     md-autocomplete.searchBar md-autocomplete-wrap {
-        padding-left: 37px;
+        padding-left: 52px;
+    }
+        
+    md-autocomplete.searchBar md-autocomplete-wrap input {
+        padding-left: 0px;
     }
     .searchBarChips md-chips-wrap.md-chips md-autocomplete button {
         display: block;

@@ -14,7 +14,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    var classPageTokenSelectionIndex = {};
 
    $scope.searchTxt = '';
-   $scope.searchExtra = [''];
+   $scope.searchExtra = ['1'];
    $scope.searchChips = ["Class: "]
 
    $scope.classList = classes;
