@@ -220,13 +220,13 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                }
             }
             else {
-               //loading_spinner.style.display = 'none'
+               loading_spinner.style.display = 'none';
                sortPostsByType();
             }
          });
       }
       else {
-         //loading_spinner.style.display = 'none'
+         loading_spinner.style.display = 'none';
          sortPostsByType();
       }
    }
