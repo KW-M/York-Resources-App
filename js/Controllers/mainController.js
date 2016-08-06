@@ -52,6 +52,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          return false;
       }
    }
+   
+   $scope.searchExtraSelected = function(path, query, id) {
+$scope.searchExtra = [$scope.$scope.searchTxt]      
+   }
 
    $scope.gotoRoute = function(path, query, id) {
       console.log(query)
