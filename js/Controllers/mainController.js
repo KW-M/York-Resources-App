@@ -13,7 +13,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    var deDuplicationIndex = {};
    var classPageTokenSelectionIndex = {};
 
-   $scope.searchTxt = '';
+   //$scope.searchTxt = ''; disabled to make popunder show with no text in  fie
    $scope.searchExtra = ['1'];
    $scope.searchChips = ["Class: "]
 
@@ -64,10 +64,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
       if (query) {
          $location.search('q='+query);
-         var searchPromise = new $q
          var deferred;
          deferred = $q.defer();
-        $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
+         $timeout(function () { 
+            deferred.resolve(['o']);
+         }, Math.random() * 1000, false);
       }
       return deferred.promise;
    };
