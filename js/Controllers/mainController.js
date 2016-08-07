@@ -56,7 +56,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    $scope.gotoRoute = function(path, query, id) {
-      console.log(query)
       if (path) {
          $location.path(path);
          $scope.toggleSidebar(true);
@@ -279,12 +278,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    $scope.generateQueryString = function() {
-      var query;
+      var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false";
       if ($scope.searchTxt) {
-         query = fullText $scope.searchTxt + " and '0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false";
-      }
-      else {
-         query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false";
+         query = query + " and fullText contains '" + $scope.searchTxt + "'";
       }
       query = query + " and properties has { key='Flagged' and value='" + $scope.queryProperties.Flagged + "' }"
       if ($scope.queryProperties.Class !== "any" && $scope.queryProperties.Class !== undefined) {
