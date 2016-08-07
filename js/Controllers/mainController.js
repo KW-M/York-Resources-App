@@ -166,7 +166,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    //-loading and filtering posts---------
 
-   $scope.getFiles = function(searchPro) {
+   $scope.getFiles = function() {
       $scope.firstFiles = true;
       if ($scope.searchTxt) {
          var nextPageToken = classPageTokenSelectionIndex[$scope.selectedClass + $scope.searchTxt] || "";
