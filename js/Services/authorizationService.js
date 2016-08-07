@@ -6,7 +6,7 @@ function authService($mdDialog) {
     var self = this;
     var clientId = '475444543746-e3r02g1o1o71kliuoohah04ojqbmo22e.apps.googleusercontent.com';
     var apiKey = 'AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo';
-    var scopes = 'https://www.googleapis.com/auth/drive';
+    var scopes = 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/userinfo.profile';
 
     var signinButton = angular.element(document.getElementById('signin_button'));
     var signinSpinner = angular.element(document.getElementById('signin_spinner'));
@@ -39,6 +39,7 @@ function authService($mdDialog) {
                 console.log('signed in')
                 if (accountDomain = 'york.org') {
                     console.log("User's Domain: " + accountDomain);
+                    console.log("User's Photo: " + currentUser.getBasicProfile().getImageUrl());
                     callback();
                     self.hideSigninButton();
                 }
