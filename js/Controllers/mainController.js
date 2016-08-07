@@ -276,7 +276,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    $scope.generateQueryString = function() {
-      var query = '';
+      if ($scope.queryParam !== "" && $scope.queryParam !== undefined) {
+         var query = $scope.queryParam + " and '0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false";
+      }else{
+         var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false";
+      }
       query = query + " and properties has { key='Flagged' and value='" + $scope.queryProperties.Flagged + "' }"
       if ($scope.queryProperties.Class !== "any" && $scope.queryProperties.Class !== undefined) {
          query = query + " and properties has { key='ClassName' and value='" + $scope.queryProperties.Class + "' }"
