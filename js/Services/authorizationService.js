@@ -6,7 +6,7 @@ function authService($mdDialog) {
     var self = this;
     var clientId = '475444543746-e3r02g1o1o71kliuoohah04ojqbmo22e.apps.googleusercontent.com';
     var apiKey = 'AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo';
-    var scopes = 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/userinfo.profile';
+    var scopes = 'https://www.googleapis.com/auth/drive profile ';
 
     var signinButton = angular.element(document.getElementById('signin_button'));
     var signinSpinner = angular.element(document.getElementById('signin_spinner'));
@@ -18,7 +18,7 @@ function authService($mdDialog) {
         gapi.auth2.init({
             client_id: clientId,
             scope: scopes,
-            fetch_basic_profile: false,
+            fetch_basic_profile: true,
             hosted_domain: 'york.org'
         }).then(function() {
             // Listen for sign-in state changes.
