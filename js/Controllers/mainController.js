@@ -65,14 +65,15 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $location.hash(id);
       }
       if (query) {
-         $location.search('q='+query);
+         $location.search('q=' + query);
          var deferred = $q.defer();
          console.log(deferred);
-         $timeout(function () { 
+         $timeout(function() {
             deferred.resolve(['o']);
          }, Math.random() * 1000, false);
-               return deferred.promise;
-      } else {
+         return deferred.promise;
+      }
+      else {
          $location.search('');
       }
    };
@@ -171,7 +172,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       var nextPageToken = classPageTokenSelectionIndex[$scope.selectedClass] || "";
       if (nextPageToken !== "end") {
          $scope.getQueryProperties();
-         loading_spinner.style.display = 'inherit' ;//////
+         loading_spinner.style.display = 'inherit'; //////
          var queryParamString = $scope.generateQueryString();
          console.log("query params:" + queryParamString);
          queue(GoogleDriveService.getListOfFlies(queryParamString, nextPageToken, 2), function(fileList) {
@@ -232,45 +233,47 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    function sortPostsByType(formattedFileList) {
       $timeout(function() {
          console.log("sorting");
-         if ($scope.queryParam !== "" && $scope.queryParam !== undefined) {
+         if ($scope.searchTxt) {
             if (formattedFileList !== undefined) {
                if ($scope.searchTxt === $scope.previousSearch) {
-                     $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
-               } else {
-                     $scope.searchPosts = formattedFileList;
+                  $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
                }
-               $scope.previousSearch = $scope.searchTxt 
+               else {
+                  $scope.searchPosts = formattedFileList;
+               }
+               $scope.previousSearch = $scope.searchTxt
             }
-            $scope.visiblePosts = $scope.searchPosts = [];
-         } else {
-         if ($scope.selectedClass === 'all-posts') {
-            $scope.searchPlaceholder = 'Search'
-            if (formattedFileList !== undefined) {
-               $scope.allPosts = $scope.allPosts.concat(formattedFileList);
-            }
-            $scope.visiblePosts = $scope.allPosts;
-         }
-         else if ($scope.selectedClass === 'flagged') {
-            $scope.searchPlaceholder = 'Search Flagged Posts'
-            if (formattedFileList !== undefined) {
-               $scope.flaggedPosts = $scope.flaggedPosts.concat(formattedFileList);
-            }
-            $scope.visiblePosts = $scope.flaggedPosts;
-         }
-         else if ($scope.selectedClass === 'my-posts') {
-            $scope.searchPlaceholder = 'Search My Posts'
-            if (formattedFileList !== undefined) {
-               $scope.allPosts = $scope.allPosts.concat(formattedFileList);
-            }
-            $scope.visiblePosts = $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts));
+            $scope.visiblePosts = $scope.searchPosts;
          }
          else {
-            $scope.searchPlaceholder = 'Search ' + $scope.selectedClass;
-            if (formattedFileList !== undefined) {
-               $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+            if ($scope.selectedClass === 'all-posts') {
+               $scope.searchPlaceholder = 'Search'
+               if (formattedFileList !== undefined) {
+                  $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+               }
+               $scope.visiblePosts = $scope.allPosts;
             }
-            $scope.visiblePosts = $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts));
-         }
+            else if ($scope.selectedClass === 'flagged') {
+               $scope.searchPlaceholder = 'Search Flagged Posts'
+               if (formattedFileList !== undefined) {
+                  $scope.flaggedPosts = $scope.flaggedPosts.concat(formattedFileList);
+               }
+               $scope.visiblePosts = $scope.flaggedPosts;
+            }
+            else if ($scope.selectedClass === 'my-posts') {
+               $scope.searchPlaceholder = 'Search My Posts'
+               if (formattedFileList !== undefined) {
+                  $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+               }
+               $scope.visiblePosts = $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts));
+            }
+            else {
+               $scope.searchPlaceholder = 'Search ' + $scope.selectedClass;
+               if (formattedFileList !== undefined) {
+                  $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+               }
+               $scope.visiblePosts = $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts));
+            }
          }
       })
    }
@@ -278,9 +281,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.generateQueryString = function() {
       var query;
       if ($scope.searchTxt) {
-         query = $scope.searchTxt + " and '0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false";
-
-      }else{
+         query = fullText $scope.searchTxt + " and '0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false";
+      }
+      else {
          query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false";
       }
       query = query + " and properties has { key='Flagged' and value='" + $scope.queryProperties.Flagged + "' }"
