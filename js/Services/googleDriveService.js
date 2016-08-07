@@ -23,6 +23,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
     }
 
     this.getListOfFlies = function(query, pageToken, pageSize) {
+        console.log(query);
         var query = query || "";
         return (gapi.client.drive.files.list({
             pageSize: pageSize,

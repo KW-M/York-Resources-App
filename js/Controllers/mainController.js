@@ -276,8 +276,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    $scope.generateQueryString = function() {
+      var query;
       if ($scope.searchTxt === "" || $scope.searchTxt === undefined) {
-         var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false";
+         query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false";
 
       }else{
          var query = $scope.searchTxt + " and '0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false";
