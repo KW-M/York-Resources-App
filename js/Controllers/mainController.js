@@ -168,7 +168,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.getFiles = function(searchPro) {
       $scope.firstFiles = true;
-      var nextPageToken = classPageTokenSelectionIndex[$scope.selectedClass] || "";
+      if ($scope.searchTxt) {
+         var nextPageToken = classPageTokenSelectionIndex[$scope.selectedClass + $scope.searchTxt] || "";
+      }
+      else {
+         var nextPageToken = classPageTokenSelectionIndex[$scope.selectedClass] || "";
+      }
       if (nextPageToken !== "end") {
          $scope.getQueryProperties();
          loading_spinner.style.display = 'inherit'; //////
@@ -192,13 +197,20 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                   if (fileList.result.nextPageToken !== undefined) { //if we haven't reached the end of our search:
                      console.log("more posts coming...")
                      if ($scope.searchTxt) {
-                        classPageTokenSelectionIndex[$scope.selectedClass + $scope.selectedClass] = fileList.result.nextPageToken;
+                        classPageTokenSelectionIndex[$scope.selectedClass + $scope.searchTxt] = fileList.result.nextPageToken;
                      }
-                     classPageTokenSelectionIndex[$scope.selectedClass] = fileList.result.nextPageToken;
+                     else {
+                        classPageTokenSelectionIndex[$scope.selectedClass] = fileList.result.nextPageToken;
+                     }
                   }
                   else { //if we havene reached the end of our search:
                      console.log("end of the line");
-                     classPageTokenSelectionIndex[$scope.selectedClass] = "end";
+                     if ($scope.searchTxt) {
+                        classPageTokenSelectionIndex[$scope.selectedClass + $scope.searchTxt] = "end";
+                     }
+                     else {
+                        classPageTokenSelectionIndex[$scope.selectedClass] = "end";
+                     }
                   }
                   sortPostsByType(formattedFileList);
                   console.log({
@@ -211,11 +223,21 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                   sortPostsByType();
                   if (fileList.result.nextPageToken !== undefined) { //if we haven't reached the end of our search:
                      console.log("duplicate posts - more posts coming...")
-                     classPageTokenSelectionIndex[$scope.selectedClass] = fileList.result.nextPageToken;
+                     if ($scope.searchTxt) {
+                        classPageTokenSelectionIndex[$scope.selectedClass + $scope.searchTxt] = fileList.result.nextPageToken;
+                     }
+                     else {
+                        classPageTokenSelectionIndex[$scope.selectedClass] = fileList.result.nextPageToken;
+                     }
                   }
                   else { //if we havene reached the end of our search:
                      console.log("duplicate posts - end of the line");
-                     classPageTokenSelectionIndex[$scope.selectedClass] = "end";
+                     if ($scope.searchTxt) {
+                        classPageTokenSelectionIndex[$scope.selectedClass + $scope.searchTxt] = "end";
+                     }
+                     else {
+                        classPageTokenSelectionIndex[$scope.selectedClass] = "end";
+                     }
                   }
                   $scope.getFiles();
                }
