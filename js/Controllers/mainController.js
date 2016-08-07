@@ -191,6 +191,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                if (formattedFileList.length !== 0) {
                   if (fileList.result.nextPageToken !== undefined) { //if we haven't reached the end of our search:
                      console.log("more posts coming...")
+                     if ($scope.searchTxt) {
+                        classPageTokenSelectionIndex[$scope.selectedClass + $scope.selectedClass] = fileList.result.nextPageToken;
+                     }
                      classPageTokenSelectionIndex[$scope.selectedClass] = fileList.result.nextPageToken;
                   }
                   else { //if we havene reached the end of our search:
