@@ -277,11 +277,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.generateQueryString = function() {
       var query;
-      if ($scope.searchTxt === "" || $scope.searchTxt === undefined) {
-         query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false";
+      if ($scope.searchTxt) {
+         query = $scope.searchTxt + " and '0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false";
 
       }else{
-         var query = $scope.searchTxt + " and '0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false";
+         query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false";
       }
       query = query + " and properties has { key='Flagged' and value='" + $scope.queryProperties.Flagged + "' }"
       if ($scope.queryProperties.Class !== "any" && $scope.queryProperties.Class !== undefined) {
@@ -293,6 +293,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       if ($scope.queryProperties.Type !== "any" && $scope.queryProperties.Type !== undefined) {
          query = query + " and properties has { key='Type' and value='" + $scope.queryProperties.Type + "' }"
       }
+      console.log(query)
       return query;
    }
 
