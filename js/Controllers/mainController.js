@@ -276,8 +276,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    $scope.generateQueryString = function() {
-      if ($scope.queryParam !== "" && $scope.queryParam !== undefined) {
-         var query = $scope.queryParam + " and '0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false";
+      if ($scope.searchTxt !== "" && $scope.searchTxt !== undefined) {
+         var query = $scope.searchTxt + " and '0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false";
       }else{
          var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false";
       }
