@@ -260,6 +260,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          if ($scope.searchTxt) {
             if (formattedFileList !== undefined) {
                if ($scope.searchTxt === $scope.previousSearch) {
+                  console.log('continueing search')
                   $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
                }
                else {
@@ -344,7 +345,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             var Creator = true;
          }
          console.log({
-            filterdPost: post,
+            filteredPost: post,
             Flagged: Flagged,
             Class: Class,
             Type,
