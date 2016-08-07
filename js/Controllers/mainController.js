@@ -200,7 +200,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                      formattedFileList[fileCount] = $scope.formatPost(fileList.result.files[o]);
                      deDuplicationIndex[fileList.result.files[o].id] = 1; //mark this id as used with a one.
                      fileCount++;
-                     }
+                  }
                }
                }
                if (formattedFileList.length !== 0) {
