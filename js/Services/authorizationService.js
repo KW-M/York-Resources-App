@@ -38,8 +38,6 @@ function authService($mdDialog) {
                 var accountDomain = currentUser.getHostedDomain()
 
                 if (accountDomain = 'york.org') {
-                    console.log(authInstance);
-                    console.log(currentUser);
                     console.log("User's Domain: " + accountDomain);
                     console.log('signed in')
                     callback();
