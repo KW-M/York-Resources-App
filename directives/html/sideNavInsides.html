@@ -35,9 +35,12 @@
                     <md-icon>group</md-icon>
                     <span>Classes</span>
                     <md-icon>search</md-icon>
-                    <span>
-                    <input ng-model="sideNavClassSearch" placeholder="Filter Classes"/>
-                    </span>
+                    <div style="background-color:#fff" class="hover-search" ng-class="{'hover-search-visible' : globals.mobileSearchOpen}">
+                        <input ng-model="sideNavClassSearch" placeholder="Filter Classes"/>
+                        <md-button class="md-icon-button" ng-click="toggleMobileSearch()">
+                            <md-icon>close</md-icon>
+                        </md-button>
+                    </div>
                 </md-menu-item>
             </md-list-item>
             <md-list>
@@ -47,7 +50,7 @@
                 </md-button>
                 </div>
                 <div ng-repeat="Catagory in classList" flex layout="column">
-                    <label class="side-nav-header">{{Catagory.Name}}</label>
+                    <label ng-hide="sideNavClassSearch" class="side-nav-header">{{Catagory.Name}}</label>
                     <md-button class="side-nav-option" ng-repeat="Class in Catagory.Classes | filter:sideNavClassSearch" ng-click="gotoRoute('/' + Class)" ng-class="{ 'selected' : pathSelected('/' + Class) }">
                         {{Class}}
                     </md-button>
