@@ -11,7 +11,7 @@ function authService($mdDialog) {
     var signinButton = angular.element(document.getElementById('signin_button'));
     var signinSpinner = angular.element(document.getElementById('signin_spinner'));
     var signinDialog = angular.element(document.getElementById('overlay_background'));
-    var signoutButton = angular.element(document.getElementById('account_button'));
+    var signoutButton = angular.element(document.getElementById('signout_button'));
 
     this.initilize = function(callback) {
         gapi.client.setApiKey(apiKey);
@@ -28,7 +28,7 @@ function authService($mdDialog) {
             updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
 
             signinButton[0].addEventListener("click", handleSigninClick);
-            //signoutButton[0].addEventListener("click", handleSignoutClick);
+            signoutButton[0].addEventListener("click", handleSignoutClick);
         });
 
         function updateSigninStatus(isSignedIn) {

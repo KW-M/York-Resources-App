@@ -534,6 +534,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    //-signin & initiation------------
 
+   $scope.signOut = function() {
+      
+   };
+
    gapi.load('client:auth2', function() {
       authorizationService.initilize(loginSucessful);
    });
