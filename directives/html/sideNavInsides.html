@@ -35,8 +35,10 @@
                     <md-icon>group</md-icon>
                     <span>Classes</span>
                     <md-icon>search</md-icon>
-                    <div style="background-color:#fff" class="hover-search" ng-class="{'hover-search-visible' : globals.mobileSearchOpen}">
-                        <input ng-model="sideNavClassSearch" placeholder="Filter Classes"/>
+                    <div class="hover-search sideNavClassSearch" ng-class="{'hover-search-visible' : globals.mobileSearchOpen}">
+                        <md-input-container>
+                            <input ng-model="sideNavClassSearch" placeholder="Filter Classes"/>
+                        </md-input-container>
                         <md-button class="md-icon-button" ng-click="toggleMobileSearch()">
                             <md-icon>close</md-icon>
                         </md-button>
