@@ -57,7 +57,8 @@ function authService($mdDialog) {
                 }
             }
             else {
-                self.showSigninButton()
+                self.showSigninDialog();
+                self.showSigninButton();
             }
         }
     }

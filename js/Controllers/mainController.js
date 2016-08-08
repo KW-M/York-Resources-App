@@ -535,7 +535,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    //-signin & initiation------------
 
    $scope.signOut = function() {
-      authorizationService.
+      authorizationService.handleSignoutClick();
    };
 
    gapi.load('client:auth2', function() {
