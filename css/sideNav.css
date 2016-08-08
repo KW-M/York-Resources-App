@@ -62,7 +62,16 @@
     }
     md-sidenav.sidenav-overlay .sideNavClassSearch {
         background-color:#fff;
-        
+        top:0px;
+        right: 100%;
+        transition: right 0.2s ease, opacity 0.2s ease;
+    }
+    md-sidenav.sidenav-inline .sideNavClassSearch {
+        background-color: #f2f2f2;
+        width:100%;
+        top:0px;
+        right: 100%;
+        transition: right 0.2s ease, opacity 0.2s ease;
     }
 
     .side-nav-classes md-menu-item>.md-button {
