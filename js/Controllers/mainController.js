@@ -326,7 +326,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       if ($scope.queryProperties.Type !== "any" && $scope.queryProperties.Type !== undefined) {
          query = query + " and properties has { key='Type' and value='" + $scope.queryProperties.Type + "' }"
       }
-      console.log(query)
       return query;
    }
 
