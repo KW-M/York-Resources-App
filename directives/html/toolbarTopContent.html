@@ -30,12 +30,12 @@
             <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" id="account_button" aria-label="account" style="height:36px;width:36px;border-radius:50%;background-image:url('images/accountPic.jpg'); background-size: 36px 36px;">
             </md-button>
             <md-menu-content>
-               <md-menu-item layout="row" style="padding-top: 6px;">
-                <p class="">{{myInfo.Name}}</p>
-                <p>{{myInfo.Email}}</p>
+               <md-menu-item layout="column" style="padding-top: 6px;">
+                <p class="user-name" style="font-weight: bold; font-size:13px" >{{myInfo.Name}}</p>
+                <p class="user-name" style="color: #666; " >{{myInfo.Email}}</p>
                </md-menu-item>
                <md-menu-item>
-                  <md-button><span flex>Sign out</span><md-icon>sign_out</md-icon></md-button>
+                  <md-button id="signout_button"><span flex>Sign out</span><md-icon>sign_out</md-icon></md-button>
                </md-menu-item>
             </md-menu-content>
          </md-menu>
