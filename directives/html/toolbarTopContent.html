@@ -26,6 +26,17 @@
             <md-icon>help</md-icon>
             <md-tooltip>Help</md-tooltip>
         </md-button>
-        <md-button class="md-icon-button" id="account_button" aria-label="account" style="height:36px;width:36px;border-radius:50%;background-image:url('images/accountPic.jpg'); background-size: 36px 36px;">
-        </md-button>
+        <md-menu md-position-mode="target-right target" md-offset="0 -45">
+            <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" id="account_button" aria-label="account" style="height:36px;width:36px;border-radius:50%;background-image:url('images/accountPic.jpg'); background-size: 36px 36px;">
+            </md-button>
+            <md-menu-content>
+               <md-menu-item>
+                <p>{{myInfo.Name}}</p>
+                <p>{{myInfo.Email}}</p>
+               </md-menu-item>
+               <md-menu-item>
+                  <md-button><span flex>Sign out</span><md-icon>sign_out</md-icon></md-button>
+               </md-menu-item>
+            </md-menu-content>
+         </md-menu>
     </div>
