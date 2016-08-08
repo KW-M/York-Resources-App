@@ -35,6 +35,9 @@
                     <md-icon>group</md-icon>
                     <span>Classes</span>
                     <md-icon>search</md-icon>
+                    <span>
+                    <input ng-model="sideNavClassSearch" placeholder="Filter Classes"/>
+                    </span>
                 </md-menu-item>
             </md-list-item>
             <md-list>
@@ -45,7 +48,7 @@
                 </div>
                 <div ng-repeat="Catagory in classList" flex layout="column">
                     <label class="side-nav-header">{{Catagory.Name}}</label>
-                    <md-button class="side-nav-option" ng-repeat="Class in Catagory.Classes" ng-click="gotoRoute('/' + Class)" ng-class="{ 'selected' : pathSelected('/' + Class) }">
+                    <md-button class="side-nav-option" ng-repeat="Class in Catagory.Classes | filter:sideNavClassSearch" ng-click="gotoRoute('/' + Class)" ng-class="{ 'selected' : pathSelected('/' + Class) }">
                         {{Class}}
                     </md-button>
                 </div>
@@ -73,7 +76,7 @@
             </md-list-item>
             <md-list-item show-sm show-xs hide-gt-sm>
                 <md-menu-item>
-                    <md-button >
+                    <md-button ng-click="::openHelpDialog()">
                         <md-icon>help</md-icon>
                         Help
                     </md-button>
