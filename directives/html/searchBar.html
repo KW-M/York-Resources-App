@@ -4,20 +4,18 @@
    <md-item-template>
       <span style="position:absolute; width:100%; height:100%; pointer-events:none;">
       <span style="overflow-x:scroll">
-         <span style="float:left">
+         <span>
+            <span>Class:</span>
+            <class-select-menu></class-select-menu>
+         </span>
+         <span>
                <span>Type:</span>
                <md-button class="md-icon-button"><md-icon>link</md-icon></md-button>
                <md-button class="md-icon-button"><md-icon>short_text</md-icon></md-button>
                <md-button class="md-icon-button"><md-icon>insert_drive_file</md-icon></md-button>
                <md-button class="md-icon-button"><md-icon><img style="height: 24px; width: 24px; opacity: 0.6;" src="./images/quizlet logo.png"></img></md-icon></md-button>
          </span>
-         <span style="float:left">
-            <span>Creator:</span>
-            <md-input-container md-no-float style="margin: 6px 0; height:30px">
-               <input ng-model="sideNavClassSearch" placeholder="Name or Email"/>
-            </md-input-container>
-         </span>
-         <span style="float:left">
+         <span>
             <span>Creator:</span>
             <md-input-container md-no-float style="margin: 6px 0; height:30px">
                <input ng-model="sideNavClassSearch" placeholder="Name or Email"/>
