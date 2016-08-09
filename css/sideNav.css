@@ -45,8 +45,11 @@
 
     .sidenav-overlay .hover-search.sideNavClassSearch {
         background-color:#fff;
+        width:100%;
         top:0px;
         right: 100%;
+        margin: 0;
+        box-sizing: border-box;
         transition: right 0.2s ease, opacity 0.2s ease;
     }
     .sidenav-inline .hover-search.sideNavClassSearch {
