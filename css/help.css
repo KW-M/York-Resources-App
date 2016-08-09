@@ -16,3 +16,6 @@
         pointer-events:initial;
         bottom: 0px;
     }
+    .credit-grid-tile {
+        bacground-color: red;
+    }
