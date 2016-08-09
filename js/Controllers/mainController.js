@@ -628,7 +628,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          performantScrollEnabled = false;
       }
    });
-
 }]));
 
 
