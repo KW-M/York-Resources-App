@@ -2,8 +2,7 @@
 <md-autocomplete class="searchBar md-accent" md-search-text="searchTxt" md-search-text-change="gotoRoute(undefined, searchTxt, undefined)" md-item-text="searchTxt" md-delay="300" md-min-length="0" md-items="ui in searchExtra" md-autoselect="false" md-select-on-match="false"
    md-require-match="false" placeholder="{{searchPlaceholder}}" md-menu-class="search-menu-style">
    <md-item-template>
-      <span style="position:absolute; width:100%; height:100%; pointer-events:none;">
-      <span style="overflow-x:scroll">
+      <span>
          <span>
             <span>Class:</span>
             <class-select-menu></class-select-menu>
