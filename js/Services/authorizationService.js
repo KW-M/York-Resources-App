@@ -28,7 +28,6 @@ function authService($mdDialog) {
             updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
 
             signinButton[0].addEventListener("click", handleSigninClick);
-            signoutButton[0].addEventListener("click", handleSignoutClick);
         });
 
         function updateSigninStatus(isSignedIn) {
