@@ -2,7 +2,8 @@
 <md-autocomplete class="searchBar md-accent" md-search-text="searchTxt" md-search-text-change="gotoRoute(undefined, searchTxt, undefined)" md-item-text="searchTxt" md-delay="300" md-min-length="0" md-items="ui in searchExtra" md-autoselect="false" md-select-on-match="false"
    md-require-match="false" placeholder="{{searchPlaceholder}}" md-menu-class="search-menu-style">
    <md-item-template>
-      <span style="overflow-y:scroll">
+      <span style="position:absolute; width:100%; height:100%; pointer-events:none;">
+      <span style="overflow-x:scroll">
          <span style="float:left">
                <span>Type:</span>
                <md-button class="md-icon-button"><md-icon>link</md-icon></md-button>
@@ -12,14 +13,14 @@
          </span>
          <span style="float:left">
             <span>Creator:</span>
-            <md-input-container md-no-float style="margin: 6px 0;">
-               <input ng-model="sideNavClassSearch" placeholder/>
+            <md-input-container md-no-float style="margin: 6px 0; height:30px">
+               <input ng-model="sideNavClassSearch" placeholder="Name or Email"/>
             </md-input-container>
          </span>
          <span style="float:left">
             <span>Creator:</span>
-            <md-input-container md-no-float style="margin: 6px 0;">
-               <input ng-model="sideNavClassSearch"/>
+            <md-input-container md-no-float style="margin: 6px 0; height:30px">
+               <input ng-model="sideNavClassSearch" placeholder="Name or Email"/>
             </md-input-container>
          </span>
       </span>
