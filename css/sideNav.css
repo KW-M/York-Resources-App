@@ -38,18 +38,21 @@
         background-color:#fff;
         width:100%;
         top:0px;
-        right: -100%;
+        left: -100%;
         margin: 0;
         box-sizing: border-box;
-        transition: right 0.2s ease, opacity 0.2s ease;
+        transition: left 0.2s ease, opacity 0.2s ease;
     }
     .sidenav-inline .hover-search.sideNavClassSearch {
         background-color: #f2f2f2;
         width:100%;
         top:0px;
-        right: -100%;
+        left: -100%;
         box-sizing: border-box;
-        transition: right 0.2s ease, opacity 0.2s ease;
+        transition: left 0.2s ease, opacity 0.2s ease;
+    }
+    .hover-search.sideNavClassSearch.hover-search-visible {
+        left: 0;
     }
 
     .side-nav-classes md-menu-item>.md-button {
