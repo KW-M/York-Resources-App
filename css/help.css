@@ -8,6 +8,7 @@
         pointer-events:none;
         transition: opacity 0.5s ease, bottom 0.5s ease;
         bottom: -50%;
+        margin-bottom: 52px
     }
     
     .credits-cover-visible{
