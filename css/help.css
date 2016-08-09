@@ -2,16 +2,18 @@
     .credits-cover{
         opacity:0;
         position: absolute;
-        height: 100%;
+        height: 0px;
         width: 100%;
-        border-box
+        box-sizing: border-box;
         pointer-events:none;
-        transition: opacity 0.5s ease;
-        bottom: -100%;
+        transition: opacity 0.5s ease, bottom 0.5s ease, height 0.5s ease;
+        bottom: -50%;
     }
     
     .credits-cover-visible{
+        transition: opacity 0.5s ease, bottom 0.5s ease, height 0.5s ease;
         opacity:1;
         pointer-events:initial;
         bottom: 0px;
+        height: 100%;
     }

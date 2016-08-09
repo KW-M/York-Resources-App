@@ -34,14 +34,14 @@
                 <md-menu-item>
                     <md-icon>group</md-icon>
                     <span>Classes</span>
-                    <md-button class="md-icon-button" ng-click="sideNavClassSearchSearch()">
+                    <md-button class="md-icon-button" ng-click="globals.sideNavClassSearchOpen = !globals.sideNavClassSearchOpen">
                             <md-icon>search</md-icon>
                     </md-button>
                     <div class="hover-search sideNavClassSearch" ng-class="{'hover-search-visible' : globals.sideNavClassSearchOpen}">
                         <md-input-container>
                             <input ng-model="sideNavClassSearch" placeholder="Filter Classes"/>
                         </md-input-container>
-                        <md-button class="md-icon-button" ng-click="sideNavClassSearchSearch()">
+                        <md-button class="md-icon-button" ng-click="globals.sideNavClassSearchOpen = !globals.sideNavClassSearchOpen">
                             <md-icon>close</md-icon>
                         </md-button>
                     </div>
