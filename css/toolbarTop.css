@@ -18,7 +18,7 @@
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
-        -webkit-align-items: center;
+        -webkit-align-items: center; 
         -ms-flex-align: center;
         align-items: center;
         -webkit-flex-direction: row;
@@ -40,6 +40,15 @@
     #account_picture {
         Height: 3.5em;
         Width: 3.5em;
+    }
+    
+    #quizlet_connect_button.md-button{
+        background: -webkit-gradient(linear, 0 100%, 0 0, from(#2072de), to(#1d67c7));
+        background: -webkit-linear-gradient(#2072de, #1d67c7);
+        background: -moz-linear-gradient(#2072de, #1d67c7);
+        background: -o-linear-gradient(#2072de, #1d67c7);
+        background: linear-gradient(#2072de, #1d67c7);
+        color: white;
     }
     
     input.search-field {
