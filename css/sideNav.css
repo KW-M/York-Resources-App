@@ -1,7 +1,4 @@
       /*-------------------- sidebar styles --------------------- */
-    md-sidenav.sidenav-overlay {
-        padding-top: 56px;
-    }
     .sidenav-inline {
         width: 252px;
         background-color: #f2f2f2;
@@ -57,7 +54,6 @@
         width:100%;
         top:0px;
         right: 100%;
-        margin: 0;
         box-sizing: border-box;
         transition: right 0.2s ease, opacity 0.2s ease;
     }
