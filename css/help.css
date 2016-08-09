@@ -1,0 +1,15 @@
+    /*---------- help and first run element styles -------- */
+    .credits-cover{
+        opacity:0;
+        height: 100%
+        width: 100%;
+        pointer-events:none;
+        transition: opacity 0.5s ease;
+        bottom: -100%;
+    }
+    
+    .credits-cover-visible{
+        opacity:1;
+        pointer-events:initial;
+        bottom: 0px;
+    }
