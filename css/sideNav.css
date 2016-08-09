@@ -43,34 +43,19 @@
         background: #bdbdbd;
     }
 
-    md-sidenav.sidenav-inline .side-nav-scroll {
-        overflow-y: hidden;
-    }
-
-    md-sidenav.sidenav-inline:hover .side-nav-scroll {
-        overflow-y: auto;
-    }
-
-    md-sidenav.sidenav-inline md-menu-item>.md-button {
-        border-top-right-radius: 3px;
-        border-bottom-right-radius: 3px;
-    }
-    md-sidenav .md-button.selected {
-           background-color: rgba(0,0,0,.05);
-           font-weight: bold;
-           color: #000000;
-    }
-    md-sidenav.sidenav-overlay .sideNavClassSearch {
+    .sidenav-overlay .hover-search.sideNavClassSearch {
         background-color:#fff;
         top:0px;
         right: 100%;
         transition: right 0.2s ease, opacity 0.2s ease;
     }
-    md-sidenav.sidenav-inline .sideNavClassSearch {
+    .sidenav-inline .hover-search.sideNavClassSearch {
         background-color: #f2f2f2;
         width:100%;
         top:0px;
         right: 100%;
+        margin: 0;
+        box-sizing: border-box;
         transition: right 0.2s ease, opacity 0.2s ease;
     }
 
