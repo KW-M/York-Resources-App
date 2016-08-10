@@ -1,4 +1,4 @@
-  <md-button class="md-fab" ng-class="{'not-visible' : onboardingPageNumber === 0}" ng-click="onboardingPageNumber = onboardingPageNumber - 1" aria-label="previous">
+  <md-button class="md-fab onboardingDialogButton" ng-class="{'not-visible' : onboardingPageNumber === 0}" ng-click="onboardingPageNumber = onboardingPageNumber - 1" aria-label="previous">
     <md-icon>arrow_back</md-icon>
   </md-button>
 <md-dialog style="overflow:hidden" class="onboardingDialog">
@@ -50,6 +50,6 @@
     </div>
   </md-dialog-actions>
 </md-dialog>
-    <md-button class="md-fab" aria-label="next" ng-click="onboardingPageNumber = onboardingPageNumber + 1">
+    <md-button class="md-fab onboardingDialogButton" aria-label="next" ng-click="onboardingPageNumber = onboardingPageNumber + 1">
       <md-icon>arrow_forward</md-icon>
     </md-button>

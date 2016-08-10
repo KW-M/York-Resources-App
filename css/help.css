@@ -28,11 +28,15 @@
         top:0px;
     }
     
-    .onboardingDialog button.md-button.md-fab{
+    .onboardingDialogButton.md-button.md-fab{
         background-color: white
     }
     
-    .onboardingDialog button.md-button.md-fab md-icon{
+    .onboardingDialogButton.md-button.md-fab:hover{
+        background-color: white
+    }
+    
+    .onboardingDialogButton.md-button.md-fab md-icon{
         color: rgb(71, 140, 249)
     }
     
