@@ -39,6 +39,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
 
    $scope.$mdMedia = $mdMedia;
+   $scope.$mdDialog = $mdDialog;
 
    var moderators = { //temporary
       'worcester-moorek2018@york.org': true,

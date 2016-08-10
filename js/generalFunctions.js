@@ -22,9 +22,9 @@
 
       function runPromise() {
         var thePromise = item.Promise;
-        console.log({
-          'Exicuting Promise': thePromise.hg.hg
-        })
+        // console.log({
+        //   'Exicuting Promise': thePromise.hg.hg
+        // })
         thePromise.then(item.Action, function(error) {
           if (item.Err) {
             console.log({
