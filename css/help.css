@@ -20,6 +20,10 @@
         background-color: #eff0f2;
     }
     
+    .onboardingDialog md-tabs {
+        height100%
+    }
+    
     .onboardingDialog md-tabs-wrapper {
         display: none;
     }
