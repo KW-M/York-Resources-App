@@ -45,11 +45,11 @@
     <md-button class="md-accent" ng-click="closeDialog()">Skip</md-button>
   </md-dialog-actions>
 </md-dialog>
-    <md-button class="md-fab md-primary" aria-label="next">
+    <md-button class="md-fab md-primary" aria-label="next" ng-click>
           <md-icon>arrow_forward</md-icon>
     </md-button>
-    <div>
-      <div class="dotPageIndicator"></div>
+    <div class="dotPageIndicatorContainer">
+      <div class="dotPageIndicator" ng-class="{'dotPageIndicatorActive' : onboardingPageNumber === 1}"></div>
       <div class="dotPageIndicator"></div>
       <div class="dotPageIndicator"></div>
     </div>
