@@ -442,15 +442,17 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.openHelpDialog = function() { //called by the top right toolbar help button
       $mdDialog.show({
          templateUrl: 'templates/html/help.html',
+         controller: DialogController,
          parent: angular.element(document.body),
          clickOutsideToClose: true,
          fullscreen: ($mdMedia('xs')),
       });
    };
-   
+
    $scope.openOnboardingDialog = function() { //called by the top right toolbar help button
       $mdDialog.show({
          templateUrl: 'templates/html/onboarding.html',
+         controller: DialogController,
          parent: angular.element(document.body),
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
@@ -542,6 +544,15 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $window.open(link);
       }
    };
+
+   function DialogController($scope, $mdDialog) {
+      $scope.hideDialog = function() {
+         $mdDialog.hide();
+      };
+      $scope.cancelDialog = function() {
+         $mdDialog.cancel();
+      };
+   }
    
    $scope.closeDialog = function() {
       console.log('closing dialog')
