@@ -19,22 +19,32 @@
     if (item) {
       var delay = 0;
       runPromise();
+
       function runPromise() {
         var thePromise = item.Promise;
-        console.log({'Exicuting Promise': thePromise.hg.hg})
+        console.log({
+          'Exicuting Promise': thePromise.hg.hg
+        })
         thePromise.then(item.Action, function(error) {
-          if(item.Err){
-            console.log({'Error': error, 'BackOffCount': delay})
+          if (item.Err) {
+            console.log({
+              'Error': error
+            })
             item.Err(error);
-          } else {
-          console.log({'Error': error, 'BackOffCount': delay})
-          if (delay < 8) {
-            setTimeout(function() {
-              runPromise();
-            }, (delay = Math.max(delay *= 2, 1)) * 1000);
           }
           else {
-            item.Err(error) || "";
+            console.log({
+              'Error': error,
+              'BackOffCount': delay
+            })
+            if (delay < 8) {
+              setTimeout(function() {
+                runPromise();
+              }, (delay = Math.max(delay *= 2, 1)) * 1000);
+            }
+            else {
+              item.Err(error) || "";
+            }
           }
         });
       }
