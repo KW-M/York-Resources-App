@@ -19,3 +19,24 @@
     .credit-grid-tile {
         background-color: #eff0f2;
     }
+    
+    .dotPageIndicatorContainer {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .dotPageIndicator.dotPageIndicatorActive {
+        width: 12px;
+        height: 12px;
+        transform: translateY(1px);
+        background-color: black;
+    }
+    
+    .dotPageIndicator {
+        width: 10px;
+        height: 10px;
+        background-color: gray;
+        border-radius: 50%;
+        display: inline-block;
+    }
