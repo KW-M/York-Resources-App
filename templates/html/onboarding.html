@@ -1,6 +1,6 @@
-        <md-button class="md-fab md-primary" aria-label="Use Android">
-          <md-icon>arrow_back</md-icon>
-    </md-button>
+  <md-button class="md-fab md-primary" ng-click="onboardingPageNumber = onboardingPageNumber - 1" aria-label="Use Android">
+    <md-icon>arrow_back</md-icon>
+  </md-button>
 <md-dialog style="overflow:hidden">
   <md-dialog-content style="position:relative">
     <md-tabs class="md-accent" md-selected="onboardingPageNumber">
@@ -43,13 +43,13 @@
   </md-dialog-content>
   <md-dialog-actions>
     <md-button class="md-accent" ng-click="closeDialog()">Skip</md-button>
+    <div class="dotPageIndicatorContainer">
+      <div class="dotPageIndicator" ng-class="{'dotPageIndicatorActive' : onboardingPageNumber === 0}"></div>
+      <div class="dotPageIndicator" ng-class="{'dotPageIndicatorActive' : onboardingPageNumber === 1}"></div>
+      <div class="dotPageIndicator" ng-class="{'dotPageIndicatorActive' : onboardingPageNumber === 2}"></div>
+    </div>
   </md-dialog-actions>
 </md-dialog>
-    <md-button class="md-fab md-primary" aria-label="next" ng-click>
-          <md-icon>arrow_forward</md-icon>
+    <md-button class="md-fab md-primary" aria-label="next" ng-click="onboardingPageNumber = onboardingPageNumber + 1">
+      <md-icon>arrow_forward</md-icon>
     </md-button>
-    <div class="dotPageIndicatorContainer">
-      <div class="dotPageIndicator" ng-class="{'dotPageIndicatorActive' : onboardingPageNumber === 1}"></div>
-      <div class="dotPageIndicator"></div>
-      <div class="dotPageIndicator"></div>
-    </div>
