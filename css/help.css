@@ -18,10 +18,11 @@
     }
     .credit-grid-tile {
         background-color: #eff0f2;
+        :md-accent:
     }
     
-    .onboardingDialog md-tabs {
-        height100%
+    .onboardingDialog md-tabs.md-accent {
+        height: 100%
     }
     
     .onboardingDialog md-tabs-wrapper {
