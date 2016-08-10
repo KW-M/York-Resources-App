@@ -446,6 +446,16 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          fullscreen: ($mdMedia('xs')),
       });
    };
+   
+   $scope.openOnboardingDialog = function() { //called by the top right toolbar help button
+      $mdDialog.show({
+         templateUrl: 'templates/html/onboarding.html',
+         parent: angular.element(document.body),
+         clickOutsideToClose: true,
+         fullscreen: ($mdMedia('xs')),
+      });
+      authorizationService.hideSigninDialog();
+   };
 
    $scope.logPostToConsole = function(content, arrayIndex) {
       console.log({
@@ -530,6 +540,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       if (link !== "" && link !== undefined) {
          $window.open(link);
       }
+   };
+   
+   $scope.closeDialog = function() {
+      $mdDialog.hide();
    };
 
    //-signin & initiation------------

@@ -313,8 +313,4 @@
             console.log(dataURL);
             return dataURL;
         }
-
-        $scope.close = function() {
-            $mdDialog.hide();
-        };
     }
