@@ -451,7 +451,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $mdDialog.show({
          templateUrl: 'templates/html/onboarding.html',
          parent: angular.element(document.body),
-         clickOutsideToClose: true,
+         clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
       });
       authorizationService.hideSigninDialog();
