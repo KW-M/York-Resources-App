@@ -23,6 +23,10 @@
         var thePromise = item.Promise;
         console.log({'Exicuting Promise': thePromise.hg.hg})
         thePromise.then(item.Action, function(error) {
+          if(item.Err){
+            console.log({'Error': error, 'BackOffCount': delay})
+            item.Err(error);
+          } else {
           console.log({'Error': error, 'BackOffCount': delay})
           if (delay < 8) {
             setTimeout(function() {
