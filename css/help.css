@@ -23,6 +23,7 @@
     .onboardingDialog md-tabs-wrapper {
         display: none;
     }
+    
     .onboardingDialog md-tabs-content-wrapper {
         top:0px;
     }
