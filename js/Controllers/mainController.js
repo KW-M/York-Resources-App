@@ -610,7 +610,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    function handleUserPrefsSheet() {
-      queue(GoogleDriveService.getUserSettings($scope.myInfo.Email, true), function(spreadsheetRow) {
+      queue(GoogleDriveService.getUserSettings("$scope.myInfo.Email", true), function(spreadsheetRow) {
          console.log(spreadsheetRow);
          document.dispatchEvent(new Event('sheetPrefsLoaded'));
          getUserList();
