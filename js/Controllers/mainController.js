@@ -616,6 +616,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          getUserList();
       }, function(Error) {
          console.log(Error);
+         if (Error.result.error.message.substring(0, 21) === "Unable to parse range") {
+           getUserList(); 
+         }
       });
 
       function getUserList() {
