@@ -20,6 +20,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.searchChips = ["Class: "]
 
    $scope.classList = classes;
+   $scope.userList = [];
    $scope.Tags = [];
    $scope.globals = {
       FABisOpen: false,
@@ -609,13 +610,18 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    function handleUserPrefsSheet() {
-      console.log(GoogleDriveService.getUserSettings($scope.myInfo.Email));
       queue(GoogleDriveService.getUserSettings($scope.myInfo.Email), function(spreadsheetRow) {
          console.log(spreadsheetRow);
          document.dispatchEvent(new Event('sheetPrefsLoaded'));
+         
       }, function(Error) {
          console.log(Error);
       });
+      
+      function getUserList () {
+         
+      }
+      
       $scope.getFiles("");
    }
 
