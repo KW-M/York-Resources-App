@@ -613,13 +613,18 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       queue(GoogleDriveService.getUserSettings($scope.myInfo.Email), function(spreadsheetRow) {
          console.log(spreadsheetRow);
          document.dispatchEvent(new Event('sheetPrefsLoaded'));
-         
+         getUserList();
       }, function(Error) {
          console.log(Error);
       });
       
       function getUserList () {
-         
+         queue(GoogleDriveService.getUserSettings("A:B"), function(spreadsheetRow) {
+         console.log(spreadsheetRow);
+         getUserList();
+      }, function(Error) {
+         console.log(Error);
+      });
       }
       
       $scope.getFiles("");
