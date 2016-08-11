@@ -611,8 +611,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    function handleUserPrefsSheet() {
       queue(GoogleDriveService.updateUserSettings("Sheet1",['ej','namei','1,2,3'], true), function(spreadsheetRow) {
+         console.log(spreadsheetRow)
       });
-      queue(GoogleDriveService.getUserSettings('$scope.myInfo.Email', true), function(spreadsheetRow) {
+      queue(GoogleDriveService.getUserSettings($scope.myInfo.Email, true), function(spreadsheetRow) {
          console.log(spreadsheetRow);
          document.dispatchEvent(new Event('sheetPrefsLoaded'));
          getUserList();
