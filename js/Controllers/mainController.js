@@ -620,6 +620,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       
       function getUserList () {
          queue(GoogleDriveService.getUserSettings("A2:B", false), function(spreadsheetRow) {
+         $scope.userList = spreadsheetRow.result.values
          console.log(spreadsheetRow);
       }, function(Error) {
          console.log(Error);
