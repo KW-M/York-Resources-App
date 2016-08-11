@@ -37,8 +37,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
                 spreadsheetId: '1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0',
                 range: range,
                 valueInputOption: "USER_ENTERED",
-                    values: [['1',"2"]],
-                }
+                values: [dataToBeInserted],
             }));
         }
         else {

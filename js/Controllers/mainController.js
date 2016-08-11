@@ -610,9 +610,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    function handleUserPrefsSheet() {
-      queue(GoogleDriveService.updateUserSettings("Sheet1",['ej','namei','1,2,3'], true), function(spreadsheetRow) {
-         console.log(spreadsheetRow)
-      });
       queue(GoogleDriveService.getUserSettings($scope.myInfo.Email, true), function(spreadsheetRow) {
          console.log(spreadsheetRow);
          document.dispatchEvent(new Event('sheetPrefsLoaded'));
@@ -620,18 +617,17 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }, function(Error) {
          console.log(Error);
          if (Error.result.error.message.substring(0, 21) === "Unable to parse range") {
-           getUserList(true); 
+            var newData = [$scope.myInfo.Email,$scope.myInfo.Name,false,"","","","",1]
+            queue(GoogleDriveService.updateUserSettings("Sheet1",newData, true), function(spreadsheetRow) {
+               console.log(spreadsheetRow)
+               getUserList();
+            });
          }
       });
 
-      function getUserList(userNotFound) {
+      function getUserList() {
          queue(GoogleDriveService.getUserSettings("A2:B", false), function(spreadsheetRow) {
             $scope.userList = spreadsheetRow.result.values;
-            if (userNotFound === true) {
-               spreadsheetRow.result.values.length + 1;
-               queue(GoogleDriveService.updateUserSettings("A2:B", false), function(spreadsheetRow) {
-               });
-            }
          });
       }
 
