@@ -29,7 +29,10 @@ app.service('GoogleDriveService', ['$q', function($q) {
        return(gapi.client.sheets.spreadsheets.values.update({
           spreadsheetId: '1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0',
           range: range,
-          valueInputOption: "USER_ENTERED"
+          valueInputOption: "USER_ENTERED",
+          {"values": [
+            array
+          ]}
         }));
     }
 
