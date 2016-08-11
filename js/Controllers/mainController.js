@@ -617,16 +617,17 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }, function(Error) {
          console.log(Error);
          if (Error.result.error.message.substring(0, 21) === "Unable to parse range") {
-           getUserList(); 
+           getUserList(true); 
          }
       });
 
-      function getUserList() {
+      function getUserList(userNotFound) {
          queue(GoogleDriveService.getUserSettings("A2:B", false), function(spreadsheetRow) {
-            $scope.userList = spreadsheetRow.result.values
-            console.log(spreadsheetRow);
-         }, function(Error) {
-            console.log(Error);
+            $scope.userList = spreadsheetRow.result.values;
+            if (userNotFound === true) {
+               spreadsheetRow.result.values.length + 1;
+               queue(GoogleDriveService.updateUserSettings("A2:B", false), function(spreadsheetRow) {
+            }
          });
       }
 
