@@ -35,122 +35,124 @@ app.service('GoogleDriveService', ['$q', function($q) {
         if (append === true) {
             return (gapi.client.sheets.spreadsheets.values.append({
                 spreadsheetId: '1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0',
+                range: range,
                 valueInputOption: "USER_ENTERED",
                 values: dataToBeInserted,
             }));
         }
-        else
+        else {
             return (gapi.client.sheets.spreadsheets.values.update({
                 spreadsheetId: '1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0',
                 range: range,
                 valueInputOption: "USER_ENTERED",
                 values: dataToBeInserted,
             }));
+        }
     }
-}
 
-this.getListOfFlies = function(query, pageToken, pageSize) {
-    var query = query || "";
-    return (gapi.client.drive.files.list({
-        pageSize: pageSize,
-        pageToken: pageToken,
-        q: query,
-        fields: 'files(name,id,modifiedTime,appProperties,properties,iconLink,thumbnailLink,createdTime,description,fullFileExtension,owners(displayName,emailAddress),permissions(displayName,emailAddress)),nextPageToken', //
-    }));
-};
 
-this.deleteDriveFile = function(fileId) {
-    return (gapi.client.drive.files.delete({
-        'fileId': fileId
-    }));
-};
+    this.getListOfFlies = function(query, pageToken, pageSize) {
+        var query = query || "";
+        return (gapi.client.drive.files.list({
+            pageSize: pageSize,
+            pageToken: pageToken,
+            q: query,
+            fields: 'files(name,id,modifiedTime,appProperties,properties,iconLink,thumbnailLink,createdTime,description,fullFileExtension,owners(displayName,emailAddress),permissions(displayName,emailAddress)),nextPageToken', //
+        }));
+    };
 
-this.updateDriveFile = function(id, metadata) {
-    return (gapi.client.drive.files.update({
-        'fileId': id,
-    }));
-};
+    this.deleteDriveFile = function(fileId) {
+        return (gapi.client.drive.files.delete({
+            'fileId': fileId
+        }));
+    };
 
-this.createDriveFile = function(metadata) {
-    metadata.parents = ['0B5NVuDykezpkbUxvOUMyNnRsUGc'];
-    return (gapi.client.drive.files.create(metadata));
-};
+    this.updateDriveFile = function(id, metadata) {
+        return (gapi.client.drive.files.update({
+            'fileId': id,
+        }));
+    };
 
-this.getFileContent = function(fileId) {
-    return (gapi.client.drive.files.get({
-        'fileId': fileId,
-        'alt': 'media'
-    }));
-};
+    this.createDriveFile = function(metadata) {
+        metadata.parents = ['0B5NVuDykezpkbUxvOUMyNnRsUGc'];
+        return (gapi.client.drive.files.create(metadata));
+    };
 
-this.updateFileProperty = function(id, property, value) {
-    var metadata = {
-        properties: {
-            Flagged: value,
-        },
-    }
-    return (gapi.client.drive.files.update({
-        'fileId': id,
-        'resource': metadata,
-    }));
-};
+    this.getFileContent = function(fileId) {
+        return (gapi.client.drive.files.get({
+            'fileId': fileId,
+            'alt': 'media'
+        }));
+    };
 
-this.updateFileMetadata = function(id, metadata) {
-    return (gapi.client.drive.files.update({
-        'fileId': id,
-        'resource': metadata,
-    }));
-};
+    this.updateFileProperty = function(id, property, value) {
+        var metadata = {
+            properties: {
+                Flagged: value,
+            },
+        }
+        return (gapi.client.drive.files.update({
+            'fileId': id,
+            'resource': metadata,
+        }));
+    };
 
-this.likeFile = function(fileID, email) {
-    return (gapi.client.drive.permissions.create({
-        sendNotificationEmail: false,
-        emailMessage: 'Please ignore this error from York Study Resources.',
-        fileId: fileID,
-        emailAddress: email,
-        role: 'writer',
-        type: "user",
-    }));
-};
+    this.updateFileMetadata = function(id, metadata) {
+        return (gapi.client.drive.files.update({
+            'fileId': id,
+            'resource': metadata,
+        }));
+    };
 
-this.unLikeFile = function(fileID, permissionID) {
-    return (gapi.client.drive.permissions.delete({
-        fileId: fileID,
-        permissionId: permissionID,
-    }));
-};
+    this.likeFile = function(fileID, email) {
+        return (gapi.client.drive.permissions.create({
+            sendNotificationEmail: false,
+            emailMessage: 'Please ignore this error from York Study Resources.',
+            fileId: fileID,
+            emailAddress: email,
+            role: 'writer',
+            type: "user",
+        }));
+    };
 
-// --not used functions--
+    this.unLikeFile = function(fileID, permissionID) {
+        return (gapi.client.drive.permissions.delete({
+            fileId: fileID,
+            permissionId: permissionID,
+        }));
+    };
 
-this.sendDriveFileWContent = function(content, title) {
-    return (gapi.client.request({
-        'path': 'https://www.googleapis.com/upload/drive/v3/files',
-        'method': 'POST',
-        'params': {
-            'uploadType': 'multipart',
-            'useContentAsIndexableText': true,
-            'alt': 'json',
-        },
-        'addParents': '0B5NVuDykezpkOXY1bDZ2ZnUxVGM',
-        'headers': {
-            'Content-Type': 'multipart/mixed; boundary="675849302theboundary"'
-        },
-        'body': "\r\n--675849302theboundary\r\n" +
-            "Content-Type: application/json\r\n\r\n" +
-            JSON.stringify({
-                name: title,
-                parents: ['0B5NVuDykezpkbUxvOUMyNnRsUGc']
-            }) +
-            "\r\n--675849302theboundary\r\n" +
-            "Content-Type: application/json\r\n\r\n" +
-            JSON.stringify(content) +
-            "\r\n--675849302theboundary--"
-    }));
-};
+    // --not used functions--
 
-this.sendRequest = function(request, callback) {
-    request.execute(function(response) {
-        callback(response);
-    });
-};
+    this.sendDriveFileWContent = function(content, title) {
+        return (gapi.client.request({
+            'path': 'https://www.googleapis.com/upload/drive/v3/files',
+            'method': 'POST',
+            'params': {
+                'uploadType': 'multipart',
+                'useContentAsIndexableText': true,
+                'alt': 'json',
+            },
+            'addParents': '0B5NVuDykezpkOXY1bDZ2ZnUxVGM',
+            'headers': {
+                'Content-Type': 'multipart/mixed; boundary="675849302theboundary"'
+            },
+            'body': "\r\n--675849302theboundary\r\n" +
+                "Content-Type: application/json\r\n\r\n" +
+                JSON.stringify({
+                    name: title,
+                    parents: ['0B5NVuDykezpkbUxvOUMyNnRsUGc']
+                }) +
+                "\r\n--675849302theboundary\r\n" +
+                "Content-Type: application/json\r\n\r\n" +
+                JSON.stringify(content) +
+                "\r\n--675849302theboundary--"
+        }));
+    };
+
+    this.sendRequest = function(request, callback) {
+        request.execute(function(response) {
+            callback(response);
+        });
+    };
 }]);
