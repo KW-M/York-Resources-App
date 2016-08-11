@@ -24,6 +24,14 @@ app.service('GoogleDriveService', ['$q', function($q) {
           range: range,
         }));
     }
+    
+    this.updateUserSettings = function (range, dataToBeInserted){
+       return(gapi.client.sheets.spreadsheets.values.update({
+          spreadsheetId: '1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0',
+          range: range,
+          valueInputOption: "USER_ENTERED"
+        }));
+    }
 
     this.getListOfFlies = function(query, pageToken, pageSize) {
         var query = query || "";
