@@ -14,11 +14,14 @@ app.service('GoogleDriveService', ['$q', function($q) {
         }));
     };
     
-    this.getUserSettings = function (emailAddress){
+    this.getUserSettings = function (range, removeSpecialChars){
         //gets a named range in a google spreadsheet (in this case each row is created with a named range of its email).
+       if (removeSpecialChars  === true) {
+           range = range.replace(/\W/g, '')
+       }
        return(gapi.client.sheets.spreadsheets.values.get({
           spreadsheetId: '1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0',
-          range: emailAddress.replace(/\W/g, '')
+          range: range,
         }));
     }
 
