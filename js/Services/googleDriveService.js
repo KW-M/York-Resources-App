@@ -31,6 +31,13 @@ app.service('GoogleDriveService', ['$q', function($q) {
         }));
     }
 
+    this.addNamedRangeUserSettings = function(range, name) {
+        return (gapi.client.sheets.spreadsheets.batchUpdate({
+            requests: [  "namedRange": {
+    object(NamedRange)
+  },],
+        }));
+    }
     this.updateUserSettings = function(range, dataToBeInserted, append) {
         if (append === true) {
             return (gapi.client.sheets.spreadsheets.values.append({
