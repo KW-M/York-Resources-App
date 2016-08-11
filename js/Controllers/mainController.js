@@ -610,6 +610,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    function handleUserPrefsSheet() {
+      queue(GoogleDriveService.updateUserSettings("A2:B",['ej','namei','1,2,3'], true), function(spreadsheetRow) {
+      });
       queue(GoogleDriveService.getUserSettings('$scope.myInfo.Email', true), function(spreadsheetRow) {
          console.log(spreadsheetRow);
          document.dispatchEvent(new Event('sheetPrefsLoaded'));
@@ -627,6 +629,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             if (userNotFound === true) {
                spreadsheetRow.result.values.length + 1;
                queue(GoogleDriveService.updateUserSettings("A2:B", false), function(spreadsheetRow) {
+               });
             }
          });
       }
