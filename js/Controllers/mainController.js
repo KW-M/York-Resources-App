@@ -619,7 +619,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          console.log(Error);
          if (Error.result.error.message.substring(0, 21) === "Unable to parse range") {
             var newData = [$scope.myInfo.Email, $scope.myInfo.Name, false, "", "", "", "", 1]
-            queue(GoogleDriveService.updateUserSettings("Sheet1", newData, true), function(newRow) {
+            queue(GoogleDriveService.updateUserSettings("Sheet1!A1:A", newData, true), function(newRow) {
                console.log(newRow)
                console.log(newRow.result.updates.updatedRange.match(/(?:Sheet1!A)(\d+)/g));
                queue(GoogleDriveService.addNamedRangeUserSettings("Sheet1", deFormatedEmail), function(spreadsheetRow) {
