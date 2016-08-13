@@ -37,7 +37,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
             "requests": [{
                 "addNamedRange": {
                     "namedRange": {
-                        "name": "namey",
+                        "name": name,
                         "range": {
                             "startRowIndex": 1,
                             "endRowIndex": 1,

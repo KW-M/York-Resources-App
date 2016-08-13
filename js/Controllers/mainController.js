@@ -610,7 +610,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    function handleUserPrefsSheet() {
-      queue(GoogleDriveService.getUserSettings("$scope.myInfo.Email", true), function(spreadsheetRow) {
+      var formatedEmail = $scope.myInfo.Email;
+      queue(GoogleDriveService.getUserSettings($scope.myInfo.Email, true), function(spreadsheetRow) {
          console.log(spreadsheetRow);
          document.dispatchEvent(new Event('sheetPrefsLoaded'));
          getUserList();
@@ -620,7 +621,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             var newData = [$scope.myInfo.Email, $scope.myInfo.Name, false, "", "", "", "", 1]
             queue(GoogleDriveService.updateUserSettings("Sheet1", newData, true), function(spreadsheetRow) {
                console.log(spreadsheetRow)
-               queue(GoogleDriveService.addNamedRangeUserSettings("Sheet1", newData, true), function(spreadsheetRow) {
+               queue(GoogleDriveService.addNamedRangeUserSettings("Sheet1"), function(spreadsheetRow) {
                   console.log(spreadsheetRow)
                });
                getUserList();
