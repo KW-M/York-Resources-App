@@ -27,7 +27,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
         }
         return (gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: '1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0',
-            range: "namey",
+            range: range,
         }));
     }
 
