@@ -186,6 +186,7 @@
                 }
             }
             console.log($scope.Class);
+            console.log($scope.Tags);
         }
 
         $scope.compilePostToMetadata = function() {
