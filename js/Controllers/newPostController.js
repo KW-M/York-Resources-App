@@ -155,8 +155,10 @@
                     $scope.UpdateDate = postObj.UpdateDate;
                 }
 
-                if (postObj.Tags !== undefined) {
+                if (postObj.Tags !== undefined && postObj.Tags.length !== 0) {
                     $scope.Tags = postObj.Tags;
+                } else {
+                   $scope.Tags = []; 
                 }
 
                 if (postObj.Description !== undefined) {
