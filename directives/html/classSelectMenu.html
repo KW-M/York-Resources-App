@@ -4,13 +4,13 @@
         <md-select-header>
           <md-input></md-input>
         </md-select-header>
-        <!--<md-option value='{{"{\"Name\":\"Other\",\"Catagory\":\"Other\",\"Color\":\"toBeMade\"}"}}'>-->
-        <!--        Other / Not associated-->
-        <!--</md-option>-->
+        <md-option value='{{"{\"Name\":\"Other\",\"Catagory\":\"Other\",\"Color\":\"toBeMade\"}"}}'>
+                Other / Not associated
+        </md-option>
         <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">
-            <!--<md-option ng-repeat="Class in Catagory.Classes" value='{{"{\"Name\":\""+Class+"\",\"Catagory\":\""+Catagory.Name+"\",\"Color\":\""+Catagory.Color+"\"}"}}'>-->
-            <!--    {{Class}}-->
-            <!--</md-option>-->
+            <md-option ng-repeat="Class in Catagory.Classes" value='{{"{\"Name\":\""+Class+"\",\"Catagory\":\""+Catagory.Name+"\",\"Color\":\""+Catagory.Color+"\"}"}}'>-->
+                {{Class}}
+            </md-option>
         </md-optgroup>
     </md-select>
 </md-input-container>
