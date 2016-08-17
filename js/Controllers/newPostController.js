@@ -166,7 +166,7 @@
                 }
 
                 if (postObj.Class.Name !== undefined) {
-                    $scope.Class = postObj.Class.ame//JSON.stringify(postObj.Class);
+                    $scope.Class = postObj.Class.Name//JSON.stringify(postObj.Class);
                 }
 
                 if (postObj.Link !== undefined) {
