@@ -610,7 +610,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    function handleUserPrefsSheet() {
-      var deFormatedEmail = $scope.myInfo.Email.replace(/\W/g, '')
+      var deFormatedEmail = $scope.myInfo.Email.replace(/\W/g, '');
+      queue(GoogleDriveService.getUserSettings(deFormatedEmail), function(spreadsheetRow) {
+         console.log(spreadsheetRow);
+         document.dispatchEvent(new Event('sheetPrefsLoaded'));
+         getUserList();
+      });
       queue(GoogleDriveService.getUserSettings(deFormatedEmail), function(spreadsheetRow) {
          console.log(spreadsheetRow);
          document.dispatchEvent(new Event('sheetPrefsLoaded'));
