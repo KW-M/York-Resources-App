@@ -155,7 +155,7 @@
                     $scope.UpdateDate = postObj.UpdateDate;
                 }
 
-                if (postObj.Tags !== undefined || postObj.Tags.length !== 0 || postObj.Tags !== [""]) {
+                if (postObj.Tags !== undefined && postObj.Tags.length !== 0 || postObj.Tags !== [""]) {
                     $scope.Tags = postObj.Tags;
                 } else {
                    $scope.Tags = []; 
