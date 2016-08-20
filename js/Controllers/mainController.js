@@ -610,30 +610,27 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    function handleUserPrefsSheet() {
       var deFormatedEmail = $scope.myInfo.Email.replace(/\W/g, '');
-      queue(GoogleDriveService.getUserSettings('A1:B'), function(allUsers) {
-         console.log(allUsers);
-      });
-      queue(GoogleDriveService.getUserSettings(deFormatedEmail), function(spreadsheetRow) {
-         console.log(spreadsheetRow);
-         document.dispatchEvent(new Event('sheetPrefsLoaded'));
-         getUserList();
-      }, function(Error) {
-         console.log(Error);
-         if (Error.result.error.message.substring(0, 21) === "Unable to parse range") {
-            var newData = [$scope.myInfo.Email, $scope.myInfo.Name, false, "", "", "", "", 1]
-            queue(GoogleDriveService.updateUserSettings("Sheet1!A1:A", newData, true), function(newRow) {
-               console.log(newRow)
-               console.log(newRow.result.updates.updatedRange.match(/(?:Sheet1!A)(\d+)/g));
-               queue(GoogleDriveService.addNamedRangeUserSettings("Sheet1", deFormatedEmail), function(spreadsheetRow) {
-                  console.log(spreadsheetRow)
-               });
-               getUserList();
-            });
-         }
-      });
+      // queue(GoogleDriveService.getUserSettings(deFormatedEmail), function(spreadsheetRow) {
+      //    console.log(spreadsheetRow);
+      //    document.dispatchEvent(new Event('sheetPrefsLoaded'));
+      //    getUserList();
+      // }, function(Error) {
+      //    console.log(Error);
+      //    if (Error.result.error.message.substring(0, 21) === "Unable to parse range") {
+      //       var newData = [$scope.myInfo.Email, $scope.myInfo.Name, false, "", "", "", "", 1]
+      //       queue(GoogleDriveService.updateUserSettings("Sheet1!A1:A", newData, true), function(newRow) {
+      //          console.log(newRow)
+      //          console.log(newRow.result.updates.updatedRange.match(/(?:Sheet1!A)(\d+)/g));
+      //          queue(GoogleDriveService.addNamedRangeUserSettings("Sheet1", deFormatedEmail), function(spreadsheetRow) {
+      //             console.log(spreadsheetRow)
+      //          });
+      //          getUserList();
+      //       });
+      //    }
+      // });
 
       function getUserList() {
-         queue(GoogleDriveService.getUserSettings("A2:B", false), function(spreadsheetRow) {
+         queue(GoogleDriveService.getUserSettings("Sheet1!A2:B", false), function(spreadsheetRow) {
             $scope.userList = spreadsheetRow.result.values;
          });
       }
