@@ -613,11 +613,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       queue(GoogleDriveService.getUserSettings("Sheet1!A2:B", false), function(usersList) {
          $scope.userList = usersList.result.values;
          for (var UserContact = 0; UserContact < $scope.userList.length; UserContact++) {
-            if (){
-               getUserSettings('A' + UserContact + ':' +UserContact);
+            if ($scope.userList[UserContact][1] === $scope.myInfo.Email){
+               getUserSettings('A' + UserContact + ':' + UserContact);
+               //UserContact = 100000;
             }
          }
-         getUserSettings(range);
       });
       function getUserSettings(range) {
          queue(GoogleDriveService.getUserSettings(deFormatedEmail), function(spreadsheetRow) {
