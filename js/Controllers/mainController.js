@@ -583,7 +583,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                "Email": userInfo.result.user.emailAddress,
                "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
             };
-            document.dispatchEvent(new Event('userInfoLoaded'));
+            document.dispatchEvent(new window.Event('userInfoLoaded'));
          });
       }
       else if (loaded === "sheets") {
@@ -629,7 +629,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          queue(GoogleDriveService.getUserSettings(range), function(spreadsheetResult) {
             var UserSettingsArray = spreadsheetResult.result.values[0];
             pushUserSettingsToScope(UserSettingsArray);
-            var gg  = new Event('sheetPrefsLoaded')
+            var gg  = new window.Event('sheetPrefsLoaded')
             document.dispatchEvent(gg);
          });
       }
