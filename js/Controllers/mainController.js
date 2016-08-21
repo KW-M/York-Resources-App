@@ -643,11 +643,13 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
 
       function pushUserSettingsToScope(settingsArray) {
-         $scope.myInfo.Moderator = UserSettingsArray[2]
-         $scope.myInfo.LastContributionDate = Date.parse(UserSettingsArray[3])
-         $scope.myInfo.LastBeenFlaggedDate = Date.parse(UserSettingsArray[3])
-         $scope.myInfo.quizletUsername = ''
-         $scope.myInfo.LastContributionDate = Date.parse(UserSettingsArray[3])
+         $scope.myInfo.Moderator = settingsArray[2]
+         $scope.myInfo.LastContributionDate = Date.parse(settingsArray[3])
+         $scope.myInfo.LastBeenFlaggedDate = Date.parse(settingsArray[4])
+         $scope.myInfo.quizletUsername = settingsArray[5]
+         $scope.myInfo.LastQuizletCheckDate = Date.parse(settingsArray[6])
+         $scope.myInfo.NumberOfVisits = settingsArray[7]
+         console.log($scope.myInfo);
       }
       $scope.getFiles("");
    }
