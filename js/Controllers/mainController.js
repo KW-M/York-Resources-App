@@ -613,21 +613,23 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       queue(GoogleDriveService.getUserSettings("Sheet1!A2:B", false), function(usersList) {
          $scope.userList = usersList.result.values;
          for (var UserContact = 0; UserContact < $scope.userList.length; UserContact++) {
-            console.log($scope.userList[UserContact][1]);
-            if ($scope.userList[UserContact][1] === $scope.myInfo.Email){
-               getUserSettings('A' + UserContact + ':' + UserContact);
-               //UserContact = 100000;
+            console.log($scope.userList[UserContact][0]);
+            if ($scope.userList[UserContact][0] === $scope.myInfo.Email){
+               console.log('is user:' + UserContact);
+               var adjustedUserContact = UserContact + 2;
+               getUserSettings('A' + adjustedUserContact + ':' + adjustedUserContact);
+               UserContact = 100000;
             }
          }
       });
       function getUserSettings(range) {
-         queue(GoogleDriveService.getUserSettings(deFormatedEmail), function(spreadsheetRow) {
+         queue(GoogleDriveService.getUserSettings(range), function(spreadsheetRow) {
             console.log(spreadsheetRow);
             document.dispatchEvent(new Event('sheetPrefsLoaded'));
          }, function(Error) {
             console.log(Error);
             if (Error.result.error.message.substring(0, 21) === "Unable to parse range") {
-               createUserSettings()  
+               createUserSettings()
             }
          });
       }
