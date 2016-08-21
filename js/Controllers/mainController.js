@@ -629,7 +629,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          queue(GoogleDriveService.getUserSettings(range), function(spreadsheetResult) {
             var UserSettingsArray = spreadsheetResult.result.values[0];
             pushUserSettingsToScope(UserSettingsArray);
-            document.dispatchEvent(new event('sheetPrefsLoaded'));
+            var gg  = new Event('sheetPrefsLoaded')
+            document.dispatchEvent(gg);
          });
       }
 
