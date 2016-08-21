@@ -613,35 +613,41 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       queue(GoogleDriveService.getUserSettings("Sheet1!A2:B", false), function(usersList) {
          $scope.userList = usersList.result.values;
          for (var UserContact = 0; UserContact < $scope.userList.length; UserContact++) {
-            if ($scope.userList[UserContact][0] === $scope.myInfo.Email){
+            if ($scope.userList[UserContact][0] === $scope.myInfo.Email) {
                var adjustedUserSettingsCount = UserContact + 2;
                $scope.UserSettingsRange = 'A' + adjustedUserSettingsCount + ':' + adjustedUserSettingsCount
                getUserSettings('A' + adjustedUserSettingsCount + ':' + adjustedUserSettingsCount);
                UserContact = 100000;
             }
          }
-         if (UserContact > 999995){
+         if (UserContact > 999995) {
             createUserSettings();
          }
       });
+
       function getUserSettings(range) {
          queue(GoogleDriveService.getUserSettings(range), function(spreadsheetResult) {
-            var UserSettingsArray = spreadsheetResult.result.values[0]
-                        console.log(UserSettingsArray)
-            $scope.myInfo.Moderator = UserSettingsArray[2]
-            $scope.myInfo.LastContributionDate = Date.parse(UserSettingsArray[3])
-            console.log($scope.myInfo.LastContributionDate)
-            $scope.myInfo.quizletUsername = ''
-            $scope.myInfo.quizletUsername = ''
+            var UserSettingsArray = spreadsheetResult.result.values[0];
+            pushUserSettingsToScope(UserSettingsArray);
             document.dispatchEvent(new event('sheetPrefsLoaded'));
          });
       }
+
       function createUserSettings() {
          var newData = [$scope.myInfo.Email, $scope.myInfo.Name, false, "3/25/2016", "", "", "", 1]
          queue(GoogleDriveService.updateUserSettings("Sheet1!A1:A", newData, true), function(newRow) {
             console.log(newRow)
             console.log(newRow.result.updates.updatedRange.match(/(?:Sheet1!A)(\d+)/g));
          });
+         pushUserSettingsToScope(newData);
+      }
+
+      function pushUserSettingsToScope(settingsArray) {
+         $scope.myInfo.Moderator = UserSettingsArray[2]
+         $scope.myInfo.LastContributionDate = Date.parse(UserSettingsArray[3])
+         $scope.myInfo.LastBeenFlaggedDate = Date.parse(UserSettingsArray[3])
+         $scope.myInfo.quizletUsername = ''
+         $scope.myInfo.LastContributionDate = Date.parse(UserSettingsArray[3])
       }
       $scope.getFiles("");
    }
