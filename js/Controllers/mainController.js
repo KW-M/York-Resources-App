@@ -625,11 +625,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          }
       });
       function getUserSettings(range) {
-         queue(GoogleDriveService.getUserSettings(range), function(spreadsheetRow) {
-            console.log(spreadsheetRow);
-            $scope.myInfo.Moderator = spreadsheetRow[2]
-            $scope.myInfo.LastContributionDate = Date.parse(spreadsheetRow[3])
-            console.log(spreadsheetRow[2])
+         queue(GoogleDriveService.getUserSettings(range), function(spreadsheetResult) {
+            var UserSettingsArray = spreadsheetResult.result.values[0]
+                        console.log(UserSettingsArray)
+            $scope.myInfo.Moderator = UserSettingsArray[2]
+            $scope.myInfo.LastContributionDate = Date.parse(UserSettingsArray[3])
+            console.log($scope.myInfo.LastContributionDate)
             $scope.myInfo.quizletUsername = ''
             $scope.myInfo.quizletUsername = ''
             document.dispatchEvent(new event('sheetPrefsLoaded'));
