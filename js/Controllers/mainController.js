@@ -614,12 +614,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $scope.userList = usersList.result.values;
          for (var UserContact = 0; UserContact < $scope.userList.length; UserContact++) {
             if ($scope.userList[UserContact][0] === $scope.myInfo.Email){
-               var adjustedUserContact = UserContact + 2;
-               getUserSettings('A' + adjustedUserContact + ':' + adjustedUserContact);
+               .adjustedUserSettingsCount = UserContact + 2;
+               getUserSettings('A' + adjustedUserSettingsCount + ':' + adjustedUserSettingsCount);
                UserContact = 100000;
             }
          }
-         if (UserContact !== 100000){
+         if (UserContact > 999995){
             createUserSettings();
          }
       });
@@ -635,7 +635,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          });
       }
       function createUserSettings() {
-         var newData = [$scope.myInfo.Email, $scope.myInfo.Name, false, "", "", "", "", 1]
+         var newData = [$scope.myInfo.Email, $scope.myInfo.Name, false, "3/25/2016", "", "", "", 1]
          queue(GoogleDriveService.updateUserSettings("Sheet1!A1:A", newData, true), function(newRow) {
             console.log(newRow)
             console.log(newRow.result.updates.updatedRange.match(/(?:Sheet1!A)(\d+)/g));
