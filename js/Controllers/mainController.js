@@ -613,13 +613,14 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       queue(GoogleDriveService.getUserSettings("Sheet1!A2:B", false), function(usersList) {
          $scope.userList = usersList.result.values;
          for (var UserContact = 0; UserContact < $scope.userList.length; UserContact++) {
-            console.log($scope.userList[UserContact][0]);
             if ($scope.userList[UserContact][0] === $scope.myInfo.Email){
-               console.log('is user:' + UserContact);
                var adjustedUserContact = UserContact + 2;
                getUserSettings('A' + adjustedUserContact + ':' + adjustedUserContact);
                UserContact = 100000;
             }
+         }
+         if (UserContact !== 100000){
+            createUserSettings();
          }
       });
       function getUserSettings(range) {
@@ -651,8 +652,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       performantScroll: false,
       gutterSize: 12,
    };
-
-
    //-event watchers---------
 
    content_container.onscroll = function(event) {
