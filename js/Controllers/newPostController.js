@@ -2,7 +2,6 @@
                                        defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
         //database variables
-        console.log(postObj);
         $scope.Type = 'noLink';
         $scope.Flagged = false;
         $scope.Title = '';
@@ -155,7 +154,7 @@
                     $scope.UpdateDate = postObj.UpdateDate;
                 }
 
-                if (postObj.Tags && postObj.Tags[0] !== "") {
+                if (postObj.Tags) {
                     console.log(postObj.Tags);
                     $scope.Tags = postObj.Tags;
                 }

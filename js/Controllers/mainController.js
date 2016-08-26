@@ -390,7 +390,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       formatedFile.Description = unformatedFile.description;
       formatedFile.CreationDate = unformatedFile.createdTime //Date.prototype.parseRFC3339(unformatedFile.createdTime);
       formatedFile.UpdateDate = unformatedFile.modifiedTime //Date.prototype.parseRFC3339(unformatedFile.modifiedTime);
+      if (unformatedFile.properties.Tag1 || unformatedFile.properties.Tag2) {
       formatedFile.Tags = JSON.parse(tagsRaw.replace(/,/g, "\",\""));
+      } else {
+         formatedFile.Tags = [];
+      }
       formatedFile.TagString = unformatedFile.properties.Tag1 + unformatedFile.properties.Tag2;
       formatedFile.Creator = {
          Name: unformatedFile.owners[0].displayName,
