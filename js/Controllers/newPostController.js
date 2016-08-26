@@ -166,8 +166,8 @@
                     $scope.newPostDescription = postObj.Description;
                 }
 
-                if (postObj.Class.Name) {
-                    $scope.Class = postObj.Class.Name//JSON.stringify(postObj.Class);
+                if (postObj.Class) {
+                    $scope.Class = postObj.Class//JSON.stringify(postObj.Class);
                 }
 
                 if (postObj.Link !== undefined) {
@@ -319,7 +319,6 @@
         }
 
         $scope.closeDialog = function() {
-            console.log("closing")
             $mdDialog.hide();
         };
     }
