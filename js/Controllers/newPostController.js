@@ -155,7 +155,7 @@
                     $scope.UpdateDate = postObj.UpdateDate;
                 }
 
-                if (postObj.Tags && postObj.Tags !== [""]) {
+                if (postObj.Tags && postObj.Tags[0] !== "") {
                     console.log(postObj.Tags);
                     $scope.Tags = postObj.Tags;
                 }
