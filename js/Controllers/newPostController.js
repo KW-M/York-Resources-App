@@ -1,8 +1,8 @@
     /* we don't define the "new post controller" here because it was alredy
-                                   defined by the $md-dialog in the newPost function on mainController.   */
+                                       defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
-            //database variables
-            console.log(postObj);
+        //database variables
+        console.log(postObj);
         $scope.Type = 'noLink';
         $scope.Flagged = false;
         $scope.Title = '';
@@ -89,7 +89,7 @@
             }
             else if (operation === 'update') {
                 var metadata = $scope.compileUpdateToMetadata();
-                queue(GoogleDriveService.updateFileMetadata(postObj.Id,metadata), function(reply) {
+                queue(GoogleDriveService.updateFileMetadata(postObj.Id, metadata), function(reply) {
                     console.log(reply.result);
                     $mdToast.hide();
                 }, function(err) {
@@ -122,7 +122,7 @@
                     }
                 }
                 else {
-                    if ($scope.Link.length > 9) { 
+                    if ($scope.Link.length > 9) {
                         $scope.Link = "http://" + $scope.Link
                     }
                     $scope.Type = 'Link';
@@ -155,17 +155,19 @@
                     $scope.UpdateDate = postObj.UpdateDate;
                 }
 
-                if (postObj.Tags !== undefined && postObj.Tags.length !== 0 &&postObj.Tags !== [""]) {
+                if (postObj.Tags && postObj.Tags !== [""]) {
+                    console.log(postObj.Tags);
                     $scope.Tags = postObj.Tags;
-                } else {
-                   $scope.Tags = []; 
+                }
+                else {
+                    $scope.Tags = [];
                 }
 
-                if (postObj.Description !== undefined) {
+                if (postObj.Description) {
                     $scope.newPostDescription = postObj.Description;
                 }
 
-                if (postObj.Class.Name !== undefined) {
+                if (postObj.Class.Name) {
                     $scope.Class = postObj.Class.Name//JSON.stringify(postObj.Class);
                 }
 
@@ -316,4 +318,8 @@
             console.log(dataURL);
             return dataURL;
         }
+
+        $scope.closeDialog = function() {
+            $mdDialog.hide();
+        };
     }
