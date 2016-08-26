@@ -167,6 +167,7 @@
                 }
 
                 if (postObj.Class) {
+                    console.log(postObj.Class)
                     $scope.Class = postObj.Class//JSON.stringify(postObj.Class);
                 }
 
