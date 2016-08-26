@@ -76,7 +76,7 @@
         };
 
         $scope.submit = function() {
-            $scope.close();
+            $scope.closeDialog();
             if (operation === 'new') {
                 var metadata = $scope.compilePostToMetadata();
                 queue(GoogleDriveService.createDriveFile(metadata), function(reply) {
