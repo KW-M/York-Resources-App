@@ -1,14 +1,14 @@
 <md-input-container class="button-select md-button" md-ink-ripple="true">
     <label>Classy</label>
     <md-select ng-model="Class">
-        <md-select-header>
-          <md-input></md-input>
-        </md-select-header>
-        <md-option value='{{"{\"Name\":\"Other\",\"Catagory\":\"Other\",\"Color\":\"toBeMade\"}"}}'>
-                Other / Not associated
-        </md-option>
+        <!--<md-select-header>-->
+        <!--  <md-input></md-input>-->
+        <!--</md-select-header>-->
+        <!--<md-option value='{{"{\"Name\":\"Other\",\"Catagory\":\"Other\",\"Color\":\"toBeMade\"}"}}'>-->
+        <!--        Other / Not associated--> 
+        <!--</md-option>-->
         <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">
-            <md-option ng-selected="index == 1" ng-repeat="Class in Catagory.Classes" value='{{"{\"Name\":\""+Class+"\",\"Catagory\":\""+Catagory.Name+"\",\"Color\":\""+Catagory.Color+"\"}"}}'>
+            <md-option ng-repeat="Class in Catagory.Classes" ng-value="name" >
                 {{Class}}
             </md-option>
         </md-optgroup>
