@@ -319,6 +319,7 @@
         }
 
         $scope.closeDialog = function() {
+            console.log("closing")
             $mdDialog.hide();
         };
     }
