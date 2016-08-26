@@ -236,7 +236,7 @@
                     thumbnail: {},
                 },
             }
-            var classObject = JSON.parse($scope.Class);
+            var classObject = $scope.Class//JSON.parse($scope.Class);
 
             if (postObj.Type !== $scope.Type) {
                 metadata.properties.Type = $scope.Type;
