@@ -305,12 +305,7 @@ md-input-container.button-select md-select-value {
     transition: opacity 450ms ease, transform 450ms ease;
 }
 .post-card.ng-enter-stagger {
-          transition-delay: 0.4s;
-
-   As of 1.4.4, this must always be set: it signals ngAnimate
-    to not accidentally inherit a delay property from another CSS class 
-  -webkit-transition-duration: 0s;
-          transition-duration: 0s;
+    transition-delay: 0.4s;
 }
 .post-card.angular-grid-item.ng-enter.ng-enter-active {
    transform: translateY(0);
