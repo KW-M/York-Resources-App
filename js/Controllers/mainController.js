@@ -169,22 +169,14 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    //-loading and filtering posts---------
 
    $scope.getFiles = function() {
-      var data = null;
-
-var xhr = new XMLHttpRequest();
-xhr.withCredentials = true;
-
-xhr.addEventListener("readystatechange", function () {
-  if (this.readyState === 4) {
-    console.log(this.responseText);
-  }
-});
-
-xhr.open("GET", "https://api.pagelr.com/capture/javascript?uri=www.google.com&width=400&height=260&ads=0&delay=250&maxage=7884000");
-//xhr.setRequestHeader("cache-control", "no-cache");
-xhr.setRequestHeader('X-Requested-With' 'XMLHttpRequest');
-
-xhr.send(data);
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+     document.getElementById("demo").innerHTML = xhttp.responseText;
+    }
+  };
+  xhttp.open("GET", "//api.pagelr.com/capture/javascript?uri=www.google.com&width=400&height=260&ads=0&delay=250&maxage=7884000", true);
+  xhttp.send();
       $scope.firstFiles = true;
       if ($scope.searchTxt) {
          var nextPageToken = classPageTokenSelectionIndex[$scope.selectedClass + $scope.searchTxt] || "";
