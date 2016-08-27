@@ -1,8 +1,8 @@
 <md-button class="md-fab onboardingDialogButton" ng-class="{'not-visible' : onboardingPageNumber === 0}" ng-click="onboardingPageNumber = onboardingPageNumber - 1" aria-label="previous" style="margin-right: 16px;">
   <md-icon>arrow_back</md-icon>
 </md-button>
-<md-dialog style="position: relative; max-width: 360px; height:100%; max-height:460px;" class="onboardingDialog">
-  <md-dialog-content style="position:relative; flex: 1;">
+<md-dialog style="max-width: 360px; height: 100%; width: 100%; max-height: 460px;" class="onboardingDialog">
+  <md-dialog-content style="height: 100%;">
     <md-tabs class="md-accent" md-selected="onboardingPageNumber">
       <md-tab id="tab1">
         <!--<md-tab-label>Access</md-tab-label>-->
