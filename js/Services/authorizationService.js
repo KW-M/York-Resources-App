@@ -24,9 +24,9 @@ function authService($mdDialog) {
         }).then(function() {
             // Listen for sign-in state changes.
             gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-            datButton.style.display = 'inline-block';
             // Handle the initial sign-in state.
             updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+            datButton.style.display = 'inline-block';
             signinButton[0].addEventListener("click", handleSigninClick);
         });
 
@@ -39,7 +39,6 @@ function authService($mdDialog) {
                 if (accountDomain === 'york.org') {
                     console.log("User's Domain: " + accountDomain);
                     callback();
-                    datButton.style.display = 'inline-block';
                     self.hideSigninButton();
                 }
                 else {
@@ -65,17 +64,17 @@ function authService($mdDialog) {
 
     this.showSigninButton = function() {
         signinSpinner.addClass('fadeOut');
-        datButton.style.display = 'none';
         setTimeout(function() {
             signinButton.addClass('fadeIn');
+            datButton.style.display = 'none';
         }, 500);
     };
 
     this.hideSigninButton = function() {
         signinSpinner.removeClass('fadeOut');
-        datButton.style.display = 'inline-block';
         setTimeout(function() {
             signinButton.removeClass('fadeIn');
+            datButton.style.display = 'inline-block';
         }, 500);
     };
 
