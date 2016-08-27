@@ -157,6 +157,10 @@ html body {
     cursor: pointer;
 }
 
+#memeButton {
+    opacity:0.;
+}
+
 .fadeOut {
     opacity: 0;
     pointer-events:none;
