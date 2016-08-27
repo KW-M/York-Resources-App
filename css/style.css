@@ -299,17 +299,17 @@ md-input-container.button-select md-select-value {
 /*  transform: scale(0.5);*/
 /*  opacity: 0;*/
 /*}*/
-/*.post-card.angular-grid-item.ng-enter {*/
-/*  -webkit-transition: opacity 450ms ease, -webkit-transform 450ms ease;*/
-/*  transition: opacity 450ms ease, -webkit-transform 450ms ease;*/
-/*  transition: opacity 450ms ease, transform 450ms ease;*/
-/*  transition: opacity 450ms ease, transform 450ms ease, -webkit-transform 450ms ease;*/
-/*  -webkit-transition-delay: 00ms;*/
-/*  transition-delay: 300ms;*/
-/*  -webkit-transform: translateY(150px);*/
-/*  transform: translateY(150px);*/
-/*  opacity: 1;*/
-/*}*/
+.post-card.angular-grid-item.ng-enter {
+  -webkit-transition: opacity 450ms ease, -webkit-transform 450ms ease;
+  transition: opacity 450ms ease, -webkit-transform 450ms ease;
+  transition: opacity 450ms ease, transform 450ms ease;
+  transition: opacity 450ms ease, transform 450ms ease, -webkit-transform 450ms ease;
+  -webkit-transition-delay: 00ms;
+  transition-delay: 300ms;
+  -webkit-transform: translateY(150px);
+  transform: translateY(150px);
+  opacity: 1;
+}
 /*.post-card.ng-enter-stagger {*/
   /* this will have a 400ms delay between each successive enter animation */
 /*  -webkit-transition-delay: 0.4s;*/
