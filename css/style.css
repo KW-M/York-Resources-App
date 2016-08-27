@@ -157,7 +157,7 @@ html body {
     cursor: pointer;
 }
 
-#memeButton {
+#dat_button {
     position: absolute;
     bottom: 0px;
     right: 0px;
@@ -166,7 +166,7 @@ html body {
     margin: 0;
 }
 
-#memeButton span {
+#dat_button span {
     opacity: 0.5;
 }
 

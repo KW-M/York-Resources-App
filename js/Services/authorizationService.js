@@ -11,7 +11,7 @@ function authService($mdDialog) {
     var signinButton = angular.element(document.getElementById('signin_button'));
     var signinSpinner = angular.element(document.getElementById('signin_spinner'));
     var signinDialog = angular.element(document.getElementById('overlay_background'));
-    var memeButton = angular.element(document.getElementById('memeButton'));
+    var datButton = angular.element(document.getElementById('dat_utton'));
     var signoutButton = angular.element(document.getElementById('signout_button'));
 
     this.initilize = function(callback) {
@@ -27,7 +27,7 @@ function authService($mdDialog) {
 
             // Handle the initial sign-in state.
             updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-
+            datButton.style.display = 'initial';
             signinButton[0].addEventListener("click", handleSigninClick);
         });
 
