@@ -65,7 +65,7 @@ function authService($mdDialog) {
 
     this.showSigninButton = function() {
         signinSpinner.addClass('fadeOut');
-        memeButton.addClass('hidde')
+        memeButton.style.display = 'none';
         setTimeout(function() {
             signinButton.addClass('fadeIn');
         }, 500);
