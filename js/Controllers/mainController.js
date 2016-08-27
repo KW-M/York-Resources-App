@@ -172,7 +172,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       var data = null;
 
 var xhr = new XMLHttpRequest();
-xhr.withCredentials = true;
+//xhr.withCredentials = true;
 
 xhr.addEventListener("readystatechange", function () {
   if (this.readyState === 4) {
@@ -180,9 +180,9 @@ xhr.addEventListener("readystatechange", function () {
   }
 });
 
-xhr.open("GET", "https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=www.google.com&width=400&height=260&ads=0&delay=250&maxage=7884000");
-xhr.setRequestHeader("cache-control", "no-cache");
-xhr.setRequestHeader("postman-token", "860ed85d-767d-deb0-4b7f-5a3c8f14df59");
+xhr.open("GET", "https://api.pagelr.com/capture/javascript?uri=www.google.com&width=400&height=260&ads=0&delay=250&maxage=7884000");
+//xhr.setRequestHeader("cache-control", "no-cache");
+//xhr.setRequestHeader("postman-token", "860ed85d-767d-deb0-4b7f-5a3c8f14df59");
 
 xhr.send(data);
       $scope.firstFiles = true;
