@@ -11,6 +11,7 @@ function authService($mdDialog) {
     var signinButton = angular.element(document.getElementById('signin_button'));
     var signinSpinner = angular.element(document.getElementById('signin_spinner'));
     var signinDialog = angular.element(document.getElementById('overlay_background'));
+    var memeButton = angular.element(document.getElementById('memeButton'));
     var signoutButton = angular.element(document.getElementById('signout_button'));
 
     this.initilize = function(callback) {
@@ -64,6 +65,7 @@ function authService($mdDialog) {
 
     this.showSigninButton = function() {
         signinSpinner.addClass('fadeOut');
+        memeButton.addClass('hidde')
         setTimeout(function() {
             signinButton.addClass('fadeIn');
         }, 500);
