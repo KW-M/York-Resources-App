@@ -168,7 +168,7 @@
 
                 if (postObj.Class) {
                     console.log(postObj.Class)
-                    $scope.Class = postObj.Class//JSON.stringify(postObj.Class);
+                    $scope.Class = postObj.Class
                 }
 
                 if (postObj.Link !== undefined) {
@@ -187,7 +187,6 @@
                     $scope.HeaderImage = postObj.HeaderImage;
                 }
             }
-            console.log($scope.Class);
             console.log($scope.Tags);
         }
 
