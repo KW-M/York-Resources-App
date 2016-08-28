@@ -189,7 +189,7 @@
             }
             console.log($scope.Tags);
         }
-
+ 
         $scope.compilePostToMetadata = function() {
             var metadata = {
                 properties: {},

@@ -8,8 +8,8 @@
         <!--        Other / Not associated value='{{"{\"Name\":\""+Class+"\",\"Catagory\":\""+Catagory.Name+"\",\"Color\":\""+Catagory.Color+"\"}"}}'--> 
         <!--</md-option>-->
         <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">
-            <md-option ng-repeat="ClassName in Catagory.Classes" ng-model-options="{trackBy: ClassName}" ng-value="{Catagory:Catagory.Name,Name:ClassName,Color:Catagory.Color}" >
-                {{ClassName}}
+            <md-option ng-repeat="Name in Catagory.Classes" ng-model-options="{trackBy: Name}" ng-value="{Catagory:Catagory.Name,Name:Name,Color:Catagory.Color}" >
+                {{Name}}
             </md-option>
         </md-optgroup>
     </md-select>
