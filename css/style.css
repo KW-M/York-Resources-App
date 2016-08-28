@@ -288,34 +288,32 @@ md-input-container.button-select md-select-value {
 
 /* --------------------------- Animations ------------------- */
 
-/*.post-card.angular-grid-item.ng-leave {*/
-/*  -webkit-transition: opacity 450ms ease, -webkit-transform 450ms ease;*/
-/*  transition: opacity 450ms ease, -webkit-transform 450ms ease;*/
-/*  transition: opacity 450ms ease, transform 450ms ease;*/
-/*  transition: opacity 450ms ease, transform 450ms ease, -webkit-transform 450ms ease;*/
-/*}*/
-/*.post-card.angular-grid-item.ng-leave.ng-leave-active {*/
-/*  -webkit-transform: scale(0.5);*/
-/*  transform: scale(0.5);*/
-/*  opacity: 0;*/
-/*}*/
+.post-card.angular-grid-item.ng-leave {
+  transform: scale(0.25);
+  opacity: 0;
+  transition: opacity 450ms ease, transform 450ms ease;
+}
+.post-card.angular-grid-item.ng-leave.ng-leave-active {
+    display: none;
+}
 .angular-grid > .post-card{
     opacity: 0;
-}
-.angular-grid > .post-card.angular-grid-item{
-    opacity: 0;
-    transform: translateY(-150px);
+    transform: translateY(150px);
     transition: opacity 450ms ease, transform 450ms ease;
 }
-.angular-grid > .post-card.angular-grid-item.ng-enter {
+.angular-grid > .post-card.angular-grid-item{
     opacity: 1;
     transform: translateY(0);
 }
+/*.angular-grid > .post-card.angular-grid-item.ng-enter {*/
+/*    opacity: 1;*/
+/*    transform: translateY(0);*/
+/*}*/
 /*.angular-grid > .post-card.angular-grid-item.ng-enter-stagger {*/
 /*    transition-delay: 0.4s;*/
 /*    transition-duration: 0;*/
 /*}*/
-.angular-grid > .post-card.angular-grid-item.ng-enter.ng-enter-active {
-   transform: translateY(0);
-   opacity: 1;
-}
+/*.angular-grid > .post-card.angular-grid-item.ng-enter.ng-enter-active {*/
+/*   transform: translateY(0);*/
+/*   opacity: 1;*/
+/*}*/
