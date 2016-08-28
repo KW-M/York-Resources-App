@@ -665,6 +665,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       for (var Catagory = 0; Catagory < classesResult.length; Catagory++) {
          console.log(classesResult[Catagory]);
          $scope.classList[Catagory] = {'Catagory':classesResult[Catagory][0], 'Color':classesResult[Catagory][0], 'Classes':[]}
+         for (var Class = 2; Class < classesResult[Catagory].length; Class++) {
+            $scope.classList[Catagory].classes  
+         }
       }
    }
 
