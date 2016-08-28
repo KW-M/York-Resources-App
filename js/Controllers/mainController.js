@@ -686,8 +686,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
       // The md-select directive eats keydown events for some quick select
       // logic. Since we have a search input here, we don't need that logic.
-   angular.element(document.getElementById('class_select_input')).on('keydown', function(ev) {
+      var selectSearchInput = angular.element(document.getElementById('class_select_input'))
+      console.log(selectSearchInput);
+   selectSearchInput.on('keydown', function(ev) {
           ev.stopPropagation();
+          console.log(ev)
    });
    content_container.onscroll = function(event) {
       //called whenever the content_container scrolls
