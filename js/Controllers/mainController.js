@@ -12,7 +12,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.visiblePosts = [];
    var deDuplicationIndex = {};
    var classPageTokenSelectionIndex = {};
-$scope.classList = classes;
+   $scope.classList = classes;
+   $scope.vegetables = ['wow','brocoli'];
    $scope.searchTxt = undefined; //undefined to make popunder show with no text in  field
    $scope.previousSearch = undefined;
    $scope.searchPlaceholder = 'Search';
