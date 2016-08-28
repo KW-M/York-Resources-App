@@ -12,7 +12,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.visiblePosts = [];
    var deDuplicationIndex = {};
    var classPageTokenSelectionIndex = {};
-
+$scope.classList = classes;
    $scope.searchTxt = undefined; //undefined to make popunder show with no text in  field
    $scope.previousSearch = undefined;
    $scope.searchPlaceholder = 'Search';
@@ -658,14 +658,14 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $scope.getFiles("");
       queue(GoogleDriveService.getSpreadsheetRange("1DfFUn8sgnFeLLijtKvWsd90GNcnEG6Xl5JTSeApX3bY","Sheet1!A2:Z"), handleClassesSheet)
    }
-   
+
    function handleClassesSheet(rawClasses) {
-      $scope.classList = [];
-      var classesResult = rawClasses.result.values
-      for (var Catagory = 0; Catagory < classesResult.length; Catagory++) {
-         console.log(classesResult[Catagory]);
-         $scope.classList[Catagory] = {'Catagory':classesResult[Catagory][0], 'Color':classesResult[Catagory][0], 'Classes':[]}
-      }
+      // $scope.classList = classes;
+      // var classesResult = rawClasses.result.values
+      // for (var Catagory = 0; Catagory < classesResult.length; Catagory++) {
+      //    console.log(classesResult[Catagory]);
+      //    $scope.classList[Catagory] = {'Catagory':classesResult[Catagory][0], 'Color':classesResult[Catagory][0], 'Classes':[]}
+      // }
    }
 
    $scope.angularGridOptions = {
@@ -780,7 +780,7 @@ var classes = [{
    'Name': 'Arts',
    'Color': 'pPink',
    'Classes': []
-}, 
+},
 ]
 
 

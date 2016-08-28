@@ -155,7 +155,6 @@
                 }
 
                 if (postObj.Tags) {
-                    console.log(postObj.Tags);
                     $scope.Tags = postObj.Tags;
                 }
                 else {
@@ -189,7 +188,7 @@
             }
             console.log($scope.Tags);
         }
- 
+
         $scope.compilePostToMetadata = function() {
             var metadata = {
                 properties: {},
@@ -322,4 +321,3 @@
             $mdDialog.hide();
         };
     }
-    \
