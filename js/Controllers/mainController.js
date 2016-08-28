@@ -13,7 +13,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    var deDuplicationIndex = {};
    var classPageTokenSelectionIndex = {};
    $scope.classList = classes;
-   $scope.vegetables = ['wow','brocoli'];
    $scope.searchTxt = undefined; //undefined to make popunder show with no text in  field
    $scope.previousSearch = undefined;
    $scope.searchPlaceholder = 'Search';
@@ -684,10 +683,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    
    //-event watchers---------
 
-      // The md-select directive eats keydown events for some quick select
-      // logic. Since we have a search input here, we don't need that logic.
-      var selectSearchInput = angular.element(document.getElementById('class_select_input'))
-      console.log(selectSearchInput);
+   // The md-select directive eats keydown events for some quick select
+   // logic. Since we have a search input here, we don't need that logic.
+   var selectSearchInput = angular.element(document.getElementById('class_select_input'))
    selectSearchInput.on('keydown', function(ev) {
           ev.stopPropagation();
           console.log(ev)
