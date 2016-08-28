@@ -1,12 +1,12 @@
 <md-input-container class="button-select md-button" md-ink-ripple="true">
     <label>Class</label>
-    <md-select ng-model-options="{trackBy: Name}" ng-model="Class">
-        <!--<md-select-header>-->
-        <!--  <md-input></md-input>-->
-        <!--</md-select-header>-->
-        <!--<md-option value='{{"{\"Name\":\"Other\",\"Catagory\":\"Other\",\"Color\":\"toBeMade\"}"}}'>-->
-        <!--        Other / Not associated value='{{"{\"Name\":\""+Class+"\",\"Catagory\":\""+Catagory.Name+"\",\"Color\":\""+Catagory.Color+"\"}"}}'--> 
-        <!--</md-option> {Catagory:Catagory.Name, Name:Name, Color:Catagory.Color}-->
+    <md-select ng-model-options="{trackBy: '$value.Name'}" ng-model="Class">
+        <md-select-header>
+          <md-input></md-input>
+        </md-select-header>
+        <md-option value="{Catagory:'Other', Name:'Other', Color:"#"}">
+                Other / Not associated value='{{"{\"Name\":\""+Class+"\",\"Catagory\":\""+Catagory.Name+"\",\"Color\":\""+Catagory.Color+"\"}"}}'
+        </md-option> {Catagory:Catagory.Name, Name:Name, Color:Catagory.Color}
         <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">
             <md-option ng-repeat="Name in Catagory.Classes" ng-value="{Catagory:Catagory.Name, Name:Name, Color:Catagory.Color}" >
                 {{Name}}
