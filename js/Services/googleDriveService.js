@@ -28,7 +28,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
         }));
     }
 
-    this.updateUserSettings = function(range, dataToBeInserted, append) {
+    this.updateSpreadsheetRange = function(id, range, dataToBeInserted, append) {
         if (append === true) {
             return (gapi.client.sheets.spreadsheets.values.append({
                 spreadsheetId: '1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0',

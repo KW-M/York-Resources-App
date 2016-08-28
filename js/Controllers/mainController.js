@@ -656,12 +656,15 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          console.log($scope.myInfo);
       }
       $scope.getFiles("");
-      queue(GoogleDriveService.getSpreadsheetRange("1DfFUn8sgnFeLLijtKvWsd90GNcnEG6Xl5JTSeApX3bY","Sheet1!A2:B", false), handleClassesSheet(rawClasses))
+      queue(GoogleDriveService.getSpreadsheetRange("1DfFUn8sgnFeLLijtKvWsd90GNcnEG6Xl5JTSeApX3bY","Sheet1!A2:z", false), handleClassesSheet)
    }
    
    function handleClassesSheet(rawClasses) {
-      for (var Catagory = 0; UserContact < $scope.userList.length; UserContact++)
-         $scope.classList = ;
+      console.log(rawClasses);
+      // for (var Catagory = 0; UserContact < $scope.userList.length; UserContact++) {
+         
+      // }
+      //    $scope.classList = ;
    }
 
    $scope.angularGridOptions = {
