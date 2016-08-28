@@ -709,7 +709,7 @@ var classes = [{
    ]
 }, {
    'Name': 'History',
-   'Color': 'pOrange',
+   'Color': '#fbf2e0',
    'Classes': [
       'Ancient History',
       'World History I',
@@ -744,7 +744,7 @@ var classes = [{
    ]
 }, {
    'Name': 'Biological Sciences',
-   'Color': 'pGreen',
+   'Color': '#e1f9e1',
    'Classes': [
       'Biology I',
       'Marine Biology',
@@ -758,7 +758,7 @@ var classes = [{
    'Classes': []
 }, {
    'Name': 'Clasical Languages',
-   'Color': 'pRed',
+   'Color': '#fae4e1',
    'Classes': []
 }, {
    'Name': 'Humanities',
