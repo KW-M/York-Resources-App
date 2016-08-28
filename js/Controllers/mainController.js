@@ -664,12 +664,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       //format the class list:
       console.log(classesResult)
       for (var Catagory = 0; Catagory < classesResult.length; Catagory++) {
-         $scope.classList[Catagory] = {'Catagory':classesResult[Catagory][0], 'Color':classesResult[Catagory][1], 'Classes':[]}
+         classList[Catagory] = {'Catagory': classesResult[Catagory][0], 'Color': classesResult[Catagory][1], 'Classes':[]}
+         console.log(classList[Catagory]);
          for (var Class = 2; Class < classesResult[Catagory].length; Class++) {
             $scope.classList[Catagory].Classes[Class - 2] = classesResult[Catagory][Class]
          }
       }
-
       $timeout(function() { //makes angular update values
          $scope.classList = classList;
          console.log($scope.classList)
