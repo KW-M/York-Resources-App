@@ -19,7 +19,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.searchExtra = [undefined];
    $scope.searchChips = ["Class: "]
 
-   $scope.classList = classes;
    $scope.userList = [];
    $scope.Tags = [];
    $scope.globals = {
@@ -657,6 +656,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          console.log($scope.myInfo);
       }
       $scope.getFiles("");
+      queue(GoogleDriveService.getUserSettings("","Sheet1!A2:B", false), function(usersList) {
+   }
+   
+   function handleClassesSheet(rawClasses) {
+      for (var Catagory = 0; UserContact < $scope.userList.length; UserContact++)
+         $scope.classList = ;
    }
 
    $scope.angularGridOptions = {
