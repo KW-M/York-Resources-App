@@ -1,29 +1,16 @@
-<!--<md-input-container class="button-select md-button" md-ink-ripple="true">-->
-<!--    <label>Class</label>-->
-<!--    <md-select ng-model-options="{trackBy: '$value.Name'}" ng-model="Class">-->
-<!--        <md-select-header>-->
-<!--          <input ng-model="wow" type="hidden">-->
-<!--        </md-select-header>-->
-<!--        <md-option value="{Catagory:'Other', Name:'Other', Color:'#ffffff'}">-->
-<!--                Other / Not associated-->
-<!--        </md-option>-->
-<!--        <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">-->
-<!--            <md-option ng-repeat="Name in Catagory.Classes" ng-value="{Catagory:Catagory.Name, Name:Name, Color:Catagory.Color}" >-->
-<!--                {{Name}}-->
-<!--            </md-option>-->
-<!--        </md-optgroup>-->
-<!--    </md-select>-->
-<!--</md-input-container>-->
-
-      <md-input-container>
-        <label>Vegetables</label>
-        <md-select ng-model="selectedVegetables">
-          <md-select-header>
-            <input ng-model="searchTerm">
-          </md-select-header>
-          <md-optgroup label="vegetables">
-            <md-option ng-value="vegetable" ng-repeat="vegetable in vegetables |
-              filter:searchTerm">{{vegetable}}</md-option>
-          </md-optgroup>
-        </md-select>
-      </md-input-container>
+<md-input-container class="button-select md-button" md-ink-ripple="true">
+    <label>Class</label>
+    <md-select ng-model-options="{trackBy: '$value.Name'}" ng-model="Class">
+        <md-select-header>
+          <input ng-model="classSelectSearch" type="Search">
+        </md-select-header>
+        <md-option value="{Catagory:'Other', Name:'Other', Color:'#ffffff'}">
+                Other / Not associated
+        </md-option>
+        <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Name}}">
+            <md-option ng-repeat="Name in Catagory.Classes" ng-value="{Catagory:Catagory.Name, Name:Name, Color:Catagory.Color}" >
+                {{Name}}
+            </md-option>
+        </md-optgroup>
+    </md-select>
+</md-input-container>
