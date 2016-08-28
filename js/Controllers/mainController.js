@@ -723,39 +723,26 @@ var classes = [
    {'Catagory': 'Mathematics', 'Color': '#fae1fa','Name': 'AP Calculus BC'},
 
    {'Catagory': 'Physical Sciences','Color': '#e6f9f4','Name': 'Physical Science (8th)'},
-   {'Catagory': 'Physical Sciences','Color': '#e6f9f4','Name': 'Chemistry',
-   {'Catagory': 'Physical Sciences','Color': '#e6f9f4','Name': 'AP Chemistry',
-   {'Catagory': 'Physical Sciences','Color': '#e6f9f4','Name': 'Physics',
-   {'Catagory': 'Physical Sciences','Color': '#e6f9f4','Name': 'AP Physics'
-   ]
-}, {
-   'Name': 'Biological Sciences',
-   'Color': '#e1f9e1',
-   'Classes': [
-      'Biology I',
-      'Marine Biology',
-      'Anatomy & Physiology',
-      'Enviromental Science',
-      'AP Biology'
-   ]
-}, {
-   'Name': 'Modern Languages',
-   'Color': '#f9f9e1',
-   'Classes': []
-}, {
-   'Name': 'Clasical Languages',
-   'Color': '#fae4e1',
-   'Classes': []
-}, {
-   'Name': 'Humanities',
-   'Color': '#f3fbdf',
-   'Classes': [
-      'Economics',
-      'AP US Government',
-      'YAS Psycology Honors'
-   ]
-}, {
+   {'Catagory': 'Physical Sciences','Color': '#e6f9f4','Name': 'Chemistry'},
+   {'Catagory': 'Physical Sciences','Color': '#e6f9f4','Name': 'AP Chemistry'},
+   {'Catagory': 'Physical Sciences','Color': '#e6f9f4','Name': 'Physics'},
+   {'Catagory': 'Physical Sciences','Color': '#e6f9f4','Name': 'AP Physics'},
+
+   {'Catagory': 'Biological Sciences','Color': '#e1f9e1','Name': 'Biology I'},
+   {'Catagory': 'Biological Sciences','Color': '#e1f9e1','Name': 'Marine Biology'},
+   {'Catagory': 'Biological Sciences','Color': '#e1f9e1','Name': 'Anatomy & Physiology'},
+   {'Catagory': 'Biological Sciences','Color': '#e1f9e1','Name': 'Enviromental Science'},
+   {'Catagory': 'Biological Sciences','Color': '#e1f9e1','Name': 'AP Biology'},
+
+   {'Catagory': 'Modern Languages','Color': '#f9f9e1', 'Name': 'Spanish I'
+   
+   {'Catagory': 'Clasical Languages','Color': '#fae4e1', 'Name': 'Latin I'},
+
+   {'Catagory': 'Humanities', 'Color': '#f3fbdf', 'Name': 'Economics'},
+   {'Catagory': 'Humanities', 'Color': '#f3fbdf', 'Name': 'AP US Government'},
+   {'Catagory': 'Humanities', 'Color': '#f3fbdf', 'Name': 'YAS Psycology Honors'},
+
+   {
    'Name': 'Arts',
    'Color': 'pPink',
-   'Classes': []
-}, ]
+   'Name'}]
