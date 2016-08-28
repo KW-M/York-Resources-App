@@ -695,15 +695,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 }]));
 
 
-var classes = [{
-   'Name': 'English',
-   'Color': '#e9ecfb',
-   'Classes': [
-      'English I',
+var classes = [
+   {'Catagory': 'English','Color': '#e9ecfb','Name': 'English I'}
       'English II',
       'English III',
       'English IV',
-      'English IV Honors',
+      'American Studies Honors',
       'English V',
       'AP Liturature'
    ]
@@ -734,7 +731,7 @@ var classes = [{
    ]
 }, {
    'Name': 'Physical Sciences',
-   'Color': 'pTerquois',
+   'Color': '#e6f9f4',
    'Classes': [
       'Physical Science (8th)',
       'Chemistry',
