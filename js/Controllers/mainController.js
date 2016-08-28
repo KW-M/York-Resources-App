@@ -721,28 +721,26 @@ var classes = [
    {'Catagory': 'Mathematics', 'Color': '#fae1fa','Name': 'Calculus'},
    {'Catagory': 'Mathematics', 'Color': '#fae1fa','Name': 'AP Calculus AB'},
    {'Catagory': 'Mathematics', 'Color': '#fae1fa','Name': 'AP Calculus BC'},
-
+   //phys
    {'Catagory': 'Physical Sciences','Color': '#e6f9f4','Name': 'Physical Science (8th)'},
    {'Catagory': 'Physical Sciences','Color': '#e6f9f4','Name': 'Chemistry'},
    {'Catagory': 'Physical Sciences','Color': '#e6f9f4','Name': 'AP Chemistry'},
    {'Catagory': 'Physical Sciences','Color': '#e6f9f4','Name': 'Physics'},
    {'Catagory': 'Physical Sciences','Color': '#e6f9f4','Name': 'AP Physics'},
-
+   //bio
    {'Catagory': 'Biological Sciences','Color': '#e1f9e1','Name': 'Biology I'},
    {'Catagory': 'Biological Sciences','Color': '#e1f9e1','Name': 'Marine Biology'},
    {'Catagory': 'Biological Sciences','Color': '#e1f9e1','Name': 'Anatomy & Physiology'},
    {'Catagory': 'Biological Sciences','Color': '#e1f9e1','Name': 'Enviromental Science'},
    {'Catagory': 'Biological Sciences','Color': '#e1f9e1','Name': 'AP Biology'},
-
-   {'Catagory': 'Modern Languages','Color': '#f9f9e1', 'Name': 'Spanish I'
-   
+   //modern languages
+   {'Catagory': 'Modern Languages','Color': '#f9f9e1', 'Name': 'Spanish I'},
+   //Clasics
    {'Catagory': 'Clasical Languages','Color': '#fae4e1', 'Name': 'Latin I'},
-
+   //humanities
    {'Catagory': 'Humanities', 'Color': '#f3fbdf', 'Name': 'Economics'},
    {'Catagory': 'Humanities', 'Color': '#f3fbdf', 'Name': 'AP US Government'},
    {'Catagory': 'Humanities', 'Color': '#f3fbdf', 'Name': 'YAS Psycology Honors'},
 
-   {
-   'Name': 'Arts',
-   'Color': 'pPink',
-   'Name'}]
+   {'Catagory': 'Arts', 'Color': 'pPink', 'Name': 'Foundation Art'},
+]
