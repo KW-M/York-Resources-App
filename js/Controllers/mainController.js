@@ -668,8 +668,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             $scope.classList[Catagory].Classes[Class - 2] = classesResult[Catagory][Class]
          }
       }
-      $scope.$apply(function (){
+      $timeout(function() { //makes angular update values
          $scope.classList = classList;
+         console.log($scope.classList)
       })
    }
 
@@ -719,85 +720,5 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
    });
 }]));
-
-// var classes = [{
-//    'Name': 'English',
-//    'Color': '#e9ecfb',
-//    'Classes': [
-//       'English I',
-//       'English II',
-//       'English III',
-//       'English IV',
-//       'American Studies Honors',
-//       'English V',
-//       'AP Liturature'
-//    ]
-// }, {
-//    'Name': 'History',
-//    'Color': '#fbf2e0',
-//    'Classes': [
-//       'Ancient History',
-//       'World History I',
-//       'World History II',
-//       'Asian History',
-//       'US History',
-//       'AP US History'
-//    ]
-// }, {
-//    'Name': 'Mathematics',
-//    'Color': '#fae1fa',
-//    'Classes': [
-//       'Algebra I',
-//       'Geometry',
-//       'Algebra II',
-//       'Precalculus',
-//       'Precalculus Honors',
-//       'Statistics',
-//       'Calculus',
-//       'AP Calculus AB',
-//       'AP Calculus BC'
-//    ]
-// }, {
-//    'Name': 'Physical Sciences',
-//    'Color': '#e6f9f4',
-//    'Classes': [
-//       'Physical Science (8th)',
-//       'Chemistry',
-//       'AP Chemistry',
-//       'Physics',
-//       'AP Physics'
-//    ]
-// }, {
-//    'Name': 'Biological Sciences',
-//    'Color': '#e1f9e1',
-//    'Classes': [
-//       'Biology I',
-//       'Marine Biology',
-//       'Anatomy & Physiology',
-//       'Enviromental Science',
-//       'AP Biology'
-//    ]
-// }, {
-//    'Name': 'Modern Languages',
-//    'Color': '#f9f9e1',
-//    'Classes': []
-// }, {
-//    'Name': 'Clasical Languages',
-//    'Color': '#fae4e1',
-//    'Classes': []
-// }, {
-//    'Name': 'Humanities',
-//    'Color': '#f3fbdf',
-//    'Classes': [
-//       'Economics',
-//       'AP US Government',
-//       'YAS Psycology Honors'
-//    ]
-// }, {
-//    'Name': 'Arts',
-//    'Color': 'pPink',
-//    'Classes': []
-// },
-// ]
 
 
