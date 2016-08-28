@@ -659,7 +659,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    function handleClassesSheet(rawClasses) {
-      $scope.classList = [];
+      var classList = [];
       var classesResult = rawClasses.result.values
       //format the class list:
       for (var Catagory = 0; Catagory < classesResult.length; Catagory++) {
@@ -668,6 +668,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             $scope.classList[Catagory].Classes[Class - 2] = classesResult[Catagory][Class]
          }
       }
+      $scope.$apply(function (){
+         $scope.classList = classList;
+      })
    }
 
    $scope.angularGridOptions = {

@@ -48,7 +48,7 @@
                 </md-menu-item>
             </md-list-item>
             <md-list>
-                <div flex layout="column">
+                <div flex layout="column" ng-hide="sideNavClassSearch">
                     <md-button class="side-nav-option" ng-click="gotoRoute('other')" ng-class="{ 'selected' : pathSelected('/other') }">
                         Other / Not associated
                     </md-button>
