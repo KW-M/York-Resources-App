@@ -613,13 +613,13 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    function handleUserPrefsSheet() {
       //var deFormatedEmail = $scope.myInfo.Email.replace(/\W/g, '');
-      queue(GoogleDriveService.getUserSettings("Sheet1!A2:B", false), function(usersList) {
+      queue(GoogleDriveService.getSpreadsheetRange('1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0', "Sheet1!A2:B", false), function(usersList) {
          $scope.userList = usersList.result.values;
          for (var UserContact = 0; UserContact < $scope.userList.length; UserContact++) {
             if ($scope.userList[UserContact][0] === $scope.myInfo.Email) {
                var adjustedUserSettingsCount = UserContact + 2;
                $scope.UserSettingsRange = 'A' + adjustedUserSettingsCount + ':' + adjustedUserSettingsCount
-               getUserSettings('A' + adjustedUserSettingsCount + ':' + adjustedUserSettingsCount);
+               getSpreadsheetRange('A' + adjustedUserSettingsCount + ':' + adjustedUserSettingsCount);
                UserContact = 100000;
             }
          }
@@ -628,8 +628,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          }
       });
 
-      function getUserSettings(range) {
-         queue(GoogleDriveService.getUserSettings(range), function(spreadsheetResult) {
+      function getSpreadsheetRange(range) {
+         queue(GoogleDriveService.getSpreadsheetRange('1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0', range), function(spreadsheetResult) {
             var UserSettingsArray = spreadsheetResult.result.values[0];
             pushUserSettingsToScope(UserSettingsArray);
             var gg  = new window.Event('sheetPrefsLoaded')
@@ -639,7 +639,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
       function createUserSettings() {
          var newData = [$scope.myInfo.Email, $scope.myInfo.Name, false, "3/25/2016", "", "", "", 1]
-         queue(GoogleDriveService.updateUserSettings("Sheet1!A1:A", newData, true), function(newRow) {
+         queue(GoogleDriveService.updateSpreadsheetRange('1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0',"Sheet1!A1:A", newData, true), function(newRow) {
             console.log(newRow)
             console.log(newRow.result.updates.updatedRange.match(/(?:Sheet1!A)(\d+)/g));
          });
@@ -656,7 +656,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          console.log($scope.myInfo);
       }
       $scope.getFiles("");
-      queue(GoogleDriveService.getUserSettings("","Sheet1!A2:B", false), function(usersList) {
+      queue(GoogleDriveService.getSpreadsheetRange("1DfFUn8sgnFeLLijtKvWsd90GNcnEG6Xl5JTSeApX3bY","Sheet1!A2:B", false), handleClassesSheet(rawClasses))
    }
    
    function handleClassesSheet(rawClasses) {

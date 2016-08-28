@@ -20,31 +20,14 @@ app.service('GoogleDriveService', ['$q', function($q) {
         }));
     };
 
-    this.getUserSettings = function(range) {
+    this.getSpreadsheetRange = function(id,range) {
         //gets a named range in a google spreadsheet (in this case each row is created with a named range of its email).
         return (gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: '1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0',
+            spreadsheetId: id,
             range: range,
         }));
     }
 
-    this.addNamedRangeUserSettings = function(range, name) {
-        return (gapi.client.sheets.spreadsheets.batchUpdate({
-            spreadsheetId: '1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0',
-            "requests": [{
-                "addNamedRange": {
-                    "namedRange": {
-                        "name": name,
-                        "range": {
-                            "startRowIndex": 1,
-                            "endRowIndex": 1,
-                            "startColumnIndex": 1,
-                        }
-                    }
-                }
-            }]
-        }));
-    }
     this.updateUserSettings = function(range, dataToBeInserted, append) {
         if (append === true) {
             return (gapi.client.sheets.spreadsheets.values.append({
@@ -170,3 +153,22 @@ app.service('GoogleDriveService', ['$q', function($q) {
         });
     };
 }]);
+
+
+    // this.addNamedRangeUserSettings = function(range, name) {
+    //     return (gapi.client.sheets.spreadsheets.batchUpdate({
+    //         spreadsheetId: '1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0',
+    //         "requests": [{
+    //             "addNamedRange": {
+    //                 "namedRange": {
+    //                     "name": name,
+    //                     "range": {
+    //                         "startRowIndex": 1,
+    //                         "endRowIndex": 1,
+    //                         "startColumnIndex": 1,
+    //                     }
+    //                 }
+    //             }
+    //         }]
+    //     }));
+    // }
