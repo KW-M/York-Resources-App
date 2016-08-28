@@ -696,48 +696,37 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
 
 var classes = [
-   {'Catagory': 'English','Color': '#e9ecfb','Name': 'English I'}
-      'English II',
-      'English III',
-      'English IV',
-      'American Studies Honors',
-      'English V',
-      'AP Liturature'
-   ]
-}, {
-   'Name': 'History',
-   'Color': '#fbf2e0',
-   'Classes': [
-      'Ancient History',
-      'World History I',
-      'World History II',
-      'Asian History',
-      'US History',
-      'AP US History'
-   ]
-}, {
-   'Name': 'Mathematics',
-   'Color': '#fae1fa',
-   'Classes': [
-      'Algebra I',
-      'Geometry',
-      'Algebra II',
-      'Precalculus',
-      'Precalculus Honors',
-      'Statistics',
-      'Calculus',
-      'AP Calculus AB',
-      'AP Calculus BC'
-   ]
-}, {
-   'Name': 'Physical Sciences',
-   'Color': '#e6f9f4',
-   'Classes': [
-      'Physical Science (8th)',
-      'Chemistry',
-      'AP Chemistry',
-      'Physics',
-      'AP Physics'
+   //english
+   {'Catagory': 'English','Color': '#e9ecfb','Name': 'English I'},
+   {'Catagory': 'English','Color': '#e9ecfb','Name': 'English II'},
+   {'Catagory': 'English','Color': '#e9ecfb','Name': 'English III'},
+   {'Catagory': 'English','Color': '#e9ecfb','Name': 'English IV'},
+   {'Catagory': 'English','Color': '#e9ecfb','Name': 'American Studies Honors'},
+   {'Catagory': 'English','Color': '#e9ecfb','Name': 'English V'},
+   {'Catagory': 'English','Color': '#e9ecfb','Name': 'AP Liturature'},
+   //history
+   {'Catagory': 'History','Color': '#fbf2e0','Name': 'Ancient History'},
+   {'Catagory': 'History','Color': '#fbf2e0','Name': 'World History I'},
+   {'Catagory': 'History','Color': '#fbf2e0','Name': 'World History II'},
+   {'Catagory': 'History','Color': '#fbf2e0','Name': 'Asian History'},
+   {'Catagory': 'History','Color': '#fbf2e0','Name': 'US History'},
+   {'Catagory': 'History','Color': '#fbf2e0','Name': 'AP US History'},
+   //math
+   {'Catagory': 'Mathematics', 'Color': '#fae1fa','Name': 'Algebra I'},
+   {'Catagory': 'Mathematics', 'Color': '#fae1fa','Name': 'Geometry'},
+   {'Catagory': 'Mathematics', 'Color': '#fae1fa','Name': 'Algebra II'},
+   {'Catagory': 'Mathematics', 'Color': '#fae1fa','Name': 'Precalculus'},
+   {'Catagory': 'Mathematics', 'Color': '#fae1fa','Name': 'Precalculus Honors'},
+   {'Catagory': 'Mathematics', 'Color': '#fae1fa','Name': 'Statistics'},
+   {'Catagory': 'Mathematics', 'Color': '#fae1fa','Name': 'Calculus'},
+   {'Catagory': 'Mathematics', 'Color': '#fae1fa','Name': 'AP Calculus AB'},
+   {'Catagory': 'Mathematics', 'Color': '#fae1fa','Name': 'AP Calculus BC'},
+
+   {'Catagory': 'Physical Sciences','Color': '#e6f9f4','Name': 'Physical Science (8th)'},
+   {'Catagory': 'Physical Sciences','Color': '#e6f9f4','Name': 'Chemistry',
+   {'Catagory': 'Physical Sciences','Color': '#e6f9f4','Name': 'AP Chemistry',
+   {'Catagory': 'Physical Sciences','Color': '#e6f9f4','Name': 'Physics',
+   {'Catagory': 'Physical Sciences','Color': '#e6f9f4','Name': 'AP Physics'
    ]
 }, {
    'Name': 'Biological Sciences',
