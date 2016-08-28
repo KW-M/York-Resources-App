@@ -1,6 +1,6 @@
 </md-content>
 <div class="side-nav-scroll" flex>
-  <div class="side-nav-section">
+    <div class="side-nav-section">
         <md-list>
             <md-list-item>
                 <md-menu-item>
@@ -35,11 +35,11 @@
                     <md-icon style="width:24px;">group</md-icon>
                     <span style="padding:0" flex>Classes</span>
                     <md-button style="margin:auto" class="md-icon-button" ng-click="globals.sideNavClassSearchOpen = !globals.sideNavClassSearchOpen">
-                            <md-icon>search</md-icon>
+                        <md-icon>search</md-icon>
                     </md-button>
                     <div class="hover-search sideNavClassSearch" ng-class="{'hover-search-visible' : globals.sideNavClassSearchOpen}">
                         <md-input-container md-no-float style="margin: auto; height: 36px;">
-                            <input ng-model="sideNavClassSearch" placeholder="Filter Classes"/>
+                            <input ng-model="sideNavClassSearch" placeholder="Filter Classes" />
                         </md-input-container>
                         <md-button class="md-icon-button" ng-click="globals.sideNavClassSearchOpen = !globals.sideNavClassSearchOpen">
                             <md-icon>close</md-icon>
@@ -48,13 +48,13 @@
                 </md-menu-item>
             </md-list-item>
             <md-list>
-                <div  flex layout="column">
-                <md-button class="side-nav-option" ng-click="gotoRoute('other')" ng-class="{ 'selected' : pathSelected('/other') }">
-                    Other / Not associated
-                </md-button>
+                <div flex layout="column">
+                    <md-button class="side-nav-option" ng-click="gotoRoute('other')" ng-class="{ 'selected' : pathSelected('/other') }">
+                        Other / Not associated
+                    </md-button>
                 </div>
                 <div ng-repeat="Catagory in classList" flex layout="column">
-                    <label ng-hide="sideNavClassSearch" class="side-nav-header">{{Catagory.Name}}</label>
+                    <label ng-hide="sideNavClassSearch" class="side-nav-header">{{Catagory.Catagory}}</label>
                     <md-button class="side-nav-option" ng-repeat="Class in Catagory.Classes | filter:sideNavClassSearch" ng-click="gotoRoute('/' + Class)" ng-class="{ 'selected' : pathSelected('/' + Class) }">
                         {{Class}}
                     </md-button>
@@ -62,33 +62,33 @@
             </md-list>
         </md-list>
     </div>
-    </div>
-    <div class="side-nav-bottom">
-        <md-list style="padding: 6px 0 0 0;">
-            <md-list-item>
-                <md-menu-item>
-                    <md-button>
-                        <md-icon>settings</md-icon>
-                        Settings
-                    </md-button>
-                </md-menu-item>
-            </md-list-item>
-            <md-list-item>
-                <md-menu-item>
-                    <md-button href="mailto:worcester-moorek2018@york.org?Subject=York%20App%20Problem" target="_blank">
-                        <md-icon>feedback</md-icon>
-                        Send Feedback
-                    </md-button>
-                </md-menu-item>
-            </md-list-item>
-            <md-list-item show-sm show-xs hide-gt-sm>
-                <md-menu-item>
-                    <md-button ng-click="::openHelpDialog()">
-                        <md-icon>help</md-icon>
-                        Help
-                    </md-button>
-                </md-menu-item>
-            </md-list-item>
-        </md-list>
-    </div>
+</div>
+<div class="side-nav-bottom">
+    <md-list style="padding: 6px 0 0 0;">
+        <md-list-item>
+            <md-menu-item>
+                <md-button>
+                    <md-icon>settings</md-icon>
+                    Settings
+                </md-button>
+            </md-menu-item>
+        </md-list-item>
+        <md-list-item>
+            <md-menu-item>
+                <md-button href="mailto:worcester-moorek2018@york.org?Subject=York%20App%20Problem" target="_blank">
+                    <md-icon>feedback</md-icon>
+                    Send Feedback
+                </md-button>
+            </md-menu-item>
+        </md-list-item>
+        <md-list-item show-sm show-xs hide-gt-sm>
+            <md-menu-item>
+                <md-button ng-click="::openHelpDialog()">
+                    <md-icon>help</md-icon>
+                    Help
+                </md-button>
+            </md-menu-item>
+        </md-list-item>
+    </md-list>
+</div>
 </md-content>
