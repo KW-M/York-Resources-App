@@ -660,10 +660,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
    
    function handleClassesSheet(rawClasses) {
-      console.log(rawClasses);
+      $scope.classList = [];
       var classesResult = rawClasses.result.values
       for (var Catagory = 0; Catagory < classesResult.length; Catagory++) {
-         
+         console.log(classesResult[Catagory]);
+         $scope.classList[Catagory] = {'Catagory':classesResult[Catagory][0], 'Color':classesResult[Catagory][0], 'Classes':}
       }
    }
 
