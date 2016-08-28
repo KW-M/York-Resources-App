@@ -677,6 +677,15 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       performantScroll: false,
       gutterSize: 12,
    };
+   
+   $scope.clearText = function(text) {
+      text = '';
+   };
+      // The md-select directive eats keydown events for some quick select
+      // logic. Since we have a search input here, we don't need that logic.
+   $element.find('input').on('keydown', function(ev) {
+          ev.stopPropagation();
+      });
    //-event watchers---------
 
    content_container.onscroll = function(event) {

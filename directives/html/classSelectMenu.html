@@ -1,8 +1,8 @@
 <md-input-container class="button-select md-button" md-ink-ripple="true">
     <label>Class</label>
     <md-select ng-model-options="{trackBy: '$value.Name'}" ng-model="Class">
-        <md-select-header>
-          <input ng-model="classSelectSearch" type="Search" placeholder="Search for a class.." class="classSelectSearchbox md-text">
+        <md-select-header class="classSelectSearchbox">
+          <input ng-model="classSelectSearch" type="Search" placeholder="Search for a class.." class="md-text">
         </md-select-header>
         <md-option value="{Catagory:'Other', Name:'Other', Color:'#ffffff'}">
                 Other / Not associated
