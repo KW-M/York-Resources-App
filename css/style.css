@@ -294,7 +294,7 @@ md-input-container.button-select md-select-value {
   transition: opacity 450ms ease, transform 450ms ease;
 }
 .post-card.angular-grid-item.ng-leave.ng-leave-active {
-    display: none;
+opacity: 1;
 }
 .angular-grid > .post-card{
     opacity: 0;
