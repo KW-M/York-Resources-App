@@ -754,7 +754,7 @@ var classes = [{
    ]
 }, {
    'Name': 'Modern Languages',
-   'Color': 'pYellow',
+   'Color': '#f9f9e1',
    'Classes': []
 }, {
    'Name': 'Clasical Languages',
@@ -762,7 +762,7 @@ var classes = [{
    'Classes': []
 }, {
    'Name': 'Humanities',
-   'Color': 'pYellowGreen',
+   'Color': '#f3fbdf',
    'Classes': [
       'Economics',
       'AP US Government',
