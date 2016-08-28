@@ -8,13 +8,13 @@ div:focus{
 
 /*this chart specifies the css variables for the class background pastel colors :
 :root {
---pPurple: hsl(300,70%,93%);
+--pPurple: hsl(300,70%,93%); 
 --pBlue: hsl(232,70%,95%);
 --pLightblue: hsl(189,60%,93%);
 --pGreen: hsl(120,68%,93%);
 --pOrange: hsl(40,76%,93%);
 --pRed: hsl(8,70%,93%);
-}
+} 
  */
 /*------------ background and layout styles ----------- */
 
