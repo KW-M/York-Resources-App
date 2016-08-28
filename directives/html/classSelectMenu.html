@@ -1,8 +1,8 @@
-<div class="button-select md-button" md-ink-ripple="true">
-    <label class="md-input">Class</label>
+<md-input-container class="button-select md-button" md-ink-ripple="true">
+    <label>Class</label>
     <md-select ng-model-options="{trackBy: '$value.Name'}" ng-model="Class">
         <md-select-header>
-          <input ng-model="wow">
+          <input ng-model="wow" type="hidden">
         </md-select-header>
         <md-option value="{Catagory:'Other', Name:'Other', Color:'#ffffff'}">
                 Other / Not associated
@@ -13,4 +13,4 @@
             </md-option>
         </md-optgroup>
     </md-select>
-</div>
+</md-input-container>
