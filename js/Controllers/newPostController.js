@@ -9,7 +9,7 @@
         $scope.UpdateDate = new Date();
         $scope.Tags = [];
         $scope.Description = '';
-        $scope.Class = '';
+        $scope.Class = {Name:null};
         $scope.Link = '';
         $scope.AttachmentId = '';
         $scope.LikeUsers = [];
