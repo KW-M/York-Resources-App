@@ -199,8 +199,6 @@
             }
 
             var tagString = JSON.stringify($scope.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || [];
-            console.log($scope.Class)
-            var classObject = JSON.parse($scope.Class);
 
             metadata.properties.Tag1 = tagString[0] || "";
             metadata.properties.Tag2 = tagString[1] || "";
@@ -212,15 +210,15 @@
 
             metadata.description = $scope.newPostDescription.innerHTML;
 
-            //metadata.properties.ClassName = classObject.Name;
-            metadata.properties.ClassCatagory = classObject.Catagory;
-            metadata.properties.ClassColor = classObject.Color;
+            //metadata.properties.ClassName = $scope.Class.Name;
+            metadata.properties.ClassCatagory = $scope.Class.Catagory;
+            metadata.properties.ClassColor = $scope.Class.Color;
 
             metadata.properties.attachmentId = $scope.AttachmentId;
 
             metadata.mimeType = "application/octet-stream"
 
-            metadata.contentHints.indexableText = " class: " + classObject.Name + " class-catagory: " + classObject.Catagory + " tags: " + tagString + " attachmentId: " + $scope.AttachmentId;
+            metadata.contentHints.indexableText = " class: " + $scope.Class.Name + " class-catagory: " + $scope.Class.Catagory + " tags: " + tagString + " attachmentId: " + $scope.AttachmentId;
 
             metadata.contentHints.thumbnail.image = getImagePreview(true);
             metadata.contentHints.thumbnail.mimeType = "image/png";
@@ -237,7 +235,6 @@
                     thumbnail: {},
                 },
             }
-            var classObject = $scope.Class//JSON.parse($scope.Class);
 
             if (postObj.Type !== $scope.Type) {
                 metadata.properties.Type = $scope.Type;
@@ -262,9 +259,9 @@
             }
 
             if (postObj.Class.Name !== $scope.Class.Name) {
-                metadata.properties.ClassName = classObject.Name;
-                metadata.properties.ClassCatagory = classObject.Catagory;
-                metadata.properties.ClassColor = classObject.Color;
+                metadata.properties.ClassName = $scope.Class.Name;
+                metadata.properties.ClassCatagory = $scope.Class.Catagory;
+                metadata.properties.ClassColor = $scope.Class.Color;
             }
 
             if (postObj.Link !== $scope.Link) {
@@ -276,7 +273,7 @@
             if (postObj.AttachmentId !== $scope.AttachmentId) {
                 metadata.properties.attachmentId = $scope.AttachmentId;
             }
-            metadata.contentHints.indexableText = " class: " + classObject.Name + " class-catagory: " + classObject.Catagory + " tags: " + tagString + " attachmentId: " + $scope.AttachmentId;
+            metadata.contentHints.indexableText = " class: " + $scope.Class.Name + " class-catagory: " + $scope.Class.Catagory + " tags: " + tagString + " attachmentId: " + $scope.AttachmentId;
             console.log(metadata);
 
             return metadata;
