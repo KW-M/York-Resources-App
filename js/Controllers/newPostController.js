@@ -17,6 +17,7 @@
         fillInValues();
 
         //temproary variables
+        $scope.operation = operation;
         $scope.previewThumbnail = "";
         $scope.previewLoading = false;
         $scope.classSearch = "";
