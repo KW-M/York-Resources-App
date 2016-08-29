@@ -210,7 +210,7 @@
 
             metadata.description = $scope.newPostDescription.innerHTML;
 
-            /metadata.properties.ClassName = $scope.Class.Name;
+            metadata.properties.ClassName = $scope.Class.Name;
             metadata.properties.ClassCatagory = $scope.Class.Catagory;
             metadata.properties.ClassColor = $scope.Class.Color;
 
