@@ -199,7 +199,7 @@
             }
 
             var tagString = JSON.stringify($scope.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || [];
-            console.log()
+            console.log($scope.Class)
             var classObject = JSON.parse($scope.Class);
 
             metadata.properties.Tag1 = tagString[0] || "";
