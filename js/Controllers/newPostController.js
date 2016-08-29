@@ -298,7 +298,7 @@
             }
             else {
                 if ($scope.Type === "Link") {
-                    $scope.previewThumbnail = 'https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=' + encodeURIComponent($scope.Link) + '&width=400&height=260&ads=0&delay=250&maxage=7884000&key=Ca7GOVe9BkGefE_rvwN2Bw';
+                    $scope.previewThumbnail = 'https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=' + encodeURIComponent($scope.Link) + '&width=400&height=260&maxage=7884000&key=Ca7GOVe9BkGefE_rvwN2Bw';
                 }
                 else if ($scope.Type === "gDrive") {
                     $scope.previewThumbnail = "https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + $scope.AttachmentId;
