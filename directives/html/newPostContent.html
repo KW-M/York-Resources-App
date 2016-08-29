@@ -39,7 +39,7 @@
       </div>
       <div class="md-dialog-content">
          <input ng-model="Title" class="newPostTitle md-title" placeholder="Title" md-autofocus>
-         <div id="DescriptionTxt" class="newPostBody" contenteditable="true"></div>
+         <div id="DescriptionTxt" ng-model="newPostDescription" class="newPostBody" contenteditable="true"></div>
       </div>
    </md-dialog-content>
    <md-dialog-actions layout="row">
