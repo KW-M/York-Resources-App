@@ -710,15 +710,15 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $scope.globals.FABisOpen = false;
          $scope.globals.FABisHidden = true;
       }
-      if ($mdMedia('gt-sm')) {
-         $mdSidenav('sidenav_overlay').close();
-      }
    };
 
    window.addEventListener("resize", function() {
       if (performantScrollEnabled === true && $scope.angularGridOptions.performantScroll === true) {
          $scope.angularGridOptions.performantScroll = false;
          performantScrollEnabled = false;
+      }
+      if ($mdMedia('gt-sm')) {
+         $mdSidenav('sidenav_overlay').close();
       }
    });
 }]));
