@@ -423,7 +423,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.toggleSidebar = function(urlPathChanged) { //called by the top left toolbar menu button
       if (urlPathChanged === true) {
          if ($mdMedia('gt-sm') !== true) {
-            $mdSidenav('sidenav_overlay').toggle();
+            $mdSidenav('sidenav_overlay').close();
          }
       }
       else {
@@ -690,11 +690,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    // The md-select directive eats keydown events for some quick select
    // logic. Since we have a search input here, we don't need that logic.
-   var selectSearchInput = angular.element(document.getElementById('class_select_input'))
-   selectSearchInput.on('keydown', function(ev) {
-          ev.stopPropagation();
-          console.log(ev)
-   });
+   // var selectSearchInput = angular.element(document.getElementById('class_select_input'))
+   // selectSearchInput.on('keydown', function(ev) {
+   //        ev.stopPropagation();
+   //        console.log(ev)
+   // });
    content_container.onscroll = function(event) {
       //called whenever the content_container scrolls
       if (performantScrollEnabled === false && $scope.angularGridOptions.performantScroll === false) {
@@ -709,6 +709,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       else {
          $scope.globals.FABisOpen = false;
          $scope.globals.FABisHidden = true;
+      }
+      if ($mdMedia('gt-sm')) {
+         $mdSidenav('sidenav_overlay').close();
       }
    };
 
