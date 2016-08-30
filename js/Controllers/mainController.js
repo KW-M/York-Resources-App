@@ -376,6 +376,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    $scope.formatPost = function(unformatedFile) {
+      console.log(unformatedFile);
       var formatedFile = {}
       var tagsRaw = "[\"" + unformatedFile.properties.Tag1 + unformatedFile.properties.Tag2 + "\"]";
       var titleAndURL = unformatedFile.name.split("{]|[}");

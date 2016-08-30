@@ -1,4 +1,4 @@
-<div ng-style="{background-color: Post.Class.Color}">
+<div ng-style="{'background-color': Post.Class.Color}">
     <div class="post-card-header" md-ink-ripple="{{Post.Type !== 'noLink'}}" ng-click="::openLink(Post.Link)" ng-class="{ 'noLink' : Post.Type === 'noLink' }">
     <img ng-src="{{::Post.PreviewImg}}" class="post-card-image" ng-hide="::Post.Link == ''">
     <div class="post-card-image-gradient">
@@ -6,13 +6,14 @@
             <md-icon class="small-icon">language</md-icon><span> {{::Post.Link}}</span>
         </p>
         <div class="post-card-metadata-text">
+
             <p style="margin: 0 0 2px 0; font-size: 14px; font-weight:700;" ng-hide="::Post.Tags === null"><md-icon class="small-icon" style="color:white">style</md-icon><span>{{Post.Tags.join(', ')}}</span></p>
             <md-icon class="small-icon" style="color:white">event</md-icon><span style="margin-right:10px"> {{::Post.CreationDate | date : "m/dd/yyyy"}}</span>
             <md-icon class="small-icon" style="color:white">people</md-icon><span> {{::Post.Class.Name}}</span>
         </div>
     </div>
 </div>
-
+            {{Post.class}}
 <p class="post-card-title">{{::Post.Title}}</p>
 <p class="post-card-creator"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{Post.Creator.ClassOf}})</span></p>
 <p id="post_card_description" ng-bind-html="::Post.Description"></p>
