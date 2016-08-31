@@ -47,14 +47,15 @@ app.service('GoogleDriveService', ['$q', function($q) {
         }
     }
 
-    this.runGAppsScript = function(function){
+    this.runGAppsScript = function(functionToRun){
         var scriptId = "MeZP4Dfy0hLzCmyrFntpD1-31ZdidIE6U";
         return(gapi.client.request({
             'root': 'https://script.googleapis.com',
             'path': 'v1/scripts/' + scriptId + ':run',
             'method': 'POST',
             'body': {
-                        'function': 'getFoldersUnderRoot',
+                        'function': 'likePost',
+                        
                     },
         }));
     }
