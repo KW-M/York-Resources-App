@@ -86,4 +86,24 @@
         white-space: initial;
     }
     
-    .
+    .onboardingTextContainer {
+        padding: 12px;
+        padding-top: 32px;
+    }
+    
+    .onboardingTextHeader {
+        color: white;
+    font-size: 24px;
+    line-height: 32px;
+    padding-bottom: 8px;
+    }
+    
+    .onboardingText {
+        color: white;
+    font-weight: 300;
+    font-size: 16px;
+    height: 96px;
+    line-height: 24px;
+    padding-left: 24px;
+    padding-right: 24px;
+    }
