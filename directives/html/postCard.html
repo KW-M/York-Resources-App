@@ -1,5 +1,5 @@
-<md-button id="like_thumb_button" class="md-icon-button" aria-label="Like">
-    <md-icon >bookmark</md-icon>
+<md-button style="position: absolute; top: -14px; right: -6px; z-index: 100;" class="md-icon-button md-accent md-whiteframe-1dp">
+    <md-icon>bookmark</md-icon>
 </md-button>
 
 <div class="post-card-header" md-ink-ripple="{{Post.Type !== 'noLink'}}" ng-click="::openLink(Post.Link)" ng-class="{ 'noLink' : Post.Type === 'noLink' }">
