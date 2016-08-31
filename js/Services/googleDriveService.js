@@ -55,7 +55,10 @@ app.service('GoogleDriveService', ['$q', function($q) {
             'method': 'POST',
             'body': {
                         'function': 'likePost',
-                        
+                        'parameters': [
+                            'hi',
+                            'ho',
+                        ],
                     },
         }));
     }

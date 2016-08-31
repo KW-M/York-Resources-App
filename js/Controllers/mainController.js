@@ -167,6 +167,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    //-loading and filtering posts---------
 
    $scope.getFiles = function() {
+      queue(GoogleDriveService.runGAppsScript, function(result) {
+      
+         console.log(result)
+      }
       $scope.firstFiles = true;
       if ($scope.searchTxt) {
          var nextPageToken = classPageTokenSelectionIndex[$scope.selectedClass + $scope.searchTxt] || "";
