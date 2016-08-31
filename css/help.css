@@ -18,8 +18,8 @@
     }
     .credit-grid-tile {
         background-color: #eff0f2;
-        :md-accent:
     }
+    
     
     .onboardingDialog md-tabs.md-accent {
         height: 100%
@@ -46,10 +46,10 @@
     }
     
     .dotPageIndicatorContainer {
-position: absolute;
-left: 50%;
-top: 50%;
-transform: translateX(-50%) translateY(-50%);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
     }
     
     .dotPageIndicator.dotPageIndicatorActive {
@@ -66,3 +66,5 @@ transform: translateX(-50%) translateY(-50%);
         border-radius: 50%;
         display: inline-block;
     }
+    
+    .onboardingImage
