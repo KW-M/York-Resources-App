@@ -1,4 +1,7 @@
-<md-icon style="color:white">bookmark</md-icon>
+<md-button id="like_thumb_button" class="md-icon-button" aria-label="Like">
+    <md-icon >bookmark</md-icon>
+</md-button>
+
 <div class="post-card-header" md-ink-ripple="{{Post.Type !== 'noLink'}}" ng-click="::openLink(Post.Link)" ng-class="{ 'noLink' : Post.Type === 'noLink' }">
     <img ng-src="{{::Post.PreviewImg}}" class="post-card-image" ng-hide="::Post.Link == ''">
     <div class="post-card-image-gradient">
