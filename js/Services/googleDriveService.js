@@ -47,6 +47,17 @@ app.service('GoogleDriveService', ['$q', function($q) {
         }
     }
 
+    this.runGAppsScript = function(){
+        var scriptId = "1JoCdUhEgf3UfCWGsFOs4mWxxWZZsbSXkMUVW1XzfrFa9__Qn1x-APy2r";
+        return(gapi.client.request({
+            'root': 'https://script.googleapis.com',
+            'path': 'v1/scripts/' + scriptId + ':run',
+            'method': 'POST',
+            'body': {
+                        'function': 'getFoldersUnderRoot',
+                    },
+        }));
+    }
 
     this.getListOfFlies = function(query, pageToken, pageSize) {
         var query = query || "";
