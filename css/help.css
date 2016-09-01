@@ -86,6 +86,13 @@
         white-space: initial;
     }
     
+    .onboardingDialog.blueBackground{
+        background-color: #68a143
+    }
+    .onboardingDialog.greenBackground{
+        background-color: #68a143
+    }
+    
     .onboardingTextContainer {
         padding: 12px;
         padding-top: 32px;
