@@ -8,11 +8,11 @@
             <md-icon style="color:White; font-size: 16px;" class="small-icon">language</md-icon><span> {{::Post.Link}}</span>
         </p>
         <div class="post-card-metadata-text">
-            <p>
-                <md-icon class="small-icon" style="color:white">event</md-icon><span style="margin-right:10px; font-weight:700; font-size:14px"> {{::Post.CreationDate | date : "m/dd/yyyy"}}</span>
-                <md-icon class="small-icon" style="color:white">people</md-icon><span style="font-weight:700; font-size:14px"> {{::Post.Class.Name}}</span>
+            <p style="margin: 2px 0 0 0; font-size: 14px; font-weight:500;">
+                <md-icon class="small-icon" style="color:white">event</md-icon><span style="margin-right:10px;"> {{::Post.CreationDate | date : "m/dd/yyyy"}}</span>
+                <md-icon class="small-icon" style="color:white">people</md-icon><span> {{::Post.Class.Name}}</span>
             </p>
-            <p style="margin: 0 0 2px 0; font-size: 12px; font-weight:500;" ng-hide="::Post.Tags === null">
+            <p style="margin: 0 0 0 0; font-size: 12px; font-weight:500;" ng-hide="::Post.Tags === null">
                 <md-icon class="small-icon" style="color:white">style</md-icon><span>{{Post.Tags.join(', ')}}</span>
             </p>
         </div>

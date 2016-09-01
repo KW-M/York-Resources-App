@@ -1,18 +1,18 @@
   <md-button class="md-fab onboardingDialogButton" ng-class="{'not-visible' : onboardingPageNumber === 0}" ng-click="onboardingPageNumber = onboardingPageNumber - 1" aria-label="previous" style="margin-right: 16px;">
     <md-icon>arrow_back</md-icon>
   </md-button>
-<md-dialog style="/*position: relative; flex: 1; max-width: 360px; height:100%; max-height:460px;*/" class="onboardingDialog">
+<md-dialog style="/*position: relative; flex: 1; max-width: 360px; height:100%; max-height:460px;*/" class="onboardingDialog" ng-style="'background-color: #68a143' : onboardingPageNumber === 0}">
   <md-dialog-content style="position:relative; flex: 1;">
     <md-tabs class="md-accent" md-selected="onboardingPageNumber">
-      <md-tab id="tab1" style="background-color:background: linear-gradient(to bottom, #68a143 0%,#e5e5e5 100%);">
+      <md-tab id="tab1">
         <md-tab-label>Access</md-tab-label>
-        <md-tab-body style="background-color:black">
-        <img src="https://t4.ftcdn.net/jpg/01/05/85/15/500_F_105851509_Q7wuqAoSxYjQiMl867z1pjWyPxlf8ovP.jpg"></img>
+        <md-tab-body>
+        <imgstyle="width: 100%;" src="https://t4.ftcdn.net/jpg/01/05/85/15/500_F_105851509_Q7wuqAoSxYjQiMl867z1pjWyPxlf8ovP.jpg"></img>
         </md-tab-body>
       </md-tab>
       <md-tab id="tab2">
         <md-tab-label>Build</md-tab-label>
-        <md-tab-body style="background-color:black">
+        <md-tab-body>
         <img style="width: 100%;" src="https://mir-s3-cdn-cf.behance.net/projects/404/d09a6c26454969.555ec572f0040.png"></img>
         <div class="onboardingTextContainer">
           <div class="onboardingTextHeader">Access</div>
@@ -32,7 +32,7 @@
       </md-tab>
     </md-tabs>
   </md-dialog-content>
-  <md-dialog-actions>
+  <md-dialog-actions style="position:relative">
     <md-button class="md-accent" style="color:white" ng-click="hideDialog()">Skip</md-button>
     <div class="dotPageIndicatorContainer">
       <div class="dotPageIndicator" ng-class="{'dotPageIndicatorActive' : onboardingPageNumber === 0}"></div>
