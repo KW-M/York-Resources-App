@@ -124,6 +124,10 @@ button.md-icon-button.md #flag_button {
     padding: 4px 8px 0px 8px;
 }
 
+#like_thumb_button.md-button .md-ripple-container{
+    border-radius: 100px;
+}
+
 
 #open_button {
     margin-left: auto;
