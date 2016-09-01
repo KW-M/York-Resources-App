@@ -127,8 +127,11 @@ button.md-icon-button.md #flag_button {
 }
 
 .like-counter {
-    margin-bottom: 6px;
-    margin-left: 4px;
+    margin: 0;
+    display: inline;
+    font-size: 16px;
+    font-weight: 700;
+    color: rgba(0,0,0,0.54);
 }
 
 #post_card_description {
