@@ -119,8 +119,11 @@ button.md-icon-button.md #flag_button {
 }
 
 #like_thumb_button {
-    margin-left: -5px;
+    min-width: 1px;
+    border-radius: 100px;
+    padding: 4px 8px 0px 8px;
 }
+
 
 #open_button {
     margin-left: auto;
