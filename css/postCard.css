@@ -144,6 +144,10 @@ button.md-icon-button.md #flag_button {
     color: rgba(0,0,0,0.54);
 }
 
+.post-card-header:hover .preBookmarkIcon{
+    display: 
+}
+
 #post_card_description {
     overflow: hidden;
     display: block;
