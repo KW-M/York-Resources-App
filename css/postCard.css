@@ -152,7 +152,9 @@ button.md-icon-button.md #flag_button {
 .small-icon {
     font-size: 12pt;
     height: 1.15em;
-    width: 1.15em;
+    width: 1em;
+    min-width: 1px;
+    min-height: 1px;
 }
 
 /*---------------------------------------------------------------- */
