@@ -1,4 +1,5 @@
-<md-button style="position: absolute; top: -14px; right: -6px; z-index: 100;" class="md-icon-button md-accent" ng-click"Post.Bookmarked = false">
+<md-button style="position: absolute; top: -14px; right: -6px; z-index: 100;" class="md-icon-button md-accent"  ng-click"Post.Bookmarked != Post.Bookmarked">
+
     <md-icon class="postBookmarkIcon" ng-show="Post.Bookmarked" style="text-shadow: 0px 1px 5px rgba(0,0,0,0.6);">bookmark</md-icon>
     <md-icon class="preBookmarkIcon" ng-hide="Post.Bookmarked" style="color: rgba(255, 255, 255, 0.6); text-shadow: 0px 1px 5px rgba(0,0,0,0.6)">bookmark_border</md-icon>
 </md-button>
@@ -25,7 +26,7 @@
 <p id="post_card_description" ng-bind-html="::Post.Description"></p>
 <md-card-actions layout="row" layout-align="start center">
 
-    
+
     <!--{{::Post.LikeUsers.length}}-->
     <md-button id="like_thumb_button" aria-label="Like">
         <md-icon style="display:none">thumb_down</md-icon>
