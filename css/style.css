@@ -8,13 +8,13 @@ div:focus {
 
 /*this chart specifies the css variables for the class background pastel colors :
 :root {
---pPurple: hsl(300,70%,93%); 
+--pPurple: hsl(300,70%,93%);
 --pBlue: hsl(232,70%,95%);
 --pLightblue: hsl(189,60%,93%);
 --pGreen: hsl(120,68%,93%);
 --pOrange: hsl(40,76%,93%);
 --pRed: hsl(8,70%,93%);
-} 
+}
  */
 
 
@@ -327,7 +327,7 @@ md-input-container.button-select md-select-value {
 }
 
 .post-card {
-    
+    box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.5);
     background-color: red;
     list-style: none;
     box-sizing: border-box;
