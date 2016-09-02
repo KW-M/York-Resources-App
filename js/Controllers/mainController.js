@@ -168,7 +168,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.getFiles = function() {
       queue(GoogleDriveService.runGAppsScript(), function(result) {
-      
          console.log(result)
       });
       $scope.firstFiles = true;
@@ -387,6 +386,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
       formatedFile.Type = unformatedFile.properties.Type;
       formatedFile.Flagged = unformatedFile.properties.Flagged;
+      formatedFile.Bookmarked = false;
       formatedFile.Id = unformatedFile.id;
 
       formatedFile.Title = titleAndURL[0];
