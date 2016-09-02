@@ -308,27 +308,33 @@ md-input-container.button-select md-select-value {
 /* --------------------------- Animations ------------------- */
 .post-card{
     background-color: red;
+    position: absolute;
+    list-style: none;
+    box-sizing: border-box;
+    -webkit-transition: all 400ms ease;
+    transition: all 400ms ease;
+    overflow: hidden;
     min-width: 100px;
     max-width: 400px;
     height: 100px;
-    margin: 8px;
-    opacity: 0;
-    transform: translateY(150px);
+    /*margin: 8px;*/
     transition: all 400ms ease;
     /*transition: opacity 450ms ease, transform 450ms ease;*/
 }
 .post-card.ng-enter {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 0;
+    transform: translateY(150px);
+    transition: all 400ms ease;
 }
 /*.post-card.ng-enter-stagger {*/
 /*    transition-delay: 0.4s;*/
 /*    transition-duration: 0;*/
 /*}*/
-/*.post-card.ng-enter.ng-enter-active {*/
-/*   transform: translateY(0);*/
-/*   opacity: 1;*/
-/*}*/
+.post-card.ng-enter.ng-enter-active {
+    transition: all 400ms ease;
+    transform: translateY(0);
+    opacity: 1;
+}
 /*.post-card.ng-leave {*/
 /*    transform: scale(0.25);*/
 /*    opacity: 0;*/

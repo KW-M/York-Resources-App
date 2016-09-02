@@ -71,8 +71,7 @@
             <div id="content_container" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'gt-sm': $mdMedia('gt-sm')}" class="">
                 <ng-view></ng-view>
                 <div angular-grid="testGrid" ag-options="angularGridOptions" ag-id="testing">
-                    <div class="post-card" ng-repeat="n in [42, 42, 43, 43, 55, 66,10, 465, 8, 9 ,0 ,7, 8, 3] track by $index">
-                        {{n}}
+                    <div class="post-card" ng-repeat="n  in visiblePosts track by $index">
                     </div>
                 </div>
                 <!--<div angular-grid="allPosts" ag-options="angularGridOptions" ag-id="posts">-->
