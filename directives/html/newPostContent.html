@@ -1,4 +1,4 @@
-<md-dialog ng-cloak id="new_post_dialog">
+<md-dialog ng-cloak id="new_post_dialog" ng-style="{'background-color': Class.Color}">
    <md-toolbar id="dialog_header">
       <div class="md-toolbar-tools">
          <div class="md-icon-button">
@@ -42,7 +42,7 @@
          <div id="DescriptionTxt" ng-bind-html="newPostDescription" class="newPostBody" contenteditable="true"></div>
       </div>
    </md-dialog-content>
-   <md-dialog-actions layout="row">
+   <md-dialog-actions layout="row"> 
       <md-button id="New_Post_Submit" ng-click="isReadyToSubmit()" class="md-raised">Submit</md-button>
       <md-button class="text-formating-button md-icon-button " style="margin: 0 -6px 0 0; padding: 0;">
          <md-icon style="font-size:18px; line-height: 24px;">format_bold</md-icon>
