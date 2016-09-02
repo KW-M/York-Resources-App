@@ -64,14 +64,17 @@
         <md-sidenav side-nav-insides class="ng-cloak side-nav md-sidenav-left md-whiteframe-z2 sidenav-overlay" md-component-id="sidenav_overlay"></md-sidenav>
         <!-------------------------------------------------------->
         <!-------------------------------------------------------->
+        <div class="post-card">{{wogh}}</div>
         <div class="horizontalContainer">
             <!---------------------------------------------------->
             <side-nav-insides class="ng-cloak side-nav md-sidenav-left sidenav-inline" ng-class="{'side-nav-open' : globals.sidenavIsOpen === true && $mdMedia('gt-sm'), 'xs': $mdMedia('xs'),}"></side-nav-insides>
             <!----- The content, ie posts, resources, etc. ------->
             <div id="content_container" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'gt-sm': $mdMedia('gt-sm')}" class="">
                 <ng-view></ng-view>
+                {{testArray}}
+                
                 <div angular-grid="testGrid" ag-options="angularGridOptions" ag-id="testing">
-                    <div class="post-card" ng-repeat="eee in testArray"></div>
+   
                 </div>
                 <!--<div angular-grid="allPosts" ag-options="angularGridOptions" ag-id="posts">-->
                 <!--    <md-card post-card class="post-card raise-on-hover" ng-repeat="Post in visiblePosts" ng-style="{'background-color': Post.Class.Color}"></md-card>-->
