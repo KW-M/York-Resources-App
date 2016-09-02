@@ -308,8 +308,11 @@ md-input-container.button-select md-select-value {
 /* --------------------------- Animations ------------------- */
 #postsGrid{
     display: none;
-}postsGrid
+}
 
+#postsGrid.angular-grid {
+  display: block;
+}
 .post-card{
     background-color: red;
     position: absolute;
