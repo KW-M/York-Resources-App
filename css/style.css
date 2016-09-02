@@ -312,14 +312,15 @@ md-input-container.button-select md-select-value {
     max-width: 400px;
     height: 100px;
     margin: 8px;
-    /*opacity: 0;*/
-    /*transform: translateY(150px);*/
+    opacity: 0;
+    transform: translateY(150px);
+    transition: all 400ms ease;
     /*transition: opacity 450ms ease, transform 450ms ease;*/
 }
-/*.post-card.ng-enter {*/
-/*    opacity: 1;*/
-/*    transform: translateY(0);*/
-/*}*/
+.post-card.ng-enter {
+    opacity: 1;
+    transform: translateY(0);
+}
 /*.post-card.ng-enter-stagger {*/
 /*    transition-delay: 0.4s;*/
 /*    transition-duration: 0;*/
