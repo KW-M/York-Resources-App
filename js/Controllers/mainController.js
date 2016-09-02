@@ -10,8 +10,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.searchPosts = [];
    $scope.flaggedPosts = [];
    $scope.visiblePosts = [];
+   
    var deDuplicationIndex = {};
    var classPageTokenSelectionIndex = {};
+   
    $scope.searchTxt = undefined; //undefined to make popunder show with no text in  field
    $scope.previousSearch = undefined;
    $scope.searchPlaceholder = 'Search';
@@ -39,6 +41,14 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.$mdMedia = $mdMedia;
    $scope.$mdDialog = $mdDialog;
+   $scope.angularGridOptions = {
+      gridWidth: 250,
+      // infiniteScroll: $scope.getFiles,
+      scrollContainer: '#content_container',
+      pageSize: 1.5,
+      performantScroll: true,
+      gutterSize: 12,
+   };
 
    //-routing-------------
 

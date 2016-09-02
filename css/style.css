@@ -327,8 +327,6 @@ md-input-container.button-select md-select-value {
 }
 
 .post-card {
-    box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.5);
-    background-color: red;
     list-style: none;
     box-sizing: border-box;
     -webkit-transition: all 400ms ease;
@@ -363,8 +361,8 @@ md-input-container.button-select md-select-value {
 }
 
 .post-card.ng-enter.ng-enter-active {
-    -webkit-transform: scale(1), translateY(0);
-    transform: scale(1), translateY(0);
+    -webkit-transform: scale(1) translateY(0);
+    transform: scale(1) translateY(0);
     opacity: 1;
 }
 

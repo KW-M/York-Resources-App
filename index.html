@@ -70,13 +70,9 @@
             <!----- The content, ie posts, resources, etc. ------->
             <div id="content_container" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'gt-sm': $mdMedia('gt-sm')}" class="">
                 <ng-view></ng-view>
-                <div angular-grid="testGrid" id="postsGrid" ag-options="angularGridOptions" ag-id="testing">
-                    <div class="post-card angular-grid-item" ng-repeat="n in visiblePosts track by $index">
-                    </div>
+                <div angular-grid="allPosts" id="postsGrid" ag-options="angularGridOptions" ag-id="posts">
+                    <md-card post-card class="post-card raise-on-hover" ng-repeat="Post in visiblePosts" ng-style="{'background-color': Post.Class.Color}"></md-card>
                 </div>
-                <!--<div angular-grid="allPosts" ag-options="angularGridOptions" ag-id="posts">-->
-                <!--    <md-card post-card class="post-card raise-on-hover" ng-repeat="Post in visiblePosts" ng-style="{'background-color': Post.Class.Color}"></md-card>-->
-                <!--</div>-->
                 <div style="width: 100%; height: 80px; postion: relative">
                     <md-progress-circular id="loading_spinner" class="md-accent" style="display: none;" md-mode="indeterminate" md-diameter="30px"></md-progress-circular>
                 </div>
