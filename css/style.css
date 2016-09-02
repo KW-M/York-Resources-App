@@ -334,7 +334,6 @@ md-input-container.button-select md-select-value {
     overflow: hidden;
     min-width: 100px;
     max-width: 400px;
-    height: 200px;
     margin: 8px;
     /*transition: opacity 450ms ease, transform 450ms ease;*/
 }
