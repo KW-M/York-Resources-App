@@ -702,10 +702,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    // });
    content_container.onscroll = function(event) {
       //called whenever the content_container scrolls
-      if (performantScrollEnabled === false && $scope.angularGridOptions.performantScroll === false) {
-         $scope.angularGridOptions.performantScroll = true;
-         performantScrollEnabled = true;
-      }
+      // if (performantScrollEnabled === false && $scope.angularGridOptions.performantScroll === false) {
+      //    $scope.angularGridOptions.performantScroll = true;
+      //    performantScrollEnabled = true;
+      // }
       var yScroll = content_container.scrollTop;
       if (yScroll >= 120) {
          $scope.globals.FABisHidden = false;
@@ -718,10 +718,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
    window.addEventListener("resize", function() {
-      if (performantScrollEnabled === true && $scope.angularGridOptions.performantScroll === true) {
-         $scope.angularGridOptions.performantScroll = false;
-         performantScrollEnabled = false;
-      }
+      // if (performantScrollEnabled === true && $scope.angularGridOptions.performantScroll === true) {
+      //    $scope.angularGridOptions.performantScroll = false;
+      //    performantScrollEnabled = false;
+      // }
       if ($mdMedia('gt-sm')) {
          $mdSidenav('sidenav_overlay').close();
       }
