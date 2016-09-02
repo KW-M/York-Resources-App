@@ -386,7 +386,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
       formatedFile.Type = unformatedFile.properties.Type;
       formatedFile.Flagged = unformatedFile.properties.Flagged;
-      formatedFile.Bookmarked = 'wow';
+      formatedFile.getghjmb = false;
       formatedFile.Id = unformatedFile.id;
 
       formatedFile.Title = titleAndURL[0];
