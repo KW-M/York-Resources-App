@@ -1,7 +1,7 @@
 /*---------------------universal styles---------------------- */
 
 button:focus,
-div:focus{
+div:focus {
     outline: 0;
 }
 
@@ -16,11 +16,13 @@ div:focus{
 --pRed: hsl(8,70%,93%);
 } 
  */
+
+
 /*------------ background and layout styles ----------- */
 
 html body {
     display: -ms-flexbox;
-    display:flex;
+    display: flex;
     -ms-flex-direction: column;
     font-family: 'Helvetica Neue', Helvetica, "Roboto", Arial, sans-serif;
     flex-direction: column;
@@ -33,13 +35,13 @@ html body {
 .horizontalContainer {
     /* The body is the vertical layout container*/
     position: relative;
-        -ms-flex:1;
-            flex:1;
-    display:-ms-flexbox;
-    display:flex;
-        -ms-flex-direction: row;
-            flex-direction: row;
-            z-index: 0;
+    -ms-flex: 1;
+    flex: 1;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    z-index: 0;
 }
 
 #content_container {
@@ -49,6 +51,7 @@ html body {
     padding: 32px 100px 0 0;
     background-color: #f2f2f2;
 }
+
 #content_container.xs {
     padding-right: 0px
 }
@@ -56,16 +59,17 @@ html body {
 
 /*---------------------------------------------------------------- */
 
+
 /*-------------- Loading & first launch styles ----------- */
 
 #welcome_dialog {
-    display:-webkit-box;
-    display:-ms-flexbox;
-    display:flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     font-size: 14px;
     font-weight: 400;
     position: fixed;
@@ -84,7 +88,9 @@ html body {
     border-radius: 4px;
     box-shadow: 0 7px 8px -4px rgba(0, 0, 0, .2), 0 13px 19px 2px rgba(0, 0, 0, .14), 0 5px 24px 4px rgba(0, 0, 0, .12);
 }
-#welcome_dialog p:not(.signin-text), #welcome_dialog ul {
+
+#welcome_dialog p:not(.signin-text),
+#welcome_dialog ul {
     margin-top: 0px
 }
 
@@ -98,8 +104,8 @@ html body {
 
 .signin-button-container {
     -webkit-box-flex: 1;
-        -ms-flex: 1;
-            flex: 1;
+    -ms-flex: 1;
+    flex: 1;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -172,15 +178,17 @@ html body {
 
 .fadeOut {
     opacity: 0;
-    pointer-events:none;
+    pointer-events: none;
     transition: opacity 0.5s ease;
 }
 
 .fadeIn {
     opacity: 1;
-    pointer-events:initial;
+    pointer-events: initial;
     transition: opacity 0.5s ease;
 }
+
+
 /* ---------------------- Genral Styles---------------------- */
 
 [ng\:cloak],
@@ -201,26 +209,30 @@ html body {
 }
 
 .unselectable:focus {
- outline:none;
+    outline: none;
 }
 
 .default-mouse {
     cursor: default;
 }
 
-.not-visible{
+.not-visible {
     visibility: hidden;
 }
+
 .no-margin {
     margin: 0 !important;
 }
+
 .no-padding {
     padding: 0 !important;
 }
+
 .no-border {
     border: none;
     outline: none;
 }
+
 .no-border:focus {
     border: none;
     outline: none;
@@ -229,34 +241,35 @@ html body {
 .dark-icon {
     color: rgba(0, 0, 0, 0.8);
 }
+
 .dark-icon:hover {
     color: black;
 }
 
-.full-height{
- height: 100%;
+.full-height {
+    height: 100%;
 }
 
-.full-width{
- width: 100%;
+.full-width {
+    width: 100%;
 }
 
-.rounded{
- border-radius: 3px;
+.rounded {
+    border-radius: 3px;
 }
 
-.rounded-right{
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
+.rounded-right {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
 
-.rounded-left{
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
+.rounded-left {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
 }
 
-.darken-on-hover:hover{
-    background-color: rgba(158,158,158,0.2);
+.darken-on-hover:hover {
+    background-color: rgba(158, 158, 158, 0.2);
 }
 
 .raise-on-hover:hover {
@@ -279,19 +292,19 @@ html body {
 
 md-input-container.button-select md-select-value {
     border-bottom: 0px !important;
-    padding:0px !important;
-    padding-bottom: 2px  !important;
+    padding: 0px !important;
+    padding-bottom: 2px !important;
 }
 
-.classSelectSearchbox input{
+.classSelectSearchbox input {
     border: none;
     outline: none;
     height: 100%;
     width: 100%;
-    padding: 0; 
+    padding: 0;
 }
 
-.classSelectSearchbox{
+.classSelectSearchbox {
     box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1), 0 0 0 0 rgba(0, 0, 0, 0.14), 0 0 0 0 rgba(0, 0, 0, 0.12);
     padding-left: 10.667px;
     height: 48px;
@@ -299,23 +312,23 @@ md-input-container.button-select md-select-value {
     position: relative;
     display: flex;
     align-items: center;
-    width: auto; 
+    width: auto;
 }
 
 
-
-
 /* --------------------------- Animations ------------------- */
-#postsGrid{
+
+#postsGrid {
     display: none;
 }
 
 #postsGrid.angular-grid {
-  display: block;
+    display: block;
 }
-.post-card{
+
+.post-card {
+    
     background-color: red;
-    position: absolute;
     list-style: none;
     box-sizing: border-box;
     -webkit-transition: all 400ms ease;
@@ -324,53 +337,96 @@ md-input-container.button-select md-select-value {
     min-width: 100px;
     max-width: 400px;
     height: 100px;
-    
-    /*margin: 8px;*/
+    margin: 8px;
     /*transition: opacity 450ms ease, transform 450ms ease;*/
 }
 
 .post-card.ng-leave {
-  -webkit-transition: all ease 400ms;
-  transition: all ease 400ms;
-}
-.post-card.ng-leave.ng-leave-active {
-  -webkit-transform: scale(0.5);
-  transform: scale(0.5);
-  opacity: 0;
-}
-.post-card.ng-enter {
-  -webkit-transition: all ease 400ms;
-  transition: all ease 400ms;
-  -webkit-transition-delay: 500ms;
-  transition-delay: 500ms;
-  -webkit-transform: scale(0.5);
-   transform: scale(0.5);
-  opacity: 0;
-}
-.post-card.ng-enter.ng-enter-active {
-  -webkit-transform: scale(1);
-  transform: scale(1);
-  opacity: 1;
+    -webkit-transition: all ease 400ms;
+    transition: all ease 400ms;
 }
 
+.post-card.ng-leave.ng-leave-active {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    opacity: 0;
+}
+
+.post-card.ng-enter {
+    -webkit-transition: all ease 400ms;
+    transition: all ease 400ms;
+    -webkit-transition-delay: 500ms;
+    transition-delay: 500ms;
+    -webkit-transform: translateY(150px);
+    transform: translateY(150px);
+    opacity: 0;
+}
+
+.post-card.ng-enter.ng-enter-active {
+    -webkit-transform: scale(1), translateY(0);
+    transform: scale(1), translateY(0);
+    opacity: 1;
+}
+
+
 /*.post-card.ng-enter {*/
+
+
 /*    opacity: 0;*/
+
+
 /*    transform: translateY(150px);*/
+
+
 /*    transition: all 400ms ease;*/
+
+
 /*}*/
+
+
 /*.post-card.ng-enter-stagger {*/
+
+
 /*    transition-delay: 0.4s;*/
+
+
 /*    transition-duration: 0;*/
+
+
 /*}*/
+
+
 /*.post-card.ng-enter.ng-enter-active {*/
+
+
 /*    transition: all 400ms ease;*/
+
+
 /*    transform: translateY(0);*/
+
+
 /*    opacity: 1;*/
+
+
 /*}*/
+
+
 /*.post-card.ng-leave {*/
+
+
 /*    transform: scale(0.25);*/
+
+
 /*    opacity: 0;*/
+
+
 /*}*/
+
+
 /*.post-card.ng-leave.ng-leave-active {*/
+
+
 /*    opacity: 0;*/
+
+
 /*}*/
