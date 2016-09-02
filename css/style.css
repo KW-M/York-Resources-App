@@ -306,6 +306,10 @@ md-input-container.button-select md-select-value {
 
 
 /* --------------------------- Animations ------------------- */
+#postsGrid{
+    display: none;
+}postsGrid
+
 .post-card{
     background-color: red;
     position: absolute;
