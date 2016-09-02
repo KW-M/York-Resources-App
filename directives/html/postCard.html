@@ -1,6 +1,6 @@
-<md-button style="position: absolute; top: -14px; right: -6px; z-index: 100;" class="md-icon-button md-accent">
-    <md-icon class="postBookmarkIcon" style="text-shadow: 0px 1px 5px rgba(0,0,0,0.6);">bookmark</md-icon>
-    <md-icon class="preBookmarkIcon" style="color: rgba(255, 255, 255, 0.6); text-shadow: 0px 1px 5px rgba(0,0,0,0.6)">bookmark_border</md-icon>
+<md-button style="position: absolute; top: -14px; right: -6px; z-index: 100;" class="md-icon-button md-accent" ng-click"Post.Bookmarked = false">
+    <md-icon class="postBookmarkIcon" ng-show="Post.Bookmarked" style="text-shadow: 0px 1px 5px rgba(0,0,0,0.6);">bookmark</md-icon>
+    <md-icon class="preBookmarkIcon" ng-hide="Post.Bookmarked" style="color: rgba(255, 255, 255, 0.6); text-shadow: 0px 1px 5px rgba(0,0,0,0.6)">bookmark_border</md-icon>
 </md-button>
 <div class="post-card-header" md-ink-ripple="{{Post.Type !== 'noLink'}}" ng-click="::openLink(Post.Link)" ng-class="{ 'noLink' : Post.Type === 'noLink' }">
     <img ng-src="{{::Post.PreviewImg}}" class="post-card-image" ng-hide="::Post.Link == ''">
