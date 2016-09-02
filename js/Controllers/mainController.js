@@ -20,6 +20,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.userList = [];
    $scope.Tags = [];
+   $scope.testArray = ['gke','g','e','e','12','23','24r','3','3','e','e'];
    $scope.globals = {
       FABisOpen: false,
       FABisHidden: true,
@@ -36,13 +37,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       CreatorEmail: "any",
    };
 
-
    $scope.$mdMedia = $mdMedia;
    $scope.$mdDialog = $mdDialog;
-
-   var moderators = { //temporary
-      'worcester-moorek2018@york.org': true,
-   }
 
    //-routing-------------
 

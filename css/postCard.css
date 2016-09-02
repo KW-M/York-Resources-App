@@ -4,11 +4,7 @@
     position: relative;
 }
 
-.post-card {
-    min-width: 100px;
-    max-width: 400px;
-    margin: 8px;
-}
+
 
 .post-card-header {
     border-bottom: solid 1px black;

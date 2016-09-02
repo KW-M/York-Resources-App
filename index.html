@@ -71,7 +71,7 @@
             <div id="content_container" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'gt-sm': $mdMedia('gt-sm')}" class="">
                 <ng-view></ng-view>
                 <div angular-grid="testGrid" ag-options="angularGridOptions" ag-id="testing">
-                    <div style="background-color:red; height:10px"></div>
+                    <div class="post-card" ng-repeat="eee in testArray"></div>
                 </div>
                 <!--<div angular-grid="allPosts" ag-options="angularGridOptions" ag-id="posts">-->
                 <!--    <md-card post-card class="post-card raise-on-hover" ng-repeat="Post in visiblePosts" ng-style="{'background-color': Post.Class.Color}"></md-card>-->

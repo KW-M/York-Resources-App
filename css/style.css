@@ -307,26 +307,31 @@ md-input-container.button-select md-select-value {
 
 /* --------------------------- Animations ------------------- */
 .post-card{
-    opacity: 0;
-    transform: translateY(150px);
-    transition: opacity 450ms ease, transform 450ms ease;
+    background-color: red;
+    min-width: 100px;
+    max-width: 400px;
+    height: 100px;
+    margin: 8px;
+    /*opacity: 0;*/
+    /*transform: translateY(150px);*/
+    /*transition: opacity 450ms ease, transform 450ms ease;*/
 }
-.post-card.ng-enter {
-    opacity: 1;
-    transform: translateY(0);
-}
+/*.post-card.ng-enter {*/
+/*    opacity: 1;*/
+/*    transform: translateY(0);*/
+/*}*/
 /*.post-card.ng-enter-stagger {*/
 /*    transition-delay: 0.4s;*/
 /*    transition-duration: 0;*/
 /*}*/
-.post-card.ng-enter.ng-enter-active {
-   transform: translateY(0);
-   opacity: 1;
-}
-.post-card.ng-leave {
-    transform: scale(0.25);
-    opacity: 0;
-}
-.post-card.ng-leave.ng-leave-active {
-    opacity: 0;
-}
+/*.post-card.ng-enter.ng-enter-active {*/
+/*   transform: translateY(0);*/
+/*   opacity: 1;*/
+/*}*/
+/*.post-card.ng-leave {*/
+/*    transform: scale(0.25);*/
+/*    opacity: 0;*/
+/*}*/
+/*.post-card.ng-leave.ng-leave-active {*/
+/*    opacity: 0;*/
+/*}*/
