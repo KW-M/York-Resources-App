@@ -95,7 +95,8 @@
         border-top: 1px solid #ddd;
     }
     
-    .selected button {
+    button.selected.md-button {
         background-color: rgba(0,0,0,.05);
-        font-weight: bold
+        font-weight: bold;
+        color: #212121;
     }

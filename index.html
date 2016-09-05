@@ -61,11 +61,11 @@
         <!-------------------------------------------------------->
         <!------------------- The top toolbar -------------------->
         <md-toolbar toolbar-top-content class="md-whiteframe-z2 ng-cloak toolbar-top"></md-toolbar>
-        <md-sidenav side-nav-insides class="ng-cloak side-nav md-sidenav-left md-whiteframe-z2 sidenav-overlay" md-component-id="sidenav_overlay"></md-sidenav>
         <!-------------------------------------------------------->
         <!-------------------------------------------------------->
         <div class="horizontalContainer">
             <!---------------------------------------------------->
+            <md-sidenav side-nav-insides class="ng-cloak side-nav md-sidenav-left md-whiteframe-z2 sidenav-overlay" md-component-id="sidenav_overlay"></md-sidenav>
             <side-nav-insides class="ng-cloak side-nav md-sidenav-left sidenav-inline" ng-class="{'side-nav-open' : globals.sidenavIsOpen === true && $mdMedia('gt-sm'), 'xs': $mdMedia('xs'),}"></side-nav-insides>
             <!----- The content, ie posts, resources, etc. ------->
             <div id="content_container" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'gt-sm': $mdMedia('gt-sm')}" class="">
