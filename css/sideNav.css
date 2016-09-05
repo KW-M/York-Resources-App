@@ -19,7 +19,7 @@
         margin-right: 4px;
     }
 
-    .sidenav-inline md-menu-item {
+    .side-nav md-menu-item {
         width: 100%;
     }
 
@@ -93,4 +93,9 @@
     .side-nav-bottom {
         /*width: 100%;*/
         border-top: 1px solid #ddd;
+    }
+    
+    .selected button {
+        background-color: rgba(0,0,0,.05);
+        font-weight: bold
     }
