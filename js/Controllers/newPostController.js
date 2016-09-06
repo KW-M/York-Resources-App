@@ -163,7 +163,10 @@
                 }
 
                 if (postObj.Description) {
-                    $scope.newPostDescription = postObj.Description;
+                    $scope.Description = postObj.Description;
+                    console.log($scope.Description)
+                } else {
+                    console.log($scope.Description)
                 }
 
                 if (postObj.Class) {
@@ -254,7 +257,7 @@
                 metadata.properties.Tag2 = tagString[1] || "";
             }
 
-            if (postObj.Description !== $scope.newPostDescription) {
+            if (postObj.Description !== $scope.Description) {
                 metadata.description = $scope.newPostDescription.innerHTML;
             }
 
