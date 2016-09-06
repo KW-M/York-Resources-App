@@ -43,7 +43,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.$mdDialog = $mdDialog;
    $scope.angularGridOptions = {
       gridWidth: 250,
-      infiniteScroll: $scope.getFiles,
+      infiniteScroll: $scope.getFiles(),
       scrollContainer: '#content_container',
       pageSize: 1.5,
       performantScroll: true,

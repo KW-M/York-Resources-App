@@ -338,7 +338,6 @@ md-input-container.button-select md-select-value {
     box-sizing: border-box;
     -webkit-transition: all 400ms ease;
     transition: all 400ms ease;
-    overflow: hidden;
     min-width: 100px;
     margin: 0px;
     /*transition: opacity 450ms ease, transform 450ms ease;*/
