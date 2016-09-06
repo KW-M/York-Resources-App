@@ -8,7 +8,7 @@
         $scope.CreationDate = new Date();
         $scope.UpdateDate = new Date();
         $scope.Tags = [];
-        $scope.Description = '';
+        $scope.Description = null;
         $scope.Class = {Name:''};
         $scope.Link = '';
         $scope.AttachmentId = '';
