@@ -8,7 +8,7 @@
         $scope.CreationDate = new Date();
         $scope.UpdateDate = new Date();
         $scope.Tags = [];
-        $scope.Description = null;
+        $scope.Description = '';
         $scope.Class = {Name:''};
         $scope.Link = '';
         $scope.AttachmentId = '';
@@ -164,9 +164,6 @@
 
                 if (postObj.Description) {
                     $scope.Description = postObj.Description;
-                    console.log($scope.Description)
-                } else {
-                    console.log($scope.Description)
                 }
 
                 if (postObj.Class) {
@@ -211,7 +208,7 @@
             metadata.properties.Type = $scope.Type;
             metadata.properties.Flagged = $scope.Flagged;
 
-            metadata.description = $scope.newPostDescription.innerHTML;
+            metadata.description = $scope.Description;
 
             metadata.properties.ClassName = $scope.Class.Name;
             metadata.properties.ClassCatagory = $scope.Class.Catagory;
@@ -258,7 +255,7 @@
             }
 
             if (postObj.Description !== $scope.Description) {
-                metadata.description = $scope.newPostDescription.innerHTML;
+                metadata.description = $scope.Description;
             }
 
             if (postObj.Class.Name !== $scope.Class.Name) {
