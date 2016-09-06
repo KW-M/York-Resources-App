@@ -47,8 +47,9 @@ html body {
 #content_container {
     -ms-flex: 1;
     flex: 1;
-    overflow: auto;
-    padding: 32px 100px 0 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 32px 100px 0px 8px;
     background-color: #f2f2f2;
 }
 
