@@ -9,7 +9,7 @@
         overflow-y: auto;
     }
 
-    .sidenav-inline.xs {
+    .sidenav-inline.xs, .sidenav-inline.sm {
         margin-right: 0px;
         margin-left: -256px;
     }
