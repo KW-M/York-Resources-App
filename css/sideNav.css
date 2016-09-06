@@ -8,12 +8,12 @@
         transition: margin 1s;
         overflow-y: auto;
     }
-    
+
     .sidenav-inline.xs {
         margin-right: 0px;
         margin-left: -256px;
     }
-    
+
     .sidenav-inline.side-nav-open {
         margin-left: 0px;
         margin-right: 4px;
@@ -62,7 +62,7 @@
     .side-nav-section {
         border-bottom: 1px solid #ddd;
     }
-    
+
     .side-nav-header {
         display: block;
         font-size: 14px;
@@ -85,7 +85,7 @@
         text-overflow: ellipsis;
         font-size: 16px;
     }
-    
+
     .side-nav-classes {
         margin-left: 12px;
     }
@@ -94,7 +94,7 @@
         /*width: 100%;*/
         border-top: 1px solid #ddd;
     }
-    
+
     button.selected.md-button {
         background-color: rgba(0,0,0,.05);
         font-weight: bold;
