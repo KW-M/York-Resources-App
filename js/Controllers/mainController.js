@@ -41,14 +41,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.$mdMedia = $mdMedia;
    $scope.$mdDialog = $mdDialog;
-   $scope.angularGridOptions = {
-      gridWidth: 250,
-      infiniteScroll: $scope.getFiles(),
-      scrollContainer: '#content_container',
-      pageSize: 1.5,
-      performantScroll: true,
-      gutterSize: 12,
-   };
 
    //-routing-------------
 
@@ -689,6 +681,15 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
    
    //-event watchers---------
+   
+   $scope.angularGridOptions = {
+      gridWidth: 250,
+      infiniteScroll: $scope.getFiles,
+      scrollContainer: '#content_container',
+      pageSize: 1.5,
+      performantScroll: true,
+      gutterSize: 12,
+   };
 
    // The md-select directive eats keydown events for some quick select
    // logic. Since we have a search input here, we don't need that logic.
