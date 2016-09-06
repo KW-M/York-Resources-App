@@ -54,11 +54,13 @@ html body {
 }
 
 #content_container.sm {
-    padding-right: 2px
+    padding-left: 24px;
+    padding-right: 24px
 }
 
 #content_container.xs {
-    padding-right: 2px
+    padding-left: 8px;
+    padding-right: 8px
 }
 
 
