@@ -684,7 +684,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    
    $scope.angularGridOptions = {
       gridWidth: 250,
-      infiniteScroll: $scope.getFiles,
+      infiniteScroll: function() {
+         if($scope.visiblePosts >= 1){
+            console.log('loading...');
+            $scope.getFiles();
+         }
+      },
       scrollContainer: '#content_container',
       pageSize: 1.5,
       performantScroll: true,
