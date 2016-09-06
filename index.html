@@ -71,67 +71,7 @@
             <div id="content_container" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'gt-sm': $mdMedia('gt-sm')}" class="">
                 <ng-view></ng-view>
                 <div angular-grid="allPosts" id="postsGrid" ag-options="angularGridOptions" ag-id="posts">
-                    <md-card class="post-card raise-on-hover" ng-repeat="Post in visiblePosts" ng-style="{'background-color': Post.Class.Color}">
-                        <div class="post-card-header" md-ink-ripple="{{Post.Type !== 'noLink'}}" ng-click="::openLink(Post.Link)" ng-class="{ 'noLink' : Post.Type === 'noLink' }">
-                            <img ng-src="{{::Post.PreviewImg}}" class="post-card-image" ng-hide="::Post.Link == ''">
-                            <div class="post-card-image-gradient">
-                                <p class="post-card-link-text" ng-hide="::Post.Link == ''">
-                                    <md-icon style="color:White; font-size: 16px;" class="small-icon">language</md-icon><span> {{::Post.Link}}</span>
-                                </p>
-                                <div class="post-card-metadata-text">
-                                    <p style="margin: 4px 0 0 0;">
-                                        <md-icon class="small-icon" style="color:white">event</md-icon><span style="margin-right:10px; font-weight:700; font-size:14px"> {{::Post.CreationDate | date : "m/dd/yyyy"}}</span>
-                                        <md-icon class="small-icon" style="color:white">people</md-icon><span style="font-weight:700; font-size:14px"> {{::Post.Class.Name}}</span>
-                                    </p>
-                                    <p style="margin: 0 0 0 0; font-size: 12px; font-weight:500;" ng-hide="::Post.Tags === null">
-                                        <md-icon class="small-icon" style="color:white">style</md-icon><span>{{Post.Tags.join(', ')}}</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="post-card-title md-title">{{::Post.Title}}</p>
-                        <p class="post-card-creator md-subhead"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{Post.Creator.ClassOf}})</span></p>
-                        <p id="post_card_description" class="md-body-1" ng-bind-html="Post.Description"></p>
-                        <md-card-actions layout="row" layout-align="start center">
-                            <md-button id="like_thumb_button" aria-label="Like">
-                                <md-icon style="display:none">thumb_down</md-icon>
-                                <p class="like-counter">16</p>
-                                <md-icon style="margin-top: -6px;">thumb_up</md-icon>
-                            </md-button>
-                            <md-button class="md-icon-button" id="flag_button" area-label="Flag" style="margin:0" ng-hide="::Post.Creator.Email === myInfo.Email">
-                                <md-icon>flag</md-icon>
-                            </md-button>
-                            <md-button class="md-icon-button" id="flag_button" area-label="Flag" style="margin:0" ng-show="::Post.Flagged === 'true'" ng-click="::unFlagPost($event,Post,$index)">
-                                <md-icon class="md-warn">flag</md-icon>
-                            </md-button>
-                            <md-menu md-position-mode="target" md-offset="7 0" style="padding:0px">
-                                <md-button ng-click="::$mdOpenMenu($event)" ng-show="::Post.Creator.Email === myInfo.Email" class="md-icon-button" style="margin:0">
-                                    <md-icon>more_vert</md-icon>
-                                </md-button>
-                                <md-menu-content>
-                                    <md-menu-item ng-hide="::Post.Flagged === 'true'">
-                                        <md-button ng-click="::flagPost($event,Post,$index)">
-                                            <md-icon>flag</md-icon>Flag</md-button>
-                                    </md-menu-item>
-                                    <md-menu-item>
-                                        <md-button ng-click="::confirmDelete($event,Post,$index)">
-                                            <md-icon>delete</md-icon>Delete</md-button>
-                                    </md-menu-item>
-                                    <md-menu-item>
-                                        <md-button ng-click="::newPost(Post,'update')">
-                                            <md-icon>edit</md-icon>Edit</md-button>
-                                    </md-menu-item>
-                                    <md-menu-item ng-show="::myInfo.Email === 'worcester-moorek2018@york.org'">
-                                        <md-button ng-click="::logPostToConsole(Post,$index)">
-                                            <md-icon>edit</md-icon>Console Log Post</md-button>
-                                    </md-menu-item>
-                                </md-menu-content>
-                            </md-menu>
-
-                            <md-button id="open_button" ng-hide="::Post.Link == ''" class="md-button md-accent" ng-click="::openLink(Post.Link)" aria-label="Open resource">Open Resource</md-button>
-                        </md-card-actions>
-                    </md-card>
-                    <!--post-card-->
+                    <md-card post-card class="post-card raise-on-hover" ng-repeat="Post in visiblePosts" ng-style="{'background-color': Post.Class.Color}"></md-card>
                 </div>
                 <div style="width: 100%; height: 80px; postion: relative">
                     <md-progress-circular id="loading_spinner" class="md-accent" style="display: none;" md-mode="indeterminate" md-diameter="30px"></md-progress-circular>
