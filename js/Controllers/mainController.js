@@ -691,7 +691,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             $scope.getFiles();
          }
       },
-      scrollContainer: '#content_container',
+      scrollContainer: 'content_container',
       pageSize: 1.5,
       performantScroll: true,
       gutterSize: 12,
