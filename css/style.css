@@ -325,50 +325,50 @@ md-input-container.button-select md-select-value {
 
 /* --------------------------- Animations ------------------- */
 
-#postsGrid {
-    display: none;
-}
+/*#postsGrid {*/
+/*    display: none;*/
+/*}*/
 
-#postsGrid.angular-grid {
-    display: block;
-}
+/*#postsGrid.angular-grid {*/
+/*    display: block;*/
+/*}*/
 
-.post-card {
-    list-style: none;
-    box-sizing: border-box;
-    -webkit-transition: all 400ms ease;
-    transition: all 400ms ease;
-    min-width: 100px;
-    margin: 0px;
+/*.post-card {*/
+/*    list-style: none;*/
+/*    box-sizing: border-box;*/
+/*    -webkit-transition: all 400ms ease;*/
+/*    transition: all 400ms ease;*/
+/*    min-width: 100px;*/
+/*    margin: 0px;*/
     /*transition: opacity 450ms ease, transform 450ms ease;*/
-}
+/*}*/
 
-.post-card.ng-leave {
-    -webkit-transition: all ease 400ms;
-    transition: all ease 400ms;
-}
+/*.post-card.ng-leave {*/
+/*    -webkit-transition: all ease 400ms;*/
+/*    transition: all ease 400ms;*/
+/*}*/
 
-.post-card.ng-leave.ng-leave-active {
-    -webkit-transform: scale(0.5);
-    transform: scale(0.5);
-    opacity: 0;
-}
+/*.post-card.ng-leave.ng-leave-active {*/
+/*    -webkit-transform: scale(0.5);*/
+/*    transform: scale(0.5);*/
+/*    opacity: 0;*/
+/*}*/
 
-.post-card.ng-enter {
-    -webkit-transition: all ease 400ms;
-    transition: all ease 400ms;
-    -webkit-transition-delay: 500ms;
-    transition-delay: 500ms;
-    -webkit-transform: translateY(150px);
-    transform: translateY(150px);
-    opacity: 0;
-}
+/*.post-card.ng-enter {*/
+/*    -webkit-transition: all ease 400ms;*/
+/*    transition: all ease 400ms;*/
+/*    -webkit-transition-delay: 500ms;*/
+/*    transition-delay: 500ms;*/
+/*    -webkit-transform: translateY(150px);*/
+/*    transform: translateY(150px);*/
+/*    opacity: 0;*/
+/*}*/
 
-.post-card.ng-enter.ng-enter-active {
-    -webkit-transform: scale(1) translateY(0);
-    transform: scale(1) translateY(0);
-    opacity: 1;
-}
+/*.post-card.ng-enter.ng-enter-active {*/
+/*    -webkit-transform: scale(1) translateY(0);*/
+/*    transform: scale(1) translateY(0);*/
+/*    opacity: 1;*/
+/*}*/
 
 
 /*.post-card.ng-enter {*/
