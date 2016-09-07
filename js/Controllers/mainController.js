@@ -411,8 +411,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
       formatedFile.Link = titleAndURL[1];
       formatedFile.attachmentId = unformatedFile.properties.attachmentId;
-      formatedFile.PreviewImg = unformatedFile.thumbnailLink.replace("=s220", "=s400") //"https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + formatedFile.Id;
-
+      if (formatedFile.Type === "Link") {
+         formatedFile.PreviewImg = unformatedFile.thumbnailLink.replace("=s220", "=s400")
+      } else if (formatedFile.Type === "Gdrive") {
+         formatedFile.PreviewImg = "https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + formatedFile.attachmentId;
+      }
       console.log({
          unformated: unformatedFile,
          formated: formatedFile
