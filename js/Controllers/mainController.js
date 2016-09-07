@@ -304,17 +304,19 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             if (formattedFileList !== undefined) {
                $scope.allPosts = $scope.allPosts.concat(formattedFileList);
             }
+            var filteredPosts = $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts));
             $timeout(function() {
-               $scope.visiblePosts = $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts));
-            })
+               $scope.visiblePosts = filteredPosts;
+            });
          }
          else {
             $scope.searchPlaceholder = 'Search ' + $scope.selectedClass;
             if (formattedFileList !== undefined) {
                $scope.allPosts = $scope.allPosts.concat(formattedFileList);
             }
+            var filteredPosts = $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts));
             $timeout(function() {
-               $scope.visiblePosts = $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts));
+               $scope.visiblePosts = filteredPosts;
             });
          }
       }
