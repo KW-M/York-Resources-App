@@ -10,10 +10,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.searchPosts = [];
    $scope.flaggedPosts = [];
    $scope.visiblePosts = [];
-   
+
    var deDuplicationIndex = {};
    var classPageTokenSelectionIndex = {};
-   
+
    $scope.searchTxt = undefined; //undefined to make popunder show with no text in  field
    $scope.previousSearch = undefined;
    $scope.searchPlaceholder = 'Search';
@@ -22,7 +22,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.userList = [];
    $scope.Tags = [];
-   $scope.testArray = ['gke','g','e','e','12','23','24r','3','3','e','e'];
+   $scope.testArray = ['gke', 'g', 'e', 'e', '12', '23', '24r', '3', '3', 'e', 'e'];
    $scope.globals = {
       FABisOpen: false,
       FABisHidden: true,
@@ -264,52 +264,60 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    function sortPostsByType(formattedFileList) {
-      $timeout(function() {
-         console.log("sorting");
-         if ($scope.searchTxt) {
-            if (formattedFileList !== undefined) {
-               if ($scope.searchTxt === $scope.previousSearch) {
-                  console.log('continueing search')
-                  $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
-               }
-               else {
-                  $scope.searchPosts = formattedFileList;
-               }
-               $scope.previousSearch = $scope.searchTxt
-            }
-            $scope.visiblePosts = $scope.searchPosts;
-         }
-         else {
-            if ($scope.selectedClass === 'all-posts') {
-               $scope.searchPlaceholder = 'Search'
-               if (formattedFileList !== undefined) {
-                  $scope.allPosts = $scope.allPosts.concat(formattedFileList);
-               }
-               $scope.visiblePosts = $scope.allPosts;
-            }
-            else if ($scope.selectedClass === 'flagged') {
-               $scope.searchPlaceholder = 'Search Flagged Posts'
-               if (formattedFileList !== undefined) {
-                  $scope.flaggedPosts = $scope.flaggedPosts.concat(formattedFileList);
-               }
-               $scope.visiblePosts = $scope.flaggedPosts;
-            }
-            else if ($scope.selectedClass === 'my-posts') {
-               $scope.searchPlaceholder = 'Search My Posts'
-               if (formattedFileList !== undefined) {
-                  $scope.allPosts = $scope.allPosts.concat(formattedFileList);
-               }
-               $scope.visiblePosts = $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts));
+      console.log("sorting");
+      if ($scope.searchTxt) {
+         if (formattedFileList !== undefined) {
+            if ($scope.searchTxt === $scope.previousSearch) {
+               console.log('continueing search')
+               $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
             }
             else {
-               $scope.searchPlaceholder = 'Search ' + $scope.selectedClass;
-               if (formattedFileList !== undefined) {
-                  $scope.allPosts = $scope.allPosts.concat(formattedFileList);
-               }
-               $scope.visiblePosts = $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts));
+               $scope.searchPosts = formattedFileList;
             }
+            $scope.previousSearch = $scope.searchTxt
          }
-      })
+         $timeout(function() {
+            $scope.visiblePosts = $scope.searchPosts;
+         })
+      }
+      else {
+         if ($scope.selectedClass === 'all-posts') {
+            $scope.searchPlaceholder = 'Search'
+            if (formattedFileList !== undefined) {
+               $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+            }
+            $timeout(function() {
+               $scope.visiblePosts = $scope.allPosts;
+            })
+         }
+         else if ($scope.selectedClass === 'flagged') {
+            $scope.searchPlaceholder = 'Search Flagged Posts'
+            if (formattedFileList !== undefined) {
+               $scope.flaggedPosts = $scope.flaggedPosts.concat(formattedFileList);
+            }
+            $timeout(function() {
+               $scope.visiblePosts = $scope.flaggedPosts;
+            })
+         }
+         else if ($scope.selectedClass === 'my-posts') {
+            $scope.searchPlaceholder = 'Search My Posts'
+            if (formattedFileList !== undefined) {
+               $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+            }
+            $timeout(function() {
+               $scope.visiblePosts = $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts));
+            })
+         }
+         else {
+            $scope.searchPlaceholder = 'Search ' + $scope.selectedClass;
+            if (formattedFileList !== undefined) {
+               $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+            }
+            $timeout(function() {
+               $scope.visiblePosts = $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts));
+            });
+         }
+      }
    }
 
    $scope.generateQueryString = function() {
@@ -392,8 +400,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       formatedFile.CreationDate = unformatedFile.createdTime //Date.prototype.parseRFC3339(unformatedFile.createdTime);
       formatedFile.UpdateDate = unformatedFile.modifiedTime //Date.prototype.parseRFC3339(unformatedFile.modifiedTime);
       if (unformatedFile.properties.Tag1 || unformatedFile.properties.Tag2) {
-      formatedFile.Tags = JSON.parse(tagsRaw.replace(/,/g, "\",\""));
-      } else {
+         formatedFile.Tags = JSON.parse(tagsRaw.replace(/,/g, "\",\""));
+      }
+      else {
          formatedFile.Tags = [];
       }
       formatedFile.TagString = unformatedFile.properties.Tag1 + unformatedFile.properties.Tag2;
@@ -413,7 +422,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       formatedFile.attachmentId = unformatedFile.properties.attachmentId;
       if (formatedFile.Type === "Link") {
          formatedFile.PreviewImg = unformatedFile.thumbnailLink.replace("=s220", "=s400")
-      } else if (formatedFile.Type === "Gdrive") {
+      }
+      else if (formatedFile.Type === "Gdrive") {
          formatedFile.PreviewImg = "https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + formatedFile.attachmentId;
       }
       console.log({
@@ -637,14 +647,14 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          queue(GoogleDriveService.getSpreadsheetRange('1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0', range), function(spreadsheetResult) {
             var UserSettingsArray = spreadsheetResult.result.values[0];
             pushUserSettingsToScope(UserSettingsArray);
-            var gg  = new window.Event('sheetPrefsLoaded')
+            var gg = new window.Event('sheetPrefsLoaded')
             document.dispatchEvent(gg);
          });
       }
 
       function createUserSettings() {
          var newData = [$scope.myInfo.Email, $scope.myInfo.Name, false, "3/25/2016", "", "", "", 1]
-         queue(GoogleDriveService.updateSpreadsheetRange('1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0',"Sheet1!A1:A", newData, true), function(newRow) {
+         queue(GoogleDriveService.updateSpreadsheetRange('1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0', "Sheet1!A1:A", newData, true), function(newRow) {
             console.log(newRow)
             console.log(newRow.result.updates.updatedRange.match(/(?:Sheet1!A)(\d+)/g));
          });
@@ -661,15 +671,19 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          console.log($scope.myInfo);
       }
       $scope.getFiles("");
-      queue(GoogleDriveService.getSpreadsheetRange("1DfFUn8sgnFeLLijtKvWsd90GNcnEG6Xl5JTSeApX3bY","Sheet1!A2:Z"), handleClassesSheet)
+      queue(GoogleDriveService.getSpreadsheetRange("1DfFUn8sgnFeLLijtKvWsd90GNcnEG6Xl5JTSeApX3bY", "Sheet1!A2:Z"), handleClassesSheet)
    }
 
    function handleClassesSheet(rawClasses) {
       var classList = [];
       var classesResult = rawClasses.result.values
-      //format the class list:
+         //format the class list:
       for (var Catagory = 0; Catagory < classesResult.length; Catagory++) {
-         classList[Catagory] = {'Catagory': classesResult[Catagory][0], 'Color': classesResult[Catagory][1], 'Classes':[]}
+         classList[Catagory] = {
+            'Catagory': classesResult[Catagory][0],
+            'Color': classesResult[Catagory][1],
+            'Classes': []
+         }
          for (var Class = 2; Class < classesResult[Catagory].length; Class++) {
             classList[Catagory].Classes[Class - 2] = classesResult[Catagory][Class]
          }
@@ -678,18 +692,18 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $scope.classList = classList;
       })
    }
-   
+
    $scope.clearText = function(text) {
       text = '';
    };
-   
+
    //-event watchers---------
-   
+
    $scope.angularGridOptions = {
       gridWidth: 250,
       infiniteScroll: function() {
          console.log('loading from overscroll...');
-         if($scope.visiblePosts >= 1){
+         if ($scope.visiblePosts >= 1) {
             $scope.getFiles();
          }
       },
@@ -733,5 +747,3 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
    });
 }]));
-
-
