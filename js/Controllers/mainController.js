@@ -61,12 +61,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
       if (query) {
          $location.search('q=' + query);
-         var deferred = $q.defer();
-         console.log(deferred);
-         $timeout(function() {
-            deferred.resolve(['o']);
-         }, Math.random() * 1000, false);
-         return deferred.promise;
+         // var deferred = $q.defer();
+         // $timeout(function() {
+         //    deferred.resolve(['o']);
+         // }, Math.random() * 1000, false);
+         // return deferred.promise;
       }
       else {
          $location.search('');
@@ -90,7 +89,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.newPost = function(postObj, operation) {
       //called by the bottom right plus/add resource button
-      console.log(postObj)
+      log(postObj)
       $mdDialog.show({
          templateUrl: '/directives/html/newPostContent.html',
          controller: ['$scope', '$mdDialog', 'GoogleDriveService', '$mdToast', "postObj", "operation", newPostController],
@@ -268,7 +267,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             }
             $timeout(function() {
                $scope.visiblePosts = $scope.flaggedPosts;
-               console.log({}$scope.visiblePosts);
+               console.log($scope.visiblePosts);
             })
          }
          else if ($scope.selectedClass === 'my-posts') {
