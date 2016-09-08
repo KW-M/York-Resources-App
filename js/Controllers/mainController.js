@@ -169,7 +169,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[queryParamString] || "";
 
-      
+
       if (nextPageToken !== "end") {
          loading_spinner.style.display = 'inherit'; //show the user that were loading results
          var queryParamString = $scope.generateQueryString();
@@ -179,7 +179,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                //format every file:
                if (!$scope.searchTxt) {
                   for (o = 0; o < fileList.result.files.length; o++) {
-                     if (deDuplicationIndex[fileList.result.files[o].id] === undefined) { 
+                     if (deDuplicationIndex[fileList.result.files[o].id] === undefined) {
                         //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
                         deDuplicationIndex[fileList.result.files[o].id] = 1; //mark this id as used with a "1".
                         formattedFileList[fileCount] = $scope.formatPost(fileList.result.files[o]); //format and save the new post to the formatted files list array
@@ -194,11 +194,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                   }
                }
                if (formattedFileList.length !== 0) {
-                  if (fileList.result.nextPageToken !== undefined) { 
+                  if (fileList.result.nextPageToken !== undefined) {
                      //if we haven't reached the end of our search:
                      classPageTokenSelectionIndex[queryParamString] = fileList.result.nextPageToken;
                   }
-                  else { 
+                  else {
                      //if we have reached the end of our search:
                      classPageTokenSelectionIndex[queryParamString] = "end"
                   }
@@ -268,7 +268,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             }
             $timeout(function() {
                $scope.visiblePosts = $scope.flaggedPosts;
-               console.log($scope.visiblePosts);
+               console.log({}$scope.visiblePosts);
             })
          }
          else if ($scope.selectedClass === 'my-posts') {
@@ -361,7 +361,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    $scope.formatPost = function(unformatedFile) {
-      console.log(unformatedFile);
       var formatedFile = {}
       var tagsRaw = "[\"" + unformatedFile.properties.Tag1 + unformatedFile.properties.Tag2 + "\"]";
       var titleAndURL = unformatedFile.name.split("{]|[}");
@@ -402,10 +401,13 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       else if (formatedFile.Type === "Gdrive") {
          formatedFile.PreviewImg = "https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + formatedFile.attachmentId;
       }
-      console.log({
-         unformated: unformatedFile,
-         formated: formatedFile
-      })
+      
+      if (devMode) {
+         console.log({
+            unformated: unformatedFile,
+            formated: formatedFile
+         })
+      }
 
       return formatedFile;
    }
@@ -600,7 +602,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             });
          }
       }
-      
+
       // queue(GoogleDriveService.runGAppsScript(), function(result) {
       //    console.log(result)
       // });
@@ -648,6 +650,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $scope.myInfo.quizletUsername = settingsArray[5]
          $scope.myInfo.LastQuizletCheckDate = Date.parse(settingsArray[6])
          $scope.myInfo.NumberOfVisits = settingsArray[7]
+         
          console.log($scope.myInfo);
       }
       $scope.getFiles("");
@@ -692,7 +695,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       performantScroll: true,
       gutterSize: 12,
    };
-   
+
 
    // The md-select directive eats keydown events for some quick select
    // logic. Since we have a search input here, we don't need that logic.
@@ -727,11 +730,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $mdSidenav('sidenav_overlay').close();
       }
    });
-   
-   document.onkeydown = function(e){
-    if (e.altKey && e.ctrlKey && e.keyCode == 68) {
-       devMode != devMode
-    }
+
+   document.onkeydown = function(e) {
+      if (e.altKey && e.ctrlKey && e.keyCode == 68) {
+         devMode != devMode
+      }
    }
-   
+
 }]));
