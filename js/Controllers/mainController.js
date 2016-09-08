@@ -749,11 +749,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
    });
    
-   window.addEventListener('keypress', function(e){
-      alert("DevModeOng");
+   document.onkeydown = function(e){
     if (e.altKey && e.ctrlKey && e.keyCode == 68) {
         alert("DevModeOn");
     }
-   }, false);
+   }
    
 }]));

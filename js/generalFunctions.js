@@ -1,6 +1,11 @@
   var theQueue = [];
   var timer = null;
 
+  function log(input) {
+    if 
+    
+  }
+
   // Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
   function queue(promise, action, error) {
     theQueue.push({
