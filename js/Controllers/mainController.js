@@ -89,7 +89,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.newPost = function(postObj, operation) {
       //called by the bottom right plus/add resource button
-      log(postObj)
+      log(postObj);
       $mdDialog.show({
          templateUrl: '/directives/html/newPostContent.html',
          controller: ['$scope', '$mdDialog', 'GoogleDriveService', '$mdToast', "postObj", "operation", newPostController],
@@ -118,7 +118,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
       var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
       var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
-      console.log("loaded my picker")
       console.log("picker");
       if (typ === "Upload") {
          console.log("pickerup");
@@ -172,7 +171,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       if (nextPageToken !== "end") {
          loading_spinner.style.display = 'inherit'; //show the user that were loading results
          var queryParamString = $scope.generateQueryString();
-         console.log("query params:" + queryParamString);
+         log("query params:" + queryParamString, true);
          queue(GoogleDriveService.getListOfFlies(queryParamString, nextPageToken, 2), function(fileList) {
             if (fileList.result.files.length > 0) {
                //format every file:
@@ -202,20 +201,20 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                      classPageTokenSelectionIndex[queryParamString] = "end"
                   }
                   sortPostsByType(formattedFileList);
-                  console.log({
+                  log({
                      allPosts: $scope.allPosts,
                      visiblePosts: $scope.visiblePosts,
-                  });
-                  console.log("-----------------------");
+                  }, true);
+                  log("-----------------------",true);
                }
                else {
                   sortPostsByType();
                   if (fileList.result.nextPageToken !== undefined) { //if we haven't reached the end of our search:
-                     console.log("duplicate posts - more posts coming...")
+                     log("duplicate posts - more posts coming...")
                      classPageTokenSelectionIndex[queryParamString] = fileList.result.nextPageToken;
                   }
                   else { //if we havene reached the end of our search:
-                     console.log("duplicate posts - end of the line");
+                     log("duplicate posts - end of the line");
                      classPageTokenSelectionIndex[queryParamString] = "end";
                   }
                   $scope.getFiles();
@@ -237,7 +236,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       if ($scope.searchTxt) {
          if (formattedFileList !== undefined) {
             if ($scope.searchTxt === $scope.previousSearch) {
-               console.log('continueing search')
+               log('continueing search')
                $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
             }
             else {
@@ -257,7 +256,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             }
             $timeout(function() {
                $scope.visiblePosts = $scope.allPosts;
-               console.log($scope.visiblePosts);
+               log({$scope.visiblePosts},true);
             })
          }
          else if ($scope.selectedClass === 'flagged') {
