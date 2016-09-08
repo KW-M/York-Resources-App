@@ -82,8 +82,17 @@
                         <md-button ng-click="consoleLog(myInfo, true)">
                             Log My Info
                         </md-button>
-                        <md-button ng-click="consoleLog({'visiblePosts':visiblePosts, 'allPosts': allPosts},true)">
-                            Log Posts Array
+                        <md-button ng-click="consoleLog({'string': queryPropertyString, 'properties':queryProperties}, true)">
+                            Log Search Query string
+                        </md-button>
+                        <md-button ng-click="consoleLog({queryParam: queryParam, query: queryParam.q, classParam: classParam, selectedClass: selectedClass, idParam: idParam}, true)">
+                            Log URL Paramiters
+                        </md-button>
+                        <md-button ng-click="consoleLog(visiblePosts, true)">
+                            Log Visible Posts Array
+                        </md-button>
+                        <md-button ng-click="consoleLog(allPosts, true)">
+                            Log All Posts Array
                         </md-button>
                     </span>
                 </div>

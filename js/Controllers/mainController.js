@@ -732,7 +732,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    document.onkeydown = function(e) {
       if (e.altKey && e.ctrlKey && e.keyCode == 68) {
          devMode = !devMode
-         alert('DevMode: ' + devMode);
          $timeout(function() {
             $scope.devMode = devMode;
          })
