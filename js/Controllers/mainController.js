@@ -162,6 +162,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.getFiles = function() {
       $scope.getQueryProperties();
+      var queryParamString = $scope.generateQueryString();
       $scope.firstFiles = true;
       var fileCount = 0;
       var formattedFileList = [];
@@ -170,7 +171,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
       if (nextPageToken !== "end") {
          loading_spinner.style.display = 'inherit'; //show the user that were loading results
-         var queryParamString = $scope.generateQueryString();
          log("query params:" + queryParamString, true);
          queue(GoogleDriveService.getListOfFlies(queryParamString, nextPageToken, 2), function(fileList) {
             if (fileList.result.files.length > 0) {
@@ -456,6 +456,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
    $scope.logPostToConsole = function(content, arrayIndex) {
+      window.alert(JSON.stringify({
+         'loggedPostContent': content,
+         'arrayIndex': arrayIndex
+      },null,4));
       console.log({
          'loggedPostContent': content,
          'arrayIndex': arrayIndex
