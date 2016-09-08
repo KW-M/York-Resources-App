@@ -713,6 +713,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       performantScroll: true,
       gutterSize: 12,
    };
+   
 
    // The md-select directive eats keydown events for some quick select
    // logic. Since we have a search input here, we don't need that logic.
@@ -747,4 +748,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $mdSidenav('sidenav_overlay').close();
       }
    });
+   
+   window.addEventListener('keypress', function(e){
+      alert("DevModeOng");
+    if (e.altKey && e.ctrlKey && e.keyCode == 68) {
+        alert("DevModeOn");
+    }
+   }, false);
+   
 }]));
