@@ -230,21 +230,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                   sortPostsByType();
                   if (fileList.result.nextPageToken !== undefined) { //if we haven't reached the end of our search:
                      console.log("duplicate posts - more posts coming...")
-                     if ($scope.searchTxt) {
-                        classPageTokenSelectionIndex[$scope.selectedClass + $scope.searchTxt] = fileList.result.nextPageToken;
-                     }
-                     else {
-                        classPageTokenSelectionIndex[$scope.selectedClass] = fileList.result.nextPageToken;
-                     }
+                     classPageTokenSelectionIndex[queryParamString] = fileList.result.nextPageToken;
                   }
                   else { //if we havene reached the end of our search:
                      console.log("duplicate posts - end of the line");
-                     if ($scope.searchTxt) {
-                        classPageTokenSelectionIndex[$scope.selectedClass + $scope.searchTxt] = "end";
-                     }
-                     else {
-                        classPageTokenSelectionIndex[$scope.selectedClass] = "end";
-                     }
+                     classPageTokenSelectionIndex[queryParamString] = "end";
                   }
                   $scope.getFiles();
                }
@@ -315,6 +305,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             var filteredPosts = $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts));
             $timeout(function() {
                $scope.visiblePosts = filteredPosts;
+               console.log($scope.visiblePosts);
             });
          }
       }
