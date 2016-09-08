@@ -162,17 +162,17 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.getFiles = function() {
       $scope.getQueryProperties();
-      var queryParamString = $scope.generateQueryString();
+      $scope.queryPropertyString = $scope.generateQueryString();
       $scope.firstFiles = true;
       var fileCount = 0;
       var formattedFileList = [];
-      var nextPageToken = classPageTokenSelectionIndex[queryParamString] || "";
+      var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
 
 
       if (nextPageToken !== "end") {
          loading_spinner.style.display = 'inherit'; //show the user that were loading results
-         log("query params:" + queryParamString, true);
-         queue(GoogleDriveService.getListOfFlies(queryParamString, nextPageToken, 2), function(fileList) {
+         log("query params:" + $scope.queryPropertyString, true);
+         queue(GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 2), function(fileList) {
             if (fileList.result.files.length > 0) {
                //format every file:
                if (!$scope.searchTxt) {
@@ -194,11 +194,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                if (formattedFileList.length !== 0) {
                   if (fileList.result.nextPageToken !== undefined) {
                      //if we haven't reached the end of our search:
-                     classPageTokenSelectionIndex[queryParamString] = fileList.result.nextPageToken;
+                     classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken;
                   }
                   else {
                      //if we have reached the end of our search:
-                     classPageTokenSelectionIndex[queryParamString] = "end"
+                     classPageTokenSelectionIndex[$scope.queryPropertyString] = "end"
                   }
                   sortPostsByType(formattedFileList);
                   log({
@@ -211,11 +211,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                   sortPostsByType();
                   if (fileList.result.nextPageToken !== undefined) { //if we haven't reached the end of our search:
                      log("duplicate posts - more posts coming...")
-                     classPageTokenSelectionIndex[queryParamString] = fileList.result.nextPageToken;
+                     classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken;
                   }
                   else { //if we havene reached the end of our search:
                      log("duplicate posts - end of the line");
-                     classPageTokenSelectionIndex[queryParamString] = "end";
+                     classPageTokenSelectionIndex[$scope.queryPropertyString] = "end";
                   }
                   //$scope.getFiles();
                }
