@@ -21,14 +21,13 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.searchChips = ["Class: "]
 
    $scope.userList = [];
-   $scope.Tags = [];
-   $scope.testArray = ['gke', 'g', 'e', 'e', '12', '23', '24r', '3', '3', 'e', 'e'];
    $scope.globals = {
       FABisOpen: false,
       FABisHidden: true,
       sidenavIsOpen: true,
       mobileSearchOpen: false,
    };
+   $scope.devMode = false;
 
    $scope.firstFiles = false;
    $scope.queryPropertyString = '';
