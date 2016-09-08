@@ -235,7 +235,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    function sortPostsByType(formattedFileList) {
-      console.log("sorting");
       if ($scope.searchTxt) {
          if (formattedFileList !== undefined) {
             if ($scope.searchTxt === $scope.previousSearch) {
@@ -259,6 +258,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             }
             $timeout(function() {
                $scope.visiblePosts = $scope.allPosts;
+               console.log($scope.visiblePosts);
             })
          }
          else if ($scope.selectedClass === 'flagged') {
@@ -268,6 +268,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             }
             $timeout(function() {
                $scope.visiblePosts = $scope.flaggedPosts;
+               console.log($scope.visiblePosts);
             })
          }
          else if ($scope.selectedClass === 'my-posts') {
@@ -278,6 +279,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             var filteredPosts = $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts));
             $timeout(function() {
                $scope.visiblePosts = filteredPosts;
+               console.log($scope.visiblePosts);
             });
          }
          else {
