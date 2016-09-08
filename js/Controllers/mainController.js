@@ -162,24 +162,21 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    //-loading and filtering posts---------
 
-      // queue(GoogleDriveService.runGAppsScript(), function(result) {
-      //    console.log(result)
-      // });
-
    $scope.getFiles = function() {
       $scope.getQueryProperties();
       $scope.firstFiles = true;
+      var fileCount = 0;
+      var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[queryParamString] || "";
+
+      
       if (nextPageToken !== "end") {
-         loading_spinner.style.display = 'inherit'; //////
+         loading_spinner.style.display = 'inherit'; //show the user that were loading results
          var queryParamString = $scope.generateQueryString();
          console.log("query params:" + queryParamString);
          queue(GoogleDriveService.getListOfFlies(queryParamString, nextPageToken, 2), function(fileList) {
             if (fileList.result.files.length > 0) {
                //format every file:
-               console.log('files length ' + fileList.result.files.length);
-               var fileCount = 0;
-               var formattedFileList = [];
                if (!$scope.searchTxt) {
                   for (o = 0; o < fileList.result.files.length; o++) {
                      if (deDuplicationIndex[fileList.result.files[o].id] === undefined) { 
@@ -601,6 +598,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             });
          }
       }
+      
+      // queue(GoogleDriveService.runGAppsScript(), function(result) {
+      //    console.log(result)
+      // });
    }
 
    function handleUserPrefsSheet() {
