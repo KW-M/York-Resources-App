@@ -166,20 +166,14 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       // queue(GoogleDriveService.runGAppsScript(), function(result) {
       //    console.log(result)
       // });
+      $scope.getQueryProperties();
       $scope.firstFiles = true;
-      if ($scope.searchTxt) {
-         var nextPageToken = classPageTokenSelectionIndex[$scope.selectedClass + $scope.searchTxt] || "";
-      }
-      else {
-         var nextPageToken = classPageTokenSelectionIndex[$scope.selectedClass] || "";
-      }
+      var nextPageToken = classPageTokenSelectionIndex[queryParamString] || "";
       if (nextPageToken !== "end") {
-         $scope.getQueryProperties();
          loading_spinner.style.display = 'inherit'; //////
          var queryParamString = $scope.generateQueryString();
          console.log("query params:" + queryParamString);
          queue(GoogleDriveService.getListOfFlies(queryParamString, nextPageToken, 2), function(fileList) {
-            console.log(fileList);
             if (fileList.result.files.length > 0) {
                //format every file:
                console.log('files length ' + fileList.result.files.length);
@@ -203,21 +197,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                if (formattedFileList.length !== 0) {
                   if (fileList.result.nextPageToken !== undefined) { //if we haven't reached the end of our search:
                      console.log("more posts coming...")
-                     if ($scope.searchTxt) {
-                        classPageTokenSelectionIndex[$scope.selectedClass + $scope.searchTxt] = fileList.result.nextPageToken;
-                     }
-                     else {
-                        classPageTokenSelectionIndex[$scope.selectedClass] = fileList.result.nextPageToken;
-                     }
+                     classPageTokenSelectionIndex[queryParamString] = fileList.result.nextPageToken;
                   }
-                  else { //if we havene reached the end of our search:
+                  else { 
+                     //if we havene reached the end of our search:
                      console.log("end of the line");
-                     if ($scope.searchTxt) {
-                        classPageTokenSelectionIndex[$scope.selectedClass + $scope.searchTxt] = "end";
-                     }
-                     else {
-                        classPageTokenSelectionIndex[$scope.selectedClass] = "end";
-                     }
+                     classPageTokenSelectionIndex[queryParamString] = "end"
                   }
                   sortPostsByType(formattedFileList);
                   console.log({
