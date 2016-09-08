@@ -743,7 +743,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    
    $scope.consoleLog = function (input,asAlert) {
       if (asAlert) {
-         window.alert(input)
+         window.alert(JSON.stringify(input,null,4))
       } else {
          console.log(input) 
       }

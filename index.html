@@ -79,12 +79,12 @@
                     <div>-idParam: {{idParam}}</div>
                     </span>
                     <span>
-                        <md-button ng-click="consoleLog(userInfo, true)">
-                            Log User Info
+                        <md-button ng-click="consoleLog(myInfo, true)">
+                            Log My Info
                         </md-button>
-                        <md-button ng-click="consoleLog({'visiblePosts':visiblePosts, 'allPosts': allPosts})">
+                        <md-button ng-click="consoleLog({'visiblePosts':visiblePosts, 'allPosts': allPosts},true)">
                             Log Posts Array
-                        <md-button>
+                        </md-button>
                     </span>
                 </div>
                 <ng-view></ng-view>
