@@ -162,10 +162,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    //-loading and filtering posts---------
 
-   $scope.getFiles = function() {
       // queue(GoogleDriveService.runGAppsScript(), function(result) {
       //    console.log(result)
       // });
+
+   $scope.getFiles = function() {
       $scope.getQueryProperties();
       $scope.firstFiles = true;
       var nextPageToken = classPageTokenSelectionIndex[queryParamString] || "";
@@ -181,9 +182,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                var formattedFileList = [];
                if (!$scope.searchTxt) {
                   for (o = 0; o < fileList.result.files.length; o++) {
-                     if (deDuplicationIndex[fileList.result.files[o].id] === undefined) { //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
-                        formattedFileList[fileCount] = $scope.formatPost(fileList.result.files[o]);
-                        deDuplicationIndex[fileList.result.files[o].id] = 1; //mark this id as used with a one.
+                     if (deDuplicationIndex[fileList.result.files[o].id] === undefined) { 
+                        //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
+                        deDuplicationIndex[fileList.result.files[o].id] = 1; //mark this id as used with a "1".
+                        formattedFileList[fileCount] = $scope.formatPost(fileList.result.files[o]); //format and save the new post to the formatted files list array
                         fileCount++;
                      }
                   }
@@ -195,13 +197,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                   }
                }
                if (formattedFileList.length !== 0) {
-                  if (fileList.result.nextPageToken !== undefined) { //if we haven't reached the end of our search:
-                     console.log("more posts coming...")
+                  if (fileList.result.nextPageToken !== undefined) { 
+                     //if we haven't reached the end of our search:
                      classPageTokenSelectionIndex[queryParamString] = fileList.result.nextPageToken;
                   }
                   else { 
-                     //if we havene reached the end of our search:
-                     console.log("end of the line");
+                     //if we have reached the end of our search:
                      classPageTokenSelectionIndex[queryParamString] = "end"
                   }
                   sortPostsByType(formattedFileList);
