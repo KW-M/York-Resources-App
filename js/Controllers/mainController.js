@@ -217,7 +217,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                      log("duplicate posts - end of the line");
                      classPageTokenSelectionIndex[queryParamString] = "end";
                   }
-                  $scope.getFiles();
+                  //$scope.getFiles();
                }
             }
             else {
