@@ -738,5 +738,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          })
       }
    }
+   
+   //dev -------
+   
+   logPostsArrayConsole = function () {
+      
+   }
 
 }]));
