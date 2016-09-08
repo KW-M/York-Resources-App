@@ -79,8 +79,11 @@
                     <div>-idParam: {{idParam}}</div>
                     </span>
                     <span>
-                        <md-button ng-click="::logPostsArrayConsole()">
-                            Log PostsArray
+                        <md-button ng-click="consoleLog(userInfo, true)">
+                            Log User Info
+                        </md-button>
+                        <md-button ng-click="consoleLog({'visiblePosts':visiblePosts, 'allPosts': allPosts})">
+                            Log Posts Array
                         <md-button>
                     </span>
                 </div>

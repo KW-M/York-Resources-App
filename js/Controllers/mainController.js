@@ -741,8 +741,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    
    //dev -------
    
-   logPostsArrayConsole = function () {
-      
+   $scope.consoleLog = function (input,asAlert) {
+      if (asAlert) {
+         window.alert(input)
+      } else {
+         console.log(input) 
+      }
    }
 
 }]));
