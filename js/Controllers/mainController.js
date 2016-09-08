@@ -27,7 +27,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       sidenavIsOpen: true,
       mobileSearchOpen: false,
    };
-   $scope.devMode = false;
 
    $scope.firstFiles = false;
    $scope.queryPropertyString = '';
@@ -751,7 +750,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    
    document.onkeydown = function(e){
     if (e.altKey && e.ctrlKey && e.keyCode == 68) {
-        alert("DevModeOn");
+       devMode != devMode
     }
    }
    

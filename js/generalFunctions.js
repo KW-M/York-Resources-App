@@ -1,9 +1,12 @@
+  var devMode = false;
   var theQueue = [];
   var timer = null;
 
   function log(input) {
-    if 
-    
+    console.log(input)
+    if (devMode === true) {
+      //do
+    }
   }
 
   // Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
