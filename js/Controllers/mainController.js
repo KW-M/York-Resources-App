@@ -734,7 +734,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          devMode = !devMode
          alert('DevMode: ' + devMode);
          $timeout(function() {
-         $scope.devMode = devMode;
+            $scope.devMode = devMode;
+         })
       }
    }
 

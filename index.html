@@ -71,11 +71,18 @@
             <!----- The content, ie posts, resources, etc. ------->
             <div id="content_container" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'gt-sm': $mdMedia('gt-sm')}" class="">
                 <div ng-show="devMode">
+                    <span>
                     <div>-queryParam: {{queryParam}}</div>
                     <div>-query: {{queryParam.q}}</div>
                     <div>-classParam: {{classParam}}</div>
                     <div>-selectedClass: {{selectedClass}}</div>
                     <div>-idParam: {{idParam}}</div>
+                    </span>
+                    <span>
+                        <md-button ng-click="::logPostToConsole(Post,$index)">
+                            Console Log PostsArray
+                        <md-b>
+                    </span>
                 </div>
                 <ng-view></ng-view>
                 <div angular-grid="visiblePosts" id="postsGrid" ag-options="angularGridOptions" ag-id="posts">

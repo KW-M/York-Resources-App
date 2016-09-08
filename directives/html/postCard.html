@@ -52,7 +52,7 @@
                 <md-button ng-click="::newPost(Post,'update')">
                     <md-icon>edit</md-icon>Edit</md-button>
             </md-menu-item>
-            <md-menu-item ng-show="::myInfo.Email === 'worcester-moorek2018@york.org'">
+            <md-menu-item ng-show="devMode">
                 <md-button ng-click="::logPostToConsole(Post,$index)">
                     <md-icon>edit</md-icon>Console Log Post</md-button>
             </md-menu-item>
