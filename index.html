@@ -70,15 +70,7 @@
             <side-nav-insides class="ng-cloak side-nav md-sidenav-left sidenav-inline" ng-class="{'side-nav-open' : globals.sidenavIsOpen === true && $mdMedia('gt-sm'), 'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}"></side-nav-insides>
             <!----- The content, ie posts, resources, etc. ------->
             <div id="content_container" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'gt-sm': $mdMedia('gt-sm')}" class="">
-                <div ng-show="devMode">
-                    <span>
-                    <div>-queryParam: {{queryParam}}</div>
-                    <div>-query: {{queryParam.q}}</div>
-                    <div>-classParam: {{classParam}}</div>
-                    <div>-selectedClass: {{selectedClass}}</div>
-                    <div>-idParam: {{idParam}}</div>
-                    </span>
-                    <span>
+                <span ng-show="devMode">
                         <md-button ng-click="consoleLog(myInfo, true)">
                             Log My Info
                         </md-button>
@@ -88,14 +80,13 @@
                         <md-button ng-click="consoleLog({queryParam: queryParam, query: queryParam.q, classParam: classParam, selectedClass: selectedClass, idParam: idParam}, true)">
                             Log URL Paramiters
                         </md-button>
-                        <md-button ng-click="consoleLog(visiblePosts, true)">
+                        <md-button ng-click="consoleLog(visiblePosts)">
                             Log Visible Posts Array
                         </md-button>
-                        <md-button ng-click="consoleLog(allPosts, true)">
+                        <md-button ng-click="consoleLog(allPosts)">
                             Log All Posts Array
                         </md-button>
-                    </span>
-                </div>
+                </span>
                 <ng-view></ng-view>
                 <div angular-grid="visiblePosts" id="postsGrid" ag-options="angularGridOptions" ag-id="posts">
                     <md-card post-card class="post-card raise-on-hover" ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}">{{Post.Title}}</md-card>
