@@ -16,6 +16,9 @@
                         <md-icon style="color: rgb(25,157,9)">person</md-icon>
                         My Posts
                     </md-button>
+                    <md-button ng-click="::gotoRoute('/my-bookmarks')" ng-class="{ 'selected' : pathSelected('/my-bookmarks') }" style="min-width: 0px; width: 39px; padding: 6px;">
+                        <md-icon style="color: rgb(25,157,9)">bookmark</md-icon>
+                    </md-button>
                 </md-menu-item>
             </md-list-item>
             <md-list-item>
