@@ -58,6 +58,7 @@ app.directive('getPosts', function() {
                 scope.$parent.queryProperties.Class = attrs.class;
                 scope.$parent.queryProperties.CreatorEmail = attrs.creatorEmail;
                 scope.$parent.queryProperties.Type = attrs.type;
+                //scope.$parent.queryProperties.Bookmarked = attrs.bookmarked;
             }
         }
     };
