@@ -19,11 +19,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.userList = [];
    $scope.globals = {
+      sidenavIsOpen: true,
       FABisOpen: false,
       FABisHidden: true,
       addBarTopIsHidden: false,
-      sidenavIsOpen: true,
-      mobileSearchOpen: false,
+      mobileSearchIsOpen: false,
    };
 
    $scope.firstFiles = false;
