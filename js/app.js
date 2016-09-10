@@ -74,22 +74,22 @@ app.config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $locati
     });
 
     $mdThemingProvider.definePalette('YorkGreen', {
-        '50': '#f3f4da',
-        '100': '#dfe2a0',
-        '200': '#d1d575',
-        '300': '#bfc43e',
-        '400': '#aaae35',
-        '500': '#93972e',
-        '600': '#7c8027',
-        '700': '#656820',
-        '800': '#4e5119',
-        '900': '#383911',
-        'A100': '#f3f4da',
-        'A200': '#dfe2a0',
-        'A400': '#aaae35',
-        'A700': '#656820',
-        'contrastDefaultColor': 'light',
-        'contrastDarkColors': '50 100 200 300 400 500 A100 A200 A400'
+  '50': '#f3f4da',
+  '100': '#dfe2a0',
+  '200': '#d1d575',
+  '300': '#bfc43e',
+  '400': '#aaae35',
+  '500': '#93972e',
+  '600': '#7c8027',
+  '700': '#656820',
+  '800': '#4e5119',
+  '900': '#383911',
+  'A100': '#f3f4da',
+  'A200': '#dfe2a0',
+  'A400': '#aaae35',
+  'A700': '#656820',
+  'contrastDefaultColor': 'light',
+  'contrastDarkColors': '50 100 200 300 400 500 A100 A200 A400'
     });
 
     $mdThemingProvider.definePalette('YorkOrange', {
@@ -110,9 +110,22 @@ app.config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $locati
   'contrastDefaultColor': 'light',
   'contrastDarkColors': '50 100 200 300 400 500 A100 A200 A400'
     });
-    //$mdThemingProvider.theme('default').accentPalette('YorkBlue').primaryPalette('YorkRed').warnPalette('YorkOrange')
-    //$mdThemingProvider.theme('default').accentPalette('Blue').primaryPalette('YorkRed').warnPalette('Orange')
-    $mdThemingProvider.theme('default').accentPalette('YorkGreenBlue').primaryPalette('Red').warnPalette('Orange')
+    $mdThemingProvider.theme('default')
+            .primaryPalette('YorkRed')
+            
+            //.accentPalette('YorkBlue')
+            //.accentPalette('YorkGreenBlue')
+            .accentPalette('YorkGreen')
+            //.accentPalette('blue')
+            
+            //.warnPalette('YorkOrange')
+            .warnPalette('orange')
+            
+            
+
+
+            
+    $mdThemingProvider.theme('default').accentPalette('YorkGreenBlue').primaryPalette('YorkRed').warnPalette('orange')
 });
 
 
