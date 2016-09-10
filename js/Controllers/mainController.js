@@ -54,7 +54,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       if (query.classPath) {
          $scope.toggleSidebar(true);
       }
-  var tempQuery
+      var tempQuery
       tempQuery.q = query.q || $scope.queryParams.q;
       tempQuery.flagged = query.flagged || $scope.queryParams.flagged;
       tempQuery.type = query.type || $scope.queryParams.type;
@@ -66,15 +66,13 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
    $scope.$on('$routeChangeSuccess', function() {
-      if ($scope.queryParams.q !== $scope.queryParams.q) {
+      if ($scope.queryParams.q !== $location.search().q) {
+         $scope.queryParams.q = $location.search().q
+         $scope.visiblePosts = []
+      }
       $scope.selectedClass = $location.path().replace(/\//g, "");
       $scope.queryParams = $location.search();
       $scope.idParam = $location.hash();
-
-      if ($scope.queryParams.q !== $scope.queryParams.q) {
-         $scope.queryParams.q = $scope.queryParam.q
-         $scope.visiblePosts = []
-      }
       // if ($scope.queryParams.q !== $scope.previousSearch) {
       //    $scope.visiblePosts = []
       // }
