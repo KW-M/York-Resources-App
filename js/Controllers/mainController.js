@@ -75,6 +75,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.$on('$routeChangeSuccess', function() {
       $scope.classParam = $location.path();
       $scope.queryParam = $location.search();
+      if ($scope.searchTxt !== $scope.previousSearch) {
+         $scope.visiblePosts = []
+      }
       $scope.idParam = $location.hash();
       $scope.selectedClass = $scope.classParam.replace(/\//g, "")
       if ($scope.firstFiles == true) { // check  if firstFiles have been loaded
@@ -167,11 +170,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       var fileCount = 0;
       var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
-
-
+      
       if (nextPageToken !== "end") {
          loading_spinner.style.display = 'inherit'; //show the user that were loading results
-         log("query params:" + $scope.queryPropertyString, true);
          queue(GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 2), function(fileList) {
             if (fileList.result.files.length > 0) {
                //format every file:
