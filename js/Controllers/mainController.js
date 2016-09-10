@@ -21,6 +21,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.globals = {
       FABisOpen: false,
       FABisHidden: true,
+      addBarTopIsHidden: false,
       sidenavIsOpen: true,
       mobileSearchOpen: false,
    };
