@@ -49,26 +49,28 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
    }
 
-   $scope.gotoRoute = function(path, query, id) {
-      var tempQuery
-      if (path) {
-         $location.path(path);
+   $scope.gotoRoute = function(query) {
+      if (query.path) {
+         $location.path(query.path || '');
          $scope.toggleSidebar(true);
       }
       if (id) {
          $location.hash(id);
       }
-      tempQuery.q = query.q || $scope.queryParams.q;
-      tempQuery.flagged = query.flagged || $scope.queryParams.flagged;
-      tempQuery.q = query.q || $scope.queryParams.q;
-      
+      if (query) {
+         var tempQuery
+         tempQuery.q = query.q || $scope.queryParams.q;
+         tempQuery.flagged = query.flagged || $scope.queryParams.flagged;
+         tempQuery.class = query.class || $scope.queryParams.class;
+         
+      }
    };
 
    $scope.$on('$routeChangeSuccess', function() {
       $scope.selectedClass = $location.path().replace(/\//g, "");
       $scope.queryParams = $location.search();
       $scope.idParam = $location.hash();
-      
+
       if ($scope.queryParams.q !== $scope.queryParams.q) {
          $scope.queryParams.q = $scope.queryParam.q
          $scope.visiblePosts = []
@@ -166,7 +168,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       var fileCount = 0;
       var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
-      
+
       if (nextPageToken !== "end") {
          loading_spinner.style.display = 'inherit'; //show the user that were loading results
          queue(GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 2), function(fileList) {
@@ -202,7 +204,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                      allPosts: $scope.allPosts,
                      visiblePosts: $scope.visiblePosts,
                   }, true);
-                  log("-----------------------",true);
+                  log("-----------------------", true);
                }
                else {
                   sortPostsByType();
@@ -253,7 +255,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             }
             $timeout(function() {
                $scope.visiblePosts = $scope.allPosts;
-               log({visiblePosts:$scope.visiblePosts},true);
+               log({
+                  visiblePosts: $scope.visiblePosts
+               }, true);
             })
          }
          else if ($scope.selectedClass === 'flagged') {
@@ -263,7 +267,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             }
             $timeout(function() {
                $scope.visiblePosts = $scope.flaggedPosts;
-               log({visiblePosts:$scope.visiblePosts},true);
+               log({
+                  visiblePosts: $scope.visiblePosts
+               }, true);
             })
          }
          else if ($scope.selectedClass === 'my-posts') {
@@ -274,7 +280,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             var filteredPosts = $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts));
             $timeout(function() {
                $scope.visiblePosts = filteredPosts;
-               log({visiblePosts:$scope.visiblePosts},true);
+               log({
+                  visiblePosts: $scope.visiblePosts
+               }, true);
             });
          }
          else {
@@ -285,7 +293,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             var filteredPosts = $scope.filterPosts($scope.allPosts.concat($scope.flaggedPosts));
             $timeout(function() {
                $scope.visiblePosts = filteredPosts;
-               log({visiblePosts:$scope.visiblePosts},true);
+               log({
+                  visiblePosts: $scope.visiblePosts
+               }, true);
             });
          }
       }
@@ -398,7 +408,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       else if (formatedFile.Type === "Gdrive") {
          formatedFile.PreviewImg = "https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + formatedFile.attachmentId;
       }
-      
+
       if (devMode) {
          console.log({
             unformated: unformatedFile,
@@ -458,7 +468,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       window.alert(JSON.stringify({
          'loggedPostContent': content,
          'arrayIndex': arrayIndex
-      },null,4));
+      }, null, 4));
       console.log({
          'loggedPostContent': content,
          'arrayIndex': arrayIndex
@@ -738,14 +748,15 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          })
       }
    }
-   
+
    //dev -------
-   
-   $scope.consoleLog = function (input,asAlert) {
+
+   $scope.consoleLog = function(input, asAlert) {
       if (asAlert) {
-         window.alert(JSON.stringify(input,null,4))
-      } else {
-         console.log(input) 
+         window.alert(JSON.stringify(input, null, 4))
+      }
+      else {
+         console.log(input)
       }
    }
 
