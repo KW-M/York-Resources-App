@@ -1,5 +1,5 @@
 <md-icon style="position: absolute;color: #757575;z-index: 60;pointer-events: none;margin: 8px 15px;">search</md-icon>
-<md-autocomplete class="searchBar md-accent" md-search-text="searchTxt" md-search-text-change="gotoRoute(undefined, undef, undefined)" md-item-text="searchTxt" md-delay="300" md-min-length="0" md-items="ui in searchExtra" md-autoselect="false" md-select-on-match="false"
+<md-autocomplete class="searchBar md-accent" md-search-text="$location.search()" md-search-text-change="gotoRoute(undefined, undefined, undefined)" md-item-text="searchTxt" md-delay="300" md-min-length="0" md-items="ui in searchExtra" md-autoselect="false" md-select-on-match="false"
    md-require-match="false" placeholder="{{searchPlaceholder}}" md-menu-class="search-menu-style">
    <md-item-template>
       <span>
