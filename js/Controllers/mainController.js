@@ -31,8 +31,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.firstFiles = false;
    $scope.queryPropertyString = '';
    $scope.queryProperties = {
-      Flagged: false,
-      Type: "any",
+      flagged: false,
+      type: "any",
       Class: "any",
       CreatorEmail: "any",
    };
@@ -78,9 +78,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $scope.queryParam = $location.search();
       $scope.idParam = $location.hash();
       $scope.selectedClass = $scope.classParam.replace(/\//g, "")
-      if ($scope.searchTxt !== $scope.previousSearch) {
+      if ($scope.queryParam !== $scope.searchTxt) {
          $scope.visiblePosts = []
       }
+      // if ($scope.searchTxt !== $scope.previousSearch) {
+      //    $scope.visiblePosts = []
+      // }
       if ($scope.firstFiles == true) { // check  if firstFiles have been loaded
          //sortPostsByType();
          $window.setTimeout(function() {
