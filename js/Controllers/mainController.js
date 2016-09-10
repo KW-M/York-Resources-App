@@ -52,18 +52,15 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    $scope.gotoRoute = function(query) {
-      console.log(query)
       if (query.classPath) {
          $scope.toggleSidebar(true);
       }
-      var tempQuery = {
-         q:''
-      }
+      var tempQuery = {}
       tempQuery.q = query.q || $scope.queryParams.q;
       tempQuery.flagged = query.flagged || $scope.queryParams.flagged;
       tempQuery.type = query.type || $scope.queryParams.type;
       tempQuery.creatoremail = query.creatoremail || $scope.queryParams.creatoremail;
-console.log(query.classpath);
+
       $location.path(query.classpath || 'all-posts');
       $location.hash(query.id || null);
       $location.search(tempQuery || null);
