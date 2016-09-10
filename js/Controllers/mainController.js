@@ -52,6 +52,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    $scope.gotoRoute = function(query) {
+      console.log(query)
       if (query.classPath) {
          $scope.toggleSidebar(true);
       }
@@ -61,7 +62,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       tempQuery.type = query.type || $scope.queryParams.type;
       tempQuery.creatoremail = query.creatoremail || $scope.queryParams.creatoremail;
 
-      $location.path(query.classpath || '/all-posts');
+      $location.path(query.classpath || 'all-posts');
       $location.hash(query.id || null);
       $location.search(tempQuery || null);
    };
@@ -74,6 +75,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $scope.queryParams.q = $location.search().q
          $scope.visiblePosts = []
       }
+      $scope.generateQueryString();
       if ($scope.firstFiles == true) { // check  if firstFiles have been loaded
          //sortPostsByType();
          $window.setTimeout(function() {
@@ -158,8 +160,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    //-loading and filtering posts---------
 
    $scope.getFiles = function() {
-      $scope.getqueryProperties();
-      $scope.queryPropertyString = $scope.generateQueryString();
       $scope.firstFiles = true;
       var fileCount = 0;
       var formattedFileList = [];

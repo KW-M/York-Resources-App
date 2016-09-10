@@ -4,7 +4,7 @@
         <md-list>
             <md-list-item>
                 <md-menu-item>
-                    <md-button ng-click="::gotoRoute('/all-posts')" ng-class="{ 'selected' : pathSelected('/all-posts') }">
+                    <md-button ng-click="::gotoRoute({classpath: '/all-posts'})" ng-class="{ 'selected' : pathSelected('/all-posts') }">
                         <md-icon class="md-accent">inbox</md-icon>
                         All Posts
                     </md-button>
@@ -16,7 +16,7 @@
                         <md-icon style="color: rgb(25,157,9)">person</md-icon>
                         My Posts
                     </md-button>
-                    <md-button ng-click="::gotoRoute('/my-bookmarks')" ng-class="{ 'selected' : pathSelected('/my-bookmarks') }" style="min-width: 0px; width: 40px; padding: 8px; position: absolute; right: 0px;">
+                    <md-button ng-click="::gotoRoute({classpath: '/my-bookmarks'})" ng-class="{ 'selected' : pathSelected('/my-bookmarks') }" style="min-width: 0px; width: 40px; padding: 8px; position: absolute; right: 0px;">
                         <md-icon style="color: rgb(25,157,9)">bookmark</md-icon>
                         <md-tooltip>My Bookmarks</md-tooltip>
                     </md-button>
@@ -24,7 +24,7 @@
             </md-list-item>
             <md-list-item>
                 <md-menu-item>
-                    <md-button ng-click="::gotoRoute('/flagged')" ng-class="{ 'selected' : pathSelected('/flagged') }">
+                    <md-button ng-click="::gotoRoute({classpath: '/flagged'})" ng-class="{ 'selected' : pathSelected('/flagged') }">
                         <md-icon class="md-warn">flag</md-icon>
                         Flagged
                     </md-button>
@@ -53,13 +53,13 @@
             </md-list-item>
             <md-list>
                 <div flex layout="column" ng-hide="sideNavClassSearch">
-                    <md-button class="side-nav-option" ng-click="gotoRoute('other')" ng-class="{ 'selected' : pathSelected('/other') }">
+                    <md-button class="side-nav-option" ng-click="gotoRoute({classpath: '/other'})" ng-class="{ 'selected' : pathSelected('/other') }">
                         Other / Not associated
                     </md-button>
                 </div>
                 <div ng-repeat="Catagory in classList" flex layout="column">
                     <label ng-hide="sideNavClassSearch" class="side-nav-header">{{Catagory.Catagory}}</label>
-                    <md-button class="side-nav-option" ng-repeat="Class in Catagory.Classes | filter:sideNavClassSearch" ng-click="gotoRoute('/' + Class)" ng-class="{ 'selected' : pathSelected('/' + Class) }">
+                    <md-button class="side-nav-option" ng-repeat="Class in Catagory.Classes | filter:sideNavClassSearch" ng-click="gotoRoute({classpath: '/' + Class})" ng-class="{ 'selected' : pathSelected('/' + Class) }">
                         {{Class}}
                     </md-button>
                 </div>
