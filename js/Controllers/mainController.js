@@ -50,6 +50,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    $scope.gotoRoute = function(path, query, id) {
+      var tempQuery
       if (path) {
          $location.path(path);
          $scope.toggleSidebar(true);
@@ -57,17 +58,10 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       if (id) {
          $location.hash(id);
       }
-      if (query) {
-         $location.search('q=' + query);
-         // var deferred = $q.defer();
-         // $timeout(function() {
-         //    deferred.resolve(['o']);
-         // }, Math.random() * 1000, false);
-         // return deferred.promise;
-      }
-      else {
-         $location.search('');
-      }
+      tempQuery.q = query.q || $scope.queryParams.q;
+      tempQuery.flagged = query.flagged || $scope.queryParams.flagged;
+      tempQuery.q = query.q || $scope.queryParams.q;
+      
    };
 
    $scope.$on('$routeChangeSuccess', function() {
