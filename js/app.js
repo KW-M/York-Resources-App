@@ -112,20 +112,14 @@ app.config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $locati
     });
     $mdThemingProvider.theme('default')
             .primaryPalette('YorkRed')
-            
-            //.accentPalette('YorkBlue')
+
+            .accentPalette('YorkBlue')
             //.accentPalette('YorkGreenBlue')
-            .accentPalette('YorkGreen')
+            //.accentPalette('YorkGreen')
             //.accentPalette('blue')
-            
+
             //.warnPalette('YorkOrange')
-            .warnPalette('orange')
-            
-            
-
-
-            
-    $mdThemingProvider.theme('default').accentPalette('YorkGreenBlue').primaryPalette('YorkRed').warnPalette('orange')
+            .warnPalette('deep-orange')
 });
 
 
