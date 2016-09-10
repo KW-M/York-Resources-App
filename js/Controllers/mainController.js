@@ -299,7 +299,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       if ($scope.searchTxt) {
          query = query + " and fullText contains '" + $scope.searchTxt + "'";
       }
-      query = query + " and properties has { key='Flagged' and value='" + $scope.queryProperties.Flagged + "' }"
+      if ($scope.queryProperties.Flagged !== undefined) {
+         query = query + " and properties has { key='Flagged' and value='" + $scope.queryProperties.Flagged + "' }"
+      }
       if ($scope.queryProperties.Class !== "any" && $scope.queryProperties.Class !== undefined) {
          query = query + " and properties has { key='ClassName' and value='" + $scope.queryProperties.Class + "' }"
       }
