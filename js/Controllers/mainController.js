@@ -30,7 +30,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.firstFiles = false;
    $scope.queryPropertyString = '';
-   $scope.queryProperties = {
+   $scope.queryParams = {
       flagged: false,
       type: "any",
       Class: "any",
@@ -74,12 +74,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
    $scope.$on('$routeChangeSuccess', function() {
-      $scope.classParam = $location.path();
+      $scope.selectedClass = $location.path().replace(/\//g, "");
       $scope.queryParams = $location.search();
       $scope.idParam = $location.hash();
-      $scope.selectedClass = $scope.classParam.replace(/\//g, "")
+      
       if ($scope.queryParams.q !== $scope.searchTxt) {
-         $scope.searchTxt = $scope.queryParam
+         $scope.searchTxt = $scope.queryParam.q
          $scope.visiblePosts = []
       }
       // if ($scope.searchTxt !== $scope.previousSearch) {
@@ -169,7 +169,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    //-loading and filtering posts---------
 
    $scope.getFiles = function() {
-      $scope.getQueryProperties();
+      $scope.getqueryParams();
       $scope.queryPropertyString = $scope.generateQueryString();
       $scope.firstFiles = true;
       var fileCount = 0;
@@ -305,17 +305,17 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       if ($scope.searchTxt) {
          query = query + " and fullText contains '" + $scope.searchTxt + "'";
       }
-      if ($scope.queryProperties.Flagged !== undefined) {
-         query = query + " and properties has { key='Flagged' and value='" + $scope.queryProperties.Flagged + "' }"
+      if ($scope.queryParams.flagged !== undefined) {
+         query = query + " and properties has { key='Flagged' and value='" + $scope.queryParams.Flagged + "' }"
       }
-      if ($scope.queryProperties.Class !== "any" && $scope.queryProperties.Class !== undefined) {
-         query = query + " and properties has { key='ClassName' and value='" + $scope.queryProperties.Class + "' }"
+      if ($scope.queryParams.class !== "any" && $scope.queryParams.class !== undefined) {
+         query = query + " and properties has { key='ClassName' and value='" + $scope.queryParams.class + "' }"
       }
-      if ($scope.queryProperties.CreatorEmail !== "any" && $scope.queryProperties.CreatorEmail !== undefined) {
-         query = query + " and '" + $scope.queryProperties.CreatorEmail + "' in owners "
+      if ($scope.queryParams.CreatorEmail !== "any" && $scope.queryParams.CreatorEmail !== undefined) {
+         query = query + " and '" + $scope.queryParams.CreatorEmail + "' in owners "
       }
-      if ($scope.queryProperties.Type !== "any" && $scope.queryProperties.Type !== undefined) {
-         query = query + " and properties has { key='Type' and value='" + $scope.queryProperties.Type + "' }"
+      if ($scope.queryParams.Type !== "any" && $scope.queryParams.Type !== undefined) {
+         query = query + " and properties has { key='Type' and value='" + $scope.queryParams.Type + "' }"
       }
       return query;
    }
@@ -323,21 +323,21 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.filterPosts = function(inputSet) {
 
       return inputSet.filter(function(post) {
-         var Flagged = post.Flagged === $scope.queryProperties.Flagged || post.Flagged;
-         if ($scope.queryProperties.Class !== "any" && $scope.queryProperties.Class !== undefined) {
-            var Class = post.Class.Name === $scope.queryProperties.Class;
+         var Flagged = post.Flagged === $scope.queryParams.Flagged || post.Flagged;
+         if ($scope.queryParams.class !== "any" && $scope.queryParams.class !== undefined) {
+            var Class = post.Class.Name === $scope.queryParams.class;
          }
          else {
             var Class = true;
          }
-         if ($scope.queryProperties.Type !== "any" && $scope.queryProperties.Type !== undefined) {
-            var Type = post.Type === $scope.queryProperties.Type;
+         if ($scope.queryParams.Type !== "any" && $scope.queryParams.Type !== undefined) {
+            var Type = post.Type === $scope.queryParams.Type;
          }
          else {
             var Type = true;
          }
-         if ($scope.queryProperties.CreatorEmail !== "any" && $scope.queryProperties.CreatorEmail !== undefined) {
-            var Creator = post.Creator.Email === $scope.queryProperties.CreatorEmail;
+         if ($scope.queryParams.CreatorEmail !== "any" && $scope.queryParams.CreatorEmail !== undefined) {
+            var Creator = post.Creator.Email === $scope.queryParams.CreatorEmail;
          }
          else {
             var Creator = true;
