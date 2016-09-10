@@ -75,10 +75,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.$on('$routeChangeSuccess', function() {
       $scope.classParam = $location.path();
-      $scope.queryParam = $location.search();
+      $scope.queryParams = $location.search();
       $scope.idParam = $location.hash();
       $scope.selectedClass = $scope.classParam.replace(/\//g, "")
-      if ($scope.queryParam !== $scope.searchTxt) {
+      if ($scope.queryParams.q !== $scope.searchTxt) {
+         $scope.searchTxt = $scope.queryParam
          $scope.visiblePosts = []
       }
       // if ($scope.searchTxt !== $scope.previousSearch) {
