@@ -17,8 +17,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.searchTxt = undefined; //undefined to make popunder show with no text in  field
    $scope.previousSearch = undefined;
    $scope.searchPlaceholder = 'Search';
-   $scope.searchExtra = [undefined];
-   $scope.searchChips = ["Class: "]
+   // $scope.searchExtra = [undefined];
+   // $scope.searchChips = ["Class: "]
 
    $scope.userList = [];
    $scope.globals = {
@@ -39,6 +39,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.$mdMedia = $mdMedia;
    $scope.$mdDialog = $mdDialog;
+   $scope.$location = $location;
 
    //-routing-------------
 
@@ -75,11 +76,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.$on('$routeChangeSuccess', function() {
       $scope.classParam = $location.path();
       $scope.queryParam = $location.search();
+      $scope.idParam = $location.hash();
+      $scope.selectedClass = $scope.classParam.replace(/\//g, "")
       if ($scope.searchTxt !== $scope.previousSearch) {
          $scope.visiblePosts = []
       }
-      $scope.idParam = $location.hash();
-      $scope.selectedClass = $scope.classParam.replace(/\//g, "")
       if ($scope.firstFiles == true) { // check  if firstFiles have been loaded
          //sortPostsByType();
          $window.setTimeout(function() {
