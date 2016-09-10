@@ -161,7 +161,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    //-loading and filtering posts---------
 
    $scope.getFiles = function() {
-      $scope.getqueryParams();
+      $scope.getqueryProperties();
       $scope.queryPropertyString = $scope.generateQueryString();
       $scope.firstFiles = true;
       var fileCount = 0;
