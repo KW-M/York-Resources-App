@@ -31,8 +31,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       q: undefined, //undefined to make search popunder show with no text in  field
       flagged: false,
       type: "any",
-      Class: "any",
-      CreatorEmail: "any",
+      class: "any",
+      creatoremail: "any",
    };
 
    $scope.$mdMedia = $mdMedia;
@@ -51,19 +51,17 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.gotoRoute = function(query) {
       if (query.path) {
-         $location.path(query.path || '');
          $scope.toggleSidebar(true);
       }
-      if (id) {
-         $location.hash(id);
-      }
-      if (query) {
-         var tempQuery
-         tempQuery.q = query.q || $scope.queryParams.q;
-         tempQuery.flagged = query.flagged || $scope.queryParams.flagged;
-         tempQuery.class = query.class || $scope.queryParams.class;
-         
-      }
+   var tempQuery
+      tempQuery.q = query.q || $scope.queryParams.q;
+      tempQuery.flagged = query.flagged || $scope.queryParams.flagged;
+      tempQuery.type = query.type || $scope.queryParams.type;
+      tempQuery.creatoremail = query.creatoremail || $scope.queryParams.creatoremail;
+      
+      $location.path(query.path || 'all-posts');
+      $location.hash(query.id || null);
+      $location.search(tempQuery || null);
    };
 
    $scope.$on('$routeChangeSuccess', function() {
