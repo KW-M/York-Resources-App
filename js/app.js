@@ -6,8 +6,8 @@ app.config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $locati
     //$locationProvider.html5Mode(true);
     //routing:
     $routeProvider.otherwise({
-            redirectTo: "/all-posts",
-        });
+        redirectTo: "/all-posts",
+    });
 
     //defining icons
     $mdIconProvider
@@ -35,23 +35,42 @@ app.config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $locati
         'contrastDarkColors': '50 100 A100 A200'
     });
 
+    $mdThemingProvider.definePalette('YorkGreenBlue', {
+        '50': '#b4d9df',
+        '100': '#7ebec9',
+        '200': '#57aab8',
+        '300': '#3b808c',
+        '400': '#326d76',
+        '500': '#295961',
+        '600': '#20454b',
+        '700': '#173136',
+        '800': '#0e1e20',
+        '900': '#050a0b',
+        'A100': '#b4d9df',
+        'A200': '#7ebec9',
+        'A400': '#326d76',
+        'A700': '#173136',
+        'contrastDefaultColor': 'light',
+        'contrastDarkColors': '50 100 200 A100 A200'
+    });
+
     $mdThemingProvider.definePalette('YorkBlue', {
-'50': '#b4d9df',
-  '100': '#7ebec9',
-  '200': '#57aab8',
-  '300': '#3b808c',
-  '400': '#326d76',
-  '500': '#295961',
-  '600': '#20454b',
-  '700': '#173136',
-  '800': '#0e1e20',
-  '900': '#050a0b',
-  'A100': '#b4d9df',
-  'A200': '#7ebec9',
-  'A400': '#326d76',
-  'A700': '#173136',
-  'contrastDefaultColor': 'light',
-  'contrastDarkColors': '50 100 200 A100 A200'
+        '50': '#abbce4',
+        '100': '#728ed1',
+        '200': '#486cc3',
+        '300': '#304d93',
+        '400': '#29417c',
+        '500': '#213565',
+        '600': '#19294e',
+        '700': '#121d37',
+        '800': '#0a1120',
+        '900': '#030509',
+        'A100': '#abbce4',
+        'A200': '#728ed1',
+        'A400': '#29417c',
+        'A700': '#121d37',
+        'contrastDefaultColor': 'light',
+        'contrastDarkColors': '50 100 A100 A200'
     });
 
     $mdThemingProvider.definePalette('YorkGreen', {
