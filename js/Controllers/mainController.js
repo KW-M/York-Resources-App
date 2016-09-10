@@ -52,18 +52,21 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    $scope.gotoRoute = function(query) {
-      if (query.classPath) {
-         $scope.toggleSidebar(true);
-      }
-      
-      if (query.q) {
-         var tempQuery = {}
+      var tempQuery = {}
+      if (query.q !== null) {
          tempQuery.q = query.q || $scope.queryParams.q;
          tempQuery.flagged = query.flagged || $scope.queryParams.flagged;
          tempQuery.type = query.type || $scope.queryParams.type;
          tempQuery.creatoremail = query.creatoremail || $scope.queryParams.creatoremail;
       } else {
-
+         tempQuery.q = null;
+         tempQuery.flagged = null;
+         tempQuery.type = null;
+         tempQuery.creatoremail = null;
+      }
+      if (query.classPath) {
+         $scope.toggleSidebar(true);
+      }
       $location.path(query.classpath || 'all-posts');
       $location.hash(query.id || null);
       $location.search(tempQuery || null);
@@ -301,34 +304,28 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.generateQueryString = function() {
       if ($scope.queryParams.classpath === 'all-posts') {
-         $scope.queryPropertyString = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false and properties has { key='Flagged' and value='false' }"
+         var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false and properties has { key='Flagged' and value='false' }"
       }
       else if ($scope.queryParams.classpath === 'my-posts') {
-         $scope.queryPropertyString = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false"
+         var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false"
       }
       else if ($scope.queryParams.classpath === 'my-bookmarks') {
-         $scope.queryPropertyString = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false"
+         var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false"
       }
       else if ($scope.queryParams.classpath === 'flagged') {
-         $scope.queryPropertyString = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false and properties has { key='Flagged' and value='true' }"
+         var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false and properties has { key='Flagged' and value='true' }"
       } else {
-         $scope.queryPropertyString = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false and properties has { key='Flagged' and value='false' } and properties has { key='ClassName' and value='" + $scope.queryParams.classpath + "' }"
+         var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false and properties has { key='Flagged' and value='false' } and properties has { key='ClassName' and value='" + $scope.queryParams.classpath + "' }"
       }
-         if ($scope.queryParams.q) {
-            query = query + " and fullText contains '" + $scope.queryParams.q + "'";
-         }
-         if ($scope.queryParams.flagged !== undefined) {
-            query = query + " and properties has { key='Flagged' and value='" + $scope.queryParams.flagged + "' }"
-         }
-         if ($scope.queryParams.classpath !== "any" && $scope.queryParams.classpath !== undefined) {
-            query = query + " and properties has { key='ClassName' and value='" + $scope.queryParams.classpath + "' }"
-         }
-         if ($scope.queryParams.creatoremail !== "any" && $scope.queryParams.creatoremail !== undefined) {
-            query = query + " and '" + $scope.queryParams.creatoremail + "' in owners "
-         }
-         if ($scope.queryParams.type !== "any" && $scope.queryParams.type !== undefined) {
-            query = query + " and properties has { key='Type' and value='" + $scope.queryParams.type + "' }"
-         }
+      if ($scope.queryParams.q) {
+         query = query + " and fullText contains '" + $scope.queryParams.q + "'";
+      }
+      if ($scope.queryParams.creatoremail !== "any" && $scope.queryParams.creatoremail !== undefined) {
+         query = query + " and '" + $scope.queryParams.creatoremail + "' in owners "
+      }
+      if ($scope.queryParams.type !== "any" && $scope.queryParams.type !== undefined) {
+         query = query + " and properties has { key='Type' and value='" + $scope.queryParams.type + "' }"
+      }
       $scope.queryPropertyString = query;
    }
 
