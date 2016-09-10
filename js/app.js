@@ -94,21 +94,25 @@ app.config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $locati
 
     $mdThemingProvider.definePalette('YorkOrange', {
         '50': '#ffffff',
-        '100': '#f7e2d5',
-        '200': '#eec1a6',
-        '300': '#e2976a',
-        '400': '#dd8551',
-        '500': '#d87337',
-        '600': '#c96427',
-        '700': '#b05722',
-        '800': '#964a1d',
-        '900': '#7c3e18',
-        'A100': '#ffffff',
-        'A200': '#f7e2d5',
-        'A400': '#dd8551',
-        'A700': '#b05722',
-        'contrastDefaultColor': 'light',
-        'contrastDarkColors': '50 100 200 300 400 500 A100 A200 A400'
+  '100': '#f7e2d5',
+  '200': '#eec1a6',
+  '300': '#e2976a',
+  '400': '#dd8551',
+  '500': '#d87337',
+  '600': '#c96427',
+  '700': '#b05722',
+  '800': '#964a1d',
+  '900': '#7c3e18',
+  'A100': '#ffffff',
+  'A200': '#f7e2d5',
+  'A400': '#dd8551',
+  'A700': '#b05722',
+  'contrastDefaultColor': 'light',
+  'contrastDarkColors': '50 100 200 300 400 500 A100 A200 A400'
     });
-    $mdThemingProvider.theme('default').accentPalette('YorkBlue').primaryPalette('YorkRed')
+    //$mdThemingProvider.theme('default').accentPalette('YorkBlue').primaryPalette('YorkRed').warnPalette('YorkOrange')
+    //$mdThemingProvider.theme('default').accentPalette('Blue').primaryPalette('YorkRed').warnPalette('Orange')
+    $mdThemingProvider.theme('default').accentPalette('YorkGreenBlue').primaryPalette('Red').warnPalette('Orange')
 });
+
+
