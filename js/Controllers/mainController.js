@@ -66,6 +66,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
    $scope.$on('$routeChangeSuccess', function() {
+      if ($scope.queryParams.q !== $scope.queryParams.q) {
       $scope.selectedClass = $location.path().replace(/\//g, "");
       $scope.queryParams = $location.search();
       $scope.idParam = $location.hash();

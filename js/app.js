@@ -5,23 +5,7 @@ var app = angular.module('YorkResourcesApp', ['ngMaterial', 'ngRoute', 'angularG
 app.config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $locationProvider) {
     //$locationProvider.html5Mode(true);
     //routing:
-    $routeProvider
-        .when("/all-posts", {
-            templateUrl: "templates/html/all-posts.html",
-        })
-        .when("/my-posts", {
-            templateUrl: "templates/html/my-posts.html",
-        })
-        .when("/flagged", {
-            templateUrl: "templates/html/flagged.html",
-        })
-        .when("/unflagpending", {
-            templateUrl: "templates/html/unflagpending.html",
-        })
-        .when("/:class", {
-            templateUrl: "templates/html/class.html",
-        })
-        .otherwise({
+    $routeProvider.otherwise({
             redirectTo: "/all-posts",
         });
 
