@@ -57,27 +57,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
       
       if (query.q) {
-      var tempQuery = {}
-      tempQuery.q = query.q || $scope.queryParams.q;
-      tempQuery.flagged = query.flagged || $scope.queryParams.flagged;
-      tempQuery.type = query.type || $scope.queryParams.type;
-      tempQuery.creatoremail = query.creatoremail || $scope.queryParams.creatoremail;
+         var tempQuery = {}
+         tempQuery.q = query.q || $scope.queryParams.q;
+         tempQuery.flagged = query.flagged || $scope.queryParams.flagged;
+         tempQuery.type = query.type || $scope.queryParams.type;
+         tempQuery.creatoremail = query.creatoremail || $scope.queryParams.creatoremail;
       } else {
-      if ($scope.queryParams.classpath === 'all-posts') {
-         $scope.queryPropertyString = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false and properties has { key='Flagged' and value='false' }"
-      }
-      else if ($scope.queryParams.classpath === 'my-posts') {
-         $scope.queryPropertyString = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false"
-      }
-      else if ($scope.queryParams.classpath === 'my-bookmarks') {
-         $scope.queryPropertyString = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false"
-      }
-      else if ($scope.queryParams.classpath === 'flagged') {
-         $scope.queryPropertyString = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false and properties has { key='Flagged' and value='true' }"
-      } else {
-         
-      }
-      }
 
       $location.path(query.classpath || 'all-posts');
       $location.hash(query.id || null);
@@ -315,7 +300,20 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    $scope.generateQueryString = function() {
-         var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false";
+      if ($scope.queryParams.classpath === 'all-posts') {
+         $scope.queryPropertyString = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false and properties has { key='Flagged' and value='false' }"
+      }
+      else if ($scope.queryParams.classpath === 'my-posts') {
+         $scope.queryPropertyString = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false"
+      }
+      else if ($scope.queryParams.classpath === 'my-bookmarks') {
+         $scope.queryPropertyString = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false"
+      }
+      else if ($scope.queryParams.classpath === 'flagged') {
+         $scope.queryPropertyString = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false and properties has { key='Flagged' and value='true' }"
+      } else {
+         $scope.queryPropertyString = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false and properties has { key='Flagged' and value='false' } and properties has { key='ClassName' and value='" + $scope.queryParams.classpath + "' }"
+      }
          if ($scope.queryParams.q) {
             query = query + " and fullText contains '" + $scope.queryParams.q + "'";
          }
