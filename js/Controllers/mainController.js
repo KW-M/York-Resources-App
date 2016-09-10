@@ -34,6 +34,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       type: "any",
       classpath: 'all-posts',
       creatoremail: "any",
+      id: null,
    };
 
    $scope.$mdMedia = $mdMedia;
@@ -66,16 +67,13 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    };
 
    $scope.$on('$routeChangeSuccess', function() {
-      if ($scope.queryParams.q !== $location.search().q) {
+      $scope.queryParams = $location.search();
+      $scope.queryParams.classpath = $location.path().replace(/\//g, "");
+      $scope.queryParams.id = $location.hash();
+      if ($scope.queryParams.q !== $scope.previousSearch) {
          $scope.queryParams.q = $location.search().q
          $scope.visiblePosts = []
       }
-      $scope.selectedClass = $location.path().replace(/\//g, "");
-      $scope.queryParams = $location.search();
-      $scope.idParam = $location.hash();
-      // if ($scope.queryParams.q !== $scope.previousSearch) {
-      //    $scope.visiblePosts = []
-      // }
       if ($scope.firstFiles == true) { // check  if firstFiles have been loaded
          //sortPostsByType();
          $window.setTimeout(function() {
@@ -246,7 +244,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          })
       }
       else {
-         if ($scope.selectedClass === 'all-posts') {
+         if ($scope.queryParams.classpath === 'all-posts') {
             $scope.searchPlaceholder = 'Search'
             if (formattedFileList !== undefined) {
                $scope.allPosts = $scope.allPosts.concat(formattedFileList);
@@ -258,7 +256,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                }, true);
             })
          }
-         else if ($scope.selectedClass === 'flagged') {
+         else if ($scope.queryParams.classpath === 'flagged') {
             $scope.searchPlaceholder = 'Search Flagged Posts'
             if (formattedFileList !== undefined) {
                $scope.flaggedPosts = $scope.flaggedPosts.concat(formattedFileList);
@@ -270,7 +268,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
                }, true);
             })
          }
-         else if ($scope.selectedClass === 'my-posts') {
+         else if ($scope.queryParams.classpath === 'my-posts') {
             $scope.searchPlaceholder = 'Search My Posts'
             if (formattedFileList !== undefined) {
                $scope.allPosts = $scope.allPosts.concat(formattedFileList);
@@ -284,7 +282,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
             });
          }
          else {
-            $scope.searchPlaceholder = 'Search ' + $scope.selectedClass;
+            $scope.searchPlaceholder = 'Search ' + $scope.queryParams.classpath;
             if (formattedFileList !== undefined) {
                $scope.allPosts = $scope.allPosts.concat(formattedFileList);
             }
