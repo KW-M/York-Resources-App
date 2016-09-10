@@ -31,7 +31,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       q: undefined, //undefined to make search popunder show with no text in  field
       flagged: false,
       type: "any",
-      class: "any",
+      classpath: 'all-posts',
       creatoremail: "any",
    };
 
@@ -50,16 +50,16 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    $scope.gotoRoute = function(query) {
-      if (query.path) {
+      if (query.classPath) {
          $scope.toggleSidebar(true);
       }
-   var tempQuery
+  var tempQuery
       tempQuery.q = query.q || $scope.queryParams.q;
       tempQuery.flagged = query.flagged || $scope.queryParams.flagged;
       tempQuery.type = query.type || $scope.queryParams.type;
       tempQuery.creatoremail = query.creatoremail || $scope.queryParams.creatoremail;
       
-      $location.path(query.path || 'all-posts');
+      $location.path(query.classPath || 'all-posts');
       $location.hash(query.id || null);
       $location.search(tempQuery || null);
    };
