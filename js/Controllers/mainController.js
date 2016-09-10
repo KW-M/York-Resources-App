@@ -30,10 +30,9 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.queryPropertyString = '';
    $scope.queryParams = {
       q: undefined, //undefined to make search popunder show with no text in  field
-      flagged: false,
       type: "any",
       classpath: 'all-posts',
-      creatoremail: "any",
+      creatorEmail: "any",
       id: null,
    };
 
@@ -55,14 +54,13 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       var tempQuery = {}
       if (query.q !== null) {
          tempQuery.q = query.q || $scope.queryParams.q;
-         tempQuery.flagged = query.flagged || $scope.queryParams.flagged;
          tempQuery.type = query.type || $scope.queryParams.type;
-         tempQuery.creatoremail = query.creatoremail || $scope.queryParams.creatoremail;
+         tempQuery.creatorEmail = query.creatorEmail || $scope.queryParams.creatorEmail;
       } else {
          tempQuery.q = null;
          tempQuery.flagged = null;
          tempQuery.type = null;
-         tempQuery.creatoremail = null;
+         tempQuery.creatorEmail = null;
       }
       if (query.classPath) {
          $scope.toggleSidebar(true);
@@ -320,8 +318,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       if ($scope.queryParams.q) {
          query = query + " and fullText contains '" + $scope.queryParams.q + "'";
       }
-      if ($scope.queryParams.creatoremail !== "any" && $scope.queryParams.creatoremail !== undefined) {
-         query = query + " and '" + $scope.queryParams.creatoremail + "' in owners "
+      if ($scope.queryParams.creatorEmail !== "any" && $scope.queryParams.creatorEmail !== undefined) {
+         query = query + " and '" + $scope.queryParams.creatorEmail + "' in owners "
       }
       if ($scope.queryParams.type !== "any" && $scope.queryParams.type !== undefined) {
          query = query + " and properties has { key='Type' and value='" + $scope.queryParams.type + "' }"
@@ -345,8 +343,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          else {
             var Type = true;
          }
-         if ($scope.queryParams.creatoremail !== "any" && $scope.queryParams.creatoremail !== undefined) {
-            var Creator = post.Creator.Email === $scope.queryParams.creatoremail;
+         if ($scope.queryParams.creatorEmail !== "any" && $scope.queryParams.creatorEmail !== undefined) {
+            var Creator = post.Creator.Email === $scope.queryParams.creatorEmail;
          }
          else {
             var Creator = true;
