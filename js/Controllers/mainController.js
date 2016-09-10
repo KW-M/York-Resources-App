@@ -14,11 +14,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    var deDuplicationIndex = {};
    var classPageTokenSelectionIndex = {};
 
-   $scope.searchTxt = undefined; //undefined to make popunder show with no text in  field
    $scope.previousSearch = undefined;
    $scope.searchPlaceholder = 'Search';
-   // $scope.searchExtra = [undefined];
-   // $scope.searchChips = ["Class: "]
 
    $scope.userList = [];
    $scope.globals = {
@@ -31,6 +28,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.firstFiles = false;
    $scope.queryPropertyString = '';
    $scope.queryParams = {
+      q: undefined, //undefined to make search popunder show with no text in  field
       flagged: false,
       type: "any",
       Class: "any",
@@ -39,7 +37,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.$mdMedia = $mdMedia;
    $scope.$mdDialog = $mdDialog;
-   $scope.$location = $location;
 
    //-routing-------------
 
@@ -78,11 +75,11 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $scope.queryParams = $location.search();
       $scope.idParam = $location.hash();
       
-      if ($scope.queryParams.q !== $scope.searchTxt) {
-         $scope.searchTxt = $scope.queryParam.q
+      if ($scope.queryParams.q !== $scope.queryParams.q) {
+         $scope.queryParams.q = $scope.queryParam.q
          $scope.visiblePosts = []
       }
-      // if ($scope.searchTxt !== $scope.previousSearch) {
+      // if ($scope.queryParams.q !== $scope.previousSearch) {
       //    $scope.visiblePosts = []
       // }
       if ($scope.firstFiles == true) { // check  if firstFiles have been loaded
@@ -181,7 +178,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          queue(GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 2), function(fileList) {
             if (fileList.result.files.length > 0) {
                //format every file:
-               if (!$scope.searchTxt) {
+               if (!$scope.queryParams.q) {
                   for (o = 0; o < fileList.result.files.length; o++) {
                      if (deDuplicationIndex[fileList.result.files[o].id] === undefined) {
                         //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
@@ -239,16 +236,16 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    function sortPostsByType(formattedFileList) {
-      if ($scope.searchTxt) {
+      if ($scope.queryParams.q) {
          if (formattedFileList !== undefined) {
-            if ($scope.searchTxt === $scope.previousSearch) {
+            if ($scope.queryParams.q === $scope.previousSearch) {
                log('continueing search')
                $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
             }
             else {
                $scope.searchPosts = formattedFileList;
             }
-            $scope.previousSearch = $scope.searchTxt
+            $scope.previousSearch = $scope.queryParams.q
          }
          $timeout(function() {
             $scope.visiblePosts = $scope.searchPosts;
@@ -302,20 +299,20 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.generateQueryString = function() {
       var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false";
-      if ($scope.searchTxt) {
-         query = query + " and fullText contains '" + $scope.searchTxt + "'";
+      if ($scope.queryParams.q) {
+         query = query + " and fullText contains '" + $scope.queryParams.q + "'";
       }
       if ($scope.queryParams.flagged !== undefined) {
-         query = query + " and properties has { key='Flagged' and value='" + $scope.queryParams.Flagged + "' }"
+         query = query + " and properties has { key='Flagged' and value='" + $scope.queryParams.flagged + "' }"
       }
       if ($scope.queryParams.class !== "any" && $scope.queryParams.class !== undefined) {
          query = query + " and properties has { key='ClassName' and value='" + $scope.queryParams.class + "' }"
       }
-      if ($scope.queryParams.CreatorEmail !== "any" && $scope.queryParams.CreatorEmail !== undefined) {
-         query = query + " and '" + $scope.queryParams.CreatorEmail + "' in owners "
+      if ($scope.queryParams.creatoremail !== "any" && $scope.queryParams.creatoremail !== undefined) {
+         query = query + " and '" + $scope.queryParams.creatoremail + "' in owners "
       }
-      if ($scope.queryParams.Type !== "any" && $scope.queryParams.Type !== undefined) {
-         query = query + " and properties has { key='Type' and value='" + $scope.queryParams.Type + "' }"
+      if ($scope.queryParams.type !== "any" && $scope.queryParams.type !== undefined) {
+         query = query + " and properties has { key='Type' and value='" + $scope.queryParams.type + "' }"
       }
       return query;
    }
@@ -323,21 +320,21 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    $scope.filterPosts = function(inputSet) {
 
       return inputSet.filter(function(post) {
-         var Flagged = post.Flagged === $scope.queryParams.Flagged || post.Flagged;
+         var Flagged = post.Flagged === $scope.queryParams.flagged || post.Flagged;
          if ($scope.queryParams.class !== "any" && $scope.queryParams.class !== undefined) {
             var Class = post.Class.Name === $scope.queryParams.class;
          }
          else {
             var Class = true;
          }
-         if ($scope.queryParams.Type !== "any" && $scope.queryParams.Type !== undefined) {
-            var Type = post.Type === $scope.queryParams.Type;
+         if ($scope.queryParams.type !== "any" && $scope.queryParams.type !== undefined) {
+            var Type = post.Type === $scope.queryParams.type;
          }
          else {
             var Type = true;
          }
-         if ($scope.queryParams.CreatorEmail !== "any" && $scope.queryParams.CreatorEmail !== undefined) {
-            var Creator = post.Creator.Email === $scope.queryParams.CreatorEmail;
+         if ($scope.queryParams.creatoremail !== "any" && $scope.queryParams.creatoremail !== undefined) {
+            var Creator = post.Creator.Email === $scope.queryParams.creatoremail;
          }
          else {
             var Creator = true;
