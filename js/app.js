@@ -36,22 +36,22 @@ app.config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $locati
     });
 
     $mdThemingProvider.definePalette('YorkBlue', {
-        '50': '#ffffff',
-        '100': '#fcfdfe',
-        '200': '#d5e0ed',
-        '300': '#a3bbd7',
-        '400': '#8dacce',
-        '500': '#789cc5',
-        '600': '#638cbc',
-        '700': '#4d7db3',
-        '800': '#446e9d',
-        '900': '#3a5f88',
-        'A100': '#ffffff',
-        'A200': '#fcfdfe',
-        'A400': '#8dacce',
-        'A700': '#4d7db3',
-        'contrastDefaultColor': 'light',
-        'contrastDarkColors': '50 100 200 300 400 500 600 A100 A200 A400'
+'50': '#b4d9df',
+  '100': '#7ebec9',
+  '200': '#57aab8',
+  '300': '#3b808c',
+  '400': '#326d76',
+  '500': '#295961',
+  '600': '#20454b',
+  '700': '#173136',
+  '800': '#0e1e20',
+  '900': '#050a0b',
+  'A100': '#b4d9df',
+  'A200': '#7ebec9',
+  'A400': '#326d76',
+  'A700': '#173136',
+  'contrastDefaultColor': 'light',
+  'contrastDarkColors': '50 100 200 A100 A200'
     });
 
     $mdThemingProvider.definePalette('YorkGreen', {
