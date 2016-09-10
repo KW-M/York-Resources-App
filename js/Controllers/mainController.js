@@ -56,12 +56,14 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       if (query.classPath) {
          $scope.toggleSidebar(true);
       }
-      var tempQuery
+      var tempQuery = {
+         q:''
+      }
       tempQuery.q = query.q || $scope.queryParams.q;
       tempQuery.flagged = query.flagged || $scope.queryParams.flagged;
       tempQuery.type = query.type || $scope.queryParams.type;
       tempQuery.creatoremail = query.creatoremail || $scope.queryParams.creatoremail;
-
+console.log(query.classpath);
       $location.path(query.classpath || 'all-posts');
       $location.hash(query.id || null);
       $location.search(tempQuery || null);
@@ -72,8 +74,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $scope.queryParams.classpath = $location.path().replace(/\//g, "");
       $scope.queryParams.id = $location.hash();
       if ($scope.queryParams.q !== $scope.previousSearch) {
-         $scope.queryParams.q = $location.search().q
          $scope.visiblePosts = []
+         $scope.previousSearch = $scope.queryParams.q
       }
       $scope.generateQueryString();
       if ($scope.firstFiles == true) { // check  if firstFiles have been loaded
