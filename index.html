@@ -88,7 +88,7 @@
                         </md-button>
                 </span>
                 <add-bar-top></add-bar-top>
-                    <add-lower-button></add-lower-button>
+                <add-lower-button></add-lower-button>
                 <div angular-grid="visiblePosts" id="postsGrid" ag-options="angularGridOptions" ag-id="posts">
                     <md-card class="post-card raise-on-hover" ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}">
                         <md-button style="position: absolute; top: -14px; right: -6px; z-index: 1000" class="md-icon-button md-accent" ng-click="Post.Bookmarked !== Post.Bookmarked">
