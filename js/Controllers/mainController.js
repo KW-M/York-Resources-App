@@ -656,8 +656,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $scope.myInfo.quizletUsername = settingsArray[5]
          $scope.myInfo.LastQuizletCheckDate = Date.parse(settingsArray[6])
          $scope.myInfo.NumberOfVisits = settingsArray[7]
-         
-         console.log($scope.myInfo);
       }
       $scope.getFiles("");
       queue(GoogleDriveService.getSpreadsheetRange("1DfFUn8sgnFeLLijtKvWsd90GNcnEG6Xl5JTSeApX3bY", "Sheet1!A2:Z"), handleClassesSheet)
