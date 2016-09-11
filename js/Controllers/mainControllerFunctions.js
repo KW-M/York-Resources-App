@@ -1,7 +1,7 @@
 /*global app*/ /*global angular*/ /*global gapi*/ /*global google*/ /*global queue*//*global subControllerFunctions*/
 app.controller('ApplicationController', controllerFunction)
-//controllerFunction.$inject(['$scope', '$mdDialog', '$window', '$timeout', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', '$routeParams', 'angularGridInstance'])
-function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, $routeParams, angularGridInstance) {
+//controllerFunction.$inject(['$scope', '$mdDialog', '$window', '$timeout', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', 'angularGridInstance'])
+function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, angularGridInstance) {
    var self = this;
    var content_container = document.getElementById("content_container");
    var loading_spinner = document.getElementById("loading_spinner");
@@ -417,30 +417,6 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
       return formatedFile;
    }
 
-   //-UI actions---------
-
-   $scope.toggleSidebar = function(urlPathChanged) { //called by the top left toolbar menu button
-      if (urlPathChanged === true) {
-         if ($mdMedia('gt-sm') !== true) {
-            $mdSidenav('sidenav_overlay').close();
-         }
-      }
-      else {
-         if ($mdMedia('gt-sm')) {
-            $scope.globals.sidenavIsOpen = !$scope.globals.sidenavIsOpen;
-            $window.setTimeout(angularGridInstance.posts.refresh, 500);
-         }
-         else {
-            $mdSidenav('sidenav_overlay').toggle();
-         }
-      }
-   };
-
-   $scope.toggleMobileSearch = function() {
-      $scope.globals.mobileSearchOpen = !$scope.globals.mobileSearchOpen;
-      console.log($scope.globals.mobileSearchOpen);
-   }
-
    //-signin & initiation------------
 
    $scope.signOut = function() {
@@ -619,5 +595,5 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
       }
    }
 
-   subControllerFunctions($scope, $location, $mdDialog, $timeout);
+   subControllerFunctions($scope, $location, $mdDialog, $timeout, $mdSidenav, angularGridInstance);
 }

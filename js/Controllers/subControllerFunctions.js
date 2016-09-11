@@ -1,5 +1,26 @@
-function subControllerFunctions($scope, $location, $mdDialog, $timeout) {
-	
+function subControllerFunctions($scope, $location, $mdDialog, $timeout, $mdSidenav, angularGridInstance) {
+	   //-UI actions---------
+
+   $scope.toggleSidebar = function(urlPathChanged) { //called by the top left toolbar menu button
+      if (urlPathChanged === true) {
+         if ($mdMedia('gt-sm') !== true) {
+            $mdSidenav('sidenav_overlay').close();
+         }
+      }
+      else {
+         if ($mdMedia('gt-sm')) {
+            $scope.globals.sidenavIsOpen = !$scope.globals.sidenavIsOpen;
+            //$window.setTimeout(angularGridInstance.posts.refresh, 500);
+         }
+         else {
+            $mdSidenav('sidenav_overlay').toggle();
+         }
+      }
+   };
+
+   $scope.toggleMobileSearch = function() {
+      $scope.globals.mobileSearchOpen = !$scope.globals.mobileSearchOpen;
+   }
 	//----------------------------------------------------
 	// --------------- Post Card Functions ---------------
 	$scope.confirmDelete = function(ev, content, arrayIndex) {
@@ -79,27 +100,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $timeout) {
 		}
 	}
 	//----------------------------------------------------
-	//---------------------- dev -------------------------
-	$scope.consoleLog = function(input, asAlert) {
-		if (asAlert) {
-			window.alert(JSON.stringify(input, null, 4))
-		}
-		else {
-			console.log(input)
-		}
-	}
-	$scope.logPostToConsole = function(content, arrayIndex) {
-		window.alert(JSON.stringify({
-			'loggedPostContent': content,
-			'arrayIndex': arrayIndex
-		}, null, 4));
-		console.log({
-			'loggedPostContent': content,
-			'arrayIndex': arrayIndex
-		});
-	};
-	
-	//----------------------------------------------------
 	//-------------------- dialogs -----------------------
 	$scope.openHelpDialog = function() { //called by the top right toolbar help button
 		$mdDialog.show({
@@ -132,4 +132,24 @@ function subControllerFunctions($scope, $location, $mdDialog, $timeout) {
 			$mdDialog.cancel();
 		};
 	}
+	//----------------------------------------------------
+	//---------------------- dev -------------------------
+	$scope.consoleLog = function(input, asAlert) {
+		if (asAlert) {
+			window.alert(JSON.stringify(input, null, 4))
+		}
+		else {
+			console.log(input)
+		}
+	}
+	$scope.logPostToConsole = function(content, arrayIndex) {
+		window.alert(JSON.stringify({
+			'loggedPostContent': content,
+			'arrayIndex': arrayIndex
+		}, null, 4));
+		console.log({
+			'loggedPostContent': content,
+			'arrayIndex': arrayIndex
+		});
+	};
 }
