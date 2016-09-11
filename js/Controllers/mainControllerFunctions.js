@@ -1,8 +1,7 @@
-/*global app*/ /*global angular*/ /*global gapi*/ /*global google*/ /*global queue*/
+/*global app*/ /*global angular*/ /*global gapi*/ /*global google*/ /*global queue*//*global subControllerFunctions*/
 app.controller('ApplicationController', controllerFunction)
 //controllerFunction.$inject(['$scope', '$mdDialog', '$window', '$timeout', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', '$routeParams', 'angularGridInstance'])
 function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, $routeParams, angularGridInstance) {
-   subControllerFunctions($scope, $location);
    var self = this;
    var content_container = document.getElementById("content_container");
    var loading_spinner = document.getElementById("loading_spinner");
@@ -463,104 +462,6 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
       authorizationService.hideSigninDialog();
    };
 
-   $scope.logPostToConsole = function(content, arrayIndex) {
-      window.alert(JSON.stringify({
-         'loggedPostContent': content,
-         'arrayIndex': arrayIndex
-      }, null, 4));
-      console.log({
-         'loggedPostContent': content,
-         'arrayIndex': arrayIndex
-      });
-   };
-
-   $scope.confirmDelete = function(ev, content, arrayIndex) {
-      // Appending dialog to document.body to cover sidenav in docs app
-      var confirm = $mdDialog.confirm()
-         .title('Permanently delete this?')
-         .ariaLabel('Delete?')
-         .targetEvent(ev)
-         .ok('Delete')
-         .cancel('Cancel');
-      $mdDialog.show(confirm).then(function() {
-         //ok
-         $timeout(function() { //makes angular update values
-            $scope.visiblePosts.splice(arrayIndex, 1);
-         });
-         queue(GoogleDriveService.deleteDriveFile(content.Id), function() {
-            console.log("deleted" + content.Id);
-         });
-      }, function() {
-         //cancel
-      });
-   };
-
-   $scope.flagPost = function(ev, content, arrayIndex) {
-      content.Flagged = true;
-      $timeout(function() { //makes angular update values
-         $scope.visiblePosts.splice(arrayIndex, 1);
-         $scope.flaggedPosts.push(content);
-      });
-      queue(GoogleDriveService.updateFileProperty(content.Id, 'Flagged', true), function() {
-         console.log("flagged: " + content.Id);
-      });
-      //set the user's has flagged date back
-   };
-
-   $scope.unFlagPost = function(ev, content, arrayIndex) {
-      if ($scope.myInfo.moderator === false) {
-         content.Flagged = false;
-         $timeout(function() { //makes angular update values
-            $scope.flaggedPosts.splice(arrayIndex, 1);
-            $scope.visiblePosts.push(content);
-         });
-
-         queue(GoogleDriveService.updateFileProperty(content.Id, 'Flagged', false), function() {
-            console.log("unflagged: " + content.Id);
-         });
-      }
-      else {
-         $mdDialog.show($mdDialog.alert({
-            title: 'Uh Oh.',
-            htmlContent: '<p style="margin: 0px; margin-bottom: 2px">One of your posts has been flagged within the past two weeks.</p><p style="margin: 0px">To unlock the ability to unflag posts, make sure none of your posts get flagged this week.</p>',
-            ok: 'Ok'
-         }));
-      }
-   };
-
-   $scope.likePost = function(ev, content, arrayIndex) {
-      GoogleDriveService.flagDriveFile(content.Id, 'Flagged', false).then(function() {
-         console.log("flagged: " + content.Id);
-      })
-   };
-
-   $scope.unLikePost = function(ev, content, arrayIndex) {
-      if ($scope.myInfo.Moderator === true) {
-         var permissionID = "needs to be created"
-         GoogleDriveService.unLikeFile(content.Id, permissionID).then(function() {
-            console.log("unflagged: " + content.Id);
-         });
-      }
-      else {
-
-      }
-   };
-
-   $scope.openLink = function(link) {
-      if (link !== "" && link !== undefined) {
-         $window.open(link);
-      }
-   };
-
-   function DialogController($scope, $mdDialog) {
-      $scope.hideDialog = function() {
-         $mdDialog.hide();
-      };
-      $scope.cancelDialog = function() {
-         $mdDialog.cancel();
-      };
-   }
-
    $scope.closeDialog = function() {
       console.log('closing dialog')
       $mdDialog.hide();
@@ -684,10 +585,6 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
       })
    }
 
-   $scope.clearText = function(text) {
-      text = '';
-   };
-
    //-event watchers---------
 
    $scope.angularGridOptions = {
@@ -748,15 +645,5 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
       }
    }
 
-   //dev -------
-
-   $scope.consoleLog = function(input, asAlert) {
-      if (asAlert) {
-         window.alert(JSON.stringify(input, null, 4))
-      }
-      else {
-         console.log(input)
-      }
-   }
-
+   subControllerFunctions($scope, $location);
 }
