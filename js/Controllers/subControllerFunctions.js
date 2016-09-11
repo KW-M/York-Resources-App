@@ -1,4 +1,4 @@
-function subControllerFunctions($scope, $location, $mdDialog, $timeout, $mdSidenav, angularGridInstance) {
+function subControllerFunctions($scope, $location, $mdDialog, $mdMedia,$timeout, $mdSidenav, authorizationService, angularGridInstance) {
 	
 	//----------------------------------------------------
 	//------------------UI actions------------------------
@@ -18,14 +18,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $timeout, $mdSiden
          }
       }
    };
-   	$scope.pathSelected = function(path) {
-		if ($location.path() === path) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
 	//----------------------------------------------------
 	// --------------- Post Card Functions ---------------
 	$scope.confirmDelete = function(ev, content, arrayIndex) {

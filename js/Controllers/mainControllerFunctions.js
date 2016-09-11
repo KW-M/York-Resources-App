@@ -596,5 +596,5 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
       }
    }
 
-   subControllerFunctions($scope, $location, $mdDialog, $timeout, $mdSidenav, angularGridInstance);
+   subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout, $mdSidenav, angularGridInstance);
 }
