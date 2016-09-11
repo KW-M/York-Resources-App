@@ -2,18 +2,18 @@
                                        defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
         //database variables
-        $scope.Type = 'noLink';
-        $scope.Flagged = false;
-        $scope.Title = '';
-        $scope.CreationDate = new Date();
-        $scope.UpdateDate = new Date();
-        $scope.Tags = [];
-        $scope.Description = '';
-        $scope.Class = {Name:''};
-        $scope.Link = '';
-        $scope.AttachmentId = '';
-        $scope.LikeUsers = [];
-        $scope.HeaderImage = '';
+        // $scope.Type = 'noLink';
+        // $scope.Flagged = false;
+        // $scope.Title = '';
+        // $scope.CreationDate = new Date();
+        // $scope.UpdateDate = new Date();
+        // $scope.Tags = [];
+        // $scope.Description = '';
+        // $scope.Class = {Name:''};
+        // $scope.Link = '';
+        // $scope.AttachmentId = '';
+        // $scope.LikeUsers = [];
+        // $scope.HeaderImage = '';
         
         $scope.post = {
             Type: 'noLink',
@@ -25,10 +25,11 @@
             Description: '',
             Class: {
                 Name:'',
-            }
+            },
             Link: '',
             AttachmentId: '',
-            Likes:
+            Likes: 0,
+            HeaderImage: '',
         }
         fillInValues();
 

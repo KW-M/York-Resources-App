@@ -39,8 +39,8 @@
          </md-chips>
       </div>
       <div class="md-dialog-content">
-         <input ng-model="Title" ng-readonly="operation === 'view'" class="newPostTitle md-title" placeholder="Title" md-autofocus>
-         <div id="DescriptionTxt" ng-bind-html="newPostDescription" class="newPostBody" contenteditable="operation !== 'view'"></div>
+         <input ng-model="post.Title" ng-readonly="operation === 'view'" class="newPostTitle md-title" placeholder="Title" md-autofocus>
+         <div id="DescriptionTxt" ng-bind-html="post.Description" class="newPostBody" contenteditable="operation !== 'view'"></div>
       </div>
    </md-dialog-content>
    <md-dialog-actions ng-hide="operation === 'view'" layout="row">
