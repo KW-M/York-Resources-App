@@ -48,6 +48,13 @@ app.directive('newPostContent', function() {
     };
 });
 
+app.directive("showOn",function(){
+  return{
+    link:function(scope,element){
+      element[0].style.border = "5px dotted #090";
+    }        
+  }      
+});
 
 // app.directive('getPosts', function() {
 //     return {
