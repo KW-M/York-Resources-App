@@ -43,6 +43,38 @@
         // var ctx = canvas.getContext('2d');
         // var dataURL;
 
+       $scope.findType = function() {
+            $scope.previewLoading = true;
+            if ($scope.post.Link === '') {
+                $scope.post.Type = 'NoLink';
+                $scope.post.HeaderImage = '', // will be the down arrow photo
+                $scope.previewLoading = false;
+            }
+            else 
+                if ($scope.post.Link.match(/(?:http|https):\/\/.{2,}/)) {
+                    xhttp.open('HEAD', $scope.post.link); // to implement: img checking and icon for non existant thumnail drive docs
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == this.DONE) {
+                            console.log(this);
+                        }
+                    };
+                    xhttp.send();
+                    var isgdrive = $scope.post.Link.match(/\/(?:d|file|folder|folders)\/([-\w]{25,})/)
+                    if (isgdrive) {
+                        $scope.post.Type = 'gDrive';
+                    }
+                    else {
+                        $scope.post.Type = 'Link';
+                    }
+                }
+                else {
+                    if ($scope.post.Link.length > 9) {
+                        $scope.post.Link = "http://" + $scope.post.Link
+                    }
+                    $scope.post.Type = 'Link';
+                }
+    
+        };
 
         $scope.isReadyToSubmit = function() {
             console.log($scope.Class);
@@ -114,40 +146,6 @@
                 });
             }
         }
-
-        $scope.findType = function() {
-            console.log($scope.post.Link)
-            $scope.previewLoading = true
-            if ($scope.post.Link === '') {
-                $scope.post.Type = 'NoLink';
-                $scope.post.HeaderImage = '', // will be the now dead
-                    $scope.previewLoading = false;
-            }
-            else {
-                if ($scope.post.Link.match(/(?:http|https):\/\/.{2,}/)) {
-                    xhttp.open('HEAD', $scope.post.link); // to implement: img checking and icon for non existant thumnail drive docs
-                    xhttp.onreadystatechange = function() {
-                        if (this.readyState == this.DONE) {
-                            console.log(this);
-                        }
-                    };
-                    xhttp.send();
-                    var isgdrive = $scope.post.Link.match(/\/(?:d|file|folder|folders)\/([-\w]{25,})/)
-                    if (isgdrive) {
-                        $scope.post.Type = 'gDrive';
-                    }
-                    else {
-                        $scope.post.Type = 'Link';
-                    }
-                }
-                else {
-                    if ($scope.post.Link.length > 9) {
-                        $scope.post.Link = "http://" + $scope.post.Link
-                    }
-                    $scope.post.Type = 'Link';
-                }
-            }
-        };
 
         // function fillInValues() {
         //     console.log("postObj");
