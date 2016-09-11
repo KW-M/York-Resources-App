@@ -441,32 +441,6 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
       console.log($scope.globals.mobileSearchOpen);
    }
 
-   $scope.openHelpDialog = function() { //called by the top right toolbar help button
-      $mdDialog.show({
-         templateUrl: 'templates/html/help.html',
-         controller: DialogController,
-         parent: angular.element(document.body),
-         clickOutsideToClose: true,
-         fullscreen: ($mdMedia('xs')),
-      });
-   };
-
-   $scope.openOnboardingDialog = function() { //called by the top right toolbar help button
-      $mdDialog.show({
-         templateUrl: 'templates/html/onboarding.html',
-         controller: DialogController,
-         parent: angular.element(document.body),
-         clickOutsideToClose: false,
-         fullscreen: ($mdMedia('xs')),
-      });
-      authorizationService.hideSigninDialog();
-   };
-
-   $scope.closeDialog = function() {
-      console.log('closing dialog')
-      $mdDialog.hide();
-   };
-
    //-signin & initiation------------
 
    $scope.signOut = function() {
@@ -645,5 +619,5 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
       }
    }
 
-   subControllerFunctions($scope, $location);
+   subControllerFunctions($scope, $location, $mdDialog, $timeout);
 }

@@ -1,43 +1,9 @@
-function subControllerFunctions($scope, $location) {
+function subControllerFunctions($scope, $location, $mdDialog, $timeout) {
 
-	$scope.clearText = function(text) {
-		text = '';
-	};
-
-	$scope.pathSelected = function(path) {
-		if ($location.path() === path) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	//---- dev -------
-	$scope.consoleLog = function(input, asAlert) {
-		if (asAlert) {
-			window.alert(JSON.stringify(input, null, 4))
-		}
-		else {
-			console.log(input)
-		}
-	}
-
-	$scope.logPostToConsole = function(content, arrayIndex) {
-		window.alert(JSON.stringify({
-			'loggedPostContent': content,
-			'arrayIndex': arrayIndex
-		}, null, 4));
-		console.log({
-			'loggedPostContent': content,
-			'arrayIndex': arrayIndex
-		});
-	};
-
+	// ------------- Post Card Functions -------------
 	$scope.confirmDelete = function(ev, content, arrayIndex) {
 		var confirm = $mdDialog.confirm().title('Permanently delete this?').ariaLabel('Delete?').targetEvent(ev).ok('Delete').cancel('Cancel');
 		$mdDialog.show(confirm).then(function() {
-			//ok
 			$timeout(function() { //makes angular update values
 				$scope.visiblePosts.splice(arrayIndex, 1);
 			});
@@ -104,6 +70,68 @@ function subControllerFunctions($scope, $location) {
 		if (link !== "" && link !== undefined) {
 			$window.open(link);
 		}
+	};
+
+	$scope.clearText = function(text) {
+		text = '';
+	};
+
+	$scope.pathSelected = function(path) {
+		if ($location.path() === path) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	//---------------------- dev ---------------------------
+	$scope.consoleLog = function(input, asAlert) {
+		if (asAlert) {
+			window.alert(JSON.stringify(input, null, 4))
+		}
+		else {
+			console.log(input)
+		}
+	}
+
+	$scope.logPostToConsole = function(content, arrayIndex) {
+		window.alert(JSON.stringify({
+			'loggedPostContent': content,
+			'arrayIndex': arrayIndex
+		}, null, 4));
+		console.log({
+			'loggedPostContent': content,
+			'arrayIndex': arrayIndex
+		});
+	};
+	
+	//--------------------- dialogs ------------------------
+
+	$scope.openHelpDialog = function() { //called by the top right toolbar help button
+		$mdDialog.show({
+			templateUrl: 'templates/html/help.html',
+			controller: DialogController,
+			parent: angular.element(document.body),
+			clickOutsideToClose: true,
+			fullscreen: ($mdMedia('xs')),
+		});
+	};
+
+	$scope.openOnboardingDialog = function() { //called by the top right toolbar help button
+		$mdDialog.show({
+			templateUrl: 'templates/html/onboarding.html',
+			controller: DialogController,
+			parent: angular.element(document.body),
+			clickOutsideToClose: false,
+			fullscreen: ($mdMedia('xs')),
+		});
+		authorizationService.hideSigninDialog();
+	};
+
+	$scope.closeDialog = function() {
+		console.log('closing dialog')
+		$mdDialog.hide();
 	};
 
 	function DialogController($scope, $mdDialog) {
