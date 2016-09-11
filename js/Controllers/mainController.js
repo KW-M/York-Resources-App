@@ -70,27 +70,22 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $location.search(tempQuery || null);
    };
    
-   function onURLChange() {
-      
-   }
-
-   $scope.$on('$locationChangeSuccess', function() {
-      $scope.queryParams = $location.search();
-      $scope.queryParams.classpath = $location.path().replace(/\//g, "");
-      $scope.queryParams.id = $location.hash();
-      if ($scope.queryParams.q !== $scope.previousSearch) {
-         $scope.visiblePosts = []
-         $scope.previousSearch = $scope.queryParams.q
-      }
-      console.log(firstFiles)
-      if (firstFiles === true) { // check  if firstFiles have been loaded
+   function listenForURLChange() {
+      onLocationChange();
+      $scope.$on('$locationChangeSuccess', onLocationChange());
+      function onLocationChange() {
+         $scope.queryParams = $location.search();
+         $scope.queryParams.classpath = $location.path().replace(/\//g, "");
+         $scope.queryParams.id = $location.hash();
+         if ($scope.queryParams.q !== $scope.previousSearch) {
+            $scope.visiblePosts = []
+            $scope.previousSearch = $scope.queryParams.q
+         }
+         
          $scope.generateQueryString();
-         //sortPostsByType();
-         $window.setTimeout(function() {
-            $scope.getFiles();
-         }, 100);
+         $scope.getFiles();
       }
-   });
+   }
 
    //-creating posts---------
 
@@ -673,7 +668,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $scope.myInfo.LastQuizletCheckDate = Date.parse(settingsArray[6])
          $scope.myInfo.NumberOfVisits = settingsArray[7]
       }
-      $scope.getFiles("");
+      listenForURLChange();// this also Starts getting files
       queue(GoogleDriveService.getSpreadsheetRange("1DfFUn8sgnFeLLijtKvWsd90GNcnEG6Xl5JTSeApX3bY", "Sheet1!A2:Z"), handleClassesSheet)
    }
 
