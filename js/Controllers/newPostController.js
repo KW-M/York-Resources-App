@@ -14,6 +14,22 @@
         $scope.AttachmentId = '';
         $scope.LikeUsers = [];
         $scope.HeaderImage = '';
+        
+        $scope.post = {
+            Type: 'noLink',
+            Flagged: false,
+            Title: null,
+            CreationDate: new Date(),
+            UpdateDate: new Date(),
+            Tags: [],
+            Description: '',
+            Class: {
+                Name:'',
+            }
+            Link: '',
+            AttachmentId: '',
+            Likes:
+        }
         fillInValues();
 
         //temproary variables
