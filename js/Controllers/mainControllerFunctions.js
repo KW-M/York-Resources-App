@@ -58,7 +58,7 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
       if (query.classPath) {
          $scope.toggleSidebar(true);
       }
-      $location.path(query.classpath || 'all-posts');
+      $location.path(query.classpath);
       $location.hash(query.id || null);
       $location.search(tempQuery || null);
    };
