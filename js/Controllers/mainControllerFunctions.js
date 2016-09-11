@@ -523,9 +523,7 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
       gridWidth: 250,
       infiniteScroll: function() {
          console.log('loading from overscroll...');
-         if ($scope.visiblePosts >= 1) {
-            $scope.getFiles();
-         }
+         $scope.getFiles();
       },
       scrollContainer: '#content_container',
       pageSize: 1.5,
