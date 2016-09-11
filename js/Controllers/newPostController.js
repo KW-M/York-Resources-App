@@ -38,7 +38,7 @@
         $scope.previewThumbnail = "";
         $scope.previewLoading = false;
         $scope.classSearch = "";
-        var xhttp = new XMLHttpRequest();
+        var request = new XMLHttpRequest();
         // var canvas = document.getElementById('image_renderer');
         // var ctx = canvas.getContext('2d');
         // var dataURL;
@@ -50,10 +50,10 @@
                 $scope.post.HeaderImage = ''; // will be the down arrow photo
                 $scope.previewLoading = false;
             } else if ($scope.post.Link.match(/(?:http|https):\/\/.{2,}/)) {
-                xhttp.open('HEAD', $scope.post.link); // to implement: img checking and icon for non existant thumnail drive docs
+                request.open("HEAD", $scope.post.Link, true); // to implement: img checking and icon for non existant thumnail drive docs
                 xhttp.onreadystatechange = function() {
                     if (this.readyState == this.DONE) {
-                        console.log(this);
+                        
                     }
                 };
                 xhttp.send();
