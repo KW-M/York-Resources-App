@@ -11,7 +11,7 @@
       <div class="newPostImgGradient" flex layout="column">
          <md-input-container md-no-float id="newPostLinkInput">
             <input id="newPostLinkInputTxt" ng-model="Link" style="color:white" placeholder="http://" ng-change="findType()" type="text">
-           <md-progress-linear class="link-loading" md-mode="indeterminate" ng-disabled="!previewLoading"></md-progress-linear>
+            <md-progress-linear class="link-loading" md-mode="indeterminate" ng-disabled="!previewLoading"></md-progress-linear>
          </md-input-container>
          <md-menu md-position-mode="target-right target" md-offset="0 -45">
             <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
@@ -43,7 +43,7 @@
          <div id="DescriptionTxt" ng-bind-html="newPostDescription" class="newPostBody" contenteditable="operation !== 'view'"></div>
       </div>
    </md-dialog-content>
-   <md-dialog-actions layout="row"> 
+   <md-dialog-actions ng-hide="operation === 'view'" layout="row">
       <md-button id="New_Post_Submit" ng-click="isReadyToSubmit()" class="md-raised md-acc">Submit</md-button>
       <md-button class="text-formating-button md-icon-button " style="margin: 0 -6px 0 0; padding: 0;">
          <md-icon style="font-size:18px; line-height: 24px;">format_bold</md-icon>
@@ -61,6 +61,31 @@
       <md-button class="md-icon-button text-format-button hover_black" style="margin-right:0px;" ng-click="closeDialog()">
          <md-icon ng-show="operation == 'new'" style="font-size:26px; line-height: 25px">delete</md-icon>
          <md-icon ng-hide="operation == 'new'" style="font-size:26px; line-height: 25px">close</md-icon>
+      </md-button>
+   </md-dialog-actions>
+   <md-dialog-actions ng-show="operation === 'view'" layout="row">
+      <md-button id="like_thumb_button" aria-label="Like">
+         <md-icon style="display:none">thumb_down</md-icon>
+         <p class="like-counter">16</p>
+         <md-icon style="margin-top: -6px;">thumb_up</md-icon>
+      </md-button>
+      <md-button class="md-icon-button" id="flag_button" area-label="Flag" style="margin:0" ng-hide="::Post.Creator.Email === myInfo.Email">
+         <md-icon>flag</md-icon>
+      </md-button>
+      <md-button class="md-icon-button" id="flag_button" area-label="Flag" style="margin:0" ng-show="::Post.Flagged === 'true'" ng-click="::unFlagPost($event,Post,$index)">
+         <md-icon class="md-warn">flag</md-icon>
+      </md-button>
+      <md-button class="md-icon-button" ng-click="::flagPost($event,Post,$index)">
+         <md-icon></md-icon>Flag</md-button>
+      <md-button class="md-icon-button" ng-click="::confirmDelete($event,Post,$index)">
+         <md-icon></md-icon>Delete</md-button>
+      <md-button class="md-icon-button" ng-click="::newPost(Post,'update')">
+         <md-icon></md-icon>Edit</md-button>
+      <md-button class="md-icon-button" ng-show="devMode" ng-click="::logPostToConsole(Post,$index)">
+         <md-icon>edit</md-icon>Console Log Post</md-button>
+      <span flex></span>
+      <md-button class="md-icon-button text-format-button hover_black" style="margin-right:0px;" ng-click="closeDialog()">
+         <md-icon style="font-size:26px; line-height: 25px">close</md-icon>
       </md-button>
    </md-dialog-actions>
 </md-dialog>
