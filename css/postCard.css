@@ -169,6 +169,7 @@ md-card.post-card:hover .md-button.md-icon-button md-icon.preBookmarkIcon{
     display: block;
     margin: 0 16px 0 16px;
     padding: 0;
+    max-height: 7em;
     color: black;
 }
 

@@ -97,9 +97,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	$scope.clearText = function(text) {
 		text = null;
 	};
-	$scope.isOverflowed = function(element){
-    	return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
-	}
 	//----------------------------------------------------
 	//-------------------- dialogs -----------------------
 	function DialogController($scope, $mdDialog) {

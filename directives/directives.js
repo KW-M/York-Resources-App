@@ -48,10 +48,14 @@ app.directive('newPostContent', function() {
     };
 });
 
-app.directive("showOn",function(){
+app.directive("showOnOverflow",function(){
   return{
     link:function(scope,element){
-      element[0].style.border = "5px dotted #090";
+        if(element[0].scrollHeight > element[0].clientHeight || element[0].scrollWidth > element[0].clientWidth) {
+            element[0].style.display = "initial";
+        } else {
+            element[0].style.display = "none"; 
+        }
     }        
   }      
 });
