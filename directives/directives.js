@@ -52,9 +52,11 @@ app.directive("showMoreOnOverflow",function(){
   return{
     link:function(scope,element){
         if(element[0].scrollHeight > element[0].clientHeight || element[0].scrollWidth > element[0].clientWidth) {
+            console.log("oveerflow")
             element[0].nextElementSibling.style.display = "initial";
         } else {
-            element[0].nextElementSibling.style.display = "none"; 
+            console.log("nonoverflow")
+            //element[0].nextElementSibling.style.display = "none"; 
         }
     }        
   }      
