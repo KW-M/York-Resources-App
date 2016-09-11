@@ -39,9 +39,9 @@
         $scope.previewLoading = false;
         $scope.classSearch = "";
         var xhttp = new XMLHttpRequest();
-        var canvas = document.getElementById('image_renderer');
-        var ctx = canvas.getContext('2d');
-        var dataURL;
+        // var canvas = document.getElementById('image_renderer');
+        // var ctx = canvas.getContext('2d');
+        // var dataURL;
 
 
         $scope.isReadyToSubmit = function() {
