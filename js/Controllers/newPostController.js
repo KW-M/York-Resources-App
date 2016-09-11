@@ -296,10 +296,6 @@
             return metadata;
         }
 
-        function onPreviewLoad() {
-            $scope.previewLoading = false;
-        }
-
         function getImagePreview(isSubmit) {
             if (isSubmit) {
                 if ($scope.Type === "Link") {
