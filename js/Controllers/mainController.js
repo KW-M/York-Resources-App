@@ -69,8 +69,12 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       $location.hash(query.id || null);
       $location.search(tempQuery || null);
    };
+   
+   function onURLChange() {
+      
+   }
 
-   $scope.$on('$routeChangeSuccess', function() {
+   $scope.$on('$locationChangeSuccess', function() {
       $scope.queryParams = $location.search();
       $scope.queryParams.classpath = $location.path().replace(/\//g, "");
       $scope.queryParams.id = $location.hash();
@@ -78,6 +82,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $scope.visiblePosts = []
          $scope.previousSearch = $scope.queryParams.q
       }
+      console.log(firstFiles)
       if (firstFiles === true) { // check  if firstFiles have been loaded
          $scope.generateQueryString();
          //sortPostsByType();
