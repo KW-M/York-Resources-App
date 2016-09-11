@@ -116,7 +116,7 @@
                         <p class="post-card-title md-title">{{::Post.Title}}</p>
                         <p class="post-card-creator md-subhead"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{Post.Creator.ClassOf}})</span></p>
                         <p id="post_card_description" class="md-body-1" ng-bind-html="Post.Description"></p>
-                        <div class="post-card-image-gradient"><md-icon>keyboard_arrow_down</md-icon></div>
+                        <div class="post-card-description-gradient" ng-style="{'background-image': 'linear-gradient(rgba(0, 0, 0, 0) 0%, '+Post.Class.Color+' 85%'}"><md-icon style="margin-bottom:2px">keyboard_arrow_down</md-icon></div>
                         <md-card-actions layout="row" layout-align="start center">
                             <md-button id="like_thumb_button" aria-label="Like">
                                 <md-icon style="display:none">thumb_down</md-icon>
