@@ -1,8 +1,8 @@
 /*global app*/ /*global angular*/ /*global gapi*/ /*global google*/ /*global queue*/
 app.controller('ApplicationController', controllerFunction)
-controllerFunction.$inject(['$scope', '$mdDialog', '$window', '$timeout', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', '$routeParams', 'angularGridInstance'])
+//controllerFunction.$inject(['$scope', '$mdDialog', '$window', '$timeout', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', '$routeParams', 'angularGridInstance'])
 function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, $routeParams, angularGridInstance) {
-   
+   subControllerFunctions($scope, $location);
    var self = this;
    var content_container = document.getElementById("content_container");
    var loading_spinner = document.getElementById("loading_spinner");
@@ -42,15 +42,6 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
    $scope.$mdDialog = $mdDialog;
 
    //-routing-------------
-
-   $scope.pathSelected = function(path) {
-      if ($location.path() === path) {
-         return true;
-      }
-      else {
-         return false;
-      }
-   }
 
    $scope.gotoRoute = function(query) {
       var tempQuery = {}
