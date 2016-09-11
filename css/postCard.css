@@ -112,7 +112,7 @@
 .post-card-creator {
     color: rgba(0, 0, 0, .54);
     font-size: 13px;
-    margin: 0px 16px 16px 16px;
+    margin: 0px 16px 0px 16px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -167,7 +167,7 @@ md-card.post-card:hover .md-button.md-icon-button md-icon.preBookmarkIcon{
 #post_card_description {
     overflow: hidden;
     display: block;
-    margin: 0 16px 0 16px;
+    margin: 16px 16px 0 16px;
     padding: 0;
     max-height: 7em;
     color: black;

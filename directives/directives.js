@@ -48,13 +48,13 @@ app.directive('newPostContent', function() {
     };
 });
 
-app.directive("showOnOverflow",function(){
+app.directive("showMoreOnOverflow",function(){
   return{
     link:function(scope,element){
         if(element[0].scrollHeight > element[0].clientHeight || element[0].scrollWidth > element[0].clientWidth) {
-            element[0].style.display = "initial";
+            element[0].nextElementSibling.style.display = "initial";
         } else {
-            element[0].style.display = "none"; 
+            element[0].nextElementSibling.style.display = "none"; 
         }
     }        
   }      
