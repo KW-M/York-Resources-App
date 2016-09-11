@@ -13,6 +13,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    var deDuplicationIndex = {};
    var classPageTokenSelectionIndex = {};
+   var firstFiles = false;
 
    $scope.previousSearch = undefined;
    $scope.searchPlaceholder = 'Search';
@@ -26,7 +27,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       mobileSearchIsOpen: false,
    };
 
-   $scope.firstFiles = false;
    $scope.queryPropertyString = '';
    $scope.queryParams = {
       q: undefined, //undefined to make search popunder show with no text in  field
@@ -78,7 +78,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $scope.visiblePosts = []
          $scope.previousSearch = $scope.queryParams.q
       }
-      if ($scope.firstFiles === true) { // check  if firstFiles have been loaded
+      if (firstFiles === true) { // check  if firstFiles have been loaded
          $scope.generateQueryString();
          //sortPostsByType();
          $window.setTimeout(function() {
@@ -163,7 +163,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    //-loading and filtering posts---------
 
    $scope.getFiles = function() {
-      $scope.firstFiles = true;
+      firstFiles = true;
       var fileCount = 0;
       var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
