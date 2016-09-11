@@ -1,6 +1,7 @@
 /*global app*/ /*global angular*/ /*global gapi*/ /*global google*/ /*global queue*/
-var dependancies = ['$scope', '$mdDialog', '$window', '$timeout', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', '$routeParams', 'angularGridInstance']
-app.controller('ApplicationController', dependancies.concat([function($scope, $mdDialog, $window, $timeout, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, $routeParams, angularGridInstance) {
+app.controller('ApplicationController', controllerFunction)
+controllerFunction.$inject(['$scope', '$mdDialog', '$window', '$timeout', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', '$routeParams', 'angularGridInstance'])
+function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, $routeParams, angularGridInstance) {
    
    var self = this;
    var content_container = document.getElementById("content_container");
@@ -767,4 +768,4 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       }
    }
 
-}]));
+}
