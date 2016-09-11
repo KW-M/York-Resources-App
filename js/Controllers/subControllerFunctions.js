@@ -1,6 +1,7 @@
 function subControllerFunctions($scope, $location, $mdDialog, $timeout) {
-
-	// ------------- Post Card Functions -------------
+	
+	//----------------------------------------------------
+	// --------------- Post Card Functions ---------------
 	$scope.confirmDelete = function(ev, content, arrayIndex) {
 		var confirm = $mdDialog.confirm().title('Permanently delete this?').ariaLabel('Delete?').targetEvent(ev).ok('Delete').cancel('Cancel');
 		$mdDialog.show(confirm).then(function() {
@@ -14,7 +15,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $timeout) {
 			//cancel
 		});
 	};
-
 	$scope.flagPost = function(ev, content, arrayIndex) {
 		content.Flagged = true;
 		$timeout(function() { //makes angular update values
@@ -26,7 +26,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $timeout) {
 		});
 		//set the user's has flagged date back
 	};
-
 	$scope.unFlagPost = function(ev, content, arrayIndex) {
 		if ($scope.myInfo.moderator === false) {
 			content.Flagged = false;
@@ -47,13 +46,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $timeout) {
 			}));
 		}
 	};
-
 	$scope.likePost = function(ev, content, arrayIndex) {
 		GoogleDriveService.flagDriveFile(content.Id, 'Flagged', false).then(function() {
 			console.log("flagged: " + content.Id);
 		})
 	};
-
 	$scope.unLikePost = function(ev, content, arrayIndex) {
 		if ($scope.myInfo.Moderator === true) {
 			var permissionID = "needs to be created"
@@ -65,17 +62,14 @@ function subControllerFunctions($scope, $location, $mdDialog, $timeout) {
 
 		}
 	};
-
 	$scope.openLink = function(link) {
 		if (link !== "" && link !== undefined) {
 			$window.open(link);
 		}
 	};
-
 	$scope.clearText = function(text) {
 		text = '';
 	};
-
 	$scope.pathSelected = function(path) {
 		if ($location.path() === path) {
 			return true;
@@ -84,8 +78,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $timeout) {
 			return false;
 		}
 	}
-
-	//---------------------- dev ---------------------------
+	//----------------------------------------------------
+	//---------------------- dev -------------------------
 	$scope.consoleLog = function(input, asAlert) {
 		if (asAlert) {
 			window.alert(JSON.stringify(input, null, 4))
@@ -94,7 +88,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $timeout) {
 			console.log(input)
 		}
 	}
-
 	$scope.logPostToConsole = function(content, arrayIndex) {
 		window.alert(JSON.stringify({
 			'loggedPostContent': content,
@@ -106,8 +99,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $timeout) {
 		});
 	};
 	
-	//--------------------- dialogs ------------------------
-
+	//----------------------------------------------------
+	//-------------------- dialogs -----------------------
 	$scope.openHelpDialog = function() { //called by the top right toolbar help button
 		$mdDialog.show({
 			templateUrl: 'templates/html/help.html',
@@ -117,7 +110,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $timeout) {
 			fullscreen: ($mdMedia('xs')),
 		});
 	};
-
 	$scope.openOnboardingDialog = function() { //called by the top right toolbar help button
 		$mdDialog.show({
 			templateUrl: 'templates/html/onboarding.html',
@@ -128,12 +120,10 @@ function subControllerFunctions($scope, $location, $mdDialog, $timeout) {
 		});
 		authorizationService.hideSigninDialog();
 	};
-
 	$scope.closeDialog = function() {
 		console.log('closing dialog')
 		$mdDialog.hide();
 	};
-
 	function DialogController($scope, $mdDialog) {
 		$scope.hideDialog = function() {
 			$mdDialog.hide();
