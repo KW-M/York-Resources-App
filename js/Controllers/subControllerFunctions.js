@@ -1,7 +1,20 @@
 function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance) {
 
 	//----------------------------------------------------
-	//------------------UI actions------------------------
+	//---------------Sorting & Filtering------------------
+	$scope.sortByLikes = function(thingToSort) {
+		thingToSort.sort(function(a, b) {
+			return b.LikeUsers.length - a.LikeUsers.length;
+		});
+	}
+
+	$scope.sortByDate = function(thingToSort) {
+			thingToSort.sort(function(a, b) {
+				return b.UpdateDate - a.UpdateDate;
+			});
+	}
+	//----------------------------------------------------
+	//------------------UI Actions------------------------
 	$scope.toggleSidebar = function(close) { //called by the top left toolbar menu button
 		if (close === true) {
 			$mdSidenav('sidenav_overlay').close();
@@ -15,6 +28,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 				$mdSidenav('sidenav_overlay').toggle();
 			}
 		}
+	};
+	$scope.signOut = function() {
+		authorizationService.handleSignoutClick();
 	};
 	//----------------------------------------------------
 	// --------------- Post Card Functions ---------------

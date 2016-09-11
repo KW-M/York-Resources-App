@@ -354,18 +354,6 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
       });
    }
 
-   $scope.sortByLikes = function(thingToSort) {
-      thingToSort.sort(function(a, b) {
-         return b.LikeUsers.length - a.LikeUsers.length;
-      });
-   }
-
-   $scope.sortByDate = function(thingToSort) {
-      thingToSort.sort(function(a, b) {
-         return b.UpdateDate - a.UpdateDate;
-      });
-   }
-
    $scope.formatPost = function(unformatedFile) {
       var formatedFile = {}
       var tagsRaw = "[\"" + unformatedFile.properties.Tag1 + unformatedFile.properties.Tag2 + "\"]";
@@ -419,10 +407,6 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
    }
 
    //-signin & initiation------------
-
-   $scope.signOut = function() {
-      authorizationService.handleSignoutClick();
-   };
 
    gapi.load('client:auth2', function() {
       authorizationService.initilize(loginSucessful);
