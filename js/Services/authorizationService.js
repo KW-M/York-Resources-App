@@ -1,7 +1,5 @@
 /*Define the authorizationService service for Angular */ /*global angular*/ /*global gapi*/ /*global app*/
-app.service('authorizationService', ['$mdDialog', authService]);
-
-//The function used in the authorizationService service also called by the google api framwork when it loads.
+app.service('authorizationService', authService);
 function authService($mdDialog) {
     var self = this;
     var clientId = '475444543746-e3r02g1o1o71kliuoohah04ojqbmo22e.apps.googleusercontent.com';

@@ -409,7 +409,7 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
    //-signin & initiation------------
 
    gapi.load('client:auth2', function() {
-      authorizationService.initilize(GoogleDriveService.loadAPIs(initiateDrive));
+      authorizationService.initilize(GoogleDriveService.loadAPIs(initiateDrive()));
    });
 
    function initiateDrive(loaded) {
