@@ -1,5 +1,5 @@
     /* we don't define the "new post controller" here because it was alredy
-                                           defined by the $md-dialog in the newPost function on mainController.   */
+                                               defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
         //database variables
         // $scope.post.Type = 'noLink';
@@ -16,22 +16,22 @@
         // $scope.HeaderImage = '';
 
         $scope.post = {
-            Type: 'noLink',
-            Flagged: false,
-            Title: null,
-            CreationDate: new Date(),
-            UpdateDate: new Date(),
-            Tags: [],
-            Description: '',
-            Class: {
-                Name: '',
-            },
-            Link: '',
-            AttachmentId: '',
-            Likes: 0,
-            HeaderImage: '',
-        }
-        // fillInValues();
+                Type: 'noLink',
+                Flagged: false,
+                Title: null,
+                CreationDate: new Date(),
+                UpdateDate: new Date(),
+                Tags: [],
+                Description: '',
+                Class: {
+                    Name: '',
+                },
+                Link: '',
+                AttachmentId: '',
+                Likes: 0,
+                HeaderImage: '',
+            }
+            // fillInValues();
 
         //temproary variables
         $scope.operation = operation;
@@ -43,37 +43,34 @@
         // var ctx = canvas.getContext('2d');
         // var dataURL;
 
-       $scope.findType = function() {
+        $scope.findType = function() {
             $scope.previewLoading = true;
             if ($scope.post.Link === '') {
                 $scope.post.Type = 'NoLink';
-                $scope.post.HeaderImage = '', // will be the down arrow photo
+                $scope.post.HeaderImage = ''; // will be the down arrow photo
                 $scope.previewLoading = false;
-            }
-            else 
-                if ($scope.post.Link.match(/(?:http|https):\/\/.{2,}/)) {
-                    xhttp.open('HEAD', $scope.post.link); // to implement: img checking and icon for non existant thumnail drive docs
-                    xhttp.onreadystatechange = function() {
-                        if (this.readyState == this.DONE) {
-                            console.log(this);
-                        }
-                    };
-                    xhttp.send();
-                    var isgdrive = $scope.post.Link.match(/\/(?:d|file|folder|folders)\/([-\w]{25,})/)
-                    if (isgdrive) {
-                        $scope.post.Type = 'gDrive';
+            } else if ($scope.post.Link.match(/(?:http|https):\/\/.{2,}/)) {
+                xhttp.open('HEAD', $scope.post.link); // to implement: img checking and icon for non existant thumnail drive docs
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == this.DONE) {
+                        console.log(this);
                     }
-                    else {
-                        $scope.post.Type = 'Link';
-                    }
+                };
+                xhttp.send();
+                var isgdrive = $scope.post.Link.match(/\/(?:d|file|folder|folders)\/([-\w]{25,})/)
+                if (isgdrive) {
+                    $scope.post.Type = 'gDrive';
                 }
                 else {
-                    if ($scope.post.Link.length > 9) {
-                        $scope.post.Link = "http://" + $scope.post.Link
-                    }
                     $scope.post.Type = 'Link';
                 }
-    
+            } else if ($scope.post.Link.length > 9) {
+                $scope.post.Link = "http://" + $scope.post.Link;
+                $scope.post.Type = 'Link';
+            } else { 
+                $scope.post.Type = 'Link';
+            }
+
         };
 
         $scope.isReadyToSubmit = function() {
