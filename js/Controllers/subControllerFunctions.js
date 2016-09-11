@@ -6,13 +6,12 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		thingToSort.sort(function(a, b) {
 			return b.LikeUsers.length - a.LikeUsers.length;
 		});
-	}
-
+	};
 	$scope.sortByDate = function(thingToSort) {
-			thingToSort.sort(function(a, b) {
-				return b.UpdateDate - a.UpdateDate;
-			});
-	}
+		thingToSort.sort(function(a, b) {
+			return b.UpdateDate - a.UpdateDate;
+		});
+	};
 	//----------------------------------------------------
 	//------------------UI Actions------------------------
 	$scope.toggleSidebar = function(close) { //called by the top left toolbar menu button
@@ -100,6 +99,14 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	};
 	//----------------------------------------------------
 	//-------------------- dialogs -----------------------
+	function DialogController($scope, $mdDialog) {
+		$scope.hideDialog = function() {
+			$mdDialog.hide();
+		};
+		$scope.cancelDialog = function() {
+			$mdDialog.cancel();
+		};
+	}
 	$scope.openHelpDialog = function() { //called by the top right toolbar help button
 		$mdDialog.show({
 			templateUrl: 'templates/html/help.html',
@@ -123,15 +130,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		console.log('closing dialog')
 		$mdDialog.hide();
 	};
-
-	function DialogController($scope, $mdDialog) {
-		$scope.hideDialog = function() {
-			$mdDialog.hide();
-		};
-		$scope.cancelDialog = function() {
-			$mdDialog.cancel();
-		};
-	}
 	//----------------------------------------------------
 	//---------------------- dev -------------------------
 	$scope.consoleLog = function(input, asAlert) {
@@ -151,5 +149,5 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			'loggedPostContent': content,
 			'arrayIndex': arrayIndex
 		});
-	};
+	}
 }

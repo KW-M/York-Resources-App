@@ -409,14 +409,10 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
    //-signin & initiation------------
 
    gapi.load('client:auth2', function() {
-      authorizationService.initilize(loginSucessful);
+      authorizationService.initilize(GoogleDriveService.loadAPIs(initiateDrive));
    });
 
-   function loginSucessful() {
-      GoogleDriveService.loadAPIs($scope.initiateDrive);
-   }
-
-   $scope.initiateDrive = function(loaded) {
+   function initiateDrive(loaded) {
       console.log("API loaded: " + loaded)
       if (loaded === "drive") {
          queue(GoogleDriveService.getUserInfo(), function(userInfo) {
@@ -455,7 +451,6 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
    }
 
    function handleUserPrefsSheet() {
-      //var deFormatedEmail = $scope.myInfo.Email.replace(/\W/g, '');
       queue(GoogleDriveService.getSpreadsheetRange('1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0', "Sheet1!A2:B", false), function(usersList) {
          $scope.userList = usersList.result.values;
          for (var UserContact = 0; UserContact < $scope.userList.length; UserContact++) {
