@@ -76,11 +76,12 @@
          <md-icon class="md-warn">flag</md-icon>
       </md-button>
       <md-button class="md-icon-button" ng-click="::flagPost($event,Post,$index)">
-         <md-icon></md-icon>Flag</md-button>
-      <md-button class="md-icon-button" ng-click="::confirmDelete($event,Post,$index)">
-         <md-icon></md-icon>Delete</md-button>
+         <md-icon>flag</md-icon></md-button>
       <md-button class="md-icon-button" ng-click="::newPost(Post,'update')">
-         <md-icon></md-icon>Edit</md-button>
+         <md-icon>edit</md-icon>
+      </md-button>
+      <md-button class="md-icon-button" ng-click="::confirmDelete($event,Post,$index)">
+         <md-icon>delete</md-icon></md-button>
       <md-button class="md-icon-button" ng-show="devMode" ng-click="::logPostToConsole(Post,$index)">
          <md-icon>edit</md-icon>Console Log Post</md-button>
       <span flex></span>
