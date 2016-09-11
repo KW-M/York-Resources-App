@@ -1,4 +1,4 @@
-function subControllerFunctions($scope, $location, $mdDialog, $mdMedia,$timeout, $mdSidenav, authorizationService, angularGridInstance) {
+function subControllerFunctions($scope, $location, $mdDialog, $mdMedia,$timeout, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance) {
 	
 	//----------------------------------------------------
 	//------------------UI actions------------------------
@@ -23,14 +23,10 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia,$timeout,
 	$scope.confirmDelete = function(ev, content, arrayIndex) {
 		var confirm = $mdDialog.confirm().title('Permanently delete this?').ariaLabel('Delete?').targetEvent(ev).ok('Delete').cancel('Cancel');
 		$mdDialog.show(confirm).then(function() {
-			$timeout(function() { //makes angular update values
-				$scope.visiblePosts.splice(arrayIndex, 1);
-			});
+			$timeout($scope.visiblePosts.splice(arrayIndex, 1));
 			queue(GoogleDriveService.deleteDriveFile(content.Id), function() {
 				console.log("deleted" + content.Id);
 			});
-		}, function() {
-			//cancel
 		});
 	};
 	$scope.flagPost = function(ev, content, arrayIndex) {
@@ -82,11 +78,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia,$timeout,
 	};
 	$scope.openLink = function(link) {
 		if (link !== "" && link !== undefined) {
-			$window.open(link);
+			window.open(link);
 		}
 	};
 	$scope.clearText = function(text) {
-		text = '';
+		text = null;
 	};
 	//----------------------------------------------------
 	//-------------------- dialogs -----------------------
