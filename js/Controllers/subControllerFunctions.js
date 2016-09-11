@@ -1,7 +1,8 @@
 function subControllerFunctions($scope, $location, $mdDialog, $timeout, $mdSidenav, angularGridInstance) {
-	   //-UI actions---------
-
-   $scope.toggleSidebar = function(urlPathChanged) { //called by the top left toolbar menu button
+	
+	//----------------------------------------------------
+	//------------------UI actions------------------------
+	$scope.toggleSidebar = function(urlPathChanged) { //called by the top left toolbar menu button
       if (urlPathChanged === true) {
          if ($mdMedia('gt-sm') !== true) {
             $mdSidenav('sidenav_overlay').close();
@@ -17,10 +18,14 @@ function subControllerFunctions($scope, $location, $mdDialog, $timeout, $mdSiden
          }
       }
    };
-
-   $scope.toggleMobileSearch = function() {
-      $scope.globals.mobileSearchOpen = !$scope.globals.mobileSearchOpen;
-   }
+   	$scope.pathSelected = function(path) {
+		if ($location.path() === path) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 	//----------------------------------------------------
 	// --------------- Post Card Functions ---------------
 	$scope.confirmDelete = function(ev, content, arrayIndex) {
@@ -91,14 +96,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $timeout, $mdSiden
 	$scope.clearText = function(text) {
 		text = '';
 	};
-	$scope.pathSelected = function(path) {
-		if ($location.path() === path) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
 	//----------------------------------------------------
 	//-------------------- dialogs -----------------------
 	$scope.openHelpDialog = function() { //called by the top right toolbar help button
