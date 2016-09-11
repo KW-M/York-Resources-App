@@ -171,6 +171,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
       if (nextPageToken !== "end") {
          loading_spinner.style.display = 'inherit'; //show the user that were loading results
          queue(GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 2), function(fileList) {
+            console.log(fileList)
             if (fileList.result.files.length > 0) {
                //format every file:
                if (!$scope.queryParams.q) {
