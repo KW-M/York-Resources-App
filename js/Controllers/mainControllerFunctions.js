@@ -85,7 +85,7 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
             $scope.previousSearch = $scope.queryParams.q
          }
          
-         generateQueryString ();
+         generateQueryString();
          getFiles();
       }
    }
