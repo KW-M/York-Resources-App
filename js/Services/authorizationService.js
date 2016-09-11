@@ -36,6 +36,7 @@ function authService($mdDialog) {
                 console.log('signed in')
                 if (accountDomain === 'york.org') {
                     console.log("User's Domain: " + accountDomain);
+                    
                     callback();
                     self.hideSigninButton();
                 }
