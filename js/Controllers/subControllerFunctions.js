@@ -1,23 +1,21 @@
-function subControllerFunctions($scope, $location, $mdDialog, $mdMedia,$timeout, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance) {
-	
+function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance) {
+
 	//----------------------------------------------------
 	//------------------UI actions------------------------
-	$scope.toggleSidebar = function(urlPathChanged) { //called by the top left toolbar menu button
-      if (urlPathChanged === true) {
-         if ($mdMedia('gt-sm') !== true) {
-            $mdSidenav('sidenav_overlay').close();
-         }
-      }
-      else {
-         if ($mdMedia('gt-sm')) {
-            $scope.globals.sidenavIsOpen = !$scope.globals.sidenavIsOpen;
-            //$window.setTimeout(angularGridInstance.posts.refresh, 500);
-         }
-         else {
-            $mdSidenav('sidenav_overlay').toggle();
-         }
-      }
-   };
+	$scope.toggleSidebar = function(close) { //called by the top left toolbar menu button
+		if (close === true) {
+			$mdSidenav('sidenav_overlay').close();
+		}
+		else {
+			if ($mdMedia('gt-sm')) {
+				$scope.globals.sidenavIsOpen = !$scope.globals.sidenavIsOpen;
+				//angularGridInstance.posts.refresh
+			}
+			else {
+				$mdSidenav('sidenav_overlay').toggle();
+			}
+		}
+	};
 	//----------------------------------------------------
 	// --------------- Post Card Functions ---------------
 	$scope.confirmDelete = function(ev, content, arrayIndex) {
@@ -109,6 +107,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia,$timeout,
 		console.log('closing dialog')
 		$mdDialog.hide();
 	};
+
 	function DialogController($scope, $mdDialog) {
 		$scope.hideDialog = function() {
 			$mdDialog.hide();
