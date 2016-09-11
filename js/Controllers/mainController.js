@@ -170,7 +170,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
       if (nextPageToken !== "end") {
          loading_spinner.style.display = 'inherit'; //show the user that were loading results
-         queue(GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 2), function(fileList) {
+         queue(GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function(fileList) {
             console.log(fileList)
             if (fileList.result.files.length > 0) {
                //format every file:
@@ -329,7 +329,6 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
    }
 
    $scope.filterPosts = function(inputSet) {
-
       return inputSet.filter(function(post) {
          var Flagged = post.Flagged === $scope.queryParams.flagged || post.Flagged;
          if ($scope.queryParams.class !== "any" && $scope.queryParams.class !== undefined) {
