@@ -78,8 +78,8 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
          $scope.visiblePosts = []
          $scope.previousSearch = $scope.queryParams.q
       }
-      $scope.generateQueryString();
-      if ($scope.firstFiles == true) { // check  if firstFiles have been loaded
+      if ($scope.firstFiles === true) { // check  if firstFiles have been loaded
+         $scope.generateQueryString();
          //sortPostsByType();
          $window.setTimeout(function() {
             $scope.getFiles();
