@@ -116,6 +116,7 @@
         }
 
         $scope.findType = function() {
+            console.log($scope.post.Link)
             $scope.previewLoading = true
             if ($scope.post.Link === '') {
                 $scope.post.Type = 'NoLink';
