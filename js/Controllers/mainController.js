@@ -52,7 +52,7 @@ app.controller('ApplicationController', dependancies.concat([function($scope, $m
 
    $scope.gotoRoute = function(query) {
       var tempQuery = {}
-      if (query.q !== null && query.q !== undefined) {
+      if (query.q !== null && query.q !== undefined && query.q !== '') {
          tempQuery.q = query.q || $scope.queryParams.q;
          tempQuery.type = query.type || $scope.queryParams.type;
          tempQuery.creatorEmail = query.creatorEmail || $scope.queryParams.creatorEmail;
