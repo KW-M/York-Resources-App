@@ -33,13 +33,13 @@
    <md-dialog-content id="dialog_scroll">
       <div flex layout="row">
          <class-select-menu></class-select-menu>
-         <md-chips ng-model="Tags" flex md-separator-keys="[32,188,13]">
+         <md-chips ng-model="Tags" flex md-separator-keys="[32,188,13]" readonly=>
             <input type="text" placeholder="Add a tag">
          </md-chips>
       </div>
       <div class="md-dialog-content">
-         <input ng-model="Title" class="newPostTitle md-title" placeholder="Title" md-autofocus>
-         <div id="DescriptionTxt" ng-bind-html="newPostDescription" class="newPostBody" contenteditable="true"></div>
+         <input ng-model="Title" ng-readonly="operation === 'view'" class="newPostTitle md-title" placeholder="Title" md-autofocus>
+         <div id="DescriptionTxt" ng-bind-html="newPostDescription" class="newPostBody" contenteditable="operation !== 'view'"></div>
       </div>
    </md-dialog-content>
    <md-dialog-actions layout="row"> 
