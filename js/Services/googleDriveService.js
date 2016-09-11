@@ -62,6 +62,15 @@ app.service('GoogleDriveService', ['$q', function($q) {
                     },
         }));
     }
+    
+    this.getWebsiteScreenshot = function(url){
+        var scriptId = "MeZP4Dfy0hLzCmyrFntpD1-31ZdidIE6U";
+        return(gapi.client.request({
+            'root': 'https://www.googleapis.com',
+            'path': 'pagespeedonline/v2/runPagespeed?url='+encodeURIComponent(url)+'&rule=AvoidLandingPageRedirects&screenshot=true&strategy=desktop&fields=screenshot(data%2Cheight%2Cwidth)&key=AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo',
+            'method': 'GET',
+        }));
+    }
 
     this.getListOfFlies = function(query, pageToken, pageSize) {
         var query = query || "";
