@@ -14,7 +14,7 @@
         // $scope.AttachmentId = '';
         // $scope.LikeUsers = [];
         // $scope.HeaderImage = '';
-        
+
         $scope.post = {
             Type: 'noLink',
             Flagged: false,
@@ -116,27 +116,29 @@
         }
 
         $scope.findType = function() {
-            if ($scope.Link === '') {
-                $scope.Type = 'NoLink';
+            $scope.previewLoading = true
+            if ($scope.post.Link === '') {
+                $scope.post.Type = 'NoLink';
+                $scope.post.HeaderImage = '',// will be the now dead
+                $scope.previewLoading = false;
             }
             else {
-                $scope.previewLoading = true
-                xhttp.open('HEAD', $scope.link); // to implement: img checking and icon for non existant thumnail drive docs
+                if ($scope.Link.match(/(?:http|https):\/\/.{2,}/)) {
+                                    xhttp.open('HEAD', $scope.post.link); // to implement: img checking and icon for non existant thumnail drive docs
                 xhttp.onreadystatechange = function() {
                     if (this.readyState == this.DONE) {
                         console.log(this);
                     }
                 };
                 xhttp.send();
-                if ($scope.Link.match(/(?:http|https):\/\/.{2,}/)) {
                     var isgdrive = $scope.Link.match(/\/(?:d|file|folder|folders)\/([-\w]{25,})/)
                     if (isgdrive) {
                         $scope.Type = 'gDrive';
-                        console.log(isgdrive);
                     }
                     else {
                         $scope.Type = 'Link';
                     }
+                    
                 }
                 else {
                     if ($scope.Link.length > 9) {
@@ -144,7 +146,6 @@
                     }
                     $scope.Type = 'Link';
                 }
-                getImagePreview(false);
             }
         };
 
