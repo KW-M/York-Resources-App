@@ -1,8 +1,8 @@
     /* we don't define the "new post controller" here because it was alredy
-                                       defined by the $md-dialog in the newPost function on mainController.   */
+                                           defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
         //database variables
-        // $scope.Type = 'noLink';
+        // $scope.post.Type = 'noLink';
         // $scope.Flagged = false;
         // $scope.Title = '';
         // $scope.CreationDate = new Date();
@@ -10,7 +10,7 @@
         // $scope.Tags = [];
         // $scope.Description = '';
         // $scope.Class = {Name:''};
-        // $scope.Link = '';
+        // $scope.post.Link = '';
         // $scope.AttachmentId = '';
         // $scope.LikeUsers = [];
         // $scope.HeaderImage = '';
@@ -24,14 +24,14 @@
             Tags: [],
             Description: '',
             Class: {
-                Name:'',
+                Name: '',
             },
             Link: '',
             AttachmentId: '',
             Likes: 0,
             HeaderImage: '',
         }
-        fillInValues();
+        // fillInValues();
 
         //temproary variables
         $scope.operation = operation;
@@ -64,7 +64,7 @@
                     });
                 }
                 else {
-                    if ($scope.Type === "gDrive") {
+                    if ($scope.post.Type === "gDrive") {
                         $mdToast.show({
                             template: '<md-toast style="width: 100%;"><div style="flex-direction: column; height: 100%;" class="md-toast-content"><p style="margin-top:10px">This will allow people at York to view the linked file.</p><span flex layout="row" style="width:100%"><md-button style="width:100%" ng-click="checkHeaderImg()">Got It</md-button></span><div></md-toast>',
                             hideDelay: 3000000,
@@ -119,94 +119,93 @@
             $scope.previewLoading = true
             if ($scope.post.Link === '') {
                 $scope.post.Type = 'NoLink';
-                $scope.post.HeaderImage = '',// will be the now dead
-                $scope.previewLoading = false;
+                $scope.post.HeaderImage = '', // will be the now dead
+                    $scope.previewLoading = false;
             }
             else {
-                if ($scope.Link.match(/(?:http|https):\/\/.{2,}/)) {
-                                    xhttp.open('HEAD', $scope.post.link); // to implement: img checking and icon for non existant thumnail drive docs
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == this.DONE) {
-                        console.log(this);
-                    }
-                };
-                xhttp.send();
-                    var isgdrive = $scope.Link.match(/\/(?:d|file|folder|folders)\/([-\w]{25,})/)
+                if ($scope.post.Link.match(/(?:http|https):\/\/.{2,}/)) {
+                    xhttp.open('HEAD', $scope.post.link); // to implement: img checking and icon for non existant thumnail drive docs
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == this.DONE) {
+                            console.log(this);
+                        }
+                    };
+                    xhttp.send();
+                    var isgdrive = $scope.post.Link.match(/\/(?:d|file|folder|folders)\/([-\w]{25,})/)
                     if (isgdrive) {
-                        $scope.Type = 'gDrive';
+                        $scope.post.Type = 'gDrive';
                     }
                     else {
-                        $scope.Type = 'Link';
+                        $scope.post.Type = 'Link';
                     }
-                    
                 }
                 else {
-                    if ($scope.Link.length > 9) {
-                        $scope.Link = "http://" + $scope.Link
+                    if ($scope.post.Link.length > 9) {
+                        $scope.post.Link = "http://" + $scope.post.Link
                     }
-                    $scope.Type = 'Link';
+                    $scope.post.Type = 'Link';
                 }
             }
         };
 
-        function fillInValues() {
-            console.log("postObj");
-            console.log(postObj);
-            if (postObj !== undefined) {
-                if (postObj.Type !== undefined && postObj.Type !== "") {
-                    $scope.Type = postObj.Type;
-                }
+        // function fillInValues() {
+        //     console.log("postObj");
+        //     console.log(postObj);
+        //     if (postObj !== undefined) {
+        //         if (postObj.Type !== undefined && postObj.Type !== "") {
+        //             $scope.post.Type = postObj.Type;
+        //         }
 
-                if (postObj.Flagged === true) {
-                    $scope.Flagged = true;
-                }
+        //         if (postObj.Flagged === true) {
+        //             $scope.Flagged = true;
+        //         }
 
-                if (postObj.Title !== undefined) {
-                    $scope.Title = postObj.Title;
-                }
+        //         if (postObj.Title !== undefined) {
+        //             $scope.post.Title = postObj.Title;
+        //         }
 
-                if (postObj.CreationDate !== undefined) {
-                    $scope.CreationDate = postObj.CreationDate;
-                }
+        //         if (postObj.CreationDate !== undefined) {
+        //             $scope.post.CreationDate = postObj.CreationDate;
+        //         }
 
-                if (postObj.UpdateDate !== undefined) {
-                    $scope.UpdateDate = postObj.UpdateDate;
-                }
+        //         if (postObj.UpdateDate !== undefined) {
+        //             $scope.UpdateDate = postObj.UpdateDate;
+        //         }
 
-                if (postObj.Tags) {
-                    $scope.Tags = postObj.Tags;
-                }
-                else {
-                    $scope.Tags = [];
-                }
+        //         if (postObj.Tags) {
+        //             $scope.Tags = postObj.Tags;
+        //         }
+        //         else {
+        //             $scope.Tags = [];
+        //         }
 
-                if (postObj.Description) {
-                    $scope.Description = postObj.Description;
-                }
+        //         if (postObj.Description) {
+        //             $scope.Description = postObj.Description;
+        //         }
 
-                if (postObj.Class) {
-                    console.log(postObj.Class)
-                    $scope.Class = postObj.Class
-                }
+        //         if (postObj.Class) {
+        //             console.log(postObj.Class)
+        //             $scope.Class = postObj.Class
+        //         }
 
-                if (postObj.Link !== undefined) {
-                    $scope.Link = postObj.Link;
-                }
+        //         if (postObj.Link !== undefined) {
+        //             $scope.post.Link = postObj.Link;
+        //         }
 
-                if (postObj.AttachmentId !== undefined) {
-                    $scope.AttachmentId = postObj.AttachmentId;
-                }
+        //         if (postObj.AttachmentId !== undefined) {
+        //             $scope.AttachmentId = postObj.AttachmentId;
+        //         }
 
-                if (postObj.LikeUsers !== undefined) {
-                    $scope.LikeUsers = postObj.LikeUsers;
-                }
+        //         if (postObj.LikeUsers !== undefined) {
+        //             $scope.LikeUsers = postObj.LikeUsers;
+        //         }
 
-                if (postObj.HeaderImage !== undefined) {
-                    $scope.HeaderImage = postObj.HeaderImage;
-                }
-            }
-            console.log($scope.Tags);
-        }
+        //         if (postObj.HeaderImage !== undefined) {
+        //             $scope.HeaderImage = postObj.HeaderImage;
+        //         }
+        //     }
+        //     console.log($scope.Tags);
+        // }
 
         $scope.compilePostToMetadata = function() {
             var metadata = {
@@ -221,9 +220,9 @@
             metadata.properties.Tag1 = tagString[0] || "";
             metadata.properties.Tag2 = tagString[1] || "";
 
-            metadata.name = $scope.Title + "{]|[}" + ($scope.Link || "") + "{]|[}";
+            metadata.name = $scope.Title + "{]|[}" + ($scope.post.Link || "") + "{]|[}";
 
-            metadata.properties.Type = $scope.Type;
+            metadata.properties.Type = $scope.post.Type;
             metadata.properties.Flagged = $scope.Flagged;
 
             metadata.description = $scope.Description;
@@ -254,8 +253,8 @@
                 },
             }
 
-            if (postObj.Type !== $scope.Type) {
-                metadata.properties.Type = $scope.Type;
+            if (postObj.Type !== $scope.post.Type) {
+                metadata.properties.Type = $scope.post.Type;
             }
 
             if (postObj.Flagged !== $scope.Flagged) {
@@ -263,7 +262,7 @@
             }
 
             if (postObj.Title !== $scope.Title) {
-                metadata.name = $scope.Title + "{]|[}" + ($scope.Link || "") + "{]|[}";
+                metadata.name = $scope.Title + "{]|[}" + ($scope.post.Link || "") + "{]|[}";
             }
 
             if (postObj.Tags !== $scope.Tags) {
@@ -282,8 +281,8 @@
                 metadata.properties.ClassColor = $scope.Class.Color;
             }
 
-            if (postObj.Link !== $scope.Link) {
-                metadata.name = $scope.Title + "{]|[}" + ($scope.Link || "") + "{]|[}";
+            if (postObj.Link !== $scope.post.Link) {
+                metadata.name = $scope.Title + "{]|[}" + ($scope.post.Link || "") + "{]|[}";
                 metadata.contentHints.thumbnail.image = getImagePreview(true);
                 metadata.contentHints.thumbnail.mimeType = "image/png";
             }
@@ -299,7 +298,7 @@
 
         function getImagePreview(isSubmit) {
             if (isSubmit) {
-                if ($scope.Type === "Link") {
+                if ($scope.post.Type === "Link") {
                     var base64 = convertImg($scope.newPostHeaderImg)
                     var base64url = base64.substring(22).replace(/\+/g, '-').replace(/\//g, '_');;
                     return base64url;
@@ -309,10 +308,10 @@
                 }
             }
             else {
-                if ($scope.Type === "Link") {
-                    $scope.previewThumbnail = 'https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=' + encodeURIComponent($scope.Link) + '&width=400&height=260&maxage=7884000&key=Ca7GOVe9BkGefE_rvwN2Bw';
+                if ($scope.post.Type === "Link") {
+                    $scope.previewThumbnail = 'https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=' + encodeURIComponent($scope.post.Link) + '&width=400&height=260&maxage=7884000&key=Ca7GOVe9BkGefE_rvwN2Bw';
                 }
-                else if ($scope.Type === "gDrive") {
+                else if ($scope.post.Type === "gDrive") {
                     $scope.previewThumbnail = "https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + $scope.AttachmentId;
                 }
                 else {
