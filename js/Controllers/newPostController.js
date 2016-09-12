@@ -1,5 +1,5 @@
     /* we don't define the "new post controller" here because it was alredy
-                                                   defined by the $md-dialog in the newPost function on mainController.   */
+                                                       defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
         //database variables
         // $scope.post.Type = 'noLink';
@@ -45,15 +45,6 @@
 
         $scope.findType = function() {
             $scope.previewLoading = true;
-            request.open('HEAD', 'https://crossorigin.me/' + $scope.post.Link, true); // to implement: img checking and icon for non existant thumnail drive docs
-            request.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    console.log(this)
-                    console.log(this.getResponseHeader('content-type'))
-                    console.log(this.getAllResponseHeaders())
-                }
-            };
-            request.send();
             if ($scope.post.Link === '') {
                 $scope.post.Type = 'NoLink';
                 $scope.post.HeaderImage = ''; // will be the down arrow photo
@@ -66,6 +57,15 @@
                 }
                 else {
                     $scope.post.Type = 'Link';
+                    request.open('HEAD', 'https://crossorigin.me/' + $scope.post.Link, true); // to implement: img checking and icon for non existant thumnail drive docs
+                    request.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            console.log(this)
+                            this.getResponseHeader('content-type')
+                            console.log(this.getAllResponseHeaders())
+                        }
+                    };
+                    request.send();
                 }
             }
             else if ($scope.post.Link.length > 9) {
