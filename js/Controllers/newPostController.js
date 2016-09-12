@@ -67,7 +67,7 @@
                                 $scope.post.HeaderImage = $scope.post.Link
                             } else {
                                 GoogleDriveService.getWebsiteScreenshot($scope.post.Link).then(function(response){
-                                    console.log(response.result.screenshot.data);
+                                    console.log("data:image/jpeg;base64," + response.result.screenshot.data);
                                     $scope.post.HeaderImage = "data:image/jpeg;base64," + response.result.screenshot.data;   
                                 })
                                 
