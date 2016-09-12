@@ -48,7 +48,10 @@
    }
 
    md-progress-linear.link-loading .md-container{
-      height: 2px; bottom: 2px; background-color: rgba(0,0,0,0);
+      bottom: 0px;
+       position: absolute;
+       z-index: 1000;
+       height: 2px;
    }
 
    #newPostLinkInput .md-errors-spacer {
