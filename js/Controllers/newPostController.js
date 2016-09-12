@@ -67,10 +67,10 @@
                                 $scope.post.HeaderImage = $scope.post.Link
                             } else {
                                 GoogleDriveService.getWebsiteScreenshot($scope.post.Link).then(function(response){
-                                    console.log("data:image/jpeg;base64," + response.result.screenshot.data.substring(22).replace(/\+/g, '-').replace(/\//g, '_'););
-                                    $scope.post.HeaderImage = "data:image/jpeg;base64," + response.result.screenshot.data;   
+                                    console.log("data:image/jpeg;base64," + response.result.screenshot.data.replace(/\+/g, '-').replace(/\//g, '_'));
+                                    $scope.post.HeaderImage = "data:image/jpeg;base64," + response.result.screenshot.data;
                                 })
-                                
+
                             }
                         }
                     };
