@@ -54,7 +54,7 @@
                 var isgdrive = $scope.post.Link.match(/\/(?:d|file|folder|folders)\/([-\w]{25,})/)
                 if (isgdrive) {
                     $scope.post.Type = 'gDrive';
-                    $scope.post.headerImage = "https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + $scope.AttachmentId;
+                    $scope.post.HeaderImage = "https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + $scope.AttachmentId;
                 }
                 else {
                     $scope.post.Type = 'Link';
@@ -64,6 +64,12 @@
                             console.log(this)
                             var type = this.getResponseHeader('content-type')
                             if (this.getResponseHeader('content-type').indexOf('image') != -1) {
+                                $scope.post.HeaderImage = $scope.post.Link
+                            } else {
+                                GoogleDriveService.getWebsiteScreenshot($scope.post.Link).then(function(response){
+                                    console.log(response);
+                                    $scope.post.HeaderImage = response.result.data;   
+                                })
                                 
                             }
                         }
