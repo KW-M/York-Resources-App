@@ -47,7 +47,7 @@
       flex: 1;
    }
 
-   .link-loading ._md-container{
+   md-progress-linear.link-loading .md-container{
       height: 2px; bottom: 2px; background-color: rgba(0,0,0,0);
    }
 
