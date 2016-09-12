@@ -1,5 +1,5 @@
     /* we don't define the "new post controller" here because it was alredy
-                                               defined by the $md-dialog in the newPost function on mainController.   */
+                                                   defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
         //database variables
         // $scope.post.Type = 'noLink';
@@ -45,19 +45,21 @@
 
         $scope.findType = function() {
             $scope.previewLoading = true;
+            request.open('HEAD', 'https://crossorigin.me/' + $scope.post.Link, true); // to implement: img checking and icon for non existant thumnail drive docs
+            request.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this)
+                    console.log(this.getResponseHeader('content-type'))
+                    console.log(this.getAllResponseHeaders())
+                }
+            };
+            request.send();
             if ($scope.post.Link === '') {
                 $scope.post.Type = 'NoLink';
                 $scope.post.HeaderImage = ''; // will be the down arrow photo
                 $scope.previewLoading = false;
-            } else if ($scope.post.Link.match(/(?:http|https):\/\/.{2,}/)) {
-                request.open("HEAD", $scope.post.Link, true); // to implement: img checking and icon for non existant thumnail drive docs
-                request.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        console.log(this)
-                        console.log(re)
-                    }
-                };
-                request.send();
+            }
+            else if ($scope.post.Link.match(/(?:http|https):\/\/.{2,}/)) {
                 var isgdrive = $scope.post.Link.match(/\/(?:d|file|folder|folders)\/([-\w]{25,})/)
                 if (isgdrive) {
                     $scope.post.Type = 'gDrive';
@@ -65,10 +67,12 @@
                 else {
                     $scope.post.Type = 'Link';
                 }
-            } else if ($scope.post.Link.length > 9) {
+            }
+            else if ($scope.post.Link.length > 9) {
                 $scope.post.Link = "http://" + $scope.post.Link;
                 $scope.post.Type = 'Link';
-            } else { 
+            }
+            else {
                 $scope.post.Type = 'Link';
             }
 
