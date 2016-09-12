@@ -7,7 +7,7 @@
          <h2><span>Title</span></h2>
          <span flex></span>
       </div>
-      <img ng-src="{{post.eaderImage}}" id="header_image">
+      <img ng-src="post.HeaderImage" id="header_image"
       <div class="newPostImgGradient" flex layout="column">
          <md-input-container md-no-float id="newPostLinkInput">
             <input id="newPostLinkInputTxt" ng-model="post.Link" ng-model-options="{ debounce: 1000 }" style="color:white" placeholder="http://" ng-change="findType()" type="text">

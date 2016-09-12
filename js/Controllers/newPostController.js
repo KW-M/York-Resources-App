@@ -55,6 +55,7 @@
                 if (isgdrive) {
                     $scope.post.Type = 'gDrive';
                     $scope.post.HeaderImage = "https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + $scope.AttachmentId;
+                    $scope.previewLoading = false;
                 }
                 else {
                     $scope.post.Type = 'Link';
@@ -64,13 +65,14 @@
                             console.log(this)
                             var type = this.getResponseHeader('content-type')
                             if (this.getResponseHeader('content-type').indexOf('image') != -1) {
-                                $scope.post.HeaderImage = $scope.post.Link
+                                $scope.post.HeaderImage = $scope.post.Link;
+                                $scope.previewLoading = false;
                             } else {
                                 GoogleDriveService.getWebsiteScreenshot($scope.post.Link).then(function(response){
-                                    console.log("data:image/jpeg;base64," + response.result.screenshot.data.replace(/\+/g, '-').replace(/\//g, '_'));
-                                    $scope.post.HeaderImage = "data:image/jpeg;base64," + response.result.screenshot.data;
+                                    console.log("data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g,'/').replace(/-/g,'+'));
+                                    $scope.post.HeaderImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g,'/').replace(/-/g,'+');
+                                    $scope.previewLoading = false;
                                 })
-
                             }
                         }
                     };
