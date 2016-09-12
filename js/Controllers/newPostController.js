@@ -67,7 +67,7 @@
                                 $scope.post.HeaderImage = $scope.post.Link
                             } else {
                                 GoogleDriveService.getWebsiteScreenshot($scope.post.Link).then(function(response){
-                                    console.log("data:image/jpeg;base64," + response.result.screenshot.data);
+                                    console.log("data:image/jpeg;base64," + response.result.screenshot.data.substring(22).replace(/\+/g, '-').replace(/\//g, '_'););
                                     $scope.post.HeaderImage = "data:image/jpeg;base64," + response.result.screenshot.data;   
                                 })
                                 
@@ -310,7 +310,7 @@
             if (isSubmit) {
                 if ($scope.post.Type === "Link") {
                     var base64 = convertImg($scope.newPostHeaderImg)
-                    var base64url = base64.substring(22).replace(/\+/g, '-').replace(/\//g, '_');;
+                    var base64url = base64.substring(22).replace(/\+/g, '-').replace(/\//g, '_');
                     return base64url;
                 }
                 else {
