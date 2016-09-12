@@ -51,13 +51,8 @@
                 $scope.previewLoading = false;
             } else if ($scope.post.Link.match(/(?:http|https):\/\/.{2,}/)) {
                 request.open("HEAD", $scope.post.Link, true); // to implement: img checking and icon for non existant thumnail drive docs
-                request.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        console.log(this.getAllResponseHeaders())
-                        console.log(request);
-                    }
-                };
-                request.send();
+                request.open('HEAD', $scope.post.Link, true);
+                    if(request.status!=404);
                 var isgdrive = $scope.post.Link.match(/\/(?:d|file|folder|folders)\/([-\w]{25,})/)
                 if (isgdrive) {
                     $scope.post.Type = 'gDrive';
