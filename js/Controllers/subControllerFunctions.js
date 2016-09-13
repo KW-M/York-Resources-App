@@ -63,23 +63,23 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 
 		var formatedPost = {
 			Title: DriveMetadata.properties.Title || '',
-			Description: '',
+			Description: descriptionAndPreviewimage[0] || '',
 			Link: descriptionAndPreviewimage[1] || '',
 			Tags: JSON.parse("[\"" + DriveMetadata.properties.Tag1 + DriveMetadata.properties.Tag2 + "\"]"),
 			Type: DriveMetadata.properties.Type || 'noLink',
-			Flagged: false,
-			CreationDate: new Date(),
-			UpdateDate: new Date(),
+			Flagged: likesAndFlagged[1] || false,
+			CreationDate: Date.parse(DriveMetadata.createdTime) || new Date(),
+			UpdateDate: Date.parse(DriveMetadata.modifiedTime) || new Date(),
 			Class: {
-				Name: '',
-				Catagory: '',
-				Color: '#ffffff',
+				Name: DriveMetadata.properties.ClassName || '',
+				Catagory: DriveMetadata.properties.ClassCatagory || '',
+				Color: DriveMetadata.properties.ClassColor || '#ffffff',
 			},
 			Creator: {
+				Name: DriveMetadata.owners[0].displayName || '',
+				Email: DriveMetadata.owners[0].e || '',
 				ClassOf: '',
-				Email: '',
-				Me: null,
-				Name: '',
+				Me: || false,
 			},
 			Link: '',
 			Id: '',
@@ -98,7 +98,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		DriveMetadata.Likes = JSON.parse(likesAndFlagged[2]); //like email array
 		DriveMetadata.Flagged = likesAndFlagged[1];
 		DriveMetadata.CreationDate: Date.parse(DriveMetadata.createdTime),
-			DriveMetadata.UpdateDate: Date.parse(DriveMetadata.modifiedTime),
+		DriveMetadata.UpdateDate: Date.parse(DriveMetadata.modifiedTime),
 
 	};
 	$scope.convertPostToDrive = function(Post) {
