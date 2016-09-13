@@ -64,7 +64,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			Title: DriveMetadata.properties.Title || '',
 			Description: descriptionAndPreviewimage[0] || '',
 			Link: descriptionAndPreviewimage[1] || '',
-			Tags: JSON.parse("[\"" + DriveMetadata.properties.Tag1 + DriveMetadata.properties.Tag2 + "\"]"),
+			Tags: JSON.parse(("[\"" + DriveMetadata.properties.Tag1 + DriveMetadata.properties.Tag2 + "\"]").replace(/,/g, "\",\"")),
 			Type: DriveMetadata.properties.Type || 'noLink',
 			Flagged: likesAndFlagged[1] || false,
 			CreationDate: Date.parse(DriveMetadata.createdTime) || new Date(),
@@ -92,19 +92,19 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	$scope.convertPostToDrive = function(Post) {
 		var formatedDriveMetadata = {
 			//name: +'{]|[}'+Flagged(True/False)+'{]|[}'+,
-			description: Post.Description + '{]|[}' + Post.Link + '{]|[}' +Post.PreviewImage,
-			createdTime: '2016-09-11T16:50:51.767Z',
-			modifiedTime: '2016-09-11T16:50:51.767Z',
-			starred: false,
+			description: Post.Description + '{]|[}' + Post.Link + '{]|[}' + Post.PreviewImage,
+			createdTime: Date.toRFC3339UTCString(),
+			modifiedTime: Date.toRFC3339UTCString(),
+			starred: Post.Bookmarked,
 			properties: {
-				Title: 'hi',
-				Type: 'noLink',
-				AttachmentId: '',
+				Title: Post.Title,
+				Type: Post.Type,
+				AttachmentId: Post.AttachmentId,
 				Tag1: '',
 				Tag2: '',
-				ClassCatagory: 'Physical Sciences',
-				ClassColor: '#e6f9f4',
-				ClassName: 'Physical Science (8th)',
+				ClassCatagory: Post.Class.Catagory,
+				ClassColor: Post.Class.Color,
+				ClassName: Post.Class.Name,
 			}
 		};
 	};
