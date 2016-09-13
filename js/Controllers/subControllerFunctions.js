@@ -27,6 +27,41 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		Bookmarked: false,
 	}
 	
+	$scope.PostTemplate = {
+		Type: 'noLink',
+		Flagged: false,
+		Title: '',
+		createdTime: "2016-09-11T16:50:51.767Z"
+		description: ''
+		iconLink: "https://ssl.gstatic.com/docs/doclist/images/icon_10_generic_list.png"
+		id:"0B5NVuDykezpkYkNpaGxXWk1rM1U"
+		modifiedTime:"2016-09-11T16:50:51.767Z"
+		name: "TTTTTTTTTTTESting{]|[}{]|[}"
+		owners: Array[1]
+		permissions: Array[2]
+properties: Object
+thumbnailLink: "https://lh3.googleusercontent.com/i4HfW5uFAyfxizWdBBSnQc4X222eyutIFFZmWemOjyk1CjcZe0-itOo7jkk97OYZWQnASQ=s220"
+		Tags: [],
+		Description: '',
+		Class: {
+			Name: '',
+			Catagory: '',
+			Color: '#ffffff',
+		},
+		Creator: {
+			ClassOf: '',
+			Email: '',
+			Me: null,
+			Name: '',
+		},
+		Link: '',
+		Id: '',
+		AttachmentId: '',
+		Likes: 0,
+		PreviewImage: '',
+		Bookmarked: false,
+	}
+	
 	
 	//----------------------------------------------------
 	//------------------ Converting ----------------------
