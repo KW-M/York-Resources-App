@@ -92,7 +92,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	$scope.convertPostToDriveMetadata = function(Post) {
 		var tagString = JSON.stringify(Post.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || [];
 		var formatedDriveMetadata = {
-			//name: +'{]|[}'+Flagged(True/False)+'{]|[}'+,
+			name: 2+'{]|[}'+false+'{]|[}'+["worcester-moorek2018@york.org","lie2018@york.org"],
 			description: Post.Description + '{]|[}' + Post.Link + '{]|[}' + Post.PreviewImage,
 			createdTime: Date.toRFC3339UTCString(Post.CreationDate),
 			modifiedTime: Date.toRFC3339UTCString(Post.UpdateDate),
