@@ -28,31 +28,30 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	}
 	
 	$scope.PostTemplate = {
-		createdTime: "2016-09-11T16:50:51.767Z"
-		description: ''
-		iconLink: "https://ssl.gstatic.com/docs/doclist/images/icon_10_generic_list.png"
-		id:"0B5NVuDykezpkYkNpaGxXWk1rM1U"
-		modifiedTime:"2016-09-11T16:50:51.767Z"
-		name: "TTTTTTTTTTTESting{]|[}{]|[}"
+		id:'0B5NVuDykezpkYkNpaGxXWk1rM1U',
+		name: '{]|[}{]|[}'
+		description: '<html>Description Text</html>{]|[}LinkUrl{]|[}PreviewImageUrl',
+		iconLink: 'https://ssl.gstatic.com/docs/doclist/images/icon_10_generic_list.png',
+		createdTime: '2016-09-11T16:50:51.767Z',
+		modifiedTime:'2016-09-11T16:50:51.767Z',
 		
 		owners: [
 			{
-				displayName: "Kyle Worcester-Moore"
-				emailAddress: "worcester-moorek2018@york.org"
+				displayName: 'Kyle Worcester-Moore'
+				emailAddress: 'worcester-moorek2018@york.org'
 			}
 		]
 		properties: {
-			Title:'hi',
-			Type:"noLink",
-			ClassCatagory:"Physical Sciences",
-			ClassColor:"#e6f9f4",
-			ClassName:"Physical Science (8th)",
-			Flagged:"false",
-			Tag1:"",
-			Tag2:"",
-			AttachmentId:"",
+			Title: 'hi',
+			Type: 'noLink',
+			AttachmentId: '',
+			Tag1: '',
+			Tag2:'',
+			ClassCatagory:'Physical Sciences',
+			ClassColor:'#e6f9f4',
+			ClassName:'Physical Science (8th)',
 		}
-		thumbnailLink: "https://lh3.googleusercontent.com/i4HfW5uFAyfxizWdBBSnQc4X222eyutIFFZmWemOjyk1CjcZe0-itOo7jkk97OYZWQnASQ=s220",
+		thumbnailLink: 'https://lh3.googleusercontent.com/i4HfW5uFAyfxizWdBBSnQc4X222eyutIFFZmWemOjyk1CjcZe0-itOo7jkk97OYZWQnASQ=s220',
 	}
 	
 	
