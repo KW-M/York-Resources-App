@@ -54,7 +54,7 @@
       </div>
       <div class="md-dialog-content">
          <input ng-model="Post.Title" ng-readonly="operation === 'view'" class="newPostTitle md-title" placeholder="Title" md-autofocus>
-         <div id="DescriptionTxt" ng-bind-html="Post.Description" class="newPostBody" contenteditable="{{operation !== 'view'}}"></div>
+         <div id="DescriptionTxt" ng-mode="Post.Description" class="newPostBody" contenteditable="{{operation !== 'view'}}"></div>
       </div>
    </md-dialog-content>
    <md-dialog-actions ng-hide="operation === 'view'" layout="row">
