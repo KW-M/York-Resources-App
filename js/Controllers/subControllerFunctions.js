@@ -1,32 +1,5 @@
 function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance) {
 	
-	$scope.PostTemplate = {
-		Title: '',
-		Description: '',
-		Link: '',
-		Tags: [],
-		Type: 'noLink',
-		Flagged: false,
-		CreationDate: new Date(),
-		UpdateDate: new Date(),
-		Class: {
-			Name: '',
-			Catagory: '',
-			Color: '#ffffff',
-		},
-		Creator: {
-			ClassOf: '',
-			Email: '',
-			Me: null,
-			Name: '',
-		},
-		Link: '',
-		Id: '',
-		AttachmentId: '',
-		Likes: 0,
-		PreviewImage: '',
-		Bookmarked: false,
-	}
 	
 	$scope.DriveMetadataTemplate = {
 		id:'0B5NVuDykezpkYkNpaGxXWk1rM1U',
@@ -56,10 +29,41 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		}
 	}
 	
+		$scope.PostTemplate = {
+		Title: '',
+		Description: '',
+		Link: '',
+		Tags: [],
+		Type: 'noLink',
+		Flagged: false,
+		CreationDate: new Date(),
+		UpdateDate: new Date(),
+		Class: {
+			Name: '',
+			Catagory: '',
+			Color: '#ffffff',
+		},
+		Creator: {
+			ClassOf: '',
+			Email: '',
+			Me: null,
+			Name: '',
+		},
+		Link: '',
+		Id: '',
+		AttachmentId: '',
+		Likes: [],
+		PreviewImage: '',
+		Bookmarked: false,
+	}
+	
 	//----------------------------------------------------
 	//------------------ Converting ----------------------
 	$scope.convertDriveToPost = function(DriveMetadata) {
 		var formatedPost = $scope.PostTemplate
+		var titleAndURL = unformatedFile.name.split("{]|[}");
+		DriveMetadata.Title = 
+		DriveMetadata.Tags = JSON.parse("[\"" + unformatedFile.properties.Tag1 + unformatedFile.properties.Tag2 + "\"]");
 		
 	};
 	$scope.convertPostToDrive = function(Post) {
