@@ -60,13 +60,20 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	//----------------------------------------------------
 	//------------------ Converting ----------------------
 	$scope.convertDriveToPost = function(DriveMetadata) {
-		var formatedPost = $scope.PostTemplate
+		var formatedPost = $scope.PostTemplate;
 		var likesAndFlagged = DriveMetadata.name.split("{]|[}");
-		var descriptionAndImage =
+		var descriptionAndPreviewimage = DriveMetadata.description.split("{]|[}");
 		
-		DriveMetadata.Likes = JSON.parse(likesAndFlagged[3]);//like email array
 		DriveMetadata.Title = DriveMetadata.properties.Title;
+		DriveMetadata.Type = DriveMetadata.properties.Type;
+		DriveMetadata.Description = descriptionAndPreviewimage[0];
+		DriveMetadata.Link = descriptionAndPreviewimage[1];
+		DriveMetadata.PreviewImage = descriptionAndPreviewimage[2];
 		DriveMetadata.Tags = JSON.parse("[\"" + DriveMetadata.properties.Tag1 + DriveMetadata.properties.Tag2 + "\"]");
+		DriveMetadata.Likes = JSON.parse(likesAndFlagged[2]);//like email array
+		DriveMetadata.Flagged = likesAndFlagged[2],
+		CreationDate: new Date(),
+		UpdateDate: new Date(),
 		
 	};
 	$scope.convertPostToDrive = function(Post) {
