@@ -1,5 +1,5 @@
     /* we don't define the "new post controller" here because it was alredy
-                                                       defined by the $md-dialog in the newPost function on mainController.   */
+                                                           defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
         //database variables
         // $scope.Post.Type = 'noLink';
@@ -25,11 +25,20 @@
                 Description: '',
                 Class: {
                     Name: '',
+                    Catagory: '',
+                    Color: '#ffffff',
                 },
+                Creator: {
+                    ClassOf: null
+                    Email: null
+                    Me: null
+                    Name: null
+                }
                 Link: '',
+                Id: '',
                 AttachmentId: '',
                 Likes: 0,
-                HeaderImage: '',
+                PreviewImage: '',
                 Bookmarked: false,
             }
             // fillInValues();
@@ -68,10 +77,11 @@
                             if (this.getResponseHeader('content-type').indexOf('image') != -1) {
                                 $scope.Post.PreviewImage = $scope.Post.Link;
                                 $scope.previewLoading = false;
-                            } else {
-                                GoogleDriveService.getWebsiteScreenshot($scope.Post.Link).then(function(response){
-                                    console.log("data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g,'/').replace(/-/g,'+'));
-                                    $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g,'/').replace(/-/g,'+');
+                            }
+                            else {
+                                GoogleDriveService.getWebsiteScreenshot($scope.Post.Link).then(function(response) {
+                                    console.log("data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+'));
+                                    $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
                                     $scope.previewLoading = false;
                                 })
                             }

@@ -48,7 +48,7 @@
       <div flex layout="row">
          <class-select-menu ng-hide="operation === 'view'"></class-select-menu>
          <div style="width:6px" ng-show="operation === 'view'"></div>
-         <md-chips ng-model="Post.Tags" flex md-separator-keys="[32,188,13]" ng-hide="operation === 'view' && Tags.length === 0" readonly="operation === 'view'">
+         <md-chips ng-model="Post.Tags" flex md-separator-keys="[32,188,13]" ng-hide="operation === 'view' && Post.Tags.length === 0" readonly="operation === 'view'">
             <input type="text" placeholder="Add a tag">
          </md-chips>
       </div>
