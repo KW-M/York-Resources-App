@@ -60,7 +60,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	$scope.convertDriveToPost = function(DriveMetadata) {
 		var likesAndFlagged = DriveMetadata.name.split("{]|[}");
 		var descriptionAndPreviewimage = DriveMetadata.description.split("{]|[}");
-
 		var formatedPost = {
 			Title: DriveMetadata.properties.Title || '',
 			Description: descriptionAndPreviewimage[0] || '',
@@ -77,32 +76,45 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			},
 			Creator: {
 				Name: DriveMetadata.owners[0].displayName || '',
-				Email: DriveMetadata.owners[0].e || '',
-				ClassOf: '',
-				Me: || false,
+				Email: DriveMetadata.owners[0].emailAddress || '',
+				ClassOf: DriveMetadata.owners[0].emailAddress || '',
+				Me: DriveMetadata.owners[0].emailAddress === $scope.myInfo.Email,
 			},
-			Link: '',
-			Id: '',
-			AttachmentId: '',
-			Likes: [],
-			PreviewImage: '',
-			Bookmarked: false,
+			Link: descriptionAndPreviewimage[1],
+			Id: DriveMetadata.id || '',
+			AttachmentId: DriveMetadata.properties.AttachmentId || '',
+			Likes: JSON.parse(likesAndFlagged[2]), //like email array,
+			PreviewImage: descriptionAndPreviewimage[2],
+			Bookmarked: DriveMetadata.starred || false,
 		}
-
-		DriveMetadata.Title = DriveMetadata.properties.Title;
-		DriveMetadata.Type = DriveMetadata.properties.Type;
-		DriveMetadata.Description = descriptionAndPreviewimage[0];
-		DriveMetadata.Link = descriptionAndPreviewimage[1];
-		DriveMetadata.PreviewImage = descriptionAndPreviewimage[2];
-		DriveMetadata.Tags = JSON.parse("[\"" + DriveMetadata.properties.Tag1 + DriveMetadata.properties.Tag2 + "\"]");
-		DriveMetadata.Likes = JSON.parse(likesAndFlagged[2]); //like email array
-		DriveMetadata.Flagged = likesAndFlagged[1];
-		DriveMetadata.CreationDate: Date.parse(DriveMetadata.createdTime),
-		DriveMetadata.UpdateDate: Date.parse(DriveMetadata.modifiedTime),
-
+		return (formatedPost);
 	};
 	$scope.convertPostToDrive = function(Post) {
-		var formatedDriveMetadata = {};
+		var formatedDriveMetadata = {
+			id: '0B5NVuDykezpkYkNpaGxXWk1rM1U',
+			name: 'Like#{]|[}Flagged(True/False){]|[}["LikerEmail","LikerEmail"]',
+			description: '<html>Description Text</html>{]|[}LinkUrl{]|[}PreviewImageUrl',
+			iconLink: 'https://ssl.gstatic.com/docs/doclist/images/icon_10_generic_list.png',
+			thumbnailLink: 'https://lh3.googleusercontent.com/i4HfW5uFAyfxizWdBBSnQc4X222eyutIFFZmWemOjyk1CjcZe0-itOo7jkk97OYZWQnASQ=s220',
+			createdTime: '2016-09-11T16:50:51.767Z',
+			modifiedTime: '2016-09-11T16:50:51.767Z',
+			starred: false,
+			viewedByMe: true,
+			owners: [{
+				displayName: 'Kyle Worcester-Moore',
+				emailAddress: 'worcester-moorek2018@york.org',
+			}],
+			properties: {
+				Title: 'hi',
+				Type: 'noLink',
+				AttachmentId: '',
+				Tag1: '',
+				Tag2: '',
+				ClassCatagory: 'Physical Sciences',
+				ClassColor: '#e6f9f4',
+				ClassName: 'Physical Science (8th)',
+			}
+		};
 	};
 	//----------------------------------------------------
 	//---------------Sorting & Filtering------------------
