@@ -15,6 +15,33 @@
         // $scope.LikeUsers = [];
         // $scope.PreviewImage = '';
         // fillInValues();
+$scope.Post = {
+		Title: '',
+		Description: '',
+		Link: '',
+		Tags: [],
+		Type: 'noLink',
+		Flagged: false,
+		CreationDate: new Date(),
+		UpdateDate: new Date(),
+		Class: {
+			Name: '',
+			Catagory: '',
+			Color: '#ffffff',
+		},
+		Creator: {
+			ClassOf: '',
+			Email: '',
+			Me: null,
+			Name: '',
+		},
+		Link: '',
+		Id: '',
+		AttachmentId: '',
+		Likes: [],
+		PreviewImage: '',
+		Bookmarked: false,
+}
 
         //temproary variables
         $scope.operation = operation;
