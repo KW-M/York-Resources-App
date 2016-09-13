@@ -294,6 +294,7 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
                else {
                   for (o = 0; o < fileList.result.files.length; o++) {
                      formattedFileList[fileCount] = formatPost(fileList.result.files[o]);
+                     console.log($scope.convertDriveToPost(fileList.result.files[o]));
                      fileCount++;
                   }
                }
