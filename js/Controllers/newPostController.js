@@ -15,7 +15,7 @@
         // $scope.LikeUsers = [];
         // $scope.PreviewImage = '';
         // fillInValues();
-$scope.Post = {
+$scope.Post = postObj || {
 		Title: '',
 		Description: '',
 		Link: '',
