@@ -24,16 +24,16 @@
                 Tags: [],
                 Description: '',
                 Class: {
-                    Name: '',
-                    Catagory: '',
+                    Name: null,
+                    Catagory: null,
                     Color: '#ffffff',
                 },
                 Creator: {
-                    ClassOf: null
-                    Email: null
-                    Me: null
-                    Name: null
-                }
+                    ClassOf: null,
+                    Email: null,
+                    Me: null,
+                    Name: null,
+                },
                 Link: '',
                 Id: '',
                 AttachmentId: '',

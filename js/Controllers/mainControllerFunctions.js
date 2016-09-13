@@ -344,7 +344,6 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
 
       formatedFile.Type = unformatedFile.properties.Type;
       formatedFile.Flagged = unformatedFile.properties.Flagged;
-      formatedFile.getghjmb = false;
       formatedFile.Id = unformatedFile.id;
 
       formatedFile.Title = titleAndURL[0];
