@@ -1,13 +1,14 @@
 function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance) {
 	
 	$scope.PostTemplate = {
+		Title: '',
+		Description: '',
+		Link: '',
+		Tags: [],
 		Type: 'noLink',
 		Flagged: false,
-		Title: '',
 		CreationDate: new Date(),
 		UpdateDate: new Date(),
-		Tags: [],
-		Description: '',
 		Class: {
 			Name: '',
 			Catagory: '',
@@ -34,7 +35,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		iconLink: 'https://ssl.gstatic.com/docs/doclist/images/icon_10_generic_list.png',
 		thumbnailLink: 'https://lh3.googleusercontent.com/i4HfW5uFAyfxizWdBBSnQc4X222eyutIFFZmWemOjyk1CjcZe0-itOo7jkk97OYZWQnASQ=s220',
 		createdTime: '2016-09-11T16:50:51.767Z',
-		modifiedTime:'2016-09-11T16:50:51.767Z',
+		modifiedTime: '2016-09-11T16:50:51.767Z',
+		starred: false,
+		viewedByMe: true,
 		owners: [
 			{
 				displayName: 'Kyle Worcester-Moore',
