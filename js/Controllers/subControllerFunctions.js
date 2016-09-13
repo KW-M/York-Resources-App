@@ -60,7 +60,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		
 	};
 	$scope.convertPostToDrive = function(Post) {
-		var formatedDriveMetadata = 
+		var formatedDriveMetadata = {};
 	};
 	//----------------------------------------------------
 	//---------------Sorting & Filtering------------------

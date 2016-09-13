@@ -64,7 +64,6 @@ app.service('GoogleDriveService', ['$q', function($q) {
     }
     
     this.getWebsiteScreenshot = function(url){
-        var scriptId = "MeZP4Dfy0hLzCmyrFntpD1-31ZdidIE6U";
         return(gapi.client.request({
             'root': 'https://www.googleapis.com',
             'path': 'pagespeedonline/v2/runPagespeed?url='+encodeURIComponent(url)+'&rule=AvoidLandingPageRedirects&screenshot=true&strategy=desktop&fields=screenshot(data%2Cheight%2Cwidth)&key=AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo',
@@ -78,7 +77,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
             pageSize: pageSize,
             pageToken: pageToken,
             q: query,
-            fields: 'files(name,id,modifiedTime,appProperties,properties,iconLink,thumbnailLink,createdTime,description,fullFileExtension,owners(displayName,emailAddress),permissions(displayName,emailAddress)),nextPageToken', //
+            fields: 'files(name,id,modifiedTime,createdTime,properties,iconLink,thumbnailLink,description,starred,viewedByMe,owners(displayName,emailAddress),permissions(displayName,emailAddress)),nextPageToken', //
         }));
     };
 
