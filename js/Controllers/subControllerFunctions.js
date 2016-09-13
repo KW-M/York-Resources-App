@@ -90,6 +90,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		return (formatedPost);
 	};
 	$scope.convertPostToDriveMetadata = function(Post) {
+		console.log(Post);
 		var tagString = JSON.stringify(Post.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || [];
 		var formatedDriveMetadata = {
 			name: 2+'{]|[}'+false+'{]|[}'+["worcester-moorek2018@york.org","lie2018@york.org"],
@@ -257,7 +258,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		}, null, 4));
 		console.log({
 			'loggedPostContent': content,
-			'arrayIndex': arrayIndex
+			'arrayIndex': arrayIndex,
+			'converted': $scope.convertPostToDriveMetadata(content)
 		});
 	}
 }
