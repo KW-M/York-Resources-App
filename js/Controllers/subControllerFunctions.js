@@ -90,23 +90,25 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		return (formatedPost);
 	};
 	$scope.convertPostToDrive = function(Post) {
+		var tagString = JSON.stringify(Post.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || [];
 		var formatedDriveMetadata = {
 			//name: +'{]|[}'+Flagged(True/False)+'{]|[}'+,
 			description: Post.Description + '{]|[}' + Post.Link + '{]|[}' + Post.PreviewImage,
-			createdTime: Date.toRFC3339UTCString(),
-			modifiedTime: Date.toRFC3339UTCString(),
+			createdTime: Date.toRFC3339UTCString(Post.CreationDate),
+			modifiedTime: Date.toRFC3339UTCString(Post.UpdateDate),
 			starred: Post.Bookmarked,
 			properties: {
 				Title: Post.Title,
 				Type: Post.Type,
 				AttachmentId: Post.AttachmentId,
-				Tag1: '',
-				Tag2: '',
+				Tag1: tagString[0],
+				Tag2: tagString[1],
 				ClassCatagory: Post.Class.Catagory,
 				ClassColor: Post.Class.Color,
 				ClassName: Post.Class.Name,
 			}
 		};
+		return(formatedDriveMetadata);
 	};
 	//----------------------------------------------------
 	//---------------Sorting & Filtering------------------
