@@ -14,34 +14,7 @@
         // $scope.AttachmentId = '';
         // $scope.LikeUsers = [];
         // $scope.PreviewImage = '';
-
-        $scope.Post = {
-                Type: 'noLink',
-                Flagged: false,
-                Title: null,
-                CreationDate: new Date(),
-                UpdateDate: new Date(),
-                Tags: [],
-                Description: '',
-                Class: {
-                    Name: null,
-                    Catagory: null,
-                    Color: '#ffffff',
-                },
-                Creator: {
-                    ClassOf: null,
-                    Email: null,
-                    Me: null,
-                    Name: null,
-                },
-                Link: '',
-                Id: '',
-                AttachmentId: '',
-                Likes: 0,
-                PreviewImage: '',
-                Bookmarked: false,
-            }
-            // fillInValues();
+        // fillInValues();
 
         //temproary variables
         $scope.operation = operation;

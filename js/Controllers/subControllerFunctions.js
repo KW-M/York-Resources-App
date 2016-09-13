@@ -1,5 +1,43 @@
 function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance) {
-
+	
+	$scope.PostTemplate = {
+		Type: 'noLink',
+		Flagged: false,
+		Title: '',
+		CreationDate: new Date(),
+		UpdateDate: new Date(),
+		Tags: [],
+		Description: '',
+		Class: {
+			Name: '',
+			Catagory: '',
+			Color: '#ffffff',
+		},
+		Creator: {
+			ClassOf: '',
+			Email: '',
+			Me: null,
+			Name: '',
+		},
+		Link: '',
+		Id: '',
+		AttachmentId: '',
+		Likes: 0,
+		PreviewImage: '',
+		Bookmarked: false,
+	}
+	//----------------------------------------------------
+	//----------------Converting------------------
+	$scope.sortByLikes = function(thingToSort) {
+		thingToSort.sort(function(a, b) {
+			return b.LikeUsers.length - a.LikeUsers.length;
+		});
+	};
+	$scope.sortByDate = function(thingToSort) {
+		thingToSort.sort(function(a, b) {
+			return b.UpdateDate - a.UpdateDate;
+		});
+	};
 	//----------------------------------------------------
 	//---------------Sorting & Filtering------------------
 	$scope.sortByLikes = function(thingToSort) {
