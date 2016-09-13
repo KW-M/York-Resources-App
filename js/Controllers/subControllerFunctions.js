@@ -77,7 +77,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			Creator: {
 				Name: DriveMetadata.owners[0].displayName || '',
 				Email: DriveMetadata.owners[0].emailAddress || '',
-				ClassOf: DriveMetadata.owners[0].emailAddress || '',
+				ClassOf: DriveMetadata.owners[0].emailAddress.match(/\d+/)[0] || '',
 				Me: DriveMetadata.owners[0].emailAddress === $scope.myInfo.Email,
 			},
 			Link: descriptionAndPreviewimage[1],
