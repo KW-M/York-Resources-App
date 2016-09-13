@@ -26,17 +26,16 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		PreviewImage: '',
 		Bookmarked: false,
 	}
+	
+	
 	//----------------------------------------------------
-	//----------------Converting------------------
-	$scope.sortByLikes = function(thingToSort) {
-		thingToSort.sort(function(a, b) {
-			return b.LikeUsers.length - a.LikeUsers.length;
-		});
+	//------------------ Converting ----------------------
+	$scope.convertDriveToPost = function(DriveMetadata) {
+		var formatedPost = $scope.PostTemplate
+		
 	};
-	$scope.sortByDate = function(thingToSort) {
-		thingToSort.sort(function(a, b) {
-			return b.UpdateDate - a.UpdateDate;
-		});
+	$scope.convertPostToDrive = function(Post) {
+		var formatedDriveMetadata
 	};
 	//----------------------------------------------------
 	//---------------Sorting & Filtering------------------
