@@ -287,7 +287,7 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
                         //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
                         deDuplicationIndex[fileList.result.files[o].id] = 1; //mark this id as used with a "1".
                         formattedFileList[fileCount] = formatPost(fileList.result.files[o]); //format and save the new post to the formatted files list array
-                        //console.log($scope.convertDriveToPost(fileList.result.files[o]))
+                        console.log($scope.convertDriveToPost(fileList.result.files[o]))
                         fileCount++;
                      }
                   }
@@ -295,7 +295,7 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
                else {
                   for (o = 0; o < fileList.result.files.length; o++) {
                      formattedFileList[fileCount] = formatPost(fileList.result.files[o]);
-                     //console.log($scope.convertDriveToPost(fileList.result.files[o]));
+                     console.log($scope.convertDriveToPost(fileList.result.files[o]));
                      fileCount++;
                   }
                }
