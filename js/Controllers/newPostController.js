@@ -2,7 +2,7 @@
                                                        defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
         //database variables
-        // $scope.post.Type = 'noLink';
+        // $scope.Post.Type = 'noLink';
         // $scope.Flagged = false;
         // $scope.Title = '';
         // $scope.CreationDate = new Date();
@@ -10,12 +10,12 @@
         // $scope.Tags = [];
         // $scope.Description = '';
         // $scope.Class = {Name:''};
-        // $scope.post.Link = '';
+        // $scope.Post.Link = '';
         // $scope.AttachmentId = '';
         // $scope.LikeUsers = [];
-        // $scope.HeaderImage = '';
+        // $scope.PreviewImage = '';
 
-        $scope.post = {
+        $scope.Post = {
                 Type: 'noLink',
                 Flagged: false,
                 Title: null,
@@ -30,6 +30,7 @@
                 AttachmentId: '',
                 Likes: 0,
                 HeaderImage: '',
+                Bookmarked: false,
             }
             // fillInValues();
 
@@ -45,32 +46,32 @@
 
         $scope.findType = function() {
             $scope.previewLoading = true;
-            if ($scope.post.Link === '') {
-                $scope.post.Type = 'NoLink';
-                $scope.post.HeaderImage = ''; // will be the down arrow photo
+            if ($scope.Post.Link === '') {
+                $scope.Post.Type = 'NoLink';
+                $scope.Post.PreviewImage = ''; // will be the down arrow photo
                 $scope.previewLoading = false;
             }
-            else if ($scope.post.Link.match(/(?:http|https):\/\/.{2,}/)) {
-                var isgdrive = $scope.post.Link.match(/\/(?:d|file|folder|folders)\/([-\w]{25,})/)
+            else if ($scope.Post.Link.match(/(?:http|https):\/\/.{2,}/)) {
+                var isgdrive = $scope.Post.Link.match(/\/(?:d|file|folder|folders)\/([-\w]{25,})/)
                 if (isgdrive) {
-                    $scope.post.Type = 'gDrive';
-                    $scope.post.HeaderImage = "https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + $scope.AttachmentId;
+                    $scope.Post.Type = 'gDrive';
+                    $scope.Post.PreviewImage = "https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + $scope.AttachmentId;
                     $scope.previewLoading = false;
                 }
                 else {
-                    $scope.post.Type = 'Link';
-                    request.open('HEAD', 'https://crossorigin.me/' + $scope.post.Link, true); // to implement: img checking and icon for non existant thumnail drive docs
+                    $scope.Post.Type = 'Link';
+                    request.open('HEAD', 'https://crossorigin.me/' + $scope.Post.Link, true); // to implement: img checking and icon for non existant thumnail drive docs
                     request.onreadystatechange = function() {
                         if (this.readyState == 4 && this.status == 200) {
                             console.log(this)
                             var type = this.getResponseHeader('content-type')
                             if (this.getResponseHeader('content-type').indexOf('image') != -1) {
-                                $scope.post.HeaderImage = $scope.post.Link;
+                                $scope.Post.PreviewImage = $scope.Post.Link;
                                 $scope.previewLoading = false;
                             } else {
-                                GoogleDriveService.getWebsiteScreenshot($scope.post.Link).then(function(response){
+                                GoogleDriveService.getWebsiteScreenshot($scope.Post.Link).then(function(response){
                                     console.log("data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g,'/').replace(/-/g,'+'));
-                                    $scope.post.HeaderImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g,'/').replace(/-/g,'+');
+                                    $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g,'/').replace(/-/g,'+');
                                     $scope.previewLoading = false;
                                 })
                             }
@@ -79,12 +80,12 @@
                     request.send();
                 }
             }
-            else if ($scope.post.Link.length > 9) {
-                $scope.post.Link = "http://" + $scope.post.Link;
-                $scope.post.Type = 'Link';
+            else if ($scope.Post.Link.length > 9) {
+                $scope.Post.Link = "http://" + $scope.Post.Link;
+                $scope.Post.Type = 'Link';
             }
             else {
-                $scope.post.Type = 'Link';
+                $scope.Post.Type = 'Link';
             }
 
         };
@@ -109,7 +110,7 @@
                     });
                 }
                 else {
-                    if ($scope.post.Type === "gDrive") {
+                    if ($scope.Post.Type === "gDrive") {
                         $mdToast.show({
                             template: '<md-toast style="width: 100%;"><div style="flex-direction: column; height: 100%;" class="md-toast-content"><p style="margin-top:10px">This will allow people at York to view the linked file.</p><span flex layout="row" style="width:100%"><md-button style="width:100%" ng-click="checkHeaderImg()">Got It</md-button></span><div></md-toast>',
                             hideDelay: 3000000,
@@ -165,7 +166,7 @@
         //     console.log(postObj);
         //     if (postObj !== undefined) {
         //         if (postObj.Type !== undefined && postObj.Type !== "") {
-        //             $scope.post.Type = postObj.Type;
+        //             $scope.Post.Type = postObj.Type;
         //         }
 
         //         if (postObj.Flagged === true) {
@@ -173,11 +174,11 @@
         //         }
 
         //         if (postObj.Title !== undefined) {
-        //             $scope.post.Title = postObj.Title;
+        //             $scope.Post.Title = postObj.Title;
         //         }
 
         //         if (postObj.CreationDate !== undefined) {
-        //             $scope.post.CreationDate = postObj.CreationDate;
+        //             $scope.Post.CreationDate = postObj.CreationDate;
         //         }
 
         //         if (postObj.UpdateDate !== undefined) {
@@ -201,7 +202,7 @@
         //         }
 
         //         if (postObj.Link !== undefined) {
-        //             $scope.post.Link = postObj.Link;
+        //             $scope.Post.Link = postObj.Link;
         //         }
 
         //         if (postObj.AttachmentId !== undefined) {
@@ -212,8 +213,8 @@
         //             $scope.LikeUsers = postObj.LikeUsers;
         //         }
 
-        //         if (postObj.HeaderImage !== undefined) {
-        //             $scope.HeaderImage = postObj.HeaderImage;
+        //         if (postObj.PreviewImage !== undefined) {
+        //             $scope.PreviewImage = postObj.PreviewImage;
         //         }
         //     }
         //     console.log($scope.Tags);
@@ -232,9 +233,9 @@
             metadata.properties.Tag1 = tagString[0] || "";
             metadata.properties.Tag2 = tagString[1] || "";
 
-            metadata.name = $scope.Title + "{]|[}" + ($scope.post.Link || "") + "{]|[}";
+            metadata.name = $scope.Title + "{]|[}" + ($scope.Post.Link || "") + "{]|[}";
 
-            metadata.properties.Type = $scope.post.Type;
+            metadata.properties.Type = $scope.Post.Type;
             metadata.properties.Flagged = $scope.Flagged;
 
             metadata.description = $scope.Description;
@@ -265,8 +266,8 @@
                 },
             }
 
-            if (postObj.Type !== $scope.post.Type) {
-                metadata.properties.Type = $scope.post.Type;
+            if (postObj.Type !== $scope.Post.Type) {
+                metadata.properties.Type = $scope.Post.Type;
             }
 
             if (postObj.Flagged !== $scope.Flagged) {
@@ -274,7 +275,7 @@
             }
 
             if (postObj.Title !== $scope.Title) {
-                metadata.name = $scope.Title + "{]|[}" + ($scope.post.Link || "") + "{]|[}";
+                metadata.name = $scope.Title + "{]|[}" + ($scope.Post.Link || "") + "{]|[}";
             }
 
             if (postObj.Tags !== $scope.Tags) {
@@ -293,8 +294,8 @@
                 metadata.properties.ClassColor = $scope.Class.Color;
             }
 
-            if (postObj.Link !== $scope.post.Link) {
-                metadata.name = $scope.Title + "{]|[}" + ($scope.post.Link || "") + "{]|[}";
+            if (postObj.Link !== $scope.Post.Link) {
+                metadata.name = $scope.Title + "{]|[}" + ($scope.Post.Link || "") + "{]|[}";
                 metadata.contentHints.thumbnail.image = getImagePreview(true);
                 metadata.contentHints.thumbnail.mimeType = "image/png";
             }
@@ -310,7 +311,7 @@
 
         function getImagePreview(isSubmit) {
             if (isSubmit) {
-                if ($scope.post.Type === "Link") {
+                if ($scope.Post.Type === "Link") {
                     var base64 = convertImg($scope.newPostHeaderImg)
                     var base64url = base64.substring(22).replace(/\+/g, '-').replace(/\//g, '_');
                     return base64url;
@@ -320,10 +321,10 @@
                 }
             }
             else {
-                if ($scope.post.Type === "Link") {
-                    $scope.previewThumbnail = 'https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=' + encodeURIComponent($scope.post.Link) + '&width=400&height=260&maxage=7884000&key=Ca7GOVe9BkGefE_rvwN2Bw';
+                if ($scope.Post.Type === "Link") {
+                    $scope.previewThumbnail = 'https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=' + encodeURIComponent($scope.Post.Link) + '&width=400&height=260&maxage=7884000&key=Ca7GOVe9BkGefE_rvwN2Bw';
                 }
-                else if ($scope.post.Type === "gDrive") {
+                else if ($scope.Post.Type === "gDrive") {
                     $scope.previewThumbnail = "https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + $scope.AttachmentId;
                 }
                 else {

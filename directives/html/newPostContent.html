@@ -7,11 +7,11 @@
          <h2><span>Title</span></h2>
          <span flex></span>
       </div>
-      <img ng-src="{{post.HeaderImage}}" id="header_image">
+      <img ng-src="{{Post.HeaderImage}}" id="header_image">
       <div class="newPostImgGradient" flex layout="column">
          <span ng-hide="operation === 'view'">
          <md-input-container md-no-float id="newPostLinkInput">
-            <input id="newPostLinkInputTxt" ng-model="post.Link" ng-model-options="{ debounce: 500 }" style="color:white" placeholder="http://" ng-change="findType()" type="text">
+            <input id="newPostLinkInputTxt" ng-model="Post.Link" ng-model-options="{ debounce: 500 }" style="color:white" placeholder="http://" ng-change="findType()" type="text">
          </md-input-container>
          <md-menu md-position-mode="target-right target" md-offset="0 -45">
             <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
@@ -51,13 +51,13 @@
       <div flex layout="row">
          <class-select-menu ng-hide="operation === 'view'"></class-select-menu>
          <div style="width:6px" ng-show="operation === 'view'"></div>
-         <md-chips ng-model="post.Tags" flex md-separator-keys="[32,188,13]" ng-hide="operation === 'view' && Tags.length === 0" readonly="operation === 'view'">
+         <md-chips ng-model="Post.Tags" flex md-separator-keys="[32,188,13]" ng-hide="operation === 'view' && Tags.length === 0" readonly="operation === 'view'">
             <input type="text" placeholder="Add a tag">
          </md-chips>
       </div>
       <div class="md-dialog-content">
-         <input ng-model="post.Title" ng-readonly="operation === 'view'" class="newPostTitle md-title" placeholder="Title" md-autofocus>
-         <div id="DescriptionTxt" ng-bind-html="post.Description" class="newPostBody" contenteditable="{{operation !== 'view'}}"></div>
+         <input ng-model="Post.Title" ng-readonly="operation === 'view'" class="newPostTitle md-title" placeholder="Title" md-autofocus>
+         <div id="DescriptionTxt" ng-bind-html="Post.Description" class="newPostBody" contenteditable="{{operation !== 'view'}}"></div>
       </div>
    </md-dialog-content>
    <md-dialog-actions ng-hide="operation === 'view'" layout="row">

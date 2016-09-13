@@ -373,10 +373,10 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
       formatedFile.Link = titleAndURL[1];
       formatedFile.attachmentId = unformatedFile.properties.attachmentId;
       if (formatedFile.Type === "Link") {
-         formatedFile.PreviewImg = unformatedFile.thumbnailLink.replace("=s220", "=s400")
+         formatedFile.PreviewImage = unformatedFile.thumbnailLink.replace("=s220", "=s400")
       }
       else if (formatedFile.Type === "Gdrive") {
-         formatedFile.PreviewImg = "https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + formatedFile.attachmentId;
+         formatedFile.PreviewImage = "https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + formatedFile.attachmentId;
       }
 
       if (devMode) {
