@@ -56,13 +56,13 @@ app.directive("showMoreOnOverflow",function(){
             element[0].nextElementSibling.style.display = "initial";
         } else {
             console.log("nonoverflow")
-            //element[0].nextElementSibling.style.display = "none"; 
+            //element[0].nextElementSibling.style.display = "none";
         }
-    }        
-  }      
+    }
+  }
 });
 
-appdirective('contenteditable', ['$sce', function($sce) {
+app.directive('contenteditable', ['$sce', function($sce) {
   return {
     restrict: 'A', // only activate on element attribute
     require: '?ngModel', // get a hold of NgModelController
