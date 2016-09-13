@@ -1,59 +1,59 @@
 function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance) {
 
 
-	$scope.DriveMetadataTemplate = {
-		id: '0B5NVuDykezpkYkNpaGxXWk1rM1U',
-		name: 'Like#{]|[}Flagged(True/False){]|[}["LikerEmail","LikerEmail"]',
-		description: '<html>Description Text</html>{]|[}LinkUrl{]|[}PreviewImageUrl',
-		iconLink: 'https://ssl.gstatic.com/docs/doclist/images/icon_10_generic_list.png',
-		thumbnailLink: 'https://lh3.googleusercontent.com/i4HfW5uFAyfxizWdBBSnQc4X222eyutIFFZmWemOjyk1CjcZe0-itOo7jkk97OYZWQnASQ=s220',
-		createdTime: '2016-09-11T16:50:51.767Z',
-		modifiedTime: '2016-09-11T16:50:51.767Z',
-		starred: false,
-		viewedByMe: true,
-		owners: [{
-			displayName: 'Kyle Worcester-Moore',
-			emailAddress: 'worcester-moorek2018@york.org',
-		}],
-		properties: {
-			Title: 'hi',
-			Type: 'noLink',
-			AttachmentId: '',
-			Tag1: '',
-			Tag2: '',
-			ClassCatagory: 'Physical Sciences',
-			ClassColor: '#e6f9f4',
-			ClassName: 'Physical Science (8th)',
-		}
-	}
+	// $scope.DriveMetadataTemplate = {
+	// 	id: '0B5NVuDykezpkYkNpaGxXWk1rM1U',
+	// 	name: 'Like#{]|[}Flagged(True/False){]|[}["LikerEmail","LikerEmail"]',
+	// 	description: '<html>Description Text</html>{]|[}LinkUrl{]|[}PreviewImageUrl',
+	// 	iconLink: 'https://ssl.gstatic.com/docs/doclist/images/icon_10_generic_list.png',
+	// 	thumbnailLink: 'https://lh3.googleusercontent.com/i4HfW5uFAyfxizWdBBSnQc4X222eyutIFFZmWemOjyk1CjcZe0-itOo7jkk97OYZWQnASQ=s220',
+	// 	createdTime: '2016-09-11T16:50:51.767Z',
+	// 	modifiedTime: '2016-09-11T16:50:51.767Z',
+	// 	starred: false,
+	// 	viewedByMe: true,
+	// 	owners: [{
+	// 		displayName: 'Kyle Worcester-Moore',
+	// 		emailAddress: 'worcester-moorek2018@york.org',
+	// 	}],
+	// 	properties: {
+	// 		Title: 'hi',
+	// 		Type: 'noLink',
+	// 		AttachmentId: '',
+	// 		Tag1: '',
+	// 		Tag2: '',
+	// 		ClassCatagory: 'Physical Sciences',
+	// 		ClassColor: '#e6f9f4',
+	// 		ClassName: 'Physical Science (8th)',
+	// 	}
+	// }
 
-	$scope.PostTemplate = {
-		Title: '',
-		Description: '',
-		Link: '',
-		Tags: [],
-		Type: 'noLink',
-		Flagged: false,
-		CreationDate: new Date(),
-		UpdateDate: new Date(),
-		Class: {
-			Name: '',
-			Catagory: '',
-			Color: '#ffffff',
-		},
-		Creator: {
-			ClassOf: '',
-			Email: '',
-			Me: null,
-			Name: '',
-		},
-		Link: '',
-		Id: '',
-		AttachmentId: '',
-		Likes: [],
-		PreviewImage: '',
-		Bookmarked: false,
-	}
+	// $scope.PostTemplate = {
+	// 	Title: '',
+	// 	Description: '',
+	// 	Link: '',
+	// 	Tags: [],
+	// 	Type: 'noLink',
+	// 	Flagged: false,
+	// 	CreationDate: new Date(),
+	// 	UpdateDate: new Date(),
+	// 	Class: {
+	// 		Name: '',
+	// 		Catagory: '',
+	// 		Color: '#ffffff',
+	// 	},
+	// 	Creator: {
+	// 		ClassOf: '',
+	// 		Email: '',
+	// 		Me: null,
+	// 		Name: '',
+	// 	},
+	// 	Link: '',
+	// 	Id: '',
+	// 	AttachmentId: '',
+	// 	Likes: [],
+	// 	PreviewImage: '',
+	// 	Bookmarked: false,
+	// }
 
 	//----------------------------------------------------
 	//------------------ Converting ----------------------
