@@ -3,7 +3,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	
 	$scope.DriveMetadataTemplate = {
 		id:'0B5NVuDykezpkYkNpaGxXWk1rM1U',
-		name: '["LikerEmail","LikerEmail"]{]|[}Flagged(True/False)',
+		name: 'Like#{]|[}Flagged(True/False){]|[}["LikerEmail","LikerEmail"]',
 		description: '<html>Description Text</html>{]|[}LinkUrl{]|[}PreviewImageUrl',
 		iconLink: 'https://ssl.gstatic.com/docs/doclist/images/icon_10_generic_list.png',
 		thumbnailLink: 'https://lh3.googleusercontent.com/i4HfW5uFAyfxizWdBBSnQc4X222eyutIFFZmWemOjyk1CjcZe0-itOo7jkk97OYZWQnASQ=s220',
@@ -61,9 +61,12 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	//------------------ Converting ----------------------
 	$scope.convertDriveToPost = function(DriveMetadata) {
 		var formatedPost = $scope.PostTemplate
-		var titleAndURL = unformatedFile.name.split("{]|[}");
-		DriveMetadata.Title = 
-		DriveMetadata.Tags = JSON.parse("[\"" + unformatedFile.properties.Tag1 + unformatedFile.properties.Tag2 + "\"]");
+		var likesAndFlagged = DriveMetadata.name.split("{]|[}");
+		var descriptionAndImage =
+		
+		DriveMetadata.Likes = JSON.parse(likesAndFlagged[3]);//like email array
+		DriveMetadata.Title = DriveMetadata.properties.Title;
+		DriveMetadata.Tags = JSON.parse("[\"" + DriveMetadata.properties.Tag1 + DriveMetadata.properties.Tag2 + "\"]");
 		
 	};
 	$scope.convertPostToDrive = function(Post) {
