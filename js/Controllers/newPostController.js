@@ -77,7 +77,7 @@
             console.log($scope.Class);
             console.log($scope.dialogElement);
             console.log(document.getElementById('header_image'));
-            if ($scope.Class === '' || $scope.Class === undefined) {
+            if ($scope.Post.Class.Name === '' || $scope.Post.Class === undefined) {
                 $mdToast.show({
                     template: '<md-toast><div class="md-toast-content">Please select a class for this post.</div><md-toast>',
                     hideDelay: 1500,
@@ -85,7 +85,7 @@
                 });
             }
             else {
-                if ($scope.Title === '' || $scope.Title === undefined) {
+                if ($scope.Post.Title === '' || $scope.Post.Title === undefined) {
                     $mdToast.show({
                         template: '<md-toast><div class="md-toast-content">Posts must have a title.</div></md-toast>',
                         hideDelay: 1500,
@@ -112,20 +112,22 @@
                 template: '<md-toast><span style="font-size:18px; max-width: 200px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="36"></md-progress-circular></md-toast>',
                 hideDelay: 3000000,
             });
-            if ($scope.newPostHeaderImg.complete === true) {
-                $scope.submit();
-            }
-            else {
-                $scope.newPostHeaderImg.onload = function() {
-                    $scope.submit();
-                }
-            }
+            $scope.submit();
+            // if ($scope.newPostHeaderImg.complete === true) {
+            //     $scope.submit();
+            // }
+            // else {
+            //     $scope.newPostHeaderImg.onload = function() {
+            //         $scope.submit();
+            //     }
+            // }
         };
 
         $scope.submit = function() {
             $scope.closeDialog();
             if (operation === 'new') {
-                var metadata = $scope.compilePostToMetadata();
+                var metadata = $scope.convertPostToDriveMetadata($scope.Post);
+                console.log({Post:$scope.Post,Metadata:metadata});
                 queue(GoogleDriveService.createDriveFile(metadata), function(reply) {
                     console.log(reply.result);
                     $mdToast.hide();

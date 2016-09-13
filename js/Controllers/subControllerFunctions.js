@@ -89,7 +89,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		}
 		return (formatedPost);
 	};
-	$scope.convertPostToDrive = function(Post) {
+	$scope.convertPostToDriveMetadata = function(Post) {
 		var tagString = JSON.stringify(Post.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || [];
 		var formatedDriveMetadata = {
 			//name: +'{]|[}'+Flagged(True/False)+'{]|[}'+,
