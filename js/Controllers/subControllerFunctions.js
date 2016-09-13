@@ -91,19 +91,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	};
 	$scope.convertPostToDrive = function(Post) {
 		var formatedDriveMetadata = {
-			id: '0B5NVuDykezpkYkNpaGxXWk1rM1U',
-			name: 'Like#{]|[}Flagged(True/False){]|[}["LikerEmail","LikerEmail"]',
-			description: '<html>Description Text</html>{]|[}LinkUrl{]|[}PreviewImageUrl',
-			iconLink: 'https://ssl.gstatic.com/docs/doclist/images/icon_10_generic_list.png',
-			thumbnailLink: 'https://lh3.googleusercontent.com/i4HfW5uFAyfxizWdBBSnQc4X222eyutIFFZmWemOjyk1CjcZe0-itOo7jkk97OYZWQnASQ=s220',
+			//name: +'{]|[}'+Flagged(True/False)+'{]|[}'+,
+			description: Post.Description + '{]|[}' + Post.Link + '{]|[}' +Post.PreviewImage,
 			createdTime: '2016-09-11T16:50:51.767Z',
 			modifiedTime: '2016-09-11T16:50:51.767Z',
 			starred: false,
-			viewedByMe: true,
-			owners: [{
-				displayName: 'Kyle Worcester-Moore',
-				emailAddress: 'worcester-moorek2018@york.org',
-			}],
 			properties: {
 				Title: 'hi',
 				Type: 'noLink',

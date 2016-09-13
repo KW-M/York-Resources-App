@@ -66,23 +66,12 @@
 
     }
   }
-
-  function formatArrayResponse(rawArrayResponse, idArray) {
-    var arrayOfPosts = [];
-    for (var i = 0; i < rawArrayResponse.length; i++) {
-      if (idArray != null) {
-        rawArrayResponse[i].result.ID = idArray[i];
-      }
-      arrayOfPosts.push(rawArrayResponse[i].result);
-    }
-    return (arrayOfPosts);
-  }
   
   function addDays(date, days) {
     var result = new Date(date);
     result.setDate(result.getDate() + days);
     return result;
-}
+  }
 
   // function RateLimit(fn, delay, context) {
   //   var queue = [],
