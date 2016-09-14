@@ -94,7 +94,7 @@
     transition: opacity 0.2s;
 }
 
-.post-card-header:hover:not(.noLink) .post-card-link-text, .post-card-header:hover:not(.noLink) .post-card-link-text {
+.post-card-header:hover:not(.noLink) .post-card-link-text, #dialog_header:hover:not(.noLink) .post-card-link-text {
     opacity: 1;
     transition: opacity 0.2s
 }
