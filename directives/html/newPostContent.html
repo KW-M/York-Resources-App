@@ -9,7 +9,7 @@
       <!--</div>-->
       <img ng-src="{{Post.PreviewImage}}" id="header_image">
       <div class="newPostImgGradient" flex layout="column">
-         <div ng-hide="operation === 'view'">
+         <div ng-hide="operation === 'view'" style="margin: 0 9px;">
             <md-input-container md-no-float id="newPostLinkInput">
                <input id="newPostLinkInputTxt" ng-model="Post.Link" ng-model-options="{ debounce: 500 }" style="color:white" placeholder="http://" ng-change="findType()" type="text">
             </md-input-container>

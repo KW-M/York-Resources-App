@@ -54,15 +54,14 @@ $scope.Post = {
         // var dataURL;
 
         $scope.findType = function() {
-            $scope.previewLoading = true;
             if ($scope.Post.Link === '') {
                 $scope.Post.Type = 'NoLink';
                 $scope.Post.PreviewImage = ''; // will be the down arrow photo
                 $scope.previewLoading = false;
             }
             else if ($scope.Post.Link.match(/(?:http|https):\/\/.{2,}/)) {
-                var isgdrive = $scope.Post.Link.match(/\/(?:d|file|folder|folders)\/([-\w]{25,})/)
-                if (isgdrive) {
+                $scope.previewLoading = true;
+                if ($scope.Post.Link.match(/\/(?:d|file|folder|folders)\/([-\w]{25,})/)) {
                     $scope.Post.Type = 'gDrive';
                     $scope.Post.PreviewImage = "https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + $scope.AttachmentId;
                     $scope.previewLoading = false;
