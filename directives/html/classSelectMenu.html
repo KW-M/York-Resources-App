@@ -1,7 +1,6 @@
-<md-input-container class="" md-ink-ripple="true">
-    <!--button-select md-button-->
-    <label>Class</label>
-    <md-select ng-model-options="{trackBy: '$value.Name'}" class="md-no-underline" ng-model="Post.Class" md-on-close="clearText(classSelectSearch)">
+
+    <!--button-select md-button md-ink-ripple="true"-->
+    <md-select ng-model-options="{trackBy: '$value.Name'}" class="md-no-underline" ng-model="Post.Class" placeholder="Class" md-on-close="clearText(classSelectSearch)">
         <md-select-header class="classSelectSearchbox">
           <input ng-model="classSelectSearch" id="class_select_input" type="Search" placeholder="Search for a class.." class="md-text">
         </md-select-header>
@@ -14,4 +13,3 @@
             </md-option>
         </md-optgroup>
     </md-select>
-</md-input-container>
