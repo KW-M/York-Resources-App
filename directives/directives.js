@@ -67,14 +67,13 @@ app.directive('htmlModel', ['$sce', function($sce) {
     restrict: 'A', // only activate on element attribute
     require: '?ngModel', // get a hold of NgModelController
     link: function(scope, element, attrs, ngModel) {
-        console.log(ngModel);
-        console.log(element.html())
       if (!ngModel) return; // do nothing if no ng-model
 
       // Specify how UI should be updated
-      ngModel.$render = function() {
-        element.html($sce.getTrustedHtml(ngModel.$viewValue || ''));
-      };
+    //   ngModel.$render = function() {
+    //       console.log(ngModel.$viewValue);
+    //     element.html($sce.getTrustedHtml(ngModel.$viewValue || ''));
+    //   };
 
       // Listen for change events to enable binding
       element.on('blur keyup change', function() {
@@ -90,7 +89,6 @@ app.directive('htmlModel', ['$sce', function($sce) {
         if (attrs.stripBr && html === '<br>') {
           html = '';
         }
-        console.log(element.html())
         ngModel.$setViewValue(html);
       }
     }
