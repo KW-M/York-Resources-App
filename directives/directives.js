@@ -62,11 +62,13 @@ app.directive("showMoreOnOverflow",function(){
   }
 });
 
-app.directive('contenteditable', ['$sce', function($sce) {
+app.directive('htmlModel', ['$sce', function($sce) {
   return {
     restrict: 'A', // only activate on element attribute
     require: '?ngModel', // get a hold of NgModelController
     link: function(scope, element, attrs, ngModel) {
+        console.log(ngModel);
+        console.log(element.html())
       if (!ngModel) return; // do nothing if no ng-model
 
       // Specify how UI should be updated
@@ -88,6 +90,7 @@ app.directive('contenteditable', ['$sce', function($sce) {
         if (attrs.stripBr && html === '<br>') {
           html = '';
         }
+        console.log(element.html())
         ngModel.$setViewValue(html);
       }
     }
