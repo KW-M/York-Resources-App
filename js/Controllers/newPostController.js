@@ -41,7 +41,7 @@ $scope.Post = {
 		PreviewImage: postObj.PreviewImage || '',
 		Bookmarked: postObj.Bookmarked || false,
 }
-$timeout
+
 console.log($scope.Post.Description);
 
         //temproary variables
