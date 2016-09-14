@@ -1,6 +1,7 @@
     /* we don't define the "new post controller" here because it was alredy
                                                            defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
+        console
         //database variables
         // $scope.Post.Type = 'noLink';
         // $scope.Flagged = false;
@@ -15,32 +16,31 @@
         // $scope.LikeUsers = [];
         // $scope.PreviewImage = '';
         // fillInValues();
-$scope.Post = postObj || {
-		Title: '',
-		Description: '',
-		Link: '',
-		Tags: [],
-		Type: 'noLink',
-		Flagged: false,
-		CreationDate: new Date(),
-		UpdateDate: new Date(),
+$scope.Post = {
+		Title: postObj.Title || '',
+		Description: postObj.Description || '',
+		Link: postObj.Link || '',
+		Tags: postObj.Tags || [],
+		Type: postObj.Type || 'noLink',
+		Flagged: postObj.Flagged || false,
+		CreationDate: postObj.CreationDate || new Date(),
+		UpdateDate: postObj.UpdateDate || new Date(),
 		Class: {
-			Name: '',
-			Catagory: '',
-			Color: '#ffffff',
+			Name: postObj.Class.Name || '',
+			Catagory: postObj.Class.Catagory || '',
+			Color: postObj.Class.Color || '#ffffff',
 		},
 		Creator: {
-			ClassOf: '',
-			Email: '',
-			Me: null,
-			Name: '',
+			ClassOf: postObj.Creator.ClassOf || '',
+			Email: postObj.Creator.Email || '',
+			Me: postObj.Creator.Me || null,
+			Name: postObj.Creator.Name || '',
 		},
-		Link: '',
-		Id: '',
-		AttachmentId: '',
-		Likes: [],
-		PreviewImage: '',
-		Bookmarked: false,
+		Id: postObj.Id || '',
+		AttachmentId: postObj.AttachmentId || '',
+		Likes: postObj.Likes || [],
+		PreviewImage: postObj.PreviewImage || '',
+		Bookmarked: postObj.Bookmarked || false,
 }
 
         //temproary variables
