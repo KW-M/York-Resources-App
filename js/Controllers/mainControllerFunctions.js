@@ -1,6 +1,6 @@
-/*global app*/ /*global angular*/ /*global gapi*/ /*global google*/ /*global queue*//*global subControllerFunctions*/
+/*global app*/ /*global angular*/ /*global gapi*/ /*global google*/ /*global queue*/ /*global subControllerFunctions*/
 app.controller('ApplicationController', controllerFunction)
-//controllerFunction.$inject(['$scope', '$mdDialog', '$window', '$timeout', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', 'angularGridInstance'])
+   //controllerFunction.$inject(['$scope', '$mdDialog', '$window', '$timeout', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', 'angularGridInstance'])
 function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, angularGridInstance) {
    var self = this;
    var content_container = document.getElementById("content_container");
@@ -52,15 +52,16 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
    $scope.$mdDialog = $mdDialog;
    $scope.$location = $location;
 
-	//----------------------------------------------------
-	//------------------- Routing ------------------------
+   //----------------------------------------------------
+   //------------------- Routing ------------------------
    $scope.gotoRoute = function(query) {
       var tempQuery = {}
       if (query.q !== null && query.q !== undefined && query.q !== '') {
          tempQuery.q = query.q || $scope.queryParams.q;
          tempQuery.type = query.type || $scope.queryParams.type;
          tempQuery.creatorEmail = query.creatorEmail || $scope.queryParams.creatorEmail;
-      } else {
+      }
+      else {
          tempQuery.q = null;
          tempQuery.flagged = null;
          tempQuery.type = null;
@@ -73,29 +74,32 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
       $location.hash(query.id || null);
       $location.search(tempQuery || null);
    };
+
    function listenForURLChange() {
       onLocationChange();
       $scope.$on('$locationChangeSuccess', onLocationChange());
-      function onLocationChange() {
-         $scope.queryParams = $location.search();
-         $scope.queryParams.classpath = $location.path().replace(/\//g, "");
-         $scope.queryParams.id = $location.hash();
-         if ($scope.queryParams.q !== $scope.previousSearch) {
-            $scope.visiblePosts = []
-            $scope.previousSearch = $scope.queryParams.q
-         }
-         generateQueryString();
-         getFiles();
-      }
    }
-   
-	//----------------------------------------------------
-	//------------- Signin & Initiation ------------------
+
+   function onLocationChange() {
+      $scope.queryParams = $location.search();
+      $scope.queryParams.classpath = $location.path().replace(/\//g, "");
+      $scope.queryParams.id = $location.hash();
+      if ($scope.queryParams.q !== $scope.previousSearch) {
+         $scope.visiblePosts = []
+         $scope.previousSearch = $scope.queryParams.q
+      }
+      generateQueryString();
+      getFiles();
+   }
+
+   //----------------------------------------------------
+   //------------- Signin & Initiation ------------------
    gapi.load('client:auth2', function() {
-      authorizationService.initilize(function(){
-         GoogleDriveService.loadAPIs(initiateDrive);  
+      authorizationService.initilize(function() {
+         GoogleDriveService.loadAPIs(initiateDrive);
       });
    });
+
    function initiateDrive(loaded) {
       console.log("API loaded: " + loaded)
       if (loaded === "drive") {
@@ -133,6 +137,7 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
       //    console.log(result)
       // });
    }
+
    function handleUserPrefsSheet() {
       queue(GoogleDriveService.getSpreadsheetRange('1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0', "Sheet1!A2:B", false), function(usersList) {
          $scope.userList = usersList.result.values;
@@ -175,9 +180,10 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
          $scope.myInfo.LastQuizletCheckDate = Date.parse(settingsArray[6])
          $scope.myInfo.NumberOfVisits = settingsArray[7]
       }
-      listenForURLChange();// this also Starts getting files
+      listenForURLChange(); // this also Starts getting files
       queue(GoogleDriveService.getSpreadsheetRange("1DfFUn8sgnFeLLijtKvWsd90GNcnEG6Xl5JTSeApX3bY", "Sheet1!A2:Z"), handleClassesSheet)
    }
+
    function handleClassesSheet(rawClasses) {
       var classList = [];
       var classesResult = rawClasses.result.values
@@ -197,8 +203,8 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
       })
    }
 
-	//----------------------------------------------------
-	//--------------- Creating Posts ---------------------
+   //----------------------------------------------------
+   //--------------- Creating Posts ---------------------
    $scope.newPost = function(postObj, operation) {
       //called by the bottom right plus/add resource button
       log(postObj);
@@ -267,9 +273,9 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
       }
    }
 
-	//----------------------------------------------------
-	//--------- loading and filtering posts --------------
-   function getFiles () {
+   //----------------------------------------------------
+   //--------- loading and filtering posts --------------
+   function getFiles() {
       firstFiles = true;
       var fileCount = 0;
       var formattedFileList = [];
@@ -339,7 +345,8 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
          sortPostsByType();
       }
    }
-   function formatPost (unformatedFile) {
+
+   function formatPost(unformatedFile) {
       var formatedFile = {}
       var tagsRaw = "[\"" + unformatedFile.properties.Tag1 + unformatedFile.properties.Tag2 + "\"]";
       var titleAndURL = unformatedFile.name.split("{]|[}");
@@ -389,7 +396,8 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
 
       return formatedFile;
    }
-   function sortPostsByType (formattedFileList) {
+
+   function sortPostsByType(formattedFileList) {
       if ($scope.queryParams.q) {
          if (formattedFileList !== undefined) {
             if ($scope.queryParams.q === $scope.previousSearch) {
@@ -458,7 +466,8 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
          }
       }
    }
-   function filterPosts (inputSet) {
+
+   function filterPosts(inputSet) {
       return inputSet.filter(function(post) {
          var Flagged = post.Flagged === $scope.queryParams.flagged || post.Flagged;
          if ($scope.queryParams.class !== "any" && $scope.queryParams.class !== undefined) {
@@ -490,7 +499,8 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
          return Flagged && Class && Type && Creator;
       });
    }
-   function generateQueryString () {
+
+   function generateQueryString() {
       if ($scope.queryParams.classpath === 'all-posts') {
          var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false and properties has { key='Flagged' and value='false' }"
       }
@@ -502,7 +512,8 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
       }
       else if ($scope.queryParams.classpath === 'flagged') {
          var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false and properties has { key='Flagged' and value='true' }"
-      } else {
+      }
+      else {
          var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false and properties has { key='Flagged' and value='false' } and properties has { key='ClassName' and value='" + $scope.queryParams.classpath + "' }"
       }
       if ($scope.queryParams.q) {
@@ -517,8 +528,8 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
       $scope.queryPropertyString = query;
    }
 
-	//----------------------------------------------------
-	//---------------- Event Watchers --------------------
+   //----------------------------------------------------
+   //---------------- Event Watchers --------------------
    // The md-select directive eats keydown events for some quick select
    // logic. Since we have a search input here, we don't need that logic.
    // var selectSearchInput = angular.element(document.getElementById('class_select_input'))
@@ -559,7 +570,7 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
          })
       }
    }
-   
+
    //More (less important functions are delegated to another file);
    subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance);
 }
