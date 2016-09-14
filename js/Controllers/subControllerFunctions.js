@@ -60,13 +60,19 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	$scope.convertDriveToPost = function(DriveMetadata) {
 		var likesAndFlagged = DriveMetadata.name.split("{]|[}");
 		var descriptionAndPreviewimage = DriveMetadata.description.split("{]|[}");
+		if (DriveMetadata.properties.Tag1 || DriveMetadata.properties.Tag2) {
+			var tags = JSON.parse(("[\"" + (DriveMetadata.properties.Tag1 || '') + (DriveMetadata.properties.Tag2 || '') + "\"]").replace(/,/g, "\",\"")),
+    	}
+    	else {
+         var tags = = [];
+      }
 		var formatedPost = {
 			Title: DriveMetadata.properties.Title || '',
 			Description: descriptionAndPreviewimage[0] || '',
 			Link: descriptionAndPreviewimage[1] || '',
 			Tags: JSON.parse(("[\"" + DriveMetadata.properties.Tag1 + DriveMetadata.properties.Tag2 + "\"]").replace(/,/g, "\",\"")),
 			Type: DriveMetadata.properties.Type || 'noLink',
-			Flagged: likesAndFlagged[1] || false,
+			Flagged: JSON.parse(likesAndFlagged[1]) || false,
 			CreationDate: Date.parse(DriveMetadata.createdTime) || new Date(),
 			UpdateDate: Date.parse(DriveMetadata.modifiedTime) || new Date(),
 			Class: {
