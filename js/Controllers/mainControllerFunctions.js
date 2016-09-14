@@ -99,7 +99,6 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
          GoogleDriveService.loadAPIs(initiateDrive);
       });
    });
-
    function initiateDrive(loaded) {
       console.log("API loaded: " + loaded)
       if (loaded === "drive") {
@@ -137,7 +136,6 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
       //    console.log(result)
       // });
    }
-
    function handleUserPrefsSheet() {
       queue(GoogleDriveService.getSpreadsheetRange('1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0', "Sheet1!A2:B", false), function(usersList) {
          $scope.userList = usersList.result.values;
@@ -183,7 +181,6 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
       listenForURLChange(); // this also Starts getting files
       queue(GoogleDriveService.getSpreadsheetRange("1DfFUn8sgnFeLLijtKvWsd90GNcnEG6Xl5JTSeApX3bY", "Sheet1!A2:Z"), handleClassesSheet)
    }
-
    function handleClassesSheet(rawClasses) {
       var classList = [];
       var classesResult = rawClasses.result.values
@@ -292,7 +289,7 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
                      if (deDuplicationIndex[fileList.result.files[o].id] === undefined) {
                         //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
                         deDuplicationIndex[fileList.result.files[o].id] = 1; //mark this id as used with a "1".
-                        formattedFileList[fileCount] = formatPost(fileList.result.files[o]); //format and save the new post to the formatted files list array
+                        formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[o]) //formatPost(fileList.result.files[o]); //format and save the new post to the formatted files list array
                         console.log($scope.convertDriveToPost(fileList.result.files[o]))
                         fileCount++;
                      }
@@ -300,7 +297,7 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
                }
                else {
                   for (o = 0; o < fileList.result.files.length; o++) {
-                     formattedFileList[fileCount] = formatPost(fileList.result.files[o]);
+                     formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[o])//formatPost(fileList.result.files[o]);
                      console.log($scope.convertDriveToPost(fileList.result.files[o]));
                      fileCount++;
                   }
