@@ -9,7 +9,7 @@
       <!--</div>-->
       <img ng-src="{{Post.PreviewImage}}" id="header_image">
       <div class="newPostImgGradient" flex layout="column">
-         <div ng-hide="operation === 'view'" style="margin: 0 4px 0 12px; width: 100%;display: flex;">
+         <div ng-hide="operation === 'view'" style="margin: 0 4px 0 12px; width: 100%; display: flex;">
             <md-input-container md-no-float id="newPostLinkInput">
                <input id="newPostLinkInputTxt" ng-model="Post.Link" ng-model-options="{ debounce: 500 }" style="color:white" placeholder="http://" ng-change="findType()" type="text">
             </md-input-container>
@@ -54,7 +54,7 @@
       </div>
       <div class="md-dialog-content">
          <input ng-model="Post.Title" ng-readonly="operation === 'view'" class="newPostTitle md-title" placeholder="Title" md-autofocus>
-         <div id="DescriptionTxt" ng-model="Post.Description" class="newPostBody" contenteditable="operation !== 'view'"></div>
+         <div id="DescriptionTxt" ng-model="Post.Description" class="newPostBody" contenteditable="{{operation !== 'view'}}"></div>
       </div>
    </md-dialog-content>
    <md-dialog-actions ng-hide="operation === 'view'" layout="row">
