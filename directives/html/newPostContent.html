@@ -65,6 +65,7 @@
          </md-chips>
       </div>
       <div class="md-dialog-content">
+         <span>{{Post.Description}}</span>
          <input ng-model="Post.Title" ng-readonly="operation === 'view'" class="newPostTitle md-title" placeholder="Title" md-autofocus>
          <div id="DescriptionTxt" ng-model="Post.Description" class="newPostBody" html-model="true" contenteditable="{{operation !== 'view'}}" ng-bind-html="Post.Description"></div>
       </div>
