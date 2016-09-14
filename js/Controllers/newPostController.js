@@ -41,6 +41,7 @@ $scope.Post = {
 		PreviewImage: postObj.PreviewImage || '',
 		Bookmarked: postObj.Bookmarked || false,
 }
+console.log($scope.Post.Description);
 
         //temproary variables
         $scope.operation = operation;
