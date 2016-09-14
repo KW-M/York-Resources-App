@@ -58,7 +58,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	//----------------------------------------------------
 	//------------------ Converting ----------------------
 	$scope.convertDriveToPost = function(DriveMetadata) {
-		var likesAndFlagged = DriveMetadata.name.split("{]|[}");
+		var likesAndFlagged = DriveMetadata.name.split("{]|[}");//not flagged any more
 		var descriptionAndPreviewimage = DriveMetadata.description.split("{]|[}");
 		if (DriveMetadata.properties.Tag1 || DriveMetadata.properties.Tag2) {
 			var tags = JSON.parse(("[\"" + (DriveMetadata.properties.Tag1 || '') + (DriveMetadata.properties.Tag2 || '') + "\"]").replace(/,/g, "\",\""));
@@ -72,7 +72,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			Link: descriptionAndPreviewimage[1] || '',
 			Tags: tags,
 			Type: DriveMetadata.properties.Type || 'noLink',
-			Flagged: JSON.parse(likesAndFlagged[1]) || false,
+			Flagged: DriveMetadata.properties.Flagged || false,
 			CreationDate: Date.parse(DriveMetadata.createdTime) || new Date(),
 			UpdateDate: Date.parse(DriveMetadata.modifiedTime) || new Date(),
 			Class: {
@@ -99,13 +99,14 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		console.log(Post);
 		var tagString = JSON.stringify(Post.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || [];
 		var formatedDriveMetadata = {
-			name: 2+'{]|[}'+false+'{]|[}'+JSON.stringify(["worcester-moorek2018@york.org","lie2018@york.org"]),
+			name: 2+'{]|[}'+JSON.stringify(["worcester-moorek2018@york.org","lie2018@york.org"]),
 			description: Post.Description + '{]|[}' + Post.Link + '{]|[}' + Post.PreviewImage,
 			createdTime: Post.CreationDate.toRFC3339UTCString(),
 			modifiedTime: Post.UpdateDate.toRFC3339UTCString(),
 			starred: Post.Bookmarked,
 			properties: {
 				Title: Post.Title,
+				Flagged: Post.Flagged,
 				Type: Post.Type,
 				AttachmentId: Post.AttachmentId,
 				Tag1: tagString[0],
