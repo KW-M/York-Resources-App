@@ -25,16 +25,16 @@ $scope.Post = {
 		Flagged: postObj.Flagged || false,
 		CreationDate: postObj.CreationDate || new Date(),
 		UpdateDate: postObj.UpdateDate || new Date(),
-		Class: {
-			Name: postObj.Class.Name || '',
-			Catagory: postObj.Class.Catagory || '',
-			Color: postObj.Class.Color || '#ffffff',
+		Class: postObj.Class || {
+			Name: '',
+			Catagory: '',
+			Color: '#ffffff',
 		},
-		Creator: {
-			ClassOf: postObj.Creator.ClassOf || '',
-			Email: postObj.Creator.Email || '',
-			Me: postObj.Creator.Me || null,
-			Name: postObj.Creator.Name || '',
+		Creator: postObj.Creator || {
+			ClassOf: '',
+			Email: '',
+			Me: null,
+			Name:  '',
 		},
 		Id: postObj.Id || '',
 		AttachmentId: postObj.AttachmentId || '',
