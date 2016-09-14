@@ -1,7 +1,6 @@
     /* we don't define the "new post controller" here because it was alredy
                                                            defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
-        console.log(postObj);
         //database variables
         // $scope.Post.Type = 'noLink';
         // $scope.Flagged = false;
