@@ -14,7 +14,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
 
    var deDuplicationIndex = {};
    var classPageTokenSelectionIndex = {};
-   var firstFiles = false;
+   var LoadingFiles = null;
 
    $scope.previousSearch = undefined;
    $scope.searchPlaceholder = 'Search';
@@ -76,8 +76,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    };
 
    function listenForURLChange() {
-      console.log('ilocation change')
-      
+      console.log('ilocation change');
       $rootScope.$on('$locationChangeSuccess', function(event){
          onLocationChange()
       });
@@ -277,7 +276,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    //----------------------------------------------------
    //--------- loading and filtering posts --------------
    function getFiles() {
-      firstFiles = true;
+      LoadingFiles = true;
       var fileCount = 0;
       var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
@@ -411,6 +410,8 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          }
          $timeout(function() {
             $scope.visiblePosts = $scope.searchPosts;
+            LoadingFiles = false;
+            document.dispatchEvent(new window.Event('filesLoaded'));
          })
       }
       else {
@@ -421,9 +422,8 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             }
             $timeout(function() {
                $scope.visiblePosts = $scope.allPosts;
-               log({
-                  visiblePosts: $scope.visiblePosts
-               }, true);
+               LoadingFiles = false;
+               document.dispatchEvent(new window.Event('filesLoaded'));
             })
          }
          else if ($scope.queryParams.classpath === 'flagged') {
@@ -433,9 +433,8 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             }
             $timeout(function() {
                $scope.visiblePosts = $scope.flaggedPosts;
-               log({
-                  visiblePosts: $scope.visiblePosts
-               }, true);
+               LoadingFiles = false;
+               document.dispatchEvent(new window.Event('filesLoaded'));
             })
          }
          else if ($scope.queryParams.classpath === 'my-posts') {
@@ -446,9 +445,8 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             var filteredPosts = filterPosts($scope.allPosts.concat($scope.flaggedPosts));
             $timeout(function() {
                $scope.visiblePosts = filteredPosts;
-               log({
-                  visiblePosts: $scope.visiblePosts
-               }, true);
+               LoadingFiles = false;
+               document.dispatchEvent(new window.Event('filesLoaded'));
             });
          }
          else {
@@ -459,9 +457,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             var filteredPosts = filterPosts($scope.allPosts.concat($scope.flaggedPosts));
             $timeout(function() {
                $scope.visiblePosts = filteredPosts;
-               log({
-                  visiblePosts: $scope.visiblePosts
-               }, true);
             });
          }
       }
