@@ -1,7 +1,7 @@
 /*global app*/ /*global angular*/ /*global gapi*/ /*global google*/ /*global queue*/ /*global subControllerFunctions*/
 app.controller('ApplicationController', controllerFunction)
    //controllerFunction.$inject(['$scope', '$mdDialog', '$window', '$timeout', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', 'angularGridInstance'])
-function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, angularGridInstance) {
+function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, angularGridInstance) {
    var self = this;
    var content_container = document.getElementById("content_container");
    var loading_spinner = document.getElementById("loading_spinner");
@@ -78,8 +78,8 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
    function listenForURLChange() {
       console.log('ilocation change')
       
-      $scope.$on('$routeUpdate', function(){
-         console.log('route update');
+      $rootScope.$on('$locationChangeSuccess', function(event){
+         onLocationChange()
       });
    }
 
