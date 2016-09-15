@@ -76,11 +76,13 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
    };
 
    function listenForURLChange() {
-      onLocationChange();
+      console.log('ilocation change')
+      
       $scope.$on('$locationChangeSuccess', onLocationChange());
    }
 
    function onLocationChange() {
+      console.log('location change')
       $scope.queryParams = $location.search();
       $scope.queryParams.classpath = $location.path().replace(/\//g, "");
       $scope.queryParams.id = $location.hash();
