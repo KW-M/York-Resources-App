@@ -276,7 +276,11 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    //----------------------------------------------------
    //--------- loading and filtering posts --------------
    function getFiles() {
+      if (LoadingFiles === true) {
+         document.addEventListener('filesLoaded', getFiles());
+      } else {
       LoadingFiles = true;
+      removeEventListener()
       var fileCount = 0;
       var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
@@ -342,6 +346,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       else {
          loading_spinner.style.display = 'none';
          sortPostsByType();
+      }
       }
    }
 
@@ -457,6 +462,8 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             var filteredPosts = filterPosts($scope.allPosts.concat($scope.flaggedPosts));
             $timeout(function() {
                $scope.visiblePosts = filteredPosts;
+               LoadingFiles = false;
+               document.dispatchEvent(new window.Event('filesLoaded'));
             });
          }
       }
