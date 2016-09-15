@@ -78,7 +78,9 @@ function controllerFunction($scope, $mdDialog, $window, $timeout, $sce, $mdSiden
    function listenForURLChange() {
       console.log('ilocation change')
       
-      $scope.$on('$locationChangeSuccess', onLocationChange());
+      $scope.$on('$routeUpdate', function(){
+         console.log('route update');
+      });
    }
 
    function onLocationChange() {
