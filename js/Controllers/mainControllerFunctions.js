@@ -78,7 +78,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    function listenForURLChange() {
       console.log('ilocation change');
       onLocationChange();
-      $rootScope.$on('$locationChangeSuccess', function(event){
+      $rootScope.$on('$locationChangeSuccess', function(event) {
          onLocationChange()
       });
    }
@@ -103,6 +103,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          GoogleDriveService.loadAPIs(initiateDrive);
       });
    });
+
    function initiateDrive(loaded) {
       console.log("API loaded: " + loaded)
       if (loaded === "drive") {
@@ -140,6 +141,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       //    console.log(result)
       // });
    }
+
    function handleUserPrefsSheet() {
       queue(GoogleDriveService.getSpreadsheetRange('1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0', "Sheet1!A2:B", false), function(usersList) {
          $scope.userList = usersList.result.values;
@@ -185,6 +187,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       listenForURLChange(); // this also Starts getting files
       queue(GoogleDriveService.getSpreadsheetRange("1DfFUn8sgnFeLLijtKvWsd90GNcnEG6Xl5JTSeApX3bY", "Sheet1!A2:Z"), handleClassesSheet)
    }
+
    function handleClassesSheet(rawClasses) {
       var classList = [];
       var classesResult = rawClasses.result.values
@@ -277,11 +280,12 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    //----------------------------------------------------
    //--------- loading and filtering posts --------------
    function getFiles() {
-      if (LoadingFiles === true) {
-         console.log('waiting')
-         // document.addEventListener('filesLoaded', getFiles());
-      } else {
-      removeEventListener('filesLoaded', getFiles())
+      // if (LoadingFiles === true) {
+      //    console.log('waiting')
+      //    document.addEventListener('filesLoaded', getFiles());
+      // }
+      // else {
+      //    removeEventListener('filesLoaded', getFiles())
       console.log('startingLoadingFiles')
       LoadingFiles = true;
       var fileCount = 0;
@@ -306,7 +310,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                }
                else {
                   for (o = 0; o < fileList.result.files.length; o++) {
-                     formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[o])//formatPost(fileList.result.files[o]);
+                     formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[o]) //formatPost(fileList.result.files[o]);
                      console.log($scope.convertDriveToPost(fileList.result.files[o]));
                      fileCount++;
                   }
@@ -350,7 +354,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          loading_spinner.style.display = 'none';
          sortPostsByType();
       }
-      }
+
    }
 
    function formatPost(unformatedFile) {
@@ -419,7 +423,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          $timeout(function() {
             $scope.visiblePosts = $scope.searchPosts;
             LoadingFiles = false;
-                        console.log('endingLoadingFiles')
+            console.log('endingLoadingFiles')
             document.dispatchEvent(new window.Event('filesLoaded'));
 
          })
@@ -433,7 +437,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             $timeout(function() {
                $scope.visiblePosts = $scope.allPosts;
                LoadingFiles = false;
-                              console.log('EndingLoadingFiles')
+               console.log('EndingLoadingFiles')
                document.dispatchEvent(new window.Event('filesLoaded'));
 
             })
@@ -446,7 +450,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             $timeout(function() {
                $scope.visiblePosts = $scope.flaggedPosts;
                LoadingFiles = false;
-                              console.log('EndingLoadingFiles')
+               console.log('EndingLoadingFiles')
                document.dispatchEvent(new window.Event('filesLoaded'));
             })
          }
@@ -459,7 +463,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             $timeout(function() {
                $scope.visiblePosts = filteredPosts;
                LoadingFiles = false;
-                              console.log('EndingLoadingFiles')
+               console.log('EndingLoadingFiles')
                document.dispatchEvent(new window.Event('filesLoaded'));
             });
          }
@@ -472,7 +476,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             $timeout(function() {
                $scope.visiblePosts = filteredPosts;
                LoadingFiles = false;
-                              console.log('EndingLoadingFiles')
+               console.log('EndingLoadingFiles')
                document.dispatchEvent(new window.Event('filesLoaded'));
             });
          }
