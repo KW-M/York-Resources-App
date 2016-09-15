@@ -77,6 +77,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
 
    function listenForURLChange() {
       console.log('ilocation change');
+      onLocationChange();
       $rootScope.$on('$locationChangeSuccess', function(event){
          onLocationChange()
       });
@@ -277,10 +278,12 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    //--------- loading and filtering posts --------------
    function getFiles() {
       if (LoadingFiles === true) {
-         document.addEventListener('filesLoaded', getFiles());
+         console.log('waiting')
+         // document.addEventListener('filesLoaded', getFiles());
       } else {
+      removeEventListener('filesLoaded', getFiles())
+      console.log('startingLoadingFiles')
       LoadingFiles = true;
-      removeEventListener()
       var fileCount = 0;
       var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
@@ -416,7 +419,9 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          $timeout(function() {
             $scope.visiblePosts = $scope.searchPosts;
             LoadingFiles = false;
+                        console.log('endingLoadingFiles')
             document.dispatchEvent(new window.Event('filesLoaded'));
+
          })
       }
       else {
@@ -428,7 +433,9 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             $timeout(function() {
                $scope.visiblePosts = $scope.allPosts;
                LoadingFiles = false;
+                              console.log('EndingLoadingFiles')
                document.dispatchEvent(new window.Event('filesLoaded'));
+
             })
          }
          else if ($scope.queryParams.classpath === 'flagged') {
@@ -439,6 +446,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             $timeout(function() {
                $scope.visiblePosts = $scope.flaggedPosts;
                LoadingFiles = false;
+                              console.log('EndingLoadingFiles')
                document.dispatchEvent(new window.Event('filesLoaded'));
             })
          }
@@ -451,6 +459,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             $timeout(function() {
                $scope.visiblePosts = filteredPosts;
                LoadingFiles = false;
+                              console.log('EndingLoadingFiles')
                document.dispatchEvent(new window.Event('filesLoaded'));
             });
          }
@@ -463,6 +472,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             $timeout(function() {
                $scope.visiblePosts = filteredPosts;
                LoadingFiles = false;
+                              console.log('EndingLoadingFiles')
                document.dispatchEvent(new window.Event('filesLoaded'));
             });
          }
