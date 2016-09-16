@@ -455,7 +455,12 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
 
    function filterPosts(inputSet) {
       return inputSet.filter(function(post) {
-         var Flagged = post.Flagged === $scope.queryParams.flagged || post.Flagged;
+         if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
+            var Flagged = post.Flagged === $scope.queryParams.flagged || post.Flagged;
+         }
+         else {
+            var Flagged = true;
+         }
          if ($scope.queryParams.classpath !== null && $scope.queryParams.classpath !== undefined && $scope.queryParams.classpath !== 'my-posts' && $scope.queryParams.classpath !== 'my-bookmarks' && $scope.queryParams.classpath !== 'all-posts' && $scope.queryParams.classpath !== 'flagged') {
             var Class = post.Class.Name === $scope.queryParams.classpath;
          }
