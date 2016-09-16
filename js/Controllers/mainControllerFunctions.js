@@ -326,10 +326,10 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                else {
                   for (o = 0; o < fileList.result.files.length; o++) {
                      formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[o]) //formatPost(fileList.result.files[o]);
-                     console.log($scope.convertDriveToPost(fileList.result.files[o]));
                      fileCount++;
                   }
                }
+               console.log(formattedFileList)
                if (formattedFileList.length !== 0) {
                   if (fileList.result.nextPageToken !== undefined) {
                      //if we haven't reached the end of our search:
