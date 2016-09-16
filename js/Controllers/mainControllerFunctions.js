@@ -41,6 +41,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    $scope.queryPropertyString = '';
    $scope.queryParams = {
       q: undefined, //undefined to make search popunder show with no text in  field
+      flagged: 
       type: "any",
       classpath: 'all-posts',
       creatorEmail: "any",
@@ -54,14 +55,12 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    //----------------------------------------------------
    //------------------- Routing ------------------------
    $scope.gotoRoute = function(query) {
-
-         tempQuery.q = query.q || $scope.queryParams.q;
       if (query.classPath) {
          $scope.toggleSidebar(true);
       }
       $location.path(query.classpath);
       $location.hash(query.id || null);
-      $location.search(tempQuery || null);
+      $location.search({q: query.q || $scope.queryParams.q} || null);
    };
 
    function listenForURLChange() {
@@ -73,13 +72,28 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    }
 
    function onLocationChange() {
-      console.log('location change')
       $scope.queryParams = $location.search();
       $scope.queryParams.classpath = $location.path().replace(/\//g, "");
       $scope.queryParams.id = $location.hash();
       if ($scope.queryParams.q !== $scope.previousSearch) {
          $scope.visiblePosts = [];
          $scope.previousSearch = $scope.queryParams.q
+      }
+      if ($scope.queryParams.classpath === 'all-posts') {
+         $scope.searchPlaceholder = 'Search'
+         $scope.queryParams = flagged
+      }
+      else if ($scope.queryParams.classpath === 'my-posts') {
+         $scope.searchPlaceholder = 'Search My Posts'
+      }
+      else if ($scope.queryParams.classpath === 'my-bookmarks') {
+         $scope.searchPlaceholder = 'Search My Bookmarks'
+      }
+      else if ($scope.queryParams.classpath === 'flagged') {
+         $scope.searchPlaceholder = 'Search Flagged Posts'
+      }
+      else {
+         $scope.searchPlaceholder = 'Search Within ' + $scope.queryParams.classpath;
       }
       generateQueryString();
       getFiles();
