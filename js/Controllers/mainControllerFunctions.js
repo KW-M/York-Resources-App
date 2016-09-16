@@ -455,19 +455,25 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    function filterPosts(inputSet) {
       return inputSet.filter(function(post) {
          var Flagged = post.Flagged === $scope.queryParams.flagged || post.Flagged;
-         if ($scope.queryParams.class !== "any" && $scope.queryParams.class !== undefined) {
-            var Class = post.Class.Name === $scope.queryParams.class;
+         if ($scope.queryParams.classpath !== null && $scope.queryParams.classpath !== undefined) {
+            var Class = post.Class.Name === $scope.queryParams.classpath;
          }
          else {
             var Class = true;
          }
-         if ($scope.queryParams.type !== "any" && $scope.queryParams.type !== undefined) {
+         if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) {
             var Type = post.Type === $scope.queryParams.type;
          }
          else {
             var Type = true;
          }
-         if ($scope.queryParams.creatorEmail !== "any" && $scope.queryParams.creatorEmail !== undefined) {
+         if ($scope.queryParams.bookmarked !== null && $scope.queryParams.bookmarked !== undefined) {
+            var Bookmarked = post.Bookmarked === $scope.queryParams.bookmarked;
+         }
+         else {
+            var Bookmarked = true;
+         }
+         if ($scope.queryParams.creatorEmail !== null && $scope.queryParams.creatorEmail !== undefined) {
             var Creator = post.Creator.Email === $scope.queryParams.creatorEmail;
          }
          else {
@@ -477,7 +483,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             filteredPost: post,
             Flagged: Flagged,
             Class: Class,
-            Type,
+            Type: Type,
             Type,
             Creator: Creator,
          });
