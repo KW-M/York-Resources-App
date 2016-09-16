@@ -313,6 +313,14 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          loading_spinner.style.display = 'inherit'; //show the user that were loading results
          queue(GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function(fileList) {
             console.log(fileList)
+               if (fileList.result.nextPageToken !== undefined) {
+                     //if we haven't reached the end of our search:
+                     classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken;
+               }
+               else {
+                     //if we have reached the end of our search:
+                     classPageTokenSelectionIndex[$scope.queryPropertyString] = "end"
+                  }
             if (fileList.result.files.length > 0) {
                if (!$scope.queryParams.q) {
                   for (o = 0; o < fileList.result.files.length; o++) {
@@ -332,14 +340,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                }
                console.log(formattedFileList)
                if (formattedFileList.length !== 0) {
-                  if (fileList.result.nextPageToken !== undefined) {
-                     //if we haven't reached the end of our search:
-                     classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken;
-                  }
-                  else {
-                     //if we have reached the end of our search:
-                     classPageTokenSelectionIndex[$scope.queryPropertyString] = "end"
-                  }
                   sortPostsByType(formattedFileList);
                   log({
                      allPosts: $scope.allPosts,
