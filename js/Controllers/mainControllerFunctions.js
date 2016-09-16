@@ -9,7 +9,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
 
    $scope.allPosts = [];
    $scope.searchPosts = [];
-   $scope.flaggedPosts = [];
    $scope.visiblePosts = [];
 
    var deDuplicationIndex = {};
@@ -281,14 +280,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    //--------- loading and filtering posts --------------
    
    function getFiles() {
-      // if (LoadingFiles === true) {
-      //    console.log('waiting')
-      //    document.addEventListener('filesLoaded', getFiles());
-      // }
-      // else {
-      //    removeEventListener('filesLoaded', getFiles())
-      console.log('startingLoadingFiles')
-      LoadingFiles = true;
+      LoadingFiles = true; 
       var fileCount = 0;
       var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
@@ -297,7 +289,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          queue(GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function(fileList) {
             console.log(fileList)
             if (fileList.result.files.length > 0) {
-               //format every file:
                if (!$scope.queryParams.q) {
                   for (o = 0; o < fileList.result.files.length; o++) {
                      if (deDuplicationIndex[fileList.result.files[o].id] === undefined) {
@@ -545,7 +536,15 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    }
 
    $scope.refresh = function(){
-      getFiles();  
+      if (LoadingFiles === true) {
+         console.log('waiting')
+         document.addEventListener('filesLoaded', getFiles());
+      }
+      else {
+         removeEventListener('filesLoaded', getFiles())
+         console.log('startingLoadingFiles')
+         getFiles()
+      }
    };
 
    //----------------------------------------------------
