@@ -88,7 +88,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       $scope.queryParams.classpath = $location.path().replace(/\//g, "");
       $scope.queryParams.id = $location.hash();
       if ($scope.queryParams.q !== $scope.previousSearch) {
-         $scope.visiblePosts = []
+         $scope.visiblePosts = [];
          $scope.previousSearch = $scope.queryParams.q
       }
       generateQueryString();
@@ -417,8 +417,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          }
          else {
             if ($scope.queryParams.classpath === 'all-posts') {
-               $scope.searchPlaceholder = 'Search'
-                  $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+               $scope.allPosts = $scope.allPosts.concat(formattedFileList);
                $timeout(function() {
                   $scope.visiblePosts = $scope.allPosts;
                   LoadingFiles = false;
@@ -428,7 +427,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                })
             }
             else if ($scope.queryParams.classpath === 'flagged') {
-               $scope.searchPlaceholder = 'Search Flagged Posts'
                if (formattedFileList !== undefined) {
                   $scope.flaggedPosts = $scope.flaggedPosts.concat(formattedFileList);
                }
@@ -505,18 +503,23 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    function generateQueryString() {
       if ($scope.queryParams.classpath === 'all-posts') {
          var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false and properties has { key='Flagged' and value='false' }"
+         $scope.searchPlaceholder = 'Search'
       }
       else if ($scope.queryParams.classpath === 'my-posts') {
          var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false"
+         $scope.searchPlaceholder = 'Search My Posts'
       }
       else if ($scope.queryParams.classpath === 'my-bookmarks') {
          var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false"
+         $scope.searchPlaceholder = 'Search My Bookmarks'
       }
       else if ($scope.queryParams.classpath === 'flagged') {
          var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false and properties has { key='Flagged' and value='true' }"
+         $scope.searchPlaceholder = 'Search Flagged Posts'
       }
       else {
          var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false and properties has { key='Flagged' and value='false' } and properties has { key='ClassName' and value='" + $scope.queryParams.classpath + "' }"
+         $scope.searchPlaceholder = 'Search Within ' + $scope.queryParams.classpath;
       }
       if ($scope.queryParams.q) {
          query = query + " and fullText contains '" + $scope.queryParams.q + "'";
