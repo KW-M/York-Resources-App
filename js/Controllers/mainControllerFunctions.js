@@ -279,6 +279,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
 
    //----------------------------------------------------
    //--------- loading and filtering posts --------------
+   
    function getFiles() {
       // if (LoadingFiles === true) {
       //    console.log('waiting')
@@ -543,6 +544,8 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       }
       $scope.queryPropertyString = query;
    }
+
+   $scope.getFiles = getFiles();
 
    //----------------------------------------------------
    //---------------- Event Watchers --------------------

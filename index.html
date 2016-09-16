@@ -65,13 +65,13 @@
         <!-------------------------------------------------------->
         <!-------------------------------------------------------->
 
-        <div class="horizontalContainer">
+        <div class="horizontalContainer"  ng-cloak>
             <!---------------------------------------------------->
-            <md-sidenav side-nav-insides class="ng-cloak side-nav md-sidenav-left md-whiteframe-z2 sidenav-overlay" md-component-id="sidenav_overlay"></md-sidenav>
-            <side-nav-insides class="ng-cloak side-nav md-sidenav-left sidenav-inline" ng-class="{'side-nav-open' : globals.sidenavIsOpen === true && $mdMedia('gt-sm'), 'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}"></side-nav-insides>
+            <md-sidenav side-nav-insides class="side-nav md-sidenav-left md-whiteframe-z2 sidenav-overlay" md-component-id="sidenav_overlay"></md-sidenav>
+            <side-nav-insides class="side-nav md-sidenav-left sidenav-inline" ng-class="{'side-nav-open' : globals.sidenavIsOpen === true && $mdMedia('gt-sm'), 'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}"></side-nav-insides>
             <!----- The content, ie posts, resources, etc. ------->
             <div id="content_container" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'gt-sm': $mdMedia('gt-sm')}" class="">
-                <span ng-show="devMode" ng-cloak>
+                <span ng-show="devMode">
                         <md-button ng-click="consoleLog(myInfo, true)">
                             Log My Info
                         </md-button>
@@ -90,7 +90,7 @@
                 </span>
                 <add-bar-top></add-bar-top>
                 <add-lower-button></add-lower-button>
-                <div angular-grid="visiblePosts" id="postsGrid" ag-options="angularGridOptions" ag-id="posts" ng-cloak>
+                <div angular-grid="visiblePosts" id="postsGrid" ag-options="angularGridOptions" ag-id="posts">
                     <md-card class="post-card raise-on-hover" ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}">
                         <md-button style="position: absolute; top: -14px; right: -6px; z-index: 1000" class="md-icon-button md-accent" ng-click="Post.Bookmarked !== Post.Bookmarked">
                             <!--<md-icon class="postBookmarkIcon" ng-hide="Post.Bookmarked === false" style="text-shadow: 0px 1px 5px rgba(0,0,0,0.6);">bookmark</md-icon>-->
@@ -190,7 +190,7 @@
         <script src="js/Controllers/subControllerFunctions.js"></script>
         <script src="js/Controllers/newPostController.js"></script>
 
-        <canvas style="display:none;position: absolute;pointer-events: none;" width="400" height="260" id="image_renderer">
+        <!--<canvas style="display:none;position: absolute;pointer-events: none;" width="400" height="260" id="image_renderer">-->
     </body>
     <link rel="stylesheet" href="css/toolbarTop.css" />
     <link rel="stylesheet" href="css/searchbar.css" />
