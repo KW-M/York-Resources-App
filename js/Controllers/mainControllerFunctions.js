@@ -484,10 +484,10 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             Flagged: Flagged,
             Class: Class,
             Type: Type,
-            Type,
+            Bookmarked: Bookmarked ,
             Creator: Creator,
          });
-         return Flagged && Class && Type && Creator;
+         return Flagged && Class && Type && Creator && Bookmarked;
       });
    }
 
