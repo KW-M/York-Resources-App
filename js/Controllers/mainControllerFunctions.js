@@ -41,7 +41,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    $scope.queryPropertyString = '';
    $scope.queryParams = {
       q: undefined, //undefined to make search popunder show with no text in  field
-      flagged: 
+      flagged: false,
       type: "any",
       classpath: 'all-posts',
       creatorEmail: "any",
@@ -81,7 +81,9 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       }
       if ($scope.queryParams.classpath === 'all-posts') {
          $scope.searchPlaceholder = 'Search'
-         $scope.queryParams = flagged
+         $scope.queryParams.flagged = false
+         $scope.queryParams.type = null,
+         creatorEmail: null,
       }
       else if ($scope.queryParams.classpath === 'my-posts') {
          $scope.searchPlaceholder = 'Search My Posts'
