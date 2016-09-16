@@ -56,12 +56,13 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    //----------------------------------------------------
    //------------------- Routing ------------------------
    $scope.gotoRoute = function(query) {
+      console.log(query)
       if (query.classPath) {
          $scope.toggleSidebar(true);
          $location.search({
             q: null
          });
-         $location.path(query.classpath);
+         $location.path(query.classath);
       }
       else {
          $location.search({
@@ -455,7 +456,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    function filterPosts(inputSet) {
       return inputSet.filter(function(post) {
          var Flagged = post.Flagged === $scope.queryParams.flagged || post.Flagged;
-         if ($scope.queryParams.classpath !== null && $scope.queryParams.classpath !== undefined) {
+         if ($scope.queryParams.classpath !== null && $scope.queryParams.classpath !== undefined && $scope.queryParams.classpath !== 'my-posts' && $scope.queryParams.classpath !== 'my-bookmarks' && $scope.queryParams.classpath !== 'all-posts' && $scope.queryParams.classpath !== 'flagged') {
             var Class = post.Class.Name === $scope.queryParams.classpath;
          }
          else {
