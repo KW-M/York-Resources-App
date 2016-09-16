@@ -56,13 +56,12 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    //----------------------------------------------------
    //------------------- Routing ------------------------
    $scope.gotoRoute = function(query) {
-      console.log(query)
       if (query.classPath) {
          $scope.toggleSidebar(true);
          $location.search({
             q: null
          });
-         $location.path(query.classath);
+         $location.path(query.classPath);
       }
       else {
          $location.search({
