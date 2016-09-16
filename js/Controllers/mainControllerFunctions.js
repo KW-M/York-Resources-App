@@ -89,25 +89,36 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             $scope.searchPlaceholder = 'Search'
             $scope.queryParams.flagged = false
             $scope.queryParams.type = null
+            $scope.queryParams.bookmarked = null
             $scope.queryParams.creatorEmail = null
          }
          else if ($scope.queryParams.classpath === 'my-posts') {
             $scope.searchPlaceholder = 'Search My Posts'
             $scope.queryParams.flagged = null
             $scope.queryParams.type = null
+            $scope.queryParams.bookmarked = null
             $scope.queryParams.creatorEmail = $scope.myInfo.Email;
          }
          else if ($scope.queryParams.classpath === 'my-bookmarks') {
             $scope.searchPlaceholder = 'Search My Bookmarks'
-            $scope.queryParams.flagged = false
+            $scope.queryParams.flagged = null
             $scope.queryParams.type = null
+            $scope.queryParams.bookmarked = true
             $scope.queryParams.creatorEmail = null
          }
          else if ($scope.queryParams.classpath === 'flagged') {
             $scope.searchPlaceholder = 'Search Flagged Posts'
+            $scope.queryParams.flagged = true
+            $scope.queryParams.type = null
+            $scope.queryParams.bookmarked = null
+            $scope.queryParams.creatorEmail = null
          }
          else {
             $scope.searchPlaceholder = 'Search Within ' + $scope.queryParams.classpath;
+            $scope.queryParams.flagged = false
+            $scope.queryParams.type = null
+            $scope.queryParams.bookmarked = null
+            $scope.queryParams.creatorEmail = null
          }
       }
       generateQueryString();
