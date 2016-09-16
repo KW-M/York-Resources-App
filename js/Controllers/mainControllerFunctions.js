@@ -85,18 +85,17 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          }
       }
       else {
-         if ($scope.queryParams.classpath === 'all-posts') {
-            $scope.searchPlaceholder = 'Search'
-            $scope.queryParams.flagged = false
-            $scope.queryParams.type = null
-            $scope.queryParams.bookmarked = null
-            $scope.queryParams.creatorEmail = null
-         }
-         else if ($scope.queryParams.classpath === 'my-posts') {
-            $scope.searchPlaceholder = 'Search My Posts'
             $scope.queryParams.flagged = null
             $scope.queryParams.type = null
             $scope.queryParams.bookmarked = null
+            $scope.queryParams.creatorEmail = null
+      }
+         if ($scope.queryParams.classpath === 'all-posts') {
+            $scope.searchPlaceholder = 'Search'
+            $scope.queryParams.flagged = false;
+         }
+         else if ($scope.queryParams.classpath === 'my-posts') {
+            $scope.searchPlaceholder = 'Search My Posts'
             $scope.queryParams.creatorEmail = $scope.myInfo.Email;
          }
          else if ($scope.queryParams.classpath === 'my-bookmarks') {
