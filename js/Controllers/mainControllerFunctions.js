@@ -54,18 +54,8 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    //----------------------------------------------------
    //------------------- Routing ------------------------
    $scope.gotoRoute = function(query) {
-      var tempQuery = {}
-      if (query.q !== null && query.q !== undefined && query.q !== '') {
+
          tempQuery.q = query.q || $scope.queryParams.q;
-         tempQuery.type = query.type || $scope.queryParams.type;
-         tempQuery.creatorEmail = query.creatorEmail || $scope.queryParams.creatorEmail;
-      }
-      else {
-         tempQuery.q = null;
-         tempQuery.flagged = null;
-         tempQuery.type = null;
-         tempQuery.creatorEmail = null;
-      }
       if (query.classPath) {
          $scope.toggleSidebar(true);
       }
