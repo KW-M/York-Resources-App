@@ -58,12 +58,12 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    $scope.gotoRoute = function(query) {
       if (query.classPath) {
          $scope.toggleSidebar(true);
+         $location.search({q: null});
+         $location.path(query.classpath);
+      } else {
+         $location.search({q: query.q || $scope.queryParams.q});
       }
-      $location.path(query.classpath);
       $location.hash(query.id || null);
-      $location.search({
-         q: query.q || $scope.queryParams.q
-      } || null);
    };
 
    function listenForURLChange() {
@@ -75,8 +75,8 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    }
 
    function onLocationChange() {
-      $scope.queryParams = $location.search();
-      $scope.queryParams.classpath = $location.path().replace(/\//g, "");
+      $scope.queryParams.q = $location.search().q || null;
+      $scope.queryParams.classpath = $location.path().replace(/\//g, "") || 'all-posts';
       $scope.queryParams.id = $location.hash();
       if ($scope.queryParams.q !== null) {
          if ($scope.queryParams.q !== $scope.previousSearch) {
