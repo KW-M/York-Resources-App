@@ -126,6 +126,7 @@ button.md-icon-button.md #flag_button {
 #like_thumb_button {
     min-width: 1px;
     border-radius: 100px;
+    margin: 0;
     padding: 4px 8px 0px 8px;
 }
 

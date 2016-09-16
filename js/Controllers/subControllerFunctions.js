@@ -72,7 +72,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			Link: descriptionAndPreviewimage[1] || '',
 			Tags: tags,
 			Type: DriveMetadata.properties.Type || 'noLink',
-			Flagged: DriveMetadata.properties.Flagged || false,
+			Flagged: JSON.parse(DriveMetadata.properties.Flagged) || false,
 			CreationDate: Date.parse(DriveMetadata.createdTime) || new Date(),
 			UpdateDate: Date.parse(DriveMetadata.modifiedTime) || new Date(),
 			Class: {
