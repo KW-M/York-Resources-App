@@ -308,6 +308,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       var fileCount = 0;
       var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
+      console.log({pageIndex:classPageTokenSelectionIndex,string:$scope.queryPropertyString})
       if (nextPageToken !== "end") {
          loading_spinner.style.display = 'inherit'; //show the user that were loading results
          queue(GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function(fileList) {
