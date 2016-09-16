@@ -71,7 +71,7 @@
             <side-nav-insides class="ng-cloak side-nav md-sidenav-left sidenav-inline" ng-class="{'side-nav-open' : globals.sidenavIsOpen === true && $mdMedia('gt-sm'), 'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}"></side-nav-insides>
             <!----- The content, ie posts, resources, etc. ------->
             <div id="content_container" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'gt-sm': $mdMedia('gt-sm')}" class="">
-                <span ng-show="devMode">
+                <span ng-show="devMode" ng-cloak>
                         <md-button ng-click="consoleLog(myInfo, true)">
                             Log My Info
                         </md-button>
@@ -90,7 +90,7 @@
                 </span>
                 <add-bar-top></add-bar-top>
                 <add-lower-button></add-lower-button>
-                <div angular-grid="visiblePosts" id="postsGrid" ag-options="angularGridOptions" ag-id="posts">
+                <div angular-grid="visiblePosts" id="postsGrid" ag-options="angularGridOptions" ag-id="posts" ng-cloak>
                     <md-card class="post-card raise-on-hover" ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}">
                         <md-button style="position: absolute; top: -14px; right: -6px; z-index: 1000" class="md-icon-button md-accent" ng-click="Post.Bookmarked !== Post.Bookmarked">
                             <!--<md-icon class="postBookmarkIcon" ng-hide="Post.Bookmarked === false" style="text-shadow: 0px 1px 5px rgba(0,0,0,0.6);">bookmark</md-icon>-->
@@ -116,7 +116,7 @@
                         </div>
                         <p class="post-card-title md-title">{{::Post.Title}}</p>
                         <p class="post-card-creator md-subhead"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{Post.Creator.ClassOf}})</span></p>
-                        <p id="post_card_description" class="md-body-1" show-more-on-overflow ng-bind-html="Post.Description"></p>
+                        <p id="post_card_description" class="md-body-1" show-more-on-overflow></p>
                         <div class="post-card-description-gradient" ng-style="{'background-image': 'linear-gradient(rgba(0, 0, 0, 0) 0%, '+Post.Class.Color+' 85%'}" ng-click="::newPost(Post,'view')"><md-icon style="margin-bottom:2px">keyboard_arrow_down</md-icon></div>
                         <md-card-actions layout="row" layout-align="start center">
                             <md-button id="like_thumb_button" aria-label="Like">
@@ -127,7 +127,7 @@
                             <md-button class="md-icon-button" id="flag_button" area-label="Flag" style="margin:0" ng-hide="::Post.Creator.Email === myInfo.Email">
                                 <md-icon>flag</md-icon>
                             </md-button>
-                            <md-button class="md-icon-button" id="flag_button" area-label="Flag" style="margin:0" ng-show="::Post.Flagged === 'true'" ng-click="::unFlagPost($event,Post,$index)">
+                            <md-button class="md-icon-button" id="flag_button" area-label="Flag" style="margin:0" ng-show="::Post.Flagged === true" ng-click="::unFlagPost($event,Post,$index)">
                                 <md-icon class="md-warn">flag</md-icon>
                             </md-button>
                             <md-menu md-position-mode="target" md-offset="7 0" style="padding:0px">
@@ -135,7 +135,7 @@
                                     <md-icon>more_vert</md-icon>
                                 </md-button>
                                 <md-menu-content>
-                                    <md-menu-item ng-hide="::Post.Flagged === 'true'">
+                                    <md-menu-item ng-hide="::Post.Flagged === true">
                                         <md-button ng-click="::flagPost($event,Post,$index)">
                                             <md-icon>flag</md-icon>Flag</md-button>
                                     </md-menu-item>
