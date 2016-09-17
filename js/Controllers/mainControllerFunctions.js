@@ -116,7 +116,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          $scope.queryParams.flagged = false
       }
       if ($scope.queryParams.q === null) {
-         sortPostsByType([]);
+         sortPostsByType();
       }
       generateQueryString();
       getFiles();
@@ -303,7 +303,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       }
    }
 
-//----------------------------------------------------
+   //----------------------------------------------------
    //--------- loading and filtering posts --------------
 
    function getFiles() {
@@ -311,19 +311,22 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       var fileCount = 0;
       var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
-      console.log({pageIndex:classPageTokenSelectionIndex,string:$scope.queryPropertyString})
+      console.log({
+         pageIndex: classPageTokenSelectionIndex,
+         string: $scope.queryPropertyString
+      })
       if (nextPageToken !== "end") {
          loading_spinner.style.display = 'inherit'; //show the user that were loading results
          queue(GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function(fileList) {
             console.log(fileList)
-               if (fileList.result.nextPageToken !== undefined) {
-                     //if we haven't reached the end of our search:
-                     classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken;
-               }
-               else {
-                     //if we have reached the end of our search:
-                     classPageTokenSelectionIndex[$scope.queryPropertyString] = "end"
-                  }
+            if (fileList.result.nextPageToken !== undefined) {
+               //if we haven't reached the end of our search:
+               classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken;
+            }
+            else {
+               //if we have reached the end of our search:
+               classPageTokenSelectionIndex[$scope.queryPropertyString] = "end"
+            }
             if (fileList.result.files.length > 0) {
                if (!$scope.queryParams.q) {
                   for (o = 0; o < fileList.result.files.length; o++) {
@@ -442,13 +445,28 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          }
          else {
             $scope.allPosts = $scope.allPosts.concat(formattedFileList);
-            var filteredPosts = filterPosts($scope.allPosts);
+            var filteredPosts = filterPosts(formattedFileList);
             $timeout(function() {
-               console.log({filter:filteredPosts, All:$scope.allPosts})
-               $scope.visiblePosts = filteredPosts;
+               console.log({
+                  filter: filteredPosts,
+                  All: $scope.allPosts
+               })
+               $scope.visiblePosts = $scope.visiblePosts.concat(filteredPosts);
                LoadingFiles = false;
                console.log('EndingLoadingFiles')
                document.dispatchEvent(new window.Event('filesLoaded'));
+            });
+         }
+      }
+      else {
+         if (!$scope.queryParams.q) {
+            var filteredPosts = filterPosts($scope.allPosts);
+            $timeout(function() {
+               console.log({
+                  filter: filteredPosts,
+                  All: $scope.allPosts
+               })
+               $scope.visiblePosts = filteredPosts;
             });
          }
       }
@@ -491,7 +509,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             Flagged: Flagged,
             Class: Class,
             Type: Type,
-            Bookmarked: Bookmarked ,
+            Bookmarked: Bookmarked,
             Creator: Creator,
          });
          return Flagged && Class && Type && Creator && Bookmarked;
