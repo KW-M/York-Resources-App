@@ -115,6 +115,9 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          $scope.searchPlaceholder = 'Search Within ' + $scope.queryParams.classpath;
          $scope.queryParams.flagged = false
       }
+      if ($scope.queryParams.q === null) {
+         sortPostsByType([]);
+      }
       generateQueryString();
       getFiles();
    }
@@ -348,7 +351,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                   log("-----------------------", true);
                }
                else {
-                  sortPostsByType();
                   if (fileList.result.nextPageToken !== undefined) { //if we haven't reached the end of our search:
                      log("duplicate posts - more posts coming...")
                      classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken;
@@ -362,13 +364,11 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             }
             else {
                loading_spinner.style.display = 'none';
-               sortPostsByType();
             }
          });
       }
       else {
          loading_spinner.style.display = 'none';
-         sortPostsByType();
       }
    }
 
