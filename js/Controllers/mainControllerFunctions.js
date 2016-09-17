@@ -444,6 +444,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             $scope.allPosts = $scope.allPosts.concat(formattedFileList);
             var filteredPosts = filterPosts($scope.allPosts);
             $timeout(function() {
+               console.log({filter:filteredPosts, All:$scope.allPosts})
                $scope.visiblePosts = filteredPosts;
                LoadingFiles = false;
                console.log('EndingLoadingFiles')
