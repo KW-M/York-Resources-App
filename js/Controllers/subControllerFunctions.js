@@ -58,65 +58,79 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	//----------------------------------------------------
 	//------------------ Converting ----------------------
 	$scope.convertDriveToPost = function(DriveMetadata) {
-		var likesAndFlagged = DriveMetadata.name.split("{]|[}");//not flagged any more
-		var descriptionAndPreviewimage = DriveMetadata.description.split("{]|[}");
-		if (DriveMetadata.properties.Tag1 || DriveMetadata.properties.Tag2) {
-			var tags = JSON.parse(("[\"" + (DriveMetadata.properties.Tag1 || '') + (DriveMetadata.properties.Tag2 || '') + "\"]").replace(/,/g, "\",\""));
-    	}
-    	else {
-         var tags = [];
-    	}
-		var formatedPost = {
-			Title: DriveMetadata.properties.Title || '',
-			Description: descriptionAndPreviewimage[0] || '',
-			Link: descriptionAndPreviewimage[1] || '',
-			Tags: tags,
-			Type: DriveMetadata.properties.Type || 'noLink',
-			Flagged: JSON.parse(DriveMetadata.properties.Flagged) || false,
-			CreationDate: Date.parse(DriveMetadata.createdTime) || new Date(),
-			UpdateDate: Date.parse(DriveMetadata.modifiedTime) || new Date(),
-			Class: {
-				Name: DriveMetadata.properties.ClassName || '',
-				Catagory: DriveMetadata.properties.ClassCatagory || '',
-				Color: DriveMetadata.properties.ClassColor || '#ffffff',
-			},
-			Creator: {
-				Name: DriveMetadata.owners[0].displayName || '',
-				Email: DriveMetadata.owners[0].emailAddress || '',
-				ClassOf: DriveMetadata.owners[0].emailAddress.match(/\d+/)[0] || '',
-				Me: DriveMetadata.owners[0].emailAddress === $scope.myInfo.Email,
-			},
-			Link: descriptionAndPreviewimage[1],
-			Id: DriveMetadata.id || '',
-			AttachmentId: DriveMetadata.properties.AttachmentId || '',
-			//Likes: JSON.parse(likesAndFlagged[2]) || [], //like email array,
-			PreviewImage: descriptionAndPreviewimage[2],
-			Bookmarked: DriveMetadata.starred || false,
+		var formatedPost
+		try {
+			var likesAndFlagged = DriveMetadata.name.split("{]|[}"); //not flagged any more
+			var descriptionAndPreviewimage = DriveMetadata.description.split("{]|[}");
+			if (DriveMetadata.properties.Tag1 || DriveMetadata.properties.Tag2) {
+				var tags = JSON.parse(("[\"" + (DriveMetadata.properties.Tag1 || '') + (DriveMetadata.properties.Tag2 || '') + "\"]").replace(/,/g, "\",\""));
+			}
+			else {
+				var tags = [];
+			}
+			formatedPost = {
+				Title: DriveMetadata.properties.Title || '',
+				Description: descriptionAndPreviewimage[0] || '',
+				Link: descriptionAndPreviewimage[1] || '',
+				Tags: tags,
+				Type: DriveMetadata.properties.Type || 'noLink',
+				Flagged: JSON.parse(DriveMetadata.properties.Flagged) || false,
+				CreationDate: Date.parse(DriveMetadata.createdTime) || new Date(),
+				UpdateDate: Date.parse(DriveMetadata.modifiedTime) || new Date(),
+				Class: {
+					Name: DriveMetadata.properties.ClassName || '',
+					Catagory: DriveMetadata.properties.ClassCatagory || '',
+					Color: DriveMetadata.properties.ClassColor || '#ffffff',
+				},
+				Creator: {
+					Name: DriveMetadata.owners[0].displayName || '',
+					Email: DriveMetadata.owners[0].emailAddress || '',
+					ClassOf: DriveMetadata.owners[0].emailAddress.match(/\d+/)[0] || '',
+					Me: DriveMetadata.owners[0].emailAddress === $scope.myInfo.Email,
+				},
+				Link: descriptionAndPreviewimage[1],
+				Id: DriveMetadata.id || '',
+				AttachmentId: DriveMetadata.properties.AttachmentId || '',
+				//Likes: JSON.parse(likesAndFlagged[2]) || [], //like email array,
+				PreviewImage: descriptionAndPreviewimage[2],
+				Bookmarked: DriveMetadata.starred || false,
+			}
+			return (formatedPost)
 		}
-		return (formatedPost);
+		catch (e) {
+			return (formatedPost);
+			console.log(e)
+		}
 	};
 	$scope.convertPostToDriveMetadata = function(Post) {
 		console.log(Post);
-		var tagString = JSON.stringify(Post.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || [];
-		var formatedDriveMetadata = {
-			name: 2+'{]|[}'+JSON.stringify(["worcester-moorek2018@york.org","lie2018@york.org"]),
-			description: Post.Description + '{]|[}' + Post.Link + '{]|[}' + Post.PreviewImage,
-			createdTime: Post.CreationDate.toRFC3339UTCString(),
-			modifiedTime: Post.UpdateDate.toRFC3339UTCString(),
-			starred: Post.Bookmarked,
-			properties: {
-				Title: Post.Title,
-				Flagged: Post.Flagged,
-				Type: Post.Type,
-				AttachmentId: Post.AttachmentId,
-				Tag1: tagString[0],
-				Tag2: tagString[1],
-				ClassCatagory: Post.Class.Catagory,
-				ClassColor: Post.Class.Color,
-				ClassName: Post.Class.Name,
-			}
-		};
-		return(formatedDriveMetadata);
+		var formatedDriveMetadata
+		try {
+			var tagString = JSON.stringify(Post.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || [];
+			formatedDriveMetadata = {
+				name: 2 + '{]|[}' + JSON.stringify(["worcester-moorek2018@york.org", "lie2018@york.org"]),
+				description: Post.Description + '{]|[}' + Post.Link + '{]|[}' + Post.PreviewImage,
+				createdTime: Post.CreationDate.toRFC3339UTCString(),
+				modifiedTime: Post.UpdateDate.toRFC3339UTCString(),
+				starred: Post.Bookmarked,
+				properties: {
+					Title: Post.Title,
+					Flagged: Post.Flagged,
+					Type: Post.Type,
+					AttachmentId: Post.AttachmentId,
+					Tag1: tagString[0],
+					Tag2: tagString[1],
+					ClassCatagory: Post.Class.Catagory,
+					ClassColor: Post.Class.Color,
+					ClassName: Post.Class.Name,
+				}
+			};
+			return (formatedDriveMetadata);
+		}
+		catch (e) {
+			return (formatedDriveMetadata);
+			console.log(e)
+		}
 	};
 	//----------------------------------------------------
 	//---------------Sorting & Filtering------------------

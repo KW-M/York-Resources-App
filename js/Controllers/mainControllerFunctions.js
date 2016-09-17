@@ -473,7 +473,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    }
 
    function filterPosts(inputSet) {
-      return inputSet.filter(function(post) {
+      var output = inputSet.filter(function(post) {
          if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
             var Flagged = post.Flagged === $scope.queryParams.flagged || post.Flagged;
          }
@@ -514,6 +514,8 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          });
          return Flagged && Class && Type && Creator && Bookmarked;
       });
+      //output.sort()
+      return (output)
    }
 
    function generateQueryString() {
@@ -536,16 +538,17 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       $scope.queryPropertyString = query;
    }
 
-   $scope.refresh = function() {
-      if (LoadingFiles === true) {
-         console.log('waiting')
-         document.addEventListener('filesLoaded', getFiles());
-      }
-      else {
-         removeEventListener('filesLoaded', getFiles())
-         console.log('startingLoadingFiles')
-         getFiles()
-      }
+   $scope.getFiles = function() {
+      console.log('fake get files')
+      // if (LoadingFiles === true) {
+      //    console.log('waiting')
+      //    document.addEventListener('filesLoaded', getFiles());
+      // }
+      // else {
+      //    removeEventListener('filesLoaded', getFiles())
+      //    console.log('startingLoadingFiles')
+      //    getFiles()
+      // }
    };
 
    //----------------------------------------------------
