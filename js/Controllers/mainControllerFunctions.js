@@ -300,7 +300,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       }
    }
 
-   //----------------------------------------------------
+//----------------------------------------------------
    //--------- loading and filtering posts --------------
 
    function getFiles() {
