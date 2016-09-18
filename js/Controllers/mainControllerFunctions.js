@@ -238,6 +238,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    //--------------- Creating Posts ---------------------
    $scope.newPost = function(postObj, operation, event) {
       //called by the bottom right plus/add resource button
+      event.path[2].style.visibility = 'hidden';
       console.log(event)
       console.log(event.path[2])
       console.log(event.path[2].getBoundingClientRect())
@@ -261,10 +262,10 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
          openFrom: {
-            top: 500,
-            left: 500,
-            height: 50,
-            width: 50
+            top: rect.top,
+            left: rect.left,
+            height: rect.height,
+            width: rect.width,
          },//('#new_post_button'),
       });
    };
