@@ -260,10 +260,12 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          },
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
-         openFrom: ('#new_post_button'),
-         closeTo: {
-            left: 1000,
-         }
+         openFrom: {
+            top: 500,
+            left: 500,
+            height: 50,
+            width: 50
+         },//('#new_post_button'),
       });
    };
    $scope.showPicker = function(typ) {
