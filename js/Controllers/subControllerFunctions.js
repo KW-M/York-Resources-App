@@ -133,7 +133,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		}
 	};
 	//----------------------------------------------------
-	//---------------Sorting & Filtering------------------
+	//-------------- Sorting & Filtering -----------------
 	$scope.sortByLikes = function(thingToSort) {
 		thingToSort.sort(function(a, b) {
 			return b.LikeUsers.length - a.LikeUsers.length;
@@ -143,6 +143,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		thingToSort.sort(function(a, b) {
 			return b.UpdateDate - a.UpdateDate;
 		});
+	};
+	//----------------------------------------------------
+	//--------------- Grid & Layout ------------------
+	$scope.sortByLikes = function(thingToSort) {
+
 	};
 	//----------------------------------------------------
 	//------------------UI Actions------------------------

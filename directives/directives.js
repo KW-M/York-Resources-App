@@ -48,51 +48,76 @@ app.directive('newPostContent', function() {
     };
 });
 
-app.directive("showMoreOnOverflow",function(){
-  return{
-    link:function(scope,element){
-        if(element[0].scrollHeight > element[0].clientHeight || element[0].scrollWidth > element[0].clientWidth) {
-            console.log("oveerflow")
-            element[0].nextElementSibling.style.display = "initial";
-        } else {
-            console.log("nonoverflow")
-            //element[0].nextElementSibling.style.display = "none";
+app.directive("showMoreOnOverflow", function() {
+    return {
+        link: function(scope, element) {
+            if (element[0].scrollHeight > element[0].clientHeight || element[0].scrollWidth > element[0].clientWidth) {
+                console.log("oveerflow")
+                element[0].nextElementSibling.style.display = "initial";
+            }
+            else {
+                console.log("nonoverflow")
+                    //element[0].nextElementSibling.style.display = "none";
+            }
         }
     }
-  }
 });
-
-app.directive('htmlModel', ['$sce', function($sce) {
-  return {
-    restrict: 'A', // only activate on element attribute
-    require: '?ngModel', // get a hold of NgModelController
-    link: function(scope, element, attrs, ngModel) {
-      if (!ngModel) return; // do nothing if no ng-model
-
-      // Specify how UI should be updated
-    //   ngModel.$render = function() {
-    //       console.log(ngModel.$viewValue);
-    //     element.html($sce.getTrustedHtml(ngModel.$viewValue || ''));
-    //   };
-
-      // Listen for change events to enable binding
-      element.on('blur keyup change', function() {
-        scope.$evalAsync(read);
-      });
-      read(); // initialize
-
-      // Write data to the model
-      function read() {
-        var html = element.html();
-        // When we clear the content editable the browser leaves a <br> behind
-        // If strip-br attribute is provided then we strip this out
-        if (attrs.stripBr && html === '<br>') {
-          html = '';
+app.directive("showMoreOnOverflow", function() {
+    return {
+        scope: false,
+        link: function(scope, element) {
+            scope.openLink('http://www.google.com')
+            //function to get column width and number of columns
+            function getColWidth() {
+                var gridOptions = {
+                    gridWidth: 300, //minumum width of a grid, this may increase to take whole space of container
+                    gutterSize: 10, //spacing between two grid,
+                    gridNo: 'auto', // grid number, by default calculate auto matically
+                }
+                var contWidth = domElm.offsetWidth;
+                var colWidth = gridOptions.gridNo == 'auto' ? gridOptions.gridWidth : Math.floor(contWidth / gridOptions.gridNo) - gridOptions.gutterSize;
+                var cols = gridOptions.gridNo == 'auto' ? Math.floor((contWidth + gridOptions.gutterSize) / (colWidth + gridOptions.gutterSize)) : gridOptions.gridNo;
+                var remainingSpace = ((contWidth + gridOptions.gutterSize) % (colWidth + gridOptions.gutterSize));
+                colWidth = colWidth + Math.floor(remainingSpace / cols);
+                return {
+                    no: cols,
+                    width: colWidth
+                };
+            }
         }
-        ngModel.$setViewValue(html);
-      }
     }
-  };
+});
+app.directive('htmlModel', ['$sce', function($sce) {
+    return {
+        restrict: 'A', // only activate on element attribute
+        require: '?ngModel', // get a hold of NgModelController
+        link: function(scope, element, attrs, ngModel) {
+            if (!ngModel) return; // do nothing if no ng-model
+
+            // Specify how UI should be updated
+            //   ngModel.$render = function() {
+            //       console.log(ngModel.$viewValue);
+            //     element.html($sce.getTrustedHtml(ngModel.$viewValue || ''));
+            //   };
+
+            // Listen for change events to enable binding
+            element.on('blur keyup change', function() {
+                scope.$evalAsync(read);
+            });
+            read(); // initialize
+
+            // Write data to the model
+            function read() {
+                var html = element.html();
+                // When we clear the content editable the browser leaves a <br> behind
+                // If strip-br attribute is provided then we strip this out
+                if (attrs.stripBr && html === '<br>') {
+                    html = '';
+                }
+                ngModel.$setViewValue(html);
+            }
+        }
+    };
 }]);
 
 // app.directive('getPosts', function() {
