@@ -236,8 +236,9 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
 
    //----------------------------------------------------
    //--------------- Creating Posts ---------------------
-   $scope.newPost = function(postObj, operation) {
+   $scope.newPost = function(postObj, operation, event) {
       //called by the bottom right plus/add resource button
+      console.log(event)
       log(postObj);
       $mdDialog.show({
          templateUrl: '/directives/html/newPostContent.html',
