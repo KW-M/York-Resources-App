@@ -51,11 +51,13 @@ app.directive('newPostContent', function() {
 app.directive("showMoreOnOverflow", function() {
     return {
         scope: false,
-        link: function(scope, element) {
-            scope.openLink('http://www.google.com')
-            $timout()
-            console.log(element[0].clientHeight);
-            console.log(element[0].scrollHeight);
+        link: function(scope, element, $timeout) {
+                console.log(element[0].clientHeight);
+                console.log(element[0].scrollHeight);
+            $timeout(function(){
+                console.log(element[0].clientHeight);
+                console.log(element[0].scrollHeight);
+            })
             // if (element[0].scrollHeight > element[0].clientHeight || element[0].scrollWidth > element[0].clientWidth) {
             //     console.log("oveerflow")
             //     element[0].nextElementSibling.style.display = "initial";
