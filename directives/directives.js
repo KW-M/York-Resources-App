@@ -48,10 +48,10 @@ app.directive('newPostContent', function() {
     };
 });
 
-app.directive("showMoreOnOverflow", function() {
+app.directive("showMoreOnOverflow", function($timeout) {
     return {
         scope: false,
-        link: function(scope, element, $timeout) {
+        link: function(scope, element) {
                 console.log(element[0].clientHeight);
                 console.log(element[0].scrollHeight);
             $timeout(function(){
