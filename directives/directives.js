@@ -51,6 +51,7 @@ app.directive('newPostContent', function() {
 app.directive("showMoreOnOverflow", function() {
     return {
         link: function(scope, element) {
+            console.log(element[0]);
             if (element[0].scrollHeight > element[0].clientHeight || element[0].scrollWidth > element[0].clientWidth) {
                 console.log("oveerflow")
                 element[0].nextElementSibling.style.display = "initial";
@@ -62,7 +63,7 @@ app.directive("showMoreOnOverflow", function() {
         }
     }
 });
-app.directive("showMoreOnOverflow", function() {
+app.directive("gridLayout", function() {
     return {
         scope: false,
         link: function(scope, element) {
