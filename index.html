@@ -119,7 +119,7 @@
                         </div>
                         <p class="post-card-title md-title">{{::Post.Title}}</p>
                         <p class="post-card-creator md-subhead"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{Post.Creator.ClassOf}})</span></p>
-                        <p id="post_card_description" class="md-body-1" show-more-on-overflow></p>
+                        <p id="post_card_description" class="md-body-1" show-more-on-overflow ></p>
                         <div class="post-card-description-gradient" ng-style="{'background-image': 'linear-gradient(rgba(0, 0, 0, 0) 0%, '+Post.Class.Color+' 85%'}" ng-click="::newPost(Post,'view')"><md-icon style="margin-bottom:2px">keyboard_arrow_down</md-icon></div>
                         <md-card-actions layout="row" layout-align="start center">
                             <md-button id="like_thumb_button" aria-label="Like">
