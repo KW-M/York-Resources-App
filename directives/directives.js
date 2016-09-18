@@ -70,6 +70,8 @@ app.directive("showMoreOnOverflow", function($timeout) {
     }
 });
 
+app.directive(getGrid)
+
 app.directive("gridLayout", function() {
     return {
         scope: false,
