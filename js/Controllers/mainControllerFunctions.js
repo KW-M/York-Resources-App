@@ -268,7 +268,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             width: rect.width,
          },//('#new_post_button'),
       }).then(function(){
-         console.log ('done')
+         event.path[2].style.visibility = 'visible';
       });
    };
    $scope.showPicker = function(typ) {
