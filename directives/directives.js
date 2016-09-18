@@ -69,6 +69,7 @@ app.directive("showMoreOnOverflow", function($timeout) {
         }
     }
 });
+
 app.directive("gridLayout", function() {
     return {
         scope: false,
@@ -86,6 +87,10 @@ app.directive("gridLayout", function() {
                 var cols = gridOptions.gridNo == 'auto' ? Math.floor((contWidth + gridOptions.gutterSize) / (colWidth + gridOptions.gutterSize)) : gridOptions.gridNo;
                 var remainingSpace = ((contWidth + gridOptions.gutterSize) % (colWidth + gridOptions.gutterSize));
                 colWidth = colWidth + Math.floor(remainingSpace / cols);
+                console.log({
+                    no: cols,
+                    width: colWidth
+                })
                 return {
                     no: cols,
                     width: colWidth
@@ -94,6 +99,7 @@ app.directive("gridLayout", function() {
         }
     }
 });
+
 app.directive('htmlModel', ['$sce', function($sce) {
     return {
         restrict: 'A', // only activate on element attribute
