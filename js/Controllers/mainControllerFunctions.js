@@ -238,7 +238,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    //--------------- Creating Posts ---------------------
    $scope.newPost = function(postObj, operation, event) {
       //called by the bottom right plus/add resource button
-      event.path[2].style.visibility = 'hidden';
+      angular.element(event.path[2]).addClass('fade-out');;
       console.log(event)
       console.log(event.path[2])
       console.log(event.path[2].getBoundingClientRect())
@@ -266,9 +266,15 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             left: rect.left,
             height: rect.height,
             width: rect.width,
-         },//('#new_post_button'),
+         },
+         closeTo: {
+            top: rect.top,
+            left: rect.left,
+            height: rect.height,
+            width: rect.width,
+         }//('#new_post_button'),
       }).then(function(){
-         event.path[2].style.visibility = 'visible';
+         angular.element(event.path[2]).removeClass('fade-out');
       });
    };
    $scope.showPicker = function(typ) {
