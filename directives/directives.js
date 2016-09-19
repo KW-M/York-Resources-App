@@ -71,10 +71,12 @@ app.directive("showMoreOnOverflow", function($timeout) {
 });
 
 app.directive("calculateCardHeight", function() {
-        return {
-        scope: false,
-        link: function(scope, element, post) {
-            
+    return {
+        scope: {
+            post: "=",
+        },
+        link: function(scope, element) {
+            scope.post.cardHeight = element.scrollHeight
         }
     }
 })

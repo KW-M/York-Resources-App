@@ -92,7 +92,7 @@
                 <add-bar-top></add-bar-top>
                 <add-lower-button></add-lower-button>
                 <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6" md-row-height="1" md-gutter="12px" md-gutter-gt-sm="8px">
-                    <md-grid-tile class="gray" calculate-card-height md-rowspan="{{Post.cardHeight}}" class="post-card raise-on-hover" md-colspan="1" ng-repeat="Post in visiblePosts track by Post.Id | orderBy: 'UpdateDate':true" ng-style="{'background-color': Post.Class.Color}">
+                    <md-grid-tile class="gray" calculate-card-height="Post" md-rowspan="{{Post.cardHeight}}" class="post-card raise-on-hover" md-colspan="1" ng-repeat="Post in visiblePosts track by Post.Id | orderBy: 'UpdateDate':true" ng-style="{'background-color': Post.Class.Color}">
                         <div>{{Post.Title}}</div>
                         <div>{{Post.Description}}</div>
                     </md-grid-tile>
