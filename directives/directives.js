@@ -77,8 +77,9 @@ app.directive("calculateCardHeight", function($timeout) {
              $timeout(function(){
                 console.log(element[0].offsetHeight);
                 console.log(element[0].scrollHeight);
-                scope.Post.cardHeight = element[0].offsetHeight;
-            })
+                console.log(element[0].clientHeight);
+                scope.Post.cardHeight = element[0].scrollHeight;
+            }, 1000)
             
             // console.log(element[0].children[0].children[0].offsetHeight);
             // console.log(element[0].scrollHeight);
