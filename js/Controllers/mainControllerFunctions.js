@@ -239,10 +239,10 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    $scope.newPost = function(postObj, operation, event) {
       //called by the bottom right plus/add resource button
       //angular.element(event.path[2]).addClass('fade-out');;
-      console.log(event)
-      console.log(event.path[2])
-      console.log(event.path[2].getBoundingClientRect())
-      var rect = event.path[2].getBoundingClientRect()
+      // console.log(event)
+      // console.log(event.path[2])
+      // console.log(event.path[2].getBoundingClientRect())
+      // var rect = event.path[2].getBoundingClientRect()
       log(postObj);
       $mdDialog.show({
          templateUrl: '/directives/html/newPostContent.html',
@@ -261,18 +261,18 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          },
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
-         openFrom: {
-            top: rect.top,
-            left: rect.left,
-            height: rect.height,
-            width: rect.width,
-         },
-         closeTo: {
-            top: rect.top,
-            left: rect.left,
-            height: rect.height,
-            width: rect.width,
-         }//('#new_post_button'),
+         // openFrom: {
+         //    top: rect.top,
+         //    left: rect.left,
+         //    height: rect.height,
+         //    width: rect.width,
+         // },
+         // closeTo: {
+         //    top: rect.top,
+         //    left: rect.left,
+         //    height: rect.height,
+         //    width: rect.width,
+         // }//('#new_post_button'),
       }).then(function(){
          //angular.element(event.path[2]).removeClass('fade-out');
       });
