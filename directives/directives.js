@@ -70,15 +70,19 @@ app.directive("showMoreOnOverflow", function($timeout) {
     }
 });
 
-app.directive("calculateCardHeight", function() {
+app.directive("calculateCardHeight", function($timeout) {
     return {
         scope: false,
         link: function(scope, element) {
-            console.log(scope);
-            scope.Post.cardHeight = element[0].children[0].children[0].offsetHeight
-            console.log(element[0].children[0].children[0].offsetHeight);
-            console.log(element[0].scrollHeight);
-            console.log(element[0].children[0].children[0].offsetHeight)
+             $timeout(function(){
+                console.log(element[0].offsetHeight);
+                console.log(element[0].scrollHeight);
+                scope.Post.cardHeight = element[0].offsetHeight;
+            })
+            
+            // console.log(element[0].children[0].children[0].offsetHeight);
+            // console.log(element[0].scrollHeight);
+            // console.log(element[0].children[0].children[0].offsetHeight)
         }
     }
 })

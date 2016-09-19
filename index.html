@@ -91,14 +91,14 @@
                 </span>
                 <add-bar-top></add-bar-top>
                 <add-lower-button></add-lower-button>
-                <!--<md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6" md-row-height="1" md-gutter="12px" md-gutter-gt-sm="8px">-->
-                <!--    <md-grid-tile calculate-card-height="Post" class="raise-on-hover" md-rowspan="{{Post.cardHeight}}" md-colspan="1" ng-repeat="Post in visiblePosts track by Post.Id | orderBy: 'UpdateDate':true">-->
-                <!--    <md-card class="post-card raise-on-hover" ng-style="{'background-color': Post.Class.Color}" style="width: 100%;margin: 0;">-->
-                <!--        <div>{{Post.Title}}</div>-->
-                <!--        <div>{{Post.Description}}</div>-->
-                <!--    </md-card>-->
-                <!--    </md-grid-tile>-->
-                <!--</md-grid-list>-->
+                <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6" md-row-height="1" md-gutter="12px" md-gutter-gt-sm="8px">
+                    <md-grid-tile class="raise-on-hover" md-rowspan="{{Post.cardHeight}}" md-colspan="1" ng-repeat="Post in visiblePosts track by Post.Id | orderBy: 'UpdateDate':true">
+                    <md-card calculate-card-height="Post" class="post-card raise-on-hover" ng-style="{'background-color': Post.Class.Color}" style="width: 100%;margin: 0;">
+                        <div>{{Post.Title}}</div>
+                        <div>{{Post.Description}}</div>
+                    </md-card>
+                    </md-grid-tile>
+                </md-grid-list>
                     <!--<md-card class="post-card raise-on-hover" ng-repeat="Post in visiblePosts track by Post.Id | orderBy: 'UpdateDate':true" ng-style="{'background-color': Post.Class.Color}">-->
                     <!--    <div>{{Post.Title}}</div>-->
                     <!--    <div>{{Post.Description}}</div>-->
