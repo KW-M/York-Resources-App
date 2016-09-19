@@ -576,8 +576,8 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    //        ev.stopPropagation();
    //        console.log(ev)
    // });
-   $scope.random=function(){
-      return Math.random()*50;  
+   $scope.random=function(index){
+      return index * 10//Math.random()*50;  
    }
    addResizeListener(content_container, function(){
       console.log('resize')
