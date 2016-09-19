@@ -70,7 +70,14 @@ app.directive("showMoreOnOverflow", function($timeout) {
     }
 });
 
-app.directive(getGrid)
+app.directive("calculateCardHeight", function() {
+        return {
+        scope: false,
+        link: function(scope, element, post) {
+            
+        }
+    }
+})
 
 app.directive("gridLayout", function() {
     return {
