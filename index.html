@@ -71,6 +71,7 @@
             <side-nav-insides class="side-nav md-sidenav-left sidenav-inline" ng-class="{'side-nav-open' : globals.sidenavIsOpen === true && $mdMedia('gt-sm'), 'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}"></side-nav-insides>
             <!----- The content, ie posts, resources, etc. ------->
             <div id="content_container" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'gt-sm': $mdMedia('gt-sm')}" class="">
+                <span id="Size_Detector"></span>
                 <span ng-show="devMode">
                         <md-button ng-click="consoleLog(myInfo, true)">
                             Log My Info
@@ -186,8 +187,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-sanitize.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.js"></script>
         <script src="Libraries/angular-grid.js"></script>
-        <script src="css-element-queries/src/ResizeSensor.js"></script>
-        <script src="css-element-queries/src/ElementQueries.js"></script>
 
         <!-- Main Scripts -->
         <script src="js/app.js"></script>
