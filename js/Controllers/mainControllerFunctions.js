@@ -576,10 +576,9 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    //        ev.stopPropagation();
    //        console.log(ev)
    // });
-   
-   var resizeElement = document.getElementById('resize_sensor');
-   addResizeListener(resizeElement, function(){
+   addResizeListener(content_container, function(){
       console.log('resize')
+      Math.random();
    });
    content_container.onscroll = function(event) {
       //called whenever the content_container scrolls
