@@ -210,20 +210,16 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			}));
 		}
 	};
-	$scope.likePost = function(ev, content, arrayIndex) {
-		GoogleDriveService.flagDriveFile(content.Id, 'Flagged', false).then(function() {
-			console.log("flagged: " + content.Id);
-		})
-	};
-	$scope.unLikePost = function(ev, content, arrayIndex) {
-		if ($scope.myInfo.Moderator === true) {
-			var permissionID = "needs to be created"
-			GoogleDriveService.unLikeFile(content.Id, permissionID).then(function() {
-				console.log("unflagged: " + content.Id);
-			});
-		}
-		else {
-
+	$scope.likePost = function(like, content, arrayIndex) {
+		if (like) {
+			content.userLiked = true;
+			content.Likes.push("Kiwi");
+		// GoogleDriveService.flagDriveFile(content.Id, 'Flagged', false).then(function() {
+		// 	console.log("flagged: " + content.Id);
+		// })
+		} else {
+			content.userLiked = false
+			content.Likes.pop();
 		}
 	};
 	$scope.openLink = function(link) {
