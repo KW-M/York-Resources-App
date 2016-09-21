@@ -134,10 +134,10 @@
                         <div class="post-card-description-gradient" ng-style="{'background-image': 'linear-gradient(rgba(0, 0, 0, 0) 0%, '+Post.Class.Color+' 85%'}"><md-icon style="margin-bottom:2px">keyboard_arrow_down</md-icon></div>
                         </div>
                         <md-card-actions layout="row" layout-align="start center">
-                            <md-button id="like_thumb_button" aria-label="Like">
-                                <md-icon ng-show="Post.userLiked" ng-click="likePost(false, Post)">thumb_down</md-icon>
-                                <p class="like-counter">{{Post.Likes}}</p>
-                                <md-icon style="margin-top: -6px;" ng-hide="Post.userLiked" ng-click="likePost(true, Post)">thumb_up</md-icon>
+                            <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(!Post.userLiked, Post)">
+                                <md-icon ng-show="Post.userLiked" >thumb_down</md-icon>
+                                <p class="like-counter">{{Post.Likes.length}}</p>
+                                <md-icon style="margin-top: -6px;" ng-hide="Post.userLiked">thumb_up</md-icon>
                             </md-button>
                             <md-button class="md-icon-button" id="flag_button" area-label="Flag" style="margin:0" ng-hide="::Post.Creator.Email === myInfo.Email">
                                 <md-icon>flag</md-icon>
