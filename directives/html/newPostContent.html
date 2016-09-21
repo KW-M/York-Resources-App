@@ -1,12 +1,12 @@
-<md-dialog id="new_post_dialog" ng-style="{'background-color': Class.Color}">
+<md-dialog id="new_post_dialog" ng-style="{'background-color': Post.Class.Color}">
    <md-toolbar id="dialog_header" ng-class="{ 'noLink' : Post.Type === 'noLink' }">
-      <!--<div class="md-toolbar-tools">-->
-      <!--   <div class="md-icon-button">-->
-      <!--      <md-icon>group</md-icon>-->
-      <!--   </div>-->
-      <!--   <h2><span>Title</span></h2>-->
-      <!--   <span flex></span>-->
-      <!--</div>-->
+      <div class="md-toolbar-tools">
+         <div class="md-icon-button">
+            <md-icon>group</md-icon>
+         </div>
+         <h2><span>Title</span></h2>
+         <span flex></span>
+      </div>
       <img ng-src="{{Post.PreviewImage}}" id="header_image">
       <div class="newPostImgGradient" flex layout="column">
          <div ng-hide="operation === 'view'" style="margin: 0 4px 0 12px; width: 100%; display: flex;">
@@ -65,9 +65,8 @@
          </md-chips>
       </div>
       <div class="md-dialog-content">
-         <span>{{Post.Description}}</span>
          <input ng-model="Post.Title" ng-readonly="operation === 'view'" class="newPostTitle md-title" placeholder="Title" md-autofocus>
-         <div id="DescriptionTxt" class="newPostBody" contenteditable="{{operation !== 'view'}}" ng-bind-html="Post.escription"></div> 
+         <div id="DescriptionTxt" class="newPostBody" contenteditable="{{operation !== 'view'}}" ng-bind-html="Post.Description"></div> 
          <!--ng-model="Post.Description" html-model="true" -->
       </div>
    </md-dialog-content>
