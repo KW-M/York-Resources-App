@@ -222,6 +222,10 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			content.Likes.pop();
 		}
 	};
+	$scope.bookmark = function(content) {
+		content.Bookmarked != content.Bookmarked
+	};
+
 	$scope.openLink = function(link) {
 		if (link !== "" && link !== undefined) {
 			window.open(link);
