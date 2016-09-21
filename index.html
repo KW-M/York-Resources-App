@@ -135,7 +135,7 @@
                         </div>
                         <md-card-actions layout="row" layout-align="start center">
                             <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(!Post.userLiked, Post)">
-                                <md-icon ng-show="Post.userLiked" >thumb_down</md-icon>
+                                <!--<md-icon ng-show="Post.userLiked" >thumb_down</md-icon>-->
                                 <p class="like-counter">{{Post.Likes.length}}</p>
                                 <md-icon style="margin-top: -6px;" ng-class="{'md-accent' : Post.userLiked}">thumb_up</md-icon>
                             </md-button>
@@ -168,7 +168,7 @@
                                     </md-menu-item>
                                 </md-menu-content>
                             </md-menu>
-                            <md-button id="open_button" ng-hide="::Post.Link == ''" class="md-button md-accent" ng-click="::openLink(Post.Link)" aria-label="Open resource">Open Resource</md-button>
+                            <md-button id="open_button" ng-hide="::Post.Link == ''" class="md-button md-accent" ng-click="::openLink(Post.Link)" aria-label="Open resource">Open Link</md-button>
                         </md-card-actions>
                     </md-card>
                     <!--post-card-->
