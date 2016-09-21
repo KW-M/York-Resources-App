@@ -136,7 +136,7 @@
                         <md-card-actions layout="row" layout-align="start center">
                             <md-button id="like_thumb_button" aria-label="Like">
                                 <md-icon ng-show="Post.userLiked" ng-click="likePost(false, Post)">thumb_down</md-icon>
-                                <p class="like-counter">{{Post.Likes.length}}</p>
+                                <p class="like-counter">{{Post.Likes}}</p>
                                 <md-icon style="margin-top: -6px;" ng-hide="Post.userLiked" ng-click="likePost(true, Post)">thumb_up</md-icon>
                             </md-button>
                             <md-button class="md-icon-button" id="flag_button" area-label="Flag" style="margin:0" ng-hide="::Post.Creator.Email === myInfo.Email">
