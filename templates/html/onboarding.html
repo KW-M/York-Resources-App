@@ -3,7 +3,7 @@
   </md-button>
 <md-dialog style="/*position: relative; flex: 1; max-width: 360px; height:100%; max-height:460px;*/ background-color:#66bfeb" class="onboardingDialog" ng-class="{'blueBackground' : onboardingPageNumber === 1}">
   <md-dialog-content style="position:relative; flex: 1;">
-    <md-tabs class="md-accent" md-selected="onboardingPageNumber">
+    <md-tabs class="md-accent" md-selected="onboardingPageNumber" md-dynamic-height>
       <md-tab id="tab1">
         <md-tab-label>Access</md-tab-label>
         <md-tab-body>
@@ -12,7 +12,7 @@
           <div class="onboardingTextHeader">Access a collection of resources</div>
           <div class="onboardingText" >Tailor made for York classes<br>
               by York students, for York students.</div>
-        </d>
+        </div>
         </md-tab-body>
       </md-tab>
       <md-tab id="tab2">
