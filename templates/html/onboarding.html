@@ -35,7 +35,7 @@
     </md-tabs>
   </md-dialog-content>
   <md-dialog-actions style="position:relative">
-    <md-button class="md-accent" style="color:white" ng-click="hideDialog()">Skip</md-button>
+    <md-button class="md-accent" style="color:white" ng-click="hideDialog()"><span ng-hide="onboardingPageNumber === 2">Skip</span><span ng-hide="onboardingPageNumber !== 2">Get Started</span></md-button>
     <div class="dotPageIndicatorContainer">
       <div class="dotPageIndicator" ng-class="{'dotPageIndicatorActive' : onboardingPageNumber === 0}"></div>
       <div class="dotPageIndicator" ng-class="{'dotPageIndicatorActive' : onboardingPageNumber === 1}"></div>
@@ -44,5 +44,6 @@
   </md-dialog-actions>
 </md-dialog>
     <md-button class="md-fab onboardingDialogButton" aria-label="next" ng-click="onboardingPageNumber = onboardingPageNumber + 1" style="margin-left: 16px;">
-      <md-icon>arrow_forward</md-icon>
+      <md-icon ng-hide="onboardingPageNumber === 2">arrow_forward</md-icon>
+      <md-icon ng-hide="onboardingPageNumber !== 2">check</md-icon>
     </md-button>
