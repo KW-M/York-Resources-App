@@ -185,7 +185,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			$scope.visiblePosts.splice(arrayIndex, 1);
 			$scope.flaggedPosts.push(content);
 		});
-		queue(GoogleDriveService.updateFileProperty(content.Id, 'Flagged', true), function() {
+		queue(GoogleDriveService.updateFlagged(content.Id, true), function() {
 			console.log("flagged: " + content.Id);
 		});
 		//set the user's has flagged date back
@@ -198,7 +198,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 				$scope.visiblePosts.push(content);
 			});
 
-			queue(GoogleDriveService.updateFileProperty(content.Id, 'Flagged', false), function() {
+			queue(GoogleDriveService.updateFlagged(content.Id, false), function() {
 				console.log("unflagged: " + content.Id);
 			});
 		}
@@ -234,7 +234,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		}
 
 		function sendBookmark() {
-			queue(GoogleDriveService.updateFileProperty(content.Id, 'Flagged', true), function() {
+			queue(GoogleDriveService.updateBookmarked(content.Id, true), function() {
 				console.log("flagged: " + content.Id);
 			});
 		}

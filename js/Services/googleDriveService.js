@@ -20,7 +20,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
         }));
     };
 
-    this.getSpreadsheetRange = function(id,range) {
+    this.getSpreadsheetRange = function(id, range) {
         //gets a named range in a google spreadsheet (in this case each row is created with a named range of its email).
         return (gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: id,
@@ -47,26 +47,26 @@ app.service('GoogleDriveService', ['$q', function($q) {
         }
     }
 
-    this.runGAppsScript = function(functionToRun){
+    this.runGAppsScript = function(functionToRun) {
         var scriptId = "MeZP4Dfy0hLzCmyrFntpD1-31ZdidIE6U";
-        return(gapi.client.request({
+        return (gapi.client.request({
             'root': 'https://script.googleapis.com',
             'path': 'v1/scripts/' + scriptId + ':run',
             'method': 'POST',
             'body': {
-                        'function': 'likePost',
-                        'parameters': [
-                            'hi',
-                            'ho',
-                        ],
-                    },
+                'function': 'likePost',
+                'parameters': [
+                    'hi',
+                    'ho',
+                ],
+            },
         }));
     }
-    
-    this.getWebsiteScreenshot = function(url){
-        return(gapi.client.request({
+
+    this.getWebsiteScreenshot = function(url) {
+        return (gapi.client.request({
             'root': 'https://www.googleapis.com',
-            'path': 'pagespeedonline/v2/runPagespeed?url='+encodeURIComponent(url)+'&rule=AvoidLandingPageRedirects&screenshot=true&strategy=desktop&fields=screenshot(data%2Cheight%2Cwidth)&key=AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo',
+            'path': 'pagespeedonline/v2/runPagespeed?url=' + encodeURIComponent(url) + '&rule=AvoidLandingPageRedirects&screenshot=true&strategy=desktop&fields=screenshot(data%2Cheight%2Cwidth)&key=AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo',
             'method': 'GET',
         }));
     }
@@ -105,15 +105,23 @@ app.service('GoogleDriveService', ['$q', function($q) {
         }));
     };
 
-    this.updateFileProperty = function(id, property, value) {
-        var metadata = {
-            properties: {
-                Flagged: value,
-            },
-        }
+    this.updateFlagged = function(id, value) {
         return (gapi.client.drive.files.update({
             'fileId': id,
-            'resource': metadata,
+            'resource': {
+                properties: {
+                    Flagged: value,
+                },
+            },
+        }));
+    };
+
+    this.updateBookmarked = function(id, value) {
+        return (gapi.client.drive.files.update({
+            'fileId': id,
+            'resource': {
+                starred: value,
+            },
         }));
     };
 
@@ -178,20 +186,20 @@ app.service('GoogleDriveService', ['$q', function($q) {
 }]);
 
 
-    // this.addNamedRangeUserSettings = function(range, name) {
-    //     return (gapi.client.sheets.spreadsheets.batchUpdate({
-    //         spreadsheetId: '1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0',
-    //         "requests": [{
-    //             "addNamedRange": {
-    //                 "namedRange": {
-    //                     "name": name,
-    //                     "range": {
-    //                         "startRowIndex": 1,
-    //                         "endRowIndex": 1,
-    //                         "startColumnIndex": 1,
-    //                     }
-    //                 }
-    //             }
-    //         }]
-    //     }));
-    // }
+// this.addNamedRangeUserSettings = function(range, name) {
+//     return (gapi.client.sheets.spreadsheets.batchUpdate({
+//         spreadsheetId: '1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0',
+//         "requests": [{
+//             "addNamedRange": {
+//                 "namedRange": {
+//                     "name": name,
+//                     "range": {
+//                         "startRowIndex": 1,
+//                         "endRowIndex": 1,
+//                         "startColumnIndex": 1,
+//                     }
+//                 }
+//             }
+//         }]
+//     }));
+// }
