@@ -113,8 +113,8 @@ app.config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $locati
     $mdThemingProvider.theme('default')
             .primaryPalette('YorkRed')
 
-            .accentPalette('YorkBlue')
-            //.accentPalette('YorkGreenBlue')
+            //.accentPalette('YorkBlue')
+            .accentPalette('YorkGreenBlue')
             //.accentPalette('YorkGreen')
             //.accentPalette('blue')
 
