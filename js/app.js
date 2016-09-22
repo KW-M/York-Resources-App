@@ -114,9 +114,9 @@ app.config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $locati
             .primaryPalette('YorkRed')
 
             //.accentPalette('YorkBlue')
-            .accentPalette('YorkGreenBlue')
+            //.accentPalette('YorkGreenBlue')
             //.accentPalette('YorkGreen')
-            //.accentPalette('blue')
+            .accentPalette('blue')
 
             //.warnPalette('YorkOrange')
             .warnPalette('deep-orange')
