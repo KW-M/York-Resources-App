@@ -223,13 +223,14 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		}
 	};
 	$scope.bookmark = function(content) {
-		console.log('bookmarking')
-				console.log(content.Bookmarked)
-				if(content.Bookmarked) {
-		content.Bookmarked = false;
-				}else {
-					content.Bookmarked = true;
-				}
+			if(content.Bookmarked) {
+				content.Bookmarked = false;
+				debounce(function() {
+					
+				}, 100);
+			} else {
+				content.Bookmarked = true;
+			}
 	};
 
 	$scope.openLink = function(link) {
