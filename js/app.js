@@ -110,13 +110,32 @@ app.config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $locati
   'contrastDefaultColor': 'light',
   'contrastDarkColors': '50 100 200 300 400 500 A100 A200 A400'
     });
+    $mdThemingProvider.definePalette('yorkLightBlue', {
+  '50': '#e2eaf3',
+  '100': '#abc3de',
+  '200': '#83a6ce',
+  '300': '#5081b9',
+  '400': '#4372a8',
+  '500': '#3a6392',
+  '600': '#31547c',
+  '700': '#294566',
+  '800': '#203650',
+  '900': '#17283a',
+  'A100': '#e2eaf3',
+  'A200': '#abc3de',
+  'A400': '#4372a8',
+  'A700': '#294566',
+  'contrastDefaultColor': 'light',
+  'contrastDarkColors': '50 100 200 A100 A200'
+});
     $mdThemingProvider.theme('default')
             .primaryPalette('YorkRed')
 
             //.accentPalette('YorkBlue')
+            .accentPalette('yorkLightBlue')
             //.accentPalette('YorkGreenBlue')
             //.accentPalette('YorkGreen')
-            .accentPalette('blue')
+            //.accentPalette('blue')
 
             //.warnPalette('YorkOrange')
             .warnPalette('deep-orange')
