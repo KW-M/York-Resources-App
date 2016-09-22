@@ -162,11 +162,12 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                authorizationService.hideSigninDialog();
             });
          }
+               console.log('run')
+      queue(GoogleDriveService.runGAppsScript(), function(result) {
+                 console.log('run2')
+         console.log(result)
+      });
       }
-
-      // queue(GoogleDriveService.runGAppsScript(), function(result) {
-      //    console.log(result)
-      // });
    }
 
    function handleUserPrefsSheet() {
