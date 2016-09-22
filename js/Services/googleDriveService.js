@@ -50,7 +50,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
     this.runGAppsScript = function(functionToRun) {
         var scriptId = "MeZP4Dfy0hLzCmyrFntpD1-31ZdidIE6U";
         return (gapi.client.request({
-            'root': 'https://script.googleapis.com',
+            'root': 'https://script.google.com',
             'path': 'v1/scripts/' + scriptId + ':run',
             'method': 'POST',
             'body': {
