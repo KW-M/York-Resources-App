@@ -50,16 +50,13 @@ app.service('GoogleDriveService', ['$q', function($q) {
     this.runGAppsScript = function(functionToRun) {
         var scriptId = "MeZP4Dfy0hLzCmyrFntpD1-31ZdidIE6U";
         return (gapi.client.request({
-            'root': 'https://script.google.com',
-            'path': 'v1/scripts/' + scriptId + ':run',
-            'method': 'POST',
-            'body': {
-                'function': 'likePost',
-                'parameters': [
-                    'hi',
-                    'ho',
-                ],
-            },
+            method: 'GET',
+            path: 'https://script.google.com/macros/s/AKfycbwAVKcfa8Lzf_iyFlQpllMAn5kx0e37QSIKxsiE-51yYFOTDg0r/exec',
+            params: {
+                test1: "testing ... 1, 2, 3",
+                test2: 34,
+                test3: false,
+            }.
         }));
     }
 
