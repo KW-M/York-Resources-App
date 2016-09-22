@@ -214,23 +214,30 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		if (like) {
 			content.userLiked = true;
 			content.Likes.push("Kiwi");
-		// GoogleDriveService.flagDriveFile(content.Id, 'Flagged', false).then(function() {
-		// 	console.log("flagged: " + content.Id);
-		// })
-		} else {
+			// GoogleDriveService.flagDriveFile(content.Id, 'Flagged', false).then(function() {
+			// 	console.log("flagged: " + content.Id);
+			// })
+		}
+		else {
 			content.userLiked = false
 			content.Likes.pop();
 		}
 	};
 	$scope.bookmark = function(content) {
-			if(content.Bookmarked) {
-				content.Bookmarked = false;
-				debounce(function() {
-					
-				}, 100);
-			} else {
-				content.Bookmarked = true;
-			}
+		if (content.Bookmarked) {
+			content.Bookmarked = false;
+			debounce(sendBookmark(), 1000);
+		}
+		else {
+			content.Bookmarked = true;
+			debounce(sendBookmark(), 1000);
+		}
+
+		function sendBookmark() {
+			queue(GoogleDriveService.updateFileProperty(content.Id, 'Flagged', true), function() {
+				console.log("flagged: " + content.Id);
+			});
+		}
 	};
 
 	$scope.openLink = function(link) {
