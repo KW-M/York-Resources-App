@@ -164,9 +164,9 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          }
       }
 
-      queue(GoogleDriveService.runGAppsScript(), function(result) {
-         console.log(result)
-      });
+      // queue(GoogleDriveService.runGAppsScript(), function(result) {
+      //    console.log(result)
+      // });
    }
 
    function handleUserPrefsSheet() {
