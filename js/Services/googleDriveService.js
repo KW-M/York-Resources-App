@@ -51,7 +51,8 @@ app.service('GoogleDriveService', ['$q', function($q) {
         console.log('run')
         return (gapi.client.request({
             method: 'GET',
-            path: 'https://script.google.com/macros/s/AKfycbwAVKcfa8Lzf_iyFlQpllMAn5kx0e37QSIKxsiE-51yYFOTDg0r/exec',
+            root: 'https://script.google.com',
+            path: 'macros/s/AKfycbwAVKcfa8Lzf_iyFlQpllMAn5kx0e37QSIKxsiE-51yYFOTDg0r/exec',
             params: {
                 test1: "testing ... 1, 2, 3",
                 test2: 34,
