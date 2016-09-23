@@ -1,7 +1,11 @@
 //Define the GoogleDriveController controller for Angular.
 app.service('GoogleDriveService', ['$q', function($q) {
     var self = this;
-
+    var URLs = {
+        databaseFolderId: '0B5NVuDykezpkbUxvOUMyNnRsUGc',
+        userSpreadsheetId: '',
+        
+    }
     this.loadAPIs = function(APILoadedCallback) {
         gapi.client.load('drive', 'v3', function() {
             APILoadedCallback("drive");
