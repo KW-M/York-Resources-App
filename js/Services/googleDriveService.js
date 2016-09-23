@@ -3,9 +3,9 @@ app.service('GoogleDriveService', ['$q', function($q) {
     var self = this;
     var URLs = {
         databaseFolderId: '0B5NVuDykezpkbUxvOUMyNnRsUGc',
-        userSpreadsheetId: '',
-        
+        userSpreadsheetId: '1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0',
     }
+    
     this.loadAPIs = function(APILoadedCallback) {
         gapi.client.load('drive', 'v3', function() {
             APILoadedCallback("drive");
@@ -35,7 +35,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
     this.updateSpreadsheetRange = function(id, range, dataToBeInserted, append) {
         if (append === true) {
             return (gapi.client.sheets.spreadsheets.values.append({
-                spreadsheetId: '1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0',
+                spreadsheetId: URLs.userSpreadsheetId,
                 range: range,
                 valueInputOption: "USER_ENTERED",
                 values: [dataToBeInserted],
@@ -43,7 +43,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
         }
         else {
             return (gapi.client.sheets.spreadsheets.values.update({
-                spreadsheetId: '1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0',
+                spreadsheetId: URLs.userSpreadsheetId,
                 range: range,
                 valueInputOption: "USER_ENTERED",
                 values: dataToBeInserted,
@@ -95,7 +95,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
     };
 
     this.createDriveFile = function(metadata) {
-        metadata.parents = ['0B5NVuDykezpkbUxvOUMyNnRsUGc'];
+        metadata.parents = [URLs.databaseFolderId];
         return (gapi.client.drive.files.create(metadata));
     };
 
@@ -162,7 +162,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
                 'useContentAsIndexableText': true,
                 'alt': 'json',
             },
-            'addParents': '0B5NVuDykezpkOXY1bDZ2ZnUxVGM',
+            'addParents': URLs.databaseFolderId,
             'headers': {
                 'Content-Type': 'multipart/mixed; boundary="675849302theboundary"'
             },
@@ -170,7 +170,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
                 "Content-Type: application/json\r\n\r\n" +
                 JSON.stringify({
                     name: title,
-                    parents: ['0B5NVuDykezpkbUxvOUMyNnRsUGc']
+                    parents: [URLs.databaseFolderId]
                 }) +
                 "\r\n--675849302theboundary\r\n" +
                 "Content-Type: application/json\r\n\r\n" +
