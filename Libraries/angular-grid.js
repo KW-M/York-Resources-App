@@ -187,6 +187,7 @@
             function getScrollContainerInfo() {
               var container = $(document.querySelector(options.scrollContainer)),
                 contElm = container[0];
+                console.log(contElm);
 
               return {
                 height: contElm.offsetHeight,
@@ -318,6 +319,7 @@
 
             setTimeout(function() {
               scrollNs.scrollContInfo = getScrollContainerInfo();
+              
               scrollNs.scrollContInfo.$elm.on('scroll', scrollHandler);
             }, 0);
 
