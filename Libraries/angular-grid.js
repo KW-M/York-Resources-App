@@ -188,12 +188,11 @@
               var container = $(document.querySelector(options.scrollContainer)),
                 contElm = container[0];
                 console.log(contElm);
-
               return {
                 height: contElm.offsetHeight,
                 scrollHeight: contElm.scrollHeight,
                 startFrom: findPos(domElm, contElm).top,
-                $elm: options.scrollContainer == 'body' ? win : container
+                $elm: container
               };
             }
 
@@ -319,7 +318,7 @@
 
             setTimeout(function() {
               scrollNs.scrollContInfo = getScrollContainerInfo();
-              
+              console.log(scrollNs.scrollContInfo);
               scrollNs.scrollContInfo.$elm.on('scroll', scrollHandler);
             }, 0);
 
