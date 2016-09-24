@@ -134,7 +134,10 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    function initiateDrive(loaded) {
       console.log("API loaded: " + loaded)
       if (loaded === "drive") {
-         queue(GoogleDriveService.getUserInfo(), function(userInfo) {
+         var preUserinfo = GoogleDriveService.getUserInfo()
+         console.log(preUserinfo);
+         queue(preUserinfo, function(userInfo) {
+            console.log(preUserinfo);
             $scope.myInfo = {
                "Name": userInfo.result.user.displayName,
                "Email": userInfo.result.user.emailAddress,
@@ -164,7 +167,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          }
                console.log('run')
       queue(GoogleDriveService.runGAppsScript(), function(result) {
-                 console.log('run2')
+         console.log('run2')
          console.log(result)
       });
       }
