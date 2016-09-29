@@ -75,6 +75,7 @@ app.directive("calculateCardHeight", function($timeout) {
     return {
         scope: false,
         link: function(scope, element) {
+            console.log(element)
             console.log({clientHeight:element[0].clientHeight, scrollHeight:element[0].scrollHeight, time:0});
             $timeout(function(){
                 console.log({clientHeight:element[0].clientHeight, scrollHeight:element[0].scrollHeight, time:'$timeout'});
