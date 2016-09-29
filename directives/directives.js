@@ -102,8 +102,8 @@ app.directive("gridLayout", function() {
     return {
         scope: false,
         link: function(scope, element) {
-            scope.openLink('http://www.google.com')
             //function to get column width and number of columns
+            console.log(element)
             function getColWidth() {
                 var gridOptions = {
                     gridWidth: 300, //minumum width of a grid, this may increase to take whole space of container
