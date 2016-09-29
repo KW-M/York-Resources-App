@@ -52,12 +52,13 @@ app.directive("showMoreOnOverflow", function($timeout) {
     return {
         scope: false,
         link: function(scope, element) {
-                console.log(element[0].clientHeight);
-                console.log(element[0].scrollHeight);
+                console.log({clientHeight:element[0].clientHeight, scrollHeight:element[0].scrollHeight, time:0});
             $timeout(function(){
-                console.log(element[0].clientHeight);
-                console.log(element[0].scrollHeight);
+                console.log({clientHeight:element[0].clientHeight, scrollHeight:element[0].scrollHeight, time:'$timeout'});
             })
+            $timeout(function(){
+                console.log({clientHeight:element[0].clientHeight, scrollHeight:element[0].scrollHeight, time:'$timeout5000'});
+            }, 5000)
             // if (element[0].scrollHeight > element[0].clientHeight || element[0].scrollWidth > element[0].clientWidth) {
             //     console.log("oveerflow")
             //     element[0].nextElementSibling.style.display = "initial";
@@ -74,13 +75,20 @@ app.directive("calculateCardHeight", function($timeout) {
     return {
         scope: false,
         link: function(scope, element) {
-             $timeout(function(){
-                 console.log('-------');
-                console.log(element[0].offsetHeight);
-                console.log(element[0].scrollHeight);
-                console.log(element[0].clientHeight);
-                scope.Post.cardHeight = element[0].scrollHeight/13;
-            }, 1000)
+            console.log({clientHeight:element[0].clientHeight, scrollHeight:element[0].scrollHeight, time:0});
+            $timeout(function(){
+                console.log({clientHeight:element[0].clientHeight, scrollHeight:element[0].scrollHeight, time:'$timeout'});
+            })
+            $timeout(function(){
+                console.log({clientHeight:element[0].clientHeight, scrollHeight:element[0].scrollHeight, time:'$timeout5000'});
+            }, 5000)
+            //  $timeout(function(){
+            //      console.log('-------');
+            //     console.log(element[0].offsetHeight);
+            //     console.log(element[0].scrollHeight);
+            //     console.log(element[0].clientHeight);
+            //     scope.Post.cardHeight = element[0].scrollHeight/13;
+            // }, 1000)
 
             // console.log(element[0].children[0].children[0].offsetHeight);
             // console.log(element[0].scrollHeight);
