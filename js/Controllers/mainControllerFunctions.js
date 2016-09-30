@@ -348,11 +348,9 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          nextPageToken: nextPageToken
       })
       if (nextPageToken !== "end") {
-         loading_spinner.style.display = 'block'; //show the user that were loading results
-         no_more_footer.style.display = 'none'; //show the user that were loading results
+         hideSpinner(false)
          queue(GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function(fileList) {
             console.log(fileList)
-            hideSpinner(undefined, false)
             if (fileList.result.nextPageToken !== undefined) {
                //if we haven't reached the end of our search:
                classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken;
@@ -362,6 +360,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                classPageTokenSelectionIndex[$scope.queryPropertyString] = "end"
             }
             if (fileList.result.files.length > 0) {
+               hideSpinner(undefined, false)
                if (!$scope.queryParams.q) {
                   for (o = 0; o < fileList.result.files.length; o++) {
                      if (deDuplicationIndex[fileList.result.files[o].id] === undefined) {
@@ -414,13 +413,11 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          if(hide === true) {
             loading_spinner.style.display = 'none';
             if (classPageTokenSelectionIndex[$scope.queryPropertyString] === 'end') {
-               if ($scope.visiblePosts.Length > 0) {
+               if ($scope.visiblePosts.length > 0) {
                   no_more_footer.style.display = 'block';
                } else {
                   no_posts_footer.style.display = 'block';
                }
-            } else {
-               console.log("why are we hidding?")
             }
          } else {
             loading_spinner.style.display = 'block';
