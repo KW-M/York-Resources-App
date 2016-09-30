@@ -411,6 +411,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          loading_spinner.style.display = 'none';
          no_more_footer.style.display = 'block';
       }
+      function hideSpinner(hide) {}
    }
 
    function formatPost(unformatedFile) {
