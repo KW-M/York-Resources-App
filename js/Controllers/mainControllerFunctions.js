@@ -334,7 +334,8 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
       console.log({
          pageIndex: classPageTokenSelectionIndex,
-         string: $scope.queryPropertyString
+         string: $scope.queryPropertyString,
+         nextPageToken: nextPageToken
       })
       if (nextPageToken !== "end") {
          loading_spinner.style.display = 'inherit'; //show the user that were loading results
@@ -388,12 +389,14 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                }
             }
             else {
-               loading_spinner.style.display = 'none';
+               loading_spinner.style.display = 'none'; 
+               no_more_footer.style.display = 'inherit'; 
             }
          });
       }
       else {
-         loading_spinner.style.display = 'none';
+         loading_spinner.style.display = 'none'; 
+         no_more_footer.style.display = 'inherit'; 
       }
    }
 
