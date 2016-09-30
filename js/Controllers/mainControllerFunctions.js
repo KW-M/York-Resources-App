@@ -54,7 +54,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    $scope.$mdMedia = $mdMedia;
    $scope.$mdDialog = $mdDialog;
    $scope.$location = $location;
-  // $scope.$timeout = $timeout;
+   // $scope.$timeout = $timeout;
 
    //----------------------------------------------------
    //------------------- Routing ------------------------
@@ -119,7 +119,14 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          $scope.queryParams.flagged = false
       }
       if ($scope.queryParams.q === null) {
-         sortPostsByType();
+         var filteredPosts = filterPosts($scope.allPosts);
+         $timeout(function() {
+            console.log({
+               filter: filteredPosts,
+               All: $scope.allPosts
+            })
+            $scope.visiblePosts = filteredPosts;
+         });
       }
       getFiles();
    }
@@ -166,11 +173,11 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                authorizationService.hideSigninDialog();
             });
          }
-      //          console.log('run')
-      // queue(GoogleDriveService.runGAppsScript(), function(result) {
-      //    console.log('run2')
-      //    console.log(result)
-      // });
+         //          console.log('run')
+         // queue(GoogleDriveService.runGAppsScript(), function(result) {
+         //    console.log('run2')
+         //    console.log(result)
+         // });
       }
    }
 
@@ -278,7 +285,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          //    height: rect.height,
          //    width: rect.width,
          // }//('#new_post_button'),
-      }).then(function(){
+      }).then(function() {
          //angular.element(event.path[2]).removeClass('fade-out');
       });
    };
@@ -453,36 +460,34 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    }
 
    function sortPostsByType(formattedFileList) {
-      if (formattedFileList !== undefined) {
-         if ($scope.queryParams.q) {
-            if ($scope.queryParams.q === $scope.previousSearch) {
-               $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
-            }
-            else {
-               $scope.searchPosts = formattedFileList;
-            }
-            $scope.previousSearch = $scope.queryParams.q
-            $timeout(function() {
-               $scope.visiblePosts = $scope.searchPosts;
-               LoadingFiles = false;
-               console.log('endingLoadingFiles')
-               document.dispatchEvent(new window.Event('filesLoaded'));
-            })
+      if ($scope.queryParams.q) {
+         if ($scope.queryParams.q === $scope.previousSearch) {
+            $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
          }
          else {
-            $scope.allPosts = $scope.allPosts.concat(formattedFileList);
-            var filteredPosts = filterPosts(formattedFileList);
-            $timeout(function() {
-               console.log({
-                  filter: filteredPosts,
-                  All: $scope.allPosts
-               })
-               $scope.visiblePosts = $scope.visiblePosts.concat(filteredPosts);
-               LoadingFiles = false;
-               console.log('EndingLoadingFiles')
-               document.dispatchEvent(new window.Event('filesLoaded'));
-            });
+            $scope.searchPosts = formattedFileList;
          }
+         $scope.previousSearch = $scope.queryParams.q
+         $timeout(function() {
+            $scope.visiblePosts = $scope.searchPosts;
+            LoadingFiles = false;
+            console.log('endingLoadingFiles')
+            document.dispatchEvent(new window.Event('filesLoaded'));
+         })
+      }
+      else {
+         $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+         var filteredPosts = filterPosts(formattedFileList);
+         $timeout(function() {
+            console.log({
+               filter: filteredPosts,
+               All: $scope.allPosts
+            })
+            $scope.visiblePosts = $scope.visiblePosts.concat(filteredPosts);
+            LoadingFiles = false;
+            console.log('EndingLoadingFiles')
+            document.dispatchEvent(new window.Event('filesLoaded'));
+         });
       }
    }
 
@@ -557,15 +562,15 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
 
    $scope.getFiles = function() {
       console.log('fake get files')
-      // if (LoadingFiles === true) {
-      //    console.log('waiting')
-      //    document.addEventListener('filesLoaded', getFiles());
-      // }
-      // else {
-      //    removeEventListener('filesLoaded', getFiles())
-      //    console.log('startingLoadingFiles')
-      //    getFiles()
-      // }
+         // if (LoadingFiles === true) {
+         //    console.log('waiting')
+         //    document.addEventListener('filesLoaded', getFiles());
+         // }
+         // else {
+         //    removeEventListener('filesLoaded', getFiles())
+         //    console.log('startingLoadingFiles')
+         //    getFiles()
+         // }
    };
 
    //----------------------------------------------------
@@ -577,10 +582,10 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    //        ev.stopPropagation();
    //        console.log(ev)
    // });
-   $scope.random=function(index){
-      return index * 10//Math.random()*50;
+   $scope.random = function(index) {
+      return index * 10 //Math.random()*50;
    }
-   addResizeListener(content_container, function(){
+   addResizeListener(content_container, function() {
       console.log('resize')
    });
    content_container.onscroll = function(event) {
