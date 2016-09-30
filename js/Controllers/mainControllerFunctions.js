@@ -121,7 +121,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       if ($scope.queryParams.q === null) {
          sortPostsByType();
       }
-      generateQueryString();
       getFiles();
    }
 
