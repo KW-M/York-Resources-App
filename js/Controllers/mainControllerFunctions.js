@@ -411,7 +411,17 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          loading_spinner.style.display = 'none';
          no_more_footer.style.display = 'block';
       }
-      function hideSpinner(hide) {}
+      function hideSpinner(hide) {
+         if(hide === true) {
+            
+         } else {
+            if ($scopevisiblePosts.Length > 4) {
+               
+            } else {
+               
+            }
+         }
+      }
    }
 
    function formatPost(unformatedFile) {
