@@ -106,12 +106,14 @@ html body {
 }
 
 .footer {
-    margin: 60px auto 0px auto;
-    text-align: center;
+    width: 100%;
+    display: flex;
+    padding: 40px 0 20px 0;
+    flex-direction: column;
 }
 
 .footer-centered {
-    margin: 60px auto 0px auto;
+    margin: 0 auto 6px auto;
     text-align: center;
 }
 
