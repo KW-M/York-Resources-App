@@ -6,6 +6,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    var content_container = document.getElementById("content_container");
    var loading_spinner = document.getElementById("loading_spinner");
    var no_more_footer = document.getElementById("no_more_footer");
+   var footer_problem = document.getElementById("footer_problem");
    console.log(no_more_footer)
    var performantScrollEnabled = false;
 
@@ -350,6 +351,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          no_more_footer.style.display = 'none'; //show the user that were loading results
          queue(GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function(fileList) {
             console.log(fileList)
+            footer_problem.style.display = 'none';
             if (fileList.result.nextPageToken !== undefined) {
                //if we haven't reached the end of our search:
                classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken;
@@ -393,13 +395,14 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                      log("duplicate posts - end of the line");
                      classPageTokenSelectionIndex[$scope.queryPropertyString] = "end";
                   }
-                  //getFiles();
                }
             }
             else {
                loading_spinner.style.display = 'none';
                no_more_footer.style.display = 'inherit';
             }
+         }, function(){
+            footer_problem.style.display = 'block';  
          });
       }
       else {
