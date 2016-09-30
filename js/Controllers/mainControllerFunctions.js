@@ -413,13 +413,15 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       }
       function hideSpinner(hide) {
          if(hide === true) {
-            
-         } else {
-            if ($scopevisiblePosts.Length > 4) {
+            loading_spinner.style.display = 'none';
+            if ($scope.visiblePosts.Length > 4) {
                
             } else {
                
             }
+         } else {
+            loading_spinner.style.display = 'block';
+            no_more_footer.style.display = 'none';
          }
       }
    }
