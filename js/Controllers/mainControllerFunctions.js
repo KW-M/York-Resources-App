@@ -352,7 +352,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          no_more_footer.style.display = 'none'; //show the user that were loading results
          queue(GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function(fileList) {
             console.log(fileList)
-            footer_problem.style.display = 'none';
+            hideSpinner(undefined, false)
             if (fileList.result.nextPageToken !== undefined) {
                //if we haven't reached the end of our search:
                classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken;
@@ -401,28 +401,26 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                }
             }
             else {
-               loading_spinner.style.display = 'none';
-               no_more_footer.style.display = 'block';
+               hideSpinner(true)
             }
          }, function(){
-            footer_problem.style.display = 'block';
+            hideSpinner(undefined, true)
          });
       }
       else {
-         loading_spinner.style.display = 'none';
-         no_more_footer.style.display = 'block';
+         hideSpinner(true)
       }
       function hideSpinner(hide, error) {
          if(hide === true) {
             loading_spinner.style.display = 'none';
-            if ($scope.visiblePosts.Length > 0) {
-               no_more_footer.style.display = 'block';
-            } else {
-               if (classPageTokenSelectionIndex[$scope.queryPropertyString] === 'end') {
+            if (classPageTokenSelectionIndex[$scope.queryPropertyString] === 'end') {
+               if ($scope.visiblePosts.Length > 0) {
                   no_more_footer.style.display = 'block';
                } else {
-                  
+                  no_posts_footer.style.display = 'block';
                }
+            } else {
+               console.log("why are we hidding?")
             }
          } else {
             loading_spinner.style.display = 'block';
