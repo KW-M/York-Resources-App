@@ -329,6 +329,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
 
    function getFiles() {
       LoadingFiles = true;
+      generateQueryString();
       var fileCount = 0;
       var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
@@ -356,14 +357,14 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                      if (deDuplicationIndex[fileList.result.files[o].id] === undefined) {
                         //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
                         deDuplicationIndex[fileList.result.files[o].id] = 1; //mark this id as used with a "1".
-                        formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[o]) //formatPost(fileList.result.files[o]); //format and save the new post to the formatted files list array
+                        formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[o]) //format and save the new post to the formatted files list array
                         fileCount++;
                      }
                   }
                }
                else {
                   for (o = 0; o < fileList.result.files.length; o++) {
-                     formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[o]) //formatPost(fileList.result.files[o]);
+                     formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[o])
                      fileCount++;
                   }
                }
@@ -480,18 +481,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                LoadingFiles = false;
                console.log('EndingLoadingFiles')
                document.dispatchEvent(new window.Event('filesLoaded'));
-            });
-         }
-      }
-      else {
-         if (!$scope.queryParams.q) {
-            var filteredPosts = filterPosts($scope.allPosts);
-            $timeout(function() {
-               console.log({
-                  filter: filteredPosts,
-                  All: $scope.allPosts
-               })
-               $scope.visiblePosts = filteredPosts;
             });
          }
       }
