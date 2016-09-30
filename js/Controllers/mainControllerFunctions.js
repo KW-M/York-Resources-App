@@ -348,7 +348,9 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          nextPageToken: nextPageToken
       })
       if (nextPageToken !== "end") {
-         hideSpinner(false)
+         loading_spinner.style.display = 'block';
+         no_more_footer.style.display = 'none';
+         no_posts_footer.style.display = 'none';
          queue(GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function(fileList) {
             console.log(fileList)
             if (fileList.result.nextPageToken !== undefined) {
@@ -360,7 +362,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                classPageTokenSelectionIndex[$scope.queryPropertyString] = "end"
             }
             if (fileList.result.files.length > 0) {
-               hideSpinner(undefined, false)
+               footer_problem.style.display = 'none';
                if (!$scope.queryParams.q) {
                   for (o = 0; o < fileList.result.files.length; o++) {
                      if (deDuplicationIndex[fileList.result.files[o].id] === undefined) {
@@ -400,36 +402,26 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                }
             }
             else {
-               hideSpinner(true)
+            loading_spinner.style.display = 'none';
+            if ($scope.visiblePosts.length > 0) {
+               no_more_footer.style.display = 'block';
+            } else {
+               no_posts_footer.style.display = 'block';
+            }
             }
          }, function(){
-            hideSpinner(undefined, true)
+            footer_problem.style.display = 'block';
          });
       }
       else {
-         hideSpinner(true)
-      }
-      function hideSpinner(hide, error) {
-         if(hide === true) {
-            loading_spinner.style.display = 'none';
-            if (classPageTokenSelectionIndex[$scope.queryPropertyString] === 'end') {
-               if ($scope.visiblePosts.length > 0) {
-                  no_more_footer.style.display = 'block';
-               } else {
-                  no_posts_footer.style.display = 'block';
-               }
-            }
+         loading_spinner.style.display = 'none';
+         if ($scope.visiblePosts.length > 0) {
+            no_more_footer.style.display = 'block';
          } else {
-            loading_spinner.style.display = 'block';
-            no_more_footer.style.display = 'none';
-            no_posts_footer.style.display = 'none';
-         }
-         if (error === true) {
-            footer_problem.style.display = 'block';
-         } else {
-            footer_problem.style.display = 'none';
+            no_posts_footer.style.display = 'block';
          }
       }
+
    }
 
    function formatPost(unformatedFile) {
