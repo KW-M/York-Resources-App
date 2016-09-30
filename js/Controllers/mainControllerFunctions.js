@@ -5,6 +5,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    var self = this;
    var content_container = document.getElementById("content_container");
    var loading_spinner = document.getElementById("loading_spinner");
+   var no_more_footer = document.getElementById("no_more_footer");
    var performantScrollEnabled = false;
 
    $scope.allPosts = [];
@@ -337,6 +338,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       })
       if (nextPageToken !== "end") {
          loading_spinner.style.display = 'inherit'; //show the user that were loading results
+         no_more_footer.style.display = 'none'; //show the user that were loading results
          queue(GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function(fileList) {
             console.log(fileList)
             if (fileList.result.nextPageToken !== undefined) {
