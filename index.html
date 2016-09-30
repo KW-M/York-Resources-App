@@ -65,7 +65,7 @@
         <!-------------------------------------------------------->
         <!-------------------------------------------------------->
 
-        <div class="horizontalContainer"  ng-cloak>
+        <div class="horizontalContainer" ng-cloak>
             <!---------------------------------------------------->
             <md-sidenav side-nav-insides class="side-nav md-sidenav-left md-whiteframe-z2 sidenav-overlay" md-component-id="sidenav_overlay"></md-sidenav>
             <side-nav-insides class="side-nav md-sidenav-left sidenav-inline" ng-class="{'side-nav-open' : globals.sidenavIsOpen === true && $mdMedia('gt-sm'), 'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}"></side-nav-insides>
@@ -131,10 +131,12 @@
                             </div>
                         </div>
                         <div ng-click="::newPost(Post,'view', $event)" style="cursor:pointer">
-                        <p class="post-card-title md-title">{{::Post.Title}}</p>
-                        <p class="post-card-creator md-subhead"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{Post.Creator.ClassOf}})</span></p>
-                        <p id="post_card_description" class="md-body-1" ng-bind-html="Post.Description" show-more-on-overflow></p>
-                        <div class="post-card-description-gradient" ng-style="{'background-image': 'linear-gradient(rgba(0, 0, 0, 0) 0%, '+Post.Class.Color+' 85%'}"><md-icon style="margin-bottom:2px">keyboard_arrow_down</md-icon></div>
+                            <p class="post-card-title md-title">{{::Post.Title}}</p>
+                            <p class="post-card-creator md-subhead"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{Post.Creator.ClassOf}})</span></p>
+                            <p id="post_card_description" class="md-body-1" ng-bind-html="Post.Description" show-more-on-overflow></p>
+                            <div class="post-card-description-gradient" ng-style="{'background-image': 'linear-gradient(rgba(0, 0, 0, 0) 0%, '+Post.Class.Color+' 85%'}">
+                                <md-icon style="margin-bottom:2px">keyboard_arrow_down</md-icon>
+                            </div>
                         </div>
                         <md-card-actions layout="row" layout-align="start center">
                             <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(!Post.userLiked, Post)">
@@ -176,7 +178,7 @@
                 </div>
                 <div class="footer">
                     <h3 id="no_more_footer" class="footer-centered" style="display: none;">No More</h3>
-                    <h3 id="no_posts_footer" class="footer-centered" style="display: none;"><img src="images/Lonely Island"/>It's so lonely here, <br>be the first to contribute</h3>
+                    <h3 id="no_posts_footer" class="footer-centered" style="/* display: none; */"><p style="margin: 0;">It's so lonely down here,</p><p style="margin: 0;font-size: 14px;font-weight: 200;">maybe you should contribute.</p><img src="images/Lonely Island.png" style="width: 216px; padding-top: 12px;"></h3>
                     <span class="footer-centered" id="footer_problem" style="display: none;">Something's not quite right, try <br> <a href="javascript:history.go(0)"><md-button>Reloading</md-button></a></span>
                     <md-progress-circular id="loading_spinner" class="md-accent footer-centered" style="display: none;" md-mode="indeterminate" md-diameter="30px"></md-progress-circular>
                 </div>
@@ -219,4 +221,5 @@
     <link rel="stylesheet" href="css/postCard.css" />
     <link rel="stylesheet" href="css/newPost.css" />
     <link rel="stylesheet" href="css/help.css" />
+
 </html>
