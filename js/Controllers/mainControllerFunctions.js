@@ -347,7 +347,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          nextPageToken: nextPageToken
       })
       if (nextPageToken !== "end") {
-         loading_spinner.style.display = 'inherit'; //show the user that were loading results
+         loading_spinner.style.display = 'block'; //show the user that were loading results
          no_more_footer.style.display = 'none'; //show the user that were loading results
          queue(GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function(fileList) {
             console.log(fileList)
@@ -395,7 +395,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                      log("duplicate posts - end of the line");
                      classPageTokenSelectionIndex[$scope.queryPropertyString] = "end";
                      loading_spinner.style.display = 'none';
-                     no_more_footer.style.display = 'inherit';
+                     no_more_footer.style.display = 'block';
                   }
                }
             }
