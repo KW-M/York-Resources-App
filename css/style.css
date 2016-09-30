@@ -105,9 +105,14 @@ html body {
     margin: auto;
 }
 
+.footer {
+    margin: 60px auto 0px auto;
+    text-align: center;
+}
+
 .footer-centered {
     margin: 60px auto 0px auto;
-    text-align: center
+    text-align: center;
 }
 
 .signin-button-container {
