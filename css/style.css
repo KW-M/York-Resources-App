@@ -105,8 +105,9 @@ html body {
     margin: auto;
 }
 
-#loading_spinner {
+.footer-centered {
     margin: 60px auto 0px auto;
+    text-align: center
 }
 
 .signin-button-container {
