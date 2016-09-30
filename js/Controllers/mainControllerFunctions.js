@@ -404,24 +404,29 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                no_more_footer.style.display = 'block';
             }
          }, function(){
-            footer_problem.style.display = 'block';  
+            footer_problem.style.display = 'block';
          });
       }
       else {
          loading_spinner.style.display = 'none';
          no_more_footer.style.display = 'block';
       }
-      function hideSpinner(hide) {
+      function hideSpinner(hide, error) {
          if(hide === true) {
             loading_spinner.style.display = 'none';
             if ($scope.visiblePosts.Length > 4) {
-               
+
             } else {
-               
+
             }
          } else {
             loading_spinner.style.display = 'block';
             no_more_footer.style.display = 'none';
+         }
+         if (error === true) {
+            footer_problem.style.display = 'block';
+         } else {
+            footer_problem.style.display = 'none';
          }
       }
    }
