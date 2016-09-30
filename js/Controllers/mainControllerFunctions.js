@@ -394,6 +394,8 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                   else { //if we havene reached the end of our search:
                      log("duplicate posts - end of the line");
                      classPageTokenSelectionIndex[$scope.queryPropertyString] = "end";
+                     loading_spinner.style.display = 'none';
+                     no_more_footer.style.display = 'inherit';
                   }
                }
             }
