@@ -91,20 +91,22 @@
                 </span>
                 <add-bar-top></add-bar-top>
 
-                <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6" md-row-height="0" md-gutter="12px" md-gutter-gt-sm="8px">
-                    <md-grid-tile class="raise-on-hover" md-rowspan="{{Post.cardHeight}}" md-colspan="1" ng-style="{'background-color': Post.Class.Color}" ng-repeat="Post in visiblePosts track by Post.Id | orderBy: 'UpdateDate':true">
-                        hi
-                    <md-card calculate-card-height class="post-card raise-on-hover" ng-style="{'background-color': Post.Class.Color}" style="width: 100%;margin: 0;">
-                        <div>{{Post.Title}}</div>
-                        <div>{{Post.Description}}</div>
+                <!--<md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6" md-row-height="0" md-gutter="12px" md-gutter-gt-sm="8px">-->
+                <!--    <md-grid-tile class="raise-on-hover" md-rowspan="{{Post.cardHeight}}" md-colspan="1" ng-style="{'background-color': Post.Class.Color}" ng-repeat="Post in visiblePosts track by Post.Id | orderBy: 'UpdateDate':true">-->
+                <!--        hi-->
+                <!--    <md-card calculate-card-height class="post-card raise-on-hover" ng-style="{'background-color': Post.Class.Color}" style="width: 100%;margin: 0;">-->
+                <!--        <div>{{Post.Title}}</div>-->
+                <!--        <div>{{Post.Description}}</div>-->
+                <!--    </md-card>-->
+                <!--    </md-grid-tile>-->
+                <!--</md-grid-list>-->
+                <div angular-grid="pics" grid-width="300" gutter-size="10" angular-grid-id="gallery" refresh-on-img-load="false" >
+                    <md-card class="post-card raise-on-hover" ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}">
+                        <p class="post-card-title md-title">{{Post.Title}}</p>-->
+                        <p class="post-card-creator md-subhead"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::Post.Creator.ClassOf}})</span></p>
+                        <p id="post_card_description" class="md-body-1" ng-bind-html="Post.Description"></p>
                     </md-card>
-                    </md-grid-tile>
-                </md-grid-list>
-                    <!--<md-card class="post-card raise-on-hover" ng-repeat="Post in visiblePosts track by Post.Id | orderBy: 'UpdateDate':true" ng-style="{'background-color': Post.Class.Color}">-->
-                    <!--    <div>{{Post.Title}}</div>-->
-                    <!--    <div>{{Post.Description}}</div>-->
-                    <!--</md-card>-->
-                <!--</div>-->
+                </div>
                 <!--<div angular-grid="visiblePosts" id="postsGrid" ag-options="angularGridOptions" ag-id="posts">-->
                 <!--    <md-card class="post-card raise-on-hover" ng-repeat="Post in visiblePosts track by Post.Id | orderBy: 'UpdateDate':true" ng-style="{'background-color': Post.Class.Color}">-->
                 <!--        <md-button style="position: absolute; top: -14px; right: -6px; z-index: 1000" class="md-icon-button md-accent" ng-click="bookmark(Post)">-->
