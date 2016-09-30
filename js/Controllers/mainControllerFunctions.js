@@ -6,6 +6,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    var content_container = document.getElementById("content_container");
    var loading_spinner = document.getElementById("loading_spinner");
    var no_more_footer = document.getElementById("no_more_footer");
+   console.log(no_more_footer)
    var performantScrollEnabled = false;
 
    $scope.allPosts = [];
@@ -389,14 +390,14 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                }
             }
             else {
-               loading_spinner.style.display = 'none'; 
-               no_more_footer.style.display = 'inherit'; 
+               loading_spinner.style.display = 'none';
+               no_more_footer.style.display = 'inherit';
             }
          });
       }
       else {
-         loading_spinner.style.display = 'none'; 
-         no_more_footer.style.display = 'inherit'; 
+         loading_spinner.style.display = 'none';
+         no_more_footer.style.display = 'inherit';
       }
    }
 
@@ -586,7 +587,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    //        console.log(ev)
    // });
    $scope.random=function(index){
-      return index * 10//Math.random()*50;  
+      return index * 10//Math.random()*50;
    }
    addResizeListener(content_container, function(){
       console.log('resize')
