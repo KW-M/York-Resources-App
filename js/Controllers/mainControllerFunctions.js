@@ -6,6 +6,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    var content_container = document.getElementById("content_container");
    var loading_spinner = document.getElementById("loading_spinner");
    var no_more_footer = document.getElementById("no_more_footer");
+   var no_posts_footer = document.getElementById("no_posts_footer");
    var footer_problem = document.getElementById("footer_problem");
    console.log(no_more_footer)
    var performantScrollEnabled = false;
@@ -414,14 +415,19 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       function hideSpinner(hide, error) {
          if(hide === true) {
             loading_spinner.style.display = 'none';
-            if ($scope.visiblePosts.Length > 4) {
-
+            if ($scope.visiblePosts.Length > 0) {
+               no_more_footer.style.display = 'block';
             } else {
-
+               if (classPageTokenSelectionIndex[$scope.queryPropertyString] === 'end') {
+                  no_more_footer.style.display = 'block';
+               } else {
+                  
+               }
             }
          } else {
             loading_spinner.style.display = 'block';
             no_more_footer.style.display = 'none';
+            no_posts_footer.style.display = 'none';
          }
          if (error === true) {
             footer_problem.style.display = 'block';
