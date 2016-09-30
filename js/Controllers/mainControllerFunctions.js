@@ -401,7 +401,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             }
             else {
                loading_spinner.style.display = 'none';
-               no_more_footer.style.display = 'inherit';
+               no_more_footer.style.display = 'block';
             }
          }, function(){
             footer_problem.style.display = 'block';  
@@ -409,7 +409,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       }
       else {
          loading_spinner.style.display = 'none';
-         no_more_footer.style.display = 'inherit';
+         no_more_footer.style.display = 'block';
       }
    }
 
