@@ -342,7 +342,7 @@ md-input-container.button-select md-select-value {
 /*}*/
 
 .post-card {
-        width: 360px;
+    idth: 360px;
     min-width: 280px;
     margin: 8px;
     position: relative;
