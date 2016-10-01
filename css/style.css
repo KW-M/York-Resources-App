@@ -341,15 +341,15 @@ md-input-container.button-select md-select-value {
 /*    display: block;*/
 /*}*/
 
-/*.post-card {*/
-/*    list-style: none;*/
-/*    box-sizing: border-box;*/
-/*    -webkit-transition: all 400ms ease;*/
-/*    transition: all 400ms ease;*/
-/*    min-width: 100px;*/
-/*    margin: 0px;*/
-    /*transition: opacity 450ms ease, transform 450ms ease;*/
-/*}*/
+.post-card {
+        width: 360px;
+    min-width: 280px;
+    margin: 8px;
+    position: relative;
+    box-sizing: border-box;
+    -webkit-transition: all 400ms ease;
+    transition: all 400ms ease;
+}
 
 /*.post-card.ng-leave {*/
 /*    -webkit-transition: all ease 400ms;*/
