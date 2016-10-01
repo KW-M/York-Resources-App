@@ -342,11 +342,11 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    //--------- loading and filtering posts --------------
 
    function getFiles() {
-      LoadingFiles = true;
-      generateQueryString();
       no_more_footer.style.display = 'none';
       no_posts_footer.style.display = 'none';
       footer_problem.style.display = 'none';
+      LoadingFiles = true;
+      generateQueryString();
       var fileCount = 0;
       var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
@@ -368,7 +368,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                classPageTokenSelectionIndex[$scope.queryPropertyString] = "end"
             }
             if (fileList.result.files.length > 0) {
-               footer_problem.style.display = 'none';
+
                if (!$scope.queryParams.q) {
                   for (o = 0; o < fileList.result.files.length; o++) {
                      if (deDuplicationIndex[fileList.result.files[o].id] === undefined) {
