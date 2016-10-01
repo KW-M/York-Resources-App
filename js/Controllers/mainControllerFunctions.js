@@ -404,24 +404,31 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             else {
                console.log($scope.visiblePosts.length)
                loading_spinner.style.display = 'none';
-               if ($scope.visiblePosts.length > 0) {
-                  no_more_footer.style.display = 'block';
-               } else {
-                  no_posts_footer.style.display = 'block';
-               }
+               $timeout(function() {
+                  console.log($scope.visiblePosts.length)
+                  if ($scope.visiblePosts.length > 0) {
+                     no_more_footer.style.display = 'block';
+                  }
+                  else {
+                     no_posts_footer.style.display = 'block';
+                  }
+               }, 100)
             }
-         }, function(){
+         }, function() {
             footer_problem.style.display = 'block';
          });
       }
       else {
          loading_spinner.style.display = 'none';
-                        console.log($scope.visiblePosts.length)
-         if ($scope.visiblePosts.length > 0) {
-            no_more_footer.style.display = 'block';
-         } else {
-            no_posts_footer.style.display = 'block';
-         }
+         $timeout(function() {
+            console.log($scope.visiblePosts.length)
+            if ($scope.visiblePosts.length > 0) {
+               no_more_footer.style.display = 'block';
+            }
+            else {
+               no_posts_footer.style.display = 'block';
+            }
+         }, 100)
       }
 
    }
