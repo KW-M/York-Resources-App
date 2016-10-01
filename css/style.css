@@ -114,6 +114,9 @@ html body {
     text-align: center;
     justify-content: center;
     padding: 40px 0 20px 0;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
 }
 
 .signin-button-container {
