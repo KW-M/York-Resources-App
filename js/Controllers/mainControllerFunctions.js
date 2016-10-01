@@ -344,6 +344,9 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    function getFiles() {
       LoadingFiles = true;
       generateQueryString();
+      no_more_footer.style.display = 'none';
+      no_posts_footer.style.display = 'none';
+      footer_problem.style.display = 'none';
       var fileCount = 0;
       var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
@@ -354,8 +357,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       })
       if (nextPageToken !== "end") {
          loading_spinner.style.display = 'block';
-         no_more_footer.style.display = 'none';
-         no_posts_footer.style.display = 'none';
          queue(GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function(fileList) {
             console.log(fileList)
             if (fileList.result.nextPageToken !== undefined) {
