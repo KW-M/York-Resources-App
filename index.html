@@ -107,8 +107,8 @@
                 <!--        <p id="post_card_description" class="md-body-1" ng-bind-html="Post.Description"></p>-->
                 <!--    </md-card>-->
                 <!--</div>-->
-                <div angular-grid="visiblePosts" id="postsGrid" ag-options="angularGridOptions" ag-id="posts">
-                    <md-card class="post-card raise-on-hover" ng-repeat="Post in visiblePosts track by Post.Id | orderBy: 'UpdateDate':true" ng-style="{'background-color': Post.Class.Color}">
+                <!--<div angular-grid="visiblePosts" id="postsGrid" ag-options="angularGridOptions" ag-id="posts">-->
+                    <md-card class="post-card raise-on-hover" ng-repeat="Post in visiblePosts track by Post.Id | orderBy: 'UpdateDate':true" ng-style="{'background-color': Post.Class.Color}" style="width:900px; display:inline">
                         <md-button style="position: absolute; top: -14px; right: -6px; z-index: 1000" class="md-icon-button md-accent" ng-click="bookmark(Post)">
                             <md-icon class="postBookmarkIcon" ng-hide="Post.Bookmarked === false" style="text-shadow: 0px 1px 5px rgba(0,0,0,0.6);">bookmark</md-icon>
                             <md-icon class="preBookmarkIcon" ng-hide="Post.Bookmarked === true" style="color: rgba(255, 255, 255, 0.6); text-shadow: 0px 1px 5px rgba(0,0,0,0.6)">bookmark_border</md-icon>
@@ -175,7 +175,7 @@
                             <md-button id="open_button" ng-hide="::Post.Link == ''" class="md-button md-accent" ng-click="::openLink(Post.Link)" aria-label="Open resource">Open Link</md-button>
                         </md-card-actions>
                     </md-card>
-                </div>
+                <!--</div>-->
                 <div class="footer">
                     <h3 id="no_posts_footer" class="footer-centered" style="display: none;"><p style="margin: 0;">It's so lonely here</p><p style="margin: 0;font-size: 14px;font-weight: 200;">Be the first to post</p><img src="images/Lonely Island.png" style="width: 216px; padding-top: 12px;"></h3>
                     <h3 id="no_more_footer" class="footer-centered" style="display: none;"><p style="margin: 0;">No more posts? Has everyone gone to sleep?</p><p style="margin: 0;font-size: 14px;font-weight: 200;">Maybe you should Contribute.</p><img src="images/Lonely Island.png" style="width: 216px; padding-top: 12px;"></h3>
@@ -183,7 +183,6 @@
                     <md-progress-circular id="loading_spinner" class="md-accent footer-centered" style="display: none;" md-mode="indeterminate" md-diameter="30px"></md-progress-circular>
                 </div>
             </div>
-            <!--<span class="unselectable default-mouse" style="font-size: 150%; background-color:rgba(0,0,0,0.5); position:fixed; bottom:0px;right:0px; color:white;">PRE-ALPHA version</span>-->
         </div>
         <!-------------------------------------------------------->
         <!---------------------- Libraries ----------------------->
