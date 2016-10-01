@@ -88,6 +88,11 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       $scope.queryParams.q = $location.search().q || null;
       $scope.queryParams.classpath = $location.path().replace(/\//g, "") || 'all-posts';
       $scope.queryParams.id = $location.hash();
+      
+      no_more_footer.style.display = 'none';
+      no_posts_footer.style.display = 'none';
+      footer_problem.style.display = 'none';
+      
       if ($scope.queryParams.q !== null) {
          if ($scope.queryParams.q !== $scope.previousSearch) {
             $scope.visiblePosts = [];
