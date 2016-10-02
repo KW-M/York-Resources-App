@@ -284,11 +284,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	//----------------------------------------------------
 	//---------------------- dev -------------------------
 	$scope.consoleLog = function(input, asAlert) {
+		console.log(input)
 		if (asAlert) {
-			window.alert(JSON.stringify(input, null, 4))
-		}
-		else {
-			console.log(input)
+			window.alert(JSON.stringify(input, null, 4))		
 		}
 	}
 	$scope.logPostToConsole = function(content, arrayIndex) {
