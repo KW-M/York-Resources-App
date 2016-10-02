@@ -421,7 +421,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                }, 100)
             }
          }, function() {
-            footer_problem.style.display = 'block';
+            footer_problem.style.display = 'flex';
          });
       }
       else {
