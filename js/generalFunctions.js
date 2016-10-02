@@ -36,7 +36,7 @@
   };
   
   function chooseRandom (inputArray) {
-    var number = (Math.floor(Math.random() * (inputArray.length - 1)) + 1) - 1;
+    var number = (Math.floor(Math.random() * (inputArray.length - 0)));
     return inputArray[number]
   }
 
