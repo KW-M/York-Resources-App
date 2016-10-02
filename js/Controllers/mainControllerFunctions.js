@@ -8,15 +8,14 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    var no_more_footer = document.getElementById("no_more_footer");
    var no_posts_footer = document.getElementById("no_posts_footer");
    var footer_problem = document.getElementById("footer_problem");
-   console.log(no_more_footer)
    var performantScrollEnabled = false;
 
    $scope.allPosts = [];
    $scope.searchPosts = [];
    $scope.visiblePosts = [];
 
-   var deDuplicationIndex = {};
-   var classPageTokenSelectionIndex = {};
+   $scope.deDuplicationIndex = {};
+   $scope.classPageTokenSelectionIndex = {};
    var LoadingFiles = null;
 
    $scope.previousSearch = undefined;
@@ -349,9 +348,9 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       generateQueryString();
       var fileCount = 0;
       var formattedFileList = [];
-      var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
+      var nextPageToken = $scope.classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
       console.log({
-         pageIndex: classPageTokenSelectionIndex,
+         pageIndex: $scope.classPageTokenSelectionIndex,
          string: $scope.queryPropertyString,
          nextPageToken: nextPageToken
       })
@@ -361,19 +360,19 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             console.log(fileList)
             if (fileList.result.nextPageToken !== undefined) {
                //if we haven't reached the end of our search:
-               classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken;
+               $scope.classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken;
             }
             else {
                //if we have reached the end of our search:
-               classPageTokenSelectionIndex[$scope.queryPropertyString] = "end"
+               $scope.classPageTokenSelectionIndex[$scope.queryPropertyString] = "end"
             }
             if (fileList.result.files.length > 0) {
 
                if (!$scope.queryParams.q) {
                   for (o = 0; o < fileList.result.files.length; o++) {
-                     if (deDuplicationIndex[fileList.result.files[o].id] === undefined) {
+                     if ($scope.deDuplicationIndex[fileList.result.files[o].id] === undefined) {
                         //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
-                        deDuplicationIndex[fileList.result.files[o].id] = 1; //mark this id as used with a "1".
+                        $scope.deDuplicationIndex[fileList.result.files[o].id] = 1; //mark this id as used with a "1".
                         formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[o]) //format and save the new post to the formatted files list array
                         fileCount++;
                      }
@@ -397,11 +396,11 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                else {
                   if (fileList.result.nextPageToken !== undefined) { //if we haven't reached the end of our search:
                      log("duplicate posts - more posts coming...")
-                     classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken;
+                     $scope.classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken;
                   }
                   else { //if we havene reached the end of our search:
                      log("duplicate posts - end of the line");
-                     classPageTokenSelectionIndex[$scope.queryPropertyString] = "end";
+                     $scope.classPageTokenSelectionIndex[$scope.queryPropertyString] = "end";
                      loading_spinner.style.display = 'none';
                      no_more_footer.style.display = 'block';
                   }
