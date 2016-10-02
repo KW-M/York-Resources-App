@@ -34,6 +34,11 @@
       if (callNow) func.apply(context, args);
     };
   };
+  
+  function chooseRandom (inputArray) {
+    var number = (Math.floor(Math.random() * (inputArray.length - 1)) + 1) - 1;
+    return inputArray[number]
+  }
 
   // Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
   function queue(promise, action, error) {
