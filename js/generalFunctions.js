@@ -40,6 +40,24 @@
     return inputArray[number]
   }
 
+function gappTest() {
+  var data = null;
+
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === 4) {
+    console.log(this.responseText);
+  }
+});
+
+xhr.open("GET", "https://script.google.com/a/macros/york.org/s/AKfycbw6AZSwWecNtHkw8zANiKM-2Ie_Nqg-HPqetfR-C2SEaWMR41Q/exec?number=55&text=hello&Bol=false");
+xhr.setRequestHeader("cache-control", "no-cache");
+xhr.setRequestHeader("postman-token", "7d82e0ad-8808-488f-882a-9882f6649c2b");
+
+xhr.send(data);
+}
   // Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
   function queue(promise, action, error) {
     theQueue.push({
