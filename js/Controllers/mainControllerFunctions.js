@@ -524,14 +524,14 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          } else {
             var Creator = true;
          }
-         console.log({
-            filteredPost: post,
-            Flagged: Flagged,
-            Class: Class,
-            Type: Type,
-            Bookmarked: Bookmarked,
-            Creator: Creator,
-         });
+         // console.log({
+         //    filteredPost: post,
+         //    Flagged: Flagged,
+         //    Class: Class,
+         //    Type: Type,
+         //    Bookmarked: Bookmarked,
+         //    Creator: Creator,
+         // });
          return Flagged && Class && Type && Creator && Bookmarked;
       });
       //output.sort()
