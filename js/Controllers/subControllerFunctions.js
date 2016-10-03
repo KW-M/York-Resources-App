@@ -175,7 +175,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		$mdDialog.show(confirm).then(function() {
 			$timeout($scope.visiblePosts.splice(arrayIndex, 1));
 			queue(GoogleDriveService.deleteDriveFile(content.Id), function() {
-				console.log("deleted" + content.Id);
+				console.log("deleted");
 			});
 		});
 	};
