@@ -366,38 +366,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             else {
                //if we have reached the end of our search:
                classPageTokenSelectionIndex[$scope.queryPropertyString] = "end"
-            }
-               for (fileCount = 0; fileCount < fileList.result.files.length; fileCount++) {
-                  if (!$scope.queryParams.q && deDuplicationIndex[fileList.result.files[fileCount].id] === undefined) {
-                     //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
-                     deDuplicationIndex[fileList.result.files[fileCount].id] = 1; //mark this id as used with a "1".
-                  }
-                  formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[fileCount]) //format and save the new post to the formatted files list array
-               }
-               console.log(formattedFileList)
-               if (formattedFileList.length !== 0) {
-                  sortPostsByType(formattedFileList);
-                  log({
-                     allPosts: $scope.allPosts,
-                     visiblePosts: $scope.visiblePosts,
-                  }, true);
-                  log("-----------------------", true);
-               }
-               else {
-                  if (fileList.result.nextPageToken !== undefined) { //if we haven't reached the end of our search:
-                     log("duplicate posts - more posts coming...")
-                     classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken;
-                  }
-                  else { //if we havene reached the end of our search:
-                     log("duplicate posts - end of the line");
-                     classPageTokenSelectionIndex[$scope.queryPropertyString] = "end";
-                     loading_spinner.style.display = 'none';
-                     no_more_footer.style.display = 'block';
-                  }
-               }
-            }
-            else {
-               console.log($scope.visiblePosts.length)
                loading_spinner.style.display = 'none';
                $timeout(function() {
                   console.log($scope.visiblePosts.length)
@@ -409,6 +377,29 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                   }
                }, 100)
             }
+               for (fileCount = 0; fileCount < fileList.result.files.length; fileCount++) {
+                  if (!$scope.queryParams.q && deDuplicationIndex[fileList.result.files[fileCount].id] === undefined) {
+                     //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
+                     deDuplicationIndex[fileList.result.files[fileCount].id] = 1; //mark this id as used with a "1".
+                  }
+                  formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[fileCount]) //format and save the new post to the formatted files list array
+               }
+               if (formattedFileList.length !== 0) {
+                  console.log(formattedFileList);
+                  sortPostsByType(formattedFileList);
+               }
+               else {
+                  if (fileList.result.nextPageToken !== undefined) { //if we haven't reached the end of our search:
+                     log("duplicate posts - more posts coming...")
+                     classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken;
+                  }
+                  else { //if we have reached the end of our search:
+                     log("duplicate posts - end of the line");
+                     classPageTokenSelectionIndex[$scope.queryPropertyString] = "end";
+                     loading_spinner.style.display = 'none';
+                     no_more_footer.style.display = 'block';
+                  }
+               }
          }, function() {
             footer_problem.style.display = 'block';
          });
