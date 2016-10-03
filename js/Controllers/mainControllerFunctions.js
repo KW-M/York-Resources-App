@@ -120,6 +120,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          $scope.searchPlaceholder = 'Search Within ' + $scope.queryParams.classpath;
          $scope.queryParams.flagged = false
       }
+      generateQueryString();
       if ($scope.queryParams.q === null) {
          var filteredPosts = filterPosts($scope.allPosts);
          $timeout(function() {
@@ -339,7 +340,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       no_more_footer.style.display = 'none';
       no_posts_footer.style.display = 'none';
       footer_problem.style.display = 'none';
-      generateQueryString();
       console.log({
          pageIndex: classPageTokenSelectionIndex,
          string: $scope.queryPropertyString,
@@ -347,7 +347,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       })
       var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
-      var lastQueryString = $scope.queryPropertyString;
       if (nextPageToken !== "end") {
          loading_spinner.style.display = 'block';
          queue(GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function(fileList) {
@@ -365,7 +364,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                fileList: fileList,
                formattedFileList: formattedFileList
             });
-            sortPostsByType(formattedFileList,lastQueryString);
+            sortPostsByType(formattedFileList);
             if (fileList.result.nextPageToken !== undefined) {
                classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken; //if we haven't reached the end of our search:
             } else {
@@ -414,7 +413,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       $scope.queryPropertyString = query;
    }
 
-   function sortPostsByType(formattedFileList, lastQueryString) {
+   function sortPostsByType(formattedFileList) {
       if ($scope.queryParams.q) {
          if ($scope.queryParams.q === $scope.previousSearch) {
             $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
@@ -431,7 +430,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          })
       } else {
          $scope.allPosts = $scope.allPosts.concat(formattedFileList);
-         if (lastQueryString === $scope.queryPropertyString) {
             var filteredPosts = filterPosts(formattedFileList);
             $timeout(function() {
                conurancy_counter--;
