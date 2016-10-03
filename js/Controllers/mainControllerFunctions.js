@@ -369,16 +369,16 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken; //if we haven't reached the end of our search:
             } else {
                classPageTokenSelectionIndex[$scope.queryPropertyString] = "end" //if we have reached the end of our search:
-               hideSpinner()
             }
+            hideSpinner();
          }, function() {
-            footer_problem.style.display = 'block';
+            footer_problem.style.display = 'flex';
          });
-      } else {
-         hideSpinner();
       }
-
-      function hideSpinner() {
+   }
+   
+   function hideSpinner() {
+      if (classPageTokenSelectionIndex[$scope.queryPropertyString] === "end")
          loading_spinner.style.display = 'none';
          $timeout(function() {
             if ($scope.visiblePosts.length > 0) {
@@ -430,19 +430,19 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          })
       } else {
          $scope.allPosts = $scope.allPosts.concat(formattedFileList);
-            var filteredPosts = filterPosts(formattedFileList);
-            $timeout(function() {
-               conurancy_counter--;
-               console.log({
-                  filter: filteredPosts,
-                  All: $scope.allPosts
-               })
-               $scope.visiblePosts = $scope.visiblePosts.concat(filteredPosts);
-               LoadingFiles = false;
-               console.log('EndingLoadingFiles')
-               document.dispatchEvent(new window.Event('filesLoaded'));
-            });
-         }
+         var filteredPosts = filterPosts(formattedFileList);
+         $timeout(function() {
+            conurancy_counter--;
+            console.log({
+               filter: filteredPosts,
+               All: $scope.allPosts
+            })
+            $scope.visiblePosts = $scope.visiblePosts.concat(filteredPosts);
+            LoadingFiles = false;
+            console.log('EndingLoadingFiles')
+            document.dispatchEvent(new window.Event('filesLoaded'));
+         });
+
       }
    }
 
@@ -594,11 +594,14 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       }
    }
 
-	//----------------------------------------------------
-	//---------------------- dev -------------------------
-	$scope.logDuplicationIndexes = function() {
-		console.log({deDuplicationIndex:deDuplicationIndex, classPageTokenSelectionIndex:classPageTokenSelectionIndex})
-	}
+   //----------------------------------------------------
+   //---------------------- dev -------------------------
+   $scope.logDuplicationIndexes = function() {
+      console.log({
+         deDuplicationIndex: deDuplicationIndex,
+         classPageTokenSelectionIndex: classPageTokenSelectionIndex
+      })
+   }
 
    //More (less important functions are delegated to another file);
    subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance);
