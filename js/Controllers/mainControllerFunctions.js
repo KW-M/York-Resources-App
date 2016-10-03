@@ -353,7 +353,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       if (nextPageToken !== "end") {
          loading_spinner.style.display = 'block';
          queue(GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function(fileList) {
-            console.log(fileList)
             for (var fileCount = 0; fileCount < fileList.result.files.length; fileCount++) {
                if (!$scope.queryParams.q && deDuplicationIndex[fileList.result.files[fileCount].id] === undefined) {
                   //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
@@ -361,29 +360,23 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                }
                formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[fileCount]) //format and save the new post to the formatted files list array
             }
-            console.log(formattedFileList);
+            console.log({fileList:fileList,formattedFileList:formattedFileList});
             sortPostsByType(formattedFileList);
             if (fileList.result.nextPageToken !== undefined) {
                classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken;//if we haven't reached the end of our search:
             }
             else {
                classPageTokenSelectionIndex[$scope.queryPropertyString] = "end"//if we have reached the end of our search:
-               loading_spinner.style.display = 'none';
-               $timeout(function() {
-                  console.log($scope.visiblePosts.length)
-                  if ($scope.visiblePosts.length > 0) {
-                     no_more_footer.style.display = 'block';
-                  }
-                  else {
-                     no_posts_footer.style.display = 'block';
-                  }
-               }, 100)
+               hideSpinner()
             }
          }, function() {
             footer_problem.style.display = 'block';
          });
       }
       else {
+         hideSpinner();
+      }
+      function hideSpinner() {
          loading_spinner.style.display = 'none';
          $timeout(function() {
             console.log($scope.visiblePosts.length)
@@ -395,7 +388,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             }
          }, 100)
       }
-
    }
 
    function formatPost(unformatedFile) {
