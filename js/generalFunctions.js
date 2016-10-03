@@ -5,17 +5,32 @@
   function log(input, logWithoutDevMode) {
     if (devMode === true) {
       console.log(input)
-    }
-    else if (logWithoutDevMode === true) {
+    } else if (logWithoutDevMode === true) {
       console.log(input)
-    }
-    else {
+    } else {
       //tough luck
     }
 
   }
-  
-  function (getURL)
+
+  function getAppsScript() {
+    var data = null;
+
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.addEventListener("readystatechange", function() {
+      if (this.readyState === 4) {
+        console.log(this.responseText);
+      }
+    });
+
+    xhr.open("GET", "https://script.google.com/macros/s/AKfycbw6AZSwWecNtHkw8zANiKM-2Ie_Nqg-HPqetfR-C2SEaWMR41Q/exec");
+    xhr.setRequestHeader("cache-control", "no-cache");
+    xhr.setRequestHeader("postman-token", "d0fe8605-9fea-448f-8a46-b2602d642b7f");
+
+    xhr.send(data);
+  }
 
   // Returns a function, that, as long as it continues to be invoked, will not
   // be triggered. The function will be called after it stops being called for
@@ -37,7 +52,7 @@
     };
   };
 
-  function chooseRandom (inputArray) {
+  function chooseRandom(inputArray) {
     var number = (Math.floor(Math.random() * (inputArray.length - 0)));
     return inputArray[number]
   }
@@ -75,8 +90,7 @@
               'Error': error
             })
             item.Err(error);
-          }
-          else {
+          } else {
             console.log({
               'Error': error,
               'BackOffCount': delay
@@ -85,8 +99,7 @@
               setTimeout(function() {
                 runPromise();
               }, (delay = Math.max(delay *= 2, 1)) * 1000);
-            }
-            else {
+            } else {
               item.Err(error) || "";
             }
           }
@@ -98,10 +111,10 @@
     }
   }
 
-  function decriptURL (Input) {
-      return decodeURIComponent(Array.prototype.map.call(atob(Input.reverse), function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-      }).join(''));
+  function decriptURL(Input) {
+    return decodeURIComponent(Array.prototype.map.call(atob(Input.reverse), function(c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
   }
 
   function addDays(date, days) {
@@ -218,8 +231,7 @@
           offset *= ((d[14] == '-') ? -1 : 1);
           result.setTime(result.getTime() - offset * 60 * 1000);
         }
-      }
-      else {
+      } else {
         result = new Date(year, mon, day, hour, mins, secs, millis);
       }
     }
@@ -228,8 +240,7 @@
 
   if (typeof Date.parse != 'function') {
     Date.parse = Date.parseRFC3339;
-  }
-  else {
+  } else {
     var oldparse = Date.parse;
     Date.parse = function(d) {
       var result = Date.parseRFC3339(d);
