@@ -367,23 +367,12 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                //if we have reached the end of our search:
                classPageTokenSelectionIndex[$scope.queryPropertyString] = "end"
             }
-            if (fileList.result.files.length > 0) {
-               if (!$scope.queryParams.q) {
-                  for (o = 0; o < fileList.result.files.length; o++) {
-                     console.log(fileCount + " O:" + o)
-                     if (deDuplicationIndex[fileList.result.files[o].id] === undefined) {
-                        //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
-                        deDuplicationIndex[fileList.result.files[o].id] = 1; //mark this id as used with a "1".
-                        formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[o]) //format and save the new post to the formatted files list array
-                        fileCount++;
-                     }
+               for (fileCount = 0; fileCount < fileList.result.files.length; fileCount++) {
+                  if (!$scope.queryParams.q && deDuplicationIndex[fileList.result.files[fileCount].id] === undefined) {
+                     //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
+                     deDuplicationIndex[fileList.result.files[fileCount].id] = 1; //mark this id as used with a "1".
                   }
-               }
-               else {
-                  for (o = 0; o < fileList.result.files.length; o++) {
-                     formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[o])
-                     fileCount++;
-                  }
+                  formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[fileCount]) //format and save the new post to the formatted files list array
                }
                console.log(formattedFileList)
                if (formattedFileList.length !== 0) {
