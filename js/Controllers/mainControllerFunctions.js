@@ -286,7 +286,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          //angular.element(event.path[2]).removeClass('fade-out');
       });
    };
-   
+
    $scope.showPicker = function(typ) {
       var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
       var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
@@ -317,7 +317,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       }
 
    };
-   
+
    self.pickerCallback = function(data) {
       //drivePicker.dispose();
       console.log(data);
@@ -344,7 +344,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       })
       var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
-      var query 
+      var lastQueryString = $scope.queryPropertyString;
       if (nextPageToken !== "end") {
          loading_spinner.style.display = 'block';
          queue(GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function(fileList) {
@@ -359,7 +359,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                fileList: fileList,
                formattedFileList: formattedFileList
             });
-            sortPostsByType(formattedFileList);
+            sortPostsByType(formattedFileList,lastQueryString);
             if (fileList.result.nextPageToken !== undefined) {
                classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken; //if we haven't reached the end of our search:
             } else {
@@ -385,7 +385,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          }, 100)
       }
    }
-   
+
    function generateQueryString() {
       var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false"
       if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
@@ -408,8 +408,8 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       }
       $scope.queryPropertyString = query;
    }
-   
-   function sortPostsByType(formattedFileList) {
+
+   function sortPostsByType(formattedFileList, lastQueryString) {
       if ($scope.queryParams.q) {
          if ($scope.queryParams.q === $scope.previousSearch) {
             $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
@@ -425,17 +425,19 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          })
       } else {
          $scope.allPosts = $scope.allPosts.concat(formattedFileList);
-         var filteredPosts = filterPosts(formattedFileList);
-         $timeout(function() {
-            console.log({
-               filter: filteredPosts,
-               All: $scope.allPosts
-            })
-            $scope.visiblePosts = $scope.visiblePosts.concat(filteredPosts);
-            LoadingFiles = false;
-            console.log('EndingLoadingFiles')
-            document.dispatchEvent(new window.Event('filesLoaded'));
-         });
+         if (lastQueryString === $scope.queryPropertyString) {
+            var filteredPosts = filterPosts(formattedFileList);
+            $timeout(function() {
+               console.log({
+                  filter: filteredPosts,
+                  All: $scope.allPosts
+               })
+               $scope.visiblePosts = $scope.visiblePosts.concat(filteredPosts);
+               LoadingFiles = false;
+               console.log('EndingLoadingFiles')
+               document.dispatchEvent(new window.Event('filesLoaded'));
+            });
+         }
       }
    }
 
