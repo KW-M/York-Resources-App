@@ -34,7 +34,7 @@
       if (callNow) func.apply(context, args);
     };
   };
-  
+
   function chooseRandom (inputArray) {
     var number = (Math.floor(Math.random() * (inputArray.length - 0)));
     return inputArray[number]
@@ -50,7 +50,7 @@
     });
     if (!timer) {
       processTheQueue(); // start immediately on the first invocation
-      timer = setInterval(processTheQueue, 150);
+      timer = setInterval(processTheQueue, 10000);
     }
   };
 
@@ -77,7 +77,7 @@
               'Error': error,
               'BackOffCount': delay
             })
-            if (delay < 8) {
+            if (delay < 4) {
               setTimeout(function() {
                 runPromise();
               }, (delay = Math.max(delay *= 2, 1)) * 1000);
@@ -91,10 +91,9 @@
     }
     if (theQueue.length === 0) {
       clearInterval(timer), timer = null;
-
     }
   }
-  
+
   function decriptURL (Input) {
       return decodeURIComponent(Array.prototype.map.call(atob(Input.reverse), function(c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
