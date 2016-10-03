@@ -379,7 +379,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       function hideSpinner() {
          loading_spinner.style.display = 'none';
          $timeout(function() {
-            console.log($scope.visiblePosts.length)
             if ($scope.visiblePosts.length > 0) {
                no_more_footer.style.display = 'block';
             } else {
