@@ -239,7 +239,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			});
 		}
 	};
-
 	$scope.openLink = function(link) {
 		if (link !== "" && link !== undefined) {
 			window.open(link);
@@ -288,6 +287,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		if (asAlert) {
 			window.alert(JSON.stringify(input, null, 4))		
 		}
+	}
+	$scope.logDuplicationIndexes = function() {
+		console.log()
 	}
 	$scope.logPostToConsole = function(content, arrayIndex) {
 		window.alert(JSON.stringify({

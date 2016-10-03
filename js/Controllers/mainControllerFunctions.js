@@ -593,6 +593,12 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       }
    }
 
+	//----------------------------------------------------
+	//---------------------- dev -------------------------
+	$scope.logDuplicationIndexes = function() {
+		console.log({deDuplicationIndex:deDuplicationIndex,})
+	}
+
    //More (less important functions are delegated to another file);
    subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance);
 }
