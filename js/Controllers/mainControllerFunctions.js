@@ -347,18 +347,14 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       no_posts_footer.style.display = 'none';
       footer_problem.style.display = 'none';
       generateQueryString();
+      console.log({pageIndex: classPageTokenSelectionIndex, string: $scope.queryPropertyString, nextPageToken: nextPageToken})
       var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
-      console.log({
-         pageIndex: classPageTokenSelectionIndex,
-         string: $scope.queryPropertyString,
-         nextPageToken: nextPageToken
-      })
       if (nextPageToken !== "end") {
          loading_spinner.style.display = 'block';
          queue(GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function(fileList) {
             console.log(fileList)
-            for (fileCount = 0; fileCount < fileList.result.files.length; fileCount++) {
+            for (var fileCount = 0; fileCount < fileList.result.files.length; fileCount++) {
                if (!$scope.queryParams.q && deDuplicationIndex[fileList.result.files[fileCount].id] === undefined) {
                   //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
                   deDuplicationIndex[fileList.result.files[fileCount].id] = 1; //mark this id as used with a "1".
@@ -367,7 +363,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             }
             console.log(formattedFileList);
             sortPostsByType(formattedFileList);
-            }
             if (fileList.result.nextPageToken !== undefined) {
                classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken;//if we haven't reached the end of our search:
             }
