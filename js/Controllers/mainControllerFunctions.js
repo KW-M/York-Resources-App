@@ -129,6 +129,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                All: $scope.allPosts
             })
             $scope.visiblePosts = filteredPosts;
+            hideSpinner()
          });
       }
       getFiles();
