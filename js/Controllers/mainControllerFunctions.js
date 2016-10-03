@@ -372,237 +372,239 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             }
             hideSpinner();
          }, function() {
+            no_more_footer.style.display = 'none';
+            no_posts_footer.style.display = 'none';
             footer_problem.style.display = 'flex';
          });
       }
    }
 
    function hideSpinner() {
-      if (classPageTokenSelectionIndex[$scope.queryPropertyString] === "end") 
+      if (classPageTokenSelectionIndex[$scope.queryPropertyString] === "end") {
          loading_spinner.style.display = 'none';
-      $timeout(function() {
-         if ($scope.visiblePosts.length > 0) {
-            no_more_footer.style.display = 'block';
-         } else {
-            no_posts_footer.style.display = 'block';
-         }
-      }, 100)
-   }
-
-
-function generateQueryString() {
-   var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false"
-   if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
-      query = query + " and properties has { key='Flagged' and value='" + $scope.queryParams.flagged + "' }";
-   }
-   if ($scope.queryParams.bookmarked !== null && $scope.queryParams.bookmarked !== undefined) {
-      query = query + " and starred = " + $scope.queryParams.bookmarked;
-   }
-   if ($scope.queryParams.creatorEmail !== null && $scope.queryParams.creatorEmail !== undefined) {
-      query = query + " and '" + $scope.queryParams.creatorEmail + "' in owners"
-   }
-   if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) {
-      query = query + " and properties has { key='Type' and value='" + $scope.queryParams.type + "' }"
-   }
-   if ($scope.queryParams.classpath !== null && $scope.queryParams.classpath !== undefined && $scope.queryParams.classpath !== 'my-posts' && $scope.queryParams.classpath !== 'my-bookmarks' && $scope.queryParams.classpath !== 'all-posts' && $scope.queryParams.classpath !== 'flagged') {
-      query = query + " and properties has { key='ClassName' and value='" + $scope.queryParams.classpath + "' }"
-   }
-   if ($scope.queryParams.q !== null && $scope.queryParams.q !== undefined) {
-      query = query + " and fullText contains '" + $scope.queryParams.q + "'";
-   }
-   $scope.queryPropertyString = query;
-}
-
-function sortPostsByType(formattedFileList) {
-   if ($scope.queryParams.q) {
-      if ($scope.queryParams.q === $scope.previousSearch) {
-         $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
-      } else {
-         $scope.searchPosts = formattedFileList;
+         $timeout(function() {
+            if ($scope.visiblePosts.length > 0) {
+               no_more_footer.style.display = 'block';
+            } else {
+               no_posts_footer.style.display = 'block';
+            }
+         }, 100)
       }
-      $scope.previousSearch = $scope.queryParams.q
-      $timeout(function() {
-         conurancy_counter--;
-         $scope.visiblePosts = $scope.searchPosts;
-         LoadingFiles = false;
-         console.log('endingLoadingFiles')
-         document.dispatchEvent(new window.Event('filesLoaded'));
-      })
-   } else {
-      $scope.allPosts = $scope.allPosts.concat(formattedFileList);
-      var filteredPosts = filterPosts(formattedFileList);
-      $timeout(function() {
-         conurancy_counter--;
-         console.log({
-            filter: filteredPosts,
-            All: $scope.allPosts
-         })
-         $scope.visiblePosts = $scope.visiblePosts.concat(filteredPosts);
-         LoadingFiles = false;
-         console.log('EndingLoadingFiles')
-         document.dispatchEvent(new window.Event('filesLoaded'));
-      });
-
-   }
-}
-
-function formatPost(unformatedFile) {
-   var formatedFile = {}
-   var tagsRaw = "[\"" + unformatedFile.properties.Tag1 + unformatedFile.properties.Tag2 + "\"]";
-   var titleAndURL = unformatedFile.name.split("{]|[}");
-
-   formatedFile.Type = unformatedFile.properties.Type;
-   formatedFile.Flagged = unformatedFile.properties.Flagged;
-   formatedFile.Id = unformatedFile.id;
-
-   formatedFile.Title = titleAndURL[0];
-   formatedFile.Description = unformatedFile.description;
-   formatedFile.CreationDate = unformatedFile.createdTime //Date.prototype.parseRFC3339(unformatedFile.createdTime);
-   formatedFile.UpdateDate = unformatedFile.modifiedTime //Date.prototype.parseRFC3339(unformatedFile.modifiedTime);
-   if (unformatedFile.properties.Tag1 || unformatedFile.properties.Tag2) {
-      formatedFile.Tags = JSON.parse(tagsRaw.replace(/,/g, "\",\""));
-   } else {
-      formatedFile.Tags = [];
-   }
-   formatedFile.TagString = unformatedFile.properties.Tag1 + unformatedFile.properties.Tag2;
-   formatedFile.Creator = {
-      Name: unformatedFile.owners[0].displayName,
-      Me: unformatedFile.owners[0].me,
-      Email: unformatedFile.owners[0].emailAddress,
-      ClassOf: unformatedFile.owners[0].emailAddress.match(/\d+/)[0],
-   }
-   formatedFile.Class = {
-      Name: unformatedFile.properties.ClassName,
-      Catagory: unformatedFile.properties.ClassCatagory,
-      Color: unformatedFile.properties.ClassColor,
    }
 
-   formatedFile.Link = titleAndURL[1];
-   formatedFile.attachmentId = unformatedFile.properties.attachmentId;
-   if (formatedFile.Type === "Link") {
-      formatedFile.PreviewImage = unformatedFile.thumbnailLink.replace("=s220", "=s400")
-   } else if (formatedFile.Type === "Gdrive") {
-      formatedFile.PreviewImage = "https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + formatedFile.attachmentId;
-   }
-
-   if (devMode) {
-      console.log({
-         unformated: unformatedFile,
-         formated: formatedFile
-      })
-   }
-
-   return formatedFile;
-}
-
-function filterPosts(inputSet) {
-   var output = inputSet.filter(function(post) {
+   function generateQueryString() {
+      var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false"
       if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
-         var Flagged = post.Flagged === $scope.queryParams.flagged || post.Flagged;
-      } else {
-         var Flagged = true;
-      }
-      if ($scope.queryParams.classpath !== null && $scope.queryParams.classpath !== undefined && $scope.queryParams.classpath !== 'my-posts' && $scope.queryParams.classpath !== 'my-bookmarks' && $scope.queryParams.classpath !== 'all-posts' && $scope.queryParams.classpath !== 'flagged') {
-         var Class = post.Class.Name === $scope.queryParams.classpath;
-      } else {
-         var Class = true;
-      }
-      if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) {
-         var Type = post.Type === $scope.queryParams.type;
-      } else {
-         var Type = true;
+         query = query + " and properties has { key='Flagged' and value='" + $scope.queryParams.flagged + "' }";
       }
       if ($scope.queryParams.bookmarked !== null && $scope.queryParams.bookmarked !== undefined) {
-         var Bookmarked = post.Bookmarked === $scope.queryParams.bookmarked;
-      } else {
-         var Bookmarked = true;
+         query = query + " and starred = " + $scope.queryParams.bookmarked;
       }
       if ($scope.queryParams.creatorEmail !== null && $scope.queryParams.creatorEmail !== undefined) {
-         var Creator = post.Creator.Email === $scope.queryParams.creatorEmail;
-      } else {
-         var Creator = true;
+         query = query + " and '" + $scope.queryParams.creatorEmail + "' in owners"
       }
-      // console.log({
-      //    filteredPost: post,
-      //    Flagged: Flagged,
-      //    Class: Class,
-      //    Type: Type,
-      //    Bookmarked: Bookmarked,
-      //    Creator: Creator,
-      // });
-      return Flagged && Class && Type && Creator && Bookmarked;
+      if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) {
+         query = query + " and properties has { key='Type' and value='" + $scope.queryParams.type + "' }"
+      }
+      if ($scope.queryParams.classpath !== null && $scope.queryParams.classpath !== undefined && $scope.queryParams.classpath !== 'my-posts' && $scope.queryParams.classpath !== 'my-bookmarks' && $scope.queryParams.classpath !== 'all-posts' && $scope.queryParams.classpath !== 'flagged') {
+         query = query + " and properties has { key='ClassName' and value='" + $scope.queryParams.classpath + "' }"
+      }
+      if ($scope.queryParams.q !== null && $scope.queryParams.q !== undefined) {
+         query = query + " and fullText contains '" + $scope.queryParams.q + "'";
+      }
+      $scope.queryPropertyString = query;
+   }
+
+   function sortPostsByType(formattedFileList) {
+      if ($scope.queryParams.q) {
+         if ($scope.queryParams.q === $scope.previousSearch) {
+            $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
+         } else {
+            $scope.searchPosts = formattedFileList;
+         }
+         $scope.previousSearch = $scope.queryParams.q
+         $timeout(function() {
+            conurancy_counter--;
+            $scope.visiblePosts = $scope.searchPosts;
+            LoadingFiles = false;
+            console.log('endingLoadingFiles')
+            document.dispatchEvent(new window.Event('filesLoaded'));
+         })
+      } else {
+         $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+         var filteredPosts = filterPosts(formattedFileList);
+         $timeout(function() {
+            conurancy_counter--;
+            console.log({
+               filter: filteredPosts,
+               All: $scope.allPosts
+            })
+            $scope.visiblePosts = $scope.visiblePosts.concat(filteredPosts);
+            LoadingFiles = false;
+            console.log('EndingLoadingFiles')
+            document.dispatchEvent(new window.Event('filesLoaded'));
+         });
+
+      }
+   }
+
+   function formatPost(unformatedFile) {
+      var formatedFile = {}
+      var tagsRaw = "[\"" + unformatedFile.properties.Tag1 + unformatedFile.properties.Tag2 + "\"]";
+      var titleAndURL = unformatedFile.name.split("{]|[}");
+
+      formatedFile.Type = unformatedFile.properties.Type;
+      formatedFile.Flagged = unformatedFile.properties.Flagged;
+      formatedFile.Id = unformatedFile.id;
+
+      formatedFile.Title = titleAndURL[0];
+      formatedFile.Description = unformatedFile.description;
+      formatedFile.CreationDate = unformatedFile.createdTime //Date.prototype.parseRFC3339(unformatedFile.createdTime);
+      formatedFile.UpdateDate = unformatedFile.modifiedTime //Date.prototype.parseRFC3339(unformatedFile.modifiedTime);
+      if (unformatedFile.properties.Tag1 || unformatedFile.properties.Tag2) {
+         formatedFile.Tags = JSON.parse(tagsRaw.replace(/,/g, "\",\""));
+      } else {
+         formatedFile.Tags = [];
+      }
+      formatedFile.TagString = unformatedFile.properties.Tag1 + unformatedFile.properties.Tag2;
+      formatedFile.Creator = {
+         Name: unformatedFile.owners[0].displayName,
+         Me: unformatedFile.owners[0].me,
+         Email: unformatedFile.owners[0].emailAddress,
+         ClassOf: unformatedFile.owners[0].emailAddress.match(/\d+/)[0],
+      }
+      formatedFile.Class = {
+         Name: unformatedFile.properties.ClassName,
+         Catagory: unformatedFile.properties.ClassCatagory,
+         Color: unformatedFile.properties.ClassColor,
+      }
+
+      formatedFile.Link = titleAndURL[1];
+      formatedFile.attachmentId = unformatedFile.properties.attachmentId;
+      if (formatedFile.Type === "Link") {
+         formatedFile.PreviewImage = unformatedFile.thumbnailLink.replace("=s220", "=s400")
+      } else if (formatedFile.Type === "Gdrive") {
+         formatedFile.PreviewImage = "https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + formatedFile.attachmentId;
+      }
+
+      if (devMode) {
+         console.log({
+            unformated: unformatedFile,
+            formated: formatedFile
+         })
+      }
+
+      return formatedFile;
+   }
+
+   function filterPosts(inputSet) {
+      var output = inputSet.filter(function(post) {
+         if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
+            var Flagged = post.Flagged === $scope.queryParams.flagged || post.Flagged;
+         } else {
+            var Flagged = true;
+         }
+         if ($scope.queryParams.classpath !== null && $scope.queryParams.classpath !== undefined && $scope.queryParams.classpath !== 'my-posts' && $scope.queryParams.classpath !== 'my-bookmarks' && $scope.queryParams.classpath !== 'all-posts' && $scope.queryParams.classpath !== 'flagged') {
+            var Class = post.Class.Name === $scope.queryParams.classpath;
+         } else {
+            var Class = true;
+         }
+         if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) {
+            var Type = post.Type === $scope.queryParams.type;
+         } else {
+            var Type = true;
+         }
+         if ($scope.queryParams.bookmarked !== null && $scope.queryParams.bookmarked !== undefined) {
+            var Bookmarked = post.Bookmarked === $scope.queryParams.bookmarked;
+         } else {
+            var Bookmarked = true;
+         }
+         if ($scope.queryParams.creatorEmail !== null && $scope.queryParams.creatorEmail !== undefined) {
+            var Creator = post.Creator.Email === $scope.queryParams.creatorEmail;
+         } else {
+            var Creator = true;
+         }
+         // console.log({
+         //    filteredPost: post,
+         //    Flagged: Flagged,
+         //    Class: Class,
+         //    Type: Type,
+         //    Bookmarked: Bookmarked,
+         //    Creator: Creator,
+         // });
+         return Flagged && Class && Type && Creator && Bookmarked;
+      });
+      //output.sort()
+      return (output)
+   }
+
+   $scope.getFiles = function() {
+      console.log('fake get files')
+         // if (LoadingFiles === true) {
+         //    console.log('waiting')
+         //    document.addEventListener('filesLoaded', getFiles());
+         // }
+         // else {
+         //    removeEventListener('filesLoaded', getFiles())
+         //    console.log('startingLoadingFiles')
+         //    getFiles()
+         // }
+   };
+
+   //----------------------------------------------------
+   //---------------- Event Watchers --------------------
+   // The md-select directive eats keydown events for some quick select
+   // logic. Since we have a search input here, we don't need that logic.
+   // var selectSearchInput = angular.element(document.getElementById('class_select_input'))
+   // selectSearchInput.on('keydown', function(ev) {
+   //        ev.stopPropagation();
+   //        console.log(ev)
+   // });
+   addResizeListener(content_container, function() {
+      console.log('resize')
    });
-   //output.sort()
-   return (output)
-}
-
-$scope.getFiles = function() {
-   console.log('fake get files')
-      // if (LoadingFiles === true) {
-      //    console.log('waiting')
-      //    document.addEventListener('filesLoaded', getFiles());
+   content_container.onscroll = function(event) {
+      //called whenever the content_container scrolls
+      // if (performantScrollEnabled === false && $scope.angularGridOptions.performantScroll === false) {
+      //    $scope.angularGridOptions.performantScroll = true;
+      //    performantScrollEnabled = true;
       // }
-      // else {
-      //    removeEventListener('filesLoaded', getFiles())
-      //    console.log('startingLoadingFiles')
-      //    getFiles()
+      var yScroll = content_container.scrollTop;
+      if (yScroll >= 120) {
+         $scope.globals.FABisHidden = false;
+         $scope.globals.FABisOpen = false;
+      } else {
+         $scope.globals.FABisOpen = false;
+         $scope.globals.FABisHidden = true;
+      }
+   };
+   window.addEventListener("resize", function() {
+      // if (performantScrollEnabled === true && $scope.angularGridOptions.performantScroll === true) {
+      //    $scope.angularGridOptions.performantScroll = false;
+      //    performantScrollEnabled = false;
       // }
-};
+      if ($mdMedia('gt-sm')) {
+         $mdSidenav('sidenav_overlay').close();
+      }
+   });
+   document.onkeydown = function(e) {
+      if (e.altKey && e.ctrlKey && e.keyCode == 68) {
+         devMode = !devMode
+         $timeout(function() {
+            $scope.devMode = devMode;
+         })
+      }
+   }
 
-//----------------------------------------------------
-//---------------- Event Watchers --------------------
-// The md-select directive eats keydown events for some quick select
-// logic. Since we have a search input here, we don't need that logic.
-// var selectSearchInput = angular.element(document.getElementById('class_select_input'))
-// selectSearchInput.on('keydown', function(ev) {
-//        ev.stopPropagation();
-//        console.log(ev)
-// });
-addResizeListener(content_container, function() {
-   console.log('resize')
-});
-content_container.onscroll = function(event) {
-   //called whenever the content_container scrolls
-   // if (performantScrollEnabled === false && $scope.angularGridOptions.performantScroll === false) {
-   //    $scope.angularGridOptions.performantScroll = true;
-   //    performantScrollEnabled = true;
-   // }
-   var yScroll = content_container.scrollTop;
-   if (yScroll >= 120) {
-      $scope.globals.FABisHidden = false;
-      $scope.globals.FABisOpen = false;
-   } else {
-      $scope.globals.FABisOpen = false;
-      $scope.globals.FABisHidden = true;
-   }
-};
-window.addEventListener("resize", function() {
-   // if (performantScrollEnabled === true && $scope.angularGridOptions.performantScroll === true) {
-   //    $scope.angularGridOptions.performantScroll = false;
-   //    performantScrollEnabled = false;
-   // }
-   if ($mdMedia('gt-sm')) {
-      $mdSidenav('sidenav_overlay').close();
-   }
-});
-document.onkeydown = function(e) {
-   if (e.altKey && e.ctrlKey && e.keyCode == 68) {
-      devMode = !devMode
-      $timeout(function() {
-         $scope.devMode = devMode;
+   //----------------------------------------------------
+   //---------------------- dev -------------------------
+   $scope.logDuplicationIndexes = function() {
+      console.log({
+         deDuplicationIndex: deDuplicationIndex,
+         classPageTokenSelectionIndex: classPageTokenSelectionIndex
       })
    }
-}
 
-//----------------------------------------------------
-//---------------------- dev -------------------------
-$scope.logDuplicationIndexes = function() {
-   console.log({
-      deDuplicationIndex: deDuplicationIndex,
-      classPageTokenSelectionIndex: classPageTokenSelectionIndex
-   })
-}
-
-//More (less important functions are delegated to another file);
-subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance);
+   //More (less important functions are delegated to another file);
+   subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance);
 }
