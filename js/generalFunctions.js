@@ -43,6 +43,7 @@
 
   // Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
   function queue(promise, action, error) {
+    console.log('queuing')
     theQueue.push({
       Promise: promise,
       Action: action,
@@ -50,11 +51,12 @@
     });
     if (!timer) {
       processTheQueue(); // start immediately on the first invocation
-      timer = setInterval(processTheQueue, 10000);
+      timer = setInterval(processTheQueue, 6000);
     }
   };
 
   function processTheQueue() {
+    console.log('running queuing')
     var item = theQueue.shift();
     if (item) {
       var delay = 0;
