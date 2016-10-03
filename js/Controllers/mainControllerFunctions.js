@@ -393,24 +393,24 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
 
    function generateQueryString() {
       var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false"
-      // if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
-      //    query = query + " and properties has { key='Flagged' and value='" + $scope.queryParams.flagged + "' }";
-      // }
-      // if ($scope.queryParams.bookmarked !== null && $scope.queryParams.bookmarked !== undefined) {
-      //    query = query + " and starred = " + $scope.queryParams.bookmarked;
-      // }
-      // if ($scope.queryParams.creatorEmail !== null && $scope.queryParams.creatorEmail !== undefined) {
-      //    query = query + " and '" + $scope.queryParams.creatorEmail + "' in owners"
-      // }
-      // if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) {
-      //    query = query + " and properties has { key='Type' and value='" + $scope.queryParams.type + "' }"
-      // }
-      // if ($scope.queryParams.classpath !== null && $scope.queryParams.classpath !== undefined && $scope.queryParams.classpath !== 'my-posts' && $scope.queryParams.classpath !== 'my-bookmarks' && $scope.queryParams.classpath !== 'all-posts' && $scope.queryParams.classpath !== 'flagged') {
-      //    query = query + " and properties has { key='ClassName' and value='" + $scope.queryParams.classpath + "' }"
-      // }
-      // if ($scope.queryParams.q !== null && $scope.queryParams.q !== undefined) {
-      //    query = query + " and fullText contains '" + $scope.queryParams.q + "'";
-      // }
+      if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
+         query = query + " and properties has { key='Flagged' and value='" + $scope.queryParams.flagged + "' }";
+      }
+      if ($scope.queryParams.bookmarked !== null && $scope.queryParams.bookmarked !== undefined) {
+         query = query + " and starred = " + $scope.queryParams.bookmarked;
+      }
+      if ($scope.queryParams.creatorEmail !== null && $scope.queryParams.creatorEmail !== undefined) {
+         query = query + " and '" + $scope.queryParams.creatorEmail + "' in owners"
+      }
+      if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) {
+         query = query + " and properties has { key='Type' and value='" + $scope.queryParams.type + "' }"
+      }
+      if ($scope.queryParams.classpath !== null && $scope.queryParams.classpath !== undefined && $scope.queryParams.classpath !== 'my-posts' && $scope.queryParams.classpath !== 'my-bookmarks' && $scope.queryParams.classpath !== 'all-posts' && $scope.queryParams.classpath !== 'flagged') {
+         query = query + " and properties has { key='ClassName' and value='" + $scope.queryParams.classpath + "' }"
+      }
+      if ($scope.queryParams.q !== null && $scope.queryParams.q !== undefined) {
+         query = query + " and fullText contains '" + $scope.queryParams.q + "'";
+      }
       $scope.queryPropertyString = query;
    }
 
