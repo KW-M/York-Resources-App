@@ -354,9 +354,12 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             for (var fileCount = 0; fileCount < fileList.result.files.length; fileCount++) {
                if (!$scope.queryParams.q && deDuplicationIndex[fileList.result.files[fileCount].id] === undefined) {
                   //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
+                  formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[fileCount]) //format and save the new post to the formatted files list array
                   deDuplicationIndex[fileList.result.files[fileCount].id] = 1; //mark this id as used with a "1".
                }
-               formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[fileCount]) //format and save the new post to the formatted files list array
+               if ($scope.queryParams.q) {
+                  formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[fileCount]) //format and save the new post to the formatted files list array
+               }
             }
             console.log({
                fileList: fileList,
@@ -596,7 +599,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
 	//----------------------------------------------------
 	//---------------------- dev -------------------------
 	$scope.logDuplicationIndexes = function() {
-		console.log({deDuplicationIndex:deDuplicationIndex,})
+		console.log({deDuplicationIndex:deDuplicationIndex, classPageTokenSelectionIndex:classPageTokenSelectionIndex})
 	}
 
    //More (less important functions are delegated to another file);
