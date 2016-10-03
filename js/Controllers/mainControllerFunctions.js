@@ -8,6 +8,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    var no_more_footer = document.getElementById("no_more_footer");
    var no_posts_footer = document.getElementById("no_posts_footer");
    var footer_problem = document.getElementById("footer_problem");
+   var conurancy_counter = 0
    console.log(no_more_footer)
    var performantScrollEnabled = false;
 
@@ -333,6 +334,8 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    //--------- loading and filtering posts --------------
    function getFiles() {
       LoadingFiles = true;
+      console.log("concurancy: " + conurancy_counter);
+      conurancy_counter++;
       no_more_footer.style.display = 'none';
       no_posts_footer.style.display = 'none';
       footer_problem.style.display = 'none';
@@ -418,6 +421,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          }
          $scope.previousSearch = $scope.queryParams.q
          $timeout(function() {
+            conurancy_counter--;
             $scope.visiblePosts = $scope.searchPosts;
             LoadingFiles = false;
             console.log('endingLoadingFiles')
@@ -428,6 +432,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          if (lastQueryString === $scope.queryPropertyString) {
             var filteredPosts = filterPosts(formattedFileList);
             $timeout(function() {
+               conurancy_counter--;
                console.log({
                   filter: filteredPosts,
                   All: $scope.allPosts
