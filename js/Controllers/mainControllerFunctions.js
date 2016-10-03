@@ -342,12 +342,11 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    //--------- loading and filtering posts --------------
 
    function getFiles() {
+      LoadingFiles = true;
       no_more_footer.style.display = 'none';
       no_posts_footer.style.display = 'none';
       footer_problem.style.display = 'none';
-      LoadingFiles = true;
       generateQueryString();
-      var fileCount = 0;
       var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
       console.log({
@@ -359,13 +358,21 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          loading_spinner.style.display = 'block';
          queue(GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function(fileList) {
             console.log(fileList)
+            for (fileCount = 0; fileCount < fileList.result.files.length; fileCount++) {
+               if (!$scope.queryParams.q && deDuplicationIndex[fileList.result.files[fileCount].id] === undefined) {
+                  //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
+                  deDuplicationIndex[fileList.result.files[fileCount].id] = 1; //mark this id as used with a "1".
+               }
+               formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[fileCount]) //format and save the new post to the formatted files list array
+            }
+            console.log(formattedFileList);
+            sortPostsByType(formattedFileList);
+            }
             if (fileList.result.nextPageToken !== undefined) {
-               //if we haven't reached the end of our search:
-               classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken;
+               classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken;//if we haven't reached the end of our search:
             }
             else {
-               //if we have reached the end of our search:
-               classPageTokenSelectionIndex[$scope.queryPropertyString] = "end"
+               classPageTokenSelectionIndex[$scope.queryPropertyString] = "end"//if we have reached the end of our search:
                loading_spinner.style.display = 'none';
                $timeout(function() {
                   console.log($scope.visiblePosts.length)
@@ -377,29 +384,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                   }
                }, 100)
             }
-               for (fileCount = 0; fileCount < fileList.result.files.length; fileCount++) {
-                  if (!$scope.queryParams.q && deDuplicationIndex[fileList.result.files[fileCount].id] === undefined) {
-                     //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
-                     deDuplicationIndex[fileList.result.files[fileCount].id] = 1; //mark this id as used with a "1".
-                  }
-                  formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[fileCount]) //format and save the new post to the formatted files list array
-               }
-               if (formattedFileList.length !== 0) {
-                  console.log(formattedFileList);
-                  sortPostsByType(formattedFileList);
-               }
-               else {
-                  if (fileList.result.nextPageToken !== undefined) { //if we haven't reached the end of our search:
-                     log("duplicate posts - more posts coming...")
-                     classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken;
-                  }
-                  else { //if we have reached the end of our search:
-                     log("duplicate posts - end of the line");
-                     classPageTokenSelectionIndex[$scope.queryPropertyString] = "end";
-                     loading_spinner.style.display = 'none';
-                     no_more_footer.style.display = 'block';
-                  }
-               }
          }, function() {
             footer_problem.style.display = 'block';
          });
