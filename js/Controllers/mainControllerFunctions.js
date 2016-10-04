@@ -364,7 +364,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                fileList: fileList,
                formattedFileList: formattedFileList
             });
-            $scope.sortPostsByType(formattedFileList);
+            sortPostsByType(formattedFileList);
             if (fileList.result.nextPageToken !== undefined) {
                classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken; //if we haven't reached the end of our search:
             } else {

@@ -175,11 +175,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
          // });
          return Flagged && Class && Type && Creator && Bookmarked;
       });
-      //output.sort()
-      return ($scope.sortByDateAndLikes(output))
+      return (output)
    }
 	$scope.sortByDateAndLikes = function(arrayToSort) {
 		arrayToSort.sort(function(a, b) {
+			console.log(b.UpdateDate.addDays(b.Likes.length))
 			return b.UpdateDate.addDays(b.Likes.length) - a.UpdateDate.addDays(a.Likes.length);
 		});
 	};
