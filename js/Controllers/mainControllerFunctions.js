@@ -364,7 +364,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                fileList: fileList,
                formattedFileList: formattedFileList
             });
-            sortPostsByType(formattedFileList);
+            $scope.sortPostsByType(formattedFileList);
             if (fileList.result.nextPageToken !== undefined) {
                classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken; //if we haven't reached the end of our search:
             } else {
@@ -378,6 +378,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          });
       }
    }
+
    function hideSpinner() {
       if (classPageTokenSelectionIndex[$scope.queryPropertyString] === "end") {
          loading_spinner.style.display = 'none';
@@ -390,6 +391,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          }, 100)
       }
    }
+
    function generateQueryString() {
       var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false"
       if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
@@ -412,6 +414,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       }
       $scope.queryPropertyString = query;
    }
+
    function sortPostsByType(formattedFileList) {
       if ($scope.queryParams.q) {
          if ($scope.queryParams.q === $scope.previousSearch) {
@@ -420,29 +423,21 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             $scope.searchPosts = formattedFileList;
          }
          $scope.previousSearch = $scope.queryParams.q
-         $timeout(function() {
-            conurancy_counter--;
-            $scope.visiblePosts = $scope.searchPosts;
-            LoadingFiles = false;
-            console.log('endingLoadingFiles')
-            document.dispatchEvent(new window.Event('filesLoaded'));
-         })
       } else {
          $scope.allPosts = $scope.allPosts.concat(formattedFileList);
          var filteredPosts = $scope.filterPosts(formattedFileList);
-         $timeout(function() {
-            conurancy_counter--;
-            console.log({
-               filter: filteredPosts,
-               All: $scope.allPosts
-            })
-            $scope.visiblePosts = $scope.visiblePosts.concat(filteredPosts);
-            LoadingFiles = false;
-            console.log('EndingLoadingFiles')
-            document.dispatchEvent(new window.Event('filesLoaded'));
-         });
-
       }
+      $timeout(function() {
+         conurancy_counter--;
+         if ($scope.queryParams.q) {
+            $scope.visiblePosts = $scope.searchPosts;
+         } else {
+            $scope.visiblePosts = $scope.visiblePosts.concat(filteredPosts);
+         }
+         LoadingFiles = false;
+         console.log('endingLoadingFiles')
+         document.dispatchEvent(new window.Event('filesLoaded'));
+      })
    }
    $scope.getFiles = function() {
       console.log('fake get files')
