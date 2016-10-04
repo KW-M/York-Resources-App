@@ -1,6 +1,6 @@
 function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance) {
 
-
+	var likeClickTimer = null;
 	// $scope.DriveMetadataTemplate = {
 	// 	id: '0B5NVuDykezpkYkNpaGxXWk1rM1U',
 	// 	name: 'Like#{]|[}Flagged(True/False){]|[}["LikerEmail","LikerEmail"]',
@@ -239,6 +239,13 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			content.userLiked = false;
 			content.Likes.splice(userLikeIndex, 1);
 		}
+		if(likeClickTimer) {
+            clearTimeout(likeClickTimer);
+        }
+         // do a date calculation
+         // show user changes to screen
+         // call the function
+        likeClickTimer = setTimeout(delayedFunc(), 5000);
 		function delayedFunc () {
 			var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
 			allArrayPost.userLiked = content.userLiked;
@@ -249,7 +256,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 				console.log(result);
 			});
 		}
-		delayedFunc.debounce(10000)
 	};
 	$scope.bookmark = function(content) {
 		content.Bookmarked != content.Bookmarked;
