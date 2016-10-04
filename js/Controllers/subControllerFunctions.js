@@ -197,6 +197,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	$scope.confirmDelete = function(ev, content, arrayIndex) {
 		var confirm = $mdDialog.confirm().title('Permanently delete this?').ariaLabel('Delete?').targetEvent(ev).ok('Delete').cancel('Cancel');
 		$mdDialog.show(confirm).then(function() {
+			
 			$timeout($scope.visiblePosts.splice(arrayIndex, 1));
 			queue(GoogleDriveService.deleteDriveFile(content.Id), function() {
 				console.log("deleted");
@@ -204,9 +205,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		});
 	};
 	$scope.flagPost = function(ev, content, arrayIndex) {
-		$timeout(function() { //makes angular update values
-			$scope.visiblePosts.splice(arrayIndex, 1);
-		});
+		// $timeout(function() { //makes angular update values
+		// 	$scope.visiblePosts.splice(arrayIndex, 1);
+		// });
+		$scope.
+		var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
 		queue(GoogleDriveService.updateFlagged(content.Id, true), function() {
 			console.log("flagged: " + content.Id);
 		});
