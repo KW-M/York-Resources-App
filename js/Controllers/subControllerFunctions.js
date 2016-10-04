@@ -1,6 +1,6 @@
 function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance) {
 
-	var likeClickTimer = null;
+	var likeClickTimer;
 	var bookmarkClickTimer = null;
 	
 	function findPostById(id, array) {
@@ -283,7 +283,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
             clearTimeout(likeClickTimer[content.Id]);
         }
         console.log(likeClickTimer);
-		likeClickTimer = setTimeout(function() {
+		likeClickTimer[content.Id] = setTimeout(function() {
 			console.log("running timer");
 			var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
 			allArrayPost.userLiked = content.userLiked;
