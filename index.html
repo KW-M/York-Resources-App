@@ -114,18 +114,24 @@
                 <!--<div angular-grid="visiblePosts" id="postsGrid" ag-options="angularGridOptions" ag-id="posts">-->
                 <!--post-card raise-on-hover-->
                 <div angular-grid="visiblePosts">
-                <md-card class="" ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}">
-                    <p class="post-card-title md-title">{{Post.Title}}</p>
-                    <p class="post-card-creator md-subhead"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::Post.Creator.ClassOf}})</span></p>
-                    <p id="post_card_description" class="md-body-1" ng-bind-html="Post.Description"></p>
-                    <button ng-click="logPostToConsole(Post)">
-                            <md-icon>edit</md-icon><span>Console log</span>
+                    <md-card class="" ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}">
+                        <p class="post-card-title md-title">{{Post.Title}}</p>
+                        <p class="post-card-creator md-subhead">
+                            <span>By {{::Post.Creator.Name}}</span>
+                            <span>(
+                                <md-icon class="small-icon">school</md-icon> {{::Post.Creator.ClassOf}})
+                            </span>
+                        </p>
+                        <p id="post_card_description" class="md-body-1" ng-bind-html="Post.Description"></p>
+                        <button ng-click="logPostToConsole(Post)">
+                        <md-icon>edit</md-icon>
+                        <span>Console log</span>
                     </button>
-                    <button ng-click="likePost(Post)">
+                        <button ng-click="likePost(Post)">
                         <p>{{Post.Likes.length}}</p>
                         <md-icon ng-class="{'md-accent' : Post.userLiked}">thumb_up</md-icon>
                     </button>
-                </md-card>
+                    </md-card>
                 </div>
                 <!--</div>-->
                 <div style='display:flex; flex:1;'>
