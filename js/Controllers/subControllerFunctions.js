@@ -231,29 +231,24 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		}
 	};
 	$scope.likePost = function(content) {
-		console.log(content)
 		var userLikeIndex = findItemInArray($scope.myInfo.Email, content.Likes)
-		console.log(userLikeIndex)
 		if (userLikeIndex === -1) {
-			content.userLiked = false;
+			content.userLiked = true;
 			content.Likes.push($scope.myInfo.Email);
 		} else {
-			console.log("here")
-			content.Likes.splice(userLikeIndex,0);
+			content.userLiked = false;
+			content.Likes.splice(userLikeIndex, 1);
 		}
-		// debounce(function() {
-		// 	var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
-		// 	allArrayPost.userLiked = content.userLiked;
-		// 	if (content.userLiked === true) {
-		// 		allArrayPost.Likes.push($scope.myInfo.Email);
-		// 	} else {
-		// 		allArrayPost.Likes.splice(userLikeIndex,1);
-		// 	}
-		// 	console.log(allArrayPost)
-		// 	// GoogleDriveService.updateTitle(content.Id, false).then(function(result) {
-		// 	// 	console.log(result);
-		// 	// })
-		// }, 1000)
+		debounce(function() {
+			console.log("here")
+			var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
+			allArrayPost.userLiked = content.userLiked;
+			allArrayPost.Likes = content.Likes;
+			console.log(allArrayPost)
+			// GoogleDriveService.updateTitle(content.Id, false).then(function(result) {
+			// 	console.log(result);
+			// })
+		}, 1000)
 	};
 	$scope.bookmark = function(content) {
 		content.Bookmarked != content.Bookmarked;
