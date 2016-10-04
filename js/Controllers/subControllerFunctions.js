@@ -239,16 +239,15 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			content.userLiked = false;
 			content.Likes.splice(userLikeIndex, 1);
 		}
-		debounce(function() {
-			console.log("here")
+		var delayedFunc = debounce(function() {
 			var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
 			allArrayPost.userLiked = content.userLiked;
 			allArrayPost.Likes = content.Likes;
-			console.log(allArrayPost)
-			// GoogleDriveService.updateTitle(content.Id, false).then(function(result) {
-			// 	console.log(result);
-			// })
-		}, 1000)
+			queue(GoogleDriveService.updateFileMetadata(content.Id, false)function(result) {
+				console.log(result);
+			})
+		}, 1000);
+		delayedFunc();
 	};
 	$scope.bookmark = function(content) {
 		content.Bookmarked != content.Bookmarked;
