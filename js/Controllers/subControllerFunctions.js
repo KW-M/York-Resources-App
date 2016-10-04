@@ -112,7 +112,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		try {
 			var tagString = JSON.stringify(Post.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || [];
 			formatedDriveMetadata = {
-				name: 2 + '{]|[}' + JSON.stringify(["worcester-moorek2018@york.org", "lie2018@york.org"]),
+				name: 0 + '{]|[}' + JSON.stringify([]),
 				description: Post.Description + '{]|[}' + Post.Link + '{]|[}' + Post.PreviewImage,
 				createdTime: Post.CreationDate.toRFC3339UTCString(),
 				modifiedTime: Post.UpdateDate.toRFC3339UTCString(),
@@ -243,9 +243,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
 			allArrayPost.userLiked = content.userLiked;
 			allArrayPost.Likes = content.Likes;
-			queue(GoogleDriveService.updateFileMetadata(content.Id, false)function(result) {
+			var name = allArrayPost.Likes.length + "{]|[}" + JSON.stringify(allArrayPost.Likes)
+			console.log(name);
+			queue(GoogleDriveService.updateFileMetadata(content.Id, {name:name}),function(result) {
 				console.log(result);
-			})
+			});
 		}, 1000);
 		delayedFunc();
 	};
