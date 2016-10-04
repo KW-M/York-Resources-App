@@ -36,25 +36,25 @@
   // be triggered. The function will be called after it stops being called for
   // N milliseconds. If `immediate` is passed, trigger the function on the
   // leading edge, instead of the trailing.
-  var debounce = function(func, wait, immediate) {
-    var timeout;
-    return function() {
-      var context = this,
+  Function.prototype.debounce = function(threshold, execAsap) {
+    var func = this,
+      timeout;
+    return function debounced() {
+      var obj = this,
         args = arguments;
-      var later = function() {
+
+      function delayed() {
+        if (!execAsap)
+          func.apply(obj, args);
         timeout = null;
-        if (!immediate) {
-          func.apply(context, args);
-        }
       };
-      var callNow = immediate && !timeout;
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait || 200);
-      if (callNow) {
-        func.apply(context, args);
-      }
+      if (timeout)
+        clearTimeout(timeout);
+      else if (execAsap)
+        func.apply(obj, args);
+      timeout = setTimeout(delayed, threshold || 100);
     };
-  };
+  }
 
   function chooseRandom(inputArray) {
     var number = (Math.floor(Math.random() * (inputArray.length - 0)));

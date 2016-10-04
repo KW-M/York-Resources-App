@@ -239,7 +239,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			content.userLiked = false;
 			content.Likes.splice(userLikeIndex, 1);
 		}
-		var delayedFunc = debounce(function() {
+		function delayedFunc () {
 			var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
 			allArrayPost.userLiked = content.userLiked;
 			allArrayPost.Likes = content.Likes;
@@ -248,8 +248,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			queue(GoogleDriveService.updateFileMetadata(content.Id, {name:name}),function(result) {
 				console.log(result);
 			});
-		}, 10000);
-		delayedFunc();
+		}
+		delayedFunc.debounce(10000)
 	};
 	$scope.bookmark = function(content) {
 		content.Bookmarked != content.Bookmarked;
