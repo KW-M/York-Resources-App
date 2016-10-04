@@ -67,7 +67,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			} else {
 				var tags = [];
 			}
-			console.log(likesAndFlagged);
+			if (likesAndFlagged[1].indexOf($scope.myInfo.Email) === -1) {
+				var hasLiked = false;
+			} else {
+				var hasLiked = true;
+			}
 			formatedPost = {
 				Title: DriveMetadata.properties.Title || '',
 				Description: descriptionAndPreviewimage[0] || '',
@@ -91,7 +95,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 				Link: descriptionAndPreviewimage[1],
 				Id: DriveMetadata.id || '',
 				AttachmentId: DriveMetadata.properties.AttachmentId || '',
-				Likes: [], // likesAndFlagged[2] like email array,
+				Likes: parseInt(likesAndFlagged[0], 10),
+				userLiked: 
 				PreviewImage: descriptionAndPreviewimage[2],
 				Bookmarked: DriveMetadata.starred || false,
 			}
