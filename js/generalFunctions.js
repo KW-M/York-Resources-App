@@ -68,7 +68,7 @@
     });
     if (!timer) {
       processTheQueue(); // start immediately on the first invocation
-      timer = setInterval(processTheQueue, 6000);
+      timer = setInterval(processTheQueue, 150);
     }
   };
 

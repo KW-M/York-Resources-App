@@ -179,6 +179,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			});
 		});
 	};
+	
 	function findPostById (id, array) {
 		for (var item = 0; item < array.length; item ++) {
 			if (item.id === id) {
@@ -189,6 +190,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			}
 		}
 	}
+	
 	$scope.flagPost = function(ev, content, arrayIndex) {
 		content.Flagged = true;
 		$timeout(function() { //makes angular update values
@@ -221,6 +223,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		}
 	};
 	$scope.likePost = function(like, content, arrayIndex) {
+		console.log(findPostById(content.Id, $scope.allPosts))
 		if (like) {
 			content.userLiked = true;
 			content.Likes.push("Kiwi");
