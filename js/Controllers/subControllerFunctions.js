@@ -95,8 +95,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 				Link: descriptionAndPreviewimage[1],
 				Id: DriveMetadata.id || '',
 				AttachmentId: DriveMetadata.properties.AttachmentId || '',
-				Likes: parseInt(likesAndFlagged[0], 10),
-				userLiked: 
+				Likes: JSON.parse(likesAndFlagged[1]),
+				userLiked: hasLiked,
 				PreviewImage: descriptionAndPreviewimage[2],
 				Bookmarked: DriveMetadata.starred || false,
 			}
