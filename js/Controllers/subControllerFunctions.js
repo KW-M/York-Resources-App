@@ -1,7 +1,28 @@
 function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance) {
 
-	var likeClickTimer = {};
-	var bookmarkClickTimer = {};
+	var likeClickTimer = null;
+	var bookmarkClickTimer = null;
+	
+	function findPostById(id, array) {
+		console.log({
+			id: id,
+			array: array
+		})
+		for (var item = 0; item < array.length; item++) {
+			if (array[item].Id === id) {
+				return (item);
+			}
+		}
+	}
+	
+	function findItemInArray(value, array) {
+		for (var item = 0; item < array.length; item++) {
+			if (array[item] === value) {
+				return (item);
+			}
+		}
+		return (-1);
+	}
 	// $scope.DriveMetadataTemplate = {
 	// 	id: '0B5NVuDykezpkYkNpaGxXWk1rM1U',
 	// 	name: 'Like#{]|[}Flagged(True/False){]|[}["LikerEmail","LikerEmail"]',
@@ -207,28 +228,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	};
 	//----------------------------------------------------
 	// --------------- Post Card Functions ---------------
-
-	function findPostById(id, array) {
-		console.log({
-			id: id,
-			array: array
-		})
-		for (var item = 0; item < array.length; item++) {
-			if (array[item].Id === id) {
-				return (item);
-			}
-		}
-	}
-	
-	function findItemInArray(value, array) {
-		for (var item = 0; item < array.length; item++) {
-			if (array[item] === value) {
-				return (item);
-			}
-		}
-		return (-1);
-	}
-
 	$scope.confirmDelete = function(ev, content, arrayIndex) {
 		var confirm = $mdDialog.confirm().title('Permanently delete this?').ariaLabel('Delete?').targetEvent(ev).ok('Delete').cancel('Cancel');
 		$mdDialog.show(confirm).then(function() {
@@ -279,12 +278,13 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			content.userLiked = false;
 			content.Likes.splice(userLikeIndex, 1);
 		}
-		var postTimer = likeClickTimer[content.Id]
-		if(postTimer) {
-            clearTimeout(postTimer);
+		if(likeClickTimer[content.Id]) {
+			console.log("clearing timer");
+            clearTimeout(likeClickTimer[content.Id]);
         }
         console.log(likeClickTimer);
-		postTimer = setTimeout(function() {
+		likeClickTimer = setTimeout(function() {
+			console.log("running timer");
 			var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
 			allArrayPost.userLiked = content.userLiked;
 			allArrayPost.Likes = content.Likes;
