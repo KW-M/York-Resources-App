@@ -67,6 +67,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			} else {
 				var tags = [];
 			}
+			console.log(likesAndFlagged);
 			formatedPost = {
 				Title: DriveMetadata.properties.Title || '',
 				Description: descriptionAndPreviewimage[0] || '',
@@ -188,10 +189,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	}
 
 	$scope.flagPost = function(ev, content, arrayIndex) {
-		content.Flagged = true;
 		$timeout(function() { //makes angular update values
 			$scope.visiblePosts.splice(arrayIndex, 1);
-
 		});
 		queue(GoogleDriveService.updateFlagged(content.Id, true), function() {
 			console.log("flagged: " + content.Id);
@@ -218,20 +217,20 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		}
 	};
 	$scope.likePost = function(content) {
-		console.log("likeing"+content.userLiked)
+		console.log(content)
 		content.userLiked != content.userLiked;
 		if (content.userLiked === true) {
-			content.Likes.push($scope.userInfo.Email);
+			content.Likes.push($scope.myInfo.Email);
 		} else {
-			content.Likes.pop($scope.userInfo.Email);
+			content.Likes.pop($scope.myInfo.Email);
 		}
 		debounce(function() {
 			var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
 			allArrayPost.userLiked = content.userLiked;
 			if (content.userLiked === true) {
-				allArrayPost.Likes.push($scope.userInfo.Email);
+				allArrayPost.Likes.push($scope.myInfo.Email);
 			} else {
-				allArrayPost.Likes.pop($scope.userInfo.Email);
+				allArrayPost.Likes.pop($scope.myInfo.Email);
 			}
 			console.log(allArrayPost)
 			// GoogleDriveService.updateTitle(content.Id, false).then(function(result) {
