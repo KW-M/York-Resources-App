@@ -179,6 +179,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			});
 		});
 	};
+	function findPost
 	$scope.flagPost = function(ev, content, arrayIndex) {
 		content.Flagged = true;
 		$timeout(function() { //makes angular update values
