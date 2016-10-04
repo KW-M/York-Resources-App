@@ -222,10 +222,15 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		debounce(function() {
 			var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
 			allArrayPost.userLiked = content.userLiked;
-			allArrayPost.Likes = 
-			GoogleDriveService.updateTitle(content.Id, false).then(function(result) {
-				console.log(result);
-			})
+			if (content.userLiked === true) {
+				allArrayPost.Likes.push($scope.userInfo.Email);
+			} else {
+				allArrayPost.Likes.pop($scope.userInfo.Email);
+			}
+			console.log(allArrayPost)
+			// GoogleDriveService.updateTitle(content.Id, false).then(function(result) {
+			// 	console.log(result);
+			// })
 		}, 1000)
 
 		content.Likes.push();
