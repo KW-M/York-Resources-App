@@ -1,7 +1,7 @@
 function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance) {
 
-	var likeClickTimer;
-	var bookmarkClickTimer;
+	var likeClickTimer = {};
+	var bookmarkClickTimer = {};
 	// $scope.DriveMetadataTemplate = {
 	// 	id: '0B5NVuDykezpkYkNpaGxXWk1rM1U',
 	// 	name: 'Like#{]|[}Flagged(True/False){]|[}["LikerEmail","LikerEmail"]',
@@ -279,10 +279,10 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			content.userLiked = false;
 			content.Likes.splice(userLikeIndex, 1);
 		}
-		if(likeClickTimer) {
-            clearTimeout(likeClickTimer);
+		if(likeClickTimer[content.Id]) {
+            clearTimeout(likeClickTimer[content.Id]);
         }
-		likeClickTimer = setTimeout(function() {
+		likeClickTimer[content.d] = setTimeout(function() {
 			var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
 			allArrayPost.userLiked = content.userLiked;
 			allArrayPost.Likes = content.Likes;
@@ -295,10 +295,10 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	};
 	$scope.bookmark = function(content) {
 		content.Bookmarked = !content.Bookmarked;
-		if(bookmarkClickTimer) {
-            clearTimeout(bookmarkClickTimer);
+		if(bookmarkClickTimer[content.Id]) {
+            clearTimeout(bookmarkClickTimer[content.Id]);
         }
-		bookmarkClickTimer = setTimeout(function() {
+		bookmarkClickTimer[content.Id] = setTimeout(function() {
 			var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
 			allArrayPost.Bookmarked = content.Bookmarked;
 			queue(GoogleDriveService.updateFileMetadata(content.Id, {starred: content.Bookmarked}), function(result) {
