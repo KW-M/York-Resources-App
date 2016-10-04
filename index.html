@@ -119,6 +119,10 @@
                         <md-button ng-click="logPostToConsole(Post,$index)">
                             <md-icon>edit</md-icon>Console log
                         </md-button>
+                        <md-button ng-click="likePost(undefned, Post)">
+                                <p>{{Post.Likes.length}}</p>
+                                <md-icon ng-class="{'md-accent' : Post.userLiked}">thumb_up</md-icon>
+                        </md-button>
                     </md-card>
                 <!--</div>-->
                 <div style='display:flex; flex:1;'><!--vertical footer alignment>-->

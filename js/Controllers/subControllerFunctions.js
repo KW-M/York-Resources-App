@@ -181,6 +181,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	};
 	
 	function findPostById (id, array) {
+		console.log()
 		for (var item = 0; item < array.length; item ++) {
 			if (item.id === id) {
 				return ({
@@ -223,6 +224,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		}
 	};
 	$scope.likePost = function(like, content, arrayIndex) {
+		console.log(content)
 		console.log(findPostById(content.Id, $scope.allPosts))
 		if (like) {
 			content.userLiked = true;
