@@ -220,16 +220,13 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			}));
 		}
 	};
-	$scope.likePost = function(like, content) {
+	$scope.likePost = function(content) {
 		console.log(findPostById(content.Id, $scope.allPosts))
-			content.userLiked = like;
+			content.userLiked != content.userLiked;
 			debounce(function(){
-				var allArrayPost = allPosts[findPostById(content.Id, $scope.allPosts)];
+				var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
 				allArrayPost.userLiked = true;
-				GoogleDriveService.updateFlagged(content.Id, false).then(function(result) {
-					console.log(result);
-				})
-				GoogleDriveService.updateFlagged(content.Id, false).then(function(result) {
+				GoogleDriveService.updateTitle(content.Id, false).then(function(result) {
 					console.log(result);
 				})
 			},1000)
