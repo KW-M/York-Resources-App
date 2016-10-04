@@ -137,15 +137,50 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		}
 	};
 	//----------------------------------------------------
-	//-------------- Sorting & Filtering -----------------
-	$scope.sortByLikes = function(thingToSort) {
-		thingToSort.sort(function(a, b) {
-			return b.LikeUsers.length - a.LikeUsers.length;
-		});
-	};
-	$scope.sortByDateAndLikes = function(thingToSort) {
-		thingToSort.sort(function(a, b) {
-			return b.UpdateDate.addDays() - a.UpdateDate;
+	//-------------- Filtering & Sorting -----------------
+	$scope.filterPosts = function(inputSet) {
+      var output = inputSet.filter(function(post) {
+         if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
+            var Flagged = post.Flagged === $scope.queryParams.flagged || post.Flagged;
+         } else {
+            var Flagged = true;
+         }
+         if ($scope.queryParams.classpath !== null && $scope.queryParams.classpath !== undefined && $scope.queryParams.classpath !== 'my-posts' && $scope.queryParams.classpath !== 'my-bookmarks' && $scope.queryParams.classpath !== 'all-posts' && $scope.queryParams.classpath !== 'flagged') {
+            var Class = post.Class.Name === $scope.queryParams.classpath;
+         } else {
+            var Class = true;
+         }
+         if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) {
+            var Type = post.Type === $scope.queryParams.type;
+         } else {
+            var Type = true;
+         }
+         if ($scope.queryParams.bookmarked !== null && $scope.queryParams.bookmarked !== undefined) {
+            var Bookmarked = post.Bookmarked === $scope.queryParams.bookmarked;
+         } else {
+            var Bookmarked = true;
+         }
+         if ($scope.queryParams.creatorEmail !== null && $scope.queryParams.creatorEmail !== undefined) {
+            var Creator = post.Creator.Email === $scope.queryParams.creatorEmail;
+         } else {
+            var Creator = true;
+         }
+         // console.log({
+         //    filteredPost: post,
+         //    Flagged: Flagged,
+         //    Class: Class,
+         //    Type: Type,
+         //    Bookmarked: Bookmarked,
+         //    Creator: Creator,
+         // });
+         return Flagged && Class && Type && Creator && Bookmarked;
+      });
+      //output.sort()
+      return (output)
+   }
+	$scope.sortByDateAndLikes = function(arrayToSort) {
+		arrayToSort.sort(function(a, b) {
+			return b.UpdateDate.addDays(b.Likes.length) - a.UpdateDate.addDays(a.Likes.length);
 		});
 	};
 	//----------------------------------------------------
@@ -208,7 +243,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		// $timeout(function() { //makes angular update values
 		// 	$scope.visiblePosts.splice(arrayIndex, 1);
 		// });
-		$scope.
+		$scope
+		$scope.sortByDateAndLikes
 		var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
 		queue(GoogleDriveService.updateFlagged(content.Id, true), function() {
 			console.log("flagged: " + content.Id);

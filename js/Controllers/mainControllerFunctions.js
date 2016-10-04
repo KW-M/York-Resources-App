@@ -378,7 +378,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          });
       }
    }
-
    function hideSpinner() {
       if (classPageTokenSelectionIndex[$scope.queryPropertyString] === "end") {
          loading_spinner.style.display = 'none';
@@ -391,7 +390,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          }, 100)
       }
    }
-
    function generateQueryString() {
       var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false"
       if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
@@ -414,7 +412,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       }
       $scope.queryPropertyString = query;
    }
-
    function sortPostsByType(formattedFileList) {
       if ($scope.queryParams.q) {
          if ($scope.queryParams.q === $scope.previousSearch) {
@@ -447,97 +444,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
 
       }
    }
-
-   function formatPost(unformatedFile) {
-      var formatedFile = {}
-      var tagsRaw = "[\"" + unformatedFile.properties.Tag1 + unformatedFile.properties.Tag2 + "\"]";
-      var titleAndURL = unformatedFile.name.split("{]|[}");
-
-      formatedFile.Type = unformatedFile.properties.Type;
-      formatedFile.Flagged = unformatedFile.properties.Flagged;
-      formatedFile.Id = unformatedFile.id;
-
-      formatedFile.Title = titleAndURL[0];
-      formatedFile.Description = unformatedFile.description;
-      formatedFile.CreationDate = unformatedFile.createdTime //Date.prototype.parseRFC3339(unformatedFile.createdTime);
-      formatedFile.UpdateDate = unformatedFile.modifiedTime //Date.prototype.parseRFC3339(unformatedFile.modifiedTime);
-      if (unformatedFile.properties.Tag1 || unformatedFile.properties.Tag2) {
-         formatedFile.Tags = JSON.parse(tagsRaw.replace(/,/g, "\",\""));
-      } else {
-         formatedFile.Tags = [];
-      }
-      formatedFile.TagString = unformatedFile.properties.Tag1 + unformatedFile.properties.Tag2;
-      formatedFile.Creator = {
-         Name: unformatedFile.owners[0].displayName,
-         Me: unformatedFile.owners[0].me,
-         Email: unformatedFile.owners[0].emailAddress,
-         ClassOf: unformatedFile.owners[0].emailAddress.match(/\d+/)[0],
-      }
-      formatedFile.Class = {
-         Name: unformatedFile.properties.ClassName,
-         Catagory: unformatedFile.properties.ClassCatagory,
-         Color: unformatedFile.properties.ClassColor,
-      }
-
-      formatedFile.Link = titleAndURL[1];
-      formatedFile.attachmentId = unformatedFile.properties.attachmentId;
-      if (formatedFile.Type === "Link") {
-         formatedFile.PreviewImage = unformatedFile.thumbnailLink.replace("=s220", "=s400")
-      } else if (formatedFile.Type === "Gdrive") {
-         formatedFile.PreviewImage = "https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + formatedFile.attachmentId;
-      }
-
-      if (devMode) {
-         console.log({
-            unformated: unformatedFile,
-            formated: formatedFile
-         })
-      }
-
-      return formatedFile;
-   }
-
-   $scope.filterPosts = function(inputSet) {
-      var output = inputSet.filter(function(post) {
-         if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
-            var Flagged = post.Flagged === $scope.queryParams.flagged || post.Flagged;
-         } else {
-            var Flagged = true;
-         }
-         if ($scope.queryParams.classpath !== null && $scope.queryParams.classpath !== undefined && $scope.queryParams.classpath !== 'my-posts' && $scope.queryParams.classpath !== 'my-bookmarks' && $scope.queryParams.classpath !== 'all-posts' && $scope.queryParams.classpath !== 'flagged') {
-            var Class = post.Class.Name === $scope.queryParams.classpath;
-         } else {
-            var Class = true;
-         }
-         if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) {
-            var Type = post.Type === $scope.queryParams.type;
-         } else {
-            var Type = true;
-         }
-         if ($scope.queryParams.bookmarked !== null && $scope.queryParams.bookmarked !== undefined) {
-            var Bookmarked = post.Bookmarked === $scope.queryParams.bookmarked;
-         } else {
-            var Bookmarked = true;
-         }
-         if ($scope.queryParams.creatorEmail !== null && $scope.queryParams.creatorEmail !== undefined) {
-            var Creator = post.Creator.Email === $scope.queryParams.creatorEmail;
-         } else {
-            var Creator = true;
-         }
-         // console.log({
-         //    filteredPost: post,
-         //    Flagged: Flagged,
-         //    Class: Class,
-         //    Type: Type,
-         //    Bookmarked: Bookmarked,
-         //    Creator: Creator,
-         // });
-         return Flagged && Class && Type && Creator && Bookmarked;
-      });
-      //output.sort()
-      return (output)
-   }
-
    $scope.getFiles = function() {
       console.log('fake get files')
          // if (LoadingFiles === true) {
