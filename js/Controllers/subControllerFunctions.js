@@ -248,7 +248,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			queue(GoogleDriveService.updateFileMetadata(content.Id, {name:name}),function(result) {
 				console.log(result);
 			});
-		}, 1000);
+		}, 10000);
 		delayedFunc();
 	};
 	$scope.bookmark = function(content) {
