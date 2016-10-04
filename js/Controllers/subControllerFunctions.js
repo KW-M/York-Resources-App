@@ -1,7 +1,7 @@
 function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance) {
 
-	var likeClickTimer;
-	var bookmarkClickTimer = null;
+	var likeClickTimer = {};
+	var bookmarkClickTimer = {};
 	
 	function findPostById(id, array) {
 		console.log({
@@ -279,12 +279,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			content.Likes.splice(userLikeIndex, 1);
 		}
 		if(typeof(likeClickTimer[content.Id]) == 'number') {
-			console.log("clearing timer");
             clearTimeout(likeClickTimer[content.Id]);
         }
-        console.log(likeClickTimer);
 		likeClickTimer[content.Id] = setTimeout(function() {
-			console.log("running timer");
 			var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
 			allArrayPost.userLiked = content.userLiked;
 			allArrayPost.Likes = content.Likes;
@@ -297,7 +294,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	};
 	$scope.bookmark = function(content) {
 		content.Bookmarked = !content.Bookmarked;
-		if(bookmarkClickTimer[content.Id]) {
+		if(typeof(bookmarkClickTimer[content.Id]) == 'number') {
             clearTimeout(bookmarkClickTimer[content.Id]);
         }
 		bookmarkClickTimer[content.Id] = setTimeout(function() {
