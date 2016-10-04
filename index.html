@@ -131,7 +131,7 @@
                 <!--post-card raise-on-hover-->
                 <div angular-grid="visiblePosts">
                     <md-card class="" ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}">
-hui
+                        {{Post.Title}}<br>{{Post.Description}}
                     </md-card>
                 </div>
                 <!--</div>-->
