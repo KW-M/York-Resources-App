@@ -220,22 +220,22 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			}));
 		}
 	};
-	$scope.likePost = function(like, content, arrayIndex) {
+	$scope.likePost = function(like, content) {
 		console.log(findPostById(content.Id, $scope.allPosts))
-		if (like) {
-			content.userLiked = true;
+			content.userLiked = like;
 			debounce(function(){
-				var allPost = allPosts[findPostById(content.Id, $scope.allPosts)];
-				allPost.userLiked = true;
-				GoogleDriveService.flagDriveFile(content.Id, 'Flagged', false).then(function() {
-					console.log("flagged: " + content.Id);
+				var allArrayPost = allPosts[findPostById(content.Id, $scope.allPosts)];
+				allArrayPost.userLiked = true;
+				GoogleDriveService.updateFlagged(content.Id, false).then(function(result) {
+					console.log(result);
+				})
+				GoogleDriveService.updateFlagged(content.Id, false).then(function(result) {
+					console.log(result);
 				})
 			},1000)
-		}
-		else {
-			content.userLiked = false
+
+			content.Likes.push();
 			content.Likes.pop();
-		}
 	};
 	$scope.bookmark = function(content) {
 		if (content.Bookmarked) {
