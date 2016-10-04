@@ -64,8 +64,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			var descriptionAndPreviewimage = DriveMetadata.description.split("{]|[}");
 			if (DriveMetadata.properties.Tag1 || DriveMetadata.properties.Tag2) {
 				var tags = JSON.parse(("[\"" + (DriveMetadata.properties.Tag1 || '') + (DriveMetadata.properties.Tag2 || '') + "\"]").replace(/,/g, "\",\""));
-			}
-			else {
+			} else {
 				var tags = [];
 			}
 			formatedPost = {
@@ -96,8 +95,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 				Bookmarked: DriveMetadata.starred || false,
 			}
 			return (formatedPost)
-		}
-		catch (e) {
+		} catch (e) {
 			return (formatedPost);
 			console.log(e)
 		}
@@ -126,8 +124,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 				}
 			};
 			return (formatedDriveMetadata);
-		}
-		catch (e) {
+		} catch (e) {
 			return (formatedDriveMetadata);
 			console.log(e)
 		}
@@ -154,13 +151,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	$scope.toggleSidebar = function(close) { //called by the top left toolbar menu button
 		if (close === true) {
 			$mdSidenav('sidenav_overlay').close();
-		}
-		else {
+		} else {
 			if ($mdMedia('gt-sm')) {
 				$scope.globals.sidenavIsOpen = !$scope.globals.sidenavIsOpen;
 				//angularGridInstance.posts.refresh
-			}
-			else {
+			} else {
 				$mdSidenav('sidenav_overlay').toggle();
 			}
 		}
@@ -180,9 +175,12 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		});
 	};
 
-	function findPostById (id, array) {
-		console.log({id:id,array:array})
-		for (var item = 0; item < array.length; item ++) {
+	function findPostById(id, array) {
+		console.log({
+			id: id,
+			array: array
+		})
+		for (var item = 0; item < array.length; item++) {
 			if (array[item].Id === id) {
 				return (item);
 			}
@@ -211,8 +209,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			queue(GoogleDriveService.updateFlagged(content.Id, false), function() {
 				console.log("unflagged: " + content.Id);
 			});
-		}
-		else {
+		} else {
 			$mdDialog.show($mdDialog.alert({
 				title: 'Uh Oh.',
 				htmlContent: '<p style="margin: 0px; margin-bottom: 2px">One of your posts has been flagged within the past two weeks.</p><p style="margin: 0px">To unlock the ability to unflag posts, make sure none of your posts get flagged this week.</p>',
@@ -221,34 +218,26 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		}
 	};
 	$scope.likePost = function(content) {
-		console.log(findPostById(content.Id, $scope.allPosts))
-			content.userLiked != content.userLiked;
-			debounce(function(){
-				var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
-				allArrayPost.userLiked = true;
-				GoogleDriveService.updateTitle(content.Id, false).then(function(result) {
-					console.log(result);
-				})
-			},1000)
+		content.userLiked != content.userLiked;
+		debounce(function() {
+			var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
+			allArrayPost.userLiked = content.userLiked;
+			allArrayPost.Likes = 
+			GoogleDriveService.updateTitle(content.Id, false).then(function(result) {
+				console.log(result);
+			})
+		}, 1000)
 
-			content.Likes.push();
-			content.Likes.pop();
+		content.Likes.push();
+		content.Likes.pop();
 	};
 	$scope.bookmark = function(content) {
-		if (content.Bookmarked) {
-			content.Bookmarked = false;
-			debounce(sendBookmark(), 1000);
-		}
-		else {
-			content.Bookmarked = true;
-			debounce(sendBookmark(), 1000);
-		}
-
-		function sendBookmark() {
-			queue(GoogleDriveService.updateBookmarked(content.Id, true), function() {
-				console.log("flagged: " + content.Id);
+		content.Bookmarked != content.Bookmarked;
+		debounce(function() {
+			queue(GoogleDriveService.updateBookmarked(content.Id, content.Bookmarked), function(result) {
+				console.log("bookmarked: " + content.Id);
 			});
-		}
+		}, 1000);
 	};
 	$scope.openLink = function(link) {
 		if (link !== "" && link !== undefined) {
