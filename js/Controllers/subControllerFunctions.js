@@ -279,10 +279,12 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			content.userLiked = false;
 			content.Likes.splice(userLikeIndex, 1);
 		}
-		if(likeClickTimer[content.Id]) {
-            clearTimeout(likeClickTimer[content.Id]);
+		var postTimer = likeClickTimer[content.Id]
+		if(postTimer) {
+            clearTimeout(postTimer);
         }
-		likeClickTimer[content.d] = setTimeout(function() {
+        console.log(likeClickTimer);
+		postTimer = setTimeout(function() {
 			var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
 			allArrayPost.userLiked = content.userLiked;
 			allArrayPost.Likes = content.Likes;
