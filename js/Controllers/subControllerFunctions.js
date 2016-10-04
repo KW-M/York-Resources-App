@@ -224,10 +224,10 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		console.log(findPostById(content.Id, $scope.allPosts))
 		if (like) {
 			content.userLiked = true;
-			content.Likes.push("Kiwi");
 			debounce(function(){
 				var allPost = allPosts[findPostById(content.Id, $scope.allPosts)];
-				
+				allPost.userLiked = true;
+				content.Likes.push("Kiwi");
 				GoogleDriveService.flagDriveFile(content.Id, 'Flagged', false).then(function() {
 					console.log("flagged: " + content.Id);
 				})
