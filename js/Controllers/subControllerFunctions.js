@@ -231,12 +231,12 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	};
 	$scope.likePost = function(content) {
 		console.log(content)
-		content.userLiked != content.userLiked;
+		var userLikeIndex = findItemInArray($scope.myInfo.Email, content.Likes)
+		content.userLiked = !content.userLiked;
 		if (content.userLiked === true) {
 			content.Likes.push($scope.myInfo.Email);
 		} else {
-			var userLikeIndex = findItemInArray($scope.myInfo.Email,content.Likes)
-			content.Likes.splice(userLikeIndex,1);
+			content.Likes.splice(userLikeIndex,0);
 		}
 		debounce(function() {
 			var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
