@@ -191,7 +191,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		content.Flagged = true;
 		$timeout(function() { //makes angular update values
 			$scope.visiblePosts.splice(arrayIndex, 1);
-			$scope.flaggedPosts.push(content);
+
 		});
 		queue(GoogleDriveService.updateFlagged(content.Id, true), function() {
 			console.log("flagged: " + content.Id);
@@ -218,7 +218,13 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		}
 	};
 	$scope.likePost = function(content) {
+		console.log("likeing"+content.userLiked)
 		content.userLiked != content.userLiked;
+		if (content.userLiked === true) {
+			content.Likes.push($scope.userInfo.Email);
+		} else {
+			content.Likes.pop($scope.userInfo.Email);
+		}
 		debounce(function() {
 			var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
 			allArrayPost.userLiked = content.userLiked;
@@ -239,7 +245,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	$scope.bookmark = function(content) {
 		content.Bookmarked != content.Bookmarked;
 		debounce(function() {
-			queue(GoogleDriveService.updateBookmarked(content.Id, content.Bookmarked), function(result) {
+			queue(GoogleDriveService.updateFileMetadata(content.Id, {starred: content.Bookmarked}), function(result) {
 				console.log("bookmarked: " + content.Id);
 			});
 		}, 1000);
