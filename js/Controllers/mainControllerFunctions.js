@@ -437,6 +437,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    }
    $scope.getFiles = function() {
       console.log('fake get files')
+      getFiles();
          // if (LoadingFiles === true) {
          //    console.log('waiting')
          //    document.addEventListener('filesLoaded', getFiles());
