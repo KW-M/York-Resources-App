@@ -121,7 +121,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       }
       generateQueryString();
       if ($scope.queryParams.q === null) {
-         var filteredPosts = filterPosts($scope.allPosts);
+         var filteredPosts = $scope.filterPosts($scope.allPosts);
          $timeout(function() {
             console.log({
                filter: filteredPosts,
@@ -432,7 +432,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          })
       } else {
          $scope.allPosts = $scope.allPosts.concat(formattedFileList);
-         var filteredPosts = filterPosts(formattedFileList);
+         var filteredPosts = $scope.filterPosts(formattedFileList);
          $timeout(function() {
             conurancy_counter--;
             console.log({
@@ -497,7 +497,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       return formatedFile;
    }
 
-   function filterPosts(inputSet) {
+   $scope.filterPosts = function(inputSet) {
       var output = inputSet.filter(function(post) {
          if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
             var Flagged = post.Flagged === $scope.queryParams.flagged || post.Flagged;
