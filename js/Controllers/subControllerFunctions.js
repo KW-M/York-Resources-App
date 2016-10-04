@@ -1,6 +1,7 @@
 function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance) {
 
-	var likeClickTimer = null;
+	var likeClickTimer;
+	var bookmarkClickTimer;
 	// $scope.DriveMetadataTemplate = {
 	// 	id: '0B5NVuDykezpkYkNpaGxXWk1rM1U',
 	// 	name: 'Like#{]|[}Flagged(True/False){]|[}["LikerEmail","LikerEmail"]',
@@ -171,15 +172,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	};
 	//----------------------------------------------------
 	// --------------- Post Card Functions ---------------
-	$scope.confirmDelete = function(ev, content, arrayIndex) {
-		var confirm = $mdDialog.confirm().title('Permanently delete this?').ariaLabel('Delete?').targetEvent(ev).ok('Delete').cancel('Cancel');
-		$mdDialog.show(confirm).then(function() {
-			$timeout($scope.visiblePosts.splice(arrayIndex, 1));
-			queue(GoogleDriveService.deleteDriveFile(content.Id), function() {
-				console.log("deleted");
-			});
-		});
-	};
 
 	function findPostById(id, array) {
 		console.log({
@@ -202,6 +194,15 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		return (-1);
 	}
 
+	$scope.confirmDelete = function(ev, content, arrayIndex) {
+		var confirm = $mdDialog.confirm().title('Permanently delete this?').ariaLabel('Delete?').targetEvent(ev).ok('Delete').cancel('Cancel');
+		$mdDialog.show(confirm).then(function() {
+			$timeout($scope.visiblePosts.splice(arrayIndex, 1));
+			queue(GoogleDriveService.deleteDriveFile(content.Id), function() {
+				console.log("deleted");
+			});
+		});
+	};
 	$scope.flagPost = function(ev, content, arrayIndex) {
 		$timeout(function() { //makes angular update values
 			$scope.visiblePosts.splice(arrayIndex, 1);
@@ -240,11 +241,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			content.Likes.splice(userLikeIndex, 1);
 		}
 		if(likeClickTimer) {
-			console.log("clear debounce fired")
             clearTimeout(likeClickTimer);
         }
 		likeClickTimer = setTimeout(function() {
-			console.log("debounce fired")
 			var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
 			allArrayPost.userLiked = content.userLiked;
 			allArrayPost.Likes = content.Likes;
@@ -256,12 +255,17 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		}, 2000);
 	};
 	$scope.bookmark = function(content) {
-		content.Bookmarked != content.Bookmarked;
-		debounce(function() {
+		content.Bookmarked = !content.Bookmarked;
+		if(bookmarkClickTimer) {
+            clearTimeout(bookmarkClickTimer);
+        }
+		bookmarkClickTimer = setTimeout(function() {
+			var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
+			allArrayPost.Bookmarked = content.Bookmarked;
 			queue(GoogleDriveService.updateFileMetadata(content.Id, {starred: content.Bookmarked}), function(result) {
 				console.log("bookmarked: " + content.Id);
 			});
-		}, 1000);
+		}, 2000);
 	};
 	$scope.openLink = function(link) {
 		if (link !== "" && link !== undefined) {
