@@ -416,27 +416,23 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    }
 
    function sortPostsByType(formattedFileList) {
-      if ($scope.queryParams.q) {
-         if ($scope.queryParams.q === $scope.previousSearch) {
-            $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
-         } else {
-            $scope.searchPosts = formattedFileList;
-         }
-         $scope.previousSearch = $scope.queryParams.q
-      } else {
-         $scope.allPosts = $scope.allPosts.concat(formattedFileList);
-         var filteredPosts = $scope.filterPosts(formattedFileList);
-      }
       $timeout(function() {
-         conurancy_counter--;
          if ($scope.queryParams.q) {
+            if ($scope.queryParams.q === $scope.previousSearch) {
+               $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
+            } else {
+               $scope.searchPosts = formattedFileList;
+            }
+            $scope.previousSearch = $scope.queryParams.q
             $scope.visiblePosts = $scope.searchPosts;
          } else {
-            $scope.visiblePosts = $scope.visiblePosts.concat(filteredPosts);
+            $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+            $scope.visiblePosts = $scope.visiblePosts.concat($scope.filterPosts(formattedFileList));
          }
+         conurancy_counter = conurancy_counter - 1 
          LoadingFiles = false;
-         console.log('endingLoadingFiles')
          document.dispatchEvent(new window.Event('filesLoaded'));
+         console.log('endingLoadingFiles')
       })
    }
    $scope.getFiles = function() {

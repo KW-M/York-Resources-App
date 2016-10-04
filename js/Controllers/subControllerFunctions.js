@@ -176,7 +176,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
          return Flagged && Class && Type && Creator && Bookmarked;
       });
       //output.sort()
-      return (output)
+      return ($scope.sortByDateAndLikes(output))
    }
 	$scope.sortByDateAndLikes = function(arrayToSort) {
 		arrayToSort.sort(function(a, b) {
