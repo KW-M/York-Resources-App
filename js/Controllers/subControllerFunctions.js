@@ -184,10 +184,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		console.log({id:id,array:array})
 		for (var item = 0; item < array.length; item ++) {
 			if (array[item].Id === id) {
-				return ({
-					Post: array[item],
-					Index: item,
-				})
+				return (item);
 			}
 		}
 	}
@@ -228,9 +225,12 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		if (like) {
 			content.userLiked = true;
 			content.Likes.push("Kiwi");
-			// GoogleDriveService.flagDriveFile(content.Id, 'Flagged', false).then(function() {
-			// 	console.log("flagged: " + content.Id);
-			// })
+			debounce(function(){
+				console.log(findPostById(content.Id, $scope.allPosts))
+			},1000)
+			GoogleDriveService.flagDriveFile(content.Id, 'Flagged', false).then(function() {
+				console.log("flagged: " + content.Id);
+			})
 		}
 		else {
 			content.userLiked = false
