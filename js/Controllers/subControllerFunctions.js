@@ -226,11 +226,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			content.userLiked = true;
 			content.Likes.push("Kiwi");
 			debounce(function(){
-				console.log(findPostById(content.Id, $scope.allPosts))
+				var allPost = allPosts[findPostById(content.Id, $scope.allPosts)];
+				GoogleDriveService.flagDriveFile(content.Id, 'Flagged', false).then(function() {
+					console.log("flagged: " + content.Id);
+				})
 			},1000)
-			GoogleDriveService.flagDriveFile(content.Id, 'Flagged', false).then(function() {
-				console.log("flagged: " + content.Id);
-			})
 		}
 		else {
 			content.userLiked = false
