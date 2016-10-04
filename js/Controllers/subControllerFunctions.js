@@ -278,7 +278,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			content.userLiked = false;
 			content.Likes.splice(userLikeIndex, 1);
 		}
-		if(likeClickTimer[content.Id]) {
+		if(likeClickTimer[content.Id] ==) {
 			console.log("clearing timer");
             clearTimeout(likeClickTimer[content.Id]);
         }
