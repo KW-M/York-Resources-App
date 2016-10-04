@@ -192,6 +192,14 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			}
 		}
 	}
+	
+	function findItemInArray(value, array) {
+		for (var item = 0; item < array.length; item++) {
+			if (array[item] === value) {
+				return (item);
+			}
+		}
+	}
 
 	$scope.flagPost = function(ev, content, arrayIndex) {
 		$timeout(function() { //makes angular update values
@@ -227,7 +235,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		if (content.userLiked === true) {
 			content.Likes.push($scope.myInfo.Email);
 		} else {
-			content.Likes.pop();
+			var userLikeIndex = findItemInArray($scope.myInfo.Email,content.Likes)
+			content.Likes.splice(userLikeIndex,1);
 		}
 		debounce(function() {
 			var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
@@ -235,7 +244,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			if (content.userLiked === true) {
 				allArrayPost.Likes.push($scope.myInfo.Email);
 			} else {
-				allArrayPost.Likes.pop($scope.myInfo.Email);
+				allArrayPost.Likes.splice(userLikeIndex,1);
 			}
 			console.log(allArrayPost)
 			// GoogleDriveService.updateTitle(content.Id, false).then(function(result) {
