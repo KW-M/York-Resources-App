@@ -179,7 +179,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			});
 		});
 	};
-	
+
 	function findPostById (id, array) {
 		console.log({id:id,array:array})
 		for (var item = 0; item < array.length; item ++) {
@@ -188,7 +188,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			}
 		}
 	}
-	
+
 	$scope.flagPost = function(ev, content, arrayIndex) {
 		content.Flagged = true;
 		$timeout(function() { //makes angular update values
@@ -227,7 +227,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			debounce(function(){
 				var allPost = allPosts[findPostById(content.Id, $scope.allPosts)];
 				allPost.userLiked = true;
-				content.Likes.push("Kiwi");
 				GoogleDriveService.flagDriveFile(content.Id, 'Flagged', false).then(function() {
 					console.log("flagged: " + content.Id);
 				})
@@ -300,7 +299,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	$scope.consoleLog = function(input, asAlert) {
 		console.log(input)
 		if (asAlert) {
-			window.alert(JSON.stringify(input, null, 4))		
+			window.alert(JSON.stringify(input, null, 4))
 		}
 	}
 	$scope.logDuplicationIndexes = function() {
