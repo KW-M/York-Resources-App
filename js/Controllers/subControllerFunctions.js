@@ -199,6 +199,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 				return (item);
 			}
 		}
+		return (-1);
 	}
 
 	$scope.flagPost = function(ev, content, arrayIndex) {
@@ -232,28 +233,27 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	$scope.likePost = function(content) {
 		console.log(content)
 		var userLikeIndex = findItemInArray($scope.myInfo.Email, content.Likes)
-		content.userLiked = !content.userLiked;
-		if (content.userLiked === true) {
+		console.log(userLikeIndex)
+		if (userLikeIndex === -1) {
+			content.userLiked = false;
 			content.Likes.push($scope.myInfo.Email);
 		} else {
+			console.log("here")
 			content.Likes.splice(userLikeIndex,0);
 		}
-		debounce(function() {
-			var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
-			allArrayPost.userLiked = content.userLiked;
-			if (content.userLiked === true) {
-				allArrayPost.Likes.push($scope.myInfo.Email);
-			} else {
-				allArrayPost.Likes.splice(userLikeIndex,1);
-			}
-			console.log(allArrayPost)
-			// GoogleDriveService.updateTitle(content.Id, false).then(function(result) {
-			// 	console.log(result);
-			// })
-		}, 1000)
-
-		content.Likes.push();
-		content.Likes.pop();
+		// debounce(function() {
+		// 	var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
+		// 	allArrayPost.userLiked = content.userLiked;
+		// 	if (content.userLiked === true) {
+		// 		allArrayPost.Likes.push($scope.myInfo.Email);
+		// 	} else {
+		// 		allArrayPost.Likes.splice(userLikeIndex,1);
+		// 	}
+		// 	console.log(allArrayPost)
+		// 	// GoogleDriveService.updateTitle(content.Id, false).then(function(result) {
+		// 	// 	console.log(result);
+		// 	// })
+		// }, 1000)
 	};
 	$scope.bookmark = function(content) {
 		content.Bookmarked != content.Bookmarked;
