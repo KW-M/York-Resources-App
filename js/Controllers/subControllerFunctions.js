@@ -179,7 +179,16 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			});
 		});
 	};
-	function findPost
+	function findPostById (id, array) {
+		for (var item = 0; item < array.length; item ++) {
+			if (item.id === id) {
+				return ({
+					Post: array[item],
+					Index: item,
+				})
+			}
+		}
+	}
 	$scope.flagPost = function(ev, content, arrayIndex) {
 		content.Flagged = true;
 		$timeout(function() { //makes angular update values
