@@ -143,9 +143,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			return b.LikeUsers.length - a.LikeUsers.length;
 		});
 	};
-	$scope.sortByDate = function(thingToSort) {
+	$scope.sortByDateAndLikes = function(thingToSort) {
 		thingToSort.sort(function(a, b) {
-			return b.UpdateDate - a.UpdateDate;
+			return b.UpdateDate.addDays() - a.UpdateDate;
 		});
 	};
 	//----------------------------------------------------
