@@ -227,6 +227,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			content.Likes.push("Kiwi");
 			debounce(function(){
 				var allPost = allPosts[findPostById(content.Id, $scope.allPosts)];
+				
 				GoogleDriveService.flagDriveFile(content.Id, 'Flagged', false).then(function() {
 					console.log("flagged: " + content.Id);
 				})

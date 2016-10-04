@@ -116,13 +116,13 @@
                     <!--post-card raise-on-hover-->
                     <md-card class="" ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}">
                         Title: {{Post.Title}}
-                        <md-button ng-click="logPostToConsole(Post,$index)">
+                        <button ng-click="logPostToConsole(Post,$index)">
                             <md-icon>edit</md-icon>Console log
-                        </md-button>
-                        <md-button ng-click="likePost(undefned, Post)">
+                        </button>
+                        <button ng-click="likePost(undefned, Post)">
                                 <p>{{Post.Likes.length}}</p>
                                 <md-icon ng-class="{'md-accent' : Post.userLiked}">thumb_up</md-icon>
-                        </md-button>
+                        </button>
                     </md-card>
                 <!--</div>-->
                 <div style='display:flex; flex:1;'><!--vertical footer alignment>-->
