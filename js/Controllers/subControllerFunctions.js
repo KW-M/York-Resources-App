@@ -95,8 +95,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 				Link: descriptionAndPreviewimage[1],
 				Id: DriveMetadata.id || '',
 				AttachmentId: DriveMetadata.properties.AttachmentId || '',
-				Likes: JSON.parse(likesAndFlagged[1])
-				userLiked: hasLiked
+				Likes: JSON.parse(likesAndFlagged[1]),
+				userLiked: hasLiked,
 				PreviewImage: descriptionAndPreviewimage[2],
 				Bookmarked: DriveMetadata.starred || false,
 			}
@@ -227,7 +227,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		if (content.userLiked === true) {
 			content.Likes.push($scope.myInfo.Email);
 		} else {
-			content.Likes.pop($scope.myInfo.Email);
+			content.Likes.pop();
 		}
 		debounce(function() {
 			var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
