@@ -652,7 +652,12 @@
                 reflowGrids();
               }, 100);
             }
-            win.on('resize', windowResizeCallback);
+            try {
+              addResizeListener(content_container, windowResizeCallback);
+            }
+catch (e) {
+              win.on('resize', windowResizeCallback);
+            }
 
             //add instance to factory if id is assigned
             if (agId) {
