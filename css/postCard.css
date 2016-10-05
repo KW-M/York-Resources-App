@@ -102,11 +102,9 @@
 .post-card-title {
     padding: 20px 16px 0px 16px;
     margin: 0px;
-    flex-direction: row;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 100%;
 }
 
 .post-card-creator {
