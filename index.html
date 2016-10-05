@@ -36,8 +36,15 @@
                     <p class="post-card-creator md-subhead"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{Post.Creator.ClassOf}})</span></p>
                     <p id="post_card_description" class="md-body-1" ng-bind-html="Post.Description"></p>
                     <md-card-actions>
-                        <md-button class="md-icon-button">
+                        <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(Post)">
+                            <span class="like-counter">{{Post.Likes.length}}</span>
+                            <md-icon ng-class="{'md-accent' : Post.userLiked}">thumb_up</md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button" id="flag_button" area-label="Flag" style="margin:0" ng-hide="::Post.Creator.Email === myInfo.Email">
                             <md-icon>flag</md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button" id="flag_button" area-label="Flag" style="margin:0" ng-show="::Post.Flagged === true" ng-click="::unFlagPost($event,Post,$index)">
+                            <md-icon class="md-warn">flag</md-icon>
                         </md-button>
                         <md-button class="md-button md-accent">Open Link</md-button>
                     </md-card-actions>
