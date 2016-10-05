@@ -586,7 +586,9 @@
                 if (!leavingElm.length) {
                   resolve();
                 } else {
+                                  console.log("leving elm")
                   single(leavingElm[0]).one('webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd', function() {
+                    console.log("leving elm")
                     $timeout(function() {
                       listElms = getListElms();
                       resolve();
