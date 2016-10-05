@@ -1,5 +1,5 @@
 /*
-    angularGrid.js v 0.6.0
+    angularGrid.js v 0.6.2
     Author: Sudhanshu Yadav
     Copyright (c) 2015-2016 Sudhanshu Yadav - ignitersworld.com , released under the MIT license.
     Demo on: http://ignitersworld.com/lab/angulargrid/
@@ -15,7 +15,7 @@
   } else if (typeof define === 'function' && define.amd) {
     // AMD
     define(['angular'], function (angular) {
-        return (global.PatternLock = factory(angular, root));
+        return factory(angular, root);
     });
   } else {
     // Global Variables
@@ -109,7 +109,7 @@
             agId: '@',
             pageSize: '=agPageSize',
             performantScroll: '=agPerformantScroll',
-            scrollContainer: '=agScrollContainer',
+            scrollContainer: '@agScrollContainer',
             infiniteScroll: '&agInfiniteScroll',
             infiniteScrollDistance: '=agInfiniteScrollDistance',
             infiniteScrollDelay: '=agInfiniteScrollDelay'
@@ -187,12 +187,12 @@
             function getScrollContainerInfo() {
               var container = $(document.querySelector(options.scrollContainer)),
                 contElm = container[0];
-                console.log(contElm);
+
               return {
                 height: contElm.offsetHeight,
                 scrollHeight: contElm.scrollHeight,
                 startFrom: findPos(domElm, contElm).top,
-                $elm: container
+                $elm: options.scrollContainer == 'body' ? win : container
               };
             }
 
@@ -318,7 +318,6 @@
 
             setTimeout(function() {
               scrollNs.scrollContInfo = getScrollContainerInfo();
-              console.log(scrollNs.scrollContInfo);
               scrollNs.scrollContInfo.$elm.on('scroll', scrollHandler);
             }, 0);
 
@@ -393,6 +392,9 @@
 
             //function to reflow grids
             function reflowGrids() {
+              //return if there are no elements
+              if(!(listElms && listElms.length )) return;
+
               reflowCount++;
 
               //claclulate width of all element
