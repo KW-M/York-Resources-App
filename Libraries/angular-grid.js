@@ -600,7 +600,6 @@
             //watch on modal key
 
             function watch() {
-              console.log(scope.visiblePosts)
               scrollNs.isBusy = true;
               $timeout(function() {
                 listElms = getListElms();
@@ -615,10 +614,10 @@
               });
             }
 
-            scope.$watch('model', function(){
-              console.warn("Model Updated");
-              watch()
-            }, true);
+            // scope.$watch('model', function(){
+            //   console.warn("Model Updated");
+            //   watch()
+            // }, true);
 
 
             //watch option for changes
