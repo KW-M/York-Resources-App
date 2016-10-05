@@ -4,6 +4,14 @@
     position: relative;
 }
 
+.post-card {
+    border-radius: 2px;
+    background-color: rgb(255,255,255);
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 2px 1px -1px rgba(0,0,0,.12);
+    -webkit-transition: all 400ms ease;
+    transition: all 400ms ease;
+}
+
 .post-card-header {
     border-bottom: solid 1px black;
     border-radius: 3px 3px 0 0;
@@ -102,10 +110,6 @@
     word-break: break-all;
 }
 
-button.md-icon-button.md #flag_button {
-    margin-left: 0px
-}
-
 #like_thumb_button {
     min-width: 1px;
     border-radius: 100px;
@@ -121,19 +125,13 @@ button.md-icon-button.md #flag_button {
     border-radius: 100px;
 }
 
-#open_button {
-    margin-left: auto;
-}
-
 .like-counter {
-    margin: 0;
-    display: inline;
     font-size: 16px;
     font-weight: 700;
     color: rgba(0,0,0,0.54);
 }
 
-md-card.post-card:hover .md-button.md-icon-button md-icon.preBookmarkIcon{
+.post-card:hover .md-button.md-icon-button md-icon.preBookmarkIcon{
     display: block;
 }
 
@@ -153,16 +151,6 @@ md-card.post-card:hover .md-button.md-icon-button md-icon.preBookmarkIcon{
     margin: 16px 16px 0 16px;
     max-height: 7em;
     color: black;
-}
-
-.overflow-shadow {
-    background-color: rgba(250, 250, 250, 0.05);
-    box-shadow: inset 0px -32px 25px -30px rgba(0, 18, 25, 0.4);
-    border-style: groove;
-    border-width: 0px;
-    border-bottom-width: 1px;
-    border-color: rgb(68, 138, 255);
-    border-radius: 2px;
 }
 
 .small-icon {
