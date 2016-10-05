@@ -6,8 +6,6 @@
 
 .post-card-header {
     border-bottom: solid 1px black;
-    min-height: 42px;
-    background-color: grey;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     position: relative;

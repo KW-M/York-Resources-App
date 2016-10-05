@@ -33,7 +33,7 @@
             <div angular-grid="visiblePosts" ag-gutter-size="8">
                 <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}">
                     <div class="post-card-header" md-ink-ripple="{{Post.Type !== 'noLink'}}" ng-click="::openLink(Post.Link)" ng-class="{ 'noLink' : Post.Type === 'noLink' }">
-                        header
+                        <img ng-src="{{Post.PreviewImage}}" class="post-card-image" ng-hide="Post.Link == ''">
                     </div>
                     <p class="post-card-title md-title">{{Post.Title}}</p>
                     <p class="post-card-creator md-subhead"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::Post.Creator.ClassOf}})</span></p>
