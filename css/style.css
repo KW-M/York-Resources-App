@@ -21,14 +21,12 @@ div:focus {
 /*------------ background and layout styles ----------- */
 
 html body {
-    display: -ms-flexbox;
+    /*display: -ms-flexbox;
     display: flex;
     -ms-flex-direction: column;
-    font-family: 'Helvetica Neue', Helvetica, "Roboto", Arial, sans-serif;
     flex-direction: column;
-    box-sizing: border-box;
-    margin: 0px;
-    padding: 0px;
+    box-sizing: border-box;*/
+    font-family: 'Helvetica Neue', Helvetica, "Roboto", Arial, sans-serif;
     background-color: #f2f2f2;
 }
 
