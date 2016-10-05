@@ -357,6 +357,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	$scope.refreshLayout = function() {
 		angularGridInstance.postsGrid.refresh();
 	}
+	$scope.$watch("visiblePosts", function (newValue) {
+		console.log("visible posts updated");
+	});
 	$scope.logDuplicationIndexes = function() {
 		console.log()
 	}
