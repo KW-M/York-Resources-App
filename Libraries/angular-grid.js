@@ -654,8 +654,8 @@
             }
             try {
               addResizeListener(content_container, windowResizeCallback);
-            }
-catch (e) {
+            } catch (e) {
+              console.log(e)
               win.on('resize', windowResizeCallback);
             }
 
@@ -675,7 +675,12 @@ catch (e) {
             //destroy on refrences and events on scope destroy
             scope.$on('$destroy', function() {
               if (agId) delete angularGridInstance[agId];
-              win.off('resize', windowResizeCallback);
+              try {
+                removeResizeListener(content_container, windowResizeCallback);
+                win.off('resize', windowResizeCallback);
+              } catch (e) {
+                console.log(e)
+              }
               clearTimeout(scrollNs.infiniteScrollTimeout);
               if (scrollNs.scrollContInfo) scrollNs.scrollContInfo.$elm.off('scroll', scrollHandler);
             });
