@@ -614,8 +614,8 @@
               });
             }
 
-            scope.$watch('model', function(){
-              console.log("Model Updated");
+            scope.$watch('visiblePosts', function(){
+              console.warn("Model Updated");
               watch()
             }, true);
 
