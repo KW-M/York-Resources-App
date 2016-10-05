@@ -34,6 +34,20 @@
                 <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}">
                     <div class="post-card-header" md-ink-ripple="{{Post.Type !== 'noLink'}}" ng-click="::openLink(Post.Link)" ng-class="{ 'noLink' : Post.Type === 'noLink' }">
                         <img ng-src="{{Post.PreviewImage}}" class="post-card-image" ng-hide="Post.Link == ''"></img>
+                        <div class="post-card-image-gradient">
+                            <div class="post-card-link-text" ng-hide="::Post.Link == ''">
+                                <md-icon style="color:White; font-size: 16px;" class="small-icon">language</md-icon><span> {{::Post.Link}}</span>
+                            </div>
+                            <div class="post-card-metadata-text">
+                                <p style="margin: 4px 0 0 0;">
+                                    <md-icon class="small-icon" style="color:white">event</md-icon><span style="margin-right:10px; font-weight:700; font-size:14px"> {{::Post.CreationDate | date : "m/dd/yyyy"}}</span>
+                                    <md-icon class="small-icon" style="color:white">people</md-icon><span style="font-weight:700; font-size:14px"> {{::Post.Class.Name}}</span>
+                                </p>
+                                <p style="margin: 0 0 0 0; font-size: 12px; font-weight:500;" ng-hide="Post.Tags.length < 1">
+                                    <md-icon class="small-icon" style="color:white">style</md-icon><span>{{Post.Tags.join(', ')}}</span>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                     <p class="post-card-title md-title">{{Post.Title}}</p>
                     <p class="post-card-creator md-subhead"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::Post.Creator.ClassOf}})</span></p>

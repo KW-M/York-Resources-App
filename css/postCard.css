@@ -6,8 +6,7 @@
 
 .post-card-header {
     border-bottom: solid 1px black;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+    border-radius: 3px 3px 0 0;
     position: relative;
 }
 
@@ -16,19 +15,9 @@
 }
 
 .post-card-image {
-    border-radius: 2px 2px 0 0;
-    box-sizing: border-box;
+    border-radius: 3px 3px 0 0;
     display: flex;
-    flex: 0 0 auto;
     width: 100%;
-    height: auto;
-    /*opacity: 0;*/
-    /*visibility: hidden;*/
-}
-
-.post-card-image.img-loaded {
-    /*visibility: visible;*/
-    opacity: 1;
 }
 
 .post-card-image-gradient {
