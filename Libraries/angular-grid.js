@@ -117,6 +117,7 @@
           link: function(scope, element, attrs) {
             var domElm = element[0],
               win = $($window),
+              content_container = document.getElementById("content_container"),
               agId = scope.agId || scope.dep_agId, // angularGridId is deprecated
               listElms,
               reflowCount = 0, //to keep tack of times reflowgrid been called
