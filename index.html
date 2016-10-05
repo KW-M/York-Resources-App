@@ -31,7 +31,11 @@
     <body ng-app="YorkResourcesApp" ng-controller="ApplicationController">
         <div style="margin:8px">
             <div angular-grid="visiblePosts" ag-gutter-size="8">
-                <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}">
+                <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}" class="post-card raise-on-hover">
+                    <md-button style="position: absolute; top: -14px; right: -6px; z-index: 1000" class="md-icon-button md-accent" ng-click="bookmark(Post)">
+                        <md-icon class="postBookmarkIcon" ng-hide="Post.Bookmarked === false" style="text-shadow: 0px 1px 5px rgba(0,0,0,0.6);">bookmark</md-icon>
+                        <md-icon class="preBookmarkIcon" ng-hide="Post.Bookmarked === true" style="color: rgba(255, 255, 255, 0.6); text-shadow: 0px 1px 5px rgba(0,0,0,0.6)">bookmark_border</md-icon>
+                    </md-button>
                     <div class="post-card-header" md-ink-ripple="{{Post.Type !== 'noLink'}}" ng-click="::openLink(Post.Link)" ng-class="{ 'noLink' : Post.Type === 'noLink' }">
                         <img ng-src="{{Post.PreviewImage}}" class="post-card-image" ng-hide="Post.Link == ''"></img>
                         <div class="post-card-image-gradient">
@@ -247,11 +251,11 @@
                 <!--    <md-icon ng-class="{'md-accent' : Post.userLiked}">thumb_up</md-icon>-->
                 <!--</button>-->
                 <!--<div angular-grid="visiblePosts">-->
-                    <!--<md-card ng-repeat="Post in visiblePosts">-->
-                    <!--    <p class="post-card-title md-title">{{Post.Title}}</p>-->
-                    <!--    <p class="post-card-creator md-subhead"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::Post.Creator.ClassOf}})</span></p>-->
-                    <!--    <p id="post_card_description" class="md-body-1" ng-bind-html="Post.Description"></p>-->
-                    <!--</md-card>-->
+                <!--<md-card ng-repeat="Post in visiblePosts">-->
+                <!--    <p class="post-card-title md-title">{{Post.Title}}</p>-->
+                <!--    <p class="post-card-creator md-subhead"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::Post.Creator.ClassOf}})</span></p>-->
+                <!--    <p id="post_card_description" class="md-body-1" ng-bind-html="Post.Description"></p>-->
+                <!--</md-card>-->
                 <!--</div>-->
                 <!--<div angular-grid="visiblePosts" id="postsGrid" ag-options="angularGridOptions" ag-id="posts">-->
                 <!--post-card raise-on-hover-->
