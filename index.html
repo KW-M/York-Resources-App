@@ -33,18 +33,15 @@
             <div angular-grid="visiblePosts" gutter-size="8">
                 <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}">
                     <p class="post-card-title md-title">{{Post.Title}}</p>
-                    <p class="post-card-creator md-subhead"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{Post.Creator.ClassOf}})</span></p>
+                    <p class="post-card-creator md-subhead"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::Post.Creator.ClassOf}})</span></p>
                     <p id="post_card_description" class="md-body-1" ng-bind-html="Post.Description"></p>
                     <md-card-actions>
                         <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(Post)">
                             <span class="like-counter">{{Post.Likes.length}}</span>
-                            <md-icon ng-class="{'md-accent' : Post.userLiked}" style="margin-top: -6px">thumb_up</md-icon>
+                            <md-icon ng-class="{'md-accent' : Post.userLiked}" style="margin-top: -8px">thumb_up</md-icon>
                         </md-button>
-                        <md-button class="md-icon-button" area-label="Flag" style="margin:0" ng-hide="::Post.Creator.Email === myInfo.Email">
-                            <md-icon>flag</md-icon>
-                        </md-button>
-                        <md-button class="md-icon-button" area-label="Flagged" style="margin:0" ng-show="Post.Flagged === true" ng-click="::unFlagPost(Post)">
-                            <md-icon class="md-warn">flag</md-icon>
+                        <md-button class="md-icon-button" area-label="Flag" ng-click="::flagPost(Post)" style="margin:0" ng-hide="Post.Creator.Email == myInfo.Email && Post.Flagged == t">
+                            <md-icon ng-class="{'md-warn' : Post.Flagged == true}">flag</md-icon>
                         </md-button>
                         <md-button class="md-button md-accent">Open Link</md-button>
                     </md-card-actions>
