@@ -613,10 +613,10 @@
               });
             }
 
-            scope.$watch('model', function(){
-              console.log("Model Updated");
-              watch()
-            }, true);
+            // scope.$watch('model', function(){
+            //   console.log("Model Updated");
+            //   watch()
+            // }, true);
 
 
             //watch option for changes
