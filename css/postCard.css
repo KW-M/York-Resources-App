@@ -24,10 +24,17 @@
     cursor: pointer;
 }
 
+.post-card-header:not(.noLink):hover .post-card-image{
+    transform: translateY(0);
+}
+
 .post-card-image {
     border-radius: 3px 3px 0 0;
     display: flex;
     width: 100%;
+    margin-top: -2.5%;
+    transition: all 0.3s ease;
+    transform: translateY(2.5%);
 }
 
 .post-card-image-gradient {
