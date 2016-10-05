@@ -40,9 +40,32 @@
                             <span class="like-counter">{{Post.Likes.length}}</span>
                             <md-icon ng-class="{'md-accent' : Post.userLiked}" style="margin-top: -8px">thumb_up</md-icon>
                         </md-button>
-                        <md-button class="md-icon-button" area-label="Flag" ng-click="::flagPost(Post)" style="margin:0" ng-hide="Post.Creator.Email == myInfo.Email && Post.Flagged == t">
+                        <md-button class="md-icon-button" area-label="Flag" ng-click="::flagPost(Post)" style="margin:0" ng-hide="Post.Creator.Email == myInfo.Email && Post.Flagged == false">
                             <md-icon ng-class="{'md-warn' : Post.Flagged == true}">flag</md-icon>
                         </md-button>
+                        <md-menu md-position-mode="target" md-offset="7 0" style="padding:0px">
+                            <md-button ng-click="::$mdOpenMenu($event)" ng-show="::Post.Creator.Email === myInfo.Email" class="md-icon-button" style="margin:0">
+                                <md-icon>more_vert</md-icon>
+                            </md-button>
+                            <md-menu-content>
+                                <md-menu-item ng-hide="::Post.Flagged === true">
+                                    <md-button ng-click="::flagPost($event,Post,$index)">
+                                        <md-icon>flag</md-icon>Flag</md-button>
+                                </md-menu-item>
+                                <md-menu-item>
+                                    <md-button ng-click="::confirmDelete($event,Post,$index)">
+                                        <md-icon>delete</md-icon>Delete</md-button>
+                                </md-menu-item>
+                                <md-menu-item>
+                                    <md-button ng-click="::newPost(Post,'update')">
+                                        <md-icon>edit</md-icon>Edit</md-button>
+                                </md-menu-item>
+                                <md-menu-item ng-show="devMode">
+                                    <md-button ng-click="::logPostToConsole(Post,$index)">
+                                        <md-icon>edit</md-icon>Console Log Post</md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
                         <md-button class="md-button md-accent">Open Link</md-button>
                     </md-card-actions>
                 </div>
