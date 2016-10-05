@@ -354,6 +354,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			window.alert(JSON.stringify(input, null, 4))
 		}
 	}
+	$scope.refreshLayout = function() {
+		
+	}
 	$scope.logDuplicationIndexes = function() {
 		console.log()
 	}
