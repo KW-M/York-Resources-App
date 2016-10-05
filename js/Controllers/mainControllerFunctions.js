@@ -494,6 +494,8 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       }
    }
    $scope.$watch("visiblePosts", function() {
+      console.log("VisiblePosts Updated")
+      console.log($scope.visiblePosts)
 		angularGridInstance.postsGrid.refresh();
 	});
 
