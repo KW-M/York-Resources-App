@@ -32,47 +32,47 @@
         <div style="margin:8px">
             <div angular-grid="visiblePosts" ag-gutter-size="8">
                 <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}">
-                    <div class="post-card-header" md-ink-ripple="{{Post.Type !== 'noLink'}}" ng-click="::openLink(Post.Link)" ng-class="{ 'noLink' : Post.Type === 'noLink' }">
-                        <img ng-src="{{Post.PreviewImage}}" class="post-card-image" ng-hide="Post.Link == ''"></img>
-                    </div>
-                    <p class="post-card-title md-title">{{Post.Title}}</p>
-                    <p class="post-card-creator md-subhead"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::Post.Creator.ClassOf}})</span></p>
-                    <p id="post_card_description" class="md-body-1" ng-bind-html="Post.Description" ng-hide="Post.Description === ''"></p>
-                    <md-card-actions layout="row">
-                        <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(Post)">
-                            <span class="like-counter">{{Post.Likes.length}}</span>
-                            <md-icon ng-class="{'md-accent' : Post.userLiked}" style="margin-top: -8px">thumb_up</md-icon>
-                        </md-button>
-                        <md-button class="md-icon-button" area-label="Flag" ng-click="::flagPost(Post)" ng-hide="Post.Creator.Email == myInfo.Email && Post.Flagged == false">
-                            <md-icon ng-class="{'md-warn' : Post.Flagged == true}">flag</md-icon>
-                        </md-button>
-                        <md-menu>
-                            <md-button ng-click="::$mdOpenMenu($event)" ng-show="::Post.Creator.Email === myInfo.Email" class="md-icon-button">
-                                <md-icon>more_vert</md-icon>
-                            </md-button>
-                            <md-menu-content>
-                                <md-menu-item ng-hide="::Post.Flagged === true">
-                                    <md-button ng-click="::flagPost($event,Post,$index)">
-                                        <md-icon>flag</md-icon>Flag</md-button>
-                                </md-menu-item>
-                                <md-menu-item>
-                                    <md-button ng-click="::confirmDelete($event,Post,$index)">
-                                        <md-icon>delete</md-icon>Delete</md-button>
-                                </md-menu-item>
-                                <md-menu-item>
-                                    <md-button ng-click="::newPost(Post,'update')">
-                                        <md-icon>edit</md-icon>Edit</md-button>
-                                </md-menu-item>
-                                <md-menu-item ng-show="devMode">
-                                    <md-button ng-click="::logPostToConsole(Post,$index)">
-                                        <md-icon>edit</md-icon>Console Log Post</md-button>
-                                </md-menu-item>
-                            </md-menu-content>
-                        </md-menu>
-                        <span flex></span>
-                        <md-button class="md-accent">Open Link</md-button>
-                    </md-card-actions>
-                </div>
+                    <img ng-src="{{Post.PreviewImage}}" class="post-card-image" ng-hide="Post.Link == ''"></img>
+                <!--    <div class="post-card-header" md-ink-ripple="{{Post.Type !== 'noLink'}}" ng-click="::openLink(Post.Link)" ng-class="{ 'noLink' : Post.Type === 'noLink' }">-->
+                <!--    </div>-->
+                <!--    <p class="post-card-title md-title">{{Post.Title}}</p>-->
+                <!--    <p class="post-card-creator md-subhead"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::Post.Creator.ClassOf}})</span></p>-->
+                <!--    <p id="post_card_description" class="md-body-1" ng-bind-html="Post.Description" ng-hide="Post.Description === ''"></p>-->
+                <!--    <md-card-actions layout="row">-->
+                <!--        <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(Post)">-->
+                <!--            <span class="like-counter">{{Post.Likes.length}}</span>-->
+                <!--            <md-icon ng-class="{'md-accent' : Post.userLiked}" style="margin-top: -8px">thumb_up</md-icon>-->
+                <!--        </md-button>-->
+                <!--        <md-button class="md-icon-button" area-label="Flag" ng-click="::flagPost(Post)" ng-hide="Post.Creator.Email == myInfo.Email && Post.Flagged == false">-->
+                <!--            <md-icon ng-class="{'md-warn' : Post.Flagged == true}">flag</md-icon>-->
+                <!--        </md-button>-->
+                <!--        <md-menu>-->
+                <!--            <md-button ng-click="::$mdOpenMenu($event)" ng-show="::Post.Creator.Email === myInfo.Email" class="md-icon-button">-->
+                <!--                <md-icon>more_vert</md-icon>-->
+                <!--            </md-button>-->
+                <!--            <md-menu-content>-->
+                <!--                <md-menu-item ng-hide="::Post.Flagged === true">-->
+                <!--                    <md-button ng-click="::flagPost($event,Post,$index)">-->
+                <!--                        <md-icon>flag</md-icon>Flag</md-button>-->
+                <!--                </md-menu-item>-->
+                <!--                <md-menu-item>-->
+                <!--                    <md-button ng-click="::confirmDelete($event,Post,$index)">-->
+                <!--                        <md-icon>delete</md-icon>Delete</md-button>-->
+                <!--                </md-menu-item>-->
+                <!--                <md-menu-item>-->
+                <!--                    <md-button ng-click="::newPost(Post,'update')">-->
+                <!--                        <md-icon>edit</md-icon>Edit</md-button>-->
+                <!--                </md-menu-item>-->
+                <!--                <md-menu-item ng-show="devMode">-->
+                <!--                    <md-button ng-click="::logPostToConsole(Post,$index)">-->
+                <!--                        <md-icon>edit</md-icon>Console Log Post</md-button>-->
+                <!--                </md-menu-item>-->
+                <!--            </md-menu-content>-->
+                <!--        </md-menu>-->
+                <!--        <span flex></span>-->
+                <!--        <md-button class="md-accent">Open Link</md-button>-->
+                <!--    </md-card-actions>-->
+                <!--</div>-->
             </div>
         </div>
         <!-------------------------------------------------------->
