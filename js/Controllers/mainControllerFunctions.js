@@ -94,7 +94,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
 
       if ($scope.queryParams.q !== null) {
          if ($scope.queryParams.q !== $scope.previousSearch) {
-            $scope.visiblePosts = [];
+            $scope.updateVisiblePosts([]);
             $scope.previousSearch = $scope.queryParams.q
          }
       } else {
@@ -122,12 +122,11 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       generateQueryString();
       if ($scope.queryParams.q === null) {
          var filteredPosts = $scope.filterPosts($scope.allPosts);
-         $timeout(function() {
+         $scope.updateVisiblePosts(filteredPosts, function(){
             console.log({
                filter: filteredPosts,
                All: $scope.allPosts
             })
-            $scope.visiblePosts = filteredPosts;
             hideSpinner()
          });
       }
@@ -416,7 +415,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    }
 
    function sortPostsByType(formattedFileList) {
-      $timeout(function() {
          if ($scope.queryParams.q) {
             if ($scope.queryParams.q === $scope.previousSearch) {
                $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
@@ -424,16 +422,15 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                $scope.searchPosts = formattedFileList;
             }
             $scope.previousSearch = $scope.queryParams.q
-            $scope.visiblePosts = $scope.searchPosts;
+            $scope.updateVisiblePosts($scope.searchPosts);
          } else {
             $scope.allPosts = $scope.allPosts.concat(formattedFileList);
-            $scope.visiblePosts = $scope.visiblePosts.concat($scope.filterPosts(formattedFileList));
+            $scope.updateVisiblePosts($scope.visiblePosts.concat($scope.filterPosts(formattedFileList)));
          }
          conurancy_counter = conurancy_counter - 1 
          LoadingFiles = false;
          document.dispatchEvent(new window.Event('filesLoaded'));
          console.log('endingLoadingFiles')
-      })
    }
    $scope.getFiles = function() {
       console.log('fake get files')
@@ -498,9 +495,14 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
 //       console.log($scope.visiblePosts)
 // 		angularGridInstance.postsGrid.refresh();
 // 	});
-$scope.updateVisiblePosts = function(argument) {
-   // body...
-}()
+   $scope.updateVisiblePosts = function(array, callback) {
+      $timeout(function(){
+         angularGridInstance.postsGrid.refresh();
+         if (callback) {
+            callback();
+         }
+      })
+   }
    //----------------------------------------------------
    //---------------------- dev -------------------------
    $scope.logDuplicationIndexes = function() {
