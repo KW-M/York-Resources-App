@@ -605,13 +605,10 @@
               scrollNs.isBusy = true;
               $timeout(function() {
                 listElms = getListElms();
-                console.log("reached timeout")
                 ngCheckAnim().then(function() {
-                  console.log("animateChecked")
                   //handle images
                   handleImage();
                   $timeout(function() {
-                    console.log("reached timeout 2")
                     //to handle scroll appearance
                     reflowGrids();
                   });
@@ -619,7 +616,7 @@
               });
             }
 
-            scope.$watch('model', watch, true);
+//            scope.$watch('model', watch, true);
 
 
             //watch option for changes

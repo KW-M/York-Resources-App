@@ -497,10 +497,13 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
 // 	});
    $scope.updateVisiblePosts = function(array, callback) {
       $timeout(function(){
-         angularGridInstance.postsGrid.refresh();
+         if (array) {
+            $scope.visiblePosts = array;
+         }
          if (callback) {
             callback();
          }
+         angularGridInstance.postsGrid.refresh();
       })
    }
    //----------------------------------------------------
