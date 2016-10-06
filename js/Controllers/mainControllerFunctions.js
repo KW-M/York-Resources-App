@@ -347,17 +347,12 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                   formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[fileCount]) //format and save the new post to the formatted files list array
                }
             }
-            console.log({
-               fileList: fileList,
-               formattedFileList: formattedFileList
-            });
             sortPostsByType(formattedFileList, queryString);
             if (fileList.result.nextPageToken !== undefined) {
                classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken; //if we haven't reached the end of our search:
             } else {
                classPageTokenSelectionIndex[$scope.queryPropertyString] = "end" //if we have reached the end of our search:
             }
-            console.log(fileList.result.nextPageToken)
             hideSpinner();
          }, function() {
             no_more_footer.style.display = 'none';
@@ -468,6 +463,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    }
    $scope.updateVisiblePosts = function(array, callback) {
       $timeout(function(){
+         console.log(array)
          if (array) {
             $scope.visiblePosts = array;
          }
