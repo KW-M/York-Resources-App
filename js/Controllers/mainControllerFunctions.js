@@ -281,14 +281,13 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
       //var cameraView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
       console.log("picker");
-      authorizationService.getAuthToken();
       if (typ === "Upload") {
          console.log("pickerup");
          var UploadPicker = new google.picker.PickerBuilder().
          addView(uploadView).
          addView(docsView).
          addView(sharedView).
-         //setOAuthToken(gapi.auth.getToken().access_token).
+         setOAuthToken(gapi.auth.getToken().access_token).
          setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
          setCallback(self.pickerCallback).
          build();
@@ -298,7 +297,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          addView(docsView).
          addView(sharedView).
          addView(uploadView).
-         setOAuthToken(gapi.auth.getToken().access_token).
+         setOAuthToken(authorizationService.getAuthToken()).
          setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
          setCallback(self.pickerCallback).
          build();
