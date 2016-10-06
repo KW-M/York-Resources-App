@@ -583,18 +583,19 @@
                 return single(elm).hasClass('ng-leave');
               });
               return $q(function(resolve) {
-                if (!leavingElm.length) {
-                  resolve();
-                } else {
-                                  console.log("leving elm")
-                  single(leavingElm[0]).one('webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd', function() {
-                    console.log("leving elm")
-                    $timeout(function() {
-                      listElms = getListElms();
-                      resolve();
-                    });
-                  });
-                }
+                resolve();
+                // if (!leavingElm.length) {
+                //   resolve();
+                // } else {
+                //                   console.log("leving elm")
+                //   single(leavingElm[0]).one('webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd', function() {
+                //     console.log("leving elm")
+                //     $timeout(function() {
+                //       listElms = getListElms();
+                //       resolve();
+                //     });
+                //   });
+                // }
               });
             }
 
