@@ -19,7 +19,7 @@ function authService($mdDialog) {
             scope: scopes,
             fetch_basic_profile: false,
             hosted_domain: 'york.org'
-        }).then(function() {
+        }).then(function(input) {
             // Listen for sign-in state changes.
             gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
             // Handle the initial sign-in state.
