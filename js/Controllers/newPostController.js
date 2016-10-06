@@ -1,48 +1,32 @@
     /* we don't define the "new post controller" here because it was alredy
-                                                           defined by the $md-dialog in the newPost function on mainController.   */
+                                                               defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
-        //database variables
-        // $scope.Post.Type = 'noLink';
-        // $scope.Flagged = false;
-        // $scope.Title = '';
-        // $scope.CreationDate = new Date();
-        // $scope.UpdateDate = new Date();
-        // $scope.Tags = [];
-        // $scope.Description = '';
-        // $scope.Class = {Name:''};
-        // $scope.Post.Link = '';
-        // $scope.AttachmentId = '';
-        // $scope.LikeUsers = [];
-        // $scope.PreviewImage = '';
-        // fillInValues();
-$scope.Post = {
-		Title: postObj.Title || '',
-		Description: postObj.Description || '',
-		Link: postObj.Link || '',
-		Tags: postObj.Tags || [],
-		Type: postObj.Type || 'noLink',
-		Flagged: postObj.Flagged || false,
-		CreationDate: postObj.CreationDate || new Date(),
-		UpdateDate: postObj.UpdateDate || new Date(),
-		Class: postObj.Class || {
-			Name: '',
-			Catagory: '',
-			Color: '#ffffff',
-		},
-		Creator: postObj.Creator || {
-			ClassOf: '',
-			Email: '',
-			Me: null,
-			Name:  '',
-		},
-		Id: postObj.Id || '',
-		AttachmentId: postObj.AttachmentId || '',
-		Likes: postObj.Likes || [],
-		PreviewImage: postObj.PreviewImage || '',
-		Bookmarked: postObj.Bookmarked || false,
-}
-
-console.log($scope.Post.Description);
+        $scope.Post = {
+            Title: postObj.Title || '',
+            Description: postObj.Description || '',
+            Link: postObj.Link || '',
+            Tags: postObj.Tags || [],
+            Type: postObj.Type || 'noLink',
+            Flagged: postObj.Flagged || false,
+            CreationDate: postObj.CreationDate || new Date(),
+            UpdateDate: postObj.UpdateDate || new Date(),
+            Class: postObj.Class || {
+                Name: '',
+                Catagory: '',
+                Color: '#ffffff',
+            },
+            Creator: postObj.Creator || {
+                ClassOf: '',
+                Email: '',
+                Me: null,
+                Name: '',
+            },
+            Id: postObj.Id || '',
+            AttachmentId: postObj.AttachmentId || '',
+            Likes: postObj.Likes || [],
+            PreviewImage: postObj.PreviewImage || '',
+            Bookmarked: postObj.Bookmarked || false,
+        }
 
         //temproary variables
         $scope.operation = operation;
@@ -50,24 +34,19 @@ console.log($scope.Post.Description);
         $scope.previewLoading = false;
         $scope.classSearch = "";
         var request = new XMLHttpRequest();
-        // var canvas = document.getElementById('image_renderer');
-        // var ctx = canvas.getContext('2d');
-        // var dataURL;
 
         $scope.findType = function() {
             if ($scope.Post.Link === '') {
                 $scope.Post.Type = 'NoLink';
                 $scope.Post.PreviewImage = ''; // will be the down arrow photo
                 $scope.previewLoading = false;
-            }
-            else if ($scope.Post.Link.match(/(?:http|https):\/\/.{2,}/)) {
+            } else if ($scope.Post.Link.match(/(?:http|https):\/\/.{2,}/)) {
                 $scope.previewLoading = true;
                 if ($scope.Post.Link.match(/\/(?:d|file|folder|folders)\/([-\w]{25,})/)) {
                     $scope.Post.Type = 'gDrive';
                     $scope.Post.PreviewImage = "https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + $scope.AttachmentId;
                     $scope.previewLoading = false;
-                }
-                else {
+                } else {
                     $scope.Post.Type = 'Link';
                     request.open('HEAD', 'https://crossorigin.me/' + $scope.Post.Link, true); // to implement: img checking and icon for non existant thumnail drive docs
                     request.onreadystatechange = function() {
@@ -77,8 +56,7 @@ console.log($scope.Post.Description);
                             if (this.getResponseHeader('content-type').indexOf('image') != -1) {
                                 $scope.Post.PreviewImage = $scope.Post.Link;
                                 $scope.previewLoading = false;
-                            }
-                            else {
+                            } else {
                                 GoogleDriveService.getWebsiteScreenshot($scope.Post.Link).then(function(response) {
                                     console.log("data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+'));
                                     $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
@@ -89,16 +67,15 @@ console.log($scope.Post.Description);
                     };
                     request.send();
                 }
-            }
-            else if ($scope.Post.Link.length > 9) {
+            } else if ($scope.Post.Link.length > 9) {
                 $scope.Post.Link = "http://" + $scope.Post.Link;
                 $scope.Post.Type = 'Link';
-            }
-            else {
+            } else {
                 $scope.Post.Type = 'Link';
             }
 
         };
+        $scope.findType()
 
         $scope.isReadyToSubmit = function() {
             console.log($scope.PostClass);
@@ -155,15 +132,17 @@ console.log($scope.Post.Description);
             $scope.closeDialog();
             if (operation === 'new') {
                 var metadata = $scope.convertPostToDriveMetadata($scope.Post);
-                console.log({Post:$scope.Post,Metadata:metadata});
+                console.log({
+                    Post: $scope.Post,
+                    Metadata: metadata
+                });
                 queue(GoogleDriveService.createDriveFile(metadata), function(reply) {
                     console.log(reply.result);
                     $mdToast.hide();
                 }, function(err) {
                     console.log(err);
                 });
-            }
-            else if (operation === 'update') {
+            } else if (operation === 'update') {
                 var metadata = $scope.compileUpdateToMetadata();
                 queue(GoogleDriveService.updateFileMetadata(postObj.Id, metadata), function(reply) {
                     console.log(reply.result);
@@ -328,19 +307,15 @@ console.log($scope.Post.Description);
                     var base64 = convertImg($scope.newPostHeaderImg)
                     var base64url = base64.substring(22).replace(/\+/g, '-').replace(/\//g, '_');
                     return base64url;
-                }
-                else {
+                } else {
                     return "";
                 }
-            }
-            else {
+            } else {
                 if ($scope.Post.Type === "Link") {
                     $scope.previewThumbnail = 'https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=' + encodeURIComponent($scope.Post.Link) + '&width=400&height=260&maxage=7884000&key=Ca7GOVe9BkGefE_rvwN2Bw';
-                }
-                else if ($scope.Post.Type === "gDrive") {
+                } else if ($scope.Post.Type === "gDrive") {
                     $scope.previewThumbnail = "https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + $scope.AttachmentId;
-                }
-                else {
+                } else {
                     $scope.previewThumbnail = "";
                 }
                 return $scope.previewThumbnail;
