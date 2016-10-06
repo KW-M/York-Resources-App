@@ -279,7 +279,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
       var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
       var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
-      var cameraView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
+      var cameraView = new google.picker.WebCamView();
       console.log("picker");
       // if (typ === "Upload") {
       //    console.log("pickerup");
