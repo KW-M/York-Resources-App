@@ -362,7 +362,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                fileList: fileList,
                formattedFileList: formattedFileList
             });
-            sortPostsByType(formattedFileList);
+            sortPostsByType(formattedFileList, que);
             if (fileList.result.nextPageToken !== undefined) {
                classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken; //if we haven't reached the end of our search:
             } else {
@@ -414,7 +414,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       $scope.queryPropertyString = query;
    }
 
-   function sortPostsByType(formattedFileList) {
+   function sortPostsByType(formattedFileList, queryString) {
          if ($scope.queryParams.q) {
             if ($scope.queryParams.q === $scope.previousSearch) {
                $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
@@ -425,7 +425,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             $scope.updateVisiblePosts($scope.searchPosts);
          } else {
             $scope.allPosts = $scope.allPosts.concat(formattedFileList);
-            if ($scope.queryPropertyString == ) $scope.updateVisiblePosts($scope.visiblePosts.concat($scope.filterPosts(formattedFileList)));
+            if ($scope.queryPropertyString == queryString) $scope.updateVisiblePosts($scope.visiblePosts.concat($scope.filterPosts(formattedFileList)));
          }
          conurancy_counter = conurancy_counter - 1 
          console.log('endingLoadingFiles')
