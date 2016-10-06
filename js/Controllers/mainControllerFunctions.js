@@ -487,6 +487,17 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          })
       }
    }
+   $scope.updateVisiblePosts = function(array, callback) {
+      $timeout(function(){
+         if (array) {
+            $scope.visiblePosts = array;
+         }
+         if (callback) {
+            callback();
+         }
+         angularGridInstance.postsGrid.refresh();
+      })
+   }
    //----------------------------------------------------
    //---------------------- dev -------------------------
    $scope.logDuplicationIndexes = function() {
