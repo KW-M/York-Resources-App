@@ -181,11 +181,9 @@
 }
 
 .post-card.ng-enter-stagger {
-   /*200ms will be applied between each sucessive enter operation */
-  -webkit-transition-delay: 2s;
-  transition-delay: s;
+  -webkit-transition-delay: 10s;
+  transition-delay: 10s;
 
-   /*this is here to avoid accidental CSS inheritance */
   -webkit-transition-duration:0;
   transition-duration:0;
 }
@@ -193,8 +191,8 @@
 .post-card.ng-enter {
   -webkit-transition: all ease-out 400ms;
   transition: all ease-out 400ms;
-  /*-webkit-transition-delay: 500ms;*/
-  /*transition-delay: 500ms;*/
+  -webkit-transition-delay: 500ms;
+  transition-delay: 500ms;
   -webkit-transform: translateY(150px);
    transform: translateY(150px);
   opacity: 0;
