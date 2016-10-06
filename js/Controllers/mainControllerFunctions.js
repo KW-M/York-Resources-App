@@ -337,13 +337,9 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       no_more_footer.style.display = 'none';
       no_posts_footer.style.display = 'none';
       footer_problem.style.display = 'none';
-      console.log({
-         pageIndex: classPageTokenSelectionIndex,
-         string: $scope.queryPropertyString,
-         nextPageToken: nextPageToken
-      })
       var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
+      
       if (nextPageToken !== "end") {
          loading_spinner.style.display = 'block';
          queue(GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function(fileList) {
@@ -371,6 +367,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          }, function() {
             no_more_footer.style.display = 'none';
             no_posts_footer.style.display = 'none';
+            no_more_footer.style.display = 'none';
             footer_problem.style.display = 'flex';
          });
       }
