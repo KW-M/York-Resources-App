@@ -180,23 +180,16 @@
   opacity: 0;
 }
 
-.post-card.ng-enter-stagger {
-  -webkit-transition-delay: 10s;
-  transition-delay: 10s;
-
-  -webkit-transition-duration:0;
-  transition-duration:0;
-}
-
 .post-card.ng-enter {
   -webkit-transition: all ease-out 400ms;
-  transition: all ease-out 400ms;
+  transition: all ease-out 00ms;
   -webkit-transition-delay: 500ms;
   transition-delay: 500ms;
   -webkit-transform: translateY(150px);
    transform: translateY(150px);
-  opacity: 0;
+   opacity: 0;
 }
+
 .post-card.ng-enter.ng-enter-active {
   -webkit-transform: scale(1) translateY(0);
   transform: scale(1) translateY(0);
