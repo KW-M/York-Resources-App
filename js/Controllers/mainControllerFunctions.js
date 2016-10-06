@@ -281,7 +281,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
       //var cameraView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
       console.log("picker");
-      console.log("picker");
+      console.log(authorizationService.getAuthToken());
       if (typ === "Upload") {
          console.log("pickerup");
          var UploadPicker = new google.picker.PickerBuilder().
