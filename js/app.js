@@ -62,13 +62,13 @@ app.config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $locati
         '400': '#29417c',
         '500': '#213565',
         '600': '#19294e',
-        '700': '#121d37',
+        '700': '#4c73cf',
         '800': '#0a1120',
         '900': '#030509',
         'A100': '#abbce4',
         'A200': '#728ed1',
         'A400': '#29417c',
-        'A700': '#121d37',
+        'A700': '#4c73cf',
         'contrastDefaultColor': 'light',
         'contrastDarkColors': '50 100 A100 A200'
     });
