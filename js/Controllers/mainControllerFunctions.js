@@ -439,9 +439,10 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       //    performantScrollEnabled = true;
       // }
       var yScroll = content_container.scrollTop;
-      if (yScroll >= 120) {
+      if (yScroll >= 120 && $scope.globals.FABisHidden == true) {
          $scope.globals.FABisHidden = false;
-      } else {
+      } 
+      if (yScroll <= 120 && $scope.globals.FABisHidden == false){
          $scope.globals.FABisOpen = false;
          $scope.globals.FABisHidden = true;
       }
