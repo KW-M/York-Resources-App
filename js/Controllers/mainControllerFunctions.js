@@ -29,17 +29,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       addBarTopIsHidden: false,
       mobileSearchIsOpen: false,
    };
-   $scope.angularGridOptions = {
-      gridWidth: 250,
-      infiniteScroll: function() {
-         console.log('loading from overscroll...');
-         getFiles();
-      },
-      scrollContainer: '#content_container',
-      pageSize: 1.5,
-      performantScroll: true,
-      gutterSize: 12,
-   };
 
    $scope.queryPropertyString = '';
    $scope.queryParams = {
@@ -129,7 +118,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             hideSpinner()
          });
       }
-      getFiles();
+      $scope.getFiles();
    }
 
    //----------------------------------------------------
@@ -331,7 +320,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
 
    //----------------------------------------------------
    //--------- loading and filtering posts --------------
-   function getFiles() {
+   $scope.getFiles = function() {
       console.log("concurancy: " + conurancy_counter);
       conurancy_counter++;
       no_more_footer.style.display = 'none';
@@ -432,19 +421,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          conurancy_counter = conurancy_counter - 1 
          console.log('endingLoadingFiles')
    }
-   $scope.getFiles = function() {
-      console.log('fake get files')
-      getFiles();
-         // if (LoadingFiles === true) {
-         //    console.log('waiting')
-         //    document.addEventListener('filesLoaded', getFiles());
-         // }
-         // else {
-         //    removeEventListener('filesLoaded', getFiles())
-         //    console.log('startingLoadingFiles')
-         //    getFiles()
-         // }
-   };
 
    //----------------------------------------------------
    //---------------- Event Watchers --------------------
