@@ -88,8 +88,12 @@ function authService($mdDialog) {
     function handleSigninClick(event) {
         gapi.auth2.getAuthInstance().signIn();
     }
-
+    
     this.handleSignoutClick = function(event) {
+        gapi.auth2.getAuthInstance().signOut();
+    }
+
+    this.getAuthToken = function() {
         gapi.auth2.getAuthInstance().signOut();
     }
 }
