@@ -455,9 +455,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    //        ev.stopPropagation();
    //        console.log(ev)
    // });
-   addResizeListener(content_container, function() {
-      console.log('resize')
-   });
    content_container.onscroll = function(event) {
       //called whenever the content_container scrolls
       // if (performantScrollEnabled === false && $scope.angularGridOptions.performantScroll === false) {
@@ -490,22 +487,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          })
       }
    }
-//    $scope.$watch("visiblePosts", function() {
-//       console.log("VisiblePosts Updated")
-//       console.log($scope.visiblePosts)
-// 		angularGridInstance.postsGrid.refresh();
-// 	});
-   $scope.updateVisiblePosts = function(array, callback) {
-      $timeout(function(){
-         if (array) {
-            $scope.visiblePosts = array;
-         }
-         if (callback) {
-            callback();
-         }
-         angularGridInstance.postsGrid.refresh();
-      })
-   }
+
    //----------------------------------------------------
    //---------------------- dev -------------------------
    $scope.logDuplicationIndexes = function() {
