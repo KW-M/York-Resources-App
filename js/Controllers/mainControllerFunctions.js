@@ -8,7 +8,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    var no_more_footer = document.getElementById("no_more_footer");
    var no_posts_footer = document.getElementById("no_posts_footer");
    var footer_problem = document.getElementById("footer_problem");
-   var drivePicker;
+   var drivePicker, uploadPicker;
    var conurancy_counter = 0
    var performantScrollEnabled = false;
 
@@ -161,6 +161,14 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             addView(docsView).
             addView(sharedView).
             addView(uploadView).
+            setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
+            setOAuthToken(authorizationService.getAuthToken()).
+            setCallback(self.pickerCallback).
+            build();
+         uploadPicker = new google.picker.PickerBuilder().
+            addView(uploadView).
+            addView(docsView).
+            addView(sharedView).
             setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
             setOAuthToken(authorizationService.getAuthToken()).
             setCallback(self.pickerCallback).
