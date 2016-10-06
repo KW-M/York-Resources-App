@@ -151,17 +151,17 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             });
          }
       } else if (loaded === "picker") {
-         var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
-         var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
-         var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
-         var drivePicker = new google.picker.PickerBuilder().
-            addView(docsView).
-            addView(sharedView).
-            addView(uploadView).
-            setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
-            setOAuthToken(authorizationService.getAuthToken()).
-            setCallback(self.pickerCallback).
-            build();
+         // var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
+         // var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
+         // var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
+         // // var drivePicker = new google.picker.PickerBuilder().
+         // //    addView(docsView).
+         // //    addView(sharedView).
+         // //    addView(uploadView).
+         // //    setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
+         // //    setOAuthToken(authorizationService.getAuthToken()).
+         // //    setCallback(self.pickerCallback).
+         // //    build();
          if ($scope.myInfo !== undefined) {
             authorizationService.hideSigninDialog();
          } else {
