@@ -4,47 +4,47 @@
     position: relative;
 }
 
+.post-card {
+    border-radius: 2px;
+    background-color: rgb(255,255,255);
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 2px 1px -1px rgba(0,0,0,.12);
+    -webkit-transition: all 400ms ease;
+    transition: all 400ms ease;
+}
+
 .post-card-header {
     border-bottom: solid 1px black;
-    min-height: 42px;
-    background-color: grey;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+    border-radius: 3px 3px 0 0;
     position: relative;
+    min-height: 46px;
+    overflow: hidden;
 }
 
 .post-card-header:not(.noLink) {
     cursor: pointer;
 }
 
-.post-card-image {
-    border-radius: 2px 2px 0 0;
-    box-sizing: border-box;
-    display: flex;
-    flex: 0 0 auto;
-    width: 100%;
-    height: auto;
-    /*opacity: 0;*/
-    /*visibility: hidden;*/
+.post-card-header:not(.noLink):hover .post-card-image{
+    transform: translateY(0);
 }
 
-.post-card-image.img-loaded {
-    /*visibility: visible;*/
-    opacity: 1;
+.post-card-image {
+    border-radius: 3px 3px 0 0;
+    display: flex;
+    width: 100%;
+    margin-top: -2.5%;
+    transition: all 0.3s ease;
+    transform: translateY(2.5%);
 }
 
 .post-card-image-gradient {
-    z-index: 1;
     position: absolute;
     right: 0;
     left: 0;
     top: 0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 100%;
-    max-height: 56px;
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, .5), rgba(0, 0, 0, 0));
+    height: 56px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, .5), rgba(0, 0, 0, 0));
+    color: white;
 }
 
 .post-card-description-gradient {
@@ -82,14 +82,14 @@
 
 .post-card-link-text {
     opacity: 0;
-    margin: 0 -100% 0 0;
-    width: 100%;
-    padding: 0px 16px;
-    box-sizing: border-box;
-    color: white;
+    right: 0;
+    left: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    position: absolute;
+    margin-top: 14px;
+    padding: 0px 16px;
     font-weight: bold;
     transition: opacity 0.2s;
 }
@@ -102,11 +102,9 @@
 .post-card-title {
     padding: 20px 16px 0px 16px;
     margin: 0px;
-    flex-direction: row;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 100%;
 }
 
 .post-card-creator {
@@ -119,14 +117,10 @@
     word-break: break-all;
 }
 
-button.md-icon-button.md #flag_button {
-    margin-left: 0px
-}
-
 #like_thumb_button {
     min-width: 1px;
     border-radius: 100px;
-    margin: 0;
+    margin: 0 0 0 8px;
     padding: 4px 8px 0px 8px;
 }
 
@@ -138,19 +132,13 @@ button.md-icon-button.md #flag_button {
     border-radius: 100px;
 }
 
-#open_button {
-    margin-left: auto;
-}
-
 .like-counter {
-    margin: 0;
-    display: inline;
     font-size: 16px;
     font-weight: 700;
     color: rgba(0,0,0,0.54);
 }
 
-md-card.post-card:hover .md-button.md-icon-button md-icon.preBookmarkIcon{
+.post-card:hover .md-button.md-icon-button md-icon.preBookmarkIcon{
     display: block;
 }
 
@@ -172,16 +160,6 @@ md-card.post-card:hover .md-button.md-icon-button md-icon.preBookmarkIcon{
     color: black;
 }
 
-.overflow-shadow {
-    background-color: rgba(250, 250, 250, 0.05);
-    box-shadow: inset 0px -32px 25px -30px rgba(0, 18, 25, 0.4);
-    border-style: groove;
-    border-width: 0px;
-    border-bottom-width: 1px;
-    border-color: rgb(68, 138, 255);
-    border-radius: 2px;
-}
-
 .small-icon {
     font-size: 12pt;
     height: 1.17em;
@@ -190,4 +168,30 @@ md-card.post-card:hover .md-button.md-icon-button md-icon.preBookmarkIcon{
     min-height: 1px;
 }
 
-/*---------------------------------------------------------------- */
+ /*--------------------------------------------------------------- */
+/* -------------------------- Animations ------------------------ */
+.post-card.ng-leave {
+  -webkit-transition: all ease 400ms;
+  transition: all ease 400ms;
+}
+.post-card.ng-leave.ng-leave-active {
+  -webkit-transform: scale(0.5);
+  transform: scale(0.5);
+  opacity: 0;
+}
+
+.post-card.ng-enter {
+  -webkit-transition: all ease-out 400ms;
+  transition: all ease-out 00ms;
+  -webkit-transition-delay: 500ms;
+  transition-delay: 500ms;
+  -webkit-transform: translateY(150px);
+   transform: translateY(150px);
+   opacity: 0;
+}
+
+.post-card.ng-enter.ng-enter-active {
+  -webkit-transform: scale(1) translateY(0);
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
