@@ -357,6 +357,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             } else {
                classPageTokenSelectionIndex[$scope.queryPropertyString] = "end" //if we have reached the end of our search:
             }
+            console.log(fileList.result.nextPageToken)
             hideSpinner();
          }, function() {
             no_more_footer.style.display = 'none';
