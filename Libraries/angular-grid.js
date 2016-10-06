@@ -393,7 +393,7 @@
             //function to reflow grids
             function reflowGrids() {
               //return if there are no elements
-              console.log(listElms);
+
               if(!(listElms && listElms.length )) return;
 
               reflowCount++;
@@ -587,9 +587,7 @@
                 if (!leavingElm.length) {
                   resolve();
                 } else {
-                    console.log("leving elm")
                   single(leavingElm[0]).one('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function() {
-                    console.log("leving elm2")
                     $timeout(function() {
                       listElms = getListElms();
                       resolve();
