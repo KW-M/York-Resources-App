@@ -393,6 +393,7 @@
             //function to reflow grids
             function reflowGrids() {
               //return if there are no elements
+              console.log(listElms);
               if(!(listElms && listElms.length )) return;
 
               reflowCount++;
@@ -619,10 +620,7 @@
               });
             }
 
-            // scope.$watch('model', function(){
-            //   console.log("Model Updated");
-            //   watch()
-            // }, true);
+            scope.$watch('model', watch, true);
 
 
             //watch option for changes
