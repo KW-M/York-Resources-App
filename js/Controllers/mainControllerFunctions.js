@@ -288,7 +288,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          addView(uploadView).
          addView(docsView).
          addView(sharedView).
-         setOAuthToken(gapi.auth.getToken().access_token).
+         //setOAuthToken(gapi.auth.getToken().access_token).
          setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
          setCallback(self.pickerCallback).
          build();
