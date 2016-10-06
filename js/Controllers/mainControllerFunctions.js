@@ -439,13 +439,15 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       //    performantScrollEnabled = true;
       // }
       var yScroll = content_container.scrollTop;
-      if (yScroll >= 120 && $scope.globals.FABisHidden == true) {
+      $timeout(function() {
+               if (yScroll >= 120 && $scope.globals.FABisHidden == true) {
          $scope.globals.FABisHidden = false;
       } 
       if (yScroll <= 120 && $scope.globals.FABisHidden == false){
          $scope.globals.FABisOpen = false;
          $scope.globals.FABisHidden = true;
-      }
+      } 
+      })
    };
    window.addEventListener("resize", function() {
       // if (performantScrollEnabled === true && $scope.angularGridOptions.performantScroll === true) {
