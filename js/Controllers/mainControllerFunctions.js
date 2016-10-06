@@ -17,7 +17,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
 
    var deDuplicationIndex = {};
    var classPageTokenSelectionIndex = {};
-   var LoadingFiles = null;
 
    $scope.previousSearch = undefined;
    $scope.searchPlaceholder = 'Search';
@@ -333,7 +332,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    //----------------------------------------------------
    //--------- loading and filtering posts --------------
    function getFiles() {
-      LoadingFiles = true;
       console.log("concurancy: " + conurancy_counter);
       conurancy_counter++;
       no_more_footer.style.display = 'none';
@@ -428,8 +426,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             $scope.updateVisiblePosts($scope.visiblePosts.concat($scope.filterPosts(formattedFileList)));
          }
          conurancy_counter = conurancy_counter - 1 
-         LoadingFiles = false;
-         document.dispatchEvent(new window.Event('filesLoaded'));
          console.log('endingLoadingFiles')
    }
    $scope.getFiles = function() {
@@ -487,7 +483,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          })
       }
    }
-
    //----------------------------------------------------
    //---------------------- dev -------------------------
    $scope.logDuplicationIndexes = function() {
