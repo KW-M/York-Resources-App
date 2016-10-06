@@ -94,6 +94,6 @@ function authService($mdDialog) {
     }
 
     this.getAuthToken = function() {
-        return(gapi.auth2.getAuthInstance())
+        console.log(gapi.auth2.getAuthInstance(true))
     }
 }
