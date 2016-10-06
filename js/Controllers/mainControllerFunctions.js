@@ -109,7 +109,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       generateQueryString();
       if ($scope.queryParams.q === null) {
          var filteredPosts = $scope.filterPosts($scope.allPosts);
-         $scope.updateVisiblePosts(filteredPosts, function(){
+         $scope.updateVisiblePosts(filteredPosts, function() {
             console.log({
                filter: filteredPosts,
                All: $scope.allPosts
@@ -151,6 +151,17 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             });
          }
       } else if (loaded === "picker") {
+         var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
+         var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
+         var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
+         var drivePicker = new google.picker.PickerBuilder().
+            addView(docsView).
+            addView(sharedView).
+            addView(uploadView).
+            setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
+            setOAuthToken(authorizationService.getAuthToken()).
+            setCallback(self.pickerCallback).
+            build();
          if ($scope.myInfo !== undefined) {
             authorizationService.hideSigninDialog();
          } else {
@@ -276,9 +287,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    };
 
    $scope.showPicker = function(typ) {
-         drivePicker.setVisible(true);
-      // }
-
+      drivePicker.setVisible(true);
    };
 
    self.pickerCallback = function(data) {
@@ -374,22 +383,22 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    }
 
    function sortPostsByType(formattedFileList, queryString) {
-         if ($scope.queryParams.q) {
-            if ($scope.queryParams.q === $scope.previousSearch) {
-               $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
-            } else {
-               $scope.searchPosts = formattedFileList;
-            }
-            $scope.previousSearch = $scope.queryParams.q
-            $scope.updateVisiblePosts($scope.searchPosts);
+      if ($scope.queryParams.q) {
+         if ($scope.queryParams.q === $scope.previousSearch) {
+            $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
          } else {
-            $scope.allPosts = $scope.allPosts.concat(formattedFileList);
-            if ($scope.queryPropertyString == queryString) {
-               $scope.updateVisiblePosts($scope.visiblePosts.concat($scope.filterPosts(formattedFileList)));
-            }
+            $scope.searchPosts = formattedFileList;
          }
-         conurancy_counter = conurancy_counter - 1 
-         console.log('endingLoadingFiles')
+         $scope.previousSearch = $scope.queryParams.q
+         $scope.updateVisiblePosts($scope.searchPosts);
+      } else {
+         $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+         if ($scope.queryPropertyString == queryString) {
+            $scope.updateVisiblePosts($scope.visiblePosts.concat($scope.filterPosts(formattedFileList)));
+         }
+      }
+      conurancy_counter = conurancy_counter - 1
+      console.log('endingLoadingFiles')
    }
 
    //----------------------------------------------------
@@ -409,13 +418,13 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       // }
       var yScroll = content_container.scrollTop;
       $timeout(function() {
-               if (yScroll >= 120 && $scope.globals.FABisHidden == true) {
-         $scope.globals.FABisHidden = false;
-      } 
-      if (yScroll <= 120 && $scope.globals.FABisHidden == false){
-         $scope.globals.FABisOpen = false;
-         $scope.globals.FABisHidden = true;
-      } 
+         if (yScroll >= 120 && $scope.globals.FABisHidden == true) {
+            $scope.globals.FABisHidden = false;
+         }
+         if (yScroll <= 120 && $scope.globals.FABisHidden == false) {
+            $scope.globals.FABisOpen = false;
+            $scope.globals.FABisHidden = true;
+         }
       })
    };
    window.addEventListener("resize", function() {
@@ -436,19 +445,19 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       }
    }
    $scope.updateVisiblePosts = function(array, callback) {
-      $timeout(function(){
-         console.log(array)
-         if (array) {
-            $scope.visiblePosts = array;
-         }
-         if (callback) {
-            callback();
-         }
-         angularGridInstance.postsGrid.refresh();
-      })
-   }
-   //----------------------------------------------------
-   //---------------------- dev -------------------------
+         $timeout(function() {
+            console.log(array)
+            if (array) {
+               $scope.visiblePosts = array;
+            }
+            if (callback) {
+               callback();
+            }
+            angularGridInstance.postsGrid.refresh();
+         })
+      }
+      //----------------------------------------------------
+      //---------------------- dev -------------------------
    $scope.logDuplicationIndexes = function() {
       console.log({
          deDuplicationIndex: deDuplicationIndex,
