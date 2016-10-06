@@ -167,6 +167,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             build();
          uploadPicker = new google.picker.PickerBuilder().
             addView(uploadView).
+            addViewGroup().addLabel("Drive").
             addView(docsView).
             addView(sharedView).
             setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
@@ -297,8 +298,13 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       });
    };
 
-   $scope.showPicker = function(typ) {
-      drivePicker.setVisible(true);
+   $scope.showPicker = function(type) {
+      if (type == "Drive") {
+         drivePicker.setVisible(true);
+      } else if (type == "Upload") {
+         uploadPicker.setVisible(true);
+      }
+      
    };
 
    self.pickerCallback = function(data) {
