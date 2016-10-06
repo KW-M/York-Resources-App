@@ -64,7 +64,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    };
 
    function listenForURLChange() {
-      console.log('ilocation change');
       onLocationChange();
       $rootScope.$on('$locationChangeSuccess', function(event) {
          onLocationChange()
