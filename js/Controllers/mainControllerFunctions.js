@@ -498,7 +498,9 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
 //       console.log($scope.visiblePosts)
 // 		angularGridInstance.postsGrid.refresh();
 // 	});
-
+$scope.updateVisiblePosts = function(argument) {
+   // body...
+}()
    //----------------------------------------------------
    //---------------------- dev -------------------------
    $scope.logDuplicationIndexes = function() {
