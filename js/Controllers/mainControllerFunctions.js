@@ -167,8 +167,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             build();
          uploadPicker = new google.picker.PickerBuilder().
             addView(uploadView).
-            addViewGroup().addLabel("Drive").
-            addView(docsView).
+            addViewGroup(docsView).
             addView(sharedView).
             setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
             setOAuthToken(authorizationService.getAuthToken()).
