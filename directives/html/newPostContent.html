@@ -45,7 +45,7 @@
          </div>
          <md-progress-linear class="link-loading" md-mode="indeterminate" ng-disabled="!previewLoading"></md-progress-linear>
       </md-toolbar>
-      <div id="new_post_content">
+      <div id="new_post_content" style="margin-top:200px">
          <div flex layout="row">
             <md-select ng-model-options="{trackBy: '$value.Name'}" class="md-no-underline md-button" ng-model="Post.Class" placeholder="Class" ng-hide="operation === 'view'" md-on-close="clearText(classSelectSearch)" style="margin: 4px 4px;font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;">
                <md-select-header class="classSelectSearchbox">

@@ -1,11 +1,9 @@
    /*-- new post dialog styles --*/
-.dialog_scroll {
-   overflow-y: auto;
-}
 
    #dialog_header {
       background-color:rgba(0, 0, 0, 0.5);
       height: 200px;
+      position: absolute;
       overflow-y: hidden;
    }
 
