@@ -2,13 +2,14 @@
 
    #dialog_header {
       max-height: 200px;
-      flex: 1;
+      height: 200px;
       min-height: 60px;
       position: absolute;
       overflow: hidden
    }
 
    #header_image {
+          top: -20px;
       -webkit-filter: brightness(85%);
       filter: brightness(85%);
       width: 100%;
