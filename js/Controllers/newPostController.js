@@ -43,6 +43,7 @@
                 $scope.previewLoading = false;
             } else if ($scope.Post.Link.match(/(?:http|https):\/\/.{2,}/)) {
                 $scope.previewLoading = true;
+                document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                 var driveId = $scope.Post.Link.match(/(?:(?:\/(?:d|file|folder|folders)\/)|(?:id=))([-\w]{25,})/);
                 console.log(driveId)
                 if (driveId) {
@@ -50,6 +51,7 @@
                     $scope.Post.AttachmentId = driveId[1]
                     $scope.Post.PreviewImage = "https://drive.google.com/thumbnail?authuser=" + 0 + "&sz=w400&id=" + $scope.Post.AttachmentId;
                     $scope.previewLoading = false;
+                    document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                 } else {
                     $scope.Post.Type = 'Link';
                     request.open('HEAD', 'https://jsonp.afeld.me/?url=' + $scope.Post.Link, true); // to implement: img checking and icon for non existant thumnail drive docs
@@ -60,10 +62,12 @@
                             if (this.getResponseHeader('content-type').indexOf('image') != -1) {
                                 $scope.Post.PreviewImage = $scope.Post.Link;
                                 $scope.previewLoading = false;
+                                document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                             } else {
                                 GoogleDriveService.getWebsiteScreenshot($scope.Post.Link).then(function(response) {
                                     $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
                                     $scope.previewLoading = false;
+                                    document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                                 })
                             }
                         }
