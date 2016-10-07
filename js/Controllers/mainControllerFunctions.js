@@ -266,8 +266,8 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          },
          onComplete: function() {
             $scope.newPostHeaderImg = document.getElementById("header_image");
-            $scope.newPostDescription = document.querySelector('#DescriptionTxt');
-            $scope.dialogElement = document.querySelector('#new_post_dialog');
+            $scope.newPostScroll = document.getElementById('dialog_scroll');
+            $scope.newPostHeader = document.getElementById('dialog_header');
          },
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),

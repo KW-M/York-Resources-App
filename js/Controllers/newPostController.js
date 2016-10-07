@@ -79,7 +79,6 @@
 
         $scope.isReadyToSubmit = function() {
             console.log($scope.PostClass);
-            console.log($scope.dialogElement);
             console.log(document.getElementById('header_image'));
             if ($scope.Post.Class.Name === '' || $scope.Post.Class === undefined) {
                 $mdToast.show({
@@ -101,7 +100,7 @@
                         $mdToast.show({
                             template: '<md-toast style="width: 100%;"><div style="flex-direction: column; height: 100%;" class="md-toast-content"><p style="margin-top:10px">This will allow people at York to view the linked file.</p><span flex layout="row" style="width:100%"><md-button style="width:100%" ng-click="checkHeaderImg()">Got It</md-button></span><div></md-toast>',
                             hideDelay: 3000000,
-                            parent: $scope.dialogElement,
+                            parent: document.getElementById('new_post_dialog'),
                         });
                     }
                     else {
@@ -314,14 +313,9 @@
 
         };
 
-        function convertImg(ImageElement) {
-            ctx.drawImage(ImageElement, 0, 0);
-            dataURL = canvas.toDataURL();
-            console.log(dataURL);
-            return dataURL;
-        }
-
         $scope.closeDialog = function() {
             $mdDialog.hide();
         };
+        
+        $scope.
     }
