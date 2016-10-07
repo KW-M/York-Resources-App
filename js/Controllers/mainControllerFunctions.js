@@ -270,7 +270,12 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             var newPostHeader = document.getElementById('dialog_header');
             newPostScroll.onscroll = function(event) {
                var scroll = newPostScroll.scrollTop;
-               newPostHeader.style.height = (200 - scroll)
+               if(scroll <= 200) {
+                  newPostHeader.style.height = (200 - scroll) + "px"
+                  newPostHeader.style.boxShadow = null
+               } else {
+                  newPostHeader.style.boxShadow = "0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12)"
+               }
             }
          },
          clickOutsideToClose: false,
