@@ -3,7 +3,7 @@
    #dialog_header {
       background-color:rgba(0, 0, 0, 0.5);
       height: 200px;
-      position: absolute;
+      position: re;
       overflow-y: hidden;
    }
 
