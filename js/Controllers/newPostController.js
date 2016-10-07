@@ -1,6 +1,6 @@
     /* we don't define the "new post controller" here because it was alredy
                                                                defined by the $md-dialog in the newPost function on mainController.   */
-    function newPostController($scope, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
+    function newPostController($scope, $timeout $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
         $scope.Post = {
             Title: postObj.Title || '',
             Description: postObj.Description || '',
@@ -36,6 +36,7 @@
         var request = new XMLHttpRequest();
 
         $scope.findType = function() {
+            $timeout(function(){
             if ($scope.Post.Link === '') {
                 $scope.Post.Type = 'NoLink';
                 $scope.Post.PreviewImage = ''; // will be the down arrow photo
@@ -58,7 +59,6 @@
                                 $scope.previewLoading = false;
                             } else {
                                 GoogleDriveService.getWebsiteScreenshot($scope.Post.Link).then(function(response) {
-                                    console.log("data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+'));
                                     $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
                                     $scope.previewLoading = false;
                                 })
@@ -73,7 +73,7 @@
             } else {
                 $scope.Post.Type = 'Link';
             }
-
+          })  
         };
         $scope.findType();
 

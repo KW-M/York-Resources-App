@@ -256,7 +256,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    $scope.newPost = function(postObj, operation, event) {
       $mdDialog.show({
          templateUrl: '/directives/html/newPostContent.html',
-         controller: ['$scope', '$mdDialog', 'GoogleDriveService', '$mdToast', "postObj", "operation", newPostController],
+         controller: ['$scope', '$timeout','$mdDialog', 'GoogleDriveService', '$mdToast', "postObj", "operation", newPostController],
          scope: $scope,
          parent: angular.element(document.body),
          preserveScope: true,
