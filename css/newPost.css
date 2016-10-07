@@ -9,7 +9,7 @@
    }
 
    #header_image {
-          top: -20px;
+      top: -20px;
       -webkit-filter: brightness(85%);
       filter: brightness(85%);
       width: 100%;
