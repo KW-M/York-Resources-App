@@ -35,6 +35,12 @@
       flex-direction: row;
    }
 
+   #header_link{
+      margin: 10px 4px 10px 12px;
+      display: flex;
+      transition: opacity 0.5s ease;
+   }
+   
    #header_link, #header_title{
       margin: 10px 4px 10px 12px;
       display: flex;
