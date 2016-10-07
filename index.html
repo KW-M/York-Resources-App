@@ -121,6 +121,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <div>
                             <p class="post-card-title md-title">{{Post.Title}}</p>
                             <p class="post-card-creator md-subhead"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::Post.Creator.ClassOf}})</span></p>
                             <p id="post_card_description" class="md-body-1" ng-bind-html="Post.Description" ng-hide="Post.Description === ''"></p>
@@ -156,7 +157,7 @@
                                     </md-menu-content>
                                 </md-menu>
                                 <span flex></span>
-                                <md-button class="md-accent">Open Link</md-button>
+                                <md-button id="open_button" ng-hide="::Post.Description == ''" class="md-button md-accent" ng-click="newPost(Post, 'view')" aria-label="Open resource">View</md-button>
                             </md-card-actions>
                         </div>
                     </div>

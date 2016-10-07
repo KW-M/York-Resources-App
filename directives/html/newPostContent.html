@@ -89,6 +89,36 @@
          <md-icon ng-hide="operation == 'new'" style="font-size:26px; line-height: 25px">close</md-icon>
       </md-button>
    </md-dialog-actions>
+                               <md-card-actions layout="row">
+                                <md-button class="md-icon-button" area-label="Flag" ng-click="::flagPost(Post)" ng-hide="Post.Creator.Email == myInfo.Email && Post.Flagged == false">
+                                    <md-icon ng-class="{'md-warn' : Post.Flagged == true}">flag</md-icon>
+                                </md-button>
+                                <md-menu>
+                                    <md-button ng-click="::$mdOpenMenu($event)" ng-show="::Post.Creator.Email === myInfo.Email" class="md-icon-button">
+                                        <md-icon>more_vert</md-icon>
+                                    </md-button>
+                                    <md-menu-content>
+                                        <md-menu-item ng-hide="::Post.Flagged === true">
+                                            <md-button ng-click="::flagPost($event,Post,$index)">
+                                                <md-icon>flag</md-icon>Flag</md-button>
+                                        </md-menu-item>
+                                        <md-menu-item>
+                                            <md-button ng-click="::confirmDelete($event,Post,$index)">
+                                                <md-icon>delete</md-icon>Delete</md-button>
+                                        </md-menu-item>
+                                        <md-menu-item>
+                                            <md-button ng-click="::newPost(Post,'update')">
+                                                <md-icon>edit</md-icon>Edit</md-button>
+                                        </md-menu-item>
+                                        <md-menu-item ng-show="devMode">
+                                            <md-button ng-click="::logPostToConsole(Post,$index)">
+                                                <md-icon>edit</md-icon>Console Log Post</md-button>
+                                        </md-menu-item>
+                                    </md-menu-content>
+                                </md-menu>
+                                <span flex></span>
+                                <md-button id="open_button" ng-hide="::Post.Description == ''" class="md-button md-accent" ng-click="newPost(Post, 'view')" aria-label="Open resource">View</md-button>
+                            </md-card-actions>
    <md-dialog-actions ng-show="operation === 'view'" layout="row">
       <md-button id="like_thumb_button" aria-label="Like">
          <md-icon style="display:none">thumb_down</md-icon>
