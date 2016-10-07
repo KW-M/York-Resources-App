@@ -117,8 +117,10 @@
    </md-dialog-actions>
    <script>
       var newPostScroll = document.getElementById('dialog_scroll');
+      console.log(newPostScroll);
 newPostScroll.onscroll = function () {
     var scroll = newPostScroll.scrollTop;
+    console.log(scroll);
     var header = document.getElementById('dialog_header');
     var headerImage = document.getElementById('newPostImg');
     var linkButtons = document.getElementById('newPostLinkButtons');
@@ -134,7 +136,7 @@ newPostScroll.onscroll = function () {
         headerImage.style.top = -20 - (scroll / 5) + 'px';
         newPostContent.style.margin = '0 0 0 0';
     } else {
-       
+    }
 };
    </script>
 </md-dialog>
