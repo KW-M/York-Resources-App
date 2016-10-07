@@ -254,13 +254,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    //----------------------------------------------------
    //--------------- Creating Posts ---------------------
    $scope.newPost = function(postObj, operation, event) {
-      //called by the bottom right plus/add resource button
-      //angular.element(event.path[2]).addClass('fade-out');;
-      // console.log(event)
-      // console.log(event.path[2])
-      // console.log(event.path[2].getBoundingClientRect())
-      // var rect = event.path[2].getBoundingClientRect()
-      log(postObj);
       $mdDialog.show({
          templateUrl: '/directives/html/newPostContent.html',
          controller: ['$scope', '$mdDialog', 'GoogleDriveService', '$mdToast', "postObj", "operation", newPostController],
