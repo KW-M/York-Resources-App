@@ -5,10 +5,8 @@
          <div class="newPostImgGradient">
             <div id="header_title" style="opacity: 0">
                <h5 style="margin: 0">{{Post.Title}}</h5>
-               <span style="font-weight:700; font-size:14px"><md-icon class="small-icon" style="color:white">people</md-icon> {{Post.Class.Name || 'No class'}}</span>
-                                                       <p style="margin: 0;" >
-                                            <md-icon class="small-icon" style="color:white">style</md-icon><span>{{Post.Tags.join(', ')}}</span>
-                                        </p>
+               <span style="font-weight:700; font-size:14px"><md-icon class="small-icon" style="color:white">people</md-icon> {{Post.Class.Name || 'No class'}}</span>                                
+               <span ng-hide="Post.Tags.length < 1"><md-icon class="small-icon" style="color:white">style</md-icon>{{Post.Tags.join(', ')}}</span>
             </div>
             <div ng-hide="operation === 'view'" id="header_link">
                <md-input-container md-no-float id="newPostLinkInput">
