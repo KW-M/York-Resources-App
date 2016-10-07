@@ -47,6 +47,7 @@
                 console.log(driveId)
                 if (driveId) {
                     $scope.Post.Type = 'gDrive';
+                    $scope.Post.AttachmentId = driveId[1]
                     $scope.Post.PreviewImage = "https://drive.google.com/thumbnail?authuser=" + 0 + "&sz=w400&id=" + $scope.Post.AttachmentId;
                     $scope.previewLoading = false;
                 } else {
