@@ -1,75 +1,75 @@
 <md-dialog id="new_post_dialog" ng-style="{'background-color': Post.Class.Color}">
-   <md-dialog-content>
-   <div id="dialog_scroll">
-   <md-toolbar id="dialog_header" ng-class="{ 'noLink' : Post.Type === 'noLink' }">
-      <div class="md-toolbar-tools">
-         <div class="md-icon-button">
-            <md-icon>group</md-icon>
+   <md-dialog-content class="new_post_dialog_scroll">
+      <md-toolbar id="dialog_header" ng-class="{ 'noLink' : Post.Type === 'noLink' }">
+         <div class="md-toolbar-tools">
+            <div class="md-icon-button">
+               <md-icon>group</md-icon>
+            </div>
+            <h2><span>Title</span></h2>
+            <span flex></span>
          </div>
-         <h2><span>Title</span></h2>
-         <span flex></span>
-      </div>
-      <img ng-src="{{Post.PreviewImage}}" id="header_image">
-      <div class="newPostImgGradient" flex layout="column">
-         <div ng-hide="operation === 'view'" style="margin: 0 4px 0 12px; width: 100%; display: flex;">
-            <md-input-container md-no-float id="newPostLinkInput">
-               <input id="newPostLinkInputTxt" ng-model="Post.Link" ng-model-options="{ debounce: 500 }" style="color:white" placeholder="http://" ng-change="findType()" type="text">
-            </md-input-container>
-            <md-menu md-position-mode="target-right target" md-offset="0 -45">
-               <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" style="margin:0">
-                  <md-icon md-menu-origin>attach_file</md-icon>
-               </md-button>
-               <md-menu-content>
-                  <md-menu-item>
-                     <md-button><span flex>Upload file</span>
-                        <md-icon style="margin: auto 0 auto 16px">file_upload</md-icon>
-                     </md-button>
-                  </md-menu-item>
-                  <md-menu-item>
-                     <md-button><span flex>Attatch drive file</span><img md-menu-align-target class="unselectable" style="width:22px; height:22px; float:right; margin: auto 0 auto 16px; opacity: 0.54;" src="images/drive_icon.svg"></md-button>
-                  </md-menu-item>
-               </md-menu-content>
-            </md-menu>
-         </div>
-         <div ng-show="operation === 'view'" style="width:100%">
-            <p class="post-card-link-text" ng-hide="::Post.Link == ''" style="position:absolute">
-               <md-icon style="color:White; font-size: 16px;" class="small-icon">language</md-icon>
-               <span> {{::Post.Link}}</span>
-            </p>
-            <div class="post-card-metadata-text">
-               <!--<p style="margin: 4px 0 0 0;">-->
-               <md-icon class="small-icon" style="color:white">event</md-icon><span style="margin-right:10px; font-weight:700; font-size:14px"> {{::Post.CreationDate | date : "m/dd/yyyy"}}</span>
-               <md-icon class="small-icon" style="color:white">people</md-icon><span style="font-weight:700; font-size:14px"> {{::Post.Class.Name}}</span>
-               <!--</p>-->
+         <img ng-src="{{Post.PreviewImage}}" id="header_image">
+         <div class="newPostImgGradient" flex layout="column">
+            <div ng-hide="operation === 'view'" style="margin: 0 4px 0 12px; width: 100%; display: flex;">
+               <md-input-container md-no-float id="newPostLinkInput">
+                  <input id="newPostLinkInputTxt" ng-model="Post.Link" ng-model-options="{ debounce: 500 }" style="color:white" placeholder="http://" ng-change="findType()" type="text">
+               </md-input-container>
+               <md-menu md-position-mode="target-right target" md-offset="0 -45">
+                  <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" style="margin:0">
+                     <md-icon md-menu-origin>attach_file</md-icon>
+                  </md-button>
+                  <md-menu-content>
+                     <md-menu-item>
+                        <md-button><span flex>Upload file</span>
+                           <md-icon style="margin: auto 0 auto 16px">file_upload</md-icon>
+                        </md-button>
+                     </md-menu-item>
+                     <md-menu-item>
+                        <md-button><span flex>Attatch drive file</span><img md-menu-align-target class="unselectable" style="width:22px; height:22px; float:right; margin: auto 0 auto 16px; opacity: 0.54;" src="images/drive_icon.svg"></md-button>
+                     </md-menu-item>
+                  </md-menu-content>
+               </md-menu>
+            </div>
+            <div ng-show="operation === 'view'" style="width:100%">
+               <p class="post-card-link-text" ng-hide="::Post.Link == ''" style="position:absolute">
+                  <md-icon style="color:White; font-size: 16px;" class="small-icon">language</md-icon>
+                  <span> {{::Post.Link}}</span>
+               </p>
+               <div class="post-card-metadata-text">
+                  <!--<p style="margin: 4px 0 0 0;">-->
+                  <md-icon class="small-icon" style="color:white">event</md-icon><span style="margin-right:10px; font-weight:700; font-size:14px"> {{::Post.CreationDate | date : "m/dd/yyyy"}}</span>
+                  <md-icon class="small-icon" style="color:white">people</md-icon><span style="font-weight:700; font-size:14px"> {{::Post.Class.Name}}</span>
+                  <!--</p>-->
+               </div>
             </div>
          </div>
-      </div>
-      <md-progress-linear class="link-loading" md-mode="indeterminate" ng-disabled="!previewLoading"></md-progress-linear>
-   </md-toolbar>
-      <div flex layout="row">
-         <md-select ng-model-options="{trackBy: '$value.Name'}" class="md-no-underline md-button" ng-model="Post.Class" placeholder="Class" ng-hide="operation === 'view'" md-on-close="clearText(classSelectSearch)" style="margin: 4px 4px;font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;">
-            <md-select-header class="classSelectSearchbox">
-               <input ng-model="classSelectSearch" id="class_select_input" type="Search" placeholder="Search for a class.." class="md-text">
-            </md-select-header>
-            <md-option value="{'Catagory':'Other', 'Name':'Other', 'Color':'#ffffff'}">
-               Other / Not associated
-            </md-option>
-            <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Catagory}}">
-               <md-option ng-repeat="Name in Catagory.Classes" ng-value="{'Catagory':Catagory.Catagory, 'Name':Name, 'Color':Catagory.Color}">
-                  {{Name}}
+         <md-progress-linear class="link-loading" md-mode="indeterminate" ng-disabled="!previewLoading"></md-progress-linear>
+      </md-toolbar>
+      <div id="new_post_content">
+         <div flex layout="row">
+            <md-select ng-model-options="{trackBy: '$value.Name'}" class="md-no-underline md-button" ng-model="Post.Class" placeholder="Class" ng-hide="operation === 'view'" md-on-close="clearText(classSelectSearch)" style="margin: 4px 4px;font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;">
+               <md-select-header class="classSelectSearchbox">
+                  <input ng-model="classSelectSearch" id="class_select_input" type="Search" placeholder="Search for a class.." class="md-text">
+               </md-select-header>
+               <md-option value="{'Catagory':'Other', 'Name':'Other', 'Color':'#ffffff'}">
+                  Other / Not associated
                </md-option>
-            </md-optgroup>
-         </md-select>
-         <div style="width:6px" ng-show="operation === 'view'"></div>
-         <md-chips ng-model="Post.Tags" flex md-separator-keys="[32,188,13]" ng-hide="operation === 'view' && Post.Tags.length === 0" readonly="operation === 'view'">
-            <input type="text" placeholder="Add a tag">
-         </md-chips>
-      </div>
-      <div class="md-dialog-content">
-         <input ng-model="Post.Title" ng-readonly="operation === 'view'" class="newPostTitle md-title" placeholder="Title" md-autofocus>
-         <div id="DescriptionTxt" class="newPostBody" contenteditable="{{operation !== 'view'}}" ng-bind-html="Post.Description"></div>
-         <!--ng-model="Post.Description" html-model="true" -->
-      </div>
+               <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Catagory}}">
+                  <md-option ng-repeat="Name in Catagory.Classes" ng-value="{'Catagory':Catagory.Catagory, 'Name':Name, 'Color':Catagory.Color}">
+                     {{Name}}
+                  </md-option>
+               </md-optgroup>
+            </md-select>
+            <div style="width:6px" ng-show="operation === 'view'"></div>
+            <md-chips ng-model="Post.Tags" flex md-separator-keys="[32,188,13]" ng-hide="operation === 'view' && Post.Tags.length === 0" readonly="operation === 'view'">
+               <input type="text" placeholder="Add a tag">
+            </md-chips>
+         </div>
+         <div class="md-dialog-content">
+            <input ng-model="Post.Title" ng-readonly="operation === 'view'" class="newPostTitle md-title" placeholder="Title" md-autofocus>
+            <div id="DescriptionTxt" class="newPostBody" contenteditable="{{operation !== 'view'}}" ng-bind-html="Post.Description"></div>
+            <!--ng-model="Post.Description" html-model="true" -->
+         </div>
       </div>
    </md-dialog-content>
    <md-dialog-actions ng-hide="operation === 'view'" layout="row">
