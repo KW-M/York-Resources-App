@@ -1,4 +1,6 @@
 <md-dialog id="new_post_dialog" ng-style="{'background-color': Post.Class.Color}">
+   <md-dialog-content>
+      <div id="dialog_scroll">
    <md-toolbar id="dialog_header" ng-class="{ 'noLink' : Post.Type === 'noLink' }">
       <div class="md-toolbar-tools">
          <div class="md-icon-button">
@@ -44,7 +46,6 @@
       </div>
       <md-progress-linear class="link-loading" md-mode="indeterminate" ng-disabled="!previewLoading"></md-progress-linear>
    </md-toolbar>
-   <md-dialog-content id="dialog_scroll">
       <div flex layout="row">
          <md-select ng-model-options="{trackBy: '$value.Name'}" class="md-no-underline md-button" ng-model="Post.Class" placeholder="Class" ng-hide="operation === 'view'" md-on-close="clearText(classSelectSearch)" style="margin: 4px 4px;font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;">
             <md-select-header class="classSelectSearchbox">
@@ -69,6 +70,7 @@
          <div id="DescriptionTxt" class="newPostBody" contenteditable="{{operation !== 'view'}}" ng-bind-html="Post.Description"></div>
          <!--ng-model="Post.Description" html-model="true" -->
       </div>
+      </di>
    </md-dialog-content>
    <md-dialog-actions ng-hide="operation === 'view'" layout="row">
       <md-button id="New_Post_Submit" ng-click="isReadyToSubmit()" class="md-raised md-acc">Save</md-button>
