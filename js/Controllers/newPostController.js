@@ -316,8 +316,4 @@
         $scope.closeDialog = function() {
             $mdDialog.hide();
         };
-        
-        // $scope.newPostScroll.onscroll = function(event) {
-        //     console.log(event)
-        // }
     }

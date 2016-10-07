@@ -265,14 +265,14 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             operation: operation
          },
          onComplete: function() {
-            $timeout(function() {
-            $scope.newPostHeaderImg = document.getElementById("header_image");
-            $scope.newPostScroll = document.getElementById('dialog_scroll');
-            console.log($scope.newPostScroll)
-            $scope.newPostHeader = document.getElementById('dialog_header');
-         
-            },3000);
-            },
+            var newPostHeaderImg = document.getElementById("header_image");
+            var newPostScroll = document.getElementById('dialog_scroll');
+            console.log(newPostScroll)
+            var newPostHeader = document.getElementById('dialog_header');
+            newPostScroll.onscroll = function(event) {
+               console.log(event)
+            }
+         },
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
          // openFrom: {
