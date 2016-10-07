@@ -120,8 +120,6 @@
 #like_thumb_button {
     min-width: 1px;
     border-radius: 100px;
-    margin: 0 0 0 8px;
-    padding: 4px 8px 0px 8px;
 }
 
 #like_thumb_button:hover {
