@@ -41,9 +41,9 @@
       transition: opacity 0.5s ease;
    }
    
-   #header_link, #header_title{
+   #header_title{
       margin: 10px 4px 10px 12px;
-      display: flex;
+      position: absolute;
       transition: opacity 0.5s ease;
    }
 
