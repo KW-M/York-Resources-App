@@ -265,7 +265,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             operation: operation
          },
          onComplete: function() {
-            var newPostHeaderLink = angular.element(document.getElementById("header_link"));
+            var newPostHeaderLink = angular.element(document.getElementById("header_link"))[0];
             var newPostScroll = document.getElementsByClassName('new_post_dialog_scroll')[0];
             var newPostHeader = document.getElementById('dialog_header');
             newPostScroll.onscroll = function(event) {
@@ -273,10 +273,10 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                if(scroll <= 160) {
                   newPostHeader.style.height = (200 - scroll) + "px"
                   newPostHeader.style.boxShadow = null
-                  newPostHeaderLink.removeClass('fade-out');
+                  newPostHeaderLink.style.opacity = 1;
                } else {
-                  newPostHeaderLink.addClass('fade-out')
                   newPostHeader.style.boxShadow = "0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12)"
+                  newPostHeaderLink.style.opacity = 0;
                }
             }
          },
