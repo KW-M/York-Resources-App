@@ -3,9 +3,9 @@
       <md-toolbar id="dialog_header" ng-class="{ 'noLink' : Post.Type === 'noLink' }">
          <img ng-src="{{Post.PreviewImage}}" id="header_image">
          <div class="newPostImgGradient">
-            <div id="header_title">
+            <div id="header_title" style="opacity: 0">
                <h5 style="margin: 0">{{Post.Title}}</h5>
-                  <span style="font-weight:700; font-size:14px"><md-icon class="small-icon" style="color:white">people</md-icon> {{Post.Class.Name || 'No class'}}</span>
+               <span style="font-weight:700; font-size:14px"><md-icon class="small-icon" style="color:white">people</md-icon> {{Post.Class.Name || 'No class'}}</span>
             </div>
             <div ng-hide="operation === 'view'" id="header_link">
                <md-input-container md-no-float id="newPostLinkInput">
