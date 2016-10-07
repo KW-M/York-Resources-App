@@ -125,7 +125,7 @@
                             <p class="post-card-title md-title">{{Post.Title}}</p>
                             <p class="post-card-creator md-subhead"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::Post.Creator.ClassOf}})</span></p>
                             <p id="post_card_description" class="md-body-1" ng-bind-html="Post.Description" ng-hide="Post.Description === ''"></p>
-                            <md-card-actions layout="row">
+                            <md-card-actions layout="row" >
                                 <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(Post)">
                                     <span class="like-counter">{{Post.Likes.length}}</span>
                                     <md-icon ng-class="{'md-accent' : Post.userLiked}" style="margin-top: -8px">thumb_up</md-icon>

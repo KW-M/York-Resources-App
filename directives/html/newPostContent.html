@@ -69,7 +69,7 @@
          </div>
       </div>
    </md-dialog-content>
-   <md-dialog-actions ng-hide="operation === 'view'" layout="row">
+   <md-dialog-actions ng-hide="operation === 'view'" layout="row" >
       <md-button id="New_Post_Submit" ng-click="isReadyToSubmit()" class="md-raised md-acc">Save</md-button>
       <md-button class="text-formating-button md-icon-button " style="margin: 0 -6px 0 0; padding: 0;">
          <md-icon style="font-size:18px; line-height: 24px;">format_bold</md-icon>
@@ -89,7 +89,7 @@
          <md-icon ng-hide="operation == 'new'" style="font-size:26px; line-height: 25px">close</md-icon>
       </md-button>
    </md-dialog-actions>
-   <md-dialog-actions ng-show="operation === 'view'" layout="row">
+   <md-dialog-actions ng-show="operation === 'view'" layout="row" style="align-items: center;">
       <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(Post)">
          <span class="like-counter">{{Post.Likes.length}}</span>
          <md-icon ng-class="{'md-accent' : Post.userLiked}" style="margin-top: -8px">thumb_up</md-icon>
