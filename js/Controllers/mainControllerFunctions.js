@@ -265,15 +265,17 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             operation: operation
          },
          onComplete: function() {
-            var newPostHeaderImg = document.getElementById("header_image");
+            var newPostHeaderLink = angular.element(document.getElementById("header_link"));
             var newPostScroll = document.getElementsByClassName('new_post_dialog_scroll')[0];
             var newPostHeader = document.getElementById('dialog_header');
             newPostScroll.onscroll = function(event) {
                var scroll = newPostScroll.scrollTop;
-               if(scroll <= 200) {
+               if(scroll <= 160) {
                   newPostHeader.style.height = (200 - scroll) + "px"
                   newPostHeader.style.boxShadow = null
+                  newPostHeaderLink.removeClass('fade-out');
                } else {
+                  newPostHeaderLink.addClass('fade-out')
                   newPostHeader.style.boxShadow = "0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12)"
                }
             }
