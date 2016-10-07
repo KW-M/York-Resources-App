@@ -1,16 +1,9 @@
 <md-dialog id="new_post_dialog" ng-style="{'background-color': Post.Class.Color}">
    <md-dialog-content class="new_post_dialog_scroll">
       <md-toolbar id="dialog_header" ng-class="{ 'noLink' : Post.Type === 'noLink' }">
-         <div class="md-toolbar-tools">
-            <div class="md-icon-button">
-               <md-icon>group</md-icon>
-            </div>
-            <h2><span>Title</span></h2>
-            <span flex></span>
-         </div>
          <img ng-src="{{Post.PreviewImage}}" id="header_image">
-         <div class="newPostImgGradient" flex layout="column">
-            <div ng-hide="operation === 'view'" style="margin: 0 4px 0 12px; width: 100%; display: flex;">
+         <div class="newPostImgGradient">
+            <div ng-hide="operation === 'view'" style="margin: 10px 4px 10px 12px;">
                <md-input-container md-no-float id="newPostLinkInput">
                   <input id="newPostLinkInputTxt" ng-model="Post.Link" ng-model-options="{ debounce: 500 }" style="color:white" placeholder="http://" ng-change="findType()" type="text">
                </md-input-container>
