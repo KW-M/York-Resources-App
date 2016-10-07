@@ -266,11 +266,13 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          },
          onComplete: function() {
             var newPostHeaderImg = document.getElementById("header_image");
-            var newPostScroll = document.getElementById('dialog_scroll');
+            var newPostScroll = document.getElementsByClassName('new_post_dialog_scroll')[0];
             console.log(newPostScroll)
             var newPostHeader = document.getElementById('dialog_header');
+            console.log('dialog')
             newPostScroll.onscroll = function(event) {
-               console.log(event)
+               var scroll = newPostScroll.scrollTop
+               newPostHeader.style.height = 200 - scroll
             }
          },
          clickOutsideToClose: false,
