@@ -43,9 +43,12 @@
                 $scope.previewLoading = false;
             } else if ($scope.Post.Link.match(/(?:http|https):\/\/.{2,}/)) {
                 $scope.previewLoading = true;
-                if ($scope.Post.Link.match(/\/(?:d|file|folder|folders|id)\/([-\w]{25,})/)) {
+                var driveId = $scope.Post.Link.match(/\/(?:d|file|folder|folders|id=)\/([-\w]{25,})/);
+                console.log(driveId)
+                if (driveId) {
+                    
                     $scope.Post.Type = 'gDrive';
-                    $scope.Post.PreviewImage = "https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + $scope.AttachmentId;
+                    $scope.Post.PreviewImage = "https://drive.google.com/thumbnail?authuser=" + 0 + "&sz=w400&id=" + $scope.Post.AttachmentId;
                     $scope.previewLoading = false;
                 } else {
                     $scope.Post.Type = 'Link';
