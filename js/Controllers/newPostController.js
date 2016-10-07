@@ -317,5 +317,7 @@
             $mdDialog.hide();
         };
         
-        $scope.
+        // $scope.newPostScroll.onscroll = function(event) {
+        //     console.log(event)
+        // }
     }
