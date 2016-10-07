@@ -267,7 +267,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          onComplete: function() {
             var newPostHeaderLink = document.getElementById("header_link");
             var newPostHeaderImage = document.getElementById("header_image");
-             var newPostHeaderTitle = document.getElementById("header_title");
+            var newPostHeaderTitle = document.getElementById("header_title");
             var newPostScroll = document.getElementsByClassName('new_post_dialog_scroll')[0];
             var newPostHeader = document.getElementById('dialog_header');
             newPostScroll.onscroll = function(event) {
@@ -310,7 +310,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       } else if (type == "Upload") {
          uploadPicker.setVisible(true);
       }
-
    };
 
    self.pickerCallback = function(data) {
