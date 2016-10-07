@@ -1,10 +1,10 @@
    /*-- new post dialog styles --*/
    
    #dialog_header {
-      height: 200px;
-      background-color: rgba(0, 0, 0, 0.5);
-      position: relative;
-      overflow-y: hidden;
+      max-height: 200px;
+      flex: 1;
+      min-height: 60px;
+      position: absolute;
    }
    
    #header_image {

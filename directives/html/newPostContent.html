@@ -3,7 +3,7 @@
       <md-toolbar id="dialog_header" ng-class="{ 'noLink' : Post.Type === 'noLink' }">
          <img ng-src="{{Post.PreviewImage}}" id="header_image">
          <div class="newPostImgGradient">
-            <div ng-hide="operation === 'view'" style="margin: 10px 4px 10px 12px;">
+            <div ng-hide="operation === 'view'" style="margin: 10px 4px 10px 12px; display: flex;">
                <md-input-container md-no-float id="newPostLinkInput">
                   <input id="newPostLinkInputTxt" ng-model="Post.Link" ng-model-options="{ debounce: 500 }" style="color:white" placeholder="http://" ng-change="findType()" type="text">
                </md-input-container>
