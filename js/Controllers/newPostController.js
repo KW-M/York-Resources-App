@@ -48,7 +48,7 @@
                     $scope.previewLoading = false;
                 } else {
                     $scope.Post.Type = 'Link';
-                    request.open('HEAD', 'https://crossorigin.me/' + $scope.Post.Link, true); // to implement: img checking and icon for non existant thumnail drive docs
+                    request.open('HEAD', 'https://jsonp.afeld.me/?url=' + $scope.Post.Link, true); // to implement: img checking and icon for non existant thumnail drive docs
                     request.onreadystatechange = function() {
                         if (this.readyState == 4 && this.status == 200) {
                             console.log(this)
