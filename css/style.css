@@ -344,15 +344,31 @@ md-input-container.button-select md-select-value {
 
 @keyframes rainbow {
     0% {background-color: #ff0000;}
-    5% {background-color: #ff8000;}
-    10% {background-color: #ffff00;}
-    15% {background-color: #80ff00;}
-    20% {background-color: #00ff00;}
-    25% {background-color: #00ff80;}
+    10% {background-color: #ff8000;}
+    20% {background-color: #ffff00;}
+    30% {background-color: #80ff00;}
+    40% {background-color: #00ff00;}
+    50% {background-color: #00ff80;}
     60% {background-color: #00ffff;}
     70% {background-color: #0080ff;}
     80% {background-color: #0000ff;}
     90% {background-color: #8000ff;}
     100% {background-color: #ff0080;}
 }
+@keyframes rainbow {
+    0% {background-color: #ff0000;}
+    5% {background-color: #ff8000;}
+    10% {background-color: #ffff00;}
+    15% {background-color: #80ff00;}
+    20% {background-color: #00ff00;}
+    25% {background-color: #00ff80;}
+    30% {background-color: #00ffff;}
+    35% {background-color: #0080ff;}
+    40% {background-color: #0000ff;}
+    45% {background-color: #8000ff;}
+    50% {background-color: #ff0080;}
+    60% {background-image: url(http://machinemachine.net/text/wp-content/uploads/2011/05/tumblr_ll41yxdmG31qzpy7ko1_r1_500.gif)};
 
+    70%
+    71%
+}
