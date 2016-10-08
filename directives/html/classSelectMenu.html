@@ -7,7 +7,7 @@
         <md-option value="{'Catagory':'Other', 'Name':'Other', 'Color':'#ffffff'}">
                 Other / Not associated
         </md-option>
-        <md-option value="{'Catagory':'Other', 'Name':'Meme', 'Color':'#ffffff'}">
+        <md-option value="{'Catagory':'Other', 'Name':'Meme', 'Color':'#ffffff'}" style="display:none" ng-show="queryParams.classpath == 'meme' || devMode == true">
                 Other / Not associated
         </md-option>
         <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Catagory}}">
