@@ -1,5 +1,5 @@
     /* we don't define the "new post controller" here because it was alredy
-                                                               defined by the $md-dialog in the newPost function on mainController.   */
+                                                                       defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $timeout, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
         $scope.Post = {
             Title: postObj.Title || '',
@@ -36,12 +36,13 @@
         var request = new XMLHttpRequest();
 
         $scope.findType = function() {
-            $timeout(function(){
             if ($scope.Post.Link === '') {
                 $scope.Post.Type = 'NoLink';
-                $scope.Post.PreviewImage = ''; // will be the down arrow photo
-                $scope.previewLoading = false;
-                document.dispatchEvent(new window.Event('urlPreviewLoaded'));
+                $timeout(function() {
+                    $scope.Post.PreviewImage = ''; // will be the down arrow photo
+                    $scope.previewLoading = false;
+                    document.dispatchEvent(new window.Event('urlPreviewLoaded'));
+                })
             } else if ($scope.Post.Link.match(/(?:http|https):\/\/.{2,}/)) {
                 $scope.previewLoading = true;
                 var driveId = $scope.Post.Link.match(/(?:(?:\/(?:d|file|folder|folders)\/)|(?:id=))([-\w]{25,})/);
@@ -49,10 +50,11 @@
                 if (driveId) {
                     $scope.Post.Type = 'gDrive';
                     $scope.Post.AttachmentId = driveId[1]
-                    $scope.Post.PreviewImage = "https://s-media-cache-ak0.pinimg.com/564x/e3/f2/b8/e3f2b88045b720632bd556ec5afa39bc.jpg"
-                    //$scope.Post.PreviewImage = "https://drive.google.com/thumbnail?authuser=" + 0 + "&sz=w400&id=" + $scope.Post.AttachmentId;
-                    $scope.previewLoading = false;
-                    document.dispatchEvent(new window.Event('urlPreviewLoaded'));
+                    $timeout(function() {
+                        $scope.Post.PreviewImage = "https://s-media-cache-ak0.pinimg.com/564x/e3/f2/b8/e3f2b88045b720632bd556ec5afa39bc.jpg" //$scope.Post.PreviewImage = "https://drive.google.com/thumbnail?authuser=" + 0 + "&sz=w400&id=" + $scope.Post.AttachmentId;
+                        $scope.previewLoading = false;
+                        document.dispatchEvent(new window.Event('urlPreviewLoaded'));
+                    });
                 } else {
                     $scope.Post.Type = 'Link';
                     request.open('HEAD', 'https://jsonp.afeld.me/?url=' + $scope.Post.Link, true); // to implement: img checking and icon for non existant thumnail drive docs
@@ -61,16 +63,20 @@
                             console.log(this)
                             var type = this.getResponseHeader('content-type')
                             if (this.getResponseHeader('content-type').indexOf('image') != -1) {
-                                $scope.Post.PreviewImage = $scope.Post.Link;
-                                $scope.previewLoading = false;
-                                document.dispatchEvent(new window.Event('urlPreviewLoaded'));
-                            } else {
-                                    console.log("Started Loading Image")
-                                GoogleDriveService.getWebsiteScreenshot($scope.Post.Link).then(function(response) {
-                                    console.log("Finished Loading Image")
-                                    $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
+                                $timeout(function() {
+                                    $scope.Post.PreviewImage = $scope.Post.Link;
                                     $scope.previewLoading = false;
                                     document.dispatchEvent(new window.Event('urlPreviewLoaded'));
+                                })
+                            } else {
+                                console.log("Started Loading Image")
+                                GoogleDriveService.getWebsiteScreenshot($scope.Post.Link).then(function(response) {
+                                    console.log("Finished Loading Image")
+                                    $timeout(function() {
+                                        $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
+                                        $scope.previewLoading = false;
+                                        document.dispatchEvent(new window.Event('urlPreviewLoaded'));
+                                    })
                                 })
                             }
                         }
@@ -83,7 +89,6 @@
             } else {
                 $scope.Post.Type = 'Link';
             }
-          })  
         };
         $scope.findType();
 
@@ -96,24 +101,21 @@
                     hideDelay: 1500,
                     parent: document.getElementById('new_post_dialog'),
                 });
-            }
-            else {
+            } else {
                 if ($scope.Post.Title === '' || $scope.Post.Title === undefined) {
                     $mdToast.show({
                         template: '<md-toast><div class="md-toast-content">Posts must have a title.</div></md-toast>',
                         hideDelay: 1500,
                         parent: document.getElementById('new_post_dialog'),
                     });
-                }
-                else {
+                } else {
                     if ($scope.Post.Type === "gDrive") {
                         $mdToast.show({
                             template: '<md-toast style="width: 100%;"><div style="flex-direction: column; height: 100%;" class="md-toast-content"><p style="margin-top:10px">This will allow people at York to view the linked file.</p><span flex layout="row" style="width:100%"><md-button style="width:100%" ng-click="checkHeaderImg()">Got It</md-button></span><div></md-toast>',
                             hideDelay: 3000000,
                             parent: document.getElementById('new_post_dialog'),
                         });
-                    }
-                    else {
+                    } else {
                         $scope.checkHeaderImg();
                     }
                 }
@@ -125,7 +127,7 @@
                 template: '<md-toast><span style="font-size:18px; max-width: 200px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="36"></md-progress-circular></md-toast>',
                 hideDelay: 3000000,
             });
-            if($scope.previewLoading){
+            if ($scope.previewLoading) {
                 document.addEventListener('urlPreviewLoaded', function() {
                     $scope.submit();
                 });
