@@ -336,11 +336,15 @@ md-input-container.button-select md-select-value {
 /*----------------------- animation ----------------------------*/
 
 .rainbow:hover {
-    filter: invert(80%);
+    filter: blur(5px);
     -webkit-animation:rainbow 1s infinite;
     -ms-animation:rainbow 1s infinite;
     -o-animation:rainbow 1s infinite;
     animation:rainbow 1s infinite;
+}
+
+.invert:hover {
+    filter: invert(80%);
 }
 
 .rainbow2:hover {
