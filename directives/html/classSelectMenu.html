@@ -7,6 +7,9 @@
         <md-option value="{'Catagory':'Other', 'Name':'Other', 'Color':'#ffffff'}">
                 Other / Not associated
         </md-option>
+        <md-option value="{'Catagory':'Other', 'Name':'Meme', 'Color':'#ffffff'}">
+                Other / Not associated
+        </md-option>
         <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Catagory}}">
             <md-option ng-repeat="Name in Catagory.Classes" ng-value="{'Catagory':Catagory.Catagory, 'Name':Name, 'Color':Catagory.Color}" >
                 {{Name}}
