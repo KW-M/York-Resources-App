@@ -137,7 +137,7 @@
         };
 
         $scope.submit = function() {
-            $scope.closeDialog();
+
             if (operation === 'new') {
                 var metadata = $scope.convertPostToDriveMetadata($scope.Post);
                 console.log({
