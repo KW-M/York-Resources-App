@@ -354,7 +354,9 @@ md-input-container.button-select md-select-value {
     animation:rainbow2 4s infinite;
 }
 
-.bro
+.ugly-brown:hover {
+    background-color:#4d442e
+}
 
 @keyframes rainbow {
     0% {background-color: #ff0000;}
@@ -371,12 +373,10 @@ md-input-container.button-select md-select-value {
 }
 @keyframes rainbow2 {
     0% {background-color: #ff0000;}
-    5% {background-color: #ff8000;}
-    10% {background-color: #ffff00;}
-    15% {background-color: #80ff00;}
-    20% {background-image: url(http://machinemachine.net/text/wp-content/uploads/2011/05/tumblr_ll41yxdmG31qzpy7ko1_r1_500.gif)}
+    5%{background-image: url(http://lorempixel.com/251/200/animals/Dummy-Text/)}
+    20%{background-image: url(http://machinemachine.net/text/wp-content/uploads/2011/05/tumblr_ll41yxdmG31qzpy7ko1_r1_500.gif)}
     50%{background-image: url(http://lorempixel.com/200/200/animals/Dummy-Text/)}
-    60%{background-image: url(http://lorempixel.com/200/200/animals/Dummy-Text/)}
-    50%{background-image: url(http://lorempixel.com/200/200/animals/Dummy-Text/)}
+    60%{background-image: url(http://lorempixel.com/225/200/animals/)}
+    70%{background-image: url(http://lorempixel.com/250/200/animals/Dummy-Text/)}
     100% {background-image: none; background-color:#4d442e;}
 }
