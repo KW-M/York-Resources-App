@@ -61,7 +61,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
         <!-------------------------------------------------------->
         <!------------------- The top toolbar -------------------->
-        <md-toolbar toolbar-top-content class="md-whiteframe-z2 ng-cloak toolbar-top"></md-toolbar>
+        <md-toolbar toolbar-top-content class="md-whiteframe-z2 ng-cloak toolbar-top" ng-class="{'rainbow' : queryParams.classpath == 'meme' }"></md-toolbar>
         <!-------------------------------------------------------->
         <!-------------------------------------------------------->
         <div class="horizontalContainer" ng-cloak>
@@ -69,8 +69,8 @@
             <md-sidenav side-nav-insides class="side-nav md-sidenav-left md-whiteframe-z2 sidenav-overlay" md-component-id="sidenav_overlay"></md-sidenav>
             <side-nav-insides class="side-nav md-sidenav-left sidenav-inline" ng-class="{'side-nav-open' : globals.sidenavIsOpen === true && $mdMedia('gt-sm'), 'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}"></side-nav-insides>
             <!----- The content, ie posts, resources, etc. ------->
-            <add-lower-button></add-lower-button>
-            <div id="content_container" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'gt-sm': $mdMedia('gt-sm')}" class="">
+            <add-lower-button ng-class="{'rainbow' : queryParams.classpath == 'meme' }"></add-lower-button>
+            <div id="content_container" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'rainbow' : queryParams.classpath == 'meme' , 'gt-sm': $mdMedia('gt-sm')}" class="">
                 <span ng-show="devMode">
                         <md-button ng-click="consoleLog(myInfo, true)">
                             Log My Info
@@ -96,7 +96,7 @@
                         </md-button>
                         all: {{allPosts.length}} Visible: {{visiblePosts.length}}
                 </span>
-                <add-bar-top ng-class="{'rainbow' : queryParams.classpath == 'meme' }"></add-bar-top>
+                <add-bar-top></add-bar-top>
                 <div>
                     <div angular-grid="visiblePosts" ag-gutter-size="8" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="getFiles()">
                         <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}" class="post-card raise-on-hover">
