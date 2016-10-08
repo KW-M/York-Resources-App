@@ -342,6 +342,13 @@ md-input-container.button-select md-select-value {
     animation:rainbow 1s infinite;
 }
 
+.rainbow2:hover {
+    -webkit-animation:rainbow2 2s infinite;
+    -ms-animation:rainbow2 2s infinite;
+    -o-animation:rainbow2 2s infinite;
+    animation:rainbow2 2s infinite;
+}
+
 @keyframes rainbow {
     0% {background-color: #ff0000;}
     10% {background-color: #ff8000;}
@@ -355,7 +362,7 @@ md-input-container.button-select md-select-value {
     90% {background-color: #8000ff;}
     100% {background-color: #ff0080;}
 }
-@keyframes rainbow {
+@keyframes rainbow2 {
     0% {background-color: #ff0000;}
     5% {background-color: #ff8000;}
     10% {background-color: #ffff00;}
@@ -367,9 +374,8 @@ md-input-container.button-select md-select-value {
     40% {background-color: #0000ff;}
     45% {background-color: #8000ff;}
     50% {background-color: #ff0080;}
-    60% {background-image: url(http://machinemachine.net/text/wp-content/uploads/2011/05/tumblr_ll41yxdmG31qzpy7ko1_r1_500.gif)};
-
-    70%{background-image: url(http://machinemachine.net/text/wp-content/uploads/2011/05/tumblr_ll41yxdmG31qzpy7ko1_r1_500.gif)};
-    71% {background-image: #4d442e;}
+    60% {background-image: url(http://machinemachine.net/text/wp-content/uploads/2011/05/tumblr_ll41yxdmG31qzpy7ko1_r1_500.gif)}
+    70%{background-image: url(https://memecrunch.com/image/51375ef5afa96f69e9000038.jpg?w=400)}
+    73% {background-image: none; background-color:#4d442e;}
+    100% {background-image: none; background-color:#4d442e;}
 }
-https://memecrunch.com/image/51375ef5afa96f69e9000038.jpg?w=400
