@@ -367,15 +367,9 @@ md-input-container.button-select md-select-value {
     5% {background-color: #ff8000;}
     10% {background-color: #ffff00;}
     15% {background-color: #80ff00;}
-    20% {background-color: #00ff00;}
-    25% {background-color: #00ff80;}
-    30% {background-color: #00ffff;}
-    35% {background-color: #0080ff;}
-    40% {background-color: #0000ff;}
-    45% {background-color: #8000ff;}
-    50% {background-color: #ff0080;}
-    60% {background-image: url(http://machinemachine.net/text/wp-content/uploads/2011/05/tumblr_ll41yxdmG31qzpy7ko1_r1_500.gif)}
-    70%{background-image: url(https://memecrunch.com/image/51375ef5afa96f69e9000038.jpg?w=400)}
-    73% {background-image: none; background-color:#4d442e;}
+    20% {background-image: url(http://machinemachine.net/text/wp-content/uploads/2011/05/tumblr_ll41yxdmG31qzpy7ko1_r1_500.gif)}
+    50%{background-image: url(http://lorempixel.com/400/200/animals/Dummy-Text/)}
+    51% {background-image: none; background-color:#4d442e;}
+    51% {background-image: none; background-color:#4d442e;}
     100% {background-image: none; background-color:#4d442e;}
 }
