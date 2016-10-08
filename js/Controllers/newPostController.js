@@ -49,7 +49,8 @@
                 if (driveId) {
                     $scope.Post.Type = 'gDrive';
                     $scope.Post.AttachmentId = driveId[1]
-                    $scope.Post.PreviewImage = "https://drive.google.com/thumbnail?authuser=" + 0 + "&sz=w400&id=" + $scope.Post.AttachmentId;
+                    $scope.Post.PreviewImage = "https://s-media-cache-ak0.pinimg.com/564x/e3/f2/b8/e3f2b88045b720632bd556ec5afa39bc.jpg
+                    //$scope.Post.PreviewImage = "https://drive.google.com/thumbnail?authuser=" + 0 + "&sz=w400&id=" + $scope.Post.AttachmentId;
                     $scope.previewLoading = false;
                     document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                 } else {
