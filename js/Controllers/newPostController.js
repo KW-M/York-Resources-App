@@ -65,7 +65,9 @@
                                 $scope.previewLoading = false;
                                 document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                             } else {
+                                    console.log("Started Loading Image")
                                 GoogleDriveService.getWebsiteScreenshot($scope.Post.Link).then(function(response) {
+                                    console.log("Finished Loading Image")
                                     $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
                                     $scope.previewLoading = false;
                                     document.dispatchEvent(new window.Event('urlPreviewLoaded'));
