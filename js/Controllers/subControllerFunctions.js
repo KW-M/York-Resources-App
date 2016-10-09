@@ -196,13 +196,13 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
          // });
          return Flagged && Class && Type && Creator && Bookmarked;
       });
-      return (output)
+      return ($scope.sortByDateAndLikes(output))
    }
 	$scope.sortByDateAndLikes = function(arrayToSort) {
-		arrayToSort.sort(function(a, b) {
+		return(arrayToSort.sort(function(a, b) {
 			console.log(b.UpdateDate.addDays(b.Likes.length))
 			return b.UpdateDate.addDays(b.Likes.length) - a.UpdateDate.addDays(a.Likes.length);
-		});
+		}));
 	};
 	//----------------------------------------------------
 	//--------------- Grid & Layout ------------------
@@ -239,6 +239,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		});
 	};
 	$scope.flagPost = function(ev, content, arrayIndex) {
+		content.Flagged = true;
 		if ($scope.queryParams.classpath != 'flagged') {
 			$timeout(function() { //makes angular update values
 				$scope.visiblePosts.splice(arrayIndex, 1);
@@ -253,11 +254,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	$scope.unFlagPost = function(content, arrayIndex) {
 		if ($scope.myInfo.moderator === false) {
 			content.Flagged = false;
-			if ($scope.queryParams.classpath != 'flagged') {
-			$timeout(function() { //makes angular update values
-				$scope.visiblePosts.splice(arrayIndex, 1);
-			});
-		}
+			if ($scope.queryParams.classpath == 'flagged') {
+				$timeout(function() { //makes angular update values
+					$scope.visiblePosts.splice(arrayIndex, 1);
+				});
+			}
 			$scope.allPosts[findPostById(content.Id, $scope.allPosts)].Flagged = false;
 			$scope.updateVisiblePosts($scope.filterPosts($scope.allPosts));
 			queue(GoogleDriveService.updateFlagged(content.Id, false), function() {

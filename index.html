@@ -138,11 +138,11 @@
                                     </md-button>
                                     <md-menu-content>
                                         <md-menu-item ng-hide="::Post.Flagged === true">
-                                            <md-button ng-click="::flagPost($event,Post,$index)">
+                                            <md-button ng-click="::flagPost(Post,$index)">
                                                 <md-icon>flag</md-icon>Flag</md-button>
                                         </md-menu-item>
                                         <md-menu-item>
-                                            <md-button ng-click="::confirmDelete($event,Post,$index)">
+                                            <md-button ng-click="::confirmDelete(Post,$index)">
                                                 <md-icon>delete</md-icon>Delete</md-button>
                                         </md-menu-item>
                                         <md-menu-item>
