@@ -6,6 +6,7 @@
             <div id="header_title" style="opacity: 0">
                <h5 style="margin: 0">{{Post.Title}}</h5>
                <span style="font-weight:700; font-size:14px"><md-icon class="small-icon" style="color:white">people</md-icon> {{Post.Class.Name || 'No class'}}</span>
+               <span ng-hide="Post.Tags.length < 1"><md-icon class="small-icon" style="color:white">style</md-icon>{{Post.Tags.join(', ')}}</span>
             </div>
             <div ng-hide="operation === 'view'" id="header_link">
                <md-input-container md-no-float id="newPostLinkInput">
@@ -27,8 +28,8 @@
                   </md-menu-content>
                </md-menu>
             </div>
-            <div ng-show="operation === 'view'" style="width:100%">
-               <p class="post-card-link-text" ng-hide="::Post.Link == ''" style="position:absolute">
+            <div ng-show="operation === 'view'" id="header_metadata">
+               <p class="post-card-link-text" ng-hide="::Post.Link == ''">
                   <md-icon style="color:White; font-size: 16px;" class="small-icon">language</md-icon>
                   <span> {{::Post.Link}}</span>
                </p>
@@ -45,9 +46,12 @@
       <div id="new_post_content" style="margin-top:200px">
          <div flex layout="row">
             <md-select ng-model-options="{trackBy: '$value.Name'}" class="md-no-underline md-button" ng-model="Post.Class" placeholder="Class" ng-hide="operation === 'view'" md-on-close="clearText(classSelectSearch)" style="margin: 4px 4px;font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;">
-               <md-select-header class="classSelectSearchbox">
-                  <input ng-model="classSelectSearch" id="class_select_input" type="Search" placeholder="Search for a class.." class="md-text">
-               </md-select-header>
+               <!--<md-select-header class="classSelectSearchbox">-->
+               <!--   <input ng-model="classSelectSearch" id="class_select_input" type="Search" placeholder="Search for a class.." class="md-text">-->
+               <!--</md-select-header>-->
+               <md-option value="{'Catagory':'Other', 'Name':'Meme', 'Color':'#ffffff'}" class="rainbow" ng-show="queryParams.classpath == 'meme' || devMode == true">
+                  Meme
+               </md-option>
                <md-option value="{'Catagory':'Other', 'Name':'Other', 'Color':'#ffffff'}">
                   Other / Not associated
                </md-option>

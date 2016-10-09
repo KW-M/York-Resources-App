@@ -52,7 +52,7 @@
                     </div>
                     <md-progress-circular id="signin_spinner" class="md-accent" md-mode="indeterminate" md-diameter="36"></md-progress-circular>
                 </div>
-                <md-button style="display:none" id="dat_button" ng-click="::gotoRoute('/meme')">meme</md-button>
+                <md-button style="display:none" id="dat_button" ng-click="::gotoRoute({classPath:'/meme'})">meme</md-button>
             </div>
         </div>
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
@@ -61,16 +61,16 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
         <!-------------------------------------------------------->
         <!------------------- The top toolbar -------------------->
-        <md-toolbar toolbar-top-content class="md-whiteframe-z2 ng-cloak toolbar-top"></md-toolbar>
+        <md-toolbar toolbar-top-content class="md-whiteframe-z2 ng-cloak toolbar-top" ng-class="{'rainbow' : queryParams.classpath == 'meme' }"></md-toolbar>
         <!-------------------------------------------------------->
         <!-------------------------------------------------------->
         <div class="horizontalContainer" ng-cloak>
             <!---------------------------------------------------->
             <md-sidenav side-nav-insides class="side-nav md-sidenav-left md-whiteframe-z2 sidenav-overlay" md-component-id="sidenav_overlay"></md-sidenav>
-            <side-nav-insides class="side-nav md-sidenav-left sidenav-inline" ng-class="{'side-nav-open' : globals.sidenavIsOpen === true && $mdMedia('gt-sm'), 'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}"></side-nav-insides>
+            <side-nav-insides class="side-nav md-sidenav-left sidenav-inline" ng-class="{'side-nav-open' : globals.sidenavIsOpen === true && $mdMedia('gt-sm'),'rainbow2' : queryParams.classpath == 'meme', 'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}"></side-nav-insides>
             <!----- The content, ie posts, resources, etc. ------->
             <add-lower-button></add-lower-button>
-            <div id="content_container" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'gt-sm': $mdMedia('gt-sm')}" class="">
+            <div id="content_container" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'ugly-brown' : queryParams.classpath == 'meme' , 'gt-sm': $mdMedia('gt-sm')}" class="">
                 <span ng-show="devMode">
                         <md-button ng-click="consoleLog(myInfo, true)">
                             Log My Info
@@ -78,7 +78,6 @@
                         <md-button ng-click="consoleLog({'string': queryPropertyString, 'properties':queryProperties}, true)">
                             Log Search Query string
                         </md-button>
-
                         <md-button ng-click="logDuplicationIndexes()">
                             Log page & deduplication Indexes
                         </md-button>
@@ -111,7 +110,7 @@
                                         <md-icon style="color:White; font-size: 16px;" class="small-icon">language</md-icon><span> {{::Post.Link}}</span>
                                     </div>
                                     <div class="post-card-metadata-text">
-                                        <p style="margin: 4px 0 0 0;">
+                                        <p style="margin: 0;">
                                             <md-icon class="small-icon" style="color:white">event</md-icon><span style="margin-right:10px; font-weight:700; font-size:14px"> {{::Post.CreationDate | date : "m/dd/yyyy"}}</span>
                                             <md-icon class="small-icon" style="color:white">people</md-icon><span style="font-weight:700; font-size:14px"> {{::Post.Class.Name}}</span>
                                         </p>
