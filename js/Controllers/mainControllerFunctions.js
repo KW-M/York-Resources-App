@@ -473,14 +473,10 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             console.log(array)
             if (array) {
                $scope.visiblePosts = array;
-            } else if (array == []) {
-               
-               $scope.visiblePosts = [];
             }
             if (callback) {
                callback();
             }
-            console.log($scope.visiblePosts)
             angularGridInstance.postsGrid.refresh();
          })
       }
