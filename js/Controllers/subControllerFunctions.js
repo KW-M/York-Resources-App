@@ -250,13 +250,16 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		});
 		//set the user's has flagged date back
 	};
-	$scope.unFlagPost = function(ev, content, arrayIndex) {
+	$scope.unFlagPost = function(content, arrayIndex) {
 		if ($scope.myInfo.moderator === false) {
 			content.Flagged = false;
+			if ($scope.queryParams.classpath != 'flagged') {
 			$timeout(function() { //makes angular update values
-				$scope.visiblePosts = $scope
+				$scope.visiblePosts.splice(arrayIndex, 1);
 			});
-
+		}
+			$scope.allPosts[findPostById(content.Id, $scope.allPosts)].Flagged = false;
+			$scope.updateVisiblePosts($scope.filterPosts($scope.allPosts));
 			queue(GoogleDriveService.updateFlagged(content.Id, false), function() {
 				console.log("unflagged: " + content.Id);
 			});
