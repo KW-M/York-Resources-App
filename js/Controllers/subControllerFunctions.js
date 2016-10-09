@@ -228,10 +228,10 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	};
 	//----------------------------------------------------
 	// --------------- Post Card Functions ---------------
-	$scope.confirmDelete = function(ev, content, arrayIndex) {
+	$scope.confirmDelete = function(content, arrayIndex) {
 		var confirm = $mdDialog.confirm().title('Permanently delete this?').ariaLabel('Delete?').targetEvent(ev).ok('Delete').cancel('Cancel');
 		$mdDialog.show(confirm).then(function() {
-			
+			$scope.allPosts.splice(findPostById(content.Id, $scope.allPosts), 1);
 			$timeout($scope.visiblePosts.splice(arrayIndex, 1));
 			queue(GoogleDriveService.deleteDriveFile(content.Id), function() {
 				console.log("deleted");
@@ -239,12 +239,12 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		});
 	};
 	$scope.flagPost = function(ev, content, arrayIndex) {
-		// $timeout(function() { //makes angular update values
-		// 	$scope.visiblePosts.splice(arrayIndex, 1);
-		// });
-		$scope
-		$scope.sortByDateAndLikes
-		var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
+		if ($scope.queryParams.classpath != 'flagged') {
+			$timeout(function() { //makes angular update values
+				$scope.visiblePosts.splice(arrayIndex, 1);
+			});
+		}
+		$scope.allPosts[findPostById(content.Id, $scope.allPosts)].Flagged = true;
 		queue(GoogleDriveService.updateFlagged(content.Id, true), function() {
 			console.log("flagged: " + content.Id);
 		});
@@ -254,8 +254,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		if ($scope.myInfo.moderator === false) {
 			content.Flagged = false;
 			$timeout(function() { //makes angular update values
-				$scope.flaggedPosts.splice(arrayIndex, 1);
-				$scope.visiblePosts.push(content);
+				$scope.visiblePosts = $scope
 			});
 
 			queue(GoogleDriveService.updateFlagged(content.Id, false), function() {
