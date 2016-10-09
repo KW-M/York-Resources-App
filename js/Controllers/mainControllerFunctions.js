@@ -330,9 +330,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    $scope.getFiles = function() {
       console.log("concurancy: " + conurancy_counter);
       conurancy_counter++;
-      no_more_footer.style.display = 'none';
-      no_posts_footer.style.display = 'none';
-      footer_problem.style.display = 'none';
       var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
       var queryString = $scope.queryPropertyString;
@@ -343,6 +340,9 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       })
       if (nextPageToken !== "end") {
          loading_spinner.style.display = 'block';
+         no_more_footer.style.display = 'none';
+         no_posts_footer.style.display = 'none';
+         footer_problem.style.display = 'none';
          queue(GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function(fileList) {
             for (var fileCount = 0; fileCount < fileList.result.files.length; fileCount++) {
                if (!$scope.queryParams.q && deDuplicationIndex[fileList.result.files[fileCount].id] === undefined) {
