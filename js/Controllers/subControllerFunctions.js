@@ -169,7 +169,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
          if ($scope.queryParams.classpath !== null && $scope.queryParams.classpath !== undefined && $scope.queryParams.classpath !== 'my-posts' && $scope.queryParams.classpath !== 'my-bookmarks' && $scope.queryParams.classpath !== 'all-posts' && $scope.queryParams.classpath !== 'flagged') {
             var Class = post.Class.Name === $scope.queryParams.classpath;
          } else {
-            var Class = true;
+         	var Class = post.Class.Name != 'memes';	
          }
          if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) {
             var Type = post.Type === $scope.queryParams.type;
