@@ -319,9 +319,9 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       console.log(data);
       if (data.action == google.picker.Action.PICKED) {
          var AttachmentId = data.docs[0].id;
-
+         console.log(data.docs[0]);
          alert('File: ' + data.docs[0].name + " id:" + AttachmentId + " URL:" + data.docs[0].url);
-         $scope.newPost(data.docs[0].id, data.docs[0].url);
+         $scope.newPost({AttachmentId: alldata.docs[0].id, Link:data.docs[0].url}, 'new');
       }
    }
 
