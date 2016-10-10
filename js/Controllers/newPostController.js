@@ -33,7 +33,7 @@
         $scope.previewThumbnail = "";
         $scope.previewLoading = false;
         $scope.classSearch = "";
-        var request = new XMLHttpRequest();
+        var request = new XMLHttp   Request();
 
         $scope.findType = function() {
             if ($scope.Post.Link === '') {
