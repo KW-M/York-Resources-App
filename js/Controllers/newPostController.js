@@ -1,39 +1,41 @@
     /* we don't define the "new post controller" here because it was alredy
-                                                                       defined by the $md-dialog in the newPost function on mainController.   */
+                                                                           defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $timeout, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
-        $scope.Post = {
-            Title: postObj.Title || '',
-            Description: postObj.Description || '',
-            Link: postObj.Link || '',
-            Tags: postObj.Tags || [],
-            Type: postObj.Type || 'noLink',
-            Flagged: postObj.Flagged || false,
-            CreationDate: postObj.CreationDate || new Date(),
-            UpdateDate: postObj.UpdateDate || new Date(),
-            Class: postObj.Class || {
-                Name: '',
-                Catagory: '',
-                Color: '#ffffff',
-            },
-            Creator: postObj.Creator || {
-                ClassOf: '',
-                Email: '',
-                Me: null,
-                Name: '',
-            },
-            Id: postObj.Id || '',
-            AttachmentId: postObj.AttachmentId || '',
-            Likes: postObj.Likes || [],
-            PreviewImage: postObj.PreviewImage || '',
-            Bookmarked: postObj.Bookmarked || false,
-        }
+        $timeout(function() {
+            $scope.Post = {
+                Title: postObj.Title || '',
+                Description: postObj.Description || '',
+                Link: postObj.Link || '',
+                Tags: postObj.Tags || [],
+                Type: postObj.Type || 'noLink',
+                Flagged: postObj.Flagged || false,
+                CreationDate: postObj.CreationDate || new Date(),
+                UpdateDate: postObj.UpdateDate || new Date(),
+                Class: postObj.Class || {
+                    Name: '',
+                    Catagory: '',
+                    Color: '#ffffff',
+                },
+                Creator: postObj.Creator || {
+                    ClassOf: '',
+                    Email: '',
+                    Me: null,
+                    Name: '',
+                },
+                Id: postObj.Id || '',
+                AttachmentId: postObj.AttachmentId || '',
+                Likes: postObj.Likes || [],
+                PreviewImage: postObj.PreviewImage || '',
+                Bookmarked: postObj.Bookmarked || false,
+            }
+        })
 
         //temproary variables
         $scope.operation = operation;
         $scope.previewThumbnail = "";
         $scope.previewLoading = false;
         $scope.classSearch = "";
-        var request = new XMLHttp   Request();
+        var request = new XMLHttpRequest();
 
         $scope.findType = function() {
             if ($scope.Post.Link === '') {
