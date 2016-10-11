@@ -320,15 +320,14 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    self.pickerCallback = function(data) {
       //drivePicker.dispose();
       console.log(data);
-      if (data.action == google.picker.Action.PICKED) {\
-         
+      if (data.action == google.picker.Action.PICKED) {
          if($scope.restorePost == true) {
-            var postObj 
-            Post obj{AttachmentId: alldata.docs[0].id, Link:data.docs[0].url}, 'new');
+            var postObj = $scope.post;
+            postObj.AttachmentId = data.docs[0].id;
          } else {
             
          }
-         $scope.newPost(postObj)
+         $scope.newPost(postObj, 'new')
          var AttachmentId = data.docs[0].id;
          console.log(data.docs[0]);
          alert('File: ' + data.docs[0].name + " id:" + AttachmentId + " URL:" + data.docs[0].url);
