@@ -23,6 +23,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    $scope.searchPlaceholder = 'Search';
 
    $scope.userList = [];
+   $scope.restorePost = false;
    $scope.globals = {
       sidenavIsOpen: true,
       FABisOpen: false,
@@ -307,7 +308,8 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       });
    };
 
-   $scope.showPicker = function(type) {
+   $scope.showPicker = function(type, restorePost) {
+      $scope.restorePost = restorePost || false;
       if (type == "Drive") {
          drivePicker.setVisible(true);
       } else if (type == "Upload") {
@@ -318,7 +320,15 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    self.pickerCallback = function(data) {
       //drivePicker.dispose();
       console.log(data);
-      if (data.action == google.picker.Action.PICKED) {
+      if (data.action == google.picker.Action.PICKED) {\
+         
+         if($scope.restorePost == true) {
+            var postObj 
+            Post obj{AttachmentId: alldata.docs[0].id, Link:data.docs[0].url}, 'new');
+         } else {
+            
+         }
+         $scope.newPost(postObj)
          var AttachmentId = data.docs[0].id;
          console.log(data.docs[0]);
          alert('File: ' + data.docs[0].name + " id:" + AttachmentId + " URL:" + data.docs[0].url);
