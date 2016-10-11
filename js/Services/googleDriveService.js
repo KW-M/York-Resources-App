@@ -13,11 +13,14 @@ app.service('GoogleDriveService', ['$q', function($q) {
         gapi.client.load('sheets', 'v4', function() {
             APILoadedCallback("sheets");
         });
-        gapi.load('picker', {
-            'callback': function(){
-              APILoadedCallback("picker")  
-            }
+        gapi.client.load('picker', 'v1', function() {
+            APILoadedCallback("picker");
         });
+        // gapi.load('picker', {
+        //     'callback': function(){
+        //       APILoadedCallback("picker")  
+        //     }
+        // });
     };
 
     this.getUserInfo = function() {
