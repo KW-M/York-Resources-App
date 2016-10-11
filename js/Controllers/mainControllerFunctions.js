@@ -303,6 +303,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          // }//('#new_post_button'),
       }).then(function() {
          //angular.element(event.path[2]).removeClass('fade-out');
+         console.log($scope.Post)
       });
    };
 

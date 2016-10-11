@@ -1,5 +1,5 @@
     /* we don't define the "new post controller" here because it was alredy
-                                                                           defined by the $md-dialog in the newPost function on mainController.   */
+                                                                               defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $timeout, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
         $timeout(function() {
             $scope.Post = {
@@ -118,28 +118,23 @@
                             parent: document.getElementById('new_post_dialog'),
                         });
                     } else {
-                        $scope.checkHeaderImg();
+                        $mdToast.show({
+                            template: '<md-toast><span style="font-size:18px; max-width: 200px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="36"></md-progress-circular></md-toast>',
+                            hideDelay: 3000000,
+                        });
+                        if ($scope.previewLoading) {
+                            document.addEventListener('urlPreviewLoaded', function() {
+                                $scope.submit();
+                            });
+                        } else {
+                            $scope.submit();
+                        }
                     }
                 }
             }
         }
 
-        $scope.checkHeaderImg = function() {
-            $mdToast.show({
-                template: '<md-toast><span style="font-size:18px; max-width: 200px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="36"></md-progress-circular></md-toast>',
-                hideDelay: 3000000,
-            });
-            if ($scope.previewLoading) {
-                document.addEventListener('urlPreviewLoaded', function() {
-                    $scope.submit();
-                });
-            } else {
-                $scope.submit();
-            }
-        };
-
         $scope.submit = function() {
-
             if (operation === 'new') {
                 var metadata = $scope.convertPostToDriveMetadata($scope.Post);
                 console.log({
