@@ -325,13 +325,16 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             var postObj = $scope.post;
             postObj.AttachmentId = data.docs[0].id;
          } else {
-            
+            var postObj = {
+               AttachmentId: data.docs[0].id, 
+               Link:data.docs[0].url
+            }
          }
          $scope.newPost(postObj, 'new')
-         var AttachmentId = data.docs[0].id;
-         console.log(data.docs[0]);
-         alert('File: ' + data.docs[0].name + " id:" + AttachmentId + " URL:" + data.docs[0].url);
-         $scope.newPost({AttachmentId: alldata.docs[0].id, Link:data.docs[0].url}, 'new');
+         // var AttachmentId = data.docs[0].id;
+         // console.log(data.docs[0]);
+         // alert('File: ' + data.docs[0].name + " id:" + AttachmentId + " URL:" + data.docs[0].url);
+         // $scope.newPost({AttachmentId: alldata.docs[0].id, Link:data.docs[0].url}, 'new');
       }
    }
 
