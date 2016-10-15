@@ -28,6 +28,7 @@
                 PreviewImage: postObj.PreviewImage || '',
                 Bookmarked: postObj.Bookmarked || false,
             }
+            $scope.findType();
         })
 
         //temproary variables
@@ -92,7 +93,6 @@
                 $scope.Post.Type = 'Link';
             }
         };
-        $scope.findType();
 
         $scope.isReadyToSubmit = function() {
             console.log($scope.PostClass);
