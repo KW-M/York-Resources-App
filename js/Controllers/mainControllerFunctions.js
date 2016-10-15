@@ -327,7 +327,9 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             AttachmentId: null,
             Link: null,
          };
+         console.log($scope.restorePost);
          if($scope.restorePost == true) {
+            console.log($scope.post);
             var postObj = $scope.post;
          }
          postObj.AttachmentId = data.docs[0].id;
