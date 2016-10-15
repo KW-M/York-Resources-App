@@ -18,12 +18,12 @@
                   </md-button>
                   <md-menu-content>
                      <md-menu-item>
-                        <md-button><span flex>Upload file</span>
+                        <md-button ng-click="::showPicker('Upload', true, 'update')"><span flex>Upload file</span>
                            <md-icon style="margin: auto 0 auto 16px">file_upload</md-icon>
                         </md-button>
                      </md-menu-item>
                      <md-menu-item>
-                        <md-button><span flex>Attatch drive file</span><img md-menu-align-target class="unselectable" style="width:22px; height:22px; float:right; margin: auto 0 auto 16px; opacity: 0.54;" src="images/drive_icon.svg"></md-button>
+                        <md-button ng-click="::showPicker('Drive', true, 'update')"><span flex>Attatch drive file</span><img md-menu-align-target class="unselectable" style="width:22px; height:22px; float:right; margin: auto 0 auto 16px; opacity: 0.54;" src="images/drive_icon.svg"></md-button>
                      </md-menu-item>
                   </md-menu-content>
                </md-menu>
