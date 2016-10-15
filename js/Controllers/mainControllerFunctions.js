@@ -24,6 +24,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
 
    $scope.userList = [];
    $scope.restorePost = false;
+   $scope.pickerPostingType = 'new'
    $scope.globals = {
       sidenavIsOpen: true,
       FABisOpen: false,
@@ -308,8 +309,9 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       });
    };
 
-   $scope.showPicker = function(type, restorePost) {
+   $scope.showPicker = function(type, restorePost, postingType) {
       $scope.restorePost = restorePost || false;
+      $scope.pickerPostingType = postingType || 'new';
       if (type == "Drive") {
          drivePicker.setVisible(true);
       } else if (type == "Upload") {
@@ -330,11 +332,10 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          }
          postObj.AttachmentId = data.docs[0].id;
          postObj.Link = data.docs[0].url;
-         $scope.newPost(postObj, 'new')
+         $scope.newPost(postObj, $scope.pickerPostingType)
          // var AttachmentId = data.docs[0].id;
          // console.log(data.docs[0]);
          // alert('File: ' + data.docs[0].name + " id:" + AttachmentId + " URL:" + data.docs[0].url);
-         // $scope.newPost({AttachmentId: alldata.docs[0].id, Link:data.docs[0].url}, 'new');
       }
    }
 
