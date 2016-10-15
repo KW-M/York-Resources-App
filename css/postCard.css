@@ -70,7 +70,6 @@
     color: white;
     text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.45);
     white-space: nowrap;
-    overflow: hidden;
     text-align: center;
     text-overflow: ellipsis;
     font-weight: normal;
