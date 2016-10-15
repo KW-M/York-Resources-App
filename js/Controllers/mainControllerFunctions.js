@@ -321,6 +321,10 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       //drivePicker.dispose();
       console.log(data);
       if (data.action == google.picker.Action.PICKED) {
+         var postObj = {
+            AttachmentId:null,
+            Link:null,
+         };
          if($scope.restorePost == true) {
             var postObj = $scope.post;
             postObj.AttachmentId = data.docs[0].id;
