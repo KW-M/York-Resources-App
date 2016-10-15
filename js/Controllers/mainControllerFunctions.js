@@ -159,19 +159,19 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
          var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
          drivePicker = new google.picker.PickerBuilder().
-            addView(docsView).
-            addView(sharedView).
-            addView(uploadView).
-            setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
-            setOAuthToken(authorizationService.getAuthToken()).
-            setCallback(self.pickerCallback).
-            build();
+         addView(docsView).
+         addView(sharedView).
+         addView(uploadView).
+         setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
+         setOAuthToken(authorizationService.getAuthToken()).
+         setCallback(self.pickerCallback).
+         build();
          uploadPicker = new google.picker.PickerBuilder().
-            addView(uploadView).
-            setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
-            setOAuthToken(authorizationService.getAuthToken()).
-            setCallback(self.pickerCallback).
-            build();
+         addView(uploadView).
+         setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
+         setOAuthToken(authorizationService.getAuthToken()).
+         setCallback(self.pickerCallback).
+         build();
          if ($scope.myInfo !== undefined) {
             authorizationService.hideSigninDialog();
          } else {
@@ -257,7 +257,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    $scope.newPost = function(postObj, operation, event) {
       $mdDialog.show({
          templateUrl: '/directives/html/newPostContent.html',
-         controller: ['$scope', '$timeout','$mdDialog', 'GoogleDriveService', '$mdToast', "postObj", "operation", newPostController],
+         controller: ['$scope', '$timeout', '$mdDialog', 'GoogleDriveService', '$mdToast', "postObj", "operation", newPostController],
          scope: $scope,
          parent: angular.element(document.body),
          preserveScope: true,
@@ -274,7 +274,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             var newPostHeader = document.getElementById('dialog_header');
             newPostScroll.onscroll = function(event) {
                var scroll = newPostScroll.scrollTop;
-               if(scroll <= 160) {
+               if (scroll <= 160) {
                   newPostHeader.style.height = (200 - scroll) + "px"
                   newPostHeader.style.boxShadow = null
                   newPostHeaderLink.style.opacity = 1;
@@ -322,13 +322,12 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       console.log(data);
       console.log($scope.Post);
       if (data.action == google.picker.Action.PICKED) {
-         if($scope.restorePost == true) {
-            $timeout(function () {
-               // body...
-            }{})
-            $scope.Post.AttachmentId = data.docs[0].id;
-            $scope.Post.Link = data.docs[0].url;
-            $scope.Post.Title = $scope.post.Title || data.docs[0].name;
+         if ($scope.restorePost == true) {
+            $timeout(function() {
+               $scope.Post.AttachmentId = data.docs[0].id;
+               $scope.Post.Link = data.docs[0].url;
+               $scope.Post.Title = $scope.post.Title || data.docs[0].name;
+            })
          } else {
             $scope.newPost({
                AttachmentId: data.docs[0].id,
