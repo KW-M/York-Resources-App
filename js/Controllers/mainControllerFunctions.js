@@ -24,7 +24,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
 
    $scope.userList = [];
    $scope.restorePost = false;
-   $scope.pickerPostingType = 'new'
    $scope.globals = {
       sidenavIsOpen: true,
       FABisOpen: false,
@@ -309,9 +308,8 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
       });
    };
 
-   $scope.showPicker = function(type, restorePost, postingType) {
+   $scope.showPicker = function(type, restorePost) {
       $scope.restorePost = restorePost || false;
-      $scope.pickerPostingType = postingType || 'new';
       if (type == "Drive") {
          drivePicker.setVisible(true);
       } else if (type == "Upload") {
@@ -322,19 +320,18 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    self.pickerCallback = function(data) {
       //drivePicker.dispose();
       console.log(data);
+      console.log($scope.post);
       if (data.action == google.picker.Action.PICKED) {
-         var postObj = {
-            AttachmentId: null,
-            Link: null,
-         };
-         console.log($scope.restorePost);
          if($scope.restorePost == true) {
-            console.log($scope.post);
-            var postObj = $scope.post;
+            $scope.post.AttachmentId = data.docs[0].id;
+            $scope.post.Link = data.docs[0].url;
+            $scope.post.Title = $scope.post.Title || data.docs[0].name;
+         } else {
+            $scope.newPost({
+               AttachmentId: data.docs[0].id,
+               Link: data.docs[0].url,
+            }, 'new');
          }
-         postObj.AttachmentId = data.docs[0].id;
-         postObj.Link = data.docs[0].url;
-         $scope.newPost(postObj, $scope.pickerPostingType)
          // var AttachmentId = data.docs[0].id;
          // console.log(data.docs[0]);
          // alert('File: ' + data.docs[0].name + " id:" + AttachmentId + " URL:" + data.docs[0].url);
