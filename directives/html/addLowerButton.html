@@ -1,51 +1,50 @@
-<md-fab-speed-dial id="speed_dial_container" md-direction="up" md-open="globals.FABisOpen"  ng-class="{ 'slide-out' : globals.FABisHidden }" class="md-fling md-hover-full md-fab-bottom-right" ng-mouseenter="globals.FABisOpen=true"
-        ng-mouseleave="globals.FABisOpen = false">
-            <md-fab-trigger>
-                <md-button id="new_post_button" class="md-fab md-accent raise-on-hover" ng-click="::newPost({},'new')">
-                    <md-tooltip md-direction="left" md-autohide>Add Resource</md-tooltip>
-                    <md-icon class="unselectable">add</md-icon>
-                </md-button>
-            </md-fab-trigger>
-            <md-fab-actions>
-                <md-button class="md-fab md-raised md-mini" ng-click="::showPicker('Drive')">
-                    <md-tooltip md-direction="left" md-autohide>Add Drive file</md-tooltip>
-                    <img class="unselectable" style="width:22px; height:22px; margin-top:8px" src="images/drive_icon.svg">
-                </md-button>
-                                    <label class="custom-file-upload" style=>
-                    <input type="file" accept="image/*" capture="camera" style="display:none">
-                <md-button class="md-fab md-raised md-mini">
+<md-fab-speed-dial id="speed_dial_container" md-direction="up" md-open="globals.FABisOpen" ng-class="{ 'slide-out' : globals.FABisHidden }" class="md-fling md-hover-full md-fab-bottom-right" ng-mouseenter="globals.FABisOpen=true" ng-mouseleave="globals.FABisOpen = false">
+    <md-fab-trigger>
+        <md-button id="new_post_button" class="md-fab md-accent raise-on-hover" ng-click="::newPost({},'new')">
+            <md-tooltip md-direction="left" md-autohide>Add Resource</md-tooltip>
+            <md-icon class="unselectable">add</md-icon>
+        </md-button>
+    </md-fab-trigger>
+    <md-fab-actions>
+        <md-button class="md-fab md-raised md-mini" ng-click="::showPicker('Drive')">
+            <md-tooltip md-direction="left" md-autohide>Add Drive file</md-tooltip>
+            <img class="unselectable" style="width:22px; height:22px; margin-top:8px" src="images/drive_icon.svg">
+        </md-button>
+        <md-button class="md-fab md-raised md-mini">
+            <label class="custom-file-upload" style=>
+                    <input type="file" accept="image/*" capture="camera" style="display:none"/>
                     <md-tooltip md-direction="left" md-autohide>Take Photo</md-tooltip>
                     <md-icon class="unselectable" style="color:black">camera</md-icon>
-
-                </md-button>
-                    </label>
-                <md-button class="md-fab md-raised md-mini" ng-click="::showPicker('Upload')">
-                    <md-tooltip md-direction="left" md-autohide>Upload</md-tooltip>
-                    <md-icon class="unselectable" style="color:black">file_upload</md-icon>
-                </md-button>
-            </md-fab-actions>
-        </md-fab-speed-dial>
+            </label>
+        </md-button>
+        <md-button class="md-fab md-raised md-mini" ng-click="::showPicker('Upload')">
+            <md-tooltip md-direction="left" md-autohide>Upload</md-tooltip>
+            <md-icon class="unselectable" style="color:black">file_upload</md-icon>
+        </md-button>
+    </md-fab-actions>
+</md-fab-speed-dial>
 <style>
-/*------------ FAB "add resource" styles ------------- */
-#speed_dial_container.slide-out {
-   padding-bottom: 0px;
-   opacity:0;
-   pointer-events: none;
-}
-
-#speed_dial_container {
-   padding-bottom: 20px;
-   bottom: 0px;
-   opacity: 1;
-   transition: all 0.4s ease;
-}
-
-#speed_dial_container #new_post_button {
-    transition: box-shadow 1s;
-}
-
-#speed_dial_container:hover #new_post_button {
-    transition: box-shadow 0.3s;
-    box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32);
-}
+    /*------------ FAB "add resource" styles ------------- */
+    
+    #speed_dial_container.slide-out {
+        padding-bottom: 0px;
+        opacity: 0;
+        pointer-events: none;
+    }
+    
+    #speed_dial_container {
+        padding-bottom: 20px;
+        bottom: 0px;
+        opacity: 1;
+        transition: all 0.4s ease;
+    }
+    
+    #speed_dial_container #new_post_button {
+        transition: box-shadow 1s;
+    }
+    
+    #speed_dial_container:hover #new_post_button {
+        transition: box-shadow 0.3s;
+        box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32);
+    }
 </style>
