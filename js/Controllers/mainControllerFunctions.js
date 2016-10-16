@@ -326,7 +326,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             $timeout(function() {
                $scope.Post.AttachmentId = data.docs[0].id;
                $scope.Post.Link = data.docs[0].url;
-               $scope.Post.Title = $scope.post.Title || data.docs[0].name;
+               $scope.Post.Title = $scope.Post.Title || data.docs[0].name;
             })
          } else {
             $scope.newPost({
