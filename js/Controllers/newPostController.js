@@ -24,6 +24,7 @@
                 },
                 Id: postObj.Id || '',
                 AttachmentId: postObj.AttachmentId || '',
+                AttachmentName: 
                 Likes: postObj.Likes || [],
                 PreviewImage: postObj.PreviewImage || '',
                 Bookmarked: postObj.Bookmarked || false,
@@ -56,7 +57,7 @@
                     queue(GoogleDriveService.getFileThumbnail($scope.Post.AttachmentId), function(reply) {
                         $timeout(function(response) {
                             console.log(response);
-                            $scope.Post.PreviewImage = response.thumbnailLink
+                            $scope.Post.PreviewImage = response.thumbnailLink.replace("s=220","s=400");
                             $scope.previewLoading = false;
                             document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                         });
@@ -75,9 +76,7 @@
                                     document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                                 })
                             } else {
-                                console.log("Started Loading Image")
                                 GoogleDriveService.getWebsiteScreenshot($scope.Post.Link).then(function(response) {
-                                    console.log("Finished Loading Image")
                                     $timeout(function() {
                                         $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
                                         $scope.previewLoading = false;
