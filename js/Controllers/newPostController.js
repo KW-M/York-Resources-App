@@ -25,7 +25,7 @@
                 Id: postObj.Id || '',
                 AttachmentId: postObj.AttachmentId || '',
                 AttachmentName: postObj.AttachmentName || '',
-                Attachmenticon: postObj.AttachmentIcon || '',
+                Attachmentcon: postObj.AttachmentIcon || '',
                 Likes: postObj.Likes || [],
                 PreviewImage: postObj.PreviewImage || '',
                 Bookmarked: postObj.Bookmarked || false,

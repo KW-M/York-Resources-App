@@ -9,6 +9,7 @@
                <span ng-hide="Post.Tags.length < 1"><md-icon class="small-icon" style="color:white">style</md-icon>{{Post.Tags.join(', ')}}</span>
             </div>
             <div ng-hide="operation === 'view'" id="header_link">
+               <img ng-src="Post.AttachmentIcon" ng-hide="Post.Type == "></img>
                <md-input-container md-no-float id="newPostLinkInput">
                   <input id="newPostLinkInputTxt" ng-model="Post.Link" ng-model-options="{ debounce: 500 }" style="color:white" placeholder="http://" ng-change="findType()" type="text">
                </md-input-container>
