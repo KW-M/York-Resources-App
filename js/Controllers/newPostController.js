@@ -25,7 +25,7 @@
                 Id: postObj.Id || '',
                 AttachmentId: postObj.AttachmentId || '',
                 AttachmentName: postObj.AttachmentName || '',
-                Attachmentcon: postObj.AttachmentIcon || '',
+                AttachmentIcon: postObj.AttachmentIcon || '',
                 Likes: postObj.Likes || [],
                 PreviewImage: postObj.PreviewImage || '',
                 Bookmarked: postObj.Bookmarked || false,
@@ -41,6 +41,8 @@
         var request = new XMLHttpRequest();
 
         $scope.findType = function() {
+            $scope.Post.PreviewImage = '';
+            $scope.Post.PreviewImage = ''
             if ($scope.Post.Link === '') {
                 $scope.Post.Type = 'NoLink';
                 $timeout(function() {
@@ -56,10 +58,11 @@
                     $scope.Post.Type = 'gDrive';
                     $scope.Post.AttachmentId = driveId[1]
                     queue(GoogleDriveService.getFileThumbnail($scope.Post.AttachmentId), function(response) {
-                                                    var thumbnail = response.result.thumbnailLink;
+                        var thumbnail = response.result.thumbnailLink;
                         $timeout(function() {
                             console.log(response);
                             $scope.Post.PreviewImage = thumbnail;
+                            $scope.Post.AttachmentId = response.result.
                            // response.result.thumbnailLink.replace("=s220","=s400");
                             $scope.previewLoading = false;
                             document.dispatchEvent(new window.Event('urlPreviewLoaded'));
