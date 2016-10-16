@@ -334,6 +334,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             $scope.newPost({
                AttachmentId: data.docs[0].id,
                Link: data.docs[0].url,
+               Title: data.docs[0].name,
             }, 'new');
          }
          // var AttachmentId = data.docs[0].id;
