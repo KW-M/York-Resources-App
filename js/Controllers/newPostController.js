@@ -48,7 +48,7 @@
                 })
             } else if ($scope.Post.Link.match(/(?:http|https):\/\/.{2,}/)) {
                 $scope.previewLoading = true;
-                var driveId = $scope.Post.Link.match(/(?:(?:\/(?:d|file|folder|folders)\/)|(?:id=))([-\w]{25,})/);
+                var driveId = $scope.Post.Link.match(/(?:(?:\/(?:d|s|file|folder|folders)\/)|(?:id=))([-\w]{25,})/);
                 console.log(driveId)
                 if (driveId) {
                     $scope.Post.Type = 'gDrive';
@@ -56,7 +56,7 @@
                     queue(GoogleDriveService.getFileThumbnail($scope.Post.AttachmentId), function(reply) {
                         $timeout(function(response) {
                             console.log(response);
-                            $scope.Post.PreviewImage = "https://s-media-cache-ak0.pinimg.com/564x/e3/f2/b8/e3f2b88045b720632bd556ec5afa39bc.jpg" //$scope.Post.PreviewImage = "https://drive.google.com/thumbnail?authuser=" + 0 + "&sz=w400&id=" + $scope.Post.AttachmentId;
+                            $scope.Post.PreviewImage = response.thumbnailLink
                             $scope.previewLoading = false;
                             document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                         });

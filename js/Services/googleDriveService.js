@@ -104,7 +104,7 @@ app.service('GoogleDriveService', ['$q', function($q) {
     this.getFileThumbnail = function(id) {
         return (gapi.client.drive.files.get({
             fileId: id,
-            fields: 'contentHints/thumbnail/image,iconLink,kind,name', //
+            fields: 'name,thumbnailLink,iconLink', //
         }));
     }
 
