@@ -42,7 +42,9 @@
 
         $scope.findType = function() {
             $scope.Post.PreviewImage = '';
-            $scope.Post.PreviewImage = ''
+            $scope.Post.AttachmentId = '';
+            $scope.Post.AttachmentName = '';
+            $scope.Post.AttachmentIcon = '';
             if ($scope.Post.Link === '') {
                 $scope.Post.Type = 'NoLink';
                 $timeout(function() {
@@ -62,7 +64,7 @@
                         $timeout(function() {
                             console.log(response);
                             $scope.Post.PreviewImage = thumbnail;
-                            $scope.Post.AttachmentId = response.result.
+                            $scope.Post.AttachmentIcon = response.result.iconLink;
                            // response.result.thumbnailLink.replace("=s220","=s400");
                             $scope.previewLoading = false;
                             document.dispatchEvent(new window.Event('urlPreviewLoaded'));
