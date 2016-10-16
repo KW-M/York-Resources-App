@@ -167,6 +167,8 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
          setCallback(self.pickerCallback).
          build();
          uploadPicker = new google.picker.PickerBuilder().
+         enableFeature(google.picker.Feature.NAV_HIDDEN).
+         hideTitleBar().
          addView(uploadView).
          setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
          setOAuthToken(authorizationService.getAuthToken()).
