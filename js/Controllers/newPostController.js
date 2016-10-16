@@ -24,7 +24,8 @@
                 },
                 Id: postObj.Id || '',
                 AttachmentId: postObj.AttachmentId || '',
-                AttachmentName: 
+                AttachmentName: postObj.AttachmentName || '',
+                Attachmenticon: postObj.AttachmentIcon || '',
                 Likes: postObj.Likes || [],
                 PreviewImage: postObj.PreviewImage || '',
                 Bookmarked: postObj.Bookmarked || false,
@@ -54,10 +55,10 @@
                 if (driveId) {
                     $scope.Post.Type = 'gDrive';
                     $scope.Post.AttachmentId = driveId[1]
-                    queue(GoogleDriveService.getFileThumbnail($scope.Post.AttachmentId), function(reply) {
-                        $timeout(function(response) {
+                    queue(GoogleDriveService.getFileThumbnail($scope.Post.AttachmentId), function(response) {
+                        $timeout(function() {
                             console.log(response);
-                            $scope.Post.PreviewImage = response.thumbnailLink.replace("s=220","s=400");
+                            $scope.Post.PreviewImage = response.result.thumbnailLink.replace("s=220","s=400");
                             $scope.previewLoading = false;
                             document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                         });
