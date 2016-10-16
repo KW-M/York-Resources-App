@@ -6,15 +6,18 @@
                     <md-icon class="unselectable">add</md-icon>
                 </md-button>
             </md-fab-trigger>
-            <md-fab-actions> 
+            <md-fab-actions>
                 <md-button class="md-fab md-raised md-mini" ng-click="::showPicker('Drive')">
                     <md-tooltip md-direction="left" md-autohide>Add Drive file</md-tooltip>
                     <img class="unselectable" style="width:22px; height:22px; margin-top:8px" src="images/drive_icon.svg">
                 </md-button>
-                <md-button class="md-fab md-raised md-mini" ng-click="::newPostBeta()">
-                    <md-tooltip md-direction="left" md-autohide>Add Link</md-tooltip>
-                    <md-icon class="unselectable" style="color:black">link</md-icon>
+                <label class="custom-file-upload">
+                <md-button class="md-fab md-raised md-mini">
+                    <input type="file" accept="image/*" capture="camera" style="display:none">
+                    <md-tooltip md-direction="left" md-autohide>Take Photo</md-tooltip>
+                    <md-icon class="unselectable" style="color:black">camera</md-icon>
                 </md-button>
+                </label>
                 <md-button class="md-fab md-raised md-mini" ng-click="::showPicker('Upload')">
                     <md-tooltip md-direction="left" md-autohide>Upload</md-tooltip>
                     <md-icon class="unselectable" style="color:black">file_upload</md-icon>
