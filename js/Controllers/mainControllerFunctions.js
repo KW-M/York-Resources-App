@@ -332,7 +332,11 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
             })
          } else {
             $scope.newPost({
-               AttachmentId: data.docs[0].id,
+               Attachment: {
+                  Id: data.docs[0].id,
+                  Name: null,
+                  fileType: null,
+               }
                Link: data.docs[0].url,
                Title: data.docs[0].name,
             }, 'new');
