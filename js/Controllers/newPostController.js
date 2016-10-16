@@ -1,5 +1,5 @@
     /* we don't define the "new post controller" here because it was alredy
-                                                                               defined by the $md-dialog in the newPost function on mainController.   */
+                                                                                       defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $timeout, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
         $timeout(function() {
             $scope.Post = {
@@ -53,10 +53,13 @@
                 if (driveId) {
                     $scope.Post.Type = 'gDrive';
                     $scope.Post.AttachmentId = driveId[1]
-                    $timeout(function() {
-                        $scope.Post.PreviewImage = "https://s-media-cache-ak0.pinimg.com/564x/e3/f2/b8/e3f2b88045b720632bd556ec5afa39bc.jpg" //$scope.Post.PreviewImage = "https://drive.google.com/thumbnail?authuser=" + 0 + "&sz=w400&id=" + $scope.Post.AttachmentId;
-                        $scope.previewLoading = false;
-                        document.dispatchEvent(new window.Event('urlPreviewLoaded'));
+                    queue(GoogleDriveService.getFileThumbnail($scope.Post.AttachmentId), function(reply) {
+                        $timeout(function(response) {
+                            console.log(response);
+                            $scope.Post.PreviewImage = "https://s-media-cache-ak0.pinimg.com/564x/e3/f2/b8/e3f2b88045b720632bd556ec5afa39bc.jpg" //$scope.Post.PreviewImage = "https://drive.google.com/thumbnail?authuser=" + 0 + "&sz=w400&id=" + $scope.Post.AttachmentId;
+                            $scope.previewLoading = false;
+                            document.dispatchEvent(new window.Event('urlPreviewLoaded'));
+                        });
                     });
                 } else {
                     $scope.Post.Type = 'Link';
