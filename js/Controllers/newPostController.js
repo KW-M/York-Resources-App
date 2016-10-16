@@ -56,9 +56,11 @@
                     $scope.Post.Type = 'gDrive';
                     $scope.Post.AttachmentId = driveId[1]
                     queue(GoogleDriveService.getFileThumbnail($scope.Post.AttachmentId), function(response) {
+                                                    var thumbnail = response.result.thumbnailLink;
                         $timeout(function() {
                             console.log(response);
-                            $scope.Post.PreviewImage = response.result.thumbnailLink.replace("=s220","=s400");
+                            $scope.Post.PreviewImage = thumbnail;
+                           // response.result.thumbnailLink.replace("=s220","=s400");
                             $scope.previewLoading = false;
                             document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                         });
