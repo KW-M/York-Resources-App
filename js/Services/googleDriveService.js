@@ -100,6 +100,13 @@ app.service('GoogleDriveService', ['$q', function($q) {
         metadata.parents = [URLs.databaseFolderId];
         return (gapi.client.drive.files.create(metadata));
     };
+    
+    this.getFileThumbnail = function(id) {
+        return (gapi.client.drive.files.get({
+            fileId: id,
+            fields: 'contentHints/thumbnail/image,iconLink,kind,name', //
+        }));
+    }
 
     this.getFileContent = function(fileId) {
         return (gapi.client.drive.files.get({
