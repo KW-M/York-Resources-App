@@ -58,7 +58,7 @@
                     queue(GoogleDriveService.getFileThumbnail($scope.Post.AttachmentId), function(response) {
                         $timeout(function() {
                             console.log(response);
-                            $scope.Post.PreviewImage = response.result.thumbnailLink.replace("s=220","s=400");
+                            $scope.Post.PreviewImage = response.result.thumbnailLink.replace("=s220","=s400");
                             $scope.previewLoading = false;
                             document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                         });
