@@ -336,7 +336,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
                   Id: data.docs[0].id,
                   Name: null,
                   fileType: null,
-               }
+               },
                Link: data.docs[0].url,
                Title: data.docs[0].name,
             }, 'new');
