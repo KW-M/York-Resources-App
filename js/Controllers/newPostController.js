@@ -1,5 +1,5 @@
     /* we don't define the "new post controller" here because it was alredy
-                                                                                       defined by the $md-dialog in the newPost function on mainController.   */
+                                                                                           defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $timeout, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
         $timeout(function() {
             $scope.Post = {
@@ -65,7 +65,7 @@
                             console.log(response);
                             $scope.Post.PreviewImage = thumbnail;
                             $scope.Post.AttachmentIcon = response.result.iconLink;
-                           // response.result.thumbnailLink.replace("=s220","=s400");
+                            // response.result.thumbnailLink.replace("=s220","=s400");
                             $scope.previewLoading = false;
                             document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                         });
@@ -151,12 +151,17 @@
                     Post: $scope.Post,
                     Metadata: metadata
                 });
-                queue(GoogleDriveService.createDriveFile(metadata), function(reply) {
-                    console.log(reply.result);
-                    $mdToast.hide();
-                }, function(err) {
-                    console.log(err);
+                GoogleDriveService.AppsScriptNewFile().then(function successCallback(response) {
+                    console.log(response)
+                }, function errorCallback(response) {
+                    console.warn(response)
                 });
+                // queue(GoogleDriveService.createDriveFile(metadata), function(reply) {
+                //     console.log(reply.result);
+                //     $mdToast.hide();
+                // }, function(err) {
+                //     console.log(err);
+                // });
             } else if (operation === 'update') {
                 var metadata = $scope.compileUpdateToMetadata();
                 queue(GoogleDriveService.updateFileMetadata(postObj.Id, metadata), function(reply) {

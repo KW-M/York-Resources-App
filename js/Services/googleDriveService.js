@@ -99,7 +99,7 @@ app.service('GoogleDriveService', ['$q','$http', function($q,$http) {
     this.AppsScriptNewFile = function () {
         return $http({
             method: 'GET',
-            url: '/someUrl'
+            url: 'https://script.google.com/macros/s/AKfycbwAVKcfa8Lzf_iyFlQpllMAn5kx0e37QSIKxsiE-51yYFOTDg0r/exec'
         });
     }
 
