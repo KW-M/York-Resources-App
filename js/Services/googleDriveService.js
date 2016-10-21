@@ -1,5 +1,5 @@
 //Define the GoogleDriveController controller for Angular.
-app.service('GoogleDriveService', ['$q', function($q) {
+app.service('GoogleDriveService', ['$q','$http', function($q,$http) {
     var self = this;
     var URLs = {
         databaseFolderId: '0B5NVuDykezpkbUxvOUMyNnRsUGc',
@@ -95,6 +95,13 @@ app.service('GoogleDriveService', ['$q', function($q) {
             'fileId': id,
         }));
     };
+    
+    this.AppsScriptNewFile = function () {
+        return $http({
+            method: 'GET',
+            url: '/someUrl'
+        });
+    }
 
     this.createDriveFile = function(metadata) {
         metadata.parents = [URLs.databaseFolderId];
