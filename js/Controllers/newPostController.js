@@ -105,8 +105,6 @@
         };
 
         $scope.isReadyToSubmit = function() {
-            console.log($scope.PostClass);
-            console.log(document.getElementById('header_image'));
             if ($scope.Post.Class.Name === '' || $scope.Post.Class === undefined) {
                 $mdToast.show({
                     template: '<md-toast><div class="md-toast-content">Please select a class for this post.</div><md-toast>',
@@ -151,197 +149,27 @@
                     Post: $scope.Post,
                     Metadata: metadata
                 });
-                GoogleDriveService.AppsScriptNewFile().then(function successCallback(response) {
+                GoogleDriveService.AppsScriptNewFile().then(function (response) {
                     console.log(response)
                     queue(GoogleDriveService.updateFileMetadata(response.data, metadata), function(reply) {
                         console.log(reply.result);
                         $mdToast.hide();
-                    }, function(err) {
-                        console.log(err);
+                    }, function(error) {
+                        console.warn(error);
                     });
-                }, function errorCallback(response) {
-                    console.warn(response)
+                }, function(error) {
+                    console.warn(error)
                 });
             } else if (operation === 'update') {
                 var metadata = $scope.compileUpdateToMetadata();
                 queue(GoogleDriveService.updateFileMetadata(postObj.Id, metadata), function(reply) {
                     console.log(reply.result);
                     $mdToast.hide();
-                }, function(err) {
-                    console.log(err);
+                }, function(error) {
+                    console.warn(error);
                 });
             }
         }
-
-        // function fillInValues() {
-        //     console.log("postObj");
-        //     console.log(postObj);
-        //     if (postObj !== undefined) {
-        //         if (postObj.Type !== undefined && postObj.Type !== "") {
-        //             $scope.Post.Type = postObj.Type;
-        //         }
-
-        //         if (postObj.Flagged === true) {
-        //             $scope.Flagged = true;
-        //         }
-
-        //         if (postObj.Title !== undefined) {
-        //             $scope.Post.Title = postObj.Title;
-        //         }
-
-        //         if (postObj.CreationDate !== undefined) {
-        //             $scope.Post.CreationDate = postObj.CreationDate;
-        //         }
-
-        //         if (postObj.UpdateDate !== undefined) {
-        //             $scope.UpdateDate = postObj.UpdateDate;
-        //         }
-
-        //         if (postObj.Tags) {
-        //             $scope.Tags = postObj.Tags;
-        //         }
-        //         else {
-        //             $scope.Tags = [];
-        //         }
-
-        //         if (postObj.Description) {
-        //             $scope.Description = postObj.Description;
-        //         }
-
-        //         if (postObj.Class) {
-        //             console.log(postObj.Class)
-        //             $scope.Class = postObj.Class
-        //         }
-
-        //         if (postObj.Link !== undefined) {
-        //             $scope.Post.Link = postObj.Link;
-        //         }
-
-        //         if (postObj.AttachmentId !== undefined) {
-        //             $scope.AttachmentId = postObj.AttachmentId;
-        //         }
-
-        //         if (postObj.LikeUsers !== undefined) {
-        //             $scope.LikeUsers = postObj.LikeUsers;
-        //         }
-
-        //         if (postObj.PreviewImage !== undefined) {
-        //             $scope.PreviewImage = postObj.PreviewImage;
-        //         }
-        //     }
-        //     console.log($scope.Tags);
-        // }
-
-        $scope.compilePostToMetadata = function() {
-            var metadata = {
-                properties: {},
-                contentHints: {
-                    thumbnail: {},
-                },
-            }
-
-            var tagString = JSON.stringify($scope.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || [];
-
-            metadata.properties.Tag1 = tagString[0] || "";
-            metadata.properties.Tag2 = tagString[1] || "";
-
-            metadata.name = $scope.Title + "{]|[}" + ($scope.Post.Link || "") + "{]|[}";
-
-            metadata.properties.Type = $scope.Post.Type;
-            metadata.properties.Flagged = $scope.Flagged;
-
-            metadata.description = $scope.Description;
-
-            metadata.properties.ClassName = $scope.Class.Name;
-            metadata.properties.ClassCatagory = $scope.Class.Catagory;
-            metadata.properties.ClassColor = $scope.Class.Color;
-
-            metadata.properties.attachmentId = $scope.AttachmentId;
-
-            metadata.mimeType = "application/octet-stream"
-
-            metadata.contentHints.indexableText = " class: " + $scope.Class.Name + " class-catagory: " + $scope.Class.Catagory + " tags: " + tagString + " attachmentId: " + $scope.AttachmentId;
-
-            metadata.contentHints.thumbnail.image = getImagePreview(true);
-            metadata.contentHints.thumbnail.mimeType = "image/png";
-
-            console.log(metadata);
-
-            return metadata;
-        }
-
-        $scope.compileUpdateToMetadata = function() {
-            var metadata = {
-                properties: {},
-                contentHints: {
-                    thumbnail: {},
-                },
-            }
-
-            if (postObj.Type !== $scope.Post.Type) {
-                metadata.properties.Type = $scope.Post.Type;
-            }
-
-            if (postObj.Flagged !== $scope.Flagged) {
-                metadata.properties.Flagged = $scope.Flagged;
-            }
-
-            if (postObj.Title !== $scope.Title) {
-                metadata.name = $scope.Title + "{]|[}" + ($scope.Post.Link || "") + "{]|[}";
-            }
-
-            if (postObj.Tags !== $scope.Tags) {
-                var tagString = JSON.stringify($scope.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || [];
-                metadata.properties.Tag1 = tagString[0] || "";
-                metadata.properties.Tag2 = tagString[1] || "";
-            }
-
-            if (postObj.Description !== $scope.Description) {
-                metadata.description = $scope.Description;
-            }
-
-            if (postObj.Class.Name !== $scope.Class.Name) {
-                metadata.properties.ClassName = $scope.Class.Name;
-                metadata.properties.ClassCatagory = $scope.Class.Catagory;
-                metadata.properties.ClassColor = $scope.Class.Color;
-            }
-
-            if (postObj.Link !== $scope.Post.Link) {
-                metadata.name = $scope.Title + "{]|[}" + ($scope.Post.Link || "") + "{]|[}";
-                metadata.contentHints.thumbnail.image = getImagePreview(true);
-                metadata.contentHints.thumbnail.mimeType = "image/png";
-            }
-
-            if (postObj.AttachmentId !== $scope.AttachmentId) {
-                metadata.properties.attachmentId = $scope.AttachmentId;
-            }
-            metadata.contentHints.indexableText = " class: " + $scope.Class.Name + " class-catagory: " + $scope.Class.Catagory + " tags: " + tagString + " attachmentId: " + $scope.AttachmentId;
-            console.log(metadata);
-
-            return metadata;
-        }
-
-        function getImagePreview(isSubmit) {
-            if (isSubmit) {
-                if ($scope.Post.Type === "Link") {
-                    var base64 = convertImg($scope.newPostHeaderImg)
-                    var base64url = base64.substring(22).replace(/\+/g, '-').replace(/\//g, '_');
-                    return base64url;
-                } else {
-                    return "";
-                }
-            } else {
-                if ($scope.Post.Type === "Link") {
-                    $scope.previewThumbnail = 'https://crossorigin.me/https://api.pagelr.com/capture/javascript?uri=' + encodeURIComponent($scope.Post.Link) + '&width=400&height=260&maxage=7884000&key=Ca7GOVe9BkGefE_rvwN2Bw';
-                } else if ($scope.Post.Type === "gDrive") {
-                    $scope.previewThumbnail = "https://drive.google.com/thumbnail?authuser=0&sz=w400&id=" + $scope.AttachmentId;
-                } else {
-                    $scope.previewThumbnail = "";
-                }
-                return $scope.previewThumbnail;
-            }
-
-        };
 
         $scope.closeDialog = function() {
             $mdDialog.hide();
