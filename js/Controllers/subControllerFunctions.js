@@ -136,8 +136,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			formatedDriveMetadata = {
 				name: 0 + '{]|[}' + JSON.stringify([]),
 				description: Post.Description + '{]|[}' + Post.Link + '{]|[}' + Post.PreviewImage,
-				createdTime: Post.CreationDate.toRFC3339UTCString(),
-				modifiedTime: Post.UpdateDate.toRFC3339UTCString(),
+				//createdTime: Post.CreationDate.toRFC3339UTCString(),
+				//modifiedTime: Post.UpdateDate.toRFC3339UTCString(),
 				starred: Post.Bookmarked,
 				properties: {
 					Title: Post.Title,
