@@ -13,25 +13,6 @@
 
   }
 
-  function getAppsScript() {
-    var data = null;
-
-    var xhr = new XMLHttpRequest();
-    xhr.withCredentials = true;
-
-    xhr.addEventListener("readystatechange", function() {
-      if (this.readyState === 4) {
-        console.log(this.responseText);
-      }
-    });
-
-    xhr.open("GET", "https://script.google.com/macros/s/AKfycbw6AZSwWecNtHkw8zANiKM-2Ie_Nqg-HPqetfR-C2SEaWMR41Q/exec");
-    xhr.setRequestHeader("cache-control", "no-cache");
-    xhr.setRequestHeader("postman-token", "d0fe8605-9fea-448f-8a46-b2602d642b7f");
-
-    xhr.send(data);
-  }
-
   Date.prototype.addDays = function(days) {
     this.setDate(this.getDate() + parseInt(days));
     return this;
