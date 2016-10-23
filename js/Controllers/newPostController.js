@@ -149,8 +149,9 @@
                     Post: $scope.Post,
                     Metadata: metadata
                 });
-                GoogleDriveService.AppsScriptNewFile().then(function (response) {
+                GoogleDriveService.AppsScriptNewFile().then(function(response) {
                     console.log(response)
+                    console.log(metadata)
                     queue(GoogleDriveService.updateFileMetadata(response.data, metadata), function(reply) {
                         console.log(reply.result);
                         $mdToast.hide();
