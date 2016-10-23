@@ -14,11 +14,13 @@
                      <div class="md-chip-content">
                         <img ng-src="Post.AttachmentIcon"></img>
                         <span>File Name</span>
+                        <md-button class="md-icon-button">
+                           <md-icon>close</md-icon>
+                        </md-button>
                      </div>
                   </md-chip>
                </div>
-               <div>
-               <md-input-container md-no-float id="newPostLinkInput">
+               <md-input-container md-no-float id="newPostLinkInput" ng-hide="Post.Type == 'gDrive'">
                   <input id="newPostLinkInputTxt" ng-model="Post.Link" ng-model-options="{ debounce: 500 }" style="color:white" placeholder="http://" ng-change="findType()" type="text">
                </md-input-container>
                <md-menu md-position-mode="target-right target" md-offset="0 -45">
