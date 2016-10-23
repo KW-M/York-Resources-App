@@ -9,9 +9,9 @@
                <span ng-hide="Post.Tags.length < 1"><md-icon class="small-icon" style="color:white">style</md-icon>{{Post.Tags.join(', ')}}</span>
             </div>
             <div ng-hide="operation === 'view'" id="header_link">
-               <div class="md-chips" ng-show="Post.Type == 'gDrive'" style="flex: 1; display: flex; flex-direction: column; align-items: center;">
-                  <md-chip style="background: rgb(224,224,224);color: rgb(66,66,66);">
-                     <div class="md-chip-content">
+               <div class="md-chips" ng-show="Post.Type == 'gDrive'" style="flex: 1; display: flex; flex-direction: column; align-items: center; max-width:80%">
+                  <md-chip style="background: rgba(224,224,224,.80); color: rgb(66,66,66);">
+                     <div class="md-chip-content" style="overflow:hidden;">
                         <img ng-src="{{Post.AttachmentIcon}}" style="top: 7.5px;position: absolute;"></img>
                         <span style="margin-left:20px">{{Post.AttachmentName}}</span>
                      </div>
