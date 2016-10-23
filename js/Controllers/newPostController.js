@@ -99,8 +99,9 @@
             } else if ($scope.Post.Link.length > 9) {
                 $scope.Post.Link = "http://" + $scope.Post.Link;
                 $scope.Post.Type = 'Link';
+                $scope.findType();
             } else {
-                $scope.Post.Type = 'Link';
+                $scope.Post.Type = 'NoLink';
             }
         };
 
