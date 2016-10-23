@@ -64,8 +64,9 @@
                         $timeout(function() {
                             console.log(response);
                             $scope.Post.PreviewImage = thumbnail;
+                            $scope.Post.AttachmentName = response.result.name;
                             $scope.Post.AttachmentIcon = response.result.iconLink;
-                            // response.result.thumbnailLink.replace("=s220","=s400");
+                            //response.result.thumbnailLink.replace("=s220","=s400");
                             $scope.previewLoading = false;
                             document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                         });
