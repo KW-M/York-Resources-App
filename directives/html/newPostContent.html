@@ -9,13 +9,13 @@
                <span ng-hide="Post.Tags.length < 1"><md-icon class="small-icon" style="color:white">style</md-icon>{{Post.Tags.join(', ')}}</span>
             </div>
             <div ng-hide="operation === 'view'" id="header_link">
-               <div class="md-chips" ng-show="Post.Type == 'gDrive'" style="</flex">
+               <div class="md-chips" ng-show="Post.Type == 'gDrive'" style="flex:1">
                   <md-chip style="background: rgb(224,224,224);color: rgb(66,66,66);">
                      <div class="md-chip-content">
                         <img ng-src="Post.AttachmentIcon"></img>
                         <span>File Name</span>
                      </div>
-                     <button class="md-chip-remove" style="margin-right:0" ng-click="Post.Type = 'NoLink'">
+                     <button class="md-chip-remove" style="margin-right:-12px" ng-click="Post.Type = 'NoLink'">
                         <md-icon style="color:black">close</md-icon>
                      </button>
                   </md-chip>
