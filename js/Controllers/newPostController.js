@@ -62,7 +62,11 @@
                         var thumbnail = response.result.thumbnailLink;
                         $timeout(function() {
                             console.log(response);
-                            $scope.Post.PreviewImage = thumbnail || "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png";
+                            if (thumbnail) {
+                                $scope.Post.PreviewImage = thumbnail.replace("=s220","=s400");
+                            } else {
+                                 "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
+                            }
                             $scope.Post.AttachmentName = response.result.name;
                             $scope.Post.AttachmentIcon = response.result.iconLink;
                             //response.result.thumbnailLink.replace("=s220","=s400");
