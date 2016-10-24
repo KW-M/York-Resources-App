@@ -41,6 +41,7 @@
         $scope.classSearch = "";
 
         $scope.findType = function() {
+            console.log('findingType')
             $scope.Post.PreviewImage = '';
             $scope.Post.AttachmentId = '';
             $scope.Post.AttachmentName = '';
