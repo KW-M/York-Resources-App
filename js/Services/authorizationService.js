@@ -36,7 +36,7 @@ function authService($mdDialog) {
                 console.log('signed in')
                 if (accountDomain === 'york.org') {
                     console.log("User's Domain: " + accountDomain);
-                    
+
                     callback();
                     self.hideSigninButton();
                 }
@@ -88,8 +88,8 @@ function authService($mdDialog) {
     function handleSigninClick(event) {
         gapi.auth2.getAuthInstance().signIn().then(function() {},function(error){
             console.log(error)
-            if(error.reason = "")
-                                $mdDialog.show($mdDialog.alert({
+            if(error.hasOwnProperty('expectedDomain')) {
+                        $mdDialog.show($mdDialog.alert({
                         title: 'Sorry.',
                         htmlContent: "<p>York Study Resources only works with York Google accounts right now.</p><p>If you have an email account ending with @york.org, please login with it, or ask Mr.Brookhouser if you don't have one.<p>",
                         ok: 'Ok'
@@ -100,9 +100,10 @@ function authService($mdDialog) {
                             angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
                         }, 500);
                     });
+            }
         });
     }
-    
+
     this.handleSignoutClick = function(event) {
         gapi.auth2.getAuthInstance().signOut();
     }
