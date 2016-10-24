@@ -1,5 +1,5 @@
     /* we don't define the "new post controller" here because it was alredy
-                                                                                                   defined by the $md-dialog in the newPost function on mainController.   */
+                                                                                                           defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $timeout, $http, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
         var linkChangeTimer = null;
         $timeout(function() {
@@ -63,9 +63,9 @@
                         $timeout(function() {
                             console.log(response);
                             if (thumbnail) {
-                                $scope.Post.PreviewImage = thumbnail.replace("=s220","=s400");
+                                $scope.Post.PreviewImage = thumbnail.replace("=s220", "=s400");
                             } else {
-                                 "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
+                                "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
                             }
                             $scope.Post.AttachmentName = response.result.name;
                             $scope.Post.AttachmentIcon = response.result.iconLink;
@@ -77,18 +77,14 @@
                 } else {
                     $scope.Post.Type = 'Link';
                     $http.head('https://jsonp.afeld.me/?url=' + $scope.Post.Link).then(function(result) {
-                            console.log(result)
-                            if (result.headers()['content-type'].indexOf('image') != -1) {
-                                $timeout(function() {
-                                    $scope.Post.PreviewImage = $scope.Post.Link;
-                                    $scope.previewLoading = false;
-                                    document.dispatchEvent(new window.Event('urlPreviewLoaded'));
-                                })
-                            } else {
-
-                            }
-                        }, function(error) {
-                            console.log(error)
+                        console.log(result)
+                        if (result.headers()['content-type'].indexOf('image') != -1) {
+                            $timeout(function() {
+                                $scope.Post.PreviewImage = $scope.Post.Link;
+                                $scope.previewLoading = false;
+                                document.dispatchEvent(new window.Event('urlPreviewLoaded'));
+                            })
+                        } else {
                             GoogleDriveService.getWebsiteScreenshot($scope.Post.Link).then(function(response) {
                                 $timeout(function() {
                                     $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
@@ -98,67 +94,29 @@
                             }, function(error) {
                                 console.log(error)
                                 $timeout(function() {
-                                    $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
+                                    $scope.Post.PreviewImage = "https://www.techtricksworld.com/wp-content/uploads/2015/12/Error-404.png"
                                     $scope.previewLoading = false;
                                     document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                                 })
                             })
+                        }
+                    }, function(error) {
+                        console.log(error)
+                        GoogleDriveService.getWebsiteScreenshot($scope.Post.Link).then(function(response) {
+                            $timeout(function() {
+                                $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
+                                $scope.previewLoading = false;
+                                document.dispatchEvent(new window.Event('urlPreviewLoaded'));
+                            })
+                        }, function(error) {
+                            console.log(error)
+                            $timeout(function() {
+                                $scope.Post.PreviewImage = "https://www.techtricksworld.com/wp-content/uploads/2015/12/Error-404.png"
+                                $scope.previewLoading = false;
+                                document.dispatchEvent(new window.Event('urlPreviewLoaded'));
+                            })
                         })
-                        // request.open('HEAD', 'https://jsonp.afeld.me/?url=' + $scope.Post.Link, true); // to implement: img checking and icon for non existant thumnail drive docs
-                        // request.onLoad = function() {
-                        //     if (this.readyState == 4 && this.status == 200) {
-                        //         console.log(this)
-                        //         var type = this.getResponseHeader('content-type')
-                        //         if (this.getResponseHeader('content-type').indexOf('image') != -1) {
-                        //             $timeout(function() {
-                        //                 $scope.Post.PreviewImage = $scope.Post.Link;
-                        //                 $scope.previewLoading = false;
-                        //                 document.dispatchEvent(new window.Event('urlPreviewLoaded'));
-                        //             })
-                        //         } else {
-                        //             GoogleDriveService.getWebsiteScreenshot($scope.Post.Link).then(function(response) {
-                        //                 $timeout(function() {
-                        //                     $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
-                        //                     $scope.previewLoading = false;
-                        //                     document.dispatchEvent(new window.Event('urlPreviewLoaded'));
-                        //                 })
-                        //             })
-                        //         }
-                        //     } else {
-                        //             GoogleDriveService.getWebsiteScreenshot($scope.Post.Link).then(function(response) {
-                        //                 $timeout(function() {
-                        //                     $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
-                        //                     $scope.previewLoading = false;
-                        //                     document.dispatchEvent(new window.Event('urlPreviewLoaded'));
-                        //                 })
-                        //             },function(){
-
-                    //             }) 
-                    //     }
-                    // }
-                    // request.onError = function() {
-                    // request.onreadystatechange = function() {
-                    //     if (this.readyState == 4 && this.status == 200) {
-                    //         console.log(this)
-                    //         var type = this.getResponseHeader('content-type')
-                    //         if (this.getResponseHeader('content-type').indexOf('image') != -1) {
-                    //             $timeout(function() {
-                    //                 $scope.Post.PreviewImage = $scope.Post.Link;
-                    //                 $scope.previewLoading = false;
-                    //                 document.dispatchEvent(new window.Event('urlPreviewLoaded'));
-                    //             })
-                    //         } else {
-                    //             GoogleDriveService.getWebsiteScreenshot($scope.Post.Link).then(function(response) {
-                    //                 $timeout(function() {
-                    //                     $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
-                    //                     $scope.previewLoading = false;
-                    //                     document.dispatchEvent(new window.Event('urlPreviewLoaded'));
-                    //                 })
-                    //             })
-                    //         }
-                    //     }
-                    // };
-                    // request.send();
+                    })
                 }
             } else if ($scope.Post.Link.length > 9) {
                 $scope.Post.Link = "http://" + $scope.Post.Link;
