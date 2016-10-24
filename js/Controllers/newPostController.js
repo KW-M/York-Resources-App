@@ -55,7 +55,6 @@
             } else if ($scope.Post.Link.match(/(?:http|https):\/\/.{2,}/)) {
                 $scope.previewLoading = true;
                 var driveId = $scope.Post.Link.match(/(?:(?:\/(?:d|s|file|folder|folders)\/)|(?:id=))([-\w]{25,})/);
-                console.log(driveId)
                 if (driveId) {
                     $scope.Post.Type = 'gDrive';
                     $scope.Post.AttachmentId = driveId[1]
@@ -72,9 +71,10 @@
                         });
                     });
                 } else {
-                    $scope.Post.Type = 'Link';//
-                    $http.head($scope.Post.Link).then(function(result){
+                    $scope.Post.Type = 'Link';
+                    $http.head('https://jsonp.afeld.me/?url=' + $scope.Post.Link).then(function(result){
                         console.log(result)
+                        console.log(result.headers)
                     },function(error) {
                         console.log(error)
                     })
