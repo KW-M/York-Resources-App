@@ -75,6 +75,38 @@
                 } else {
                     $scope.Post.Type = 'Link';
                     request.open('HEAD', 'https://jsonp.afeld.me/?url=' + $scope.Post.Link, true); // to implement: img checking and icon for non existant thumnail drive docs
+                    request.onLoad = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            console.log(this)
+                            var type = this.getResponseHeader('content-type')
+                            if (this.getResponseHeader('content-type').indexOf('image') != -1) {
+                                $timeout(function() {
+                                    $scope.Post.PreviewImage = $scope.Post.Link;
+                                    $scope.previewLoading = false;
+                                    document.dispatchEvent(new window.Event('urlPreviewLoaded'));
+                                })
+                            } else {
+                                GoogleDriveService.getWebsiteScreenshot($scope.Post.Link).then(function(response) {
+                                    $timeout(function() {
+                                        $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
+                                        $scope.previewLoading = false;
+                                        document.dispatchEvent(new window.Event('urlPreviewLoaded'));
+                                    })
+                                })
+                            }
+                        } else {
+                                GoogleDriveService.getWebsiteScreenshot($scope.Post.Link).then(function(response) {
+                                    $timeout(function() {
+                                        $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
+                                        $scope.previewLoading = false;
+                                        document.dispatchEvent(new window.Event('urlPreviewLoaded'));
+                                    })
+                                },function(){
+                                    
+                                }) 
+                        }
+                    }
+                    request.onError = function() {
                     request.onreadystatechange = function() {
                         if (this.readyState == 4 && this.status == 200) {
                             console.log(this)
