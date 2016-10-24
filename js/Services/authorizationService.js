@@ -88,13 +88,13 @@ function authService($mdDialog) {
     function handleSigninClick(event) {
         gapi.auth2.getAuthInstance().signIn().then(function() {},function(error){
             console.log(error)
+             gapi.auth2.getAuthInstance().signOut();
             if(error.hasOwnProperty('expectedDomain')) {
                         $mdDialog.show($mdDialog.alert({
                         title: 'Sorry.',
                         htmlContent: "<p>York Study Resources only works with York Google accounts right now.</p><p>If you have an email account ending with @york.org, please login with it, or ask Mr.Brookhouser if you don't have one.<p>",
                         ok: 'Ok'
                     })).then(function() {
-                        gapi.auth2.getAuthInstance().signOut();
                         angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
                         setTimeout(function() {
                             angular.element(document.querySelector('#auth_button')).addClass('fadeIn');

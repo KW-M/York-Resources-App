@@ -347,6 +347,10 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
       }
    }
 
+   $scope.DriveErrorHandeler = function(error, callback){
+      
+      callback(error)
+   }
    //----------------------------------------------------
    //--------- loading and filtering posts --------------
    $scope.getFiles = function() {
