@@ -1,7 +1,7 @@
 /*global app*/ /*global angular*/ /*global gapi*/ /*global google*/ /*global queue*/ /*global subControllerFunctions*/
 app.controller('ApplicationController', controllerFunction)
    //controllerFunction.$inject(['$scope', '$mdDialog', '$window', '$timeout', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', 'angularGridInstance'])
-function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, angularGridInstance) {
+function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $timeout, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, angularGridInstance) {
    var self = this;
    var content_container = document.getElementById("content_container");
    var loading_spinner = document.getElementById("loading_spinner");
@@ -259,7 +259,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $timeout, $s
    $scope.newPost = function(postObj, operation, event) {
       $mdDialog.show({
          templateUrl: '/directives/html/newPostContent.html',
-         controller: ['$scope', '$timeout', '$mdDialog', 'GoogleDriveService', '$mdToast', "postObj", "operation", newPostController],
+         controller: ['$scope', '$timeout', '$http','$mdDialog', 'GoogleDriveService', '$mdToast', "postObj", "operation", newPostController],
          scope: $scope,
          parent: angular.element(document.body),
          preserveScope: true,

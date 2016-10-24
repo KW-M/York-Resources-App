@@ -1,6 +1,6 @@
     /* we don't define the "new post controller" here because it was alredy
                                                                                                defined by the $md-dialog in the newPost function on mainController.   */
-    function newPostController($scope, $timeout, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
+    function newPostController($scope, $timeout, $http, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
        var linkChangeTimer = null;
         $timeout(function() {
             $scope.Post = {
@@ -39,7 +39,6 @@
         $scope.previewThumbnail = "";
         $scope.previewLoading = false;
         $scope.classSearch = "";
-        var request = new XMLHttpRequest();
 
         $scope.findType = function() {
             $scope.Post.PreviewImage = '';
@@ -74,6 +73,9 @@
                     });
                 } else {
                     $scope.Post.Type = 'Link';
+                    $http.head('https://jsonp.afeld.me/?url=' + $scope.Post.Link).then(function {
+                        
+                    })
                     request.open('HEAD', 'https://jsonp.afeld.me/?url=' + $scope.Post.Link, true); // to implement: img checking and icon for non existant thumnail drive docs
                     request.onLoad = function() {
                         if (this.readyState == 4 && this.status == 200) {
