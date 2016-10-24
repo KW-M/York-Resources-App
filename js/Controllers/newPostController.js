@@ -1,5 +1,5 @@
     /* we don't define the "new post controller" here because it was alredy
-                                                                                                           defined by the $md-dialog in the newPost function on mainController.   */
+                                                                                                               defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $timeout, $http, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
         var linkChangeTimer = null;
         $timeout(function() {
@@ -57,13 +57,13 @@
                 $scope.previewLoading = true;
                 var driveId = $scope.Post.Link.match(/(?:(?:\/(?:d|s|file|folder|folders)\/)|(?:id=))([-\w]{25,})/);
                 if (driveId) {
-                    $scope.Post.Type = 'Link';
+                    $scope.Post.Type = 'gDrive';
                     $scope.Post.AttachmentId = driveId[1]
                     queue(GoogleDriveService.getFileThumbnail($scope.Post.AttachmentId), function(response) {
                         var thumbnail = response.result.thumbnailLink;
                         $timeout(function() {
                             console.log(response);
-                            if (thumbnail) {
+                            if (response.result.thumbnailLink) {
                                 $scope.Post.PreviewImage = thumbnail.replace("=s220", "=s400");
                             } else {
                                 "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
@@ -73,9 +73,9 @@
                             //response.result.thumbnailLink.replace("=s220","=s400");
                             $scope.previewLoading = false;
                             document.dispatchEvent(new window.Event('urlPreviewLoaded'));
-                        },function(error) {
+                        }, function(error) {
                             console.log(error);
-                            $scope.Post.Type = 'gDrive';
+                            $scope.Post.Type = 'Link';
                             GoogleDriveService.getWebsiteScreenshot($scope.Post.Link).then(function(response) {
                                 console.log(response)
                                 $timeout(function() {
