@@ -122,6 +122,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 				PreviewImage: descriptionAndPreviewimage[2],
 				Bookmarked: DriveMetadata.starred || false,
 			}
+			if(formatedPost.Type === 'GDrive'){
+				//get thumbnail
+			}
 			return (formatedPost)
 		} catch (e) {
 			return (formatedPost);
