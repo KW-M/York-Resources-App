@@ -57,7 +57,7 @@
                 $scope.previewLoading = true;
                 var driveId = $scope.Post.Link.match(/(?:(?:\/(?:d|s|file|folder|folders)\/)|(?:id=))([-\w]{25,})/);
                 if (driveId) {
-                    $scope.Post.Type = 'gDrive';
+                    $scope.Post.Type = 'Link';
                     $scope.Post.AttachmentId = driveId[1]
                     queue(GoogleDriveService.getFileThumbnail($scope.Post.AttachmentId), function(response) {
                         var thumbnail = response.result.thumbnailLink;
@@ -73,6 +73,24 @@
                             //response.result.thumbnailLink.replace("=s220","=s400");
                             $scope.previewLoading = false;
                             document.dispatchEvent(new window.Event('urlPreviewLoaded'));
+                        },function(error) {
+                            console.log(error);
+                            $scope.Post.Type = 'gDrive';
+                            GoogleDriveService.getWebsiteScreenshot($scope.Post.Link).then(function(response) {
+                                console.log(response)
+                                $timeout(function() {
+                                    $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
+                                    $scope.previewLoading = false;
+                                    document.dispatchEvent(new window.Event('urlPreviewLoaded'));
+                                })
+                            }, function(error) {
+                                console.log(error)
+                                $timeout(function() {
+                                    $scope.Post.PreviewImage = "https://www.techtricksworld.com/wp-content/uploads/2015/12/Error-404.png"
+                                    $scope.previewLoading = false;
+                                    document.dispatchEvent(new window.Event('urlPreviewLoaded'));
+                                })
+                            })
                         });
                     });
                 } else {
