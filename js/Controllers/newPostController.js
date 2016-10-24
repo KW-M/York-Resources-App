@@ -101,7 +101,7 @@
             } else if ($scope.Post.Link.length > 9) {
                 $scope.Post.Link = "http://" + $scope.Post.Link;
                 $scope.Post.Type = 'Link';
-                $scope.findType();
+                //$scope.findType();
             } else {
                 $scope.Post.Type = 'NoLink';
             }
@@ -181,6 +181,11 @@
                 });
             }
         }
+
+$scope.clearLink = function() {
+    $scope.Post.Link = ""
+    $scope.Post.Type = "NoLink"
+}
 
         $scope.closeDialog = function() {
             $mdDialog.hide();
