@@ -134,7 +134,7 @@
             if (typeof(linkChangeTimer) == 'number') {
                 clearTimeout(linkChangeTimer);
             }
-            linkChangeTimer = setTimeout($scope.findType())
+            linkChangeTimer = setTimeout($scope.findType(), 500)
         })
 
         $scope.isReadyToSubmit = function() {
@@ -206,7 +206,6 @@
         }
 
         $scope.clearLink = function() {
-            console.log('clearlink')
             $timeout(function() {
                 $scope.Post.Link = ""
                 $scope.Post.Type = "NoLink"
