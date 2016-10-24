@@ -1,6 +1,7 @@
     /* we don't define the "new post controller" here because it was alredy
                                                                                                defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $timeout, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
+       var likeChangeTimer = null;
         $timeout(function() {
             $scope.Post = {
                 Title: postObj.Title || '',
@@ -105,6 +106,15 @@
                 $scope.Post.Type = 'NoLink';
             }
         };
+        
+        $watch(function(){
+            if(typeof(linkChangeTimer) == 'number') {
+                clearTimeout(linkChangeTimer);
+            }
+		    linkChangeTimer = setTimeout(function() {
+		        
+		    })
+        })
 
         $scope.isReadyToSubmit = function() {
             if ($scope.Post.Class.Name === '' || $scope.Post.Class === undefined) {
