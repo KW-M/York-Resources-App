@@ -347,8 +347,10 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
       }
    }
 
-   $scope.DriveErrorHandeler = function(error, callback){
-      
+   $window.DriveErrorHandeler = function(error, callback){
+      if (callback) {
+         
+      }
       callback(error)
    }
    //----------------------------------------------------
