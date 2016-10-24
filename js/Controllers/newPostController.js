@@ -88,7 +88,7 @@
                         } else {
                             console.log('notImage')
                             GoogleDriveService.getWebsiteScreenshot($scope.Post.Link).then(function(response) {
-                                console.log(res)
+                                console.log(response)
                                 $timeout(function() {
                                     $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
                                     $scope.previewLoading = false;
@@ -206,8 +206,10 @@
         }
 
         $scope.clearLink = function() {
-            $scope.Post.Link = ""
+            $timeout(function() {
+                            $scope.Post.Link = ""
             $scope.Post.Type = "NoLink"
+            })
         }
 
         $scope.closeDialog = function() {
