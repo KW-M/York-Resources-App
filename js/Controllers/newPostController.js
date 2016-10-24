@@ -206,6 +206,7 @@
         }
 
         $scope.clearLink = function() {
+            console.log('clearlink')
             $timeout(function() {
                 $scope.Post.Link = ""
                 $scope.Post.Type = "NoLink"
