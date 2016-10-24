@@ -150,6 +150,7 @@
 
         $scope.$watch('Post.Link', function() {
             if (typeof(linkChangeTimer) == 'number') {
+                console.log('clearingtimer')
                 clearTimeout(linkChangeTimer);
             }
             linkChangeTimer = setTimeout($scope.findType(), 500)
