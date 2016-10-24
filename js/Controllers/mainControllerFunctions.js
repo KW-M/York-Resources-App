@@ -348,10 +348,21 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
    }
 
    $window.DriveErrorHandeler = function(error, callback){
+      if(error.hasOwnProperty('expectedDomain')) {
+                        $mdDialog.show($mdDialog.alert({
+                        title: 'Sorry.',
+                        htmlContent: "<p>York Study Resources only works with York Google accounts right now.</p><p>If you have an email account ending with @york.org, please login with it, or ask Mr.Brookhouser if you don't have one.<p>",
+                        ok: 'Ok'
+                    })).then(function() {
+                        angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
+                        setTimeout(function() {
+                            angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
+                        }, 500);
+                    });
+            }
       if (callback) {
-         
+         callback(error)
       }
-      callback(error)
    }
    //----------------------------------------------------
    //--------- loading and filtering posts --------------

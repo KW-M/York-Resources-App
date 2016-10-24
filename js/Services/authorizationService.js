@@ -25,7 +25,7 @@ function authService($mdDialog) {
             // Handle the initial sign-in state.
             updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
             datButton.style.display = 'inline-block';
-            signinButton[0].addEventListener("click", handleSigninClick);
+            signinButton[0].addEventListener("click", self.handleSigninClick());
         });
 
         function updateSigninStatus(isSignedIn) {
@@ -85,7 +85,7 @@ function authService($mdDialog) {
         signinDialog.removeClass('fadeOut');
     };
 
-    function handleSigninClick(event) {
+    this.handleSigninClick = function() {
         gapi.auth2.getAuthInstance().signIn().then(function() {},function(error){
             console.log(error)
              gapi.auth2.getAuthInstance().signOut();
@@ -109,7 +109,6 @@ function authService($mdDialog) {
     }
 
     this.getAuthToken = function() {
-        console.log()
         return(gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true).access_token)
     }
 }
