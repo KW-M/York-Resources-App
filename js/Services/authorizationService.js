@@ -73,15 +73,7 @@ function authService($mdDialog) {
     };
 
     this.handleSigninClick = function() {
-        console.log('signing in')
         gapi.auth2.getAuthInstance().signIn()
-            .then(null, function(error){
-                console.log(error)
-                 gapi.auth2.getAuthInstance().signOut();
-                if(error.hasOwnProperty('expectedDomain')) {
-                    self.showNonYorkDialog(); 
-                }
-            });
     }
 
     this.handleSignoutClick = function(event) {
@@ -106,5 +98,10 @@ function authService($mdDialog) {
         });
     }
     
-    function handleError(error) {console.log(error)}
+    function handleError(error) {
+        console.log(error)
+        if(error.hasOwnProperty('expectedDomain')) {
+            self.showNonYorkDialog(); 
+        }
+    }
 }
