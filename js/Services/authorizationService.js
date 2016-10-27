@@ -25,7 +25,7 @@ function authService($mdDialog) {
             // Handle the initial sign-in state.
             updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
             datButton.style.display = 'inline-block';
-            signinButton[0].addEventListener("click", self.handleSigninClick());
+            signinButton[0].addEventListener("click", self.handleSigninClick);
         });
 
         function updateSigninStatus(isSignedIn) {
@@ -89,24 +89,25 @@ function authService($mdDialog) {
 
     this.handleSigninClick = function() {
         console.log('signing in')
-        gapi.auth2.getAuthInstance().signIn().then(function() {
-            console.log('signed in 1')
-        },function(error){
-            console.log(error)
-             gapi.auth2.getAuthInstance().signOut();
-            if(error.hasOwnProperty('expectedDomain')) {
-                        $mdDialog.show($mdDialog.alert({
-                        title: 'Sorry.',
-                        htmlContent: "<p>York Study Resources only works with York Google accounts right now.</p><p>If you have an email account ending with @york.org, please login with it, or ask Mr.Brookhouser if you don't have one.<p>",
-                        ok: 'Ok'
-                    })).then(function() {
-                        angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
-                        setTimeout(function() {
-                            angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
-                        }, 500);
-                    });
-            }
-        });
+         gapi.auth2.getAuthInstance().signIn()
+        //.then(function() {
+        //     console.log('signed in 1')
+        // },function(error){
+        //     console.log(error)
+        //      gapi.auth2.getAuthInstance().signOut();
+        //     if(error.hasOwnProperty('expectedDomain')) {
+        //                 $mdDialog.show($mdDialog.alert({
+        //                 title: 'Sorry.',
+        //                 htmlContent: "<p>York Study Resources only works with York Google accounts right now.</p><p>If you have an email account ending with @york.org, please login with it, or ask Mr.Brookhouser if you don't have one.<p>",
+        //                 ok: 'Ok'
+        //             })).then(function() {
+        //                 angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
+        //                 setTimeout(function() {
+        //                     angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
+        //                 }, 500);
+        //             });
+        //     }
+        // });
     }
 
     this.handleSignoutClick = function(event) {
