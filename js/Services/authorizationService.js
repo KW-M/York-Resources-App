@@ -15,7 +15,7 @@ function authService($mdDialog) {
         gapi.auth2.init({
             client_id: '475444543746-e3r02g1o1o71kliuoohah04ojqbmo22e.apps.googleusercontent.com',
             scope: 'https://www.googleapis.com/auth/drive',
-            fetch_basic_profile: true,
+            fetch_basic_profile: false,
             hosted_domain: 'york.org'
         }).then(function(googleauth) {
             var authinstance = gapi.auth2.getAuthInstance()
