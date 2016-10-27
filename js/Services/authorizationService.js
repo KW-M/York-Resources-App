@@ -23,7 +23,7 @@ function authService($mdDialog) {
             authinstance.isSignedIn.listen(updateSigninStatus);
             // Handle the initial sign-in state.
             updateSigninStatus(authinstance.isSignedIn.get());
-            // sign in prompt if sign in button is clicked
+            // show sign in prompt if sign in button is clicked
             authinstance.attachClickHandler(signinButton[0], null, self.handleSigninClick(), function(error) {
                 console.log(error)
             })
@@ -77,24 +77,13 @@ function authService($mdDialog) {
     this.handleSigninClick = function() {
         console.log('signing in')
         gapi.auth2.getAuthInstance().signIn()
-            //.then(function() {
-            //     console.log('signed in 1')
-            // },function(error){
-            //     console.log(error)
-            //      gapi.auth2.getAuthInstance().signOut();
-            //     if(error.hasOwnProperty('expectedDomain')) {
-            //                 $mdDialog.show($mdDialog.alert({
-            //                 title: 'Sorry.',
-            //                 htmlContent: "<p>York Study Resources only works with York Google accounts right now.</p><p>If you have an email account ending with @york.org, please login with it, or ask Mr.Brookhouser if you don't have one.<p>",
-            //                 ok: 'Ok'
-            //             })).then(function() {
-            //                 angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
-            //                 setTimeout(function() {
-            //                     angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
-            //                 }, 500);
-            //             });
-            //     }
-            // });
+            .then(null, function(error){
+                console.log(error)
+                 gapi.auth2.getAuthInstance().signOut();
+                if(error.hasOwnProperty('expectedDomain')) {
+                    self.showNonYorkDialog(); 
+                }
+            });
     }
 
     this.handleSignoutClick = function(event) {
@@ -105,13 +94,13 @@ function authService($mdDialog) {
         return (gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true).access_token)
     }
 
-    function showNonYorkDialog() {
+    this.showNonYorkDialog = function() {
+        gapi.auth2.getAuthInstance().signOut();
         $mdDialog.show($mdDialog.alert({
             title: 'Sorry.',
             htmlContent: "<p>York Study Resources only works with York Google accounts right now.</p><p>If you have an email account ending with @york.org, please login with it, or ask Mr.Brookhouser if you don't have one.<p>",
             ok: 'Ok'
         })).then(function() {
-            gapi.auth2.getAuthInstance().signOut();
             angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
             setTimeout(function() {
                 angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
