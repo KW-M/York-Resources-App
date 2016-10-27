@@ -3,7 +3,7 @@ app.service('authorizationService', authService);
 function authService($mdDialog) {
     var self = this;
     var clientId = '475444543746-e3r02g1o1o71kliuoohah04ojqbmo22e.apps.googleusercontent.com';
-    var apiKey = 'AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo';
+   // var apiKey = 'AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo';
     var scopes = 'https://www.googleapis.com/auth/drive';
 
     var signinButton = angular.element(document.getElementById('signin_button'));
@@ -13,14 +13,16 @@ function authService($mdDialog) {
     var signoutButton = angular.element(document.getElementById('signout_button'));
 
     this.initilize = function(callback) {
-        gapi.client.setApiKey(apiKey);
+        //gapi.client.setApiKey(apiKey);
         gapi.auth2.init({
             client_id: clientId,
             scope: scopes,
-            fetch_basic_profile: false,
+           // fetch_basic_profile: false,
             hosted_domain: 'york.org'
         }).then(function(googleauth) {
             var authinstance = gapi.auth2.getAuthInstance()
+            console.log(googleauth)
+            console.log(authinstance)
             // Listen for sign-in state changes.
             authinstance.isSignedIn.listen(updateSigninStatus);
             // Handle the initial sign-in state.
