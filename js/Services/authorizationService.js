@@ -17,7 +17,7 @@ function authService($mdDialog) {
         gapi.auth2.init({
             client_id: clientId,
             scope: scopes,
-           // fetch_basic_profile: false,
+            fetch_basic_profile: false,
             hosted_domain: 'york.org'
         }).then(function(googleauth) {
             var authinstance = gapi.auth2.getAuthInstance()
