@@ -29,7 +29,9 @@ function authService($mdDialog) {
         });
 
         function updateSigninStatus(isSignedIn) {
+            console.log('signed in testing')
             if (isSignedIn) {
+                console.log('signed in 2')
                 var authInstance = gapi.auth2.getAuthInstance()
                 var currentUser = authInstance.currentUser.get()
                 var accountDomain = currentUser.getHostedDomain()
@@ -86,7 +88,10 @@ function authService($mdDialog) {
     };
 
     this.handleSigninClick = function() {
-        gapi.auth2.getAuthInstance().signIn().then(function() {},function(error){
+        console.log('signing in')
+        gapi.auth2.getAuthInstance().signIn().then(function() {
+            console.log('signed in 1')
+        },function(error){
             console.log(error)
              gapi.auth2.getAuthInstance().signOut();
             if(error.hasOwnProperty('expectedDomain')) {
