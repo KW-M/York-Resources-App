@@ -14,7 +14,7 @@ function authService($mdDialog) {
         //gapi.client.setApiKey(apiKey);
         gapi.auth2.init({
             client_id: '475444543746-e3r02g1o1o71kliuoohah04ojqbmo22e.apps.googleusercontent.com',
-            scope: 'https://www.googleapis.com/auth/drive',
+            scope: 'https://www.googleapis.com/auth/drive email',
             fetch_basic_profile: false,
             hosted_domain: 'york.org'
         }).then(function(googleauth) {
