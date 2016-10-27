@@ -19,13 +19,14 @@ function authService($mdDialog) {
             scope: scopes,
             fetch_basic_profile: false,
             hosted_domain: 'york.org'
-        }).then(function(input) {
+        }).then(function(googleauth) {
+            var authinstance = gapi.auth2.getAuthInstance()
             // Listen for sign-in state changes.
-            gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+            authinstance.isSignedIn.listen(updateSigninStatus);
             // Handle the initial sign-in state.
-            updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+            updateSigninStatus(authinstance.isSignedIn.get());
             datButton.style.display = 'inline-block';
-            signinButton[0].addEventListener("click", self.handleSigninClick);
+            authinstance.signinButton[0].addEventListener("click", self.handleSigninClick);
         });
 
         function updateSigninStatus(isSignedIn) {
