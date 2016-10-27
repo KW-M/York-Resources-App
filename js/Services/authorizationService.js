@@ -25,8 +25,9 @@ function authService($mdDialog) {
             authinstance.isSignedIn.listen(updateSigninStatus);
             // Handle the initial sign-in state.
             updateSigninStatus(authinstance.isSignedIn.get());
-            datButton.style.display = 'inline-block';
-            authinstance.attachClickHandler(signinButton[0],null, self.handleSigninClick, function(error){console.log(error)})
+            gapi.auth2.getAuthInstance().signIn()
+            //datButton.style.display = 'inline-block';
+            //authinstance.attachClickHandler(signinButton[0],null, self.handleSigninClick, function(error){console.log(error)})
         });
 
         function updateSigninStatus(isSignedIn) {
