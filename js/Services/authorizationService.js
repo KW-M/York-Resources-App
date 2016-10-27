@@ -18,7 +18,7 @@ function authService($mdDialog) {
             client_id: clientId,
             scope: scopes,
             fetch_basic_profile: false,
-            //hosted_domain: 'york.org'
+            hosted_domain: 'york.org'
         }).then(function(input) {
             // Listen for sign-in state changes.
             gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
@@ -36,6 +36,8 @@ function authService($mdDialog) {
                 var currentUser = authInstance.currentUser.get()
                 var accountDomain = currentUser.getHostedDomain()
                 console.log(currentUser)
+                                    callback();
+                    self.hideSigninButton();
                 // if (accountDomain === 'york.org') {
                 //     console.log("User's Domain: " + accountDomain);
 
