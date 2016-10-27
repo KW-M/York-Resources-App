@@ -17,17 +17,15 @@ function authService($mdDialog) {
             scope: 'https://www.googleapis.com/auth/drive email',
             fetch_basic_profile: false,
             hosted_domain: 'york.org'
-        }).then(function(googleauth) {
+        }).then(function() {
             var authinstance = gapi.auth2.getAuthInstance()
-            console.log(googleauth)
-            console.log(authinstance)
             // Listen for sign-in state changes.
             authinstance.isSignedIn.listen(updateSigninStatus);
             // Handle the initial sign-in state.
             updateSigninStatus(authinstance.isSignedIn.get());
-            gapi.auth2.getAuthInstance().signIn()
-            //datButton.style.display = 'inline-block';
-            //authinstance.attachClickHandler(signinButton[0],null, self.handleSigninClick, function(error){console.log(error)})
+            // sign in prompt if sign in button is clicked
+            authinstance.attachClickHandler(signinButton[0], null, self.handleSigninClick(), function(error){console.log(error)})
+            datButton.style.display = 'inline-block';
         });
 
         function updateSigninStatus(isSignedIn) {
