@@ -78,6 +78,13 @@ function authService($mdDialog) {
 
     this.handleSignoutClick = function(event) {
         gapi.auth2.getAuthInstance().signOut();
+        var logout = document.createElement("img");
+        logout.setAttribute("src", "https://mail.google.com/mail/u/0/?logout&hl=en");
+        logout.style.display = "none";
+        var logoutImg = document.body.appendChild(logout);
+        logoutImg.onload = function(){
+            console.log("loaded")
+        }
     }
 
     this.getAuthToken = function() {
