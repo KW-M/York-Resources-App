@@ -2,7 +2,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 
 	var likeClickTimer = {};
 	var bookmarkClickTimer = {};
-	
+
 	function findPostById(id, array) {
 		console.log({
 			id: id,
@@ -14,7 +14,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			}
 		}
 	}
-	
+
 	function findItemInArray(value, array) {
 		for (var item = 0; item < array.length; item++) {
 			if (array[item] === value) {
@@ -127,7 +127,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 				Bookmarked: DriveMetadata.starred || false,
 			}
 			console.log(formatedPost)
-			if(formatedPost.Type === 'GDrive'){
+			if (formatedPost.Type === 'GDrive') {
 				//get thumbnail
 			}
 			return (formatedPost)
@@ -168,46 +168,46 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	//----------------------------------------------------
 	//-------------- Filtering & Sorting -----------------
 	$scope.filterPosts = function(inputSet) {
-      var output = inputSet.filter(function(post) {
-         if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
-            var Flagged = post.Flagged === $scope.queryParams.flagged || post.Flagged;
-         } else {
-            var Flagged = true;
-         }
-         if ($scope.queryParams.classpath !== null && $scope.queryParams.classpath !== undefined && $scope.queryParams.classpath !== 'my-posts' && $scope.queryParams.classpath !== 'my-bookmarks' && $scope.queryParams.classpath !== 'all-posts' && $scope.queryParams.classpath !== 'flagged') {
-            var Class = post.Class.Name === $scope.queryParams.classpath;
-         } else {
-         	var Class = post.Class.Name != 'memes';	
-         }
-         if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) {
-            var Type = post.Type === $scope.queryParams.type;
-         } else {
-            var Type = true;
-         }
-         if ($scope.queryParams.bookmarked !== null && $scope.queryParams.bookmarked !== undefined) {
-            var Bookmarked = post.Bookmarked === $scope.queryParams.bookmarked;
-         } else {
-            var Bookmarked = true;
-         }
-         if ($scope.queryParams.creatorEmail !== null && $scope.queryParams.creatorEmail !== undefined) {
-            var Creator = post.Creator.Email === $scope.queryParams.creatorEmail;
-         } else {
-            var Creator = true;
-         }
-         // console.log({
-         //    filteredPost: post,
-         //    Flagged: Flagged,
-         //    Class: Class,
-         //    Type: Type,
-         //    Bookmarked: Bookmarked,
-         //    Creator: Creator,
-         // });
-         return Flagged && Class && Type && Creator && Bookmarked;
-      });
-      return ($scope.sortByDateAndLikes(output))
-   }
+		var output = inputSet.filter(function(post) {
+			if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
+				var Flagged = post.Flagged === $scope.queryParams.flagged || post.Flagged;
+			} else {
+				var Flagged = true;
+			}
+			if ($scope.queryParams.classpath !== null && $scope.queryParams.classpath !== undefined && $scope.queryParams.classpath !== 'my-posts' && $scope.queryParams.classpath !== 'my-bookmarks' && $scope.queryParams.classpath !== 'all-posts' && $scope.queryParams.classpath !== 'flagged') {
+				var Class = post.Class.Name === $scope.queryParams.classpath;
+			} else {
+				var Class = post.Class.Name != 'memes';
+			}
+			if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) {
+				var Type = post.Type === $scope.queryParams.type;
+			} else {
+				var Type = true;
+			}
+			if ($scope.queryParams.bookmarked !== null && $scope.queryParams.bookmarked !== undefined) {
+				var Bookmarked = post.Bookmarked === $scope.queryParams.bookmarked;
+			} else {
+				var Bookmarked = true;
+			}
+			if ($scope.queryParams.creatorEmail !== null && $scope.queryParams.creatorEmail !== undefined) {
+				var Creator = post.Creator.Email === $scope.queryParams.creatorEmail;
+			} else {
+				var Creator = true;
+			}
+			// console.log({
+			//    filteredPost: post,
+			//    Flagged: Flagged,
+			//    Class: Class,
+			//    Type: Type,
+			//    Bookmarked: Bookmarked,
+			//    Creator: Creator,
+			// });
+			return Flagged && Class && Type && Creator && Bookmarked;
+		});
+		return ($scope.sortByDateAndLikes(output))
+	}
 	$scope.sortByDateAndLikes = function(arrayToSort) {
-		return(arrayToSort.sort(function(a, b) {
+		return (arrayToSort.sort(function(a, b) {
 			console.log(b.UpdateDate.addDays(b.Likes.length))
 			return b.UpdateDate.addDays(b.Likes.length) - a.UpdateDate.addDays(a.Likes.length);
 		}));
@@ -289,29 +289,33 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			content.userLiked = false;
 			content.Likes.splice(userLikeIndex, 1);
 		}
-		if(typeof(likeClickTimer[content.Id]) == 'number') {
-            clearTimeout(likeClickTimer[content.Id]);
-        }
+		if (typeof(likeClickTimer[content.Id]) == 'number') {
+			clearTimeout(likeClickTimer[content.Id]);
+		}
 		likeClickTimer[content.Id] = setTimeout(function() {
 			var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
 			allArrayPost.userLiked = content.userLiked;
 			allArrayPost.Likes = content.Likes;
 			var name = allArrayPost.Likes.length + "{]|[}" + JSON.stringify(allArrayPost.Likes)
 			console.log(name);
-			queue(GoogleDriveService.updateFileMetadata(content.Id, {name:name}),function(result) {
+			queue(GoogleDriveService.updateFileMetadata(content.Id, {
+				name: name
+			}), function(result) {
 				console.log(result);
 			});
 		}, 2000);
 	};
 	$scope.bookmark = function(content) {
 		content.Bookmarked = !content.Bookmarked;
-		if(typeof(bookmarkClickTimer[content.Id]) == 'number') {
-            clearTimeout(bookmarkClickTimer[content.Id]);
-        }
+		if (typeof(bookmarkClickTimer[content.Id]) == 'number') {
+			clearTimeout(bookmarkClickTimer[content.Id]);
+		}
 		bookmarkClickTimer[content.Id] = setTimeout(function() {
 			var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
 			allArrayPost.Bookmarked = content.Bookmarked;
-			queue(GoogleDriveService.updateFileMetadata(content.Id, {starred: content.Bookmarked}), function(result) {
+			queue(GoogleDriveService.updateFileMetadata(content.Id, {
+				starred: content.Bookmarked
+			}), function(result) {
 				console.log("bookmarked: " + content.Id);
 			});
 		}, 2000);
@@ -358,12 +362,36 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		$mdDialog.hide();
 	};
 	//----------------------------------------------------
-	//----------------- Error Handling -------------------	
-	window.checkAuthToken = function(){
-		
+	//----------------- Error Handling -------------------
+	window.DriveErrorHandeler = function(error, callback) {
+		console.log(error);
+		if (error.hasOwnProperty('expectedDomain')) {
+			gapi.auth2.getAuthInstance().signOut();
+			$mdDialog.show($mdDialog.alert({
+				title: 'Sorry.',
+				htmlContent: "<p>York Study Resources only works with York Google accounts right now.</p><p>If you have an email account ending with @york.org, please login with it, or ask Mr.Brookhouser if you don't have one.<p>",
+				ok: 'Ok'
+			})).then(function() {
+				angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
+				setTimeout(function() {
+					angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
+				}, 500);
+			});
+		}
+		if (error.hasOwnProperty('result')) {
+			if (error.result.error.message == 'Invalid Credentials') {
+				//console.log(authorizationService.getAuthToken())
+			}
+		}
+		if (callback) {
+			callback(error)
+		}
 	}
-	//----------------------------------------------------
-	//---------------------- dev -------------------------
+	window.checkAuthToken = function() {
+
+		}
+		//----------------------------------------------------
+		//---------------------- dev -------------------------
 	$scope.consoleLog = function(input, asAlert) {
 		console.log(input)
 		if (asAlert) {
