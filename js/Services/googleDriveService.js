@@ -76,6 +76,7 @@ app.service('GoogleDriveService', ['$q','$http', function($q,$http) {
 
     this.getListOfFlies = function(query, pageToken, pageSize) {
         var query = query || "";
+        console.log("gettingFIles")
         return (gapi.client.drive.files.list({
             pageSize: pageSize,
             pageToken: pageToken,
