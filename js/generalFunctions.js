@@ -27,6 +27,9 @@
   // Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
   function queue(typeName, promise, action, error, interval) {
     typeName = typeName || 'general'
+    if(!theQueue[typeName]) {
+      theQueue[typeName] = [];
+    }
     theQueue[typeName].push({
       Promise: promise,
       Action: action,
@@ -39,6 +42,7 @@
   };
 
   function processTheQueue(typeName) {
+    console.log('processing'+typeName)
     var item = theQueue[typeName].shift();
     if (item) {
       var delay = 0;
@@ -208,8 +212,8 @@
       return result;
     }
   }
-  
-  
+
+
 
 
 var caesarShift = function(str, amount) {
