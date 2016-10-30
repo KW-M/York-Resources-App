@@ -372,7 +372,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
                   //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
                   formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[fileCount]) //format and save the new post to the formatted files list array
                   deDuplicationIndex[fileList.result.files[fileCount].id] = 1; //mark this id as used with a "1".
-               console.log(formattedFileList)
                }
                if ($scope.queryParams.q) {
                   formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[fileCount]) //format and save the new post to the formatted files list array
@@ -431,6 +430,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
    }
 
    function sortPostsByType(formattedFileList, queryString) {
+      console.log($scope.queryParams.q)
       if ($scope.queryParams.q) {
          if ($scope.queryParams.q === $scope.previousSearch) {
             $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
