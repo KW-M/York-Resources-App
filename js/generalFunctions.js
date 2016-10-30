@@ -38,7 +38,7 @@
     if (!timer[typeName]) {
       console.log('noTimer'+timer[typeName])
       processTheQueue(typeName); // start immediately on the first invocation
-      timer[typeName] = setInterval(processTheQueue(typeName), interval || 150);
+      timer[typeName] = setInterval(function(){processTheQueue(typeName)}, interval || 150);
     } else {
       console.log('isTimer'+timer[typeName])
     }
