@@ -84,8 +84,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		try {
 			console.log(DriveMetadata)
 			var likesAndFlagged = DriveMetadata.name.split("{]|[}"); //not flagged any more
-						console.log('convertingPost2')
-			var descriptionAndPreviewimage = DriveMetadata.description.split("{]|[}");
+			if (DriveMetadata.description) {
+				var descriptionAndPreviewimage = DriveMetadata.description.split("{]|[}");
+			}
 			if (DriveMetadata.properties.Tag1 || DriveMetadata.properties.Tag2) {
 				var tags = JSON.parse(("[\"" + (DriveMetadata.properties.Tag1 || '') + (DriveMetadata.properties.Tag2 || '') + "\"]").replace(/,/g, "\",\""));
 			} else {
@@ -96,7 +97,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			} else {
 				var hasLiked = true;
 			}
-					console.log('convertingPost3')
+			console.log('convertingPost3')
 			formatedPost = {
 				Title: DriveMetadata.properties.Title || '',
 				Description: descriptionAndPreviewimage[0] || '',
@@ -131,8 +132,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			}
 			return (formatedPost)
 		} catch (e) {
-			return (formatedPost);
 			console.log(e)
+			return (formatedPost);
 		}
 	};
 	$scope.convertPostToDriveMetadata = function(Post) {
