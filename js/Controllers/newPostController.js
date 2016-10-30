@@ -59,7 +59,7 @@
                 if (driveId) {
                     $scope.Post.Type = 'gDrive';
                     $scope.Post.AttachmentId = driveId[1]
-                    queue(GoogleDriveService.getFileThumbnail($scope.Post.AttachmentId), function(response) {
+                    queue('drive',GoogleDriveService.getFileThumbnail($scope.Post.AttachmentId), function(response) {
                         var thumbnail = response.result.thumbnailLink;
                         $timeout(function() {
                             console.log(response);
@@ -76,7 +76,7 @@
                         }, function(error) {
                             console.log(error);
                             $scope.Post.Type = 'Link';
-                            GoogleDriveService.getWebsiteScreenshot($scope.Post.Link).then(function(response) {
+                            queue('screenshot',GoogleDriveService.getWebsiteScreenshot($scope.Post.Link),function(response) {
                                 console.log(response)
                                 $timeout(function() {
                                     $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
@@ -90,9 +90,9 @@
                                     $scope.previewLoading = false;
                                     document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                                 })
-                            })
+                            },10);
                         });
-                    });
+                    }, null, 150);
                 } else {
                     $scope.Post.Type = 'Link';
                     $http.head('https://jsonp.afeld.me/?url=' + $scope.Post.Link).then(function(result) {
@@ -123,7 +123,7 @@
                         }
                     }, function(error) {
                         console.log(error)
-                        GoogleDriveService.getWebsiteScreenshot($scope.Post.Link).then(function(response) {
+                        queue('screenshot',GoogleDriveService.getWebsiteScreenshot($scope.Post.Link),function(response) {
                             $timeout(function() {
                                 $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
                                 $scope.previewLoading = false;
@@ -136,7 +136,7 @@
                                 $scope.previewLoading = false;
                                 document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                             })
-                        })
+                        },10)
                     })
                 }
             } else if ($scope.Post.Link.length > 9) {
@@ -201,26 +201,26 @@
                     Post: $scope.Post,
                     Metadata: metadata
                 });
-                GoogleDriveService.AppsScriptNewFile().then(function(response) {
+                queue('other',GoogleDriveService.AppsScriptNewFile(),function(response) {
                     console.log(response)
                     console.log(metadata)
-                    queue(GoogleDriveService.updateFileMetadata(response.data, metadata), function(reply) {
+                    queue('drive',GoogleDriveService.updateFileMetadata(response.data, metadata), function(reply) {
                         console.log(reply.result);
                         $mdToast.hide();
                     }, function(error) {
                         console.warn(error);
-                    });
+                    },150);
                 }, function(error) {
                     console.warn(error)
-                });
+                },2);
             } else if (operation === 'update') {
                 var metadata = $scope.compileUpdateToMetadata();
-                queue(GoogleDriveService.updateFileMetadata(postObj.Id, metadata), function(reply) {
+                queue('drive',GoogleDriveService.updateFileMetadata(postObj.Id, metadata), function(reply) {
                     console.log(reply.result);
                     $mdToast.hide();
                 }, function(error) {
                     console.warn(error);
-                });
+                },150);
             }
         }
 

@@ -1,6 +1,6 @@
   var devMode = false;
-  var theQueue = [];
-  var timer = null;
+  var theQueue = {};
+  var timer = {};
 
   function log(input, logWithoutDevMode) {
     if (devMode === true) {
@@ -25,22 +25,21 @@
 
 
   // Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
-  function queue(promise, action, error) {
-    console.log('queuing')
-    theQueue.push({
+  function queue(typeName, promise, action, error, interval) {
+    typeName = typeName || 'general'
+    theQueue[typeName].push({
       Promise: promise,
       Action: action,
       Err: error
     });
-    if (!timer) {
-      processTheQueue(); // start immediately on the first invocation
-      timer = setInterval(processTheQueue, 150);
+    if (!timer[typeName]) {
+      processTheQueue(typeName); // start immediately on the first invocation
+      timer[typeName] = setInterval(processTheQueue(typeName), interval || 150);
     }
   };
 
-  function processTheQueue() {
-    console.log('running queuing')
-    var item = theQueue.shift();
+  function processTheQueue(typeName) {
+    var item = theQueue[typeName].shift();
     if (item) {
       var delay = 0;
       runPromise();
@@ -52,15 +51,8 @@
         // })
         thePromise.then(item.Action, function(error) {
           if (item.Err) {
-            console.log({
-              'Error': error
-            })
             item.Err(error);
           } else {
-            console.log({
-              'Error': error,
-              'BackOffCount': delay
-            })
             if (delay < 4) {
               setTimeout(function() {
                 runPromise();
@@ -73,7 +65,7 @@
       }
     }
     if (theQueue.length === 0) {
-      clearInterval(timer), timer = null;
+      clearInterval(timer[typeName]), timer[typeName] = null;
     }
   }
 

@@ -353,6 +353,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		$mdDialog.hide();
 	};
 	//----------------------------------------------------
+	//----------------- Error Handling -------------------	
+	window.checkAuthToken = function(){
+		
+	}
+	//----------------------------------------------------
 	//---------------------- dev -------------------------
 	$scope.consoleLog = function(input, asAlert) {
 		console.log(input)
