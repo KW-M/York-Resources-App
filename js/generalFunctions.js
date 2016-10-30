@@ -71,7 +71,7 @@
         });
       }
     }
-    if (theQueue.length === 0) {
+    if (theQueue[typeName].length === 0) {
       clearInterval(timer[typeName]), timer[typeName] = null;
     }
   }
