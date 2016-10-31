@@ -451,6 +451,9 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
 
    //----------------------------------------------------
    //---------------- Event Watchers --------------------
+   $scope.$watch('searchInputTxt', function() {
+      if
+   })
    // The md-select directive eats keydown events for some quick select
    // logic. Since we have a search input here, we don't need that logic.
    // var selectSearchInput = angular.element(document.getElementById('class_select_input'))
