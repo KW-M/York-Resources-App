@@ -133,7 +133,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
       }
       $scope.getFiles();
       getFileTimer = setInterval(function(){
-         console.log(content_container)
+         console.log('sh ' + content_container.scrollHeight + 'ch ' + content_container.clientHeight)
          if(conurancy_counter == 0) {
             $scope.getFiles()
          }
