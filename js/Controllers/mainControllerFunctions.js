@@ -4,10 +4,12 @@ app.controller('ApplicationController', controllerFunction)
 function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $timeout, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, angularGridInstance) {
    var self = this;
    var content_container = document.getElementById("content_container");
+   var layout_grid = document.getElementById("layout_grid");
    var loading_spinner = document.getElementById("loading_spinner");
    var no_more_footer = document.getElementById("no_more_footer");
    var no_posts_footer = document.getElementById("no_posts_footer");
    var footer_problem = document.getElementById("footer_problem");
+   
    var drivePicker, uploadPicker;
    var conurancy_counter = 0
    var performantScrollEnabled = false;
@@ -409,6 +411,8 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
             if ($scope.visiblePosts.length > 0) {
                no_more_footer.style.display = 'block';
             } else {
+               console.log
+               layout_grid.style.height = '0px';
                no_posts_footer.style.display = 'block';
             }
          }, 100)

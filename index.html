@@ -95,7 +95,7 @@
                 </span>
                 <add-bar-top></add-bar-top>
                 <div>
-                    <div angular-grid="visiblePosts" id="layout_Grid" ag-gutter-size="8" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="getFiles()">
+                    <div angular-grid="visiblePosts" id="layout_grid" ag-gutter-size="8" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="getFiles()">
                         <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}" class="post-card raise-on-hover">
                             <md-button style="position: absolute; top: -14px; right: -6px; z-index: 1" class="md-icon-button md-accent" ng-click="bookmark(Post)">
                                 <md-icon class="postBookmarkIcon" ng-hide="Post.Bookmarked === false" style="text-shadow: 0px 1px 5px rgba(0,0,0,0.6);">bookmark</md-icon>
