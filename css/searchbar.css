@@ -15,7 +15,7 @@
         font-size: 14px;
     }
     
-    .search-icon {
+    md-icon.search-bar-icon {
         position: absolute;
         color: #757575;
         z-index: 60;
