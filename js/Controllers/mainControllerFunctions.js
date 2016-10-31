@@ -76,6 +76,8 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
       $scope.queryParams.q = $location.search().q || null;
       $scope.queryParams.classpath = $location.path().replace(/\//g, "") || 'all-posts';
       $scope.queryParams.id = $location.hash();
+      
+      $scope.searchInputTxt = $scope.queryParams.q;
 
       no_more_footer.style.display = 'none';
       no_posts_footer.style.display = 'none';
@@ -452,7 +454,11 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
    //----------------------------------------------------
    //---------------- Event Watchers --------------------
    $scope.$watch('searchInputTxt', function() {
-      if
+      if ($scope.searchInputTxt != $scope.queryParams.q) {
+         $scope.gotoRoute({
+            q: $scope.searchInputTxt
+         })
+      }
    })
    // The md-select directive eats keydown events for some quick select
    // logic. Since we have a search input here, we don't need that logic.
