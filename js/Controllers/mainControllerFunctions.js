@@ -430,7 +430,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
    }
 
    function sortPostsByType(formattedFileList, queryString) {
-      console.log($scope.queryParams.q)
+      console.log($scope.queryParams)
       if ($scope.queryParams.q) {
          if ($scope.queryParams.q === $scope.previousSearch) {
             $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
@@ -480,6 +480,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
       //    $scope.angularGridOptions.performantScroll = false;
       //    performantScrollEnabled = false;
       // }
+      console.log('resize'+)
       if ($mdMedia('gt-sm')) {
          $mdSidenav('sidenav_overlay').close();
       }
