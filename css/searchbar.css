@@ -6,7 +6,7 @@
     }
     
     .search-bar {
-        padding-left: 52px;
+        padding: 0 52px 0 40px;
         border: none;
         outline: none;
         border-radius: 4px;
@@ -15,7 +15,7 @@
         font-size: 14px;
     }
     
-    md-icon.search-bar-icon {
+    md-icon.material-icons.search-bar-icon {
         position: absolute;
         color: #757575;
         z-index: 60;
@@ -32,14 +32,14 @@
         padding: 0;
         transform: scale(0.1);
         opacity: 0;
-        pointer-events:
+        pointer-events:none;
         transition: opacity ease 200ms, transform ease 200ms;
     }
     
     .md-button.md-icon-button.search-bar-close-button.has-text {
         transform: scale(1);
-        opacity: 0;
-        transition: opacity ease 200ms, transform ease 200ms;
+        opacity: 1;
+        pointer-events: inherit;
     }
     
     md-autocomplete.searchBar {
