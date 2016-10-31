@@ -1,29 +1,4 @@
 <md-icon style="position: absolute;color: #757575;z-index: 60;pointer-events: none;margin: 8px 15px;">search</md-icon>
-<md-autocomplete class="searchBar md-accent" md-search-text="searchTxt" md-search-text-change="gotoRoute({q: searchTxt})" md-item-text="searchTxt" md-delay="300" md-min-length="0" md-items="ui in searchExtra" md-autoselect="false" md-select-on-match="false"
-   md-require-match="false" placeholder="{{searchPlaceholder}}" md-menu-class="search-menu-style">
-   <md-item-template>
-      <span>
-         <span>
-            <span>Class:</span>
-            <class-select-menu></class-select-menu>
-         </span>
-         <span>
-               <span>Type:</span>
-               <md-button class="md-icon-button"><md-icon>link</md-icon></md-button>
-               <md-button class="md-icon-button"><md-icon>short_text</md-icon></md-button>
-               <md-button class="md-icon-button"><md-icon>insert_drive_file</md-icon></md-button>
-               <md-button class="md-icon-button"><md-icon><img style="height: 24px; width: 24px; opacity: 0.6;" src="./images/quizlet logo.png"></img></md-icon></md-button>
-         </span>
-         <span>
-            <span>Creator:</span>
-            <md-input-container md-no-float style="margin: 6px 0; height:30px">
-               <input ng-model="sideNavClassSearch" placeholder="Name or Email"/>
-            </md-input-container>
-         </span>
-      </span>
-   </md-item-template>
-   <!--<md-not-found>-->
-   <!--  No states matching "wow" were found.-->
-   <!--  <a>Create a new one!</a>-->
-   <!--</md-not-found>-->
-</md-autocomplete>
+<md-input-container md-no-float class="searchBar md-accent" >
+   <input md-delay="300" ng-model="searchTxt" placeholder="{{searchPlaceholder}}"/>
+</md-input-container>
