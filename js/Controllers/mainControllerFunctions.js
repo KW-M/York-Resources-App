@@ -9,7 +9,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
    var no_more_footer = document.getElementById("no_more_footer");
    var no_posts_footer = document.getElementById("no_posts_footer");
    var footer_problem = document.getElementById("footer_problem");
-   
+
    var drivePicker, uploadPicker;
    var conurancy_counter = 0
    var performantScrollEnabled = false;
@@ -411,7 +411,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
             if ($scope.visiblePosts.length > 0) {
                no_more_footer.style.display = 'block';
             } else {
-               console.log
+               console.log(layout_grid)
                layout_grid.style.height = '0px';
                no_posts_footer.style.display = 'block';
             }
