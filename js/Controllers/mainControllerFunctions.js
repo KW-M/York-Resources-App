@@ -11,7 +11,8 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
    var footer_problem = document.getElementById("footer_problem");
 
    var drivePicker, uploadPicker;
-   var conurancy_counter = 0
+   var getFileTimer = null;
+   var conurancy_counter = 0;
    var performantScrollEnabled = false;
 
    $scope.allPosts = [];
@@ -131,6 +132,11 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
          });
       }
       $scope.getFiles();
+      getFileTimer = setInterval(function(){
+         if(conurancy_counter == 0) {
+            getFiles()
+         }
+      },100)
    }
 
    //----------------------------------------------------
