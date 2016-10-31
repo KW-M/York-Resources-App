@@ -482,6 +482,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
          }
       })
    });
+   
    document.onkeydown = function(e) {
       if (e.altKey && e.ctrlKey && e.keyCode == 68) {
          devMode = !devMode
