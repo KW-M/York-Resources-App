@@ -5,13 +5,23 @@
         padding-left: 24px;
     }
     
-    padding-left: 52px;
-    border: none;
-    outline: none;
-    border-radius: 4px;
-    height: 40px;
-    min-width: 720px;
-    font-size: 14px;
+    .search-bar {
+        padding-left: 52px;
+        border: none;
+        outline: none;
+        border-radius: 4px;
+        height: 40px;
+        min-width: 720px;
+        font-size: 14px;
+    }
+    
+    .search-icon {
+        position: absolute;
+        color: #757575;
+        z-index: 60;
+        pointer-events: none;
+        margin: 8px 15px;
+    }
     
     md-autocomplete.searchBar {
         max-width: 720px;
