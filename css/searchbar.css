@@ -1,5 +1,5 @@
     /*---------- searchbar styles -------- */
-
+    
     search-bar {
         flex: 1;
         padding-left: 24px;
@@ -23,6 +23,17 @@
         margin: 8px 15px;
     }
     
+    .md-button.md-icon-button.search-bar-close-button {
+        left: -45px;
+        line-height: 20px;
+        min-width: 30px;
+        min-height: 30px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        padding: 0;
+    }
+    
     md-autocomplete.searchBar {
         max-width: 720px;
     }
@@ -30,10 +41,11 @@
     md-autocomplete.searchBar md-autocomplete-wrap {
         padding-left: 52px;
     }
-        
+    
     md-autocomplete.searchBar md-autocomplete-wrap input {
         padding-left: 0px;
     }
+    
     .searchBarChips md-chips-wrap.md-chips md-autocomplete button {
         display: block;
     }
@@ -53,16 +65,21 @@
     .searchbar>md-autocomplete-wrap>input:-ms-input-placeholder {
         color: #fff;
     }
+    
     .searchbar>md-autocomplete-wrap>input:focus:-ms-input-placeholder {
         color: #757575;
     }
     
-    .md-virtual-repeat-offsetter .md-autocomplete-suggestions li:hover,.md-virtual-repeat-offsetter .md-autocomplete-suggestions li:focus {
-        background-color: rgb(255,255,255)
+    .md-virtual-repeat-offsetter .md-autocomplete-suggestions li:hover,
+    .md-virtual-repeat-offsetter .md-autocomplete-suggestions li:focus {
+        background-color: rgb(255, 255, 255)
     }
+    
     .searchBar md-progress-linear ._md-container._md-mode-indeterminate {
-        background-color: rgb(170,209,249);
+        background-color: rgb(170, 209, 249);
     }
-    .searchBar md-progress-linear ._md-container._md-mode-indeterminate ._md-bar{
-        background-color: rgb(16,108,200);
+    
+    .searchBar md-progress-linear ._md-container._md-mode-indeterminate ._md-bar {
+        background-color: rgb(16, 108, 200);
     }
+    
