@@ -58,6 +58,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
          });
          $location.path(query.classPath);
       } else {
+         if(query.q = null)
          $location.search({
             q: query.q || $scope.queryParams.q
          });
@@ -453,10 +454,10 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
 
    //----------------------------------------------------
    //---------------- Event Watchers --------------------
-   $scope.$watch('searchInputTxt', function() {
-      if ($scope.searchInputTxt != $scope.queryParams.q) {
+   $scope.$watch('searchInputTxt', function (newValue) {
+      if (newValue != $scope.queryParams.q) {
          $scope.gotoRoute({
-            q: $scope.searchInputTxt
+            q: newValue
          })
       }
    })
