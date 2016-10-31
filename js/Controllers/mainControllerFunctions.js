@@ -98,7 +98,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
       } else {
          $scope.queryParams.flagged = null
          $scope.queryParams.type = null
-         $scope.queryParams.bookmarked = null
+         //$scope.queryParams.bookmarked = null
          $scope.queryParams.creatorEmail = null
       }
       if ($scope.queryParams.classpath === 'all-posts') {
