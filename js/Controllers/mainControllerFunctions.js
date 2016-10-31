@@ -51,6 +51,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
    //----------------------------------------------------
    //------------------- Routing ------------------------
    $scope.gotoRoute = function(query) {
+      console.log(query)
       if (query.classPath) {
          $scope.toggleSidebar(true);
          $location.search({
@@ -58,10 +59,15 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
          });
          $location.path(query.classPath);
       } else {
-         if(query.q = null)
-         $location.search({
-            q: query.q || $scope.queryParams.q
-         });
+         if (query.q === '') {
+            $location.search({
+               q: null
+            });
+         } else {
+            $location.search({
+               q: query.q || $scope.queryParams.q
+            });
+         }
       }
       $location.hash(query.id || null);
    };
@@ -77,7 +83,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
       $scope.queryParams.q = $location.search().q || null;
       $scope.queryParams.classpath = $location.path().replace(/\//g, "") || 'all-posts';
       $scope.queryParams.id = $location.hash();
-      
+
       $scope.searchInputTxt = $scope.queryParams.q;
 
       no_more_footer.style.display = 'none';
@@ -138,7 +144,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
       if (loaded === "drive") {
          var preUserinfo = GoogleDriveService.getUserInfo()
          console.log(preUserinfo);
-         queue('drive',preUserinfo, function(userInfo) {
+         queue('drive', preUserinfo, function(userInfo) {
             console.log(preUserinfo);
             $scope.myInfo = {
                "Name": userInfo.result.user.displayName,
@@ -146,7 +152,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
                "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
             };
             document.dispatchEvent(new window.Event('userInfoLoaded'));
-         },null,150);
+         }, null, 150);
       }
       if (loaded === "sheets") {
          if ($scope.myInfo !== undefined) {
@@ -193,7 +199,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
    }
 
    function handleUserPrefsSheet() {
-      queue('sheets',GoogleDriveService.getSpreadsheetRange('1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0', "Sheet1!A2:B", false), function(usersList) {
+      queue('sheets', GoogleDriveService.getSpreadsheetRange('1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0', "Sheet1!A2:B", false), function(usersList) {
          $scope.userList = usersList.result.values;
          for (var UserContact = 0; UserContact < $scope.userList.length; UserContact++) {
             if ($scope.userList[UserContact][0] === $scope.myInfo.Email) {
@@ -206,23 +212,23 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
          if (UserContact > 999995) {
             createUserSettings();
          }
-      },null,2);
+      }, null, 2);
 
       function getSpreadsheetRange(range) {
-         queue('sheets',GoogleDriveService.getSpreadsheetRange('1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0', range), function(spreadsheetResult) {
+         queue('sheets', GoogleDriveService.getSpreadsheetRange('1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0', range), function(spreadsheetResult) {
             var UserSettingsArray = spreadsheetResult.result.values[0];
             pushUserSettingsToScope(UserSettingsArray);
             var gg = new window.Event('sheetPrefsLoaded')
             document.dispatchEvent(gg);
-         },null,2);
+         }, null, 2);
       }
 
       function createUserSettings() {
          var newData = [$scope.myInfo.Email, $scope.myInfo.Name, false, "3/25/2016", "", "", "", 1]
-         queue('sheets',GoogleDriveService.updateSpreadsheetRange('1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0', "Sheet1!A1:A", newData, true), function(newRow) {
+         queue('sheets', GoogleDriveService.updateSpreadsheetRange('1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0', "Sheet1!A1:A", newData, true), function(newRow) {
             console.log(newRow)
             console.log(newRow.result.updates.updatedRange.match(/(?:Sheet1!A)(\d+)/g));
-         },null,2);
+         }, null, 2);
          pushUserSettingsToScope(newData);
       }
 
@@ -235,7 +241,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
          $scope.myInfo.NumberOfVisits = settingsArray[7]
       }
       listenForURLChange(); // this also Starts getting files
-      queue('sheets',GoogleDriveService.getSpreadsheetRange("1DfFUn8sgnFeLLijtKvWsd90GNcnEG6Xl5JTSeApX3bY", "Sheet1!A2:Z"), handleClassesSheet,null,2)
+      queue('sheets', GoogleDriveService.getSpreadsheetRange("1DfFUn8sgnFeLLijtKvWsd90GNcnEG6Xl5JTSeApX3bY", "Sheet1!A2:Z"), handleClassesSheet, null, 2)
    }
 
    function handleClassesSheet(rawClasses) {
@@ -368,7 +374,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
          no_more_footer.style.display = 'none';
          no_posts_footer.style.display = 'none';
          footer_problem.style.display = 'none';
-         queue('drive',GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function(fileList) {
+         queue('drive', GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function(fileList) {
             console.log(fileList)
             for (var fileCount = 0; fileCount < fileList.result.files.length; fileCount++) {
                if (!$scope.queryParams.q && deDuplicationIndex[fileList.result.files[fileCount].id] === undefined) {
@@ -392,7 +398,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
             no_posts_footer.style.display = 'none';
             no_more_footer.style.display = 'none';
             footer_problem.style.display = 'flex';
-         },150);
+         }, 150);
       }
    }
 
@@ -454,20 +460,20 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
 
    //----------------------------------------------------
    //---------------- Event Watchers --------------------
-   $scope.$watch('searchInputTxt', function (newValue) {
-      if (newValue != $scope.queryParams.q) {
-         $scope.gotoRoute({
-            q: newValue
-         })
-      }
-   })
-   // The md-select directive eats keydown events for some quick select
-   // logic. Since we have a search input here, we don't need that logic.
-   // var selectSearchInput = angular.element(document.getElementById('class_select_input'))
-   // selectSearchInput.on('keydown', function(ev) {
-   //        ev.stopPropagation();
-   //        console.log(ev)
-   // });
+   $scope.$watch('searchInputTxt', function(newValue) {
+         if (newValue != $scope.queryParams.q) {
+            $scope.gotoRoute({
+               q: newValue
+            })
+         }
+      })
+      // The md-select directive eats keydown events for some quick select
+      // logic. Since we have a search input here, we don't need that logic.
+      // var selectSearchInput = angular.element(document.getElementById('class_select_input'))
+      // selectSearchInput.on('keydown', function(ev) {
+      //        ev.stopPropagation();
+      //        console.log(ev)
+      // });
    content_container.onscroll = function(event) {
       //called whenever the content_container scrolls
       // if (performantScrollEnabled === false && $scope.angularGridOptions.performantScroll === false) {
@@ -492,7 +498,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
          }
       })
    });
-   
+
    document.onkeydown = function(e) {
       if (e.altKey && e.ctrlKey && e.keyCode == 68) {
          devMode = !devMode
