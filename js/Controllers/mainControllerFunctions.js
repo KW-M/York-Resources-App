@@ -133,8 +133,9 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
       }
       $scope.getFiles();
       getFileTimer = setInterval(function(){
+         console.log(content_container)
          if(conurancy_counter == 0) {
-            getFiles()
+            $scope.getFiles()
          }
       },100)
    }
@@ -413,11 +414,11 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
    function hideSpinner() {
       if (classPageTokenSelectionIndex[$scope.queryPropertyString] === "end") {
          loading_spinner.style.display = 'none';
+         clearInterval(getFileTimer);
          $timeout(function() {
             if ($scope.visiblePosts.length > 0) {
                no_more_footer.style.display = 'block';
             } else {
-               console.log(layout_grid)
                layout_grid.style.height = '0px';
                no_posts_footer.style.display = 'block';
             }
