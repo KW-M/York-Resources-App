@@ -476,14 +476,11 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
       })
    };
    window.addEventListener("resize", function() {
-      // if (performantScrollEnabled === true && $scope.angularGridOptions.performantScroll === true) {
-      //    $scope.angularGridOptions.performantScroll = false;
-      //    performantScrollEnabled = false;
-      // }
-      console.log('resize'+)
-      if ($mdMedia('gt-sm')) {
-         $mdSidenav('sidenav_overlay').close();
-      }
+      $timeout(function() {
+         if ($mdMedia('gt-sm')) {
+            $mdSidenav('sidenav_overlay').close();
+         }
+      })
    });
    document.onkeydown = function(e) {
       if (e.altKey && e.ctrlKey && e.keyCode == 68) {
