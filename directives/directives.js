@@ -137,12 +137,12 @@ app.directive('contenteditable', ['$sce', function($sce) {
 
       // Specify how UI should be updated
       ngModel.$render = function() {
-          console.log(ngModel.$viewValue)
         element.html($sce.getTrustedHtml(ngModel.$viewValue || ''));
       };
 
       // Listen for change events to enable binding
       element.on('blur keyup change', function() {
+         console.log(ngModel.$viewValue)
         scope.$evalAsync(read);
       });
       read(); // initialize
