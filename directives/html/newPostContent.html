@@ -81,6 +81,7 @@
             <input ng-model="Post.Title" ng-readonly="operation === 'view'" class="newPostTitle md-title" placeholder="Title" md-autofocus>
             <!--<div id="DescriptionTxt" class="newPostBody" contenteditable="{{operation !== 'view'}}" ng-bind-html="Post.Description"></div>-->
            <div contenteditable ng-model="userContent" strip-br="false">Change me!</div>
+           <input type="text" ng-model='userContent'/>
            <span>{{userContent}}</span>
             <!--ng-model="Post.Description" html-model="true" -->
          </div>
