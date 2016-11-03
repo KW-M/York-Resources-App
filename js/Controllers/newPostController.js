@@ -2,6 +2,7 @@
                                                                                                                defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $timeout, $http, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
         var linkChangeTimer = null;
+        console.log(postObj);
         $timeout(function() {
             $scope.Post = {
                 Title: postObj.Title || '',
