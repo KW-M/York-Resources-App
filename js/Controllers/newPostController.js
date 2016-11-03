@@ -1,40 +1,36 @@
     /* we don't define the "new post controller" here because it was alredy
                                                                                                                    defined by the $md-dialog in the newPost function on mainController.   */
-    function newPostController($scope, $timeout, $http, $mdDialog, GoogleDriveService, $mdToast, Post, operation) {
+    function newPostController($scope, $timeout, $http, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
         var linkChangeTimer = null;
-        $scope.Post = Post
-        $scope.Post.Title = 'what?'
-console.log(Post)
-console.log($scopePost)
+        $scope.Post = postObj;
         $timeout(function() {
-            console.log(Post)
-            Post.Title = Post.Title || ''
-            Post.Description = Post.Description || ''
-            Post.Link = Post.Link || ''
-            Post.Tags = Post.Tags || []
-            Post.Type = Post.Type || 'noLink'
-            Post.Flagged = Post.Flagged || false
-            console.log(Post)
-            Post.CreationDate = Post.CreationDate || new Date()
-            Post.UpdateDate = Post.UpdateDate || new Date()
-            Post.Class = Post.Class || {
+            $scope.Post.Title = $scope.Post.Title || ''
+            $scope.Post.Description = $scope.Post.Description || ''
+            $scope.Post.Link = $scope.Post.Link || ''
+            $scope.Post.Tags = $scope.Post.Tags || []
+            $scope.Post.Type = $scope.Post.Type || 'noLink'
+            $scope.Post.Flagged = $scope.Post.Flagged || false
+            console.log($scope.Post)
+            $scope.Post.CreationDate = $scope.Post.CreationDate || new Date()
+            $scope.Post.UpdateDate = $scope.Post.UpdateDate || new Date()
+            $scope.Post.Class = $scope.Post.Class || {
                 Name: '',
                 Catagory: '',
                 Color: '#ffffff',
             }
-            Post.Creator = Post.Creator || {
+            $scope.Post.Creator = $scope.Post.Creator || {
                 ClassOf: '',
                 Email: '',
                 Me: null,
                 Name: '',
             }
-            Post.Id = Post.Id || ''
-            Post.AttachmentId = Post.AttachmentId || ''
-            Post.AttachmentName = Post.AttachmentName || ''
-            Post.AttachmentIcon = Post.AttachmentIcon || ''
-            Post.Likes = Post.Likes || []
-            Post.PreviewImage = Post.PreviewImage || ''
-            Post.Bookmarked = Post.Bookmarked || false
+            $scope.Post.Id = $scope.Post.Id || ''
+            $scope.Post.AttachmentId = $scope.Post.AttachmentId || ''
+            $scope.Post.AttachmentName = $scope.Post.AttachmentName || ''
+            $scope.Post.AttachmentIcon = $scope.Post.AttachmentIcon || ''
+            $scope.Post.Likes = $scope.Post.Likes || []
+            $scope.Post.PreviewImage = $scope.Post.PreviewImage || ''
+            $scope.Post.Bookmarked = $scope.Post.Bookmarked || false
             $scope.findType();
         })
 
