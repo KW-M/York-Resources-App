@@ -3,6 +3,7 @@
     function newPostController($scope, $timeout, $http, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
         var linkChangeTimer = null;
         console.log(postObj);
+    postObj.Title = "nowyy"
         $timeout(function() {
             $scope.Post = {
                 Title: postObj.Title || '',
