@@ -1,37 +1,37 @@
     /* we don't define the "new post controller" here because it was alredy
                                                                                                                defined by the $md-dialog in the newPost function on mainController.   */
-    function newPostController($scope, $timeout, $http, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
+    function newPostController($scope, $timeout, $http, $mdDialog, GoogleDriveService, $mdToast, Post, operation) {
         var linkChangeTimer = null;
-        console.log(postObj);
-    postObj.Title = "nowyy"
+        console.log(Post);
+        Post.title = 'now now'
+        
         $timeout(function() {
-            $scope.Post = {
-                Title: postObj.Title || '',
-                Description: postObj.Description || '',
-                Link: postObj.Link || '',
-                Tags: postObj.Tags || [],
-                Type: postObj.Type || 'noLink',
-                Flagged: postObj.Flagged || false,
-                CreationDate: postObj.CreationDate || new Date(),
-                UpdateDate: postObj.UpdateDate || new Date(),
-                Class: postObj.Class || {
+                Post.Title: postObj.Title || '',
+                Post.Description: postObj.Description || '',
+                Post.Link: postObj.Link || '',
+                Post.Tags: postObj.Tags || [],
+                Post.Type: postObj.Type || 'noLink',
+                Post.Flagged: postObj.Flagged || false,
+                Post.CreationDate: postObj.CreationDate || new Date(),
+                Post.UpdateDate: postObj.UpdateDate || new Date(),
+                Post.Class: postObj.Class || {
                     Name: '',
                     Catagory: '',
                     Color: '#ffffff',
                 },
-                Creator: postObj.Creator || {
+                Post.Creator: postObj.Creator || {
                     ClassOf: '',
                     Email: '',
                     Me: null,
                     Name: '',
                 },
-                Id: postObj.Id || '',
-                AttachmentId: postObj.AttachmentId || '',
-                AttachmentName: postObj.AttachmentName || '',
-                AttachmentIcon: postObj.AttachmentIcon || '',
-                Likes: postObj.Likes || [],
-                PreviewImage: postObj.PreviewImage || '',
-                Bookmarked: postObj.Bookmarked || false,
+                Post.Id: postObj.Id || '',
+                Post.AttachmentId: postObj.AttachmentId || '',
+                Post.AttachmentName: postObj.AttachmentName || '',
+                Post.AttachmentIcon: postObj.AttachmentIcon || '',
+                Post.Likes: postObj.Likes || [],
+                Post.PreviewImage: postObj.PreviewImage || '',
+                Post.Bookmarked: postObj.Bookmarked || false,
             }
             $scope.findType();
         })
