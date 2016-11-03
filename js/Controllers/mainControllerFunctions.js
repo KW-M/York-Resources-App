@@ -274,7 +274,8 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
    //----------------------------------------------------
    //--------------- Creating Posts ---------------------
    $scope.newPost = function(postObj, operation, event) {
-      console.logI
+      console.log(postObj);
+      postObj.Title = "wowwww"
       $mdDialog.show({
          templateUrl: '/directives/html/newPostContent.html',
          controller: ['$scope', '$timeout', '$http', '$mdDialog', 'GoogleDriveService', '$mdToast', "postObj", "operation", newPostController],
