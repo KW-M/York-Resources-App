@@ -235,7 +235,9 @@
 
         $scope.closeDialog = function() {
             console.log(originalPost)
-            postObj = originalPost;
+            $timeout(function() {
+                postObj = originalPost;  
+            })
             $mdDialog.hide();
         };
     }
