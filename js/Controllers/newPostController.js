@@ -1,38 +1,37 @@
     /* we don't define the "new post controller" here because it was alredy
-                                                                                                               defined by the $md-dialog in the newPost function on mainController.   */
+                                                                                                                   defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $timeout, $http, $mdDialog, GoogleDriveService, $mdToast, Post, operation) {
         var linkChangeTimer = null;
-        console.log(Post);
-        Post.title = 'now now'
-        
+        Post.itle = 'now now'
+console.log(Post)
         $timeout(function() {
-                Post.Title: postObj.Title || '',
-                Post.Description: postObj.Description || '',
-                Post.Link: postObj.Link || '',
-                Post.Tags: postObj.Tags || [],
-                Post.Type: postObj.Type || 'noLink',
-                Post.Flagged: postObj.Flagged || false,
-                Post.CreationDate: postObj.CreationDate || new Date(),
-                Post.UpdateDate: postObj.UpdateDate || new Date(),
-                Post.Class: postObj.Class || {
-                    Name: '',
-                    Catagory: '',
-                    Color: '#ffffff',
-                },
-                Post.Creator: postObj.Creator || {
-                    ClassOf: '',
-                    Email: '',
-                    Me: null,
-                    Name: '',
-                },
-                Post.Id: postObj.Id || '',
-                Post.AttachmentId: postObj.AttachmentId || '',
-                Post.AttachmentName: postObj.AttachmentName || '',
-                Post.AttachmentIcon: postObj.AttachmentIcon || '',
-                Post.Likes: postObj.Likes || [],
-                Post.PreviewImage: postObj.PreviewImage || '',
-                Post.Bookmarked: postObj.Bookmarked || false,
+            console.log(Post)
+            Post.Title = Post.Title || ''
+            Post.Description = Post.Description || ''
+            Post.Link = Post.Link || ''
+            Post.Tags = Post.Tags || []
+            Post.Type = Post.Type || 'noLink'
+            Post.Flagged = Post.Flagged || false
+            Post.CreationDate = Post.CreationDate || new Date()
+            Post.UpdateDate = Post.UpdateDate || new Date()
+            Post.Class = Post.Class || {
+                Name: '',
+                Catagory: '',
+                Color: '#ffffff',
             }
+            Post.Creator = Post.Creator || {
+                ClassOf: '',
+                Email: '',
+                Me: null,
+                Name: '',
+            }
+            Post.Id = Post.Id || ''
+            Post.AttachmentId = Post.AttachmentId || ''
+            Post.AttachmentName = Post.AttachmentName || ''
+            Post.AttachmentIcon = Post.AttachmentIcon || ''
+            Post.Likes = Post.Likes || []
+            Post.PreviewImage = Post.PreviewImage || ''
+            Post.Bookmarked = Post.Bookmarked || false
             $scope.findType();
         })
 
@@ -61,7 +60,7 @@
                 if (driveId) {
                     $scope.Post.Type = 'gDrive';
                     $scope.Post.AttachmentId = driveId[1]
-                    queue('drive',GoogleDriveService.getFileThumbnail($scope.Post.AttachmentId), function(response) {
+                    queue('drive', GoogleDriveService.getFileThumbnail($scope.Post.AttachmentId), function(response) {
                         var thumbnail = response.result.thumbnailLink;
                         $timeout(function() {
                             console.log(response);
@@ -78,7 +77,7 @@
                         }, function(error) {
                             console.log(error);
                             $scope.Post.Type = 'Link';
-                            queue('screenshot',GoogleDriveService.getWebsiteScreenshot($scope.Post.Link),function(response) {
+                            queue('screenshot', GoogleDriveService.getWebsiteScreenshot($scope.Post.Link), function(response) {
                                 console.log(response)
                                 $timeout(function() {
                                     $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
@@ -92,7 +91,7 @@
                                     $scope.previewLoading = false;
                                     document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                                 })
-                            },10);
+                            }, 10);
                         });
                     }, null, 150);
                 } else {
@@ -125,7 +124,7 @@
                         }
                     }, function(error) {
                         console.log(error)
-                        queue('screenshot',GoogleDriveService.getWebsiteScreenshot($scope.Post.Link),function(response) {
+                        queue('screenshot', GoogleDriveService.getWebsiteScreenshot($scope.Post.Link), function(response) {
                             $timeout(function() {
                                 $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
                                 $scope.previewLoading = false;
@@ -138,7 +137,7 @@
                                 $scope.previewLoading = false;
                                 document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                             })
-                        },10)
+                        }, 10)
                     })
                 }
             } else if ($scope.Post.Link.length > 9) {
@@ -203,26 +202,26 @@
                     Post: $scope.Post,
                     Metadata: metadata
                 });
-                queue('other',GoogleDriveService.AppsScriptNewFile(),function(response) {
+                queue('other', GoogleDriveService.AppsScriptNewFile(), function(response) {
                     console.log(response)
                     console.log(metadata)
-                    queue('drive',GoogleDriveService.updateFileMetadata(response.data, metadata), function(reply) {
+                    queue('drive', GoogleDriveService.updateFileMetadata(response.data, metadata), function(reply) {
                         console.log(reply.result);
                         $mdToast.hide();
                     }, function(error) {
                         console.warn(error);
-                    },150);
+                    }, 150);
                 }, function(error) {
                     console.warn(error)
-                },2);
+                }, 2);
             } else if (operation === 'update') {
                 var metadata = $scope.compileUpdateToMetadata();
-                queue('drive',GoogleDriveService.updateFileMetadata(postObj.Id, metadata), function(reply) {
+                queue('drive', GoogleDriveService.updateFileMetadata(postObj.Id, metadata), function(reply) {
                     console.log(reply.result);
                     $mdToast.hide();
                 }, function(error) {
                     console.warn(error);
-                },150);
+                }, 150);
             }
         }
 
