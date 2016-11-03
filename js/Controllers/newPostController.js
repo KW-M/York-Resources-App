@@ -2,7 +2,8 @@
                                                                                                                    defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $timeout, $http, $mdDialog, GoogleDriveService, $mdToast, postObj, operation) {
         var linkChangeTimer = null;
-        var originalPost = new postObj;
+        var originalPost = angular.copy(postObj);
+        console.log(originalPost)
         $scope.Post = postObj;
         $timeout(function() {
             $scope.Post.Title = $scope.Post.Title || ''
@@ -233,6 +234,7 @@
         }
 
         $scope.closeDialog = function() {
+            console.log(originalPost)
             postObj = originalPost;
             $mdDialog.hide();
         };
