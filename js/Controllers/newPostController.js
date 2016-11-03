@@ -2,8 +2,10 @@
                                                                                                                    defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $timeout, $http, $mdDialog, GoogleDriveService, $mdToast, Post, operation) {
         var linkChangeTimer = null;
-        Post.itle = 'now now'
+        $scope.Post = Post
+        $scope.Post.Title = 'what?'
 console.log(Post)
+console.log($scopePost)
         $timeout(function() {
             console.log(Post)
             Post.Title = Post.Title || ''
@@ -12,6 +14,7 @@ console.log(Post)
             Post.Tags = Post.Tags || []
             Post.Type = Post.Type || 'noLink'
             Post.Flagged = Post.Flagged || false
+            console.log(Post)
             Post.CreationDate = Post.CreationDate || new Date()
             Post.UpdateDate = Post.UpdateDate || new Date()
             Post.Class = Post.Class || {
