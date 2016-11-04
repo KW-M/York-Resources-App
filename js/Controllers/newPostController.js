@@ -196,6 +196,10 @@
                 }
             }
         }
+        
+        function shareFile () {
+            
+        }
 
         $scope.submit = function() {
             if (operation === 'new') {
