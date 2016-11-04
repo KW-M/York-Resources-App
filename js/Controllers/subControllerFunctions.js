@@ -108,14 +108,14 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			formatedPost.UpdateDate = Date.parse(DriveMetadata.modifiedTime) || new Date()
 			formatedPost.Class = {
 				Name: DriveMetadata.properties.ClassName || '',
-				Catagory: DriveMetadata.properties.ClassCatagory || ''
-				Color: DriveMetadata.properties.ClassColor || '#ffffff'
+				Catagory: DriveMetadata.properties.ClassCatagory || '',
+				Color: DriveMetadata.properties.ClassColor || '#ffffff',
 			}
 			formatedPost.Creator = {
-				Name: DriveMetadata.owners[0].displayName || ''
-				Email: DriveMetadata.owners[0].emailAddress || ''
-				ClassOf: DriveMetadata.owners[0].emailAddress.match(/\d+/)[0] || ''
-				Me: DriveMetadata.owners[0].emailAddress === $scope.myInfo.Email
+				Name: DriveMetadata.owners[0].displayName || '',
+				Email: DriveMetadata.owners[0].emailAddress || '',
+				ClassOf: DriveMetadata.owners[0].emailAddress.match(/\d+/)[0] || '',
+				Me: DriveMetadata.owners[0].emailAddress === $scope.myInfo.Email,
 			}
 			formatedPost.Link = descriptionAndPreviewimage[1]
 			formatedPost.Id = DriveMetadata.id || ''
@@ -138,9 +138,10 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 					});
 				}, function(error) {
 					console.log(error);
-
+					formatedPost.PreviewImage = "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
 				}, 150);
 			}
+			console.log(formatedPost)
 			return (formatedPost)
 		} catch (e) {
 			console.log(e)
