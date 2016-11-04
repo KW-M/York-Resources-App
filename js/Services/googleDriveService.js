@@ -152,11 +152,10 @@ app.service('GoogleDriveService', ['$q','$http', function($q,$http) {
 
     this.linkShareFile = function(fileID) {
         return (gapi.client.drive.permissions.create({
-            sendNotificationEmail: false,
-            emailMessage: 'Please ignore this error from York Study Resources.',
-            emailAddress: email,
-            role: 'reader',
+            fileId: fileID,
             type: "domain",
+            role: 'reader',
+            sendNotificationEmail: false,
         }));
     };
     
