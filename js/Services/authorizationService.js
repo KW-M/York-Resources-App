@@ -28,13 +28,11 @@ function authService($mdDialog) {
             authinstance.attachClickHandler('signin_button', null, null, handleError)
             datButton.style.display = 'inline-block';
         });
-        
+
         function updateSigninStatus(isSignedIn) {
             if (isSignedIn) {
                 var authInstance = gapi.auth2.getAuthInstance()
-                console.log(authInstance)
                 var currentUser = authInstance.currentUser.get()
-                console.log(currentUser)
                 var accountDomain = currentUser.getHostedDomain()
                 if (accountDomain === 'york.org') {
                     console.log("User's Domain: " + accountDomain);
@@ -90,7 +88,6 @@ function authService($mdDialog) {
     }
 
     this.getAuthToken = function() {
-        console.log(gapi.auth2.getAuthInstance())
         return (gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true).access_token)
     }
 
@@ -107,11 +104,11 @@ function authService($mdDialog) {
             }, 500);
         });
     }
-    
+
     function handleError(error) {
         console.log(error)
         if(error.hasOwnProperty('expectedDomain')) {
-            self.showNonYorkDialog(); 
+            self.showNonYorkDialog();
         }
     }
 }
