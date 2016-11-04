@@ -69,7 +69,7 @@
                             if (response.result.thumbnailLink) {
                                 $scope.Post.PreviewImage = thumbnail.replace("=s220", "=s400") + "&access_token=" + access_token;
                             } else {
-                                "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
+                                $scope.Post.PreviewImage = "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
                             }
                             $scope.Post.AttachmentName = response.result.name;
                             $scope.Post.AttachmentIcon = response.result.iconLink;

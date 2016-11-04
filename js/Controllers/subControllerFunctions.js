@@ -98,70 +98,47 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 				var hasLiked = true;
 			}
 			console.log('convertingPost3')
-			formatedPost = {
-				Title: DriveMetadata.properties.Title || '',
-				Description: descriptionAndPreviewimage[0] || '',
-				Link: descriptionAndPreviewimage[1] || '',
-				Tags: tags,
-				Type: DriveMetadata.properties.Type || 'noLink',
-				Flagged: JSON.parse(DriveMetadata.properties.Flagged) || false,
-				CreationDate: Date.parse(DriveMetadata.createdTime) || new Date(),
-				UpdateDate: Date.parse(DriveMetadata.modifiedTime) || new Date(),
-				Class: {
-					Name: DriveMetadata.properties.ClassName || '',
-					Catagory: DriveMetadata.properties.ClassCatagory || '',
-					Color: DriveMetadata.properties.ClassColor || '#ffffff',
-				},
-				Creator: {
-					Name: DriveMetadata.owners[0].displayName || '',
-					Email: DriveMetadata.owners[0].emailAddress || '',
-					ClassOf: DriveMetadata.owners[0].emailAddress.match(/\d+/)[0] || '',
-					Me: DriveMetadata.owners[0].emailAddress === $scope.myInfo.Email,
-				},
-				Link: descriptionAndPreviewimage[1],
-				Id: DriveMetadata.id || '',
-				AttachmentId: DriveMetadata.properties.AttachmentId || '',
-				Likes: JSON.parse(likesAndFlagged[1]),
-				userLiked: hasLiked,
-				PreviewImage: descriptionAndPreviewimage[2],
-				Bookmarked: DriveMetadata.starred || false,
+			formatedPost.Title = DriveMetadata.properties.Title || ''
+			formatedPost.Description = descriptionAndPreviewimage[0] || ''
+			formatedPost.Link = descriptionAndPreviewimage[1] || ''
+			formatedPost.Tags = tags
+			formatedPost.Type = DriveMetadata.properties.Type || 'noLink'
+			formatedPost.Flagged = JSON.parse(DriveMetadata.properties.Flagged) || false
+			formatedPost.CreationDate = Date.parse(DriveMetadata.createdTime) || new Date()
+			formatedPost.UpdateDate = Date.parse(DriveMetadata.modifiedTime) || new Date()
+			formatedPost.Class = {
+				Name: DriveMetadata.properties.ClassName || '',
+				Catagory: DriveMetadata.properties.ClassCatagory || ''
+				Color: DriveMetadata.properties.ClassColor || '#ffffff'
 			}
-			console.log(formatedPost)
+			formatedPost.Creator = {
+				Name: DriveMetadata.owners[0].displayName || ''
+				Email: DriveMetadata.owners[0].emailAddress || ''
+				ClassOf: DriveMetadata.owners[0].emailAddress.match(/\d+/)[0] || ''
+				Me: DriveMetadata.owners[0].emailAddress === $scope.myInfo.Email
+			}
+			formatedPost.Link = descriptionAndPreviewimage[1]
+			formatedPost.Id = DriveMetadata.id || ''
+			formatedPost.AttachmentId = DriveMetadata.properties.AttachmentId || ''
+			formatedPost.Likes = JSON.parse(likesAndFlagged[1])
+			formatedPost.userLiked = hasLiked
+			formatedPost.PreviewImage = descriptionAndPreviewimage[2]
+			formatedPost.Bookmarked = DriveMetadata.starred || false
 			if (formatedPost.Type === 'GDrive') {
 				queue('drive', GoogleDriveService.getFileThumbnail(formatedPost.AttachmentId), function(response) {
-					var thumbnail = response.result.thumbnailLink;
-					var access_token = authorizationService.getAuthToken();
 					$timeout(function() {
 						console.log(response);
 						if (response.result.thumbnailLink) {
-							$scope.Post.PreviewImage = thumbnail.replace("=s220", "=s400") + "&access_token=" + access_token;
+							formatedPost.PreviewImage = response.result.thumbnailLink.replace("=s220", "=s400") + "&access_token=" + authorizationService.getAuthToken();
 						} else {
-							"https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
+							formatedPost.PreviewImage = "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
 						}
-						$scope.Post.AttachmentName = response.result.name;
-						$scope.Post.AttachmentIcon = response.result.iconLink;
-						//response.result.thumbnailLink.replace("=s220","=s400");
-						$scope.previewLoading = false;
-						document.dispatchEvent(new window.Event('urlPreviewLoaded'));
+						formatedPost.AttachmentName = response.result.name;
+						formatedPost.AttachmentIcon = response.result.iconLink;
 					});
 				}, function(error) {
 					console.log(error);
-					$scope.Post.Type = 'Link';
-					queue('screenshot', GoogleDriveService.getWebsiteScreenshot($scope.Post.Link), function(response) {
-						console.log(response)
-						$timeout(function() {
-							$scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
-							$scope.previewLoading = false;
-							document.dispatchEvent(new window.Event('urlPreviewLoaded'));
-						})
-					}, function(error) {
-						console.log(error)
-						$timeout(function() {
-							$scope.Post.PreviewImage = "https://www.techtricksworld.com/wp-content/uploads/2015/12/Error-404.png"
-							$scope.previewLoading = false;
-							document.dispatchEvent(new window.Event('urlPreviewLoaded'));
-						})
-					}, 10);
+
 				}, 150);
 			}
 			return (formatedPost)
