@@ -162,12 +162,12 @@
         $scope.isReadyToSubmit = function() {
             if ($scope.Post.Class.Name === '' || $scope.Post.Class === undefined) {
                 $mdToast.show({
-                    template: '<md-toast><div class="md-toast-content">Please select a class for this post.</div><md-toast>',
+                    template: '<md-toast><div class="md-toast-content">Select a class for this post.</div><md-toast>',
                     hideDelay: 1500,
                     parent: document.getElementById('new_post_dialog'),
                 });
             } else {
-                if ($scope.Post.Title === '' || $scope.Post.Title === undefined) {
+                if (($scope.Post.Title === '' || $scope.Post.Title === undefined) && ($scope.Post.Description === '' || $scope.Post.Title === undefined)) {
                     $mdToast.show({
                         template: '<md-toast><div class="md-toast-content">Posts must have a title.</div></md-toast>',
                         hideDelay: 1500,
@@ -198,7 +198,7 @@
         }
         
         function shareFile () {
-            
+            GoogleDriveService.shareLinkFile(linkShareFile)
         }
 
         $scope.submit = function() {
