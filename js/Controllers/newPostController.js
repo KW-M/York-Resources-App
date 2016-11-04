@@ -63,10 +63,11 @@
                     $scope.Post.AttachmentId = driveId[1]
                     queue('drive', GoogleDriveService.getFileThumbnail($scope.Post.AttachmentId), function(response) {
                         var thumbnail = response.result.thumbnailLink;
+                        var access_token = authorizationService.getAuthToken();
                         $timeout(function() {
                             console.log(response);
                             if (response.result.thumbnailLink) {
-                                $scope.Post.PreviewImage = thumbnail.replace("=s220", "=s400");
+                                $scope.Post.PreviewImage = thumbnail.replace("=s220", "=s400") + "&access_token=" + access_token;
                             } else {
                                 "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
                             }
