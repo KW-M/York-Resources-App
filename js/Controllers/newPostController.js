@@ -1,5 +1,5 @@
     /* we don't define the "new post controller" here because it was alredy
-                                                                                                                   defined by the $md-dialog in the newPost function on mainController.   */
+                                                                                                                       defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $timeout, $http, $mdDialog, GoogleDriveService, authorizationService, $mdToast, postObj, operation) {
         var linkChangeTimer = null;
         var originalPost = angular.copy(postObj);
@@ -76,26 +76,26 @@
                             //response.result.thumbnailLink.replace("=s220","=s400");
                             $scope.previewLoading = false;
                             document.dispatchEvent(new window.Event('urlPreviewLoaded'));
-                        }, function(error) {
-                            console.log(error);
-                            $scope.Post.Type = 'Link';
-                            queue('screenshot', GoogleDriveService.getWebsiteScreenshot($scope.Post.Link), function(response) {
-                                console.log(response)
-                                $timeout(function() {
-                                    $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
-                                    $scope.previewLoading = false;
-                                    document.dispatchEvent(new window.Event('urlPreviewLoaded'));
-                                })
-                            }, function(error) {
-                                console.log(error)
-                                $timeout(function() {
-                                    $scope.Post.PreviewImage = "https://www.techtricksworld.com/wp-content/uploads/2015/12/Error-404.png"
-                                    $scope.previewLoading = false;
-                                    document.dispatchEvent(new window.Event('urlPreviewLoaded'));
-                                })
-                            }, 10);
                         });
-                    }, null, 150);
+                    }, function(error) {
+                        console.log(error);
+                        $scope.Post.Type = 'Link';
+                        queue('screenshot', GoogleDriveService.getWebsiteScreenshot($scope.Post.Link), function(response) {
+                            console.log(response)
+                            $timeout(function() {
+                                $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
+                                $scope.previewLoading = false;
+                                document.dispatchEvent(new window.Event('urlPreviewLoaded'));
+                            })
+                        }, function(error) {
+                            console.log(error)
+                            $timeout(function() {
+                                $scope.Post.PreviewImage = "https://www.techtricksworld.com/wp-content/uploads/2015/12/Error-404.png"
+                                $scope.previewLoading = false;
+                                document.dispatchEvent(new window.Event('urlPreviewLoaded'));
+                            })
+                        }, 10);
+                    }, 150);
                 } else {
                     $scope.Post.Type = 'Link';
                     $http.head('https://jsonp.afeld.me/?url=' + $scope.Post.Link).then(function(result) {
@@ -237,8 +237,9 @@
         $scope.closeDialog = function() {
             console.log(originalPost)
             $timeout(function() {
-                postObj = originalPost;  
+                postObj = originalPost;
             })
             $mdDialog.hide();
         };
     }
+    

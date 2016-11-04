@@ -128,7 +128,41 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			}
 			console.log(formatedPost)
 			if (formatedPost.Type === 'GDrive') {
-				//get thumbnail
+				queue('drive', GoogleDriveService.getFileThumbnail(formatedPost.AttachmentId), function(response) {
+					var thumbnail = response.result.thumbnailLink;
+					var access_token = authorizationService.getAuthToken();
+					$timeout(function() {
+						console.log(response);
+						if (response.result.thumbnailLink) {
+							$scope.Post.PreviewImage = thumbnail.replace("=s220", "=s400") + "&access_token=" + access_token;
+						} else {
+							"https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
+						}
+						$scope.Post.AttachmentName = response.result.name;
+						$scope.Post.AttachmentIcon = response.result.iconLink;
+						//response.result.thumbnailLink.replace("=s220","=s400");
+						$scope.previewLoading = false;
+						document.dispatchEvent(new window.Event('urlPreviewLoaded'));
+					});
+				}, function(error) {
+					console.log(error);
+					$scope.Post.Type = 'Link';
+					queue('screenshot', GoogleDriveService.getWebsiteScreenshot($scope.Post.Link), function(response) {
+						console.log(response)
+						$timeout(function() {
+							$scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
+							$scope.previewLoading = false;
+							document.dispatchEvent(new window.Event('urlPreviewLoaded'));
+						})
+					}, function(error) {
+						console.log(error)
+						$timeout(function() {
+							$scope.Post.PreviewImage = "https://www.techtricksworld.com/wp-content/uploads/2015/12/Error-404.png"
+							$scope.previewLoading = false;
+							document.dispatchEvent(new window.Event('urlPreviewLoaded'));
+						})
+					}, 10);
+				}, 150);
 			}
 			return (formatedPost)
 		} catch (e) {
