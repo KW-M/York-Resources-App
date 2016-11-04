@@ -150,7 +150,17 @@ app.service('GoogleDriveService', ['$q','$http', function($q,$http) {
         }));
     };
 
-    this.likeFile = function(fileID, email) {
+    this.linkShareFile = function(fileID) {
+        return (gapi.client.drive.permissions.create({
+            sendNotificationEmail: false,
+            emailMessage: 'Please ignore this error from York Study Resources.',
+            emailAddress: email,
+            role: 'reader',
+            type: "domain",
+        }));
+    };
+    
+    this.legacylikeFile = function(fileID, email) {
         return (gapi.client.drive.permissions.create({
             sendNotificationEmail: false,
             emailMessage: 'Please ignore this error from York Study Resources.',
