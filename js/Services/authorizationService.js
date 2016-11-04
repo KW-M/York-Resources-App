@@ -32,9 +32,10 @@ function authService($mdDialog) {
         function updateSigninStatus(isSignedIn) {
             if (isSignedIn) {
                 var authInstance = gapi.auth2.getAuthInstance()
+                console.log(authInstance)
                 var currentUser = authInstance.currentUser.get()
-                var accountDomain = currentUser.getHostedDomain()
                 console.log(currentUser)
+                var accountDomain = currentUser.getHostedDomain()
                 if (accountDomain === 'york.org') {
                     console.log("User's Domain: " + accountDomain);
                     callback();
@@ -89,6 +90,7 @@ function authService($mdDialog) {
     }
 
     this.getAuthToken = function() {
+        console.log(gapi.auth2.getAuthInstance())
         return (gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true).access_token)
     }
 
