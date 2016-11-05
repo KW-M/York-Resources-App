@@ -161,9 +161,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		}));
 	};
 	//----------------------------------------------------
-	//----------------- Grid & Layout --------------------
-
-	//----------------------------------------------------
 	//------------------UI Actions------------------------
 	$scope.toggleSidebar = function(close) { //called by the top left toolbar menu button
 		if (close === true) {
