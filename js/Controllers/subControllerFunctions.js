@@ -267,7 +267,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		//set the user's has flagged date back
 	};
 	$scope.unFlagPost = function(content, arrayIndex) {
-		if ($scope.myInfo.moderator === false) {
+		if ($scope.myInfo.moderator === true) {
 			content.Flagged = false;
 			if ($scope.queryParams.classpath == 'flagged') {
 				$timeout(function() { //makes angular update values
@@ -285,7 +285,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		} else {
 			$mdDialog.show($mdDialog.alert({
 				title: 'Uh Oh.',
-				htmlContent: '<p style="margin: 0px; margin-bottom: 2px">One of your posts has been flagged within the past two weeks.</p><p style="margin: 0px">To unlock the ability to unflag posts, make sure none of your posts get flagged this week.</p>',
+				htmlContent: '<p style="margin: 0 0 2px 0">One of your posts has been flagged within the past two weeks.<br>To unlock the ability to unflag posts, make sure none of your posts get flagged this week.</p>',
 				ok: 'Ok'
 			}));
 		}
@@ -308,14 +308,14 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			allArrayPost.Likes = content.Likes;
 			var name = allArrayPost.Likes.length + "{]|[}" + JSON.stringify(allArrayPost.Likes)
 			console.log(name);
-			queue(GoogleDriveService.updateFileMetadata(content.Id, {
+			queue('drive', GoogleDriveService.updateFileMetadata(content.Id, {
 				name: name
 			}), function(result) {
 				console.log(result);
 			},function (err) {
-				$mdToast.showSimple('Error likeing post, try again.');
+				$mdToast.showSimple('Error liking post, try again.');
 				console.warn(err)
-			});
+			}, 150);
 		}, 2000);
 	};
 	$scope.openLink = function(link) {
