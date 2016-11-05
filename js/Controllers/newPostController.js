@@ -181,7 +181,7 @@
                         //     parent: document.getElementById('new_post_dialog'),
                         // });
                         //var tost = $mdToast.build().action('Got It').textContent('Anyone at York will be able to view the attached file.');
-                    $mdToast.show($mdToast.simple().action('Got It').textContent('Anyone at York will be able to view the attached file.').parent(document.getElementById('new_post_dialog'));
+                    $mdToast.show($mdToast.simple().action('Got It').textContent('Anyone at York will be able to view the attached file.').parent(document.getElementById('new_post_dialog')).hideDelay(300000));
                     } else {
                         $mdToast.show({
                             template: '<md-toast><span style="font-size:18px; max-width: 200px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="36"></md-progress-circular></md-toast>',
@@ -198,7 +198,7 @@
                 }
             }
         }
-        
+
         function shareFile () {
             GoogleDriveService.shareLinkFile(linkShareFile)
         }
@@ -248,4 +248,3 @@
             $mdDialog.hide();
         };
     }
-    
