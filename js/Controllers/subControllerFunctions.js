@@ -1,7 +1,6 @@
 function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance) {
 
 	var likeClickTimer = {};
-	var bookmarkClickTimer = {};
 
 	function findPostById(id, array) {
 		console.log({
@@ -74,7 +73,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	// 	AttachmentId: '',
 	// 	Likes: [],
 	// 	PreviewImage: '',
-	// 	Bookmarked: false,
+	// 	Bookmarked: false(legacy,),
 	// }
 
 	//----------------------------------------------------
@@ -123,7 +122,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			formatedPost.Likes = JSON.parse(likesAndFlagged[1])
 			formatedPost.userLiked = hasLiked
 			formatedPost.PreviewImage = descriptionAndPreviewimage[2]
-			formatedPost.Bookmarked = DriveMetadata.starred || false
 			// if (formatedPost.Type === 'GDrive') {
 			// 	queue('drive', GoogleDriveService.getFileThumbnail(formatedPost.AttachmentId), function(response) {
 			// 		$timeout(function() {
@@ -158,7 +156,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 				description: Post.Description + '{]|[}' + Post.Link + '{]|[}' + Post.PreviewImage,
 				//createdTime: Post.CreationDate.toRFC3339UTCString(),
 				//modifiedTime: Post.UpdateDate.toRFC3339UTCString(),
-				starred: Post.Bookmarked,
 				properties: {
 					Title: Post.Title,
 					Flagged: Post.Flagged,
@@ -186,7 +183,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			} else {
 				var Flagged = true;
 			}
-			if ($scope.queryParams.classpath !== null && $scope.queryParams.classpath !== undefined && $scope.queryParams.classpath !== 'my-posts' && $scope.queryParams.classpath !== 'my-bookmarks' && $scope.queryParams.classpath !== 'all-posts' && $scope.queryParams.classpath !== 'flagged') {
+			if ($scope.queryParams.classpath !== null && $scope.queryParams.classpath !== undefined && $scope.queryParams.classpath !== 'my-posts'  && $scope.queryParams.classpath !== 'all-posts' && $scope.queryParams.classpath !== 'flagged') {
 				var Class = post.Class.Name === $scope.queryParams.classpath;
 			} else {
 				var Class = post.Class.Name != 'memes';
@@ -195,11 +192,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 				var Type = post.Type === $scope.queryParams.type;
 			} else {
 				var Type = true;
-			}
-			if ($scope.queryParams.bookmarked !== null && $scope.queryParams.bookmarked !== undefined) {
-				var Bookmarked = post.Bookmarked === $scope.queryParams.bookmarked;
-			} else {
-				var Bookmarked = true;
 			}
 			if ($scope.queryParams.creatorEmail !== null && $scope.queryParams.creatorEmail !== undefined) {
 				var Creator = post.Creator.Email === $scope.queryParams.creatorEmail;
@@ -211,10 +203,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			//    Flagged: Flagged,
 			//    Class: Class,
 			//    Type: Type,
-			//    Bookmarked: Bookmarked,
 			//    Creator: Creator,
 			// });
-			return Flagged && Class && Type && Creator && Bookmarked;
+			return Flagged && Class && Type && Creator;
 		});
 		return ($scope.sortByDateAndLikes(output))
 	}
@@ -314,21 +305,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 				name: name
 			}), function(result) {
 				console.log(result);
-			});
-		}, 2000);
-	};
-	$scope.bookmark = function(content) {
-		content.Bookmarked = !content.Bookmarked;
-		if (typeof(bookmarkClickTimer[content.Id]) == 'number') {
-			clearTimeout(bookmarkClickTimer[content.Id]);
-		}
-		bookmarkClickTimer[content.Id] = setTimeout(function() {
-			var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
-			allArrayPost.Bookmarked = content.Bookmarked;
-			queue(GoogleDriveService.updateFileMetadata(content.Id, {
-				starred: content.Bookmarked
-			}), function(result) {
-				console.log("bookmarked: " + content.Id);
 			});
 		}, 2000);
 	};

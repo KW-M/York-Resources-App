@@ -32,7 +32,6 @@
             $scope.Post.AttachmentIcon = $scope.Post.AttachmentIcon || ''
             $scope.Post.Likes = $scope.Post.Likes || []
             $scope.Post.PreviewImage = $scope.Post.PreviewImage || ''
-            $scope.Post.Bookmarked = $scope.Post.Bookmarked || false
             $scope.findType();
         })
 

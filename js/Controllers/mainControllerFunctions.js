@@ -40,7 +40,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
       q: undefined, //undefined to make search popunder show with no text in  field
       flagged: false,
       type: null,
-      //bookmarked: null,
       classpath: 'all-posts',
       creatorEmail: null,
       id: null,
@@ -101,7 +100,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
       } else {
          $scope.queryParams.flagged = null
          $scope.queryParams.type = null
-         //$scope.queryParams.bookmarked = null
          $scope.queryParams.creatorEmail = null
       }
       if ($scope.queryParams.classpath === 'all-posts') {
@@ -110,9 +108,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
       } else if ($scope.queryParams.classpath === 'my-posts') {
          $scope.searchPlaceholder = 'Search My Posts'
          $scope.queryParams.creatorEmail = $scope.myInfo.Email;
-      // } else if ($scope.queryParams.classpath === 'my-bookmarks') {
-      //    $scope.searchPlaceholder = 'Search My Bookmarks'
-      //    $scope.queryParams.bookmarked = true
       } else if ($scope.queryParams.classpath === 'flagged') {
          $scope.searchPlaceholder = 'Search Flagged Posts'
          $scope.queryParams.flagged = true
@@ -430,16 +425,13 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
       if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
          query = query + " and properties has { key='Flagged' and value='" + $scope.queryParams.flagged + "' }";
       }
-      // if ($scope.queryParams.bookmarked !== null && $scope.queryParams.bookmarked !== undefined) {
-      //    query = query + " and starred = " + $scope.queryParams.bookmarked;
-      // }
       if ($scope.queryParams.creatorEmail !== null && $scope.queryParams.creatorEmail !== undefined) {
          query = query + " and '" + $scope.queryParams.creatorEmail + "' in owners"
       }
       if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) {
          query = query + " and properties has { key='Type' and value='" + $scope.queryParams.type + "' }"
       }
-      if ($scope.queryParams.classpath !== null && $scope.queryParams.classpath !== undefined && $scope.queryParams.classpath !== 'my-posts' && $scope.queryParams.classpath !== 'my-bookmarks' && $scope.queryParams.classpath !== 'all-posts' && $scope.queryParams.classpath !== 'flagged') {
+      if ($scope.queryParams.classpath !== null && $scope.queryParams.classpath !== undefined && $scope.queryParams.classpath !== 'my-posts' && $scope.queryParams.classpath !== 'all-posts' && $scope.queryParams.classpath !== 'flagged') {
          query = query + " and properties has { key='ClassName' and value='" + $scope.queryParams.classpath + "' }"
       }
       if ($scope.queryParams.q !== null && $scope.queryParams.q !== undefined) {
