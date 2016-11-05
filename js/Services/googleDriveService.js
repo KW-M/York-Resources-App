@@ -5,7 +5,10 @@ app.service('GoogleDriveService', ['$q','$http', function($q,$http) {
         databaseFolderId: '0B5NVuDykezpkbUxvOUMyNnRsUGc',
         userSpreadsheetId: '1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0',
     }
-    
+
+    //----------------------------------------------------
+	//---------------- Initialization --------------------
+
     this.loadAPIs = function(APILoadedCallback) {
         gapi.client.load('drive', 'v3', function() {
             APILoadedCallback("drive");
@@ -15,7 +18,7 @@ app.service('GoogleDriveService', ['$q','$http', function($q,$http) {
         });
         gapi.load('picker', {
             'callback': function(){
-              APILoadedCallback("picker")  
+              APILoadedCallback("picker")
             }
         });
     };
@@ -25,9 +28,11 @@ app.service('GoogleDriveService', ['$q','$http', function($q,$http) {
             'fields': 'user(displayName,emailAddress,photoLink),appInstalled'
         }));
     };
+    
+    //----------------------------------------------------
+	//----------------- Spreadsheets ---------------------
 
     this.getSpreadsheetRange = function(id, range) {
-        //gets a named range in a google spreadsheet (in this case each row is created with a named range of its email).
         return (gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: id,
             range: range,
@@ -53,19 +58,6 @@ app.service('GoogleDriveService', ['$q','$http', function($q,$http) {
         }
     }
 
-    this.runGAppsScript = function(functionToRun) {
-        return (gapi.client.request({
-            method: 'GET',
-            root: 'https://script.google.com',
-            path: 'macros/s/AKfycbwAVKcfa8Lzf_iyFlQpllMAn5kx0e37QSIKxsiE-51yYFOTDg0r/exec',
-            params: {
-                test1: "testing ... 1, 2, 3",
-                test2: 34,
-                test3: false,
-            },
-        }));
-    }
-
     this.getWebsiteScreenshot = function(url) {
         return (gapi.client.request({
             'root': 'https://www.googleapis.com',
@@ -73,6 +65,9 @@ app.service('GoogleDriveService', ['$q','$http', function($q,$http) {
             'method': 'GET',
         }));
     }
+    
+    //----------------------------------------------------
+	//----------------- Getting Files --------------------
 
     this.getListOfFlies = function(query, pageToken, pageSize) {
         var query = query || "";
@@ -84,6 +79,9 @@ app.service('GoogleDriveService', ['$q','$http', function($q,$http) {
             fields: 'files(name,id,modifiedTime,createdTime,properties,iconLink,thumbnailLink,description,starred,viewedByMe,owners(displayName,emailAddress),permissions(displayName,emailAddress)),nextPageToken', //
         }));
     };
+    
+    //----------------------------------------------------
+	//---------------- Modifying Files -------------------
 
     this.deleteDriveFile = function(fileId) {
         return (gapi.client.drive.files.delete({
@@ -96,7 +94,7 @@ app.service('GoogleDriveService', ['$q','$http', function($q,$http) {
             'fileId': id,
         }));
     };
-    
+
     this.AppsScriptNewFile = function () {
         return $http({
             method: 'GET',
@@ -108,7 +106,7 @@ app.service('GoogleDriveService', ['$q','$http', function($q,$http) {
         metadata.parents = [URLs.databaseFolderId];
         return (gapi.client.drive.files.create(metadata));
     };
-    
+
     this.getFileThumbnail = function(id) {
         return (gapi.client.drive.files.get({
             fileId: id,
@@ -158,75 +156,5 @@ app.service('GoogleDriveService', ['$q','$http', function($q,$http) {
             sendNotificationEmail: false,
         }));
     };
-    
-    this.legacylikeFile = function(fileID, email) {
-        return (gapi.client.drive.permissions.create({
-            sendNotificationEmail: false,
-            emailMessage: 'Please ignore this error from York Study Resources.',
-            fileId: fileID,
-            emailAddress: email,
-            role: 'writer',
-            type: "user",
-        }));
-    };
-
-    this.unLikeFile = function(fileID, permissionID) {
-        return (gapi.client.drive.permissions.delete({
-            fileId: fileID,
-            permissionId: permissionID,
-        }));
-    };
-
     // --not used functions--
-
-    this.sendDriveFileWContent = function(content, title) {
-        return (gapi.client.request({
-            'path': 'https://www.googleapis.com/upload/drive/v3/files',
-            'method': 'POST',
-            'params': {
-                'uploadType': 'multipart',
-                'useContentAsIndexableText': true,
-                'alt': 'json',
-            },
-            'addParents': URLs.databaseFolderId,
-            'headers': {
-                'Content-Type': 'multipart/mixed; boundary="675849302theboundary"'
-            },
-            'body': "\r\n--675849302theboundary\r\n" +
-                "Content-Type: application/json\r\n\r\n" +
-                JSON.stringify({
-                    name: title,
-                    parents: [URLs.databaseFolderId]
-                }) +
-                "\r\n--675849302theboundary\r\n" +
-                "Content-Type: application/json\r\n\r\n" +
-                JSON.stringify(content) +
-                "\r\n--675849302theboundary--"
-        }));
-    };
-
-    this.sendRequest = function(request, callback) {
-        request.execute(function(response) {
-            callback(response);
-        });
-    };
 }]);
-
-
-// this.addNamedRangeUserSettings = function(range, name) {
-//     return (gapi.client.sheets.spreadsheets.batchUpdate({
-//         spreadsheetId: '1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0',
-//         "requests": [{
-//             "addNamedRange": {
-//                 "namedRange": {
-//                     "name": name,
-//                     "range": {
-//                         "startRowIndex": 1,
-//                         "endRowIndex": 1,
-//                         "startColumnIndex": 1,
-//                     }
-//                 }
-//             }
-//         }]
-//     }));
-// }
