@@ -5,19 +5,6 @@ div:focus {
     outline: 0;
 }
 
-
-/*this chart specifies the css variables for the class background pastel colors :
-:root {
---pPurple: hsl(300,70%,93%);
---pBlue: hsl(232,70%,95%);
---pLightblue: hsl(189,60%,93%);
---pGreen: hsl(120,68%,93%);
---pOrange: hsl(40,76%,93%);
---pRed: hsl(8,70%,93%);
-}
- */
-
-
 /*------------ background and layout styles ----------- */
 
 html body {
@@ -333,46 +320,142 @@ md-input-container.button-select md-select-value {
     align-items: center;
     width: auto;
 }
+
+
+/*--------- new post top bar ------------ */
+
+.new-post-bar-top {
+    position: relative;
+    background-color: white;
+    display: flex;
+    height: 46px;
+    max-width: 570px;
+    box-sizing: border-box;
+    margin: 0px auto 16px auto;
+    padding-right: 6px;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.new-post-text-top {
+    height: 100%;
+    top: 0px;
+    padding: 12px 0 12px 10px;
+    box-sizing: border-box;
+    display: inline-block;
+    text-transform: none;
+    font-family: 'Roboto Slab', serif;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.new-post-text-top:hover>md-icon {
+    color: black;
+}
+
+.new-post-card-top:hover {
+    background-color: rgba(158, 158, 158, 0.1);
+}
+
+.new-post-option-button {
+    height: 46px;
+    top: 0px;
+    padding: 12px 8px 12px 8px;
+    box-sizing: border-box;
+    display: inline-block;
+    color: black;
+    opacity: 0.6;
+    margin: 0 6px;
+    outline: none;
+    min-width: 0;
+    width: 40px;
+}
+
+.new-post-option-button:hover {
+    opacity: 1;
+}
+
+
 /*----------------------- animation ----------------------------*/
 
 .rainbow:hover {
     filter: blur(5px);
-    -webkit-animation:rainbow 1s infinite;
-    -ms-animation:rainbow 1s infinite;
-    -o-animation:rainbow 1s infinite;
-    animation:rainbow 1s infinite;
+    -webkit-animation: rainbow 1s infinite;
+    -ms-animation: rainbow 1s infinite;
+    -o-animation: rainbow 1s infinite;
+    animation: rainbow 1s infinite;
 }
 
 .rainbow2:hover {
-    -webkit-animation:rainbow2 4s infinite;
-    -ms-animation:rainbow2 4s infinite;
-    -o-animation:rainbow2 4s infinite;
-    animation:rainbow2 4s infinite;
+    -webkit-animation: rainbow2 4s infinite;
+    -ms-animation: rainbow2 4s infinite;
+    -o-animation: rainbow2 4s infinite;
+    animation: rainbow2 4s infinite;
 }
 
 .ugly-brown:hover {
-    background-color:#4d442e !important;
+    background-color: #4d442e !important;
 }
 
 @keyframes rainbow {
-    0% {background-color: #ff0000;}
-    10% {background-color: #ff8000;}
-    20% {background-color: #ffff00;}
-    30% {background-color: #80ff00;}
-    40% {background-color: #00ff00;}
-    50% {background-color: #00ff80;}
-    60% {background-color: #00ffff;}
-    70% {background-color: #0080ff;}
-    80% {background-color: #0000ff;}
-    90% {background-color: #8000ff;}
-    100% {background-color: #ff0080;}
+    0% {
+        background-color: #ff0000;
+    }
+    10% {
+        background-color: #ff8000;
+    }
+    20% {
+        background-color: #ffff00;
+    }
+    30% {
+        background-color: #80ff00;
+    }
+    40% {
+        background-color: #00ff00;
+    }
+    50% {
+        background-color: #00ff80;
+    }
+    60% {
+        background-color: #00ffff;
+    }
+    70% {
+        background-color: #0080ff;
+    }
+    80% {
+        background-color: #0000ff;
+    }
+    90% {
+        background-color: #8000ff;
+    }
+    100% {
+        background-color: #ff0080;
+    }
 }
+
 @keyframes rainbow2 {
-    0% {background-color: #ff0000; filter:invert(0%);}
-    5%{background-image: url(http://lorempixel.com/251/200/animals/Dummy-Text/)}
-    20%{background-image: url(http://machinemachine.net/text/wp-content/uploads/2011/05/tumblr_ll41yxdmG31qzpy7ko1_r1_500.gif)}
-    50%{background-image: url(http://lorempixel.com/200/200/animals/Dummy-Text/)}
-    60%{filter:invert(0%); background-image: url(http://lorempixel.com/225/200/animals/)}
-    70%{background-image: url(http://lorempixel.com/250/200/animals/)}
-    100% {background-image: none; background-color:#4d442e; filter:invert(80%);}
+    0% {
+        background-color: #ff0000;
+        filter: invert(0%);
+    }
+    5% {
+        background-image: url(http://lorempixel.com/251/200/animals/Dummy-Text/)
+    }
+    20% {
+        background-image: url(http://machinemachine.net/text/wp-content/uploads/2011/05/tumblr_ll41yxdmG31qzpy7ko1_r1_500.gif)
+    }
+    50% {
+        background-image: url(http://lorempixel.com/200/200/animals/Dummy-Text/)
+    }
+    60% {
+        filter: invert(0%);
+        background-image: url(http://lorempixel.com/225/200/animals/)
+    }
+    70% {
+        background-image: url(http://lorempixel.com/250/200/animals/)
+    }
+    100% {
+        background-image: none;
+        background-color: #4d442e;
+        filter: invert(80%);
+    }
 }
