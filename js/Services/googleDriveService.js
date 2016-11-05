@@ -1,5 +1,5 @@
 //Define the GoogleDriveController controller for Angular.
-app.service('GoogleDriveService', ['$q','$http', function($q,$http) {
+app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
     var self = this;
     var URLs = {
         databaseFolderId: '0B5NVuDykezpkbUxvOUMyNnRsUGc',
@@ -7,7 +7,7 @@ app.service('GoogleDriveService', ['$q','$http', function($q,$http) {
     }
 
     //----------------------------------------------------
-	//---------------- Initialization --------------------
+    //---------------- Initialization --------------------
 
     this.loadAPIs = function(APILoadedCallback) {
         gapi.client.load('drive', 'v3', function() {
@@ -17,8 +17,8 @@ app.service('GoogleDriveService', ['$q','$http', function($q,$http) {
             APILoadedCallback("sheets");
         });
         gapi.load('picker', {
-            'callback': function(){
-              APILoadedCallback("picker")
+            'callback': function() {
+                APILoadedCallback("picker")
             }
         });
     };
@@ -28,9 +28,9 @@ app.service('GoogleDriveService', ['$q','$http', function($q,$http) {
             'fields': 'user(displayName,emailAddress,photoLink),appInstalled'
         }));
     };
-    
+
     //----------------------------------------------------
-	//----------------- Spreadsheets ---------------------
+    //----------------- Spreadsheets ---------------------
 
     this.getSpreadsheetRange = function(id, range) {
         return (gapi.client.sheets.spreadsheets.values.get({
@@ -39,35 +39,26 @@ app.service('GoogleDriveService', ['$q','$http', function($q,$http) {
         }));
     }
 
-    this.updateSpreadsheetRange = function(id, range, dataToBeInserted, append) {
-        if (append === true) {
-            return (gapi.client.sheets.spreadsheets.values.append({
-                spreadsheetId: URLs.userSpreadsheetId,
-                range: range,
-                valueInputOption: "USER_ENTERED",
-                values: [dataToBeInserted],
-            }));
-        }
-        else {
-            return (gapi.client.sheets.spreadsheets.values.update({
-                spreadsheetId: URLs.userSpreadsheetId,
-                range: range,
-                valueInputOption: "USER_ENTERED",
-                values: dataToBeInserted,
-            }));
-        }
-    }
-
-    this.getWebsiteScreenshot = function(url) {
-        return (gapi.client.request({
-            'root': 'https://www.googleapis.com',
-            'path': 'pagespeedonline/v2/runPagespeed?url=' + encodeURIComponent(url) + '&rule=AvoidLandingPageRedirects&screenshot=true&strategy=desktop&fields=screenshot(data%2Cheight%2Cwidth)&key=AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo',
-            'method': 'GET',
+    this.updateSpreadsheetRange = function(id, range, dataToBeInserted) {
+        return (gapi.client.sheets.spreadsheets.values.update({
+            spreadsheetId: URLs.userSpreadsheetId,
+            range: range,
+            valueInputOption: "USER_ENTERED",
+            values: dataToBeInserted,
         }));
     }
-    
+
+    this.appendSpreadsheetRange = function(id, range, dataToBeInserted) {
+        return (gapi.client.sheets.spreadsheets.values.append({
+            spreadsheetId: URLs.userSpreadsheetId,
+            range: range,
+            valueInputOption: "USER_ENTERED",
+            values: [dataToBeInserted],
+        }));
+    }
+
     //----------------------------------------------------
-	//----------------- Getting Files --------------------
+    //----------------- Getting Files --------------------
 
     this.getListOfFlies = function(query, pageToken, pageSize) {
         var query = query || "";
@@ -79,18 +70,18 @@ app.service('GoogleDriveService', ['$q','$http', function($q,$http) {
             fields: 'files(name,id,modifiedTime,createdTime,properties,iconLink,thumbnailLink,description,starred,viewedByMe,owners(displayName,emailAddress),permissions(displayName,emailAddress)),nextPageToken', //
         }));
     };
-    
+
     this.getFileThumbnail = function(id) {
         return (gapi.client.drive.files.get({
             fileId: id,
             fields: 'name,thumbnailLink,iconLink', //
         }));
     }
-    
+
     //----------------------------------------------------
-	//---------------- Modifying Files -------------------
-	
-	this.AppsScriptNewFile = function () {
+    //---------------- Modifying Files -------------------
+
+    this.AppsScriptNewFile = function() {
         return $http({
             method: 'GET',
             url: 'https://script.google.com/macros/s/AKfycbwAVKcfa8Lzf_iyFlQpllMAn5kx0e37QSIKxsiE-51yYFOTDg0r/exec'
@@ -102,7 +93,7 @@ app.service('GoogleDriveService', ['$q','$http', function($q,$http) {
             'fileId': fileId
         }));
     };
-    
+
     this.updateDriveFile = function(id, metadata) {
         return (gapi.client.drive.files.update({
             'fileId': id,
@@ -129,4 +120,16 @@ app.service('GoogleDriveService', ['$q','$http', function($q,$http) {
             sendNotificationEmail: false,
         }));
     };
+
+    //----------------------------------------------------
+    //------------------ Other Stuff ---------------------
+
+    this.getWebsiteScreenshot = function(url) {
+        return (gapi.client.request({
+            'root': 'https://www.googleapis.com',
+            'path': 'pagespeedonline/v2/runPagespeed?url=' + encodeURIComponent(url) + '&rule=AvoidLandingPageRedirects&screenshot=true&strategy=desktop&fields=screenshot(data%2Cheight%2Cwidth)&key=AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo',
+            'method': 'GET',
+        }));
+    }
+
 }]);

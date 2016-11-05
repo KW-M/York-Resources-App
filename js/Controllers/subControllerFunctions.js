@@ -81,7 +81,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	$scope.convertDriveToPost = function(DriveMetadata) {
 		var formatedPost = {};
 		try {
-			console.log(DriveMetadata)
 			var likesAndFlagged = DriveMetadata.name.split("{]|[}"); //not flagged any more
 			if (DriveMetadata.description) {
 				var descriptionAndPreviewimage = DriveMetadata.description.split("{]|[}");
@@ -96,7 +95,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			} else {
 				var hasLiked = true;
 			}
-			console.log('convertingPost3')
 			formatedPost.Title = DriveMetadata.properties.Title || ''
 			formatedPost.Description = descriptionAndPreviewimage[0] || ''
 			formatedPost.Link = descriptionAndPreviewimage[1] || ''
