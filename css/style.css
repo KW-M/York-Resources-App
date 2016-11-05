@@ -8,11 +8,6 @@ div:focus {
 /*------------ background and layout styles ----------- */
 
 html body {
-    /*display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    box-sizing: border-box;*/
     font-family: 'Helvetica Neue', Helvetica, "Roboto", Arial, sans-serif;
     background-color: #f2f2f2;
     flex-direction: column;
@@ -54,8 +49,6 @@ html body {
 
 
 /*---------------------------------------------------------------- */
-
-
 /*-------------- Loading & first launch styles ----------- */
 
 #welcome_dialog {
@@ -325,10 +318,10 @@ md-input-container.button-select md-select-value {
 /*--------- new post top bar ------------ */
 
 .new-post-bar-top {
-    position: relative;
     background-color: white;
     display: flex;
-    height: 46px;
+    width: 100%;
+    min-height: 48px;
     max-width: 570px;
     box-sizing: border-box;
     margin: 0px auto 16px auto;
