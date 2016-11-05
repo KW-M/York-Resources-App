@@ -7,10 +7,10 @@
         <span class="unselectable default-mouse" style="font-size: 110%">YORK </span>
         <span class="unselectable default-mouse" style="font-size: 80%">Study Resources </span>
     </h2>
-    <div hide-xs show-gt-xs style="search-bar-container">
+    <div hide-xs show-gt-xs class="search-bar-container">
         <md-icon class="search-bar-icon">search</md-icon>
         <input md-delay="300" class="search-bar" ng-model="searchInputTxt" ng-model-options="{ debounce: 500 }" placeholder="{{searchPlaceholder}}" />
-        <md-button ng-class="{'has-text': searchInputTxt}" ng-click="searchInputTxt = ''" class='search-bar-close-button md-icon-button'>
+        <md-button ng-class="{'has-text': searchInputTxt}" ng-click="searchInputTxt = ''" class='search-bar-clear-button md-icon-button'>
             <md-icon style="color:rgb(117,117,117)">close</md-icon>
         </md-button>
     </div>
@@ -21,7 +21,7 @@
         <div class="search-bar-container" style='margin-right:0'>
             <md-icon class="search-bar-icon">search</md-icon>
             <input md-delay="300" class="search-bar" ng-model="searchInputTxt" ng-model-options="{ debounce: 500 }" placeholder="{{searchPlaceholder}}" />
-            <md-button ng-class="{'has-text': searchInputTxt}" ng-click="searchInputTxt = ''" class='search-bar-close-button md-icon-button'>
+            <md-button ng-class="{'has-text': searchInputTxt}" ng-click="searchInputTxt = ''" class='search-bar-clear-button md-icon-button'>
                 <md-icon style="color:rgb(117,117,117)">close</md-icon>
             </md-button>
         </div>
