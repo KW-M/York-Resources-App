@@ -134,7 +134,7 @@ app.directive('contenteditable', ['$sce', function($sce) {
     require: '?ngModel', // get a hold of NgModelController
     link: function(scope, element, attrs, ngModel) {
       if (!ngModel) return; // do nothing if no ng-model
-console.log(element)
+      
       // Specify how UI should be updated
       ngModel.$render = function() {
         element.html($sce.getTrustedHtml(ngModel.$viewValue || ''));

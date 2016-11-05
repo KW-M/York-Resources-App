@@ -183,7 +183,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			} else {
 				var Flagged = true;
 			}
-			if ($scope.queryParams.classpath !== null && $scope.queryParams.classpath !== undefined && $scope.queryParams.classpath !== 'my-posts'  && $scope.queryParams.classpath !== 'all-posts' && $scope.queryParams.classpath !== 'flagged') {
+			if ($scope.queryParams.classpath !== null && $scope.queryParams.classpath !== undefined && $scope.queryParams.classpath !== 'my-posts' && $scope.queryParams.classpath !== 'all-posts' && $scope.queryParams.classpath !== 'flagged') {
 				var Class = post.Class.Name === $scope.queryParams.classpath;
 			} else {
 				var Class = post.Class.Name != 'memes';
@@ -216,10 +216,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		}));
 	};
 	//----------------------------------------------------
-	//--------------- Grid & Layout ------------------
-	$scope.sortByLikes = function(thingToSort) {
-
-	};
+	//----------------- Grid & Layout --------------------
+	
 	//----------------------------------------------------
 	//------------------UI Actions------------------------
 	$scope.toggleSidebar = function(close) { //called by the top left toolbar menu button
