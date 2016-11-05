@@ -206,7 +206,7 @@
                 queue('other', GoogleDriveService.AppsScriptNewFile(), function(response) {
                     console.log(response)
                     console.log(metadata)
-                    queue('drive', GoogleDriveService.updateFileMetadata(response.data, metadata), function(reply) {
+                    queue('drive', GoogleDriveService.updateDriveFile(response.data, metadata), function(reply) {
                         console.log(reply.result);
                         $mdToast.hide();
                     }, function(error) {
@@ -217,7 +217,7 @@
                 }, 2);
             } else if (operation === 'update') {
                 var metadata = $scope.compileUpdateToMetadata();
-                queue('drive', GoogleDriveService.updateFileMetadata(postObj.Id, metadata), function(reply) {
+                queue('drive', GoogleDriveService.updateDrivMetadata(postObj.Id, metadata), function(reply) {
                     console.log(reply.result);
                     $mdToast.hide();
                 }, function(error) {

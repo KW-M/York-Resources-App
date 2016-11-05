@@ -308,7 +308,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			allArrayPost.Likes = content.Likes;
 			var name = allArrayPost.Likes.length + "{]|[}" + JSON.stringify(allArrayPost.Likes)
 			console.log(name);
-			queue('drive', GoogleDriveService.updateFileMetadata(content.Id, {
+			queue('drive', GoogleDriveService.updateDriveFile(content.Id, {
 				name: name
 			}), function(result) {
 				console.log(result);

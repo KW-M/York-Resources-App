@@ -80,44 +80,33 @@ app.service('GoogleDriveService', ['$q','$http', function($q,$http) {
         }));
     };
     
-    //----------------------------------------------------
-	//---------------- Modifying Files -------------------
-
-    this.deleteDriveFile = function(fileId) {
-        return (gapi.client.drive.files.delete({
-            'fileId': fileId
-        }));
-    };
-
-    this.updateDriveFile = function(id, metadata) {
-        return (gapi.client.drive.files.update({
-            'fileId': id,
-        }));
-    };
-
-    this.AppsScriptNewFile = function () {
-        return $http({
-            method: 'GET',
-            url: 'https://script.google.com/macros/s/AKfycbwAVKcfa8Lzf_iyFlQpllMAn5kx0e37QSIKxsiE-51yYFOTDg0r/exec'
-        });
-    }
-
-    this.createDriveFile = function(metadata) {
-        metadata.parents = [URLs.databaseFolderId];
-        return (gapi.client.drive.files.create(metadata));
-    };
-
     this.getFileThumbnail = function(id) {
         return (gapi.client.drive.files.get({
             fileId: id,
             fields: 'name,thumbnailLink,iconLink', //
         }));
     }
+    
+    //----------------------------------------------------
+	//---------------- Modifying Files -------------------
+	
+	this.AppsScriptNewFile = function () {
+        return $http({
+            method: 'GET',
+            url: 'https://script.google.com/macros/s/AKfycbwAVKcfa8Lzf_iyFlQpllMAn5kx0e37QSIKxsiE-51yYFOTDg0r/exec'
+        });
+    }
 
-    this.getFileContent = function(fileId) {
-        return (gapi.client.drive.files.get({
-            'fileId': fileId,
-            'alt': 'media'
+    this.deleteDriveFile = function(fileId) {
+        return (gapi.client.drive.files.delete({
+            'fileId': fileId
+        }));
+    };
+    
+    this.updateDriveFile = function(id, metadata) {
+        return (gapi.client.drive.files.update({
+            'fileId': id,
+            'resource': metadata,
         }));
     };
 
@@ -132,23 +121,7 @@ app.service('GoogleDriveService', ['$q','$http', function($q,$http) {
         }));
     };
 
-    this.updateBookmarked = function(id, value) {
-        return (gapi.client.drive.files.update({
-            'fileId': id,
-            'resource': {
-                starred: value,
-            },
-        }));
-    };
-
-    this.updateFileMetadata = function(id, metadata) {
-        return (gapi.client.drive.files.update({
-            'fileId': id,
-            'resource': metadata,
-        }));
-    };
-
-    this.linkShareFile = function(fileID) {
+    this.shareFileLink = function(fileID) {
         return (gapi.client.drive.permissions.create({
             fileId: fileID,
             type: "domain",
@@ -156,5 +129,4 @@ app.service('GoogleDriveService', ['$q','$http', function($q,$http) {
             sendNotificationEmail: false,
         }));
     };
-    // --not used functions--
 }]);
