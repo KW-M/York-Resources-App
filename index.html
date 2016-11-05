@@ -67,7 +67,31 @@
             <md-sidenav side-nav-insides class="side-nav md-sidenav-left md-whiteframe-z2 sidenav-overlay" md-component-id="sidenav_overlay"></md-sidenav>
             <side-nav-insides class="side-nav md-sidenav-left sidenav-inline" ng-class="{'side-nav-open' : globals.sidenavIsOpen === true && $mdMedia('gt-sm'),'rainbow2' : queryParams.classpath == 'meme', 'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}"></side-nav-insides>
             <!----- The content, ie posts, resources, etc. ------->
-            <add-lower-button></add-lower-button>
+            <md-fab-speed-dial id="speed_dial_container" md-direction="up" md-open="globals.FABisOpen" ng-class="{ 'slide-out' : globals.FABisHidden }" class="md-fling md-hover-full md-fab-bottom-right" ng-mouseenter="globals.FABisOpen=true" ng-mouseleave="globals.FABisOpen = false">
+                <md-fab-trigger>
+                    <md-button id="new_post_button" class="md-fab md-accent raise-on-hover" ng-click="::newPost({},'new')">
+                        <md-tooltip md-direction="left" md-autohide>Add Resource</md-tooltip>
+                        <md-icon class="unselectable">add</md-icon>
+                    </md-button>
+                </md-fab-trigger>
+                <md-fab-actions>
+                    <md-button class="md-fab md-raised md-mini" ng-click="::showPicker('Drive')">
+                        <md-tooltip md-direction="left" md-autohide>Add Drive file</md-tooltip>
+                        <img class="unselectable" style="width:22px; height:22px; margin-top:8px" src="images/drive_icon.svg">
+                    </md-button>
+                    <md-button class="md-fab md-raised md-mini">
+                        <label class="custom-file-upload" style=>
+                    <input type="file" accept="image/*" capture="camera" style="display:none"/>
+                    <md-tooltip md-direction="left" md-autohide>Take Photo</md-tooltip>
+                    <md-icon class="unselectable" style="color:black">camera</md-icon>
+                        </label>
+                    </md-button>
+                    <md-button class="md-fab md-raised md-mini" ng-click="::showPicker('Upload')">
+                        <md-tooltip md-direction="left" md-autohide>Upload</md-tooltip>
+                        <md-icon class="unselectable" style="color:black">file_upload</md-icon>
+                    </md-button>
+                </md-fab-actions>
+            </md-fab-speed-dial>
             <div id="content_container" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'ugly-brown' : queryParams.classpath == 'meme' , 'gt-sm': $mdMedia('gt-sm')}" class="">
                 <span ng-show="devMode">
                         <md-button ng-click="consoleLog(myInfo, true)">
@@ -107,7 +131,7 @@
                         <md-icon class="unselectable" md-svg-icon="driveIcon"></md-icon>
                     </span>
                 </div>
-                <div>
+                <!--<div>-->
                     <div angular-grid="visiblePosts" id="layout_grid" ag-gutter-size="8" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="getFiles()">
                         <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}" class="post-card raise-on-hover">
                             <md-button style="position: absolute; top: -14px; right: -6px; z-index: 1" class="md-icon-button md-accent" ng-click="bookmark(Post)">
@@ -196,7 +220,7 @@
                             <md-progress-circular id="loading_spinner" style="display: none;margin: auto;" class="md-accent" md-mode="indeterminate" md-diameter="30px"></md-progress-circular>
                         </div>
                     </div>
-                </div>
+                <!--</div>-->
             </div>
             <!-------------------------------------------------------->
             <!---------------------- Libraries ----------------------->
