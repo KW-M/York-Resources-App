@@ -1,45 +1,61 @@
-    <div  class="md-toolbar-tools">
-        <md-button class="md-icon-button" ng-click="::toggleSidebar()">
-            <md-icon>menu</md-icon>
+<div class="md-toolbar-tools">
+    <md-button class="md-icon-button" ng-click="::toggleSidebar()">
+        <md-icon>menu</md-icon>
+    </md-button>
+    <img hide-gt-sm show-xs show-sm style="height: 46px;" src="./images/logo.png" />
+    <h2 show-gt-sm hide-xs hide-sm>
+        <span class="unselectable default-mouse" style="font-size: 110%">YORK </span>
+        <span class="unselectable default-mouse" style="font-size: 80%">Study Resources </span>
+    </h2>
+    <div hide-xs show-gt-xs style="search-bar-container">
+        <md-icon class="search-bar-icon">search</md-icon>
+        <input md-delay="300" class="search-bar" ng-model="searchInputTxt" ng-model-options="{ debounce: 500 }" placeholder="{{searchPlaceholder}}" />
+        <md-button ng-class="{'has-text': searchInputTxt}" ng-click="searchInputTxt = ''" class='search-bar-close-button md-icon-button'>
+            <md-icon style="color:rgb(117,117,117)">close</md-icon>
         </md-button>
-        <img hide-gt-sm show-xs show-sm  style="height: 46px;" src="./images/logo.png"/>
-        <h2 show-gt-sm hide-xs hide-sm >
-          <span class="unselectable default-mouse" style="font-size: 110%">YORK </span>
-          <span class="unselectable default-mouse" style="font-size: 80%" >Study Resources </span>
-        </h2>
-        <search-bar hide-xs show-gt-xs style="margin-right: 12px;"></search-bar>
-        <div hide-gt-xs show-xs class="hover-search" ng-class="{'hover-search-visible' : globals.mobileSearchIsOpen}">
-            <md-button class="md-icon-button" style="margin-right: -20px" ng-click="globals.mobileSearchIsOpen = !globals.mobileSearchIsOpen">
-                <md-icon>close</md-icon>
-            </md-button>
-            <search-bar></search-bar>
-        </div>
-        <span flex hide-gt-xs show-xs></span>
-        {{globals.mobileSearchOpen}}
-        <md-button hide-gt-xs show-xs class="md-icon-button" ng-click="globals.mobileSearchIsOpen = !globals.mobileSearchIsOpen">
-            <md-icon>search</md-icon>
-        </md-button>
-        <md-button class="md-icon-button" ng-click="getFiles()">
-            <md-icon>refresh</md-icon>
-            <md-tooltip md-autohide>Refresh</md-tooltip>
-        </md-button>
-        <md-button hide-sm hide-xs show-gt-sm class="md-icon-button" ng-click="::openHelpDialog()">
-            <md-icon>help</md-icon>
-            <md-tooltip >Help</md-tooltip>
-        </md-button>
-        <md-menu md-position-mode="target-right target">
-            <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" id="account_button" aria-label="account" style="height:36px;width:36px;border-radius:50%;background-image:url('images/accountPic.jpg'); background-size: 36px 36px;">
-            </md-button>
-            <md-menu-content>
-               <md-menu-item layout="column" style="padding: 6px 16px;">
-                <p class="user-name" style="font-weight: bold; font-size:13px; padding: 0px" >{{myInfo.Name}}</p>
-                <p class="user-name" style="color: #666; font-size:13px; padding: 0px" >{{myInfo.Email}}</p>
-               </md-menu-item>
-               <md-menu-item>
-                  <md-button id="signout_button" ng-click="signOut()"><span flex>Sign out</span><md-icon>exit_to_app</md-icon></md-button>
-               </md-menu-item>
-                <md-button id="quizlet_connect_button" class="md-raised" ng-click=""><span>Connect Quizlet</span><md-icon style="margin: auto 0px auto 10px;"><img style="height: 24px;width: 24px;-webkit-filter: invert(100%);filter: invert(100%);" src="./images/quizlet logo.png"></img></md-icon></md-button>
-                
-            </md-menu-content>
-         </md-menu>
     </div>
+    <div hide-gt-xs show-xs class="hover-search" ng-class="{'hover-search-visible' : globals.mobileSearchIsOpen}">
+        <md-button class="md-icon-button" style="margin-right: -20px" ng-click="globals.mobileSearchIsOpen = !globals.mobileSearchIsOpen">
+            <md-icon>close</md-icon>
+        </md-button>
+        <div class="search-bar-container" style='margin-right:0'>
+            <md-icon class="search-bar-icon">search</md-icon>
+            <input md-delay="300" class="search-bar" ng-model="searchInputTxt" ng-model-options="{ debounce: 500 }" placeholder="{{searchPlaceholder}}" />
+            <md-button ng-class="{'has-text': searchInputTxt}" ng-click="searchInputTxt = ''" class='search-bar-close-button md-icon-button'>
+                <md-icon style="color:rgb(117,117,117)">close</md-icon>
+            </md-button>
+        </div>
+    </div>
+    <span flex hide-gt-xs show-xs></span> {{globals.mobileSearchOpen}}
+    <md-button hide-gt-xs show-xs class="md-icon-button" ng-click="globals.mobileSearchIsOpen = !globals.mobileSearchIsOpen">
+        <md-icon>search</md-icon>
+    </md-button>
+    <md-button class="md-icon-button" ng-click="getFiles()">
+        <md-icon>refresh</md-icon>
+        <md-tooltip md-autohide>Refresh</md-tooltip>
+    </md-button>
+    <md-button hide-sm hide-xs show-gt-sm class="md-icon-button" ng-click="::openHelpDialog()">
+        <md-icon>help</md-icon>
+        <md-tooltip>Help</md-tooltip>
+    </md-button>
+    <md-menu md-position-mode="target-right target">
+        <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" id="account_button" aria-label="account" style="height:36px;width:36px;border-radius:50%;background-image:url('images/accountPic.jpg'); background-size: 36px 36px;">
+        </md-button>
+        <md-menu-content>
+            <md-menu-item layout="column" style="padding: 6px 16px;">
+                <p class="user-name" style="font-weight: bold; font-size:13px; padding: 0px">{{myInfo.Name}}</p>
+                <p class="user-name" style="color: #666; font-size:13px; padding: 0px">{{myInfo.Email}}</p>
+            </md-menu-item>
+            <md-menu-item>
+                <md-button id="signout_button" ng-click="signOut()"><span flex>Sign out</span>
+                    <md-icon>exit_to_app</md-icon>
+                </md-button>
+            </md-menu-item>
+            <md-button id="quizlet_connect_button" class="md-raised" ng-click=""><span>Connect Quizlet</span>
+                <md-icon style="margin: auto 0px auto 10px;"><img style="height: 24px;width: 24px;-webkit-filter: invert(100%);filter: invert(100%);" src="./images/quizlet logo.png"></img>
+                </md-icon>
+            </md-button>
+
+        </md-menu-content>
+    </md-menu>
+</div>

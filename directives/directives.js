@@ -7,12 +7,6 @@ app.directive('toolbarTopContent', function() {
         templateUrl: 'directives/html/toolbarTopContent.html'
     };
 });
-app.directive('searchBar', function() {
-    return {
-        restrict: 'E',
-        templateUrl: 'directives/html/searchBar.html'
-    };
-});
 app.directive('sideNavInsides', function() {
     return {
         restrict: 'AE',
@@ -27,19 +21,6 @@ app.directive('addLowerButton', function() {
 });
 
 // ----Posts layout pieces----
-app.directive('postCard', function() {
-    return {
-        restrict: 'EA',
-        templateUrl: 'directives/html/postCard.html'
-    };
-});
-
-app.directive('addBarTop', function() {
-    return {
-        restrict: 'E',
-        templateUrl: 'directives/html/addBarTop.html'
-    };
-});
 
 app.directive('newPostContent', function() {
     return {
