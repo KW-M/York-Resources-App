@@ -124,23 +124,23 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			formatedPost.userLiked = hasLiked
 			formatedPost.PreviewImage = descriptionAndPreviewimage[2]
 			formatedPost.Bookmarked = DriveMetadata.starred || false
-			if (formatedPost.Type === 'GDrive') {
-				queue('drive', GoogleDriveService.getFileThumbnail(formatedPost.AttachmentId), function(response) {
-					$timeout(function() {
-						console.log(response);
-						if (response.result.thumbnailLink) {
-							formatedPost.PreviewImage = response.result.thumbnailLink.replace("=s220", "=s400") + "&access_token=" + authorizationService.getAuthToken();
-						} else {
-							formatedPost.PreviewImage = "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
-						}
-						formatedPost.AttachmentName = response.result.name;
-						formatedPost.AttachmentIcon = response.result.iconLink;
-					});
-				}, function(error) {
-					console.log(error);
-					formatedPost.PreviewImage = "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
-				}, 150);
-			}
+			// if (formatedPost.Type === 'GDrive') {
+			// 	queue('drive', GoogleDriveService.getFileThumbnail(formatedPost.AttachmentId), function(response) {
+			// 		$timeout(function() {
+			// 			console.log(response);
+			// 			if (response.result.thumbnailLink) {
+			// 				formatedPost.PreviewImage = response.result.thumbnailLink.replace("=s220", "=s400") + "&access_token=" + authorizationService.getAuthToken();
+			// 			} else {
+			// 				formatedPost.PreviewImage = "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
+			// 			}
+			// 			formatedPost.AttachmentName = response.result.name;
+			// 			formatedPost.AttachmentIcon = response.result.iconLink;
+			// 		});
+			// 	}, function(error) {
+			// 		console.log(error);
+			// 		formatedPost.PreviewImage = "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
+			// 	}, 150);
+			// }
 			console.log(formatedPost)
 			return (formatedPost)
 		} catch (e) {

@@ -180,7 +180,7 @@
                         //     hideDelay: 3000000,
                         //     parent: document.getElementById('new_post_dialog'),
                         // });
-                        
+                        var tost = $mdToast.build().action('Got It').textContent('Anyone at York will be able to view the attached file.');
                     $mdToast.show($mdToast.simple().action('Got It').textContent('Anyone at York will be able to view the attached file.'));
                     } else {
                         $mdToast.show({
