@@ -122,23 +122,23 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			formatedPost.Likes = JSON.parse(likesAndFlagged[1])
 			formatedPost.userLiked = hasLiked
 			formatedPost.PreviewImage = descriptionAndPreviewimage[2]
-			// if (formatedPost.Type === 'GDrive') {
-			// 	queue('drive', GoogleDriveService.getFileThumbnail(formatedPost.AttachmentId), function(response) {
-			// 		$timeout(function() {
-			// 			console.log(response);
-			// 			if (response.result.thumbnailLink) {
-			// 				formatedPost.PreviewImage = response.result.thumbnailLink.replace("=s220", "=s400") + "&access_token=" + authorizationService.getAuthToken();
-			// 			} else {
-			// 				formatedPost.PreviewImage = "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
-			// 			}
-			// 			formatedPost.AttachmentName = response.result.name;
-			// 			formatedPost.AttachmentIcon = response.result.iconLink;
-			// 		});
-			// 	}, function(error) {
-			// 		console.log(error);
-			// 		formatedPost.PreviewImage = "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
-			// 	}, 150);
-			// }
+				// if (formatedPost.Type === 'GDrive') {
+				// 	queue('drive', GoogleDriveService.getFileThumbnail(formatedPost.AttachmentId), function(response) {
+				// 		$timeout(function() {
+				// 			console.log(response);
+				// 			if (response.result.thumbnailLink) {
+				// 				formatedPost.PreviewImage = response.result.thumbnailLink.replace("=s220", "=s400") + "&access_token=" + authorizationService.getAuthToken();
+				// 			} else {
+				// 				formatedPost.PreviewImage = "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
+				// 			}
+				// 			formatedPost.AttachmentName = response.result.name;
+				// 			formatedPost.AttachmentIcon = response.result.iconLink;
+				// 		});
+				// 	}, function(error) {
+				// 		console.log(error);
+				// 		formatedPost.PreviewImage = "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
+				// 	}, 150);
+				// }
 			console.log(formatedPost)
 			return (formatedPost)
 		} catch (e) {
@@ -217,7 +217,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	};
 	//----------------------------------------------------
 	//----------------- Grid & Layout --------------------
-	
+
 	//----------------------------------------------------
 	//------------------UI Actions------------------------
 	$scope.toggleSidebar = function(close) { //called by the top left toolbar menu button
@@ -242,9 +242,12 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		$mdDialog.show(confirm).then(function() {
 			$scope.allPosts.splice(findPostById(content.Id, $scope.allPosts), 1);
 			$timeout($scope.visiblePosts.splice(arrayIndex, 1));
-			queue(GoogleDriveService.deleteDriveFile(content.Id), function() {
+			queue('drive', GoogleDriveService.deleteDriveFile(content.Id), function() {
 				console.log("deleted");
-			});
+			}, function(err) {
+				$mdToast.showSimple('Error deleting post, try again.');
+				console.warn(err)
+			}, 150);
 		});
 	};
 	$scope.flagPost = function(ev, content, arrayIndex) {
@@ -257,7 +260,10 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		$scope.allPosts[findPostById(content.Id, $scope.allPosts)].Flagged = true;
 		queue(GoogleDriveService.updateFlagged(content.Id, true), function() {
 			console.log("flagged: " + content.Id);
-		});
+		}, function(err) {
+			$mdToast.showSimple('Error flagging post, try again.');
+			console.warn(err)
+		}, 150);
 		//set the user's has flagged date back
 	};
 	$scope.unFlagPost = function(content, arrayIndex) {
@@ -272,7 +278,10 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			$scope.updateVisiblePosts($scope.filterPosts($scope.allPosts));
 			queue(GoogleDriveService.updateFlagged(content.Id, false), function() {
 				console.log("unflagged: " + content.Id);
-			});
+			}, function(err) {
+				$mdToast.showSimple('Error unflagging post, try again.');
+				console.warn(err)
+			}, 150);
 		} else {
 			$mdDialog.show($mdDialog.alert({
 				title: 'Uh Oh.',
@@ -303,6 +312,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 				name: name
 			}), function(result) {
 				console.log(result);
+			},function (err) {
+				$mdToast.showSimple('Error likeing post, try again.');
+				console.warn(err)
 			});
 		}, 2000);
 	};
