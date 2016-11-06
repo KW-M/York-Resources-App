@@ -117,20 +117,21 @@
                         </md-button>
                         all: {{allPosts.length}} Visible: {{visiblePosts.length}}
                 </span>
-                <div class="new-post-bar-top" md-ink-ripple="true">
-                    <span class="new-post-text-top unselectable" flex ng-click="::newPost({},'new')">
-                        <md-icon style="margin-top: -3px;">add_circle</md-icon>
-                        <span>Share a link or resource...</span>
-                    </span>
-                    <span class="new-post-option-button" ng-click="::showPicker('Upload')">
-                        <md-tooltip md-direction="::down">Upload</md-tooltip>
-                        <md-icon class="unselectable" style="color: black;">file_upload</md-icon>
-                    </span>
-                    <span class="new-post-option-button" ng-click="::showPicker('Drive')">
-                        <md-tooltip md-direction="::down">Add Drive file</md-tooltip>
-                        <md-icon class="unselectable" md-svg-icon="driveIcon"></md-icon>
-                    </span>
-                </div>
+                <!--<div class="new-post-bar-top" md-ink-ripple="true">-->
+                <!--    <span class="new-post-text-top unselectable" flex ng-click="::newPost({},'new')">-->
+                <!--        <md-icon style="margin-top: -3px;">add_circle</md-icon>-->
+                <!--        <span>Share a link or resource...</span>-->
+                <!--    </span>-->
+                <!--    <span class="new-post-option-button" ng-click="::showPicker('Upload')">-->
+                <!--        <md-tooltip md-direction="::down">Upload</md-tooltip>-->
+                <!--        <md-icon class="unselectable" style="color: black;">file_upload</md-icon>-->
+                <!--    </span>-->
+                <!--    <span class="new-post-option-button" ng-click="::showPicker('Drive')">-->
+                <!--        <md-tooltip md-direction="::down">Add Drive file</md-tooltip>-->
+                <!--        <md-icon class="unselectable" md-svg-icon="driveIcon"></md-icon>-->
+                <!--    </span>-->
+                <!--</div>-->
+                <div>
                 <div angular-grid="visiblePosts" id="layout_grid" ag-gutter-size="8" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="getFiles()">
                     <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}" class="post-card raise-on-hover">
                         <div class="post-card-header" md-ink-ripple="{{Post.Type != 'noLink'}}" ng-click="openLink(Post.Link)" ng-class="{ 'noLink' : Post.Type == 'noLink' }">
@@ -191,6 +192,7 @@
                         </div>
                     </div>
                 </div>
+                 </div>
                 <div class="footer-container">
                     <div class="footer">
                         <div id="no_posts_footer" style="display: none;">
