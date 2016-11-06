@@ -69,6 +69,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			formatedPost.PreviewImage = descriptionAndPreviewimage[2]
 			if (formatedPost.Type === 'GDrive') {
 				queue('drive', GoogleDriveService.getFileThumbnail(formatedPost.AttachmentId), function(response) {
+					console.log('gotPreviewImage')
 					$timeout(function() {
 						console.log(response);
 						if (response.result.thumbnailLink) {
