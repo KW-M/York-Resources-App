@@ -1,22 +1,21 @@
     /*---------- searchbar styles -------- */
-    
+
     .search-bar-container {
         flex: 1;
-        margin: 0 24px 0 10px;
+        margin: 0 10px 0 24px;
         position: relative;
     }
-    
+
     .search-bar {
         padding: 0 40px 0 52px;
         border: none;
         outline: none;
         border-radius: 4px;
         height: 40px;
-        width: 100%
-        min-width: 720px;
+        width: 100%;
         font-size: 14px;
     }
-    
+
     md-icon.material-icons.search-bar-icon {
         position: absolute;
         color: #757575;
@@ -24,7 +23,7 @@
         pointer-events: none;
         margin: 8px 15px;
     }
-    
+
     .md-button.md-icon-button.search-bar-clear-button {
         position: absolute;
         right: 0px;
@@ -35,59 +34,58 @@
         pointer-events: none;
         transition: opacity ease 200ms, transform ease 200ms;
     }
-    
+
     .md-button.md-icon-button.search-bar-clear-button.has-text {
         transform: scale(1);
         opacity: 1;
         pointer-events: inherit;
     }
-    
+
     md-autocomplete.searchBar {
         max-width: 720px;
     }
-    
+
     md-autocomplete.searchBar md-autocomplete-wrap {
         padding-left: 52px;
     }
-    
+
     md-autocomplete.searchBar md-autocomplete-wrap input {
         padding-left: 0px;
     }
-    
+
     .searchBarChips md-chips-wrap.md-chips md-autocomplete button {
         display: block;
     }
-    
+
     .searchBar md-autocomplete-wrap input#input-0:focus::-webkit-input-placeholder {
         color: #757575;
     }
-    
+
     .searchbar>md-autocomplete-wrap>input:-moz-placeholder {
         color: #fff;
     }
-    
+
     .searchbar>md-autocomplete-wrap>input:focus:-moz-placeholder {
         color: #757575;
     }
-    
+
     .searchbar>md-autocomplete-wrap>input:-ms-input-placeholder {
         color: #fff;
     }
-    
+
     .searchbar>md-autocomplete-wrap>input:focus:-ms-input-placeholder {
         color: #757575;
     }
-    
+
     .md-virtual-repeat-offsetter .md-autocomplete-suggestions li:hover,
     .md-virtual-repeat-offsetter .md-autocomplete-suggestions li:focus {
         background-color: rgb(255, 255, 255)
     }
-    
+
     .searchBar md-progress-linear ._md-container._md-mode-indeterminate {
         background-color: rgb(170, 209, 249);
     }
-    
+
     .searchBar md-progress-linear ._md-container._md-mode-indeterminate ._md-bar {
         background-color: rgb(16, 108, 200);
     }
-    
