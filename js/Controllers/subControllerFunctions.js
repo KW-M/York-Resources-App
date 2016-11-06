@@ -67,7 +67,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			formatedPost.Likes = JSON.parse(likesAndFlagged[1])
 			formatedPost.userLiked = hasLiked
 			formatedPost.PreviewImage = descriptionAndPreviewimage[2]
-			if (formatedPost.Type === 'GDrive') {
+			if (formatedPost.Type === 'gDrive') {
 				queue('drive', GoogleDriveService.getFileThumbnail(formatedPost.AttachmentId), function(response) {
 					console.log('gotPreviewImage')
 					$timeout(function() {
