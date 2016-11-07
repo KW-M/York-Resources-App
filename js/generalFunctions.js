@@ -36,16 +36,12 @@
       Err: error
     });
     if (!timer[typeName]) {
-      console.log('noTimer'+timer[typeName])
       processTheQueue(typeName); // start immediately on the first invocation
       timer[typeName] = setInterval(function(){processTheQueue(typeName)}, interval || 150);
-    } else {
-      console.log('isTimer'+timer[typeName])
     }
   };
 
   function processTheQueue(typeName) {
-    console.log('processing'+typeName)
     var item = theQueue[typeName].shift();
     if (item) {
       var delay = 0;
@@ -53,9 +49,6 @@
 
       function runPromise() {
         var thePromise = item.Promise;
-        // console.log({
-        //   'Exicuting Promise': thePromise.hg.hg
-        // })
         thePromise.then(item.Action, function(error) {
           if (item.Err) {
             item.Err(error);

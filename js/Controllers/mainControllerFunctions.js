@@ -354,7 +354,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
          no_posts_footer.style.display = 'none';
          footer_problem.style.display = 'none';
          queue('drive', GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function(fileList) {
-            console.log(fileList)
             for (var fileCount = 0; fileCount < fileList.result.files.length; fileCount++) {
                if (!$scope.queryParams.q && deDuplicationIndex[fileList.result.files[fileCount].id] === undefined) {
                   //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.

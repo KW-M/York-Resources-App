@@ -178,9 +178,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		$mdDialog.show(confirm).then(function() {
 			$scope.allPosts.splice(findPostById(content.Id, $scope.allPosts), 1);
 			$timeout($scope.visiblePosts.splice(arrayIndex, 1));
-			queue('drive', GoogleDriveService.deleteDriveFile(content.Id), function() {
-				//console.log("deleted");
-			}, function(err) {
+			queue('drive', GoogleDriveService.deleteDriveFile(content.Id), null, function(err) {
 				$mdToast.showSimple('Error deleting post, try again.');
 				console.warn(err)
 			}, 150);

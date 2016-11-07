@@ -508,10 +508,8 @@
                     //set the height of container
                     var contHeight = Math.max.apply(Math, lastRowBottom);
                     element.css('height', contHeight + 'px');
-
-console.log(clones)
+                    
                     clones.remove();
-console.log(clones)
                     //update the scroll container info
                     if (options.performantScroll || scope.infiniteScroll) {
                       scrollNs.scrollContInfo = getScrollContainerInfo();
