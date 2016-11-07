@@ -1,4 +1,7 @@
    /*-- new post dialog styles --*/
+   #new_post_dialog {
+      overflow:hidden;
+   }
    
    #dialog_header {
       max-height: 200px;

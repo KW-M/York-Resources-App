@@ -1,4 +1,4 @@
-<md-dialog id="new_post_dialog" ng-style="{'background-color': Post.Class.Color}">
+<md-dialog id="new_post_dialog" ng-style="{'background-color': Post.Class.Color" ng-class="{'no-link': Post.Link}">
    <md-dialog-content class="new_post_dialog_scroll">
       <md-toolbar id="dialog_header" ng-class="{ 'noLink' : Post.Type === 'noLink' }">
          <img ng-src="{{Post.PreviewImage}}" id="header_image" ></img>
