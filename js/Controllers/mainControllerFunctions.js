@@ -188,17 +188,17 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
    }
 
    function handleUserPrefsSheet() {
-      queue('sheets', GoogleDriveService.getSpreadsheetRange('1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0', "Sheet1!A2:B", false), function(usersList) {
+      queue('sheets', GoogleDriveService.getSpreadsheetRange("Sheet1!A2:B"), function(usersList) {
          $scope.userList = usersList.result.values;
          for (var UserContact = 0; UserContact < $scope.userList.length; UserContact++) {
             if ($scope.userList[UserContact][0] === $scope.myInfo.Email) {
                var adjustedUserSettingsCount = UserContact + 2;
                $scope.UserSettingsRange = 'A' + adjustedUserSettingsCount + ':' + adjustedUserSettingsCount
                getSpreadsheetRange('A' + adjustedUserSettingsCount + ':' + adjustedUserSettingsCount);
-               UserContact = 100000;
+               UserContact = $scope.userList.length;
             }
          }
-         if (UserContact > 999995) {
+         if (UserContact = $scope.userList.length) {
             createUserSettings();
          }
       }, null, 2);
@@ -215,7 +215,9 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
       function createUserSettings() {
          var newData = [$scope.myInfo.Email, $scope.myInfo.Name, false, "3/25/2016", "", "", "", 1]
          queue('sheets', GoogleDriveService.appendSpreadsheetRange("Sheet1!A1:A", newData), function(newRow) {
-            
+            pushUserSettingsToScope(newData);
+            var gg = new window.Event('sheetPrefsLoaded')
+            document.dispatchEvent(gg);
          }, null, 2);
          pushUserSettingsToScope(newData);
       }
@@ -303,8 +305,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
          //    width: rect.width,
          // }//('#new_post_button'),
       }).then(function() {
-         //angular.element(event.path[2]).removeClass('fade-out');
-         console.log($scope.Post)
+//done
       });
    };
 
@@ -319,8 +320,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
 
    self.pickerCallback = function(data) {
       //drivePicker.dispose();
-      console.log(data);
-      console.log($scope.Post);
       if (data.action == google.picker.Action.PICKED) {
          if ($scope.restorePost == true) {
             $timeout(function() {
