@@ -523,8 +523,8 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
          })
       }
          $scope.$watch('visiblePosts', function() {
-               console.log('visiblePosts model has changed')
-           }, true);
+               console.log('visiblePosts model has changed2')
+           }, false);
       //----------------------------------------------------
       //---------------------- dev -------------------------
    $scope.logDuplicationIndexes = function() {
