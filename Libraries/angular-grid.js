@@ -334,7 +334,7 @@
                 element.append(clone);
 
                 var width = clone[0].offsetWidth;
-                
+
                 clone.remove();
 
                 return {
