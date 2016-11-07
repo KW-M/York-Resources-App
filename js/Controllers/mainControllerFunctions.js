@@ -127,11 +127,11 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
          });
       }
       $scope.getFiles();
-      getFileTimer = setInterval(function(){
-         if(conurancy_counter == 0 && content_container.scrollHeight == content_container.clientHeight) {
+      getFileTimer = setInterval(function() {
+         if (conurancy_counter == 0 && content_container.scrollHeight == content_container.clientHeight) {
             $scope.getFiles()
          }
-      },1000)
+      }, 1000)
    }
 
    //----------------------------------------------------
@@ -518,9 +518,13 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
             if (callback) {
                callback();
             }
+            console.log('visiblePosts Updated')
             angularGridInstance.postsGrid.refresh();
          })
       }
+         $scope.$watch('visiblePosts', function() {
+               console.log('visiblePosts model has changed')
+           }, true);
       //----------------------------------------------------
       //---------------------- dev -------------------------
    $scope.logDuplicationIndexes = function() {

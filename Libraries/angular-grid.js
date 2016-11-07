@@ -614,7 +614,9 @@
               });
             }
 
-//            scope.$watch('model', watch, true);
+           scope.$watch('model', function() {
+               console.log('ag-grid model has changed')
+           }, true);
 
 
             //watch option for changes
