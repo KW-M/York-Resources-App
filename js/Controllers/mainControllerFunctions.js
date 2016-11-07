@@ -146,9 +146,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
       console.log("API loaded: " + loaded)
       if (loaded === "drive") {
          var preUserinfo = GoogleDriveService.getUserInfo()
-         console.log(preUserinfo);
          queue('drive', preUserinfo, function(userInfo) {
-            console.log(preUserinfo);
             $scope.myInfo = {
                "Name": userInfo.result.user.displayName,
                "Email": userInfo.result.user.emailAddress,
@@ -362,16 +360,10 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
    //----------------------------------------------------
    //--------- loading and filtering posts --------------
    $scope.getFiles = function() {
-      console.log("concurancy: " + conurancy_counter);
       conurancy_counter++;
       var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
       var queryString = $scope.queryPropertyString;
-      console.log({
-         pageIndex: classPageTokenSelectionIndex,
-         string: $scope.queryPropertyString,
-         nextPageToken: nextPageToken
-      })
       if (nextPageToken !== "end") {
          loading_spinner.style.display = 'block';
          no_more_footer.style.display = 'none';
@@ -441,7 +433,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
    }
 
    function sortPostsByType(formattedFileList, queryString) {
-      console.log($scope.queryParams)
       if ($scope.queryParams.q) {
          if ($scope.queryParams.q === $scope.previousSearch) {
             $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
