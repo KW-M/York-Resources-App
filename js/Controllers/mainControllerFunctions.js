@@ -232,7 +232,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
       }
 
       listenForURLChange(); // this also Starts getting files
-      queue('sheets', GoogleDriveService.getSpreadsheetRange("Sheet1!A2:Z"), handleClassesSheet, null, 2)
+      queue('sheets', GoogleDriveService.getSpreadsheetRange("Sheet1!A2:Z", true), handleClassesSheet, null, 2)
    }
 
    function handleClassesSheet(rawClasses) {

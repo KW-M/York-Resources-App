@@ -40,7 +40,7 @@ app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
              var spreadsheetId = URLs.userSpreadsheetId;
         }
         return (gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: URLs.userSpreadsheetId,
+            spreadsheetId: spreadsheetId,
             range: range,
         }));
     }
