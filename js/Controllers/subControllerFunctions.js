@@ -111,8 +111,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 					ClassColor: Post.Class.Color,
 					ClassName: Post.Class.Name,
 				},
-				contentHints:{ 
-					indexableText: "Title: " + Post.Title = ", Attachment: " +
+				contentHints: { 
+					indexableText: "Title: " + Post.Title + ", Attachment: " + Post.AttachmentName + ", Class: " + Post.Class.Name + ", Class Catagory: " + Post.Class.Catagory + ", tags: ("+(tagString[2]||'')+(tagString[2]||'')+")"
 				}
 			};
 			return (formatedDriveMetadata);
