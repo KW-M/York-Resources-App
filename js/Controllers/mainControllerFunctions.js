@@ -53,7 +53,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
    //----------------------------------------------------
    //------------------- Routing ------------------------
    $scope.gotoRoute = function(query) {
-      console.log(query)
       if (query.classPath) {
          $scope.toggleSidebar(true);
          $location.search({
@@ -117,13 +116,8 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
       }
       generateQueryString();
       if ($scope.queryParams.q === null) {
-         var filteredPosts = $scope.filterPosts($scope.allPosts);
-         $scope.updateVisiblePosts(filteredPosts, function() {
-            console.log({
-               filter: filteredPosts,
-               All: $scope.allPosts
-            })
-            hideSpinner()
+         $scope.updateVisiblePosts($scope.filterPosts($scope.allPosts), function() {
+            hideSpinner();
          });
       }
       $scope.getFiles();
@@ -145,8 +139,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
    function initiateDrive(loaded) {
       console.log("API loaded: " + loaded)
       if (loaded === "drive") {
-         var preUserinfo = GoogleDriveService.getUserInfo()
-         queue('drive', preUserinfo, function(userInfo) {
+         queue('drive', GoogleDriveService.getUserInfo(), function(userInfo) {
             $scope.myInfo = {
                "Name": userInfo.result.user.displayName,
                "Email": userInfo.result.user.emailAddress,
@@ -191,11 +184,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
                authorizationService.hideSigninDialog();
             });
          }
-         //          console.log('run')
-         // queue(GoogleDriveService.runGAppsScript(), function(result) {
-         //    console.log('run2')
-         //    console.log(result)
-         // });
       }
    }
 
@@ -216,7 +204,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
       }, null, 2);
 
       function getSpreadsheetRange(range) {
-         queue('sheets', GoogleDriveService.getSpreadsheetRange('1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0', range), function(spreadsheetResult) {
+         queue('sheets', GoogleDriveService.getSpreadsheetRange(range), function(spreadsheetResult) {
             var UserSettingsArray = spreadsheetResult.result.values[0];
             pushUserSettingsToScope(UserSettingsArray);
             var gg = new window.Event('sheetPrefsLoaded')
@@ -226,9 +214,8 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
 
       function createUserSettings() {
          var newData = [$scope.myInfo.Email, $scope.myInfo.Name, false, "3/25/2016", "", "", "", 1]
-         queue('sheets', GoogleDriveService.updateSpreadsheetRange('1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0', "Sheet1!A1:A", newData, true), function(newRow) {
-            console.log(newRow)
-            console.log(newRow.result.updates.updatedRange.match(/(?:Sheet1!A)(\d+)/g));
+         queue('sheets', GoogleDriveService.appendSpreadsheetRange("Sheet1!A1:A", newData), function(newRow) {
+            
          }, null, 2);
          pushUserSettingsToScope(newData);
       }
@@ -241,8 +228,9 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
          $scope.myInfo.LastQuizletCheckDate = Date.parse(settingsArray[6])
          $scope.myInfo.NumberOfVisits = settingsArray[7]
       }
+      
       listenForURLChange(); // this also Starts getting files
-      queue('sheets', GoogleDriveService.getSpreadsheetRange("1DfFUn8sgnFeLLijtKvWsd90GNcnEG6Xl5JTSeApX3bY", "Sheet1!A2:Z"), handleClassesSheet, null, 2)
+      queue('sheets', GoogleDriveService.getSpreadsheetRange("Sheet1!A2:Z"), handleClassesSheet, null, 2)
    }
 
    function handleClassesSheet(rawClasses) {

@@ -32,14 +32,14 @@ app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
     //----------------------------------------------------
     //----------------- Spreadsheets ---------------------
 
-    this.getSpreadsheetRange = function(id, range) {
+    this.getSpreadsheetRange = function(range) {
         return (gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: id,
+            spreadsheetId: ,
             range: range,
         }));
     }
 
-    this.updateSpreadsheetRange = function(id, range, dataToBeInserted) {
+    this.updateSpreadsheetRange = function(range, dataToBeInserted) {
         return (gapi.client.sheets.spreadsheets.values.update({
             spreadsheetId: URLs.userSpreadsheetId,
             range: range,
@@ -48,7 +48,7 @@ app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
         }));
     }
 
-    this.appendSpreadsheetRange = function(id, range, dataToBeInserted) {
+    this.appendSpreadsheetRange = function(range, dataToBeInserted) {
         return (gapi.client.sheets.spreadsheets.values.append({
             spreadsheetId: URLs.userSpreadsheetId,
             range: range,
