@@ -321,9 +321,12 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
    self.pickerCallback = function(data) {
       //drivePicker.dispose();
       if (data.action == google.picker.Action.PICKED) {
+         console.log(data)
          if ($scope.restorePost == true) {
             $timeout(function() {
                $scope.Post.AttachmentId = data.docs[0].id;
+               $scope.Post.AttachmentName = data.docs[0].name;
+               $scope.Post.AttachmentIcon = data.docs[0].id;
                $scope.Post.Link = data.docs[0].url;
                $scope.Post.Title = $scope.Post.Title || data.docs[0].name;
             })
