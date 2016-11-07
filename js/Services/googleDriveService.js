@@ -4,6 +4,7 @@ app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
     var URLs = {
         databaseFolderId: '0B5NVuDykezpkbUxvOUMyNnRsUGc',
         userSpreadsheetId: '1_ncCoG3lzplXNnSevTivR5bdJaunU2DOQOA0-KWXTU0',
+        classSpreadsheetId: '1DfFUn8sgnFeLLijtKvWsd90GNcnEG6Xl5JTSeApX3bY'
     }
 
     //----------------------------------------------------
@@ -32,7 +33,12 @@ app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
     //----------------------------------------------------
     //----------------- Spreadsheets ---------------------
 
-    this.getSpreadsheetRange = function(range) {
+    this.getSpreadsheetRange = function(range, classSheet) {
+        if (classSheet) {
+            var spreadsheetId = URLs.classSpreadsheetId;
+        } else {
+             var spreadsheetId = URLs.userSpreadsheetId;
+        }
         return (gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: URLs.userSpreadsheetId,
             range: range,
