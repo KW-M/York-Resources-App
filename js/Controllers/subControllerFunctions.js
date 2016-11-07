@@ -68,7 +68,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			if (formatedPost.Type === 'gDrive') {
 				queue('drive', GoogleDriveService.getFileThumbnail(formatedPost.AttachmentId), function(response) {
 					$timeout(function() {
-						console.log(response);
 						if (response.result.thumbnailLink) {
 							formatedPost.PreviewImage = response.result.thumbnailLink.replace("=s220", "=s400") + "&access_token=" + authorizationService.getAuthToken();
 						} else {
@@ -82,10 +81,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 					formatedPost.PreviewImage = "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
 				}, 150);
 			}
-			console.log(formatedPost)
 			return (formatedPost)
 		} catch (e) {
-			console.log(e)
+			console.warn(e)
 			return (formatedPost);
 		}
 	};
@@ -118,7 +116,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			return (formatedDriveMetadata);
 		} catch (e) {
 			return (formatedDriveMetadata);
-			console.log(e)
+			console.warn(e)
 		}
 	};
 	//----------------------------------------------------
@@ -192,9 +190,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			});
 		}
 		$scope.allPosts[findPostById(content.Id, $scope.allPosts)].Flagged = true;
-		queue(GoogleDriveService.updateFlagged(content.Id, true), function() {
-			//console.log("flagged: " + content.Id);
-		}, function(err) {
+		queue(GoogleDriveService.updateFlagged(content.Id, true), null, function(err) {
 			$mdToast.showSimple('Error flagging post, try again.');
 			console.warn(err)
 		}, 150);
@@ -210,9 +206,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			}
 			$scope.allPosts[findPostById(content.Id, $scope.allPosts)].Flagged = false;
 			$scope.updateVisiblePosts($scope.filterPosts($scope.allPosts));
-			queue(GoogleDriveService.updateFlagged(content.Id, false), function() {
-				//console.log("unflagged: " + content.Id);
-			}, function(err) {
+			queue(GoogleDriveService.updateFlagged(content.Id, false), null, function(err) {
 				$mdToast.showSimple('Error unflagging post, try again.');
 				console.warn(err)
 			}, 150);
@@ -243,9 +237,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			var name = allArrayPost.Likes.length + "{]|[}" + JSON.stringify(allArrayPost.Likes)
 			queue('drive', GoogleDriveService.updateDriveFile(content.Id, {
 				name: name
-			}), function(result) {
-				//console.log(result);
-			}, function(err) {
+			}), null, function(err) {
 				$mdToast.showSimple('Error liking post, try again.');
 				console.warn(err)
 			}, 150);
@@ -294,7 +286,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	//----------------------------------------------------
 	//----------------- Error Handling -------------------
 	window.DriveErrorHandeler = function(error, callback) {
-		console.log(error);
+		console.warn(error);
 		if (error.hasOwnProperty('expectedDomain')) {
 			gapi.auth2.getAuthInstance().signOut();
 			$mdDialog.show($mdDialog.alert({
