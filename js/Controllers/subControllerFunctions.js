@@ -3,10 +3,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	var likeClickTimer = {};
 
 	function findPostById(id, array) {
-		console.log({
-			id: id,
-			array: array
-		})
 		for (var item = 0; item < array.length; item++) {
 			if (array[item].Id === id) {
 				return (item);
@@ -69,7 +65,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			formatedPost.PreviewImage = descriptionAndPreviewimage[2]
 			if (formatedPost.Type === 'gDrive') {
 				queue('drive', GoogleDriveService.getFileThumbnail(formatedPost.AttachmentId), function(response) {
-					console.log('gotPreviewImage')
 					$timeout(function() {
 						console.log(response);
 						if (response.result.thumbnailLink) {
@@ -93,7 +88,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		}
 	};
 	$scope.convertPostToDriveMetadata = function(Post) {
-		console.log(Post);
 		var formatedDriveMetadata
 		try {
 			var tagString = JSON.stringify(Post.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || [];
@@ -112,6 +106,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 					ClassCatagory: Post.Class.Catagory,
 					ClassColor: Post.Class.Color,
 					ClassName: Post.Class.Name,
+				}
+				contentHints:{ 
+					indexableText: "Title: " + Post.Title = ","
 				}
 			};
 			return (formatedDriveMetadata);
@@ -144,20 +141,12 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			} else {
 				var Creator = true;
 			}
-			// console.log({
-			//    filteredPost: post,
-			//    Flagged: Flagged,
-			//    Class: Class,
-			//    Type: Type,
-			//    Creator: Creator,
-			// });
 			return Flagged && Class && Type && Creator;
 		});
 		return ($scope.sortByDateAndLikes(output))
 	}
 	$scope.sortByDateAndLikes = function(arrayToSort) {
 		return (arrayToSort.sort(function(a, b) {
-			console.log(b.UpdateDate.addDays(b.Likes.length))
 			return b.UpdateDate.addDays(b.Likes.length) - a.UpdateDate.addDays(a.Likes.length);
 		}));
 	};
@@ -186,7 +175,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			$scope.allPosts.splice(findPostById(content.Id, $scope.allPosts), 1);
 			$timeout($scope.visiblePosts.splice(arrayIndex, 1));
 			queue('drive', GoogleDriveService.deleteDriveFile(content.Id), function() {
-				console.log("deleted");
+				//console.log("deleted");
 			}, function(err) {
 				$mdToast.showSimple('Error deleting post, try again.');
 				console.warn(err)
@@ -202,7 +191,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		}
 		$scope.allPosts[findPostById(content.Id, $scope.allPosts)].Flagged = true;
 		queue(GoogleDriveService.updateFlagged(content.Id, true), function() {
-			console.log("flagged: " + content.Id);
+			//console.log("flagged: " + content.Id);
 		}, function(err) {
 			$mdToast.showSimple('Error flagging post, try again.');
 			console.warn(err)
@@ -220,7 +209,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			$scope.allPosts[findPostById(content.Id, $scope.allPosts)].Flagged = false;
 			$scope.updateVisiblePosts($scope.filterPosts($scope.allPosts));
 			queue(GoogleDriveService.updateFlagged(content.Id, false), function() {
-				console.log("unflagged: " + content.Id);
+				//console.log("unflagged: " + content.Id);
 			}, function(err) {
 				$mdToast.showSimple('Error unflagging post, try again.');
 				console.warn(err)
@@ -250,11 +239,10 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			allArrayPost.userLiked = content.userLiked;
 			allArrayPost.Likes = content.Likes;
 			var name = allArrayPost.Likes.length + "{]|[}" + JSON.stringify(allArrayPost.Likes)
-			console.log(name);
 			queue('drive', GoogleDriveService.updateDriveFile(content.Id, {
 				name: name
 			}), function(result) {
-				console.log(result);
+				//console.log(result);
 			}, function(err) {
 				$mdToast.showSimple('Error liking post, try again.');
 				console.warn(err)
@@ -299,7 +287,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		authorizationService.hideSigninDialog();
 	};
 	$scope.closeDialog = function() {
-		console.log('closing dialog')
 		$mdDialog.hide();
 	};
 	//----------------------------------------------------
@@ -343,7 +330,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		angularGridInstance.postsGrid.refresh();
 	}
 	$scope.logDuplicationIndexes = function() {
-		console.log()
+	//	console.log()
 	}
 	$scope.logPostToConsole = function(content, arrayIndex) {
 		window.alert(JSON.stringify({
