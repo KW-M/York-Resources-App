@@ -60,6 +60,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			formatedPost.Link = descriptionAndPreviewimage[1]
 			formatedPost.Id = DriveMetadata.id || ''
 			formatedPost.AttachmentId = DriveMetadata.properties.AttachmentId || ''
+			formatedPost.AttachmentIcon = DriveMetadata.properties.AttachmentIcon || ''
+			formatedPost.AttachmentName = DriveMetadata.properties.AttachmentName || ''
 			formatedPost.Likes = JSON.parse(likesAndFlagged[1])
 			formatedPost.userLiked = hasLiked
 			formatedPost.PreviewImage = descriptionAndPreviewimage[2]
@@ -101,14 +103,16 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 					Flagged: Post.Flagged,
 					Type: Post.Type,
 					AttachmentId: Post.AttachmentId,
+					AttachmentIcon: Post.AttachmentIcon,
+					AttachmentName: Post.AttachmentName,
 					Tag1: tagString[0],
 					Tag2: tagString[1],
 					ClassCatagory: Post.Class.Catagory,
 					ClassColor: Post.Class.Color,
 					ClassName: Post.Class.Name,
-				}
+				},
 				contentHints:{ 
-					indexableText: "Title: " + Post.Title = ","
+					indexableText: "Title: " + Post.Title = ", Attachment: " +
 				}
 			};
 			return (formatedDriveMetadata);
