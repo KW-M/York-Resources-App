@@ -230,7 +230,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
          $scope.myInfo.LastQuizletCheckDate = Date.parse(settingsArray[6])
          $scope.myInfo.NumberOfVisits = settingsArray[7]
       }
-      
+
       listenForURLChange(); // this also Starts getting files
       queue('sheets', GoogleDriveService.getSpreadsheetRange("Sheet1!A2:Z"), handleClassesSheet, null, 2)
    }
@@ -305,7 +305,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
          //    width: rect.width,
          // }//('#new_post_button'),
       }).then(function() {
-//done
+         //done
       });
    };
 
@@ -338,9 +338,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
                Title: data.docs[0].name,
             }, 'new');
          }
-         // var AttachmentId = data.docs[0].id;
-         // console.log(data.docs[0]);
-         // alert('File: ' + data.docs[0].name + " id:" + AttachmentId + " URL:" + data.docs[0].url);
       }
    }
 
@@ -435,7 +432,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
          }
       }
       conurancy_counter = conurancy_counter - 1
-      console.log('endingLoadingFiles')
    }
 
    //----------------------------------------------------
@@ -488,24 +484,17 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
       }
    }
    $scope.updateVisiblePosts = function(array, callback) {
-         $timeout(function() {
-            console.log(array)
-            if (array) {
-               $scope.visiblePosts = array;
-            }
-            if (callback) {
-               callback();
-            }
-            console.log('visiblePosts Updated')
-
-         })
-      }
-         $scope.$watch('visiblePosts', function() {
-               console.log('visiblePosts model has changed1')
-               angularGridInstance.postsGrid.refresh();
-           }, true);
-      //----------------------------------------------------
-      //---------------------- dev -------------------------
+      $timeout(function() {
+         if (array) {
+            $scope.visiblePosts = array;
+         }
+         if (callback) {
+            callback();
+         }
+      })
+   }
+   //----------------------------------------------------
+   //---------------------- dev -------------------------
    $scope.logDuplicationIndexes = function() {
       console.log({
          deDuplicationIndex: deDuplicationIndex,

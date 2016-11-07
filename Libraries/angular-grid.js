@@ -616,9 +616,7 @@ console.log(clones)
               });
             }
 
-           scope.$watch('model', function() {
-               console.log('ag-grid model has changed')
-           }, true);
+           scope.$watch('model', watch, true);
 
 
             //watch option for changes

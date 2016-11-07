@@ -34,7 +34,7 @@ app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
 
     this.getSpreadsheetRange = function(range) {
         return (gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: ,
+            spreadsheetId: URLs.userSpreadsheetId,
             range: range,
         }));
     }
@@ -61,13 +61,11 @@ app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
     //----------------- Getting Files --------------------
 
     this.getListOfFlies = function(query, pageToken, pageSize) {
-        var query = query || "";
-        console.log("gettingFIles")
         return (gapi.client.drive.files.list({
             pageSize: pageSize,
             pageToken: pageToken,
-            q: query,
-            fields: 'files(name,id,modifiedTime,createdTime,properties,iconLink,thumbnailLink,description,starred,viewedByMe,owners(displayName,emailAddress),permissions(displayName,emailAddress)),nextPageToken', //
+            q: query || null,
+            fields: 'files(name,id,modifiedTime,createdTime,properties,description,owners(displayName,emailAddress)),nextPageToken', //
         }));
     };
 
