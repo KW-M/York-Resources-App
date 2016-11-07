@@ -3,7 +3,6 @@
     function newPostController($scope, $timeout, $http, $mdDialog, GoogleDriveService, authorizationService, $mdToast, postObj, operation) {
         var linkChangeTimer = null;
         var originalPost = angular.copy(postObj);
-        console.log(originalPost)
         $scope.Post = postObj;
         $timeout(function() {
             $scope.Post.Title = $scope.Post.Title || ''

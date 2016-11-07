@@ -325,18 +325,12 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
          if ($scope.restorePost == true) {
             $timeout(function() {
                $scope.Post.AttachmentId = data.docs[0].id;
-               $scope.Post.AttachmentName = data.docs[0].name;
-               $scope.Post.AttachmentIcon = data.docs[0].id;
                $scope.Post.Link = data.docs[0].url;
                $scope.Post.Title = $scope.Post.Title || data.docs[0].name;
             })
          } else {
             $scope.newPost({
-               Attachment: {
-                  Id: data.docs[0].id,
-                  Name: null,
-                  fileType: null,
-               },
+               AttachmentId: data.docs[0].id,
                Link: data.docs[0].url,
                Title: data.docs[0].name,
             }, 'new');
