@@ -519,11 +519,12 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
                callback();
             }
             console.log('visiblePosts Updated')
-            angularGridInstance.postsGrid.refresh();
+
          })
       }
          $scope.$watch('visiblePosts', function() {
-               console.log('visiblePosts model has changed2')
+               console.log('visiblePosts model has changed1')
+               angularGridInstance.postsGrid.refresh();
            }, false);
       //----------------------------------------------------
       //---------------------- dev -------------------------
