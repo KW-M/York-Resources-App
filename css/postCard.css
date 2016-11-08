@@ -93,37 +93,18 @@
     opacity: 0;
 }
 
-.post-card-link-text {
-    opacity: 0;
-    width: 100%;
-    margin:0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    position: absolute;
-    padding: 0px 16px;
-    font-weight: bold;
-    transition: opacity 0.2s;
-    box-sizing: border-box;
-}
-
-.post-card-header:hover:not(.noLink) .post-card-link-text, #dialog_header:hover:not(.noLink) .post-card-link-text {
-    opacity: 1;
-    transition: opacity 0.2s
-}
-
 .post-card-title {
-    padding: 20px 16px 0px 16px;
     margin: 0px;
+    padding: 20px 16px 0px 16px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .post-card-creator {
-    color: rgba(0, 0, 0, .54);
-    font-size: 13px;
     margin: 0px 16px 0px 16px;
+    font-size: 13px;
+    color: rgba(0, 0, 0, .54);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -149,21 +130,6 @@
     color: rgba(0,0,0,0.54);
 }
 
-.post-card:hover .md-button.md-icon-button md-icon.preBookmarkIcon{
-    display: block;
-}
-
-.md-button.md-icon-button md-icon.preBookmarkIcon{
-    display: none;
-}
-
-/*.md-button.md-icon-button md-icon.postBookmarkIcon{*/
-/*}*/
-
-/*.post-card-header:hover md-icon.postBookmarkIcon:hover{*/
-/*    display: block;*/
-/*}*/
-
 #post_card_description {
     overflow: hidden;
     margin: 16px 16px 0 16px;
@@ -175,8 +141,8 @@
     font-size: 12pt;
     height: 1.17em;
     width: 1em;
-    min-width: 1px;
-    min-height: 1px;
+    min-width: 0;
+    min-height: 0;
 }
 
  /*--------------------------------------------------------------- */

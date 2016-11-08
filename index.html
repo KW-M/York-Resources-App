@@ -137,7 +137,7 @@
                             <div class="post-card-header" md-ink-ripple="{{Post.Link != ''}}" ng-click="openLink(Post.Link)">
                                 <img ng-src="{{Post.PreviewImage}}" class="post-card-image" ng-hide="Post.Link == ''"></img>
                                 <div class="post-card-image-gradient">
-                                                                        <div class="metadata-regular">
+                                    <div class="metadata-regular">
                                         <span ng-hide="Post.Class.Name == null"><md-icon>people</md-icon> {{Post.Class.Name}}</span>
                                         <span><md-icon>event</md-icon> {{Post.CreationDate | date : "mm/dd/yyyy"}}</span>
                                     </div>
