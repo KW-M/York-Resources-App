@@ -9,29 +9,29 @@
 
 .post-card-header {
     height: 200px;
-    cursor: pointer;
     position: relative;
     overflow: hidden;
+    cursor: pointer;
     border-bottom: solid 1px black;
     border-radius: 3px 3px 0 0;
 }
 
-.post-card-header.noLink {
+.post-card.noLink .post-card-header {
     height: 56px;
     cursor: default;   
 }
 
-.post-card-header:not(.noLink):hover .post-card-image{
-    transform: translateY(0);
-}
-
 .post-card-image {
-    border-radius: 3px 3px 0 0;
-    display: flex;
     width: 100%;
     margin-top: -2.5%;
+    display: flex;
+    border-radius: 3px 3px 0 0;
     transition: all 0.3s ease;
     transform: translateY(2.5%);
+}
+
+.post-card:not(.no-link) .post-card-header:hover .post-card-image{
+    transform: translateY(0);
 }
 
 .post-card-image-gradient {
