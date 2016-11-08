@@ -249,9 +249,14 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		}
 	};
 	$scope.removeHttp = function(input){
-		console.log(input)
-		var url = input.replace(/(?:http|https):\/\/.{2,}/, '')
-		return (url.replace('www', ''))
+		if (input) {
+			console.log(input)
+			var url = input.replace(/(?:http|https):\/\//,'')
+			console.log(url)
+			return (url.replace('www', ''))
+		} else {
+			return input
+		}
 	}
 	$scope.clearText = function(text) {
 		text = null;
