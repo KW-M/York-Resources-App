@@ -33,16 +33,16 @@
       justify-content: center;
    }
    
-   #newPostLinkButtons {
-      position: absolute;
-      opacity: 1.00;
-      height: 100%;
-      width: 100%;
-      display: flex;
-      justify-content: space-around;
-      align-content: center;
-      flex-direction: row;
-   }
+   /*#newPostLinkButtons {*/
+   /*   position: absolute;*/
+   /*   opacity: 1.00;*/
+   /*   height: 100%;*/
+   /*   width: 100%;*/
+   /*   display: flex;*/
+   /*   justify-content: space-around;*/
+   /*   align-content: center;*/
+   /*   flex-direction: row;*/
+   /*}*/
    
    #header_link {
       width: 100%;
