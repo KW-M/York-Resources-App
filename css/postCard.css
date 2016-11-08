@@ -50,24 +50,12 @@
 .post-card-image-gradient div {
     padding: 0 4px;
     display: flex;
+    box-sizing: border-box;
     font-size: 14px;
     font-weight: bold;
     white-space: nowrap;
     transition: opacity 0.2s;
     justify-content: space-around;
-}
-
-.post-card-image-gradient div.metadata-link{
-   position: absolute;
-   opacity: 0;
-}
-
-.post-card:not(.no-link) .post-card-header:hover .post-card-image-gradient div.metadata-link {
-    opacity: 1
-}
-
-.post-card:not(.no-link) .post-card-header:hover .post-card-image-gradient div:not(.metadata-link) {
-    opacity: 0;
 }
 
 .post-card-image-gradient div span {
@@ -82,6 +70,24 @@
     min-width: 0;
     color: white;
     font-size: 18px;
+}
+
+.post-card-image-gradient md-chip {
+    background: rgba(224,224,224,.80);
+    color: rgb(66,66,66);
+}
+
+.post-card-image-gradient div.metadata-link{
+   position: absolute;
+   opacity: 0;
+}
+
+.post-card:not(.no-link) .post-card-header:hover .post-card-image-gradient div.metadata-link {
+    opacity: 1
+}
+
+.post-card:not(.no-link) .post-card-header:hover .post-card-image-gradient div.metadata-regular {
+    opacity: 0;
 }
 
 .post-card-metadata-text {
