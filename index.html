@@ -139,17 +139,17 @@
                                 <div class="post-card-image-gradient">
                                     <!--<div class="post-card-link-text" ng-hide="Post.Link == ''">-->
                                     <!--<md-icon style="color:White; font-size: 16px;" class="small-icon">language</md-icon><span> {{Post.Link}}</span>-->
-                                    <div class="metadata-regular">
+                                    <div>
                                         <span ng-hide="Post.Class.Name == null"><md-icon>people</md-icon> {{Post.Class.Name}}</span>
                                         <span><md-icon>event</md-icon> {{Post.CreationDate | date : "mm/dd/yyyy"}}</span>
                                     </div>
-                                    <div ng-hide="Post.Tags.length < 1" class="metadata-regular">
+                                    <div ng-hide="Post.Tags.length < 1">
                                         <span><md-icon>style</md-icon> {{Post.Tags.join(', ')}}</span>
                                     </div>
-                                    <div ng-hide="Post.Link == '' || Post.Type == gDrive" class="metadata-link">
-                                        <span><md-icon>language</md-icon> {{Post.Link}}</span>
+                                    <div ng-hide="Post.Link == '' || Post.Type == 'gDrive'" class="metadata-link">
+                                        <span><md-icon>language</md-icon> {{Post.Type}}</span>
                                     </div>
-                                    <div class="md-chips metadata-link" ng-hide="Post.Type != gDrive">
+                                    <div class="md-chips metadata-link" ng-hide="Post.Type != 'gDrive'">
                                         <md-chip style="background: rgba(224,224,224,.80); color: rgb(66,66,66);">
                                             <div class="md-chip-content" style="overflow:hidden;max-width:90%">
                                                 <img ng-src="{{Post.AttachmentIcon}}" style="top: 7.5px;position: absolute;"></img>
