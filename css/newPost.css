@@ -6,10 +6,9 @@
    
    #dialog_header {
       height: 200px;
-      max-height: 200px;
-      min-height: 60px;
+      width: 100%;
       position: absolute;
-      overflow: hidden
+      overflow: hidden;
    }
    
    #header_image {
