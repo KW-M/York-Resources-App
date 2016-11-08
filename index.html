@@ -133,10 +133,10 @@
                 </div>
                 <div>
                 <div angular-grid="visiblePosts" id="layout_grid" ag-gutter-size="8" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="getFiles()">
-                    <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}" class="post-card raise-on-hover" ng-class="{'no-link': !Post.Link}">
-                        <div class="post-card-header" md-ink-ripple="{{Post.Type != 'noLink'}}" ng-click="openLink(Post.Link)" >
+                    <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}" class="post-card raise-on-hover" ng-class="{'no-link': Post.Link == , 'gDrive-type': Post.Type == 'gDrive'}">
+                        <div class="post-card-header" md-ink-ripple="{{Post.Link != null}}" ng-click="openLink(Post.Link)">
                             <img ng-src="{{Post.PreviewImage}}" class="post-card-image" ng-hide="Post.Link == ''"></img>
-                            <div class="post-card-image-gradient">
+                            <div class="post-card-image-gradient"
                                 <div class="post-card-link-text" ng-hide="::Post.Link == ''">
                                     <md-icon style="color:White; font-size: 16px;" class="small-icon">language</md-icon><span> {{::Post.Link}}</span>
                                 </div>
