@@ -248,6 +248,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			window.open(link);
 		}
 	};
+	$scope.removeHttp = function(input){
+		console.log(input)
+		var url = input.replace(/(?:http|https):\/\/.{2,}/, '')
+		return (url.replace('www', ''))
+	}
 	$scope.clearText = function(text) {
 		text = null;
 	};

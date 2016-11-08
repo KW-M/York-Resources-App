@@ -147,7 +147,7 @@
                                         <span><md-icon>style</md-icon> {{Post.Tags.join(', ')}}</span>
                                     </div>
                                     <div ng-hide="Post.Link == '' || Post.Type == 'gDrive'" class="metadata-link">
-                                        <span><md-icon>language</md-icon> {{Post.Link.replace(,'')}}</span>
+                                        <span><md-icon>language</md-icon> {{removeHttp(Post.Link)}}</span>
                                     </div>
                                     <div class="md-chips metadata-link" ng-hide="Post.Type != 'gDrive'" style="width:100%">
                                         <md-chip>
