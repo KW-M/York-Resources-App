@@ -81,7 +81,7 @@
 .post-card-image-gradient div.metadata-link{
     padding: 0px 16px;
     position: absolute;
-   opacity: 0;
+    opacity: 0;
 }
 
 .post-card:not(.no-link) .post-card-header:hover .post-card-image-gradient div.metadata-link {
