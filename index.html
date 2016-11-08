@@ -140,11 +140,14 @@
                                     <!--<div class="post-card-link-text" ng-hide="Post.Link == ''">-->
                                     <!--<md-icon style="color:White; font-size: 16px;" class="small-icon">language</md-icon><span> {{Post.Link}}</span>-->
                                     <div>
-                                        <span></span>
-                                        <span></span>
+                                        <md-icon>event</md-icon><span>{{Post.CreationDate | date : "mm/dd/yyyy"}}</span>
+                                        <md-icon>people</md-icon><span>{{Post.Class.Name}}</span>
                                     </div>
-                                    <div>
-                                        <span></span>
+                                    <div ng-hide="Post.Tags.length < 1">
+                                        <md-icon>style</md-icon><span>{{Post.Tags.join(', ')}}</span>
+                                    </div>
+                                    <div ng-hide="Post.Link == ''">
+                                        <md-icon>language</md-icon><span>{{Post.Link}}</span>
                                     </div>
                                 </div>
                                 <!--<div class="post-card-metadata-text">-->
