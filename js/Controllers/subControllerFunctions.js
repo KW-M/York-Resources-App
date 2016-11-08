@@ -253,7 +253,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			console.log(input)
 			var url = input.replace(/(?:http|https):\/\//,'')
 			console.log(url)
-			return (url.replace('www', ''))
+			return (url.replace('www.', ''))
 		} else {
 			return input
 		}
