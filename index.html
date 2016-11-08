@@ -134,19 +134,17 @@
                 <div>
                     <div angular-grid="visiblePosts" id="layout_grid" ag-gutter-size="8" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="getFiles()">
                         <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}" class="post-card raise-on-hover" ng-class="{'no-link': Post.Link == '', 'gDrive-type': Post.Type == 'gDrive'}">
-                            <div class="post-card-header" md-ink-ripple="{{Post.Link != null}}" ng-click="openLink(Post.Link)">
+                            <div class="post-card-header" md-ink-ripple="{{Post.Link != ''}}" ng-click="openLink(Post.Link)">
                                 <img ng-src="{{Post.PreviewImage}}" class="post-card-image" ng-hide="Post.Link == ''"></img>
                                 <div class="post-card-image-gradient">
-                                    <!--<div class="post-card-link-text" ng-hide="Post.Link == ''">-->
-                                    <!--<md-icon style="color:White; font-size: 16px;" class="small-icon">language</md-icon><span> {{Post.Link}}</span>-->
-                                    <div class="metadata-regular">
+                                                                        <div class="metadata-regular">
                                         <span ng-hide="Post.Class.Name == null"><md-icon>people</md-icon> {{Post.Class.Name}}</span>
                                         <span><md-icon>event</md-icon> {{Post.CreationDate | date : "mm/dd/yyyy"}}</span>
                                     </div>
                                     <div ng-hide="Post.Tags.length < 1" class="metadata-regular">
                                         <span><md-icon>style</md-icon> {{Post.Tags.join(', ')}}</span>
                                     </div>
-                                    <div ng-hide="Post.Link == '' || Post.Type == 'gDrive'" class="metadata-link" style="font-size:22px">
+                                    <div ng-hide="Post.Link == '' || Post.Type == 'gDrive'" class="metadata-link" style="font-size:18px">
                                         <span><md-icon>language</md-icon> {{removeHttp(Post.Link)}}</span>
                                     </div>
                                     <div class="md-chips metadata-link" ng-hide="Post.Type != 'gDrive'" style="width:100%">
