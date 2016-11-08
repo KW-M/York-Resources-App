@@ -48,12 +48,18 @@
 }
 
 .post-card-image-gradient div {
-    margin: 0 4px;
+    padding: 0 4px;
     display: flex;
     font-size: 14px;
     font-weight: bold;
+    white-space: nowrap;
     transition: opacity 0.2s;
     justify-content: space-around;
+}
+
+.post-card-image-gradient div span {
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .post-card-image-gradient md-icon.material-icons {
