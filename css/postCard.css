@@ -49,6 +49,12 @@
 
 .post-card-image-gradient div {
     margin: 0 auto;
+    transition: opacity 0.2s
+}
+
+.post-card-image-gradient md-icon.material-icons {
+    color: white;
+    font-size: 18px;
 }
 
 .post-card-metadata-text {
@@ -61,7 +67,6 @@
     text-overflow: ellipsis;
     font-weight: normal;
     font-size: 12px;
-    transition: opacity 0.2s
 }
 
 .post-card-header:not(.noLink):hover .post-card-metadata-text, #dialog_header:hover:not(.noLink) .post-card-metadata-text{
