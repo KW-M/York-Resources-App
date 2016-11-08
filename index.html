@@ -140,17 +140,17 @@
                                     <!--<div class="post-card-link-text" ng-hide="Post.Link == ''">-->
                                     <!--<md-icon style="color:White; font-size: 16px;" class="small-icon">language</md-icon><span> {{Post.Link}}</span>-->
                                     <div>
-                                        <span><md-icon>event</md-icon><span>{{Post.CreationDate | date : "mm/dd/yyyy"}}</span></span>
-                                        <span><md-icon>people</md-icon><span>{{Post.Class.Name}}</span></span>
+                                        <span><md-icon>event</md-icon> {{Post.CreationDate | date : "mm/dd/yyyy"}}</span>
+                                        <span><md-icon>people</md-icon> {{Post.Class.Name}}</span>
                                     </div>
                                     <div ng-hide="Post.Tags.length < 1">
-                                        <md-icon>style</md-icon><span>{{Post.Tags.join(', ')}}</span></span>
+                                        <span><md-icon>style</md-icon> {{Post.Tags.join(', ')}}</span>
                                     </div>
                                     <div ng-hide="Post.Link == '' || Post.Type != gDrive">
-                                        <md-icon>language</md-icon><span>{{Post.Link}}</span></span>
+                                        <span><md-icon>language</md-icon> {{Post.Link}}</span>
                                     </div>
                                     <div ng-hide="Post.Type != gDrive">
-                                        <md-icon>language</md-icon><span>{{Post.Link}}</span></span>
+                                        <span><md-icon>language</md-icon> {{Post.Link}}</span>
                                     </div>
                                 </div>
                                 <!--<div class="post-card-metadata-text">-->

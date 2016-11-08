@@ -49,10 +49,18 @@
 
 .post-card-image-gradient div {
     margin: 0 auto;
+    font-size: 14px;
+    font-weight: bold;
     transition: opacity 0.2s
 }
 
+.post-card-image-gradient div span {
+    margin: 0 auto;
+}
+
 .post-card-image-gradient md-icon.material-icons {
+    min-height: 0;
+    min-width: 0;
     color: white;
     font-size: 18px;
 }
