@@ -137,18 +137,20 @@
                             <div class="post-card-header" md-ink-ripple="{{Post.Link != null}}" ng-click="openLink(Post.Link)">
                                 <img ng-src="{{Post.PreviewImage}}" class="post-card-image" ng-hide="Post.Link == ''"></img>
                                 <div class="post-card-image-gradient">
-                                    <div class="post-card-link-text" ng-hide="Post.Link == ''">
-                                    <md-icon style="color:White; font-size: 16px;" class="small-icon">language</md-icon><span> {{Post.Link}}</span>
+                                    <!--<div class="post-card-link-text" ng-hide="Post.Link == ''">-->
+                                    <!--<md-icon style="color:White; font-size: 16px;" class="small-icon">language</md-icon><span> {{Post.Link}}</span>-->
+                                    <div>hi</div>
+                                    <div>bye</div>
                                 </div>
-                                <div class="post-card-metadata-text">
-                                    <p style="margin: 0;">
-                                        <md-icon class="small-icon" style="color:white">event</md-icon><span style="margin-right:10px; font-weight:700; font-size:14px"> {{Post.CreationDate | date : "mm/dd/yyyy"}}</span>
-                                        <md-icon class="small-icon" style="color:white">people</md-icon><span style="font-weight:700; font-size:14px"> {{Post.Class.Name}}</span>
-                                    </p>
-                                    <p style="margin: 0;" ng-hide="Post.Tags.length < 1">
-                                        <md-icon class="small-icon" style="color:white">style</md-icon><span>{{Post.Tags.join(', ')}}</span>
-                                    </p>
-                                </div>
+                                <!--<div class="post-card-metadata-text">-->
+                                <!--    <p style="margin: 0;">-->
+                                <!--        <md-icon class="small-icon" style="color:white">event</md-icon><span style="margin-right:10px; font-weight:700; font-size:14px"> {{Post.CreationDate | date : "mm/dd/yyyy"}}</span>-->
+                                <!--        <md-icon class="small-icon" style="color:white">people</md-icon><span style="font-weight:700; font-size:14px"> {{Post.Class.Name}}</span>-->
+                                <!--    </p>-->
+                                <!--    <p style="margin: 0;" ng-hide="Post.Tags.length < 1">-->
+                                <!--        <md-icon class="small-icon" style="color:white">style</md-icon><span>{{Post.Tags.join(', ')}}</span>-->
+                                <!--    </p>-->
+                                <!--</div>-->
                             </div>
                         </div>
                         <div>
