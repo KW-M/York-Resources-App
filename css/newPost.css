@@ -1,5 +1,5 @@
    /*-- new post dialog styles --*/
-   #new_post_dialog {
+   md-dialog#new_post_dialog {
       overflow:hidden;
    }
    
