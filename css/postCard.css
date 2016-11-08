@@ -43,8 +43,12 @@
     display: flex;
     color: white;
     background: linear-gradient(to bottom, rgba(0, 0, 0, .5), rgba(0, 0, 0, 0));
-    flex-direction:;
+    flex-direction: column;
     justify-content: space-around;
+}
+
+.post-card-image-gradient div {
+    margin: auto;
 }
 
 .post-card-metadata-text {

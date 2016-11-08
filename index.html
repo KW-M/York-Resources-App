@@ -117,7 +117,7 @@
                         </md-button>
                         all: {{allPosts.length}} Visible: {{visiblePosts.length}}
                 </span>
-                <div class="new-post-bar-top" >
+                <div class="new-post-bar-top">
                     <span md-ink-ripple="true" class="new-post-text-top unselectable" flex ng-click="::newPost({},'new')">
                         <md-icon style="margin-top: -3px;">add_circle</md-icon>
                         <span>Share a link or resource...</span>
@@ -151,104 +151,104 @@
                                 <!--        <md-icon class="small-icon" style="color:white">style</md-icon><span>{{Post.Tags.join(', ')}}</span>-->
                                 <!--    </p>-->
                                 <!--</div>-->
+                                <!--</div>-->
+                            </div>
+                            <div>
+                                <p class="post-card-title md-title">{{Post.Title}}</p>
+                                <p class="post-card-creator md-subhead"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::Post.Creator.ClassOf}})</span></p>
+                                <p id="post_card_description" class="md-body-1" ng-bind-html="Post.Description" ng-hide="Post.Description === ''"></p>
+                                <md-card-actions layout="row" style="align-items: center;">
+                                    <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(Post)">
+                                        <span class="like-counter">{{Post.Likes.length}}</span>
+                                        <md-icon ng-class="{'md-accent' : Post.userLiked}" style="margin-top: -8px">thumb_up</md-icon>
+                                    </md-button>
+                                    <md-button class="md-icon-button" area-label="Flag" ng-click="::flagPost(Post)" ng-hide="Post.Creator.Email == myInfo.Email && Post.Flagged == false">
+                                        <md-icon ng-class="{'md-warn' : Post.Flagged == true}">flag</md-icon>
+                                    </md-button>
+                                    <md-menu>
+                                        <md-button ng-click="::$mdOpenMenu($event)" ng-show="::Post.Creator.Email === myInfo.Email" class="md-icon-button">
+                                            <md-icon>more_vert</md-icon>
+                                        </md-button>
+                                        <md-menu-content>
+                                            <md-menu-item ng-hide="::Post.Flagged === true">
+                                                <md-button ng-click="::flagPost(Post,$index)">
+                                                    <md-icon>flag</md-icon>Flag</md-button>
+                                            </md-menu-item>
+                                            <md-menu-item>
+                                                <md-button ng-click="::confirmDelete(Post,$index)">
+                                                    <md-icon>delete</md-icon>Delete</md-button>
+                                            </md-menu-item>
+                                            <md-menu-item>
+                                                <md-button ng-click="newPost(Post,'update')">
+                                                    <md-icon>edit</md-icon>Edit</md-button>
+                                            </md-menu-item>
+                                            <md-menu-item ng-show="devMode">
+                                                <md-button ng-click="::logPostToConsole(Post,$index)">
+                                                    <md-icon>edit</md-icon>Console Log Post</md-button>
+                                            </md-menu-item>
+                                        </md-menu-content>
+                                    </md-menu>
+                                    <span flex></span>
+                                    <md-button id="open_button" ng-hide="::Post.Description == ''" class="md-button md-accent" ng-click="newPost(Post, 'view')" aria-label="Open resource">View</md-button>
+                                </md-card-actions>
                             </div>
                         </div>
-                        <div>
-                            <p class="post-card-title md-title">{{Post.Title}}</p>
-                            <p class="post-card-creator md-subhead"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::Post.Creator.ClassOf}})</span></p>
-                            <p id="post_card_description" class="md-body-1" ng-bind-html="Post.Description" ng-hide="Post.Description === ''"></p>
-                            <md-card-actions layout="row" style="align-items: center;">
-                                <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(Post)">
-                                    <span class="like-counter">{{Post.Likes.length}}</span>
-                                    <md-icon ng-class="{'md-accent' : Post.userLiked}" style="margin-top: -8px">thumb_up</md-icon>
-                                </md-button>
-                                <md-button class="md-icon-button" area-label="Flag" ng-click="::flagPost(Post)" ng-hide="Post.Creator.Email == myInfo.Email && Post.Flagged == false">
-                                    <md-icon ng-class="{'md-warn' : Post.Flagged == true}">flag</md-icon>
-                                </md-button>
-                                <md-menu>
-                                    <md-button ng-click="::$mdOpenMenu($event)" ng-show="::Post.Creator.Email === myInfo.Email" class="md-icon-button">
-                                        <md-icon>more_vert</md-icon>
-                                    </md-button>
-                                    <md-menu-content>
-                                        <md-menu-item ng-hide="::Post.Flagged === true">
-                                            <md-button ng-click="::flagPost(Post,$index)">
-                                                <md-icon>flag</md-icon>Flag</md-button>
-                                        </md-menu-item>
-                                        <md-menu-item>
-                                            <md-button ng-click="::confirmDelete(Post,$index)">
-                                                <md-icon>delete</md-icon>Delete</md-button>
-                                        </md-menu-item>
-                                        <md-menu-item>
-                                            <md-button ng-click="newPost(Post,'update')">
-                                                <md-icon>edit</md-icon>Edit</md-button>
-                                        </md-menu-item>
-                                        <md-menu-item ng-show="devMode">
-                                            <md-button ng-click="::logPostToConsole(Post,$index)">
-                                                <md-icon>edit</md-icon>Console Log Post</md-button>
-                                        </md-menu-item>
-                                    </md-menu-content>
-                                </md-menu>
-                                <span flex></span>
-                                <md-button id="open_button" ng-hide="::Post.Description == ''" class="md-button md-accent" ng-click="newPost(Post, 'view')" aria-label="Open resource">View</md-button>
-                            </md-card-actions>
+                    </div>
+                </div>
+                <div class="footer-container">
+                    <div class="footer">
+                        <div id="no_posts_footer" style="display: none;">
+                            <h3 style="margin: 0;">It's so lonely here</h3>
+                            <p style="margin: 0;font-size: 14px;font-weight: 200;">Be the first to post</p>
+                            <img src="images/Lonely Island.png" style="width: 216px; padding-top: 12px;" />
                         </div>
+                        <div id="no_more_footer" style="display: none;">
+                            <h3 style="margin: 0;">No more posts? Has everyone gone to sleep?</h3>
+                            <p style="margin: 0;font-size: 14px;font-weight: 200;">Maybe you should Contribute.</p>
+                            <img src="images/Lonely Island.png" style="width: 216px; padding-top: 12px;" />
+                        </div>
+                        <div id="footer_problem" style="display: none; align-items: center;">
+                            <div style="margin-right:-120px;margin-left: 120px;z-index:1;margin-top: 20px;">
+                                <h3 style="margin: 0; text-shadow: 0px 0px 10px rgb(242, 242, 242);">Houston, we have a problem!</h3>
+                                <p style="margin: 0;font-size: 14px;font-weight: 200;">Something's not quite right, try
+                                    <md-button class="md-accent md-raised">Reloading</md-button>
+                                    <p>
+                            </div>
+                            <img src="images/rocket problem.png" style="width:300px" />
+                        </div>
+                        <md-progress-circular id="loading_spinner" style="display: none;margin: auto;" class="md-accent" md-mode="indeterminate" md-diameter="30px"></md-progress-circular>
                     </div>
                 </div>
             </div>
-            <div class="footer-container">
-                <div class="footer">
-                    <div id="no_posts_footer" style="display: none;">
-                        <h3 style="margin: 0;">It's so lonely here</h3>
-                        <p style="margin: 0;font-size: 14px;font-weight: 200;">Be the first to post</p>
-                        <img src="images/Lonely Island.png" style="width: 216px; padding-top: 12px;" />
-                    </div>
-                    <div id="no_more_footer" style="display: none;">
-                        <h3 style="margin: 0;">No more posts? Has everyone gone to sleep?</h3>
-                        <p style="margin: 0;font-size: 14px;font-weight: 200;">Maybe you should Contribute.</p>
-                        <img src="images/Lonely Island.png" style="width: 216px; padding-top: 12px;" />
-                    </div>
-                    <div id="footer_problem" style="display: none; align-items: center;">
-                        <div style="margin-right:-120px;margin-left: 120px;z-index:1;margin-top: 20px;">
-                            <h3 style="margin: 0; text-shadow: 0px 0px 10px rgb(242, 242, 242);">Houston, we have a problem!</h3>
-                            <p style="margin: 0;font-size: 14px;font-weight: 200;">Something's not quite right, try
-                                <md-button class="md-accent md-raised">Reloading</md-button>
-                                <p>
-                        </div>
-                        <img src="images/rocket problem.png" style="width:300px" />
-                    </div>
-                    <md-progress-circular id="loading_spinner" style="display: none;margin: auto;" class="md-accent" md-mode="indeterminate" md-diameter="30px"></md-progress-circular>
-                </div>
-            </div>
-        </div>
-        <!-------------------------------------------------------->
-        <!---------------------- Libraries ----------------------->
-        <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-aria.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-messages.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.js"></script>
-        <script src="Libraries/ng-sanitize-1.5.7.js"></script>
-        <script src="Libraries/angular-grid.js"></script>
-        <script type="text/javascript" src="Libraries/detect-element-resize.js"></script>
+            <!-------------------------------------------------------->
+            <!---------------------- Libraries ----------------------->
+            <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-aria.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-messages.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.js"></script>
+            <script src="Libraries/ng-sanitize-1.5.7.js"></script>
+            <script src="Libraries/angular-grid.js"></script>
+            <script type="text/javascript" src="Libraries/detect-element-resize.js"></script>
 
 
-        <!-- Main Scripts -->
-        <script src="js/app.js"></script>
-        <script src="js/generalFunctions.js"></script>
+            <!-- Main Scripts -->
+            <script src="js/app.js"></script>
+            <script src="js/generalFunctions.js"></script>
 
-        <!-- Directives -->
-        <script src="directives/directives.js"></script>
+            <!-- Directives -->
+            <script src="directives/directives.js"></script>
 
-        <!-- Services -->
-        <script src="js/Services/authorizationService.js"></script>
-        <script src="js/Services/googleDriveService.js"></script>
+            <!-- Services -->
+            <script src="js/Services/authorizationService.js"></script>
+            <script src="js/Services/googleDriveService.js"></script>
 
-        <!-- Controllers -->
-        <script src="js/Controllers/mainControllerFunctions.js"></script>
-        <script src="js/Controllers/subControllerFunctions.js"></script>
-        <script src="js/Controllers/newPostController.js"></script>
+            <!-- Controllers -->
+            <script src="js/Controllers/mainControllerFunctions.js"></script>
+            <script src="js/Controllers/subControllerFunctions.js"></script>
+            <script src="js/Controllers/newPostController.js"></script>
 
-        <!--<canvas style="display:none;position: absolute;pointer-events: none;" width="400" height="260" id="image_renderer">-->
+            <!--<canvas style="display:none;position: absolute;pointer-events: none;" width="400" height="260" id="image_renderer">-->
     </body>
     <link rel="stylesheet" href="css/toolbarTop.css" />
     <link rel="stylesheet" href="css/searchbar.css" />
