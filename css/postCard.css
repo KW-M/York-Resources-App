@@ -1,22 +1,24 @@
 /*-------------- post card styles ----------- */
 
 .post-card {
-    border-radius: 2px;
+    border-radius: 3px;
     background-color: white;
     box-shadow: 0 1px 3px 0 rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 2px 1px -1px rgba(0,0,0,.12);
     transition: all 400ms ease;
 }
 
 .post-card-header {
+    height: 200px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
     border-bottom: solid 1px black;
     border-radius: 3px 3px 0 0;
-    position: relative;
-    min-height: 56px;
-    overflow: hidden;
 }
 
-.post-card-header:not(.noLink) {
-    cursor: pointer;
+.post-card-header.noLink {
+    height: 56px;
+    cursor: default;   
 }
 
 .post-card-header:not(.noLink):hover .post-card-image{
