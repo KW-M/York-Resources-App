@@ -4,8 +4,8 @@
    }
    
    #dialog_header {
-      max-height: 200px;
       height: 200px;
+      max-height: 200px;
       min-height: 60px;
       position: absolute; 
       overflow: hidden
@@ -16,7 +16,7 @@
       -webkit-filter: brightness(85%);
       filter: brightness(85%);
       width: 100%;
-      position: absolute;
+      position: absolute; 
       background-color: #bccac7;
    }
    
