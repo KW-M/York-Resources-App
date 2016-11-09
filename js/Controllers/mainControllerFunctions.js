@@ -227,16 +227,6 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
          pushUserSettingsToScope(newData);
       }
 
-      function pushUserSettingsToScope(settingsArray) {
-         $scope.myInfo.Moderator = settingsArray[2]
-         $scope.myInfo.NumberOfVisits = settingsArray[3]
-         $scope.myInfo.NumberOfContributions = settingsArray[4]
-         $scope.myInfo.LastContributionDate = Date.parse(settingsArray[5])
-         $scope.myInfo.LastBeenFlaggedDate = Date.parse(settingsArray[6])
-         //$scope.myInfo.quizletUsername = settingsArray[6]
-         //$scope.myInfo.LastQuizletCheckDate = Date.parse(settingsArray[7])
-      }
-
       listenForURLChange(); // this also Starts getting files
       queue('sheets', GoogleDriveService.getSpreadsheetRange("Sheet1!A2:Z", true), handleClassesSheet, null, 2)
    }

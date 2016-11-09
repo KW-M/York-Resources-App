@@ -21,7 +21,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 
 	//----------------------------------------------------
 	//------------------ Converting ----------------------
-	$scope.convertDriveToPost = function(DriveMetadata) {
+	$scope.convertDriveToPost = function (DriveMetadata) {
 		var formatedPost = {};
 		try {
 			var likesAndFlagged = DriveMetadata.name.split("{]|[}"); //not flagged any more
@@ -66,8 +66,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			formatedPost.userLiked = hasLiked
 			formatedPost.PreviewImage = descriptionAndPreviewimage[2]
 			if (formatedPost.Type === 'gDrive') {
-				queue('drive', GoogleDriveService.getFileThumbnail(formatedPost.AttachmentId), function(response) {
-					$timeout(function() {
+				queue('drive', GoogleDriveService.getFileThumbnail(formatedPost.AttachmentId), function (response) {
+					$timeout(function () {
 						if (response.result.thumbnailLink) {
 							formatedPost.PreviewImage = response.result.thumbnailLink.replace("=s220", "=s400") + "&access_token=" + authorizationService.getAuthToken();
 						} else {
@@ -76,7 +76,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 						formatedPost.AttachmentName = response.result.name;
 						formatedPost.AttachmentIcon = response.result.iconLink;
 					});
-				}, function(error) {
+				}, function (error) {
 					console.log(error);
 					formatedPost.PreviewImage = "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
 				}, 150);
@@ -87,7 +87,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			return (formatedPost);
 		}
 	};
-	$scope.convertPostToDriveMetadata = function(Post) {
+	$scope.convertPostToDriveMetadata = function (Post) {
 		var formatedDriveMetadata
 		try {
 			var tagString = JSON.stringify(Post.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || [];
@@ -109,8 +109,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 					ClassColor: Post.Class.Color,
 					ClassName: Post.Class.Name,
 				},
-				contentHints: { 
-					indexableText: "Title: " + Post.Title + ", Attachment: " + Post.AttachmentName + ", Class: " + Post.Class.Name + ", Class Catagory: " + Post.Class.Catagory + ", tags: ("+(tagString[2]||'')+(tagString[2]||'')+")"
+				contentHints: {
+					indexableText: "Title: " + Post.Title + ", Attachment: " + Post.AttachmentName + ", Class: " + Post.Class.Name + ", Class Catagory: " + Post.Class.Catagory + ", tags: (" + (tagString[2] || '') + (tagString[2] || '') + ")"
 				}
 			};
 			return (formatedDriveMetadata);
@@ -119,10 +119,32 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			console.warn(e)
 		}
 	};
-	//----------------------------------------------------
-	//-------------- Filtering & Sorting -----------------
-	$scope.filterPosts = function(inputSet) {
-		var output = inputSet.filter(function(post) {
+	$scope.convertRowToUserPreferences = function (spreadsheetRow) {
+		$scope.myInfo.Moderator = spreadsheetRow[2]
+		$scope.myInfo.NumberOfVisits = spreadsheetRow[3]
+		$scope.myInfo.NumberOfContributions = spreadsheetRow[4]
+		$scope.myInfo.LastContributionDate = Date.parse(spreadsheetRow[5])
+		$scope.myInfo.LastBeenFlaggedDate = Date.parse(spreadsheetRow[6])
+	}
+	$scope.convertUserPreferencesToRow = function () {
+			var spreadsheetRow = []
+			spreadsheetRow[0] = $scope.myInfo.Email;
+			spreadsheetRow[1] = $scope.myInfo.Name;
+			spreadsheetRow[2] = $scope.myInfo.Moderator;
+			spreadsheetRow[3] = $scope.myInfo.NumberOfVisits;
+			spreadsheetRow[4] = $scope.myInfo.NumberOfContributions;
+			spreadsheetRow[5] = $scope.myInfo.LastContributionDate;
+			spreadsheetRow[6] = $scope.myInfo.Email;
+			 = settingsArray[2]
+			 = settingsArray[3]
+			$scope.myInfo.NumberOfContributions = settingsArray[4]
+			$scope.myInfo.LastContributionDate = Date.parse(settingsArray[5])
+			$scope.myInfo.LastBeenFlaggedDate = Date.parse(settingsArray[6])
+		}
+		//----------------------------------------------------
+		//-------------- Filtering & Sorting -----------------
+	$scope.filterPosts = function (inputSet) {
+		var output = inputSet.filter(function (post) {
 			if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
 				var Flagged = post.Flagged === $scope.queryParams.flagged || post.Flagged;
 			} else {
@@ -147,14 +169,14 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		});
 		return ($scope.sortByDateAndLikes(output))
 	}
-	$scope.sortByDateAndLikes = function(arrayToSort) {
-		return (arrayToSort.sort(function(a, b) {
+	$scope.sortByDateAndLikes = function (arrayToSort) {
+		return (arrayToSort.sort(function (a, b) {
 			return b.UpdateDate.addDays(b.Likes.length) - a.UpdateDate.addDays(a.Likes.length);
 		}));
 	};
 	//----------------------------------------------------
 	//------------------UI Actions------------------------
-	$scope.toggleSidebar = function(close) { //called by the top left toolbar menu button
+	$scope.toggleSidebar = function (close) { //called by the top left toolbar menu button
 		if (close === true) {
 			$mdSidenav('sidenav_overlay').close();
 		} else {
@@ -166,47 +188,47 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			}
 		}
 	};
-	$scope.signOut = function() {
+	$scope.signOut = function () {
 		authorizationService.handleSignoutClick();
 	};
 	//----------------------------------------------------
 	// --------------- Post Card Functions ---------------
-	$scope.confirmDelete = function(content, arrayIndex) {
+	$scope.confirmDelete = function (content, arrayIndex) {
 		var confirm = $mdDialog.confirm().title('Permanently delete this?').ariaLabel('Delete?').targetEvent(ev).ok('Delete').cancel('Cancel');
-		$mdDialog.show(confirm).then(function() {
+		$mdDialog.show(confirm).then(function () {
 			$scope.allPosts.splice(findPostById(content.Id, $scope.allPosts), 1);
 			$timeout($scope.visiblePosts.splice(arrayIndex, 1));
-			queue('drive', GoogleDriveService.deleteDriveFile(content.Id), null, function(err) {
+			queue('drive', GoogleDriveService.deleteDriveFile(content.Id), null, function (err) {
 				$mdToast.showSimple('Error deleting post, try again.');
 				console.warn(err)
 			}, 150);
 		});
 	};
-	$scope.flagPost = function(ev, content, arrayIndex) {
+	$scope.flagPost = function (ev, content, arrayIndex) {
 		content.Flagged = true;
 		if ($scope.queryParams.classpath != 'flagged') {
-			$timeout(function() { //makes angular update values
+			$timeout(function () { //makes angular update values
 				$scope.visiblePosts.splice(arrayIndex, 1);
 			});
 		}
 		$scope.allPosts[findPostById(content.Id, $scope.allPosts)].Flagged = true;
-		queue(GoogleDriveService.updateFlagged(content.Id, true), null, function(err) {
+		queue(GoogleDriveService.updateFlagged(content.Id, true), null, function (err) {
 			$mdToast.showSimple('Error flagging post, try again.');
 			console.warn(err)
 		}, 150);
 		//set the user's has flagged date back
 	};
-	$scope.unFlagPost = function(content, arrayIndex) {
+	$scope.unFlagPost = function (content, arrayIndex) {
 		if ($scope.myInfo.moderator === true) {
 			content.Flagged = false;
 			if ($scope.queryParams.classpath == 'flagged') {
-				$timeout(function() { //makes angular update values
+				$timeout(function () { //makes angular update values
 					$scope.visiblePosts.splice(arrayIndex, 1);
 				});
 			}
 			$scope.allPosts[findPostById(content.Id, $scope.allPosts)].Flagged = false;
 			$scope.updateVisiblePosts($scope.filterPosts($scope.allPosts));
-			queue(GoogleDriveService.updateFlagged(content.Id, false), null, function(err) {
+			queue(GoogleDriveService.updateFlagged(content.Id, false), null, function (err) {
 				$mdToast.showSimple('Error unflagging post, try again.');
 				console.warn(err)
 			}, 150);
@@ -218,7 +240,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			}));
 		}
 	};
-	$scope.likePost = function(content) {
+	$scope.likePost = function (content) {
 		var userLikeIndex = findItemInArray($scope.myInfo.Email, content.Likes)
 		if (userLikeIndex === -1) {
 			content.userLiked = true;
@@ -227,49 +249,49 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			content.userLiked = false;
 			content.Likes.splice(userLikeIndex, 1);
 		}
-		if (typeof(likeClickTimer[content.Id]) == 'number') {
+		if (typeof (likeClickTimer[content.Id]) == 'number') {
 			clearTimeout(likeClickTimer[content.Id]);
 		}
-		likeClickTimer[content.Id] = setTimeout(function() {
+		likeClickTimer[content.Id] = setTimeout(function () {
 			var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
 			allArrayPost.userLiked = content.userLiked;
 			allArrayPost.Likes = content.Likes;
 			var name = allArrayPost.Likes.length + "{]|[}" + JSON.stringify(allArrayPost.Likes)
 			queue('drive', GoogleDriveService.updateDriveFile(content.Id, {
 				name: name
-			}), null, function(err) {
+			}), null, function (err) {
 				$mdToast.showSimple('Error liking post, try again.');
 				console.warn(err)
 			}, 150);
 		}, 2000);
 	};
-	$scope.openLink = function(link) {
+	$scope.openLink = function (link) {
 		if (link !== "" && link !== undefined) {
 			window.open(link);
 		}
 	};
-	$scope.removeHttp = function(input){
+	$scope.removeHttp = function (input) {
 		if (input) {
-			var url = input.replace(/(?:http|https):\/\//,'')
+			var url = input.replace(/(?:http|https):\/\//, '')
 			return (url.replace('www.', ''))
 		} else {
 			return input
 		}
 	}
-	$scope.clearText = function(text) {
+	$scope.clearText = function (text) {
 		text = null;
 	};
 	//----------------------------------------------------
 	//-------------------- dialogs -----------------------
 	function DialogController($scope, $mdDialog) {
-		$scope.hideDialog = function() {
+		$scope.hideDialog = function () {
 			$mdDialog.hide();
 		};
-		$scope.cancelDialog = function() {
+		$scope.cancelDialog = function () {
 			$mdDialog.cancel();
 		};
 	}
-	$scope.openHelpDialog = function() { //called by the top right toolbar help button
+	$scope.openHelpDialog = function () { //called by the top right toolbar help button
 		$mdDialog.show({
 			templateUrl: 'templates/html/help.html',
 			controller: DialogController,
@@ -278,7 +300,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			fullscreen: ($mdMedia('xs')),
 		});
 	};
-	$scope.openOnboardingDialog = function() { //called by the top right toolbar help button
+	$scope.openOnboardingDialog = function () { //called by the top right toolbar help button
 		$mdDialog.show({
 			templateUrl: 'templates/html/onboarding.html',
 			controller: DialogController,
@@ -288,12 +310,12 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		});
 		authorizationService.hideSigninDialog();
 	};
-	$scope.closeDialog = function() {
+	$scope.closeDialog = function () {
 		$mdDialog.hide();
 	};
 	//----------------------------------------------------
 	//----------------- Error Handling -------------------
-	window.DriveErrorHandeler = function(error, callback) {
+	window.DriveErrorHandeler = function (error, callback) {
 		console.warn(error);
 		if (error.hasOwnProperty('expectedDomain')) {
 			gapi.auth2.getAuthInstance().signOut();
@@ -301,9 +323,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 				title: 'Sorry.',
 				htmlContent: "<p>York Study Resources only works with York Google accounts right now.</p><p>If you have an email account ending with @york.org, please login with it, or ask Mr.Brookhouser if you don't have one.<p>",
 				ok: 'Ok'
-			})).then(function() {
+			})).then(function () {
 				angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
-				setTimeout(function() {
+				setTimeout(function () {
 					angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
 				}, 500);
 			});
@@ -317,24 +339,24 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			callback(error)
 		}
 	}
-	window.checkAuthToken = function() {
+	window.checkAuthToken = function () {
 
 		}
 		//----------------------------------------------------
 		//---------------------- dev -------------------------
-	$scope.consoleLog = function(input, asAlert) {
+	$scope.consoleLog = function (input, asAlert) {
 		console.log(input)
 		if (asAlert) {
 			window.alert(JSON.stringify(input, null, 4))
 		}
 	}
-	$scope.refreshLayout = function() {
+	$scope.refreshLayout = function () {
 		angularGridInstance.postsGrid.refresh();
 	}
-	$scope.logDuplicationIndexes = function() {
-	//	console.log()
+	$scope.logDuplicationIndexes = function () {
+		//	console.log()
 	}
-	$scope.logPostToConsole = function(content, arrayIndex) {
+	$scope.logPostToConsole = function (content, arrayIndex) {
 		window.alert(JSON.stringify({
 			'loggedPostContent': content,
 			'arrayIndex': arrayIndex
