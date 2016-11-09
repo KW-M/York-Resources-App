@@ -206,12 +206,10 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
       function getUserSettings(range) {
          queue('sheets', GoogleDriveService.getSpreadsheetRange(range), function(response) {
             response.result.values[0][3]++
-            pushUserSettingsToScope(response.result.values[0]);
+            $scope.convertRowToUserPreferences(response.result.values[0]);
             var event = new window.Event('sheetPrefsLoaded')
             document.dispatchEvent(event);
-            queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, response.result.values[0]), function(spreadsheetResult) {
-               console.log(spreadsheetResult)
-            }, function(error) {
+            queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, response.result.values[0]), null, function(error) {
                console.log(error)
             }, 2);
          }, null, 2);
@@ -220,11 +218,11 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
       function createUserSettings() {
          var newData = [$scope.myInfo.Email, $scope.myInfo.Name, false, 1, 0, "", "", "", ""]
          queue('sheets', GoogleDriveService.appendSpreadsheetRange("Sheet1!A1:A", newData), function(newRow) {
-            pushUserSettingsToScope(newData);
+            $scope.convertRowToUserPreferences(newData);
             var event = new window.Event('sheetPrefsLoaded')
             document.dispatchEvent(event);
          }, null, 2);
-         pushUserSettingsToScope(newData);
+         $scope.convertRowToUserPreferences(newData);
       }
 
       listenForURLChange(); // this also Starts getting files
