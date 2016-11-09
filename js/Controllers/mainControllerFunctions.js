@@ -190,8 +190,9 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
    function handleUserPrefsSheet() {
       queue('sheets', GoogleDriveService.getSpreadsheetRange("Sheet1!A2:B"), function(response) {
          $scope.userList = response.result.values;
+         console.log( $scope.userList)
          for (var rowCount = 0; rowCount <= $scope.userList.length && rowCount > -1;  rowCount++) {
-            if ($scope.userList[rowCount] && $scope.userList[rowCount][0] == $scope.myInfo.Email) {
+            if ($scope.userList[rowCount] != undefined && $scope.userList[rowCount][0] == $scope.myInfo.Email) {
                $scope.UserSettingsRange = 'A' + (rowCount + 2) + ':' + (rowCount + 2) //+2 adjusts for header row
                getSpreadsheetRange($scope.UserSettingsRange);
                rowCount = -2;//signify that the user's Row has been found
@@ -203,6 +204,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
       }, null, 2);
 
       function getSpreadsheetRange(range) {
+         console.log(range)
          queue('sheets', GoogleDriveService.getSpreadsheetRange(range), function(spreadsheetResult) {
             pushUserSettingsToScope(spreadsheetResult.result.values[0]);
             var event = new window.Event('sheetPrefsLoaded')
