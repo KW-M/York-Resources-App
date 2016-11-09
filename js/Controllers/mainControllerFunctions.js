@@ -211,7 +211,9 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
             document.dispatchEvent(event);
             queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, response.result.values[0]), function(spreadsheetResult) {
                console.log(spreadsheetResult)
-            }, null, 2);
+            }, function(error) {
+               console.log(error)
+            }, 2);
          }, null, 2);
       }
 

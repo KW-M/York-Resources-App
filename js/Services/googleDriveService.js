@@ -50,7 +50,7 @@ app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
             spreadsheetId: URLs.userSpreadsheetId,
             range: range,
             valueInputOption: "USER_ENTERED",
-            values: dataToBeInserted,
+            values: [dataToBeInserted],
         }));
     }
 
