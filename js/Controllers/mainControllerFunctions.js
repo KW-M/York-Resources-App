@@ -215,8 +215,8 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
          var newData = [$scope.myInfo.Email, $scope.myInfo.Name, false, "3/25/2016", "", "", "", 1]
          queue('sheets', GoogleDriveService.appendSpreadsheetRange("Sheet1!A1:A", newData), function(newRow) {
             pushUserSettingsToScope(newData);
-            var gg = new window.Event('sheetPrefsLoaded')
-            document.dispatchEvent(gg);
+            var event = new window.Event('sheetPrefsLoaded')
+            document.dispatchEvent(event);
          }, null, 2);
          pushUserSettingsToScope(newData);
       }
