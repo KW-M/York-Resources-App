@@ -194,18 +194,19 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
          for (var rowCount = 0; rowCount <= $scope.userList.length && rowCount > -1;  rowCount++) {
             if ($scope.userList[rowCount] != undefined && $scope.userList[rowCount][0] == $scope.myInfo.Email) {
                $scope.UserSettingsRange = 'A' + (rowCount + 2) + ':' + (rowCount + 2) //+2 adjusts for header row
-               getSpreadsheetRange($scope.UserSettingsRange);
+               getUserSettings($scope.UserSettingsRange);
                rowCount = -2;//signify that the user's Row has been found
             }
          }
-         if (rowCount = $scope.userList.length + 1) {
+         if (rowCount == $scope.userList.length + 1) {
             createUserSettings();
          }
       }, null, 2);
 
-      function getSpreadsheetRange(range) {
+      function getUserSettings(range) {
          console.log(range)
          queue('sheets', GoogleDriveService.getSpreadsheetRange(range), function(spreadsheetResult) {
+            spreadsheetResult.result.values[0][3]
             pushUserSettingsToScope(spreadsheetResult.result.values[0]);
             var event = new window.Event('sheetPrefsLoaded')
             document.dispatchEvent(event);
@@ -213,7 +214,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
       }
 
       function createUserSettings() {
-         var newData = [$scope.myInfo.Email, $scope.myInfo.Name, false, "3/25/2016", "", "", "", 1]
+         var newData = [$scope.myInfo.Email, $scope.myInfo.Name, false, 1, "", "", "", ""]
          queue('sheets', GoogleDriveService.appendSpreadsheetRange("Sheet1!A1:A", newData), function(newRow) {
             pushUserSettingsToScope(newData);
             var event = new window.Event('sheetPrefsLoaded')
