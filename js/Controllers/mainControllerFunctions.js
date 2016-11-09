@@ -218,7 +218,7 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
       }
 
       function createUserSettings() {
-         var newData = [$scope.myInfo.Email, $scope.myInfo.Name, false, 1, "", "", "", ""]
+         var newData = [$scope.myInfo.Email, $scope.myInfo.Name, false, 1, 0, "", "", "", ""]
          queue('sheets', GoogleDriveService.appendSpreadsheetRange("Sheet1!A1:A", newData), function(newRow) {
             pushUserSettingsToScope(newData);
             var event = new window.Event('sheetPrefsLoaded')
@@ -230,8 +230,9 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
       function pushUserSettingsToScope(settingsArray) {
          $scope.myInfo.Moderator = settingsArray[2]
          $scope.myInfo.NumberOfVisits = settingsArray[3]
-         $scope.myInfo.LastContributionDate = Date.parse(settingsArray[4])
-         $scope.myInfo.LastBeenFlaggedDate = Date.parse(settingsArray[5])
+         $scope.myInfo.NumberOfContributions = settingsArray[4]
+         $scope.myInfo.LastContributionDate = Date.parse(settingsArray[5])
+         $scope.myInfo.LastBeenFlaggedDate = Date.parse(settingsArray[6])
          //$scope.myInfo.quizletUsername = settingsArray[6]
          //$scope.myInfo.LastQuizletCheckDate = Date.parse(settingsArray[7])
       }
