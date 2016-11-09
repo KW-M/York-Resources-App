@@ -204,12 +204,14 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
       }, null, 2);
 
       function getUserSettings(range) {
-         console.log(range)
-         queue('sheets', GoogleDriveService.getSpreadsheetRange(range), function(spreadsheetResult) {
-            spreadsheetResult.result.values[0][3]
-            pushUserSettingsToScope(spreadsheetResult.result.values[0]);
+         queue('sheets', GoogleDriveService.getSpreadsheetRange(range), function(response) {
+            response.result.values[0][3]++
+            pushUserSettingsToScope(response.result.values[0]);
             var event = new window.Event('sheetPrefsLoaded')
             document.dispatchEvent(event);
+            queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, response.result.values[0]), function(spreadsheetResult) {
+               console.log(spreadsheetResult)
+            }, null, 2);
          }, null, 2);
       }
 
@@ -225,11 +227,11 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
 
       function pushUserSettingsToScope(settingsArray) {
          $scope.myInfo.Moderator = settingsArray[2]
-         $scope.myInfo.LastContributionDate = Date.parse(settingsArray[3])
-         $scope.myInfo.LastBeenFlaggedDate = Date.parse(settingsArray[4])
-         $scope.myInfo.quizletUsername = settingsArray[5]
-         $scope.myInfo.LastQuizletCheckDate = Date.parse(settingsArray[6])
-         $scope.myInfo.NumberOfVisits = settingsArray[7]
+         $scope.myInfo.NumberOfVisits = settingsArray[3]
+         $scope.myInfo.LastContributionDate = Date.parse(settingsArray[4])
+         $scope.myInfo.LastBeenFlaggedDate = Date.parse(settingsArray[5])
+         //$scope.myInfo.quizletUsername = settingsArray[6]
+         //$scope.myInfo.LastQuizletCheckDate = Date.parse(settingsArray[7])
       }
 
       listenForURLChange(); // this also Starts getting files
