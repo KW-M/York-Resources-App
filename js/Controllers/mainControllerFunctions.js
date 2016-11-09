@@ -188,17 +188,16 @@ function controllerFunction($scope, $rootScope, $mdDialog, $window, $http, $time
    }
 
    function handleUserPrefsSheet() {
-      queue('sheets', GoogleDriveService.getSpreadsheetRange("Sheet1!A2:B"), function(usersList) {
-         $scope.userList = usersList.result.values;
-         for (var UserContact = 0; UserContact < $scope.userList.length; UserContact++) {
-            if ($scope.userList[UserContact][0] === $scope.myInfo.Email) {
-               var adjustedUserSettingsCount = UserContact + 2;
-               $scope.UserSettingsRange = 'A' + adjustedUserSettingsCount + ':' + adjustedUserSettingsCount
-               getSpreadsheetRange('A' + adjustedUserSettingsCount + ':' + adjustedUserSettingsCount);
-               UserContact = $scope.userList.length;
+      queue('sheets', GoogleDriveService.getSpreadsheetRange("Sheet1!A2:B"), function(response) {
+         $scope.userList = response.result.values;
+         for (var rowCount = 0; rowCount <= $scope.userList.length && rowCount != true;  rowCount++) {
+            if ($scope.userList[rowCount][0] == $scope.myInfo.Email) {
+               $scope.UserSettingsRange = 'A' + (rowCount + 2) + ':' + (rowCount + 2) //+2 adjusts for header row
+               getSpreadsheetRange($scope.UserSettingsRange);
+               rowCount = true;//signify that the user's Row has been found
             }
          }
-         if (UserContact = $scope.userList.length) {
+         if (rowCount = $scope.userList.length + 1) {
             createUserSettings();
          }
       }, null, 2);
