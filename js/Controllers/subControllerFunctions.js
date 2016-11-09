@@ -250,9 +250,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	};
 	$scope.removeHttp = function(input){
 		if (input) {
-			console.log(input)
 			var url = input.replace(/(?:http|https):\/\//,'')
-			console.log(url)
 			return (url.replace('www.', ''))
 		} else {
 			return input
