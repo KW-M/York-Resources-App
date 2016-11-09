@@ -127,22 +127,19 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		$scope.myInfo.LastBeenFlaggedDate = Date.parse(spreadsheetRow[6])
 	}
 	$scope.convertUserPreferencesToRow = function () {
-			var spreadsheetRow = []
-			spreadsheetRow[0] = $scope.myInfo.Email;
-			spreadsheetRow[1] = $scope.myInfo.Name;
-			spreadsheetRow[2] = $scope.myInfo.Moderator;
-			spreadsheetRow[3] = $scope.myInfo.NumberOfVisits;
-			spreadsheetRow[4] = $scope.myInfo.NumberOfContributions;
-			spreadsheetRow[5] = $scope.myInfo.LastContributionDate;
-			spreadsheetRow[6] = $scope.myInfo.Email;
-			 = settingsArray[2]
-			 = settingsArray[3]
-			$scope.myInfo.NumberOfContributions = settingsArray[4]
-			$scope.myInfo.LastContributionDate = Date.parse(settingsArray[5])
-			$scope.myInfo.LastBeenFlaggedDate = Date.parse(settingsArray[6])
-		}
-		//----------------------------------------------------
-		//-------------- Filtering & Sorting -----------------
+		var spreadsheetRow = [];
+		spreadsheetRow[0] = $scope.myInfo.Email;
+		spreadsheetRow[1] = $scope.myInfo.Name;
+		spreadsheetRow[2] = $scope.myInfo.Moderator || false;
+		spreadsheetRow[3] = $scope.myInfo.NumberOfVisits || 0;
+		spreadsheetRow[4] = $scope.myInfo.NumberOfContributions || 0;
+		spreadsheetRow[5] = $scope.myInfo.LastContributionDate || '';
+		spreadsheetRow[6] = $scope.myInfo.LastBeenFlaggedDate || '';
+		return (spreadsheetRow);
+	}
+
+	//----------------------------------------------------
+	//-------------- Filtering & Sorting -----------------
 	$scope.filterPosts = function (inputSet) {
 		var output = inputSet.filter(function (post) {
 			if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
