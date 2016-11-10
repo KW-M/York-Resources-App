@@ -4,9 +4,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 
 	function findPostById(id, array) {
 		var item = 0;
+		console.log(id)
 		for (item in array) {
-			console.log(array[item])
-			if (array[item].Id === id) {
+			console.log(item)
+			if (array[item].Id == id) {
+				console.log(array[item])
 				return (item)
 			}
 		}
@@ -205,6 +207,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	};
 	$scope.flagPost = function (ev, content, arrayIndex) {
 		content.Flagged = true;
+		console.log(content)
 		if ($scope.queryParams.classpath != 'flagged') {
 			$timeout(function () { //makes angular update values
 				$scope.visiblePosts.splice(arrayIndex, 1);
