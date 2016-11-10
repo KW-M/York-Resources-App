@@ -214,8 +214,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		//set the user's has flagged date back
 		for (var item = 0; item < $scope.userList.length; item++) {
 			if ($scope.userList[item][0] && $scope.userList[item][0] == content.Creator.Email) {
-				
-				queue(GoogleDriveService.updateSpreadsheetRange(), null, function (err) {
+				var range = 'G' + (item + 2) + ':G' + (item + 2)
+				var now = Date.now()
+				queue(GoogleDriveService.updateSpreadsheetRange(range,), null, function (err) {
 					$mdToast.showSimple('Error flagging post, try again.');
 				}, 150);
 			}
