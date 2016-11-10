@@ -123,7 +123,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		$scope.myInfo.NumberOfContributions = spreadsheetRow[4]
 		$scope.myInfo.LastContributionDate = Date.parse(spreadsheetRow[5])
 		$scope.myInfo.LastBeenFlaggedDate = Date.parse(spreadsheetRow[6])
-		console.log($scope.myInfo.LastBeenFlaggedDate.toRFC3339UTCString());
+		console.log(new Date().toDateString());
 	}
 	$scope.convertUserPreferencesToRow = function () {
 		var spreadsheetRow = [];
