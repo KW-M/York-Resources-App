@@ -207,7 +207,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			});
 		}
 		$scope.allPosts[findPostById(content.Id, $scope.allPosts)].Flagged = true;
-		queue('drive',GoogleDriveService.updateFlagged(content.Id, true), null, function (err) {
+		queue('drive', GoogleDriveService.updateFlagged(content.Id, true), null, function (err) {
 			$timeout(function () { //makes angular update values
 				content.Flagged = false;
 				$scope.visiblePosts.splice(arrayIndex, 0, content);
@@ -221,7 +221,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				var range = 'Sheet1!G' + (item + 2)
 				var today = $filter('date')(new Date(), 'M/d/yy');
 				console.log(today);
-				queue('sheets',GoogleDriveService.updateSpreadsheetRange(range, [today]), null, function (err) {
+				queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, [today]), null, function (err) {
 					$timeout(function () { //makes angular update values
 						content.Flagged = false;
 						$scope.visiblePosts.splice(arrayIndex, 0, content);
@@ -255,6 +255,14 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			}));
 		}
 	};
+	$scope.updateLastPostedDate = function () {
+		var today = $filter('date')(new Date(), 'M/d/yy');
+		var range = 'Sheet1!F' + $scope.UserSettingsRowNum
+		queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, [today]), null, function (err) {
+			console.warn(err)
+			$mdToast.showSimple('Error Saving Post');
+		}, 2);
+	}
 	$scope.likePost = function (content) {
 		var userLikeIndex = findItemInArray($scope.myInfo.Email, content.Likes)
 		if (userLikeIndex == -1) {

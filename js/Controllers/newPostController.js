@@ -203,10 +203,9 @@
                     Metadata: metadata
                 });
                 queue('other', GoogleDriveService.AppsScriptNewFile(), function(response) {
-                    console.log(response)
-                    console.log(metadata)
                     queue('drive', GoogleDriveService.updateDriveFile(response.data, metadata), function(reply) {
                         console.log(reply.result);
+                        
                         $mdToast.hide();
                     }, function(error) {
                         console.warn(error);
