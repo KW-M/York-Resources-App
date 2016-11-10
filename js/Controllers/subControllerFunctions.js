@@ -3,18 +3,16 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	var likeClickTimer = {};
 
 	function findPostById(id, array) {
-		for (var item = 0; item < array.length; item++) {
-			if (array[item].Id === id) {
-				return (item);
-			}
+		var item = 0;
+		for (item in array) {
+			if (array[item].Id === id) return (item)
 		}
 	}
 
 	function findItemInArray(value, array) {
-		for (var item = 0; item < array.length; item++) {
-			if (array[item] === value) {
-				return (item);
-			}
+		var item = 0;
+		for (item in array) {
+			if (array[item] === value) return (item)
 		}
 		return (-1);
 	}
@@ -213,6 +211,12 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			$mdToast.showSimple('Error flagging post, try again.');
 			console.warn(err)
 		}, 150);
+		for (var item = 0; item < array.length; item++) {
+			if (array[item] === value) {
+				return (item);
+			}
+		}
+		return (-1);
 		//set the user's has flagged date back
 	};
 	$scope.unFlagPost = function (content, arrayIndex) {
@@ -239,16 +243,14 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	};
 	$scope.likePost = function (content) {
 		var userLikeIndex = findItemInArray($scope.myInfo.Email, content.Likes)
-		if (userLikeIndex === -1) {
+		if (userLikeIndex == -1) {
 			content.userLiked = true;
 			content.Likes.push($scope.myInfo.Email);
 		} else {
 			content.userLiked = false;
 			content.Likes.splice(userLikeIndex, 1);
 		}
-		if (typeof (likeClickTimer[content.Id]) == 'number') {
-			clearTimeout(likeClickTimer[content.Id]);
-		}
+		if (typeof (likeClickTimer[content.Id]) == 'number') clearTimeout(likeClickTimer[content.Id]);
 		likeClickTimer[content.Id] = setTimeout(function () {
 			var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
 			allArrayPost.userLiked = content.userLiked;
