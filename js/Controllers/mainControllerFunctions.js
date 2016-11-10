@@ -194,7 +194,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             if ($scope.userList[rowCount] != undefined && $scope.userList[rowCount][0] == $scope.myInfo.Email) {
                $scope.UserSettingsRowNum = rowCount + 2 //+2 adjusts for header row
                getUserSettings('A' + (rowCount + 2) + ':' + (rowCount + 2));
-               rowCount = -;//signify that the user's Row has been found
+               rowCount = -3//signify that the user's Row has been found
             }
          }
          if (rowCount == $scope.userList.length + 1) {

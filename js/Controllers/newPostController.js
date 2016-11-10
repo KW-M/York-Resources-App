@@ -205,7 +205,7 @@
                 queue('other', GoogleDriveService.AppsScriptNewFile(), function(response) {
                     queue('drive', GoogleDriveService.updateDriveFile(response.data, metadata), function(reply) {
                         console.log(reply.result);
-                        
+                        $scope.updateLastPostedDate();
                         $mdToast.hide();
                     }, function(error) {
                         console.warn(error);
