@@ -1,4 +1,4 @@
-function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance) {
+function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout, $filter, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance) {
 
 	var likeClickTimer = {};
 
@@ -207,20 +207,20 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			});
 		}
 		$scope.allPosts[findPostById(content.Id, $scope.allPosts)].Flagged = true;
-		queue(GoogleDriveService.updateFlagged(content.Id, true), null, function (err) {
+		queue('drive',GoogleDriveService.updateFlagged(content.Id, true), null, function (err) {
 			$timeout(function () { //makes angular update values
 				$scope.visiblePosts.splice(arrayIndex, 0, content);
 			});
 			$mdToast.showSimple('Error flagging post, try again.');
 			console.warn(err)
 		}, 150);
-		//set the user's has flagged date back
+		//set the poster's has flagged date back
 		for (var item = 0; item < $scope.userList.length; item++) {
 			if ($scope.userList[item][0] && $scope.userList[item][0] == content.Creator.Email) {
 				var range = 'G' + (item + 2) + ':G' + (item + 2)
 				var today = $filter('date')(new Date(), 'M/d/yy');
 				console.log(today);
-				queue(GoogleDriveService.updateSpreadsheetRange(range, today), function (result) {
+				queue('sheets',GoogleDriveService.updateSpreadsheetRange(range, today), function (result) {
 					console.log(result)
 				}, function (err) {
 					$timeout(function () { //makes angular update values
@@ -228,7 +228,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 					});
 					$mdToast.showSimple('Error flagging post, try again.');
 					console.warn(err)
-				}, 150);
+				}, 2);
 			}
 		}
 	};
