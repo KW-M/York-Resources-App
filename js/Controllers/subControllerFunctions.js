@@ -233,7 +233,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}
 	};
 	$scope.unFlagPost = function (content, arrayIndex) {
-		new 
+		var timeoutDate = new Date().setTime($scope.myInfo.LastBeenFlaggedDate.getTime() + 7 * 86400000);
+		console.log(new Date(timeoutDate).toDateString())
 		if ($scope.lastContributionDate === true) {
 			content.Flagged = false;
 			if ($scope.queryParams.classpath == 'flagged') {
