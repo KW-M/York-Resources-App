@@ -5,13 +5,17 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 	function findPostById(id, array) {
 		var item = 0;
 		for (item in array) {
-			if (array[item].Id === id) return (item)
+			console.log(array[item])
+			if (array[item].Id === id) {
+				return (item)
+			}
 		}
 	}
 
 	function findItemInArray(value, array) {
 		var item = 0;
 		for (item in array) {
+			console.log(array[item])
 			if (array[item] === value) return (item)
 		}
 		return (-1);
