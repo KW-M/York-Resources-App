@@ -1,7 +1,7 @@
 /*global app*/ /*global angular*/ /*global gapi*/ /*global google*/ /*global queue*/ /*global subControllerFunctions*/
 app.controller('ApplicationController', controllerFunction)
    //controllerFunction.$inject(['$scope', '$mdDialog', '$window', '$timeout', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', 'angularGridInstance'])
-function controllerFunction($scope, $rootScope, $filter, $mdDialog, $window, $http, $timeout, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, angularGridInstance) {
+function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $window, $http, $timeout, $sce, $mdSidenav, $mdMedia, authorizationService, GoogleDriveService, $q, $location, angularGridInstance) {
    var self = this;
    var content_container = document.getElementById("content_container");
    var layout_grid = document.getElementById("layout_grid");
@@ -492,5 +492,5 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $window, $ht
    }
 
    //More (less important functions are delegated to another file);
-   subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout, $filter, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance);
+   subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia, $timeout, $filter, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance);
 }

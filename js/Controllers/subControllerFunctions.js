@@ -1,4 +1,4 @@
-function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout, $filter, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance) {
+function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia, $timeout, $filter, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance) {
 
 	var likeClickTimer = {};
 
@@ -207,17 +207,17 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			});
 		}
 		$scope.allPosts[findPostById(content.Id, $scope.allPosts)].Flagged = true;
-		queue('drive',GoogleDriveService.updateFlagged(content.Id, true), null, function (err) {
-			$timeout(function () { //makes angular update values
-				$scope.visiblePosts.splice(arrayIndex, 0, content);
-			});
-			$mdToast.showSimple('Error flagging post, try again.');
-			console.warn(err)
-		}, 150);
+		// queue('drive',GoogleDriveService.updateFlagged(content.Id, true), null, function (err) {
+		// 	$timeout(function () { //makes angular update values
+		// 		$scope.visiblePosts.splice(arrayIndex, 0, content);
+		// 	});
+		// 	$mdToast.showSimple('Error flagging post, try again.');
+		// 	console.warn(err)
+		// }, 150);
 		//set the poster's has flagged date back
 		for (var item = 0; item < $scope.userList.length; item++) {
 			if ($scope.userList[item][0] && $scope.userList[item][0] == content.Creator.Email) {
-				var range = 'G' + (item + 2) + ':G' + (item + 2)
+				var range = 'G' + (item + 2)
 				var today = $filter('date')(new Date(), 'M/d/yy');
 				console.log(today);
 				queue('sheets',GoogleDriveService.updateSpreadsheetRange(range, today), function (result) {
@@ -226,8 +226,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 					$timeout(function () { //makes angular update values
 						$scope.visiblePosts.splice(arrayIndex, 0, content);
 					});
-					$mdToast.showSimple('Error flagging post, try again.');
 					console.warn(err)
+					$mdToast.showSimple('Error flagging post, try again.');
 				}, 2);
 			}
 		}
