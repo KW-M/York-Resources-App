@@ -233,9 +233,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}
 	};
 	$scope.unFlagPost = function (content, arrayIndex) {
-		var timeoutDate = new Date().setTime($scope.myInfo.LastBeenFlaggedDate.getTime() + 7 * 86400000);
-		console.log(new Date(timeoutDate).toDateString())
-		if ($scope.lastContributionDate === true) {
+		var timeoutDate = new Date($scope.myInfo.LastBeenFlaggedDate.getTime() + 7 * 86400000);
+		if (timeoutDate < new Date()) {
 			content.Flagged = false;
 			if ($scope.queryParams.classpath == 'flagged') {
 				$timeout(function () { //makes angular update values
@@ -244,14 +243,14 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			}
 			$scope.allPosts[findPostById(content.Id, $scope.allPosts)].Flagged = false;
 			$scope.updateVisiblePosts($scope.filterPosts($scope.allPosts));
-			queue(GoogleDriveService.updateFlagged(content.Id, false), null, function (err) {
+			queue('drive', GoogleDriveService.updateFlagged(content.Id, false), null, function (err) {
 				$mdToast.showSimple('Error unflagging post, try again.');
 				console.warn(err)
 			}, 150);
 		} else {
 			$mdDialog.show($mdDialog.alert({
 				title: 'Uh Oh.',
-				htmlContent: '<p style="margin: 0 0 2px 0">One of your posts has been flagged within the past two weeks.<br>To unlock the ability to unflag posts, make sure none of your posts get flagged this week.</p>',
+				htmlContent: '<p style="margin: 0 0 2px 0">One of your posts has been flagged within the past week.<br>To unlock the ability to unflag posts, don' of your posts get flagged this week.</p>',
 				ok: 'Ok'
 			}));
 		}
