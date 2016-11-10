@@ -207,7 +207,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			});
 		}
 		$scope.allPosts[findPostById(content.Id, $scope.allPosts)].Flagged = true;
-		queue('drive', GoogleDriveService.updateFlagged(content.Id, true), null, function (err) {
+		queue('drive',GoogleDriveService.updateFlagged(content.Id, true), null, function (err) {
 			$timeout(function () { //makes angular update values
 				content.Flagged = false;
 				$scope.visiblePosts.splice(arrayIndex, 0, content);
@@ -221,7 +221,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				var range = 'Sheet1!G' + (item + 2)
 				var today = $filter('date')(new Date(), 'M/d/yy');
 				console.log(today);
-				queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, [today]), null, function (err) {
+				queue('sheets',GoogleDriveService.updateSpreadsheetRange(range, [today]), null, function (err) {
 					$timeout(function () { //makes angular update values
 						content.Flagged = false;
 						$scope.visiblePosts.splice(arrayIndex, 0, content);
@@ -233,29 +233,27 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}
 	};
 	$scope.unFlagPost = function (content, arrayIndex) {
-		for (var item = 0; item < $scope.userList.length; item++) {
-			if ($scope.userList[item][0] && $scope.userList[item][0] == content.Creator.Email) {
-				var range = 'Sheet1!G' + (item + 2)
-				content.Flagged = false;
-				if ($scope.queryParams.classpath == 'flagged') {
-					$timeout(function () { //makes angular update values
-						$scope.visiblePosts.splice(arrayIndex, 1);
-					});
-				}
-				$scope.allPosts[findPostById(content.Id, $scope.allPosts)].Flagged = false;
-				$scope.updateVisiblePosts($scope.filterPosts($scope.allPosts));
-				queue(GoogleDriveService.updateFlagged(content.Id, false), null, function (err) {
-					$mdToast.showSimple('Error unflagging post, try again.');
-					console.warn(err)
-				}, 150);
-			} else {
-				$mdDialog.show($mdDialog.alert({
-					title: 'Uh Oh.',
-					htmlContent: '<p style="margin: 0 0 2px 0">One of your posts has been flagged within the past two weeks.<br>To unlock the ability to unflag posts, make sure none of your posts get flagged this week.</p>',
-					ok: 'Ok'
-				}));
+		
+		console.log($scope.lastContributionDate.)
+		if ($scope.lastContributionDate === true) {
+			content.Flagged = false;
+			if ($scope.queryParams.classpath == 'flagged') {
+				$timeout(function () { //makes angular update values
+					$scope.visiblePosts.splice(arrayIndex, 1);
+				});
 			}
-
+			$scope.allPosts[findPostById(content.Id, $scope.allPosts)].Flagged = false;
+			$scope.updateVisiblePosts($scope.filterPosts($scope.allPosts));
+			queue(GoogleDriveService.updateFlagged(content.Id, false), null, function (err) {
+				$mdToast.showSimple('Error unflagging post, try again.');
+				console.warn(err)
+			}, 150);
+		} else {
+			$mdDialog.show($mdDialog.alert({
+				title: 'Uh Oh.',
+				htmlContent: '<p style="margin: 0 0 2px 0">One of your posts has been flagged within the past two weeks.<br>To unlock the ability to unflag posts, make sure none of your posts get flagged this week.</p>',
+				ok: 'Ok'
+			}));
 		}
 	};
 	$scope.likePost = function (content) {
