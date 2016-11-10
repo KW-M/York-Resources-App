@@ -211,13 +211,15 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 			$mdToast.showSimple('Error flagging post, try again.');
 			console.warn(err)
 		}, 150);
-		for (var item = 0; item < array.length; item++) {
-			if (array[item] === value) {
-				return (item);
+		//set the user's has flagged date back
+		for (var item = 0; item < $scope.userList.length; item++) {
+			if ($scope.userList[item][0] && $scope.userList[item][0] == content.Creator.Email) {
+				
+				queue(GoogleDriveService.updateSpreadsheetRange(), null, function (err) {
+					$mdToast.showSimple('Error flagging post, try again.');
+				}, 150);
 			}
 		}
-		return (-1);
-		//set the user's has flagged date back
 	};
 	$scope.unFlagPost = function (content, arrayIndex) {
 		if ($scope.myInfo.moderator === true) {
