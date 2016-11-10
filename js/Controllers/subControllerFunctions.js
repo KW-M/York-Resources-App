@@ -250,7 +250,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		} else {
 			$mdDialog.show($mdDialog.alert({
 				title: 'Uh Oh.',
-				htmlContent: '<p style="margin: 0 0 2px 0">One of your posts has been flagged within the past week.<br>To unlock the ability to unflag posts, don' of your posts get flagged this week.</p>',
+				htmlContent: '<p style="margin: 0 0 2px 0">One of your posts has been flagged within the past week.<br>To unlock the ability to unflag posts, don\'t let your posts get flagged this week.</p>',
 				ok: 'Ok'
 			}));
 		}
