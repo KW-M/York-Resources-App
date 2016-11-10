@@ -166,7 +166,7 @@
                                         <span class="like-counter">{{Post.Likes.length}}</span>
                                         <md-icon ng-class="{'md-accent' : Post.userLiked}" style="margin-top: -8px">thumb_up</md-icon>
                                     </md-button>
-                                    <md-button class="md-icon-button" area-label="Flag" ng-click="::flagPost(Post)" ng-hide="Post.Creator.Email == myInfo.Email && Post.Flagged == false">
+                                    <md-button class="md-icon-button" area-label="Flag" ng-click="::unFlagPost(Post,$index)" ng-hide="Post.Flagged == false">
                                         <md-icon ng-class="{'md-warn' : Post.Flagged == true}">flag</md-icon>
                                     </md-button>
                                     <md-menu>

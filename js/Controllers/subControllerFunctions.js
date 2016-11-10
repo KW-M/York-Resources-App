@@ -123,6 +123,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		$scope.myInfo.NumberOfContributions = spreadsheetRow[4]
 		$scope.myInfo.LastContributionDate = Date.parse(spreadsheetRow[5])
 		$scope.myInfo.LastBeenFlaggedDate = Date.parse(spreadsheetRow[6])
+		console.log($scope.myInfo.LastBeenFlaggedDate.toRFC3339UTCString());
 	}
 	$scope.convertUserPreferencesToRow = function () {
 		var spreadsheetRow = [];
@@ -233,8 +234,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}
 	};
 	$scope.unFlagPost = function (content, arrayIndex) {
-		
-		console.log($scope.lastContributionDate.)
+		console.log($scope.lastContributionDate)
 		if ($scope.lastContributionDate === true) {
 			content.Flagged = false;
 			if ($scope.queryParams.classpath == 'flagged') {
