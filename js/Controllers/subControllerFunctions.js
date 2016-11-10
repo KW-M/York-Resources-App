@@ -209,6 +209,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		$scope.allPosts[findPostById(content.Id, $scope.allPosts)].Flagged = true;
 		// queue('drive',GoogleDriveService.updateFlagged(content.Id, true), null, function (err) {
 		// 	$timeout(function () { //makes angular update values
+		//		content.Flagged = false;
 		// 		$scope.visiblePosts.splice(arrayIndex, 0, content);
 		// 	});
 		// 	$mdToast.showSimple('Error flagging post, try again.');
@@ -224,6 +225,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 					console.log(result)
 				}, function (err) {
 					$timeout(function () { //makes angular update values
+						content.Flagged = false;
 						$scope.visiblePosts.splice(arrayIndex, 0, content);
 					});
 					console.warn(err)
