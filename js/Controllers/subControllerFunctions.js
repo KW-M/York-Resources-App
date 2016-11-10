@@ -42,8 +42,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			formatedPost.Tags = tags
 			formatedPost.Type = DriveMetadata.properties.Type || 'noLink'
 			formatedPost.Flagged = JSON.parse(DriveMetadata.properties.Flagged) || false
-			formatedPost.CreationDate = Date.parse(DriveMetadata.createdTime) || new Date()
-			formatedPost.UpdateDate = Date.parse(DriveMetadata.modifiedTime) || new Date()
+			formatedPost.CreationDate = new Date(DriveMetadata.createdTime) || new Date()
+			formatedPost.UpdateDate = new Date(DriveMetadata.modifiedTime) || new Date()
 			formatedPost.Class = {
 				Name: DriveMetadata.properties.ClassName || '',
 				Catagory: DriveMetadata.properties.ClassCatagory || '',
