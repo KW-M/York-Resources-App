@@ -215,8 +215,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdMedia, $timeout
 		for (var item = 0; item < $scope.userList.length; item++) {
 			if ($scope.userList[item][0] && $scope.userList[item][0] == content.Creator.Email) {
 				var range = 'G' + (item + 2) + ':G' + (item + 2)
-				var now = Date.now()
-				queue(GoogleDriveService.updateSpreadsheetRange(range,), null, function (err) {
+				var today = $filter('date')(new Date(),'M/d/yy');
+				console.log(today);
+				queue(GoogleDriveService.updateSpreadsheetRange(range,today), function(result){console.log(result)}, function (err) {
 					$mdToast.showSimple('Error flagging post, try again.');
 				}, 150);
 			}
