@@ -134,7 +134,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		spreadsheetRow[5] = $scope.myInfo.LastContributionDate || '';
 		spreadsheetRow[6] = $scope.myInfo.LastBeenFlaggedDate || '';
 		return (spreadsheetRow);
-	}
+	};
 
 	//----------------------------------------------------
 	//-------------- Filtering & Sorting -----------------
