@@ -48,7 +48,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    $scope.$mdMedia = $mdMedia;
    $scope.$mdDialog = $mdDialog;
    $scope.$location = $location;
-   // $scope.$timeout = $timeout;
+    $scope.$timeout = $timeout;
 
    //----------------------------------------------------
    //------------------- Routing ------------------------
