@@ -5,16 +5,13 @@
         var linkChangeTimer = null;
         var originalPost = angular.copy(postObj);
         $scope.Post = postObj;
-        console.log($scope.Post)
         $timeout(function () {
-            console.log($scope.Post)
             $scope.Post.Title = $scope.Post.Title || ''
             $scope.Post.Description = $scope.Post.Description || ''
             $scope.Post.Link = $scope.Post.Link || ''
             $scope.Post.Tags = $scope.Post.Tags || []
             $scope.Post.Type = $scope.Post.Type || 'noLink'
             $scope.Post.Flagged = $scope.Post.Flagged || false
-            console.log($scope.Post)
             $scope.Post.CreationDate = $scope.Post.CreationDate || new Date()
             $scope.Post.UpdateDate = $scope.Post.UpdateDate || new Date()
             $scope.Post.Class = $scope.Post.Class || {
@@ -240,9 +237,10 @@
         $scope.closeDialog = function () {
             console.log(originalPost)
             $timeout(function () {
-                postObj = originalPost;
+                $scope.Post = originalPost;
+                console.log($scope.Post)
+                $mdDialog.hide();
             })
-            $mdDialog.hide();
         };
     }
     

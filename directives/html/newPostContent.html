@@ -1,7 +1,7 @@
 <md-dialog id="new_post_dialog" ng-style="{'background-color': Post.Class.Color}">
    <md-dialog-content class="new_post_dialog_scroll">
       <div id="dialog_header" ng-class="{ 'no-link' : Post.Type === 'noLink' }">
-         <img ng-src="{{Post.PreviewImage}}" id="header_image" ></img>
+         <img ng-src="{{Post.PreviewImage}}" id="header_image"></img>
          <div class="new-post-img-gradient">
             <div id="header_title" style="opacity: 0">
                <h5 style="margin: 0">{{Post.Title}}</h5>
@@ -79,9 +79,7 @@
          </div>
          <div class="md-dialog-content">
             <input ng-model="Post.Title" ng-readonly="operation === 'view'" class="newPostTitle md-title" placeholder="Title" md-autofocus>
-            <!--<div id="DescriptionTxt" class="newPostBody" contenteditable="{{operation !== 'view'}}" ng-bind-html="Post.Description"></div>-->
-           <div contenteditable="{{operation != 'view'}}" ng-model="Post.Description" class="newPostBody"></div>
-            <!--ng-model="Post.Description" html-model="true" contenteditable ng-model="Post.Description"  -->
+            <div contenteditable="{{operation != 'view'}}" ng-model="Post.Description" class="newPostBody"></div>
          </div>
       </div>
    </md-dialog-content>
