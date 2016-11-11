@@ -1,10 +1,12 @@
     /* we don't define the "new post controller" here because it was alredy
-                                                                                                                               defined by the $md-dialog in the newPost function on mainController.   */
+                                                                                                                                   defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $timeout, $http, $mdDialog, GoogleDriveService, authorizationService, $mdToast, postObj, operation) {
+        console.log(postObj)
         var linkChangeTimer = null;
         var originalPost = angular.copy(postObj);
         $scope.Post = postObj;
-        $timeout(function() {
+        $timeout(function () {
+            console.log($scope.Post)
             $scope.Post.Title = $scope.Post.Title || ''
             $scope.Post.Description = $scope.Post.Description || ''
             $scope.Post.Link = $scope.Post.Link || ''
@@ -40,15 +42,15 @@
         $scope.previewLoading = false;
         $scope.classSearch = "";
 
-        $scope.findType = function() {
+        $scope.findType = function () {
             console.log('findingType')
-            $scope.Post.PreviewImage = '';
-            $scope.Post.AttachmentId = '';
-            $scope.Post.AttachmentName = '';
-            $scope.Post.AttachmentIcon = '';
             if ($scope.Post.Link === '') {
+                $scope.Post.PreviewImage = '';
+                $scope.Post.AttachmentId = '';
+                $scope.Post.AttachmentName = '';
+                $scope.Post.AttachmentIcon = '';
                 $scope.Post.Type = 'NoLink';
-                $timeout(function() {
+                $timeout(function () {
                     $scope.Post.PreviewImage = ''; // will be the down arrow photo
                     $scope.previewLoading = false;
                     document.dispatchEvent(new window.Event('urlPreviewLoaded'));
@@ -59,10 +61,10 @@
                 if (driveId) {
                     $scope.Post.Type = 'gDrive';
                     $scope.Post.AttachmentId = driveId[1]
-                    queue('drive', GoogleDriveService.getFileThumbnail($scope.Post.AttachmentId), function(response) {
+                    queue('drive', GoogleDriveService.getFileThumbnail($scope.Post.AttachmentId), function (response) {
                         var thumbnail = response.result.thumbnailLink;
                         var access_token = authorizationService.getAuthToken();
-                        $timeout(function() {
+                        $timeout(function () {
                             console.log(response);
                             if (response.result.thumbnailLink) {
                                 $scope.Post.PreviewImage = thumbnail.replace("=s220", "=s400") + "&access_token=" + access_token;
@@ -75,19 +77,19 @@
                             $scope.previewLoading = false;
                             document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                         });
-                    }, function(error) {
+                    }, function (error) {
                         console.log(error);
                         $scope.Post.Type = 'Link';
-                        queue('screenshot', GoogleDriveService.getWebsiteScreenshot($scope.Post.Link), function(response) {
+                        queue('screenshot', GoogleDriveService.getWebsiteScreenshot($scope.Post.Link), function (response) {
                             console.log(response)
-                            $timeout(function() {
+                            $timeout(function () {
                                 $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
                                 $scope.previewLoading = false;
                                 document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                             })
-                        }, function(error) {
+                        }, function (error) {
                             console.log(error)
-                            $timeout(function() {
+                            $timeout(function () {
                                 $scope.Post.PreviewImage = "https://www.techtricksworld.com/wp-content/uploads/2015/12/Error-404.png"
                                 $scope.previewLoading = false;
                                 document.dispatchEvent(new window.Event('urlPreviewLoaded'));
@@ -96,43 +98,43 @@
                     }, 150);
                 } else {
                     $scope.Post.Type = 'Link';
-                    $http.head('https://jsonp.afeld.me/?url=' + $scope.Post.Link).then(function(result) {
+                    $http.head('https://jsonp.afeld.me/?url=' + $scope.Post.Link).then(function (result) {
                         console.log(result)
                         if (result.headers()['content-type'].indexOf('image') != -1) {
-                            $timeout(function() {
+                            $timeout(function () {
                                 $scope.Post.PreviewImage = $scope.Post.Link;
                                 $scope.previewLoading = false;
                                 document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                             })
                         } else {
                             console.log('notImage')
-                            GoogleDriveService.getWebsiteScreenshot($scope.Post.Link).then(function(response) {
+                            GoogleDriveService.getWebsiteScreenshot($scope.Post.Link).then(function (response) {
                                 console.log(response)
-                                $timeout(function() {
+                                $timeout(function () {
                                     $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
                                     $scope.previewLoading = false;
                                     document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                                 })
-                            }, function(error) {
+                            }, function (error) {
                                 console.log(error)
-                                $timeout(function() {
+                                $timeout(function () {
                                     $scope.Post.PreviewImage = "https://www.techtricksworld.com/wp-content/uploads/2015/12/Error-404.png"
                                     $scope.previewLoading = false;
                                     document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                                 })
                             })
                         }
-                    }, function(error) {
+                    }, function (error) {
                         console.log(error)
-                        queue('screenshot', GoogleDriveService.getWebsiteScreenshot($scope.Post.Link), function(response) {
-                            $timeout(function() {
+                        queue('screenshot', GoogleDriveService.getWebsiteScreenshot($scope.Post.Link), function (response) {
+                            $timeout(function () {
                                 $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
                                 $scope.previewLoading = false;
                                 document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                             })
-                        }, function(error) {
+                        }, function (error) {
                             console.log(error)
-                            $timeout(function() {
+                            $timeout(function () {
                                 $scope.Post.PreviewImage = "https://www.techtricksworld.com/wp-content/uploads/2015/12/Error-404.png"
                                 $scope.previewLoading = false;
                                 document.dispatchEvent(new window.Event('urlPreviewLoaded'));
@@ -149,15 +151,18 @@
             }
         };
 
-        $scope.$watch('Post.Link', function() {
-            if (typeof(linkChangeTimer) == 'number') {
-                console.log('clearingtimer')
-                clearTimeout(linkChangeTimer);
-            }
-            linkChangeTimer = setTimeout($scope.findType(), 500)
+        $scope.$watch('Post.Link', function () {
+            if (typeof (linkChangeTimer) == 'number') clearTimeout(linkChangeTimer);
+            linkChangeTimer = setTimeout(function () {
+                $scope.Post.PreviewImage = '';
+                $scope.Post.AttachmentId = '';
+                $scope.Post.AttachmentName = '';
+                $scope.Post.AttachmentIcon = '';
+                $scope.findType()
+            }, 500)
         })
 
-        $scope.isReadyToSubmit = function() {
+        $scope.isReadyToSubmit = function () {
             if ($scope.Post.Class.Name === '' || $scope.Post.Class === undefined) {
                 $mdToast.show({
                     template: '<md-toast><div class="md-toast-content">Select a class for this post.</div><md-toast>',
@@ -182,7 +187,7 @@
                     hideDelay: 3000000,
                 });
                 if ($scope.previewLoading) {
-                    document.addEventListener('urlPreviewLoaded', function() {
+                    document.addEventListener('urlPreviewLoaded', function () {
                         $scope.submit();
                     });
                 } else {
@@ -195,45 +200,45 @@
             GoogleDriveService.shareLinkFile(linkShareFile)
         }
 
-        $scope.submit = function() {
+        $scope.submit = function () {
             if (operation === 'new') {
                 var metadata = $scope.convertPostToDriveMetadata($scope.Post);
                 console.log({
                     Post: $scope.Post,
                     Metadata: metadata
                 });
-                queue('other', GoogleDriveService.AppsScriptNewFile(), function(response) {
-                    queue('drive', GoogleDriveService.updateDriveFile(response.data, metadata), function(reply) {
+                queue('other', GoogleDriveService.AppsScriptNewFile(), function (response) {
+                    queue('drive', GoogleDriveService.updateDriveFile(response.data, metadata), function (reply) {
                         console.log(reply.result);
                         $scope.updateLastPostedDate();
                         $mdToast.hide();
-                    }, function(error) {
+                    }, function (error) {
                         console.warn(error);
                     }, 150);
-                }, function(error) {
+                }, function (error) {
                     console.warn(error)
                 }, 2);
             } else if (operation === 'update') {
                 var metadata = $scope.compileUpdateToMetadata();
-                queue('drive', GoogleDriveService.updateDrivMetadata(postObj.Id, metadata), function(reply) {
+                queue('drive', GoogleDriveService.updateDrivMetadata(postObj.Id, metadata), function (reply) {
                     console.log(reply.result);
                     $mdToast.hide();
-                }, function(error) {
+                }, function (error) {
                     console.warn(error);
                 }, 150);
             }
         }
 
-        $scope.clearLink = function() {
-            $timeout(function() {
+        $scope.clearLink = function () {
+            $timeout(function () {
                 $scope.Post.Link = ""
                 $scope.Post.Type = "NoLink"
             })
         }
 
-        $scope.closeDialog = function() {
+        $scope.closeDialog = function () {
             console.log(originalPost)
-            $timeout(function() {
+            $timeout(function () {
                 postObj = originalPost;
             })
             $mdDialog.hide();
