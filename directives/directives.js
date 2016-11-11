@@ -29,29 +29,6 @@ app.directive('newPostContent', function() {
     };
 });
 
-app.directive("showMoreOnOverflow", function($timeout) {
-    return {
-        scope: false,
-        link: function(scope, element) {
-                console.log({clientHeight:element[0].clientHeight, scrollHeight:element[0].scrollHeight, time:0});
-            $timeout(function(){
-                console.log({clientHeight:element[0].clientHeight, scrollHeight:element[0].scrollHeight, time:'$timeout'});
-            })
-            $timeout(function(){
-                console.log({clientHeight:element[0].clientHeight, scrollHeight:element[0].scrollHeight, time:'$timeout5000'});
-            }, 5000)
-            // if (element[0].scrollHeight > element[0].clientHeight || element[0].scrollWidth > element[0].clientWidth) {
-            //     console.log("oveerflow")
-            //     element[0].nextElementSibling.style.display = "initial";
-            // }
-            // else {
-            //     console.log("nonoverflow")
-            //         //element[0].nextElementSibling.style.display = "none";
-            // }
-        }
-    }
-});
-
 app.directive("calculateCardHeight", function($timeout) {
     return {
         scope: false,
@@ -118,6 +95,8 @@ app.directive('contenteditable', ['$sce', function($sce) {
       
       // Specify how UI should be updated
       ngModel.$render = function() {
+          console.log('viewModel:')
+          console.log(ngModel.$viewValue)
         element.html($sce.getTrustedHtml(ngModel.$viewValue || ''));
       };
 

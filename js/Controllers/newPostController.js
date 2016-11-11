@@ -5,6 +5,7 @@
         var linkChangeTimer = null;
         var originalPost = angular.copy(postObj);
         $scope.Post = postObj;
+        console.log($scope.Post)
         $timeout(function () {
             console.log($scope.Post)
             $scope.Post.Title = $scope.Post.Title || ''
