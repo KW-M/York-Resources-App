@@ -108,8 +108,6 @@ app.directive('contenteditable', ['$sce', function ($sce) {
 
             // Specify how UI should be updated
             ngModel.$render = function () {
-                console.log('viewModel:')
-                console.log(ngModel.$viewValue)
                 element.html($sce.getTrustedHtml(ngModel.$viewValue || ''));
             };
 

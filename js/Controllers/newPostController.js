@@ -235,12 +235,34 @@
         }
 
         $scope.closeDialog = function () {
-            console.log(originalPost)
-            $timeout(function () {
-                $scope.Post = originalPost;
+            $scope.Post = originalPost;
+            $scope.Post.Title = $scope.Post.Title || ''
+            $scope.Post.Description = $scope.Post.Description || ''
+            $scope.Post.Link = $scope.Post.Link || ''
+            $scope.Post.Tags = $scope.Post.Tags || []
+            $scope.Post.Type = $scope.Post.Type || 'noLink'
+            $scope.Post.Flagged = $scope.Post.Flagged || false
+            $scope.Post.CreationDate = $scope.Post.CreationDate || new Date()
+            $scope.Post.UpdateDate = $scope.Post.UpdateDate || new Date()
+            $scope.Post.Class = $scope.Post.Class || {
+                Name: '',
+                Catagory: '',
+                Color: '#ffffff',
+            }
+            $scope.Post.Creator = $scope.Post.Creator || {
+                ClassOf: '',
+                Email: '',
+                Me: null,
+                Name: '',
+            }
+            $scope.Post.Id = $scope.Post.Id || ''
+            $scope.Post.AttachmentId = $scope.Post.AttachmentId || ''
+            $scope.Post.AttachmentName = $scope.Post.AttachmentName || ''
+            $scope.Post.AttachmentIcon = $scope.Post.AttachmentIcon || ''
+            $scope.Post.Likes = $scope.Post.Likes || []
+            $scope.Post.PreviewImage = $scope.Post.PreviewImage || ''
                 console.log($scope.Post)
                 $mdDialog.hide();
-            })
         };
     }
     
