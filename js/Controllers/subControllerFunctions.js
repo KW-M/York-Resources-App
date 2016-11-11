@@ -189,7 +189,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	//----------------------------------------------------
 	// --------------- Post Card Functions ---------------
 	$scope.confirmDelete = function (content, arrayIndex) {
-		var confirm = $mdDialog.confirm().title('Permanently delete this?').ariaLabel('Delete?').targetEvent(ev).ok('Delete').cancel('Cancel');
+		var confirm = $mdDialog.confirm().title('Permanently delete this?').ariaLabel('Delete?').ok('Delete').cancel('Cancel');
 		$mdDialog.show(confirm).then(function () {
 			$scope.allPosts.splice(findPostById(content.Id, $scope.allPosts), 1);
 			$timeout($scope.visiblePosts.splice(arrayIndex, 1));
