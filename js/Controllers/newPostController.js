@@ -240,20 +240,19 @@
             $scope.Post.Link = originalPost.Link || ''
             $scope.Post.Tags = originalPost.Tags || []
             $scope.Post.Type = originalPost.Type || 'noLink'
-            // $scope.Post.Flagged = originalPost.Flagged || false
-            // $scope.Post.UpdateDate = originalPost.UpdateDate || new Date()
-            // $scope.Post.Class = originalPost.Class || {
-            //     Name: '',
-            //     Catagory: '',
-            //     Color: '#ffffff',
-            // }
-            // $scope.Post.Id = originalPost.Id || ''
-            // $scope.Post.AttachmentId = originalPost.AttachmentId || ''
-            // $scope.Post.AttachmentName = originalPost.AttachmentName || ''
-            // $scope.Post.AttachmentIcon = originalPost.AttachmentIcon || ''
-            // $scope.Post.Likes = originalPost.Likes || []
-            //$scope.Post.PreviewImage = originalPost.PreviewImage || ''
+            $scope.Post.Flagged = originalPost.Flagged || false
+            $scope.Post.UpdateDate = originalPost.UpdateDate || new Date()
+            $scope.Post.Class = originalPost.Class || {
+                Name: '',
+                Catagory: '',
+                Color: '#ffffff',
+            }
+            $scope.Post.Id = originalPost.Id || ''
+            $scope.Post.AttachmentId = originalPost.AttachmentId || ''
+            $scope.Post.AttachmentName = originalPost.AttachmentName || ''
+            $scope.Post.AttachmentIcon = originalPost.AttachmentIcon || ''
+            $scope.Post.Likes = originalPost.Likes || []
+            $scope.Post.PreviewImage = originalPost.PreviewImage || ''
             $mdDialog.hide();
         };
     }
-    
