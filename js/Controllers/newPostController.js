@@ -63,7 +63,6 @@
                         var thumbnail = response.result.thumbnailLink;
                         var access_token = authorizationService.getAuthToken();
                         $timeout(function () {
-                            console.log(response);
                             if (response.result.thumbnailLink) {
                                 $scope.Post.PreviewImage = thumbnail.replace("=s220", "=s400") + "&access_token=" + access_token;
                             } else {
@@ -76,17 +75,16 @@
                             document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                         });
                     }, function (error) {
-                        console.log(error);
+                        console.warn(error);
                         $scope.Post.Type = 'Link';
                         queue('screenshot', GoogleDriveService.getWebsiteScreenshot($scope.Post.Link), function (response) {
-                            console.log(response)
                             $timeout(function () {
                                 $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
                                 $scope.previewLoading = false;
                                 document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                             })
                         }, function (error) {
-                            console.log(error)
+                            console.warn(error)
                             $timeout(function () {
                                 $scope.Post.PreviewImage = "https://www.techtricksworld.com/wp-content/uploads/2015/12/Error-404.png"
                                 $scope.previewLoading = false;
@@ -97,7 +95,6 @@
                 } else {
                     $scope.Post.Type = 'Link';
                     $http.head('https://jsonp.afeld.me/?url=' + $scope.Post.Link).then(function (result) {
-                        console.log(result)
                         if (result.headers()['content-type'].indexOf('image') != -1) {
                             $timeout(function () {
                                 $scope.Post.PreviewImage = $scope.Post.Link;
@@ -105,16 +102,14 @@
                                 document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                             })
                         } else {
-                            console.log('notImage')
                             GoogleDriveService.getWebsiteScreenshot($scope.Post.Link).then(function (response) {
-                                console.log(response)
                                 $timeout(function () {
                                     $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
                                     $scope.previewLoading = false;
                                     document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                                 })
                             }, function (error) {
-                                console.log(error)
+                                console.warn(error)
                                 $timeout(function () {
                                     $scope.Post.PreviewImage = "https://www.techtricksworld.com/wp-content/uploads/2015/12/Error-404.png"
                                     $scope.previewLoading = false;
@@ -123,7 +118,7 @@
                             })
                         }
                     }, function (error) {
-                        console.log(error)
+                        console.warn(error)
                         queue('screenshot', GoogleDriveService.getWebsiteScreenshot($scope.Post.Link), function (response) {
                             $timeout(function () {
                                 $scope.Post.PreviewImage = "data:image/jpeg;base64," + response.result.screenshot.data.replace(/_/g, '/').replace(/-/g, '+');
@@ -131,7 +126,7 @@
                                 document.dispatchEvent(new window.Event('urlPreviewLoaded'));
                             })
                         }, function (error) {
-                            console.log(error)
+                            console.warn(error)
                             $timeout(function () {
                                 $scope.Post.PreviewImage = "https://www.techtricksworld.com/wp-content/uploads/2015/12/Error-404.png"
                                 $scope.previewLoading = false;
@@ -207,7 +202,6 @@
                 });
                 queue('other', GoogleDriveService.AppsScriptNewFile(), function (response) {
                     queue('drive', GoogleDriveService.updateDriveFile(response.data, metadata), function (reply) {
-                        console.log(reply.result);
                         $scope.updateLastPostedDate();
                         $mdToast.hide();
                     }, function (error) {
@@ -218,7 +212,7 @@
                 }, 2);
             } else if (operation === 'update') {
                 var metadata = $scope.compileUpdateToMetadata();
-                queue('drive', GoogleDriveService.updateDrivMetadata(postObj.Id, metadata), function (reply) {
+                queue('drive', GoogleDriveService.updateDriveFile(postObj.Id, metadata), function (reply) {
                     console.log(reply.result);
                     $mdToast.hide();
                 }, function (error) {
