@@ -381,7 +381,8 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                layout_grid.style.height = '0px';
                no_posts_footer.style.display = 'block';
             }
-         }, 100)
+            angularGridInstance.postsGrid.refresh();
+         }, 200)
       }
    }
 
