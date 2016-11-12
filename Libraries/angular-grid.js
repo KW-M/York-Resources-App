@@ -1,5 +1,5 @@
 /*
-    angularGrid.js v 0.6.2
+    angularGrid.js v 0.6.4
     Author: Sudhanshu Yadav
     Copyright (c) 2015-2016 Sudhanshu Yadav - ignitersworld.com , released under the MIT license.
     Demo on: http://ignitersworld.com/lab/angulargrid/
@@ -8,14 +8,15 @@
 
 /* module to create pinterest like responsive masonry grid system for angular */
 
-;(function (root, factory) {
+;
+(function (root, factory) {
   if (typeof module !== 'undefined' && module.exports) {
     // CommonJS
     module.exports = factory(require('angular'), root);
   } else if (typeof define === 'function' && define.amd) {
     // AMD
     define(['angular'], function (angular) {
-        return factory(angular, root);
+      return factory(angular, root);
     });
   } else {
     // Global Variables
@@ -40,7 +41,7 @@
   };
 
   var $ = angular.element;
-  var camelCaseToHyphenCase = function(str) {
+  var camelCaseToHyphenCase = function (str) {
     return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
   };
 
@@ -53,9 +54,9 @@
     width: ''
   };
 
-  var single = (function() {
+  var single = (function () {
     var $elm = $(window);
-    return function(elm) {
+    return function (elm) {
       $elm[0] = elm;
       return $elm;
     };
@@ -83,7 +84,7 @@
 
   return angular.module('angularGrid', [])
     .directive('angularGrid', ['$timeout', '$window', '$q', 'angularGridInstance',
-      function($timeout, $window, $q, angularGridInstance) {
+      function ($timeout, $window, $q, angularGridInstance) {
         return {
           restrict: 'A',
           scope: {
@@ -114,14 +115,14 @@
             infiniteScrollDistance: '=agInfiniteScrollDistance',
             infiniteScrollDelay: '=agInfiniteScrollDelay'
           },
-          link: function(scope, element, attrs) {
+          link: function (scope, element, attrs) {
             var domElm = element[0],
               win = $($window),
               agId = scope.agId || scope.dep_agId, // angularGridId is deprecated
               listElms,
               reflowCount = 0, //to keep tack of times reflowgrid been called
               timeoutPromise;
-            var content_container = document.getElementById("content_container");
+              var content_container = document.getElementById("content_container");
             element.addClass('angular-grid');
 
 
@@ -130,7 +131,7 @@
             var options;
 
             //check deprecated options
-            ['gridWidth', 'gutterSize', 'refreshOnImgLoad', 'direction', 'options', 'cssGrid','gridNo', 'agId'].forEach(function(key) {
+            ['gridWidth', 'gutterSize', 'refreshOnImgLoad', 'direction', 'options', 'cssGrid', 'gridNo', 'agId'].forEach(function (key) {
               var depKey = camelCaseToHyphenCase(key);
               var correctKey = 'ag-' + camelCaseToHyphenCase(key);
               if (key == 'options') depKey = "angular-grid-options";
@@ -145,7 +146,7 @@
 
             function getOptions() {
               options = {};
-              Object.keys(defaults).forEach(function(key) {
+              Object.keys(defaults).forEach(function (key) {
                 if (scope[key] !== undefined) {
                   options[key] = scope[key];
                 } else if (scope['dep_' + key] !== undefined) {
@@ -229,7 +230,7 @@
                 }
               }
 
-              scrollNs.pageInfo = scrollNs.pageInfo.map(function(page, idx) {
+              scrollNs.pageInfo = scrollNs.pageInfo.map(function (page, idx) {
                 var fromPage = Math.max(idx - 1, 0),
                   toPage = Math.min(idx + 1, scrollNs.pageInfo.length - 1);
                 return {
@@ -316,7 +317,7 @@
               if (scope.infiniteScroll) infiniteScroll(scrollTop);
             }
 
-            setTimeout(function() {
+            setTimeout(function () {
               scrollNs.scrollContInfo = getScrollContainerInfo();
               scrollNs.scrollContInfo.$elm.on('scroll', scrollHandler);
             }, 0);
@@ -334,11 +335,10 @@
                 element.append(clone);
 
                 var width = clone[0].offsetWidth;
-
                 clone.remove();
 
                 return {
-                  no: Math.floor((contWidth + 12) / width),
+                  no: width ? Math.floor((contWidth + 12) / width) : 0,
                   width: width
                 };
               }
@@ -365,12 +365,12 @@
                 allImg = container.find('img'),
                 loadedImgPromises = [];
 
-              domToAry(allImg).forEach(function(img) {
-                if(!img.src) return;
+              domToAry(allImg).forEach(function (img) {
+                if (!img.src) return;
                 beforeLoad(img);
                 if (!imageLoaded(img) && !ignoreCheck(img)) {
-                  loadedImgPromises.push($q(function(resolve, reject) {
-                    img.onload = function() {
+                  loadedImgPromises.push($q(function (resolve, reject) {
+                    img.onload = function () {
                       onLoad(img);
                       resolve();
                     };
@@ -384,7 +384,7 @@
               if (loadedImgPromises.length) {
                 $q.all(loadedImgPromises).then(onFullLoad, onFullLoad);
               } else {
-                setTimeout(function() {
+                setTimeout(function () {
                   onFullLoad();
                 }, 0);
               }
@@ -394,8 +394,7 @@
             //function to reflow grids
             function reflowGrids() {
               //return if there are no elements
-
-              if(!(listElms && listElms.length )) return;
+              if (!(listElms && listElms.length)) return;
 
               reflowCount++;
 
@@ -405,6 +404,8 @@
                 cols = colInfo.no,
                 i;
 
+              if (!cols) return;
+
               //initialize listRowBottom
               var lastRowBottom = [];
               for (i = 0; i < cols; i++) {
@@ -412,10 +413,10 @@
               }
 
               //if image actual width and actual height is defined update image size so that it dosent cause reflow on image load
-              domToAry(listElms).forEach(function(item) {
+              domToAry(listElms).forEach(function (item) {
                 var $item = single(item);
 
-                domToAry($item.find('img')).forEach(function(img) {
+                domToAry($item.find('img')).forEach(function (img) {
                   var $img = $(img);
                   //if image is already loaded don't do anything
                   if ($img.hasClass('img-loaded')) {
@@ -450,14 +451,17 @@
 
               //For cloned element again we have to check if image loaded (IOS only)
 
-              (function(reflowIndx) {
+              (function (reflowIndx) {
                 afterImageLoad(clones, {
-                  ignoreCheck: function(img) {
+                  ignoreCheck: function (img) {
                     return !single(img).hasClass('img-loaded');
                   },
-                  onFullLoad: function() {
+                  onFullLoad: function () {
                     //if its older reflow don't do any thing
-                    if (reflowIndx < reflowCount) return;
+                    if (reflowIndx < reflowCount) {
+                      clones.remove();
+                      return;
+                    }
 
                     var listElmHeights = [],
                       listElmPosInfo = [],
@@ -508,8 +512,9 @@
                     //set the height of container
                     var contHeight = Math.max.apply(Math, lastRowBottom);
                     element.css('height', contHeight + 'px');
-                    
+
                     clones.remove();
+
                     //update the scroll container info
                     if (options.performantScroll || scope.infiniteScroll) {
                       scrollNs.scrollContInfo = getScrollContainerInfo();
@@ -535,7 +540,7 @@
             //function to handle asynchronous image loading
             function handleImage() {
               var reflowPending = false;
-              domToAry(listElms).forEach(function(listItem) {
+              domToAry(listElms).forEach(function (listItem) {
                 var $listItem = $(listItem),
                   allImg = $listItem.find('img');
 
@@ -547,23 +552,23 @@
                 $listItem.addClass('img-loading');
 
                 afterImageLoad($listItem, {
-                  beforeLoad: function(img) {
+                  beforeLoad: function (img) {
                     single(img).addClass('img-loading');
                   },
-                  isLoaded: function(img) {
+                  isLoaded: function (img) {
                     single(img).removeClass('img-loading').addClass('img-loaded');
                   },
-                  onLoad: function(img) {
+                  onLoad: function (img) {
                     if (!reflowPending && options.refreshOnImgLoad) {
                       reflowPending = true;
-                      $timeout(function() {
+                      $timeout(function () {
                         reflowGrids();
                         reflowPending = false;
                       }, 100);
                     }
                     single(img).removeClass('img-loading').addClass('img-loaded');
                   },
-                  onFullLoad: function() {
+                  onFullLoad: function () {
                     $listItem.removeClass('img-loading').addClass('img-loaded');
                   }
                 });
@@ -573,22 +578,22 @@
 
             //function to get list elements excluding clones
             function getListElms() {
-              return $(domToAry(element.children()).filter(function(elm) {
+              return $(domToAry(element.children()).filter(function (elm) {
                 return !single(elm).hasClass('ag-clone');
               }));
             }
 
             //function to check for ng animation
             function ngCheckAnim() {
-              var leavingElm = domToAry(listElms).filter(function(elm) {
+              var leavingElm = domToAry(listElms).filter(function (elm) {
                 return single(elm).hasClass('ng-leave');
               });
-              return $q(function(resolve) {
+              return $q(function (resolve) {
                 if (!leavingElm.length) {
                   resolve();
                 } else {
-                  single(leavingElm[0]).one('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function() {
-                    $timeout(function() {
+                  single(leavingElm[0]).one('webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd', function () {
+                    $timeout(function () {
                       listElms = getListElms();
                       resolve();
                     });
@@ -601,12 +606,12 @@
 
             function watch() {
               scrollNs.isBusy = true;
-              $timeout(function() {
+              $timeout(function () {
                 listElms = getListElms();
-                ngCheckAnim().then(function() {
+                ngCheckAnim().then(function () {
                   //handle images
                   handleImage();
-                  $timeout(function() {
+                  $timeout(function () {
                     //to handle scroll appearance
                     reflowGrids();
                   });
@@ -614,7 +619,7 @@
               });
             }
 
-           scope.$watch('model', watch, true);
+            scope.$watch('model', watch, true);
 
 
             //watch option for changes
@@ -625,7 +630,7 @@
 
             scope.$watch('options', watchOptions, true);
 
-            Object.keys(defaults).forEach(function(key) {
+            Object.keys(defaults).forEach(function (key) {
               if (scope[key] !== undefined) scope.$watch(key, watchOptions);
             });
 
@@ -643,7 +648,7 @@
                 $timeout.cancel(timeoutPromise);
               }
 
-              timeoutPromise = $timeout(function() {
+              timeoutPromise = $timeout(function () {
                 //caclulate container info
                 if (options.performantScroll) {
                   element.children().detach();
@@ -654,6 +659,7 @@
               }, 100);
             }
             try {
+              win.on('resize', windowResizeCallback);
               addResizeListener(content_container, windowResizeCallback);
             } catch (e) {
               console.log(e)
@@ -663,10 +669,10 @@
             //add instance to factory if id is assigned
             if (agId) {
               angularGridInstance[agId] = {
-                refresh: function() {
+                refresh: function () {
                   watch();
                 },
-                handleScroll: function(scrollTop) {
+                handleScroll: function (scrollTop) {
                   if (options.performantScroll) refreshDomElm(scrollTop);
                   if (scope.infiniteScroll) infiniteScroll(scrollTop);
                 }
@@ -674,9 +680,10 @@
             }
 
             //destroy on refrences and events on scope destroy
-            scope.$on('$destroy', function() {
+            scope.$on('$destroy', function () {
               if (agId) delete angularGridInstance[agId];
               try {
+                win.off('resize', windowResizeCallback);
                 removeResizeListener(content_container, windowResizeCallback);
                 win.off('resize', windowResizeCallback);
               } catch (e) {
@@ -690,7 +697,7 @@
       }
     ])
     //a factory to store angulargrid instances which can be injected to controllers or directive
-    .factory('angularGridInstance', function() {
+    .factory('angularGridInstance', function () {
 
       var angularGridInstance = {};
 

@@ -135,7 +135,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		spreadsheetRow[6] = $scope.myInfo.LastBeenFlaggedDate || '';
 		return (spreadsheetRow);
 	};
-
 	//----------------------------------------------------
 	//-------------- Filtering & Sorting -----------------
 	$scope.filterPosts = function (inputSet) {
@@ -259,7 +258,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		$scope.myInfo.LastContributionDate = new Date()
 		var today = $filter('date')(new Date(), 'M/d/yy');
 		$scope.NumberOfContributions++
-		var range = 'Sheet1!E' + $scope.UserSettingsRowNum + ':F' + $scope.UserSettingsRowNum
+			var range = 'Sheet1!E' + $scope.UserSettingsRowNum + ':F' + $scope.UserSettingsRowNum
 		queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, [$scope.NumberOfContributions, today]), null, function (err) {
 			console.warn(err)
 			$mdToast.showSimple('Error Saving Post');
