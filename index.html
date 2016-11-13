@@ -69,7 +69,7 @@
             <!----- The content, ie posts, resources, etc. ------->
             <md-fab-speed-dial id="speed_dial_container" md-direction="up" md-open="globals.FABisOpen" ng-class="{ 'slide-out' : globals.FABisHidden }" class="md-fling md-hover-full md-fab-bottom-right" ng-mouseenter="globals.FABisOpen = true" ng-mouseleave="globals.FABisOpen = false">
                 <md-fab-trigger>
-                    <md-button id="new_post_button" class="md-fab md-accent raise-on-hover" ng-click="::newPost({},'new')">
+                    <md-button id="new_post_button" class="md-fab md-accent raise-on-hover" ng-click="FABClick($event)">
                         <md-tooltip md-direction="left" md-autohide>Add Resource</md-tooltip>
                         <md-icon class="unselectable">add</md-icon>
                     </md-button>
