@@ -59,7 +59,7 @@
     justify-content: space-around;
 }
 
-.post-card-image-gradient div span {
+.gradient-metadata span {
     text-overflow: ellipsis;
     overflow: hidden;
 }
@@ -73,13 +73,13 @@
     font-size: 18px;
 }
 
-.post-card-image-gradient md-chip {
+.gradient-metadata md-chip {
     margin: 0 auto;
     background: rgba(224,224,224,.80);
     color: rgb(66,66,66);
 }
 
-.post-card-image-gradient div.metadata-link{
+.gradient-metadata.metadata-link{
     padding: 0px 16px;
     position: absolute;
     opacity: 0;
