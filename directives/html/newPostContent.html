@@ -12,10 +12,10 @@
                <span ng-hide="Post.Class.Name == null"><md-icon>people</md-icon> {{Post.Class.Name}}</span>
                <span><md-icon>event</md-icon> {{Post.CreationDate | date : "mm/dd/yyyy"}}</span>
             </div>
-            <div ng-hide="Post.Tags.length < 1 || operation != 'view'" class="metadata-regular">
+            <div class="metadata-regular" ng-hide="Post.Tags.length < 1 || operation != 'view'">
                <span><md-icon>style</md-icon> {{Post.Tags.join(', ')}}</span>
             </div>
-            <div ng-hide="Post.Link == '' || Post.Type == 'gDrive'" class="metadata-link" style="font-size:18px">
+            <div class="metadata-link" style="font-size:18px" ng-hide="Post.Link == '' || Post.Type == 'gDrive'" >
                <span><md-icon>language</md-icon> {{removeHttp(Post.Link)}}</span>
             </div>
             <div class="md-chips" ng-class="{'metadata-link': true}" ng-hide="Post.Type != 'gDrive'" style="width:100%">
@@ -26,7 +26,7 @@
                   </div>
                </md-chip>
             </div>
-            <div ng-hide="operation == 'view'" id="header_link_input_container">
+            <div id="header_link_input_container" ng-hide="operation == 'view'" >
                <md-input-container id="header_link_input" md-no-float ng-hide="Post.Type == 'gDrive'">
                   <input ng-model="Post.Link" style="color:white" placeholder="http://" type="text">
                </md-input-container>
