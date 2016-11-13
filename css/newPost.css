@@ -9,6 +9,7 @@
       width: 100%;
       position: absolute;
       overflow: hidden;
+      pointer-events: none;
    }
    
    #header_image {
