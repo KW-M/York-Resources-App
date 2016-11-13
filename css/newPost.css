@@ -67,6 +67,14 @@
       font-size: 20px;
    }
    
+   .attach-menu{
+      margin: auto;
+   }
+   
+   .attach-menu md-icon{
+      color: rgba(255,255,255,0.87);
+   }
+   
    md-progress-linear.link-loading {
       bottom: 0px;
       position: absolute;
