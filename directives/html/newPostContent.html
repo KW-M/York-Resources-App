@@ -18,7 +18,7 @@
             <div ng-hide="Post.Link == '' || Post.Type == 'gDrive'" class="metadata-link" style="font-size:18px">
                <span><md-icon>language</md-icon> {{removeHttp(Post.Link)}}</span>
             </div>
-            <div class="md-chips metadata-link" ng-hide="Post.Type != 'gDrive'" style="width:100%">
+            <div class="md-chips" ng-class="{'metadata-link': true}" ng-hide="Post.Type != 'gDrive'" style="width:100%">
                <md-chip>
                   <div class="md-chip-content" style="padding-left:0">
                      <img ng-src="{{Post.AttachmentIcon}}" style="top: 7.5px;position: absolute;"></img>
