@@ -13,7 +13,7 @@
       width: 100%;
       position: absolute;
       overflow: hidden;
-      pointer-events: none;
+      /*pointer-events: none;*/
       background-color: rgb(161,10,25);
    }
    
@@ -62,9 +62,9 @@
       margin: 0 12px;
    }
    
-   #newPostLinkInput {
-      margin: 0 0 0;
-      flex: 1;
+   #new_post_link_input {
+      margin: 0;
+      font-size: 20px;
    }
    
    md-progress-linear.link-loading {
