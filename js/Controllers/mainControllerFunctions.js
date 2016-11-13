@@ -361,11 +361,13 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                classPageTokenSelectionIndex[$scope.queryPropertyString] = "end" //if we have reached the end of our search:
             }
             hideSpinner();
+            content_container.scrollTop(content_container.scrollHeight);
          }, function() {
             no_more_footer.style.display = 'none';
             no_posts_footer.style.display = 'none';
             no_more_footer.style.display = 'none';
             footer_problem.style.display = 'flex';
+            
          }, 150);
       }
    }
