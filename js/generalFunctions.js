@@ -93,10 +93,10 @@
   //   }
   // }
 
-
-  document.addEventListener('touchmove', function(e){
-    e.preventDefault();
-  }, false);
+  window.scrollTo(0,1);
+  // document.addEventListener('touchmove', function(e){
+  //   e.preventDefault();
+  // }, false);
   
   /*
    * rfc3339date.js version 0.1.3
