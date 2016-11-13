@@ -182,7 +182,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			}
 		}
 	};
-	$scope.FABClick = function (close) { //called by the top left toolbar menu button
+	$scope.FABClick = function (event) { //called by the top left toolbar menu button
+		$scope.newPost({},'new')
 	};
 	$scope.signOut = function () {
 		authorizationService.handleSignoutClick();
