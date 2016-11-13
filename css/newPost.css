@@ -17,6 +17,10 @@
       background-color: rgb(161,10,25);
    }
    
+   #dialog_header md-icon{
+      color: rgba(255,255,255,0.87);
+   }
+   
    #header_image {
       top: -20px;
       width: 100%;
