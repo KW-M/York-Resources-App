@@ -362,13 +362,12 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             }
             hideSpinner();
             console.log(content_container)
-            content_container.scrollTop = content_container.height;
          }, function() {
             no_more_footer.style.display = 'none';
             no_posts_footer.style.display = 'none';
             no_more_footer.style.display = 'none';
             footer_problem.style.display = 'flex';
-            
+            content_container.scrollTop = content_container.scrollHeight;
          }, 150);
       }
    }
