@@ -47,7 +47,7 @@
     justify-content: center;
 }
 
-.post-card-image-gradient div {
+.gradient-metadata {
     width: 100%;
     padding: 0 4px;
     display: flex;
