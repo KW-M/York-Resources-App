@@ -13,17 +13,11 @@
 
   }
 
-  Date.prototype.addDays = function(days) {
-    this.setDate(this.getDate() + parseInt(days));
-    return this;
-  };
-
   function chooseRandom(inputArray) {
     var number = (Math.floor(Math.random() * (inputArray.length - 0)));
     return inputArray[number]
   }
-
-
+  
   // Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
   function queue(typeName, promise, action, error, interval) {
     typeName = typeName || 'general'
@@ -69,12 +63,6 @@
     }
   }
 
-  function decriptURL(Input) {
-    return decodeURIComponent(Array.prototype.map.call(atob(Input.reverse), function(c) {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-  }
-
   function addDays(date, days) {
     var result = new Date(date);
     result.setDate(result.getDate() + days);
@@ -106,7 +94,10 @@
   // }
 
 
-
+  document.addEventListener('touchmove', function(e){
+    e.preventDefault();
+  }, false);
+  
   /*
    * rfc3339date.js version 0.1.3
    *
@@ -209,10 +200,7 @@
     }
   }
 
-
-
-
-var caesarShift = function(str, amount) {
+  var caesarShift = function(str, amount) {
   //Call it like this: caesarShift('Attack at dawn!', 12); Returns "Mffmow mf pmiz!"
   // And reverse it like this: caesarShift('Mffmow mf pmiz!', -12); Returns "Attack at dawn!"
 	if (amount < 0)
