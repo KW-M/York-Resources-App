@@ -49,20 +49,14 @@
    /*   flex-direction: row;*/
    /*}*/
    
-   #header_link {
+   #header_link_input_container {
       width: 100%;
-      margin: 10px 4px 10px 12px;
+      margin: 10px 0px 10px 12px;
       display: flex;
       transition: opacity 0.5s ease;
    }
    
-   #header_title {
-      position: absolute;
-      transition: opacity 0.5s ease;
-      margin: 0 12px;
-   }
-   
-   #new_post_link_input {
+   #header_link_input {
       margin: 0;
       font-size: 20px;
    }
@@ -71,8 +65,10 @@
       margin: auto;
    }
    
-   .attach-menu md-icon{
-      color: rgba(255,255,255,0.87);
+   #header_title {
+      margin: 0 12px;
+      position: absolute;
+      transition: opacity 0.5s ease;
    }
    
    md-progress-linear.link-loading {
