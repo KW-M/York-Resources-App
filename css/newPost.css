@@ -4,6 +4,10 @@
       overflow: hidden;
    }
    
+   .new_post_dialog_scroll{
+      flex:1;
+   }
+   
    #dialog_header {
       height: 200px;
       width: 100%;
