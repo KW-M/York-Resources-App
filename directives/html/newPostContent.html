@@ -2,23 +2,23 @@
    <md-dialog-content class="new_post_dialog_scroll">
       <div id="dialog_header" ng-class="{ 'no-link' : Post.Type === 'noLink' }">
          <img ng-src="{{Post.PreviewImage}}" id="header_image"></img>
-         <div class="new-post-img-gradient">
-            <div id="header_title" style="opacity: 0" class="metadata-regular">
+         <div class="image-gradient-overlay new-post-img-gradient">
+            <div id="header_title" style="opacity: 0" class="gradient-overlay-metadata metadata-regular">
                <h5 style="margin: 0">{{Post.Title}}</h5>
                <span style="font-weight:700; font-size:14px"><md-icon class="small-icon" style="color:white">people</md-icon> {{Post.Class.Name || 'No class'}}</span>
                <span ng-hide="Post.Tags.length < 1"><md-icon class="small-icon" style="color:white">style</md-icon>{{Post.Tags.join(', ')}}</span>
             </div>
-            <div class="metadata-regular" ng-hide="operation != 'view'">
+            <div class="gradient-overlay-metadata metadata-regular" ng-hide="operation != 'view'">
                <span ng-hide="Post.Class.Name == null"><md-icon>people</md-icon> {{Post.Class.Name}}</span>
                <span><md-icon>event</md-icon> {{Post.CreationDate | date : "mm/dd/yyyy"}}</span>
             </div>
-            <div class="metadata-regular" ng-hide="Post.Tags.length < 1 || operation != 'view'">
+            <div class="gradient-overlay-metadata metadata-regular" ng-hide="Post.Tags.length < 1 || operation != 'view'">
                <span><md-icon>style</md-icon> {{Post.Tags.join(', ')}}</span>
             </div>
-            <div class="metadata-link" style="font-size:18px" ng-hide="Post.Link == '' || Post.Type == 'gDrive'" >
+            <div class="gradient-overlay-metadata metadata-link" style="font-size:18px" ng-hide="Post.Link == '' || Post.Type == 'gDrive'" >
                <span><md-icon>language</md-icon> {{removeHttp(Post.Link)}}</span>
             </div>
-            <div class="md-chips" ng-class="{'metadata-link': true}" ng-hide="Post.Type != 'gDrive'" style="width:100%">
+            <div class="md-chips" class="gradient-overlay-metadata" ng-class="{'metadata-link': true}" ng-hide="Post.Type != 'gDrive'" style="width:100%">
                <md-chip>
                   <div class="md-chip-content" style="padding-left:0">
                      <img ng-src="{{Post.AttachmentIcon}}" style="top: 7.5px;position: absolute;"></img>
@@ -26,7 +26,7 @@
                   </div>
                </md-chip>
             </div>
-            <div id="header_link_input_container" ng-hide="operation == 'view'" >
+            <div id="header_link_input_container" class="gradient-overlay-metadata" ng-hide="operation == 'view'" >
                <md-input-container id="header_link_input" md-no-float ng-hide="Post.Type == 'gDrive'">
                   <input ng-model="Post.Link" style="color:white" placeholder="http://" type="text">
                </md-input-container>
