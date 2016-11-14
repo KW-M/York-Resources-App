@@ -12,10 +12,10 @@
                <span ng-hide="Post.Class.Name == null"><md-icon>people</md-icon> {{Post.Class.Name}}</span>
                <span><md-icon>event</md-icon> {{Post.CreationDate | date : "mm/dd/yyyy"}}</span>
             </div>
-            <div class="gradient-overlay-metadata metadata-link" style="font-size:18px" ng-hide="Post.Link == '' || Post.Type == 'gDrive'" >
+            <div class="gradient-overlay-metadata metadata-link" style="font-size:18px" ng-hide="Post.Link == '' || Post.Type == 'gDrive' || operation != 'view'" >
                <span><md-icon>language</md-icon> {{removeHttp(Post.Link)}}</span>
             </div>
-            <div class="md-chips" class="gradient-overlay-metadata" ng-class="{'metadata-link': true}" ng-hide="Post.Type != 'gDrive'" style="width:100%">
+            <div class="md-chips" class="gradient-overlay-metadata" ng-class="{'metadata-link': operation == 'view'}" ng-hide="Post.Type != 'gDrive'" style="width:100%">
                <md-chip>
                   <div class="md-chip-content" style="padding-left:0">
                      <img ng-src="{{Post.AttachmentIcon}}" style="top: 7.5px;position: absolute;"></img>
