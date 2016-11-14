@@ -30,6 +30,10 @@
     margin-top:60px;
 }
 
+#new_post_content{
+    margin-top: 200px;
+}
+
 .post-card-image {
     width: 100%;
     margin-top: -2.5%;
