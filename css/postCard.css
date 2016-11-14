@@ -22,6 +22,10 @@
     cursor: default;
 }
 
+.post-card-header#dialog_header.no-link {
+    height: 60px;
+}
+
 .post-card-header.no-link + #new_post_content{
     margin-top:60px;
 }

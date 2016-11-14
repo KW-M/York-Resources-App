@@ -269,19 +269,20 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             var newPostHeader = document.getElementById('dialog_header');
             newPostScroll.onscroll = function (event) {
                var scroll = newPostScroll.scrollTop;
-               if ($scope.operation == 'view' && $scope.Post.Link == '') {
-                  newPostHeader.style.height = "60px"
-                  newPostHeader.style.boxShadow = "0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12)"
-               } else {
-                  if (scroll <= 160) {
+               if (scroll <= 160) {
+                  newPostHeader.style.boxShadow = null
+                  if ($scope.operation == 'view' && $scope.Post.Link == '') {
+                     newPostHeader.style.height = "60px"
+                  } else {
                      newPostHeader.style.height = (200 - scroll) + "px"
-                     newPostHeader.style.boxShadow = null
                      newPostHeaderLink.style.opacity = 1;
                      newPostHeaderTitle.style.opacity = 0;
                      newPostHeaderImage.style.top = -20 - (scroll / 5) + 'px';
-                  } else {
+                  }
+               } else {
+                  newPostHeader.style.boxShadow = "0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12)"
+                  if (!($scope.operation == 'view' && $scope.Post.Link == '')) {
                      newPostHeader.style.height = "60px"
-                     newPostHeader.style.boxShadow = "0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12)"
                      newPostHeaderLink.style.opacity = 0;
                      newPostHeaderTitle.style.opacity = 1;
                   }
