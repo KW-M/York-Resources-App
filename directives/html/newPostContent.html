@@ -71,7 +71,7 @@
          </div>
          <div class="md-dialog-content">
             <input ng-model="Post.Title" ng-readonly="operation === 'view'" class="newPostTitle md-title" placeholder="Title" md-autofocus>
-            <p class="post-card-creator md-subhead"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::Post.Creator.ClassOf}})</span></p>
+            <p class="post-card-creator md-subhead" style="margin:0" ng-hide="::Post.Creator.Name == undefined || Post.Creator.Name == myInfo.Name"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::Post.Creator.ClassOf}})</span></p>
             <div contenteditable="{{operation != 'view'}}" ng-model="Post.Description" class="newPostBody"></div>
          </div>
       </div>

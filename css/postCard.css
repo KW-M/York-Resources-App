@@ -89,7 +89,7 @@
     opacity: 1
 }
 
-.post-card:not(.no-link) .post-card-header:hover .gradient-overlay-metadata.metadata-regular {
+.post-card.post-card-header:not(.no-link) :hover .gradient-overlay-metadata.metadata-regular {
     opacity: 0;
 }
 
