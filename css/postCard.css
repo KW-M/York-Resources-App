@@ -22,6 +22,10 @@
     cursor: default;
 }
 
+.post-card-header.no-link + #new_post_content{
+    margin-top:60px;
+}
+
 .post-card-image {
     width: 100%;
     margin-top: -2.5%;
