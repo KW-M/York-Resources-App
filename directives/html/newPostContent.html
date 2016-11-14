@@ -12,9 +12,6 @@
                <span ng-hide="Post.Class.Name == null"><md-icon>people</md-icon> {{Post.Class.Name}}</span>
                <span><md-icon>event</md-icon> {{Post.CreationDate | date : "mm/dd/yyyy"}}</span>
             </div>
-            <div class="gradient-overlay-metadata metadata-regular" ng-hide="Post.Tags.length < 1 || operation != 'view'">
-               <span><md-icon>style</md-icon> {{Post.Tags.join(', ')}}</span>
-            </div>
             <div class="gradient-overlay-metadata metadata-link" style="font-size:18px" ng-hide="Post.Link == '' || Post.Type == 'gDrive'" >
                <span><md-icon>language</md-icon> {{removeHttp(Post.Link)}}</span>
             </div>
@@ -74,6 +71,7 @@
          </div>
          <div class="md-dialog-content">
             <input ng-model="Post.Title" ng-readonly="operation === 'view'" class="newPostTitle md-title" placeholder="Title" md-autofocus>
+            <p class="post-card-creator md-subhead"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::Post.Creator.ClassOf}})</span></p>
             <div contenteditable="{{operation != 'view'}}" ng-model="Post.Description" class="newPostBody"></div>
          </div>
       </div>
