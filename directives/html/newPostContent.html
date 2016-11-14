@@ -1,7 +1,7 @@
 <md-dialog id="new_post_dialog" ng-style="{'background-color': Post.Class.Color}">
    <md-dialog-content class="new_post_dialog_scroll">
-      <div id="dialog_header" ng-class="{ 'no-link' : Post.Type === 'noLink' }">
-         <img ng-src="{{Post.PreviewImage}}" id="header_image"></img>
+      <div id="dialog_header" class="post-card-header" ng-class="{ 'no-link' : Post.Type === 'noLink' }">
+         <img ng-src="{{Post.PreviewImage}}" id="header_image" ng-class="{'post-card-image':operation == 'view'}"></img>
          <div class="image-gradient-overlay new-post-img-gradient">
             <div id="header_title" style="opacity: 0" class="gradient-overlay-metadata metadata-regular">
                <h5 style="margin: 0">{{Post.Title}}</h5>
