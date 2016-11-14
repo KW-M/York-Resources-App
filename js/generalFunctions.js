@@ -18,6 +18,10 @@
     return inputArray[number]
   }
   
+  Date.prototype.addDays = function(days) {
+    this.setDate(this.getDate() + parseInt(days));
+    return this;
+  };
   // Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
   function queue(typeName, promise, action, error, interval) {
     typeName = typeName || 'general'
