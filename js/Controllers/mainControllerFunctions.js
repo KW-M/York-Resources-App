@@ -268,10 +268,13 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             var newPostScroll = document.getElementsByClassName('new_post_dialog_scroll')[0];
             var newPostHeader = document.getElementById('dialog_header');
             newPostScroll.onscroll = function (event) {
+               console.log($scope.operation)
+               console.log($scope.Post.Link)
                var scroll = newPostScroll.scrollTop;
                if (scroll <= 160) {
                   newPostHeader.style.boxShadow = null
-                  if ($scope.operation == 'view' && $scope.Post.Link == '') {
+                  if ($scope.operation == 'view' && $scope.Post.Link == null) {
+                     
                      newPostHeader.style.height = "60px"
                   } else {
                      newPostHeader.style.height = (200 - scroll) + "px"
