@@ -22,16 +22,16 @@
     cursor: default;
 }
 
-.post-card-header#dialog_header.no-link {
+#new_post_content.small-margin + .post-card-header#dialog_header {
     height: 60px;
-}
-
-.post-card-header#dialog_header.no-link + #new_post_content{
-    margin-top:60px;
 }
 
 #new_post_content{
     margin-top: 200px;
+}
+
+#new_post_content.small-margin{
+    margin-top: 60px;
 }
 
 .post-card-image {
