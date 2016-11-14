@@ -9,10 +9,7 @@
    }
    
    #dialog_header {
-      height: 200px;
-      width: 100%;
       position: absolute;
-      overflow: hidden;
       /*pointer-events: none;*/
       background-color: rgb(161,10,25);
    }

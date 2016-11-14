@@ -9,6 +9,7 @@
 
 .post-card-header {
     height: 200px;
+    width: 100%;
     position: relative;
     overflow: hidden;
     cursor: pointer;
@@ -16,7 +17,7 @@
     border-radius: 3px 3px 0 0;
 }
 
-.post-card.no-link .post-card-header {
+.post-card-header.no-link {
     height: 56px;
     cursor: default;
 }
