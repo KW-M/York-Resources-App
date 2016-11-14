@@ -15,7 +15,7 @@
             <div class="gradient-overlay-metadata metadata-link" style="font-size:18px" ng-hide="Post.Link == '' || Post.Type == 'gDrive' || operation != 'view'" >
                <span><md-icon>language</md-icon> {{removeHttp(Post.Link)}}</span>
             </div>
-            <div class="md-chips" class="gradient-overlay-metadata" ng-class="{'metadata-link': operation == 'view'}" ng-hide="Post.Type != 'gDrive'" style="width:100%">
+            <div class="md-chips gradient-overlay-metadata" style="position:absolute" ng-class="{'metadata-link': operation == 'view'}" ng-hide="Post.Type != 'gDrive'" style="width:100%">
                <md-chip>
                   <div class="md-chip-content" style="padding-left:0">
                      <img ng-src="{{Post.AttachmentIcon}}" style="top: 7.5px;position: absolute;"></img>
@@ -23,7 +23,7 @@
                   </div>
                </md-chip>
             </div>
-            <div id="header_link_input_container" class="gradient-overlay-metadata" ng-hide="operation == 'view'" >
+            <div id="header_link_input_container" class="gradient-overlay-metadata" ng-hide="operation == 'view'" > 
                <md-input-container id="header_link_input" md-no-float ng-hide="Post.Type == 'gDrive'">
                   <input ng-model="Post.Link" style="color:white" placeholder="http://" type="text">
                </md-input-container>
@@ -46,7 +46,7 @@
          </div>
          <md-progress-linear class="link-loading" md-mode="indeterminate" ng-disabled="!previewLoading"></md-progress-linear>
       </div>
-      <div id="new_post_content" style="margin-top:200px">
+      <div id="new_post_content">
          <div flex layout="row">
             <md-select ng-model-options="{trackBy: '$value.Name'}" class="md-no-underline md-button" ng-model="Post.Class" placeholder="Class" ng-hide="operation === 'view'" md-on-close="clearText(classSelectSearch)" style="margin: 4px 4px;font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;">
                <!--<md-select-header class="classSelectSearchbox">-->
