@@ -34,7 +34,7 @@
     transform: translateY(0);
 }
 
-.post-card-image-gradient {
+.image-gradient-overlay {
     top: 0;
     right: 0;
     left: 0;
@@ -47,7 +47,7 @@
     justify-content: center;
 }
 
-.gradient-metadata {
+.gradient-overlay-metadata {
     width: 100%;
     padding: 0 4px;
     display: flex;
@@ -59,12 +59,12 @@
     justify-content: space-around;
 }
 
-.gradient-metadata span {
+.gradient-overlay-metadata span {
     text-overflow: ellipsis;
     overflow: hidden;
 }
 
-.post-card-image-gradient md-icon.material-icons {
+.image-gradient-overlay md-icon.material-icons {
     height: 1em;
     width: 1em;
     min-height: 0;
@@ -73,23 +73,23 @@
     font-size: 18px;
 }
 
-.gradient-metadata md-chip {
+.gradient-overlay-metadata md-chip {
     margin: 0 auto;
     background: rgba(224,224,224,.80);
     color: rgb(66,66,66);
 }
 
-.gradient-metadata.metadata-link{
+.gradient-overlay-metadata.metadata-link{
     padding: 0px 16px;
     position: absolute;
     opacity: 0;
 }
 
-.post-card:not(.no-link) .post-card-header:hover .post-card-image-gradient div.metadata-link {
+.post-card:not(.no-link) .post-card-header:hover .gradient-overlay-metadata.metadata-link {
     opacity: 1
 }
 
-.post-card:not(.no-link) .post-card-header:hover .post-card-image-gradient div.metadata-regular {
+.post-card:not(.no-link) .post-card-header:hover .gradient-overlay-metadata.metadata-regular {
     opacity: 0;
 }
 

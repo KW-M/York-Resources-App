@@ -137,17 +137,17 @@
                             <div class="post-card-header" md-ink-ripple="{{Post.Link != ''}}" ng-click="openLink(Post.Link)">
                                 <img ng-src="{{Post.PreviewImage}}" class="post-card-image" ng-hide="Post.Link == ''"></img>
                                 <div class="post-card-image-gradient">
-                                    <div class="metadata-regular">
+                                    <div class="gradient-overlay-metadata metadata-regular">
                                         <span ng-hide="Post.Class.Name == null"><md-icon>people</md-icon> {{Post.Class.Name}}</span>
                                         <span><md-icon>event</md-icon> {{Post.CreationDate | date : "mm/dd/yyyy"}}</span>
                                     </div>
-                                    <div ng-hide="Post.Tags.length < 1" class="metadata-regular">
+                                    <div ng-hide="Post.Tags.length < 1" class="gradient-overlay-metadata metadata-regular">
                                         <span><md-icon>style</md-icon> {{Post.Tags.join(', ')}}</span>
                                     </div>
-                                    <div ng-hide="Post.Link == '' || Post.Type == 'gDrive'" class="metadata-link" style="font-size:18px">
+                                    <div ng-hide="Post.Link == '' || Post.Type == 'gDrive'" class="gradient-overlay-metadata metadata-link" style="font-size:18px">
                                         <span><md-icon>language</md-icon> {{removeHttp(Post.Link)}}</span>
                                     </div>
-                                    <div class="md-chips metadata-link" ng-hide="Post.Type != 'gDrive'" style="width:100%">
+                                    <div class="gradient-overlay-metadata md-chips metadata-link" ng-hide="Post.Type != 'gDrive'" style="width:100%">
                                         <md-chip>
                                             <div class="md-chip-content" style="padding-left:0">
                                                 <img ng-src="{{Post.AttachmentIcon}}" style="top: 7.5px;position: absolute;"></img>
