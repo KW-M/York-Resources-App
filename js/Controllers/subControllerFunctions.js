@@ -293,8 +293,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			}, 150);
 		}, 2000);
 	};
-	$scope.openLink = function (link) {
-		if (link !== "" && link !== undefined) {
+	$scope.openLink = function (link, dontOpen) {
+		if (link !== "" && link !== undefined && dontOpen == false) {
 			window.open(link);
 		}
 	};
