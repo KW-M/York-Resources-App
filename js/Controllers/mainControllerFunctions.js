@@ -273,6 +273,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                   $timeout(function() {
                      $scope.newPostScroll = newPostScroll.scrollTop;
                   })
+                  newPostHeaderImage.style.top = -20 - (newPostScroll.scrollTop / 5) + 'px';
                } else {
                   $timeout(function() {
                      $scope.newPostScroll = 140;
@@ -292,7 +293,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                //       newPostHeader.style.height = (200 - scroll) + "px"
                //       newPostHeaderLink.style.opacity = 1;
                //       newPostHeaderTitle.style.opacity = 0;
-               //       newPostHeaderImage.style.top = -20 - (scroll / 5) + 'px';
+               //       
                //    } else {
                //       newPostHeader.style.boxShadow = "0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12)"
                //       newPostHeader.style.height = "60px"
