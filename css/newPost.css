@@ -9,7 +9,10 @@
    }
 
    #dialog_header {
+      min-height: 60px;
+      max-height: 200px;
       position: absolute;
+      z-index: 1000;
       /*pointer-events: none;*/
       background-color: rgb(161,10,25);
    }

@@ -268,8 +268,12 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             var newPostScroll = document.getElementsByClassName('new_post_dialog_scroll')[0];
             var newPostHeader = document.getElementById('dialog_header');
             newPostScroll.onscroll = function (event) {
-               if (newPostScroll.scrollTop > 150){
-                  
+               if (newPostScroll.scrollTop < 141){
+                  $timeout(function() {
+                     $scope.newPostScroll = newPostScroll.scrollTop;
+                  })
+               } else {
+                  $scope.newPostScroll = 140
                }
 
                
