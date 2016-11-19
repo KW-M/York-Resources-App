@@ -273,7 +273,9 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                      $scope.newPostScroll = newPostScroll.scrollTop;
                   })
                } else {
-                  $scope.newPostScroll = 140
+                  $timeout(function() {
+                     $scope.newPostScroll = 140;
+                  })
                }
 
                
