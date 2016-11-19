@@ -250,6 +250,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    //----------------------------------------------------
    //--------------- Creating Posts ---------------------
    $scope.newPost = function (postObj, operation, event) {
+      $scope.newPostScroll = 0;
       $mdDialog.show({
          templateUrl: '/directives/html/newPostContent.html',
          controller: ['$scope', '$timeout', '$http', '$mdDialog', 'GoogleDriveService', 'authorizationService', '$mdToast', "Post", "operation", newPostController],
