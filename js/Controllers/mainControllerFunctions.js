@@ -369,7 +369,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                classPageTokenSelectionIndex[$scope.queryPropertyString] = "end" //if we have reached the end of our search:
             }
             hideSpinner();
-            console.log(content_container)
          }, function () {
             no_more_footer.style.display = 'none';
             no_posts_footer.style.display = 'none';
