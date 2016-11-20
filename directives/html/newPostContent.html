@@ -53,8 +53,8 @@
       <div id="new_post_content" ng-class="{'small-margin': Post.Type == 'NoLink' && operation == 'view'}">
                {{Post.Class}}
          <div flex layout="row">
-            <md-select ng-model="Post.Class" placeholder="Class" ng-model-options="{trackBy: '$value.Name'}" class="md-no-underline" id="class_dropdown_button" md-on-close="returnObj()">
-               <md-option ng-value="{'Catagory': '\'' + searchPlaceholder+'\'', 'Name':'Other1','Color':'ff00ff'}">Axe</md-option>
+            <md-select ng-model="Post.Class" placeholder="Class" ng-model-options="{trackBy: '$value.Name'}" class="md-no-underline" id="class_dropdown_button">
+               <md-option ng-value="{'Catagory': searchPlaceholder, 'Name':'Other2','Color':'ff00ff'}">Axe</md-option>
                <md-option ng-value="{'Catagory':'Other', 'Name':'Other1', 'Color':'ffff00'}">Sword</md-option>
                <md-option ng-value="{'Catagory':'Other', 'Name':'Other23', 'Color':'ffafaf'}">pen</md-option>
                <md-option ng-value="{'Catagory':'Other', 'Name':'Other3', 'Color':'bbffbf'}">Pencil</md-option>
