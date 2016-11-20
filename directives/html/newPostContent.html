@@ -50,14 +50,14 @@
          </div>
          <md-progress-linear class="link-loading" md-mode="indeterminate" ng-disabled="!previewLoading"></md-progress-linear>
       </md-toolbar>
-      {{Post.Class}}
       <div id="new_post_content" ng-class="{'small-margin': Post.Type == 'NoLink' && operation == 'view'}">
+               {{Post.Class}}
          <div flex layout="row">
             <md-select ng-model="Post.Class" placeholder="Class" class="md-no-underline" id="class_dropdown_button" required>
-               <md-option value="axe">Axe</md-option>
-               <md-option value="sword">Sword</md-option>
-               <md-option value="wand">Wand</md-option>
-               <md-option value="{{{'Color':'#ff0000'}}}">Pencil</md-option>
+               <md-option value="{'Catagory':'Other', 'Name':'Other', 'Color':'#ffffff'}">Axe</md-option>
+               <md-option value="{'Catagory':'Other', 'Name':'Other1', 'Color':'#ffffff'}">Sword</md-option>
+               <md-option value="{'Catagory':'Other', 'Name':'Other23', 'Color':'#ffffff'}">pen</md-option>
+               <md-option value="{'Catagory':'Other', 'Name':'Other3', 'Color':'#ffffff'}">Pencil</md-option>
             </md-select>
             <div style="width:6px" ng-show="operation === 'view'"></div>
             <md-chips ng-model="Post.Tags" flex md-separator-keys="[32,188,13]" ng-hide="operation === 'view' && Post.Tags.length === 0" readonly="operation === 'view'">
