@@ -221,9 +221,7 @@
         }
 
 $scope.returnObj = function(input) {
-    console.log(input)
-    console.log($scopePost.Class)
-    return(input)
+    console.log($scope.Post.Class)
 }
         $scope.clearLink = function () {
             $timeout(function () {
