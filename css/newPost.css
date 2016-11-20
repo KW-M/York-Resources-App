@@ -110,6 +110,10 @@
       z-index:20;
    }
    
+   #class_dropdown_button .hide-label label{
+      display:none;
+   }
+   
    .newPostClassSelector {
       height: 222px;
       width: 180px;

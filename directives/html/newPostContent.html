@@ -60,10 +60,10 @@
                <md-select-header class="classSelectSearchbox">
                   <input ng-model="classSelectSearch" id="class_select_input" type="text" placeholder="Search for a class.." class="md-text">
                </md-select-header>
-               <md-option ng-value="{'Catagory':'Other', 'Name':'Other', 'Color':'ffffff'}">
+               <md-option ng-value="{'Catagory':'Other', 'Name':'Other', 'Color':'ffffff'}" ng-hide="classSelectSearch != null">
                   Other
                </md-option>
-               <md-optgroup ng-repeat="Catagory in classList" label="{{::Catagory.Catagory}}">
+               <md-optgroup ng-repeat="Catagory in classList" label="{{::Catagory.Catagory}}" ng-class="{'hide-label': classSelectSearch != ''}">
                   <md-option ng-value="{'Catagory':Catagory.Catagory,'Name':Name,'Color':Catagory.Color}" ng-repeat="Name in Catagory.Classes">{{::Name}}</md-option>
                </md-optgroup>
             </md-select>
