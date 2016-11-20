@@ -221,7 +221,8 @@
         }
 
 $scope.returnObj = function(input) {
-    return(JSON.parse(input))
+    console.log(input)
+    return(input)
 }
         $scope.clearLink = function () {
             $timeout(function () {
