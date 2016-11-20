@@ -222,6 +222,7 @@
 
 $scope.returnObj = function(input) {
     console.log(input)
+    console.log($scopePost.Class)
     return(input)
 }
         $scope.clearLink = function () {
