@@ -57,11 +57,14 @@
                <!--<md-option ng-value="{'Catagory':'Other','Name':'Memes','Color':'ffffff'}" class="rainbow" ng-show="queryParams.classpath == 'Memes' || devMode == true">-->
                <!--   Memes-->
                <!--</md-option>-->
-               <!--<md-option ng-value="{'Catagory':'Other', 'Name':'Other', 'Color':'ffffff'}">-->
-               <!--   Other-->
-               <!--</md-option>-->
-               <md-optgroup ng-repeat="Catagory in classList" label="test">
-                  <md-option ng-value="{'Catagory':Catagory.Catagory,'Name':Name,'Color':Catagory.Color}" ng-repeat="Name in Catagory.Classes">{{Name}}</md-option>
+               <md-select-header class="classSelectSearchbox">
+                  <input ng-model="classSelectSearch" id="class_select_input" type="Search" placeholder="Search for a class.." class="md-text">
+               </md-select-header>
+               <md-option ng-value="{'Catagory':'Other', 'Name':'Other', 'Color':'ffffff'}">
+                  Other
+               </md-option>
+               <md-optgroup ng-repeat="Catagory in classList" label="{{::Catagory.Catagory}}">
+                  <md-option ng-value="{'Catagory':Catagory.Catagory,'Name':Name,'Color':Catagory.Color}" ng-repeat="Name in Catagory.Classes">{{::Name}}</md-option>
                </md-optgroup>
             </md-select>
             <div style="width:6px" ng-show="operation === 'view'"></div>
