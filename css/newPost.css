@@ -29,7 +29,7 @@
       filter: brightness(85%);
    }
    
-   .image-gradient-overlay-metadataoverlay.new-post-img-gradient {
+   .image-gradient-overlay.new-post-img-gradient {
       bottom: 0;
       top: initial;
       height: 60px;
