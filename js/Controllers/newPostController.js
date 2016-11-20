@@ -229,8 +229,8 @@
         
         $scope.clearClassSelectSearch = function () {
             $timeout(function() {
-                $scope.classSelectSearch = null;
-            })
+                $scope.classSelectSearch = '';
+            });
         }
 
         $scope.closeDialog = function () {
