@@ -114,6 +114,10 @@
       display:none;
    }
    
+   md-option.hide{
+      display:none;
+   }
+   
    .newPostClassSelector {
       height: 222px;
       width: 180px;

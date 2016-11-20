@@ -229,6 +229,12 @@ $scope.returnObj = function(input) {
                 $scope.Post.Type = "NoLink"
             })
         }
+        $scope.clearLink = function () {
+            $timeout(function () {
+                $scope.Post.Link = ""
+                $scope.Post.Type = "NoLink"
+            })
+        }
 
         $scope.closeDialog = function () {
             $scope.Post.Title = originalPost.Title || ''
