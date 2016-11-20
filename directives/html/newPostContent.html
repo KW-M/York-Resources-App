@@ -51,18 +51,8 @@
       </md-toolbar>
       <div id="new_post_content" ng-class="{'small-margin': Post.Type == 'NoLink' && operation == 'view'}">
          <div flex layout="row">
-            <md-select ng-model-options="{trackBy: '$value.Name'}" class="md-no-underline md-button" ng-model="Post.Class" placeholder="Class" ng-hide="operation === 'view'" md-on-close="clearText(classSelectSearch)" style="margin: 4px 4px;font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;">
-               <!--<md-select-header class="classSelectSearchbox">-->
-               <!--   <input ng-model="classSelectSearch" id="class_select_input" type="Search" placeholder="Search for a class.." class="md-text">-->
-               <!--</md-select-header>-->
-               <md-option value="{'Catagory':'Other', 'Name':'Memes', 'Color':'#ffffff'}" class="rainbow" ng-show="queryParams.classpath == 'meme' || devMode == true">
-                  Memes
-               </md-option>
-               <md-option value="{'Catagory':'Other', 'Name':'Other', 'Color':'#ffffff'}">
-                  Other / Not associated
-               </md-option>
-               <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Catagory}}">
-                  <md-option ng-repeat="Name in Catagory.Classes" ng-value="{'Catagory':Catagory.Catagory, 'Name':Name, 'Color':Catagory.Color}">
+            <md-select ng-model-options="{trackBy: '$value.Name'}" class="md-no-underline" ng-model="Post.Class" placeholder="Class" ng-hide="operation === 'view'" md-on-close="clearText(classSelectSearch)" style="margin: 4px 4px;font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;">
+                  <md-option ng-repeat="Catagory in classList" ng-value="{'Catagory':Catagory.Catagory, 'Name':Name, 'Color':Catagory.Color}">
                      {{Name}}
                   </md-option>
                </md-optgroup>
