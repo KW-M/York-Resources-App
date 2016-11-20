@@ -15,7 +15,7 @@
             <div class="gradient-overlay-metadata metadata-link" style="font-size:18px" ng-hide="Post.Link == '' || Post.Type == 'gDrive' || operation != 'view'" >
                <span><md-icon>language</md-icon> {{removeHttp(Post.Link)}}</span>
             </div>
-            <div class="md-chips gradient-overlay-metadata" style="position:absolute" ng-class="{'metadata-link': operation == 'view'}" ng-hide="Post.Type != 'gDrive'" style="width:100%">
+            <div class="md-chips gradient-overlay-metadata" style="position:absolute; padding: 0 40px 0 8px" ng-class="{'metadata-link': operation == 'view'}" ng-hide="Post.Type != 'gDrive'">
                <md-chip>
                   <div class="md-chip-content" style="padding-left:0">
                      <img ng-src="{{Post.AttachmentIcon}}" style="top: 7.5px;position: absolute;"></img>
