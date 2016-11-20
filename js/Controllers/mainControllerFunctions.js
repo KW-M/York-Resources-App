@@ -480,6 +480,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          }
       })
    };
+   
    window.addEventListener("resize", function () {
       $timeout(function () {
          if ($mdMedia('gt-sm')) {
@@ -496,6 +497,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          })
       }
    }
+   
    $scope.updateVisiblePosts = function (array, callback) {
          $timeout(function () {
             if (array) {
@@ -506,13 +508,15 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             }
          })
       }
-      //----------------------------------------------------
-      //---------------------- dev -------------------------
+      
+   //----------------------------------------------------
+   //---------------------- dev -------------------------
    $mdTheming.setBrowserColor({
       theme: 'default', // Default is 'default'
       palette: 'primary', // Default is 'primary', any basic material palette and extended palettes are available
       hue: '400' // Default is '800'
    });
+   
    $scope.logDuplicationIndexes = function () {
       console.log({
          deDuplicationIndex: deDuplicationIndex,
