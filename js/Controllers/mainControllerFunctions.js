@@ -269,39 +269,23 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             var newPostScroll = document.getElementsByClassName('new_post_dialog_scroll')[0];
             var newPostHeader = document.getElementById('dialog_header');
             newPostScroll.onscroll = function () {
-               if (newPostScroll.scrollTop < 141){
-                  $timeout(function() {
-                     $scope.newPostScroll = newPostScroll.scrollTop;
-                  })
-                  newPostHeaderImage.style.top = -20 - (newPostScroll.scrollTop / 5) + 'px';
-               } else {
-                  $timeout(function() {
-                     $scope.newPostScroll = 140;
-                  })
+                  if (newPostScroll.scrollTop < 141) {
+                     $timeout(function () {
+                        $scope.newPostScroll = newPostScroll.scrollTop;
+                     })
+                     newPostHeaderImage.style.top = -20 - (newPostScroll.scrollTop / 5) + 'px';
+                  } else {
+                     $timeout(function () {
+                        $scope.newPostScroll = 140;
+                     })
+                  }
                }
-
-               
-               // if ($scope.operation == 'view' && $scope.Post.Link == '') {
-               //    newPostHeader.style.height = "60px"
-               //    if (scroll > 1) {
-               //       newPostHeader.style.boxShadow = "0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12)"
-               //    } else {
-               //       newPostHeader.style.boxShadow = null
-               //    }
-               // } else {
-               //    if (scroll <= 160) {
-               //       newPostHeader.style.height = (200 - scroll) + "px"
-               //       newPostHeaderLink.style.opacity = 1;
-               //       newPostHeaderTitle.style.opacity = 0;
-               //       
-               //    } else {
-               //       newPostHeader.style.boxShadow = "0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12)"
-               //       newPostHeader.style.height = "60px"
-               //       newPostHeaderLink.style.opacity = 0;
-               //       newPostHeaderTitle.style.opacity = 1;
-               //    }
-               // }
-            }
+               // The md-select directive eats keydown events for some quick select
+               // logic. Since we have a search input here, we don't need that logic.
+            var selectSearchInput = angular.element(document.getElementById('class_select_input'))
+            selectSearchInput.on('keydown', function (ev) {
+               ev.stopPropagation();
+            });
          },
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
@@ -450,19 +434,13 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    //----------------------------------------------------
    //---------------- Event Watchers --------------------
    $scope.$watch('searchInputTxt', function (newValue) {
-         if (newValue != $scope.queryParams.q) {
-            $scope.gotoRoute({
-               q: newValue
-            })
-         }
-      })
-      // The md-select directive eats keydown events for some quick select
-      // logic. Since we have a search input here, we don't need that logic.
-      // var selectSearchInput = angular.element(document.getElementById('class_select_input'))
-      // selectSearchInput.on('keydown', function(ev) {
-      //        ev.stopPropagation();
-      //        console.log(ev)
-      // });
+      if (newValue != $scope.queryParams.q) {
+         $scope.gotoRoute({
+            q: newValue
+         })
+      }
+   })
+
    content_container.onscroll = function (event) {
       //called whenever the content_container scrolls
       // if (performantScrollEnabled === false && $scope.angularGridOptions.performantScroll === false) {
@@ -480,7 +458,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          }
       })
    };
-   
+
    window.addEventListener("resize", function () {
       $timeout(function () {
          if ($mdMedia('gt-sm')) {
@@ -497,18 +475,18 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          })
       }
    }
-   
+
    $scope.updateVisiblePosts = function (array, callback) {
-         $timeout(function () {
-            if (array) {
-               $scope.visiblePosts = array;
-            }
-            if (callback) {
-               callback();
-            }
-         })
-      }
-      
+      $timeout(function () {
+         if (array) {
+            $scope.visiblePosts = array;
+         }
+         if (callback) {
+            callback();
+         }
+      })
+   }
+
    //----------------------------------------------------
    //---------------------- dev -------------------------
    $mdTheming.setBrowserColor({
@@ -516,7 +494,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       palette: 'primary', // Default is 'primary', any basic material palette and extended palettes are available
       hue: '400' // Default is '800'
    });
-   
+
    $scope.logDuplicationIndexes = function () {
       console.log({
          deDuplicationIndex: deDuplicationIndex,
