@@ -1,6 +1,7 @@
 <md-dialog id="new_post_dialog" ng-style="{'background-color': Post.Class.Color}">
    <md-dialog-content class="new_post_dialog_scroll">
-      <md-toolbar id="dialog_header" class="post-card-header" ng-class="{'no-link':Post.Type == 'NoLink','md-whiteframe-3dp': (operation == 'view' && Post.Link == '' && newPostScroll > 0) || (operation != 'view' && newPostScroll > 139)}" md-ink-ripple="{{Post.Link != '' && operation == 'view'}}" ng-click="openLink(Post.Link)" ng-style="{'height': ((operation == 'view' && Post.Link == '') ? (60):(200-newPostScroll)) + 'px'}">
+      <md-toolbar id="dialog_header" class="post-card-header" ng-class="{'no-link':Post.Type == 'NoLink','md-whiteframe-3dp': (operation == 'view' && Post.Link == '' && newPostScroll > 0) || (operation != 'view' && newPostScroll > 139)}" md-ink-ripple="{{Post.Link != '' && operation == 'view'}}"
+         ng-click="openLink(Post.Link)" ng-style="{'height': ((operation == 'view' && Post.Link == '') ? (60):(200-newPostScroll)) + 'px'}">
          <img ng-src="{{Post.PreviewImage}}" id="header_image" ng-class="{'post-card-image':operation == 'view'}"></img>
          <div class="image-gradient-overlay new-post-img-gradient">
             <div id="header_title" style="opacity: 0" class="gradient-overlay-metadata metadata-regular">
@@ -12,7 +13,7 @@
                <span ng-hide="Post.Class.Name == null"><md-icon>people</md-icon> {{Post.Class.Name}}</span>
                <span><md-icon>event</md-icon> {{Post.CreationDate | date : "mm/dd/yyyy"}}</span>
             </div>
-            <div class="gradient-overlay-metadata metadata-link" style="font-size:18px" ng-hide="Post.Link == '' || Post.Type == 'gDrive' || operation != 'view'" >
+            <div class="gradient-overlay-metadata metadata-link" style="font-size:18px" ng-hide="Post.Link == '' || Post.Type == 'gDrive' || operation != 'view'">
                <span><md-icon>language</md-icon> {{removeHttp(Post.Link)}}</span>
             </div>
             <div class="md-chips gradient-overlay-metadata" style="position:absolute; padding: 0 40px 0 8px" ng-class="{'metadata-link': operation == 'view'}" ng-hide="Post.Type != 'gDrive'">
@@ -26,7 +27,7 @@
                   </div>
                </md-chip>
             </div>
-            <div id="header_link_input_container" class="gradient-overlay-metadata" ng-hide="operation == 'view'" >
+            <div id="header_link_input_container" class="gradient-overlay-metadata" ng-hide="operation == 'view'">
                <md-input-container id="header_link_input" md-no-float ng-hide="Post.Type == 'gDrive'">
                   <input ng-model="Post.Link" style="color:white" placeholder="http://" type="text">
                </md-input-container>
@@ -51,11 +52,11 @@
       </md-toolbar>
       <div id="new_post_content" ng-class="{'small-margin': Post.Type == 'NoLink' && operation == 'view'}">
          <div flex layout="row">
-            <md-select ng-model-options="{trackBy: '$value.Name'}" class="md-no-underline" ng-model="Post.Class" placeholder="Class" ng-hide="operation === 'view'" md-on-close="clearText(classSelectSearch)" style="margin: 4px 4px;font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;">
-                  <md-option ng-repeat="Catagory in classList" ng-value="{'Catagory':Catagory.Catagory, 'Name':Name, 'Color':Catagory.Color}">
-                     {{Name}}
-                  </md-option>
-               </md-optgroup>
+            <md-select ng-model="Post.Class" placeholder="Class" class="md-no-underline">
+               <md-option value="axe">Axe</md-option>
+               <md-option value="sword">Sword</md-option>
+               <md-option value="wand">Wand</md-option>
+               <md-option value="pen">Pen?</md-option>
             </md-select>
             <div style="width:6px" ng-show="operation === 'view'"></div>
             <md-chips ng-model="Post.Tags" flex md-separator-keys="[32,188,13]" ng-hide="operation === 'view' && Post.Tags.length === 0" readonly="operation === 'view'">
