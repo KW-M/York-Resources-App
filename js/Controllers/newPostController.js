@@ -17,7 +17,7 @@
             $scope.Post.Class = $scope.Post.Class || {
                 Name: '',
                 Catagory: '',
-                Color: '#ffffff',
+                Color: '#ff00ff',
             }
             $scope.Post.Creator = $scope.Post.Creator || {
                 ClassOf: '',
@@ -41,7 +41,6 @@
         $scope.classSearch = "";
 
         $scope.findType = function () {
-            console.log('findingType')
             if ($scope.Post.Link === '') {
                 $scope.Post.PreviewImage = '';
                 $scope.Post.AttachmentId = '';
