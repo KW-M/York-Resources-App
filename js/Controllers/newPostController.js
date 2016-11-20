@@ -220,19 +220,16 @@
             }
         }
 
-$scope.returnObj = function(input) {
-    console.log($scope.Post.Class)
-}
         $scope.clearLink = function () {
             $timeout(function () {
                 $scope.Post.Link = ""
                 $scope.Post.Type = "NoLink"
             })
         }
-        $scope.clearLink = function () {
-            $timeout(function () {
-                $scope.Post.Link = ""
-                $scope.Post.Type = "NoLink"
+        
+        $scope.clearClassSelectSearch = function () {
+            $timeout(function() {
+                $scope.classSelectSearch = null;
             })
         }
 

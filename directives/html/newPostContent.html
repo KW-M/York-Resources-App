@@ -53,7 +53,7 @@
       <div id="new_post_content" ng-class="{'small-margin': Post.Type == 'NoLink' && operation == 'view'}">
                {{Post.Class}}
          <div flex layout="row">
-            <md-select ng-model="Post.Class" ng-model-options="{trackBy: '$value.Name'}" ng-hide="operation == 'view'" class="md-no-underline" placeholder="Class" id="class_dropdown_button" md-on-close="clearText(classSelectSearch)">
+            <md-select ng-model="Post.Class" ng-model-options="{trackBy: '$value.Name'}" ng-hide="operation == 'view'" class="md-no-underline" placeholder="Class" id="class_dropdown_button" md-on-close="clearClassSelectSearch()">
                <md-option ng-value="{'Catagory':'Other','Name':'Memes','Color':'ffffff'}" class="rainbow" ng-class="{'hide': queryParams.classpath != 'Memes' || devMode != true}">
                   Memes
                </md-option>
