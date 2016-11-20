@@ -53,11 +53,16 @@
       <div id="new_post_content" ng-class="{'small-margin': Post.Type == 'NoLink' && operation == 'view'}">
                {{Post.Class}}
          <div flex layout="row">
-            <md-select ng-model="Post.Class" placeholder="Class" ng-model-options="{trackBy: '$value.Name'}" class="md-no-underline" id="class_dropdown_button">
-               <md-option ng-value="{'Catagory': searchPlaceholder, 'Name':'Other2','Color':'ff00ff'}">Axe</md-option>
-               <md-option ng-value="{'Catagory':'Other', 'Name':'Other1', 'Color':'ffff00'}">Sword</md-option>
-               <md-option ng-value="{'Catagory':'Other', 'Name':'Other23', 'Color':'ffafaf'}">pen</md-option>
-               <md-option ng-value="{'Catagory':'Other', 'Name':'Other3', 'Color':'bbffbf'}">Pencil</md-option>
+            <md-select ng-model="Post.Class" ng-model-options="{trackBy: '$value.Name'}" ng-hide="operation === 'view'" class="md-no-underline" placeholder="Class" id="class_dropdown_button">
+               <md-option ng-value="{'Catagory':'Other','Name':'Memes','Color':'ffff'}" class="rainbow" ng-show="queryParams.classpath == 'Memes' || devMode == true">
+                  Memes
+               </md-option>
+               <md-option value="{'Catagory':'Other', 'Name':'Other', 'Color':'#ffffff'}">
+                  Other / Not associated
+               </md-option>
+               <md-optgroup ng-repeat="Catagory in classList" label="{{Catagory.Catagory}}">
+                  <md-option ng-value="{'Catagory':Catagory.Catagory,'Name':Name,'Color':Catagory.Color}" ng-repeat="Name in Catagory.Classes">Axe</md-option>
+               </md-optgroup>
             </md-select>
             <div style="width:6px" ng-show="operation === 'view'"></div>
             <md-chips ng-model="Post.Tags" flex md-separator-keys="[32,188,13]" ng-hide="operation === 'view' && Post.Tags.length === 0" readonly="operation === 'view'">
