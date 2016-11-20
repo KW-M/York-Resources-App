@@ -61,7 +61,9 @@
       font-size: 20px;
    }
    
-   
+    #header_link_input input::-webkit-input-placeholder {
+      color: white;
+   }
    
    #header_title {
       margin: 0 12px;
