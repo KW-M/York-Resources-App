@@ -29,7 +29,7 @@
       filter: brightness(85%);
    }
    
-   .image-gradient-overlay.new-post-img-gradient {
+   .image-gradient-overlay-metadataoverlay.new-post-img-gradient {
       bottom: 0;
       top: initial;
       height: 60px;
@@ -65,6 +65,12 @@
       margin: 0 12px;
       position: absolute;
       transition: opacity 0.5s ease;
+   }
+   
+   .gradient-overlay-metadata md-chip .md-chip-content{
+      height: 100%;
+      display: flex;
+      align-items: center;
    }
    
    md-progress-linear.link-loading {
