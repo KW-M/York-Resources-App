@@ -52,11 +52,11 @@
       </md-toolbar>
       <div id="new_post_content" ng-class="{'small-margin': Post.Type == 'NoLink' && operation == 'view'}">
          <div flex layout="row">
-            <md-select ng-model="Post.Class" placeholder="Class" class="md-no-underline" id="">
+            <md-select ng-model="Post.Class" placeholder="Class" class="md-no-underline" id="class_dropdown_button">
                <md-option value="axe">Axe</md-option>
                <md-option value="sword">Sword</md-option>
                <md-option value="wand">Wand</md-option>
-               <md-option value="pen">Pen?</md-option>
+               <md-option value="{Catagory:'poke',Name:'pen',color:"}">Pen?</md-option>
             </md-select>
             <div style="width:6px" ng-show="operation === 'view'"></div>
             <md-chips ng-model="Post.Tags" flex md-separator-keys="[32,188,13]" ng-hide="operation === 'view' && Post.Tags.length === 0" readonly="operation === 'view'">
