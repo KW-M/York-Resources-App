@@ -17,7 +17,7 @@
             $scope.Post.Class = $scope.Post.Class || {
                 Name: '',
                 Catagory: '',
-                Color: '#ff00ff',
+                Color: 'ff00ff',
             }
             $scope.Post.Creator = $scope.Post.Creator || {
                 ClassOf: '',
