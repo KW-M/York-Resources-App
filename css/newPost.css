@@ -110,7 +110,7 @@
       z-index:20;
    }
    
-   #class_dropdown_button .hide-label label{
+   md-optgroup.hide-label label{
       display:none;
    }
    
