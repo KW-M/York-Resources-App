@@ -18,8 +18,8 @@
             <div class="md-chips gradient-overlay-metadata" style="position:absolute; padding: 0 40px 0 8px" ng-class="{'metadata-link': operation == 'view'}" ng-hide="Post.Type != 'gDrive'">
                <md-chip>
                   <div class="md-chip-content" style="padding-left:0">
-                     <img ng-src="{{Post.AttachmentIcon}}" style="top: 7.5px;position: absolute;"></img>
-                     <span style="margin-left:20px">{{Post.AttachmentName}}</span>
+                     <img ng-src="{{Post.AttachmentIcon}}" style="top: 7.5px; position: absolute;"></img>
+                     <span style="margin-left:20px; display:block">{{Post.AttachmentName}}</span>
                      <button class="md-chip-remove" style="margin-right:-10px" ng-click="clearLink()">
                         <md-icon style="color:rgb(66,66,66)">close</md-icon>
                      </button>
