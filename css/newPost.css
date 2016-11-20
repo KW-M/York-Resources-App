@@ -61,8 +61,12 @@
       font-size: 20px;
    }
    
+    #header_link_input input {
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+   
     #header_link_input input::-webkit-input-placeholder {
-      color: ;
+      color: rgba(255, 255, 255, 0.6);
    }
    
    #header_title {
