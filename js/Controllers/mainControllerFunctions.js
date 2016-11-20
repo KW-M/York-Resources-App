@@ -508,11 +508,11 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       }
       //----------------------------------------------------
       //---------------------- dev -------------------------
-     $mdTheming.setBrowserColor({
-      theme: 'myTheme', // Default is 'default'
-      palette: 'accent', // Default is 'primary', any basic material palette and extended palettes are available
-      hue: '200' // Default is '800'
-    });
+   $mdTheming.setBrowserColor({
+      theme: 'default', // Default is 'default'
+      palette: 'primary', // Default is 'primary', any basic material palette and extended palettes are available
+      hue: '400' // Default is '800'
+   });
    $scope.logDuplicationIndexes = function () {
       console.log({
          deDuplicationIndex: deDuplicationIndex,
