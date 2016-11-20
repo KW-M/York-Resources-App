@@ -220,6 +220,9 @@
             }
         }
 
+$scope.returnObj = function(input) {
+    return(JSON.parse(input))
+}
         $scope.clearLink = function () {
             $timeout(function () {
                 $scope.Post.Link = ""
