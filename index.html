@@ -62,7 +62,7 @@
                 <h2 show-gt-sm hide-xs hide-sm>
                     <span class="unselectable default-mouse" style="font-size: 110%">StudyHub</span>
                 </h2>
-                <div hide-xs show-gt-xs class="search-bar-container">
+                <div hide-xs show-gt-xs class="search-bar-container unselectable">
                     <div style="width:100%; max-width:720px; position:relative">
                         <md-icon class="search-bar-icon">search</md-icon>
                         <input md-delay="300" class="search-bar" ng-model="searchInputTxt" ng-model-options="{ debounce: 500 }" placeholder="{{searchPlaceholder}}" />
@@ -71,11 +71,11 @@
                         </md-button>
                     </div>
                 </div>
-                <div hide-gt-xs show-xs class="hover-search" ng-class="{'hover-search-visible' : globals.mobileSearchIsOpen}">
-                    <md-button class="md-icon-button" style="margin-right: 0; min-width:44px" ng-click="globals.mobileSearchIsOpen = !globals.mobileSearchIsOpen">
+                <div hide-gt-xs show-xs class="hover-search unselectable" ng-class="{'hover-search-visible' : globals.mobileSearchIsOpen}">
+                    <md-button class="md-icon-button unselectable" style="margin-right: 0; min-width:44px" ng-click="globals.mobileSearchIsOpen = !globals.mobileSearchIsOpen">
                         <md-icon>close</md-icon>
                     </md-button>
-                    <div class="search-bar-container" style="margin:0">
+                    <div class="search-bar-container unselectable" style="margin:0">
                         <md-icon class="search-bar-icon">search</md-icon>
                         <input class="search-bar" ng-model="searchInputTxt" ng-model-options="{ debounce: 500 }" placeholder="{{searchPlaceholder}}" />
                         <md-button ng-class="{'has-text': searchInputTxt}" ng-click="searchInputTxt = ''" class='search-bar-clear-button md-icon-button'>
@@ -83,23 +83,23 @@
                         </md-button>
                     </div>
                 </div>
-                <span flex hide-gt-xs show-xs></span> {{globals.mobileSearchOpen}}
-                <md-button hide-gt-xs show-xs class="md-icon-button" ng-click="globals.mobileSearchIsOpen = !globals.mobileSearchIsOpen">
+                <span flex hide-gt-xs show-xs></span>
+                <md-button hide-gt-xs show-xs class="md-icon-button unselectable" ng-click="globals.mobileSearchIsOpen = !globals.mobileSearchIsOpen">
                     <md-icon>search</md-icon>
                 </md-button>
-                <md-button class="md-icon-button" ng-click="getFiles()">
+                <md-button class="md-icon-button unselectable" ng-click="getFiles()">
                     <md-icon>refresh</md-icon>
                     <md-tooltip md-autohide>Refresh</md-tooltip>
                 </md-button>
-                <md-button hide-sm hide-xs show-gt-sm class="md-icon-button" ng-click="::openHelpDialog()">
+                <md-button hide-sm hide-xs show-gt-sm class="md-icon-button unselectable" ng-click="::openHelpDialog()">
                     <md-icon>help</md-icon>
                     <md-tooltip>Help</md-tooltip>
                 </md-button>
                 <md-menu md-position-mode="target-right target">
-                    <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" id="account_button" aria-label="account" style="height:36px;width:36px;border-radius:50%;background-image:url('images/accountPic.jpg'); background-size: 36px 36px;">
+                    <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button unselectable" id="account_button" aria-label="account" style="height:36px;width:36px;border-radius:50%;background-image:url('images/accountPic.jpg'); background-size: 36px 36px;">
                     </md-button>
                     <md-menu-content>
-                        <md-menu-item layout="column" style="padding: 6px 16px;">
+                        <md-menu-item layout="column" style="padding: 6px 16px;" class="unselectable">
                             <p class="user-name" style="font-weight: bold; font-size:13px; padding: 0px">{{myInfo.Name}}</p>
                             <p class="user-name" style="color: #666; font-size:13px; padding: 0px">{{myInfo.Email}}</p>
                         </md-menu-item>
@@ -108,7 +108,7 @@
                                 <md-icon>exit_to_app</md-icon>
                             </md-button>
                         </md-menu-item>
-                        <md-button id="quizlet_connect_button" class="md-raised" ng-click=""><span>Connect Quizlet</span>
+                        <md-button id="quizlet_connect_button" class="md-raised " ng-click=""><span>Connect Quizlet</span>
                             <md-icon style="margin: auto 0px auto 10px;"><img style="height: 24px;width: 24px;-webkit-filter: invert(100%);filter: invert(100%);" src="./images/quizlet logo.png"></img>
                             </md-icon>
                         </md-button>
@@ -191,21 +191,21 @@
                     <div angular-grid="visiblePosts" id="layout_grid" ag-gutter-size="" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="getFiles()">
                         <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}" class="post-card raise-on-hover">
                             <div class="post-card-header unselectable" md-ink-ripple="{{Post.Link != ''}}" ng-class="{'no-link': Post.Link == '', 'gDrive-type': Post.Type == 'gDrive'}" ng-click="openLink(Post.Link)">
-                                <img ng-src="{{Post.PreviewImage}}" class="post-card-image " ng-hide="Post.Link == ''"></img>
+                                <img ng-src="{{Post.PreviewImage}}" class="post-card-image unselectable" ng-hide="Post.Link == ''"></img>
                                 <div class="image-gradient-overlay">
-                                    <div class="gradient-overlay-metadata metadata-regular">
+                                    <div class="gradient-overlay-metadata metadata-regular unselectable">
                                         <span ng-hide="Post.Class.Name == null"><md-icon>people</md-icon> {{Post.Class.Name}}</span>
                                         <span><md-icon>event</md-icon> {{Post.CreationDate | date : "mm/dd/yyyy"}}</span>
                                     </div>
-                                    <div ng-hide="Post.Tags.length < 1" class="gradient-overlay-metadata metadata-regular">
+                                    <div ng-hide="Post.Tags.length < 1" class="gradient-overlay-metadata metadata-regular unselectable">
                                         <span><md-icon>style</md-icon> {{Post.Tags.join(', ')}}</span>
                                     </div>
-                                    <div ng-hide="Post.Link == '' || Post.Type == 'gDrive'" class="gradient-overlay-metadata metadata-link" style="font-size:18px">
+                                    <div ng-hide="Post.Link == '' || Post.Type == 'gDrive'" class="gradient-overlay-metadata metadata-link unselectable" style="font-size:18px">
                                         <span><md-icon>language</md-icon> {{removeHttp(Post.Link)}}</span>
                                     </div>
-                                    <div class="gradient-overlay-metadata md-chips metadata-link" ng-hide="Post.Type != 'gDrive'" style="width:100%">
+                                    <div class="gradient-overlay-metadata md-chips metadata-link unselectable" ng-hide="Post.Type != 'gDrive'" style="width:100%">
                                         <md-chip>
-                                            <div class="md-chip-content">
+                                            <div class="md-chip-content unselectable">
                                                 <img ng-src="{{Post.AttachmentIcon}}" style="margin-right:4px"></img>
                                                 <span>{{Post.AttachmentName}}</span>
                                             </div>
@@ -215,7 +215,7 @@
                             </div>
                             <div>
                                 <p class="post-card-title md-title">{{Post.Title}}</p>
-                                <p class="post-card-creator md-subhead"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::Post.Creator.ClassOf}})</span></p>
+                                <p class="post-card-creator md-subhead unselectable"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::Post.Creator.ClassOf}})</span></p>
                                 <p id="post_card_description" class="md-body-1" ng-bind-html="Post.Description" ng-hide="Post.Description === ''"></p>
                                 <md-card-actions layout="row" style="align-items: center;">
                                     <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(Post)">
