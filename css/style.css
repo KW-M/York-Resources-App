@@ -84,6 +84,7 @@ html body {
     padding: 24px;
 }
 .signin-dialog-tip {
+    position: relative;
     transition: max-height 0.5s ease-in;
     max-height: 1000px;
     overflow: hidden;
@@ -182,9 +183,11 @@ html body {
 
 #dat_button {
     position: absolute;
-    bottom: 0px;
+    top: 0px;
     right: 0px;
     opacity: 0.5;
+    min-height: 1.5em;
+    font-size: 11px;
     padding: 0;
     margin: 0;
 }
