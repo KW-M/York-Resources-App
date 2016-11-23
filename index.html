@@ -32,14 +32,7 @@
             <div id="welcome_dialog">
                 <h1 style="margin-top:-6px">Welcome</h1>
                 <!--<img src="images/logo.png" style="width: 50%;margin: auto;margin-top: 30px;">-->
-                <p>This is a place where any student can post anything they think might help other students in the york community.</p>
-                <p>Some things to keep in mind:</p>
-                <md-button ng-click="openOnboardingDialog()">onboard</md-button>
-                <ul>
-                    <li>This website is accessible by anyone at York, so don't post anything you wouldn't want teachers and staff to see!</li>
-                    <li>Participation is esensial, you'll need to contribute something at least every semester to keep accesing other student's work.</li>
-                </ul>
-                <!--<p>Sign in with your me@york.org email account.</p>-->
+                <p>Sign in with your me@york.org email account.</p>
                 <div class="signin-button-container">
                     <div id="signin_button" class="signin-button">
                         <div class="signin-icon"><svg style="" viewBox="0, 0, 40, 40">
@@ -49,7 +42,11 @@
                     </div>
                     <md-progress-circular id="signin_spinner" class="md-accent" md-mode="indeterminate" md-diameter="36"></md-progress-circular>
                 </div>
-                <md-button style="display:none" id="dat_button" ng-click="::gotoRoute({classPath:'/meme'})">meme</md-button>
+                <h3>Tips:</h3>
+                <p>This is a place where any student can post anything they think might help other students in the york community.</p>
+                <p>Some things to keep in mind:</p>
+                <!--<md-button ng-click="openOnboardingDialog()">onboard</md-button>-->
+                <md-button style="display:none" id="dat_button" ng-click="::gotoRoute({classPath:'/Memes'})">meme</md-button>
             </div>
         </div>
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.css">
