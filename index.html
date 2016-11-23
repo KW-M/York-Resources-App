@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <title>York StudyHub</title>
         <meta charset="utf-8">
@@ -18,6 +19,7 @@
         <script src="https://apis.google.com/js/api.js"></script>
         <link rel="stylesheet" href="css/style.css" />
     </head>
+
     <body ng-app="YorkResourcesApp" ng-controller="ApplicationController">
         <!-------------------------------------------------------->
         <!-------------- The Welcome/Login screen ---------------->
@@ -41,7 +43,7 @@
                     <h3>Tips:</h3>
                     <p>Look for the mobile update comming soon.</p>
                     <!--<md-button ng-click="openOnboardingDialog()">onboard</md-button>-->
-                     <md-button style="display:none" id="dat_button" ng-click="::gotoRoute({classPath:'/Memes'})">meme</md-button>
+                    <md-button style="display:none" id="dat_button" ng-click="::gotoRoute({classPath:'/Memes'})">meme</md-button>
                 </div>
             </div>
         </div>
@@ -51,7 +53,69 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
         <!-------------------------------------------------------->
         <!------------------- The top toolbar -------------------->
-        <md-toolbar toolbar-top-content class="md-whiteframe-z2 ng-cloak toolbar-top" ng-class="{'rainbow' : queryParams.classpath == 'meme' }"></md-toolbar>
+        <md-toolbar class="md-whiteframe-z2 ng-cloak toolbar-top" ng-class="{'rainbow' : queryParams.classpath == 'Memes' }">
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button" ng-click="::toggleSidebar()">
+                    <md-icon>menu</md-icon>
+                </md-button>
+                <img hide-gt-sm show-xs show-sm style="height: 46px;" src="./images/logo.png" />
+                <h2 show-gt-sm hide-xs hide-sm>
+                    <span class="unselectable default-mouse" style="font-size: 110%">StudyHub</span>
+                </h2>
+                <div hide-xs show-gt-xs class="search-bar-container">
+                    <div style="width:100%; max-width:720px; position:relative">
+                        <md-icon class="search-bar-icon">search</md-icon>
+                        <input md-delay="300" class="search-bar" ng-model="searchInputTxt" ng-model-options="{ debounce: 500 }" placeholder="{{searchPlaceholder}}" />
+                        <md-button ng-class="{'has-text': searchInputTxt}" ng-click="searchInputTxt = ''" class='search-bar-clear-button md-icon-button'>
+                            <md-icon style="color:rgb(117,117,117)">close</md-icon>
+                        </md-button>
+                    </div>
+                </div>
+                <div hide-gt-xs show-xs class="hover-search" ng-class="{'hover-search-visible' : globals.mobileSearchIsOpen}">
+                    <md-button class="md-icon-button" style="margin-right: 0; min-width:44px" ng-click="globals.mobileSearchIsOpen = !globals.mobileSearchIsOpen">
+                        <md-icon>close</md-icon>
+                    </md-button>
+                    <div class="search-bar-container" style="margin:0">
+                        <md-icon class="search-bar-icon">search</md-icon>
+                        <input class="search-bar" ng-model="searchInputTxt" ng-model-options="{ debounce: 500 }" placeholder="{{searchPlaceholder}}" />
+                        <md-button ng-class="{'has-text': searchInputTxt}" ng-click="searchInputTxt = ''" class='search-bar-clear-button md-icon-button'>
+                            <md-icon style="color:rgb(117,117,117)">close</md-icon>
+                        </md-button>
+                    </div>
+                </div>
+                <span flex hide-gt-xs show-xs></span> {{globals.mobileSearchOpen}}
+                <md-button hide-gt-xs show-xs class="md-icon-button" ng-click="globals.mobileSearchIsOpen = !globals.mobileSearchIsOpen">
+                    <md-icon>search</md-icon>
+                </md-button>
+                <md-button class="md-icon-button" ng-click="getFiles()">
+                    <md-icon>refresh</md-icon>
+                    <md-tooltip md-autohide>Refresh</md-tooltip>
+                </md-button>
+                <md-button hide-sm hide-xs show-gt-sm class="md-icon-button" ng-click="::openHelpDialog()">
+                    <md-icon>help</md-icon>
+                    <md-tooltip>Help</md-tooltip>
+                </md-button>
+                <md-menu md-position-mode="target-right target">
+                    <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" id="account_button" aria-label="account" style="height:36px;width:36px;border-radius:50%;background-image:url('images/accountPic.jpg'); background-size: 36px 36px;">
+                    </md-button>
+                    <md-menu-content>
+                        <md-menu-item layout="column" style="padding: 6px 16px;">
+                            <p class="user-name" style="font-weight: bold; font-size:13px; padding: 0px">{{myInfo.Name}}</p>
+                            <p class="user-name" style="color: #666; font-size:13px; padding: 0px">{{myInfo.Email}}</p>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button id="signout_button" ng-click="signOut()"><span flex>Sign out</span>
+                                <md-icon>exit_to_app</md-icon>
+                            </md-button>
+                        </md-menu-item>
+                        <md-button id="quizlet_connect_button" class="md-raised" ng-click=""><span>Connect Quizlet</span>
+                            <md-icon style="margin: auto 0px auto 10px;"><img style="height: 24px;width: 24px;-webkit-filter: invert(100%);filter: invert(100%);" src="./images/quizlet logo.png"></img>
+                            </md-icon>
+                        </md-button>
+                    </md-menu-content>
+                </md-menu>
+            </div>
+        </md-toolbar>
         <!-------------------------------------------------------->
         <!-------------------------------------------------------->
         <div class="horizontalContainer" ng-cloak>
@@ -126,8 +190,8 @@
                 <div>
                     <div angular-grid="visiblePosts" id="layout_grid" ag-gutter-size="" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="getFiles()">
                         <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}" class="post-card raise-on-hover">
-                            <div class="post-card-header" md-ink-ripple="{{Post.Link != ''}}" ng-class="{'no-link': Post.Link == '', 'gDrive-type': Post.Type == 'gDrive'}" ng-click="openLink(Post.Link)">
-                                <img ng-src="{{Post.PreviewImage}}" class="post-card-image" ng-hide="Post.Link == ''"></img>
+                            <div class="post-card-header unselectable" md-ink-ripple="{{Post.Link != ''}}" ng-class="{'no-link': Post.Link == '', 'gDrive-type': Post.Type == 'gDrive'}" ng-click="openLink(Post.Link)">
+                                <img ng-src="{{Post.PreviewImage}}" class="post-card-image " ng-hide="Post.Link == ''"></img>
                                 <div class="image-gradient-overlay">
                                     <div class="gradient-overlay-metadata metadata-regular">
                                         <span ng-hide="Post.Class.Name == null"><md-icon>people</md-icon> {{Post.Class.Name}}</span>
@@ -246,8 +310,6 @@
             <script src="js/Controllers/mainControllerFunctions.js"></script>
             <script src="js/Controllers/subControllerFunctions.js"></script>
             <script src="js/Controllers/newPostController.js"></script>
-
-            <!--<canvas style="display:none;position: absolute;pointer-events: none;" width="400" height="260" id="image_renderer">-->
     </body>
     <link rel="stylesheet" href="css/toolbarTop.css" />
     <link rel="stylesheet" href="css/searchbar.css" />
@@ -255,5 +317,4 @@
     <link rel="stylesheet" href="css/postCard.css" />
     <link rel="stylesheet" href="css/newPost.css" />
     <link rel="stylesheet" href="css/help.css" />
-
 </html>
