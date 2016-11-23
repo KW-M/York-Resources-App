@@ -84,16 +84,16 @@ html body {
     padding: 24px;
 }
 .signin-dialog-tip {
-    transition: max-height 0.5s ease-out;
-    max-height: 0;
+    transition: max-height 0.5s ease-in;
+    max-height: 1000px;
     overflow: hidden;
     flex: initial;
     border-top: 1px rgba(0, 0, 0, 0.2) solid;
     padding: 0px 24px;
 }
-.signin-dialog-tip.visible {
-    max-height: 1000px;
-    transition: max-height 0.5s ease-in;
+.signin-dialog-tip.hidden {
+    max-height: 0px;
+    transition: max-height 0.5s ease-out;
 }
 
 #welcome_dialog p:not(.signin-text),
