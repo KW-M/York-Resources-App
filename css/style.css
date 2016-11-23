@@ -52,12 +52,7 @@ html body {
 /*-------------- Loading & first launch styles ----------- */
 
 #welcome_dialog {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
     flex-direction: column;
     font-size: 14px;
     font-weight: 400;
@@ -78,10 +73,20 @@ html body {
 }
 
 .signin-dialog-padding {
+    flex: 1 ;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
     padding: 24px;
 }
 .signin-dialog-padding.border {
+    flex: 0;
     border-top: 1px black solid;
+    padding: 0px 24px;
 }
 
 #welcome_dialog p:not(.signin-text),
