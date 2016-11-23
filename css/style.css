@@ -85,18 +85,15 @@ html body {
 }
 .signin-dialog-tip {
     transition: max-height 0.5s ease-out;
-    max-height: ;
+    max-height: 0;
     overflow: hidden;
     flex: initial;
-    border-top: 1px black solid;
+    border-top: 1px rgba(0, 0, 0, 0.2) solid;
     padding: 0px 24px;
 }
-.signin-dialog-tip:hover {
+.signin-dialog-tip.visib {
     max-height: 1000px;
     transition: max-height 0.5s ease-in;
-    flex: initial;
-    border-top: 1px black solid;
-    padding: 0px 24px;
 }
 
 #welcome_dialog p:not(.signin-text),
