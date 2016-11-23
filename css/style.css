@@ -84,9 +84,9 @@ html body {
     padding: 24px;
 }
 .signin-dialog-padding.border {
-    flex: 0;
+    flex: initial;
     border-top: 1px black solid;
-    padding: 0px 24px;
+    padding: 0px 24px 24px 24px;
 }
 
 #welcome_dialog p:not(.signin-text),
