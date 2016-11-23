@@ -1,0 +1,44 @@
+ /* --------------------------- Pre Render Styles --------------------------------*/
+/* These styles are to be loaded before the page renders, but slow down load times*/
+
+/*------------ background and layout styles ----------- */
+
+html body {
+    font-family: 'Helvetica Neue', Helvetica, "Roboto", Arial, sans-serif;
+    background-color: #f2f2f2;
+    flex-direction: column;
+    display: flex;
+}
+
+.horizontalContainer {
+    /* The body is the vertical layout container*/
+    position: relative;
+    -ms-flex: 1;
+    flex: 1;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    z-index: 0;
+}
+
+#content_container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    -ms-flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 32px 100px 0px 8px;
+    background-color: #f2f2f2;
+}
+
+#content_container.sm {
+    padding-left: 24px;
+    padding-right: 24px
+}
+
+#content_container.xs {
+    padding-left: 8px;
+    padding-right: 2px
+}
