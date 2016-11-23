@@ -84,11 +84,16 @@ html body {
     padding: 24px;
 }
 .signin-dialog-tip {
+    transition: max-height 0.5s ease-out;
+    max-height: ;
+    overflow: hidden;
     flex: initial;
     border-top: 1px black solid;
     padding: 0px 24px;
 }
 .signin-dialog-tip:hover {
+    max-height: 1000px;
+    transition: max-height 0.5s ease-in;
     flex: initial;
     border-top: 1px black solid;
     padding: 0px 24px;
