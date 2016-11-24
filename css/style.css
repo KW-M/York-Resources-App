@@ -1,23 +1,11 @@
-/*---------------------universal styles---------------------- */
+/*-------------------- Universal Styles --------------------- */
 
 button:focus,
 div:focus {
     outline: 0;
 }
 
-
-
-.fadeOut {
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.5s ease;
-}
-
-.fadeIn {
-    opacity: 1;
-    pointer-events: initial;
-    transition: opacity 0.5s ease;
-}
+/*--------------------- General Styles ---------------------- */
 
 .unselectable {
     -webkit-touch-callout: none;
@@ -25,10 +13,6 @@ div:focus {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-}
-
-.unselectable:focus {
-    outline: none;
 }
 
 .default-mouse {
@@ -87,20 +71,25 @@ div:focus {
     border-bottom-left-radius: 3px;
 }
 
+.fadeIn {
+    opacity: 1;
+    pointer-events: initial;
+    transition: opacity 0.5s ease;
+}
+
+.fadeOut {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
 .darken-on-hover:hover {
     background-color: rgba(158, 158, 158, 0.2);
 }
 
 .raise-on-hover:hover {
-    -webkit-transition: .2s;
     transition: .2s;
     box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32);
-}
-
-md-input-container.button-select md-select-value {
-    border-bottom: 0px !important;
-    padding: 0px !important;
-    padding-bottom: 2px !important;
 }
 
 .classSelectSearchbox input {
