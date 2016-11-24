@@ -6,13 +6,14 @@
     Main Toolbar Styles
         Search Bar Styles
         User Menu Styles
+    Side Navigation Styles
+        
     Content Container Styles
         Create Post Top Bar Styles
         Create Post FAB Styles
         Posts Footer Styles
     Post Creation Dialog Styles
         Class Selector Styles
-    Animations
 */
 
 
@@ -206,6 +207,14 @@ span:focus {
 /*---------------------------------------------------------
 ------------------- Main Toolbar Styles -------------------*/
 
+.toolbar-top {
+    z-index: 65;
+}
+
+#york_study_logo {
+    margin: 16px 24px 16px 0;
+}
+
 
 /*------- Search Bar Styles ------*/
 
@@ -250,6 +259,35 @@ md-icon.material-icons.search-bar-icon {
     pointer-events: inherit;
 }
 
+.overlay-search {
+    z-index: 100;
+    left: 0px;
+    padding-right: 16px;
+    background-color: rgb(161, 10, 25);
+    position: absolute;
+    opacity: 0;
+    top: -100%;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    transition: top 0.2s ease, opacity 0.2s ease;
+}
+
+.overlay-search.search-visible {
+    opacity: 1;
+    top: 0px;
+    pointer-events: initial;
+}
+
 
 /*------- User Menu Styles ------*/
 
@@ -265,6 +303,118 @@ md-icon.material-icons.search-bar-icon {
     background: -o-linear-gradient(#2072de, #1d67c7);
     background: linear-gradient(#2072de, #1d67c7);
     color: white;
+}
+
+
+/*--------------------------------------------------------------
+------------------- Side Navigation styles --------------------- */
+
+.sidenav-inline {
+    width: 252px;
+    background-color: #f2f2f2;
+    overflow: Hidden;
+    margin-right: 100px;
+    margin-left: -256px;
+    transition: margin 1s;
+    overflow-y: auto;
+}
+
+.sidenav-inline.xs,
+.sidenav-inline.sm {
+    margin-right: 0px;
+    margin-left: -256px;
+}
+
+.sidenav-inline.side-nav-open {
+    margin-left: 0px;
+    margin-right: 4px;
+}
+
+.side-nav-scroll {
+    overflow-y: auto;
+}
+
+.side-nav-scroll::-webkit-scrollbar {
+    background: transparent;
+    width: 8px;
+}
+
+.side-nav-scroll::-webkit-scrollbar-thumb {
+    background: #bdbdbd;
+}
+
+.side-nav md-menu-item {
+    width: 100%;
+}
+
+.sidenav-overlay .hover-search.sideNavClassSearch {
+    background-color: #fff;
+    width: 100%;
+    top: 0px;
+    left: -100%;
+    margin: 0;
+    box-sizing: border-box;
+    transition: left 0.2s ease, opacity 0.2s ease;
+}
+
+.sidenav-inline .hover-search.sideNavClassSearch {
+    background-color: #f2f2f2;
+    width: 100%;
+    top: 0px;
+    left: -100%;
+    box-sizing: border-box;
+    transition: left 0.2s ease, opacity 0.2s ease;
+}
+
+.hover-search.sideNavClassSearch.hover-search-visible {
+    left: 0;
+}
+
+.side-nav-classes md-menu-item>.md-button {
+    border-radius: 3px;
+}
+
+.side-nav-section {
+    border-bottom: 1px solid #ddd;
+}
+
+.side-nav-header {
+    display: block;
+    font-size: 14px;
+    text-transform: uppercase;
+    padding: 16px;
+    font-weight: 500;
+}
+
+.side-nav-option {
+    text-transform: none;
+    font-weight: 400;
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    text-align: start;
+    margin: 0 2px;
+    padding: 0 32px;
+    height: 48px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 16px;
+}
+
+.side-nav-classes {
+    margin-left: 12px;
+}
+
+.side-nav-bottom {
+    /*width: 100%;*/
+    border-top: 1px solid #ddd;
+}
+
+button.selected.md-button {
+    background-color: rgba(0, 0, 0, .05);
+    font-weight: bold;
+    color: #212121;
 }
 
 
@@ -290,6 +440,7 @@ md-icon.material-icons.search-bar-icon {
     padding-left: 8px;
     padding-right: 2px
 }
+
 
 /*------- Create Post Top Bar Styles -------- */
 
@@ -347,6 +498,7 @@ md-icon.material-icons.search-bar-icon {
     opacity: 1;
 }
 
+
 /*------ Create Post FAB Styles -------- */
 
 #speed_dial_container {
@@ -387,6 +539,7 @@ md-icon.material-icons.search-bar-icon {
     padding: 40px 0 20px 0;
     margin: auto;
 }
+
 
 /*-------------------------------------------------------------
 ----------------- Post Creation Dialog Styles -----------------*/
