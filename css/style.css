@@ -1,11 +1,15 @@
-/* Table of contents:
+/* ---- Table of contents: -----
     Universal Styles
         General Styles
         General Transitions
+        General Animations
     Main Toolbar Styles
         Search Bar Styles
+        User Menu Styles
     Content Container Styles
         Create Post Top Bar Styles
+        Create Post FAB Styles
+        Posts Footer Styles
     Post Creation Dialog Styles
         Class Selector Styles
     Animations
@@ -110,120 +114,7 @@ div:focus {
     box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32);
 }
 
-/*------------------------------------------------------------*/
-/*------------------- Main Toolbar Styles -------------------*/
-
-
-/*------- Search Bar Styles ------*/
-
-
-/*------- User Menu Styles ------*/
-
-
-/*------------------------------------------------------------*/
-/* --------------- Content Container Styles -----------------*/
-
-/*--------- Create Post Top Bar Styles ------------ */
-
-.create-post-bar-top {
-    width: 100%;
-    max-width: 570px;
-    min-height: 48px;
-    margin: 0px auto 16px auto;
-    padding-right: 6px;
-    position: relative;
-    display: flex;
-    box-sizing: border-box;
-    background-color: white;
-    border-radius: 2px;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-}
-
-.create-post-bar-top:hover {
-    background-color: rgba(158, 158, 158, 0.1);
-}
-
-.create-post-bar-text {
-    height: 100%;
-    top: 0px;
-    padding: 12px 0 12px 10px;
-    box-sizing: border-box;
-    display: inline-block;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    text-transform: none;
-    font-family: 'Roboto Slab', serif;
-    color: rgba(0, 0, 0, 0.6);
-}
-
-.create-post-bar-text:hover>md-icon {
-    color: black;
-}
-
-.create-post-bar-top span:not(.create-post-bar-text) {
-    height: 46px;
-    top: 0px;
-    padding: 12px 8px 12px 8px;
-    box-sizing: border-box;
-    display: inline-block;
-    color: black;
-    opacity: 0.6;
-    margin: 0 6px;
-    outline: none;
-    min-width: 0;
-    width: 40px;
-}
-
-.create-post-bar-top span:not(.create-post-bar-text):hover {
-    opacity: 1;
-}
-
-
-/*------ Create Post FAB styles -------- */
-
-#speed_dial_container {
-    padding-bottom: 20px;
-    bottom: 0px;
-    opacity: 1;
-    transition: all 0.4s ease;
-}
-
-#speed_dial_container.slide-out {
-    padding-bottom: 0px;
-    opacity: 0;
-    pointer-events: none;
-}
-
-#speed_dial_container #new_post_button {
-    transition: box-shadow 1s;
-}
-
-#speed_dial_container:hover #new_post_button {
-    box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32);
-    transition: box-shadow 0.3s;
-}
-
-
-/*------- Posts Footer Styles --------*/
-
-.footer-container {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    position: relative;
-}
-
-.footer {
-    text-align: center;
-    padding: 40px 0 20px 0;
-    margin: auto;
-}
-
-
-
-/*----------------------- Animations ----------------------------*/
+/*------- General Animations ------*/
 
 .rainbow:hover {
     filter: blur(5px);
@@ -238,10 +129,6 @@ div:focus {
     -ms-animation: rainbow2 4s infinite;
     -o-animation: rainbow2 4s infinite;
     animation: rainbow2 4s infinite;
-}
-
-.ugly-brown:hover {
-    background-color: #4d442e !important;
 }
 
 @keyframes rainbow {
@@ -307,3 +194,158 @@ div:focus {
         filter: invert(0%);
     }
 }
+
+/*------------------------------------------------------------*/
+/*------------------- Main Toolbar Styles -------------------*/
+
+
+/*------- Search Bar Styles ------*/
+
+
+/*------- User Menu Styles ------*/
+
+
+/*------------------------------------------------------------*/
+/* --------------- Content Container Styles -----------------*/
+
+ #content_container {
+ 	display: flex;
+ 	padding: 32px 100px 0px 8px;
+ 	background-color: #f2f2f2;
+ 	overflow-y: auto;
+ 	overflow-x: hidden;
+ 	flex-direction: column;
+ 	flex: 1;
+ }
+
+ #content_container.sm {
+ 	padding-left: 24px;
+ 	padding-right: 24px
+ }
+
+ #content_container.xs {
+ 	padding-left: 8px;
+ 	padding-right: 2px
+ }
+
+/*--------- Create Post Top Bar Styles ------------ */
+
+.create-post-bar-top {
+    width: 100%;
+    max-width: 570px;
+    min-height: 48px;
+    margin: 0px auto 16px auto;
+    padding-right: 6px;
+    position: relative;
+    display: flex;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.create-post-bar-top:hover {
+    background-color: rgba(158, 158, 158, 0.1);
+}
+
+.create-post-bar-text {
+    height: 100%;
+    top: 0px;
+    padding: 12px 0 12px 10px;
+    box-sizing: border-box;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-transform: none;
+    font-family: 'Roboto Slab', serif;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.create-post-bar-text:hover>md-icon {
+    color: black;
+}
+
+.create-post-bar-top span:not(.create-post-bar-text) {
+    height: 46px;
+    top: 0px;
+    padding: 12px 8px 12px 8px;
+    box-sizing: border-box;
+    display: inline-block;
+    color: black;
+    opacity: 0.6;
+    margin: 0 6px;
+    outline: none;
+    min-width: 0;
+    width: 40px;
+}
+
+.create-post-bar-top span:not(.create-post-bar-text):hover {
+    opacity: 1;
+}
+
+
+/*------ Create Post FAB Styles -------- */
+
+#speed_dial_container {
+    padding-bottom: 20px;
+    bottom: 0px;
+    opacity: 1;
+    transition: all 0.4s ease;
+}
+
+#speed_dial_container.slide-out {
+    padding-bottom: 0px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#speed_dial_container #new_post_button {
+    transition: box-shadow 1s;
+}
+
+#speed_dial_container:hover #new_post_button {
+    box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32);
+    transition: box-shadow 0.3s;
+}
+
+/*------- Posts Footer Styles --------*/
+
+.footer-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.footer {
+    text-align: center;
+    padding: 40px 0 20px 0;
+    margin: auto;
+}
+
+/*------------------------------------------------------------*/
+/*------------------- Post Creation Dialog Styles -------------------*/
+
+/*------- Class Selector Styles ----------*/
+
+.classSelectSearchbox input {
+    border: none;
+    outline: none;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+}
+
+.classSelectSearchbox {
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1), 0 0 0 0 rgba(0, 0, 0, 0.14), 0 0 0 0 rgba(0, 0, 0, 0.12);
+    padding-left: 10.667px;
+    height: 48px;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: auto;
+}
+

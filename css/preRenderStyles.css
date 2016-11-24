@@ -17,26 +17,6 @@
  	z-index: 0;
  }
 
- #content_container {
- 	display: flex;
- 	padding: 32px 100px 0px 8px;
- 	background-color: #f2f2f2;
- 	overflow-y: auto;
- 	overflow-x: hidden;
- 	flex-direction: column;
- 	flex: 1;
- }
-
- #content_container.sm {
- 	padding-left: 24px;
- 	padding-right: 24px
- }
-
- #content_container.xs {
- 	padding-left: 8px;
- 	padding-right: 2px
- }
-
  /*------------ login dialog styles ----------- */
 
  #welcome_dialog {
