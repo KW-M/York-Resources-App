@@ -1,14 +1,14 @@
  /* ---------------------------- Pre Render Styles ---------------------------------*/
  /* These styles are to be loaded before the page renders, but slow down load times */
  /*------------ background and layout styles ----------- */
- 
+
  body {
  	font-family: 'Helvetica Neue', Helvetica, 'Roboto', Arial, sans-serif;
  	background-color: #f2f2f2;
  	flex-direction: column;
  	display: flex;
  }
- 
+
  .horizontalContainer {
  	position: relative;
  	display: flex;
@@ -16,7 +16,7 @@
  	flex-direction: row;
  	z-index: 0;
  }
- 
+
  #content_container {
  	display: flex;
  	padding: 32px 100px 0px 8px;
@@ -26,19 +26,19 @@
  	flex-direction: column;
  	flex: 1;
  }
- 
+
  #content_container.sm {
  	padding-left: 24px;
  	padding-right: 24px
  }
- 
+
  #content_container.xs {
  	padding-left: 8px;
  	padding-right: 2px
  }
- 
+
  /*------------ login dialog styles ----------- */
- 
+
  #welcome_dialog {
  	top: 0;
     bottom: 0;
@@ -58,6 +58,17 @@
     z-index: 76;
     border-radius: 4px;
     box-shadow: 0 7px 8px -4px rgba(0, 0, 0, .2), 0 13px 19px 2px rgba(0, 0, 0, .14), 0 5px 24px 4px rgba(0, 0, 0, .12);
+}
+
+.overlay-background {
+	top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: 75;
+    transition: opacity .3s;
 }
 
 .signin-dialog-padding {
@@ -129,6 +140,10 @@
     cursor: pointer;
 }
 
+#welcome_dialog p:not(.signin-text), #welcome_dialog ul {
+    margin-top: 0px;
+}
+
 #dat_button {
     bottom: 0px;
     right: 6px;
@@ -136,8 +151,7 @@
     margin: 0;
     min-height: 1.5em;
     position: absolute;
-    opacity: 0.5; 
+    opacity: 0.5;
     line-height: inherit;
     font-size: 13px;
 }
- 

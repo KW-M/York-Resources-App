@@ -29,7 +29,6 @@ div:focus {
     margin: auto;
 }
 
-
 .fadeOut {
     opacity: 0;
     pointer-events: none;
@@ -132,17 +131,6 @@ div:focus {
     box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32);
 }
 
-.overlay-background {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, .7);
-    z-index: 75;
-    -webkit-transition: opacity .3s;
-    transition: opacity .3s;
-}
 
 md-input-container.button-select md-select-value {
     border-bottom: 0px !important;
