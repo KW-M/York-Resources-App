@@ -16,10 +16,8 @@
 */
 
 
-/*------------------------------------------------------------*/
-
-
-/*-------------------- Universal Styles ---------------------*/
+/*---------------------------------------------------------
+-------------------- Universal Styles ---------------------*/
 
 button:focus,
 div:focus,
@@ -205,11 +203,8 @@ span:focus {
 }
 
 
-/*------------------------------------------------------------*/
-
-
-/*------------------- Main Toolbar Styles -------------------*/
-
+/*---------------------------------------------------------
+------------------- Main Toolbar Styles -------------------*/
 
 
 /*------- Search Bar Styles ------*/
@@ -255,13 +250,26 @@ md-icon.material-icons.search-bar-icon {
     pointer-events: inherit;
 }
 
+
 /*------- User Menu Styles ------*/
 
+#account_picture {
+    Height: 3.5em;
+    Width: 3.5em;
+}
 
-/*------------------------------------------------------------*/
+#quizlet_connect_button.md-button {
+    background: -webkit-gradient(linear, 0 100%, 0 0, from(#2072de), to(#1d67c7));
+    background: -webkit-linear-gradient(#2072de, #1d67c7);
+    background: -moz-linear-gradient(#2072de, #1d67c7);
+    background: -o-linear-gradient(#2072de, #1d67c7);
+    background: linear-gradient(#2072de, #1d67c7);
+    color: white;
+}
 
 
-/* --------------- Content Container Styles -----------------*/
+/*--------------------------------------------------------
+--------------- Content Container Styles -----------------*/
 
 #content_container {
     display: flex;
@@ -282,7 +290,6 @@ md-icon.material-icons.search-bar-icon {
     padding-left: 8px;
     padding-right: 2px
 }
-
 
 /*------- Create Post Top Bar Styles -------- */
 
@@ -382,11 +389,8 @@ md-icon.material-icons.search-bar-icon {
     margin: auto;
 }
 
-
-/*------------------------------------------------------------*/
-
-
-/*------------------- Post Creation Dialog Styles -------------------*/
+/*-------------------------------------------------------------
+----------------- Post Creation Dialog Styles -----------------*/
 
 
 /*------- Class Selector Styles ----------*/
