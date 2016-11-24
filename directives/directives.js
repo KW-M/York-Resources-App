@@ -1,7 +1,6 @@
 // Put any directives you make here and the html template in a file in the directives/html/ folder
 
 // ----Outer UI----
-
 app.directive('sideNavInsides', function () {
     return {
         restrict: 'AE',
