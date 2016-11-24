@@ -347,7 +347,7 @@ md-icon.material-icons.search-bar-icon {
     width: 100%;
 }
 
-.sidenav-overlay .overla-search.sidenav-class-search {
+.sidenav-overlay .overlay-search.sidenav-class-search {
     background-color: #fff;
     width: 100%;
     top: 0px;
@@ -366,7 +366,7 @@ md-icon.material-icons.search-bar-icon {
     transition: left 0.2s ease, opacity 0.2s ease;
 }
 
-.hover-search.sidenav-class-search.hover-search-visible {
+.overlay-search.sidenav-class-search.search-visible {
     left: 0;
 }
 
