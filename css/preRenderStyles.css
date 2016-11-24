@@ -80,12 +80,10 @@
 
 .signin-dialog-tip {
     position: relative;
-    max-height: 1000px;
     padding: 0px 24px;
     overflow: hidden;
     flex: initial;
     border-top: 1px rgba(0, 0, 0, 0.2) solid;
-    transition: max-height 0.5s ease-in;
 }
 
 .signin-button-container {
@@ -154,4 +152,15 @@
     opacity: 0.5;
     line-height: inherit;
     font-size: 13px;
+}
+
+/*---------------------------- Universal Styles ---------------------------*/
+
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+    display: none !important;
 }

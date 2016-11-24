@@ -5,29 +5,7 @@ div:focus {
     outline: 0;
 }
 
-.signin-dialog-tip.hidden {
-    max-height: 0px;
-    transition: max-height 0.5s ease-out;
-}
 
-#welcome_dialog p:not(.signin-text),
-#welcome_dialog ul {
-    margin-top: 0px
-}
-
-.footer-container {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    position: relative;
-}
-
-.footer {
-    text-align: center;
-    padding: 40px 0 20px 0;
-    margin: auto;
-}
 
 .fadeOut {
     opacity: 0;
@@ -39,18 +17,6 @@ div:focus {
     opacity: 1;
     pointer-events: initial;
     transition: opacity 0.5s ease;
-}
-
-
-/* ---------------------- Genral Styles---------------------- */
-
-[ng\:cloak],
-[ng-cloak],
-[data-ng-cloak],
-[x-ng-cloak],
-.ng-cloak,
-.x-ng-cloak {
-    display: none !important;
 }
 
 .unselectable {
@@ -130,7 +96,6 @@ div:focus {
     transition: .2s;
     box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32);
 }
-
 
 md-input-container.button-select md-select-value {
     border-bottom: 0px !important;
@@ -297,4 +262,19 @@ md-input-container.button-select md-select-value {
         background-color: #4d442e;
         filter: invert(80%);
     }
+}
+
+
+.footer-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.footer {
+    text-align: center;
+    padding: 40px 0 20px 0;
+    margin: auto;
 }
