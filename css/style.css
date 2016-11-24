@@ -114,6 +114,10 @@ div:focus {
     box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32);
 }
 
+.ugly-brown:hover {
+    background-color: #4d442e !important;
+}
+
 /*------- General Animations ------*/
 
 .rainbow:hover {
@@ -348,4 +352,3 @@ div:focus {
     align-items: center;
     width: auto;
 }
-
