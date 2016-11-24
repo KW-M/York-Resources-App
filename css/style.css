@@ -9,12 +9,14 @@
     Animations
 */
 
+
 /*-------------------- Universal Styles ---------------------*/
 
 button:focus,
 div:focus {
     outline: 0;
 }
+
 
 /*--------------------- General Styles ----------------------*/
 
@@ -82,6 +84,7 @@ div:focus {
     border-bottom-left-radius: 3px;
 }
 
+
 /*--------------------- General Transitions ---------------------- */
 
 .fadeIn {
@@ -105,9 +108,12 @@ div:focus {
     box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32);
 }
 
+
 /*------------------- Main Toolbar Styles -------------------*/
 
+
 /*------- Search Bar Styles ------*/
+
 
 /*------- User Menu Styles ------*/
 
@@ -132,6 +138,9 @@ div:focus {
     align-items: center;
     width: auto;
 }
+
+/* ------------------------------------------------------------------*/
+/* ------------------------- Content container----------------------*/
 
 /*--------- Create Post Top Bar Styles ------------ */
 
@@ -189,6 +198,32 @@ div:focus {
     opacity: 1;
 }
 
+
+/*------ Create Post FAB styles -------- */
+
+#speed_dial_container {
+    padding-bottom: 20px;
+    bottom: 0px;
+    opacity: 1;
+    transition: all 0.4s ease;
+}
+
+#speed_dial_container.slide-out {
+    padding-bottom: 0px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#speed_dial_container #new_post_button {
+    transition: box-shadow 1s;
+}
+
+#speed_dial_container:hover #new_post_button {
+    box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32);
+    transition: box-shadow 0.3s;
+}
+
+
 /*------- Posts Footer Styles --------*/
 
 .footer-container {
@@ -204,6 +239,7 @@ div:focus {
     padding: 40px 0 20px 0;
     margin: auto;
 }
+
 
 /*----------------------- Animations ----------------------------*/
 
