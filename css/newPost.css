@@ -6,7 +6,7 @@
    
    .new_post_dialog_scroll {
       flex: 1;
-      transition: opacity 0.s ease;
+      transition: opacity 0.3s ease;
    }
    
    #dialog_header {
