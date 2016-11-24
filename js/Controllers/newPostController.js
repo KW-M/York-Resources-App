@@ -250,7 +250,7 @@
             $scope.Post.AttachmentId = originalPost.AttachmentId || ''
             $scope.Post.AttachmentName = originalPost.AttachmentName || ''
             $scope.Post.AttachmentIcon = originalPost.AttachmentIcon || ''
-            $scope.Post.Likes = originalPost.Likes || []
+            //$scope.Post.Likes = originalPost.Likes || []
             $scope.Post.PreviewImage = originalPost.PreviewImage || ''
             $mdDialog.hide();
         };
