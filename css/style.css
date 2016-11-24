@@ -120,7 +120,11 @@ div:focus {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 
-.new-post-text-top {
+.create-post-bar-top:hover {
+    background-color: rgba(158, 158, 158, 0.1);
+}
+
+.create-post-bar-text {
     height: 100%;
     top: 0px;
     padding: 12px 0 12px 10px;
@@ -134,15 +138,11 @@ div:focus {
     color: rgba(0, 0, 0, 0.6);
 }
 
-.new-post-text-top:hover>md-icon {
+.create-post-bar-text:hover>md-icon {
     color: black;
 }
 
-.new-post-bar-top:hover {
-    background-color: rgba(158, 158, 158, 0.1);
-}
-
-.new-post-option-button {
+.create-post-bar-top span:not(.create-post-bar-text) {
     height: 46px;
     top: 0px;
     padding: 12px 8px 12px 8px;
@@ -156,9 +156,11 @@ div:focus {
     width: 40px;
 }
 
-.new-post-option-button:hover {
+.create-post-bar-top span:not(.create-post-bar-text):hover {
     opacity: 1;
 }
+
+/* --------------------- class 
 
 .classSelectSearchbox input {
     border: none;
