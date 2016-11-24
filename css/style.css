@@ -15,11 +15,15 @@
     Animations
 */
 
+
 /*------------------------------------------------------------*/
+
+
 /*-------------------- Universal Styles ---------------------*/
 
 button:focus,
-div:focus {
+div:focus,
+span:focus {
     outline: 0;
 }
 
@@ -118,6 +122,7 @@ div:focus {
     background-color: #4d442e !important;
 }
 
+
 /*------- General Animations ------*/
 
 .rainbow:hover {
@@ -199,40 +204,87 @@ div:focus {
     }
 }
 
+
 /*------------------------------------------------------------*/
+
+
 /*------------------- Main Toolbar Styles -------------------*/
+
 
 
 /*------- Search Bar Styles ------*/
 
+.search-bar-container {
+    flex: 1;
+    margin: 0 10px 0 24px;
+    position: relative;
+}
+
+.search-bar {
+    padding: 0 40px 0 52px;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    height: 40px;
+    width: 100%;
+    font-size: 14px;
+}
+
+md-icon.material-icons.search-bar-icon {
+    margin: 8px 15px;
+    position: absolute;
+    color: #757575;
+    z-index: 60;
+    pointer-events: none;
+}
+
+.md-button.md-icon-button.search-bar-clear-button {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    margin: 0;
+    transform: scale(0.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity ease 200ms, transform ease 200ms;
+}
+
+.md-button.md-icon-button.search-bar-clear-button.has-text {
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: inherit;
+}
 
 /*------- User Menu Styles ------*/
 
 
 /*------------------------------------------------------------*/
+
+
 /* --------------- Content Container Styles -----------------*/
 
- #content_container {
- 	display: flex;
- 	padding: 32px 100px 0px 8px;
- 	background-color: #f2f2f2;
- 	overflow-y: auto;
- 	overflow-x: hidden;
- 	flex-direction: column;
- 	flex: 1;
- }
+#content_container {
+    display: flex;
+    padding: 32px 100px 0px 8px;
+    background-color: #f2f2f2;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex-direction: column;
+    flex: 1;
+}
 
- #content_container.sm {
- 	padding-left: 24px;
- 	padding-right: 24px
- }
+#content_container.sm {
+    padding-left: 24px;
+    padding-right: 24px
+}
 
- #content_container.xs {
- 	padding-left: 8px;
- 	padding-right: 2px
- }
+#content_container.xs {
+    padding-left: 8px;
+    padding-right: 2px
+}
 
-/*--------- Create Post Top Bar Styles ------------ */
+
+/*------- Create Post Top Bar Styles -------- */
 
 .create-post-bar-top {
     width: 100%;
@@ -313,6 +365,7 @@ div:focus {
     transition: box-shadow 0.3s;
 }
 
+
 /*------- Posts Footer Styles --------*/
 
 .footer-container {
@@ -329,8 +382,12 @@ div:focus {
     margin: auto;
 }
 
+
 /*------------------------------------------------------------*/
+
+
 /*------------------- Post Creation Dialog Styles -------------------*/
+
 
 /*------- Class Selector Styles ----------*/
 
