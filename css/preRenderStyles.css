@@ -78,11 +78,7 @@
 }
 
 .signin-button-container {
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
     flex: 1;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     position: relative;
 }
@@ -91,7 +87,6 @@
     opacity: 0;
     display: inline-block;
     margin: auto;
-    -webkit-transition: box-shadow .2s, background-color .2s, opacity .5s;
     transition: box-shadow .2s, background-color .2s, opacity .5s;
     background-color: #AF001A;
     width: 86px;
@@ -109,7 +104,6 @@
 }
 
 .signin-button:hover {
-    -webkit-transition: box-shadow .2s, background-color .2s;
     transition: box-shadow .2s, background-color .2s;
     box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32);
     background-color: #A20019;
