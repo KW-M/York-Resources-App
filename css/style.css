@@ -347,7 +347,7 @@ md-icon.material-icons.search-bar-icon {
     width: 100%;
 }
 
-.sidenav-overlay .hover-search.side-nav-class-search {
+.sidenav-overlay .overla-search.sidenav-class-search {
     background-color: #fff;
     width: 100%;
     top: 0px;
@@ -357,7 +357,7 @@ md-icon.material-icons.search-bar-icon {
     transition: left 0.2s ease, opacity 0.2s ease;
 }
 
-.sidenav-inline .hover-search.side-navclass-earch {
+.sidenav-inline .overlay-search.sidenav-class-search {
     background-color: #f2f2f2;
     width: 100%;
     top: 0px;
@@ -366,7 +366,7 @@ md-icon.material-icons.search-bar-icon {
     transition: left 0.2s ease, opacity 0.2s ease;
 }
 
-.hover-search.sideNavClassSearch.hover-search-visible {
+.hover-search.sidenav-class-search.hover-search-visible {
     left: 0;
 }
 
