@@ -554,7 +554,30 @@ button.selected.md-button {
     transition: all 400ms ease;
 }
 
+.post-card-title {
+    margin: 0px;
+    padding: 20px 16px 0px 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
+.post-card-creator {
+    margin: 0px 16px 0px 16px;
+    font-size: 13px;
+    color: rgba(0, 0, 0, .54);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
+}
+
+#post_card_description {
+    overflow: hidden;
+    margin: 16px 16px 0 16px;
+    max-height: 7em;
+    color: black;
+}
 
 /*------- Post Card Header Styles -------*/
 

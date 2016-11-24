@@ -7,12 +7,6 @@ app.directive('sideNavInsides', function () {
         templateUrl: 'directives/html/sideNavInsides.html'
     };
 });
-app.directive('addLowerButton', function () {
-    return {
-        restrict: 'E',
-        templateUrl: 'directives/html/addLowerButton.html'
-    };
-});
 
 // ----Posts layout pieces----
 
@@ -55,26 +49,3 @@ app.directive('contenteditable', ['$sce', function ($sce) {
         }
     };
 }]);
-
-// app.directive('getPosts', function() {
-//     return {
-//         restrict: 'AE',
-//         link: function(scope, elem, attrs) {
-//             scope.$parent.getQueryProperties = function() {
-//                 scope.$parent.queryProperties.Flagged = attrs.flagged;
-//                 scope.$parent.queryProperties.Class = attrs.class;
-//                 scope.$parent.queryProperties.CreatorEmail = attrs.creatorEmail;
-//                 scope.$parent.queryProperties.Type = attrs.type;
-//                 //scope.$parent.queryProperties.Bookmarked = attrs.bookmarked;
-//             }
-//         }
-//     };
-// });
-
-// ----New post pieces----
-app.directive('classSelectMenu', function () {
-    return {
-        restrict: 'E',
-        templateUrl: 'directives/html/classSelectMenu.html'
-    };
-});
