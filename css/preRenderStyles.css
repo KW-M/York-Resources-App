@@ -3,17 +3,15 @@
 
 /*------------ background and layout styles ----------- */
 
-html body {
-    font-family: 'Helvetica Neue', Helvetica, "Roboto", Arial, sans-serif;
+body {
+    font-family: 'Helvetica Neue', Helvetica, 'Roboto', Arial, sans-serif;
     background-color: #f2f2f2;
     flex-direction: column;
     display: flex;
 }
 
 .horizontalContainer {
-    /* The body is the vertical layout container*/
     position: relative;
-    -ms-flex: 1;
     flex: 1;
     display: -ms-flexbox;
     display: flex;
