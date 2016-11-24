@@ -1,3 +1,7 @@
+/* Table fo contents
+
+*/
+
 /*-------------------- Universal Styles --------------------- */
 
 button:focus,
@@ -120,6 +124,7 @@ div:focus {
     min-height: 48px;
     margin: 0px auto 16px auto;
     padding-right: 6px;
+    position: relative;
     display: flex;
     box-sizing: border-box;
     background-color: white;
@@ -145,7 +150,7 @@ div:focus {
     color: black;
 }
 
-.new-post-card-top:hover {
+.new-post-bar-top:hover {
     background-color: rgba(158, 158, 158, 0.1);
 }
 
