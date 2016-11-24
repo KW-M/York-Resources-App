@@ -319,15 +319,15 @@ md-icon.material-icons.search-bar-icon {
     overflow-y: auto;
 }
 
+.sidenav-inline.side-nav-open {
+    margin-left: 0px;
+    margin-right: 4px;
+}
+
 .sidenav-inline.xs,
 .sidenav-inline.sm {
     margin-right: 0px;
     margin-left: -256px;
-}
-
-.sidenav-inline.side-nav-open {
-    margin-left: 0px;
-    margin-right: 4px;
 }
 
 .side-nav-scroll {
@@ -386,7 +386,7 @@ md-icon.material-icons.search-bar-icon {
     font-weight: 500;
 }
 
-.side-nav-option {
+.side-nav-class {
     text-transform: none;
     font-weight: 400;
     display: -ms-flexbox;
