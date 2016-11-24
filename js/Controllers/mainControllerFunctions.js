@@ -262,6 +262,8 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             operation: operation
          },
          onComplete: function () {
+            var newPostDialog = document.getElementById("new_post_dialog");
+            //newPostDialog.style.visibility = 'initial'
             var newPostHeaderLink = document.getElementById("header_link");
             var newPostHeaderMetadata = document.getElementById("Metadata");
             var newPostHeaderImage = document.getElementById("header_image");

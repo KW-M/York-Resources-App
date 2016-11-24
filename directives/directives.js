@@ -8,15 +8,6 @@ app.directive('sideNavInsides', function () {
     };
 });
 
-// ----Posts layout pieces----
-
-app.directive('newPostContent', function () {
-    return {
-        restrict: 'E',
-        templateUrl: 'directives/html/newPostContent.html'
-    };
-});
-
 app.directive('contenteditable', ['$sce', function ($sce) {
     return {
         restrict: 'A', // only activate on element attribute
