@@ -13,8 +13,9 @@
         Create Post FAB Styles
         Posts Footer Styles
     Post Card Styles
+        Post Card Header Styles
+        Post Card Bottom Toolbar Styles
         Post Card Transitions
-        
     Post Creation Dialog Styles
         Class Selector Styles
 */
@@ -553,6 +554,10 @@ button.selected.md-button {
     transition: all 400ms ease;
 }
 
+
+
+/*------- Post Card Header Styles -------*/
+
 .post-card-header {
     height: 200px;
     width: 100%;
@@ -652,22 +657,12 @@ button.selected.md-button {
     opacity: 0;
 }
 
-.post-card-title {
-    margin: 0px;
-    padding: 20px 16px 0px 16px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+/* ------ Post Bottom Toolbar Styles ------- */
 
-.post-card-creator {
-    margin: 0px 16px 0px 16px;
-    font-size: 13px;
-    color: rgba(0, 0, 0, .54);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    word-break: break-all;
+.like-counter {
+    font-size: 16px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.54);
 }
 
 #like_thumb_button {
@@ -681,19 +676,6 @@ button.selected.md-button {
 
 #like_thumb_button.md-button .md-ripple-container {
     border-radius: 100px;
-}
-
-.like-counter {
-    font-size: 16px;
-    font-weight: 700;
-    color: rgba(0, 0, 0, 0.54);
-}
-
-#post_card_description {
-    overflow: hidden;
-    margin: 16px 16px 0 16px;
-    max-height: 7em;
-    color: black;
 }
 
 .small-icon {
