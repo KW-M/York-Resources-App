@@ -269,6 +269,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             var newPostHeaderImage = document.getElementById("header_image");
             var newPostHeaderTitle = document.getElementById("header_title");
             var newPostScroll = document.getElementsByClassName('new_post_dialog_scroll')[0];
+            newPostScroll.style.opacity = 1
             var newPostHeader = document.getElementById('dialog_header');
             newPostScroll.onscroll = function () {
                   if (newPostScroll.scrollTop < 141) {
