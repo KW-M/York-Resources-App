@@ -3,19 +3,20 @@
     General Styles
     General Transitions
     Main Toolbar Styles
-    Create Post Top Bar Styles
+    Search Bar Styles
     Class Selector Styles
+    Create Post Top Bar Styles
     Animations
 */
 
-/*-------------------- Universal Styles --------------------- */
+/*-------------------- Universal Styles ---------------------*/
 
 button:focus,
 div:focus {
     outline: 0;
 }
 
-/*--------------------- General Styles ---------------------- */
+/*--------------------- General Styles ----------------------*/
 
 .unselectable {
     -webkit-touch-callout: none;
@@ -104,9 +105,33 @@ div:focus {
     box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32);
 }
 
-/*---------- Main Toolbar Styles ------------*/
+/*------------------- Main Toolbar Styles -------------------*/
+
+/*------- Search Bar Styles ------*/
+
+/*------- User Menu Styles ------*/
 
 
+/*---- Class Selector Styles ----------*/
+
+.classSelectSearchbox input {
+    border: none;
+    outline: none;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+}
+
+.classSelectSearchbox {
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1), 0 0 0 0 rgba(0, 0, 0, 0.14), 0 0 0 0 rgba(0, 0, 0, 0.12);
+    padding-left: 10.667px;
+    height: 48px;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: auto;
+}
 
 /*--------- Create Post Top Bar Styles ------------ */
 
@@ -164,28 +189,7 @@ div:focus {
     opacity: 1;
 }
 
-/* ---------------- Class Selector Styles -----------------*/
-
-.classSelectSearchbox input {
-    border: none;
-    outline: none;
-    height: 100%;
-    width: 100%;
-    padding: 0;
-}
-
-.classSelectSearchbox {
-    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1), 0 0 0 0 rgba(0, 0, 0, 0.14), 0 0 0 0 rgba(0, 0, 0, 0.12);
-    padding-left: 10.667px;
-    height: 48px;
-    cursor: pointer;
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: auto;
-}
-
-/*------- Posts Footer S
+/*------- Posts Footer Styles --------*/
 
 .footer-container {
     display: flex;
