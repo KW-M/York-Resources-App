@@ -1,5 +1,10 @@
-/* Table fo contents
-
+/* Table of contents:
+    Universal Styles
+    General Styles
+    General Transitions
+    
+    Create Post Top Bar
+    
 */
 
 /*-------------------- Universal Styles --------------------- */
@@ -75,6 +80,8 @@ div:focus {
     border-bottom-left-radius: 3px;
 }
 
+/*--------------------- General Transitions ---------------------- */
+
 .fadeIn {
     opacity: 1;
     pointer-events: initial;
@@ -96,29 +103,10 @@ div:focus {
     box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32);
 }
 
-.classSelectSearchbox input {
-    border: none;
-    outline: none;
-    height: 100%;
-    width: 100%;
-    padding: 0;
-}
 
-.classSelectSearchbox {
-    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1), 0 0 0 0 rgba(0, 0, 0, 0.14), 0 0 0 0 rgba(0, 0, 0, 0.12);
-    padding-left: 10.667px;
-    height: 48px;
-    cursor: pointer;
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: auto;
-}
+/*--------- Create Post Top Bar ------------ */
 
-
-/*--------- new post top bar ------------ */
-
-.new-post-bar-top {
+.create-post-bar-top {
     width: 100%;
     max-width: 570px;
     min-height: 48px;
@@ -172,6 +160,24 @@ div:focus {
     opacity: 1;
 }
 
+.classSelectSearchbox input {
+    border: none;
+    outline: none;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+}
+
+.classSelectSearchbox {
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1), 0 0 0 0 rgba(0, 0, 0, 0.14), 0 0 0 0 rgba(0, 0, 0, 0.12);
+    padding-left: 10.667px;
+    height: 48px;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: auto;
+}
 
 /*----------------------- animation ----------------------------*/
 
