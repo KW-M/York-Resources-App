@@ -96,28 +96,3 @@
     md-icon.search-icon.ng-isolate-scope.material-icons .search-field:focus {
         color: rgba(255, 255, 255, 0.8);
     }
-    /* Search field placeholder colors to be compatable with all browsers */
-    
-    input.search-field::-webkit-input-placeholder {
-        color: #fff;
-    }
-    
-    input.search-field:focus::-webkit-input-placeholder {
-        color: #757575;
-    }
-    
-    input.search-field:-moz-placeholder {
-        color: #fff;
-    }
-    
-    input.search-field:focus:-moz-placeholder {
-        color: #757575;
-    }
-    
-    input.search-field:-ms-input-placeholder {
-        color: #fff;
-    }
-    
-    input.search-field:focus:-ms-input-placeholder {
-        color: #757575;
-    }
