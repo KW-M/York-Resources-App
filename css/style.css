@@ -185,6 +185,22 @@ div:focus {
     width: auto;
 }
 
+/*------- Posts Footer S
+
+.footer-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.footer {
+    text-align: center;
+    padding: 40px 0 20px 0;
+    margin: auto;
+}
+
 /*----------------------- Animations ----------------------------*/
 
 .rainbow:hover {
@@ -268,19 +284,4 @@ div:focus {
         background-color: #4d442e;
         filter: invert(0%);
     }
-}
-
-
-.footer-container {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    position: relative;
-}
-
-.footer {
-    text-align: center;
-    padding: 40px 0 20px 0;
-    margin: auto;
 }
