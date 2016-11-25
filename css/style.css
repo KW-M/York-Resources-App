@@ -352,6 +352,7 @@ md-icon.material-icons.search-bar-icon {
 }
 
 .side-nav md-menu-item {
+    user-select: none;
     width: 100%;
 }
 
@@ -392,6 +393,7 @@ md-icon.material-icons.search-bar-icon {
     text-transform: uppercase;
     padding: 16px;
     font-weight: 500;
+    user-select: none;
 }
 
 .side-nav-class {
@@ -461,6 +463,7 @@ button.selected.md-button {
     position: relative;
     display: flex;
     box-sizing: border-box;
+    cursor: pointer;
     background-color: white;
     border-radius: 2px;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
