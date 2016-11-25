@@ -192,7 +192,7 @@
                         <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}" class="post-card raise-on-hover">
                             <div class="post-card-header unselectable" md-ink-ripple="{{Post.Link != ''}}" ng-class="{'no-link': Post.Link == '', 'gDrive-type': Post.Type == 'gDrive'}" ng-click="openLink(Post.Link)">
                                 <img ng-src="{{Post.PreviewImage}}" class="post-card-image unselectable" ng-hide="Post.Link == ''"></img>
-                                <div class="image-gradient-overlay">
+                                <div class="gradient-overlay">
                                     <div class="gradient-overlay-metadata metadata-regular unselectable">
                                         <span ng-hide="Post.Class.Name == null"><md-icon>people</md-icon> {{Post.Class.Name}}</span>
                                         <span><md-icon>event</md-icon> {{Post.CreationDate | date : "mm/dd/yyyy"}}</span>

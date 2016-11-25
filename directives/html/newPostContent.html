@@ -3,7 +3,7 @@
       <md-toolbar id="dialog_header" class="post-card-header" ng-class="{'no-link':Post.Type == 'NoLink','md-whiteframe-3dp': (operation == 'view' && Post.Link == '' && newPostScroll > 0) || (operation != 'view' && newPostScroll > 139)}" md-ink-ripple="{{Post.Link != '' && operation == 'view'}}"
          ng-click="openLink(Post.Link)" ng-style="{'height': ((operation == 'view' && Post.Link == '') ? (60):(200-newPostScroll)) + 'px'}">
          <img ng-src="{{Post.PreviewImage}}" id="header_image" ng-class="{'post-card-image':operation == 'view'}"></img>
-         <div class="image-gradient-overlay new-post-img-gradient">
+         <div class="gradient-overlay new-post-img-gradient">
             <div id="header_title" style="opacity: 0" class="gradient-overlay-metadata metadata-regular">
                <h5 style="margin: 0">{{Post.Title}}</h5>
                <span style="font-weight:700; font-size:14px"><md-icon class="small-icon" style="color:white">people</md-icon> {{Post.Class.Name || 'No class'}}</span>
@@ -50,7 +50,7 @@
          </div>
          <md-progress-linear class="link-loading" md-mode="indeterminate" ng-disabled="!previewLoading"></md-progress-linear>
       </md-toolbar>
-      <div id="new_post_content" ng-class="{'small-margin': Post.Type == 'NoLink' && operation == 'view'}">
+      <div id="new_post_content" ng-class="{'small-header': Post.Type == 'NoLink' && operation == 'view'}">
                {{Post.Class}}
          <div flex layout="row">
             <md-select ng-model="Post.Class" ng-model-options="{trackBy: '$value.Name'}" ng-hide="operation == 'view'" class="md-no-underline" placeholder="Class" id="class_dropdown_button" md-on-close="clearClassSelectSearch()">
@@ -73,9 +73,9 @@
             </md-chips>
          </div>
          <div class="md-dialog-content">
-            <input ng-model="Post.Title" ng-readonly="operation === 'view'" class="newPostTitle md-title" placeholder="Title" md-autofocus>
+            <input ng-model="Post.Title" ng-readonly="operation === 'view'" class="new-post-title md-title" placeholder="Title" md-autofocus>
             <p class="post-card-creator md-subhead" style="margin:0" ng-hide="::Post.Creator.Name == undefined || Post.Creator.Name == myInfo.Name"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::Post.Creator.ClassOf}})</span></p>
-            <div contenteditable="{{operation != 'view'}}" ng-model="Post.Description" class="newPostBody"></div>
+            <div contenteditable="{{operation != 'view'}}" ng-model="Post.Description" class="new-post-body"></div>
          </div>
       </div>
    </md-dialog-content>

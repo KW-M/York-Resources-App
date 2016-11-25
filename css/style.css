@@ -7,7 +7,7 @@
         Search Bar Styles
         User Menu Styles
     Side Navigation Styles
-        
+
     Content Container Styles
         Create Post Top Bar Styles
         Create Post FAB Styles
@@ -73,6 +73,10 @@ span:focus {
 
 .dark-icon:hover {
     color: black;
+}
+
+.hover-black:hover {
+   color: black;
 }
 
 .full-height {
@@ -596,18 +600,6 @@ button.selected.md-button {
     cursor: default;
 }
 
-#new_post_content.small-margin + .post-card-header#dialog_header {
-    height: 60px;
-}
-
-#new_post_content{
-    margin-top: 200px;
-}
-
-#new_post_content.small-margin{
-    margin-top: 60px;
-}
-
 .post-card-image {
     width: 100%;
     margin-top: -2.5%;
@@ -621,7 +613,7 @@ button.selected.md-button {
     transform: translateY(0);
 }
 
-.image-gradient-overlay {
+.gradient-overlay {
     top: 0;
     right: 0;
     left: 0;
@@ -651,7 +643,7 @@ button.selected.md-button {
     overflow: hidden;
 }
 
-.image-gradient-overlay md-icon.material-icons {
+.gradient-overlay md-icon.material-icons {
     height: 1em;
     width: 1em;
     min-height: 0;
