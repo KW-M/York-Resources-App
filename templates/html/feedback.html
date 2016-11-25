@@ -1,22 +1,29 @@
 <md-dialog>
 	<md-dialog-content>
 		<form action="https://docs.google.com/a/york.org/forms/d/e/1FAIpQLSctToJKWAnKR_Y0alWolQtreBJP-GLlxsD20zbAYgKaMcVXNQ/formResponse" method="POST" target="_blank">
-			<div>
+			<md-radio-group class="md-accent">
 				<input type="radio" name="entry.1591633300" value="Comments" role="radio" aria-label="Comments">
-				<span>Comments</span>
-			</div>
-			<div>
-				<input type="radio" name="entry.1591633300" value="Questions" role="radio" aria-label="Questions">
-				<span>Questions</span>
-			</div>
-			<div>
-				<input type="radio" name="entry.1591633300" value="Bug Reports" role="radio" aria-label="Bug Reports">
-				<span>Bug Reports</span>
-			</div>
-			<div>
-				<input type="radio" name="entry.1591633300" value="Feature Request" role="radio" aria-label="Feature Request">
-				<span>Feature Request</span>
-			</div>
+				<md-radio-button name="entry.1591633300" value="Questions">Questions</md-radio-button>
+				<md-radio-button name="entry.1591633300" value="Bug Reports">Bug Reports</md-radio-button>
+				<md-radio-button name="entry.1591633300" value="Feature Request">Feature Requests</md-radio-button>
+			</md-radio-group>
+			<!--<div>-->
+			<input type="radio" name="entry.1591633300" value="Comments" role="radio" aria-label="Comments">
+			<!--	<span>Comments</span>-->
+			<!--</div>-->
+			<!--<div>-->
+			<!--	<input type="radio" name="entry.1591633300" value="Questions" role="radio" aria-label="Questions">-->
+			<!--	<span>Questions</span>-->
+			<!--</div>-->
+			<!--<div>-->
+			<!--	<input type="radio" name="entry.1591633300" value="Bug Reports" role="radio" aria-label="Bug Reports">-->
+			<!--	<span>Bug Reports</span>-->
+			<!--</div>-->
+			<!--<div>-->
+			<!--	<input type="radio" name="entry.1591633300" value="Feature Request" role="radio" aria-label="Feature Request">-->
+			<!--	<span>Feature Request</span>-->
+			<!--</div>-->
+
 			<md-input-container class="md-accent">
 				<textarea name="entry.326955045" rows="5" cols="0" dir="auto" aria-label="Feedback"></textarea>
 			</md-input-container>
