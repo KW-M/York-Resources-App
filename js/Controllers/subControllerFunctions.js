@@ -328,6 +328,15 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			fullscreen: ($mdMedia('xs')),
 		});
 	};
+	$scope.openFeedbackDialog = function () { //called by the top right toolbar help button
+		$mdDialog.show({
+			templateUrl: 'templates/html/feedback.html',
+			controller: DialogController,
+			parent: angular.element(document.body),
+			clickOutsideToClose: true,
+			fullscreen: ($mdMedia('xs')),
+		});
+	};
 	$scope.openOnboardingDialog = function () { //called by the top right toolbar help button
 		$mdDialog.show({
 			templateUrl: 'templates/html/onboarding.html',
