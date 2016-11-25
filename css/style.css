@@ -396,7 +396,7 @@ md-icon.material-icons.search-bar-icon {
     user-select: none;
 }
 
-.side-nav-class {
+.side-nav-class.md-button {
     text-transform: none;
     font-weight: 400;
     display: -ms-flexbox;
