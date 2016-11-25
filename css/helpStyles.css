@@ -1,25 +1,26 @@
     /*---------- help and first run element styles -------- */
-    .credits-cover{
-        opacity:0;
+    
+    .credits-cover {
+        opacity: 0;
         position: absolute;
         height: 100%;
         width: 100%;
         box-sizing: border-box;
-        pointer-events:none;
+        pointer-events: none;
         transition: opacity 0.5s ease, bottom 0.5s ease;
         bottom: -50%;
     }
     
-    .credits-cover-visible{
+    .credits-cover-visible {
         transition: opacity 0.5s ease, bottom 0.5s ease;
-        opacity:1;
-        pointer-events:initial;
+        opacity: 1;
+        pointer-events: initial;
         bottom: 0px;
     }
+    
     .credit-grid-tile {
         background-color: #eff0f2;
     }
-    
     
     .onboardingDialog md-tabs.md-accent {
         height: 100%
@@ -30,18 +31,18 @@
     }
     
     .onboardingDialog md-tabs-content-wrapper {
-        top:0px;
+        top: 0px;
     }
     
-    .onboardingDialogButton.md-button.md-fab{
+    .onboardingDialogButton.md-button.md-fab {
         background-color: white
     }
     
-    .onboardingDialogButton.md-button.md-fab:hover{
+    .onboardingDialogButton.md-button.md-fab:hover {
         background-color: white
     }
     
-    .onboardingDialogButton.md-button.md-fab md-icon{
+    .onboardingDialogButton.md-button.md-fab md-icon {
         color: rgb(71, 140, 249)
     }
     
@@ -71,11 +72,11 @@
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         height: 66%;
-        width:100%;
+        width: 100%;
         background-color: #7986cb;
     }
     
-    .onboardingDialog{
+    .onboardingDialog {
         background-color: #3f51b5;
         border-radius: 10px;
         font-family: Roboto;
@@ -85,10 +86,11 @@
         white-space: initial;
     }
     
-    .onboardingDialog.blueBackground{
+    .onboardingDialog.blueBackground {
         background-color: #68a143
     }
-    .onboardingDialog.greenBackground{
+    
+    .onboardingDialog.greenBackground {
         background-color: #68a143
     }
     
@@ -97,19 +99,20 @@
         padding-top: 32px;
     }
     
-    .onboardingTextHeader { 
+    .onboardingTextHeader {
         color: white;
-    font-size: 24px;
-    line-height: 32px;
-    padding-bottom: 8px;
+        font-size: 24px;
+        line-height: 32px;
+        padding-bottom: 8px;
     }
     
     .onboardingText {
         color: white;
-    font-weight: 300;
-    font-size: 16px;
-    height: 96px;
-    line-height: 24px;
-    padding-left: 24px;
-    padding-right: 24px;
+        font-weight: 300;
+        font-size: 16px;
+        height: 96px;
+        line-height: 24px;
+        padding-left: 24px;
+        padding-right: 24px;
     }
+    

@@ -147,6 +147,8 @@ input.new-post-title {
    -ms-user-select: none;
 }
 
+/*------- New Post Action Bar Styles --------*/
+
 button#New_Post_Submit.md-button {
    height: 36px;
    margin: 0px;
