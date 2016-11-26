@@ -378,7 +378,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	window.DriveErrorHandeler = function (error, item) {
 		console.warn(error);
 		console.log(item);
-		if (err)
 		if (error.hasOwnProperty('expectedDomain')) {
 			gapi.auth2.getAuthInstance().signOut();
 			$mdDialog.show($mdDialog.alert({
@@ -394,7 +393,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}
 		if (error.hasOwnProperty('result')) {
 			if (error.result.error.message == 'Invalid Credentials') {
-				console.log(authorizationService.getAuthToken())
+				console.log('Invalid Credentials - token: ' + authorizationService.getAuthToken())
+			} else if (error.result.error.reason == 'dailyLimitExceededUnreg') {
+				console.log('daily limit')
 			}
 		}
 		if (item.Err) {
