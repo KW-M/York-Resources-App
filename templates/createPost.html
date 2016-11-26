@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="css/newPost.css" />
+<link rel="stylesheet" href="css/createPost.css" />
 <md-dialog id="new_post_dialog" ng-style="{'background-color': Post.Class.Color}">
    <md-dialog-content class="new_post_dialog_scroll" style="opacity:0">
       <md-toolbar id="dialog_header" class="post-card-header" ng-class="{'no-link':Post.Type == 'NoLink','md-whiteframe-3dp': (operation == 'view' && Post.Link == '' && newPostScroll > 0) || (operation != 'view' && newPostScroll > 139)}" md-ink-ripple="{{Post.Link != '' && operation == 'view'}}"
