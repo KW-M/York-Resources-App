@@ -406,6 +406,10 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	window.checkAuthToken = function () {
 
 		}
+	window.clearUserInfo = function (){
+		$scope.visiblePosts = [];
+		$scope.userList = [];
+	}
 		//----------------------------------------------------
 		//---------------------- dev -------------------------
 	$scope.consoleLog = function (input, asAlert) {

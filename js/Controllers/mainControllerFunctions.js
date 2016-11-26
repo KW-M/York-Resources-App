@@ -13,7 +13,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    var drivePicker, uploadPicker;
    var getFileTimer = null;
    var conurancy_counter = 0;
-   var performantScrollEnabled = false;
 
    $scope.allPosts = [];
    $scope.searchPosts = [];
@@ -492,11 +491,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
 
    //----------------------------------------------------
    //---------------------- dev -------------------------
-   $mdTheming.setBrowserColor({
-      theme: 'default', // Default is 'default'
-      palette: 'primary', // Default is 'primary', any basic material palette and extended palettes are available
-      hue: '400' // Default is '800'
-   });
 
    $scope.logDuplicationIndexes = function () {
       console.log({
