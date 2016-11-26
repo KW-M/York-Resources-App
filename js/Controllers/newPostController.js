@@ -201,7 +201,7 @@
                 });
                 queue('other', GoogleDriveService.AppsScriptNewFile(), function (response) {
                     queue('drive', GoogleDriveService.updateDriveFile(response.data, metadata), function (reply) {
-                        $scope.updateLastPostedDate();
+                        $scope.updateLastPosted();
                         $mdToast.hide();
                     }, function (error) {
                         console.warn(error);
