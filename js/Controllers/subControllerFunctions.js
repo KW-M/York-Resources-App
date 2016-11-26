@@ -191,6 +191,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	$scope.signOut = function () {
 		authorizationService.handleSignoutClick();
 	};
+	$scope.hideSidebarSearch = function () {
+		
+	}
 	//----------------------------------------------------
 	// --------------- Post Card Functions ---------------
 	$scope.confirmDelete = function (content, arrayIndex) {
