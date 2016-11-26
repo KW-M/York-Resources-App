@@ -80,6 +80,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    }
 
    function onLocationChange() {
+      console.log('changing location')
       $scope.queryParams.q = $location.search().q || null;
       $scope.queryParams.classpath = $location.path().replace(/\//g, "") || 'all-posts';
       $scope.queryParams.id = $location.hash();

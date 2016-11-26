@@ -141,7 +141,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		console.log($scope.queryParams)
 		var output = inputSet.filter(function (post) {
 			if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
-				var Flagged = post.Flagged === $scope.queryParams.flagged || post.Flagged;
+				var Flagged = post.Flagged == $scope.queryParams.flagged;
 			} else {
 				var Flagged = true;
 			}
