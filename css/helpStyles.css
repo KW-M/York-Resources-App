@@ -116,3 +116,16 @@
         padding-right: 24px;
     }
     
+    .help_tabs md-tabs-wrapper{
+            position: fixed;
+    z-index: 100;
+    width: 100%;
+    background-color: white;
+    }
+    
+    .help_tabs md-tabs-content-wrapper{
+        margin-top:48px;
+    }
+    
+    
+    
