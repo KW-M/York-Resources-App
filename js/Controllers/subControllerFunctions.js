@@ -138,7 +138,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	//----------------------------------------------------
 	//-------------- Filtering & Sorting -----------------
 	$scope.filterPosts = function (inputSet) {
-		console.log($scope.queryParams)
 		var output = inputSet.filter(function (post) {
 			if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
 				var Flagged = post.Flagged == $scope.queryParams.flagged;
@@ -392,7 +391,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				}, 500);
 			});
 		}
-		if (error.hasOwnProperty('result')) {
+		if (error.result) {
 			console.log('hasResult')
 			if (error.result.error.message == 'Invalid Credentials') {
 				console.log('Invalid Credentials - token: ' + authorizationService.getAuthToken())
