@@ -183,22 +183,34 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}
 	};
 	$scope.FABClick = function () { //called by the top left toolbar menu button
-		if($scope.globals.FABisOpen == true) {
-			$scope.newPost({},'new')
+		if ($scope.globals.FABisOpen == true) {
+			$scope.newPost({}, 'new')
 		}
 
 	};
 	$scope.signOut = function () {
 		authorizationService.handleSignoutClick();
 	};
-	$scope.hideMobileSearch = function () {
-		document.getElementById("sidenav_class_search_input").blur();
+	$scope.toggleMobileSearch = function (toOpen) {
+		$ti
+		$scope.globals.sideNavClassSearchOpen = toOpen;
 		$scope.sideNavClassSearch = '';
-		
+		if (toOpen == true) {
+			document.getElementById("sidenav_class_search_input").focus();
+		} else {
+			document.getElementById("sidenav_class_search_input").blur();
+		}
 	}
-	$scope.hideSidenavClassSearch = function () {
-		
+	$scope.toggleSidenavClassSearch = function (toOpen) {
+		$scope.globals.sideNavClassSearchOpen = toOpen;
+		$scope.sideNavClassSearch = '';
+		if (toOpen == true) {
+			document.getElementById("sidenav_class_search_input").focus();
+		} else {
+			document.getElementById("sidenav_class_search_input").blur();
+		}
 	}
+
 	//----------------------------------------------------
 	// --------------- Post Card Functions ---------------
 	$scope.confirmDelete = function (content, arrayIndex) {
