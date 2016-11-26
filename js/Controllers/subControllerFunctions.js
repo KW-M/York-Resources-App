@@ -366,8 +366,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			controller: DialogController,
 			parent: angular.element(document.body),
 			scope: {
-				
-			}
+				fullscreen:	$mdMedia('xs'),
+			},
 			clickOutsideToClose: false,
 			fullscreen: ($mdMedia('xs')),
 		});
