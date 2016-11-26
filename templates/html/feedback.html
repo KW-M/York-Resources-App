@@ -6,7 +6,7 @@
 			display:none;	
 			}
 		</style>
-		<md-button class="md-icon-button md-raised" style="position: absolute; top: 0px; right: -6px; border-radius: 0 0 0 50px; padding: 0px 0 8px 8px;">
+		<md-button class="md-icon-button md-raised" ng-click="hideDialog()" style="position: absolute; top: 0px; right: -6px; border-radius: 0 0 0 50px; padding: 0px 0 8px 8px;">
 			<md-icon>close</md-icon>
 		</md-button>
 		<div style="background-color: rgb(140, 158, 255);height: 8px;width: 100%;"></div>
@@ -35,7 +35,7 @@
 					<textarea name="entry.1696159737" placeholder="Your answer" aria-label="Suggestions for improvement"></textarea>
 				</md-input-container>
 			</div>
-			<input type="submit" value="Submit" class="md-accent md-button md-raised" style="margin: 34px 0 0 0;"/>
+			<input type="submit" value="Submit" class="md-accent md-button md-raised" style="margin: 34px 0 0 0;" ng-click="hideDialog()"/>
 			<input style="display:none" type="radio" name="entry.1591633300" value="Comments" role="radio" aria-label="Comments" ng-checked="feedbackType == 'Comments'">
 			<input style="display:none" type="radio" name="entry.1591633300" value="Questions" role="radio" aria-label="Questions" ng-checked="feedbackType == 'Questions'">
 			<input style="display:none" type="radio" name="entry.1591633300" value="Bug Reports" role="radio" aria-label="Bug Reports" ng-checked="feedbackType == 'Bug Reports'">
