@@ -71,20 +71,20 @@
                         </md-button>
                     </div>
                 </div>
-                <div hide-gt-xs show-xs class="hover-search unselectable" ng-class="{'hover-search-visible' : globals.mobileSearchIsOpen}">
-                    <md-button class="md-icon-button unselectable" style="margin-right: 0; min-width:44px" ng-click="globals.mobileSearchIsOpen = !globals.mobileSearchIsOpen">
+                <div hide-gt-xs show-xs class="overlay-search unselectable" ng-class="{'search-visible' : globals.mobileSearchIsOpen}">
+                    <md-button class="md-icon-button unselectable" style="margin-right: 0; min-width:44px" ng-click="toggleMobileSearch(false)">
                         <md-icon>close</md-icon>
                     </md-button>
                     <div class="search-bar-container unselectable" style="margin:0">
                         <md-icon class="search-bar-icon">search</md-icon>
-                        <input class="search-bar unselectable" ng-model="searchInputTxt" ng-model-options="{ debounce: 500 }" placeholder="{{searchPlaceholder}}" />
+                        <input class="search-bar unselectable" ng-model="searchInputTxt" ng-model-options="{ debounce: 500 }" placeholder="{{searchPlaceholder}}" id="mobile_search_input"/>
                         <md-button ng-class="{'has-text': searchInputTxt}" ng-click="searchInputTxt = ''" class='search-bar-clear-button md-icon-button'>
                             <md-icon style="color:rgb(117,117,117)">close</md-icon>
                         </md-button>
                     </div>
                 </div>
                 <span flex hide-gt-xs show-xs></span>
-                <md-button hide-gt-xs show-xs class="md-icon-button unselectable" ng-click="globals.mobileSearchIsOpen = !globals.mobileSearchIsOpen">
+                <md-button hide-gt-xs show-xs class="md-icon-button unselectable" ng-click="toggleMobileSearch(true)">
                     <md-icon>search</md-icon>
                 </md-button>
                 <md-button class="md-icon-button unselectable" ng-click="getFiles()">

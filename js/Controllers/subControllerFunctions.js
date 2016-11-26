@@ -192,18 +192,21 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		authorizationService.handleSignoutClick();
 	};
 	$scope.toggleMobileSearch = function (toOpen) {
-		$ti
-		$scope.globals.sideNavClassSearchOpen = toOpen;
-		$scope.sideNavClassSearch = '';
+		$timeout(function() {
+		   	$scope.globals.mobileSearchIsOpen = toOpen;
+			$scope.searchInputTxt = ''; 
+		})
 		if (toOpen == true) {
-			document.getElementById("sidenav_class_search_input").focus();
+			document.getElementById("mobile_search_input").focus();
 		} else {
-			document.getElementById("sidenav_class_search_input").blur();
+			document.getElementById("mobile_search_input").blur();
 		}
 	}
 	$scope.toggleSidenavClassSearch = function (toOpen) {
-		$scope.globals.sideNavClassSearchOpen = toOpen;
-		$scope.sideNavClassSearch = '';
+		$timeout(function() {
+		   	$scope.globals.sideNavClassSearchOpen = toOpen;
+			$scope.sideNavClassSearch = '';
+		})
 		if (toOpen == true) {
 			document.getElementById("sidenav_class_search_input").focus();
 		} else {
