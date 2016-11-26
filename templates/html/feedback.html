@@ -4,20 +4,26 @@
 			<div style="" class="md-display-1">Feedback</div>
 			<div style="white-space: pre-wrap; line-height: 17.55px; margin-top: 22px; font-size: 13px;">I would love to hear your thoughts or feedback on how StudyHub can be improved!</div>
 			<div style="margin-top: 2px; padding: 16px 0px;">
-			<div style="font-size: 20px; line-height: 27px; width: 133.016px;">Feedback Type</div>
-			<md-radio-group class="md-accent" ng-model="feedbackType">>
-				<md-radio-button value="Comments">Comments</md-radio-button>
-				<md-radio-button value="Questions">Questions</md-radio-button>
-				<md-radio-button value="Bug Reports">Bug Reports</md-radio-button>
-				<md-radio-button value="Feature Requests">Feature Requests</md-radio-button>
-			</md-radio-group>
-			
-			<md-input-container class="md-accent">
-				<textarea name="entry.326955045" rows="5" cols="0" dir="auto" aria-label="Feedback"></textarea>
-			</md-input-container>
-			<md-input-container class="md-accent">
-				<textarea name="entry.1696159737" rows="5" cols="0" dir="auto" aria-label="Suggestions for improvement"></textarea>
-			</md-input-container>
+				<div style="font-size: 20px; line-height: 27px; width: 100%;">Feedback Type</div>
+				<md-radio-group class="md-accent" ng-model="feedbackType">
+					<md-radio-button value="Comments">Comments</md-radio-button>
+					<md-radio-button value="Questions">Questions</md-radio-button>
+					<md-radio-button value="Bug Reports">Bug Reports</md-radio-button>
+					<md-radio-button value="Feature Requests">Feature Requests</md-radio-button>
+				</md-radio-group>
+			</div>
+			<div style="margin-top: 2px; padding: 16px 0px;">
+				<div style="font-size: 20px; line-height: 27px; width: 100%;">Feedback</div>
+				<md-input-container class="md-accent">
+					<textarea name="entry.326955045" placeholder="Your answer" dir="auto" aria-label="Feedback"></textarea>
+				</md-input-container>
+			</div>
+			<div style="margin-top: 2px; padding: 16px 0px;">
+				<div style="font-size: 20px; line-height: 27px; width: width: 100%;">Suggestions for improvement</div>
+				<md-input-container class="md-accent">
+					<textarea name="entry.1696159737" dir="auto" aria-label="Suggestions for improvement"></textarea>
+				</md-input-container>
+			</div>
 			<input type="submit" value="Submit" class="md-accent md-button md-raised" />
 			<input style="display:none" type="radio" name="entry.1591633300" value="Comments" role="radio" aria-label="Comments" ng-checked="feedbackType == 'Comments'">
 			<input style="display:none" type="radio" name="entry.1591633300" value="Questions" role="radio" aria-label="Questions" ng-checked="feedbackType == 'Questions'">
