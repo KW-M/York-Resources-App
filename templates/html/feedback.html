@@ -1,6 +1,13 @@
 <md-dialog>
-	<div style="background-color: rgb(140, 158, 255);height: 8px;width: 100%;"></div>
-	<md-dialog-content style="color: rgba(0,0,0,.87);padding: 34px 17px;">
+	<md-dialog-content>
+		<style type="text/css">
+			md-input-container.feedback-text-box .md-errors-spacer
+			{
+			display:none;	
+			}
+		</style>
+		<div style="background-color: rgb(140, 158, 255);height: 8px;width: 100%;"></div>
+		<div style="color: rgba(0,0,0,.87);padding: 34px 17px;">
 		<form action="https://docs.google.com/a/york.org/forms/d/e/1FAIpQLSctToJKWAnKR_Y0alWolQtreBJP-GLlxsD20zbAYgKaMcVXNQ/formResponse" method="POST" target="_blank" style="padding:0 17px;">
 			<div class="md-display-1">Feedback</div>
 			<div style="white-space: pre-wrap; line-height: 17.55px; margin-top: 22px; font-size: 13px;margin-bottom:22px">I would love to hear your thoughts or feedback on how StudyHub can be improved!</div>
@@ -15,13 +22,13 @@
 			</div>
 			<div style="margin-top: 2px; padding: 16px 0px;">
 				<div style="font-size: 20px; line-height: 27px; width: 100%;">Feedback</div>
-				<md-input-container class="md-accent" md-no-float style="width:100%; margin:0; height:30px; padding: 14px 0px 0px 0;">
+				<md-input-container class="md-accent feedback-text-box" md-no-float style="width:100%; margin:0; padding: 14px 0px 0px 0;">
 					<textarea name="entry.326955045" placeholder="Your answer" aria-label="Feedback"></textarea>
 				</md-input-container>
 			</div>
 			<div style="margin-top: 2px; padding: 16px 0px;" >
 				<div style="font-size: 20px; line-height: 27px; width: width: 100%;">Suggestions for improvement</div>
-				<md-input-container class="md-accent" md-no-float style="width:100%;  margin:0; height:30px; padding: 14px 0px 0px 0;">
+				<md-input-container class="md-accent feedback-text-box" md-no-float style="width:100%;  margin:0; padding: 14px 0px 0px 0;">
 					<textarea name="entry.1696159737" placeholder="Your answer" aria-label="Suggestions for improvement"></textarea>
 				</md-input-container>
 			</div>
@@ -31,5 +38,6 @@
 			<input style="display:none" type="radio" name="entry.1591633300" value="Bug Reports" role="radio" aria-label="Bug Reports" ng-checked="feedbackType == 'Bug Reports'">
 			<input style="display:none" type="radio" name="entry.1591633300" value="Feature Request" role="radio" aria-label="Feature Request" ng-checked="feedbackType == 'Feature Requests'">
 		</form>
+		</div>
 	</md-dialog-content>
 </md-dialog>
