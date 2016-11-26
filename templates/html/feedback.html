@@ -1,11 +1,12 @@
 <md-dialog>
-	<md-dialog-content class="md-dialog-content">
-		<form action="https://docs.google.com/a/york.org/forms/d/e/1FAIpQLSctToJKWAnKR_Y0alWolQtreBJP-GLlxsD20zbAYgKaMcVXNQ/formResponse" method="POST" target="_blank">
-			<div style="" class="md-display-1">Feedback</div>
-			<div style="white-space: pre-wrap; line-height: 17.55px; margin-top: 22px; font-size: 13px;">I would love to hear your thoughts or feedback on how StudyHub can be improved!</div>
+	<div style="background-color: rgb(140, 158, 255);height: 8px;width: 100%;"></div>
+	<md-dialog-content style="color: rgba(0,0,0,.87);padding: 34px 17px;">
+		<form action="https://docs.google.com/a/york.org/forms/d/e/1FAIpQLSctToJKWAnKR_Y0alWolQtreBJP-GLlxsD20zbAYgKaMcVXNQ/formResponse" method="POST" target="_blank" style="padding:0 17px;">
+			<div class="md-display-1">Feedback</div>
+			<div style="white-space: pre-wrap; line-height: 17.55px; margin-top: 22px; font-size: 13px;margin-bottom:22px">I would love to hear your thoughts or feedback on how StudyHub can be improved!</div>
 			<div style="margin-top: 2px; padding: 16px 0px;">
-				<div style="font-size: 20px; line-height: 27px; width: 100%;">Feedback Type</div>
-				<md-radio-group class="md-accent" ng-model="feedbackType" style="padding: 14px 0px 0px 0;">
+				<div style="font-size: 20px; line-height: 27px; width: 100%; padding-bottom:14px">Feedback Type</div>
+				<md-radio-group class="md-accent" ng-model="feedbackType">
 					<md-radio-button value="Comments">Comments</md-radio-button>
 					<md-radio-button value="Questions">Questions</md-radio-button>
 					<md-radio-button value="Bug Reports">Bug Reports</md-radio-button>
