@@ -2,39 +2,45 @@
 <md-dialog style="overflow: hidden;">
   <md-dialog-content>
     <div style="height:100%; overflow:auto">
-    <md-tabs md-dynamic-height md-border-bottom class="help-tabs">
-      <md-tab label="About">
-        <md-content class="md-padding">
-          <h1 class="md-display-1">About the Project</h1>
-          what?
-        </md-content>
-      </md-tab>
-      <md-tab label="Crating Posts">
-        <md-content class="md-padding">
-          <h1 class="md-display-1">Crating Posts</h1>
-          <p>at non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+      <md-tabs md-dynamic-height md-border-bottom class="help-tabs">
+        <md-tab label="About">
+          <md-content class="md-padding">
+            <h1 class="md-display-1">About the Project</h1>
+            what?
           </md-content>
-      </md-tab>
-      <md-tab label="Searching">
-        <md-content class="md-padding">
-          <h1 class="md-display-1">Searching</h1>
-          Search man. Search!
-        </md-content>
-      </md-tab>
-      <md-tab label="Troubleshooting">
-        <md-content class="md-padding">
-          <h1 class="md-display-1">Troubleshooting</h1>
-          <p>
-          1. Try refreshing the page
-          2. Try incognito or private mode
-              If you are having trouble loging when not in private mode, try going to Google.com and loging out there
-          </p>    
-        </md-content>
-      </md-tab>
-    </md-tabs>
+        </md-tab>
+        <md-tab label="Creating Posts">
+          <md-content class="md-padding">
+            <h1 class="md-display-1">Creating Posts</h1>
+            <p>at non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+          </md-content>
+        </md-tab>
+        <md-tab label="Searching">
+          <md-content class="md-padding">
+            <h1 class="md-display-1">Searching</h1>
+            Search man. Search!
+          </md-content>
+        </md-tab>
+        <md-tab label="Troubleshooting">
+          <md-content class="md-padding">
+            <h1 class="md-display-1">Troubleshooting</h1>
+            <p>
+              <ol>
+                <li>
+                  <h3>Try refreshing the page</h3>
+                </li>
+                <li>
+                  <h3>Try incognito or private mode</h3>
+                  <span>If you are having trouble loging when not in private mode, try going to Google.com and loging out there</span>
+                </li>
+                <ol>
+            </p>
+          </md-content>
+        </md-tab>
+      </md-tabs>
     </div>
     <div class="md-padding credits-cover" ng-class="{'credits-cover-visible' : creditsVisible}" ng-click="creditsVisible = false" style="background-color: wheat; z-index:200">
-      
+
     </div>
   </md-dialog-content>
   <md-dialog-actions>
