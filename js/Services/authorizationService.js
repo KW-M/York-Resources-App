@@ -77,7 +77,7 @@ function authService($mdDialog) {
     this.handleSigninClick = function(callback) {
         gapi.auth2.getAuthInstance().signIn(function () {
             if (callback) {
-                callback
+                callback()
             }
         })
     }
