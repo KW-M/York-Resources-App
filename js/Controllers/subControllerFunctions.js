@@ -392,6 +392,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			});
 		}
 		if (error.hasOwnProperty('result')) {
+			console.log('hasResult')
 			if (error.result.error.message == 'Invalid Credentials') {
 				console.log('Invalid Credentials - token: ' + authorizationService.getAuthToken())
 			} else if (error.result.error.reason == 'dailyLimitExceededUnreg') {
