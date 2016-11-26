@@ -17,15 +17,15 @@
     var number = (Math.floor(Math.random() * (inputArray.length - 0)));
     return inputArray[number]
   }
-  
-  Date.prototype.addDays = function(days) {
+
+  Date.prototype.addDays = function (days) {
     this.setDate(this.getDate() + parseInt(days));
     return this;
   };
   // Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
   function queue(typeName, promise, action, error, interval) {
     typeName = typeName || 'general'
-    if(!theQueue[typeName]) {
+    if (!theQueue[typeName]) {
       theQueue[typeName] = [];
     }
     theQueue[typeName].push({
@@ -35,7 +35,9 @@
     });
     if (!timer[typeName]) {
       processTheQueue(typeName); // start immediately on the first invocation
-      timer[typeName] = setInterval(function(){processTheQueue(typeName)}, interval || 150);
+      timer[typeName] = setInterval(function () {
+        processTheQueue(typeName)
+      }, interval || 150);
     }
   };
 
@@ -43,28 +45,28 @@
     var item = theQueue[typeName].shift();
     if (item) {
       var delay = 0;
-      runPromise();
-
-      function runPromise() {
-        var thePromise = item.Promise;
-        thePromise.then(item.Action, function(error) {
-          if (item.Err) {
-            item.Err(error);
-          } else {
-            if (delay < 4) {
-              setTimeout(function() {
-                runPromise();
-              }, (delay = Math.max(delay *= 2, 1)) * 1000);
-            } else {
-              item.Err(error) || "";
-            }
-          }
-        });
-      }
+      runPromise(item);
     }
     if (theQueue[typeName].length === 0) {
       clearInterval(timer[typeName]), timer[typeName] = null;
     }
+  }
+
+  function runPromise(item) {
+    var thePromise = item.Promise;
+    thePromise.then(item.Action, function (error) {
+      if (item.Err) {
+        item.Err(error);
+      } else {
+        if (delay < 4) {
+          setTimeout(function () {
+            runPromise();
+          }, (delay = Math.max(delay *= 2, 1)) * 1000);
+        } else {
+          item.Err(error) || "";
+        }
+      }
+    });
   }
 
   function addDays(date, days) {
@@ -73,35 +75,10 @@
     return result;
   }
 
-  // function RateLimit(fn, delay, context) {
-  //   var queue = [],
-  //     timer = null;
-
-  //   function processQueue() {
-  //     var item = queue.shift();
-  //     if (item)
-  //       fn.apply(item.context, item.arguments);
-  //     if (queue.length === 0)
-  //       clearInterval(timer), timer = null;
-  //   }
-
-  //   return function limited() {
-  //     queue.push({
-  //       context: context || this,
-  //       arguments: [].slice.call(arguments)
-  //     });
-  //     if (!timer) {
-  //       processQueue(); // start immediately on the first invocation
-  //       timer = setInterval(processQueue, delay);
-  //     }
-  //   }
-  // }
-
-  //window.scrollTo(0,1);
-  document.addEventListener('touchmove', function(e){
+  document.addEventListener('touchmove', function (e) {
     e.preventDefault();
   }, false);
-  
+
   /*
    * rfc3339date.js version 0.1.3
    *
@@ -115,9 +92,9 @@
    *   var d = new Date().toRFC3339LocaleString();  =>  "2010-07-25T19:51:31.427+08:00"
    */
 
-  Number.prototype.toPaddedString = function(len, fillchar) {
+  Number.prototype.toPaddedString = function (len, fillchar) {
     var result = this.toString();
-    if (typeof(fillchar) == 'undefined') {
+    if (typeof (fillchar) == 'undefined') {
       fillchar = '0'
     };
     while (result.length < len) {
@@ -126,7 +103,7 @@
     return result;
   }
 
-  Date.prototype.toRFC3339UTCString = function(supressFormating, supressMillis) {
+  Date.prototype.toRFC3339UTCString = function (supressFormating, supressMillis) {
     var dSep = (supressFormating ? '' : '-');
     var tSep = (supressFormating ? '' : ':');
     var result = this.getUTCFullYear().toString();
@@ -139,7 +116,7 @@
     return result + 'Z';
   }
 
-  Date.prototype.toRFC3339LocaleString = function(supressFormating, supressMillis) {
+  Date.prototype.toRFC3339LocaleString = function (supressFormating, supressMillis) {
     var dSep = (supressFormating ? '' : '-');
     var tSep = (supressFormating ? '' : ':');
     var result = this.getFullYear().toString();
@@ -156,7 +133,7 @@
     return result;
   }
 
-  Date.parseRFC3339 = function(dString) {
+  Date.parseRFC3339 = function (dString) {
     if (typeof dString != 'string') return;
     var result;
     var regexp = /(\d\d\d\d)(-)?(\d\d)(-)?(\d\d)(T)?(\d\d)(:)?(\d\d)?(:)?(\d\d)?([\.,]\d+)?($|Z|([+-])(\d\d)(:)?(\d\d)?)/i;
@@ -195,7 +172,7 @@
     Date.parse = Date.parseRFC3339;
   } else {
     var oldparse = Date.parse;
-    Date.parse = function(d) {
+    Date.parse = function (d) {
       var result = Date.parseRFC3339(d);
       if (!result && oldparse) {
         result = oldparse(d);
@@ -204,22 +181,23 @@
     }
   }
 
-  var caesarShift = function(str, amount) {
-  //Call it like this: caesarShift('Attack at dawn!', 12); Returns "Mffmow mf pmiz!"
-  // And reverse it like this: caesarShift('Mffmow mf pmiz!', -12); Returns "Attack at dawn!"
-	if (amount < 0)
-		return caesarShift(str, amount + 26);
-	var output = '';
-	for (var i = 0; i < str.length; i ++) {
-		var c = str[i];
-		if (c.match(/[a-z]/i)) {
-			var code = str.charCodeAt(i);
-			if ((code >= 65) && (code <= 90))
-				c = String.fromCharCode(((code - 65 + amount) % 26) + 65);
-			else if ((code >= 97) && (code <= 122))
-				c = String.fromCharCode(((code - 97 + amount) % 26) + 97);
-		}
-		output += c;
-	}
-	return output;
-};
+  var caesarShift = function (str, amount) {
+    //Call it like this: caesarShift('Attack at dawn!', 12); Returns "Mffmow mf pmiz!"
+    // And reverse it like this: caesarShift('Mffmow mf pmiz!', -12); Returns "Attack at dawn!"
+    if (amount < 0)
+      return caesarShift(str, amount + 26);
+    var output = '';
+    for (var i = 0; i < str.length; i++) {
+      var c = str[i];
+      if (c.match(/[a-z]/i)) {
+        var code = str.charCodeAt(i);
+        if ((code >= 65) && (code <= 90))
+          c = String.fromCharCode(((code - 65 + amount) % 26) + 65);
+        else if ((code >= 97) && (code <= 122))
+          c = String.fromCharCode(((code - 97 + amount) % 26) + 97);
+      }
+      output += c;
+    }
+    return output;
+  };
+  
