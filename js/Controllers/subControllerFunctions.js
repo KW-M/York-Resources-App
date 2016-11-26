@@ -376,7 +376,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	//----------------------------------------------------
 	//----------------- Error Handling -------------------
 	window.DriveErrorHandeler = function (error, item) {
-		console.warn(item);
+		console.warn(error);
+		console.log(item);
+		if (err)
 		if (error.hasOwnProperty('expectedDomain')) {
 			gapi.auth2.getAuthInstance().signOut();
 			$mdDialog.show($mdDialog.alert({
@@ -392,11 +394,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}
 		if (error.hasOwnProperty('result')) {
 			if (error.result.error.message == 'Invalid Credentials') {
-				//console.log(authorizationService.getAuthToken())
+				console.log(authorizationService.getAuthToken())
 			}
 		}
-		if (callback) {
-			callback(error)
+		if (item.Err) {
+			item.Err(error)
 		}
 	}
 	window.checkAuthToken = function () {
