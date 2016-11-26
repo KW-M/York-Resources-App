@@ -481,6 +481,18 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             $scope.devMode = devMode;
          })
       }
+      if (e.keyCode == 75){
+         alert('handeling signin click')
+         authorizationService.handleSigninClick(function(){
+            alert('done')
+         });
+      }
+      if (e.keyCode == 76){
+         alert('running siginin initialization')
+         authorizationService.initilize(function(){
+            alert('done')
+         })
+      }
    }
 
    $scope.updateVisiblePosts = function (array, callback) {

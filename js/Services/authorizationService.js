@@ -35,7 +35,9 @@ function authService($mdDialog) {
                 var currentUser = authInstance.currentUser.get()
                 var accountDomain = currentUser.getHostedDomain()
                 if (accountDomain === 'york.org') {
-                    callback();
+                    if (callback){
+                        callback();
+                    };
                     self.hideSigninButton();
                 } else {
 
@@ -72,8 +74,12 @@ function authService($mdDialog) {
         signinDialog.removeClass('fadeOut');
     };
 
-    this.handleSigninClick = function() {
-        gapi.auth2.getAuthInstance().signIn()
+    this.handleSigninClick = function(callback) {
+        gapi.auth2.getAuthInstance().signIn(function () {
+            if (callback) {
+                callback
+            }
+        })
     }
 
     this.handleSignoutClick = function() {
