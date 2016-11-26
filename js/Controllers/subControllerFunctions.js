@@ -192,9 +192,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		authorizationService.handleSignoutClick();
 	};
 	$scope.toggleMobileSearch = function (toOpen) {
-		$timeout(function() {
-		   	$scope.globals.mobileSearchIsOpen = toOpen;
-			$scope.searchInputTxt = ''; 
+		$timeout(function () {
+			$scope.globals.mobileSearchIsOpen = toOpen;
+			$scope.searchInputTxt = '';
 		})
 		if (toOpen == true) {
 			document.getElementById("mobile_search_input").focus();
@@ -203,8 +203,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}
 	}
 	$scope.toggleSidenavClassSearch = function (toOpen) {
-		$timeout(function() {
-		   	$scope.globals.sideNavClassSearchOpen = toOpen;
+		$timeout(function () {
+			$scope.globals.sideNavClassSearchOpen = toOpen;
 			$scope.sideNavClassSearch = '';
 		})
 		if (toOpen == true) {
