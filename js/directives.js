@@ -1,10 +1,10 @@
-// Put any directives you make here and the html template in a file in the directives/html/ folder
+// Put any directives you make here and the html template in a file in the /templates folder
 
 // ----Outer UI----
 app.directive('sideNavInsides', function () {
     return {
         restrict: 'AE',
-        templateUrl: 'directives/html/sideNavInsides.html'
+        templateUrl: 'templates/sideNavigation.html'
     };
 });
 

@@ -344,7 +344,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	}
 	$scope.openHelpDialog = function () { //called by the top right toolbar help button
 		$mdDialog.show({
-			templateUrl: 'templates/html/help.html',
+			templateUrl: 'templates/help.html',
 			controller: DialogController,
 			parent: angular.element(document.body),
 			clickOutsideToClose: true,
@@ -353,7 +353,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	};
 	$scope.openFeedbackDialog = function () { //called by the top right toolbar help button
 		$mdDialog.show({
-			templateUrl: 'templates/html/feedback.html',
+			templateUrl: 'templates/feedback.html',
 			controller: DialogController,
 			parent: angular.element(document.body),
 			clickOutsideToClose: true,
@@ -362,7 +362,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	};
 	$scope.openOnboardingDialog = function () { //called by the top right toolbar help button
 		$mdDialog.show({
-			templateUrl: 'templates/html/onboarding.html',
+			templateUrl: 'templates/onboard.html',
 			controller: DialogController,
 			parent: angular.element(document.body),
 			clickOutsideToClose: false,
