@@ -191,7 +191,12 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	$scope.signOut = function () {
 		authorizationService.handleSignoutClick();
 	};
-	$scope.hideSidebarSearch = function () {
+	$scope.hideMobileSearch = function () {
+		document.getElementById("sidenav_class_search_input").blur();
+		$scope.sideNavClassSearch = '';
+		
+	}
+	$scope.hideSidenavClassSearch = function () {
 		
 	}
 	//----------------------------------------------------
