@@ -55,17 +55,18 @@
   function runPromise(item) {
     var thePromise = item.Promise;
     thePromise.then(item.Action, function (error) {
-      if (item.Err) {
-        item.Err(error);
-      } else {
-        if (delay < 4) {
-          setTimeout(function () {
-            runPromise();
-          }, (delay = Math.max(delay *= 2, 1)) * 1000);
-        } else {
-          item.Err(error) || "";
-        }
-      }
+      DriveErrorHandeler(error,item);
+      // if (item.Err) {
+      //   item.Err(error);
+      // } else {
+      //   if (delay < 4) {
+      //     setTimeout(function () {
+      //       runPromise();
+      //     }, (delay = Math.max(delay *= 2, 1)) * 1000);
+      //   } else {
+      //     item.Err(error) || "";
+      //   }
+      // }
     });
   }
 

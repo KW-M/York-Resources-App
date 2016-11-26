@@ -375,8 +375,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	};
 	//----------------------------------------------------
 	//----------------- Error Handling -------------------
-	window.DriveErrorHandeler = function (error, callback, promise) {
-		console.warn(error);
+	window.DriveErrorHandeler = function (error, item) {
+		console.warn(item);
 		if (error.hasOwnProperty('expectedDomain')) {
 			gapi.auth2.getAuthInstance().signOut();
 			$mdDialog.show($mdDialog.alert({
