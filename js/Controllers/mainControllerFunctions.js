@@ -157,6 +157,18 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          }
       }
       if (loaded === "picker") {
+         $scope.initiateDrivePicker()
+         if ($scope.myInfo !== undefined) {
+            authorizationService.hideSigninDialog();
+         } else {
+            document.addEventListener('sheetPrefsLoaded', function () {
+               authorizationService.hideSigninDialog();
+            });
+         }
+      }
+   }
+   
+      $scope.initiateDrivePicker = function(){
          var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
          var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
          var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
@@ -176,14 +188,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          setOAuthToken(authorizationService.getAuthToken()).
          setCallback(self.pickerCallback).
          build();
-         if ($scope.myInfo !== undefined) {
-            authorizationService.hideSigninDialog();
-         } else {
-            document.addEventListener('sheetPrefsLoaded', function () {
-               authorizationService.hideSigninDialog();
-            });
-         }
-      }
    }
 
    function handleUserPrefsSheet() {
