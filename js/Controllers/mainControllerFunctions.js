@@ -493,7 +493,10 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             alert('done')
          })
       }
-      if (e.ke)
+      if (e.keyCode == 77){
+         alert('signing out')
+         gapi.auth2.getAuthInstance().signOut();
+      }
    }
 
    $scope.updateVisiblePosts = function (array, callback) {
