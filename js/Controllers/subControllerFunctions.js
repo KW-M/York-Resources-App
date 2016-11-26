@@ -407,8 +407,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 
 		}
 	window.clearUserInfo = function (){
-		$scope.visiblePosts = [];
-		$scope.userList = [];
+		$timeout(function (argument) {
+			$scope.myInfo = {};
+			$scope.visiblePosts = [];
+			$scope.userList = [];
+		})
 	}
 		//----------------------------------------------------
 		//---------------------- dev -------------------------
