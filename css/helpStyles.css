@@ -1,14 +1,17 @@
     /*---------- help and first run element styles -------- */
     
     .credits-cover {
-        opacity: 0;
-        position: absolute;
         height: 100%;
         width: 100%;
+        bottom: -50%;
+        position: absolute;
+        background-color: white;
+        overflow: auto;
+        z-index: 200;
+        opacity: 0;
         box-sizing: border-box;
         pointer-events: none;
         transition: opacity 0.5s ease, bottom 0.5s ease;
-        bottom: -50%;
     }
     
     .credits-cover-visible {
