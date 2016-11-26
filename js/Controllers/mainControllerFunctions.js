@@ -493,6 +493,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             alert('done')
          })
       }
+      if (e.ke)
    }
 
    $scope.updateVisiblePosts = function (array, callback) {
