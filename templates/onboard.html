@@ -39,6 +39,7 @@
     </md-tabs>
   </md-dialog-content>
   <md-dialog-actions style="position:relative">
+    ng-click="onboardingPageNumber = onboardingPageNumber + 1"
     <md-button class="md-accent" style="color:white" ng-click="hideDialog()"><span ng-hide="onboardingPageNumber === 2">Skip</span><span ng-hide="onboardingPageNumber !== 2">Get Started</span></md-button>
     <div class="dotPageIndicatorContainer">
       <div class="dotPageIndicator" ng-class="{'dotPageIndicatorActive' : onboardingPageNumber === 0}"></div>
