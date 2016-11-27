@@ -5,27 +5,34 @@
         <md-tab-label>Start</md-tab-label>
         <md-tab-body>
           <div class="md-dialog-content">
-          <span class="md-display-1">Quizlet Connect</span>
-          <p>By connecting Quizlet, you will be able to:</p>
-          <ul>
-            <li>Only show study sets made by York students when searching Quizlet</li>
-            <li>Link your own Quizlet sets right in StudyHub</li>
-            <li>Sync your public Quizlet sets with the York Quizlet class.</li>
-          </ul>
-          <div style="width: 100%;height: 100px;display: flex;justify-content: center; align-items: center;">
-          <md-button class="md-raised md-accent" ng-click="quizletStepNumber = 1">Get Started</md-button>
-          </div>
+            <span class="md-display-1">Quizlet Connect</span>
+            <p>By connecting Quizlet, you will be able to:</p>
+            <ul>
+              <li>Only show study sets made by York students when searching Quizlet</li>
+              <li>Link your own Quizlet sets right in StudyHub</li>
+              <li>Sync your public Quizlet sets with the York Quizlet class.</li>
+            </ul>
+            <div style="width: 100%;height: 100px;display: flex;justify-content: center; align-items: center;">
+              <md-button class="md-raised md-accent" ng-click="quizletStepNumber = 1">Get Started</md-button>
+            </div>
           </div>
         </md-tab-body>
       </md-tab>
       <md-tab>
         <md-tab-label>Join Class</md-tab-label>
-        <md-tab-body >
+        <md-tab-body>
           <div class="md-dialog-content" style="padding-bottom: 0px;">
-          <p><strong>Step 1: </strong><span>Join the York Quizlet class</span></p>
-          <div style="width: 100%;height: 100px;display: flex;justify-content: center; align-items: center;">
-          <md-button class="md-raised md-accent" ng-click="quizletStepNumber = 2">Join Class</md-button>
-          </div>
+            <p><strong>Step 1: </strong><span>Join the York Quizlet class</span></p>
+              <div style="box-sizing: border-box; display: table; table-layout: fixed; width: 361.818px; color: rgb(69, 83, 88); font-family: hurme_no2-webfont, -apple-system, BlinkMacSystemFont, sans-serif; font-size: 16px; text-align: center;">
+                <div style="box-sizing: border-box; vertical-align: middle; padding: 0px; width: 67px; margin: 0px auto;"><span class="glyph icon class-icon HeaderIcon" style="display: inline-block; font-stretch: normal; font-size: 42px; line-height: 42px; font-family: glyphs-h130-web; user-select: none; -webkit-font-smoothing: antialiased; color: rgb(255, 255, 255); width: 66.9886px; box-sizing: border-box;"></span></div>
+                <div style="box-sizing: border-box; vertical-align: middle; padding: 0px;">
+                    <h1 style="margin: 0px 0px 4px; padding: 0px; color: black; display: inline-block; font-weight: 400; font-stretch: normal; font-size: 24px; line-height: 1.3; text-shadow: rgba(0, 0, 0, 0.498039) 1px 1px 2px; -webkit-font-smoothing: antialiased; box-sizing: border-box;">York</h1>
+                    <h2 style="margin: 0px; padding: 0px; color: rgba(0, 0, 0, 0.701961); font-weight: 400; font-stretch: normal; font-size: 14px; line-height: 1.3; vertical-align: middle; -webkit-font-smoothing: antialiased; box-sizing: border-box;">York School, CA</h2>
+              </div>
+              <div class="ClassPageHeader-actions" style="box-sizing: border-box; vertical-align: middle; padding: 0px; width: 361.818px; margin-top: 20px;">
+                <div class="ClassPageHeader-actionsInner" style="box-sizing: border-box; float: none;"><span class="JoinClassButton" style="box-sizing: border-box;"><button type="submit" style="-webkit-font-smoothing: antialiased; background: rgb(56, 142, 52); border-width: 1px; border-style: solid; border-color: rgb(48, 121, 44); border-radius: 2px; color: rgb(255, 255, 255); cursor: pointer; font-size: 16px; line-height: 35px; font-family: hurme_no2-webfont, -apple-system, BlinkMacSystemFont, sans-serif; padding-top: 0px; padding-right: 16px; padding-left: 16px; text-shadow: rgba(0, 0, 0, 0.298039) 0px -1px 0px; -webkit-appearance: none; margin: 0px 8px 0px 0px; outline: none 0px; vertical-align: middle;">Join Class</button></span></div>
+              </div>
+            </div>
           </div>
         </md-tab-body>
       </md-tab>
@@ -33,23 +40,23 @@
         <md-tab-label>Enable Sync</md-tab-label>
         <md-tab-body>
           <div class="md-dialog-content" style="padding-bottom: 0px;">
-          <strong>Step 2: </strong><span>Enable sync</span>
-          <p>To sync with Quizlet in the background, StudyHub needs your permission.</p>
-          <div style="position:relative; overflow:hidden; width:100%; height:100%;">
-            <iframe src="https://script.google.com/macros/s/AKfycbyZgXfwg8djOo75b-2t5GS8Mu0lAajIs2XcYQuzHfAGtDUmc4qv/exec" style="border:0;position:relative;top:-40px;width:500px"></iframe>
-          </div>
+            <strong>Step 2: </strong><span>Enable sync</span>
+            <p>To sync with Quizlet in the background, StudyHub needs your permission.</p>
+            <div style="position:relative; overflow:hidden; width:100%; height:100%;">
+              <iframe src="https://script.google.com/macros/s/AKfycbyZgXfwg8djOo75b-2t5GS8Mu0lAajIs2XcYQuzHfAGtDUmc4qv/exec" style="border:0;position:relative;top:-40px;width:500px"></iframe>
+            </div>
           </div>
         </md-tab-body>
-        </md-tab>
-        <md-tab>
-          <md-tab-label>Done</md-tab-label>
-        </md-tab>
-        </md-tabs>
-        <div class="md-dialog-content" style="padding-bottom: 0px;" ng-show="quizletStepNumber == 3">
-          <span>All Done! You can change your preferences here.</span>
-          <md-switch ng-model="quizletSync">Sync</md-switch>
-          <p>York Quizlet Member: <strong>Yes</strong></p>
-        </div>
+      </md-tab>
+      <md-tab>
+        <md-tab-label>Done</md-tab-label>
+      </md-tab>
+    </md-tabs>
+    <div class="md-dialog-content" style="padding-bottom: 0px;" ng-show="quizletStepNumber == 3">
+      <span>All Done! You can change your preferences here.</span>
+      <md-switch ng-model="quizletSync">Sync</md-switch>
+      <p>York Quizlet Member: <strong>Yes</strong></p>
+    </div>
   </md-dialog-content>
   <md-dialog-actions ng-hide="quizletStepNumber == 0 || quizletStepNumber == 3">
     <md-button class="md-accent" ng-click="hideDialog()">Cancel</md-button>
