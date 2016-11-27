@@ -365,6 +365,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			templateUrl: 'templates/quizlet.html',
 			controller: function ($scope, $mdDialog, $timeout) {
 				$scope.quizletStepNumber = 0;
+				$scope.reSize
 				$scope.hideDialog = function () {
 					$mdDialog.hide();
 				};
