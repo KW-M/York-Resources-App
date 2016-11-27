@@ -655,13 +655,13 @@ button.selected.md-button {
     font-size: 18px;
 }
 
-.gradient-overlay-metadata md-chip {
+.gradient-overlay .gradient-overlay-metadata md-chip {
     margin: 0 auto;
     background: rgba(224, 224, 224, .80);
     color: rgb(66, 66, 66);
 }
 
-.gradient-overlay-metadata.metadata-link {
+.gradient-overlay .gradient-overlay-metadata.metadata-link {
     padding: 0px 16px;
     position: absolute;
     opacity: 0;
