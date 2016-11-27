@@ -368,7 +368,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				$scope.reSize
 				$scope.hideDialog = function () {
 					$mdDialog.hide();
-				};
+				};				setInterval(function() {
+    				document.getElementById('quizlet_setup_frame').src += '';
+				},4000)
 				window.addEventListener("message", function receiveMessage(event) {
 					console.log(event);
 					if (event.data == "QuizletAuthorized") {
@@ -380,6 +382,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			parent: angular.element(document.body),
 			clickOutsideToClose: true,
 			fullscreen: ($mdMedia('xs')),
+			onComplete: function () {
+								setInterval(function() {
+    				document.getElementById('quizlet_setup_frame').src += '';
+				},4000)
+			}
 		});
 	};
 	$scope.openOnboardingDialog = function () { //called by the top right toolbar help button
