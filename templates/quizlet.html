@@ -4,7 +4,6 @@
       .hidden-frame {
         border: 0;
         position: relative;
-        top: -92px;
         left: -8px;
         height: 145px;
         width: 162px;
@@ -16,19 +15,6 @@
         width: 100%;
         height: 30px;
         margin-bottom: 40px;
-      }
-
-      .hidding-div.show {
-        width: 100%;
-        height: 100%;
-        margin-bottom: 2px;
-      }
-
-      .hidding-div.show .hidden-frame {
-        top: 0px;
-        left: 0px;
-        height: 100%;
-        width: 100%;
       }
     </style>
     <md-tabs md-selected="quizletStepNumber" md-dynamic-height md-swipe-content ng-hide="quizletStepNumber == 3">
@@ -73,7 +59,7 @@
           <div class="md-dialog-content" style="padding-bottom: 0px;">
             <strong>Step 2: </strong><span>Enable sync</span>
             <p>To sync with Quizlet in the background, StudyHub needs your permission.</p>
-            <div class="hidding-div" ng-class="{'show' : showQuizletFrame == true}" ng-click="showQuizletFrame = true">
+            <div class="hidding-div" >
               <iframe id="" src="https://script.google.com/macros/s/AKfycbyZgXfwg8djOo75b-2t5GS8Mu0lAajIs2XcYQuzHfAGtDUmc4qv/exec" class="hidden-frame"></iframe>
             </div>
           </div>
