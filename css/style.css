@@ -603,7 +603,7 @@ button.selected.md-button {
     cursor: default;
 }
 
-.post-card-header:not(.operation-view) {
+.post-card-header.not-operation-view {
     cursor: default;
 }
 
