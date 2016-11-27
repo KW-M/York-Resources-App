@@ -629,7 +629,7 @@ button.selected.md-button {
     justify-content: center;
 }
 
-.gradient-overlay-metadata {
+.gradient-overlay .gradient-overlay-metadata {
     width: 100%;
     padding: 0 4px;
     display: flex;
@@ -641,7 +641,7 @@ button.selected.md-button {
     justify-content: space-around;
 }
 
-.gradient-overlay-metadata span {
+.gradient-overlay .gradient-overlay-metadata span {
     text-overflow: ellipsis;
     overflow: hidden;
 }
@@ -665,6 +665,7 @@ button.selected.md-button {
     padding: 0px 16px;
     position: absolute;
     opacity: 0;
+    pointer-events: none;
 }
 
 .post-card-header:not(.no-link):hover .gradient-overlay-metadata.metadata-link {
@@ -696,7 +697,7 @@ button.selected.md-button {
     border-radius: 100px;
 }
 
-m.small-icon {
+.material-icons.small-icon {
     font-size: 12pt;
     height: 1.17em;
     width: 1em;
