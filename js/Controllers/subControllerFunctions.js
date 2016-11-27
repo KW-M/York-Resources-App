@@ -317,7 +317,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}, 2000);
 	};
 	$scope.openLink = function (link, dontOpen) {
-		if (link !== "" && link !== undefined && dontOpen == false) {
+		if (link !== "" && link !== undefined && dontOpen != true) {
 			window.open(link);
 		}
 	};
