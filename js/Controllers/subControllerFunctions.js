@@ -363,9 +363,12 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	$scope.openQuizletDialog = function () { //called by the top right toolbar help button
 		$mdDialog.show({
 			templateUrl: 'templates/quizlet.html',
-			controller: function () {
-				window.addEventListener("message", 	function receiveMessage(event) {
-console.log(event);
+			controller: function ($scope, $mdDialog) {
+				$scope.hideDialog = function () {
+					$mdDialog.hide();
+				};
+				window.addEventListener("message", function receiveMessage(event) {
+					console.log(event);
 				}, false);
 			},
 			parent: angular.element(document.body),
