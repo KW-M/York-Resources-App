@@ -369,6 +369,10 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				};
 				window.addEventListener("message", function receiveMessage(event) {
 					console.log(event);
+					if (event.data == "QuizletAuthorized") {
+						console.log('auth q done');
+						$scope.quizletStepNumber = 3;
+					}
 				}, false);
 			},
 			parent: angular.element(document.body),
