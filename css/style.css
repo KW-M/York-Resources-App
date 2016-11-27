@@ -596,10 +596,15 @@ button.selected.md-button {
     cursor: pointer;
     border-bottom: solid 1px black;
     border-radius: 3px 3px 0 0;
+    pointer-events:none;
 }
 
 .post-card-header.no-link {
     height: 56px;
+    cursor: default;
+}
+
+.post-card-header:not(.operation-view) {
     cursor: default;
 }
 

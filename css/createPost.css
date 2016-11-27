@@ -54,6 +54,7 @@ md-dialog#new_post_dialog {
    display: flex;
    transition: opacity 0.5s ease;
    justify-content: flex-end;
+   pointer-events:initial;
 }
 
 #header_link_input {
