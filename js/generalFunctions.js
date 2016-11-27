@@ -56,17 +56,17 @@
     var thePromise = item.Promise;
     thePromise.then(item.Action, function (error) {
       DriveErrorHandeler(error,item);
-      // if (item.Err) {
-      //   item.Err(error);
-      // } else {
-      //   if (delay < 4) {
-      //     setTimeout(function () {
-      //       runPromise();
-      //     }, (delay = Math.max(delay *= 2, 1)) * 1000);
-      //   } else {
-      //     item.Err(error) || "";
-      //   }
-      // }
+      if (item.Err) {
+        item.Err(error);
+      } else {
+        if (delay < 4) {
+          setTimeout(function () {
+            runPromise(item);
+          }, (delay = Math.max(delay *= 2, 1)) * 1000);
+        } else {
+          item.Err(error) || "";
+        }
+      }
     });
   }
 

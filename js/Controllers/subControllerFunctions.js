@@ -406,7 +406,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		if (error.result) {
 			if (error.result.error.errors[0].message == 'Invalid Credentials') {
 				console.log('Invalid Credentials - token: ' + authorizationService.getAuthToken())
-				
+				runPromise(item);
 			} else if (error.result.error.errors[0].reason == 'dailyLimitExceededUnreg') {
 				console.log('daily limit')
 			}
