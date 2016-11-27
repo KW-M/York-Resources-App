@@ -384,14 +384,13 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			clickOutsideToClose: true,
 			fullscreen: ($mdMedia('xs')),
 			onComplete: function () {
-				//$scope.reloadFrame = document.getElementById('quizlet_setup_frame')
-				console.log(	'here')
-				setInterval(function() {
-			console.log(	$scope.reloadFrame)
-					if (window.reloadQuizletFrame != null) {
-    					window.reloadQuizletFrame.src += '';
-					}
-				},4000)
+				window.reloadQuizletFrame = document.getElementById('quizlet_setup_frame')
+				// setInterval(function() {
+				// 	console.log(window.reloadQuizletFrame)
+				// 	if (window.reloadQuizletFrame != null) {
+    // 					window.reloadQuizletFrame.src += '';
+				// 	}
+				// },4000)
 			}
 		});
 	};
