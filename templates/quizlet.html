@@ -61,7 +61,7 @@
   <md-dialog-actions ng-hide="quizletStepNumber == 0">
     <md-button ng-hide="quizletStepNumber == 3" class="md-accent" ng-click="hideDialog()">Cancel</md-button>
     <span flex></span>
-    <md-button ng-show="quizletStepNumber == 3" class="md-accent" ng-click="quizletStepNumber = quizletStepNumber+1">Close</md-button>
+    <md-button ng-show="quizletStepNumber == 3" class="md-accent" ng-click="hideDialog()">Close</md-button>
     <md-button ng-show="quizletStepNumber == 2" class="md-accent" ng-click="quizletStepNumber = quizletStepNumber+1">Continue</md-button>
   </md-dialog-actions>
 </md-dialog>
