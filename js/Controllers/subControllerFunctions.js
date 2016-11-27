@@ -1,7 +1,7 @@
 function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia, $timeout, $filter, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance) {
 
 	var likeClickTimer = {};
-	var reloadFrame = null;
+
 	function findPostById(id, array) {
 		var item = 0;
 		for (item in array) {
@@ -373,8 +373,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				},4000)
 				window.addEventListener("message", function receiveMessage(event) {
 					console.log(event);
-					reloadFrame = null;
-					console.log(reloadFrame)
+					$scope.reloadFrame = 'woa';
 					if (event.data == "QuizletAuthorized") {
 						console.log('auth q done');
 						$scope.quizletStepNumber = 3;
@@ -385,11 +384,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			clickOutsideToClose: true,
 			fullscreen: ($mdMedia('xs')),
 			onComplete: function () {
-				reloadFrame = document.getElementById('quizlet_setup_frame')
+				$scope.reloadFrame = document.getElementById('quizlet_setup_frame')
 				setInterval(function() {
-					loaded
-					if (reloadFrame != null) {
-    					reloadFrame.src += '';
+			console.log(	$scope.reloadFrame)
+					if ($scope.reloadFrame != 'wowa') {
+    					$scope.reloadFrame.src += '';
 					}
 				},4000)
 			}
