@@ -1,6 +1,6 @@
 <md-dialog>
   <md-dialog-content>
-    <md-tabs class="md-accent" md-selected="onboardingPageNumber" md-dynamic-height md-swipe-content>
+    <md-tabs class="md-accent" md-selected="quizletStepNumber" md-dynamic-height md-swipe-content>
       <md-tab>
         <md-tab-label>Start</md-tab-label>
         <md-tab-body>
@@ -12,8 +12,8 @@
             <li>Link your own Quizlet sets right in StudyHub</li>
             <li>Sync your public Quizlet sets with the York Quizlet class.</li>
           </ul>
-          <div height="300px" style="width:100%;height:300px">
-          <md-button>Get Started</md-button>
+          <div style="width: 100%;height: 100px;display: flex;justify-content: center; align-items: center;">
+          <md-button class="md-raised md-accent" ng-click="quizletStepNumber = 1">Get Started</md-button>
           </div>
           </div>
         </md-tab-body>
@@ -42,9 +42,9 @@
         </md-tab-body>
         <md-tab>
   </md-dialog-content>
-  <md-dialog-actions>
+  <md-dialog-actions ng-hide="quizletStepNumber == 0">
     <md-button class="md-accent" ng-click="hideDialog()">Cancel</md-button>
     <span flex></span>
-    <md-button class="md-accent" ng-click="hideDialog()">Continue</md-button>
+    <md-button class="md-accent" ng-click="quizletStepNumber = quizletStepNumber+1">Continue</md-button>
   </md-dialog-actions>
 </md-dialog>
