@@ -1,23 +1,38 @@
 <md-dialog>
-  <md-dialog-content class="md-dialog-content">
-    <span class="md-display-1">Quizlet Connect</span>
-    <p>By connecting Quizlet, you will be able to:</p>
-    <ul>
-      <li>Only show study sets made by York students when searching Quizlet</li>
-      <li>Link your own Quizlet sets right in StudyHub</li>
-      <li>Sync your public Quizlet sets with the York Quizlet class.</li>
-    </ul>
+  <md-dialog-content>
     <md-tabs class="md-accent" md-selected="onboardingPageNumber" md-dynamic-height md-swipe-content>
+      <md-tab>
+        <md-tab-label>Start</md-tab-label>
+        <md-tab-body >
+          <span class="md-display-1">Quizlet Connect</span>
+          <p>By connecting Quizlet, you will be able to:</p>
+          <ul>
+            <li>Only show study sets made by York students when searching Quizlet</li>
+            <li>Link your own Quizlet sets right in StudyHub</li>
+            <li>Sync your public Quizlet sets with the York Quizlet class.</li>
+          </ul>
+        </md-tab-body>
+      </md-tab>
       <md-tab>
         <md-tab-label>Join Class</md-tab-label>
         <md-tab-body>
-          <strong>Step 1:</strong>
+          <strong>Step 1: </strong><span>Join the York Quizlet class</span>
+          <p>Join today!</p>
+          <div style="position:relative; overflow:hidden; width:100%; height:100%;">
+            <iframe src="https://script.google.com/macros/s/AKfycbyZgXfwg8djOo75b-2t5GS8Mu0lAajIs2XcYQuzHfAGtDUmc4qv/exec" style="border:0;position:relative;top:-40px;width:500px"></iframe>
+          </div>
+        </md-tab-body>
+      </md-tab>
+      <md-tab>
+        <md-tab-label>Enable Sync</md-tab-label>
+        <md-tab-body>
+          <strong>Step 2: </strong><span>Enable sync</span>
           <p>To sync with Quizlet in the background, StudyHub needs your permission.</p>
           <!--<div style="position:relative; overflow:hidden; width:100%; height:100%;">-->
           <!--  <iframe src="https://script.google.com/macros/s/AKfycbyZgXfwg8djOo75b-2t5GS8Mu0lAajIs2XcYQuzHfAGtDUmc4qv/exec" style="border:0;position:relative;top:-40px;width:500px"></iframe>-->
           <!--</div>-->
-      </md-tab-body>
-    <md-tab>
+        </md-tab-body>
+        <md-tab>
   </md-dialog-content>
   <md-dialog-actions>
     <md-button class="md-accent" ng-click="hideDialog()">Cancel</md-button>
