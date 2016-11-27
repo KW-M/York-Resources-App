@@ -60,7 +60,7 @@
             <strong>Step 2: </strong><span>Enable sync</span>
             <p style="margin-bottom: -4px; font-family: arial, sans-serif; font-size: 15px;">To sync with Quizlet in the background,</p>
             <div class="hidding-div" >
-              <iframe src="https://script.google.com/macros/s/AKfycbyZgXfwg8djOo75b-2t5GS8Mu0lAajIs2XcYQuzHfAGtDUmc4qv/exec" class="hidden-frame"></iframe>
+              <iframe id="quizlet_setup_frame" src="https://script.google.com/macros/s/AKfycbyZgXfwg8djOo75b-2t5GS8Mu0lAajIs2XcYQuzHfAGtDUmc4qv/exec" class="hidden-frame"></iframe>
             </div>
           </div>
         </md-tab-body>
@@ -70,15 +70,13 @@
       </md-tab>
     </md-tabs>
     <div class="md-dialog-content" style="padding-bottom: 0px;" ng-show="quizletStepNumber == 3">
-      <span>All Done! You can change your preferences here.</span>
+      <span>All Done! You can change your preferences anytime from settings.</span>
       <md-switch ng-model="quizletSync">Sync</md-switch>
       <p>York Quizlet Member: <strong>Yes</strong></p>
     </div>
   </md-dialog-content>
   <md-dialog-actions ng-hide="quizletStepNumber == 0">
-    <md-button ng-hide="quizletStepNumber == 3" class="md-accent" ng-click="hideDialog()">Cancel</md-button>
     <span flex></span>
     <md-button ng-show="quizletStepNumber == 3" class="md-accent" ng-click="hideDialog()">Close</md-button>
-    <md-button ng-show="quizletStepNumber == 2" class="md-accent" ng-click="quizletStepNumber = quizletStepNumber+1">Continue</md-button>
   </md-dialog-actions>
 </md-dialog>
