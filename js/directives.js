@@ -1,4 +1,4 @@
-// Put any directives you make here and the html template in a file in the /templates folder
+// Put any directives you make here and the html template in a file in the templates folder
 
 // ----Outer UI----
 app.directive('sideNavInsides', function () {
