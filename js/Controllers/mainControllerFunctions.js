@@ -90,14 +90,11 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       footer_problem.style.display = 'none';
 
       if ($scope.queryParams.q !== null) {
-         console.log('$scope.queryParams.q not null')
          if ($scope.queryParams.q != $scope.previousSearch) {
-            console.log('new Search')
             $scope.updateVisiblePosts([]);
             $scope.previousSearch = $scope.queryParams.q
-         } 
+         }
       } else {
-         console.log('$scope.queryParams.q null')
          $scope.queryParams.flagged = null
          $scope.queryParams.type = null
          $scope.queryParams.creatorEmail = null
