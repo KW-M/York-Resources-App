@@ -87,6 +87,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	};
 	$scope.convertPostToDriveMetadata = function (Post) {
 		var formatedDriveMetadata
+		return ('bub');
 		try {
 			var tagString = JSON.stringify(Post.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || [];
 			formatedDriveMetadata = {
@@ -112,7 +113,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 					indexableText: "Title: " + Post.Title + ", Attachment: " + Post.AttachmentName + ", Class: " + Post.Class.Name + ", Class Catagory: " + Post.Class.Catagory + ", tags: (" + (tagString[2] || '') + (tagString[2] || '') + ")"
 				}
 			};
-			return (formatedDriveMetadata);
+			return (null);
 		} catch (e) {
 			return (formatedDriveMetadata);
 			console.warn(e)
