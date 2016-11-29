@@ -219,13 +219,13 @@
                     console.log(reply.result);
                     $mdToast.hide();
                 }, function (error) {
-                    console.warn(error);
-                    $mdToast.hide();
+                    
                 }, 150);
             }
         }
         
-        function onError () {
+        function onError (error) {
+            
             $mdToast.show($mdToast.simple().textContent('Error.').hideDelay(5000));
         }
 
