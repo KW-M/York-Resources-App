@@ -204,20 +204,29 @@
                         $scope.updateLastPosted();
                         $mdToast.hide();
                     }, function (error) {
-                        console.warn(error);
+                        $mdToast.hide();
                     }, 150);
                 }, function (error) {
                     console.warn(error)
                 }, 2);
             } else if (operation === 'update') {
-                var metadata = $scope.compileUpdateToMetadata();
+                var metadata = $scope.convertPostToDriveMetadata($scope.Post);
+                console.log({
+                    Post: $scope.Post,
+                    Metadata: metadata
+                });
                 queue('drive', GoogleDriveService.updateDriveFile(postObj.Id, metadata), function (reply) {
                     console.log(reply.result);
                     $mdToast.hide();
                 }, function (error) {
                     console.warn(error);
+                    $mdToast.hide();
                 }, 150);
             }
+        }
+        
+        function onError () {
+            $mdToast.show($mdToast.simple().textContent('Error.').hideDelay(5000));
         }
 
         $scope.clearLink = function () {
