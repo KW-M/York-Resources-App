@@ -218,10 +218,11 @@
                 },onError, 150);
             }
         }
-        
+
         function onError (error) {
             console.warn(error);
-            $mdToast.show($mdToast.simple().textContent('Error Posting, try again').hideDelay(5000));
+            $scope.newPost($scope.Post, operation);
+            $mdToast.show($mdToast.simple().textContent('Error Posting, try again.').hideDelay(5000));
         }
 
         $scope.clearLink = function () {
@@ -230,7 +231,7 @@
                 $scope.Post.Type = "NoLink"
             })
         }
-        
+
         $scope.clearClassSelectSearch = function () {
             $timeout(function() {
                 $scope.classSelectSearch = '';
