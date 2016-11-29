@@ -59,7 +59,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          });
          $location.path(query.classPath);
       } else {
-         if (query.q === '') {
+         if (query.q == '') {
             $location.search({
                q: null
             });
@@ -522,6 +522,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       })
    }
 
-   //More (less important functions are delegated to another file);
+   //less important functions are delegated to another file;
    subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia, $timeout, $filter, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance);
 }
