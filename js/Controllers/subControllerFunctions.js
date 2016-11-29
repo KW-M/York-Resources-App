@@ -94,6 +94,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				description: Post.Description + '{]|[}' + Post.Link + '{]|[}' + Post.PreviewImage,
 				//createdTime: Post.CreationDate.toRFC3339UTCString(),
 				//modifiedTime: Post.UpdateDate.toRFC3339UTCString(),
+				skngs:'this shouldnt be bere',
 				properties: {
 					Title: Post.Title,
 					Flagged: Post.Flagged,
