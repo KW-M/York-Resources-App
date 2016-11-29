@@ -1,0 +1,170 @@
+/*----------------------------------------------------------
+------------------ New Post Dialog Styles -------------------*/
+
+md-dialog#new_post_dialog {
+   overflow: hidden;
+}
+
+.new_post_dialog_scroll {
+   flex: 1;
+   transition: opacity 0.3s ease;
+}
+
+#new_post_content {
+   margin-top: 200px;
+}
+
+#new_post_content.small-header {
+   margin-top: 60px;
+}
+
+/*------- New Post Header Styles --------*/
+
+#dialog_header {
+   min-height: 60px;
+   max-height: 200px;
+   position: absolute;
+   z-index: 1000;
+   /*pointer-events: none;*/
+   background-color: rgb(161, 10, 25);
+}
+
+#new_post_content.small-header+.post-card-header#dialog_header {
+   height: 60px;
+}
+
+#header_image {
+   top: -20px;
+   width: 100%;
+   position: absolute;
+   background-color: #bccac7;
+   filter: brightness(85%);
+}
+
+.gradient-overlay.new-post-img-gradient {
+   bottom: 0;
+   top: initial;
+   height: 60px;
+   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, .5));
+}
+
+#header_link_input_container {
+   width: 100%;
+   padding: 0 4px 0 14px;
+   display: flex;
+   transition: opacity 0.5s ease;
+   justify-content: flex-end;
+   pointer-events:initial;
+}
+
+#header_link_input {
+   height: 30px;
+   width: 100%;
+   margin: auto 0;
+   font-size: 20px;
+}
+
+#header_link_input input {
+   border-color: rgba(255, 255, 255, 0.12);
+}
+
+#header_link_input input::-webkit-input-placeholder {
+   color: rgba(255, 255, 255, 0.6);
+}
+
+#header_title {
+   margin: 0 12px;
+   position: absolute;
+   transition: opacity 0.5s ease;
+}
+
+.gradient-overlay-metadata md-chip .md-chip-content {
+   height: 100%;
+   display: flex;
+   align-items: center;
+}
+
+md-progress-linear.link-loading {
+   bottom: 0px;
+   position: absolute;
+   z-index: 1000;
+   height: 2px;
+}
+
+/*------- New Post body Styles --------*/
+
+#class_dropdown_button {
+   padding: 0 6px;
+   margin: 4px 4px;
+   border-radius: 3px;
+   background-color: rgba(158, 158, 158, 0.2);
+   z-index: 20;
+}
+
+md-optgroup.hide-label label {
+   display: none;
+}
+
+md-option.hide {
+   display: none;
+}
+
+md-chips md-chips-wrap.md-chips {
+   padding-left: 1000px;
+   margin-left: -1000px;
+}
+
+input.new-post-title {
+   background-color: rgba(0, 0, 0, 0);
+   font-weight: bold;
+   font-family: 'Roboto Condensed', 'Droid Sans', arial, sans-serif;
+   outline: none;
+   border: none;
+   margin: 0;
+   width: 100%;
+}
+
+.new-post-body {
+   font-size: 14px;
+   line-height: 19px;
+   min-height: 46px;
+   padding-top: 12px;
+   font-family: 'Roboto Slab', 'Times New Roman', serif;
+   white-space: pre-wrap;
+   word-wrap: break-word;
+   outline: none;
+   word-wrap: break-word;
+}
+
+.new-post-body:empty:before {
+   content: "Say something";
+   font-size: small;
+   color: #757575;
+   font-family: 'Roboto Slab', 'Times New Roman', serif;
+   left: 20px;
+   line-height: 15px;
+   -moz-user-select: none;
+   -webkit-user-select: none;
+   -ms-user-select: none;
+}
+
+/*------- New Post Action Bar Styles --------*/
+
+button#New_Post_Submit.md-button {
+   height: 36px;
+   margin: 0px;
+   margin-left: 0;
+   padding: 0px;
+   vertical-align: top;
+   background-color: #3a76e5;
+   color: white;
+}
+
+button#New_Post_Submit.md-button:hover {
+   background-color: #3972DC;
+   box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32)
+}
+
+#new_post_dialog md-toast {
+   min-width: 294px
+}

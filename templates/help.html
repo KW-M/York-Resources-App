@@ -1,0 +1,64 @@
+<link rel="stylesheet" href="css/helpStyles.css" />
+<md-dialog style="overflow: hidden;">
+  <md-dialog-content>
+    <div style="height:100%; overflow:auto">
+      <md-tabs md-dynamic-height md-border-bottom class="help-tabs">
+        <md-tab label="About">
+          <md-content class="md-padding">
+            <h1 class="md-display-1">About the Project</h1>
+            what?
+          </md-content>
+        </md-tab>
+        <md-tab label="Creating Posts">
+          <md-content class="md-padding">
+            <h1 class="md-display-1">Creating Posts</h1>
+            <p>at non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+          </md-content>
+        </md-tab>
+        <md-tab label="Searching">
+          <md-content class="md-padding">
+            <h1 class="md-display-1">Searching</h1>
+            Search man. Search!
+          </md-content>
+        </md-tab>
+        <md-tab label="Troubleshooting">
+          <md-content class="md-padding">
+            <h1 class="md-display-1">Troubleshooting</h1>
+            <p>
+              <ol>
+                <li class="md-subhead">Try refreshing the page</li>
+                <span>Click here -> </span><md-button class="md-raised" href="http://www.google.com">refresh</md-button>
+                <li class="md-subhead">Try incognito or private mode</li>
+                <div>In Chrome:</div>
+                <ol style="margin: 4px 0px 12px; outline: 0px; padding: 0px; vertical-align: baseline; color: rgb(33, 33, 33); font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 13px; ">
+                  <li style="margin: 4px 0px 4px 20px;">At the top&nbsp;right, click&nbsp;More&nbsp;<img src="https://lh3.ggpht.com/N5LLlFszQeMqXo6Z6UF1VXFN4k3UxO8H8ZU3FV8AjUhomHuRCrwUeKMg1BhuFxKwqQ=w18-h18" width="18" height="18" alt="More" title="More" style="vertical-align: middle; max-width: 100%;">&nbsp;
+                    <img src="https://lh3.googleusercontent.com/nHFGZ_9xjCh-mP83zMzXQVJF5VYf2n6kwoBIxB2zv3V4VPT4gNTtBye8lYznogLqLPY=w13-h18" width="13" height="18" alt="and then" title="and then" style="vertical-align: middle; max-width: 100%;">&nbsp;<strong>New Incognito Window</strong>.</li>
+                  <li style="margin: 4px 0px 4px 20px;">A new window will open. In the top corner, check for the gray Incognito icon&nbsp;<img src="https://lh3.googleusercontent.com/lcUE4uBygwOmri9bQNgUP3-NtJL29oeH5r8cE-3I5XMF0QuAXMJ_JJakxifLBfnv5PU=w18" width="18" height="18" alt="Incognito mode" title="Incognito mode" style="vertical-align: middle; max-width: 100%;"></li>
+                </ol>
+                <div>In Safari:</div>
+                <ol style="margin: 4px 0px 12px; outline: 0px; padding: 0px; vertical-align: baseline; color: rgb(33, 33, 33); font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 13px; ">
+                  <li style="margin: 4px 0px 4px 20px;">In the top menubar, Choose&nbsp;File&nbsp; <img src="https://lh3.googleusercontent.com/nHFGZ_9xjCh-mP83zMzXQVJF5VYf2n6kwoBIxB2zv3V4VPT4gNTtBye8lYznogLqLPY=w13-h18" width="13" height="18" alt="and then" title="and then" style="vertical-align: middle; max-width: 100%;">&nbsp;<strong>New Private Window</strong>.</li>
+                  <li style="margin: 4px 0px 4px 20px;">A new window will open. Check for a dark URL/search field</li>
+                </ol>
+                <div>In Edge:</div>
+                <ol style="margin: 4px 0px 12px; outline: 0px; padding: 0px; vertical-align: baseline; color: rgb(33, 33, 33); font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 13px;">
+                  <li style="margin: 4px 0px 4px 20px;">At the top&nbsp;right, click&nbsp;More&nbsp;<img src="https://lh3.ggpht.com/N5LLlFszQeMqXo6Z6UF1VXFN4k3UxO8H8ZU3FV8AjUhomHuRCrwUeKMg1BhuFxKwqQ=w18-h18" width="18" height="18" style="transform:rotate(90deg); vertical-align: middle;" alt="More" title="More" style="vertical-align: middle; max-width: 100%;">&nbsp;
+                    <img src="https://lh3.googleusercontent.com/nHFGZ_9xjCh-mP83zMzXQVJF5VYf2n6kwoBIxB2zv3V4VPT4gNTtBye8lYznogLqLPY=w13-h18" width="13" height="18" alt="and then" title="and then" style="vertical-align: middle; max-width: 100%;">&nbsp;<strong>New InPrivate Window</strong>.</li>
+                </ol>
+                <span>If you are having trouble loging when not in incognito/private mode, try going to google.com and loging out there</span>
+                <ol>
+            </p>
+          </md-content>
+        </md-tab>
+      </md-tabs>
+    </div>
+    <div class="md-padding credits-cover" ng-class="{'credits-cover-visible' : creditsVisible}" ng-click="creditsVisible = false" style="background-color: wheat; z-index:200">
+
+    </div>
+  </md-dialog-content>
+  <md-dialog-actions>
+    <md-button class="md-accent" ng-click="creditsVisible = !creditsVisible">Credits</md-button>
+    <span flex></span>
+    <md-button class="md-accent" ng-click="hideDialog()">Close</md-button>
+  </md-dialog-actions>
+</md-dialog>

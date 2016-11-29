@@ -1,0 +1,54 @@
+  <link rel="stylesheet" href="css/onboardStyles.css" />
+  <md-button class="md-fab onboardingDialogButton" ng-class="{'not-visible' : onboardingPageNumber === 0}" ng-click="onboardingPageNumber = onboardingPageNumber - 1" aria-label="previous" style="margin-right: 16px;">
+    <md-icon>arrow_back</md-icon>
+  </md-button>
+<md-dialog style="/*position: relative; flex: 1; max-width: 360px; height:100%; max-height:460px;*/ background-color:#66bfeb" class="onboardingDialog" ng-class="{'blueBackground' : onboardingPageNumber === 1}">
+  <md-dialog-content style="position:relative; flex: 1;">
+    <md-tabs class="md-accent" md-selected="onboardingPageNumber" md-dynamic-height md-swipe-content>
+      <md-tab id="tab1">
+        <md-tab-label>Access</md-tab-label>
+        <md-tab-body>
+        <img style="width: 100%;" src="https://t4.ftcdn.net/jpg/01/05/85/15/500_F_105851509_Q7wuqAoSxYjQiMl867z1pjWyPxlf8ovP.jpg"></img>
+        <div class="onboardingTextContainer">  
+          <div class="onboardingTextHeader">Access a collection of resources</div>
+          <div class="onboardingText" >Tailor made for York classes<br>
+              by York students, for York students.</div>
+        </div>
+        </md-tab-body>
+      </md-tab>
+      <md-tab id="tab2">
+        <md-tab-label>Build</md-tab-label>
+        <md-tab-body>
+        <img style="width: 100%;" src="https://t4.ftcdn.net/jpg/01/05/85/27/500_F_105852796_1Y92gtGlQ8LDU4NYrH3sTR0oKRwgI2k9.jpg"></img>
+        <div class="onboardingTextContainer">
+          <div class="onboardingTextHeader">Build on the work of others</div>
+          <div class="onboardingText" >To enrich your learning and gain new insight and understanding.</div>
+        </div>
+        </md-tab-body>
+      </md-tab>
+      <md-tab id="tab3">
+        <md-tab-label>Contribute</md-tab-label>
+        <md-tab-body>
+        <img style="width: 100%;" src="https://mir-s3-cdn-cf.behance.net/projects/404/d09a6c26454969.555ec572f0040.png"></img>
+        <div class="onboardingTextContainer">
+          <div class="onboardingTextHeader">Contribute your own work</div>
+          <div class="onboardingText" >To help current students, and those to come get more out of learning at York.</div>
+        </div>
+        </md-tab-body>
+      </md-tab>
+    </md-tabs>
+  </md-dialog-content>
+  <md-dialog-actions style="position:relative">
+    <md-button ng-hide="onboardingPageNumber == 2 || fullscreen != true" class="md-accent" style="color:white" ng-click="onboardingPageNumber = onboardingPageNumber + 1">Next</md-button>
+    <md-button ng-hide="onboardingPageNumber != 2 && fullscreen == true" class="md-accent" style="color:white" ng-click="hideDialog()"><span ng-hide="onboardingPageNumber === 2">Skip</span><span ng-hide="onboardingPageNumber !== 2">Get Started</span></md-button>
+    <div class="dotPageIndicatorContainer">
+      <div class="dotPageIndicator" ng-class="{'dotPageIndicatorActive' : onboardingPageNumber === 0}"></div>
+      <div class="dotPageIndicator" ng-class="{'dotPageIndicatorActive' : onboardingPageNumber === 1}"></div>
+      <div class="dotPageIndicator" ng-class="{'dotPageIndicatorActive' : onboardingPageNumber === 2}"></div>
+    </div>
+  </md-dialog-actions>
+</md-dialog>
+    <md-button class="md-fab onboardingDialogButton" aria-label="next" ng-click="onboardingPageNumber = onboardingPageNumber + 1" style="margin-left: 16px;">
+      <md-icon ng-hide="onboardingPageNumber === 2">arrow_forward</md-icon>
+      <md-icon ng-hide="onboardingPageNumber !== 2">check</md-icon>
+    </md-button>

@@ -1,0 +1,92 @@
+<div class="side-nav-scroll" flex>
+    <div class="side-nav-section">
+        <md-list>
+            <md-list-item>
+                <md-menu-item>
+                    <md-button ng-click="::gotoRoute({classPath: '/all-posts'})" ng-class="{ 'selected' : $location.path() === '/all-posts' }">
+                        <md-icon class="md-accent">inbox</md-icon>
+                        All Posts
+                    </md-button>
+                </md-menu-item>
+            </md-list-item>
+            <md-list-item>
+                <md-menu-item>
+                    <md-button ng-click="::gotoRoute({classPath: '/my-posts'})" ng-class="{ 'selected' : $location.path() === '/my-posts' }">
+                        <md-icon style="color: rgb(25,157,9)">person</md-icon>
+                        My Posts
+                    </md-button>
+                </md-menu-item>
+            </md-list-item>
+            <md-list-item>
+                <md-menu-item>
+                    <md-button ng-click="::gotoRoute({classPath: '/flagged'})" ng-class="{ 'selected' : $location.path() === '/flagged' }">
+                        <md-icon class="md-warn">flag</md-icon>
+                        Flagged
+                    </md-button>
+                </md-menu-item>
+            </md-list-item>
+        </md-list>
+    </div>
+    <div>
+        <md-list>
+            <md-list-item>
+                <md-menu-item>
+                    <md-icon style="width:24px;">group</md-icon>
+                    <span style="padding:0" flex>Classes</span>
+                    <md-button style="margin:auto" class="md-icon-button" ng-click="toggleSidenavClassSearch(true)">
+                        <md-icon>search</md-icon>
+                    </md-button>
+                    <div class="overlay-search sidenav-class-search" ng-class="{'search-visible' : globals.sideNavClassSearchOpen}">
+                        <md-input-container md-no-float style="margin: auto; height: 36px;">
+                            <input ng-model="sideNavClassSearch" placeholder="Filter Classes" id="sidenav_class_search_input"/>
+                        </md-input-container>
+                        <md-button class="md-icon-button" ng-click="toggleSidenavClassSearch(false)">
+                            <md-icon>close</md-icon>
+                        </md-button>
+                    </div>
+                </md-menu-item>
+            </md-list-item>
+            <md-list>
+                <div flex layout="column" ng-hide="sideNavClassSearch">
+                    <md-button class="side-nav-class" ng-click="gotoRoute({classPath: '/other'})" ng-class="{ 'selected' : $location.path() === '/other' }">
+                        Other / Not associated
+                    </md-button>
+                </div>
+                <div ng-repeat="Catagory in classList" flex layout="column">
+                    <label ng-hide="sideNavClassSearch" class="side-nav-header">{{Catagory.Catagory}}</label>
+                    <md-button class="side-nav-class" ng-repeat="Class in Catagory.Classes | filter:sideNavClassSearch" ng-click="gotoRoute({classPath: '/' + Class})" ng-class="{ 'selected' : $location.path() === '/' + Class }">
+                        {{Class}}
+                    </md-button>
+                </div>
+            </md-list>
+        </md-list>
+    </div>
+</div>
+<div class="side-nav-bottom">
+    <md-list style="padding: 6px 0 0 0;">
+        <md-list-item>
+            <md-menu-item>
+                <md-button>
+                    <md-icon>settings</md-icon>
+                    Settings
+                </md-button>
+            </md-menu-item>
+        </md-list-item>
+        <md-list-item>
+            <md-menu-item>
+                <md-button ng-click="openFeedbackDialog()">
+                    <md-icon>feedback</md-icon>
+                    Send Feedback
+                </md-button>
+            </md-menu-item>
+        </md-list-item>
+        <md-list-item show-sm show-xs hide-gt-sm>
+            <md-menu-item>
+                <md-button ng-click="::openHelpDialog()">
+                    <md-icon>help</md-icon>
+                    Help
+                </md-button>
+            </md-menu-item>
+        </md-list-item>
+    </md-list>
+</div>
