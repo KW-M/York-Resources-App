@@ -221,7 +221,9 @@
 
         function onError (error) {
             console.warn(error);
-            $scope.newPost($scope.Post, operation);
+            console.log($mdDialog)
+            $mdDialog.show()
+            //$scope.newPost($scope.Post, operation);
             $mdToast.show($mdToast.simple().textContent('Error Posting, try again.').hideDelay(5000));
         }
 
