@@ -168,27 +168,27 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          }
       }
    }
-   
-      $scope.initiateDrivePicker = function(){
-         var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
-         var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
-         var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
-         drivePicker = new google.picker.PickerBuilder().
-         addView(docsView).
-         addView(sharedView).
-         addView(uploadView).
-         setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
-         setOAuthToken(authorizationService.getAuthToken()).
-         setCallback(self.pickerCallback).
-         build();
-         uploadPicker = new google.picker.PickerBuilder().
-         enableFeature(google.picker.Feature.NAV_HIDDEN).
-         hideTitleBar().
-         addView(uploadView).
-         setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
-         setOAuthToken(authorizationService.getAuthToken()).
-         setCallback(self.pickerCallback).
-         build();
+
+   $scope.initiateDrivePicker = function () {
+      var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
+      var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
+      var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
+      drivePicker = new google.picker.PickerBuilder().
+      addView(docsView).
+      addView(sharedView).
+      addView(uploadView).
+      setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
+      setOAuthToken(authorizationService.getAuthToken()).
+      setCallback(self.pickerCallback).
+      build();
+      uploadPicker = new google.picker.PickerBuilder().
+      enableFeature(google.picker.Feature.NAV_HIDDEN).
+      hideTitleBar().
+      addView(uploadView).
+      setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
+      setOAuthToken(authorizationService.getAuthToken()).
+      setCallback(self.pickerCallback).
+      build();
    }
 
    function handleUserPrefsSheet() {
@@ -475,27 +475,29 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    });
 
    document.onkeydown = function (e) {
-      if (e.altKey && e.ctrlKey && e.keyCode == 68) {
-         devMode = !devMode
-         $timeout(function () {
-            $scope.devMode = devMode;
-         })
-      }
-      if (e.keyCode == 75){
-         alert('handeling signin click')
-         authorizationService.handleSigninClick(function(){
-            alert('done')
-         });
-      }
-      if (e.keyCode == 76){
-         alert('running siginin initialization')
-         authorizationService.initilize(function(){
-            alert('done')
-         })
-      }
-      if (e.keyCode == 77){
-         alert('signing out')
-         gapi.auth2.getAuthInstance().signOut();
+      if (e.altKey && e.ctrlKey) {
+         if (e.keyCode == 68) {
+            devMode = !devMode
+            $timeout(function () {
+               $scope.devMode = devMode;
+            })
+         }
+         if (e.keyCode == 75) {
+            alert('handeling signin click')
+            authorizationService.handleSigninClick(function () {
+               alert('done')
+            });
+         }
+         if (e.keyCode == 76) {
+            alert('running siginin initialization')
+            authorizationService.initilize(function () {
+               alert('done')
+            })
+         }
+         if (e.keyCode == 77) {
+            alert('signing out')
+            gapi.auth2.getAuthInstance().signOut();
+         }
       }
    }
 

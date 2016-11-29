@@ -5,15 +5,11 @@ var app = angular.module('YorkResourcesApp', ['ngMaterial', 'ngRoute', 'angularG
 app.config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $locationProvider) {
     //$locationProvider.html5Mode(true);
     //routing:
-    $routeProvider.otherwise({
-        redirectTo: "/all-posts",
-    });
 
     //defining icons
-    $mdIconProvider
-        .icon("accountpic", "./assets/svg/avatar-1.svg", 128)
-        .icon("driveIconNot", "./assets/drive-icon.svg", 18)
-        .icon("driveIcon", "./images/drive_icon.svg", 18);
+    $mdIconProvider.icon("accountpic", "assets/svg/avatar-1.svg", 128)
+    $mdIconProvider.icon("driveIconNot", "assets/drive-icon.svg", 18)
+    $mdIconProvider.icon("driveIcon", "images/drive_icon.svg", 18);
 
     //theming stuff
     $mdThemingProvider.definePalette('YorkRed', {
