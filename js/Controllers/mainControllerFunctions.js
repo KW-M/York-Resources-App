@@ -58,7 +58,8 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             q: null
          });
          $location.path(query.classPath);
-      } else {
+      }
+      if (query.q) {
          if (query.q == '') {
             $location.search({
                q: null
@@ -69,18 +70,15 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             });
          }
       }
-      $location.hash(query.id || null);
+      //$location.hash(query.id || null);
    };
 
    function listenForURLChange() {
       onLocationChange();
-      $rootScope.$on('$locationChangeSuccess', function (event) {
-         onLocationChange()
-      });
+      $rootScope.$on('$locationChangeSuccess', onLocationChange);
    }
 
    function onLocationChange() {
-      console.log('changing location')
       $scope.queryParams.q = $location.search().q || null;
       $scope.queryParams.classpath = $location.path().replace(/\//g, "") || 'all-posts';
       $scope.queryParams.id = $location.hash();
