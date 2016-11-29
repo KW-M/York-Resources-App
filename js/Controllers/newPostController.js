@@ -193,6 +193,7 @@
         }
 
         $scope.submit = function () {
+            $mdDialog.hide();
             if (operation === 'new') {
                 var metadata = $scope.convertPostToDriveMetadata($scope.Post);
                 console.log({
@@ -203,12 +204,8 @@
                     queue('drive', GoogleDriveService.updateDriveFile(response.data, metadata), function (reply) {
                         $scope.updateLastPosted();
                         $mdToast.hide();
-                    }, function (error) {
-                        $mdToast.hide();
-                    }, 150);
-                }, function (error) {
-                    console.warn(error)
-                }, 2);
+                    },onError, 150);
+                },onError, 2);
             } else if (operation === 'update') {
                 var metadata = $scope.convertPostToDriveMetadata($scope.Post);
                 console.log({
@@ -218,15 +215,13 @@
                 queue('drive', GoogleDriveService.updateDriveFile(postObj.Id, metadata), function (reply) {
                     console.log(reply.result);
                     $mdToast.hide();
-                }, function (error) {
-                    
-                }, 150);
+                },onError, 150);
             }
         }
         
         function onError (error) {
-            
-            $mdToast.show($mdToast.simple().textContent('Error.').hideDelay(5000));
+            console.warn(error);
+            $mdToast.show($mdToast.simple().textContent('Error Posting, try again').hideDelay(5000));
         }
 
         $scope.clearLink = function () {
