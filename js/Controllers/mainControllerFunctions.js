@@ -95,9 +95,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             console.log('new Search')
             $scope.updateVisiblePosts([]);
             $scope.previousSearch = $scope.queryParams.q
-         } else{
-            console.log('loading for previousSearch')
-         }
+         } 
       } else {
          console.log('$scope.queryParams.q null')
          $scope.queryParams.flagged = null
