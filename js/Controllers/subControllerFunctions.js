@@ -90,7 +90,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		try {
 			var tagString = JSON.stringify(Post.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || [];
 			formatedDriveMetadata = {
-				name: 0 + '{]|[}' + JSON.stringify([]),
+				name: (Post.Likes.length || 0) + '{]|[}' + JSON.stringify(Post.Likes || []),
 				description: Post.Description + '{]|[}' + Post.Link + '{]|[}' + Post.PreviewImage,
 				//createdTime: Post.CreationDate.toRFC3339UTCString(),
 				//modifiedTime: Post.UpdateDate.toRFC3339UTCString(),
