@@ -49,6 +49,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				Catagory: DriveMetadata.properties.ClassCatagory || '',
 				Color: DriveMetadata.properties.ClassColor || '#ffffff',
 			}
+			var ClassOf = (DriveMetadata.properties.CreatorEmail || DriveMetadata.owners[0].emailAddress).match(/\d+/) || '',
 			formatedPost.Creator = {
 				Name: (DriveMetadata.properties.CreatorName || DriveMetadata.owners[0].displayName) || '',
 				Email: (DriveMetadata.properties.CreatorEmail || DriveMetadata.owners[0].emailAddress) || '',
