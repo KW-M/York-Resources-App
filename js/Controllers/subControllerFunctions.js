@@ -20,6 +20,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	//----------------------------------------------------
 	//------------------ Converting ----------------------
 	$scope.convertDriveToPost = function (DriveMetadata) {
+		console.log(DriveMetadata)
 		var formatedPost = {};
 		try {
 			var likesAndFlagged = DriveMetadata.name.split("{]|[}"); //not flagged any more
@@ -169,7 +170,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		return (arrayToSort.sort(function (a, b) {
 			console.log(a)
 			console.log(b)
-			return b.UpdateDate.addDays(b.Likes.length) - a.UpdateDate.addDays(a.Likes.length);
+			return b.UpdateDate.addDays(b.Likes.length || 0) - a.UpdateDate.addDays(a.Likes.length || 0);
 		}));
 	};
 	//----------------------------------------------------
