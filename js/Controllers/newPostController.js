@@ -155,6 +155,7 @@
         })
 
         $scope.isReadyToSubmit = function () {
+            if ()
             if ($scope.Post.Class.Name === '' || $scope.Post.Class === undefined) {
                 $mdToast.show({
                     template: '<md-toast><div class="md-toast-content">Select a class for this post.</div><md-toast>',
