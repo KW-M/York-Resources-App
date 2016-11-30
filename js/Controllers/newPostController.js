@@ -207,7 +207,7 @@
                     Metadata: metadata
                 });
                 queue('other', GoogleDriveService.AppsScriptNewFile(), function (response) {
-                    $scope.Post.id = response.data;
+                    $scope.Post.Id = response.data;
                     $timeout(function () {
                         $scope.allPosts.push($scope.Post)
                         $scope.visiblePosts = $scope.filterPosts($scope.allPosts);
