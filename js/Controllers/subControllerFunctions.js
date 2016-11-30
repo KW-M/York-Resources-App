@@ -49,11 +49,10 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				Catagory: DriveMetadata.properties.ClassCatagory || '',
 				Color: DriveMetadata.properties.ClassColor || '#ffffff',
 			}
-			console.log(DriveMetadata.properties.CreatorEmail || DriveMetadata.owners[0].emailAddress)
 			formatedPost.Creator = {
 				Name: (DriveMetadata.properties.CreatorName || DriveMetadata.owners[0].displayName) || '',
 				Email: (DriveMetadata.properties.CreatorEmail || DriveMetadata.owners[0].emailAddress) || '',
-				ClassOf: (DriveMetadata.properties.CreatorEmail || DriveMetadata.owners[0].emailAddress).match(/\d+/)[0] || '',
+				ClassOf: (DriveMetadata.properties.CreatorEmail || DriveMetadata.owners[0].emailAddress).match(/\d+/) || '',
 				Me: (DriveMetadata.properties.CreatorEmail || DriveMetadata.owners[0].emailAddress) === $scope.myInfo.Email,
 			}
 			formatedPost.Link = descriptionAndPreviewimage[1]
