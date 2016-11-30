@@ -201,7 +201,8 @@
             $mdDialog.hide();
             if ($scope.operation === 'new') {
                 $timeout(function () {
-                    $scope.allPosts.push($scope.post)
+                    $scope.allPosts.push($scope.Post)
+                    console.log($scope.allPosts)
                     $scope.visiblePosts = $scope.filterPosts($scope.allPosts);
                 })
                 var metadata = $scope.convertPostToDriveMetadata($scope.Post);
@@ -210,6 +211,7 @@
                     Metadata: metadata
                 });
                 queue('other', GoogleDriveService.AppsScriptNewFile(), function (response) {
+                    $scope.post.id = response.data;
                     queue('drive', GoogleDriveService.updateDriveFile(response.data, metadata), function (reply) {
                         $scope.updateLastPosted();
                         $mdToast.hide();
