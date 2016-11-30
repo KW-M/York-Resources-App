@@ -50,7 +50,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				Color: DriveMetadata.properties.ClassColor || '#ffffff',
 			}
 			var ClassOf = (DriveMetadata.properties.CreatorEmail || DriveMetadata.owners[0].emailAddress).match(/\d+/) || ['∞'];
-			console.log(ClassOf);
 			formatedPost.Creator = {
 				Name: (DriveMetadata.properties.CreatorName || DriveMetadata.owners[0].displayName) || '',
 				Email: (DriveMetadata.properties.CreatorEmail || DriveMetadata.owners[0].emailAddress) || '',
@@ -169,8 +168,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	}
 	$scope.sortByDateAndLikes = function (arrayToSort) {
 		return (arrayToSort.sort(function (a, b) {
-			console.log(a)
-			console.log(b)
 			return b.UpdateDate.addDays(b.Likes.length || 0) - a.UpdateDate.addDays(a.Likes.length || 0);
 		}));
 	};
