@@ -198,7 +198,7 @@
 
         $scope.submit = function () {
             $mdDialog.hide();
-            if (operation === 'new') {
+            if ($scope.operation === 'new') {
                 var metadata = $scope.convertPostToDriveMetadata($scope.Post);
                 console.log({
                     Post: $scope.Post,
@@ -210,7 +210,7 @@
                         $mdToast.hide();
                     },onError, 150);
                 },onError, 2);
-            } else if (operation === 'update') {
+            } else if ($scope.operation === 'update') {
                 var metadata = $scope.convertPostToDriveMetadata($scope.Post);
                 console.log({
                     Post: $scope.Post,

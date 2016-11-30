@@ -95,7 +95,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				//createdTime: Post.CreationDate.toRFC3339UTCString(),
 				//modifiedTime: Post.UpdateDate.toRFC3339UTCString(),
 				properties: {
-					Title: null,//Post.Title,
+					Title: Post.Title ,
 					Flagged: Post.Flagged,
 					Type: Post.Type,
 					AttachmentId: Post.AttachmentId,
