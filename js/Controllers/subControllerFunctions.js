@@ -101,8 +101,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 					AttachmentId: Post.AttachmentId || null,
 					AttachmentIcon: Post.AttachmentIcon || null,
 					AttachmentName: Post.AttachmentName || null,
-					CreatorEmail: 'Bob Joe',//$scope.myInfo.Email || null,
-					CreatorName: 'BobJoe2020@york.org',// $scope.myInfo.Name || null,
+					CreatorEmail: 'Bob Joe',//Post.Creator.Email || $scope.myInfo.Email || null,
+					CreatorName: 'BobJoe2020@york.org',//Post.Creator.Name || $scope.myInfo.Name || null,
 					Tag1: tagString[0] || null,
 					Tag2: tagString[1] || null,
 					ClassCatagory: Post.Class.Catagory || null,
@@ -167,6 +167,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	}
 	$scope.sortByDateAndLikes = function (arrayToSort) {
 		return (arrayToSort.sort(function (a, b) {
+			console.log(a)
+			console.log(b)
 			return b.UpdateDate.addDays(b.Likes.length) - a.UpdateDate.addDays(a.Likes.length);
 		}));
 	};
