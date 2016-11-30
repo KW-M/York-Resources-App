@@ -599,6 +599,13 @@ button.selected.md-button {
     border-radius: 3px 3px 0 0;
 }
 
+.post-card-header::before {
+    background-image: url(https://ssl.gstatic.com/atari/images/simple-header-blended-small.png);
+    height: 200px;
+    width: 100%;
+    opacity: 0.5;
+}
+
 .post-card-header.no-link {
     height: 56px;
     cursor: default;
