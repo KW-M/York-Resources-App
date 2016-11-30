@@ -155,6 +155,7 @@
         })
 
         $scope.isReadyToSubmit = function () {
+                            console.log($scope.tagAddInput)
             if ($scope.tagAddInput) {
                 console.log($scope.tagAddInput)
                 $scope.Post.tags.push($scope.tagAddInput);
