@@ -50,10 +50,10 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				Color: DriveMetadata.properties.ClassColor || '#ffffff',
 			}
 			formatedPost.Creator = {
-				Name: DriveMetadata.owners[0].displayName || '',
-				Email: DriveMetadata.owners[0].emailAddress || '',
-				ClassOf: DriveMetadata.owners[0].emailAddress.match(/\d+/)[0] || '',
-				Me: DriveMetadata.owners[0].emailAddress === $scope.myInfo.Email,
+				Name: (DriveMetadata.properties.CreatorName || DriveMetadata.owners[0].displayName) || '',
+				Email: (DriveMetadata.properties.CreatorEmail || DriveMetadata.owners[0].emailAddress) || '',
+				ClassOf: (DriveMetadata.properties.CreatorEmail || DriveMetadata.owners[0].emailAddress).match(/\d+/)[0] || '',
+				Me: (DriveMetadata.properties.CreatorEmail || DriveMetadata.owners[0].emailAddress) === $scope.myInfo.Email,
 			}
 			formatedPost.Link = descriptionAndPreviewimage[1]
 			formatedPost.Id = DriveMetadata.id || ''
@@ -101,8 +101,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 					AttachmentId: Post.AttachmentId || null,
 					AttachmentIcon: Post.AttachmentIcon || null,
 					AttachmentName: Post.AttachmentName || null,
-					CreatorEmail: $scope.myInfo.Email || null,
-					CreatorName: $scope.myInfo.Name || null,
+					CreatorEmail: 'Bob Joe',//$scope.myInfo.Email || null,
+					CreatorName: 'BobJoe2020@york.org',// $scope.myInfo.Name || null,
 					Tag1: tagString[0] || null,
 					Tag2: tagString[1] || null,
 					ClassCatagory: Post.Class.Catagory || null,
