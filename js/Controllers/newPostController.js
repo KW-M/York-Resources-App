@@ -155,7 +155,10 @@
         })
 
         $scope.isReadyToSubmit = function () {
-            if ()
+            if ($scope.tagAddInput) {
+                console.log($scope.tagAddInput)
+                $scope.Post.tags.push($scope.tagAddInput);
+            }
             if ($scope.Post.Class.Name === '' || $scope.Post.Class === undefined) {
                 $mdToast.show({
                     template: '<md-toast><div class="md-toast-content">Select a class for this post.</div><md-toast>',
@@ -222,9 +225,9 @@
 
         function onError (error) {
             console.warn(error);
-            console.log($mdDialog)
-            $scope.newPost($scope.Post, operation);
-            $mdDialog.hide();
+            $mdDialog.hide().then(function() {
+                $scope.newPost($scope.Post, operation);
+            });
             $mdToast.show($mdToast.simple().textContent('Error Posting, try again.').hideDelay(5000));
         }
 
