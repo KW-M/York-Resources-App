@@ -21,7 +21,7 @@
             }
             $scope.Post.Creator = $scope.Post.Creator || {
                 ClassOf: '',
-                Email: '',
+                Email: $scope.myInfo.email,
                 Me: null,
                 Name: '',
             }
@@ -199,6 +199,9 @@
         $scope.submit = function () {
             $mdDialog.hide();
             if ($scope.operation === 'new') {
+                            $timeout(function() {
+                $scope.allPosts.push($scope.post)
+            })
                 var metadata = $scope.convertPostToDriveMetadata($scope.Post);
                 console.log({
                     Post: $scope.Post,
