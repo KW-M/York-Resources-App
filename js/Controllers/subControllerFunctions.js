@@ -168,7 +168,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	}
 	$scope.sortByDateAndLikes = function (arrayToSort) {
 		return (arrayToSort.sort(function (a, b) {
-			return b.UpdateDate.addDays(b.Likes.length || 0) - a.UpdateDate.addDays(a.Likes.length || 0);
+			return b.CreationDate.addDays(b.Likes.length || 0) - a.CreationDate.addDays(a.Likes.length || 0);
 		}));
 	};
 	//----------------------------------------------------
