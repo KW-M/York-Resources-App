@@ -20,7 +20,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	//----------------------------------------------------
 	//------------------ Converting ----------------------
 	$scope.convertDriveToPost = function (DriveMetadata) {
-		console.log(DriveMetadata)
 		var formatedPost = {};
 		try {
 			var likesAndFlagged = DriveMetadata.name.split("{]|[}"); //not flagged any more
@@ -50,6 +49,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				Catagory: DriveMetadata.properties.ClassCatagory || '',
 				Color: DriveMetadata.properties.ClassColor || '#ffffff',
 			}
+			console.log(DriveMetadata.properties.CreatorEmail || DriveMetadata.owners[0].emailAddress)
 			formatedPost.Creator = {
 				Name: (DriveMetadata.properties.CreatorName || DriveMetadata.owners[0].displayName) || '',
 				Email: (DriveMetadata.properties.CreatorEmail || DriveMetadata.owners[0].emailAddress) || '',
@@ -76,7 +76,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 						formatedPost.AttachmentIcon = response.result.iconLink;
 					});
 				}, function (error) {
-					console.log(error);
+					console.warn(error);
 					formatedPost.PreviewImage = "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
 				}, 150);
 			}
