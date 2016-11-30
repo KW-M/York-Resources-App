@@ -1,5 +1,5 @@
     /* we don't define the "new post controller" here because it was alredy
-                                                                                                                                       defined by the $md-dialog in the newPost function on mainController.   */
+                                                                                                                                           defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $timeout, $http, $mdDialog, GoogleDriveService, authorizationService, $mdToast, postObj, operation) {
         console.log(postObj)
         var linkChangeTimer = null;
@@ -201,11 +201,6 @@
         $scope.submit = function () {
             $mdDialog.hide();
             if ($scope.operation === 'new') {
-                $timeout(function () {
-                    $scope.allPosts.push($scope.Post)
-                    console.log($scope.allPosts)
-                    $scope.visiblePosts = $scope.filterPosts($scope.allPosts);
-                })
                 var metadata = $scope.convertPostToDriveMetadata($scope.Post);
                 console.log({
                     Post: $scope.Post,
@@ -213,6 +208,10 @@
                 });
                 queue('other', GoogleDriveService.AppsScriptNewFile(), function (response) {
                     $scope.Post.id = response.data;
+                    $timeout(function () {
+                        $scope.allPosts.push($scope.Post)
+                        $scope.visiblePosts = $scope.filterPosts($scope.allPosts);
+                    })
                     queue('drive', GoogleDriveService.updateDriveFile(response.data, metadata), function (reply) {
                         $scope.updateLastPosted();
                         $mdToast.hide();
