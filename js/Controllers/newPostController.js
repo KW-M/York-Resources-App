@@ -19,17 +19,18 @@
                 Catagory: '',
                 Color: 'ff00ff',
             }
-            $scope.Post.Creator = operation == 'new' ? ({
-                ClassOf: $scope.ClassOf,
-                Email: $scope.myInfo.email,
+            $scope.Post.Creator = (operation == 'new') ? ({
+                ClassOf: $scope.myInfo.ClassOf,
+                Email: $scope.myInfo.Email,
                 Me: true,
-                Name: $scope.myInfo.name,
+                Name: $scope.myInfo.Name,
             }) : ($scope.Post.Creator || {
                 ClassOf: '',
                 Email: '',
                 Me: null,
                 Name: ''
             })
+            console.log($scope.Post.Creator);
             $scope.Post.Id = $scope.Post.Id || ''
             $scope.Post.AttachmentId = $scope.Post.AttachmentId || ''
             $scope.Post.AttachmentName = $scope.Post.AttachmentName || ''
@@ -211,7 +212,7 @@
                     Metadata: metadata
                 });
                 queue('other', GoogleDriveService.AppsScriptNewFile(), function (response) {
-                    $scope.post.id = response.data;
+                    $scope.Post.id = response.data;
                     queue('drive', GoogleDriveService.updateDriveFile(response.data, metadata), function (reply) {
                         $scope.updateLastPosted();
                         $mdToast.hide();
