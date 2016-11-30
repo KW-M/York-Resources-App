@@ -19,12 +19,12 @@
                 Catagory: '',
                 Color: 'ff00ff',
             }
-            $scope.Post.Creator = $scope.Post.Creator || {
-                ClassOf: '',
+            $scope.Post.Creator = operation == 'new' ? ({
+                ClassOf: $scope.ClassOf,
                 Email: $scope.myInfo.email,
-                Me: null,
-                Name: '',
-            }
+                Me: true,
+                Name: $scope.myInfo.name,
+            }) : ($scope.Post.Creator || {ClassOf: '',Email: '',Me: null, Name: ''})
             $scope.Post.Id = $scope.Post.Id || ''
             $scope.Post.AttachmentId = $scope.Post.AttachmentId || ''
             $scope.Post.AttachmentName = $scope.Post.AttachmentName || ''
