@@ -49,11 +49,12 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				Catagory: DriveMetadata.properties.ClassCatagory || '',
 				Color: DriveMetadata.properties.ClassColor || '#ffffff',
 			}
+			var ClassOf = (DriveMetadata.properties.CreatorEmail || DriveMetadata.owners[0].emailAddress).match(/\d+/) || ['∞'];
 			formatedPost.Creator = {
-				Name: DriveMetadata.owners[0].displayName || '',
-				Email: DriveMetadata.owners[0].emailAddress || '',
-				ClassOf: DriveMetadata.owners[0].emailAddress.match(/\d+/)[0] || '',
-				Me: DriveMetadata.owners[0].emailAddress === $scope.myInfo.Email,
+				Name: (DriveMetadata.properties.CreatorName || DriveMetadata.owners[0].displayName) || '',
+				Email: (DriveMetadata.properties.CreatorEmail || DriveMetadata.owners[0].emailAddress) || '',
+				ClassOf: ClassOf[0],
+				Me: (DriveMetadata.properties.CreatorEmail || DriveMetadata.owners[0].emailAddress) === $scope.myInfo.Email,
 			}
 			formatedPost.Link = descriptionAndPreviewimage[1]
 			formatedPost.Id = DriveMetadata.id || ''
@@ -75,7 +76,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 						formatedPost.AttachmentIcon = response.result.iconLink;
 					});
 				}, function (error) {
-					console.log(error);
+					console.warn(error);
 					formatedPost.PreviewImage = "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
 				}, 150);
 			}
@@ -87,26 +88,27 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	};
 	$scope.convertPostToDriveMetadata = function (Post) {
 		var formatedDriveMetadata
-		return('g')
 		try {
 			var tagString = JSON.stringify(Post.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || [];
 			formatedDriveMetadata = {
-				name: 0 + '{]|[}' + JSON.stringify([]),
+				name: (Post.Likes.length || 0) + '{]|[}' + JSON.stringify(Post.Likes || []),
 				description: Post.Description + '{]|[}' + Post.Link + '{]|[}' + Post.PreviewImage,
 				//createdTime: Post.CreationDate.toRFC3339UTCString(),
 				//modifiedTime: Post.UpdateDate.toRFC3339UTCString(),
 				properties: {
-					Title: Post.Title,
-					Flagged: Post.Flagged,
-					Type: Post.Type,
-					AttachmentId: Post.AttachmentId,
-					AttachmentIcon: Post.AttachmentIcon,
-					AttachmentName: Post.AttachmentName,
-					Tag1: tagString[0],
-					Tag2: tagString[1],
-					ClassCatagory: Post.Class.Catagory,
-					ClassColor: Post.Class.Color,
-					ClassName: Post.Class.Name,
+					Title: Post.Title || null,
+					Flagged: Post.Flagged || false,
+					Type: Post.Type || 'noLink',
+					AttachmentId: Post.AttachmentId || null,
+					AttachmentIcon: Post.AttachmentIcon || null,
+					AttachmentName: Post.AttachmentName || null,
+					CreatorEmail: Post.Creator.Email || $scope.myInfo.Email || null,
+					CreatorName: Post.Creator.Name || $scope.myInfo.Name || null,
+					Tag1: tagString[0] || null,
+					Tag2: tagString[1] || null,
+					ClassCatagory: Post.Class.Catagory || null,
+					ClassColor: Post.Class.Color || null,
+					ClassName: Post.Class.Name || null,
 				},
 				contentHints: {
 					indexableText: "Title: " + Post.Title + ", Attachment: " + Post.AttachmentName + ", Class: " + Post.Class.Name + ", Class Catagory: " + Post.Class.Catagory + ", tags: (" + (tagString[2] || '') + (tagString[2] || '') + ")"
@@ -166,7 +168,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	}
 	$scope.sortByDateAndLikes = function (arrayToSort) {
 		return (arrayToSort.sort(function (a, b) {
-			return b.UpdateDate.addDays(b.Likes.length) - a.UpdateDate.addDays(a.Likes.length);
+			return b.CreationDate.addDays(b.Likes.length || 0) - a.CreationDate.addDays(a.Likes.length || 0);
 		}));
 	};
 	//----------------------------------------------------

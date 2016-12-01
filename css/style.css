@@ -589,7 +589,6 @@ button.selected.md-button {
 /*------- Post Card Header Styles -------*/
 
 .post-card-header {
-    background-image: url(https://ssl.gstatic.com/atari/images/simple-header-blended-small.png);
     height: 200px;
     width: 100%;
     position: relative;
@@ -599,11 +598,8 @@ button.selected.md-button {
     border-radius: 3px 3px 0 0;
 }
 
-.post-card-header::before {
+.post-card .post-card-header {
     background-image: url(https://ssl.gstatic.com/atari/images/simple-header-blended-small.png);
-    height: 200px;
-    width: 100%;
-    opacity: 0.5;
 }
 
 .post-card-header.no-link {

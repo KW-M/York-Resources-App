@@ -68,9 +68,7 @@
                </md-optgroup>
             </md-select>
             <div style="width:6px" ng-show="operation === 'view'"></div>
-            <md-chips ng-model="Post.Tags" flex md-separator-keys="[32,188,13]" ng-hide="operation === 'view' && Post.Tags.length === 0" readonly="operation === 'view'">
-               <input type="text" placeholder="Add a tag">
-            </md-chips>
+            <md-chips ng-model="Post.Tags" placeholder="Add a tag" flex md-separator-keys="[32,188,13]" ng-hide="operation === 'view' && Post.Tags.length === 0" readonly="operation === 'view'" md-enable-chip-edit="true" md-add-on-blur="true"></md-chips>
          </div>
          <div class="md-dialog-content">
             <input ng-model="Post.Title" ng-readonly="operation === 'view'" class="new-post-title md-title" placeholder="Title" md-autofocus>

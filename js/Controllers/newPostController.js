@@ -1,5 +1,5 @@
     /* we don't define the "new post controller" here because it was alredy
-                                                                                                                                   defined by the $md-dialog in the newPost function on mainController.   */
+                                                                                                                                           defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $timeout, $http, $mdDialog, GoogleDriveService, authorizationService, $mdToast, postObj, operation) {
         console.log(postObj)
         var linkChangeTimer = null;
@@ -19,12 +19,18 @@
                 Catagory: '',
                 Color: 'ff00ff',
             }
-            $scope.Post.Creator = $scope.Post.Creator || {
+            $scope.Post.Creator = (operation == 'new') ? ({
+                ClassOf: $scope.myInfo.ClassOf,
+                Email: $scope.myInfo.Email,
+                Me: true,
+                Name: $scope.myInfo.Name,
+            }) : ($scope.Post.Creator || {
                 ClassOf: '',
                 Email: '',
                 Me: null,
-                Name: '',
-            }
+                Name: ''
+            })
+            console.log($scope.Post.Creator);
             $scope.Post.Id = $scope.Post.Id || ''
             $scope.Post.AttachmentId = $scope.Post.AttachmentId || ''
             $scope.Post.AttachmentName = $scope.Post.AttachmentName || ''
@@ -194,19 +200,24 @@
 
         $scope.submit = function () {
             $mdDialog.hide();
-            if (operation === 'new') {
+            if ($scope.operation === 'new') {
                 var metadata = $scope.convertPostToDriveMetadata($scope.Post);
                 console.log({
                     Post: $scope.Post,
                     Metadata: metadata
                 });
                 queue('other', GoogleDriveService.AppsScriptNewFile(), function (response) {
+                    $scope.Post.Id = response.data;
+                    $timeout(function () {
+                        $scope.allPosts.push($scope.Post)
+                        $scope.visiblePosts = $scope.filterPosts($scope.allPosts);
+                    })
                     queue('drive', GoogleDriveService.updateDriveFile(response.data, metadata), function (reply) {
                         $scope.updateLastPosted();
                         $mdToast.hide();
-                    },onError, 150);
-                },onError, 2);
-            } else if (operation === 'update') {
+                    }, onError, 150);
+                }, onError, 2);
+            } else if ($scope.operation === 'update') {
                 var metadata = $scope.convertPostToDriveMetadata($scope.Post);
                 console.log({
                     Post: $scope.Post,
@@ -215,15 +226,15 @@
                 queue('drive', GoogleDriveService.updateDriveFile(postObj.Id, metadata), function (reply) {
                     console.log(reply.result);
                     $mdToast.hide();
-                },onError, 150);
+                }, onError, 150);
             }
         }
 
-        function onError (error) {
+        function onError(error) {
             console.warn(error);
-            console.log($mdDialog)
-            $scope.newPost($scope.Post, operation);
-            $mdDialog.hide();
+            $mdDialog.hide().then(function () {
+                $scope.newPost($scope.Post, operation);
+            });
             $mdToast.show($mdToast.simple().textContent('Error Posting, try again.').hideDelay(5000));
         }
 
@@ -235,7 +246,7 @@
         }
 
         $scope.clearClassSelectSearch = function () {
-            $timeout(function() {
+            $timeout(function () {
                 $scope.classSelectSearch = '';
             });
         }
@@ -246,14 +257,13 @@
             $scope.Post.Link = originalPost.Link || ''
             $scope.Post.Tags = originalPost.Tags || []
             $scope.Post.Type = originalPost.Type || 'noLink'
-            $scope.Post.Flagged = originalPost.Flagged || false
             $scope.Post.UpdateDate = originalPost.UpdateDate || new Date()
             $scope.Post.Class = originalPost.Class || {
                 Name: '',
                 Catagory: '',
                 Color: '#ffffff',
             }
-            $scope.Post.Id = originalPost.Id || ''
+            $scope.Post.Id = originalPost.Id || $scope.Post.Id || ''
             $scope.Post.AttachmentId = originalPost.AttachmentId || ''
             $scope.Post.AttachmentName = originalPost.AttachmentName || ''
             $scope.Post.AttachmentIcon = originalPost.AttachmentIcon || ''
