@@ -344,6 +344,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		$scope.cancelDialog = function () {
 			$mdDialog.cancel();
 		};
+		console.log($scope)
+		$scope.myEmail = $scope.myInfo.Email
 	}
 	$scope.openHelpDialog = function () { //called by the top right toolbar help button
 		$mdDialog.show({
