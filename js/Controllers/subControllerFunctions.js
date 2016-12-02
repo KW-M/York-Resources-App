@@ -1,5 +1,5 @@
 function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia, $timeout, $filter, $mdSidenav, authorizationService, GoogleDriveService, angularGridInstance) {
-
+	var myEmail = $scope.myInfo.Email
 	var likeClickTimer = {};
 	window.reloadQuizletFrame = null;
 	function findPostById(id, array) {
@@ -337,6 +337,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	};
 	//----------------------------------------------------
 	//-------------------- dialogs -----------------------
+
 	function DialogController($scope, $mdDialog) {
 		$scope.hideDialog = function () {
 			$mdDialog.hide();
@@ -344,8 +345,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		$scope.cancelDialog = function () {
 			$mdDialog.cancel();
 		};
-		console.log($scope)
-		$scope.myEmail = $scope.myInfo.Email
+		$scope.myEmail = myEmail
 	}
 	$scope.openHelpDialog = function () { //called by the top right toolbar help button
 		$mdDialog.show({
