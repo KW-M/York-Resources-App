@@ -20,6 +20,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	//----------------------------------------------------
 	//------------------ Converting ----------------------
 	$scope.convertDriveToPost = function (DriveMetadata) {
+		console.log($scope.classList)
 		var formatedPost = {};
 		try {
 			var likesAndFlagged = DriveMetadata.name.split("{]|[}"); //not flagged any more
