@@ -160,15 +160,32 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                }
             }
             if (rowCount == $scope.userList.length + 1) {
-               return GoogleDriveService.appendSpreadsheetRange("Sheet1!A1:A", [$scope.myInfo.Email, $scope.myInfo.Name, false, 1, 0, "", "", "", ""]);
+               return GoogleDriveService.appendSpreadsheetRange("Sheet1!A1:A", [$scope.myInfo.Email, $scope.myInfo.Name, false, 0, 0, "", "", "", ""]);
             }
          }).then(function(response) {
             console.log(response)
             response.result.values[0][3]++;
             $scope.convertRowToUserPreferences(response.result.values[0]);
-            return GoogleDriveService.getSpreadsheetRange("Sheet1!A2:Z", true)
          }).then(function() {
-
+            GoogleDriveService.updateSpreadsheetRange(range, response.result.values[0])
+            return GoogleDriveService.getSpreadsheetRange("Sheet1!A2:Z", true)
+         }).then(function(rawClasses) {
+            var classList = [];
+            var classesResult = rawClasses.result.values
+               //format the class list:
+            for (var Catagory = 0; Catagory < classesResult.length; Catagory++) {
+               classList[Catagory] = {
+                  'Catagory': classesResult[Catagory][0],
+                  'Color': classesResult[Catagory][1],
+                  'Classes': []
+               }
+               for (var Class = 2; Class < classesResult[Catagory].length; Class++) {
+                  classList[Catagory].Classes[Class - 2] = classesResult[Catagory][Class]
+               }
+            }
+            $timeout(function() { //makes angular update values
+               $scope.classList = classList;
+            })
          })
          var pickerAPI = pickerPromise.promise.then(function() {
             $scope.initiateDrivePicker()
