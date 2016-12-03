@@ -421,8 +421,10 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       if (queryParams.q) {
          console.log('hasQueryParams')
          if (queryParams.q === $scope.previousSearch) {
+            console.log('sameSearch')
             $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
          } else {
+            console.log('newSearch')
             $scope.searchPosts = formattedFileList;
          }
          $scope.previousSearch = $scope.queryParams.q
