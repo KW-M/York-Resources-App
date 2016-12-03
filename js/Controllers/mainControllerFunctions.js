@@ -133,7 +133,13 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          gapi.load('picker', {'callback': pickerPromise.resolve})
          
          var driveAPI = gapi.load('https://www.googleapis.com/discovery/v1/apis/drive/v3/rest').then(function() {
-            // body...
+            return GoogleDriveService.getUserInfo();
+         }).then(function(userInfo) {
+            $scope.myInfo = {
+               "Name": userInfo.result.user.displayName,
+               "Email": userInfo.result.user.emailAddress,
+               "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
+            };
          })
          var sheetsAPI = gapi.load('https://sheets.googleapis.com/$discovery/rest?version=v4').then(function() {
             // body...
