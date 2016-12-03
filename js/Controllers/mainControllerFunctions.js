@@ -595,9 +595,9 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
 console.log(window.location)
 if (window.location.search) {
    var unformated = window.location.search.match(/state=([^&]+)(?:$|&)/)
-   console.log(unformated)
-   console.log(decodeURIComponent(unformated[1]))
-   console.log(JSON.parse(decodeURIComponent(unformated[1])))
+   var shareInput = JSON.parse(decodeURIComponent(unformated[1]));
+   $scope.newPost({
+      link: shareInput.exportIds[0]}, 'new')
 }
 
    //----------------------------------------------------
