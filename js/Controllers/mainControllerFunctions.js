@@ -129,7 +129,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    //------------- Signin & Initiation ------------------
    gapi.load('client:auth2', function () {
       authorizationService.initilize(function () {
-         var driveAPI = gapi.load('')
+         var driveAPI = gapi.load('https://developers.google.com/apis-explorer/#s/discovery/v1/discovery.apis.getRest?api=drive&version=v3&')
          var sheetsAPI = gapi.load('')
          var pickerAPI = gapi.load('')
          GoogleDriveService.loadAPIs(initiateDrive);
