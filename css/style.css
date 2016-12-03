@@ -314,7 +314,7 @@ md-icon.material-icons.search-bar-icon {
 }
 
 /*------------- Shortcut Menu Settings----------- */
-.shortcut-menu-button {
+button.md-button.shortcut-menu-button {
     text-transform: none;
     line-height: 12px;
     padding-bottom: 8px;
