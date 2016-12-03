@@ -142,6 +142,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          var driveAPI = gapi.client.load('https://www.googleapis.com/discovery/v1/apis/drive/v3/rest').then(function() {
             return GoogleDriveService.getUserInfo();
          }).then(function(userInfo) {
+            console.log(userInfo)
             $scope.myInfo = {
                "Name": userInfo.result.user.displayName,
                "Email": userInfo.result.user.emailAddress,
@@ -186,10 +187,11 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             $timeout(function() { //makes angular update values
                $scope.classList = classList;
             })
-         }).catch(function(error) {
-            console.log(e)
-            // body...
-         }
+         })
+         //.catch(function(error) {
+           // console.warn(error)
+         //});
+         console.log(sheetsAPI)
          
          var pickerAPI = pickerPromise.promise.then(function() {
             $scope.initiateDrivePicker()
