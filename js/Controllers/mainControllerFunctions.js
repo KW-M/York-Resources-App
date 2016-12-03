@@ -140,10 +140,8 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          })
 
          var driveAPI = gapi.client.load('https://www.googleapis.com/discovery/v1/apis/drive/v3/rest').then(function() {
-            console.log('drive loaded')
             return GoogleDriveService.getUserInfo();
          }).then(function(userInfo) {
-            console.log('user loaded')
             $scope.myInfo = {
                "Name": userInfo.result.user.displayName,
                "Email": userInfo.result.user.emailAddress,
@@ -166,16 +164,20 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             }
          }).then(function(response) {
             console.log(response)
-               response.result.values[0][3]++
-               $scope.convertRowToUserPreferences(response.result.values[0]);
+            response.result.values[0][3]++;
+            $scope.convertRowToUserPreferences(response.result.values[0]);
+            return GoogleDriveService.getSpreadsheetRange("Sheet1!A2:Z", true)
+         }).then(function() {
+
          })
          var pickerAPI = pickerPromise.promise.then(function() {
-            console.log('picker loaded')
+            $scope.initiateDrivePicker()
          })
          $q.all([driveAPI, sheetsAPI, pickerAPI]).then(function() {
-               console.log('all loaded')
+            authorizationService.hideSigninDialog();
          })
-        //GoogleDriveService.loadAPIs(initiateDrive);
+
+         //GoogleDriveService.loadAPIs(initiateDrive);
       });
    });
 
