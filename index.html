@@ -104,8 +104,17 @@
                             <p class="user-name" style="color: #666; font-size:13px; padding: 0px">{{myInfo.Email}}</p>
                         </md-menu-item>
                         <md-menu-item>
-                            <md-button id="signout_button" ng-click="signOut()"><span flex>Sign out</span>
+                            <md-button id="signout_button" ng-click="signOut()">
+                                <span>Sign out</span>
+                                <span flex></span>
                                 <md-icon>exit_to_app</md-icon>
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button id="signout_button" ng-click="signOut()">
+                                <span>Help</span>
+                                <span flex></span>
+                                <md-icon>help</md-icon>
                             </md-button>
                         </md-menu-item>
                         <md-button id="quizlet_connect_button" class="md-raised unselectable" ng-click="openQuizletDialog()"><span>Connect Quizlet</span>
