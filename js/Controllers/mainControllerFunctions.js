@@ -594,7 +594,10 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
 
 console.log(window.location)
 if (window.location.search) {
-   //window.location.search.match()
+   var unformated = window.location.search.match(/state=([^&]+)(?:$|&)/)
+   console.log(unformated)
+   console.log(decodeURIComponent(unformated[1]))
+   console.log(JSON.parse(decodeURIComponent(unformated[1])))
 }
 
    //----------------------------------------------------
