@@ -88,7 +88,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       no_more_footer.style.display = 'none';
       no_posts_footer.style.display = 'none';
       footer_problem.style.display = 'none';
-
+      $scope.queryParams.q
       if ($scope.queryParams.q !== null) {
          if ($scope.queryParams.q != $scope.previousSearch) {
             $scope.updateVisiblePosts([]);
