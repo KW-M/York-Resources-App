@@ -131,23 +131,29 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       authorizationService.initilize(function () {
          var pickerPromise = $q.defer();
          gapi.load('picker', {'callback': pickerPromise.resolve})
-         
-         var driveAPI = gapi.load('https://www.googleapis.com/discovery/v1/apis/drive/v3/rest').then(function() {
+
+         var driveAPI = gapi.client.load('https://www.googleapis.com/discovery/v1/apis/drive/v3/rest')
+         driveAPI.then(function() {
+             console.log('drive loaded')
             return GoogleDriveService.getUserInfo();
          }).then(function(userInfo) {
+             console.log('user loaded')
             $scope.myInfo = {
                "Name": userInfo.result.user.displayName,
                "Email": userInfo.result.user.emailAddress,
                "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
             };
          })
-         var sheetsAPI = gapi.load('https://sheets.googleapis.com/$discovery/rest?version=v4').then(function() {
+         var sheetsAPI = gapi.client.load('https://sheets.googleapis.com/$discovery/rest?version=v4').then(function() {
  console.log('sheets loaded')
          })
          var pickerAPI = pickerPromise.promise.then(function() {
-            // body...
+             console.log('picker loaded')
          })
-         GoogleDriveService.loadAPIs(initiateDrive);
+         $q.all([driveAPI,sheetsAPI,pickerAPI]).then(function() {
+            console.log('all loaded')
+         })
+         //GoogleDriveService.loadAPIs(initiateDrive);
       });
    });
 
