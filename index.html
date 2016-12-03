@@ -91,21 +91,21 @@
                 <md-icon>refresh</md-icon>
                 <md-tooltip md-autohide>Refresh</md-tooltip>
             </md-button>
-            <md-menu md-position-mode="target-right target" md-offset="0 42">
+            <md-menu md-position-mode="target-right target" md-offset="0 56">
                 <md-button hide-xs show-gt-sm class="md-icon-button unselectable" ng-click="$mdOpenMenu($event)">
                     <md-icon>apps</md-icon>
                     <md-tooltip>Quick Shortcuts</md-tooltip>
                 </md-button>
                 <md-menu-content style="flex-direction:row">
-                    <md-button class="shortcut-menu-button" href="https://haiku.york.org" target="_blank">
+                    <md-button class="shortcut-menu-button" ng-click="openLink('https://haiku.york.org')">
                         <div class="shortcut-menu-image" style="background-image: url(images/Haiku_Logo.png);background-size: 54px;background-position: 5px 5px;background-repeat: no-repeat;"></div>
                         <div>Haiku</div>
                     </md-button>
-                    <md-button class="shortcut-menu-button" href="https://www.google.com" target="_blank">
+                    <md-button class="shortcut-menu-button" ng-click="openLink('https://drive.google.com')">
                         <div class="shortcut-menu-image shortcut-google-image" style="background-position: 0 -1518px;"></div>
                         <div>Drive</div>
                     </md-button>
-                    <md-button class="shortcut-menu-button" href="https://www.google.com" target="_blank">
+                    <md-button class="shortcut-menu-button" ng-click="openLink('https://mail.google.com')">
                         <div class="shortcut-menu-image shortcut-google-image" style="background-position:0 -621px;"></div>
                         <div>Gmail</div>
                     </md-button>
