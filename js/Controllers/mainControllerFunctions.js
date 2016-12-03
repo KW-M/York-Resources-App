@@ -148,7 +148,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
             };
          })
-         var spreadsheetOperation = null
+
          var sheetsAPI = gapi.client.load('https://sheets.googleapis.com/$discovery/rest?version=v4').then(function() {
             return GoogleDriveService.getSpreadsheetRange("Sheet1!A2:B")
          }).then(function(spreadsheetRange) {
@@ -165,9 +165,9 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          }).then(function(response) {
             console.log(response)
             response.result.values[0][3]++;
-            $scope.convertRowToUserPreferences(response.result.values[0]);
-         }).then(function() {
-            GoogleDriveService.updateSpreadsheetRange(range, response.result.values[0])
+            return GoogleDriveService.updateSpreadsheetRange(response.result.range, response.result.values[0])
+         }).then(function(updatedUserSpreadsheetRow) {
+            $scope.convertRowToUserPreferences(updatedUserSpreadsheetRow.result.values[0]);
             return GoogleDriveService.getSpreadsheetRange("Sheet1!A2:Z", true)
          }).then(function(rawClasses) {
             var classList = [];
@@ -190,6 +190,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          var pickerAPI = pickerPromise.promise.then(function() {
             $scope.initiateDrivePicker()
          })
+         $q
          $q.all([driveAPI, sheetsAPI, pickerAPI]).then(function() {
             authorizationService.hideSigninDialog();
          })
