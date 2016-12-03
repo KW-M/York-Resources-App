@@ -129,12 +129,18 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    //------------- Signin & Initiation ------------------
    gapi.load('client:auth2', function () {
       authorizationService.initilize(function () {
-         var driveAPI = gapi.load('https://www.googleapis.com/discovery/v1/apis/drive/v3/rest')
-         var sheetsAPI = gapi.load('https://sheets.googleapis.com/$discovery/rest?version=v4')
-         var pickerAPI = $q.defer();
-         gapi.load('picker', {'callback': function() {
-            pickerAPI.resolve
-         }})
+         var pickerPromise = $q.defer();
+         gapi.load('picker', {'callback': pickerPromise.resolve})
+         
+         var driveAPI = gapi.load('https://www.googleapis.com/discovery/v1/apis/drive/v3/rest').then(function() {
+            // body...
+         })
+         var sheetsAPI = gapi.load('https://sheets.googleapis.com/$discovery/rest?version=v4').then(function() {
+            // body...
+         })
+         var pickerAPI = pickerPromise.promise.then(function() {
+            // body...
+         })
          GoogleDriveService.loadAPIs(initiateDrive);
       });
    });
