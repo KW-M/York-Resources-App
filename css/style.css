@@ -314,7 +314,15 @@ md-icon.material-icons.search-bar-icon {
 }
 
 /*------------- Shortcut Menu Settings----------- */
-.shortcut-image
+.shortcut-menu-image {
+    height: 64px;
+    width: 64px;
+    display: inline-block;
+    vertical-align: top;
+    background-image: url(https://ssl.gstatic.com/gb/images/p1_a4541be8.png);
+    -webkit-background-size: 64px 2065px;
+    background-size: 64px 2065px;
+}
 
 
 /*--------------------------------------------------------------
