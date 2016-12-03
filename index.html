@@ -91,47 +91,15 @@
                 <md-icon>refresh</md-icon>
                 <md-tooltip md-autohide>Refresh</md-tooltip>
             </md-button>
-            <md-button hide-xs show-gt-sm class="md-icon-button unselectable" ng-click="::openHelpDialog()">
-                <md-icon>help</md-icon>
-                <md-tooltip>uick Shortcuts</md-tooltip>
-            </md-button>
             <md-menu md-position-mode="target-right target">
-                <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button unselectable" id="account_button" aria-label="account" style="height:36px;width:36px;border-radius:50%;background-image:url('images/accountPic.jpg'); background-size: 36px 36px;">
+                <md-button hide-xs show-gt-sm class="md-icon-button unselectable" ng-click="$mdOpenMenu($event)">
+                    <md-icon>apps</md-icon>
+                    <md-tooltip>Quick Shortcuts</md-tooltip>
                 </md-button>
-                <md-menu-content>
-                    <md-menu-item layout="column" style="padding: 6px 16px;" class="unselectable">
-                        <p class="user-name" style="font-weight: bold; font-size:13px; padding: 0px">{{myInfo.Name}}</p>
-                        <p class="user-name" style="color: #666; font-size:13px; padding: 0px">{{myInfo.Email}}</p>
-                    </md-menu-item>
-                    <md-menu-item>
-                        <md-button id="signout_button" ng-click="signOut()">
-                            <md-icon>exit_to_app</md-icon>
-                            <span>Sign out</span>
-                        </md-button>
-                    </md-menu-item>
-                    <md-menu-item>
-                        <md-button ng-click="::openHelpDialog()">
-                            <md-icon>settings</md-icon>
-                            <span>Settings</span>
-                        </md-button>
-                    </md-menu-item>
-                    <md-divider></md-divider>
-                    <md-menu-item>
-                        <md-button ng-click="::openHelpDialog()">
-                            <md-icon>help</md-icon>
-                            <span>Help</span>
-                        </md-button>
-                    </md-menu-item>
-                    <md-menu-item>
-                        <md-button ng-click="::openFeedbackDialog()">
-                            <md-icon>feedback</md-icon>
-                            <span>Feedback</span>
-                        </md-button>
-                    </md-menu-item>
-                    <md-button id="quizlet_connect_button" class="md-raised unselectable" ng-click="openQuizletDialog()"><span>Connect Quizlet</span>
-                        <md-icon style="margin: auto 0px auto 10px;"><img style="height: 24px;width: 24px;-webkit-filter: invert(100%);filter: invert(100%);" src="images/quizlet logo.png"></img>
-                        </md-icon>
-                    </md-button>
+                <md-menu-content >
+<md-button>Haiku</md-button>
+<md-button>Google Drive</md-button>
+<md-button>Gmail</md-button>
                 </md-menu-content>
             </md-menu>
             <md-menu md-position-mode="target-right target">
