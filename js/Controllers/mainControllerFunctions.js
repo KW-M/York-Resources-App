@@ -162,10 +162,10 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             if (rowCount == $scope.userList.length + 1) {
                return GoogleDriveService.appendSpreadsheetRange("Sheet1!A1:A", [$scope.myInfo.Email, $scope.myInfo.Name, false, 0, 0, "", "", "", ""]);
             }
-         }).then(function(response) {
-            console.log(response)
-            response.result.values[0][3]++;
-            return GoogleDriveService.updateSpreadsheetRange(response.result.range, response.result.values[0])
+         }).then(function(userSpreadsheetRow) {
+            console.log(userSpreadsheetRow)
+            userSpreadsheetRow.result.values[0][3]++;
+            return GoogleDriveService.updateSpreadsheetRange(userSpreadsheetRow.result.range, userSpreadsheetRow.result.values[0])
          }).then(function(updatedUserSpreadsheetRow) {
             $scope.convertRowToUserPreferences(updatedUserSpreadsheetRow.result.values[0]);
             return GoogleDriveService.getSpreadsheetRange("Sheet1!A2:Z", true)
@@ -186,16 +186,17 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             $timeout(function() { //makes angular update values
                $scope.classList = classList;
             })
-         })
+         }).catch(function(error) {
+            console.log(e)
+            // body...
+         }
+         
          var pickerAPI = pickerPromise.promise.then(function() {
             $scope.initiateDrivePicker()
          })
-         $q
-         $q.all([driveAPI, sheetsAPI, pickerAPI]).then(function() {
-            authorizationService.hideSigninDialog();
-         })
-
-         //GoogleDriveService.loadAPIs(initiateDrive);
+         
+         $q.all([driveAPI, sheetsAPI]).then(listenForURLChange);
+         $q.all([driveAPI, sheetsAPI, pickerAPI]).then(authorizationService.hideSigninDialog)
       });
    });
 
