@@ -105,28 +105,24 @@
                         </md-menu-item>
                         <md-menu-item>
                             <md-button id="signout_button" ng-click="signOut()">
-                                <span>Sign out</span>
-                                <span flex></span>
                                 <md-icon>exit_to_app</md-icon>
+                                <span>Sign out</span>
                             </md-button>
                         </md-menu-item>
                         <md-menu-item>
                             <md-button ng-click="::openHelpDialog()">
-                                <span>Help</span>
-                                <span flex></span>
-                                <md-icon>help</md-icon>
+                                <md-icon>settings</md-icon>
+                                <span>Settings</span>
                             </md-button>
                         </md-menu-item>
-                        <>
+                        <md-menu-item>
                             <md-button ng-click="::openHelpDialog()">
-                                <span>Settings</span>
-                                <span flex></span>
-                                <md-icon>settings</md-icon>
+                                <md-icon>help</md-icon>
+                                <span>Help</span>
                             </md-button>
-                            <md-button id="signout_button" ng-click="::openFeedbackDialog()">
-                                <span>Feedback</span>
-                                <span flex></span>
+                            <md-button ng-click="::openFeedbackDialog()">
                                 <md-icon>feedback</md-icon>
+                                <span>Feedback</span>
                             </md-button>
                         </md-menu-item>
                         <md-button id="quizlet_connect_button" class="md-raised unselectable" ng-click="openQuizletDialog()"><span>Connect Quizlet</span>
