@@ -111,10 +111,22 @@
                             </md-button>
                         </md-menu-item>
                         <md-menu-item>
-                            <md-button id="signout_button" ng-click="signOut()">
+                            <md-button ng-click="::openHelpDialog()">
                                 <span>Help</span>
                                 <span flex></span>
                                 <md-icon>help</md-icon>
+                            </md-button>
+                        </md-menu-item>
+                        <>
+                            <md-button ng-click="::openHelpDialog()">
+                                <span>Settings</span>
+                                <span flex></span>
+                                <md-icon>settings</md-icon>
+                            </md-button>
+                            <md-button id="signout_button" ng-click="::openFeedbackDialog()">
+                                <span>Feedback</span>
+                                <span flex></span>
+                                <md-icon>feedback</md-icon>
                             </md-button>
                         </md-menu-item>
                         <md-button id="quizlet_connect_button" class="md-raised unselectable" ng-click="openQuizletDialog()"><span>Connect Quizlet</span>
