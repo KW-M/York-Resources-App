@@ -168,9 +168,11 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             userSpreadsheetRow.result.values[0][3]++;
             return GoogleDriveService.updateSpreadsheetRange(userSpreadsheetRow.result.range, userSpreadsheetRow.result.values[0])
          }).then(function(updatedUserSpreadsheetRow) {
+            console.log(updatedUserSpreadsheetRow)
             $scope.convertRowToUserPreferences(updatedUserSpreadsheetRow.result.values[0]);
             return GoogleDriveService.getSpreadsheetRange("Sheet1!A2:Z", true)
          }).then(function(rawClasses) {
+            console.log(rawClasses)
             var classList = [];
             var classesResult = rawClasses.result.values
                //format the class list:
