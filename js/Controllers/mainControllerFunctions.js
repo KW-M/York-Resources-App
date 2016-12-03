@@ -592,6 +592,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       })
    }
 
+if ()
    //----------------------------------------------------
    //---------------------- dev -------------------------
 
