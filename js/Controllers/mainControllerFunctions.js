@@ -142,7 +142,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             };
          })
          var sheetsAPI = gapi.load('https://sheets.googleapis.com/$discovery/rest?version=v4').then(function() {
-            // body...
+ console.log('sheets loaded')
          })
          var pickerAPI = pickerPromise.promise.then(function() {
             // body...
