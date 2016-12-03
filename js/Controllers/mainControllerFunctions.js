@@ -166,10 +166,10 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          }).then(function(userSpreadsheetRow) {
             console.log(userSpreadsheetRow)
             userSpreadsheetRow.result.values[0][3]++;
+            $scope.convertRowToUserPreferences(userSpreadsheetRow.result.values[0]);
             return GoogleDriveService.updateSpreadsheetRange(userSpreadsheetRow.result.range, userSpreadsheetRow.result.values[0])
          }).then(function(updatedUserSpreadsheetRow) {
             console.log(updatedUserSpreadsheetRow)
-            $scope.convertRowToUserPreferences(updatedUserSpreadsheetRow.result.values[0]);
             return GoogleDriveService.getSpreadsheetRange("Sheet1!A2:Z", true)
          }).then(function(rawClasses) {
             console.log(rawClasses)
@@ -194,11 +194,11 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
            // console.warn(error)
          //});
          console.log(sheetsAPI)
-         
+
          var pickerAPI = pickerPromise.promise.then(function() {
             $scope.initiateDrivePicker()
          })
-         
+
          $q.all([driveAPI, sheetsAPI]).then(listenForURLChange);
          $q.all([driveAPI, sheetsAPI, pickerAPI]).then(authorizationService.hideSigninDialog)
       });
