@@ -92,7 +92,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       if ($scope.queryParams.q !== null) {
          if ($scope.queryParams.q != $scope.previousSearch) {
             $scope.updateVisiblePosts([]);
-            $scope.previousSearch = $scope.queryParams.q
          }
       } else {
          $scope.queryParams.flagged = null
