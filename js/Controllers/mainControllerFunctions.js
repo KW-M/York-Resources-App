@@ -129,6 +129,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    //------------- Signin & Initiation ------------------
    gapi.load('client:auth2', function () {
       authorizationService.initilize(function () {
+         gapi.l
          GoogleDriveService.loadAPIs(initiateDrive);
       });
    });
