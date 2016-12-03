@@ -358,12 +358,11 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                   //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
                   formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[fileCount]) //format and save the new post to the formatted files list array
                   deDuplicationIndex[fileList.result.files[fileCount].id] = 1; //mark this id as used with a "1".
-               }
-               if ($scope.queryParams.q) {
+               } else if ($scope.queryParams.q) {
                   formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[fileCount]) //format and save the new post to the formatted files list array
                }
             }
-            sortPostsByType(formattedFileList, queryString);
+            sortPostsByType(formattedFileList, queryString, $scope.queryParams);
             if (fileList.result.nextPageToken !== undefined) {
                classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken; //if we haven't reached the end of our search:
             } else {
@@ -418,9 +417,10 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       $scope.queryPropertyString = query;
    }
 
-   function sortPostsByType(formattedFileList, queryString) {
-      if ($scope.queryParams.q) {
-         if ($scope.queryParams.q === $scope.previousSearch) {
+   function sortPostsByType(formattedFileList, queryString, queryParams) {
+      if (queryParams.q) {
+         console.log('hasQueryParams')
+         if (queryParams.q === $scope.previousSearch) {
             $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
          } else {
             $scope.searchPosts = formattedFileList;
