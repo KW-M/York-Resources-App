@@ -175,7 +175,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       addView(docsView).
       addView(sharedView).
       addView(uploadView).
-      setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
+      setDeveloperKey("AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA").
       setOAuthToken(authorizationService.getAuthToken()).
       setCallback(self.pickerCallback).
       build();
@@ -183,7 +183,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       enableFeature(google.picker.Feature.NAV_HIDDEN).
       hideTitleBar().
       addView(uploadView).
-      setDeveloperKey("AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo").
+      setDeveloperKey("AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA").
       setOAuthToken(authorizationService.getAuthToken()).
       setCallback(self.pickerCallback).
       build();

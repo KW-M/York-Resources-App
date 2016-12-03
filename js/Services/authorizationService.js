@@ -13,7 +13,7 @@ function authService($mdDialog) {
 
     this.initilize = function(callback) {
         gapi.auth2.init({
-            client_id: '475444543746-e3r02g1o1o71kliuoohah04ojqbmo22e.apps.googleusercontent.com',
+            client_id: '632148950209-60a3db9qm6q31sids128mvstddg2qme7.apps.googleusercontent.com',
             scope: 'https://www.googleapis.com/auth/drive email',
             fetch_basic_profile: false,
             hosted_domain: 'york.org'
