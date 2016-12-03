@@ -150,9 +150,9 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
             };
          })
+         var spreadsheetOperation = null
          var sheetsAPI = gapi.client.load('https://sheets.googleapis.com/$discovery/rest?version=v4').then(function() {
             return GoogleDriveService.getSpreadsheetRange("Sheet1!A2:B")
-
          }).then(function(spreadsheetRange) {
             $scope.userList = spreadsheetRange.result.values;
             for (var rowCount = 0; rowCount <= $scope.userList.length && rowCount > -1; rowCount++) {
@@ -162,16 +162,20 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                }
             }
             if (rowCount == $scope.userList.length + 1) {
-               createUserSettings();
+               return GoogleDriveService.appendSpreadsheetRange("Sheet1!A1:A", [$scope.myInfo.Email, $scope.myInfo.Name, false, 1, 0, "", "", "", ""]);
             }
+         }).then(function(response) {
+            console.log(response)
+               response.result.values[0][3]++
+               $scope.convertRowToUserPreferences(response.result.values[0]);
          })
          var pickerAPI = pickerPromise.promise.then(function() {
             console.log('picker loaded')
          })
          $q.all([driveAPI, sheetsAPI, pickerAPI]).then(function() {
                console.log('all loaded')
-            })
-            //GoogleDriveService.loadAPIs(initiateDrive);
+         })
+        //GoogleDriveService.loadAPIs(initiateDrive);
       });
    });
 
@@ -261,7 +265,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
 
       function createUserSettings() {
          var newData = [$scope.myInfo.Email, $scope.myInfo.Name, false, 1, 0, "", "", "", ""]
-         queue('sheets', GoogleDriveService.appendSpreadsheetRange("Sheet1!A1:A", newData), function(newRow) {
+         queue('sheets', GoogleDriveService.appendSpreadsheetRange("Sheet1!A1:A", [$scope.myInfo.Email, $scope.myInfo.Name, false, 1, 0, "", "", "", ""]), function(newRow) {
             $scope.convertRowToUserPreferences(newData);
             var event = new window.Event('sheetPrefsLoaded')
             document.dispatchEvent(event);
