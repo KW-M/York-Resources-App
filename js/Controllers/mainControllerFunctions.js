@@ -592,7 +592,9 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       })
    }
 
-if ()
+console.log(window.location)
+if (window.location.search)
+
    //----------------------------------------------------
    //---------------------- dev -------------------------
 
