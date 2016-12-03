@@ -444,7 +444,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             q: newValue
          })
       }
-   })
+   },true);
 
    content_container.onscroll = function (event) {
       //called whenever the content_container scrolls
