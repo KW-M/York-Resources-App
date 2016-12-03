@@ -91,18 +91,27 @@
                 <md-icon>refresh</md-icon>
                 <md-tooltip md-autohide>Refresh</md-tooltip>
             </md-button>
-            <md-menu md-position-mode="target-right target">
+            <md-menu md-position-mode="target-right target" md-offset="0 42">
                 <md-button hide-xs show-gt-sm class="md-icon-button unselectable" ng-click="$mdOpenMenu($event)">
                     <md-icon>apps</md-icon>
                     <md-tooltip>Quick Shortcuts</md-tooltip>
                 </md-button>
                 <md-menu-content style="flex-direction:row">
-<md-button class="shortcut-menu-button"><div class="shortcut-menu-image" style="background-position: 0 -1518px;"></div><div>Haiku</div></md-button>
-<md-button class="shortcut-menu-button"><div class="shortcut-menu-image shortcut-google-image" style="background-position: 0 -1518px;"></div><div>Drive</div></md-button>
-<md-button class="shortcut-menu-button"><div class="shortcut-menu-image shortcut-google-image" style="background-position:0 -621px;"></div><div>Gmail</div></md-button>
+                    <md-button class="shortcut-menu-button" href="https://www.google.com">
+                        <div class="shortcut-menu-image" style="background-position: 0 -1518px;"></div>
+                        <div>Haiku</div>
+                    </md-button>
+                    <md-button class="shortcut-menu-button">
+                        <div class="shortcut-menu-image shortcut-google-image" style="background-position: 0 -1518px;"></div>
+                        <div>Drive</div>
+                    </md-button>
+                    <md-button class="shortcut-menu-button">
+                        <div class="shortcut-menu-image shortcut-google-image" style="background-position:0 -621px;"></div>
+                        <div>Gmail</div>
+                    </md-button>
                 </md-menu-content>
             </md-menu>
-            <md-menu md-position-mode="target-right target" md-offset="0 36">
+            <md-menu md-position-mode="target-right target">
                 <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button unselectable" id="account_button" aria-label="account" style="height:36px;width:36px;border-radius:50%;background-image:url('images/accountPic.jpg'); background-size: 36px 36px;">
                 </md-button>
                 <md-menu-content>
