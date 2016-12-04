@@ -171,11 +171,7 @@
                 $scope.findType();
             }
             else {
-                            document.addEventListener('userInfoLoaded', function() {
-               handleUserPrefsSheet();
-            });
-                    $scope.findType();
-                }, 5000)
+                document.addEventListener('userInfoLoaded', $scope.findType);
             }
         }
 
