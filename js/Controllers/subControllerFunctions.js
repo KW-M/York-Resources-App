@@ -142,11 +142,10 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		var spreadsheetRow = [];
 		spreadsheetRow[0] = $scope.myInfo.Email;
 		spreadsheetRow[1] = $scope.myInfo.Name;
-		spreadsheetRow[2] = $scope.myInfo.Moderator || false;
-		spreadsheetRow[3] = $scope.myInfo.NumberOfVisits || 0;
-		spreadsheetRow[4] = $scope.myInfo.NumberOfContributions || 0;
-		spreadsheetRow[5] = $scope.myInfo.LastContributionDate || '';
-		spreadsheetRow[6] = $scope.myInfo.LastBeenFlaggedDate || '';
+		spreadsheetRow[2] = $scope.myInfo.NumberOfVisits || 0;
+		spreadsheetRow[3] = $scope.myInfo.NumberOfContributions || 0;
+		spreadsheetRow[4] = $scope.myInfo.LastContributionDate || '';
+		spreadsheetRow[5] = $scope.myInfo.LastBeenFlaggedDate || '';
 		return (spreadsheetRow);
 	};
 	//----------------------------------------------------
