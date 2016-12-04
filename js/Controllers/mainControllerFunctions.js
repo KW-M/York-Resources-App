@@ -191,10 +191,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                   $scope.classList = classList;
                })
             })
-            //.catch(function(error) {
-            // console.warn(error)
-            //});
-         console.log(sheetsAPI)
 
          var pickerAPI = pickerPromise.promise.then(function() {
             $scope.initiateDrivePicker()
