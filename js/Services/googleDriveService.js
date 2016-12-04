@@ -47,6 +47,8 @@ app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
     }
 
     this.updateSpreadsheetRange = function(range, dataToBeInserted) {
+        dataToBeInserted.shift()
+        dataToBeInserted.shift()
         return (gapi.client.sheets.spreadsheets.values.update({
             spreadsheetId: URLs.userSpreadsheetId,
             range: range,
@@ -55,7 +57,7 @@ app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
         }));
     }
 
-    this.appendSpreadsheetRange = function(range, dataToBeInserted) {
+    this.appendSpreadsheetRange = function(dataToBeInserted) {
         var range1 = gapi.client.sheets.spreadsheets.values.append({
             spreadsheetId: URLs.userSpreadsheetId,
             range: 'Sheet1!A1:A',
@@ -64,12 +66,13 @@ app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
                 [[dataToBeInserted[0],dataToBeInserted[1]]]
             ],
         })
-        data
+        dataToBeInserted.shift()
+        dataToBeInserted.shift()
         var range2 = gapi.client.sheets.spreadsheets.values.append({
             spreadsheetId: URLs.userSpreadsheetId,
             range: 'Sheet1!F1:F',
             valueInputOption: "USER_ENTERED",
-            values: [[12,13]],
+            values: [dataToBeInserted],
         })
         return $q.all([range1, range2])
     }

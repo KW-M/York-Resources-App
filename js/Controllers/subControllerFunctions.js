@@ -2,6 +2,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 
 	var likeClickTimer = {};
 	window.reloadQuizletFrame = null;
+
 	function findPostById(id, array) {
 		var item = 0;
 		for (item in array) {
@@ -19,7 +20,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 
 	//----------------------------------------------------
 	//------------------ Converting ----------------------
-	$scope.convertDriveToPost = function (DriveMetadata) {
+	$scope.convertDriveToPost = function(DriveMetadata) {
 		console.log($scope.classList)
 		var formatedPost = {};
 		try {
@@ -29,12 +30,14 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			}
 			if (DriveMetadata.properties.Tag1 || DriveMetadata.properties.Tag2) {
 				var tags = JSON.parse(("[\"" + (DriveMetadata.properties.Tag1 || '') + (DriveMetadata.properties.Tag2 || '') + "\"]").replace(/,/g, "\",\""));
-			} else {
+			}
+			else {
 				var tags = [];
 			}
 			if (likesAndFlagged[1].indexOf($scope.myInfo.Email) === -1) {
 				var hasLiked = false;
-			} else {
+			}
+			else {
 				var hasLiked = true;
 			}
 			formatedPost.Title = DriveMetadata.properties.Title || ''
@@ -66,28 +69,30 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			formatedPost.userLiked = hasLiked
 			formatedPost.PreviewImage = descriptionAndPreviewimage[2]
 			if (formatedPost.Type === 'gDrive') {
-				queue('drive', GoogleDriveService.getFileThumbnail(formatedPost.AttachmentId), function (response) {
-					$timeout(function () {
+				queue('drive', GoogleDriveService.getFileThumbnail(formatedPost.AttachmentId), function(response) {
+					$timeout(function() {
 						if (response.result.thumbnailLink) {
 							formatedPost.PreviewImage = response.result.thumbnailLink.replace("=s220", "=s400") + "&access_token=" + authorizationService.getAuthToken();
-						} else {
+						}
+						else {
 							formatedPost.PreviewImage = "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
 						}
 						formatedPost.AttachmentName = response.result.name;
 						formatedPost.AttachmentIcon = response.result.iconLink;
 					});
-				}, function (error) {
+				}, function(error) {
 					console.warn(error);
 					formatedPost.PreviewImage = "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
 				}, 150);
 			}
 			return (formatedPost)
-		} catch (e) {
+		}
+		catch (e) {
 			console.warn(e)
 			return (formatedPost);
 		}
 	};
-	$scope.convertPostToDriveMetadata = function (Post) {
+	$scope.convertPostToDriveMetadata = function(Post) {
 		var formatedDriveMetadata
 		try {
 			var tagString = JSON.stringify(Post.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || [];
@@ -116,19 +121,20 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				}
 			};
 			return (formatedDriveMetadata);
-		} catch (e) {
+		}
+		catch (e) {
 			return (formatedDriveMetadata);
 			console.warn(e)
 		}
 	};
-	$scope.convertRowToUserPreferences = function (spreadsheetRow) {
+	$scope.convertRowToUserPreferences = function(spreadsheetRow) {
 		$scope.myInfo.Moderator = spreadsheetRow[2]
 		$scope.myInfo.NumberOfVisits = spreadsheetRow[3]
 		$scope.myInfo.NumberOfContributions = spreadsheetRow[4]
 		$scope.myInfo.LastContributionDate = new Date(spreadsheetRow[5])
 		$scope.myInfo.LastBeenFlaggedDate = new Date(spreadsheetRow[6])
 	}
-	$scope.convertUserPreferencesToRow = function () {
+	$scope.convertUserPreferencesToRow = function() {
 		var spreadsheetRow = [];
 		spreadsheetRow[0] = $scope.myInfo.Email;
 		spreadsheetRow[1] = $scope.myInfo.Name;
@@ -141,106 +147,113 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	};
 	//----------------------------------------------------
 	//-------------- Filtering & Sorting -----------------
-	$scope.filterPosts = function (inputSet) {
-		var output = inputSet.filter(function (post) {
+	$scope.filterPosts = function(inputSet) {
+		var output = inputSet.filter(function(post) {
 			if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
 				var Flagged = post.Flagged == $scope.queryParams.flagged;
-			} else {
+			}
+			else {
 				var Flagged = true;
 			}
 			if ($scope.queryParams.classpath !== null && $scope.queryParams.classpath !== undefined && $scope.queryParams.classpath !== 'my-posts' && $scope.queryParams.classpath !== 'all-posts' && $scope.queryParams.classpath !== 'flagged') {
 				var Class = post.Class.Name === $scope.queryParams.classpath;
-			} else {
+			}
+			else {
 				var Class = post.Class.Name != 'memes';
 			}
 			if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) {
 				var Type = post.Type === $scope.queryParams.type;
-			} else {
+			}
+			else {
 				var Type = true;
 			}
 			if ($scope.queryParams.creatorEmail !== null && $scope.queryParams.creatorEmail !== undefined) {
 				var Creator = post.Creator.Email === $scope.queryParams.creatorEmail;
-			} else {
+			}
+			else {
 				var Creator = true;
 			}
 			return Flagged && Class && Type && Creator;
 		});
 		return ($scope.sortByDateAndLikes(output))
 	}
-	$scope.sortByDateAndLikes = function (arrayToSort) {
-		return (arrayToSort.sort(function (a, b) {
+	$scope.sortByDateAndLikes = function(arrayToSort) {
+		return (arrayToSort.sort(function(a, b) {
 			return b.CreationDate.addDays(b.Likes.length || 0) - a.CreationDate.addDays(a.Likes.length || 0);
 		}));
 	};
 	//----------------------------------------------------
 	//------------------UI Actions------------------------
-	$scope.toggleSidebar = function (close) { //called by the top left toolbar menu button
+	$scope.toggleSidebar = function(close) { //called by the top left toolbar menu button
 		if (close === true) {
 			$mdSidenav('sidenav_overlay').close();
-		} else {
+		}
+		else {
 			if ($mdMedia('gt-sm')) {
 				$scope.globals.sidenavIsOpen = !$scope.globals.sidenavIsOpen;
-				//angularGridInstance.posts.refresh
-			} else {
+			}
+			else {
 				$mdSidenav('sidenav_overlay').toggle();
 			}
 		}
 	};
-	$scope.FABClick = function () { //called by the top left toolbar menu button
+	$scope.FABClick = function() { //called by the top left toolbar menu button
 		if ($scope.globals.FABisOpen == true) {
 			$scope.newPost({}, 'new')
 		}
 
 	};
-	$scope.signOut = function () {
+	$scope.signOut = function() {
 		authorizationService.handleSignoutClick();
 	};
-	$scope.toggleMobileSearch = function (toOpen) {
-		$timeout(function () {
+	$scope.toggleMobileSearch = function(toOpen) {
+		$timeout(function() {
 			$scope.globals.mobileSearchIsOpen = toOpen;
 			$scope.searchInputTxt = '';
 		})
 		if (toOpen == true) {
 			document.getElementById("mobile_search_input").focus();
-		} else {
+		}
+		else {
 			document.getElementById("mobile_search_input").blur();
 		}
 	}
-	$scope.toggleSidenavClassSearch = function (toOpen) {
-		$timeout(function () {
+	$scope.toggleSidenavClassSearch = function(toOpen) {
+		$timeout(function() {
 			$scope.globals.sideNavClassSearchOpen = toOpen;
 			$scope.sideNavClassSearch = '';
 		})
 		if (toOpen == true) {
 			document.getElementById("sidenav_class_search_input").focus();
-		} else {
+		}
+		else {
 			document.getElementById("sidenav_class_search_input").blur();
 		}
 	}
 
 	//----------------------------------------------------
 	// --------------- Post Card Functions ---------------
-	$scope.confirmDelete = function (content, arrayIndex) {
+	$scope.confirmDelete = function(content, arrayIndex) {
 		var confirm = $mdDialog.confirm().title('Permanently delete this?').ariaLabel('Delete?').ok('Delete').cancel('Cancel');
-		$mdDialog.show(confirm).then(function () {
+		$mdDialog.show(confirm).then(function() {
 			$scope.allPosts.splice(findPostById(content.Id, $scope.allPosts), 1);
 			$timeout($scope.visiblePosts.splice(arrayIndex, 1));
-			queue('drive', GoogleDriveService.deleteDriveFile(content.Id), null, function (err) {
+			queue('drive', GoogleDriveService.deleteDriveFile(content.Id), null, function(err) {
 				$mdToast.showSimple('Error deleting post, try again.');
 				console.warn(err)
 			}, 150);
 		});
 	};
-	$scope.flagPost = function (content, arrayIndex) {
+	$scope.flagPost = function(content, arrayIndex) {
 		content.Flagged = true;
 		if ($scope.queryParams.classpath != 'flagged') {
-			$timeout(function () { //makes angular update values
+			$timeout(function() { //makes angular update values
 				$scope.visiblePosts.splice(arrayIndex, 1);
 			});
 		}
 		$scope.allPosts[findPostById(content.Id, $scope.allPosts)].Flagged = true;
-		queue('drive', GoogleDriveService.updateFlagged(content.Id, true), null, function (err) {
-			$timeout(function () { //makes angular update values
+		queue('drive', GoogleDriveService.updateFlagged(content.Id, true), null, function(err) {
+			$timeout(function() { //makes angular update values
 				content.Flagged = false;
 				$scope.visiblePosts.splice(arrayIndex, 0, content);
 			});
@@ -250,11 +263,10 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		//set the poster's has flagged date back
 		for (var item = 0; item < $scope.userList.length; item++) {
 			if ($scope.userList[item][0] && $scope.userList[item][0] == content.Creator.Email) {
-				var range = 'Sheet1!G' + (item + 2)
+				var range = 'Sheet1!I' + (item + 2)
 				var today = $filter('date')(new Date(), 'M/d/yy');
-				console.log(today);
-				queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, [today]), null, function (err) {
-					$timeout(function () { //makes angular update values
+				queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, [today]), null, function(err) {
+					$timeout(function() { //makes angular update values
 						content.Flagged = false;
 						$scope.visiblePosts.splice(arrayIndex, 0, content);
 					});
@@ -264,22 +276,23 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			}
 		}
 	};
-	$scope.unFlagPost = function (content, arrayIndex) {
+	$scope.unFlagPost = function(content, arrayIndex) {
 		var timeoutDate = new Date($scope.myInfo.LastBeenFlaggedDate.getTime() + 7 * 86400000);
 		if (timeoutDate < new Date()) {
 			content.Flagged = false;
 			if ($scope.queryParams.classpath == 'flagged') {
-				$timeout(function () { //makes angular update values
+				$timeout(function() { //makes angular update values
 					$scope.visiblePosts.splice(arrayIndex, 1);
 				});
 			}
 			$scope.allPosts[findPostById(content.Id, $scope.allPosts)].Flagged = false;
 			$scope.updateVisiblePosts($scope.filterPosts($scope.allPosts));
-			queue('drive', GoogleDriveService.updateFlagged(content.Id, false), null, function (err) {
+			queue('drive', GoogleDriveService.updateFlagged(content.Id, false), null, function(err) {
 				$mdToast.showSimple('Error unflagging post, try again.');
 				console.warn(err)
 			}, 150);
-		} else {
+		}
+		else {
 			$mdDialog.show($mdDialog.alert({
 				title: 'Uh Oh.',
 				htmlContent: '<p style="margin: 0 0 2px 0">One of your posts has been flagged within the past week.<br>To unlock the ability to unflag posts, don\'t let your posts get flagged this week.</p>',
@@ -287,68 +300,70 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			}));
 		}
 	};
-	$scope.updateLastPosted = function () {
+	$scope.updateLastPosted = function() {
 		$scope.myInfo.LastContributionDate = new Date()
 		var today = $filter('date')(new Date(), 'M/d/yy');
 		$scope.NumberOfContributions++
-			var range = 'Sheet1!E' + $scope.UserSettingsRowNum + ':F' + $scope.UserSettingsRowNum
-		queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, [$scope.NumberOfContributions, today]), null, function (err) {
+			var range = 'Sheet1!G' + $scope.UserSettingsRowNum + ':H' + $scope.UserSettingsRowNum
+		queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, [$scope.NumberOfContributions, today]), null, function(err) {
 			console.warn(err)
 			$mdToast.showSimple('Error Saving Post');
 		}, 2);
 	}
-	$scope.likePost = function (content) {
+	$scope.likePost = function(content) {
 		var userLikeIndex = findItemInArray($scope.myInfo.Email, content.Likes)
 		if (userLikeIndex == -1) {
 			content.userLiked = true;
 			content.Likes.push($scope.myInfo.Email);
-		} else {
+		}
+		else {
 			content.userLiked = false;
 			content.Likes.splice(userLikeIndex, 1);
 		}
-		if (typeof (likeClickTimer[content.Id]) == 'number') clearTimeout(likeClickTimer[content.Id]);
-		likeClickTimer[content.Id] = setTimeout(function () {
+		if (typeof(likeClickTimer[content.Id]) == 'number') clearTimeout(likeClickTimer[content.Id]);
+		likeClickTimer[content.Id] = setTimeout(function() {
 			var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
 			allArrayPost.userLiked = content.userLiked;
 			allArrayPost.Likes = content.Likes;
 			var name = allArrayPost.Likes.length + "{]|[}" + JSON.stringify(allArrayPost.Likes)
 			queue('drive', GoogleDriveService.updateDriveFile(content.Id, {
 				name: name
-			}), null, function (err) {
+			}), null, function(err) {
 				$mdToast.showSimple('Error liking post, try again.');
 				console.warn(err)
 			}, 150);
 		}, 2000);
 	};
-	$scope.openLink = function (link, dontOpen) {
+	$scope.openLink = function(link, dontOpen) {
 		if (link !== "" && link !== undefined && dontOpen != true) {
 			window.open(link);
 		}
 	};
-	$scope.removeHttp = function (input) {
+	$scope.removeHttp = function(input) {
 		if (input) {
 			var url = input.replace(/(?:http|https):\/\//, '')
 			return (url.replace('www.', ''))
-		} else {
+		}
+		else {
 			return input
 		}
 	}
-	$scope.clearText = function (text) {
+	$scope.clearText = function(text) {
 		text = null;
 	};
 	//----------------------------------------------------
 	//-------------------- dialogs -----------------------
 
 	function DialogController(scope, $mdDialog) {
-		scope.hideDialog = function () {
+		scope.hideDialog = function() {
 			$mdDialog.hide();
 		};
-		scope.cancelDialog = function () {
+		scope.cancelDialog = function() {
 			$mdDialog.cancel();
 		};
 		scope.myEmail = $scope.myInfo.Email
 	}
-	$scope.openHelpDialog = function () { //called by the top right toolbar help button
+	$scope.openHelpDialog = function() { //called by the top right toolbar help button
 		$mdDialog.show({
 			templateUrl: 'templates/help.html',
 			controller: DialogController,
@@ -357,7 +372,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			fullscreen: ($mdMedia('xs')),
 		});
 	};
-	$scope.openFeedbackDialog = function () { //called by the top right toolbar help button
+	$scope.openFeedbackDialog = function() { //called by the top right toolbar help button
 		$mdDialog.show({
 			templateUrl: 'templates/feedback.html',
 			controller: DialogController,
@@ -366,17 +381,18 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			fullscreen: ($mdMedia('xs')),
 		});
 	};
-	$scope.openQuizletDialog = function () { //called by the top right toolbar help button
+	$scope.openQuizletDialog = function() { //called by the top right toolbar help button
 		$mdDialog.show({
 			templateUrl: 'templates/quizlet.html',
-			controller: function ($scope, $mdDialog, $timeout) {
+			controller: function($scope, $mdDialog, $timeout) {
 				$scope.quizletStepNumber = 0;
 				$scope.reSize
-				$scope.hideDialog = function () {
+				$scope.hideDialog = function() {
 					$mdDialog.hide();
-				};				setInterval(function() {
-    				document.getElementById('quizlet_setup_frame').src += '';
-				},4000)
+				};
+				setInterval(function() {
+					document.getElementById('quizlet_setup_frame').src += '';
+				}, 4000)
 				window.addEventListener("message", function receiveMessage(event) {
 					console.log(event);
 					window.reloadQuizletFrame = null
@@ -389,18 +405,18 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			parent: angular.element(document.body),
 			clickOutsideToClose: true,
 			fullscreen: ($mdMedia('xs')),
-			onComplete: function () {
+			onComplete: function() {
 				window.reloadQuizletFrame = document.getElementById('quizlet_setup_frame')
-				// setInterval(function() {
-				// 	console.log(window.reloadQuizletFrame)
-				// 	if (window.reloadQuizletFrame != null) {
-    // 					window.reloadQuizletFrame.src += '';
-				// 	}
-				// },4000)
+					// setInterval(function() {
+					// 	console.log(window.reloadQuizletFrame)
+					// 	if (window.reloadQuizletFrame != null) {
+					// 					window.reloadQuizletFrame.src += '';
+					// 	}
+					// },4000)
 			}
 		});
 	};
-	$scope.openOnboardingDialog = function () { //called by the top right toolbar help button
+	$scope.openOnboardingDialog = function() { //called by the top right toolbar help button
 		$mdDialog.show({
 			templateUrl: 'templates/onboard.html',
 			controller: DialogController,
@@ -413,12 +429,12 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		});
 		authorizationService.hideSigninDialog();
 	};
-	$scope.closeDialog = function () {
+	$scope.closeDialog = function() {
 		$mdDialog.hide();
 	};
 	//----------------------------------------------------
 	//----------------- Error Handling -------------------
-	window.DriveErrorHandeler = function (error, item) {
+	window.DriveErrorHandeler = function(error, item) {
 		console.warn(error);
 		console.log(item);
 		if (error.hasOwnProperty('expectedDomain')) {
@@ -427,9 +443,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				title: 'Sorry.',
 				htmlContent: "<p>York Study Resources only works with York Google accounts right now.</p><p>If you have an email account ending with @york.org, please login with it, or ask Mr.Brookhouser if you don't have one.<p>",
 				ok: 'Ok'
-			})).then(function () {
+			})).then(function() {
 				angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
-				setTimeout(function () {
+				setTimeout(function() {
 					angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
 				}, 500);
 			});
@@ -438,7 +454,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			if (error.result.error.errors[0].message == 'Invalid Credentials') {
 				console.log('Invalid Credentials - token: ' + authorizationService.getAuthToken())
 				runPromise(item);
-			} else if (error.result.error.errors[0].reason == 'dailyLimitExceededUnreg') {
+			}
+			else if (error.result.error.errors[0].reason == 'dailyLimitExceededUnreg') {
 				console.log('daily limit')
 			}
 		}
@@ -446,11 +463,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			item.Err(error)
 		}
 	}
-	window.checkAuthToken = function () {
+	window.checkAuthToken = function() {
 
 	}
-	window.clearUserInfo = function () {
-			$timeout(function (argument) {
+	window.clearUserInfo = function() {
+			$timeout(function(argument) {
 				$scope.myInfo = {};
 				$scope.visiblePosts = [];
 				$scope.userList = [];
@@ -458,19 +475,19 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}
 		//----------------------------------------------------
 		//---------------------- dev -------------------------
-	$scope.consoleLog = function (input, asAlert) {
+	$scope.consoleLog = function(input, asAlert) {
 		console.log(input)
 		if (asAlert) {
 			window.alert(JSON.stringify(input, null, 4))
 		}
 	}
-	$scope.refreshLayout = function () {
+	$scope.refreshLayout = function() {
 		angularGridInstance.postsGrid.refresh();
 	}
-	$scope.logDuplicationIndexes = function () {
+	$scope.logDuplicationIndexes = function() {
 		//	console.log()
 	}
-	$scope.logPostToConsole = function (content, arrayIndex) {
+	$scope.logPostToConsole = function(content, arrayIndex) {
 		window.alert(JSON.stringify({
 			'loggedPostContent': content,
 			'arrayIndex': arrayIndex
