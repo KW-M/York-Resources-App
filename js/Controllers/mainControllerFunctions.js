@@ -597,7 +597,8 @@ if (window.location.search) {
    var unformated = window.location.search.match(/state=([^&]+)(?:$|&)/)
    var shareInput = JSON.parse(decodeURIComponent(unformated[1]));
    $scope.newPost({
-      link: shareInput.exportIds[0]}, 'new')
+      Link: 'https://drive.google.com/?open=' + shareInput.exportIds[0]
+   }, 'new')
 }
 
    //----------------------------------------------------
