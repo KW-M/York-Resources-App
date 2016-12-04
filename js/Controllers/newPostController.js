@@ -37,6 +37,7 @@
             $scope.Post.AttachmentIcon = $scope.Post.AttachmentIcon || ''
             $scope.Post.Likes = $scope.Post.Likes || []
             $scope.Post.PreviewImage = $scope.Post.PreviewImage || ''
+            if
             $scope.findType();
         })
 
@@ -61,6 +62,7 @@
             } else if ($scope.Post.Link.match(/(?:http|https):\/\/.{2,}/)) {
                 $scope.previewLoading = true;
                 var driveId = $scope.Post.Link.match(/(?:(?:\/(?:d|s|file|folder|folders)\/)|(?:id=)|(?:open=))([-\w]{25,})/);
+                console.log(driveId);
                 if (driveId) {
                     $scope.Post.Type = 'gDrive';
                     $scope.Post.AttachmentId = driveId[1]
