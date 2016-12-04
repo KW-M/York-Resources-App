@@ -65,7 +65,7 @@ app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
             spreadsheetId: URLs.userSpreadsheetId,
             range: 'Sheet1!D1:D',
             valueInputOption: "USER_ENTERED",
-            values: [dataToBeInserted]],
+            values: [[dataToBeInserted[0],dataToBeInserted[1]]],
         })
         return $q.all([range1,range2])
     }
