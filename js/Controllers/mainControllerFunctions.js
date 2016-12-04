@@ -167,7 +167,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             var arrayy = [];
             arrayy[0] = 'email'
             arrayy[1] = 'name'
-             arrayy[5] = 'other'//[$scope.myInfo.Email, $scope.myInfo.Name, , 0, 0, "", "", "", ""]
+            arrayy[5] = 'other'//[$scope.myInfo.Email, $scope.myInfo.Name, , 0, 0, "", "", "", ""]
             return GoogleDriveService.appendSpreadsheetRange(arrayy);
          }).then(function(userSpreadsheetRow) {
             console.log(userSpreadsheetRow)
