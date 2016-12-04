@@ -164,16 +164,18 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                   }
                }
             }
-
-            return GoogleDriveService.appendSpreadsheetRange({Email:$scope.myInfo.Email, Name:$scope.myInfo.Name},[0, 0, "", "", "", ""]);
+            return GoogleDriveService.appendSpreadsheetRange({
+               Email: $scope.myInfo.Email,
+               Name: $scope.myInfo.Name
+            }, [0, 0, "", "", "", ""]);
          }).then(function(userSpreadsheetRow) {
             console.log(userSpreadsheetRow)
             userSpreadsheetRow.result.values[0][3]++;
             $scope.convertRowToUserPreferences(userSpreadsheetRow.result.values[0]);
-            return GoogleDriveService.updateSpreadsheetRange(userSpreadsheetRow.result.range.replace('A','E'), userSpreadsheetRow.result.values[0])
+            return GoogleDriveService.updateSpreadsheetRange(userSpreadsheetRow.result.range.replace('A', 'E'), userSpreadsheetRow.result.values[0])
          }, function(error) {
-  console.warn(error)
-          }).then(function(updatedUserSpreadsheetRow) {
+            console.warn(error)
+         }).then(function(updatedUserSpreadsheetRow) {
             console.log(updatedUserSpreadsheetRow)
             return GoogleDriveService.getSpreadsheetRange("Sheet1!A2:Z", true)
          }).then(function(rawClasses) {
@@ -291,7 +293,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
 
       function createUserSettings() {
          var newData = [$scope.myInfo.Email, $scope.myInfo.Name, false, 1, 0, "", "", "", ""]
-         queue('sheets', GoogleDriveService.appendSpreadsheetRange([$scope.myInfo.Email, $scope.myInfo.Name,  1, 0, "", "", "", ""]), function(newRow) {
+         queue('sheets', GoogleDriveService.appendSpreadsheetRange([$scope.myInfo.Email, $scope.myInfo.Name, 1, 0, "", "", "", ""]), function(newRow) {
             $scope.convertRowToUserPreferences(newData);
             var event = new window.Event('sheetPrefsLoaded')
             document.dispatchEvent(event);
