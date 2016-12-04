@@ -592,10 +592,12 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       })
    }
 
-console.log(window.location)
 if (window.location.search) {
+   console.log(window.location.search);
    var unformated = window.location.search.match(/state=([^&]+)(?:$|&)/)
+   console.log(unformated)
    var shareInput = JSON.parse(decodeURIComponent(unformated[1]));
+   console.log(shareInput)
    $scope.newPost({
       Link: 'https://drive.google.com/?open=' + shareInput.exportIds[0]
    }, 'new')
