@@ -174,7 +174,9 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             userSpreadsheetRow.result.values[0][3]++;
             $scope.convertRowToUserPreferences(userSpreadsheetRow.result.values[0]);
             return GoogleDriveService.updateSpreadsheetRange(userSpreadsheetRow.result.range, userSpreadsheetRow.result.values[0])
-         }).then(function(updatedUserSpreadsheetRow) {
+         }, function(error) {
+  console.warn(error)
+          }).then(function(updatedUserSpreadsheetRow) {
             console.log(updatedUserSpreadsheetRow)
             return GoogleDriveService.getSpreadsheetRange("Sheet1!A2:Z", true)
          }).then(function(rawClasses) {
