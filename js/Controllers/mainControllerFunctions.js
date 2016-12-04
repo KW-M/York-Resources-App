@@ -165,11 +165,12 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                }
             }
 
-            return GoogleDriveService.appendSpreadsheetRange([$scope.myInfo.Email, $scope.myInfo.Name, 0, 0, "", "", "", ""]);
+            return GoogleDriveService.appendSpreadsheetRange({Email:$scope.myInfo.Email, Name:$scope.myInfo.Name},[0, 0, "", "", "", ""]);
          }).then(function(userSpreadsheetRow) {
             console.log(userSpreadsheetRow)
             userSpreadsheetRow.result.values[0][3]++;
             $scope.convertRowToUserPreferences(userSpreadsheetRow.result.values[0]);
+            userSpreadsheetRow.result.range.replace('A','E')
             return GoogleDriveService.updateSpreadsheetRange(userSpreadsheetRow.result.range, userSpreadsheetRow.result.values[0])
          }, function(error) {
   console.warn(error)
