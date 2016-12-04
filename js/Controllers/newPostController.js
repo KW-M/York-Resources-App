@@ -36,15 +36,7 @@
             $scope.Post.AttachmentIcon = $scope.Post.AttachmentIcon || ''
             $scope.Post.Likes = $scope.Post.Likes || []
             $scope.Post.PreviewImage = $scope.Post.PreviewImage || ''
-            // if ($scope.userInfo !== undefined) {
-            //     $scope.findType();
-            // }
-            // else {
-            //     window.timeout(function() {
-            //         $scope.findType();
-            //     }, 6000)
-
-            // }
+            runFindType();
         })
 
         //temproary variables
@@ -170,9 +162,20 @@
                 $scope.Post.AttachmentId = '';
                 $scope.Post.AttachmentName = '';
                 $scope.Post.AttachmentIcon = '';
-                $scope.findType()
+                runFindType();
             }, 500)
         })
+
+        function runFindType() {
+            if ($scope.myInfo !== undefined) {
+                $scope.findType();
+            }
+            else {
+                window.setTimeout(function() {
+                    $scope.findType();
+                }, 5000)
+            }
+        }
 
         $scope.isReadyToSubmit = function() {
             if ($scope.Post.Class.Name === '' || $scope.Post.Class === undefined) {
