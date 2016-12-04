@@ -47,7 +47,10 @@ app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
     }
 
     this.updateSpreadsheetRange = function(range, dataToBeInserted) {
-
+        dataToBeInserted.shift()
+        dataToBeInserted.shift()
+        dataToBeInserted.shift()
+        dataToBeInserted.shift()
         return (gapi.client.sheets.spreadsheets.values.update({
             spreadsheetId: URLs.userSpreadsheetId,
             range: range,
