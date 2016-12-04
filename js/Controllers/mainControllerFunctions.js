@@ -154,6 +154,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          var sheetsAPI = gapi.client.load('https://sheets.googleapis.com/$discovery/rest?version=v4').then(function() {
                return GoogleDriveService.getSpreadsheetRange("Sheet1!A2:B")
             }).then(function(spreadsheetRange) {
+               console.log(spreadsheetRange)
                $scope.userList = spreadsheetRange.result.values;
                for (var rowCount = 0; rowCount <= $scope.userList.length && rowCount > -1; rowCount++) {
                   if ($scope.userList[rowCount] != undefined && $scope.userList[rowCount][0] == $scope.myInfo.Email) {
@@ -161,9 +162,8 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                      return GoogleDriveService.getSpreadsheetRange('A' + (rowCount + 2) + ':' + (rowCount + 2));
                   }
                }
-               if (rowCount == $scope.userList.length + 1) {
                   return GoogleDriveService.appendSpreadsheetRange("Sheet1!A1:A", [$scope.myInfo.Email, $scope.myInfo.Name, false, 0, 0, "", "", "", ""]);
-               }
+
             }).then(function(userSpreadsheetRow) {
                console.log(userSpreadsheetRow)
                userSpreadsheetRow.result.values[0][3]++;
