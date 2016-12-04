@@ -148,6 +148,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                "Email": userInfo.result.user.emailAddress,
                "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
             };
+            document.dispatchEvent(new window.Event('userInfoLoaded'));
          })
 
          var sheetsAPI = gapi.client.load('https://sheets.googleapis.com/$discovery/rest?version=v4').then(function() {
