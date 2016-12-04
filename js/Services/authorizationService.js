@@ -56,6 +56,7 @@ function authService($mdDialog) {
             signinButton.addClass('fadeIn');
             datButton.style.display = 'none';
         }, 500);
+        signinDialog.style['z-index'] = 2000
     };
 
     this.hideSigninButton = function() {
