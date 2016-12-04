@@ -164,7 +164,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                   }
                }
             }
-            return GoogleDriveService.appendSpreadsheetRange("Sheet1!A1:A", [$scope.myInfo.Email, $scope.myInfo.Name, "", 0, 0, "", "", "", ""]);
+            return GoogleDriveService.appendSpreadsheetRange("Sheet1!A1:A", [$scope.myInfo.Email, $scope.myInfo.Name, , 0, 0, "", "", "", ""]);
          }).then(function(userSpreadsheetRow) {
             console.log(userSpreadsheetRow)
             userSpreadsheetRow.result.values[0][3]++;
