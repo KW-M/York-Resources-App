@@ -61,14 +61,14 @@ app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
             range: 'Sheet1!A1:A',
             valueInputOption: "USER_ENTERED",
             values: [
-                [dataToBeInserted[0], dataToBeInserted[1]]
+                ['$scope.myInfo.Email', '$scope.myInfo.Name']
             ],
         })
         var range2 = gapi.client.sheets.spreadsheets.values.append({
             spreadsheetId: URLs.userSpreadsheetId,
             range: 'Sheet1!E1:E',
             valueInputOption: "USER_ENTERED",
-            values: [dataToBeInserted],
+            values: [[12,13]],
         })
         return $q.all([range1, range2])
     }

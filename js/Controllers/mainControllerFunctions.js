@@ -164,11 +164,8 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                   }
                }
             }
-            var arrayy = [];
-            arrayy[0] = 'email'
-            arrayy[1] = 'name'
-            // arrayy[5] = 'other'//[$scope.myInfo.Email, $scope.myInfo.Name, , 0, 0, "", "", "", ""]
-            return GoogleDriveService.appendSpreadsheetRange("Sheet1!A1:A", arrayy);
+            
+            return GoogleDriveService.appendSpreadsheetRange("Sheet1!A1:A", [$scope.myInfo.Email, $scope.myInfo.Name, , 0, 0, "", "", "", ""]);
          }).then(function(userSpreadsheetRow) {
             console.log(userSpreadsheetRow)
             userSpreadsheetRow.result.values[0][3]++;
