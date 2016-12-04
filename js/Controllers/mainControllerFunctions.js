@@ -151,48 +151,48 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          })
 
          var sheetsAPI = gapi.client.load('https://sheets.googleapis.com/$discovery/rest?version=v4').then(function() {
-            return GoogleDriveService.getSpreadsheetRange("Sheet1!A2:B")
-         }).then(function(spreadsheetRange) {
-            $scope.userList = spreadsheetRange.result.values;
-            for (var rowCount = 0; rowCount <= $scope.userList.length && rowCount > -1; rowCount++) {
-               if ($scope.userList[rowCount] != undefined && $scope.userList[rowCount][0] == $scope.myInfo.Email) {
-                  $scope.UserSettingsRowNum = rowCount + 2 //+2 adjusts for header row
-                  return GoogleDriveService.getSpreadsheetRange('A' + (rowCount + 2) + ':' + (rowCount + 2));
+               return GoogleDriveService.getSpreadsheetRange("Sheet1!A2:B")
+            }).then(function(spreadsheetRange) {
+               $scope.userList = spreadsheetRange.result.values;
+               for (var rowCount = 0; rowCount <= $scope.userList.length && rowCount > -1; rowCount++) {
+                  if ($scope.userList[rowCount] != undefined && $scope.userList[rowCount][0] == $scope.myInfo.Email) {
+                     $scope.UserSettingsRowNum = rowCount + 2 //+2 adjusts for header row
+                     return GoogleDriveService.getSpreadsheetRange('A' + (rowCount + 2) + ':' + (rowCount + 2));
+                  }
                }
-            }
-            if (rowCount == $scope.userList.length + 1) {
-               return GoogleDriveService.appendSpreadsheetRange("Sheet1!A1:A", [$scope.myInfo.Email, $scope.myInfo.Name, false, 0, 0, "", "", "", ""]);
-            }
-         }).then(function(userSpreadsheetRow) {
-            console.log(userSpreadsheetRow)
-            userSpreadsheetRow.result.values[0][3]++;
-            $scope.convertRowToUserPreferences(userSpreadsheetRow.result.values[0]);
-            return GoogleDriveService.updateSpreadsheetRange(userSpreadsheetRow.result.range, userSpreadsheetRow.result.values[0])
-         }).then(function(updatedUserSpreadsheetRow) {
-            console.log(updatedUserSpreadsheetRow)
-            return GoogleDriveService.getSpreadsheetRange("Sheet1!A2:Z", true)
-         }).then(function(rawClasses) {
-            console.log(rawClasses)
-            var classList = [];
-            var classesResult = rawClasses.result.values
-               //format the class list:
-            for (var Catagory = 0; Catagory < classesResult.length; Catagory++) {
-               classList[Catagory] = {
-                  'Catagory': classesResult[Catagory][0],
-                  'Color': classesResult[Catagory][1],
-                  'Classes': []
+               if (rowCount == $scope.userList.length + 1) {
+                  return GoogleDriveService.appendSpreadsheetRange("Sheet1!A1:A", [$scope.myInfo.Email, $scope.myInfo.Name, false, 0, 0, "", "", "", ""]);
                }
-               for (var Class = 2; Class < classesResult[Catagory].length; Class++) {
-                  classList[Catagory].Classes[Class - 2] = classesResult[Catagory][Class]
+            }).then(function(userSpreadsheetRow) {
+               console.log(userSpreadsheetRow)
+               userSpreadsheetRow.result.values[0][3]++;
+               $scope.convertRowToUserPreferences(userSpreadsheetRow.result.values[0]);
+               return GoogleDriveService.updateSpreadsheetRange(userSpreadsheetRow.result.range, userSpreadsheetRow.result.values[0])
+            }).then(function(updatedUserSpreadsheetRow) {
+               console.log(updatedUserSpreadsheetRow)
+               return GoogleDriveService.getSpreadsheetRange("Sheet1!A2:Z", true)
+            }).then(function(rawClasses) {
+               console.log(rawClasses)
+               var classList = [];
+               var classesResult = rawClasses.result.values
+                  //format the class list:
+               for (var Catagory = 0; Catagory < classesResult.length; Catagory++) {
+                  classList[Catagory] = {
+                     'Catagory': classesResult[Catagory][0],
+                     'Color': classesResult[Catagory][1],
+                     'Classes': []
+                  }
+                  for (var Class = 2; Class < classesResult[Catagory].length; Class++) {
+                     classList[Catagory].Classes[Class - 2] = classesResult[Catagory][Class]
+                  }
                }
-            }
-            $timeout(function() { //makes angular update values
-               $scope.classList = classList;
+               $timeout(function() { //makes angular update values
+                  $scope.classList = classList;
+               })
             })
-         })
-         //.catch(function(error) {
-           // console.warn(error)
-         //});
+            //.catch(function(error) {
+            // console.warn(error)
+            //});
          console.log(sheetsAPI)
 
          var pickerAPI = pickerPromise.promise.then(function() {
@@ -592,16 +592,21 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       })
    }
 
-if (window.location.search) {
-   console.log(window.location.search);
-   var unformated = window.location.search.match(/state=([^&]+)(?:$|&)/)
-   console.log(unformated)
-   var shareInput = JSON.parse(decodeURIComponent(unformated[1]));
-   console.log(shareInput)
-   $scope.newPost({
-      Link: 'https://drive.google.com/?open=' + shareInput.exportIds[0]
-   }, 'new')
-}
+   if (window.location.search) {
+      console.log(window.location.search);
+      var unformated = window.location.search.match(/state=([^&]+)(?:$|&)/)
+      console.log(unformated)
+      var shareInput = JSON.parse(decodeURIComponent(unformated[1]));
+      if (shareInput.exportIds) {
+         var id = shareInput.exportIds[0]
+      }
+      else if (shareInput.ids) {
+         var id = shareInput.ids[0]
+      }
+      $scope.newPost({
+         Link: 'https://drive.google.com/?open=' + id
+      }, 'new')
+   }
 
    //----------------------------------------------------
    //---------------------- dev -------------------------
