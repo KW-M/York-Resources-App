@@ -223,7 +223,7 @@
                         <md-icon class="unselectable" md-svg-icon="driveIcon"></md-icon>
                     </span>
             </div>
-            <div name="Posts Grid" style="display:none">
+            <div name="Posts Grid">
                 <div angular-grid="visiblePosts" id="layout_grid" ag-gutter-size="12" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="getFiles()">
                     <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}" class="post-card raise-on-hover">
                         <div class="post-card-header unselectable" md-ink-ripple="{{Post.Link != ''}}" ng-class="{'no-link': Post.Link == '', 'gDrive-type': Post.Type == 'gDrive'}" ng-click="openLink(Post.Link)">
@@ -293,27 +293,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div name="Quizlet List" style="position:absolute">
-                <md-toolbar class="md-theme-light" style="color:#4257b2">
-                    <h2 class="md-toolbar-tools">
-                        <span>Full Bleed</span>
-                    </h2>
-                </md-toolbar>
-
-                <md-content>
-                    <md-list>
-                        <md-list-item class="md-3-line" ng-repeat="listItem in allPosts">
-                            <div class="md-list-item-text">
-                                <h3>Title</h3>
-                                <h4>By me</h4>
-                                <p>fluff</p>
-                            </div>
-                            <md-button class="md-secondary">Respond</md-button>
-                            <md-divider ng-if="!$last"></md-divider>
-                        </md-list-item>
-                    </md-list>
-                </md-content>
             </div>
             <div class="footer-container">
                 <div class="footer">
