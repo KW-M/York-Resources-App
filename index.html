@@ -294,29 +294,26 @@
                     </div>
                 </div>
             </div>
-            <div name="Quizlet List" ng-hide="">
-                HTMLJS
-<div ng-controller="AppCtrl" ng-cloak>
+            <div name="Quizlet List" style="position:absolute">
+                <md-toolbar class="md-theme-light" style="color:#4257b2">
+                    <h2 class="md-toolbar-tools">
+                        <span>Full Bleed</span>
+                    </h2>
+                </md-toolbar>
 
-  <md-toolbar class="md-theme-light" style="color:#4257b2">
-    <h2 class="md-toolbar-tools">
-      <span>Full Bleed</span>
-    </h2>
-  </md-toolbar>
-
-  <md-content>
-    <md-list>
-      <md-list-item class="md-3-line">
-        <div class="md-list-item-text">
-          <h3>Title</h3>
-          <h4>By me</h4>
-          <p>flu</p>
-        </div>
-        <md-button class="md-secondary">Respond</md-button>
-        <md-divider ng-if="!$last"></md-divider>
-      </md-list-item>
-    </md-list>
-  </md-content>
+                <md-content>
+                    <md-list>
+                        <md-list-item class="md-3-line" ng-repeat="listItem in allPosts">
+                            <div class="md-list-item-text">
+                                <h3>Title</h3>
+                                <h4>By me</h4>
+                                <p>fluff</p>
+                            </div>
+                            <md-button class="md-secondary">Respond</md-button>
+                            <md-divider ng-if="!$last"></md-divider>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
             </div>
             <div class="footer-container">
                 <div class="footer">
