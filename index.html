@@ -224,7 +224,8 @@
                     </span>
             </div>
             <div class="quizlet-bar-top" ng-show="queryParams.classpath == 'quizlet'">
-                <md-button>hi</md-button>
+                <md-button ng-click="openLink('')"><md-icon>plus</md-icon>Create Set</md-button>
+                <md-button><md-icon>plus</md-icon>Open Class</md-button>
             </div>
             <div name="Posts Grid" ng-hide="queryParams.classpath == 'quizlet'">
                 <div angular-grid="visiblePosts" id="layout_grid" ag-gutter-size="12" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="getFiles()">

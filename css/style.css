@@ -562,6 +562,7 @@ button.selected.md-button {
     color: white;
 }
 .quizlet-bar-top button.md-button.md-ink-ripple:hover {
+    box-shadow:0 2px 5px 0 rgba(0,0,0,.26);
     background-color: rgb(66, 87, 178);
 }
 /*------- Posts Footer Styles --------*/
