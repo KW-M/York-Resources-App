@@ -557,6 +557,7 @@ button.selected.md-button {
 
 /*------- Quizlet Bar Styles --------*/
 .quizlet-bar-top button.md-button.md-ink-ripple {
+    padding: 0 12px;
     border-radius: 25px;
     background-color: rgba(66, 87, 178, 0.78);
     color: white;
