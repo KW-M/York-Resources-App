@@ -185,6 +185,10 @@
                 </md-button>
             </md-fab-actions>
         </md-fab-speed-dial>
+        <div class="quizlet-bar-top">
+            <md-button ng-click="openLink('https://quizlet.com/create-set')"><md-icon style='color: white;font-size: 22px;margin-right: 6px;'>add_to_photos</md-icon>Create Set</md-button>
+            <md-button><md-icon style='color: white;font-size: 22px;margin-right: 6px;'>open_in_browser</md-icon>Open Class</md-button>
+        </div>
         <div id="content_container" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'ugly-brown' : queryParams.classpath == 'meme' , 'gt-sm': $mdMedia('gt-sm')}">
             <span ng-show="devMode">
                         <md-button ng-click="consoleLog(myInfo, true)">
@@ -223,10 +227,6 @@
                         <md-tooltip md-direction="::down">Add Drive file</md-tooltip>
                         <md-icon class="unselectable" md-svg-icon="driveIcon"></md-icon>
                     </span>
-            </div>
-            <div class="quizlet-bar-top" ng-show="queryParams.classpath == 'quizlet'">
-                <md-button ng-click="openLink('https://quizlet.com/create-set')"><md-icon style='color: white;font-size: 22px;margin-right: 6px;'>add_to_photos</md-icon>Create Set</md-button>
-                <md-button><md-icon style='color: white;font-size: 22px;margin-right: 6px;'>open_in_browser</md-icon>Open Class</md-button>
             </div>
             <div name="Posts Grid" ng-hide="queryParams.classpath == 'quizlet'">
                 <div angular-grid="visiblePosts" id="layout_grid" ag-gutter-size="12" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="getFiles()">
