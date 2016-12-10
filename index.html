@@ -190,20 +190,20 @@
                 <div style="display: flex;align-items: center; margin-top: 12px;">
                     <span class="md-display-1">{{classTitle}}</span>
                     <span style="flex:1;text-align:center">
-                       <md-button ng-hide="queryParams.classpath == 'Quizlet' || queryParams.classpath == 'all-posts' || queryParams.classpath == 'your-posts' || queryParams.classpath == 'flagged'">
-                    <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>star</md-icon>Star Class</md-button>
                        <md-button ng-click="openLink('https://quizlet.com/create-set')" ng-show="queryParams.classpath == 'Quizlet'">
                     <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>add_to_photos</md-icon>Create Set</md-button>
                        <md-button ng-show="queryParams.classpath == 'Quizlet'">
                     <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>open_in_browser</md-icon>Open Class</md-button>
                     </span>
+                    <md-button ng-hide="queryParams.classpath == 'Quizlet' || queryParams.classpath == 'all-posts' || queryParams.classpath == 'your-posts' || queryParams.classpath == 'flagged'">
+                    <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>star</md-icon>Star Class</md-button>
                 </div>
                 <div style="">Class Rules: <span class="md-caption">Don't post test or homework answers. Do post what will help other student's get to the answers on their own. - <a href="#">edit<a></span></div>
-                                    <md-chips>
-                        <md-chip>Hockey</md-chip>
-                        <md-chip>Lacrosse</md-chip>
-                        <md-chip>Baseball</md-chip>
-                    </md-chips>
+                <md-chips>
+                    <md-chip>Hockey</md-chip>
+                    <md-chip>Lacrosse</md-chip>
+                    <md-chip>Baseball</md-chip>
+                </md-chips>
                 <div style="display:none" class="create-post-bar-top" ng-hide="queryParams.classpath == 'Quizlet'">
                     <span md-ink-ripple="true" class="create-post-bar-text unselectable" flex ng-click="::newPost({},'new')">
                         <md-icon style="margin-top: -3px;">add_circle</md-icon>
