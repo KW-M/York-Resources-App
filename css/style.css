@@ -478,9 +478,15 @@ button.selected.md-button {
     padding-right: 2px
 }
 
+/*content-top-bar
+
 .content-top-bar{
    background: coral;
    position: relative;
+}
+
+.content-top-bar md-chips .md-chips {
+    box-shadow: none;
 }
 
 .content-top-bar md-chips md-chip {
