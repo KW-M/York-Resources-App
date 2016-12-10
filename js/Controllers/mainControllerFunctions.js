@@ -90,6 +90,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       no_posts_footer.style.display = 'none';
       footer_problem.style.display = 'none';
       console.log($scope.queryParams.q);
+      $scope.searchPrefix = 'Search';
       if ($scope.queryParams.q !== null) {
          if ($scope.queryParams.q != $scope.previousSearch) {
             $scope.updateVisiblePosts([]);
@@ -101,19 +102,20 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          $scope.queryParams.creatorEmail = null
       }
       if ($scope.queryParams.classpath === 'all-posts') {
-         $scope.searchPlaceholder = 'Search'
+         $scope.classTitle = 'All Posts'
          $scope.queryParams.flagged = false;
       }
       else if ($scope.queryParams.classpath === 'my-posts') {
-         $scope.searchPlaceholder = 'Search Your Posts'
+         $scope.classTitle = 'Your Posts'
          $scope.queryParams.creatorEmail = $scope.myInfo.Email;
       }
       else if ($scope.queryParams.classpath === 'flagged') {
-         $scope.searchPlaceholder = 'Search Flagged Posts'
+         $scope.classTitle = 'Flagged Posts'
          $scope.queryParams.flagged = true
       }
       else {
-         $scope.searchPlaceholder = 'Search Within ' + $scope.queryParams.classpath;
+         $scope.searchPrefix = 'Search Within'
+         $scope.classTitle = $scope.queryParams.classpath;
          $scope.queryParams.flagged = false
       }
       generateQueryString();
