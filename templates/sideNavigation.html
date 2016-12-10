@@ -25,6 +25,14 @@
                     </md-button>
                 </md-menu-item>
             </md-list-item>
+            <md-list-item>
+                <md-menu-item>
+                    <md-button ng-click="::gotoRoute({classPath: '/quizlet'})" ng-class="{ 'selected' : $location.path() === '/quizlet' }">
+                        
+                        Quizlet
+                    </md-button>
+                </md-menu-item>
+            </md-list-item>
         </md-list>
     </div>
     <div>
