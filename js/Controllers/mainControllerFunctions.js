@@ -105,7 +105,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          $scope.queryParams.flagged = false;
       }
       else if ($scope.queryParams.classpath === 'my-posts') {
-         $scope.searchPlaceholder = 'Search My Posts'
+         $scope.searchPlaceholder = 'Search Your Posts'
          $scope.queryParams.creatorEmail = $scope.myInfo.Email;
       }
       else if ($scope.queryParams.classpath === 'flagged') {
