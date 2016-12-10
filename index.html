@@ -223,6 +223,9 @@
                         <md-icon class="unselectable" md-svg-icon="driveIcon"></md-icon>
                     </span>
             </div>
+            <div class="quizlet-bar-top">
+                <md-button>hi</md-button>
+            </div>
             <div name="Posts Grid">
                 <div angular-grid="visiblePosts" id="layout_grid" ag-gutter-size="12" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="getFiles()">
                     <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}" class="post-card raise-on-hover">
