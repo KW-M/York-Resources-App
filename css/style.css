@@ -464,6 +464,10 @@ button.selected.md-button {
     padding-left: 8px;
     padding-right: 100px;
 }
+.content-padding.content-top-bar {
+    padding-left: 24px;
+    padding-right: 24px;
+}
 .content-padding.sm {
     padding-left: 24px;
     padding-right: 24px
