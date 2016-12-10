@@ -190,7 +190,7 @@
                 <div style="display: flex;align-items: center; margin-top: 12px;">
                     <span class="md-display-1">{{classTitle}}</span>
                     <span style="flex:1;text-align:center">
-                    <md-button ng-show="queryParams.classpath == 'Quizlet'">
+                    <md-button ng-hide="queryParams.classpath == 'Quizlet' || queryParams.classpath == 'all-posts' || queryParams.classpath == 'your-posts' || queryParams.classpath == 'flagged'">
                     <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>star</md-icon>Star Class</md-button>
                        <md-button ng-click="openLink('https://quizlet.com/create-set')" ng-show="queryParams.classpath == 'Quizlet'">
                     <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>add_to_photos</md-icon>Create Set</md-button>
