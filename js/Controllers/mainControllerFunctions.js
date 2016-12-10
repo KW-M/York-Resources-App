@@ -105,7 +105,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          $scope.classTitle = 'All Posts'
          $scope.queryParams.flagged = false;
       }
-      else if ($scope.queryParams.classpath === 'my-posts') {
+      else if ($scope.queryParams.classpath === 'your-posts') {
          $scope.classTitle = 'Your Posts'
          $scope.queryParams.creatorEmail = $scope.myInfo.Email;
       }
