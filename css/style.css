@@ -475,15 +475,15 @@ button.selected.md-button {
 }
 
 .content-top-bar{
-        background: coral;
+   background: coral;
     position: relative;
     min-height: 136px;
 }
 
 .content-top-bar button.md-button.md-ink-ripple {
-    padding: 0 12px;
+    /*padding: 0 12px;
     border-radius: 25px;
-    background-color: rgba(66, 87, 178, 0.78);
+    background-color: rgba(66, 87, 178, 0.78);*/
     color: white;
 }
 .content-top-bar button.md-button.md-ink-ripple:hover {
