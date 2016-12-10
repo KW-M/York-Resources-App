@@ -209,7 +209,7 @@
                         </md-button>
                         all: {{allPosts.length}} Visible: {{visiblePosts.length}}
                 </span>
-            <div class="create-post-bar-top">
+            <div class="create-post-bar-top" ng-="queryParams.classpath == 'quizlet'">
                 <span md-ink-ripple="true" class="create-post-bar-text unselectable" flex ng-click="::newPost({},'new')">
                         <md-icon style="margin-top: -3px;">add_circle</md-icon>
                         <span>Share a link or resource...</span>
@@ -223,10 +223,10 @@
                         <md-icon class="unselectable" md-svg-icon="driveIcon"></md-icon>
                     </span>
             </div>
-            <div class="quizlet-bar-top">
+            <div class="quizlet-bar-top" ng-show="queryParams.classpath == 'quizlet'">
                 <md-button>hi</md-button>
             </div>
-            <div name="Posts Grid">
+            <div name="Posts Grid" ng-hide="queryParams.classpath == 'quizlet'">
                 <div angular-grid="visiblePosts" id="layout_grid" ag-gutter-size="12" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="getFiles()">
                     <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}" class="post-card raise-on-hover">
                         <div class="post-card-header unselectable" md-ink-ripple="{{Post.Link != ''}}" ng-class="{'no-link': Post.Link == '', 'gDrive-type': Post.Type == 'gDrive'}" ng-click="openLink(Post.Link)">
