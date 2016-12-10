@@ -198,21 +198,14 @@
                     <md-button ng-hide="queryParams.classpath == 'Quizlet' || queryParams.classpath == 'all-posts' || queryParams.classpath == 'your-posts' || queryParams.classpath == 'flagged'">
                     <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>star</md-icon>Star Class</md-button>
                 </div>
-                <div style="">Class Rules: <span class="md-caption">Don't post test or homework answers. Do post what will help other student's get to the answers on their own. - <a href="#">edit<a></span></div>
+                <div>Class Rules: <span class="md-caption">Don't post test or homework answers. Do post what will help other student's get to the answers on their own. - <a href="#">edit<a></span></div>
+                <div>
                 <md-chips>
-                    <md-chip>Hockey</md-chip>
-                    <md-chip>Lacrosse</md-chip>
-                    <md-chip>Baseball</md-chip>
-                    <md-chip>Hockey</md-chip>
-                    <md-chip>Lacrosse</md-chip>
-                    <md-chip>Baseball</md-chip>
-                    <md-chip>Hockey</md-chip>
-                    <md-chip>Lacrosse</md-chip>
-                    <md-chip>Baseball</md-chip>
-                    <md-chip>Hockey</md-chip>
-                    <md-chip>Lacrosse</md-chip>
-                    <md-chip>Baseball</md-chip>
+                    <md-chip class="unselectable" md-ink-ripple="true">Ms.Wiliston</md-chip>
+                    <md-chip class="unselectable" md-ink-ripple="true">2015</md-chip>
+                    <md-chip class="unselectable" md-ink-ripple="true">2018</md-chip>
                 </md-chips>
+                </div>
                 <div style="display:none" class="create-post-bar-top" ng-hide="queryParams.classpath == 'Quizlet'">
                     <span md-ink-ripple="true" class="create-post-bar-text unselectable" flex ng-click="::newPost({},'new')">
                         <md-icon style="margin-top: -3px;">add_circle</md-icon>
