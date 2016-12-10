@@ -209,7 +209,7 @@
                         </md-button>
                         all: {{allPosts.length}} Visible: {{visiblePosts.length}}
                 </span>
-            <div class="create-post-bar-top" ng-="queryParams.classpath == 'quizlet'">
+            <div class="create-post-bar-top" ng-hide="queryParams.classpath == 'quizlet'">
                 <span md-ink-ripple="true" class="create-post-bar-text unselectable" flex ng-click="::newPost({},'new')">
                         <md-icon style="margin-top: -3px;">add_circle</md-icon>
                         <span>Share a link or resource...</span>
