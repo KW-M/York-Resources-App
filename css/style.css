@@ -555,7 +555,15 @@ button.selected.md-button {
     transition: box-shadow 0.3s;
 }
 
-
+/*------- Quizlet Bar Styles --------*/
+.quizlet-bar-top button.md-button.md-ink-ripple {
+    border-radius: 25px;
+    background-color: rgba(66, 87, 178, 0.78);
+    color: white;
+}
+.quizlet-bar-top button.md-button.md-ink-ripple:hover {
+    background-color: rgb(66, 87, 178);
+}
 /*------- Posts Footer Styles --------*/
 
 .footer-container {
