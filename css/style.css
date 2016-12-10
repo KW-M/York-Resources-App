@@ -556,6 +556,11 @@ button.selected.md-button {
 }
 
 /*------- Quizlet Bar Styles --------*/
+
+.quizlet-bar-top {
+    min-height: 100%;
+    margin-top: -22px;
+}
 .quizlet-bar-top button.md-button.md-ink-ripple {
     padding: 0 12px;
     border-radius: 25px;
@@ -566,6 +571,7 @@ button.selected.md-button {
     box-shadow:0 2px 5px 0 rgba(0,0,0,.26);
     background-color: rgb(66, 87, 178);
 }
+
 /*------- Posts Footer Styles --------*/
 
 .footer-container {
