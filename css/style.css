@@ -480,8 +480,15 @@ button.selected.md-button {
 
 .content-top-bar{
    background: coral;
-    position: relative;
-    min-height: 136px;
+   position: relative;
+}
+
+.content-top-bar md-chips md-chip {
+    background: rgba(224, 224, 224, 0.5);
+}
+
+.content-top-bar md-chips md-chip:hover {
+    box-shadow:0 2px 5px 0 rgba(0,0,0,.26);
 }
 
 .content-top-bar button.md-button.md-ink-ripple {
