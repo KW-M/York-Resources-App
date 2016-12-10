@@ -9,7 +9,8 @@
     Side Navigation Styles
 
     Content Container Styles
-        Create Post Top Bar Styles
+        Content Top Bar Styles
+        -XXX- Create Post Top Bar Styles
         Create Post FAB Styles
         Posts Footer Styles
     Post Card Styles
@@ -478,7 +479,7 @@ button.selected.md-button {
     padding-right: 2px
 }
 
-/*content-top-bar
+/* -------- Content Top Bar -------- */
 
 .content-top-bar{
    background: coral;
