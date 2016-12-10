@@ -190,14 +190,16 @@
                 <div style="display: flex;align-items: center; margin-top: 12px;">
                     <span class="md-display-1">{{classTitle}}</span>
                     <span style="flex:1;text-align:center">
-                       <md-button ng-click="openLink('https://quizlet.com/create-set')">
+                    <md-button ng-show="queryParams.classpath == 'Quizlet'">
+                    <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>star</md-icon>Star Class</md-button>
+                       <md-button ng-click="openLink('https://quizlet.com/create-set')" ng-show="queryParams.classpath == 'Quizlet'">
                     <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>add_to_photos</md-icon>Create Set</md-button>
-                       <md-button>
+                       <md-button ng-show="queryParams.classpath == 'Quizlet'">
                     <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>open_in_browser</md-icon>Open Class</md-button>
                     </span>
                 </div>
                 <div style="">Class Rules: <span class="md-caption">Don't post test or homework answers. Do post what will help other student's get to the answers on their own. - <a href="#">edit<a></span></div>
-                <div style="display:none" class="create-post-bar-top" ng-hide="queryParams.classpath == 'quizlet'">
+                <div style="display:none" class="create-post-bar-top" ng-hide="queryParams.classpath == 'Quizlet'">
                     <span md-ink-ripple="true" class="create-post-bar-text unselectable" flex ng-click="::newPost({},'new')">
                         <md-icon style="margin-top: -3px;">add_circle</md-icon>
                         <span>Share a link or resource...</span>
@@ -212,7 +214,7 @@
                     </span>
                 </div>
             </div>
-            <div class="content-padding" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'ugly-brown' : queryParams.classpath == 'meme' , 'gt-sm': $mdMedia('gt-sm')}" style="padding-top: 32px;padding-bottom: 8px;">
+            <div class="content-padding" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'ugly-brown' : queryParams.classpath == 'Memes' , 'gt-sm': $mdMedia('gt-sm')}" style="padding-top: 32px;padding-bottom: 8px;">
                 <span ng-show="devMode">
                         <md-button ng-click="consoleLog(myInfo, true)">
                             Log My Info
@@ -237,7 +239,7 @@
                         </md-button>
                         all: {{allPosts.length}} Visible: {{visiblePosts.length}}
                 </span>
-                <div name="Posts Grid" ng-hide="queryParams.classpath == 'quizlet'">
+                <div name="Posts Grid" ng-hide="queryParams.classpath == 'Quizlet'">
                     <div angular-grid="visiblePosts" id="layout_grid" ag-gutter-size="12" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="getFiles()">
                         <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}" class="post-card raise-on-hover">
                             <div class="post-card-header unselectable" md-ink-ripple="{{Post.Link != ''}}" ng-class="{'no-link': Post.Link == '', 'gDrive-type': Post.Type == 'gDrive'}" ng-click="openLink(Post.Link)">
