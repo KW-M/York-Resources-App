@@ -342,6 +342,14 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			window.open(link);
 		}
 	};
+	$scope.openQuizletWindow = function(argument) {
+		var windowm = window.open("", "_blank", "status=no,menubar=no,toolbar=no");
+		windowm.resizeTo(9000, 140)
+		windowm.document.write("<div style='display:flex;align-items: center;height: 100%;'><span>Your Quizlet username should show up here.</span><div style='flex:1;height: 2px;margin-left: 5px;background:black;'></div><div style=' width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 10px solid; '></div><div style=' width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 10px solid; margin-right: 160px; '></div></div>");
+		setTimeout(function() {
+			windowm.location = "https://quizlet.com"
+		}, 3000);
+	}
 	$scope.removeHttp = function(input) {
 		if (input) {
 			var url = input.replace(/(?:http|https):\/\//, '')
