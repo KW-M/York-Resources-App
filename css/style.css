@@ -468,7 +468,6 @@ button.selected.md-button {
 .content-padding.content-top-bar {
     padding-left: 24px;
     padding-right: 24px;
-    
 }
 .content-padding.sm {
     padding-left: 24px;
@@ -484,6 +483,8 @@ button.selected.md-button {
 .content-top-bar{
    background: coral;
    position: relative;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
 }
 
 .content-top-bar md-chips .md-chips {
