@@ -215,13 +215,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                               Usage: Label[1] || 0,
                               Type: (ColumnNumAdjusted <= 5) ? 'Teacher' : 'Label'
                            }
-                              // if (ColumnNumAdjusted <= 5) {
-                              //    Class.Labels[LabelCount].Text = Row[ColumnNum].formattedValue
-                              //    Class.Labels[LabelCount].Type = 'Teacher'
-                              // }
-                              // else if (ColumnNumAdjusted > 5)
-                              //    Class.Labels[LabelCount].Text = Row[ColumnNum].formattedValue
-                              // Class.Labels[LabelCount].Type = 'Lable'
                            LabelCount++
                         }
                      }
@@ -234,6 +227,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             console.log(catagoryList);
             $timeout(function() { //makes angular update values
                $scope.classList = catagoryList;
+               console.log($scope.findClassObject('English II'))
             })
          })
 

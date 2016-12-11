@@ -185,6 +185,13 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			return b.CreationDate.addDays(b.Likes.length || 0) - a.CreationDate.addDays(a.Likes.length || 0);
 		}));
 	};
+	$scope.findClassObject = function(className) {
+		for (var Catagories = 0; Catagories < $scope.classList.length; Catagories++) {
+			for (var ClassNum = 0; ClassNum < $scope.classList[Catagories].Classes.length; ClassNum++) {
+				if($scope.classList[Catagories].classes[ClassNum].Name == className) return 
+		    }
+		}
+	}
 	//----------------------------------------------------
 	//------------------UI Actions------------------------
 	$scope.toggleSidebar = function(close) { //called by the top left toolbar menu button
@@ -233,7 +240,15 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			document.getElementById("sidenav_class_search_input").blur();
 		}
 	}
-
+	$scope.openQuizletWindow = function(argument) {
+		var quizWindow = window.open("", "_blank", "status=no,menubar=no,toolbar=no");
+		quizWindow.resizeTo(9000, 140)
+		quizWindow.moveTo(0, 0);
+		quizWindow.document.write("<div style='display:flex;align-items: center;height: 100%;'><span>Your Quizlet username should show up here.</span><div style='flex:1;height: 2px;margin-left: 5px;background:black;'></div><div style=' width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 10px solid; '></div><div style=' width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 10px solid; margin-right: 160px; '></div></div>");
+		setTimeout(function() {
+			quizWindow.location = "https://quizlet.com"
+		}, 3000);
+	}
 	//----------------------------------------------------
 	// --------------- Post Card Functions ---------------
 	$scope.confirmDelete = function(content, arrayIndex) {
@@ -342,15 +357,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			window.open(link);
 		}
 	};
-	$scope.openQuizletWindow = function(argument) {
-		var quizWindow = window.open("", "_blank", "status=no,menubar=no,toolbar=no");
-		quizWindow.resizeTo(9000, 140)
-		quizWindow.moveTo(0, 0);
-		quizWindow.document.write("<div style='display:flex;align-items: center;height: 100%;'><span>Your Quizlet username should show up here.</span><div style='flex:1;height: 2px;margin-left: 5px;background:black;'></div><div style=' width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 10px solid; '></div><div style=' width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 10px solid; margin-right: 160px; '></div></div>");
-		setTimeout(function() {
-			quizWindow.location = "https://quizlet.com"
-		}, 3000);
-	}
 	$scope.removeHttp = function(input) {
 		if (input) {
 			var url = input.replace(/(?:http|https):\/\//, '')
@@ -363,6 +369,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	$scope.clearText = function(text) {
 		text = null;
 	};
+	
 	//----------------------------------------------------
 	//-------------------- dialogs -----------------------
 
