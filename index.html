@@ -254,7 +254,7 @@
                 </span>
                 <div name="Posts Grid" ng-hide="queryParams.classpath == 'Quizlet'">
                     <div angular-grid="visiblePosts" id="layout_grid" ag-gutter-size="12" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="getFiles()">
-                        <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color + ' 0.)'}" class="post-card raise-on-hover">
+                        <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color + ' 0.6)'}" class="post-card raise-on-hover">
                             <div class="post-card-header unselectable" md-ink-ripple="{{Post.Link != ''}}" ng-class="{'no-link': Post.Link == '', 'gDrive-type': Post.Type == 'gDrive'}" ng-click="openLink(Post.Link)">
                                 <img ng-src="{{Post.PreviewImage||'https://ssl.gstatic.com/atari/images/simple-header-blended-small.png'}}" class="post-card-image unselectable" ng-hide="Post.Link == ''"></img>
                                 <div class="gradient-overlay">
