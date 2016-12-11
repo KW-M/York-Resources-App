@@ -195,8 +195,8 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                }
                console.log(catagoryList[SheetNum])
                for (var RowNum = 2; RowNum < rows.length; RowNum++) {
-                  var Class = catagoryList[SheetNum].Classes[RowNum]
-x
+                  var Class = rows[]
+console.log(Class)
                   var Row = rows[RowNum].values
                   var LabelCount = 0
                   Class.Name = Row[0].formattedValue;
