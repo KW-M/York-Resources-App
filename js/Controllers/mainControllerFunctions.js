@@ -185,14 +185,15 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             var catagoryList = [];
             var catagorySheets = rawClassesSheet.result.sheets;
                //format the class list:
-            for (var Catagory = 0; Catagory < catagorySheets.length; Catagory++) {
-               var rows = catagorySheets[Catagory].data[0].rowData
-               catagoryList[Catagory] = {
-                  'Catagory': rows[1].values,
-                  'Color': classesResult[Catagory][1],
+            for (var Sheet = 0; Sheet < catagorySheets.length; Sheet++) {
+               var rows = catagorySheets[Sheet].data[0].rowData
+               catagoryList[Sheet] = {
+                  'Catagory': rows[1].values[0],
+                  'Color': rows[1].values[1],
                   'Classes': []
                }
-               for (var Class = 0; Class < rows.length; Catagory++) {
+               for (var Row = 2; Row < rows.length; Row++) {
+                  catagoryList[Sheet][Row].Name = 
                   for (var Class = 2; Class < classesResult[Catagory].length; Class++) {
                   classList[Catagory].Classes[Class - 2] = classesResult[Catagory][Class]
                   }
