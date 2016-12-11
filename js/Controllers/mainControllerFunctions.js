@@ -194,12 +194,15 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                }
                for (var RowNum = 2; RowNum < rows.length; RowNum++) {
                   var Class = catagoryList[SheetNum].Classes[RowNum]
-                  var Row = 
-                  Class.Name = rows[RowNum].values[0].formattedValue;
-                  Class.Rules = rows[RowNum].values[1].formattedValue;
+                  var Row = rows[RowNum].values
+                  var LabelCount = 0
+                  Class.Name = Row[0].formattedValue;
+                  Class.Rules = Row[1].formattedValue;
                   for (var ColumnNum = 2; ColumnNum < rows[RowNum].values.length; ColumnNum++) {
-                     if ((ColumnNum -2) <= 5 && ) {
-                        
+                     var ColumnNumAdjusted = ColumnNum - 2;
+                     if (ColumnNumAdjusted <= 5 && Row[ColumnNum].formattedValue !== undefined) {
+                        Class.Labels[LabelCount].Text = ColumnNumAdjusted
+                        LabelCount++
                      }
                   }
                }
