@@ -181,13 +181,12 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             console.log(updatedUserSpreadsheetRow)
             return GoogleDriveService.getWholeSpreadsheet()
          }).then(function(rawClassesSheet) {
-
             console.log(rawClassesSheet)
-            var classList = [];
-            var classesResult = rawClasses.result.values
+            var catagoryList = [];
+            var catagorySheets = rawClassesSheet.result.sheets;
                //format the class list:
-            for (var Catagory = 0; Catagory < classesResult.length; Catagory++) {
-               classList[Catagory] = {
+            for (var Catagory = 0; Catagory < catagorySheets.length; Catagory++) {
+               catagoryList[Catagory] = {
                   'Catagory': classesResult[Catagory][0],
                   'Color': classesResult[Catagory][1],
                   'Classes': []
