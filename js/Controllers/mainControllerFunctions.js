@@ -202,20 +202,24 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                         Rules: Row[1].formattedValue,
                         Labels: [],
                      }
-                     var Class = catagoryList[SheetNum].Classes[RowNum]
+                     var Class = catagoryList[SheetNum].Classes[RowNum - 2]
                      console.log(Class)
-                     for (var ColumnNum = 2; ColumnNum < rows[RowNum].values.length; ColumnNum++) {
+                     for (var ColumnNum = 2; ColumnNum < Row.length; ColumnNum++) {
                         var ColumnNumAdjusted = ColumnNum - 2;
+                        console.log(Row[ColumnNum])
                         if (Row[ColumnNum].formattedValue !== undefined) {
-                           if (ColumnNumAdjusted <= 5) {
-                              Class.Labels[LabelCount].Text = Row[ColumnNum].formattedValue
-                              Class.Labels[LabelCount].Type = 'Teacher'
-                           }
-                           else if (ColumnNumAdjusted > 5)
-                              Class.Labels[LabelCount].Text = Row[ColumnNum].formattedValue
-                           Class.Labels[LabelCount].Type = 'Lable'
-                        }
+                           Class.Labels[LabelCount] = Row[ColumnNum].formattedValue
+                           // if (ColumnNumAdjusted <= 5) {
+                           //    Class.Labels[LabelCount].Text = Row[ColumnNum].formattedValue
+                           //    Class.Labels[LabelCount].Type = 'Teacher'
+                           // }
+                           // else if (ColumnNumAdjusted > 5)
+                           //    Class.Labels[LabelCount].Text = Row[ColumnNum].formattedValue
+                           // Class.Labels[LabelCount].Type = 'Lable'
+
                         LabelCount++
+
+                        }
                      }
                   }
                }
