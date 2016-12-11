@@ -184,40 +184,43 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             console.log(rawClassesSheet)
             var catagoryList = [];
             var catagorySheets = rawClassesSheet.result.sheets;
-               //format the class list:
+            //format the class list:
             try {
-            for (var SheetNum = 0; SheetNum < catagorySheets.length; SheetNum++) {
-               var rows = catagorySheets[SheetNum].data[0].rowData
-               catagoryList[SheetNum] = {
-                  'Catagory': rows[1].values[0].formattedValue,
-                  'Color': rows[1].values[1].formattedValue,
-                  'Classes': []
-               }
-               console.log(catagoryList[SheetNum])
-               for (var RowNum = 2; RowNum < rows.length; RowNum++) {
-                                    var Row = rows[RowNum].values
-                  var LabelCount = 0
-                  catagoryList[SheetNum].Classes[RowNum] = {
-                     Name: Row[0].formattedValue,
-                     Rules: Row[1].formattedValue
+               for (var SheetNum = 0; SheetNum < catagorySheets.length; SheetNum++) {
+                  var rows = catagorySheets[SheetNum].data[0].rowData
+                  catagoryList[SheetNum] = {
+                     'Catagory': rows[1].values[0].formattedValue,
+                     'Color': rows[1].values[1].formattedValue,
+                     'Classes': []
                   }
-                  var Class = catagoryList[SheetNum].Classes[RowNum]
-                  console.log(Class)
-                  for (var ColumnNum = 2; ColumnNum < rows[RowNum].values.length; ColumnNum++) {
-                     var ColumnNumAdjusted = ColumnNum - 2;
-                     if (Row[ColumnNum].formattedValue !== undefined) {
-                     if (ColumnNumAdjusted <= 5) {
-                        Class.Labels[LabelCount].Text = Row[ColumnNum].formattedValue
-                        Class.Labels[LabelCount].Type = 'Teacher'
-                     } else if (ColumnNumAdjusted > 5)
-                        Class.Labels[LabelCount].Text = Row[ColumnNum].formattedValue
-                        Class.Labels[LabelCount].Type = 'Lable'
+                  console.log(catagoryList[SheetNum])
+                  for (var RowNum = 2; RowNum < rows.length; RowNum++) {
+                     var Row = rows[RowNum].values
+                     var LabelCount = 0
+                     catagoryList[SheetNum].Classes[RowNum - 2] = {
+                        Name: Row[0].formattedValue,
+                        Rules: Row[1].formattedValue,
+                        Labels: [],
                      }
-                     LabelCount++
+                     var Class = catagoryList[SheetNum].Classes[RowNum]
+                     console.log(Class)
+                     for (var ColumnNum = 2; ColumnNum < rows[RowNum].values.length; ColumnNum++) {
+                        var ColumnNumAdjusted = ColumnNum - 2;
+                        if (Row[ColumnNum].formattedValue !== undefined) {
+                           if (ColumnNumAdjusted <= 5) {
+                              Class.Labels[LabelCount].Text = Row[ColumnNum].formattedValue
+                              Class.Labels[LabelCount].Type = 'Teacher'
+                           }
+                           else if (ColumnNumAdjusted > 5)
+                              Class.Labels[LabelCount].Text = Row[ColumnNum].formattedValue
+                           Class.Labels[LabelCount].Type = 'Lable'
+                        }
+                        LabelCount++
+                     }
                   }
                }
             }
-            } catch(e) {
+            catch (e) {
                console.warn(e)
             }
             console.log(catagoryList);
