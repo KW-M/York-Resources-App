@@ -473,7 +473,6 @@ button.selected.md-button {
     padding-left: 24px;
     padding-right: 24px
 }
-
 .content-padding.xs {
     padding-left: 8px;
     padding-right: 2px
@@ -489,11 +488,9 @@ button.selected.md-button {
 .content-top-bar md-chips .md-chips {
     box-shadow: none;
 }
-
 .content-top-bar md-chips md-chip {
     background: rgba(224, 224, 224, 0.5);
 }
-
 .content-top-bar md-chips md-chip:hover {
     box-shadow:0 2px 5px 0 rgba(0,0,0,.26);
 }
@@ -506,7 +503,7 @@ button.selected.md-button {
 }
 .content-top-bar button.md-button.md-ink-ripple:hover {
     box-shadow:0 2px 5px 0 rgba(0,0,0,.26);
-    background-color: rgb(66, 87, 178);
+    background-color: none;
 }
 /*------- Create Post Top Bar Styles -------- */
 
