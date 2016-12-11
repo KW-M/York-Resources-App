@@ -209,10 +209,11 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                         var ColumnNumAdjusted = ColumnNum - 2;
                         console.log(Row[ColumnNum])
                         if (Row[ColumnNum].formattedValue) {
-                           
+                           var Label = Row[ColumnNum].formattedValue.split(",")
                            Class.Labels[LabelCount] = {
-                              Text: Row[ColumnNum].formattedValue,
-                              
+                              Text: Label[0],
+                              Usage: Label[1] || 0,
+                              Type: (ColumnNumAdjusted <= 5) ? 'Teacher' : 'Label'
                            }
                               // if (ColumnNumAdjusted <= 5) {
                               //    Class.Labels[LabelCount].Text = Row[ColumnNum].formattedValue
