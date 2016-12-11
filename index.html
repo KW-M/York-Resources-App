@@ -199,7 +199,7 @@
                         <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>star</md-icon>Star Class</md-button>
                 </div>
                 <div>Class Rules: <span class="md-caption">Don't post test or homework answers. Do post what will help other student's get to the answers on their own. - <a href="#">edit</a></span></div>
-                <div>
+                <div style="padding-bottom:6px">
                     <md-chips>
                         <md-chip class="unselectable" md-ink-ripple>Ms.Wiliston</md-chip>
                         <md-chip class="unselectable" md-ink-ripple>2015</md-chip>
@@ -212,32 +212,7 @@
                         <md-chip class="unselectable" md-ink-ripple>2018</md-chip>
                     </md-chips>
                 </div>
-                <md-fab-speed-dial md-direction="down" md-open="globals.FABisOpen" class="md-fling" ng-mouseenter="globals.FABisOpen = true" ng-mouseleave="globals.FABisOpen = false" style="position: absolute; bottom: -190px;right: 20px;">
-                    <md-fab-trigger>
-                        <md-button id="new_post_button" class="md-fab md-accent raise-on-hover" ng-click="FABClick($event)">
-                            <md-tooltip md-direction="left" md-autohide>Create Post</md-tooltip>
-                            <md-icon class="unselectable">add</md-icon>
-                        </md-button>
-                    </md-fab-trigger>
-                    <md-fab-actions>
-                        <md-button class="md-fab md-raised md-mini" ng-click="::showPicker('Drive')">
-                            <md-tooltip md-direction="left" md-autohide>Add Drive file</md-tooltip>
-                            <img class="unselectable" style="width:22px; height:22px; margin-top:8px" src="images/drive_icon.svg">
-                        </md-button>
-                        <md-button class="md-fab md-raised md-mini">
-                            <label class="custom-file-upload" style=>
-                    <input type="file" accept="image/*" capture="camera" style="display:none"/>
-                    <md-tooltip md-direction="left" md-autohide>Take Photo</md-tooltip>
-                    <md-icon class="unselectable" style="color:black">camera</md-icon>
-                        </label>
-                        </md-button>
-                        <md-button class="md-fab md-raised md-mini" ng-click="::showPicker('Upload')">
-                            <md-tooltip md-direction="left" md-autohide>Upload</md-tooltip>
-                            <md-icon class="unselectable" style="color:black">file_upload</md-icon>
-                        </md-button>
-                    </md-fab-actions>
-                </md-fab-speed-dial>
-                <div style="display:none" class="create-post-bar-top" ng-hide="queryParams.classpath == 'Quizlet'">
+                <div class="create-post-bar-top" ng-hide="queryParams.classpath == 'Quizlet'">
                     <span md-ink-ripple="true" class="create-post-bar-text unselectable" flex ng-click="::newPost({},'new')">
                         <md-icon style="margin-top: -3px;">add_circle</md-icon>
                         <span>Share a link or resource...</span>
