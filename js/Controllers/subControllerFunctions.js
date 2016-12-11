@@ -40,6 +40,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			else {
 				var hasLiked = true;
 			}
+			var updatedClass = $scope.findClassObject(DriveMetadata.properties.ClassName);
 			formatedPost.Title = DriveMetadata.properties.Title || ''
 			formatedPost.Description = descriptionAndPreviewimage[0] || ''
 			formatedPost.Link = descriptionAndPreviewimage[1] || ''
@@ -50,8 +51,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			formatedPost.UpdateDate = new Date(DriveMetadata.modifiedTime) || new Date()
 			formatedPost.Class = {
 				Name: DriveMetadata.properties.ClassName || '',
-				Catagory: DriveMetadata.properties.ClassCatagory || '',
-				Color: DriveMetadata.properties.ClassColor || '#ffffff',
+				Catagory: updatedClass.Catagory || DriveMetadata.properties.ClassCatagory || '',
+				Color: updatedClass.Color || DriveMetadata.properties.ClassColor || '#ffffff',
 			}
 			var ClassOf = (DriveMetadata.properties.CreatorEmail || DriveMetadata.owners[0].emailAddress).match(/\d+/) || ['∞'];
 			formatedPost.Creator = {
