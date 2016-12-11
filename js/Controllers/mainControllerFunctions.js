@@ -188,15 +188,19 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             for (var SheetNum = 0; SheetNum < catagorySheets.length; SheetNum++) {
                var rows = catagorySheets[SheetNum].data[0].rowData
                catagoryList[SheetNum] = {
-                  'Catagory': rows[1].values[0],
-                  'Color': rows[1].values[1],
+                  'Catagory': rows[1].values[0].formattedValue,
+                  'Color': rows[1].values[1].formattedValue,
                   'Classes': []
                }
                for (var RowNum = 2; RowNum < rows.length; RowNum++) {
-                  catagoryList[SheetNum].Classes[RowNum].Name = rows[RowNum].values[0]
-                  catagoryList[SheetNum].Classes[RowNum].Rules = rows[RowNum].values[1]
-                  for (var Column = 2; Column < Column[Catagory].length; Column++) {
-                  classList[Catagory].Classes[Class - 2] = classesResult[Catagory][Class]
+                  var Class = catagoryList[SheetNum].Classes[RowNum]
+                  var Row = 
+                  Class.Name = rows[RowNum].values[0].formattedValue;
+                  Class.Rules = rows[RowNum].values[1].formattedValue;
+                  for (var ColumnNum = 2; ColumnNum < rows[RowNum].values.length; ColumnNum++) {
+                     if ((ColumnNum -2) <= 5 && ) {
+                        
+                     }
                   }
                }
             }
