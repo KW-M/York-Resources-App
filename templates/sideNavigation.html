@@ -61,7 +61,7 @@
                     </md-button>
                 </div>
                 <div ng-repeat="Catagory in classList" flex layout="column">
-                    <label ng-hide="sideNavClassSearch" class="side-nav-header" ng-style="{'background-color': selectedClass.Color}">{{Catagory.Catagory}}</label>
+                    <label ng-hide="sideNavClassSearch" class="side-nav-header" ng-style="::{'background-color': Catagory.Color}">{{Catagory.Catagory}}</label>
                     <md-button class="side-nav-class" ng-repeat="Class in Catagory.Classes | filter:sideNavClassSearch" ng-click="gotoRoute({classPath: '/' + Class.Name})" ng-class="{ 'selected' : $location.path() === '/' + Class.Name }">
                         {{Class.Name}}
                     </md-button>

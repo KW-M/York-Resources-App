@@ -416,6 +416,9 @@ button.md-button.shortcut-menu-button {
     padding: 16px;
     font-weight: 500;
     user-select: none;
+    border-top-right-radius: 50px;
+    /* border-bottom-right-radius: 50px; */
+    box-shadow: 1px 4px 6px -3px rgba(0,0,0,.2), -2px 7px 14px 1px rgba(0,0,0,.14);
 }
 
 .side-nav-class.md-button {
