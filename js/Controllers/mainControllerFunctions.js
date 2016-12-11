@@ -195,13 +195,14 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                }
                console.log(catagoryList[SheetNum])
                for (var RowNum = 2; RowNum < rows.length; RowNum++) {
-                  var Class = rows[]
-console.log(Class)
-                  var Row = rows[RowNum].values
+                                    var Row = rows[RowNum].values
                   var LabelCount = 0
-                  Class.Name = Row[0].formattedValue;
-                  Class.Rules = Row[1].formattedValue;
-                  console.log(catagoryList[SheetNum].Classes[RowNum])
+                  catagoryList[SheetNum].Classes[RowNum] = {
+                     Name: Row[0].formattedValue,
+                     Rules: Row[1].formattedValue
+                  }
+                  var Class = catagoryList[SheetNum].Classes[RowNum]
+                  console.log(Class)
                   for (var ColumnNum = 2; ColumnNum < rows[RowNum].values.length; ColumnNum++) {
                      var ColumnNumAdjusted = ColumnNum - 2;
                      if (Row[ColumnNum].formattedValue !== undefined) {
