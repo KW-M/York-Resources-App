@@ -185,6 +185,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             var catagoryList = [];
             var catagorySheets = rawClassesSheet.result.sheets;
             //format the class list:
+            var defaultRules = 'Default Rules'
             try {
                for (var SheetNum = 0; SheetNum < catagorySheets.length; SheetNum++) {
                   var rows = catagorySheets[SheetNum].data[0].rowData
@@ -199,11 +200,8 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                      var LabelCount = 0
                      catagoryList[SheetNum].Classes[RowNum - 2] = {
                         Name: Row[0].formattedValue,
-                        Rules: '',
+                        Rules: (Row[1] !== undefined) ? Row[1].formattedValue || defaultRules : defaultRules,
                         Labels: [],
-                     }
-                     if (Row[1].formattedValue !== undefined) {
-                        Row[1].formattedValue || 'whu'
                      }
                      var Class = catagoryList[SheetNum].Classes[RowNum - 2]
                      console.log(Class)
@@ -211,7 +209,11 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                         var ColumnNumAdjusted = ColumnNum - 2;
                         console.log(Row[ColumnNum])
                         if (Row[ColumnNum].formattedValue) {
-                           Class.Labels[LabelCount] = Row[ColumnNum].formattedValue
+                           
+                           Class.Labels[LabelCount] = {
+                              Text: Row[ColumnNum].formattedValue,
+                              
+                           }
                               // if (ColumnNumAdjusted <= 5) {
                               //    Class.Labels[LabelCount].Text = Row[ColumnNum].formattedValue
                               //    Class.Labels[LabelCount].Type = 'Teacher'
