@@ -475,11 +475,20 @@ button.selected.md-button {
     padding-left: 24px;
     padding-right: 24px
 }
+.content-padding.content-top-bar.sm {
+    padding-left: 16px;
+    padding-right: 16px;
+    margin-left: 24px;
+    margin-right: 24px;
+}
 .content-padding.xs {
     padding-left: 8px;
     padding-right: 4px;
+}
+.content-padding.content-top-bar.xs {
     margin-left: 0px;
     margin-right: 0px;
+    border-radius: 0px;
 }
 
 /* -------- Content Top Bar -------- */
