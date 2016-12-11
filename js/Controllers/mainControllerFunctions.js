@@ -186,17 +186,20 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             var catagorySheets = rawClassesSheet.result.sheets;
                //format the class list:
             for (var Catagory = 0; Catagory < catagorySheets.length; Catagory++) {
+               var rows = catagorySheets[Catagory].data[0].rowData
                catagoryList[Catagory] = {
-                  'Catagory': classesResult[Catagory][0],
+                  'Catagory': rows[1].values,
                   'Color': classesResult[Catagory][1],
                   'Classes': []
                }
-               for (var Class = 2; Class < classesResult[Catagory].length; Class++) {
+               for (var Class = 0; Class < rows.length; Catagory++) {
+                  for (var Class = 2; Class < classesResult[Catagory].length; Class++) {
                   classList[Catagory].Classes[Class - 2] = classesResult[Catagory][Class]
+                  }
                }
             }
             $timeout(function() { //makes angular update values
-               $scope.classList = classList;
+               $scope.classList = catagoryList;
             })
          })
 
