@@ -187,8 +187,14 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	};
 	$scope.findClassObject = function(className) {
 		for (var Catagories = 0; Catagories < $scope.classList.length; Catagories++) {
+			console.log($scope.classList[Catagories])
 			for (var ClassNum = 0; ClassNum < $scope.classList[Catagories].Classes.length; ClassNum++) {
-				if($scope.classList[Catagories].Classes[ClassNum].Name == className) return $scope.classList[Catagories].Classes[ClassNum];
+				var Class = $scope.classList[Catagories].Classes[ClassNum]
+				if(Class.Name == className) {
+					Class.Color = $scope.classList[Catagories].Color
+					Class.Catagory = $scope.classList[Catagories].Name
+					return(Class)
+				}
 		    }
 		}
 		console.warn ('could not find class: ' + className);
