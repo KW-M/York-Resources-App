@@ -188,9 +188,10 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	$scope.findClassObject = function(className) {
 		for (var Catagories = 0; Catagories < $scope.classList.length; Catagories++) {
 			for (var ClassNum = 0; ClassNum < $scope.classList[Catagories].Classes.length; ClassNum++) {
-				if($scope.classList[Catagories].classes[ClassNum].Name == className) return 
+				if($scope.classList[Catagories].Classes[ClassNum].Name == className) return $scope.classList[Catagories].Classes[ClassNum];
 		    }
 		}
+		console.warn ('could not find class: ' + className);
 	}
 	//----------------------------------------------------
 	//------------------UI Actions------------------------
@@ -369,7 +370,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	$scope.clearText = function(text) {
 		text = null;
 	};
-	
+
 	//----------------------------------------------------
 	//-------------------- dialogs -----------------------
 
