@@ -192,7 +192,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				var Class = $scope.classList[Catagories].Classes[ClassNum]
 				if(Class.Name == className) {
 					Class.Color = $scope.classList[Catagories].Color
-					Class.Catagory = $scope.classList[Catagories].Name
+					Class.Catagory = $scope.classList[Catagories].Catagory
 					return(Class)
 				}
 		    }

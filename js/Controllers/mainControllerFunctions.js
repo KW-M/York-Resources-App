@@ -83,7 +83,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       $scope.queryParams.q = $location.search().q || null;
       $scope.queryParams.classpath = $location.path().replace(/\//g, "") || 'all-posts';
       $scope.queryParams.id = $location.hash();
-
       $scope.searchInputTxt = $scope.queryParams.q;
 
       no_more_footer.style.display = 'none';
@@ -115,6 +114,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       }
       else {
          $scope.searchPrefix = 'Search Within'
+         $scope.selectedClass = $scope.findClassObject($scope.queryParams.classpath);
          $scope.classTitle = $scope.queryParams.classpath;
          $scope.queryParams.flagged = false
       }
@@ -194,7 +194,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                      'Color': rows[1].values[1].formattedValue,
                      'Classes': []
                   }
-                  console.log(catagoryList[SheetNum])
                   for (var RowNum = 2; RowNum < rows.length; RowNum++) {
                      var Row = rows[RowNum].values
                      var LabelCount = 0
@@ -204,10 +203,8 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                         Labels: [],
                      }
                      var Class = catagoryList[SheetNum].Classes[RowNum - 2]
-                     console.log(Class)
                      for (var ColumnNum = 2; ColumnNum < Row.length; ColumnNum++) {
                         var ColumnNumAdjusted = ColumnNum - 2;
-                        console.log(Row[ColumnNum])
                         if (Row[ColumnNum].formattedValue) {
                            var Label = Row[ColumnNum].formattedValue.split(",")
                            Class.Labels[LabelCount] = {
@@ -227,7 +224,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             console.log(catagoryList);
             $timeout(function() { //makes angular update values
                $scope.classList = catagoryList;
-               console.log($scope.findClassObject('English II'))
             })
          })
 
