@@ -192,6 +192,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                   'Color': rows[1].values[1].formattedValue,
                   'Classes': []
                }
+               console.log
                for (var RowNum = 2; RowNum < rows.length; RowNum++) {
                   var Class = catagoryList[SheetNum].Classes[RowNum]
                   var Row = rows[RowNum].values
@@ -200,13 +201,19 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                   Class.Rules = Row[1].formattedValue;
                   for (var ColumnNum = 2; ColumnNum < rows[RowNum].values.length; ColumnNum++) {
                      var ColumnNumAdjusted = ColumnNum - 2;
-                     if (ColumnNumAdjusted <= 5 && Row[ColumnNum].formattedValue !== undefined) {
-                        Class.Labels[LabelCount].Text = ColumnNumAdjusted
-                        LabelCount++
+                     if (Row[ColumnNum].formattedValue !== undefined) {
+                     if (ColumnNumAdjusted <= 5) {
+                        Class.Labels[LabelCount].Text = Row[ColumnNum].formattedValue
+                        Class.Labels[LabelCount].Type = 'Teacher'
+                     } else if (ColumnNumAdjusted > 5)
+                        Class.Labels[LabelCount].Text = Row[ColumnNum].formattedValue
+                        Class.Labels[LabelCount].Type = 'Lable'
                      }
+                     LabelCount++
                   }
                }
             }
+            console.log(catagoryList);
             $timeout(function() { //makes angular update values
                $scope.classList = catagoryList;
             })
