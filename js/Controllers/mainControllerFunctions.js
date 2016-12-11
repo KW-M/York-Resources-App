@@ -199,26 +199,27 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                      var LabelCount = 0
                      catagoryList[SheetNum].Classes[RowNum - 2] = {
                         Name: Row[0].formattedValue,
-                        Rules: Row[1].formattedValue,
+                        Rules: '',
                         Labels: [],
+                     }
+                     if (Row[1].formattedValue !== undefined) {
+                        Row[1].formattedValue || 'whu'
                      }
                      var Class = catagoryList[SheetNum].Classes[RowNum - 2]
                      console.log(Class)
                      for (var ColumnNum = 2; ColumnNum < Row.length; ColumnNum++) {
                         var ColumnNumAdjusted = ColumnNum - 2;
                         console.log(Row[ColumnNum])
-                        if (Row[ColumnNum].formattedValue !== undefined) {
+                        if (Row[ColumnNum].formattedValue) {
                            Class.Labels[LabelCount] = Row[ColumnNum].formattedValue
-                           // if (ColumnNumAdjusted <= 5) {
-                           //    Class.Labels[LabelCount].Text = Row[ColumnNum].formattedValue
-                           //    Class.Labels[LabelCount].Type = 'Teacher'
-                           // }
-                           // else if (ColumnNumAdjusted > 5)
-                           //    Class.Labels[LabelCount].Text = Row[ColumnNum].formattedValue
-                           // Class.Labels[LabelCount].Type = 'Lable'
-
-                        LabelCount++
-
+                              // if (ColumnNumAdjusted <= 5) {
+                              //    Class.Labels[LabelCount].Text = Row[ColumnNum].formattedValue
+                              //    Class.Labels[LabelCount].Type = 'Teacher'
+                              // }
+                              // else if (ColumnNumAdjusted > 5)
+                              //    Class.Labels[LabelCount].Text = Row[ColumnNum].formattedValue
+                              // Class.Labels[LabelCount].Type = 'Lable'
+                           LabelCount++
                         }
                      }
                   }
