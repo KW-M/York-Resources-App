@@ -511,7 +511,7 @@ button.selected.md-button {
     width: 100%;
     max-width: 570px;
     min-height: 48px;
-    margin: 0px auto 16px auto;
+    margin: 0px auto -22px auto;
     padding-right: 6px;
     position: relative;
     display: flex;
@@ -523,7 +523,7 @@ button.selected.md-button {
 }
 
 .create-post-bar-top:hover {
-    background-color: rgba(158, 158, 158, 0.1);
+    background-color: rgb(220, 220, 220);
 }
 
 .create-post-bar-text {
