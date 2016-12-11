@@ -185,6 +185,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             var catagoryList = [];
             var catagorySheets = rawClassesSheet.result.sheets;
                //format the class list:
+            try {
             for (var SheetNum = 0; SheetNum < catagorySheets.length; SheetNum++) {
                var rows = catagorySheets[SheetNum].data[0].rowData
                catagoryList[SheetNum] = {
@@ -192,13 +193,15 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                   'Color': rows[1].values[1].formattedValue,
                   'Classes': []
                }
-               console.log
+               console.log(catagoryList[SheetNum])
                for (var RowNum = 2; RowNum < rows.length; RowNum++) {
                   var Class = catagoryList[SheetNum].Classes[RowNum]
+x
                   var Row = rows[RowNum].values
                   var LabelCount = 0
                   Class.Name = Row[0].formattedValue;
                   Class.Rules = Row[1].formattedValue;
+                  console.log(catagoryList[SheetNum].Classes[RowNum])
                   for (var ColumnNum = 2; ColumnNum < rows[RowNum].values.length; ColumnNum++) {
                      var ColumnNumAdjusted = ColumnNum - 2;
                      if (Row[ColumnNum].formattedValue !== undefined) {
@@ -212,6 +215,9 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                      LabelCount++
                   }
                }
+            }
+            } catch(e) {
+               console.warn(e)
             }
             console.log(catagoryList);
             $timeout(function() { //makes angular update values
