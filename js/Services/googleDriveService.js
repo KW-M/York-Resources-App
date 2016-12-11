@@ -32,16 +32,17 @@ app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
 
     //----------------------------------------------------
     //----------------- Spreadsheets ---------------------
+    
+    this.getWholeSpreadsheet = function(range) {
+        return (gapi.client.sheets.spreadsheets.get({
+            spreadsheetId: URLs.classSpreadsheetId,
+            fields: 'sheets/data/rowData/values/formattedValue',
+        }));
+    }
 
-    this.getSpreadsheetRange = function(range, classSheet) {
-        if (classSheet) {
-            var spreadsheetId = URLs.classSpreadsheetId;
-        }
-        else {
-            var spreadsheetId = URLs.userSpreadsheetId;
-        }
+    this.getSpreadsheetRange = function(range) {
         return (gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: spreadsheetId,
+            spreadsheetId: URLs.userSpreadsheetId,
             range: range,
         }));
     }

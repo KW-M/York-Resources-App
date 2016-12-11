@@ -179,9 +179,10 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             console.warn(error)
          }).then(function(updatedUserSpreadsheetRow) {
             console.log(updatedUserSpreadsheetRow)
-            return GoogleDriveService.getSpreadsheetRange("Sheet1!A2:Z", true)
-         }).then(function(rawClasses) {
-            console.log(rawClasses)
+            return GoogleDriveService.getWholeSpreadsheet()
+         }).then(function(rawClassesSheet) {
+
+            console.log(rawClassesSheet)
             var classList = [];
             var classesResult = rawClasses.result.values
                //format the class list:
