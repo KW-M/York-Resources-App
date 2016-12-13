@@ -182,7 +182,9 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             return GoogleDriveService.getWholeSpreadsheet()
          }).then(function(rawClassesSheet) {
             console.log(rawClassesSheet)
-            var catagoryList = [];
+            var catagoryList = [
+               
+            ];
             var catagorySheets = rawClassesSheet.result.sheets;
             //format the class list
             try {
