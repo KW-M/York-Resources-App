@@ -521,7 +521,7 @@ button.selected.md-button {
 .content-top-bar .label-container .label {
     cursor: pointer;
     border-radius: 16px;
-    display: block;
+    display: inline-block;
     height: 32px;
     line-height: 32px;
     margin: 8px 8px 0 0;
@@ -532,7 +532,7 @@ button.selected.md-button {
     background: rgba(224, 224, 224, 0.5);
     box-shadow: 0 0px 2px 0 rgba(0,0,0,0.12);
 }
-.content-top-bar md-chips md-chip:hover {
+.content-top-bar .label-container .label:hover {
     box-shadow:0 2px 5px 0 rgba(0,0,0,.26);
 }
 
