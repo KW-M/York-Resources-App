@@ -496,18 +496,28 @@ button.selected.md-button {
 /* -------- Content Top Bar -------- */
 
 .content-top-bar{
-   background: coral;
-   position: relative;
+    background: coral;
+    position: relative;
     border-bottom-right-radius: 12px;
     border-bottom-left-radius: 12px;
 }
 .content-top-bar .label-container {
+    padding-bottom: 6px;
+    overflow: auto;
+    white-space: nowrap;
     display: block;
     font-family: Roboto,Helvetica Neue,sans-serif;
     font-size: 16px;
     padding: 0 0 8px 3px;
     vertical-align: middle;
 }
+.content-top-bar .label-container::-webkit-scrollbar {
+    background: transparent;
+    width: 8px;
+}
+.content-top-bar .label-container::-webkit-scrollbar-thumb {
+    background: #bdbdbd;
+} 
 .content-top-bar .label-container .label {
     cursor: pointer;
     border-radius: 16px;
