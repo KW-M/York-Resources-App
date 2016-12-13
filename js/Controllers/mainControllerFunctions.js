@@ -204,7 +204,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                }]
             },
             {
-               'Color': 'hsla(229, 46%, %',
+               'Color': 'hsla(229, 46%, 49%',
                'Classes': [{
                   'Name': 'Quizlet',
                   'rules': null,
