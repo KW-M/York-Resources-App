@@ -198,7 +198,7 @@
                     <md-button ng-hide="queryParams.classpath == 'Quizlet' || queryParams.classpath == 'all-posts' || queryParams.classpath == 'your-posts' || queryParams.classpath == 'flagged'">
                         <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>star</md-icon>Star Class</md-button>
                 </div>
-                <div>Class Rules: <span class="md-caption">Don't post test or homework answers. Do post what will help other student's get to the answers on their own. - <a href="#">edit</a></span></div>
+                <div>Class Rules: <span class="md-caption">{{selectedClass.Rules || 'Dont post test or homework answers. Do post what will help other students get to the answers on their own.'}} - <a href="#">edit</a></span></div>
                 <div style="padding-bottom:6px">
                     <md-chips>
                         <md-chip class="unselectable" md-ink-ripple>Ms.Wiliston</md-chip>

@@ -185,7 +185,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             var catagoryList = [];
             var catagorySheets = rawClassesSheet.result.sheets;
             //format the class list:
-            var defaultRules = 'Default Rules'
+            var defaultRules = null;
             try {
                for (var SheetNum = 0; SheetNum < catagorySheets.length; SheetNum++) {
                   var rows = catagorySheets[SheetNum].data[0].rowData
@@ -199,7 +199,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                      var LabelCount = 0
                      catagoryList[SheetNum].Classes[RowNum - 2] = {
                         Name: Row[0].formattedValue,
-                        Rules: (Row[1] !== undefined) ? Row[1].formattedValue || defaultRules : defaultRules,
+                        Rules: (Row[1] !== undefined) ? Row[1].formattedValue || null : null,
                         Labels: [],
                      }
                      var Class = catagoryList[SheetNum].Classes[RowNum - 2]
