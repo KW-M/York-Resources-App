@@ -200,12 +200,7 @@
                 </div>
                 <div>Class Rules: <span class="md-caption">{{selectedClass.Rules || 'Dont post test or homework answers. Do post what will help other students get to the answers on their own.'}} - <a href="#">edit</a></span></div>
                 <div style="padding-bottom:6px">
-                    <div style="padding-bottom:6px">
-                        <md-chips>
-                            <md-chip class="unselectable"><span md-ink-ripple style="border-radius:50p">Ms.Wiliston</span></md-chip>
-                            <md-chip class="unselectable"><span md-ink-ripple>2015</span></md-chip>
-                        </md-chips>
-                    </div>
+                    <md-button class="chip-button">Ms.Wiliston</md-button>
                 </div>
                 <div class="create-post-bar-top" ng-hide="queryParams.classpath == 'Quizlet'">
                     <span md-ink-ripple="true" class="create-post-bar-text unselectable" flex ng-click="::newPost({},'new')">
