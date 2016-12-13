@@ -200,17 +200,19 @@
                 </div>
                 <div>Class Rules: <span class="md-caption">{{selectedClass.Rules || 'Dont post test or homework answers. Do post what will help other students get to the answers on their own.'}} - <a href="#">edit</a></span></div>
                 <div style="padding-bottom:6px">
-                    <md-chips>
-                        <md-chip class="unselectable" md-ink-ripple>Ms.Wiliston</md-chip>
-                        <md-chip class="unselectable" md-ink-ripple>2015</md-chip>
-                        <md-chip class="unselectable" md-ink-ripple>2018</md-chip>
-                        <md-chip class="unselectable" md-ink-ripple>Ms.Wiliston</md-chip>
-                        <md-chip class="unselectable" md-ink-ripple>2015</md-chip>
-                        <md-chip class="unselectable" md-ink-ripple>2018</md-chip>
-                        <md-chip class="unselectable" md-ink-ripple>Ms.Wiliston</md-chip>
-                        <md-chip class="unselectable" md-ink-ripple>2015</md-chip>
-                        <md-chip class="unselectable" md-ink-ripple>2018</md-chip>
-                    </md-chips>
+                    <div style="padding-bottom:6px">
+                        <md-chips>
+                            <md-chip class="unselectable" md-ink-ripple>Ms.Wiliston</md-chip>
+                            <md-chip class="unselectable" md-ink-ripple>2015</md-chip>
+                            <md-chip class="unselectable" md-ink-ripple>2018</md-chip>
+                            <md-chip class="unselectable" md-ink-ripple>Ms.Wiliston</md-chip>
+                            <md-chip class="unselectable" md-ink-ripple>2015</md-chip>
+                            <md-chip class="unselectable" md-ink-ripple>2018</md-chip>
+                            <md-chip class="unselectable" md-ink-ripple>Ms.Wiliston</md-chip>
+                            <md-chip class="unselectable" md-ink-ripple>2015</md-chip>
+                            <md-chip class="unselectable" md-ink-ripple>2018</md-chip>
+                        </md-chips>
+                    </div>
                 </div>
                 <div class="create-post-bar-top" ng-hide="queryParams.classpath == 'Quizlet'">
                     <span md-ink-ripple="true" class="create-post-bar-text unselectable" flex ng-click="::newPost({},'new')">
@@ -323,7 +325,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <div class="footer-container">
                 <div class="footer">
