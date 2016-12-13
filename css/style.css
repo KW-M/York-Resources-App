@@ -512,11 +512,11 @@ button.selected.md-button {
     vertical-align: middle;
 }
 .content-top-bar .label-container::-webkit-scrollbar {
-    background: transparent;
-    width: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    height: 3px;
 }
 .content-top-bar .label-container::-webkit-scrollbar-thumb {
-    background: #bdbdbd;
+    background: rgba(0, 0, 0, 0.1);
 } 
 .content-top-bar .label-container .label {
     cursor: pointer;
