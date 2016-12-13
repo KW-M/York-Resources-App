@@ -184,8 +184,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             console.log(rawClassesSheet)
             var catagoryList = [];
             var catagorySheets = rawClassesSheet.result.sheets;
-            //format the class list:
-            var defaultRules = null;
+            //format the class list
             try {
                for (var SheetNum = 0; SheetNum < catagorySheets.length; SheetNum++) {
                   var rows = catagorySheets[SheetNum].data[0].rowData
