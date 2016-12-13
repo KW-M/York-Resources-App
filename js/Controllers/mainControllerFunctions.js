@@ -183,9 +183,16 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          }).then(function(rawClassesSheet) {
             console.log(rawClassesSheet)
             var catagoryList = [{
-               'Catagory': 'Hidden',
-               'Color': rows[1].values[1].formattedValue,
-               'Classes': []
+               'Color': 'hsla(360, 70%, 75%,',
+               'Classes': [{
+                  'Name': 'all-posts',
+                  'rules': null,
+               },
+               {
+                  'Name': 'all-posts',
+                  'rules': null,
+               },
+               ]
             }];
             var catagorySheets = rawClassesSheet.result.sheets;
             //format the class list
