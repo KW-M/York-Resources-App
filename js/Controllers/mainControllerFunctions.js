@@ -215,7 +215,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             try {
                for (var SheetNum = 0; SheetNum < catagorySheets.length; SheetNum++) {
                   var rows = catagorySheets[SheetNum].data[0].rowData
-                  catagoryList[SheetNum + 4] = {
+                  catagoryList[SheetNum + 3] = {
                      'Catagory': rows[1].values[0].formattedValue,
                      'Color': rows[1].values[1].formattedValue,
                      'Classes': []
@@ -223,7 +223,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                   for (var RowNum = 2; RowNum < rows.length; RowNum++) {
                      var Row = rows[RowNum].values
                      var LabelCount = 0
-                     catagoryList[SheetNum + 4].Classes[RowNum - 2] = {
+                     catagoryList[SheetNum + 3].Classes[RowNum - 2] = {
                         Name: Row[0].formattedValue,
                         Rules: (Row[1] !== undefined) ? Row[1].formattedValue || null : null,
                         Labels: [],

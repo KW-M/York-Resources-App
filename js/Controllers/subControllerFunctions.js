@@ -23,7 +23,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	$scope.convertDriveToPost = function(DriveMetadata) {
 		console.log($scope.classList)
 		var formatedPost = {};
-		try {
+	//	try {
 			var likesAndFlagged = DriveMetadata.name.split("{]|[}"); //not flagged any more
 			if (DriveMetadata.description) {
 				var descriptionAndPreviewimage = DriveMetadata.description.split("{]|[}");
@@ -87,11 +87,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				}, 150);
 			}
 			return (formatedPost)
-		}
-		catch (e) {
-			console.warn(e)
-			return (formatedPost);
-		}
+		// }
+		// // catch (e) {
+		// // 	console.warn(e)
+		// // 	return (formatedPost);
+		// // }
 	};
 	$scope.convertPostToDriveMetadata = function(Post) {
 		var formatedDriveMetadata
