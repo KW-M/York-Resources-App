@@ -190,7 +190,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                }]
             },
             {
-               'Color': 'hsla(200, 70%, 75%,',
+               'Color': 'hsla(114, 89%, 42%,',
                'Classes': [{
                   'Name': 'Your Posts',
                   'rules': null,
