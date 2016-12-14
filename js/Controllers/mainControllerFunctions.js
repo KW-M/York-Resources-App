@@ -81,7 +81,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
 
    function onLocationChange() {
       $scope.queryParams.q = $location.search().q || null;
-      $scope.queryParams.classpath = $location.path().replace(/\//g, "") || 'all-posts';
+      $scope.queryParams.classpath = $location.path().replace("/", "").replace("-", " ") || 'All Posts';
       $scope.queryParams.id = $location.hash();
       $scope.searchInputTxt = $scope.queryParams.q;
 
@@ -100,15 +100,13 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          $scope.queryParams.type = null
          $scope.queryParams.creatorEmail = null
       }
-      if ($scope.queryParams.classpath === 'all-posts') {
-         $scope.classTitle = 'All Posts'
+      if ($scope.queryParams.classpath === 'All Posts') {
          $scope.queryParams.flagged = false;
       }
-      else if ($scope.queryParams.classpath === 'your-posts') {
-         $scope.classTitle = 'Your Posts'
+      else if ($scope.queryParams.classpath === 'Your Posts') {
          $scope.queryParams.creatorEmail = $scope.myInfo.Email;
       }
-      else if ($scope.queryParams.classpath === 'flagged') {
+      else if ($scope.queryParams.classpath === 'lagged') {
          $scope.classTitle = 'Flagged Posts'
          $scope.queryParams.flagged = true
       }

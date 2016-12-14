@@ -56,13 +56,13 @@
             </md-list-item>
             <md-list>
                 <div flex layout="column" ng-hide="sideNavClassSearch">
-                    <md-button class="side-nav-class" ng-click="gotoRoute({classPath: '/other'})" ng-class="{ 'selected' : $location.path() === '/other' }">
-                        Other / Not associated
+                    <md-button class="side-nav-class" ng-click="gotoRoute({classPath: 'Other'})" ng-class="{ 'selected' : $scope.queryParams.classpath == 'Other' }">
+                        Other
                     </md-button>
                 </div>
                 <div ng-repeat="Catagory in classList" flex layout="column" ng-hide="Catagory.Catagory === undefined">
                     <label ng-hide="sideNavClassSearch" class="side-nav-header" ng-style="::{'background-color': Catagory.Color + ' 1)'}">{{Catagory.Catagory}}</label>
-                    <md-button class="side-nav-class" ng-repeat="Class in Catagory.Classes | filter:sideNavClassSearch" ng-click="gotoRoute({classPath: '/' + Class.Name})" ng-class="{ 'selected' : $location.path() === '/' + Class.Name }">
+                    <md-button class="side-nav-class" ng-repeat="Class in Catagory.Classes | filter:sideNavClassSearch" ng-click="gotoRoute({classPath: '/' + Class.Name})" ng-class="{ 'selected' : $scope.queryParams.classath == Class.Name }">
                         {{Class.Name}}
                     </md-button>
                 </div>
