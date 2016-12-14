@@ -60,10 +60,10 @@
                         Other
                     </md-button>
                 </div>
-                <div ng-repeat="Catagory in classList" flex layout="column" ng-hide="Catagory.Catagory === undefined">
+                <div ng-repeat="navCatagory in classList" flex layout="column" ng-hide="Catagory.Catagory === undefined">
                     <label ng-hide="sideNavClassSearch" class="side-nav-header" ng-style="::{'background-color': Catagory.Color + ' 1)'}">{{Catagory.Catagory}}</label>
-                    <md-button class="side-nav-class" ng-repeat="Class in Catagory.Classes | filter:sideNavClassSearch" ng-click="gotoRoute({classPath: Class.Name})" ng-class="{ 'selected' : $scope.queryParams.classPath == Class.Name }">
-                        {{Class.Name}}
+                    <md-button class="side-nav-class" ng-repeat="navClass in navCatagory.Classes | filter:sideNavClassSearch" ng-click="gotoRoute({classPath: navClass.Name})" ng-class="{ 'selected' : $scope.queryParams.classPath == navClass.Name }">
+                        {{navClass.Name}}
                     </md-button>
                 </div>
             </md-list>
