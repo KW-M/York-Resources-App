@@ -82,6 +82,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    function onLocationChange() {
       $scope.queryParams.q = $location.search().q || null;
       $scope.queryParams.classPath = $location.path().replace("/", "").replace("-", " ") || 'All Posts';
+      console.log($scope.queryParams.classPath)
       $scope.queryParams.id = $location.hash();
       $scope.searchInputTxt = $scope.queryParams.q;
 
