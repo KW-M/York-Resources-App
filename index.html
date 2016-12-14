@@ -202,19 +202,15 @@
                 
                 
                 
-    <md-chips ng-model="selectedVegetables">
+    <md-chips ng-model="guf">
       <md-autocomplete
-          md-selected-item="selectedItem"
-          md-search-text="asearchText"
           md-items="item in ['now','their','you','tag']"
-          md-item-text="item"
           placeholder="Find labels...">
         <span md-highlight-text="asearchText">{{item}}</span>
       </md-autocomplete>
-      <md-chip-template name="test">
+      <md-chip-template>
         <span>
           <strong>{{$chip}}</strong>
-          <em>({{$chip}})</em>
         </span>
       </md-chip-template>
     </md-chips>
