@@ -251,7 +251,12 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             return GoogleDriveService.appendSpreadsheetRange([$scope.myInfo.Email, $scope.myInfo.Name, 0, 0, "", "", "", ""]);
          }).then(function(userSpreadsheetRow) {
             console.log(userSpreadsheetRow)
-            var rowValues = (userSpreadsheetRow.result.values === undefined) ? userSpreadsheetRow.result.values[0] || userSpreadsheetRow.result.updates.updatedData.values[0];
+            if(userSpreadsheetRow.result.values !== undefined) {
+               var rowValues = userSpreadsheetRow.result.values[0];
+               var ow
+            }else{
+               var rowValues = userSpreadsheetRow.result.updates.updatedData.values[0];
+            }
             console.log(rowValues)
             rowValues[4]++;
             $scope.convertRowToUserPreferences(rowValues);
@@ -262,6 +267,8 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             console.warn(error)
          }).then(function(updatedUserSpreadsheetRow) {
             console.log(updatedUserSpreadsheetRow)
+         }, function(error) {
+            console.warn(error)
          })
          $q.all([driveAPI, sheetsAPI, pickerAPI]).then(authorizationService.hideSigninDialog)
       });
