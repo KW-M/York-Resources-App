@@ -153,7 +153,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          var sheetsAPI = gapi.client.load('https://sheets.googleapis.com/$discovery/rest?version=v4').then(function() {
             return GoogleDriveService.getWholeSpreadsheet()
          }).then(function(rawClassesSheet) {
-            //console.log(rawClassesSheet)
             var catagoryList = [{
                'Color': 'hsla(200, 70%, 75%,',
                'Classes': [{
@@ -235,7 +234,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          $q.all([driveAPI, sheetsAPI]).then(function(){
             return GoogleDriveService.getSpreadsheetRange("C2:D");
          }).then(function(spreadsheetRange) {
-            console.log(spreadsheetRange)
             if (spreadsheetRange.result.values) {
                $scope.userList = spreadsheetRange.result.values;
                for (var rowCount = 0; rowCount <= $scope.userList.length; rowCount++) {
@@ -259,9 +257,8 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             rowValues[4] = parseInt(rowValues[4])+1 || 1;
             $scope.convertRowToUserPreferences(rowValues);
             return GoogleDriveService.updateSpreadsheetRange("Sheet1!E" + $scope.UserSettingsRowNum, [rowValues[4]])
-         }).then(function(updatedUserSpreadsheetRow) {
-            console.log(updatedUserSpreadsheetRow)
-         })
+         }).then(listenForURLChange);
+         
          $q.all([driveAPI, sheetsAPI, pickerAPI]).then(authorizationService.hideSigninDialog)
       });
    });

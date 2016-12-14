@@ -135,7 +135,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		if (spreadsheetRow[7]) $scope.myInfo.LastBeenFlaggedDate = new Date(spreadsheetRow[7]);
 		if (spreadsheetRow[8]) $scope.myInfo.StaredClasses = spreadsheetRow[8].split(",") || [];
 		if (spreadsheetRow[9]) $scope.myInfo.QuizletUsername = spreadsheetRow[9];
-		if (spreadsheetRow[10]) $scope.myInfo.QuizletUpdateDate = spreadsheetRow[10];
+		if (spreadsheetRow[10]) $scope.myInfo.QuizletUpdateDate = new Date(spreadsheetRow[10]);
 	}
 	$scope.convertUserPreferencesToRow = function() {
 		// var spreadsheetRow = [];
