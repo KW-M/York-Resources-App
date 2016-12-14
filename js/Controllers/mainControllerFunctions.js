@@ -153,6 +153,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          var sheetsAPI = gapi.client.load('https://sheets.googleapis.com/$discovery/rest?version=v4').then(function() {
             return GoogleDriveService.getWholeSpreadsheet()
          }).then(function(rawClassesSheet) {
+            console.log(rawClassesSheet)
             var catagoryList = [{
                'Color': 'hsla(200, 70%, 75%,',
                'Classes': [{
@@ -251,13 +252,11 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                var rowValues = userSpreadsheetRow.result.updates.updatedData.values[0];
                $scope.UserSettingsRowNum = userSpreadsheetRow.result.updates.updatedRange.match(/\d(?=:)/);
             }
-            console.log(rowValues)
-            console.log($scope.UserSettingsRowNum)
             rowValues[4] = parseInt(rowValues[4])+1 || 1;
             $scope.convertRowToUserPreferences(rowValues);
             return GoogleDriveService.updateSpreadsheetRange("Sheet1!E" + $scope.UserSettingsRowNum, [rowValues[4]])
          }).then(listenForURLChange);
-         
+
          $q.all([driveAPI, sheetsAPI, pickerAPI]).then(authorizationService.hideSigninDialog)
       });
    });
