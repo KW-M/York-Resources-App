@@ -199,23 +199,6 @@
                         <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>star</md-icon>Star Class</md-button>
                 </div>
                 <div>Class Rules: <span class="md-caption">{{selectedClass.Rules || 'Dont post test or homework answers. Do post what will help other students get to the answers on their own.'}} - <a href="#">edit</a></span></div>
-                
-                
-                
-    <md-chips ng-model="guf">
-      <md-autocomplete
-          md-items="item in ['now','their','you','tag']"
-          placeholder="Find labels...">
-        <span md-highlight-text="asearchText">{{item}}</span>
-      </md-autocomplete>
-      <md-chip-template>
-        <span>
-          <strong>{{$chip}}</strong>
-        </span>
-      </md-chip-template>
-    </md-chips>
-                
-                
                 <div class="label-container" style="padding-bottom:6px">
                     <div class="label unselectable" ng-repeat="Label in selectedClass.Labels">{{Label.Text}}</div>
                 </div>
