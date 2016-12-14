@@ -152,24 +152,21 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          })
 
          var sheetsAPI = gapi.client.load('https://sheets.googleapis.com/$discovery/rest?version=v4').then(function() {
-            return GoogleDriveService.getSpreadsheetRange("A2:C")
+            return GoogleDriveService.getSpreadsheetRange("B2:C")
          }).then(function(spreadsheetRange) {
             console.log(spreadsheetRange)
             if (spreadsheetRange.result.values) {
                $scope.userList = spreadsheetRange.result.values;
                for (var rowCount = 0; rowCount <= $scope.userList.length; rowCount++) {
-                  if ($scope.userList[rowCount] != undefined && $scope.userList[rowCount][1] == $scope.myInfo.Email) {
+                  if ($scope.userList[rowCount] != undefined && $scope.userList[rowCount][0] == $scope.myInfo.Email) {
                      $scope.UserSettingsRowNum = rowCount + 2 //+2 adjusts for header row
                      return GoogleDriveService.getSpreadsheetRange('B' + (rowCount + 2) + ':' + (rowCount + 2));
                   }
                }
             }
-            return GoogleDriveService.appendSpreadsheetRange({
-               Email: $scope.myInfo.Email,
-               Name: $scope.myInfo.Name
-            }, [$scope.myInfo.Email,$scope.myInfo.Name,0, 0, "", "", "", ""]);
+            return GoogleDriveService.appendSpreadsheetRange([$scope.myInfo.Email, $scope.myInfo.Name, 0, 0, "", "", "", ""]);
          }).then(function(userSpreadsheetRow) {
-            //console.log(userSpreadsheetRow)
+            console.log(userSpreadsheetRow)
             userSpreadsheetRow.result.values[0][3]++;
             $scope.convertRowToUserPreferences(userSpreadsheetRow.result.values[0]);
             return GoogleDriveService.updateSpreadsheetRange(userSpreadsheetRow.result.range.replace('A', 'E'), userSpreadsheetRow.result.values[0])
@@ -191,13 +188,13 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                'Color': 'hsla(114, 89%, 42%,',
                'Classes': [{
                   'Name': 'Your Posts',
-                  'rules': null,
+                  'rules': " ",
                }]
             },
             {
                'Color': 'hsla(15, 95%, 65%,',
                'Classes': [{
-                  'Name': 'Flagged',
+                  'Name': 'Flagged Posts',
                   'rules': null,
                }]
             },
@@ -205,7 +202,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                'Color': 'hsla(229, 46%, 49%,',
                'Classes': [{
                   'Name': 'Quizlet',
-                  'rules': null,
+                  'rules': "Quizlet sets for york.",
                }]
             }];
             var catagorySheets = rawClassesSheet.result.sheets;
@@ -245,7 +242,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             catch (e) {
                console.warn(e)
             }
-            console.log(catagoryList);
             $timeout(function() { //makes angular update values
                $scope.classList = catagoryList;
             })

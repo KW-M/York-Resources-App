@@ -21,7 +21,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	//----------------------------------------------------
 	//------------------ Converting ----------------------
 	$scope.convertDriveToPost = function(DriveMetadata) {
-		console.log($scope.classList)
 		var formatedPost = {};
 	//	try {
 			var likesAndFlagged = DriveMetadata.name.split("{]|[}"); //not flagged any more
@@ -188,7 +187,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	};
 	$scope.findClassObject = function(className) {
 		for (var Catagories = 0; Catagories < $scope.classList.length; Catagories++) {
-			console.log($scope.classList[Catagories])
 			for (var ClassNum = 0; ClassNum < $scope.classList[Catagories].Classes.length; ClassNum++) {
 				var Class = $scope.classList[Catagories].Classes[ClassNum]
 				if(Class.Name == className) {
