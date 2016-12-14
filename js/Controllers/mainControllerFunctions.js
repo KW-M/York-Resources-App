@@ -251,11 +251,13 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             return GoogleDriveService.appendSpreadsheetRange([$scope.myInfo.Email, $scope.myInfo.Name, 0, 0, "", "", "", ""]);
          }).then(function(userSpreadsheetRow) {
             console.log(userSpreadsheetRow)
-            userSpreadsheetRow.result.values[0][4]++;
-            $scope.convertRowToUserPreferences(userSpreadsheetRow.result.values[0]);
-            userSpreadsheetRow.result.values[0].shift()
-            userSpreadsheetRow.result.values[0].shift()
-            return GoogleDriveService.updateSpreadsheetRange("Sheet1!C" + $scope.UserSettingsRowNum,userSpreadsheetRow.result.values[0])
+            if(userUpdateType == "Update") var rowValues = 
+            if(userUpdateType == "New") var rowValues = userSpreadsheetRow.result.updates.updatedvalues[0]
+            rowValues[4]++;
+            $scope.convertRowToUserPreferences(rowValues);
+            rowValues.shift()
+            rowValues.shift()
+            return GoogleDriveService.updateSpreadsheetRange("Sheet1!C" + $scope.UserSettingsRowNum, rowValues)
          }, function(error) {
             console.warn(error)
          }).then(function(updatedUserSpreadsheetRow) {
