@@ -159,8 +159,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			else {
 				var Flagged = true;
 			}
-			if ($scope.queryParams.classpath !== null && $scope.queryParams.classpath !== undefined && $scope.queryParams.classpath !== 'my-posts' && $scope.queryParams.classpath !== 'all-posts' && $scope.queryParams.classpath !== 'flagged') {
-				var Class = post.Class.Name === $scope.queryParams.classpath;
+			if ($scope.queryParams.classPath !== null && $scope.queryParams.classPath !== undefined && $scope.queryParams.classPath !== 'my-posts' && $scope.queryParams.classPath !== 'all-posts' && $scope.queryParams.classPath !== 'flagged') {
+				var Class = post.Class.Name === $scope.queryParams.classPath;
 			}
 			else {
 				var Class = post.Class.Name != 'memes';
@@ -272,7 +272,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	};
 	$scope.flagPost = function(content, arrayIndex) {
 		content.Flagged = true;
-		if ($scope.queryParams.classpath != 'flagged') {
+		if ($scope.queryParams.classPath != 'flagged') {
 			$timeout(function() { //makes angular update values
 				$scope.visiblePosts.splice(arrayIndex, 1);
 			});
@@ -306,7 +306,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		var timeoutDate = new Date($scope.myInfo.LastBeenFlaggedDate.getTime() + 7 * 86400000);
 		if (timeoutDate < new Date()) {
 			content.Flagged = false;
-			if ($scope.queryParams.classpath == 'flagged') {
+			if ($scope.queryParams.classPath == 'flagged') {
 				$timeout(function() { //makes angular update values
 					$scope.visiblePosts.splice(arrayIndex, 1);
 				});

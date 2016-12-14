@@ -39,7 +39,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       q: undefined, //undefined to make search popunder show with no text in  field
       flagged: false,
       type: null,
-      classpath: 'all-posts',
+      classPath: 'all-posts',
       creatorEmail: null,
       id: null,
    };
@@ -81,7 +81,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
 
    function onLocationChange() {
       $scope.queryParams.q = $location.search().q || null;
-      $scope.queryParams.classpath = $location.path().replace("/", "").replace("-", " ") || 'All Posts';
+      $scope.queryParams.classPath = $location.path().replace("/", "").replace("-", " ") || 'All Posts';
       $scope.queryParams.id = $location.hash();
       $scope.searchInputTxt = $scope.queryParams.q;
 
@@ -100,20 +100,19 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          $scope.queryParams.type = null
          $scope.queryParams.creatorEmail = null
       }
-      if ($scope.queryParams.classpath === 'All Posts') {
+      if ($scope.queryParams.classPath === 'All Posts') {
          $scope.queryParams.flagged = false;
       }
-      else if ($scope.queryParams.classpath === 'Your Posts') {
+      else if ($scope.queryParams.classPath === 'Your Posts') {
          $scope.queryParams.creatorEmail = $scope.myInfo.Email;
       }
-      else if ($scope.queryParams.classpath === 'lagged') {
-         $scope.classTitle = 'Flagged Posts'
+      else if ($scope.queryParams.classPath === 'Flagged Posts') {
          $scope.queryParams.flagged = true
       }
       else {
          $scope.searchPrefix = 'Search Within'
-         $scope.selectedClass = $scope.findClassObject($scope.queryParams.classpath);
-         $scope.classTitle = $scope.queryParams.classpath;
+         $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
+         $scope.classTitle = $scope.queryParams.classPath;
          $scope.queryParams.flagged = false
       }
       generateQueryString();
@@ -542,8 +541,8 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) {
          query = query + " and properties has { key='Type' and value='" + $scope.queryParams.type + "' }"
       }
-      if ($scope.queryParams.classpath !== null && $scope.queryParams.classpath !== undefined && $scope.queryParams.classpath !== 'my-posts' && $scope.queryParams.classpath !== 'all-posts' && $scope.queryParams.classpath !== 'flagged') {
-         query = query + " and properties has { key='ClassName' and value='" + $scope.queryParams.classpath + "' }"
+      if ($scope.queryParams.classPath !== null && $scope.queryParams.classPath !== undefined && $scope.queryParams.classPath !== 'my-posts' && $scope.queryParams.classPath !== 'all-posts' && $scope.queryParams.classPath !== 'flagged') {
+         query = query + " and properties has { key='ClassName' and value='" + $scope.queryParams.classPath + "' }"
       }
       if ($scope.queryParams.q !== null && $scope.queryParams.q !== undefined) {
          query = query + " and fullText contains '" + $scope.queryParams.q + "'";
