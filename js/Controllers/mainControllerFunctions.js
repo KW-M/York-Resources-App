@@ -258,9 +258,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             console.log($scope.UserSettingsRowNum)
             rowValues[4] = (rowValues[4]++ || 1);
             $scope.convertRowToUserPreferences(rowValues);
-            rowValues.shift()
-            rowValues.shift()
-            return GoogleDriveService.updateSpreadsheetRange("Sheet1!E" + rowRange, rowValues[4])
+            return GoogleDriveService.updateSpreadsheetRange("Sheet1!E" + $scope.UserSettingsRowNum, [rowValues[4]])
          }, function(error) {
             console.warn(error)
          }).then(function(updatedUserSpreadsheetRow) {
