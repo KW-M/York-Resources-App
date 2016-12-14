@@ -142,7 +142,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          var driveAPI = gapi.client.load('https://www.googleapis.com/discovery/v1/apis/drive/v3/rest').then(function() {
             return GoogleDriveService.getUserInfo();
          }).then(function(userInfo) {
-            console.log(userInfo)
+            //console.log(userInfo)
             $scope.myInfo = {
                "Name": userInfo.result.user.displayName,
                "Email": userInfo.result.user.emailAddress,
@@ -152,13 +152,13 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          })
 
          var sheetsAPI = gapi.client.load('https://sheets.googleapis.com/$discovery/rest?version=v4').then(function() {
-            return GoogleDriveService.getSpreadsheetRange("A2:")
+            return GoogleDriveService.getSpreadsheetRange("A2:C")
          }).then(function(spreadsheetRange) {
             console.log(spreadsheetRange)
             if (spreadsheetRange.result.values) {
                $scope.userList = spreadsheetRange.result.values;
-               for (var rowCount = 0; rowCount <= $scope.userList.length && rowCount > -1; rowCount++) {
-                  if ($scope.userList[rowCount] != undefined && $scope.userList[rowCount][0] == $scope.myInfo.Email) {
+               for (var rowCount = 0; rowCount <= $scope.userList.length; rowCount++) {
+                  if ($scope.userList[rowCount] != undefined && $scope.userList[rowCount][1] == $scope.myInfo.Email) {
                      $scope.UserSettingsRowNum = rowCount + 2 //+2 adjusts for header row
                      return GoogleDriveService.getSpreadsheetRange('B' + (rowCount + 2) + ':' + (rowCount + 2));
                   }
@@ -167,19 +167,19 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             return GoogleDriveService.appendSpreadsheetRange({
                Email: $scope.myInfo.Email,
                Name: $scope.myInfo.Name
-            }, [0, 0, "", "", "", ""]);
+            }, [$scope.myInfo.Email,$scope.myInfo.Name,0, 0, "", "", "", ""]);
          }).then(function(userSpreadsheetRow) {
-            console.log(userSpreadsheetRow)
+            //console.log(userSpreadsheetRow)
             userSpreadsheetRow.result.values[0][3]++;
             $scope.convertRowToUserPreferences(userSpreadsheetRow.result.values[0]);
             return GoogleDriveService.updateSpreadsheetRange(userSpreadsheetRow.result.range.replace('A', 'E'), userSpreadsheetRow.result.values[0])
          }, function(error) {
             console.warn(error)
          }).then(function(updatedUserSpreadsheetRow) {
-            console.log(updatedUserSpreadsheetRow)
+            //console.log(updatedUserSpreadsheetRow)
             return GoogleDriveService.getWholeSpreadsheet()
          }).then(function(rawClassesSheet) {
-            console.log(rawClassesSheet)
+            //console.log(rawClassesSheet)
             var catagoryList = [{
                'Color': 'hsla(200, 70%, 75%,',
                'Classes': [{
