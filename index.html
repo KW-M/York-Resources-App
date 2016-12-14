@@ -198,7 +198,7 @@
                     <md-button ng-hide="queryParams.classpath == 'Quizlet' || queryParams.classpath == 'all-posts' || queryParams.classpath == 'your-posts' || queryParams.classpath == 'flagged'">
                         <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>star</md-icon>Star Class</md-button>
                 </div>
-                <div>Class Rules: <span class="md-caption">{{selectedClass.Rules || 'Dont post test or homework answers. Do post what will help other students get to the answers on their own.'}} - <a href="#">edit</a></span></div>
+                <div><span ng-hide="selectedClass.Name = 'All Posts'">Class Rules: </span><span class="md-caption">{{selectedClass.Rules || 'Dont post test or homework answers. Do post what will help other students get to the answers on their own.'}} - <a href="#">edit</a></span></div>
                 <div class="label-container" style="padding-bottom:6px">
                     <div class="label unselectable" ng-repeat="Label in selectedClass.Labels">{{Label.Text}}</div>
                 </div>
