@@ -259,12 +259,8 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             rowValues[4] = parseInt(rowValues[4])+1 || 1;
             $scope.convertRowToUserPreferences(rowValues);
             return GoogleDriveService.updateSpreadsheetRange("Sheet1!E" + $scope.UserSettingsRowNum, [rowValues[4]])
-         }, function(error) {
-            console.warn(error)
          }).then(function(updatedUserSpreadsheetRow) {
             console.log(updatedUserSpreadsheetRow)
-         }, function(error) {
-            console.warn(error)
          })
          $q.all([driveAPI, sheetsAPI, pickerAPI]).then(authorizationService.hideSigninDialog)
       });
