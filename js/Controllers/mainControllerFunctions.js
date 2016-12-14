@@ -134,7 +134,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    //------------- Signin & Initiation ------------------
    gapi.load('client:auth2', function() {
       authorizationService.initilize(function() {
-         var userUpdateType
          var pickerPromise = $q.defer();
          gapi.load('picker', {
             'callback': pickerPromise.resolve
@@ -247,7 +246,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                   }
                }
             }
-            userUpdateType = "Append"
             return GoogleDriveService.appendSpreadsheetRange([$scope.myInfo.Email, $scope.myInfo.Name, 0, 0, "", "", "", ""]);
          }).then(function(userSpreadsheetRow) {
             console.log(userSpreadsheetRow)
@@ -260,11 +258,11 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             }
             console.log(rowValues)
             console.log(rowRange)
-            rowValues[4]++;
+            rowValues[4] = (rowValues[4]++ || 1);
             $scope.convertRowToUserPreferences(rowValues);
             rowValues.shift()
             rowValues.shift()
-            return GoogleDriveService.updateSpreadsheetRange("Sheet1!E" + rowRange, rowValues)
+            return GoogleDriveService.updateSpreadsheetRange("Sheet1!E" + rowRange, rowValues[4])
          }, function(error) {
             console.warn(error)
          }).then(function(updatedUserSpreadsheetRow) {
