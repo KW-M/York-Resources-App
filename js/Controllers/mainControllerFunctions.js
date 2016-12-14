@@ -252,14 +252,14 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          }).then(function(userSpreadsheetRow) {
             console.log(userSpreadsheetRow)
             // userSpreadsheetRow.result.values[0][4]++;
-            // userSpreadsheetRow.result.values[0].shift()
-            // userSpreadsheetRow.result.values[0].shift()
             //$scope.convertRowToUserPreferences(userSpreadsheetRow.result.values[0]);
+            userSpreadsheetRow.result.values[0].shift()
+            userSpreadsheetRow.result.values[0].shift()
             return GoogleDriveService.updateSpreadsheetRange("Sheet1!C" + $scope.UserSettingsRowNum + ":C",userSpreadsheetRow.result.values[0])
          }, function(error) {
             console.warn(error)
          }).then(function(updatedUserSpreadsheetRow) {
-            //console.log(updatedUserSpreadsheetRow)
+            console.log(updatedUserSpreadsheetRow)
          })
          $q.all([driveAPI, sheetsAPI, pickerAPI]).then(authorizationService.hideSigninDialog)
       });

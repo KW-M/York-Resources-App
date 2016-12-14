@@ -128,15 +128,13 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}
 	};
 	$scope.convertRowToUserPreferences = function(spreadsheetRow) {
-		$scope.myInfo.Moderator = (spreadsheetRow[3] = 'TRUE') ? true : false;
-		$scope.myInfo.NumberOfVisits = spreadsheetRow[5]
-		$scope.myInfo.NumberOfContributions = spreadsheetRow[6]
-		if (spreadsheetRow[7]) {
-			$scope.myInfo.LastContributionDate = new Date(spreadsheetRow[7])
-		}
-		if (spreadsheetRow[8]) {
-			$scope.myInfo.LastBeenFlaggedDate = new Date(spreadsheetRow[8])
-		}
+		$scope.myInfo.Moderator = (spreadsheetRow[0] == 'TRUE') ? true : false;
+		$scope.myInfo.NumberOfVisits = spreadsheetRow[4];
+		$scope.myInfo.NumberOfContributions = spreadsheetRow[5]
+		if (spreadsheetRow[6]) $scope.myInfo.LastContributionDate = new Date(spreadsheetRow[6]);
+		if (spreadsheetRow[7]) $scope.myInfo.LastBeenFlaggedDate = new Date(spreadsheetRow[7]);
+		if (spreadsheetRow[8]) $scope.myInfo.StaredClasses = spreadsheetRow[8].split(",") || [];
+		if (spreadsheetRow[9])
 	}
 	$scope.convertUserPreferencesToRow = function() {
 		var spreadsheetRow = [];
