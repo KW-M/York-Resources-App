@@ -3,7 +3,7 @@
         <md-list>
             <md-list-item>
                 <md-menu-item>
-                    <md-button ng-click="::gotoRoute({classPath: '/All Posts'})" ng-class="{ 'selected' : $location.path() === '/All Posts' }">
+                    <md-button ng-click="::gotoRoute({classPath: 'All Posts'})" ng-class="{ 'selected' : $scope.queryParams.classpath == 'All Posts' }">
                         <md-icon class="md-accent">inbox</md-icon>
                         All Posts
                     </md-button>
@@ -11,7 +11,7 @@
             </md-list-item>
             <md-list-item>
                 <md-menu-item>
-                    <md-button ng-click="::gotoRoute({classPath: '/Your Posts'})" ng-class="{ 'selected' : $location.path() === '/Your Posts' }">
+                    <md-button ng-click="::gotoRoute({classPath: 'Your Posts'})" ng-class="{ 'selected' : $scope.queryParams.classpath == 'Your Posts' }">
                         <md-icon style="color: rgb(25,157,9)">person</md-icon>
                         Your Posts
                     </md-button>
@@ -19,7 +19,7 @@
             </md-list-item>
             <md-list-item>
                 <md-menu-item>
-                    <md-button ng-click="::gotoRoute({classPath: '/Flagged'})" ng-class="{ 'selected' : $location.path() === '/Flagged' }">
+                    <md-button ng-click="::gotoRoute({classPath: 'Flagged'})" ng-class="{ 'selected' : $scope.queryParams.classpath == 'Flagged Posts' }">
                         <md-icon class="md-warn">flag</md-icon>
                         Flagged
                     </md-button>
@@ -27,7 +27,7 @@
             </md-list-item>
             <md-list-item>
                 <md-menu-item>
-                    <md-button ng-click="::gotoRoute({classPath: '/Quizlet'})" ng-class="{ 'selected' : $location.path() === '/Quizlet' }">
+                    <md-button ng-click="::gotoRoute({classPath: 'Quizlet'})" ng-class="{ 'selected' : $scope.queryParams.classpath == 'Quizlet' }">
                         <md-icon md-svg-src="images/quizlet_logo.svg" style="color: #4257b2;"></md-icon>
                         Quizlet
                     </md-button>
@@ -62,7 +62,7 @@
                 </div>
                 <div ng-repeat="Catagory in classList" flex layout="column" ng-hide="Catagory.Catagory === undefined">
                     <label ng-hide="sideNavClassSearch" class="side-nav-header" ng-style="::{'background-color': Catagory.Color + ' 1)'}">{{Catagory.Catagory}}</label>
-                    <md-button class="side-nav-class" ng-repeat="Class in Catagory.Classes | filter:sideNavClassSearch" ng-click="gotoRoute({classPath: '/' + Class.Name})" ng-class="{ 'selected' : $scope.queryParams.classath == Class.Name }">
+                    <md-button class="side-nav-class" ng-repeat="Class in Catagory.Classes | filter:sideNavClassSearch" ng-click="gotoRoute({classPath: Class.Name})" ng-class="{ 'selected' : $scope.queryParams.classPath == Class.Name }">
                         {{Class.Name}}
                     </md-button>
                 </div>

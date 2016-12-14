@@ -57,7 +57,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          $location.search({
             q: null
          });
-         $location.path(query.classPath);
+         $location.path(query.classPath.replace(" ","-") || query.classPath);
       }
       if (query.q) {
          if (query.q == '') {
@@ -260,41 +260,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       });
    });
 
-   function initiateDrive(loaded) {
-      console.log("API loaded: " + loaded)
-      if (loaded === "drive") {
-         queue('drive', GoogleDriveService.getUserInfo(), function(userInfo) {
-            $scope.myInfo = {
-               "Name": userInfo.result.user.displayName,
-               "Email": userInfo.result.user.emailAddress,
-               "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
-            };
-            document.dispatchEvent(new window.Event('userInfoLoaded'));
-         }, null, 150);
-      }
-      if (loaded === "sheets") {
-         if ($scope.myInfo !== undefined) {
-            handleUserPrefsSheet()
-         }
-         else {
-            document.addEventListener('userInfoLoaded', function() {
-               handleUserPrefsSheet();
-            });
-         }
-      }
-      if (loaded === "picker") {
-         $scope.initiateDrivePicker()
-         if ($scope.myInfo !== undefined) {
-            authorizationService.hideSigninDialog();
-         }
-         else {
-            document.addEventListener('sheetPrefsLoaded', function() {
-               authorizationService.hideSigninDialog();
-            });
-         }
-      }
-   }
-
    $scope.initiateDrivePicker = function() {
       var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
       var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
@@ -315,66 +280,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       setOAuthToken(authorizationService.getAuthToken()).
       setCallback(self.pickerCallback).
       build();
-   }
-
-   function handleUserPrefsSheet() {
-      queue('sheets', GoogleDriveService.getSpreadsheetRange("Sheet1!A2:B"), function(response) {
-         $scope.userList = response.result.values;
-         for (var rowCount = 0; rowCount <= $scope.userList.length && rowCount > -1; rowCount++) {
-            if ($scope.userList[rowCount] != undefined && $scope.userList[rowCount][0] == $scope.myInfo.Email) {
-               $scope.UserSettingsRowNum = rowCount + 2 //+2 adjusts for header row
-               getUserSettings('A' + (rowCount + 2) + ':' + (rowCount + 2));
-               rowCount = -3 //signify that the user's Row has been found
-            }
-         }
-         if (rowCount == $scope.userList.length + 1) {
-            createUserSettings();
-         }
-      }, null, 2);
-
-      function getUserSettings(range) {
-         queue('sheets', GoogleDriveService.getSpreadsheetRange(range), function(response) {
-            response.result.values[0][3]++
-               $scope.convertRowToUserPreferences(response.result.values[0]);
-            var event = new window.Event('sheetPrefsLoaded')
-            document.dispatchEvent(event);
-            queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, response.result.values[0]), null, function(error) {
-               console.log(error)
-            }, 2);
-         }, null, 2);
-      }
-
-      function createUserSettings() {
-         var newData = [$scope.myInfo.Email, $scope.myInfo.Name, false, 1, 0, "", "", "", ""]
-         queue('sheets', GoogleDriveService.appendSpreadsheetRange([$scope.myInfo.Email, $scope.myInfo.Name, 1, 0, "", "", "", ""]), function(newRow) {
-            $scope.convertRowToUserPreferences(newData);
-            var event = new window.Event('sheetPrefsLoaded')
-            document.dispatchEvent(event);
-         }, null, 2);
-         $scope.convertRowToUserPreferences(newData);
-      }
-
-      listenForURLChange(); // this also Starts getting files
-      queue('sheets', GoogleDriveService.getSpreadsheetRange("Sheet1!A2:Z", true), handleClassesSheet, null, 2)
-   }
-
-   function handleClassesSheet(rawClasses) {
-      var classList = [];
-      var classesResult = rawClasses.result.values
-         //format the class list:
-      for (var Catagory = 0; Catagory < classesResult.length; Catagory++) {
-         classList[Catagory] = {
-            'Catagory': classesResult[Catagory][0],
-            'Color': classesResult[Catagory][1],
-            'Classes': []
-         }
-         for (var Class = 2; Class < classesResult[Catagory].length; Class++) {
-            classList[Catagory].Classes[Class - 2] = classesResult[Catagory][Class]
-         }
-      }
-      $timeout(function() { //makes angular update values
-         $scope.classList = classList;
-      })
    }
 
    //----------------------------------------------------
