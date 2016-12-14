@@ -255,7 +255,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             $scope.convertRowToUserPreferences(userSpreadsheetRow.result.values[0]);
             userSpreadsheetRow.result.values[0].shift()
             userSpreadsheetRow.result.values[0].shift()
-            return GoogleDriveService.updateSpreadsheetRange("Sheet1!C" + $scope.UserSettingsRowNum + ":C",userSpreadsheetRow.result.values[0])
+            return GoogleDriveService.updateSpreadsheetRange("Sheet1!C" + $scope.UserSettingsRowNum,userSpreadsheetRow.result.values[0])
          }, function(error) {
             console.warn(error)
          }).then(function(updatedUserSpreadsheetRow) {
