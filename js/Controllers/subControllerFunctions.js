@@ -129,8 +129,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	};
 	$scope.convertRowToUserPreferences = function(spreadsheetRow) {
 		$scope.myInfo.Moderator = (spreadsheetRow[0] == 'TRUE') ? true : false;
-		$scope.myInfo.NumberOfVisits = spreadsheetRow[4];
-		$scope.myInfo.NumberOfContributions = spreadsheetRow[5]
+		$scope.myInfo.NumberOfVisits = parseInt(spreadsheetRow[4]);
+		$scope.myInfo.NumberOfContributions = parseInt(spreadsheetRow[5])
 		if (spreadsheetRow[6]) $scope.myInfo.LastContributionDate = new Date(spreadsheetRow[6]);
 		if (spreadsheetRow[7]) $scope.myInfo.LastBeenFlaggedDate = new Date(spreadsheetRow[7]);
 		if (spreadsheetRow[8]) $scope.myInfo.StaredClasses = spreadsheetRow[8].split(",") || [];
@@ -138,14 +138,14 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		if (spreadsheetRow[10]) $scope.myInfo.QuizletUpdateDate = spreadsheetRow[10];
 	}
 	$scope.convertUserPreferencesToRow = function() {
-		var spreadsheetRow = [];
-		spreadsheetRow[0] = $scope.myInfo.Email;
-		spreadsheetRow[1] = $scope.myInfo.Name;
-		spreadsheetRow[2] = $scope.myInfo.NumberOfVisits || 0;
-		spreadsheetRow[3] = $scope.myInfo.NumberOfContributions || 0;
-		spreadsheetRow[4] = $scope.myInfo.LastContributionDate || '';
-		spreadsheetRow[5] = $scope.myInfo.LastBeenFlaggedDate || '';
-		return (spreadsheetRow);
+		// var spreadsheetRow = [];
+		// spreadsheetRow[0] = $scope.myInfo.Email;
+		// spreadsheetRow[1] = $scope.myInfo.Name;
+		// spreadsheetRow[2] = $scope.myInfo.NumberOfVisits || 0;
+		// spreadsheetRow[3] = $scope.myInfo.NumberOfContributions || 0;
+		// spreadsheetRow[4] = $scope.myInfo.LastContributionDate || '';
+		// spreadsheetRow[5] = $scope.myInfo.LastBeenFlaggedDate || '';
+		// return (spreadsheetRow);
 	};
 	//----------------------------------------------------
 	//-------------- Filtering & Sorting -----------------
@@ -327,8 +327,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		$scope.myInfo.LastContributionDate = new Date()
 		var today = $filter('date')(new Date(), 'M/d/yy');
 		var range = 'Sheet1!F' + $scope.UserSettingsRowNum + ':F' + $scope.UserSettingsRowNum
-		$scope.parseInt(NumberOfContributions)++
-		queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, [$scope.NumberOfContributions, today]), null, function(err) {
+		$scope.$scope.myInfo.NumberOfContributions++
+		queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, [$scope.myInfo.NumberOfContributions, today]), null, function(err) {
 			console.warn(err)
 			$mdToast.showSimple('Error Saving Post');
 		}, 2);
