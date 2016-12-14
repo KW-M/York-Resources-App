@@ -240,7 +240,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                $scope.userList = spreadsheetRange.result.values;
                for (var rowCount = 0; rowCount <= $scope.userList.length; rowCount++) {
                   if ($scope.userList[rowCount] != undefined && $scope.userList[rowCount][0] == $scope.myInfo.Email) {
-                     $scope.UserSettingsRowNum = rowCount + 2 //+2 adjusts for header row
                      return GoogleDriveService.getSpreadsheetRange('Sheet1!A' + (rowCount + 2) + ':' + (rowCount + 2));
                   }
                }
@@ -256,7 +255,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                $scope.UserSettingsRowNum = userSpreadsheetRow.result.updates.updatedRange.match(/\d(?=:)/);
             }
             console.log(rowValues)
-            console.log(rowRange)
+            console.log($scope.UserSettingsRowNum)
             rowValues[4] = (rowValues[4]++ || 1);
             $scope.convertRowToUserPreferences(rowValues);
             rowValues.shift()
