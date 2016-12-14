@@ -169,7 +169,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             console.log(userSpreadsheetRow)
             userSpreadsheetRow.result.values[0][3]++;
             $scope.convertRowToUserPreferences(userSpreadsheetRow.result.values[0]);
-            return GoogleDriveService.updateSpreadsheetRange(userSpreadsheetRow.result.range.replace('A', 'E'), userSpreadsheetRow.result.values[0])
+            return GoogleDriveService.updateSpreadsheetRange(userSpreadsheetRow.result.range.replace('', 'D'), userSpreadsheetRow.result.values[0])
          }, function(error) {
             console.warn(error)
          }).then(function(updatedUserSpreadsheetRow) {
@@ -189,6 +189,10 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                'Classes': [{
                   'Name': 'Your Posts',
                   'rules': " ",
+               },
+               {
+                  'Name': 'Memes',
+                  'rules': "What are you doing here?",
                }]
             },
             {
