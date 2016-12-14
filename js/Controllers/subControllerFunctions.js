@@ -289,7 +289,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		//set the poster's has flagged date back
 		for (var item = 0; item < $scope.userList.length; item++) {
 			if ($scope.userList[item][0] && $scope.userList[item][0] == content.Creator.Email) {
-				var range = 'Sheet1!I' + (item + 2)
+				var range = 'Sheet1!G' + (item + 2);
 				var today = $filter('date')(new Date(), 'M/d/yy');
 				queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, [today]), null, function(err) {
 					$timeout(function() { //makes angular update values
