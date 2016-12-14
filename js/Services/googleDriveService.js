@@ -51,6 +51,7 @@ app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
         return (gapi.client.sheets.spreadsheets.values.update({
             spreadsheetId: URLs.userSpreadsheetId,
             range: range,
+            includeValuesInResponse: true,
             valueInputOption: "USER_ENTERED",
             values: [dataToBeInserted],
         }));
