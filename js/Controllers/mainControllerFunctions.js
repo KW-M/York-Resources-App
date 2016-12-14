@@ -39,7 +39,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       q: undefined, //undefined to make search popunder show with no text in  field
       flagged: false,
       type: null,
-      classPath: 'all-posts',
+      classPath: 'Loading...',
       creatorEmail: null,
       id: null,
    };
@@ -542,7 +542,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) {
          query = query + " and properties has { key='Type' and value='" + $scope.queryParams.type + "' }"
       }
-      if ($scope.queryParams.classPath !== null && $scope.queryParams.classPath !== undefined && $scope.queryParams.classPath !== 'my-posts' && $scope.queryParams.classPath !== 'all-posts' && $scope.queryParams.classPath !== 'flagged') {
+      if ($scope.queryParams.classPath !== null && $scope.queryParams.classPath !== undefined && $scope.queryParams.classPath !== 'Your Posts' && $scope.queryParams.classPath !== 'All Posts' && $scope.queryParams.classPath !== 'Flagged Posts') {
          query = query + " and properties has { key='ClassName' and value='" + $scope.queryParams.classPath + "' }"
       }
       if ($scope.queryParams.q !== null && $scope.queryParams.q !== undefined) {

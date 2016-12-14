@@ -159,11 +159,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			else {
 				var Flagged = true;
 			}
-			if ($scope.queryParams.classPath !== null && $scope.queryParams.classPath !== undefined && $scope.queryParams.classPath !== 'My Posts' && $scope.queryParams.classPath !== 'All Posts' && $scope.queryParams.classPath !== 'flagged') {
+			if ($scope.queryParams.classPath !== null && $scope.queryParams.classPath !== undefined && $scope.queryParams.classPath !== 'My Posts' && $scope.queryParams.classPath !== 'All Posts' && $scope.queryParams.classPath !== 'Flagged Posts') {
 				var Class = post.Class.Name === $scope.queryParams.classPath;
 			}
 			else {
-				var Class = post.Class.Name != 'memes';
+				var Class = post.Class.Name != 'Memes';
 			}
 			if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) {
 				var Type = post.Type === $scope.queryParams.type;
