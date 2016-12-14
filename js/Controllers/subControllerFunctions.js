@@ -286,7 +286,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		//set the poster's has flagged date back
 		for (var item = 0; item < $scope.userList.length; item++) {
 			if ($scope.userList[item][0] && $scope.userList[item][0] == content.Creator.Email) {
-				var range = 'Sheet1!G' + (item + 2);
+				var range = 'Sheet1!H' + (item + 2);
 				var today = $filter('date')(new Date(), 'M/d/yy');
 				queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, [today]), null, function(err) {
 					$timeout(function() { //makes angular update values
@@ -326,8 +326,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	$scope.updateLastPosted = function() {
 		$scope.myInfo.LastContributionDate = new Date()
 		var today = $filter('date')(new Date(), 'M/d/yy');
-		var range = 'Sheet1!E' + $scope.UserSettingsRowNum + ':F' + $scope.UserSettingsRowNum
-		$scope.NumberOfContributions++
+		var range = 'Sheet1!F' + $scope.UserSettingsRowNum + ':F' + $scope.UserSettingsRowNum
+		$scope.parseInt(NumberOfContributions)++
 		queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, [$scope.NumberOfContributions, today]), null, function(err) {
 			console.warn(err)
 			$mdToast.showSimple('Error Saving Post');
