@@ -253,6 +253,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             console.log(userSpreadsheetRow)
             userSpreadsheetRow.result.values[0][4]++;
             userSpreadsheetRow.result.values[0].shift()
+            
             $scope.convertRowToUserPreferences(userSpreadsheetRow.result.values[0]);
             return GoogleDriveService.updateSpreadsheetRange("Sheet1!C" + $scope.UserSettingsRowNum,userSpreadsheetRow.result.values[0])
          }, function(error) {
