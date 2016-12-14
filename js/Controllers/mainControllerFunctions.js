@@ -152,7 +152,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          })
 
          var sheetsAPI = gapi.client.load('https://sheets.googleapis.com/$discovery/rest?version=v4').then(function() {
-            return GoogleDriveService.getSpreadsheetRange("B2:C")
+            return GoogleDriveService.getSpreadsheetRange("C2:D")
          }).then(function(spreadsheetRange) {
             console.log(spreadsheetRange)
             if (spreadsheetRange.result.values) {
