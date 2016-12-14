@@ -329,8 +329,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	$scope.updateLastPosted = function() {
 		$scope.myInfo.LastContributionDate = new Date()
 		var today = $filter('date')(new Date(), 'M/d/yy');
+		var range = 'Sheet1!E' + $scope.UserSettingsRowNum + ':F' + $scope.UserSettingsRowNum
 		$scope.NumberOfContributions++
-			var range = 'Sheet1!G' + $scope.UserSettingsRowNum + ':H' + $scope.UserSettingsRowNum
 		queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, [$scope.NumberOfContributions, today]), null, function(err) {
 			console.warn(err)
 			$mdToast.showSimple('Error Saving Post');

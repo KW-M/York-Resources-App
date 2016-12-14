@@ -152,7 +152,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          })
 
          var sheetsAPI = gapi.client.load('https://sheets.googleapis.com/$discovery/rest?version=v4').then(function() {
-            return GoogleDriveService.getSpreadsheetRange("Sheet1!A2:B")
+            return GoogleDriveService.getSpreadsheetRange("A2:")
          }).then(function(spreadsheetRange) {
             console.log(spreadsheetRange)
             if (spreadsheetRange.result.values) {
@@ -160,7 +160,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                for (var rowCount = 0; rowCount <= $scope.userList.length && rowCount > -1; rowCount++) {
                   if ($scope.userList[rowCount] != undefined && $scope.userList[rowCount][0] == $scope.myInfo.Email) {
                      $scope.UserSettingsRowNum = rowCount + 2 //+2 adjusts for header row
-                     return GoogleDriveService.getSpreadsheetRange('A' + (rowCount + 2) + ':' + (rowCount + 2));
+                     return GoogleDriveService.getSpreadsheetRange('B' + (rowCount + 2) + ':' + (rowCount + 2));
                   }
                }
             }
