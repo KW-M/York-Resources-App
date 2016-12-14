@@ -241,7 +241,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                for (var rowCount = 0; rowCount <= $scope.userList.length; rowCount++) {
                   if ($scope.userList[rowCount] != undefined && $scope.userList[rowCount][0] == $scope.myInfo.Email) {
                      $scope.UserSettingsRowNum = rowCount + 2 //+2 adjusts for header row
-                     userUpdateType = "Get"
                      return GoogleDriveService.getSpreadsheetRange('Sheet1!A' + (rowCount + 2) + ':' + (rowCount + 2));
                   }
                }
@@ -249,12 +248,12 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             return GoogleDriveService.appendSpreadsheetRange([$scope.myInfo.Email, $scope.myInfo.Name, 0, 0, "", "", "", ""]);
          }).then(function(userSpreadsheetRow) {
             console.log(userSpreadsheetRow)
-            if(userSpreadsheetRow.result.values !== undefined) {
+            if (userSpreadsheetRow.result.values !== undefined) {
                var rowValues = userSpreadsheetRow.result.values[0];
-               var rowRange = userSpreadsheetRow.result.range.match(/\d(?=:)/);
-            }else{
+               $scope.UserSettingsRowNum = userSpreadsheetRow.result.range.match(/\d(?=:)/);
+            } else {
                var rowValues = userSpreadsheetRow.result.updates.updatedData.values[0];
-               var rowRange = userSpreadsheetRow.result.updates.updatedRange.match(/\d(?=:)/);;
+               $scope.UserSettingsRowNum = userSpreadsheetRow.result.updates.updatedRange.match(/\d(?=:)/);
             }
             console.log(rowValues)
             console.log(rowRange)
