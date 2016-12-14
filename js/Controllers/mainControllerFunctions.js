@@ -89,7 +89,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       no_more_footer.style.display = 'none';
       no_posts_footer.style.display = 'none';
       footer_problem.style.display = 'none';
-      console.log($scope.queryParams.q);
       $scope.searchPrefix = 'Search';
       if ($scope.queryParams.q !== null) {
          if ($scope.queryParams.q != $scope.previousSearch) {
@@ -153,13 +152,17 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          var sheetsAPI = gapi.client.load('https://sheets.googleapis.com/$discovery/rest?version=v4').then(function() {
             return GoogleDriveService.getWholeSpreadsheet()
          }).then(function(rawClassesSheet) {
-            console.log(rawClassesSheet)
             var catagoryList = [{
                'Color': 'hsla(200, 70%, 75%,',
                'Classes': [{
                   'Name': 'All Posts',
                   'rules': "Whatup",
-               }]
+               },
+               {
+                  'Name': 'Other',
+                  'rules': "Other Stuff",
+               }
+               ]
             },
             {
                'Color': 'hsla(114, 89%, 42%,',
@@ -244,7 +247,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             }
             return GoogleDriveService.appendSpreadsheetRange([$scope.myInfo.Email, $scope.myInfo.Name, 0, 0, "", "", "", ""]);
          }).then(function(userSpreadsheetRow) {
-            console.log(userSpreadsheetRow)
             if (userSpreadsheetRow.result.values !== undefined) {
                var rowValues = userSpreadsheetRow.result.values[0];
                $scope.UserSettingsRowNum = userSpreadsheetRow.result.range.match(/\d(?=:)/);
