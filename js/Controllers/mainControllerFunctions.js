@@ -157,7 +157,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                'Color': 'hsla(200, 70%, 75%,',
                'Classes': [{
                   'Name': 'All Posts',
-                  'rules': null,
+                  'rules': "Whatup",
                }]
             },
             {
@@ -175,7 +175,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                'Color': 'hsla(15, 95%, 65%,',
                'Classes': [{
                   'Name': 'Flagged Posts',
-                  'rules': null,
+                  'rules': "UNaccepabed",
                }]
             },
             {
@@ -186,7 +186,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                }]
             }];
             var catagorySheets = rawClassesSheet.result.sheets;
-            //format the class list
             try {
                for (var SheetNum = 0; SheetNum < catagorySheets.length; SheetNum++) {
                   var rows = catagorySheets[SheetNum].data[0].rowData
