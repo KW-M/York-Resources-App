@@ -253,16 +253,17 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             console.log(userSpreadsheetRow)
             if(userSpreadsheetRow.result.values !== undefined) {
                var rowValues = userSpreadsheetRow.result.values[0];
-               var ow
+               var rowRange = userSpreadsheetRow.result.range.m;
             }else{
                var rowValues = userSpreadsheetRow.result.updates.updatedData.values[0];
+               var rowRange = userSpreadsheetRow.result.updates.updatedRange;
             }
             console.log(rowValues)
             rowValues[4]++;
             $scope.convertRowToUserPreferences(rowValues);
             rowValues.shift()
             rowValues.shift()
-            return GoogleDriveService.updateSpreadsheetRange("Sheet1!C" + $scope.UserSettingsRowNum, rowValues)
+            return GoogleDriveService.updateSpreadsheetRange(rowRange, rowValues)
          }, function(error) {
             console.warn(error)
          }).then(function(updatedUserSpreadsheetRow) {
