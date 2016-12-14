@@ -200,6 +200,28 @@
                 </div>
                 <div>Class Rules: <span class="md-caption">{{selectedClass.Rules || 'Dont post test or homework answers. Do post what will help other students get to the answers on their own.'}} - <a href="#">edit</a></span></div>
                 
+                
+                
+    <md-chips ng-model="ctrl.selectedVegetables" md-autocomplete-snap
+              md-transform-chip="ctrl.transformChip($chip)"
+              md-require-match="ctrl.autocompleteDemoRequireMatch">
+      <md-autocomplete
+          md-selected-item="ctrl.selectedItem"
+          md-search-text="ctrl.searchText"
+          md-items="item in ctrl.querySearch(ctrl.searchText)"
+          md-item-text="item.name"
+          placeholder="Find labels...">
+        <span md-highlight-text="ctrl.searchText">{{item.name}} :: {{item.type}}</span>
+      </md-autocomplete>
+      <md-chip-template name="test">
+        <span>
+          <strong>{{$chip.name}}</strong>
+          <em>({{$chip.type}})</em>
+        </span>
+      </md-chip-template>
+    </md-chips>
+                
+                
                 <div class="label-container" style="padding-bottom:6px">
                     <div class="label unselectable" ng-repeat="Label in selectedClass.Labels">{{Label.Text}}</div>
                 </div>
