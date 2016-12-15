@@ -499,6 +499,11 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       }
    }, false);
 
+   $scope.$watch('allPosts', function(newValue) {
+     console.log('allPosts Changed')
+   }, true);
+
+
    content_container.onscroll = function(event) {
       //called whenever the content_container scrolls
       // if (performantScrollEnabled === false && $scope.angularGridOptions.performantScroll === false) {
