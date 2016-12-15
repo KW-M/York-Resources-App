@@ -52,6 +52,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    //----------------------------------------------------
    //------------------- Routing ------------------------
    $scope.gotoRoute = function(query) {
+      console.log(query)
       if (query.classPath) {
          $scope.toggleSidebar(true);
          $location.search({
@@ -59,7 +60,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          });
          $location.path(query.classPath.replace(" ","-") || query.classPath);
       }
-      if (query.q) {
+      if (query.q !== und) {
          if (query.q == '') {
             $location.search({
                q: null
@@ -485,18 +486,12 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    //----------------------------------------------------
    //---------------- Event Watchers --------------------
    $scope.$watch('searchInputTxt', function(newValue) {
-      if (newValue == "" || newValue === undefined) {
-         var input = null
-      } else {
-         var input = newValue;
-      }
+      var input = newValue || null
       var query = $scope.queryParams.q || null;
-      console.log(input);
-       console.log(query);
-      if (newValue !== $scope.queryParams.q) {
-         console.log(newValue + "!=" + $scope.queryParams.q);
+      if (input != query) {
+         console.log(input + "!=" + query);
          $scope.gotoRoute({
-            q: newValue
+            q: input
          })
       }
    }, false);
