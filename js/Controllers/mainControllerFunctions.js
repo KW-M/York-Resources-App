@@ -486,12 +486,13 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    //---------------- Event Watchers --------------------
    $scope.$watch('searchInputTxt', function(newValue) {
       console.log(newValue)
-      if (newValue != $scope.queryParams.q) {
+      console.log($scope.queryParams.q);
+      if (newValue !== $scope.queryParams.q) {
          $scope.gotoRoute({
             q: newValue
          })
       }
-   }, true);
+   }, false);
 
    content_container.onscroll = function(event) {
       //called whenever the content_container scrolls
