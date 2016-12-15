@@ -470,7 +470,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             console.log('newSearch')
             $scope.searchPosts = formattedFileList;
          }
-         $scope.previousSearch = $scope.queryParams2.q || null
+         $scope.previousSearch = $scope.queryParams2.q || null;
          $scope.updateVisiblePosts($scope.searchPosts);
       }
       else {
