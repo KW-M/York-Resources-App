@@ -463,6 +463,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    function sortPostsByType(formattedFileList, queryString, queryParams) {
       console.log(queryString)
       console.log(queryParams)
+      console.log($scope.queryParams)
       if (queryParams.q) {
          console.log('hasQueryParams')
          if (queryParams.q === $scope.previousSearch) {
@@ -473,7 +474,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             console.log('newSearch')
             $scope.searchPosts = formattedFileList;
          }
-         $scope.previousSearch = $scope.queryParams2.q || null;
+         $scope.previousSearch = $scope.queryParams.q || null;
          $scope.updateVisiblePosts($scope.searchPosts);
       }
       else {
