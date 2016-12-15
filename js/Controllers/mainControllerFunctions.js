@@ -485,11 +485,16 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    //----------------------------------------------------
    //---------------- Event Watchers --------------------
    $scope.$watch('searchInputTxt', function(newValue) {
-      if newValue = ""
-      var input = newValue || null;
+      if (newValue == "" || newValue === undefined) {
+         var input = null
+      } else {
+         var input = newValue;
+      }
       var query = $scope.queryParams.q || null;
-      console.log($scope.queryParams.q);
-      if (input != query) {
+      console.log(input);
+       console.log(query);
+      if (newValue !== $scope.queryParams.q) {
+         console.log(newValue + "!=" + $scope.queryParams.q);
          $scope.gotoRoute({
             q: newValue
          })
