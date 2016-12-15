@@ -496,7 +496,7 @@ button.selected.md-button {
 /* -------- Content Top Bar -------- */
 
 .content-top-bar{
-    background: coral;
+    background-color: white;
     position: relative;
     border-bottom-right-radius: 12px;
     border-bottom-left-radius: 12px;

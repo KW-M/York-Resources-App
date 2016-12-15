@@ -485,6 +485,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    //----------------------------------------------------
    //---------------- Event Watchers --------------------
    $scope.$watch('searchInputTxt', function(newValue) {
+      console.log(newValue)
       if (newValue != $scope.queryParams.q) {
          $scope.gotoRoute({
             q: newValue
