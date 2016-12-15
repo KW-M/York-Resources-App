@@ -53,15 +53,15 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    //------------------- Routing ------------------------
    $scope.gotoRoute = function(query) {
       console.log(query)
-      if (query.classPath) {
+      if (query.classPath !== undefined) {
          $scope.toggleSidebar(true);
          $location.search({
             q: null
          });
          $location.path(query.classPath.replace(" ","-") || query.classPath);
       }
-      if (query.q !== und) {
-         if (query.q == '') {
+      if (query.q !== undefined) {
+         if (query.q === null || query.q =='') {
             $location.search({
                q: null
             });
