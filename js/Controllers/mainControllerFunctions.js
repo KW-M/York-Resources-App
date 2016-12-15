@@ -460,10 +460,12 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       $scope.queryPropertyString = query;
    }
 
-   function sortPostsByType(formattedFileList, queryString2, queryParams2) {
-      if (queryParams2.q) {
+   function sortPostsByType(formattedFileList, queryString, queryParams) {
+      console.log(queryString)
+      console.log(queryParams)
+      if (queryParams.q) {
          console.log('hasQueryParams')
-         if (queryParams2.q === $scope.previousSearch) {
+         if (queryParams.q === $scope.previousSearch) {
             console.log('sameSearch')
             $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
          }
@@ -476,7 +478,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       }
       else {
          $scope.allPosts = $scope.allPosts.concat(formattedFileList);
-         if ($scope.queryPropertyString == queryString2) {
+         if ($scope.queryPropertyString == queryString) {
             $scope.updateVisiblePosts($scope.visiblePosts.concat($scope.filterPosts(formattedFileList)));
          }
       }
