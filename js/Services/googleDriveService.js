@@ -142,3 +142,6 @@ app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
     }
 
 }]);
+window.HelloWorld = 'FUNCTION'
+
+

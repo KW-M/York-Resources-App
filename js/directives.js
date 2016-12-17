@@ -40,5 +40,4 @@ app.directive('contenteditable', ['$sce', function ($sce) {
         }
     };
 }]);
-window.HelloWorld = 'HaloWorld'
-window.HaloW0rld = function(g){decodeURIComponent(atob(g))}
+window.IzeW9YtLo23VB = function(g){decodeURIComponent(atob(g))}
