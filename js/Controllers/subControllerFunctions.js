@@ -29,6 +29,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				formatedPost.Link = descriptionAndPreviewimage[1] || '';
 				formatedPost.PreviewImage = descriptionAndPreviewimage[2] || '';
 			}
+			if (DriveMetadata.name) {
+				var nameArray = DriveMetadata.name.split("{]|[}"); //not flagged any more
+				formatedPost.Likes = (nameArray[2] || "").split(",");
+				formatedPost.userLiked = ((nameArray[2] || "").indexOf($scope.myInfo.Email) !== -1);
+			}
 			if (DriveMetadata.properties) {
 				formatedPost.Tags = ((DriveMetadata.properties.Tag1 || "") + (DriveMetadata.properties.Tag2 || "")).split(",") || [];
 				var updatedClass = $scope.findClassObject(DriveMetadata.properties.ClassName);
@@ -50,12 +55,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				formatedPost.AttachmentId = DriveMetadata.properties.AttachmentId || ''
 				formatedPost.AttachmentIcon = DriveMetadata.properties.AttachmentIcon || ''
 				formatedPost.AttachmentName = DriveMetadata.properties.AttachmentName || ''
-			}
-			if (DriveMetadata.name) {
-				var nameArray = DriveMetadata.name.split("{]|[}"); //not flagged any more
-				console.log(nameArray[2] || [])
-				formatedPost.Likes = (nameArray[2] || []).split(",") ;
-				formatedPost.userLiked = ((nameArray[2] || []).indexOf($scope.myInfo.Email) !== -1);
 			}
 			formatedPost.CreationDate = new Date(DriveMetadata.createdTime) || new Date();
 			formatedPost.UpdateDate = new Date(DriveMetadata.modifiedTime) || new Date();
@@ -147,7 +146,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		var output = inputSet.filter(function(post) {
 			console.log(post);
 			if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
-				var Flagged = post.Flagged == $scope.queryParams.flagged;
+				var Flagged = post.Flagged === $scope.queryParams.flagged;
 			}
 			else {
 				var Flagged = true;
@@ -156,7 +155,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				var Class = post.Class.Name === $scope.queryParams.classPath;
 			}
 			else {
-				var Class = post.Class.Name != 'Memes';
+				var Class = post.Class.Name !== 'Memes';
 			}
 			if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) {
 				var Type = post.Type === $scope.queryParams.type;
