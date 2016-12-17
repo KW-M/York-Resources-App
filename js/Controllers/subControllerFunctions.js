@@ -23,54 +23,42 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	$scope.convertDriveToPost = function(DriveMetadata) {
 		var formatedPost = {};
 		try {
-			console.log(DriveMetadata)
-			var likesAndFlagged = DriveMetadata.name.split("{]|[}"); //not flagged any more
-			if (likesAndFlagged[1].indexOf($scope.myInfo.Email) === -1) {
-				var hasLiked = false;
-			}
-			else {
-				var hasLiked = true;
-			}
 			if (DriveMetadata.description) {
 				var descriptionAndPreviewimage = DriveMetadata.description.split("{]|[}");
+				formatedPost.Description = descriptionAndPreviewimage[0] || ''
+				formatedPost.Link = descriptionAndPreviewimage[1] || ''
+				formatedPost.PreviewImage = descriptionAndPreviewimage[2]
 			}
 			if (DriveMetadata.properties) {
-				if (DriveMetadata.properties.Tag1 || DriveMetadata.properties.Tag2) {
-					var tags = JSON.parse(("[\"" + (DriveMetadata.properties.Tag1 || '') + (DriveMetadata.properties.Tag2 || '') + "\"]").replace(/,/g, "\",\""));
+				formatedPost.Tags = (DriveMetadata.properties.Tag1 + DriveMetadata.properties.Tag2).split(",");
+				var updatedClass = $scope.findClassObject(DriveMetadata.properties.ClassName);
+				formatedPost.Title = DriveMetadata.properties.Title || nameArray[1] || ''
+				formatedPost.Flagged = JSON.parse(DriveMetadata.properties.Flagged) || false;
+				formatedPost.Class = {
+					Name: DriveMetadata.properties.ClassName || '',
+					Catagory: updatedClass.Catagory || DriveMetadata.properties.ClassCatagory || '',
+					Color: updatedClass.Color || DriveMetadata.properties.ClassColor || '#ffffff',
 				}
-				else {
-					var tags = [];
+				var ClassOf = (DriveMetadata.properties.CreatorEmail || DriveMetadata.owners[0].emailAddress).match(/\d+/) || ['∞'];
+				formatedPost.Creator = {
+					Name: (DriveMetadata.properties.CreatorName || DriveMetadata.owners[0].displayName) || '',
+					Email: (DriveMetadata.properties.CreatorEmail || DriveMetadata.owners[0].emailAddress) || '',
+					ClassOf: ClassOf[0],
+					Me: (DriveMetadata.properties.CreatorEmail || DriveMetadata.owners[0].emailAddress) === $scope.myInfo.Email,
 				}
+				formatedPost.Type = DriveMetadata.properties.Type || 'noLink'
+				formatedPost.AttachmentId = DriveMetadata.properties.AttachmentId || ''
+				formatedPost.AttachmentIcon = DriveMetadata.properties.AttachmentIcon || ''
+				formatedPost.AttachmentName = DriveMetadata.properties.AttachmentName || ''
 			}
-			var updatedClass = $scope.findClassObject(DriveMetadata.properties.ClassName);
-			formatedPost.Title = DriveMetadata.properties.Title || ''
-			formatedPost.Description = descriptionAndPreviewimage[0] || ''
-			formatedPost.Link = descriptionAndPreviewimage[1] || ''
-			formatedPost.Tags = tags
-			formatedPost.Type = DriveMetadata.properties.Type || 'noLink'
-			formatedPost.Flagged = JSON.parse(DriveMetadata.properties.Flagged) || false
-			formatedPost.CreationDate = new Date(DriveMetadata.createdTime) || new Date()
-			formatedPost.UpdateDate = new Date(DriveMetadata.modifiedTime) || new Date()
-			formatedPost.Class = {
-				Name: DriveMetadata.properties.ClassName || '',
-				Catagory: updatedClass.Catagory || DriveMetadata.properties.ClassCatagory || '',
-				Color: updatedClass.Color || DriveMetadata.properties.ClassColor || '#ffffff',
+			if (DriveMetadata.name) {
+				var nameArray = DriveMetadata.name.split("{]|[}"); //not flagged any more
+				formatedPost.Likes = nameArray[2].split(",")
+				formatedPost.userLiked = (nameArray[2].indexOf($scope.myInfo.Email) !== -1);
 			}
-			var ClassOf = (DriveMetadata.properties.CreatorEmail || DriveMetadata.owners[0].emailAddress).match(/\d+/) || ['∞'];
-			formatedPost.Creator = {
-				Name: (DriveMetadata.properties.CreatorName || DriveMetadata.owners[0].displayName) || '',
-				Email: (DriveMetadata.properties.CreatorEmail || DriveMetadata.owners[0].emailAddress) || '',
-				ClassOf: ClassOf[0],
-				Me: (DriveMetadata.properties.CreatorEmail || DriveMetadata.owners[0].emailAddress) === $scope.myInfo.Email,
-			}
-			formatedPost.Link = descriptionAndPreviewimage[1]
-			formatedPost.Id = DriveMetadata.id || ''
-			formatedPost.AttachmentId = DriveMetadata.properties.AttachmentId || ''
-			formatedPost.AttachmentIcon = DriveMetadata.properties.AttachmentIcon || ''
-			formatedPost.AttachmentName = DriveMetadata.properties.AttachmentName || ''
-			formatedPost.Likes = JSON.parse(likesAndFlagged[1])
-			formatedPost.userLiked = hasLiked
-			formatedPost.PreviewImage = descriptionAndPreviewimage[2]
+			formatedPost.CreationDate = new Date(DriveMetadata.createdTime) || new Date();
+			formatedPost.UpdateDate = new Date(DriveMetadata.modifiedTime) || new Date();
+			formatedPost.Id = DriveMetadata.id || '';
 			if (formatedPost.Type === 'gDrive') {
 				queue('drive', GoogleDriveService.getFileThumbnail(formatedPost.AttachmentId), function(response) {
 					$timeout(function() {
@@ -98,12 +86,10 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	$scope.convertPostToDriveMetadata = function(Post) {
 		var formatedDriveMetadata
 		try {
-			var tagString = JSON.stringify(Post.Tags).replace(/[\[\]"]+/g, '').match(/[\s\S]{1,116}/g) || [];
+			var tagString = Post.Tags.join(",").match(/[\s\S]{1,116}/g) || [];
 			formatedDriveMetadata = {
-				name: (Post.Likes.length || 0) + '{]|[}' + JSON.stringify(Post.Likes || []),
+				name: (Post.Likes.length || 0) + '{]|[}' + Post.Title + '{]|[}' + (Post.Likes.join(",") || ""),
 				description: Post.Description + '{]|[}' + Post.Link + '{]|[}' + Post.PreviewImage,
-				//createdTime: Post.CreationDate.toRFC3339UTCString(),
-				//modifiedTime: Post.UpdateDate.toRFC3339UTCString(),
 				properties: {
 					Title: Post.Title || null,
 					Flagged: Post.Flagged || false,
