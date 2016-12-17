@@ -144,6 +144,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	//-------------- Filtering & Sorting -----------------
 	$scope.filterPosts = function(inputSet) {
 		var output = inputSet.filter(function(post) {
+			console.log(post);
 			if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
 				var Flagged = post.Flagged == $scope.queryParams.flagged;
 			}
