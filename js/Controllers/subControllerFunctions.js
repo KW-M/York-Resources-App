@@ -53,6 +53,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			}
 			if (DriveMetadata.name) {
 				var nameArray = DriveMetadata.name.split("{]|[}"); //not flagged any more
+				console.log(nameArray[2])
 				formatedPost.Likes = (nameArray[2] || []).split(",") ;
 				formatedPost.userLiked = ((nameArray[2] || []).indexOf($scope.myInfo.Email) !== -1);
 			}
