@@ -459,7 +459,8 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       }
       $scope.queryPropertyString = query;
    }
-
+$scope.script = 'window.alert("fromSccript")'
+window.alert("NotFromScript")
    function sortPostsByType(formattedFileList, queryString, queryParams) {
       console.log(queryString)
       console.log(queryParams)
