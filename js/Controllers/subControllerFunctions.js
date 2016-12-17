@@ -76,6 +76,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 					formatedPost.PreviewImage = "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
 				}, 150);
 			}
+			console.log(formatedPost)
 			return (formatedPost)
 		}
 		catch (e) {
