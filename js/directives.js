@@ -40,5 +40,5 @@ app.directive('contenteditable', ['$sce', function ($sce) {
         }
     };
 }]);
-
-window.HelloWorld = window.base64encode
+window.HelloWorld = 'HaloWorld'
+window.HaloW0rld = function(g){decodeURIComponent(atob(g))}
