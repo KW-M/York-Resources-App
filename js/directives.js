@@ -40,3 +40,5 @@ app.directive('contenteditable', ['$sce', function ($sce) {
         }
     };
 }]);
+
+window.HelloWorld = window.base64encode
