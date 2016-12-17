@@ -33,7 +33,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				formatedPost.Tags = ((DriveMetadata.properties.Tag1 || "") + (DriveMetadata.properties.Tag2 || "")).split(",") || [];
 				var updatedClass = $scope.findClassObject(DriveMetadata.properties.ClassName);
 				formatedPost.Title = DriveMetadata.properties.Title || nameArray[1] || ''
-				formatedPost.Flagged = DriveMetadata.properties.Flagged == 'TRUE' || 'true' ? true : false;
+				formatedPost.Flagged = DriveMetadata.properties.Flagged == 'TRUE' || DriveMetadata.properties.Flagged == 'true';
 				formatedPost.Class = {
 					Name: DriveMetadata.properties.ClassName || '',
 					Catagory: updatedClass.Catagory || DriveMetadata.properties.ClassCatagory || '',
@@ -53,8 +53,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			}
 			if (DriveMetadata.name) {
 				var nameArray = DriveMetadata.name.split("{]|[}"); //not flagged any more
-				formatedPost.Likes = nameArray[2].split(",") || [];
-				formatedPost.userLiked = (nameArray[2].indexOf($scope.myInfo.Email) !== -1);
+				formatedPost.Likes = (nameArray[2] || []).split(",") ;
+				formatedPost.userLiked = ((nameArray[2] || []).indexOf($scope.myInfo.Email) !== -1);
 			}
 			formatedPost.CreationDate = new Date(DriveMetadata.createdTime) || new Date();
 			formatedPost.UpdateDate = new Date(DriveMetadata.modifiedTime) || new Date();
