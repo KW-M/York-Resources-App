@@ -22,23 +22,25 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	//------------------ Converting ----------------------
 	$scope.convertDriveToPost = function(DriveMetadata) {
 		var formatedPost = {};
-	//	try {
-	console.log(DriveMetadata)
+		try {
+			console.log(DriveMetadata)
 			var likesAndFlagged = DriveMetadata.name.split("{]|[}"); //not flagged any more
-			if (DriveMetadata.description) {
-				var descriptionAndPreviewimage = DriveMetadata.description.split("{]|[}");
-			}
-			if (DriveMetadata.properties.Tag1 || DriveMetadata.properties.Tag2) {
-				var tags = JSON.parse(("[\"" + (DriveMetadata.properties.Tag1 || '') + (DriveMetadata.properties.Tag2 || '') + "\"]").replace(/,/g, "\",\""));
-			}
-			else {
-				var tags = [];
-			}
 			if (likesAndFlagged[1].indexOf($scope.myInfo.Email) === -1) {
 				var hasLiked = false;
 			}
 			else {
 				var hasLiked = true;
+			}
+			if (DriveMetadata.description) {
+				var descriptionAndPreviewimage = DriveMetadata.description.split("{]|[}");
+			}
+			if (DriveMetadata.properties) {
+				if (DriveMetadata.properties.Tag1 || DriveMetadata.properties.Tag2) {
+					var tags = JSON.parse(("[\"" + (DriveMetadata.properties.Tag1 || '') + (DriveMetadata.properties.Tag2 || '') + "\"]").replace(/,/g, "\",\""));
+				}
+				else {
+					var tags = [];
+				}
 			}
 			var updatedClass = $scope.findClassObject(DriveMetadata.properties.ClassName);
 			formatedPost.Title = DriveMetadata.properties.Title || ''
@@ -87,11 +89,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				}, 150);
 			}
 			return (formatedPost)
-		// }
-		// // catch (e) {
-		// // 	console.warn(e)
-		// // 	return (formatedPost);
-		// // }
+		}
+		catch (e) {
+			console.warn(e)
+			return (formatedPost);
+		}
 	};
 	$scope.convertPostToDriveMetadata = function(Post) {
 		var formatedDriveMetadata
@@ -186,20 +188,20 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}));
 	};
 	$scope.findClassObject = function(className) {
-		for (var Catagories = 0; Catagories < $scope.classList.length; Catagories++) {
-			for (var ClassNum = 0; ClassNum < $scope.classList[Catagories].Classes.length; ClassNum++) {
-				 var Class = $scope.classList[Catagories].Classes[ClassNum]
-				if(Class.Name == className) {
-					Class.Color = $scope.classList[Catagories].Color
-					Class.Catagory = $scope.classList[Catagories].Catagory
-					return(Class)
+			for (var Catagories = 0; Catagories < $scope.classList.length; Catagories++) {
+				for (var ClassNum = 0; ClassNum < $scope.classList[Catagories].Classes.length; ClassNum++) {
+					var Class = $scope.classList[Catagories].Classes[ClassNum]
+					if (Class.Name == className) {
+						Class.Color = $scope.classList[Catagories].Color
+						Class.Catagory = $scope.classList[Catagories].Catagory
+						return (Class)
+					}
 				}
-		    }
+			}
+			console.warn('could not find class: ' + className);
 		}
-		console.warn ('could not find class: ' + className);
-	}
-	//----------------------------------------------------
-	//------------------UI Actions------------------------
+		//----------------------------------------------------
+		//------------------UI Actions------------------------
 	$scope.toggleSidebar = function(close) { //called by the top left toolbar menu button
 		if (close === true) {
 			$mdSidenav('sidenav_overlay').close();
@@ -247,16 +249,16 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}
 	}
 	$scope.openQuizletWindow = function(argument) {
-		var quizWindow = window.open("", "_blank", "status=no,menubar=no,toolbar=no");
-		quizWindow.resizeTo(9000, 140)
-		quizWindow.moveTo(0, 0);
-		quizWindow.document.write("<div style='display:flex;align-items: center;height: 100%;'><span>Your Quizlet username should show up here.</span><div style='flex:1;height: 2px;margin-left: 5px;background:black;'></div><div style=' width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 10px solid; '></div><div style=' width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 10px solid; margin-right: 160px; '></div></div>");
-		setTimeout(function() {
-			quizWindow.location = "https://quizlet.com"
-		}, 3000);
-	}
-	//----------------------------------------------------
-	// --------------- Post Card Functions ---------------
+			var quizWindow = window.open("", "_blank", "status=no,menubar=no,toolbar=no");
+			quizWindow.resizeTo(9000, 140)
+			quizWindow.moveTo(0, 0);
+			quizWindow.document.write("<div style='display:flex;align-items: center;height: 100%;'><span>Your Quizlet username should show up here.</span><div style='flex:1;height: 2px;margin-left: 5px;background:black;'></div><div style=' width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 10px solid; '></div><div style=' width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 10px solid; margin-right: 160px; '></div></div>");
+			setTimeout(function() {
+				quizWindow.location = "https://quizlet.com"
+			}, 3000);
+		}
+		//----------------------------------------------------
+		// --------------- Post Card Functions ---------------
 	$scope.confirmDelete = function(content, arrayIndex) {
 		var confirm = $mdDialog.confirm().title('Permanently delete this?').ariaLabel('Delete?').ok('Delete').cancel('Cancel');
 		$mdDialog.show(confirm).then(function() {
@@ -329,10 +331,10 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		var today = $filter('date')(new Date(), 'M/d/yy');
 		var range = 'Sheet1!F' + $scope.UserSettingsRowNum + ':F' + $scope.UserSettingsRowNum
 		$scope.$scope.myInfo.NumberOfContributions++
-		queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, [$scope.myInfo.NumberOfContributions, today]), null, function(err) {
-			console.warn(err)
-			$mdToast.showSimple('Error Saving Post');
-		}, 2);
+			queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, [$scope.myInfo.NumberOfContributions, today]), null, function(err) {
+				console.warn(err)
+				$mdToast.showSimple('Error Saving Post');
+			}, 2);
 	}
 	$scope.likePost = function(content) {
 		var userLikeIndex = findItemInArray($scope.myInfo.Email, content.Likes)
