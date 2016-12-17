@@ -30,7 +30,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				formatedPost.PreviewImage = descriptionAndPreviewimage[2]
 			}
 			if (DriveMetadata.properties) {
-				formatedPost.Tags = (DriveMetadata.properties.Tag1 + DriveMetadata.properties.Tag2).split(",");
+				formatedPost.Tags = ((DriveMetadata.properties.Tag1 || "") + (DriveMetadata.properties.Tag2 || "")).split(",") || [];
 				var updatedClass = $scope.findClassObject(DriveMetadata.properties.ClassName);
 				formatedPost.Title = DriveMetadata.properties.Title || nameArray[1] || ''
 				formatedPost.Flagged = JSON.parse(DriveMetadata.properties.Flagged) || false;
@@ -53,7 +53,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			}
 			if (DriveMetadata.name) {
 				var nameArray = DriveMetadata.name.split("{]|[}"); //not flagged any more
-				formatedPost.Likes = nameArray[2].split(",")
+				formatedPost.Likes = nameArray[2].split(",") || [];
 				formatedPost.userLiked = (nameArray[2].indexOf($scope.myInfo.Email) !== -1);
 			}
 			formatedPost.CreationDate = new Date(DriveMetadata.createdTime) || new Date();
@@ -76,10 +76,13 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 					formatedPost.PreviewImage = "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
 				}, 150);
 			}
+			console.log(DriveMetadata)
 			console.log(formatedPost)
 			return (formatedPost)
 		}
 		catch (e) {
+			console.log(DriveMetadata)
+			console.log(formatedPost)
 			console.warn(e)
 			return (formatedPost);
 		}
