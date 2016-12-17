@@ -25,15 +25,15 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		try {
 			if (DriveMetadata.description) {
 				var descriptionAndPreviewimage = DriveMetadata.description.split("{]|[}");
-				formatedPost.Description = descriptionAndPreviewimage[0] || ''
-				formatedPost.Link = descriptionAndPreviewimage[1] || ''
-				formatedPost.PreviewImage = descriptionAndPreviewimage[2]
+				formatedPost.Description = descriptionAndPreviewimage[0] || '';
+				formatedPost.Link = descriptionAndPreviewimage[1] || '';
+				formatedPost.PreviewImage = descriptionAndPreviewimage[2] || '';
 			}
 			if (DriveMetadata.properties) {
 				formatedPost.Tags = ((DriveMetadata.properties.Tag1 || "") + (DriveMetadata.properties.Tag2 || "")).split(",") || [];
 				var updatedClass = $scope.findClassObject(DriveMetadata.properties.ClassName);
 				formatedPost.Title = DriveMetadata.properties.Title || nameArray[1] || ''
-				formatedPost.Flagged = JSON.parse(DriveMetadata.properties.Flagged) || false;
+				formatedPost.Flagged = DriveMetadata.properties.Flagged == 'TRUE' || 'true' ? true : false;
 				formatedPost.Class = {
 					Name: DriveMetadata.properties.ClassName || '',
 					Catagory: updatedClass.Catagory || DriveMetadata.properties.ClassCatagory || '',
