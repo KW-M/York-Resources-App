@@ -209,9 +209,9 @@
                 <div><span ng-hide="selectedClass.Name == 'All Posts'">Class Rules: </span><span class="md-caption">{{selectedClass.Rules || 'Dont post test or homework answers. Do post what will help other students get to the answers on their own.'}} - <a href="#">edit</a></span></div>
 
 
-                <md-autocomplete md-selected-item="aselectedItem" md-search-text="asearchText" md-items="item in selectedClass.Labels" md-item-text="item" md-min-length="0" placeholder="What is your favorite US state?">
+                <md-autocomplete md-selected-item="aselectedItem" md-search-text="asearchText" md-items="item in selectedClass.Labels" md-item-text="item.Text" md-min-length="0" placeholder="What is your favorite US state?">
                     <md-item-template>
-                        <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item}}</span>
+                        <span md-highlight-text="asearchText" md-highlight-flags="^i">{{item.Text}}</span>
                     </md-item-template>
                     <md-not-found>
                         No labels matching "{{asearchText}}" were found. <md-button>Create this label.</md-button>
