@@ -228,6 +228,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             }
             $timeout(function() { //makes angular update values
                $scope.classList = catagoryList;
+               console.log(catagoryList)
             })
          })
 
