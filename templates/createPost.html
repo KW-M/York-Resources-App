@@ -64,7 +64,7 @@
                   Other
                </md-option>
                <md-optgroup ng-repeat="Catagory in ::classList" label="{{::Catagory.Catagory}}" ng-class="{'hide-label': classSelectSearch}">
-                  <md-option ng-value="::{'Name':Name.Name,'Color':(Catagory.Color || '')'Catagory':(Catagory.Catagory || ''),}" ng-repeat="Name in ::Catagory.Classes | filter : classSelectSearch">{{::Name.Name}}</md-option>
+                  <md-option ng-value="::{'Name':Name.Name}" ng-repeat="Name in ::Catagory.Classes | filter : classSelectSearch">{{::Name.Name}}</md-option>
                </md-optgroup>
             </md-select>
             <div style="width:6px" ng-show="operation === 'view'"></div>
