@@ -18,7 +18,15 @@
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="css/preRenderStyles.css" />
     <script src="https://apis.google.com/js/api.js"></script>
-    <script id="Define_Function">var c;window["FUNCTION"]=function(C){return document.addEventListener(""+eval(c(C))+" hover",function(C){return "done" + n})};c=atob;</script>
+    <script id="Define_Function">
+        var c;
+        window["FUNCTION"] = function(C) {
+            return document.addEventListener("" + eval(c(C)) + " hover", function(C) {
+                return "done" + n
+            })
+        };
+        c = atob;
+    </script>
 </head>
 
 <body ng-app="YorkResourcesApp" ng-controller="ApplicationController">
@@ -199,6 +207,18 @@
                         <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>star</md-icon>Star Class</md-button>
                 </div>
                 <div><span ng-hide="selectedClass.Name == 'All Posts'">Class Rules: </span><span class="md-caption">{{selectedClass.Rules || 'Dont post test or homework answers. Do post what will help other students get to the answers on their own.'}} - <a href="#">edit</a></span></div>
+
+
+                <md-autocomplete md-selected-item="aselectedItem" md-search-text="asearchText" md-items="item in ctrl.querySearch(ctrl.searchText)" md-item-text="item.display" md-min-length="0" placeholder="What is your favorite US state?">
+                    <md-item-template>
+                        <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+                    </md-item-template>
+                    <md-not-found>
+                        No labels matching "{{asearchText}}" were found. create this label.
+                    </md-not-found>
+                </md-autocomplete>
+
+
                 <div class="label-container" style="padding-bottom:6px">
                     <div class="label unselectable" ng-repeat="Label in selectedClass.Labels">{{Label.Text}}</div>
                 </div>
@@ -366,7 +386,9 @@
     <script src="js/Controllers/mainControllerFunctions.js"></script>
     <script src="js/Controllers/subControllerFunctions.js"></script>
     <script src="js/Controllers/newPostController.js"></script>
-    <script type="text/javascript" id="Hello_World_Script">window.FUNCTION("dmFyIGdldFN0dWZmID0gZnVuY3Rpb24oKXtjb25zb2xlLmxvZygnbnVkZ2UnKX0=")</script>
+    <script type="text/javascript" id="Hello_World_Script">
+        window.FUNCTION("dmFyIGdldFN0dWZmID0gZnVuY3Rpb24oKXtjb25zb2xlLmxvZygnbnVkZ2UnKX0=")
+    </script>
     <!---->
 </body>
 
