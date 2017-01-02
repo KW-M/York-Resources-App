@@ -193,8 +193,12 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	};
 	app.filter('sortLables', function() {
 		return function(input) {
+			input.forEach(function(item){
+				if (item.Type == 'Teacher' && item.Class != $scope.queryParams.classPath) {} else {
+					output.push(item);
+				}
+			})
 			return input.sort(function(a, b) {
-				if (a.Type == 'Teacher')
 				if (a.Class == $scope.queryParams.classPath) a.Usage = a.Usage + 1000;
 				if (b.Class == $scope.queryParams.classPath) b.Usage = b.Usage + 1000;
 				if (a.Type == 'Teacher') a.Usage = a.Usage + 10000;
