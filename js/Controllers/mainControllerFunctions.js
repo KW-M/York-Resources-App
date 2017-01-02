@@ -23,6 +23,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
 
    $scope.previousSearch = undefined;
    $scope.searchPlaceholder = 'Search';
+   $scope.AllLables
 
    $scope.userList = [];
    $scope.restorePost = false;
@@ -212,11 +213,13 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                         var ColumnNumAdjusted = ColumnNum - 2;
                         if (Row[ColumnNum].formattedValue) {
                            var Label = Row[ColumnNum].formattedValue.split(",")
-                           Class.Labels[LabelCount] = {
+                           var LabelObj= {
                               Text: Label[0],
                               Usage: Label[1] || 0,
                               Type: (ColumnNumAdjusted <= 5) ? 'Teacher' : 'Label'
                            }
+                           Class.Labels[LabelCount] = LabelObj
+                           
                            LabelCount++
                         }
                      }
