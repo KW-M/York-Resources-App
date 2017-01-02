@@ -179,20 +179,29 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}));
 	};
 	$scope.findClassObject = function(className) {
-			for (var Catagories = 0; Catagories < $scope.classList.length; Catagories++) {
-				for (var ClassNum = 0; ClassNum < $scope.classList[Catagories].Classes.length; ClassNum++) {
-					var Class = $scope.classList[Catagories].Classes[ClassNum]
-					if (Class.Name == className) {
-						Class.Color = $scope.classList[Catagories].Color
-						Class.Catagory = $scope.classList[Catagories].Catagory
-						return (Class)
-					}
+		for (var Catagories = 0; Catagories < $scope.classList.length; Catagories++) {
+			for (var ClassNum = 0; ClassNum < $scope.classList[Catagories].Classes.length; ClassNum++) {
+				var Class = $scope.classList[Catagories].Classes[ClassNum]
+				if (Class.Name == className) {
+					Class.Color = $scope.classList[Catagories].Color
+					Class.Catagory = $scope.classList[Catagories].Catagory
+					return (Class)
 				}
 			}
-			console.warn('could not find class: ' + className);
 		}
-		//----------------------------------------------------
-		//------------------UI Actions------------------------
+		console.warn('could not find class: ' + className);
+	};
+	app.filter('myFilter', function() {
+		return function(input) {
+			var output = [];
+			output = in
+			return output;
+		}
+
+	});
+
+	//----------------------------------------------------
+	//------------------UI Actions------------------------
 	$scope.toggleSidebar = function(close) { //called by the top left toolbar menu button
 		if (close === true) {
 			$mdSidenav('sidenav_overlay').close();
