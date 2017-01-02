@@ -23,7 +23,8 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
 
    $scope.previousSearch = undefined;
    $scope.searchPlaceholder = 'Search';
-   $scope.AllLabels = [];
+   $scope.allLabels = [];
+   $scope.visibleLabels = [];
 
    $scope.userList = [];
    $scope.restorePost = false;
@@ -124,8 +125,11 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          });
       }
       $scope.getFiles();
+      $timeout(function() {
+         
+      })
       getFileTimer = setInterval(function() {
-         if (conurancy_counter == 0 && content_container.scrollHeight == content_container.clientHeight) {
+         if (conurancy_counter == 0 && content_container.scrollHeight == content_container.clientHeight + 200) {
             $scope.getFiles()
          }
       }, 1000)
