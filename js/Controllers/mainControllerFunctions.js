@@ -224,13 +224,12 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                            }
                            Class.Labels[LabelCount] = LabelObj
                            LabelObj.Class = Row[0].formattedValue;
-                           $scope.AllLabels.push(LabelObj);
+                           $scope.allLabels.push(LabelObj);
                            LabelCount++
                         }
                      }
                   }
                }
-               console.log($scope.AllLabels);
             }
             catch (e) {
                console.warn(e)
