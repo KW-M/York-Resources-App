@@ -191,23 +191,20 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}
 		console.warn('could not find class: ' + className);
 	};
-	app.filter('sortLabels', function() {
-		return function(input) {
-			var output
-			input.forEach(function(item){
-				if (!(item.Type == 'Teacher' && item.Class != $scope.queryParams.classPath)) output.push(item);
-			})
-			output = output.sort(function(a, b) {
-				if (a.Class == $scope.queryParams.classPath) a.Usage = a.Usage + 1000;
-				if (b.Class == $scope.queryParams.classPath) b.Usage = b.Usage + 1000;
-				if (a.Type == 'Teacher') a.Usage = a.Usage + 10000;
-				if (b.Type == 'Teacher') b.Usage = b.Usage + 10000;
-				return b.Usage - a.Usage;
-			})
-			return output
-		}
-
-	});
+	$scope.sortLabels = function(input) {
+		var output = [];
+		input.forEach(function(item) {
+			if (!(item.Type == 'Teacher' && item.Class != $scope.queryParams.classPath)) output.push(item);
+		})
+		output = output.sort(function(a, b) {
+			if (a.Class == $scope.queryParams.classPath) a.Usage = a.Usage + 1000;
+			if (b.Class == $scope.queryParams.classPath) b.Usage = b.Usage + 1000;
+			if (a.Type == 'Teacher') a.Usage = a.Usage + 10000;
+			if (b.Type == 'Teacher') b.Usage = b.Usage + 10000;
+			return b.Usage - a.Usage;
+		})
+		return output
+	};
 
 	//----------------------------------------------------
 	//------------------UI Actions------------------------
