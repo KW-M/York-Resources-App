@@ -23,7 +23,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
 
    $scope.previousSearch = undefined;
    $scope.searchPlaceholder = 'Search';
-   $scope.AllLables
+   $scope.AllLabels = [];
 
    $scope.userList = [];
    $scope.restorePost = false;
@@ -219,12 +219,14 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                               Type: (ColumnNumAdjusted <= 5) ? 'Teacher' : 'Label'
                            }
                            Class.Labels[LabelCount] = LabelObj
-                           
+                           LabelObj.Class = Row[0].formattedValue;
+                           $scope.AllLabels.push(LabelObj);
                            LabelCount++
                         }
                      }
                   }
                }
+               console.log($scope.AllLabels);
             }
             catch (e) {
                console.warn(e)
