@@ -220,7 +220,7 @@
 
 
                 <div class="label-container" style="padding-bottom:6px">
-                    <div class="label unselectable" ng-repeat="Label in AllLabels | sortLables">{{Label.Text}}</div>
+                    <div class="label unselectable" ng-repeat="Label in AllLabels | sortLabels">{{Label.Text}}</div>
                 </div>
                 <div class="create-post-bar-top" ng-hide="queryParams.classPath == 'Quizlet'">
                     <span md-ink-ripple="true" class="create-post-bar-text unselectable" flex ng-click="::newPost({},'new')">

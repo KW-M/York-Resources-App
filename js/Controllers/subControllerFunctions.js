@@ -191,7 +191,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}
 		console.warn('could not find class: ' + className);
 	};
-	app.filter('sortLables', function() {
+	app.filter('sortLabels', function() {
 		return function(input) {
 			var output
 			input.forEach(function(item){
