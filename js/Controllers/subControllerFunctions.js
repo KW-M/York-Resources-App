@@ -191,15 +191,16 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}
 		console.warn('could not find class: ' + className);
 	};
-	app.filter('myFilter', function() {
+	app.filter('sortLables', function() {
 		return function(input) {
-			var output = [];
-			output = input.sort(function(a, b) {
-				if b.Class == 
+			return input.sort(function(a, b) {
+				if (a.Type == 'Teacher')
+				if (a.Class == $scope.queryParams.classPath) a.Usage = a.Usage + 1000;
+				if (b.Class == $scope.queryParams.classPath) b.Usage = b.Usage + 1000;
+				if (a.Type == 'Teacher') a.Usage = a.Usage + 10000;
+				if (b.Type == 'Teacher') b.Usage = b.Usage + 10000;
 				return b.Usage - a.Usage;
 			})
-			output = output
-			return output;
 		}
 
 	});
