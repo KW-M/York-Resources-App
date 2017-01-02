@@ -194,7 +194,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	app.filter('myFilter', function() {
 		return function(input) {
 			var output = [];
-			output = in
+			output = input.sort(function(a, b) {
+				if b.Class == 
+				return b.Usage - a.Usage;
+			})
+			output = output
 			return output;
 		}
 
