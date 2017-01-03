@@ -194,12 +194,26 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                for (var RowNum = 3; RowNum < rows.length; RowNum++) {
                   var Row = catagorySheets[0].data[0].rowData[RowNum].values
                   var label = {
-                     text: Row[0],
-                     type: Row[1],
+                     text: Row[0].formattedValue,
+                     type: Row[1].formattedValue,
                      linkedClasses: []
                   };
-                  for(var CellNum = 2;CellNum < Row.length; CellNum++) {
+                  for (var CellNum = 2; CellNum < Row.length; CellNum++) {
+                     var Class = Row[CellNum].formattedValue.split(",")
+                     var ClassObj = {
+                        Name: Class[0],
+                        Prevelence: Class[1] || 0,
+                     }
                      Row.CellNum
+                  }
+                  for (var ColumnNum = 2; ColumnNum < Row.length; ColumnNum++) {
+                     var ColumnNumAdjusted = ColumnNum - 2;
+                     if (Row[ColumnNum].formattedValue) {
+                        Class.Labels[LabelCount] = LabelObj
+                        LabelObj.Class = Row[0].formattedValue;
+                        $scope.AllLabels.push(LabelObj);
+                        LabelCount++
+                     }
                   }
                   $scope.allLabels.push(label)
                }
