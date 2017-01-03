@@ -198,16 +198,17 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             var catagorySheets = rawClassesSheet.result.sheets;
             try {
                for (var SheetNum = 2; SheetNum < catagorySheets.length; SheetNum++) {
+                  console.log(catagorySheets)
                   var rows = catagorySheets[SheetNum].data[0].rowData
                   catagoryList[SheetNum + 2] = {
-                     'Catagory': rows[1].values[0].formattedValue,
-                     'Color': rows[1].values[1].formattedValue,
+                     'Catagory': catagorySheets[SheetNum].,
+                     'Color': rows[2].values[0].formattedValue,
                      'Classes': []
                   }
                   for (var RowNum = 2; RowNum < rows.length; RowNum++) {
                      var Row = rows[RowNum].values
                      var LabelCount = 0
-                     catagoryList[SheetNum + ].Classes[RowNum - 2] = {
+                     catagoryList[SheetNum + 2].Classes[RowNum - 2] = {
                         Name: Row[0].formattedValue,
                         Rules: (Row[1] !== undefined) ? Row[1].formattedValue || null : null,
                      }

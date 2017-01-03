@@ -36,7 +36,7 @@ app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
     this.getWholeSpreadsheet = function(range) {
         return (gapi.client.sheets.spreadsheets.get({
             spreadsheetId: URLs.classSpreadsheetId,
-            fields: 'sheets/data/rowData/values/formattedValue',
+            fields: 'sheets(data/rowData/values/formattedValue,properties/title)',
         }));
     }
 
