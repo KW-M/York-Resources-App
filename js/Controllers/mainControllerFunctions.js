@@ -200,20 +200,10 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                   };
                   for (var CellNum = 2; CellNum < Row.length; CellNum++) {
                      var Class = Row[CellNum].formattedValue.split(",")
-                     var ClassObj = {
+                     label.linkedClasses.push({
                         Name: Class[0],
-                        Prevelence: Class[1] || 0,
-                     }
-                     Row.CellNum
-                  }
-                  for (var ColumnNum = 2; ColumnNum < Row.length; ColumnNum++) {
-                     var ColumnNumAdjusted = ColumnNum - 2;
-                     if (Row[ColumnNum].formattedValue) {
-                        Class.Labels[LabelCount] = LabelObj
-                        LabelObj.Class = Row[0].formattedValue;
-                        $scope.AllLabels.push(LabelObj);
-                        LabelCount++
-                     }
+                        Usage: Class[1] || 0,
+                     });
                   }
                   $scope.allLabels.push(label)
                }
@@ -224,6 +214,8 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                      email: [1],
                      classesTaught: []
                   }
+                  for (var CellNum = 2; CellNum < Row.length; CellNum++) teacher.classesTaught.push(Row[CellNum])
+                  $scope.allTeachers.push(teacher);
                }
                for (var SheetNum = 2; SheetNum < catagorySheets.length; SheetNum++) {
                   var rows = catagorySheets[SheetNum].data[0].rowData
