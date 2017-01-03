@@ -196,7 +196,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		input.forEach(function(item) {
 			if (item.type == 'Teacher') {
 				item.classesTaught.forEach(function(classTaught) {
-					if (classTaught.name = $scope.queryParams.classPath) output.push(item);
+					if (classTaught == $scope.queryParams.classPath) output.push(item);
 				});
 			} else {
 				output.push(item);
