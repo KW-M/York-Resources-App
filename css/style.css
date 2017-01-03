@@ -511,6 +511,7 @@ button.selected.md-button {
 }
 .content-top-bar .label-container {
     padding-bottom: 6px;
+    box-shadow: inset rgba(0, 0, 0, 0.27) -10px 2px 24px -17px, inset rgba(0, 0, 0, 0.27) 10px -2px 24px -17px;
     width: calc(100% - 110px);
     overflow: auto;
     white-space: nowrap;
