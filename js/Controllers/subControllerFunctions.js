@@ -196,16 +196,24 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		input.forEach(function(item) {
 			if (item.type == 'Teacher') {
 				item.classesTaught.forEach(function(classTaught) {
-					if (classTaught.name = 
+					if (classTaught.name = $scope.queryParams.classPath) output.push(item);
 				});
+			} else {
+				output.push(item);
 			}
-			output.push(item);
 		})
 		console.log(input)
 		output = output.sort(function(a, b) {
+			if (a.Type == 'Teacher') {
+				a.Usage = 10000;
+			} else {
+				aclassesTaught.forEach(function(classTaught) {
+					if (classTaught.name = $scope.queryParams.classPath) output.push(item);
+				});
+			}
 			if (a.Class == $scope.queryParams.classPath) a.Usage = a.Usage + 1000;
 			if (b.Class == $scope.queryParams.classPath) b.Usage = b.Usage + 1000;
-			if (a.Type == 'Teacher') a.Usage = a.Usage + 10000;
+			
 			if (b.Type == 'Teacher') b.Usage = b.Usage + 10000;
 			return b.Usage - a.Usage;
 		})
