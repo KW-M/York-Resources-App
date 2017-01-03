@@ -210,7 +210,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                      catagoryList[SheetNum + 4].Classes[RowNum - 2] = {
                         Name: Row[0].formattedValue,
                         Rules: (Row[1] !== undefined) ? Row[1].formattedValue || null : null,
-                        Labels: [],
                      }
                      var Class = catagoryList[SheetNum + 4].Classes[RowNum - 2]
                      for (var ColumnNum = 2; ColumnNum < Row.length; ColumnNum++) {
