@@ -25,6 +25,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    $scope.searchPlaceholder = 'Search';
    $scope.allLabels = [];
    $scope.visibleLabels = [];
+   $scope.allTeachers = [];
 
    $scope.userList = [];
    $scope.restorePost = false;
@@ -191,27 +192,28 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             }];
             var catagorySheets = rawClassesSheet.result.sheets;
             try {
+               var rows = catagorySheets[0].data[0].rowData
                for (var RowNum = 3; RowNum < rows.length; RowNum++) {
-                  var Row = catagorySheets[0].data[0].rowData[RowNum].values
+                  var Row = rows[RowNum].values
                   var label = {
                      text: Row[0].formattedValue,
                      type: Row[1].formattedValue,
-                     label.totalUsage: 0,
+                     totalUsage: 0,
                      linkedClasses: []
                   };
                   for (var CellNum = 2; CellNum < Row.length; CellNum++) {
-                     label.totalUsage++
                      var Class = Row[CellNum].formattedValue.split(",")
                      label.linkedClasses.push({
                         Name: Class[0],
                         Usage: Class[1] || 0,
                      });
-                  }
-                  label.totalUsage = 
+                     label.totalUsage = label.totalUsage + Class[1] || 1;
+                  };
                   $scope.allLabels.push(label)
                }
-               for (var RowNum = 2; RowNum < rows.length; RowNum++) {
-                  var Row = catagorySheets[1].data[0].rowData[RowNum].values
+               var rows = catagorySheets[0].data[0].rowData
+               for (var RowNum = 3; RowNum < rows.length; RowNum++) {
+                  var Row = rows[RowNum].values;
                   var teacher = {
                      name: Row[0],
                      email: [1],
