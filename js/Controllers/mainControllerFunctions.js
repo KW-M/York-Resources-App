@@ -230,9 +230,9 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                      'Color': rows[2].values[0].formattedValue,
                      'Classes': []
                   }
-                  for (var RowNum = 2; RowNum < rows.length; RowNum++) {
+                  for (var RowNum = 1; RowNum < rows.length; RowNum++) {
                      var Row = rows[RowNum].values
-                     catagoryList[SheetNum + 2].Classes[RowNum - 2] = {
+                     catagoryList[SheetNum + 2].Classes[RowNum - ] = {
                         Name: Row[1].formattedValue,
                         Rules: (Row[2] !== undefined) ? Row[2].formattedValue || null : null,
                      }

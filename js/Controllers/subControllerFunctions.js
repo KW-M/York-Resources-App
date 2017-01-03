@@ -202,8 +202,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				output.push(item);
 			}
 		})
-		console.log(input)
-		console.log(output)
 		output = output.sort(function(a, b) {
 			var aUsage, bUsage
 			if (a.type == 'Teacher') {
@@ -211,7 +209,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			} else {
 				aUsage = a.totalUsage
 				a.linkedClasses.forEach(function(linkedClass) {
-					if (linkedClass.name = $scope.queryParams.classPath) aUsage = linkedClass.usage + 1000;
+					if (linkedClass.name == $scope.queryParams.classPath) aUsage = linkedClass.usage + 1000;
 				});
 			}
 			if (b.type == 'Teacher') {
@@ -219,7 +217,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			} else {
 				bUsage = b.totalUsage
 				b.linkedClasses.forEach(function(linkedClass) {
-					if (linkedClass.name = $scope.queryParams.classPath) bUsage = linkedClass.usage + 1000;
+					if (linkedClass.name == $scope.queryParams.classPath) bUsage = linkedClass.usage + 1000;
 				});
 			}
 			console.log(a)
