@@ -297,8 +297,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			}],
 			totalUsage: 1
 		}
-		queue('sheets', GoogleDriveService.appendSpreadsheetRange('Labels!A2:A',[labelName,null,($scope.queryParams.classPath + ",1"],'class')), null, function(err) {
-					$mdToast.showSimple('Error adding label, try again.');
+		queue('sheets', GoogleDriveService.appendSpreadsheetRange('Sheet1!A2:A',[labelName,null,$scope.queryParams.classPath + ",1"],'class'), null, function(err) {
+			$mdToast.showSimple('Error adding label, try again.');
 		}, 2);
 		$scope.allLabels.push(newLabel);
 		$scope.queryParams.labels.push(newLabel);
