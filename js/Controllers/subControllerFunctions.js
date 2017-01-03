@@ -285,6 +285,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				quizWindow.location = "https://quizlet.com"
 			}, 3000);
 		}
+		$scope.addLabel = function function_name(argument) {
+			// body...
+		}
 		//----------------------------------------------------
 		// --------------- Post Card Functions ---------------
 	$scope.confirmDelete = function(content, arrayIndex) {
