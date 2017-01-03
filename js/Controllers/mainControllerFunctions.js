@@ -196,15 +196,18 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                   var label = {
                      text: Row[0].formattedValue,
                      type: Row[1].formattedValue,
+                     label.totalUsage: 0,
                      linkedClasses: []
                   };
                   for (var CellNum = 2; CellNum < Row.length; CellNum++) {
+                     label.totalUsage++
                      var Class = Row[CellNum].formattedValue.split(",")
                      label.linkedClasses.push({
                         Name: Class[0],
                         Usage: Class[1] || 0,
                      });
                   }
+                  label.totalUsage = 
                   $scope.allLabels.push(label)
                }
                for (var RowNum = 2; RowNum < rows.length; RowNum++) {
