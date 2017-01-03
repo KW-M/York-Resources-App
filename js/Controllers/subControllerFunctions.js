@@ -206,7 +206,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		output = output.sort(function(a, b) {
 			var aUsage, bUsage
 			if (a.type == 'Teacher') {
-				aUsage = 9999;
+				aUsage = 10000;
 			} else {
 				aUsage = a.totalUsage
 				a.linkedClasses.forEach(function(linkedClass) {
@@ -221,7 +221,10 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 					if (linkedClass.name = $scope.queryParams.classPath) bUsage = linkedClass.usage + 1000;
 				});
 			}
-			return b.Usage - a.Usage;
+			console.log(a)
+			console.log()
+			console.log(bUsage + " " + aUsage)
+			return bUsage - aUsage;
 		})
 		return output
 	};
