@@ -203,6 +203,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			}
 		})
 		console.log(input)
+		console.log(output)
 		output = output.sort(function(a, b) {
 			var aUsage, bUsage
 			if (a.type == 'Teacher') {
@@ -222,7 +223,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				});
 			}
 			console.log(a)
-			console.log()
+			console.log(b)
 			console.log(bUsage + " " + aUsage)
 			return bUsage - aUsage;
 		})
