@@ -266,7 +266,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                   }
                }
             }
-            return GoogleDriveService.appendSpreadsheetRange([$scope.myInfo.Email, $scope.myInfo.Name, 0, 0, "", "", "", ""]);
+            return GoogleDriveService.appendSpreadsheetRange([$scope.myInfo.Email, $scope.myInfo.Name, 0, 0, "", "", "", ""], 'user');
          }).then(function(userSpreadsheetRow) {
             if (userSpreadsheetRow.result.values !== undefined) {
                var rowValues = userSpreadsheetRow.result.values[0];
