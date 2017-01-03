@@ -198,7 +198,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				item.classesTaught.forEach(function(classTaught) {
 					if (classTaught == $scope.queryParams.classPath) output.push(item);
 				});
-			} else {
+			}
+			else {
 				output.push(item);
 			}
 		})
@@ -206,7 +207,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			var aUsage, bUsage
 			if (a.type == 'Teacher') {
 				aUsage = 100000;
-			} else {
+			}
+			else {
 				aUsage = a.totalUsage
 				a.linkedClasses.forEach(function(linkedClass) {
 					if (linkedClass.Name == $scope.queryParams.classPath) aUsage = linkedClass.Usage + 1000;
@@ -214,7 +216,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			}
 			if (b.type == 'Teacher') {
 				bUsage = 100000;
-			} else {
+			}
+			else {
 				bUsage = b.totalUsage
 				b.linkedClasses.forEach(function(linkedClass) {
 					if (linkedClass.Name == $scope.queryParams.classPath) bUsage = linkedClass.Usage + 1000;
@@ -277,26 +280,28 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}
 	}
 	$scope.openQuizletWindow = function(argument) {
-			var quizWindow = window.open("", "_blank", "status=no,menubar=no,toolbar=no");
-			quizWindow.resizeTo(9000, 140)
-			quizWindow.moveTo(0, 0);
-			quizWindow.document.write("<div style='display:flex;align-items: center;height: 100%;'><span>Your Quizlet username should show up here.</span><div style='flex:1;height: 2px;margin-left: 5px;background:black;'></div><div style=' width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 10px solid; '></div><div style=' width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 10px solid; margin-right: 160px; '></div></div>");
-			setTimeout(function() {
-				quizWindow.location = "https://quizlet.com"
-			}, 3000);
+		var quizWindow = window.open("", "_blank", "status=no,menubar=no,toolbar=no");
+		quizWindow.resizeTo(9000, 140)
+		quizWindow.moveTo(0, 0);
+		quizWindow.document.write("<div style='display:flex;align-items: center;height: 100%;'><span>Your Quizlet username should show up here.</span><div style='flex:1;height: 2px;margin-left: 5px;background:black;'></div><div style=' width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 10px solid; '></div><div style=' width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 10px solid; margin-right: 160px; '></div></div>");
+		setTimeout(function() {
+			quizWindow.location = "https://quizlet.com"
+		}, 3000);
+	}
+	$scope.addLabel = function(labelName) {
+		var newLabel = {
+			text: labelName,
+			linkedClasses: [{
+				Name: $scope.queryParams.classPath,
+				Usage: 1,
+			}],
+			totalUsage: 1
 		}
-		$scope.addLabel = function(labelName) {
-			var newLabel = {
-				text: labelName,
-				linkedClasses: [{
-					Name: $scope.queryParams.classPath,
-				}],
-				totalUsage: 1
-			}
-			$scope.queryParams.labels.push()
-		}
-		//----------------------------------------------------
-		// --------------- Post Card Functions ---------------
+		$scope.queryParams.labels.push(newLabel)
+	}
+
+	//----------------------------------------------------
+	// --------------- Post Card Functions ---------------
 	$scope.confirmDelete = function(content, arrayIndex) {
 		var confirm = $mdDialog.confirm().title('Permanently delete this?').ariaLabel('Delete?').ok('Delete').cancel('Cancel');
 		$mdDialog.show(confirm).then(function() {
