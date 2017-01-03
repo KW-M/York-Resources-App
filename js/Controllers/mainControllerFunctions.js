@@ -207,7 +207,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                         Name: Class[0],
                         Usage: Class[1] || 0,
                      });
-                     label.totalUsage = label.totalUsage + Class[1] || 1;
+                     label.totalUsage = label.totalUsage + parseInt(Class[1]) || 1;
                   };
                   $scope.allLabels.push(label)
                }
@@ -244,6 +244,8 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             $timeout(function() { //makes angular update values
                $scope.classList = catagoryList;
                console.log(catagoryList)
+               console.log($scope.allLabels)
+               console.log($scope.allTeachers)
             })
          })
 
