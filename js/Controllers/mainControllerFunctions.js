@@ -215,7 +215,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                for (var RowNum = 1; RowNum < rows.length; RowNum++) {
                   var Row = rows[RowNum].values;
                   var teacher = {
-                     name: Row[0].formattedValue,
+                     text: Row[0].formattedValue,
                      email: Row[1].formattedValue,
                      type: 'Teacher',
                      classesTaught: []
