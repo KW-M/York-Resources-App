@@ -210,10 +210,10 @@
                 <div>
                 <span class="label-container" style="padding-bottom:6px">
                     <span ng-show="labelSearch == null">
-                        <div class="label unselectable" ng-repeat="Label in visibleLabels">{{Label.Text}}</div>
+                        <div class="label unselectable" ng-repeat="Label in visibleLabels">{{Label.text}}</div>
                     </span>
                     <span ng-hide="labelSearch == null" style="">
-                        <div class="label unselectable" ng-repeat="Label in allLabels | filter:labelSearch">{{Label.Text}}</div>
+                        <div class="label unselectable" ng-repeat="Label in allLabels | filter:labelSearch">{{Label.text}}</div>
                     </span>
                 </span>
                     <md-input-container md-no-float class="md-input-min-height" style="width:110px">

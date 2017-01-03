@@ -193,7 +193,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             var catagorySheets = rawClassesSheet.result.sheets;
             try {
                var rows = catagorySheets[0].data[0].rowData
-               for (var RowNum = 3; RowNum < rows.length; RowNum++) {
+               for (var RowNum = 2; RowNum < rows.length; RowNum++) {
                   var Row = rows[RowNum].values
                   var label = {
                      text: Row[0].formattedValue,
@@ -211,7 +211,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                   };
                   $scope.allLabels.push(label)
                }
-               var rows = catagorySheets[0].data[0].rowData
+               var rows = catagorySheets[1].data[0].rowData
                for (var RowNum = 3; RowNum < rows.length; RowNum++) {
                   var Row = rows[RowNum].values;
                   var teacher = {
