@@ -232,7 +232,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                   }
                   for (var RowNum = 1; RowNum < rows.length; RowNum++) {
                      var Row = rows[RowNum].values
-                     catagoryList[SheetNum + 2].Classes[RowNum - ] = {
+                     catagoryList[SheetNum + 2].Classes[RowNum - 1] = {
                         Name: Row[1].formattedValue,
                         Rules: (Row[2] !== undefined) ? Row[2].formattedValue || null : null,
                      }

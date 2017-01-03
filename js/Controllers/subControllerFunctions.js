@@ -209,7 +209,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			} else {
 				aUsage = a.totalUsage
 				a.linkedClasses.forEach(function(linkedClass) {
-					if (linkedClass.name == $scope.queryParams.classPath) aUsage = linkedClass.usage + 1000;
+					if (linkedClass.Name == $scope.queryParams.classPath) aUsage = linkedClass.sage + 1000;
 				});
 			}
 			if (b.type == 'Teacher') {
@@ -217,7 +217,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			} else {
 				bUsage = b.totalUsage
 				b.linkedClasses.forEach(function(linkedClass) {
-					if (linkedClass.name == $scope.queryParams.classPath) bUsage = linkedClass.usage + 1000;
+					if (linkedClass.Name == $scope.queryParams.classPath) bUsage = linkedClass.Usage + 1000;
 				});
 			}
 			console.log(a)
