@@ -204,17 +204,23 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		})
 		console.log(input)
 		output = output.sort(function(a, b) {
+			var aUsage, bUsage
 			if (a.Type == 'Teacher') {
-				a.Usage = 10000;
+				aUsage = 10000;
 			} else {
+				aUsage = a.totalUsage
 				a.linkedClasses.forEach(function(linkedClass) {
-					if (linkedClass.name = $scope.queryParams.classPath) a.Usage = linkedClass.name;
+					if (linkedClass.name = $scope.queryParams.classPath) aUsage = linkedClass.usage + 1000;
 				});
 			}
-			if (a.Class == $scope.queryParams.classPath) a.Usage = a.Usage + 1000; 
-			if (b.Class == $scope.queryParams.classPath) b.Usage = b.Usage + 1000;
-			
-			if (b.Type == 'Teacher') b.Usage = b.Usage + 10000;
+			if (b.Type == 'Teacher') {
+				bUsage = 10000;
+			} else {
+				bUsage = b.totalUsage
+				b.linkedClasses.forEach(function(linkedClass) {
+					if (linkedClass.name = $scope.queryParams.classPath) bUsage = linkedClass.usage + 1000;
+				});
+			}
 			return b.Usage - a.Usage;
 		})
 		return output
