@@ -207,17 +207,19 @@
                         <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>star</md-icon>Star Class</md-button>
                 </div>
                 <div><span ng-hide="selectedClass.Name == 'All Posts'">Class Rules: </span><span class="md-caption">{{selectedClass.Rules || 'Dont post test or homework answers. Do post what will help other students get to the answers on their own.'}} - <a href="#">edit</a></span></div>
-                <div class="label-container" style="padding-bottom:6px">
-                    <span>
-                        <div ng-show="labelSearch == null" class="label unselectable" ng-repeat="Label in visibleLabels">{{Label.Text}}</div>
+                <div>
+                <span class="label-container" style="padding-bottom:6px">
+                    <span ng-show="labelSearch == null">
+                        <div class="label unselectable" ng-repeat="Label in visibleLabels">{{Label.Text}}</div>
                     </span>
-                    <span ng-hide="labelSearch == null" style=>
-                        <div class="label unselectable" ng-repeat="Label in allLabels">{{Label.Text}}</div>
+                    <span ng-hide="labelSearch == null" style="">
+                        <div class="label unselectable" ng-repeat="Label in allLabels | filter:labelSearch">{{Label.Text}}</div>
                     </span>
+                </span>
                     <md-input-container md-no-float class="md-input-min-height">
                         <input type="text" placeholder="Find a Label..." ng-model="labelSearch">
                     </md-input-container>
-                </div>
+                    </div>
                 <div class="create-post-bar-top" ng-hide="queryParams.classPath == 'Quizlet'">
                     <span md-ink-ripple="true" class="create-post-bar-text unselectable" flex ng-click="::newPost({},'new')">
                         <md-icon style="margin-top: -3px;">add_circle</md-icon>
