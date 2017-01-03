@@ -198,35 +198,17 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             var catagorySheets = rawClassesSheet.result.sheets;
             try {
                for (var SheetNum = 2; SheetNum < catagorySheets.length; SheetNum++) {
-                  console.log(catagorySheets)
                   var rows = catagorySheets[SheetNum].data[0].rowData
                   catagoryList[SheetNum + 2] = {
-                     'Catagory': catagorySheets[SheetNum].,
+                     'Catagory': catagorySheets[SheetNum].properties.title,
                      'Color': rows[2].values[0].formattedValue,
                      'Classes': []
                   }
                   for (var RowNum = 2; RowNum < rows.length; RowNum++) {
                      var Row = rows[RowNum].values
-                     var LabelCount = 0
                      catagoryList[SheetNum + 2].Classes[RowNum - 2] = {
-                        Name: Row[0].formattedValue,
-                        Rules: (Row[1] !== undefined) ? Row[1].formattedValue || null : null,
-                     }
-                     var Class = catagoryList[SheetNum + 4].Classes[RowNum - 2]
-                     for (var ColumnNum = 2; ColumnNum < Row.length; ColumnNum++) {
-                        var ColumnNumAdjusted = ColumnNum - 2;
-                        if (Row[ColumnNum].formattedValue) {
-                           var Label = Row[ColumnNum].formattedValue.split(",")
-                           var LabelObj= {
-                              Text: Label[0],
-                              Usage: Label[1] || 0,
-                              Type: (ColumnNumAdjusted <= 5) ? 'Teacher' : 'Label'
-                           }
-                           Class.Labels[LabelCount] = LabelObj
-                           LabelObj.Class = Row[0].formattedValue;
-                           $scope.allLabels.push(LabelObj);
-                           LabelCount++
-                        }
+                        Name: Row[1].formattedValue,
+                        Rules: (Row[2] !== undefined) ? Row[2].formattedValue || null : null,
                      }
                   }
                }
