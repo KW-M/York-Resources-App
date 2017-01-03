@@ -511,9 +511,10 @@ button.selected.md-button {
 }
 .content-top-bar .label-container {
     padding-bottom: 6px;
+    width: calc(100% - 110px);
     overflow: auto;
     white-space: nowrap;
-    display: block;
+    display: inline-block;
     font-family: Roboto,Helvetica Neue,sans-serif;
     font-size: 16px;
     padding: 0 0 8px 3px;
