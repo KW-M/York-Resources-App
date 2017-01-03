@@ -217,7 +217,7 @@
                         </div>
                         <div ng-hide="labelSearch == null || labelSearch == ''" style="width: 100%;text-align: center;display:inline">
                             <div class="label unselectable" ng-repeat="Label in allLabels | filter:labelSearch as filteredLabels">{{Label.text}}</div>
-                            <span ng-show="filteredLabels.length === 0">No label called '{{labelSearch}}' was found. <md-button>Create {{labelSearch}}</md-button> as a new label?</span> 
+                            <span ng-show="filteredLabels.length === 0">label '{{labelSearch}}' wasn't found. Add this new label: <div class="label">{{labelSearch}}</div></span> 
                         </div>
                     </span>
                     <md-input-container md-no-float class="md-input-min-height" style="width:99px">
