@@ -25,7 +25,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    $scope.searchPlaceholder = 'Search';
    $scope.allLabels = [];
    $scope.visibleLabels = [];
-   $scope.allTeachers = [];
+   $scope.labelSearch = null;
 
    $scope.userList = [];
    $scope.restorePost = false;
