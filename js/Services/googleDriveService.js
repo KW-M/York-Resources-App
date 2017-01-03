@@ -60,7 +60,7 @@ app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
     this.appendSpreadsheetRange = function(range, dataToBeInserted, spreadsheetName) {
         console.log(dataToBeInserted);
         return gapi.client.sheets.spreadsheets.values.append({
-            spreadsheetId: spreadsheetName = 'user' ? URLs.userSpreadsheetId : URLs.classSpreadsheetId,
+            spreadsheetId: spreadsheetName == 'user' ? URLs.userSpreadsheetId : URLs.classSpreadsheetId,
             range: range,
             includeValuesInResponse: true,
             valueInputOption: "USER_ENTERED",
