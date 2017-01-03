@@ -104,7 +104,7 @@ span:focus {
 
 .md-input-min-height {
     margin: 0;
-    height: 27px;
+    height: 30px;
 }
 md-input-container.md-input-min-height .md-errors-spacer{
     display: none;
@@ -512,6 +512,7 @@ button.selected.md-button {
 .content-top-bar .label-container {
     padding-bottom: 6px;
     box-shadow: inset rgba(0, 0, 0, 0.27) -10px 2px 24px -17px, inset rgba(0, 0, 0, 0.27) 10px -2px 24px -17px;
+        border-radius: 3px;
     width: calc(100% - 110px);
     overflow: auto;
     white-space: nowrap;
