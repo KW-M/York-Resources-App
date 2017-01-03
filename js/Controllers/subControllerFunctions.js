@@ -297,6 +297,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			}],
 			totalUsage: 1
 		}
+		queue('sheets', GoogleDriveService.appendSpreadsheetRange('', [today]), null, function(err) {
+					$mdToast.showSimple('Error adding label, try again.');
+		}, 2);
 		$scope.allLabels.push(newLabel);
 		$scope.queryParams.labels.push(newLabel);
 		$timeout(function() {
