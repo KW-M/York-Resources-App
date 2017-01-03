@@ -60,10 +60,10 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          $location.search({
             q: null
          });
-         $location.path(query.classPath.replace(" ","-") || query.classPath);
+         $location.path(query.classPath.replace(" ", "-") || query.classPath);
       }
       if (query.q !== undefined) {
-         if (query.q === null || query.q =='') {
+         if (query.q === null || query.q == '') {
             $location.search({
                q: null
             });
@@ -114,7 +114,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       }
       else {
          $scope.searchPrefix = 'Search Within'
-         //$scope.classTitle = $scope.queryParams.classPath;
+            //$scope.classTitle = $scope.queryParams.classPath;
          $scope.queryParams.flagged = false
       }
       $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
@@ -126,7 +126,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       }
       $scope.getFiles();
       $timeout(function() {
-        $scope.visibleLabels = $scope.sortLabels($scope.allLabels);
+         $scope.visibleLabels = $scope.sortLabels($scope.allLabels);
       })
       getFileTimer = setInterval(function() {
          if (conurancy_counter == 0 && content_container.scrollHeight == content_container.clientHeight + 200) {
@@ -163,32 +163,26 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                'Classes': [{
                   'Name': 'All Posts',
                   'rules': "Whatup",
-               },
-               {
+               }, {
                   'Name': 'Other',
                   'rules': "Other Stuff",
-               }
-               ]
-            },
-            {
+               }]
+            }, {
                'Color': 'hsla(114, 89%, 42%,',
                'Classes': [{
                   'Name': 'Your Posts',
                   'rules': " ",
-               },
-               {
+               }, {
                   'Name': 'Memes',
                   'rules': "What are you doing here?",
                }]
-            },
-            {
+            }, {
                'Color': 'hsla(15, 95%, 65%,',
                'Classes': [{
                   'Name': 'Flagged Posts',
                   'rules': "UNaccepabed",
                }]
-            },
-            {
+            }, {
                'Color': 'hsla(229, 46%, 49%,',
                'Classes': [{
                   'Name': 'Quizlet',
@@ -197,6 +191,20 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             }];
             var catagorySheets = rawClassesSheet.result.sheets;
             try {
+               for (var RowNum = 3; RowNum < rows.length; RowNum++) {
+                  var Row = catagorySheets[0].data[0].rowData[RowNum].values
+                  $scope.allLabels.push({
+                     text:Row[0],
+                     linkedClasses: []
+                  })
+               }
+               for (var RowNum = 3; RowNum < rows.length; RowNum++) {
+                  var Row = catagorySheets[1].data[0].rowData[RowNum].values
+                  $scope.allLabels.push({
+                     name:Row[0],
+                     emai: [],
+                  })
+               }
                for (var SheetNum = 2; SheetNum < catagorySheets.length; SheetNum++) {
                   var rows = catagorySheets[SheetNum].data[0].rowData
                   catagoryList[SheetNum + 2] = {
@@ -226,7 +234,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             $scope.initiateDrivePicker()
          })
 
-         $q.all([driveAPI, sheetsAPI]).then(function(){
+         $q.all([driveAPI, sheetsAPI]).then(function() {
             return GoogleDriveService.getSpreadsheetRange("C2:D");
          }).then(function(spreadsheetRange) {
             if (spreadsheetRange.result.values) {
@@ -242,11 +250,12 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             if (userSpreadsheetRow.result.values !== undefined) {
                var rowValues = userSpreadsheetRow.result.values[0];
                $scope.UserSettingsRowNum = userSpreadsheetRow.result.range.match(/\d(?=:)/);
-            } else {
+            }
+            else {
                var rowValues = userSpreadsheetRow.result.updates.updatedData.values[0];
                $scope.UserSettingsRowNum = userSpreadsheetRow.result.updates.updatedRange.match(/\d(?=:)/);
             }
-            rowValues[4] = parseInt(rowValues[4])+1 || 1;
+            rowValues[4] = parseInt(rowValues[4]) + 1 || 1;
             $scope.convertRowToUserPreferences(rowValues);
             return GoogleDriveService.updateSpreadsheetRange("Sheet1!E" + $scope.UserSettingsRowNum, [rowValues[4]])
          }).then(listenForURLChange);
@@ -490,7 +499,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    }, false);
 
    $scope.$watch('allPosts', function(newValue) {
-     console.log('allPosts Changed')
+      console.log('allPosts Changed')
    }, true);
 
 
