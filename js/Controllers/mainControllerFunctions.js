@@ -45,6 +45,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       classPath: 'Loading...',
       creatorEmail: null,
       id: null,
+      labels: [],
    };
 
    $scope.$mdMedia = $mdMedia;

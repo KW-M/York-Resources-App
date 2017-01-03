@@ -285,8 +285,15 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				quizWindow.location = "https://quizlet.com"
 			}, 3000);
 		}
-		$scope.addLabel = function function_name(argument) {
-			// body...
+		$scope.addLabel = function(labelName) {
+			var newLabel = {
+				text: labelName,
+				linkedClasses: [{
+					Name: $scope.queryParams.classPath,
+				}],
+				totalUsage: 1
+			}
+			$scope.queryParams.labels.push()
 		}
 		//----------------------------------------------------
 		// --------------- Post Card Functions ---------------
