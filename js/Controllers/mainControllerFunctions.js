@@ -197,7 +197,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                   var Row = rows[RowNum].values
                   var label = {
                      text: Row[0].formattedValue,
-                     type: Row[1].formattedValue,
+                     type: Row[1].formattedValue || 'Label',
                      totalUsage: 0,
                      linkedClasses: []
                   };
@@ -212,15 +212,16 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                   $scope.allLabels.push(label)
                }
                var rows = catagorySheets[1].data[0].rowData
-               for (var RowNum = 3; RowNum < rows.length; RowNum++) {
+               for (var RowNum = 1; RowNum < rows.length; RowNum++) {
                   var Row = rows[RowNum].values;
                   var teacher = {
-                     name: Row[0],
-                     email: [1],
+                     name: Row[0].formattedValue,
+                     email: Row[1].formattedValue,
+                     type: 'Teacher',
                      classesTaught: []
                   }
-                  for (var CellNum = 2; CellNum < Row.length; CellNum++) teacher.classesTaught.push(Row[CellNum])
-                  $scope.allTeachers.push(teacher);
+                  for (var CellNum = 2; CellNum < Row.length; CellNum++) teacher.classesTaught.push(Row[CellNum].formattedValue)
+                  $scope.allLabels.push(teacher);
                }
                for (var SheetNum = 2; SheetNum < catagorySheets.length; SheetNum++) {
                   var rows = catagorySheets[SheetNum].data[0].rowData
