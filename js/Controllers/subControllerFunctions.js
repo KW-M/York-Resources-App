@@ -207,11 +207,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			if (a.Type == 'Teacher') {
 				a.Usage = 10000;
 			} else {
-				aclassesTaught.forEach(function(classTaught) {
-					if (classTaught.name = $scope.queryParams.classPath) output.push(item);
+				a.linkedClasses.forEach(function(linkedClass) {
+					if (linkedClass.name = $scope.queryParams.classPath) a.Usage = linkedClass.name;
 				});
 			}
-			if (a.Class == $scope.queryParams.classPath) a.Usage = a.Usage + 1000;
+			if (a.Class == $scope.queryParams.classPath) a.Usage = a.Usage + 1000; 
 			if (b.Class == $scope.queryParams.classPath) b.Usage = b.Usage + 1000;
 			
 			if (b.Type == 'Teacher') b.Usage = b.Usage + 10000;
