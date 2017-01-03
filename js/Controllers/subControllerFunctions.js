@@ -205,15 +205,15 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		console.log(input)
 		output = output.sort(function(a, b) {
 			var aUsage, bUsage
-			if (a.Type == 'Teacher') {
-				aUsage = 10000;
+			if (a.type == 'Teacher') {
+				aUsage = 9999;
 			} else {
 				aUsage = a.totalUsage
 				a.linkedClasses.forEach(function(linkedClass) {
 					if (linkedClass.name = $scope.queryParams.classPath) aUsage = linkedClass.usage + 1000;
 				});
 			}
-			if (b.Type == 'Teacher') {
+			if (b.type == 'Teacher') {
 				bUsage = 10000;
 			} else {
 				bUsage = b.totalUsage
