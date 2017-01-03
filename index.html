@@ -209,10 +209,13 @@
                 <div><span ng-hide="selectedClass.Name == 'All Posts'">Class Rules: </span><span class="md-caption">{{selectedClass.Rules || 'Dont post test or homework answers. Do post what will help other students get to the answers on their own.'}} - <a href="#">edit</a></span></div>
                 <div class="label-container" style="padding-bottom:6px">
                     <span>
-                    <div class="label unselectable" ng-repeat="Label in visibleLabels">{{Label.Text}}</div>
+                        <div ng-hide="labelSearch = null" class="label unselectable" ng-repeat="Label in visibleLabels">{{Label.Text}}</div>
                     </span>
-                    <md-input-container md-no-float style="margin: 0;height: 32px;">
-                        <input type="text" placeholder="Find a Label...">
+                    <span ng-hide="labelSearch = null">
+                        <div class="label unselectable" ng-repeat="Label in allLabels">{{Label.Text}}</div>
+                    </span>
+                    <md-input-container md-no-float class="md-input-min-height">
+                        <input type="text" placeholder="Find a Label..." md-model="labelSearch">
                     </md-input-container>
                 </div>
                 <div class="create-post-bar-top" ng-hide="queryParams.classPath == 'Quizlet'">

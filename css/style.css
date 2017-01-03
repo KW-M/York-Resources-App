@@ -102,6 +102,14 @@ span:focus {
     border-bottom-left-radius: 3px;
 }
 
+.md-input-min-height {
+    margin: 0;
+    height: 27px;
+}
+md-input-container.md-input-min-height .md-errors-spacer{
+    display: none;
+}
+
 
 /*------ General Transitions ------ */
 
