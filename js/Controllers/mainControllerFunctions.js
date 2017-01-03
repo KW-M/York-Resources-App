@@ -193,17 +193,23 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             try {
                for (var RowNum = 3; RowNum < rows.length; RowNum++) {
                   var Row = catagorySheets[0].data[0].rowData[RowNum].values
-                  $scope.allLabels.push({
-                     text:Row[0],
+                  var label = {
+                     text: Row[0],
+                     type: Row[1],
                      linkedClasses: []
-                  })
+                  };
+                  for(var CellNum = 2;CellNum < Row.length; CellNum++) {
+                     Row.CellNum
+                  }
+                  $scope.allLabels.push(label)
                }
-               for (var RowNum = 3; RowNum < rows.length; RowNum++) {
+               for (var RowNum = 2; RowNum < rows.length; RowNum++) {
                   var Row = catagorySheets[1].data[0].rowData[RowNum].values
-                  $scope.allLabels.push({
-                     name:Row[0],
-                     emai: [],
-                  })
+                  var teacher = {
+                     name: Row[0],
+                     email: [1],
+                     classesTaught: []
+                  }
                }
                for (var SheetNum = 2; SheetNum < catagorySheets.length; SheetNum++) {
                   var rows = catagorySheets[SheetNum].data[0].rowData
