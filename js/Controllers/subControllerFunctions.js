@@ -297,7 +297,12 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			}],
 			totalUsage: 1
 		}
-		$scope.queryParams.labels.push(newLabel)
+		$scope.allLabels.push(newLabel);
+		$scope.queryParams.labels.push(newLabel);
+		$timeout(function() {
+			$scope.labelSearch = "";
+		    $scope.visibleLabels = $scope.sortLabels($scope.allLabels)
+		})
 	}
 
 	//----------------------------------------------------
