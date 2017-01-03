@@ -209,10 +209,13 @@
                 <div><span ng-hide="selectedClass.Name == 'All Posts'">Class Rules: </span><span class="md-caption">{{selectedClass.Rules || 'Dont post test or homework answers. Do post what will help other students get to the answers on their own.'}} - <a href="#">edit</a></span></div>
                 <div>
                     <span class="label-container" style="padding-bottom:6px">
-                        <div ng-show="labelSearch == null || labelSearch == ''" style="width: 100%;text-align: center;">
+                        <div style="display:inline">
+                            <div class="label unselectable label-active" ng-repeat="Label in visibleLabels">{{Label.text}}</div>
+                        </div>
+                        <div ng-show="labelSearch == null || labelSearch == ''" style="width: 100%;text-align: center;display:inline">
                             <div class="label unselectable" ng-repeat="Label in visibleLabels">{{Label.text}}</div>
                         </div>
-                        <div ng-hide="labelSearch == null || labelSearch == ''" style="width: 100%;text-align: center;">
+                        <div ng-hide="labelSearch == null || labelSearch == ''" style="width: 100%;text-align: center;display:inline">
                             <div class="label unselectable" ng-repeat="Label in allLabels | filter:labelSearch">{{Label.text}}</div>
                         </div>
                     </span>
