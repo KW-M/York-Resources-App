@@ -223,9 +223,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 					if (linkedClass.Name == $scope.queryParams.classPath) bUsage = linkedClass.Usage + 1000;
 				});
 			}
-			console.log(a)
-			console.log(b)
-			console.log(bUsage + " " + aUsage)
 			return bUsage - aUsage;
 		})
 		return output
@@ -288,7 +285,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			quizWindow.location = "https://quizlet.com"
 		}, 3000);
 	}
-	
+
 	//----------------------------------------------------
 	//------------------Handleing Labels------------------------
 	$scope.addLabel = function(labelName) {
@@ -313,7 +310,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	$scope.transferAllLabels = function(){
 		$scope.queryParams.labels.forEach(function(){
 			var label = $scope.queryParams.labels.pop()
-			$scope.allLabels.push(label);	
+			$scope.allLabels.push(label);
 		})
 		$timeout(function(){
 			$scope.labelSearch = "";
@@ -322,7 +319,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	}
 	$scope.moveLabeltoActive = function(labelName){
 		$scope.allLabels.every(function(Label,Index){
-			if(Label.text = labelName) {
+			if(Label.text == labelName) {
 				$scope.allLabels.splice(Index,1);
 				$scope.queryParams.labels.push(Label);
 				return false
@@ -338,6 +335,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	$scope.moveLabeltoAllLabels = function(activeLabelIndex){
 		console.log(activeLabelIndex)
 		var label = $scope.queryParams.labels.splice(activeLabelIndex,1)
+		console.log(label)
 		$scope.allLabels.push(label);
 		$timeout(function(){
 		    $scope.visibleLabels = $scope.sortLabels($scope.allLabels)
