@@ -210,13 +210,13 @@
                 <div>
                     <span class="label-container" style="padding-bottom:6px">
                         <div style="display:inline">
-                            <div class="label unselectable label-active" ng-repeat="Label in queryParams.labels">{{Label.text}}</div>
+                            <div class="label unselectable label-active" ng-click="moveLabeltoAllLabels($index)" ng-repeat="Label in queryParams.labels">{{Label.text}}</div>
                         </div>
                         <div ng-show="labelSearch == null || labelSearch == ''" style="width: 100%;text-align: center;display:inline">
-                            <div class="label unselectable" ng-repeat="Label in visibleLabels">{{Label.text}}</div>
+                            <div class="label unselectable" ng-click="moveLabeltoActive(Label.text)" ng-repeat="Label in visibleLabels">{{Label.text}}</div>
                         </div>
                         <div ng-hide="labelSearch == null || labelSearch == ''" style="width: 100%;text-align: center;display:inline">
-                            <div class="label unselectable" ng-repeat="Label in allLabels | filter:labelSearch as filteredLabels">{{Label.text}}</div>
+                            <div class="label unselectable" ng-click="moveLabeltoActive(Label.text)" ng-repeat="Label in allLabels | filter:labelSearch as filteredLabels">{{Label.text}}</div>
                             <span ng-show="filteredLabels.length === 0">{{labelSearch}} wasn't found. Add this new label: <div class="label" ng-click="addLabel(labelSearch)">{{labelSearch}}</div></span> 
                         </div>
                     </span>

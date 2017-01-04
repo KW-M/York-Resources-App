@@ -321,10 +321,13 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		})
 	}
 	$scope.moveLabeltoActive = function(labelName){
-		$scope.allLabels.forEach(function(Label,Index){
+		$scope.allLabels.every(function(Label,Index){
 			if(Label.text = labelName) {
 				$scope.allLabels.splice(Index,1);
-				$scope.queryParams.labels.push(abel);
+				$scope.queryParams.labels.push(Label);
+				return false
+			} else {
+				return true
 			}
 		})
 		$timeout(function(){
