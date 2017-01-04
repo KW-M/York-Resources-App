@@ -297,12 +297,22 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			}],
 			totalUsage: 1
 		}
+		var labelIndex = $scope.queryParams.labels.length;
 		queue('sheets', GoogleDriveService.appendSpreadsheetRange('Labels!A2:A',[labelName,null,$scope.queryParams.classPath + ",1"],'class'), null, function(err) {
 			$mdToast.showSimple('Error adding label, try again.');
+			$scope.queryParams.labels.splice(labelIndex,1);
 		}, 2);
-		$scope.allLabels.push(newLabel);
-		$scope.queryParams.labels.push(newLabel);
 		$timeout(function() {
+			$scope.labelSearch = "";
+			$scope.queryParams.labels.push(newLabel);
+		})
+	}
+	$scope.transferLabels = function(){
+		$scope.queryParams.labels.forEach(function(){
+			var label = $scope.queryParams.labels.pop()
+			$scope.allLabels.push(label);	
+		})
+		$timeout(function(){
 			$scope.labelSearch = "";
 		    $scope.visibleLabels = $scope.sortLabels($scope.allLabels)
 		})
