@@ -509,7 +509,7 @@ button.selected.md-button {
     border-bottom-right-radius: 12px;
     border-bottom-left-radius: 12px;
 }
-.content-top-bar .label-container {
+.label-container {
     padding-bottom: 6px;
     box-shadow: inset rgba(0, 0, 0, 0.27) -10px 2px 24px -17px, inset rgba(0, 0, 0, 0.27) 10px -2px 24px -17px;
         border-radius: 3px;
@@ -522,14 +522,14 @@ button.selected.md-button {
     padding: 0 0 8px 3px;
     vertical-align: middle;
 }
-.content-top-bar .label-container::-webkit-scrollbar {
+.label-container::-webkit-scrollbar {
     background: rgba(255, 255, 255, 0.08);
     height: 3px;
 }
-.content-top-bar .label-container::-webkit-scrollbar-thumb {
+.label-container::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0.1);
 } 
-.content-top-bar .label-container .label {
+.label-container .label {
     cursor: pointer;
     border-radius: 16px;
     display: inline-block;
@@ -543,10 +543,10 @@ button.selected.md-button {
     background: rgba(224, 224, 224, 0.5);
     box-shadow: 0 0px 2px 0 rgba(0,0,0,0.12);
 }
-.content-top-bar .label-container .label:hover {
+.label-container .label:hover {
     box-shadow:0 2px 5px 0 rgba(0,0,0,.26);
 }
-.content-top-bar .label-container .label.label-active {   
+.label-container .label.label-active {   
     background: rgba(255, 255, 255, 0.85);
     box-shadow: 0 1px 3px 0 rgba(0,0,0,.26);
 }
