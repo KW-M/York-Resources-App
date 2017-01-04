@@ -68,7 +68,24 @@
                </md-optgroup>
             </md-select>
             <div style="width:6px" ng-show="operation === 'view'"></div>
-            <!--<md-chips ng-model="Post.Tags" placeholder="Add a tag" flex md-separator-keys="[32,188,13]" ng-hide="operation === 'view' && Post.Tags.length === 0" readonly="operation === 'view'" md-enable-chip-edit="true" md-add-on-blur="true"></md-chips>-->
+            <md-chips ng-model="Post.Tags" placeholder="Add a tag" flex md-separator-keys="[32,188,13]" ng-hide="operation === 'view' && Post.Tags.length === 0" readonly="operation === 'view'" md-enable-chip-edit="true" md-add-on-blur="true"></md-chips>
+            <div>
+               <div class="label-container" style="padding-bottom:6px">
+                  <div style="display:inline">
+                     <div class="label unselectable label-active" ng-click="moveLabeltoAllLabels($index)" ng-repeat="Label in queryParams.labels">{{Label.text}}</div>
+                  </div>
+                  <div ng-show="labelSearch == null || labelSearch == ''" style="width: 100%;text-align: center;display:inline">
+                     <div class="label unselectable" ng-click="moveLabeltoActive(Label.text)" ng-repeat="Label in visibleLabels">{{Label.text}}</div>
+                  </div>
+                  <div ng-hide="labelSearch == null || labelSearch == ''" style="width: 100%;text-align: center;display:inline">
+                            <div class="label unselectable" ng-click="moveLabeltoActive(Label.text)" ng-repeat="Label in allLabels | filter:labelSearch as filteredLabels">{{Label.text}}</div>
+                            <span ng-show="filteredLabels.length === 0">{{labelSearch}} wasn't found. Add this new label: <div class="label" ng-click="addLabel(labelSearch)">{{labelSearch}}</div></span> 
+                  </div>
+                    </div>
+                    <md-input-container md-no-float class="md-input-min-height" style="width:99px">
+                        <input type="text" placeholder="Find a Label..." ng-model="labelSearch">
+                    </md-input-container>
+            </div>
          </div>
          <div class="md-dialog-content">
             <input ng-model="Post.Title" ng-readonly="operation === 'view'" class="new-post-title md-title" placeholder="Title" md-autofocus>
