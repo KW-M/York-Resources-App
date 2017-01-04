@@ -336,6 +336,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		})
 	}
 	$scope.moveLabeltoAllLabels = function(activeLabelIndex){
+		console.log(activeLabelIndex)
 		var label = $scope.queryParams.labels.splice(activeLabelIndex,1)
 		$scope.allLabels.push(label);
 		$timeout(function(){
