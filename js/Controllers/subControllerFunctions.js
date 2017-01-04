@@ -288,6 +288,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			quizWindow.location = "https://quizlet.com"
 		}, 3000);
 	}
+	
+	//----------------------------------------------------
+	//------------------Handleing Labels------------------------
 	$scope.addLabel = function(labelName) {
 		var newLabel = {
 			text: labelName,
@@ -307,13 +310,30 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			$scope.queryParams.labels.push(newLabel);
 		})
 	}
-	$scope.transferLabels = function(){
+	$scope.transferAllLabels = function(){
 		$scope.queryParams.labels.forEach(function(){
 			var label = $scope.queryParams.labels.pop()
 			$scope.allLabels.push(label);	
 		})
 		$timeout(function(){
 			$scope.labelSearch = "";
+		    $scope.visibleLabels = $scope.sortLabels($scope.allLabels)
+		})
+	}
+	$scope.moveLabeltoActive = function(labelName){
+		$scope.queryParams.labels.forEach(function(){
+			var label = $scope.queryParams.labels.pop()
+			$scope.allLabels.push(label);	
+		})
+		$timeout(function(){
+			$scope.labelSearch = "";
+		    $scope.visibleLabels = $scope.sortLabels($scope.allLabels)
+		})
+	}
+	$scope.moveLabeltoAllLabels = function(activeLabelIndex){
+		var label = $scope.queryParams.labels.splice(activeLabelIndex,1)
+		$scope.allLabels.push(label);
+		$timeout(function(){
 		    $scope.visibleLabels = $scope.sortLabels($scope.allLabels)
 		})
 	}
