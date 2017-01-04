@@ -68,8 +68,8 @@
                </md-optgroup>
             </md-select>
             <div style="width:6px" ng-show="operation === 'view'"></div>
-            <md-chips ng-model="Post.Tags" placeholder="Add a tag" flex md-separator-keys="[32,188,13]" ng-hide="operation === 'view' && Post.Tags.length === 0" readonly="operation === 'view'" md-enable-chip-edit="true" md-add-on-blur="true"></md-chips>
-            <div style="display:inline-block">
+            <md-chips ng-model="Post.Labels" flex ng-hide="operation === 'view' && Post.Tags.length === 0" readonly="true"></md-chips>
+            <div style="display:flex" ng-hide="operation === 'view'">
                <div class="label-container" style="padding-bottom:6px">
                   <div style="display:inline">
                      <div class="label unselectable label-active" ng-click="moveLabeltoAllLabels($index)" ng-repeat="Label in queryParams.labels">{{Label.text}}</div>
@@ -82,7 +82,7 @@
                      <span ng-show="filteredLabels.length === 0">{{labelSearch}} wasn't found. Add this new label: <span class="label" ng-click="addLabel(labelSearch)">{{labelSearch}}</span></span>
                   </div>
                </div>
-               <md-input-container md-no-float class="md-input-min-height" style="width:99px">
+               <md-input-container md-no-float class="md-input-min-height" style="width: 102px;margin: auto;">
                   <input type="text" placeholder="Find a Label..." ng-model="labelSearch">
                </md-input-container>
             </div>

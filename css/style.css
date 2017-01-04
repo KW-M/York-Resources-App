@@ -520,6 +520,7 @@ button.selected.md-button {
     font-family: Roboto,Helvetica Neue,sans-serif;
     font-size: 16px;
     padding: 0 0 8px 3px;
+    flex:1;
     vertical-align: middle;
 }
 .label-container::-webkit-scrollbar {
