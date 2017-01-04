@@ -68,8 +68,8 @@
                </md-optgroup>
             </md-select>
             <div style="width:6px" ng-show="operation === 'view'"></div>
-            <md-chips ng-model="Post.Labels" flex ng-hide="operation === 'view' && Post.Tags.length === 0" readonly="true"></md-chips>
-            <div style="display:flex" ng-hide="operation === 'view'">
+            <md-chips ng-model="Post.Labels" flex ng-hide="operation != 'view' operation == 'view' && Post.Tags.length == 0" readonly="true"></md-chips>
+            <div style="display:flex" ng-hide="operation == 'view'">
                <div class="label-container" style="padding-bottom:6px">
                   <div style="display:inline">
                      <div class="label unselectable label-active" ng-click="moveLabeltoAllLabels($index)" ng-repeat="Label in queryParams.labels">{{Label.text}}</div>
