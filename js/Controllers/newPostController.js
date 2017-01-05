@@ -222,10 +222,12 @@
         }
 
         function shareFile() {
+            console.log($scope.shareSelect);
             if ($scope.shareSelect == 'view') var role = 'reader';
             if ($scope.shareSelect == 'comment') var role = 'commenter';
             if ($scope.shareSelect == 'edit') var role = 'writer';
             queue('drive', GoogleDriveService.shareFileDomain($scope.Post.AttachmentId, role), null, onError, 150)
+            $mdToast.hide();
         }
 
         $scope.submit = function() {
@@ -301,7 +303,4 @@
             $scope.Post.PreviewImage = originalPost.PreviewImage || ''
             $mdDialog.hide();
         };
-        $scope.hideToast = function() {
-            $mdToast.hide();
-        }
     }
