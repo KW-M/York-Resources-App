@@ -9,7 +9,7 @@
             $scope.Post.Title = $scope.Post.Title || ''
             $scope.Post.Description = $scope.Post.Description || ''
             $scope.Post.Link = $scope.Post.Link || ''
-            $scope.Post.Tags = $scope.Post.Tags || []
+            $scope.Post.Labels = $scope.Post.Labels || []
             $scope.Post.Type = $scope.Post.Type || 'noLink'
             $scope.Post.Flagged = $scope.Post.Flagged || false
             $scope.Post.CreationDate = $scope.Post.CreationDate || new Date()
