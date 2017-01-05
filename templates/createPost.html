@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="css/createPost.css" />
 <md-dialog id="new_post_dialog">
+   {{}}
    <md-dialog-content class="new_post_dialog_scroll" style="opacity:0" ng-style="{'background-color': Post.Class.Color + ' 0.6)'}">
       <div id="dialog_header" class="post-card-header" ng-class="{'no-link':Post.Type == 'NoLink','md-whiteframe-3dp': (operation == 'view' && Post.Link == '' && newPostScroll > 0) || (operation != 'view' && newPostScroll > 139),'not-operation-view':operation != 'view'}"
          md-ink-ripple="{{Post.Link != '' && operation == 'view'}}" ng-click="openLink(Post.Link, operation != 'view')" ng-style="{'height': ((operation == 'view' && Post.Link == '') ? (60):(200-newPostScroll)) + 'px'}">
@@ -72,7 +73,7 @@
             <div style="display:flex" ng-hide="operation == 'view'">
                <div class="label-container" style="padding-bottom:6px">
                   <div style="display:inline">
-                     <div class="label unselectable label-active" ng-click="moveLabeltoAllLabels($index)" ng-repeat="Label in Post.L">{{Label.text}}</div>
+                     <div class="label unselectable label-active" ng-click="moveLabeltoAllLabels($index)" ng-repeat="Label in Post.Labels">{{Label.text}}</div>
                   </div>
                   <div ng-show="labelSearch == null || labelSearch == ''" style="width: 100%;text-align: center;display:inline">
                      <div class="label unselectable" ng-click="moveLabeltoActive(Label.text)" ng-repeat="Label in visibleLabels">{{Label.text}}</div>
