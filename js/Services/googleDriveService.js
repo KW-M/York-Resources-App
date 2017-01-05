@@ -121,11 +121,11 @@ app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
         }));
     };
 
-    this.shareFileLink = function(fileID) {
+    this.shareFileLink = function(fileID,) {
         return (gapi.client.drive.permissions.create({
             fileId: fileID,
-            type: "domain",
-            role: 'reader',
+            type: 'domain',
+            role: role,
             sendNotificationEmail: false,
         }));
     };
