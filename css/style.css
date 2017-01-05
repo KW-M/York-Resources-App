@@ -896,12 +896,17 @@ button.selected.md-button {
     width: auto;
 }
 
-.shareLevelToast md-select .md-select-value {
+.shareLevelToast md-select.md-default-theme:not([disabled]):hover{
+    
+}
+.shareLevelToast md-select.md-default-theme:not([disabled]) .md-select-value {
     color:white;
+    border:none;
 }
 
-.shareLevelToast md-select .md-select-value:focus {
+.shareLevelToast md-select.md-default-theme:not([disabled]):focus .md-select-value {
     color:white;
+    border:none;
 }
 
 .shareLevelToast{
