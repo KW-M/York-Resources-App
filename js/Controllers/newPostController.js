@@ -222,7 +222,10 @@
         }
 
         function shareFile() {
-            GoogleDriveService.shareLinkFile(linkShareFile)
+            if ($scope.shareSelect == 'view') var role = 'reader';
+            if ($scope.shareSelect == 'comment') var role = 'commenter';
+            if ($scope.shareSelect == 'edit') var role = 'writter';
+            GoogleDriveService.shareFileDomain($scope.Post.AttachmentId,role)
         }
 
         $scope.submit = function() {
