@@ -275,7 +275,7 @@
             $scope.Post.Title = originalPost.Title || ''
             $scope.Post.Description = originalPost.Description || ''
             $scope.Post.Link = originalPost.Link || ''
-            $scope.Post.Tags = originalPost.Tags || []
+            $scope.Post.Labels = originalPost.Labels || []
             $scope.Post.Type = originalPost.Type || 'noLink'
             $scope.Post.UpdateDate = originalPost.UpdateDate || new Date()
             $scope.Post.Class = originalPost.Class || {

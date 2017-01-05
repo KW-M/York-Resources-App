@@ -35,7 +35,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				formatedPost.userLiked = ((nameArray[2] || "").indexOf($scope.myInfo.Email) !== -1);
 			}
 			if (DriveMetadata.properties) {
-				formatedPost.Tags = ((DriveMetadata.properties.Tag1 || "") + (DriveMetadata.properties.Tag2 || "")).split(",") || [];
+				formatedPost.Labels = ((DriveMetadata.properties.Tag1 || "") + (DriveMetadata.properties.Tag2 || "")).split(",") || [];
 				var updatedClass = $scope.findClassObject(DriveMetadata.properties.ClassName);
 				formatedPost.Title = DriveMetadata.properties.Title || nameArray[1] || ''
 				formatedPost.Flagged = DriveMetadata.properties.Flagged == 'TRUE' || DriveMetadata.properties.Flagged == 'true';
@@ -90,7 +90,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	$scope.convertPostToDriveMetadata = function(Post) {
 		var formatedDriveMetadata
 		try {
-			var tagString = Post.Tags.join(",").match(/[\s\S]{1,116}/g) || [];
+			var tagString = Post.Labels.join(",").match(/[\s\S]{1,116}/g) || [];
 			formatedDriveMetadata = {
 				name: (Post.Likes.length || 0) + '{]|[}' + Post.Title + '{]|[}' + (Post.Likes.join(",") || ""),
 				description: Post.Description + '{]|[}' + Post.Link + '{]|[}' + Post.PreviewImage,
@@ -110,7 +110,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 					ClassName: Post.Class.Name || null,
 				},
 				contentHints: {
-					indexableText: "Title: " + Post.Title + ", Attachment: " + Post.AttachmentName + ", Class: " + Post.Class.Name + ", Class Catagory: " + Post.Class.Catagory + ", tags: (" + (tagString[2] || '') + (tagString[2] || '') + ")"
+					indexableText: "Title: " + Post.Title + ", Attachment: " + Post.AttachmentName + ", Class: " + Post.Class.Name + ", Class Catagory: " + Post.Class.Catagory + ", Labels: (" + (tagString[2] || '') + (tagString[2] || '') + ")"
 				}
 			};
 			return (formatedDriveMetadata);
@@ -297,7 +297,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			}],
 			totalUsage: 1
 		}
-		var labelIndex = $scope.post.labels.length;
+		var labelIndex = $scope.ost.Labels.length;
 		queue('sheets', GoogleDriveService.appendSpreadsheetRange('Labels!A2:A',[labelName,null,$scope.queryParams.classPath + ",1"],'class'), null, function(err) {
 			$mdToast.showSimple('Error adding label, try again.');
 			$scope.post.labels.splice(labelIndex,1);
