@@ -1,5 +1,5 @@
     /* we don't define the "new post controller" here because it was alredy
-                                                                                                                                                   defined by the $md-dialog in the newPost function on mainController.   */
+                                                                                                                                                       defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $timeout, $http, $mdDialog, GoogleDriveService, authorizationService, $mdToast, postObj, operation) {
         console.log(postObj)
         var linkChangeTimer = null;
@@ -194,9 +194,9 @@
                             template: '<md-toast> <div class="md-toast-content" style="justify-content: center;"> <div> <div class="md-toast-text" style="padding: 6px 0 0 0px;">How should the attached file be shared?</div> <div style="display:flex"> <md-select ng-model="shareSelect"> <md-option value="view"> York students can view </md-option> <md-option value="comment"> York students can comment </md-option> <md-option value="edit"> York students can edit </md-option> </md-select> <md-button style="color:rgb(68,138,255)">Share</md-button> </div></div></div></md-toast>',
                             hideDelay: 3000000,
                             parent: document.getElementById('new_post_dialog'),
-                            toastClass:'shareLevelToast',
-                            scope:$scope,
-                        }).then(submitCheck);
+                            toastClass: 'shareLevelToast',
+                            scope: $scope,
+                        }).then(shareFile());
                         // $mdToast.show($mdToast.simple().action('Got It').textContent('Anyone at York will be able to view the attached file.').parent(document.getElementById('new_post_dialog')).hideDelay(300000)).then(submitCheck);
                     }
                     else {
@@ -204,28 +204,28 @@
                     }
                 }
             }
+        }
 
-            function submitCheck() {
-                $mdToast.show({
-                    template: '<md-toast><span style="font-size:18px; max-width: 200px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="36"></md-progress-circular></md-toast>',
-                    hideDelay: 3000000,
-                });
-                if ($scope.previewLoading) {
-                    document.addEventListener('urlPreviewLoaded', function() {
-                        $scope.submit();
-                    });
-                }
-                else {
+        function submitCheck() {
+            $mdToast.show({
+                template: '<md-toast><span style="font-size:18px; max-width: 200px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="36"></md-progress-circular></md-toast>',
+                hideDelay: 3000000,
+            });
+            if ($scope.previewLoading) {
+                document.addEventListener('urlPreviewLoaded', function() {
                     $scope.submit();
-                }
+                });
+            }
+            else {
+                $scope.submit();
             }
         }
 
         function shareFile() {
             if ($scope.shareSelect == 'view') var role = 'reader';
             if ($scope.shareSelect == 'comment') var role = 'commenter';
-            if ($scope.shareSelect == 'edit') var role = 'writter';
-            GoogleDriveService.shareFileDomain($scope.Post.AttachmentId,role)
+            if ($scope.shareSelect == 'edit') var role = 'writer';
+            queue('drive', GoogleDriveService.shareFileDomain($scope.Post.AttachmentId, role), submitCheck, onError, 150)
         }
 
         $scope.submit = function() {
@@ -301,7 +301,8 @@
             $scope.Post.PreviewImage = originalPost.PreviewImage || ''
             $mdDialog.hide();
         };
-        $scope.hideToast = function(){
+        $scope.hideToast = function() {
             $mdToast.hide();
         }
     }
+    
