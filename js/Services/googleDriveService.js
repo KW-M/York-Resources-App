@@ -127,7 +127,7 @@ app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
             type: 'domain',
             role: role,
             sendNotificationEmail: false,
-            allowFileDiscovery: false
+            allowFileDiscovery: false,
         }));
     };
 
