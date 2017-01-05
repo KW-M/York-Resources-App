@@ -44,6 +44,7 @@
         $scope.previewThumbnail = "";
         $scope.previewLoading = false;
         $scope.classSearch = "";
+        $scope.shareSelect = "view"
 
         $scope.findType = function() {
             if ($scope.Post.Link === '') {
