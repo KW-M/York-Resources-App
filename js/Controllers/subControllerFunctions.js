@@ -92,10 +92,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		try {
 			var tagString, tagStringArray
 			Post.Labels.forEach(function(label,index){
-				var isComma = (index < )
-				tagString = tagString + label.text + ','
+				var isComma = (index+1 != Post.Labels.length) ? ',' : '';
+				tagString = tagString + label.text + isComma;
 			})
-			Post.Labels.join(",").match(/[\s\S]{1,116}/g) || [];
+			tagStringArray = tagString.match(/[\s\S]{1,116}/g) || [];
+							console.log(tagStringArray);
 			formatedDriveMetadata = {
 				name: (Post.Likes.length || 0) + '{]|[}' + Post.Title + '{]|[}' + (Post.Likes.join(",") || ""),
 				description: Post.Description + '{]|[}' + Post.Link + '{]|[}' + Post.PreviewImage,
@@ -108,8 +109,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 					AttachmentName: Post.AttachmentName || null,
 					CreatorEmail: Post.Creator.Email || $scope.myInfo.Email || null,
 					CreatorName: Post.Creator.Name || $scope.myInfo.Name || null,
-					Tag1: tagString[0] || null,
-					Tag2: tagString[1] || null,
+					Tag1: tagStringArray[0] || null,
+					Tag2: tagStringArray[1] || null,
 					ClassCatagory: Post.Class.Catagory || null,
 					ClassColor: Post.Class.Color || null,
 					ClassName: Post.Class.Name || null,
