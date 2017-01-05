@@ -895,3 +895,5 @@ button.selected.md-button {
     align-items: center;
     width: auto;
 }
+
+.shareLevelToast md-select.md-default-theme:not([disabled]):focus .md-select-value, md-select:not([disabled]):focus .md-select-value {
