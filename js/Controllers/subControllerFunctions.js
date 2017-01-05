@@ -90,7 +90,12 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	$scope.convertPostToDriveMetadata = function(Post) {
 		var formatedDriveMetadata
 		try {
-			var tagString = Post.Labels.join(",").match(/[\s\S]{1,116}/g) || [];
+			var tagString, tagStringArray
+			Post.Labels.forEach(function(label,index){
+				var isComma = (index < )
+				tagString = tagString + label.text + ','
+			})
+			Post.Labels.join(",").match(/[\s\S]{1,116}/g) || [];
 			formatedDriveMetadata = {
 				name: (Post.Likes.length || 0) + '{]|[}' + Post.Title + '{]|[}' + (Post.Likes.join(",") || ""),
 				description: Post.Description + '{]|[}' + Post.Link + '{]|[}' + Post.PreviewImage,
@@ -297,10 +302,10 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			}],
 			totalUsage: 1
 		}
-		var labelIndex = $scope.ost.Labels.length;
+		var labelIndex = $scope.Post.Labels.length;
 		queue('sheets', GoogleDriveService.appendSpreadsheetRange('Labels!A2:A',[labelName,null,$scope.queryParams.classPath + ",1"],'class'), null, function(err) {
 			$mdToast.showSimple('Error adding label, try again.');
-			$scope.post.labels.splice(labelIndex,1);
+			$scope.Post.Labels.splice(labelIndex,1);
 		}, 2);
 		$timeout(function() {
 			$scope.labelSearch = "";
@@ -309,7 +314,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	}
 	$scope.transferAllLabels = function(){
 		$scope.queryParams.labels.forEach(function(){
-			var label = $scope.post.labels.pop()
+			var label = $scope.Post.Labels.pop()
 			$scope.allLabels.push(label);
 		})
 		$timeout(function(){
@@ -321,7 +326,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		$scope.allLabels.every(function(Label,Index){
 			if(Label.text == labelName) {
 				$scope.allLabels.splice(Index,1);
-				$scope.post.labels.push(Label);
+				$scope.Post.Labels.push(Label);
 				return false
 			} else {
 				return true
