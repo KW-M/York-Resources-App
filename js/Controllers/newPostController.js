@@ -225,7 +225,7 @@
             if ($scope.shareSelect == 'view') var role = 'reader';
             if ($scope.shareSelect == 'comment') var role = 'commenter';
             if ($scope.shareSelect == 'edit') var role = 'writer';
-            queue('drive', GoogleDriveService.shareFileDomain($scope.Post.AttachmentId, role), submitCheck, onError, 150)
+            queue('drive', GoogleDriveService.shareFileDomain($scope.Post.AttachmentId, role), null, onError, 150)
         }
 
         $scope.submit = function() {
@@ -305,4 +305,3 @@
             $mdToast.hide();
         }
     }
-    
