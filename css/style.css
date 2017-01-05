@@ -898,6 +898,8 @@ button.selected.md-button {
 
 .shareLevelToast md-select:not([disabled]){
     border-radius: 3px;
+    padding-left: 6px;
+    margin: 8px 0px;
     transition: background-color .4s cubic-bezier(.25,.8,.25,1);
 }
 .shareLevelToast md-select:not([disabled]):hover{
