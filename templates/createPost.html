@@ -69,7 +69,6 @@
                </md-optgroup>
             </md-select>
             <div style="width:6px" ng-show="operation === 'view'"></div>
-            <md-chips ng-model="Post.Labels" flex ng-hide="operation != 'view' operation == 'view' && Post.Tags.length == 0" readonly="true"></md-chips>
             <div style="display:flex" ng-hide="operation == 'view'">
                <div class="label-container" style="padding-bottom:6px">
                   <div style="display:inline">
@@ -92,7 +91,6 @@
             <input ng-model="Post.Title" ng-readonly="operation === 'view'" class="new-post-title md-title" placeholder="Title" md-autofocus>
             <p class="post-card-creator md-subhead" style="margin:0" ng-hide="::Post.Creator.Name == undefined || Post.Creator.Name == myInfo.Name"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::Post.Creator.ClassOf}})</span></p>
             <div contenteditable="{{operation != 'view'}}" ng-model="Post.Description" class="new-post-body"></div>
-               {{shareSelect}}
          </div>
       </div>
    </md-dialog-content>
