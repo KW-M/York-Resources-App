@@ -321,7 +321,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		$scope.allLabels.every(function(Label,Index){
 			if(Label.text == labelName) {
 				$scope.allLabels.splice(Index,1);
-				$scope.queryParams.labels.push(Label);
+				$scope.post.labels.push(Label);
 				return false
 			} else {
 				return true
