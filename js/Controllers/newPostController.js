@@ -1,5 +1,5 @@
     /* we don't define the "new post controller" here because it was alredy
-                                                                                                                                               defined by the $md-dialog in the newPost function on mainController.   */
+                                                                                                                                                   defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $timeout, $http, $mdDialog, GoogleDriveService, authorizationService, $mdToast, postObj, operation) {
         console.log(postObj)
         var linkChangeTimer = null;
@@ -190,7 +190,12 @@
                 }
                 else {
                     if ($scope.Post.Type === "gDrive") {
-                        $mdToast.show($mdToast.simple().action('Got It').textContent('Anyone at York will be able to view the attached file.').parent(document.getElementById('new_post_dialog')).hideDelay(300000)).then(submitCheck);
+                        $mdToast.show({
+                            template: '<md-toast> <div class="md-toast-content"> <div> <div class="md-toast-text" style="padding: 6px 0 0 14px;">How should the attached file be shared?</div> <div style="display:flex"> <md-select ng-model="shareSelect" style="margin:8px; color:white!important"> <md-option value="view"> York students can view </md-option> <md-option value="comment"> York students can comment </md-option> <md-option value="edit"> York students can edit </md-option> </md-select> <md-button>Share</md-button> </div></div></div></md-toast>',
+                            hideDelay: 3000000,
+                            parent: document.getElementById('new_post_dialog'),
+                        }).then(submitCheck);
+                        // $mdToast.show($mdToast.simple().action('Got It').textContent('Anyone at York will be able to view the attached file.').parent(document.getElementById('new_post_dialog')).hideDelay(300000)).then(submitCheck);
                     }
                     else {
                         submitCheck();
@@ -292,3 +297,4 @@
             $mdDialog.hide();
         };
     }
+    
