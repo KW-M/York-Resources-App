@@ -31,12 +31,12 @@
 
 <body ng-app="YorkResourcesApp" ng-controller="ApplicationController">
 
-    <md-toast md-theme="default" class="_md md-default-theme md-bottom md-left" style="z-index:20">
+    <md-toast md-theme="default" class="_md md-default-theme md-bottom md-left" class="">
         <div class="md-toast-content">
             <div>
             <div class="md-toast-text">How should the attached file be shared?</div>
             <div style="display:flex">
-            <md-select ng-model="shareSelect" >
+            <md-select ng-model="shareSelect" style="margin:8px">
                 <md-option value="view">
                     York students can view
                 </md-option>
