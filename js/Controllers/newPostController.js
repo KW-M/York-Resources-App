@@ -298,4 +298,7 @@
             $scope.Post.PreviewImage = originalPost.PreviewImage || ''
             $mdDialog.hide();
         };
+        $scope.hideToast = function(){
+            $mdToast.hide();
+        }
     }
