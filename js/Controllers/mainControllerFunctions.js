@@ -215,7 +215,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             }
             $timeout(function() { //makes angular update values
                $scope.classList = catagoryList;
-               $scope.staredClasses = stare;
                console.log(catagoryList)
                console.log($scope.allLabels)
                console.log($scope.allTeachers)
