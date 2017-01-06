@@ -160,34 +160,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          var sheetsAPI = gapi.client.load('https://sheets.googleapis.com/$discovery/rest?version=v4').then(function() {
             return GoogleDriveService.getWholeSpreadsheet()
          }).then(function(rawClassesSheet) {
-            var catagoryList = [{
-               'Color': 'hsla(200, 70%, 75%,',
-               'Catagory':'Hidden',
-               'Classes': [{
-                  'Name': 'Other',
-               }]
-            }, {
-               'Color': 'hsla(114, 89%, 42%,',
-               'Classes': [{
-                  'Name': 'Your Posts',
-                  'rules': " ",
-               }, {
-                  'Name': 'Memes',
-                  'rules': "What are you doing here?",
-               }]
-            }, {
-               'Color': 'hsla(15, 95%, 65%,',
-               'Classes': [{
-                  'Name': 'Flagged Posts',
-                  'rules': "UNaccepabed",
-               }]
-            }, {
-               'Color': 'hsla(229, 46%, 49%,', 
-               'Classes': [{
-                  'Name': 'Quizlet',
-                  'rules': "Quizlet sets for york.",
-               }]
-            }];
+            var catagoryList = [];
             var catagorySheets = rawClassesSheet.result.sheets;
             try {
                var rows = catagorySheets[0].data[0].rowData
@@ -223,14 +196,14 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                }
                for (var SheetNum = 2; SheetNum < catagorySheets.length; SheetNum++) {
                   var rows = catagorySheets[SheetNum].data[0].rowData
-                  catagoryList[SheetNum + 2] = {
+                  catagoryList[SheetNum - 2] = {
                      'Catagory': catagorySheets[SheetNum].properties.title,
                      'Color': rows[2].values[0].formattedValue,
                      'Classes': []
                   }
                   for (var RowNum = 1; RowNum < rows.length; RowNum++) {
                      var Row = rows[RowNum].values
-                     catagoryList[SheetNum + 2].Classes[RowNum - 1] = {
+                     catagoryList[SheetNum - 2].Classes[RowNum - 1] = {
                         Name: Row[1].formattedValue,
                         Rules: (Row[2] !== undefined) ? Row[2].formattedValue || null : null,
                      }
@@ -242,6 +215,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             }
             $timeout(function() { //makes angular update values
                $scope.classList = catagoryList;
+               $scope.staredClasses = stare;
                console.log(catagoryList)
                console.log($scope.allLabels)
                console.log($scope.allTeachers)
