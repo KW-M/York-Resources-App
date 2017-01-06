@@ -188,13 +188,19 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		if (className == 'All Posts'){
 			
 		} else if (className == 'All Posts') {
-			
+			return({
+				Name: 'All Posts',
+				Color: 
+			})
 		} else if (className == 'Your Posts') {
+			
 		} else if (className == 'Flagged Posts') {
+			
 		} else if (className == 'Quizlet') {
+			
 		} else if (className == 'Memes') {
-		} else if (className == 'All Posts') {
-		
+			
+		} else {
 		for (var Catagories = 0; Catagories < $scope.classList.length; Catagories++) {
 			for (var ClassNum = 0; ClassNum < $scope.classList[Catagories].Classes.length; ClassNum++) {
 				var Class = $scope.classList[Catagories].Classes[ClassNum]
@@ -204,6 +210,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 					return (Class)
 				}
 			}
+		}
 		}
 		console.warn('could not find class: ' + className);
 	};
