@@ -3,7 +3,7 @@
         <md-list>
             <md-list-item>
                 <md-menu-item>
-                    <md-button ng-click="::gotoRoute({classPath: '/all-posts'})" ng-class="{ 'selected' : $location.path() === '/all-posts' }">
+                    <md-button ng-click="::gotoRoute({classPath: 'All Posts'})" ng-class="{ 'selected' : $scope.queryParams.classpath == 'All Posts' }">
                         <md-icon class="md-accent">inbox</md-icon>
                         All Posts
                     </md-button>
@@ -11,17 +11,25 @@
             </md-list-item>
             <md-list-item>
                 <md-menu-item>
-                    <md-button ng-click="::gotoRoute({classPath: '/my-posts'})" ng-class="{ 'selected' : $location.path() === '/my-posts' }">
+                    <md-button ng-click="::gotoRoute({classPath: 'Your Posts'})" ng-class="{ 'selected' : $scope.queryParams.classpath == 'Your Posts' }">
                         <md-icon style="color: rgb(25,157,9)">person</md-icon>
-                        My Posts
+                        Your Posts
                     </md-button>
                 </md-menu-item>
             </md-list-item>
             <md-list-item>
                 <md-menu-item>
-                    <md-button ng-click="::gotoRoute({classPath: '/flagged'})" ng-class="{ 'selected' : $location.path() === '/flagged' }">
+                    <md-button ng-click="::gotoRoute({classPath: 'Flagged Posts'})" ng-class="{ 'selected' : $scope.queryParams.classpath == 'Flagged Posts' }">
                         <md-icon class="md-warn">flag</md-icon>
-                        Flagged
+                        Flagged Posts
+                    </md-button>
+                </md-menu-item>
+            </md-list-item>
+            <md-list-item>
+                <md-menu-item>
+                    <md-button ng-click="::gotoRoute({classPath: 'Quizlet'})" ng-class="{ 'selected' : $scope.queryParams.classpath == 'Quizlet' }">
+                        <md-icon md-svg-src="images/quizlet_logo.svg" style="color: #4257b2;"></md-icon>
+                        Quizlet
                     </md-button>
                 </md-menu-item>
             </md-list-item>
@@ -48,18 +56,22 @@
             </md-list-item>
             <md-list>
                 <div flex layout="column" ng-hide="sideNavClassSearch">
-                    <md-button class="side-nav-class" ng-click="gotoRoute({classPath: '/other'})" ng-class="{ 'selected' : $location.path() === '/other' }">
-                        Other / Not associated
+                    <md-button ng-repeat="favClass in myInfo.StaredClasses" class="side-nav-class" ng-click="gotoRoute({classPath: favClass})" ng-class="{ 'selected' : queryParams.classpath == favClass }">
+                        {{favClass}}
+                    </md-button>
+                    <md-button class="side-nav-class" ng-click="gotoRoute({classPath: 'Other'})" ng-class="{ 'selected' : queryParams.classpath == 'Other' }">
+                        Other
                     </md-button>
                 </div>
-                <div ng-repeat="Catagory in classList" flex layout="column">
-                    <label ng-hide="sideNavClassSearch" class="side-nav-header">{{Catagory.Catagory}}</label>
-                    <md-button class="side-nav-class" ng-repeat="Class in Catagory.Classes | filter:sideNavClassSearch" ng-click="gotoRoute({classPath: '/' + Class})" ng-class="{ 'selected' : $location.path() === '/' + Class }">
-                        {{Class}}
+                <div ng-repeat="navCatagory in classList" flex layout="column" ng-hide="navCatagory.Catagory === undefined">
+                    <label ng-hide="sideNavClassSearch" class="side-nav-header" ng-style="::{'background-color': navCatagory.Color + ' 1)'}">{{navCatagory.Catagory}}</label>
+                    <md-button class="side-nav-class" ng-repeat="navClass in navCatagory.Classes | filter:sideNavClassSearch" ng-click="gotoRoute({classPath: navClass.Name})" ng-class="{ 'selected' : queryParams.classPath == navClass.Name }">
+                        {{navClass.Name}}
                     </md-button>
                 </div>
             </md-list>
         </md-list>
+        <div style="text-align: center;">Think a class or teacher is missing? <md-button ng-click="openFeedbackDialog()">Tell us about it.</md-button></div>
     </div>
 </div>
 <div class="side-nav-bottom">

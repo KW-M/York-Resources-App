@@ -13,8 +13,8 @@ function authService($mdDialog) {
 
     this.initilize = function(callback) {
         gapi.auth2.init({
-            client_id: '475444543746-e3r02g1o1o71kliuoohah04ojqbmo22e.apps.googleusercontent.com',
-            scope: 'https://www.googleapis.com/auth/drive email',
+            client_id: '632148950209-60a3db9qm6q31sids128mvstddg2qme7.apps.googleusercontent.com',
+            scope: 'email https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.install',
             fetch_basic_profile: false,
             hosted_domain: 'york.org'
         })
@@ -56,6 +56,8 @@ function authService($mdDialog) {
             signinButton.addClass('fadeIn');
             datButton.style.display = 'none';
         }, 500);
+        console.log(signinDialog)
+        signinDialog[0].style.zIndex = "2000"
     };
 
     this.hideSigninButton = function() {

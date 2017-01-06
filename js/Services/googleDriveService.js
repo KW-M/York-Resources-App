@@ -33,14 +33,16 @@ app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
     //----------------------------------------------------
     //----------------- Spreadsheets ---------------------
 
-    this.getSpreadsheetRange = function(range, classSheet) {
-        if (classSheet) {
-            var spreadsheetId = URLs.classSpreadsheetId;
-        } else {
-             var spreadsheetId = URLs.userSpreadsheetId;
-        }
+    this.getWholeSpreadsheet = function(range) {
+        return (gapi.client.sheets.spreadsheets.get({
+            spreadsheetId: URLs.classSpreadsheetId,
+            fields: 'sheets(data/rowData/values/formattedValue,properties/title)',
+        }));
+    }
+
+    this.getSpreadsheetRange = function(range) {
         return (gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: spreadsheetId,
+            spreadsheetId: URLs.userSpreadsheetId,
             range: range,
         }));
     }
@@ -49,18 +51,21 @@ app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
         return (gapi.client.sheets.spreadsheets.values.update({
             spreadsheetId: URLs.userSpreadsheetId,
             range: range,
+            includeValuesInResponse: true,
             valueInputOption: "USER_ENTERED",
             values: [dataToBeInserted],
         }));
     }
 
-    this.appendSpreadsheetRange = function(range, dataToBeInserted) {
-        return (gapi.client.sheets.spreadsheets.values.append({
-            spreadsheetId: URLs.userSpreadsheetId,
+    this.appendSpreadsheetRange = function(range, dataToBeInserted, spreadsheetName) {
+        console.log(dataToBeInserted);
+        return gapi.client.sheets.spreadsheets.values.append({
+            spreadsheetId: spreadsheetName == 'user' ? URLs.userSpreadsheetId : URLs.classSpreadsheetId,
             range: range,
+            includeValuesInResponse: true,
             valueInputOption: "USER_ENTERED",
             values: [dataToBeInserted],
-        }));
+        })
     }
 
     //----------------------------------------------------
@@ -116,12 +121,14 @@ app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
         }));
     };
 
-    this.shareFileLink = function(fileID) {
+    this.shareFileDomain = function(fileID,role) {
         return (gapi.client.drive.permissions.create({
             fileId: fileID,
-            type: "domain",
-            role: 'reader',
+            type: 'domain',
+            role: role,
             sendNotificationEmail: false,
+            allowFileDiscovery: false,
+            domain: 'york.org',
         }));
     };
 
@@ -137,3 +144,6 @@ app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
     }
 
 }]);
+window.HelloWorld = 'FUNCTION()'
+
+

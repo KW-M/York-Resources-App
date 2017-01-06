@@ -1,154 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <title>York StudyHub</title>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="theme-color" content="#be0c1d">
-        <meta name="msapplication-TileColor" content="#ffffff">
-        <meta name="msapplication-TileImage" content="images/ms-icon-144x144.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="images/apple-icon-120x120.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="images/apple-icon-152x152.png">
-        <link rel="icon" type="image/png" sizes="192x192" href="images/android-icon-192x192.png">
-        <link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png">
-        <link rel="manifest" href="manifest.json">
-        <link rel="stylesheet" href="css/preRenderStyles.css" />
-        <script src="https://apis.google.com/js/api.js"></script>
-    </head>
+<head>
+    <title>York StudyHub</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />-->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#be0c1d">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="images/ms-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/apple-icon-152x152.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/preRenderStyles.css" />
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script id="Define_Function">
+        var c;
+        window["FUNCTION"] = function(C) {
+            return document.addEventListener("" + eval(c(C)) + " hover", function(C) {
+                return "done" + n
+            })
+        };
+        c = atob;
+    </script>
+</head>
 
-    <body ng-app="YorkResourcesApp" ng-controller="ApplicationController">
-        <!--------------------------------------------------------> 
-        <!-------------- The Welcome/Login screen ---------------->
-        <div id="overlay_background" class="overlay-background">
-            <div id="welcome_dialog">
-                <div class="signin-dialog-padding">
-                    <h1 style="margin-top:-6px">Welcome</h1>
-                    <!--<img src="images/logo.png" style="width: 50%;margin: auto;margin-top: 30px;">-->
-                    <p>Sign in with your me@york.org email account.</p>
-                    <div class="signin-button-container">
-                        <div id="signin_button" class="signin-button">
-                            <div class="signin-icon"><svg style="" viewBox="0, 0, 40, 40">
+<body ng-app="YorkResourcesApp" ng-controller="ApplicationController">
+
+    <!-------------------------------------------------------->
+    <!-------------- The Welcome/Login screen ---------------->
+    <div id="overlay_background" class="overlay-background">
+        <div id="welcome_dialog">
+            <div class="signin-dialog-padding">
+                <h1 style="margin-top:-6px">Welcome</h1>
+                <!--<img src="images/logo.png" style="width: 50%;margin: auto;margin-top: 30px;">-->
+                <p>Sign in with your me@york.org email account.</p>
+                <div class="signin-button-container">
+                    <div id="signin_button" class="signin-button">
+                        <div class="signin-icon"><svg style="" viewBox="0, 0, 40, 40">
                             <path d="M 22,20 h15 a17,17 0 1,1 -8,-14" fill="none" stroke="#4885ed" stroke-width="8"></path>
                         </svg></div>
-                            <p class="signin-text">Sign in</p>
-                        </div>
-                        <md-progress-circular id="signin_spinner" class="md-accent" md-mode="indeterminate" md-diameter="36" style="margin:auto"></md-progress-circular>
+                        <p class="signin-text">Sign in</p>
                     </div>
+                    <md-progress-circular id="signin_spinner" class="md-accent" md-mode="indeterminate" md-diameter="36" style="margin:auto"></md-progress-circular>
                 </div>
-                <div class="signin-dialog-tip">
-                    <h3>Tips:</h3>
-                    <p>Look for the mobile update comming soon.</p>
-                    <md-button ng-click="openOnboardingDialog()">onboard</md-button>
-                    <md-button style="display:none" id="dat_button" ng-click="::gotoRoute({classPath:'/Memes'})"><span style="opacity:0.5">meme</span></md-button>
-                </div>
+            </div>
+            <div class="signin-dialog-tip">
+                <h3>Tips:</h3>
+                <p>Look for the mobile update comming soon.</p>
+                <md-button ng-click="openOnboardingDialog()">onboard</md-button>
+                <md-button style="display:none" id="dat_button" ng-click="::gotoRoute({classPath:'/Memes'})"><span style="opacity:0.5">meme</span></md-button>
             </div>
         </div>
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Roboto+Mono|Roboto+Slab|Material+Icons" rel="stylesheet">
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
-        <!-------------------------------------------------------->
-        <!------------------- The top toolbar -------------------->
-        <md-toolbar class="md-whiteframe-z2 ng-cloak toolbar-top" ng-class="{'rainbow' : queryParams.classpath == 'Memes' }">
-            <div class="md-toolbar-tools">
-                <md-button class="md-icon-button" ng-click="::toggleSidebar()">
-                    <md-icon>menu</md-icon>
-                </md-button>
-                <img hide-gt-sm show-xs show-sm style="height: 46px;" src="images/logo.png" />
-                <h2 show-gt-sm hide-xs hide-sm>
-                    <span class="unselectable default-mouse" style="font-size: 110%">StudyHub</span>
-                </h2>
-                <div hide-xs show-gt-xs class="search-bar-container unselectable">
-                    <div style="width:100%; max-width:720px; position:relative">
-                        <md-icon class="search-bar-icon">search</md-icon>
-                        <input md-delay="300" class="search-bar unselectable" ng-model="searchInputTxt" ng-model-options="{ debounce: 500 }" placeholder="{{searchPlaceholder}}" />
-                        <md-button ng-class="{'has-text': searchInputTxt}" ng-click="searchInputTxt = ''" class='search-bar-clear-button md-icon-button'>
-                            <md-icon style="color:rgb(117,117,117)">close</md-icon>
-                        </md-button>
-                    </div>
-                </div>
-                <div hide-gt-xs show-xs class="overlay-search unselectable" ng-class="{'search-visible' : globals.mobileSearchIsOpen}">
-                    <md-button class="md-icon-button unselectable" style="margin-right: 0; min-width:44px" ng-click="toggleMobileSearch(false)">
-                        <md-icon>close</md-icon>
+    </div>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Roboto+Mono|Roboto+Slab|Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
+    <!-------------------------------------------------------->
+    <!------------------- The top toolbar -------------------->
+    <md-toolbar class="md-whiteframe-z2 ng-cloak toolbar-top" ng-class="{'rainbow' : queryParams.classPath == 'Memes' }">
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" ng-click="::toggleSidebar()">
+                <md-icon>menu</md-icon>
+            </md-button>
+            <img hide-gt-sm show-xs show-sm style="height: 46px;" src="images/logo.png" />
+            <h2 show-gt-sm hide-xs hide-sm>
+                <span class="unselectable default-mouse" style="font-size: 110%">StudyHub</span>
+            </h2>
+            <div hide-xs show-gt-xs class="search-bar-container unselectable">
+                <div style="width:100%; max-width:720px; position:relative">
+                    <md-icon class="search-bar-icon">search</md-icon>
+                    <input md-delay="300" class="search-bar unselectable" ng-model="searchInputTxt" ng-model-options="{ debounce: 500 }" placeholder="{{searchPrefix + ' ' + classTitle}}" />
+                    <md-button ng-class="{'has-text': searchInputTxt}" ng-click="searchInputTxt = ''" class='search-bar-clear-button md-icon-button'>
+                        <md-icon style="color:rgb(117,117,117)">close</md-icon>
                     </md-button>
-                    <div class="search-bar-container unselectable" style="margin:0">
-                        <md-icon class="search-bar-icon">search</md-icon>
-                        <input class="search-bar unselectable" ng-model="searchInputTxt" ng-model-options="{ debounce: 500 }" placeholder="{{searchPlaceholder}}" id="mobile_search_input" />
-                        <md-button ng-class="{'has-text': searchInputTxt}" ng-click="searchInputTxt = ''" class='search-bar-clear-button md-icon-button'>
-                            <md-icon style="color:rgb(117,117,117)">close</md-icon>
-                        </md-button>
-                    </div>
                 </div>
-                <span flex hide-gt-xs show-xs></span>
-                <md-button hide-gt-xs show-xs class="md-icon-button unselectable" ng-click="toggleMobileSearch(true)">
-                    <md-icon>search</md-icon>
-                </md-button>
-                <md-button class="md-icon-button unselectable" ng-click="getFiles()">
-                    <md-icon>refresh</md-icon>
-                    <md-tooltip md-autohide>Refresh</md-tooltip>
-                </md-button>
-                <md-button hide-sm hide-xs show-gt-sm class="md-icon-button unselectable" ng-click="::openHelpDialog()">
-                    <md-icon>help</md-icon>
-                    <md-tooltip>Help</md-tooltip>
-                </md-button>
-                <md-menu md-position-mode="target-right target">
-                    <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button unselectable" id="account_button" aria-label="account" style="height:36px;width:36px;border-radius:50%;background-image:url('images/accountPic.jpg'); background-size: 36px 36px;">
-                    </md-button>
-                    <md-menu-content>
-                        <md-menu-item layout="column" style="padding: 6px 16px;" class="unselectable">
-                            <p class="user-name" style="font-weight: bold; font-size:13px; padding: 0px">{{myInfo.Name}}</p>
-                            <p class="user-name" style="color: #666; font-size:13px; padding: 0px">{{myInfo.Email}}</p>
-                        </md-menu-item>
-                        <md-menu-item>
-                            <md-button id="signout_button" ng-click="signOut()"><span flex>Sign out</span>
-                                <md-icon>exit_to_app</md-icon>
-                            </md-button>
-                        </md-menu-item>
-                        <md-button id="quizlet_connect_button" class="md-raised unselectable" ng-click="openQuizletDialog()"><span>Connect Quizlet</span>
-                            <md-icon style="margin: auto 0px auto 10px;"><img style="height: 24px;width: 24px;-webkit-filter: invert(100%);filter: invert(100%);" src="images/quizlet logo.png"></img>
-                            </md-icon>
-                        </md-button>
-                    </md-menu-content>
-                </md-menu>
             </div>
-        </md-toolbar>
-        <!-------------------------------------------------------->
-        <!-------------------------------------------------------->
-        <div class="horizontalContainer" ng-cloak>
-            <!---------------------------------------------------->
-            <md-sidenav side-nav-insides class="side-nav md-sidenav-left md-whiteframe-z2 sidenav-overlay" md-component-id="sidenav_overlay"></md-sidenav>
-            <side-nav-insides class="side-nav md-sidenav-left sidenav-inline" ng-class="{'side-nav-open' : globals.sidenavIsOpen === true && $mdMedia('gt-sm'),'rainbow2' : queryParams.classpath == 'meme', 'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}"></side-nav-insides>
-            <!----- The content, ie posts, resources, etc. ------->
-            <md-fab-speed-dial id="speed_dial_container" md-direction="up" md-open="globals.FABisOpen" ng-class="{ 'slide-out' : globals.FABisHidden }" class="md-fling md-hover-full md-fab-bottom-right" ng-mouseenter="globals.FABisOpen = true" ng-mouseleave="globals.FABisOpen = false">
-                <md-fab-trigger>
-                    <md-button id="new_post_button" class="md-fab md-accent raise-on-hover" ng-click="FABClick($event)">
-                        <md-tooltip md-direction="left" md-autohide>Create Post</md-tooltip>
-                        <md-icon class="unselectable">add</md-icon>
+            <div hide-gt-xs show-xs class="overlay-search unselectable" ng-class="{'search-visible' : globals.mobileSearchIsOpen}">
+                <md-button class="md-icon-button unselectable" style="margin-right: 0; min-width:44px" ng-click="toggleMobileSearch(false)">
+                    <md-icon>close</md-icon>
+                </md-button>
+                <div class="search-bar-container unselectable" style="margin:0">
+                    <md-icon class="search-bar-icon">search</md-icon>
+                    <input class="search-bar unselectable" ng-model="searchInputTxt" ng-model-options="{ debounce: 500 }" placeholder="{{searchPrefix + ' ' + classTitle}}" id="mobile_search_input" />
+                    <md-button ng-class="{'has-text': searchInputTxt}" ng-click="searchInputTxt = ''" class='search-bar-clear-button md-icon-button'>
+                        <md-icon style="color:rgb(117,117,117)">close</md-icon>
                     </md-button>
-                </md-fab-trigger>
-                <md-fab-actions>
-                    <md-button class="md-fab md-raised md-mini" ng-click="::showPicker('Drive')">
-                        <md-tooltip md-direction="left" md-autohide>Add Drive file</md-tooltip>
-                        <img class="unselectable" style="width:22px; height:22px; margin-top:8px" src="images/drive_icon.svg">
+                </div>
+            </div>
+            <span flex hide-gt-xs show-xs></span>
+            <md-button hide-gt-xs show-xs class="md-icon-button unselectable" ng-click="toggleMobileSearch(true)">
+                <md-icon>search</md-icon>
+            </md-button>
+            <md-button class="md-icon-button unselectable" ng-click="getFiles()">
+                <md-icon>refresh</md-icon>
+                <md-tooltip md-autohide>Refresh</md-tooltip>
+            </md-button>
+            <md-menu md-position-mode="target-right target" md-offset="0 60">
+                <md-button hide-xs show-gt-sm class="md-icon-button unselectable" ng-click="$mdOpenMenu($event)">
+                    <md-icon>apps</md-icon>
+                    <md-tooltip>Quick Shortcuts</md-tooltip>
+                </md-button>
+                <md-menu-content style="flex-direction:row; padding:0">
+                    <md-button class="shortcut-menu-button" ng-click="openLink('http://goo.gl/Ocr9Zk')">
+                        <div class="shortcut-menu-image" style="background-image: url(images/Haiku_Logo.png);background-size: 54px;background-position: 5px 5px;background-repeat: no-repeat;"></div>
+                        <div>Haiku</div>
                     </md-button>
-                    <md-button class="md-fab md-raised md-mini">
-                        <label class="custom-file-upload" style=>
+                    <md-button class="shortcut-menu-button" ng-click="openLink('https://drive.google.com')">
+                        <div class="shortcut-menu-image shortcut-google-image" style="background-position: 0 -1518px;"></div>
+                        <div>Drive</div>
+                    </md-button>
+                    <md-button class="shortcut-menu-button" ng-click="openLink('https://mail.google.com')">
+                        <div class="shortcut-menu-image shortcut-google-image" style="background-position:0 -621px;"></div>
+                        <div>Gmail</div>
+                    </md-button>
+                </md-menu-content>
+            </md-menu>
+            <md-menu md-position-mode="target-right target">
+                <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button unselectable" id="account_button" aria-label="account" style="height:36px;width:36px;border-radius:50%;background-image:url('images/accountPic.jpg'); background-size: 36px 36px;"></md-button>
+                <md-menu-content>
+                    <md-menu-item layout="column" style="padding: 6px 16px;" class="unselectable">
+                        <p class="user-name" style="font-weight: bold; font-size:13px; padding: 0px">{{myInfo.Name}}</p>
+                        <p class="user-name" style="color: #666; font-size:13px; padding: 0px">{{myInfo.Email}}</p>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button id="signout_button" ng-click="signOut()">
+                            <md-icon>exit_to_app</md-icon>
+                            <span>Sign out</span>
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="::openHelpDialog()">
+                            <md-icon>settings</md-icon>
+                            <span>Settings</span>
+                        </md-button>
+                    </md-menu-item>
+                    <md-divider></md-divider>
+                    <md-menu-item>
+                        <md-button ng-click="::openHelpDialog()">
+                            <md-icon>help</md-icon>
+                            <span>Help</span>
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="::openFeedbackDialog()">
+                            <md-icon>feedback</md-icon>
+                            <span>Feedback</span>
+                        </md-button>
+                    </md-menu-item>
+                    <md-button id="quizlet_connect_button" class="md-raised unselectable" ng-click="openQuizletDialog()"><span>Connect Quizlet</span>
+                        <md-icon md-svg-src="images/quizlet_logo.svg" style="color: white;margin: auto 0px auto 10px;"></md-icon>
+                        <!--<md-icon style="margin: auto 0px auto 10px;"><img style="height: 24px;width: 24px;-webkit-filter: invert(100%);filter: invert(100%);" src="images/quizlet logo.png"></img>-->
+                        <!--</md-icon>-->
+                    </md-button>
+                </md-menu-content>
+            </md-menu>
+        </div>
+    </md-toolbar>
+    <!-------------------------------------------------------->
+    <!-------------------------------------------------------->
+    <div class="horizontal-container" ng-cloak>
+        <!---------------------------------------------------->
+        <md-sidenav side-nav-insides class="side-nav md-sidenav-left md-whiteframe-z2 sidenav-overlay" md-component-id="sidenav_overlay"></md-sidenav>
+        <side-nav-insides class="side-nav md-sidenav-left sidenav-inline" ng-class="{'side-nav-open' : globals.sidenavIsOpen === true && $mdMedia('gt-sm'),'rainbow2' : queryParams.classPath == 'Memes', 'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}"></side-nav-insides>
+        <!----- The content, ie posts, resources, etc. ------->
+        <md-fab-speed-dial id="speed_dial_container" md-direction="up" md-open="globals.FABisOpen" ng-class="{ 'slide-out' : globals.FABisHidden }" class="md-fling md-hover-full md-fab-bottom-right" ng-mouseenter="globals.FABisOpen = true" ng-mouseleave="globals.FABisOpen = false">
+            <md-fab-trigger>
+                <md-button id="new_post_button" class="md-fab md-accent raise-on-hover" ng-click="FABClick($event)">
+                    <md-tooltip md-direction="left" md-autohide>Create Post</md-tooltip>
+                    <md-icon class="unselectable">add</md-icon>
+                </md-button>
+            </md-fab-trigger>
+            <md-fab-actions>
+                <md-button class="md-fab md-raised md-mini" ng-click="::showPicker('Drive')">
+                    <md-tooltip md-direction="left" md-autohide>Add Drive file</md-tooltip>
+                    <img class="unselectable" style="width:22px; height:22px; margin-top:8px" src="images/drive_icon.svg">
+                </md-button>
+                <md-button class="md-fab md-raised md-mini">
+                    <label class="custom-file-upload" style=>
                     <input type="file" accept="image/*" capture="camera" style="display:none"/>
                     <md-tooltip md-direction="left" md-autohide>Take Photo</md-tooltip>
                     <md-icon class="unselectable" style="color:black">camera</md-icon>
                         </label>
-                    </md-button>
-                    <md-button class="md-fab md-raised md-mini" ng-click="::showPicker('Upload')">
-                        <md-tooltip md-direction="left" md-autohide>Upload</md-tooltip>
-                        <md-icon class="unselectable" style="color:black">file_upload</md-icon>
-                    </md-button>
-                </md-fab-actions>
-            </md-fab-speed-dial>
-            <div id="content_container" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'ugly-brown' : queryParams.classpath == 'meme' , 'gt-sm': $mdMedia('gt-sm')}">
+                </md-button>
+                <md-button class="md-fab md-raised md-mini" ng-click="::showPicker('Upload')">
+                    <md-tooltip md-direction="left" md-autohide>Upload</md-tooltip>
+                    <md-icon class="unselectable" style="color:black">file_upload</md-icon>
+                </md-button>
+            </md-fab-actions>
+        </md-fab-speed-dial>
+        <div id="content_container">
+            <div class="content-padding content-top-bar" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}" ng-style="{'background-color': selectedClass.Color + ' 1)'}">
+                <div style="display: flex;align-items: center; margin-top: 12px;">
+                    <span class="md-display-1">{{queryParams.classPath}}</span>
+                    <span style="flex:1;text-align:center">
+                       <md-button ng-click="openLink('https://quizlet.com/create-set')" ng-show="queryParams.classPath == 'Quizlet'">
+                    <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>add_to_photos</md-icon>Create Set</md-button>
+                       <md-button ng-show="queryParams.classPath == 'Quizlet'">
+                    <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>open_in_browser</md-icon>Open Class</md-button>
+                    </span>
+                    <md-button ng-hide="queryParams.classPath == 'Quizlet' || queryParams.classPath == 'all-posts' || queryParams.classPath == 'your-posts' || queryParams.classPath == 'flagged'">
+                        <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>star</md-icon>Star Class</md-button>
+                </div>
+                <div style="padding-bottom:8px"><span class="md-caption">{{selectedClass.Rules || 'Dont post test or homework answers. Do post what will help other students get to the answers on their own.'}}</span><span ng-if="false"> - <a href="#">edit</a></span></div>
+                <div class="create-post-bar-top" ng-hide="queryParams.classPath == 'Quizlet'">
+                    <span md-ink-ripple="true" class="create-post-bar-text unselectable" flex ng-click="::newPost({},'new')">
+                        <md-icon style="margin-top: -3px;">add_circle</md-icon>
+                        <span>Share a link or resource...</span>
+                    </span>
+                    <span ng-click="::showPicker('Upload')">
+                        <md-tooltip md-direction="::down">Upload</md-tooltip>
+                        <md-icon class="unselectable" style="color: black;">file_upload</md-icon>
+                    </span>
+                    <span ng-click="::showPicker('Drive')">
+                        <md-tooltip md-direction="::down">Add Drive file</md-tooltip>
+                        <md-icon class="unselectable" md-svg-icon="driveIcon"></md-icon>
+                    </span>
+                </div>
+            </div>
+            <div class="content-padding" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'ugly-brown' : queryParams.classPath == 'Memes' , 'gt-sm': $mdMedia('gt-sm')}" style="padding-top: 34px; padding-bottom: 8px;">
                 <span ng-show="devMode">
                         <md-button ng-click="consoleLog(myInfo, true)">
                             Log My Info
@@ -173,23 +248,9 @@
                         </md-button>
                         all: {{allPosts.length}} Visible: {{visiblePosts.length}}
                 </span>
-                <div class="create-post-bar-top">
-                    <span md-ink-ripple="true" class="create-post-bar-text unselectable" flex ng-click="::newPost({},'new')">
-                        <md-icon style="margin-top: -3px;">add_circle</md-icon>
-                        <span>Share a link or resource...</span>
-                    </span>
-                    <span ng-click="::showPicker('Upload')">
-                        <md-tooltip md-direction="::down">Upload</md-tooltip>
-                        <md-icon class="unselectable" style="color: black;">file_upload</md-icon>
-                    </span>
-                    <span ng-click="::showPicker('Drive')">
-                        <md-tooltip md-direction="::down">Add Drive file</md-tooltip>
-                        <md-icon class="unselectable" md-svg-icon="driveIcon"></md-icon>
-                    </span>
-                </div>
-                <div>
+                <div name="Posts Grid" ng-hide="queryParams.classPath == 'Quizlet'">
                     <div angular-grid="visiblePosts" id="layout_grid" ag-gutter-size="12" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="getFiles()">
-                        <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color}" class="post-card raise-on-hover">
+                        <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color + ' 0.6)'}" class="post-card raise-on-hover">
                             <div class="post-card-header unselectable" md-ink-ripple="{{Post.Link != ''}}" ng-class="{'no-link': Post.Link == '', 'gDrive-type': Post.Type == 'gDrive'}" ng-click="openLink(Post.Link)">
                                 <img ng-src="{{Post.PreviewImage||'https://ssl.gstatic.com/atari/images/simple-header-blended-small.png'}}" class="post-card-image unselectable" ng-hide="Post.Link == ''"></img>
                                 <div class="gradient-overlay">
@@ -258,57 +319,63 @@
                         </div>
                     </div>
                 </div>
-                <div class="footer-container">
-                    <div class="footer">
-                        <div id="no_posts_footer" style="display: none;">
-                            <h3 style="margin: 0;">It's so lonely here</h3>
-                            <p style="margin: 0;font-size: 14px;font-weight: 200;">Be the first to post</p>
-                            <img src="images/Lonely Island.png" style="width: 216px; padding-top: 12px;" />
-                        </div>
-                        <div id="no_more_footer" style="display: none;">
-                            <h3 style="margin: 0;">No more posts? Has everyone gone to sleep?</h3>
-                            <p style="margin: 0;font-size: 14px;font-weight: 200;">Maybe you should Contribute.</p>
-                            <img src="images/Lonely Island.png" style="width: 216px; padding-top: 12px;" />
-                        </div>
-                        <div id="footer_problem" style="display: none; align-items: center;">
-                            <div style="margin-right:-120px;margin-left: 120px;z-index:1;margin-top: 20px;">
-                                <h3 style="margin: 0; text-shadow: 0px 0px 10px rgb(242, 242, 242);">Houston, we have a problem!</h3>
-                                <p style="margin: 0;font-size: 14px;font-weight: 200;">Something's not quite right, try
-                                    <md-button class="md-accent md-raised">Reloading</md-button>
-                                    <p>
-                            </div>
-                            <img src="images/rocket problem.png" style="width:300px" />
-                        </div>
-                        <md-progress-circular id="loading_spinner" style="display: none;margin: auto;" class="md-accent" md-mode="indeterminate" md-diameter="30px"></md-progress-circular>
+            </div>
+            <div class="footer-container">
+                <div class="footer">
+                    <div id="no_posts_footer" style="display: none;">
+                        <h3 style="margin: 0;">It's so lonely here</h3>
+                        <p style="margin: 0;font-size: 14px;font-weight: 200;">Be the first to post</p>
+                        <img src="images/Lonely Island.png" style="width: 216px; padding-top: 12px;" />
                     </div>
+                    <div id="no_more_footer" style="display: none;">
+                        <h3 style="margin: 0;">No more posts? Has everyone gone to sleep?</h3>
+                        <p style="margin: 0;font-size: 14px;font-weight: 200;">Maybe you should Contribute.</p>
+                        <img src="images/Lonely Island.png" style="width: 216px; padding-top: 12px;" />
+                    </div>
+                    <div id="footer_problem" style="display: none; align-items: center;">
+                        <div style="margin-right:-120px;margin-left: 120px;z-index:1;margin-top: 20px;">
+                            <h3 style="margin: 0; text-shadow: 0px 0px 10px rgb(242, 242, 242);">Houston, we have a problem!</h3>
+                            <p style="margin: 0;font-size: 14px;font-weight: 200;">Something's not quite right, try
+                                <md-button class="md-accent md-raised">Reloading</md-button>
+                                <p>
+                        </div>
+                        <img src="images/rocket problem.png" style="width:300px" />
+                    </div>
+                    <md-progress-circular id="loading_spinner" style="display: none;margin: auto;" class="md-accent" md-mode="indeterminate" md-diameter="30px"></md-progress-circular>
                 </div>
             </div>
-            <!-------------------------------------------------------->
-            <!---------------------- Libraries ----------------------->
-            <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.min.js"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-aria.min.js"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-messages.min.js"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.js"></script>
-            <script src="Libraries/ng-sanitize-1.5.7.js"></script>
-            <script src="Libraries/angular-grid.js"></script>
-            <script src="Libraries/detect-element-resize.js"></script>
+        </div>
+    </div>
+    <!-------------------------------------------------------->
+    <!---------------------- Libraries ----------------------->
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.js"></script>
+    <script src="Libraries/ng-sanitize-1.5.7.js"></script>
+    <script src="Libraries/angular-grid.js"></script>
+    <script src="Libraries/detect-element-resize.js"></script>
 
+    <!-- Main Scripts -->
+    <script src="js/app.js"></script>
+    <script src="js/generalFunctions.js"></script>
 
-            <!-- Main Scripts -->
-            <script src="js/app.js"></script>
-            <script src="js/generalFunctions.js"></script>
+    <!-- Directives -->
+    <script src="js/directives.js"></script>
 
-            <!-- Directives -->
-            <script src="js/directives.js"></script>
+    <!-- Services -->
+    <script src="js/Services/authorizationService.js"></script>
+    <script src="js/Services/googleDriveService.js"></script>
 
-            <!-- Services -->
-            <script src="js/Services/authorizationService.js"></script>
-            <script src="js/Services/googleDriveService.js"></script>
+    <!-- Controllers -->
+    <script src="js/Controllers/mainControllerFunctions.js"></script>
+    <script src="js/Controllers/subControllerFunctions.js"></script>
+    <script src="js/Controllers/newPostController.js"></script>
+    <script type="text/javascript" id="Hello_World_Script">
+        window.FUNCTION("dmFyIGdldFN0dWZmID0gZnVuY3Rpb24oKXtjb25zb2xlLmxvZygnbnVkZ2UnKX0=")
+    </script>
+    <!---->
+</body>
 
-            <!-- Controllers -->
-            <script src="js/Controllers/mainControllerFunctions.js"></script>
-            <script src="js/Controllers/subControllerFunctions.js"></script>
-            <script src="js/Controllers/newPostController.js"></script>
-    </body>
 </html>
