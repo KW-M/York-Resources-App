@@ -190,8 +190,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		} else if (className == 'All Posts') {
 			
 		} else if (className == 'Your Posts') {
-		} else if (className == 'All Posts') {
-		} else if (className == 'All Posts') {
+		} else if (className == 'Flagged Posts') {
+		} else if (className == 'Quizlet') {
 		} else if (className == 'All Posts') {
 		} else if (className == 'All Posts') {
 		
