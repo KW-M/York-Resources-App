@@ -55,7 +55,7 @@
                 </md-menu-item>
             </md-list-item>
             <md-list>
-                <div flex layout="column" ng-if="sideNavClassSearch">
+                <div flex layout="column" ng-if="!sideNavClassSearch">
                     <md-button ng-repeat="favClass in myInfo.StaredClasses" class="side-nav-class" ng-click="gotoRoute({classPath: favClass.Name})" ng-class="{ 'selected' : queryParams.classpath == favClass.Name }">
                         {{favClass.Name}}
                     </md-button>
@@ -68,7 +68,7 @@
                 </div>
             </md-list>
         </md-list>
-        <div style="text-align: center;">Think a class or teacher is missing? <md-button ng-click="openFeedbackDialog()">Tell us about it.</md-button></div>
+        <div style="text-align: center;" ng-if="sideNavClassSearch">Think a class or teacher is missing? <md-button ng-click="openFeedbackDialog()">Tell us about it.</md-button></div>
     </div>
 </div>
 <div class="side-nav-bottom">
