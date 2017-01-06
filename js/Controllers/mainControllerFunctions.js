@@ -185,7 +185,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                   'rules': "UNaccepabed",
                }]
             }, {
-               'Color': 'hsla(229, 46%, 49%,',
+               'Color': 'hsla(229, 46%, 49%,', 
                'Classes': [{
                   'Name': 'Quizlet',
                   'rules': "Quizlet sets for york.",

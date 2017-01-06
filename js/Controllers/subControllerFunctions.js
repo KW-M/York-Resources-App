@@ -91,12 +91,12 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		var formatedDriveMetadata
 		try {
 			var tagString, tagStringArray
-			Post.Labels.forEach(function(label,index){
-				var isComma = (index+1 != Post.Labels.length) ? ',' : '';
+			Post.Labels.forEach(function(label, index) {
+				var isComma = (index + 1 != Post.Labels.length) ? ',' : '';
 				tagString = tagString + label.text + isComma;
 			})
 			tagStringArray = tagString.match(/[\s\S]{1,116}/g) || [];
-							console.log(tagStringArray);
+			console.log(tagStringArray);
 			formatedDriveMetadata = {
 				name: (Post.Likes.length || 0) + '{]|[}' + Post.Title + '{]|[}' + (Post.Likes.join(",") || ""),
 				description: Post.Description + '{]|[}' + Post.Link + '{]|[}' + Post.PreviewImage,
@@ -185,32 +185,52 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}));
 	};
 	$scope.findClassObject = function(className) {
-		if (className == 'All Posts'){
-			
-		} else if (className == 'All Posts') {
-			return({
+		if (className == 'All Posts') {
+			return ({
 				Name: 'All Posts',
-				Color: 
+				Color: 'hsla(200, 70%, 75%,',
+				Catagory: null,
 			})
-		} else if (className == 'Your Posts') {
-			
-		} else if (className == 'Flagged Posts') {
-			
-		} else if (className == 'Quizlet') {
-			
-		} else if (className == 'Memes') {
-			
-		} else {
-		for (var Catagories = 0; Catagories < $scope.classList.length; Catagories++) {
-			for (var ClassNum = 0; ClassNum < $scope.classList[Catagories].Classes.length; ClassNum++) {
-				var Class = $scope.classList[Catagories].Classes[ClassNum]
-				if (Class.Name == className) {
-					Class.Color = $scope.classList[Catagories].Color
-					Class.Catagory = $scope.classList[Catagories].Catagory
-					return (Class)
+		}
+		else if (className == 'Your Posts') {
+			return ({
+				Name: 'Your Posts',
+				Color: 'hsla(114, 89%, 42%,',
+				Catagory: null,
+			})
+		}
+		else if (className == 'Flagged Posts') {
+			return ({
+				Name: 'Flagged Posts',
+				Color: 'hsla(15, 95%, 65%,',
+				Catagory: null,
+			})
+		}
+		else if (className == 'Quizlet') {
+			return ({
+				Name: 'Quizlet',
+				Color: 'hsla(229, 46%, 49%,',
+				Catagory: null,
+			})
+		}
+		else if (className == 'Memes') {
+			return ({
+				Name: 'Memes',
+				Color: 'hsla(200, 70%, 75%,',
+				Catagory: null,
+			})
+		}
+		else {
+			for (var Catagories = 0; Catagories < $scope.classList.length; Catagories++) {
+				for (var ClassNum = 0; ClassNum < $scope.classList[Catagories].Classes.length; ClassNum++) {
+					var Class = $scope.classList[Catagories].Classes[ClassNum]
+					if (Class.Name == className) {
+						Class.Color = $scope.classList[Catagories].Color
+						Class.Catagory = $scope.classList[Catagories].Catagory
+						return (Class)
+					}
 				}
 			}
-		}
 		}
 		console.warn('could not find class: ' + className);
 	};
@@ -321,45 +341,46 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			totalUsage: 1
 		}
 		var labelIndex = $scope.Post.Labels.length;
-		queue('sheets', GoogleDriveService.appendSpreadsheetRange('Labels!A2:A',[labelName,null,$scope.queryParams.classPath + ",1"],'class'), null, function(err) {
+		queue('sheets', GoogleDriveService.appendSpreadsheetRange('Labels!A2:A', [labelName, null, $scope.queryParams.classPath + ",1"], 'class'), null, function(err) {
 			$mdToast.showSimple('Error adding label, try again.');
-			$scope.Post.Labels.splice(labelIndex,1);
+			$scope.Post.Labels.splice(labelIndex, 1);
 		}, 2);
 		$timeout(function() {
 			$scope.labelSearch = "";
 			$scope.queryParams.labels.push(newLabel);
 		})
 	}
-	$scope.transferAllLabels = function(){
-		$scope.queryParams.labels.forEach(function(){
+	$scope.transferAllLabels = function() {
+		$scope.queryParams.labels.forEach(function() {
 			var label = $scope.Post.Labels.pop()
 			$scope.allLabels.push(label);
 		})
-		$timeout(function(){
+		$timeout(function() {
 			$scope.labelSearch = "";
-		    $scope.visibleLabels = $scope.sortLabels($scope.allLabels)
+			$scope.visibleLabels = $scope.sortLabels($scope.allLabels)
 		})
 	}
-	$scope.moveLabeltoActive = function(labelName){
-		$scope.allLabels.every(function(Label,Index){
-			if(Label.text == labelName) {
-				$scope.allLabels.splice(Index,1);
+	$scope.moveLabeltoActive = function(labelName) {
+		$scope.allLabels.every(function(Label, Index) {
+			if (Label.text == labelName) {
+				$scope.allLabels.splice(Index, 1);
 				$scope.Post.Labels.push(Label);
 				return false
-			} else {
+			}
+			else {
 				return true
 			}
 		})
-		$timeout(function(){
+		$timeout(function() {
 			$scope.labelSearch = "";
-		    $scope.visibleLabels = $scope.sortLabels($scope.allLabels)
+			$scope.visibleLabels = $scope.sortLabels($scope.allLabels)
 		})
 	}
-	$scope.moveLabeltoAllLabels = function(activeLabelIndex){
-		var label = $scope.queryParams.labels.splice(activeLabelIndex,1)
+	$scope.moveLabeltoAllLabels = function(activeLabelIndex) {
+		var label = $scope.queryParams.labels.splice(activeLabelIndex, 1)
 		$scope.allLabels.push(label[0]);
-		$timeout(function(){
-		    $scope.visibleLabels = $scope.sortLabels($scope.allLabels)
+		$timeout(function() {
+			$scope.visibleLabels = $scope.sortLabels($scope.allLabels)
 		})
 	}
 
