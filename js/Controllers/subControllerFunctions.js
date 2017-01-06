@@ -185,6 +185,16 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}));
 	};
 	$scope.findClassObject = function(className) {
+		if (className == 'All Posts'){
+			
+		} else if (className == 'All Posts') {
+			
+		} else if (className == 'Your Posts') {
+		} else if (className == 'All Posts') {
+		} else if (className == 'All Posts') {
+		} else if (className == 'All Posts') {
+		} else if (className == 'All Posts') {
+		
 		for (var Catagories = 0; Catagories < $scope.classList.length; Catagories++) {
 			for (var ClassNum = 0; ClassNum < $scope.classList[Catagories].Classes.length; ClassNum++) {
 				var Class = $scope.classList[Catagories].Classes[ClassNum]
