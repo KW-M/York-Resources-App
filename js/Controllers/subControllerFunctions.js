@@ -134,13 +134,18 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		if (spreadsheetRow[7]) $scope.myInfo.LastBeenFlaggedDate = new Date(spreadsheetRow[7]);
 		if (spreadsheetRow[8]) {
 			var staredArray = spreadsheetRow[8].split(",") || [];
-			// $scope.myInfo.StaredClasses[0] = {
-			// 	Name:'Other',
-			// 	Color:'hsla(200, 70%, 75%,',
-			// }
+			$scope.myInfo.StaredClasses = [];
+			$timeout(function() {
+			  			$scope.myInfo.StaredClasses[0] = {
+				Name:'Other',
+				Color:'hsla(200, 70%, 75%,',
+			}
 			staredArray.forEach(function(Class){
 				$scope.myInfo.StaredClasses.push($scope.findClassObject(Class))
 			})
+			})
+			console.log(staredArray)
+			console.log($scope.myInfo.StaredClasses)
 		}
 		if (spreadsheetRow[9]) $scope.myInfo.QuizletUsername = spreadsheetRow[9];
 		if (spreadsheetRow[10]) $scope.myInfo.QuizletUpdateDate = new Date(spreadsheetRow[10]);
