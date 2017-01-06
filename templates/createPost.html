@@ -57,7 +57,7 @@
                <md-select-header class="classSelectSearchbox">
                   <input ng-model="classSelectSearch" id="class_select_input" type="text" placeholder="Search for a class.." class="md-text">
                </md-select-header>
-               <md-option ng-value="{'Name': Name.Name, 'Catagory' : Catagory.Catagory, 'Color':Catagory.Color}"  ng-repeat="favClass in myInfo.StaredClasses"
+               <md-option ng-if="!classSelectSearch" ng-value="{'Name': favClass.Name, 'Catagory' : favClass.Catagory, 'Color':favClass.Color}" ng-repeat="favClass in myInfo.StaredClasses">{{::favClass.Name}}</md-option>
                <md-optgroup ng-repeat="Catagory in ::classList" label="{{::Catagory.Catagory}}" ng-class="{'hide-label': classSelectSearch}">
                   <md-option ng-value="{'Name': Name.Name, 'Catagory' : Catagory.Catagory, 'Color':Catagory.Color}" ng-repeat="Name in ::Catagory.Classes | filter : classSelectSearch">{{::Name.Name}}</md-option>
                </md-optgroup>
