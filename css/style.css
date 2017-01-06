@@ -513,7 +513,7 @@ button.selected.md-button {
     padding-bottom: 6px;
     box-shadow: inset rgba(0, 0, 0, 0.27) -10px 2px 24px -17px, inset rgba(0, 0, 0, 0.27) 10px -2px 24px -17px;
         border-radius: 3px;
-    width: calc(100% - 110px);
+    width: 300px;
     overflow: auto;
     white-space: nowrap;
     display: inline-block;

@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="css/createPost.css" />
 <md-dialog id="new_post_dialog">
-
    <md-dialog-content class="new_post_dialog_scroll" style="opacity:0" ng-style="{'background-color': Post.Class.Color + ' 0.6)'}">
       <div id="dialog_header" class="post-card-header" ng-class="{'no-link':Post.Type == 'NoLink','md-whiteframe-3dp': (operation == 'view' && Post.Link == '' && newPostScroll > 0) || (operation != 'view' && newPostScroll > 139),'not-operation-view':operation != 'view'}"
          md-ink-ripple="{{Post.Link != '' && operation == 'view'}}" ng-click="openLink(Post.Link, operation != 'view')" ng-style="{'height': ((operation == 'view' && Post.Link == '') ? (60):(200-newPostScroll)) + 'px'}">
@@ -55,31 +54,27 @@
       <div id="new_post_content" ng-class="{'small-header': Post.Type == 'NoLink' && operation == 'view'}">
          <div flex layout="row">
             <md-select ng-model="Post.Class" ng-model-options="{trackBy: '$value.Name'}" ng-hide="operation == 'view'" class="md-no-underline" placeholder="Class" id="class_dropdown_button" md-on-close="clearClassSelectSearch()">
-               <md-option ng-value="{'Catagory':'Other','Name':'Memes','Color':'ffffff'}" class="rainbow" ng-class="{'hide': queryParams.classpath != 'Memes'}">
-                  Memes
-               </md-option>
                <md-select-header class="classSelectSearchbox">
                   <input ng-model="classSelectSearch" id="class_select_input" type="text" placeholder="Search for a class.." class="md-text">
                </md-select-header>
-               <md-option ng-value="::{'Catagory':'Other', 'Name':'Other', 'Color':'ffffff'}" ng-class="{'hide': classSelectSearch}">
-                  Other
-               </md-option>
-               <md-optgroup ng-repeat="Catagory in ::classList" label="{{::Catagory.Catagory}}" ng-class="{'hide-label': classSelectSearch}">
+               <md-option ng-if="!classSelectSearch" ng-value="{'Name': favClass.Name, 'Catagory' : favClass.Catagory, 'Color':favClass.Color}" ng-repeat="favClass in myInfo.StaredClasses">{{::favClass.Name}}</md-option>
+               <md-optgroup ng-repeat="Catagory in ::classList" ng-class="{'hide-label': classSelectSearch}">
+                  <label class="side-nav-header md-container-ignore" ng-style="::{'background-color': Catagory.Color + ' 1)'}">{{::Catagory.Catagory}}</label>
                   <md-option ng-value="{'Name': Name.Name, 'Catagory' : Catagory.Catagory, 'Color':Catagory.Color}" ng-repeat="Name in ::Catagory.Classes | filter : classSelectSearch">{{::Name.Name}}</md-option>
                </md-optgroup>
             </md-select>
             <div style="width:6px" ng-show="operation === 'view'"></div>
             <div style="display:flex" ng-hide="operation == 'view'">
                <div class="label-container" style="padding-bottom:6px">
-                  <div style="display:inline">
+                  <div style="display:inline" ng-if="labelSearch == null || labelSearch == ''">
                      <div class="label unselectable label-active" ng-click="moveLabeltoAllLabels($index)" ng-repeat="Label in Post.Labels">{{Label.text}}</div>
                   </div>
-                  <div ng-show="labelSearch == null || labelSearch == ''" style="width: 100%;text-align: center;display:inline">
+                  <div ng-if="labelSearch == null || labelSearch == ''" style="width: 100%;text-align: center;display:inline">
                      <div class="label unselectable" ng-click="moveLabeltoActive(Label.text)" ng-repeat="Label in visibleLabels">{{Label.text}}</div>
                   </div>
-                  <div ng-hide="labelSearch == null || labelSearch == ''" style="width: 100%;text-align: center;display:inline">
+                  <div ng-if="!(labelSearch == null || labelSearch == '')" style="width: 100%;text-align: center;display:inline">
                      <div class="label unselectable" ng-click="moveLabeltoActive(Label.text)" ng-repeat="Label in allLabels | filter:labelSearch as filteredLabels">{{Label.text}}</div>
-                     <span ng-show="filteredLabels.length === 0">{{labelSearch}} wasn't found. Add this new label: <span class="label" ng-click="addLabel(labelSearch)">{{labelSearch}}</span></span>
+                     <span ng-if="filteredLabels.length === 0">{{labelSearch}} wasn't found. Add this new label: <span class="label" ng-click="addLabel(labelSearch)">{{labelSearch}}</span></span>
                   </div>
                </div>
                <md-input-container md-no-float class="md-input-min-height" style="width: 102px;margin: auto;">
