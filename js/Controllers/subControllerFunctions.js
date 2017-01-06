@@ -190,6 +190,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				Name: 'All Posts',
 				Color: 'hsla(200, 70%, 75%,',
 				Catagory: null,
+				Rules: null,
 			})
 		}
 		else if (className == 'Your Posts') {
@@ -197,6 +198,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				Name: 'Your Posts',
 				Color: 'hsla(114, 89%, 42%,',
 				Catagory: null,
+				Rules: null,
 			})
 		}
 		else if (className == 'Flagged Posts') {
@@ -204,6 +206,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				Name: 'Flagged Posts',
 				Color: 'hsla(15, 95%, 65%,',
 				Catagory: null,
+				Rules: null,
 			})
 		}
 		else if (className == 'Quizlet') {
@@ -211,6 +214,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				Name: 'Quizlet',
 				Color: 'hsla(229, 46%, 49%,',
 				Catagory: null,
+				Rules: null,
 			})
 		}
 		else if (className == 'Memes') {
@@ -218,6 +222,15 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				Name: 'Memes',
 				Color: 'hsla(200, 70%, 75%,',
 				Catagory: null,
+				Rules: 'What da heck are you doing here??',
+			})
+		}
+		else if (className == 'Other') {
+			return ({
+				Name: 'Other',
+				Color: 'hsla(200, 70%, 75%,',
+				Catagory: null,
+				Rules: null,
 			})
 		}
 		else {

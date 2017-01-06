@@ -162,12 +162,9 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          }).then(function(rawClassesSheet) {
             var catagoryList = [{
                'Color': 'hsla(200, 70%, 75%,',
+               'Catagory':'Hidden',
                'Classes': [{
-                  'Name': 'All Posts',
-                  'rules': "Whatup",
-               }, {
                   'Name': 'Other',
-                  'rules': "Other Stuff",
                }]
             }, {
                'Color': 'hsla(114, 89%, 42%,',
