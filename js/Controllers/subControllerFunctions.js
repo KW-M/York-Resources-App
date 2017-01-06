@@ -192,7 +192,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		} else if (className == 'Your Posts') {
 		} else if (className == 'Flagged Posts') {
 		} else if (className == 'Quizlet') {
-		} else if (className == 'All Posts') {
+		} else if (className == 'Memes') {
 		} else if (className == 'All Posts') {
 		
 		for (var Catagories = 0; Catagories < $scope.classList.length; Catagories++) {
