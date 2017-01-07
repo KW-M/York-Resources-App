@@ -232,7 +232,8 @@
         }
 
         $scope.submit = function() {
-            $mdDialog.hide();
+            var dialog_container = document.getElementsByClassName('md-dialog-container')
+            var dialog_container[0].style.
             if ($scope.operation === 'new') {
                 var metadata = $scope.convertPostToDriveMetadata($scope.Post);
                 console.log({
@@ -248,6 +249,7 @@
                     queue('drive', GoogleDriveService.updateDriveFile(response.data, metadata), function(reply) {
                         $scope.updateLastPosted();
                         $mdToast.hide();
+                        $mdDialog.hide();
                     }, onError, 150);
                 }, onError, 2);
             }
@@ -266,9 +268,6 @@
 
         function onError(error) {
             console.warn(error);
-            $mdDialog.hide().then(function() {
-                $scope.newPost($scope.Post, operation);
-            });
             $mdToast.show($mdToast.simple().textContent('Error Posting, try again.').hideDelay(5000));
         }
 
