@@ -297,7 +297,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             var newPostHeaderMetadata = document.getElementById("Metadata");
             var newPostHeaderImage = document.getElementById("header_image");
             var newPostHeaderTitle = document.getElementById("header_title");
-            
+            $scope.dialog_container = document.getElementsByClassName('md-dialog-container')[0]
             var newPostScroll = document.getElementsByClassName('new_post_dialog_scroll')[0];
             newPostScroll.style.opacity = 1
             var newPostHeader = document.getElementById('dialog_header');

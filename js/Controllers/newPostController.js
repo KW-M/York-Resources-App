@@ -232,9 +232,8 @@
         }
 
         $scope.submit = function() {
-            
-            dialog_container[0].style.opacity = 0;
-            dialog_container[0].style.pointerEvents = 'none';
+            $scope.dialog_container.style.opacity = 0;
+            $scope.dialog_container.style.pointerEvents = 'none';
             if ($scope.operation === 'new') {
                 var metadata = $scope.convertPostToDriveMetadata($scope.Post);
                 console.log({
@@ -269,8 +268,8 @@
 
         function onError(error) {
             console.warn(error);
-                                    dialog_container[0].style.opacity = 0;
-                          dialog_container[0].style.pointerEvents = 'none';
+            $scope.dialog_container.style.opacity = 1;
+            $scope.dialog_container.style.pointerEvents = 'all';
             $mdToast.show($mdToast.simple().textContent('Error Posting, try again.').hideDelay(5000));
         }
 
