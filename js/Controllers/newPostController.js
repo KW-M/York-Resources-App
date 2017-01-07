@@ -1,5 +1,5 @@
     /* we don't define the "new post controller" here because it was alredy
-                                                                                                                                                       defined by the $md-dialog in the newPost function on mainController.   */
+                                                                                                                                                           defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $timeout, $http, $mdDialog, GoogleDriveService, authorizationService, $mdToast, postObj, operation) {
         console.log(postObj)
         var linkChangeTimer = null;
@@ -205,29 +205,30 @@
                     }
                 }
             }
-        function submitCheck() {
-            $mdToast.show({
-                template: '<md-toast><span style="font-size:18px; max-width: 200px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="36"></md-progress-circular></md-toast>',
-                hideDelay: 3000000,
-            });
-            if ($scope.previewLoading) {
-                document.addEventListener('urlPreviewLoaded', function() {
-                    $scope.submit();
-                });
-            }
-            else {
-                $scope.submit();
-            }
-        }
 
-        function shareFile() {
-            console.log($scope.shareSelect);
-            if ($scope.shareSelect == 'view') var role = 'reader';
-            if ($scope.shareSelect == 'comment') var role = 'commenter';
-            if ($scope.shareSelect == 'edit') var role = 'writer';
-            queue('drive', GoogleDriveService.shareFileDomain($scope.Post.AttachmentId, role), null, onError, 150)
-            $mdToast.hide();
-        }
+            function submitCheck() {
+                $mdToast.show({
+                    template: '<md-toast><span style="font-size:18px; max-width: 200px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="36"></md-progress-circular></md-toast>',
+                    hideDelay: 3000000,
+                });
+                if ($scope.previewLoading) {
+                    document.addEventListener('urlPreviewLoaded', function() {
+                        $scope.submit();
+                    });
+                }
+                else {
+                    $scope.submit();
+                }
+            }
+
+            function shareFile() {
+                console.log($scope.shareSelect);
+                if ($scope.shareSelect == 'view') var role = 'reader';
+                if ($scope.shareSelect == 'comment') var role = 'commenter';
+                if ($scope.shareSelect == 'edit') var role = 'writer';
+                queue('drive', GoogleDriveService.shareFileDomain($scope.Post.AttachmentId, role), null, onError, 150)
+                $mdToast.hide();
+            }
         }
 
         $scope.submit = function() {
@@ -274,6 +275,7 @@
         $scope.clearLink = function() {
             $timeout(function() {
                 $scope.Post.Link = ""
+                $scope.Post.PreviewImage = ""
                 $scope.Post.Type = "NoLink"
             })
         }
@@ -304,3 +306,4 @@
             $mdDialog.hide();
         };
     }
+    
