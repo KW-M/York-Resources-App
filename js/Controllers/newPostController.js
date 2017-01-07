@@ -72,7 +72,7 @@
                         $timeout(function() {
                             if (response.result.thumbnailLink) {
                                 console.log(response.result.thumbnailLink);
-                                $scope.Post.PreviewImage = thumbnail.replace("=s220", "=s400") + ("&access_token=" + access_token;
+                                $scope.Post.PreviewImage = thumbnail.replace("=s220", "=s400") + (thumbnail.includes("?") ? "&" : "?") + "access_token=" + access_token;
                             }
                             else {
                                 $scope.Post.PreviewImage = "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
