@@ -181,7 +181,7 @@
             if ($scope.Post.Class.Name === '' || $scope.Post.Class === undefined) {
                 $mdToast.show({
                     template: '<md-toast><div class="md-toast-content">Select a class for this post.</div><md-toast>',
-                    //hideDelay: 1500,
+                    hideDelay: 1500,
                     parent: document.getElementById('new_post_dialog'),
                 });
             }
@@ -192,12 +192,12 @@
                 else {
                     if ($scope.Post.Type === "gDrive") {
                         $mdToast.show({
-                            template: '<md-toast> <div class="md-toast-content" style="justify-content: center;"> <div> <div class="md-toast-text" style="padding: 6px 0 0 0px;">How should the attached file be shared?</div> <div style="display:flex"> <md-select ng-model="shareSelect"> <md-option value="view"> York students can view </md-option> <md-option value="comment"> York students can comment </md-option> <md-option value="edit"> York students can edit </md-option> </md-select> <md-button style="color:rgb(68,138,255)">Share</md-button> </div></div></div></md-toast>',
-                            //hideDelay: 300000000,
+                            template: '<md-toast> <div class="md-toast-content" style="justify-content: center;"> <div> <div class="md-toast-text" style="padding: 6px 0 0 0px;">How should the attached file be shared?</div> <div style="display:flex"> <md-select ng-model="shareSelect"> <md-option value="view"> York students can view </md-option> <md-option value="comment"> York students can comment </md-option> <md-option value="edit"> York students can edit </md-option> </md-select> <md-button style="color:rgb(68,138,255)" ng-click="shareFile()">Share</md-button> </div></div></div></md-toast>',
+                            hideDelay: false,
                             parent: document.getElementById('new_post_dialog'),
                             toastClass: 'shareLevelToast',
                             scope: $scope,
-                        }).then(shareFile);
+                        })
                         // $mdToast.show($mdToast.simple().action('Got It').textContent('Anyone at York will be able to view the attached file.').parent(document.getElementById('new_post_dialog')).hideDelay(300000)).then(submitCheck);
                     }
                     else {
@@ -221,12 +221,12 @@
                 }
             }
 
-            function shareFile() {
+            $scope.shareFilefunction shareFile() {
                 console.log($scope.shareSelect);
                 if ($scope.shareSelect == 'view') var role = 'reader';
                 if ($scope.shareSelect == 'comment') var role = 'commenter';
                 if ($scope.shareSelect == 'edit') var role = 'writer';
-                queue('drive', GoogleDriveService.shareFileDomain($scope.Post.AttachmentId, role), null, onError, 150)
+                //queue('drive', GoogleDriveService.shareFileDomain($scope.Post.AttachmentId, role), null, onError, 150)
                 $mdToast.hide();
             }
         }
@@ -306,4 +306,7 @@
             $scope.Post.PreviewImage = originalPost.PreviewImage || ''
             $mdDialog.hide();
         };
+        $scope.hideToast = function(){
+            $mdToast.hide()
+        }
     }
