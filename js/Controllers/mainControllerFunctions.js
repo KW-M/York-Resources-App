@@ -259,7 +259,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
       var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
       var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
-      var recentsView = new google.picker.DocsView(google.picker.ViewId.RECENTLY_PICKED).setIncludeFolders(true).setSelectFolderEnabled(true);
+      var recentsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(false).setSelectFolderEnabled(true).setLabel('Recents');
       drivePicker = new google.picker.PickerBuilder().
       addView(docsView).
       addView(recentsView).
