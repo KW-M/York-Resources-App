@@ -259,12 +259,13 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
       var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
       var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
-   var recentsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(false).setSelectFolderEnabled(true);
+      var recentsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(false).setSelectFolderEnabled(true);
       drivePicker = new google.picker.PickerBuilder().
       addView(docsView).
       addView(recentsView).
       addView(sharedView).
       setDeveloperKey("AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA").
+      setOrigin(window.location.protocol + '//' + window.location.host).
       setOAuthToken(authorizationService.getAuthToken()).
       setCallback(self.pickerCallback).
       build();
@@ -273,6 +274,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       hideTitleBar().
       addView(uploadView).
       setDeveloperKey("AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA").
+      setOrigin(window.location.protocol + '//' + window.location.host).
       setOAuthToken(authorizationService.getAuthToken()).
       setCallback(self.pickerCallback).
       build();
