@@ -204,8 +204,6 @@
                     }
                 }
             }
-        }
-
         function submitCheck() {
             $mdToast.show({
                 template: '<md-toast><span style="font-size:18px; max-width: 200px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="36"></md-progress-circular></md-toast>',
@@ -228,6 +226,7 @@
             if ($scope.shareSelect == 'edit') var role = 'writer';
             queue('drive', GoogleDriveService.shareFileDomain($scope.Post.AttachmentId, role), null, onError, 150)
             $mdToast.hide();
+        }
         }
 
         $scope.submit = function() {
