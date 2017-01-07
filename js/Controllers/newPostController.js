@@ -71,7 +71,8 @@
                         var access_token = authorizationService.getAuthToken();
                         $timeout(function() {
                             if (response.result.thumbnailLink) {
-                                $scope.Post.PreviewImage = thumbnail.replace("=s220", "=s400") + "&access_token=" + access_token;
+                                console.log(response.result.thumbnailLink);
+                                $scope.Post.PreviewImage = thumbnail.replace("=s220", "=s400") + ("&access_token=" + access_token;
                             }
                             else {
                                 $scope.Post.PreviewImage = "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
