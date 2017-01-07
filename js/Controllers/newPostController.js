@@ -232,7 +232,7 @@
         }
 
         $scope.submit = function() {
-            var dialog_container = document.getElementsByClassName('md-dialog-container')
+            
             dialog_container[0].style.opacity = 0;
             dialog_container[0].style.pointerEvents = 'none';
             if ($scope.operation === 'new') {
@@ -241,18 +241,18 @@
                     Post: $scope.Post,
                     Metadata: metadata
                 });
-                // queue('other', GoogleDriveService.AppsScriptNewFile(), function(response) {
-                //     $scope.Post.Id = response.data;
-                //     $timeout(function() {
-                //         $scope.allPosts.push($scope.Post)
-                //         $scope.visiblePosts = $scope.filterPosts($scope.allPosts);
-                //     })
-                //     queue('drive', GoogleDriveService.updateDriveFile(response.data, metadata), function(reply) {
-                //         $scope.updateLastPosted();
-                //         $mdToast.hide();
-                //         $mdDialog.hide();
-                //     }, onError, 150);
-                // }, onError, 2);
+                queue('other', GoogleDriveService.AppsScriptNewFile(), function(response) {
+                    $scope.Post.Id = response.data;
+                    $timeout(function() {
+                        $scope.allPosts.push($scope.Post)
+                        $scope.visiblePosts = $scope.filterPosts($scope.allPosts);
+                    })
+                    queue('drive', GoogleDriveService.updateDriveFile(response.data, metadata), function(reply) {
+                        $scope.updateLastPosted();
+                        $mdToast.hide();
+                        $mdDialog.hide();
+                    }, onError, 150);
+                }, onError, 2);
             }
             else if ($scope.operation === 'update') {
                 var metadata = $scope.convertPostToDriveMetadata($scope.Post);
@@ -269,6 +269,8 @@
 
         function onError(error) {
             console.warn(error);
+                                    dialog_container[0].style.opacity = 0;
+                          dialog_container[0].style.pointerEvents = 'none';
             $mdToast.show($mdToast.simple().textContent('Error Posting, try again.').hideDelay(5000));
         }
 
@@ -306,4 +308,3 @@
             $mdDialog.hide();
         };
     }
-    
