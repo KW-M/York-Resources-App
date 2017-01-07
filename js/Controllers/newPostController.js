@@ -241,6 +241,8 @@
                         $scope.updateLastPosted();
                         $mdToast.hide();
                         $mdDialog.hide();
+                                                            $scope.dialog_container.style.opacity = 1;
+            $scope.dialog_container.style.pointerEvents = 'all';
                     }, onError, 150);
                 }, onError, 2);
             }
