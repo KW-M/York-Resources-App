@@ -563,13 +563,13 @@ button.selected.md-button {
     background-color: none;
 }
 
-.content-top-bar .star-button:hover .star-button-txt {
-    width: 0px;
+.content-top-bar button.md-button.star-button {
+    min-width: 0px;
+    width: 36px;
     transition: all 0.5s;
 }
 
-.content-top-bar .star-button:hover .star-button-txt {
-    margin-left: 6px;
+.content-top-bar button.md-button.star-button:hover {
     width: auto;
 }
 /*------- Create Post Top Bar Styles -------- */
