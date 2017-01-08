@@ -84,7 +84,7 @@
             <div hide-xs show-gt-xs class="search-bar-container unselectable">
                 <div style="width:100%; max-width:720px; position:relative">
                     <md-icon class="search-bar-icon">search</md-icon>
-                    <input md-delay="300" class="search-bar unselectable" ng-model="searchInputTxt" ng-model-options="{ debounce: 500 }" placeholder="{{searchPrefix + ' ' + classTitle}}" />
+                    <input md-delay="300" class="search-bar unselectable" ng-model="searchInputTxt" ng-model-options="{ debounce: 500 }" placeholder="{{searchPrefix + ' ' + (selectedClass.Stared != null ? selectedClass.Name:'')}}" />
                     <md-button ng-class="{'has-text': searchInputTxt}" ng-click="searchInputTxt = ''" class='search-bar-clear-button md-icon-button'>
                         <md-icon style="color:rgb(117,117,117)">close</md-icon>
                     </md-button>
