@@ -198,8 +198,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			return b.CreationDate.addDays(b.Likes.length || 0) - a.CreationDate.addDays(a.Likes.length || 0);
 		}));
 	};
-	$scope.findClassObject = function(className, classArray) {
-		classArray = classArray || $scope.classList;
+	$scope.findClassObject = function(className) {
 		if (className == 'All Posts') {
 			return ({
 				Name: 'All Posts',
@@ -215,6 +214,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				Color: 'hsla(114, 89%, 42%,',
 				Catagory: null,
 				Rules: null,
+				Stared: null,
 			})
 		}
 		else if (className == 'Flagged Posts') {
@@ -223,6 +223,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				Color: 'hsla(15, 95%, 65%,',
 				Catagory: null,
 				Rules: null,
+				Stared: null,
 			})
 		}
 		else if (className == 'Quizlet') {
@@ -231,6 +232,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				Color: 'hsla(229, 46%, 49%,',
 				Catagory: null,
 				Rules: null,
+				Stared: null,
 			})
 		}
 		else if (className == 'Memes') {
@@ -239,6 +241,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				Color: 'hsla(200, 70%, 75%,',
 				Catagory: null,
 				Rules: 'What da heck are you doing here??',
+				Stared: false,
 			})
 		}
 		else if (className == 'Other') {
@@ -247,15 +250,23 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				Color: 'hsla(200, 70%, 75%,',
 				Catagory: null,
 				Rules: null,
+				Stared: null,
 			})
 		}
 		else {
-			for (var Catagories = 0; Catagories < classArray.length; Catagories++) {
-				for (var ClassNum = 0; ClassNum < classArray[Catagories].Classes.length; ClassNum++) {
-					var Class = classArray[Catagories].Classes[ClassNum]
+			for (var Catagories = 0; Catagories < $scope.classList.length; Catagories++) {
+				for (var ClassNum = 0; ClassNum < $scope.classList[Catagories].Classes.length; ClassNum++) {
+					var Class = $scope.classList[Catagories].Classes[ClassNum]
 					if (Class.Name == className) {
-						Class.Color = classArray[Catagories].Color
-						Class.Catagory = classArray[Catagories].Catagory
+						Class.Color = $scope.classList[Catagories].Color
+						Class.Catagory = $scope.classList[Catagories].Catagory
+						for (var StaredNum = 0; StaredNum < $scope.staredArray.length; StaredNum++) {
+							if ($scope.staredArray[StaredNum].Name = className) {
+								Class.Stared = true;
+								return (Class)
+							}
+						}
+						Class.Stared = false;
 						return (Class)
 					}
 				}
