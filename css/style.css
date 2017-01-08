@@ -566,8 +566,7 @@ button.selected.md-button {
 }
 
 .content-top-bar button.md-button.star-button:hover {
-    min-width: 36px;
-    max-width: 1000px;
+    max-width: 150px;
 }
 /*------- Create Post Top Bar Styles -------- */
 
