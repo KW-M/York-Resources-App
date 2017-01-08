@@ -553,14 +553,10 @@ button.selected.md-button {
 }
 
 .content-top-bar button.md-button.md-ink-ripple {
-    /*padding: 0 12px;
-    border-radius: 25px;
-    background-color: rgba(66, 87, 178, 0.78);*/
     color: white;
 }
 .content-top-bar button.md-button.md-ink-ripple:hover {
     box-shadow:0 2px 5px 0 rgba(0,0,0,.26);
-    background-color: none;
 }
 
 .content-top-bar button.md-button.star-button {
