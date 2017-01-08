@@ -198,13 +198,15 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			return b.CreationDate.addDays(b.Likes.length || 0) - a.CreationDate.addDays(a.Likes.length || 0);
 		}));
 	};
-	$scope.findClassObject = function(className) {
+	$scope.findClassObject = function(className, classArray) {
+		classArray = classArray || $scope.classList;
 		if (className == 'All Posts') {
 			return ({
 				Name: 'All Posts',
 				Color: 'hsla(200, 70%, 75%,',
 				Catagory: null,
 				Rules: null,
+				Stared: null,
 			})
 		}
 		else if (className == 'Your Posts') {
@@ -248,17 +250,18 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			})
 		}
 		else {
-			for (var Catagories = 0; Catagories < $scope.classList.length; Catagories++) {
-				for (var ClassNum = 0; ClassNum < $scope.classList[Catagories].Classes.length; ClassNum++) {
-					var Class = $scope.classList[Catagories].Classes[ClassNum]
+			for (var Catagories = 0; Catagories < classArray.length; Catagories++) {
+				for (var ClassNum = 0; ClassNum < classArray[Catagories].Classes.length; ClassNum++) {
+					var Class = classArray[Catagories].Classes[ClassNum]
 					if (Class.Name == className) {
-						Class.Color = $scope.classList[Catagories].Color
-						Class.Catagory = $scope.classList[Catagories].Catagory
+						Class.Color = classArray[Catagories].Color
+						Class.Catagory = classArray[Catagories].Catagory
 						return (Class)
 					}
 				}
 			}
 		}
+		return false()
 		console.warn('could not find class: ' + className);
 	};
 	$scope.sortLabels = function(input) {

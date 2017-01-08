@@ -127,6 +127,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       }
       $scope.getFiles();
       $timeout(function() {
+         $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
          $scope.visibleLabels = $scope.sortLabels($scope.allLabels);
       })
       getFileTimer = setInterval(function() {
