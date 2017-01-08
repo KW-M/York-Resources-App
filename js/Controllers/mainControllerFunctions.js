@@ -119,7 +119,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             //$scope.classTitle = $scope.queryParams.classPath;
          $scope.queryParams.flagged = false
       }
-      $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
       generateQueryString();
       if ($scope.queryParams.q === null) {
          $scope.updateVisiblePosts($scope.filterPosts($scope.allPosts), function() {

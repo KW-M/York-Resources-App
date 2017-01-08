@@ -214,7 +214,7 @@
                     <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>open_in_browser</md-icon>Open Class</md-button>
                     </span>
                     <md-button class="star-button" ng-hide="queryParams.classPath == 'Quizlet' || queryParams.classPath == 'all-posts' || queryParams.classPath == 'your-posts' || queryParams.classPath == 'flagged'">
-                        <md-icon style='color: white;font-size: 22px'>star_outline</md-icon><span style="margin-left: 6px;">Star Class<span></md-button>
+                        <md-icon style='color: white;font-size: 22px'>{{selectedClass.Stared ? 'star' : 'star_outline'}}</md-icon><span style="margin-left: 6px;">{{selectedClass.Stared ? 'un'}}Star Class<span></md-button>
                 </div>
                 <div style="padding-bottom:8px"><span class="md-caption">{{selectedClass.Rules || 'Dont post test or homework answers. Do post what will help other students get to the answers on their own.'}}</span><span ng-if="false"> - <a href="#">edit</a></span></div>
                 <div class="create-post-bar-top" ng-hide="queryParams.classPath == 'Quizlet'">
