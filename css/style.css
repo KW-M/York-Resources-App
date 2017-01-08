@@ -564,12 +564,13 @@ button.selected.md-button {
 }
 
 .content-top-bar button.md-button.star-button {
-    min-width: 0px;
+    min-width: 36px;
     max-width: 36px;
-    transition: box-shadow .4s cubic-bezier(.25,.8,.25,1),background-color .4s cubic-bezier(.25,.8,.25,1),
+    transition: box-shadow .4s cubic-bezier(.25,.8,.25,1),background-color .4s cubic-bezier(.25,.8,.25,1),max-width .4s cubic-bezier(.25,.8,.25,1);
 }
 
 .content-top-bar button.md-button.star-button:hover {
+    min-width: 36px;
     max-width: 1000px;
 }
 /*------- Create Post Top Bar Styles -------- */
