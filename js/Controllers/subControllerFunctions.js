@@ -278,7 +278,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	$scope.sortLabels = function(input) {
 		var output = [];
 		input.forEach(function(item) {
-			console.log(item.type)
+			console.log(item)
 			if (item.type == 'Teacher') {
 				item.classesTaught.forEach(function(classTaught) {
 					if (classTaught == $scope.queryParams.classPath) output.push(item);
