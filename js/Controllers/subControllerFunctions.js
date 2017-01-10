@@ -441,7 +441,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			totalUsage: 1
 		}
 		$timeout(function() {
-			$scope.Post.Labels.push(newLabel);
+			$scope.allLabels.push(newLabel);
 		})
 		return newLabel;
 	}
