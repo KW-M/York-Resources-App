@@ -205,6 +205,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				Color: 'hsla(200, 70%, 75%,',
 				Catagory: null,
 				Rules: null,
+				Stared: null,
 			})
 		}
 		else if (className == 'Your Posts') {
@@ -213,6 +214,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				Color: 'hsla(114, 89%, 42%,',
 				Catagory: null,
 				Rules: null,
+				Stared: null,
 			})
 		}
 		else if (className == 'Flagged Posts') {
@@ -221,6 +223,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				Color: 'hsla(15, 95%, 65%,',
 				Catagory: null,
 				Rules: null,
+				Stared: null,
 			})
 		}
 		else if (className == 'Quizlet') {
@@ -229,6 +232,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				Color: 'hsla(229, 46%, 49%,',
 				Catagory: null,
 				Rules: null,
+				Stared: null,
 			})
 		}
 		else if (className == 'Memes') {
@@ -237,6 +241,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				Color: 'hsla(200, 70%, 75%,',
 				Catagory: null,
 				Rules: 'What da heck are you doing here??',
+				Stared: false,
 			})
 		}
 		else if (className == 'Other') {
@@ -245,6 +250,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				Color: 'hsla(200, 70%, 75%,',
 				Catagory: null,
 				Rules: null,
+				Stared: null,
 			})
 		}
 		else {
@@ -254,16 +260,25 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 					if (Class.Name == className) {
 						Class.Color = $scope.classList[Catagories].Color
 						Class.Catagory = $scope.classList[Catagories].Catagory
+						for (var StaredNum = 0; StaredNum < $scope.myInfo.StaredClasses.length; StaredNum++) {
+							if ($scope.myInfo.StaredClasses[StaredNum].Name == className) {
+								Class.Stared = true;
+								return (Class)
+							}
+						}
+						Class.Stared = false;
 						return (Class)
 					}
 				}
 			}
 		}
+		return false()
 		console.warn('could not find class: ' + className);
 	};
 	$scope.sortLabels = function(input) {
 		var output = [];
 		input.forEach(function(item) {
+			console.log(item)
 			if (item.type == 'Teacher') {
 				item.classesTaught.forEach(function(classTaught) {
 					if (classTaught == $scope.queryParams.classPath) output.push(item);
@@ -404,7 +419,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		})
 	}
 	$scope.moveLabeltoAllLabels = function(activeLabelIndex) {
-		var label = $scope.queryParams.labels.splice(activeLabelIndex, 1)
+		var label = $scope.Post.Labels.splice(activeLabelIndex, 1)
 		$scope.allLabels.push(label[0]);
 		$timeout(function() {
 			$scope.visibleLabels = $scope.sortLabels($scope.allLabels)

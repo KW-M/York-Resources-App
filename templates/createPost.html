@@ -38,11 +38,13 @@
                   </md-button>
                   <md-menu-content>
                      <md-menu-item>
-                        <md-button ng-click="::showPicker('Drive', true, 'update')"><span flex>Attatch drive file</span><img md-menu-align-target class="unselectable" style="width:22px; height:22px; float:right; margin: auto 0 auto 16px; opacity: 0.54;" src="images/drive_icon.svg"></md-button>
+                        <md-button ng-click="::showPicker('Drive', true, 'update')">
+                           <span style="display:flex"><span flex>Attatch Drive File</span><img md-menu-align-target class="unselectable" style="width:22px; height:22px; margin: auto 0 auto 16px; opacity: 0.54;" src="images/drive_icon.svg"></span>
+                        </md-button>
                      </md-menu-item>
                      <md-menu-item>
-                        <md-button ng-click="::showPicker('Upload', true, 'update')"><span flex>Upload file</span>
-                           <md-icon style="margin: auto 0 auto 16px">file_upload</md-icon>
+                        <md-button ng-click="::showPicker('Upload', true, 'update')">
+                           <span style="display:flex"><span flex>Upload File</span><md-icon style="margin: auto 0px">file_upload</md-icon></span>
                         </md-button>
                      </md-menu-item>
                   </md-menu-content>
@@ -63,8 +65,7 @@
                   <md-option ng-value="{'Name': Name.Name, 'Catagory' : Catagory.Catagory, 'Color':Catagory.Color}" ng-repeat="Name in ::Catagory.Classes | filter : classSelectSearch">{{::Name.Name}}</md-option>
                </md-optgroup>
             </md-select>
-            <div style="width:6px" ng-show="operation === 'view'"></div>
-            <div style="display:flex" ng-hide="operation == 'view'">
+            <div style="display:flex">
                <div class="label-container" style="padding-bottom:6px">
                   <div style="display:inline" ng-if="labelSearch == null || labelSearch == ''">
                      <div class="label unselectable label-active" ng-click="moveLabeltoAllLabels($index)" ng-repeat="Label in Post.Labels">{{Label.text}}</div>

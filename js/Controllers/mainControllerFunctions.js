@@ -119,7 +119,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             //$scope.classTitle = $scope.queryParams.classPath;
          $scope.queryParams.flagged = false
       }
-      $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
       generateQueryString();
       if ($scope.queryParams.q === null) {
          $scope.updateVisiblePosts($scope.filterPosts($scope.allPosts), function() {
@@ -128,6 +127,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       }
       $scope.getFiles();
       $timeout(function() {
+         $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
          $scope.visibleLabels = $scope.sortLabels($scope.allLabels);
       })
       getFileTimer = setInterval(function() {
@@ -259,11 +259,13 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
       var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
       var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
+      var recentsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(false).setSelectFolderEnabled(true).setLabel('Recents');
       drivePicker = new google.picker.PickerBuilder().
       addView(docsView).
+      addView(recentsView).
       addView(sharedView).
-      addView(uploadView).
       setDeveloperKey("AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA").
+      setOrigin(window.location.protocol + '//' + window.location.host).
       setOAuthToken(authorizationService.getAuthToken()).
       setCallback(self.pickerCallback).
       build();
@@ -272,6 +274,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       hideTitleBar().
       addView(uploadView).
       setDeveloperKey("AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA").
+      setOrigin(window.location.protocol + '//' + window.location.host).
       setOAuthToken(authorizationService.getAuthToken()).
       setCallback(self.pickerCallback).
       build();
@@ -297,6 +300,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             var newPostHeaderMetadata = document.getElementById("Metadata");
             var newPostHeaderImage = document.getElementById("header_image");
             var newPostHeaderTitle = document.getElementById("header_title");
+            $scope.dialog_container = document.getElementsByClassName('md-dialog-container')[0]
             var newPostScroll = document.getElementsByClassName('new_post_dialog_scroll')[0];
             newPostScroll.style.opacity = 1
             var newPostHeader = document.getElementById('dialog_header');
