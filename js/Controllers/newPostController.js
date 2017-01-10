@@ -1,5 +1,5 @@
     /* we don't define the "new post controller" here because it was alredy
-                                                                                                                                                               defined by the $md-dialog in the newPost function on mainController.   */
+                                                                                                                                                                   defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $timeout, $http, $mdDialog, GoogleDriveService, authorizationService, $mdToast, postObj, operation) {
         console.log(postObj)
         var linkChangeTimer = null;
@@ -241,8 +241,8 @@
                         $scope.updateLastPosted();
                         $mdToast.hide();
                         $mdDialog.hide();
-                                                            $scope.dialog_container.style.opacity = 1;
-            $scope.dialog_container.style.pointerEvents = 'all';
+                        $scope.dialog_container.style.opacity = 1;
+                        $scope.dialog_container.style.pointerEvents = 'all';
                     }, onError, 150);
                 }, onError, 2);
             }
@@ -263,7 +263,7 @@
             if ($scope.shareSelect == 'view') var role = 'reader';
             if ($scope.shareSelect == 'comment') var role = 'commenter';
             if ($scope.shareSelect == 'edit') var role = 'writer';
-            queue('drive', GoogleDriveService.shareFileDomain($scope.Post.AttachmentId, role), null, function(err){
+            queue('drive', GoogleDriveService.shareFileDomain($scope.Post.AttachmentId, role), null, function(err) {
                 console.warn(err)
             }, 150)
             $mdToast.hide();
@@ -313,3 +313,4 @@
             $mdToast.hide()
         }
     }
+    
