@@ -392,7 +392,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}, 2);
 		$timeout(function() {
 			$scope.labelSearch = "";
-			$scope.queryParams.labels.push(newLabel);
+			$scope.Post.Labels.push(newLabel);
 		})
 	}
 	$scope.transferAllLabels = function() {
@@ -440,6 +440,10 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			}],
 			totalUsage: 1
 		}
+		$timeout(function() {
+			$scope.Post.Labels.push(newLabel);
+		})
+		return newLabel;
 	}
 
 	//----------------------------------------------------
