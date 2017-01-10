@@ -428,6 +428,19 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			$scope.visibleLabels = $scope.sortLabels($scope.allLabels)
 		})
 	}
+	$scope.findLabel = function(labelName) {
+		$scope.allLabels.forEach(function(Label){
+			if (Label.text == labelName) return labelName
+		})
+		var newLabel = {
+			text: labelName,
+			linkedClasses: [{
+				Name: $scope.queryParams.classPath,
+				Usage: 1,
+			}],
+			totalUsage: 1
+		}
+	}
 
 	//----------------------------------------------------
 	// --------------- Post Card Functions ---------------
