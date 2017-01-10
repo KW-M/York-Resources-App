@@ -698,9 +698,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	$scope.refreshLayout = function() {
 		angularGridInstance.postsGrid.refresh();
 	}
-	$scope.logDuplicationIndexes = function() {
-		//	console.log()
-	}
 	$scope.logPostToConsole = function(content, arrayIndex) {
 		window.alert(JSON.stringify({
 			'loggedPostContent': content,
