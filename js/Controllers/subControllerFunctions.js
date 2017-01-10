@@ -610,10 +610,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 					document.getElementById('quizlet_setup_frame').src += '';
 				}, 4000)
 				window.addEventListener("message", function receiveMessage(event) {
-					console.log(event);
 					window.reloadQuizletFrame = null
 					if (event.data == "QuizletAuthorized") {
-						console.log('auth q done');
 						$scope.quizletStepNumber = 3;
 					}
 				}, false);
@@ -668,11 +666,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}
 		if (error.result) {
 			if (error.result.error.errors[0].message == 'Invalid Credentials') {
-				console.log('Invalid Credentials - token: ' + authorizationService.getAuthToken())
+				console.warn('Invalid Credentials - token: ' + authorizationService.getAuthToken())
 				runPromise(item);
 			}
 			else if (error.result.error.errors[0].reason == 'dailyLimitExceededUnreg') {
-				console.log('daily limit')
+				console.warn('daily limit reached')
 			}
 		}
 		if (item.Err) {
