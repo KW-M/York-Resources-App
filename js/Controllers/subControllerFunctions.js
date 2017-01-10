@@ -37,7 +37,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			if (DriveMetadata.properties) {
 				formatedPost.Labels = ((DriveMetadata.properties.Tag1 || "") + (DriveMetadata.properties.Tag2 || "")).split(",") || [];
 				formatedPost.Labels.forEach(function(Label,Index) {
-				    formatedPost.Labels[Index] = {}
+				    formatedPost.Labels[Index] = $scope.findLabel(Label);
 				})
 				var updatedClass = $scope.findClassObject(DriveMetadata.properties.ClassName);
 				formatedPost.Title = DriveMetadata.properties.Title || nameArray[1] || ''
