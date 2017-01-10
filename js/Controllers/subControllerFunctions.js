@@ -174,7 +174,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			else {
 				var Flagged = true;
 			}
-			if ($scope.queryParams.classPath !== null && $scope.queryParams.classPath !== undefined && ) {
+			if ($scope.queryParams.classPath !== null && $scope.queryParams.classPath !== undefined && $scope.selectedClass !== false && $scope.selectedClass.Stared !== null) {
 				var Class = post.Class.Name === $scope.queryParams.classPath;
 			}
 			else {
@@ -275,7 +275,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				}
 			}
 		}
-		return false()
+		return false
 		console.warn('could not find class: ' + className);
 	};
 	$scope.sortLabels = function(input) {
