@@ -674,7 +674,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			}
 		}
 		if (item.Err) {
-			item.Err(error)
+			//item.Err(error)
 		}
 	}
 	window.checkAuthToken = function() {
