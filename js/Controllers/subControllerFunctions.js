@@ -36,8 +36,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			}
 			if (DriveMetadata.properties) {
 				formatedPost.Labels = ((DriveMetadata.properties.Tag1 || "") + (DriveMetadata.properties.Tag2 || "")).split(",") || [];
-				formatedPost.Labels.forEach(function(Label,Index) {
-				    formatedPost.Labels[Index] = $scope.findLabel(Label);
+				formatedPost.Labels.forEach(function(Label, Index) {
+					formatedPost.Labels[Index] = $scope.findLabel(Label);
 				})
 				var updatedClass = $scope.findClassObject(DriveMetadata.properties.ClassName);
 				formatedPost.Title = DriveMetadata.properties.Title || nameArray[1] || ''
@@ -429,7 +429,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		})
 	}
 	$scope.findLabel = function(labelName) {
-		$scope.allLabels.forEach(function(Label){
+		$scope.allLabels.forEach(function(Label) {
 			if (Label.text == labelName) return labelName
 		})
 		var newLabel = {
@@ -519,11 +519,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		$scope.myInfo.LastContributionDate = new Date()
 		var today = $filter('date')(new Date(), 'M/d/yy');
 		var range = 'Sheet1!F' + $scope.UserSettingsRowNum + ':F' + $scope.UserSettingsRowNum
-		$scope.$scope.myInfo.NumberOfContributions++
-			queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, [$scope.myInfo.NumberOfContributions, today]), null, function(err) {
-				console.warn(err)
-				$mdToast.showSimple('Error Saving Post');
-			}, 2);
+		$scope.myInfo.NumberOfContributions++;
+		queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, [$scope.myInfo.NumberOfContributions, today]), null, function(err) {
+			console.warn(err)
+			$mdToast.showSimple('Error Saving Post');
+		}, 2);
 	}
 	$scope.likePost = function(content) {
 		var userLikeIndex = findItemInArray($scope.myInfo.Email, content.Likes)
