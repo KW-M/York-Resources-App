@@ -39,8 +39,6 @@ function authService($mdDialog) {
                         callback();
                     };
                     self.hideSigninButton();
-                } else {
-
                 }
             } else {
                 window.clearUserInfo();
@@ -90,8 +88,6 @@ function authService($mdDialog) {
         logout.setAttribute("src", "https://mail.google.com/mail/u/0/?logout&hl=en");
         logout.style.display = "none";
         var logoutImg = document.body.appendChild(logout);
-        logoutImg.onload = function(){
-        }
     }
 
     this.getAuthToken = function() {
