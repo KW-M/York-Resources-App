@@ -665,6 +665,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			});
 		}
 		if (error.result) {
+								var newItem = JSON.parse(JSON.stringify(item).replace(/(?:"Authorization":"Bearer )[^"]+/,'"Authorization":"Bearer woop woop ' + authorizationService.getAuthToken() + '"'));
+					console.log(newItem)
 			if (error.result.error.errors[0].message == 'Invalid Credentials') {
 				console.warn('Invalid Credentials - token: ' + authorizationService.getAuthToken())
 				console.log("calling gapi.auth2.init");
@@ -676,8 +678,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				})
 				console.log("re-runing promise")
 				setTimeout(function() {
-					JSON.parse().stringify(item).replace(/(?:"Authorization":"Bearer )[^"]+/,'"Authorization":"Bearer ' + authorizationService.getAuthToken() + '"')
-					runPromise(item);
+					var newItem = JSON.parse(JSON.stringify(item).replace(/(?:"Authorization":"Bearer )[^"]+/,'"Authorization":"Bearer ' + authorizationService.getAuthToken() + '"'));
+					console.log(newItem)
+					runPromise(newItem);
 					console.log("calling authorizationService.initilize");
 					authorizationService.initilize(function() {
 						console.log("	authorizationService.initilize Done")
