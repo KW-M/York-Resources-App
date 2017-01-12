@@ -667,14 +667,14 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		if (error.result) {
 			if (error.result.error.errors[0].message == 'Invalid Credentials') {
 				console.warn('Invalid Credentials - token: ' + authorizationService.getAuthToken())
-				runPromise(item);
+				//runPromise(item);
 			}
 			else if (error.result.error.errors[0].reason == 'dailyLimitExceededUnreg') {
 				console.warn('daily limit reached')
 			}
 		}
 		if (item.Err) {
-			//item.Err(error)
+			item.Err(error)
 		}
 	}
 	window.checkAuthToken = function() {
