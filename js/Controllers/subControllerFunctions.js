@@ -676,7 +676,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				})
 				console.log("re-runing promise")
 				setTimeout(function() {
-					item.
+					JSON.stringify(item).replace('\\')
 					runPromise(item);
 					console.log("calling authorizationService.initilize");
 					authorizationService.initilize(function() {
