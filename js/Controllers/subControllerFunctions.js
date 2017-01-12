@@ -675,11 +675,14 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 					hosted_domain: 'york.org'
 				})
 				console.log("re-runing promise")
-				runPromise(item);
-				console.log("calling authorizationService.initilize");
-				authorizationService.initilize(function() {
-					console.log("	authorizationService.initilize Done")
-				});
+				setTimeout(function() {
+					runPromise(item);
+					console.log("calling authorizationService.initilize");
+					authorizationService.initilize(function() {
+						console.log("	authorizationService.initilize Done")
+					});
+				}, 10000)
+
 			}
 			else if (error.result.error.errors[0].reason == 'dailyLimitExceededUnreg') {
 				console.warn('daily limit reached')
