@@ -676,7 +676,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				})
 				console.log("re-runing promise")
 				setTimeout(function() {
-					JSON.stringify(item).replace('\\')
+					JSON.parse().stringify(item).replace(/(?:"Authorization":"Bearer )[^"]+/,'"Authorization":"Bearer ' + authorizationService.getAuthToken() + '"')
 					runPromise(item);
 					console.log("calling authorizationService.initilize");
 					authorizationService.initilize(function() {
