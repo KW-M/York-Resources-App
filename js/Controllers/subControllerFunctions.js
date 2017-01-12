@@ -665,11 +665,12 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			});
 		}
 		if (error.result) {
-			var newItem = JSON.parse(JSON.stringify(item).replace(/(?:"Authorization":"Bearer )[^"]+/,'"Authorization":"Bearer woop woop ' + authorizationService.getAuthToken() + '"'));
-					console.log(newItem)
+			// var newItem = JSON.parse(JSON.stringify(item).replace(/(?:"Authorization":"Bearer )[^"]+/,'"Authorization":"Bearer woop woop ' + authorizationService.getAuthToken() + '"'));
+			// 		console.log(newItem)
 			if (error.result.error.errors[0].message == 'Invalid Credentials') {
 				console.warn("invalid credentials")
                 $mdToast.show($mdToast.simple().textContent('Please signin again.')).hideDelay(8000);
+                authorizationService.showSigninButton();
                 authorizationService.showSigninDialog();
 			}
 			else if (error.result.error.errors[0].reason == 'dailyLimitExceededUnreg') {

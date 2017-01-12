@@ -46,6 +46,7 @@
     if (item) {
       var delay = 0;
       var tokenExpiration = Date(gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true).expires_at)
+      console.log(tokenExpiration)
       if (tokenExpiration > new Date()) {
         runPromise(item);
       } else {
@@ -54,11 +55,11 @@
 					scope: 'email https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.install',
 					fetch_basic_profile: false,
 					hosted_domain: 'york.org'
-				}).then(function() {
+				}).then(function(){
+				  console.log("auth init run")
 				  runPromise(item)
 				})
       }
-
     }
     if (theQueue[typeName].length === 0) {
       clearInterval(timer[typeName]), timer[typeName] = null;
