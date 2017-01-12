@@ -130,7 +130,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          $scope.visibleLabels = $scope.sortLabels($scope.allLabels);
       })
       getFileTimer = setInterval(function() {
-         if (conurancy_counter == 0 && content_container.scrollHeight == content_container.clientHeight + 200) {
+         if (conurancy_counter == 0 && content_container.scrollHeight == content_container.clientHeight) {
             $scope.getFiles()
          }
       }, 1000)
