@@ -665,39 +665,20 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			});
 		}
 		if (error.result) {
-								var newItem = JSON.parse(JSON.stringify(item).replace(/(?:"Authorization":"Bearer )[^"]+/,'"Authorization":"Bearer woop woop ' + authorizationService.getAuthToken() + '"'));
+			var newItem = JSON.parse(JSON.stringify(item).replace(/(?:"Authorization":"Bearer )[^"]+/,'"Authorization":"Bearer woop woop ' + authorizationService.getAuthToken() + '"'));
 					console.log(newItem)
 			if (error.result.error.errors[0].message == 'Invalid Credentials') {
-				console.warn('Invalid Credentials - token: ' + authorizationService.getAuthToken())
-				console.log("calling gapi.auth2.init");
-				gapi.auth2.init({
-					client_id: '632148950209-60a3db9qm6q31sids128mvstddg2qme7.apps.googleusercontent.com',
-					scope: 'email https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.install',
-					fetch_basic_profile: false,
-					hosted_domain: 'york.org'
-				})
-				console.log("re-runing promise")
-				setTimeout(function() {
-					var newItem = JSON.parse(JSON.stringify(item).replace(/(?:"Authorization":"Bearer )[^"]+/,'"Authorization":"Bearer ' + authorizationService.getAuthToken() + '"'));
-					console.log(newItem)
-					runPromise(newItem);
-					console.log("calling authorizationService.initilize");
-					authorizationService.initilize(function() {
-						console.log("	authorizationService.initilize Done")
-					});
-				}, 10000)
-
+				console.warn("invalid credentials")
+                $mdToast.show($mdToast.simple().textContent('Please signin again.')).hideDelay(8000);
 			}
 			else if (error.result.error.errors[0].reason == 'dailyLimitExceededUnreg') {
 				console.warn('daily limit reached')
+				$mdToast.show($mdToast.simple().textContent('Please signin again.')).hideDelay(8000);
 			}
 		}
 		if (item.Err) {
 			item.Err(error)
 		}
-	}
-	window.checkAuthToken = function() {
-
 	}
 	window.clearUserInfo = function() {
 			$timeout(function(argument) {
