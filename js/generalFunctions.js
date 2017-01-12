@@ -45,9 +45,9 @@
     var item = theQueue[typeName].shift();
     if (item) {
       var delay = 0;
-      var tokenExpiration = new Date(gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true).expires_at)
+      var tokenExpiration = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true).expires_at
       console.log(tokenExpiration)
-      if (tokenExpiration > new Date()) {
+      if (new Date(tokenExpiration) > new Date()) {
         runPromise(item);
       } else {
         gapi.auth2.init({
