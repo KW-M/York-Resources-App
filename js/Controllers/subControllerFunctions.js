@@ -667,7 +667,19 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		if (error.result) {
 			if (error.result.error.errors[0].message == 'Invalid Credentials') {
 				console.warn('Invalid Credentials - token: ' + authorizationService.getAuthToken())
-				//runPromise(item);
+				console.log("calling gapi.auth2.init");
+				gapi.auth2.init({
+					client_id: '632148950209-60a3db9qm6q31sids128mvstddg2qme7.apps.googleusercontent.com',
+					scope: 'email https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.install',
+					fetch_basic_profile: false,
+					hosted_domain: 'york.org'
+				})
+				console.log("re-runing promise")
+				runPromise(item);
+				console.log("calling authorizationService.initilize");
+				authorizationService.initilize(function() {
+					console.log("	authorizationService.initilize Done")
+				});
 			}
 			else if (error.result.error.errors[0].reason == 'dailyLimitExceededUnreg') {
 				console.warn('daily limit reached')
