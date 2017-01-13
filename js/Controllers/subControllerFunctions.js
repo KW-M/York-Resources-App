@@ -430,11 +430,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	}
 	$scope.findLabel = function(labelName) {
 		for (var labelCount = 0; labelCount < $scope.allLabels.length; labelCount++) {
-			var $scope.allLabels[labelCount]
-		}
-		$scope.lLabels.forEach(function(Label) {
+			var Label = $scope.allLabels[labelCount];
 			if (Label.text == labelName) return labelName
-		})
+		}
 		var newLabel = {
 			text: labelName,
 			linkedClasses: [{
@@ -443,9 +441,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			}],
 			totalUsage: 1
 		}
-		$timeout(function() {
-			$scope.allLabels.push(newLabel);
-		})
+		// $timeout(function() {
+		// 	$scope.allLabels.push(newLabel);
+		// })
 		return newLabel;
 	}
 
