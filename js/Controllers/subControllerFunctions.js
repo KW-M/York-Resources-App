@@ -36,6 +36,9 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			}
 			if (DriveMetadata.properties) {
 				formatedPost.Labels = ((DriveMetadata.properties.Tag1 || "") + (DriveMetadata.properties.Tag2 || "")).split(",") || [];
+				formatedPost.Labels.forEach(function(Label, Index) {
+					formatedPost.Labels[Index] = $scope.findLabel(Label);
+				})
 				var updatedClass = $scope.findClassObject(DriveMetadata.properties.ClassName);
 				formatedPost.Title = DriveMetadata.properties.Title || nameArray[1] || ''
 				formatedPost.Flagged = DriveMetadata.properties.Flagged == 'TRUE' || DriveMetadata.properties.Flagged == 'true';
@@ -171,7 +174,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			else {
 				var Flagged = true;
 			}
-			if ($scope.queryParams.classPath !== null && $scope.queryParams.classPath !== undefined && $scope.queryParams.classPath !== 'Your Posts' && $scope.queryParams.classPath !== 'All Posts' && $scope.queryParams.classPath !== 'Flagged Posts') {
+			if ($scope.queryParams.classPath !== null && $scope.queryParams.classPath !== undefined && $scope.selectedClass !== false && $scope.selectedClass.Stared !== null) {
 				var Class = post.Class.Name === $scope.queryParams.classPath;
 			}
 			else {
@@ -272,7 +275,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				}
 			}
 		}
-		return false()
+		return false
 		console.warn('could not find class: ' + className);
 	};
 	$scope.sortLabels = function(input) {
@@ -389,7 +392,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}, 2);
 		$timeout(function() {
 			$scope.labelSearch = "";
-			$scope.queryParams.labels.push(newLabel);
+			$scope.Post.Labels.push(newLabel);
 		})
 	}
 	$scope.transferAllLabels = function() {
@@ -424,6 +427,24 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		$timeout(function() {
 			$scope.visibleLabels = $scope.sortLabels($scope.allLabels)
 		})
+	}
+	$scope.findLabel = function(labelName) {
+		for (var labelCount = 0; labelCount < $scope.allLabels.length; labelCount++) {
+			var Label = $scope.allLabels[labelCount];
+			if (Label.text == labelName) return labelName
+		}
+		var newLabel = {
+			text: labelName,
+			linkedClasses: [{
+				Name: $scope.queryParams.classPath,
+				Usage: 1,
+			}],
+			totalUsage: 1
+		}
+		// $timeout(function() {
+		// 	$scope.allLabels.push(newLabel);
+		// })
+		return newLabel;
 	}
 
 	//----------------------------------------------------
@@ -499,11 +520,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		$scope.myInfo.LastContributionDate = new Date()
 		var today = $filter('date')(new Date(), 'M/d/yy');
 		var range = 'Sheet1!F' + $scope.UserSettingsRowNum + ':F' + $scope.UserSettingsRowNum
-		$scope.$scope.myInfo.NumberOfContributions++
-			queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, [$scope.myInfo.NumberOfContributions, today]), null, function(err) {
-				console.warn(err)
-				$mdToast.showSimple('Error Saving Post');
-			}, 2);
+		$scope.myInfo.NumberOfContributions++;
+		queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, [$scope.myInfo.NumberOfContributions, today]), null, function(err) {
+			console.warn(err)
+			$mdToast.showSimple('Error Saving Post');
+		}, 2);
 	}
 	$scope.likePost = function(content) {
 		var userLikeIndex = findItemInArray($scope.myInfo.Email, content.Likes)
@@ -590,10 +611,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 					document.getElementById('quizlet_setup_frame').src += '';
 				}, 4000)
 				window.addEventListener("message", function receiveMessage(event) {
-					console.log(event);
 					window.reloadQuizletFrame = null
 					if (event.data == "QuizletAuthorized") {
-						console.log('auth q done');
 						$scope.quizletStepNumber = 3;
 					}
 				}, false);
@@ -647,20 +666,22 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			});
 		}
 		if (error.result) {
+			// var newItem = JSON.parse(JSON.stringify(item).replace(/(?:"Authorization":"Bearer )[^"]+/,'"Authorization":"Bearer woop woop ' + authorizationService.getAuthToken() + '"'));
+			// 		console.log(newItem)
 			if (error.result.error.errors[0].message == 'Invalid Credentials') {
-				console.log('Invalid Credentials - token: ' + authorizationService.getAuthToken())
-				runPromise(item);
+				console.warn("invalid credentials")
+                $mdToast.show($mdToast.simple().textContent('Please signin again.')).hideDelay(8000);
+                authorizationService.showSigninButton();
+                authorizationService.showSigninDialog();
 			}
 			else if (error.result.error.errors[0].reason == 'dailyLimitExceededUnreg') {
-				console.log('daily limit')
+				console.warn('daily limit reached')
+				$mdToast.show($mdToast.simple().textContent('Please signin again.')).hideDelay(8000);
 			}
 		}
 		if (item.Err) {
 			item.Err(error)
 		}
-	}
-	window.checkAuthToken = function() {
-
 	}
 	window.clearUserInfo = function() {
 			$timeout(function(argument) {
@@ -679,9 +700,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	}
 	$scope.refreshLayout = function() {
 		angularGridInstance.postsGrid.refresh();
-	}
-	$scope.logDuplicationIndexes = function() {
-		//	console.log()
 	}
 	$scope.logPostToConsole = function(content, arrayIndex) {
 		window.alert(JSON.stringify({

@@ -45,7 +45,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       classPath: 'Loading...',
       creatorEmail: null,
       id: null,
-      labels: [],
    };
 
    $scope.$mdMedia = $mdMedia;
@@ -131,7 +130,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          $scope.visibleLabels = $scope.sortLabels($scope.allLabels);
       })
       getFileTimer = setInterval(function() {
-         if (conurancy_counter == 0 && content_container.scrollHeight == content_container.clientHeight + 200) {
+         if (conurancy_counter == 0 && content_container.scrollHeight == content_container.clientHeight) {
             $scope.getFiles()
          }
       }, 1000)
@@ -153,6 +152,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                "Name": userInfo.result.user.displayName,
                "Email": userInfo.result.user.emailAddress,
                "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
+               "StaredClasses":[],
             };
             document.dispatchEvent(new window.Event('userInfoLoaded'));
          })

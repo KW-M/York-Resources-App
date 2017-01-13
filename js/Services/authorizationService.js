@@ -3,8 +3,6 @@ app.service('authorizationService', authService);
 
 function authService($mdDialog) {
     var self = this;
-    // var apiKey = 'AIzaSyCFXAknC9Fza_lsQBlRCAJJZbzQGDYr6mo';
-
     var signinButton = angular.element(document.getElementById('signin_button'));
     var signinSpinner = angular.element(document.getElementById('signin_spinner'));
     var signinDialog = angular.element(document.getElementById('overlay_background'));
@@ -39,8 +37,6 @@ function authService($mdDialog) {
                         callback();
                     };
                     self.hideSigninButton();
-                } else {
-
                 }
             } else {
                 window.clearUserInfo();
@@ -90,8 +86,6 @@ function authService($mdDialog) {
         logout.setAttribute("src", "https://mail.google.com/mail/u/0/?logout&hl=en");
         logout.style.display = "none";
         var logoutImg = document.body.appendChild(logout);
-        logoutImg.onload = function(){
-        }
     }
 
     this.getAuthToken = function() {
