@@ -6,7 +6,7 @@ md-dialog#new_post_dialog {
 }
 
 .new_post_dialog_scroll {
-   flex: 1;
+   flex-grow: 1;
    transition: opacity 0.3s ease;
 }
 
