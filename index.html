@@ -11,19 +11,19 @@
     <meta name="theme-color" content="#be0c1d">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="images/StudyHub_Logo/ms-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="57x57" href="images/StudyHub_Logo/apple-icon-57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="images/StudyHub_Logo/apple-icon-60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="images/StudyHub_Logo/apple-icon-72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="images/StudyHub_Logo/apple-icon-76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="images/StudyHub_Logo/apple-icon-114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="images/StudyHub_Logo/apple-icon-120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="images/StudyHub_Logo/apple-icon-144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="images/StudyHub_Logo/apple-icon-152.png">
-<link rel="apple-touch-icon" sizes="180x180" href="images/StudyHub_Logo/apple-icon-180.png">
-<link rel="icon" type="image/png" sizes="192x192" href="images/StudyHub_Logo/android-icon-192.png">
-<link rel="icon" type="image/png" sizes="96x96" href="images/StudyHub_Logo/favicon-96.png">
-<link rel="icon" type="image/png" sizes="32x32" href="images/StudyHub_Logo/favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="images/StudyHub_Logo/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="images/StudyHub_Logo/apple-icon-57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="images/StudyHub_Logo/apple-icon-60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/StudyHub_Logo/apple-icon-72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/StudyHub_Logo/apple-icon-76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/StudyHub_Logo/apple-icon-114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/StudyHub_Logo/apple-icon-120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/StudyHub_Logo/apple-icon-144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/StudyHub_Logo/apple-icon-152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/StudyHub_Logo/apple-icon-180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/StudyHub_Logo/android-icon-192.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="images/StudyHub_Logo/favicon-96.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/StudyHub_Logo/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/StudyHub_Logo/favicon-16.png">
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="css/preRenderStyles.css" />
     <script src="https://apis.google.com/js/api.js"></script>
@@ -46,13 +46,12 @@
         <div id="welcome_dialog">
             <div class="signin-dialog-padding">
                 <h1 style="margin-top:-6px">Welcome</h1>
-                <!--<img src="images/logo.png" style="width: 50%;margin: auto;margin-top: 30px;">-->
                 <p>Sign in with your me@york.org email account.</p>
                 <div class="signin-button-container">
                     <div id="signin_button" class="signin-button">
-                        <div class="signin-icon"><svg style="" viewBox="0, 0, 40, 40">
-                            <path d="M 22,20 h15 a17,17 0 1,1 -8,-14" fill="none" stroke="#4885ed" stroke-width="8"></path>
-                        </svg></div>
+                        <div class="signin-icon">
+                            <svg viewBox="0, 0, 40, 40"><path d="M 22,20 h15 a17,17 0 1,1 -8,-14" fill="none" stroke="#4885ed" stroke-width="8"></path></svg>
+                        </div>
                         <p class="signin-text">Sign in</p>
                     </div>
                     <md-progress-circular id="signin_spinner" class="md-accent" md-mode="indeterminate" md-diameter="36" style="margin:auto"></md-progress-circular>
@@ -62,7 +61,7 @@
                 <h3>Tips:</h3>
                 <p>Look for the mobile update comming soon.</p>
                 <md-button ng-click="openOnboardingDialog()">onboard</md-button>
-                <md-button style="display:none" id="dat_button" ng-click="::gotoRoute({classPath:'/Memes'})"><span style="opacity:0.5">meme</span></md-button>
+                <!--<md-button style="display:none" id="dat_button" ng-click="::gotoRoute({classPath:'/Memes'})"><span style="opacity:0.5">meme</span></md-button>-->
             </div>
         </div>
     </div>

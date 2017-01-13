@@ -21,6 +21,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	//----------------------------------------------------
 	//------------------ Converting ----------------------
 	$scope.convertDriveToPost = function(DriveMetadata) {
+		console.log(DriveMetadata)
 		var formatedPost = {};
 		try {
 			if (DriveMetadata.description) {
