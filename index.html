@@ -61,7 +61,9 @@
                 <h3>Tips:</h3>
                 <p>Look for the mobile update comming soon.</p>
                 <!--<md-button ng-click="openOnboardingDialog()">onboard</md-button>-->
-                <div style="display:none"><md-button style="display:none" id="dat_button" ng-click="::gotoRoute({classPath:'/Memes'})"><span style="opacity:0.5">meme</span></md-button></div>
+                <div style="display:none">
+                    <md-button style="display:none" id="dat_button" ng-click="::gotoRoute({classPath:'/Memes'})"><span style="opacity:0.5">meme</span></md-button>
+                </div>
             </div>
         </div>
     </div>
@@ -215,8 +217,8 @@
                     <md-button class="star-button" ng-if="selectedClass.Stared != null">
                         <md-icon style='color: white;font-size: 22px'>{{selectedClass.Stared ? 'star' : 'star_outline'}}</md-icon>
                         <span style="margin-left: 6px;">{{selectedClass.Stared ? 'un' : ''}}Star Class</span>
-                            <md-tooltip>Coming Soon</md-tooltip>
-                        </md-button>
+                        <md-tooltip>Coming Soon</md-tooltip>
+                    </md-button>
                 </div>
                 <div style="padding-bottom:8px"><span class="md-caption">{{selectedClass.Rules || 'Dont post test or homework answers. Do post what will help other students get to the answers on their own.'}}</span><span ng-if="false"> - <a href="#">edit</a></span></div>
                 <div class="create-post-bar-top" ng-hide="queryParams.classPath == 'Quizlet'">
