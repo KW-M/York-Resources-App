@@ -429,7 +429,10 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		})
 	}
 	$scope.findLabel = function(labelName) {
-		$scope.allLabels.forEach(function(Label) {
+		for (var labelCount = 0; labelCount < $scope.allLabels.length; labelCount++) {
+			var $scope.allLabels[labelCount]
+		}
+		$scope.lLabels.forEach(function(Label) {
 			if (Label.text == labelName) return labelName
 		})
 		var newLabel = {
