@@ -152,6 +152,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                "Name": userInfo.result.user.displayName,
                "Email": userInfo.result.user.emailAddress,
                "ClassOf": userInfo.result.user.emailAddress.match(/\d+/)[0],
+               "StaredClasses":[],
             };
             document.dispatchEvent(new window.Event('userInfoLoaded'));
          })
