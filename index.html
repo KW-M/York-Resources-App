@@ -189,13 +189,13 @@
                     <md-tooltip md-direction="left" md-autohide>Add Drive file</md-tooltip>
                     <img class="unselectable" style="width:22px; height:22px; margin-top:8px" src="images/drive_icon.svg">
                 </md-button>
-                <md-button class="md-fab md-raised md-mini">
-                    <label class="custom-file-upload" style=>
-                    <input type="file" accept="image/*" capture="camera" style="display:none"/>
-                    <md-tooltip md-direction="left" md-autohide>Take Photo</md-tooltip>
-                    <md-icon class="unselectable" style="color:black">camera</md-icon>
-                        </label>
-                </md-button>
+                <!--<md-button class="md-fab md-raised md-mini">-->
+                <!--    <label class="custom-file-upload" style=>-->
+                <!--    <input type="file" accept="image/*" capture="camera" style="display:none"/>-->
+                <!--    <md-tooltip md-direction="left" md-autohide>Take Photo</md-tooltip>-->
+                <!--    <md-icon class="unselectable" style="color:black">camera</md-icon>-->
+                <!--        </label>-->
+                <!--</md-button>-->
                 <md-button class="md-fab md-raised md-mini" ng-click="::showPicker('Upload')">
                     <md-tooltip md-direction="left" md-autohide>Upload</md-tooltip>
                     <md-icon class="unselectable" style="color:black">file_upload</md-icon>
@@ -213,7 +213,8 @@
                     <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>open_in_browser</md-icon>Open Class</md-button>
                     </span>
                     <md-button class="star-button" ng-if="selectedClass.Stared != null">
-                        <md-icon style='color: white;font-size: 22px'>{{selectedClass.Stared ? 'star' : 'star_outline'}}</md-icon><span style="margin-left: 6px;">{{selectedClass.Stared ? 'un' : ''}}Star Class<span>
+                        <md-icon style='color: white;font-size: 22px'>{{selectedClass.Stared ? 'star' : 'star_outline'}}</md-icon>
+                        <span style="margin-left: 6px;">{{selectedClass.Stared ? 'un' : ''}}Star Class</span>
                             <md-tooltip>Coming Soon</md-tooltip>
                         </md-button>
                 </div>
