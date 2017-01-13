@@ -75,7 +75,7 @@
                   </div>
                   <div ng-if="!(labelSearch == null || labelSearch == '')" style="width: 100%;text-align: center;display:inline">
                      <div class="label unselectable" ng-click="moveLabeltoActive(Label.text)" ng-repeat="Label in allLabels | filter:labelSearch as filteredLabels">{{Label.text}}</div>
-                     <span ng-if="filteredLabels.length === 0">{{labelSearch}} wasn't found. Add this new label: <span class="label" ng-click="addLabel(labelSearch)">{{labelSearch}}</span></span>
+                     <span ng-if="filteredLabels.length === 0">Add this new label: <span class="label" ng-click="addLabel(labelSearch)">{{labelSearch}}</span></span>
                   </div>
                </div>
                <md-input-container md-no-float class="md-input-min-height" style="width: 102px;margin: auto;">
@@ -92,18 +92,18 @@
    </md-dialog-content>
    <md-dialog-actions ng-hide="operation === 'view'" layout="row" style="align-items: center;" ng-style="{'background-color': Post.Class.Color + ' 0.6)'}">
       <md-button id="New_Post_Submit" ng-click="isReadyToSubmit()" ng-disabled="previewLoading" class="md-raised">Save</md-button>
-      <md-button class="text-formating-button md-icon-button " style="margin: 0 -6px 0 0; padding: 0;">
-         <md-icon style="font-size:18px; line-height: 24px;">format_bold</md-icon>
-      </md-button>
-      <md-button class="text-formating-button md-icon-button " style="margin: 0 -6px 0 0; padding: 0;">
-         <md-icon style="font-size:18px; line-height: 24px;">format_italic</md-icon>
-      </md-button>
-      <md-button class="text-formating-button md-icon-button " style="margin: 0 -6px 0 0; padding: 0;">
-         <md-icon style="font-size:18px; line-height: 24px;">format_underline</md-icon>
-      </md-button>
-      <md-button class="md-icon-button text-format-button" style="margin: 0 -6px 0 0; padding: 0;">
-         <md-icon style="font-size:18px;line-height: 24px;">format_list_bulleted</md-icon>
-      </md-button>
+      <!--<md-button class="text-formating-button md-icon-button " style="margin: 0 -6px 0 0; padding: 0;">-->
+      <!--   <md-icon style="font-size:18px; line-height: 24px;">format_bold</md-icon>-->
+      <!--</md-button>-->
+      <!--<md-button class="text-formating-button md-icon-button " style="margin: 0 -6px 0 0; padding: 0;">-->
+      <!--   <md-icon style="font-size:18px; line-height: 24px;">format_italic</md-icon>-->
+      <!--</md-button>-->
+      <!--<md-button class="text-formating-button md-icon-button " style="margin: 0 -6px 0 0; padding: 0;">-->
+      <!--   <md-icon style="font-size:18px; line-height: 24px;">format_underline</md-icon>-->
+      <!--</md-button>-->
+      <!--<md-button class="md-icon-button text-format-button" style="margin: 0 -6px 0 0; padding: 0;">-->
+      <!--   <md-icon style="font-size:18px;line-height: 24px;">format_list_bulleted</md-icon>-->
+      <!--</md-button>-->
       <span flex></span>
       <md-button class="md-icon-button text-format-button hover_black" style="margin-right:0px;" ng-click="closeDialog()">
          <md-icon ng-show="operation == 'new'" style="font-size:26px; line-height: 25px">delete</md-icon>
