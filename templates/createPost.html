@@ -61,8 +61,8 @@
                <!--</md-select-header>-->
                <!--<md-option ng-if="!classSelectSearch" ng-value="{'Name': favClass.Name, 'Catagory' : favClass.Catagory, 'Color':favClass.Color}" ng-repeat="favClass in myInfo.StaredClasses">{{::favClass.Name}}</md-option>-->
                <md-optgroup ng-repeat="Catagory in ::classList" ng-class="{'hide-label': classSelectSearch}">
-                  <!--<label class="side-nav-header md-container-ignore" ng-style="::{'background-color': Catagory.Color + ' 1)'}">{{::Catagory.Catagory}}</label>-->
-                  <md-option ng-value="{'Name': Name.Name || '', 'Catagory' : Catagory.Catagory  || '', 'Color':Catagory.Color  || ''}" ng-repeat="Name in ::Catagory.Classes | filter : classSelectSearch">{{::Name.Name}}</md-option>
+                  <label class="side-nav-header md-container-ignore" ng-style="::{'background-color': Catagory.Color + ' 1)'}">{{::Catagory.Catagory}}</label>
+                  <!--<md-option ng-value="{'Name': Name.Name || '', 'Catagory' : Catagory.Catagory  || '', 'Color':Catagory.Color  || ''}" ng-repeat="Name in ::Catagory.Classes | filter : classSelectSearch">{{::Name.Name}}</md-option>-->
                </md-optgroup>
             </md-select>
             <div style="display:flex">
