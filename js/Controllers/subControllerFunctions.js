@@ -79,8 +79,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 					formatedPost.PreviewImage = "https://ssl.gstatic.com/atari/images/simple-header-blended-small.png"
 				}, 150);
 			}
-			console.log(DriveMetadata)
-			console.log(formatedPost)
 			return (formatedPost)
 		}
 		catch (e) {
@@ -147,8 +145,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 					$scope.myInfo.StaredClasses.push($scope.findClassObject(Class))
 				})
 			})
-			console.log(staredArray)
-			console.log($scope.myInfo.StaredClasses)
 		}
 		if (spreadsheetRow[9]) $scope.myInfo.QuizletUsername = spreadsheetRow[9];
 		if (spreadsheetRow[10]) $scope.myInfo.QuizletUpdateDate = new Date(spreadsheetRow[10]);
@@ -167,7 +163,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	//-------------- Filtering & Sorting -----------------
 	$scope.filterPosts = function(inputSet) {
 		var output = inputSet.filter(function(post) {
-			console.log(post);
 			if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
 				var Flagged = post.Flagged === $scope.queryParams.flagged;
 			}
@@ -281,7 +276,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	$scope.sortLabels = function(input) {
 		var output = [];
 		input.forEach(function(item) {
-			console.log(item)
 			if (item.type == 'Teacher') {
 				item.classesTaught.forEach(function(classTaught) {
 					if (classTaught == $scope.queryParams.classPath) output.push(item);

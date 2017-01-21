@@ -55,7 +55,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    //----------------------------------------------------
    //------------------- Routing ------------------------
    $scope.gotoRoute = function(query) {
-      console.log(query)
       if (query.classPath !== undefined) {
          $scope.toggleSidebar(true);
          $location.search({
@@ -86,7 +85,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    function onLocationChange() {
       $scope.queryParams.q = $location.search().q || null;
       $scope.queryParams.classPath = $location.path().replace("/", "").replace("-", " ") || 'All Posts';
-      console.log($scope.queryParams.classPath)
       $scope.queryParams.id = $location.hash();
       $scope.searchInputTxt = $scope.queryParams.q;
 
@@ -215,9 +213,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             }
             $timeout(function() { //makes angular update values
                $scope.classList = catagoryList;
-               console.log(catagoryList)
-               console.log($scope.allLabels)
-               console.log($scope.allTeachers)
             })
          })
 
@@ -356,7 +351,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    self.pickerCallback = function(data) {
       //drivePicker.dispose();
       if (data.action == google.picker.Action.PICKED) {
-         console.log(data)
          if ($scope.restorePost == true) {
             $timeout(function() {
                $scope.Post.AttachmentId = data.docs[0].id;
@@ -459,9 +453,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    }
 
    function sortPostsByType(formattedFileList, queryString, queryParams) {
-      console.log(queryString)
-      console.log(queryParams)
-      console.log($scope.queryParams)
       if (queryParams.q) {
          console.log('hasQueryParams')
          if (queryParams.q === $scope.previousSearch) {
@@ -490,7 +481,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       var input = newValue || null
       var query = $scope.queryParams.q || null;
       if (input != query) {
-         console.log(input + "!=" + query);
          $scope.gotoRoute({
             q: input
          })
@@ -567,9 +557,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    }
 
    if (window.location.search) {
-      console.log(window.location.search);
       var unformated = window.location.search.match(/state=([^&]+)(?:$|&)/)
-      console.log(unformated)
       var shareInput = JSON.parse(decodeURIComponent(unformated[1]));
       if (shareInput.exportIds) {
          var id = shareInput.exportIds[0]
