@@ -371,10 +371,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    //----------------------------------------------------
    //--------- loading and filtering posts --------------
    $scope.getFiles = function() {
-      GoogleDriveService.appsScriptRequest().then(function(result,err){
-         console.log(result)
-         console.log(err)
-      })
+
       conurancy_counter++;
       var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
