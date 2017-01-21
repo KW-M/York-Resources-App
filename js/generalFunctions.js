@@ -94,19 +94,6 @@
     e.preventDefault();
   }, false);
 
-function getScript() {
-  gapi.client.request({
-            'root': 'https://script.googleapis.com',
-            'path': 'v1/scripts/MvIH1Lx0xYW2HuRXj0IjQfu31ZdidIE6U:run',
-            'method': 'POST',
-            'body': {
-              'function': 'test'
-            },
-        }).then(function (res,err) {
-          console.log(res)
-          console.warn(err)
-        })
-}
   /*
    * rfc3339date.js version 0.1.3
    *
