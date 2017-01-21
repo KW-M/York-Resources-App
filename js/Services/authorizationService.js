@@ -73,7 +73,8 @@ function authService($mdDialog) {
     };
 
     this.handleSigninClick = function(callback) {
-        gapi.auth2.getAuthInstance().signIn(function () {
+        gapi.auth2.getAuthInstance().signIn(function (res) {
+            console.log(res)
             if (callback) {
                 callback()
             }
