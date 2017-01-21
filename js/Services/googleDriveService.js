@@ -89,6 +89,16 @@ app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
 
     //----------------------------------------------------
     //---------------- Modifying Files -------------------
+    this.appsScriptRequest = function(functionName, param1, param2, param3){
+        return(gapi.client.request({
+            'root': 'https://script.googleapis.com',
+            'path': 'v1/scripts/MvIH1Lx0xYW2HuRXj0IjQfu31ZdidIE6U:run',
+            'method': 'POST',
+            'body': {
+              'function': 'test'
+            },
+        }));
+    }
 
     this.AppsScriptNewFile = function() {
         return $http({

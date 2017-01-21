@@ -251,7 +251,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             return GoogleDriveService.updateSpreadsheetRange("Sheet1!E" + $scope.UserSettingsRowNum, [rowValues[4]])
          }).then(listenForURLChange);
 
-         $q.all([driveAPI, sheetsAPI, pickerAPI]).then(authorizationService.hideSigninDialog)
+         $q.all([driveAPI, sheetsAPI, pickerAPI]).then(authorizationService.hideSigninDialog);
       });
    });
 
@@ -377,6 +377,10 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    //----------------------------------------------------
    //--------- loading and filtering posts --------------
    $scope.getFiles = function() {
+      GoogleDriveService.appsScriptRequest().then(function(result,err){
+         console.log(result)
+         console.log(err)
+      })
       conurancy_counter++;
       var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
