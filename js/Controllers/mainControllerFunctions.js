@@ -168,7 +168,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
                      text: Row[0].formattedValue,
                      type: Row[1].formattedValue || 'Label',
                      totalUsage: 0,
-                     linkedClasses: []
+                     linkedClasses: [],
                   };
                   for (var CellNum = 2; CellNum < Row.length; CellNum++) {
                      var Class = Row[CellNum].formattedValue.split(",")
@@ -371,7 +371,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    //----------------------------------------------------
    //--------- loading and filtering posts --------------
    $scope.getFiles = function() {
-
       conurancy_counter++;
       var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
