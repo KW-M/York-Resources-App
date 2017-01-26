@@ -53,7 +53,7 @@
             </div>
             <div class="signin-dialog-tip">
                 <h3>Tips:</h3>
-                <p>Share right from Google Drive.</br> Right-Click > Open With > Share on StudyHub</p>
+                <p>Share right from Google Drive. Right-Click > Open With > Share on StudyHub.</p>
                 <div style="display:none">
                     <md-button style="display:none" id="dat_button" ng-click="::gotoRoute({classPath:'/Memes'})"><span style="opacity:0.5">meme</span></md-button>
                 </div>
@@ -504,6 +504,13 @@
                 logout.setAttribute("src", "https://mail.google.com/mail/u/0/?logout&hl=en");
                 logout.style.display = "none";
                 var logoutImg = document.body.appendChild(logout);
+            }
+
+            this.onLoad = function(callback) {
+                $q.all([LibraryLoadPromise.promise, FireSignInPromise.promise, GSignInPromise.promise]).then(function() {
+                    console.log("everything Loade")
+                    callback();
+                });
             }
         });
     </script>
