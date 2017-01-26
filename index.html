@@ -388,6 +388,8 @@
     <!-- Directives -->
     <script src="js/directives.js"></script>
 
+    <button onclick="signOut()"></button>
+
     <script>
         app.service('authorizationService', function($q, $mdDialog) {
             firebase.initializeApp({
@@ -490,7 +492,7 @@
                 }
             }
 
-            function signOut() {
+            window.signOut = function() {
                 gapi.auth2.getAuthInstance().signOut().then(function() {
                     setTimeout(function() {
                         FireAuth.signOut().then(function() {
