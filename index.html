@@ -508,9 +508,21 @@
 
             this.onLoad = function(callback) {
                 $q.all([LibraryLoadPromise.promise, FireSignInPromise.promise, GSignInPromise.promise]).then(function() {
-                    console.log("everything Loade")
+                    console.log("everything Loaded")
                     callback();
                 });
+            }
+
+            this.hideSigninDialog = function() {
+                signinDialog.addClass('fadeOut');
+            };
+
+            this.showSigninDialog = function() {
+                signinDialog.removeClass('fadeOut');
+            };
+
+            this.getGAuthToken = function() {
+                return (gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true).access_token)
             }
         });
     </script>

@@ -141,6 +141,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          'callback': function() {
             initiateDrivePicker();
             authorizationService.hideSigninDialog();
+            
          }
       })
    })
