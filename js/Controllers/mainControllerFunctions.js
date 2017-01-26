@@ -179,6 +179,12 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          console.log('getClassList', JSON.parse(resp.result.response.result))
          $scope.classList = JSON.parse(resp.result.response.result).classList
       }, console.warn)
+      gapi.client.request({
+            'root': 'https://people.googleapis.com',
+            'path': '/v1/people/me?fields=photos%2Furl',
+            'method': 'GET',
+        }).then(fun)
+
    }
 
    function runAppsScript(scriptFunction, payload) {
