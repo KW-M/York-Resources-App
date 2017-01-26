@@ -505,6 +505,30 @@
                 var logoutImg = document.body.appendChild(logout);
             }
 
+                var self = this;
+    var signinDialog = angular.element(document.getElementById('overlay_background'));
+    var signinButton = angular.element(document.getElementById('signin_button'));
+    var signinSpinner = angular.element(document.getElementById('signin_spinner'));
+    var datButton = document.getElementById('dat_button');
+    var signoutButton = angular.element(document.getElementById('signout_button'));
+    function showSigninButton() {
+        signinSpinner.addClass('fadeOut');
+        setTimeout(function() {
+            signinButton.addClass('fadeIn');
+            datButton.style.display = 'none';
+        }, 500);
+        console.log(signinDialog)
+        signinDialog[0].style.zIndex = "2000"
+    };
+
+    function hideSigninButton() {
+        signinSpinner.removeClass('fadeOut');
+        setTimeout(function() {
+            signinButton.removeClass('fadeIn');
+            datButton.style.display = 'inline-block';
+        }, 500);
+    };
+
             this.onLoad = function(callback) {
                 $q.all([LibraryLoadPromise.promise, FireSignInPromise.promise, GSignInPromise.promise]).then(function() {
                     console.log("everything Loaded")
