@@ -151,10 +151,40 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
       var recentsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(false).setSelectFolderEnabled(true).setLabel('Recents');
 
-      var basePicker =
       drivePicker = new google.picker.PickerBuilder().setDeveloperKey("AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA").setOrigin(window.location.protocol + '//' + window.location.host).setOAuthToken(authorizationService.getGAuthToken()).setCallback(self.pickerCallback)
-      .addView(docsView).addView(recentsView).addView(sharedView).build();
-      uploadPicker = basePicker.addView(uploadView).enableFeature(google.picker.Feature.NAV_HIDDEN).hideTitleBar().build();
+         .addView(docsView).addView(recentsView).addView(sharedView).build();
+      uploadPicker = new google.picker.PickerBuilder().setDeveloperKey("AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA").setOrigin(window.location.protocol + '//' + window.location.host).setOAuthToken(authorizationService.getGAuthToken()).setCallback(self.pickerCallback)
+         .addView(uploadView).enableFeature(google.picker.Feature.NAV_HIDDEN).hideTitleBar().build();
+   }
+
+   function loadData() {
+      runAppsScript('userPreferencesHandler', {
+         operation: 'getUser',
+      }).then(function(resp) {
+         console.log('getUser', resp)
+         console.log('getUser', JSON.parse(resp.result.response.result))
+      }, console.warn)
+      runAppsScript('labelHandler', {
+         operation: 'getLabels',
+      }).then(function(resp) {
+         console.log('getLabels', resp)
+         console.log('getLabels', JSON.parse(resp.result.response.result))
+      }, console.warn)
+      runAppsScript('classAndTeacherHandler', {
+         operation: 'getList',
+      }).then(function(resp) {
+         console.log('getClassList', resp)
+         console.log('getClassList', JSON.parse(resp.result.response.result))
+      }, console.warn)
+   }
+
+   function runAppsScript(scriptFunction, payload) {
+      return (gapi.client.script.scripts.run({
+         'scriptId': 'MZMSm56uR7QYFSkt-WuDJEPA9VMeL9Grb',
+         'function': scriptFunction,
+         'parameters': [JSON.stringify(payload)],
+         'devMode': true,
+      }));
    }
 
    //----------------------------------------------------
