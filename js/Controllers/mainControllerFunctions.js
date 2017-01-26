@@ -146,29 +146,14 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    })
 
    function initiateDrivePicker() {
-      var token = authorizationService.getGAuthToken()
+      var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
       var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
       var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
-      var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
       var recentsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(false).setSelectFolderEnabled(true).setLabel('Recents');
-      drivePicker = new google.picker.PickerBuilder().
-      addView(docsView).
-      addView(recentsView).
-      addView(sharedView).
-      setDeveloperKey("AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA").
-      setOrigin(window.location.protocol + '//' + window.location.host).
-      setOAuthToken().
-      setCallback(self.pickerCallback).
-      build();
-      uploadPicker = new google.picker.PickerBuilder().
-      enableFeature(google.picker.Feature.NAV_HIDDEN).
-      hideTitleBar().
-      addView(uploadView).
-      setDeveloperKey("AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA").
-      setOrigin(window.location.protocol + '//' + window.location.host).
-      setOAuthToken(authorizationService.getGAuthToken()).
-      setCallback(self.pickerCallback).
-      build();
+
+      var basepicker = google.picker.PickerBuilder().setDeveloperKey("AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA").setOrigin(window.location.protocol + '//' + window.location.host).setOAuthToken(authorizationService.getGAuthToken()).setCallback(self.pickerCallback);
+      var drivePicker = new picker.addView(docsView).addView(recentsView).addView(sharedView).build();
+      var uploadPicker = new picker.addView(uploadView).enableFeature(google.picker.Feature.NAV_HIDDEN).hideTitleBar().build();
    }
 
    //----------------------------------------------------
