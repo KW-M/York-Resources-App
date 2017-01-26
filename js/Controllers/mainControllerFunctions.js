@@ -136,13 +136,16 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
 
    //----------------------------------------------------
    //------------- Signin & Initiation ------------------
-         var pickerAPI = pickerPromise.promise.then(function() {
-            $scope.initiateDrivePicker()
-         })
+   authorizationService.onLoad(function() {
+      gapi.load('picker', {
+         'callback': function() {
+            initiateDrivePicker();
+            authorizationService.hideSigninDialog();
+         }
+      })
+   })
 
-         $q.all([driveAPI, sheetsAPI, pickerAPI]).then(authorizationService.hideSigninDialog
-
-   $scope.initiateDrivePicker = function() {
+   function initiateDrivePicker() {
       var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
       var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
       var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");

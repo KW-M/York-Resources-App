@@ -17,11 +17,6 @@ app.service('GoogleDriveService', ['$q', '$http', function($q, $http) {
         gapi.client.load('sheets', 'v4', function() {
             APILoadedCallback("sheets");
         });
-        gapi.load('picker', {
-            'callback': function() {
-                APILoadedCallback("picker")
-            }
-        });
     };
 
     this.getUserInfo = function() {
