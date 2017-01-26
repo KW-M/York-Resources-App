@@ -139,6 +139,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    authorizationService.onLoad(function() {
       gapi.load('picker', {
          'callback': function() {
+            loadData();
             initiateDrivePicker();
             authorizationService.hideSigninDialog();
          }
