@@ -164,6 +164,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       }).then(function(resp) {
          console.log('getUser', resp)
          console.log('getUser', JSON.parse(resp.result.response.result))
+         $scope.myInfo = JSON.parse(resp.result.response.result).classList
       }, console.warn)
       runAppsScript('labelHandler', {
          operation: 'getLabels',
@@ -176,6 +177,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       }).then(function(resp) {
          console.log('getClassList', resp)
          console.log('getClassList', JSON.parse(resp.result.response.result))
+         $scope.classList = JSON.parse(resp.result.response.result).classList
       }, console.warn)
    }
 
