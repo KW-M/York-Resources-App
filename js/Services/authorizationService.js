@@ -73,7 +73,7 @@ function authService($mdDialog) {
     };
 
     this.handleSigninClick = function(callback) {
-        gapi.auth2.getAuthInstance().signIn(function(res) {
+        gapi.auth2.getAuthInstance().signIn(function (res) {
             console.log(res)
             if (callback) {
                 callback()
@@ -88,7 +88,6 @@ function authService($mdDialog) {
         logout.style.display = "none";
         var logoutImg = document.body.appendChild(logout);
     }
-    
 
     this.getAuthToken = function() {
         return (gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true).access_token)
