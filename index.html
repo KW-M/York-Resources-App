@@ -390,6 +390,7 @@
     <script src="js/directives.js"></script>
     
     <script>
+    app.service('authorizationService', function ($mdDialog) {
 		firebase.initializeApp({
 			apiKey: "AIzaSyDDxl3a7JKUo5VYvGR05BFeO1j7cvU628g",
 			authDomain: "fir-test-156302.firebaseapp.com",
@@ -497,6 +498,7 @@
 			logout.style.display = "none";
 			var logoutImg = document.body.appendChild(logout);
 		}
+    })
 	</script>
 
 </body>
