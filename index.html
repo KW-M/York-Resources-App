@@ -36,7 +36,7 @@
 <body ng-app="StudyHub" ng-controller="AppController">
     <!-------------------------------------------------------->
     <!-------------- The Welcome/Login screen ---------------->
-    <div id="overlay_background" class="overlay-background">
+    <div id="overlay_background">
         <div id="welcome_dialog">
             <div class="signin-dialog-padding">
                 <h1 style="margin-top:-6px">Welcome</h1>
@@ -44,7 +44,7 @@
                 <div class="signin-button-container">
                     <div id="signin_button" class="signin-button">
                         <div class="signin-icon">
-                
+                            <svg viewBox="0, 0, 40, 40"><path d="M 22,20 h15 a17,17 0 1,1 -8,-14" fill="none" stroke="#4885ed" stroke-width="8"></path></svg>
                         </div>
                         <p class="signin-text">Sign in</p>
                     </div>
@@ -388,7 +388,230 @@
     <script src="js/Services/googleDriveService.js"></script>
     <!-- Directives -->
     <script src="js/directives.js"></script>
+    
+    <script>
+		firebase.initializeApp({
+			apiKey: "AIzaSyDDxl3a7JKUo5VYvGR05BFeO1j7cvU628g",
+			authDomain: "fir-test-156302.firebaseapp.com",
+			databaseURL: "https://fir-test-156302.firebaseio.com",
+			storageBucket: "firebase-test-156302.appspot.com",
+			messagingSenderId: "191304458473"
+		});
+		var FireAuth = firebase.auth();
+		var FireDatabase = firebase.database();
+		var FireStorage = firebase.storage();
+		var FireGAuth = new firebase.auth.GoogleAuthProvider();
+		var FireUser = 'None';
 
+		FireAuth.onAuthStateChanged(updateSigninStatus);
+
+		// ---------- End Firebase Auth, Begin Google API Library and auth2 ------------ //
+
+		var GUser = null;
+		var GSignedIn = false;
+
+		gapi.load('client:auth2', function() {
+			// Initialize oauth
+			gapi.auth2.init({
+				'client_id': '191304458473-0nph9b5p6vc65irae1rfa4tggpqdpe6h.apps.googleusercontent.com',
+				'scope': 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/script.external_request',
+				'hosted_domain': 'york.org'
+			}).then(function(GAuth) {
+				// Listen for sign-in state changes.
+				GAuth.isSignedIn.listen(updateSigninStatus);
+				// Handle the initial sign-in state.
+				updateSigninStatus(GAuth.isSignedIn.get());
+				// show sign in prompt if sign in button is clicked.
+				GAuth.attachClickHandler('signin_button', null, null, console.warn)
+			}, console.warn)
+			
+			// Initialize API libraries
+			gapi.client.init({
+				'apiKey': 'AIzaSyDDxl3a7JKUo5VYvGR05BFeO1j7cvU628g',
+				'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest', 'https://www.googleapis.com/discovery/v1/apis/script/v1/rest'],
+			}).then(function() {
+				console.log("Loaded APIs")
+			}, console.warn)
+		});
+
+		function updateSigninStatus(Input) {
+			// Input is either a boolean from GAuth.isSignedIn.get() or a Firebase User object from FireAuth.currentUser
+			if (Input === true) {
+				GSignedIn = true;
+				GUser = gapi.auth2.getAuthInstance().currentUser.get();
+				GSignInPromise.resolve(GUser);
+			}
+			else if (Input === false) {
+				GSignedIn = false;
+				GUser = null;
+			}
+			else if (typeof(Input) == 'object') {
+				FireUser = Input;
+				FireSignInPromise.resolve(FireUser);
+			}
+			// Use the variables specified here
+			if (GSignedIn && FireUser && FireUser != 'None' && isUserEqual(GUser, FireUser)) {
+				console.log("Everything is SignedIn")
+			}
+			else if (GSignedIn && FireUser && FireUser != 'None' && !isUserEqual(GUser, FireUser)) {
+				console.log("Different Firebase user, signing into Firebase...")
+				SignIntoFirebase()
+			}
+			else if (GSignedIn && FireUser != 'None') {
+				console.log("No Firebase user, signing into Firebase...")
+				SignIntoFirebase()
+			}
+
+			function SignIntoFirebase() {
+				// Sign in with id_token credential from the gapi Google user.
+				var credential = firebase.auth.GoogleAuthProvider.credential(GUser.getAuthResponse().id_token);
+				firebase.auth().signInWithCredential(credential).then(function() {
+					console.log("fireSignin")
+				}).catch(console.warn);
+			}
+
+			function isUserEqual(googleUser, firebaseUser) {
+				if (firebaseUser) {
+					var providerData = firebaseUser.providerData;
+					for (var i = 0; i < providerData.length; i++) {
+						if (providerData[i].providerId === firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
+							providerData[i].uid === googleUser.getBasicProfile().getId()) {
+							// We don't need to reauth the Firebase connection.
+							return true;
+						}
+					}
+				}
+				return false;
+			}
+		}
+
+		function signOut() {
+			gapi.auth2.getAuthInstance().signOut().then(function() {
+				setTimeout(function() {
+					FireAuth.signOut().then(function() {
+						console.log("All Signed Out")
+					}, console.warn);
+				}, 500)
+			}, console.warn);
+
+			var logout = document.createElement("img");
+			logout.setAttribute("src", "https://mail.google.com/mail/u/0/?logout&hl=en");
+			logout.style.display = "none";
+			var logoutImg = document.body.appendChild(logout);
+		}
+
+		var postMemory = {}
+
+		FireDatabase.ref('posts').on('child_added', function(childSnapshot, prevChildKey) {
+			var val = childSnapshot.val()
+			postMemory[childSnapshot.key] = {
+				updateDate: val.D,
+				class: val.C,
+				email: val.E,
+				title: val.T,
+				loadStatus: 'Not Loaded'
+			}
+			console.log('child changed: ' + childSnapshot.key + ' previous key: ' + prevChildKey, childSnapshot.val())
+			console.log(postMemory)
+		});
+		FireDatabase.ref('posts').on('child_removed', function(childSnapshot, prevChildKey) {
+			var val = childSnapshot.val()
+			delete postMemory[childSnapshot.key];
+
+			console.log('child removed: ' + childSnapshot.key + ' previous key: ' + prevChildKey, childSnapshot.val())
+			console.log(postMemory)
+		});
+		FireDatabase.ref('posts').on('child_changed', function(childSnapshot, prevChildKey) {
+			var val = childSnapshot.val()
+			postMemory[childSnapshot.key].updateDate = val.D
+			postMemory[childSnapshot.key].class = val.C
+			postMemory[childSnapshot.key].email = val.E
+			postMemory[childSnapshot.key].title = val.T
+			postMemory[childSnapshot.key].loadStatus = 'Update Pending'
+
+			console.log('child removed: ' + childSnapshot.key + ' previous key: ' + prevChildKey, childSnapshot.val())
+			console.log(postMemory)
+		});
+
+		function createDatabaseObj() {
+			FireDatabase.ref('posts').push().set({
+				T: 'title is here',
+				E: 'worcester-moorek2018@york.org',
+				C: 'English II',
+				D: Date.now()
+			});
+		}
+
+		Q.all([LibraryLoadPromise.promise, FireSignInPromise.promise, GSignInPromise.promise]).then(function() {
+			console.log("promises Done");
+			runAppsScript('userPreferencesHandler', {
+				operation:'getUser',
+			}).then(function(resp) {
+				console.log('getUser',resp)
+				console.log('getUser',JSON.parse(resp.result.response.result))
+			}, console.warn)
+			runAppsScript('labelHandler', {
+				operation:'getLabels',
+			}).then(function(resp) {
+				console.log('getLabels',resp)
+				console.log('getLabels',JSON.parse(resp.result.response.result))
+			}, console.warn)
+			runAppsScript('classAndTeacherHandler', {
+				operation:'getList',
+			}).then(function(resp) {
+				console.log('getClassList',resp)
+				console.log('getClassList',JSON.parse(resp.result.response.result))
+			}, console.warn)
+		});
+
+		function runAppsScript(scriptFunction, payload) {
+			return (gapi.client.script.scripts.run({
+				'scriptId': 'MZMSm56uR7QYFSkt-WuDJEPA9VMeL9Grb',
+				'function': scriptFunction,
+				'parameters': [JSON.stringify(payload)],
+				'devMode': true,
+			}));
+		}
+
+		// runAppsScript('userPreferencesHandler',{
+		// 	operation:'updateUser',
+		// 	content: {
+		//         visits: 'increment',
+		//         contributions: 300,
+		// 	}
+		// })
+		// runAppsScript('savePostHandler', {
+		// 	operation: 'updatePost',
+		// 	content: {
+		// 		Title: "The post's title (string)",
+		// 		Description: "The description or body of the post (string, posibly containing HTML to be rendered)",
+		// 		Link: "The URL attached to this post (string, if present)",
+		// 		Labels: ["The names of the labels attched to this post (array of strings)", "Label"],
+		// 		Type: "'noLink' or 'Link' or 'Drive' the post's type (string)",
+		// 		Flagged: false,
+		// 		Class: {
+		// 			Name: "The name of the class associated with this post (string)",
+		// 			Catagory: "The catagory which includes the class associated with this post (string)",
+		// 			Color: "The color for the catagory (string)",
+		// 		},
+		// 		Creator: {
+		// 			ClassOf: "The posting user's graduation year(string)",
+		// 			Email: "The posting user's email(string)",
+		// 			Name: "The posting user's name(string)",
+		// 		},
+		// 		Id: "The Google Drive file id for this post(string)",
+		// 		AttachmentId: "The id of the attched Google Drive file (string, if present)",
+		// 		AttachmentName: "The filename of the attched Google Drive file (string, if present)",
+		// 		AttachmentIcon: "Attched Google Drive file's filetype icon URL (string, if present)",
+		// 		Likes: ["The email for every student that has liked this post (array of strings)", "a@york.org"],
+		// 		PreviewImage: "The URL or Base64 image for the preview of the Linked website or attched Google Drive file (string, if present)",
+		// 	}
+		// })
+		// .then(function(resp) {
+		// 	console.log(resp)
+		// 	console.log(JSON.parse(resp.result.response.result))
+		// }, console.warn)
+	</script>
 
 </body>
 
