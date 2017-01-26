@@ -8,23 +8,6 @@ function authService($mdDialog) {
     var signinDialog = angular.element(document.getElementById('overlay_background'));
     var datButton = document.getElementById('dat_button');
     var signoutButton = angular.element(document.getElementById('signout_button'));
-        this.showSigninButton = function() {
-        signinSpinner.addClass('fadeOut');
-        setTimeout(function() {
-            signinButton.addClass('fadeIn');
-            datButton.style.display = 'none';
-        }, 500);
-        console.log(signinDialog)
-        signinDialog[0].style.zIndex = "2000"
-    };
-
-    this.hideSigninButton = function() {
-        signinSpinner.removeClass('fadeOut');
-        setTimeout(function() {
-            signinButton.removeClass('fadeIn');
-            datButton.style.display = 'inline-block';
-        }, 500);
-    };
 
     this.initilize = function(callback) {
         gapi.auth2.init({
