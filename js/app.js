@@ -1,17 +1,15 @@
 //define the root angular module (app) as a variable named "app"
-var app = angular.module('YorkResourcesApp', ['ngMaterial', 'ngRoute', 'angularGrid', 'ngSanitize']);
+var app = angular.module('StudyHub', ['ngMaterial', 'ngRoute', 'angularGrid', 'ngSanitize']);
 
 //universaly applying configurations/options for the angular module (app) named "app" above
 app.config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $locationProvider) {
     //$locationProvider.html5Mode(true);
     //routing:
 
-    //defining icons
-    $mdIconProvider.icon("accountpic", "assets/svg/avatar-1.svg", 128)
-    $mdIconProvider.icon("driveIconNot", "assets/drive-icon.svg", 18)
+    //defining icons:
     $mdIconProvider.icon("driveIcon", "images/drive_icon.svg", 18);
 
-    //theming stuff
+    //theming stuff:
     $mdThemingProvider.definePalette('YorkRed', {
         '50': '#fbb9c0',
         '100': '#f6717f',
@@ -70,71 +68,69 @@ app.config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $locati
     });
 
     $mdThemingProvider.definePalette('YorkGreen', {
-  '50': '#f3f4da',
-  '100': '#dfe2a0',
-  '200': '#d1d575',
-  '300': '#bfc43e',
-  '400': '#aaae35',
-  '500': '#93972e',
-  '600': '#7c8027',
-  '700': '#656820',
-  '800': '#4e5119',
-  '900': '#383911',
-  'A100': '#f3f4da',
-  'A200': '#dfe2a0',
-  'A400': '#aaae35',
-  'A700': '#656820',
-  'contrastDefaultColor': 'light',
-  'contrastDarkColors': '50 100 200 300 400 500 A100 A200 A400'
+        '50': '#f3f4da',
+        '100': '#dfe2a0',
+        '200': '#d1d575',
+        '300': '#bfc43e',
+        '400': '#aaae35',
+        '500': '#93972e',
+        '600': '#7c8027',
+        '700': '#656820',
+        '800': '#4e5119',
+        '900': '#383911',
+        'A100': '#f3f4da',
+        'A200': '#dfe2a0',
+        'A400': '#aaae35',
+        'A700': '#656820',
+        'contrastDefaultColor': 'light',
+        'contrastDarkColors': '50 100 200 300 400 500 A100 A200 A400'
     });
 
     $mdThemingProvider.definePalette('YorkOrange', {
         '50': '#ffffff',
-  '100': '#f7e2d5',
-  '200': '#eec1a6',
-  '300': '#e2976a',
-  '400': '#dd8551',
-  '500': '#d87337',
-  '600': '#c96427',
-  '700': '#b05722',
-  '800': '#964a1d',
-  '900': '#7c3e18',
-  'A100': '#ffffff',
-  'A200': '#f7e2d5',
-  'A400': '#dd8551',
-  'A700': '#b05722',
-  'contrastDefaultColor': 'light',
-  'contrastDarkColors': '50 100 200 300 400 500 A100 A200 A400'
+        '100': '#f7e2d5',
+        '200': '#eec1a6',
+        '300': '#e2976a',
+        '400': '#dd8551',
+        '500': '#d87337',
+        '600': '#c96427',
+        '700': '#b05722',
+        '800': '#964a1d',
+        '900': '#7c3e18',
+        'A100': '#ffffff',
+        'A200': '#f7e2d5',
+        'A400': '#dd8551',
+        'A700': '#b05722',
+        'contrastDefaultColor': 'light',
+        'contrastDarkColors': '50 100 200 300 400 500 A100 A200 A400'
     });
     $mdThemingProvider.definePalette('yorkLightBlue', {
-  '50': '#e2eaf3',
-  '100': '#abc3de',
-  '200': '#83a6ce',
-  '300': '#5081b9',
-  '400': '#4372a8',
-  '500': '#3a6392',
-  '600': '#31547c',
-  '700': '#294566',
-  '800': '#203650',
-  '900': '#17283a',
-  'A100': '#e2eaf3',
-  'A200': '#abc3de',
-  'A400': '#4372a8',
-  'A700': '#294566',
-  'contrastDefaultColor': 'light',
-  'contrastDarkColors': '50 100 200 A100 A200'
-});
+        '50': '#e2eaf3',
+        '100': '#abc3de',
+        '200': '#83a6ce',
+        '300': '#5081b9',
+        '400': '#4372a8',
+        '500': '#3a6392',
+        '600': '#31547c',
+        '700': '#294566',
+        '800': '#203650',
+        '900': '#17283a',
+        'A100': '#e2eaf3',
+        'A200': '#abc3de',
+        'A400': '#4372a8',
+        'A700': '#294566',
+        'contrastDefaultColor': 'light',
+        'contrastDarkColors': '50 100 200 A100 A200'
+    });
     $mdThemingProvider.theme('default')
-            .primaryPalette('YorkRed')
+    .primaryPalette('YorkRed')
 
-            //.accentPalette('YorkBlue')
-            //.accentPalette('yorkLightBlue')
-            //.accentPalette('YorkGreenBlue')
-            //.accentPalette('YorkGreen')
-            .accentPalette('blue')
+    //.accentPalette('YorkBlue')
+    //.accentPalette('yorkLightBlue')
+    //.accentPalette('YorkGreenBlue')
+    //.accentPalette('YorkGreen')
+    .accentPalette('blue')
 
-            //.warnPalette('YorkOrange')
-            .warnPalette('deep-orange')
+    //.warnPalette('YorkOrange')
+    .warnPalette('deep-orange')
 });
-
-

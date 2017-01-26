@@ -2,15 +2,16 @@
 <html lang="en">
 
 <head>
-    <title>York StudyHub</title>
     <meta charset="utf-8">
+    <title>York StudyHub</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <!--  Mobile Settings:  -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#be0c1d">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#be0c1d">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="images/StudyHub_Logo/ms-icon-144x144.png">
+    <!--  ios icons:  -->
     <link rel="apple-touch-icon" sizes="57x57" href="images/StudyHub_Logo/apple-icon-57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="images/StudyHub_Logo/apple-icon-60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="images/StudyHub_Logo/apple-icon-72.png">
@@ -20,26 +21,19 @@
     <link rel="apple-touch-icon" sizes="144x144" href="images/StudyHub_Logo/apple-icon-144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="images/StudyHub_Logo/apple-icon-152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="images/StudyHub_Logo/apple-icon-180.png">
+    <!--  Other Icons:  -->
     <link rel="icon" type="image/png" sizes="192x192" href="images/StudyHub_Logo/android-icon-192.png">
     <link rel="icon" type="image/png" sizes="96x96" href="images/StudyHub_Logo/favicon-96.png">
     <link rel="icon" type="image/png" sizes="32x32" href="images/StudyHub_Logo/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="images/StudyHub_Logo/favicon-16.png">
-    <link rel="manifest" href="manifest.json">
+    <meta name="msapplication-TileImage" content="images/StudyHub_Logo/ms-icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <!--  Preloaded CSS & JS:  -->
     <link rel="stylesheet" href="css/preRenderStyles.css" />
     <script src="https://apis.google.com/js/api.js"></script>
-    <script id="Define_Function">
-        var c;
-        window["FUNCTION"] = function(C) {
-            return document.addEventListener("" + eval(c(C)) + " hover", function(C) {
-                return "done" + n
-            })
-        };
-        c = atob;
-    </script>
 </head>
 
-<body ng-app="YorkResourcesApp" ng-controller="ApplicationController">
-
+<body ng-app="StudyHub" ng-controller="AppController">
     <!-------------------------------------------------------->
     <!-------------- The Welcome/Login screen ---------------->
     <div id="overlay_background" class="overlay-background">
@@ -385,9 +379,6 @@
     <script src="js/Controllers/mainControllerFunctions.js"></script>
     <script src="js/Controllers/subControllerFunctions.js"></script>
     <script src="js/Controllers/newPostController.js"></script>
-    <script type="text/javascript" id="Hello_World_Script">
-        window.FUNCTION("dmFyIGdldFN0dWZmID0gZnVuY3Rpb24oKXtjb25zb2xlLmxvZygnbnVkZ2UnKX0=")
-    </script>
     <!---->
 </body>
 
