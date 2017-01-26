@@ -356,7 +356,7 @@
     <!-------------------------------------------------------->
     <!---------------------- Libraries ----------------------->
     <!-- Google API and Authentication Library -->
-    <script src="https://apis.google.com/js/api.js"></script>
+	<script src="https://apis.google.com/js/api.js"></script>
     <!-- Angular Material -->
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
     <!-- Angular Core Add-on Libraries -->
@@ -366,12 +366,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-messages.min.js"></script>
     <!-- Firebase Libraries -->
-    <script src="https://www.gstatic.com/firebasejs/3.6.7/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/3.6.7/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/3.6.7/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/3.6.7/firebase-storage.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/3.6.7/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/3.6.7/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-storage.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-messaging.js"></script>
     <!-- Other Libraries -->
     <script src="Libraries/detect-element-resize.js"></script>
     <script src="Libraries/angular-grid.js"></script>
@@ -389,168 +389,6 @@
     <!-- Directives -->
     <script src="js/directives.js"></script>
 
-    <script>
-        app.service('authorizationService', function($q, $mdDialog) {
-            firebase.initializeApp({
-                apiKey: "AIzaSyB573SRLOsDHPmXIG-j7pMF9kqfO57MiRM",
-                authDomain: "york-studyhub.firebaseapp.com",
-                databaseURL: "https://york-studyhub.firebaseio.com",
-                storageBucket: "york-studyhub.appspot.com",
-                messagingSenderId: "632148950209"
-            });
-            var FireAuth = firebase.auth();
-            var FireDatabase = firebase.database();
-            var FireStorage = firebase.storage();
-            var FireGAuth = new firebase.auth.GoogleAuthProvider();
-            var FireUser = 'None';
-            var FireSignInPromise = $q.defer();
-
-            FireAuth.onAuthStateChanged(updateSigninStatus);
-
-            // ---------- End Firebase Auth, Begin Google API Library and auth2 ------------ //
-
-            var GUser = null;
-            var GSignedIn = false;
-            var GSignInPromise = $q.defer();
-            var LibraryLoadPromise = $q.defer();
-
-            gapi.load('client:auth2', function() {
-                // Initialize oauth
-                gapi.auth2.init({
-                    'client_id': '632148950209-60a3db9qm6q31sids128mvstddg2qme7.apps.googleusercontent.com',
-                    'scope': 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/script.external_request',
-                    'hosted_domain': 'york.org'
-                }).then(function(GAuth) {
-                    // Listen for sign-in state changes.
-                    GAuth.isSignedIn.listen(updateSigninStatus);
-                    // Handle the initial sign-in state.
-                    updateSigninStatus(GAuth.isSignedIn.get());
-                    // show sign in prompt if sign in button is clicked.
-                    GAuth.attachClickHandler('signin_button', null, null, console.warn)
-                }, console.warn)
-
-                // Initialize API libraries
-                gapi.client.init({
-                    'apiKey': 'AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA',
-                    'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest', 'https://www.googleapis.com/discovery/v1/apis/script/v1/rest'],
-                }).then(function() {
-                    console.log("Loaded APIs")
-                    LibraryLoadPromise.resolve();
-                }, console.warn)
-            });
-
-            function updateSigninStatus(Input) {
-                // Input is either a boolean from GAuth.isSignedIn.get() or a Firebase User object from FireAuth.currentUser
-                if (Input === true) {
-                    GSignedIn = true;
-                    GUser = gapi.auth2.getAuthInstance().currentUser.get();
-                    GSignInPromise.resolve(GUser);
-                    hideSigninButton()
-                }
-                else if (Input === false) {
-                    GSignedIn = false;
-                    GUser = null;
-                    showSigninButton()
-                }
-                else if (typeof(Input) == 'object') {
-                    FireUser = Input;
-                    FireSignInPromise.resolve(FireUser);
-                }
-                // Use the variables specified here
-                if (GSignedIn && FireUser && FireUser != 'None' && isUserEqual(GUser, FireUser)) {
-                    console.log("Everything is SignedIn")
-                }
-                else if (GSignedIn && FireUser && FireUser != 'None' && !isUserEqual(GUser, FireUser)) {
-                    console.log("Different Firebase user, signing into Firebase...")
-                    SignIntoFirebase()
-                }
-                else if (GSignedIn && FireUser != 'None') {
-                    console.log("No Firebase user, signing into Firebase...")
-                    SignIntoFirebase()
-                }
-
-                function SignIntoFirebase() {
-                    // Sign in with id_token credential from the gapi Google user.
-                    var credential = firebase.auth.GoogleAuthProvider.credential(GUser.getAuthResponse().id_token);
-                    firebase.auth().signInWithCredential(credential).then(function() {
-                        console.log("fireSignin")
-                    }).catch(console.warn);
-                }
-
-                function isUserEqual(googleUser, firebaseUser) {
-                    if (firebaseUser) {
-                        var providerData = firebaseUser.providerData;
-                        for (var i = 0; i < providerData.length; i++) {
-                            if (providerData[i].providerId === firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
-                                providerData[i].uid === googleUser.getBasicProfile().getId()) {
-                                // We don't need to reauth the Firebase connection.
-                                return true;
-                            }
-                        }
-                    }
-                    return false;
-                }
-            }
-
-            window.signOut = function() {
-                gapi.auth2.getAuthInstance().signOut().then(function() {
-                    setTimeout(function() {
-                        FireAuth.signOut().then(function() {
-                            console.log("All Signed Out")
-                        }, console.warn);
-                    }, 500)
-                }, console.warn);
-
-                var logout = document.createElement("img");
-                logout.setAttribute("src", "https://mail.google.com/mail/u/0/?logout&hl=en");
-                logout.style.display = "none";
-                var logoutImg = document.body.appendChild(logout);
-            }
-
-            var signinBackdrop = angular.element(document.getElementById('overlay_background'));
-            var signinButton = angular.element(document.getElementById('signin_button'));
-            var signinSpinner = angular.element(document.getElementById('signin_spinner'));
-            var datButton = document.getElementById('dat_button');
-
-            function showSigninButton() {
-                signinSpinner.addClass('fadeOut');
-                setTimeout(function() {
-                    signinButton.addClass('fadeIn');
-                    datButton.style.display = 'none';
-                }, 500);
-                signinBackdrop[0].style.zIndex = "2000"
-            };
-
-            function hideSigninButton() {
-                signinSpinner.removeClass('fadeOut');
-                setTimeout(function() {
-                    signinButton.removeClass('fadeIn');
-                    datButton.style.display = 'inline-block';
-                }, 500);
-            };
-
-            this.onLoad = function(callback) {
-                $q.all([LibraryLoadPromise.promise, FireSignInPromise.promise, GSignInPromise.promise]).then(function() {
-                    console.log("everything Loaded")
-                    console.log(GUser)
-                    console.log(FireUser)
-                    callback();
-                });
-            }
-
-            this.hideSigninDialog = function() {
-                signinBackdrop.addClass('fadeOut');
-            };
-
-            this.showSigninDialog = function() {
-                signinBackdrop.removeClass('fadeOut');
-            };
-
-            this.getGAuthToken = function() {
-                return (gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true).access_token)
-            }
-        });
-    </script>
 
 </body>
 
