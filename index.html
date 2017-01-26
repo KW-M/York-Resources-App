@@ -170,8 +170,8 @@
     <!-------------------------------------------------------->
     <div class="horizontal-container" ng-cloak>
         <!---------------------------------------------------->
-        <md-sidenav side-nav-insides class="side-nav md-sidenav-left md-whiteframe-z2 sidenav-overlay" md-component-id="sidenav_overlay"></md-sidenav>
-        <side-nav-insides class="side-nav md-sidenav-left sidenav-inline" ng-class="{'side-nav-open' : globals.sidenavIsOpen === true && $mdMedia('gt-sm'),'rainbow2' : queryParams.classPath == 'Memes', 'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}"></side-nav-insides>
+        <md-sidenav side-nav-insides class="side-nav  md-sidenav-left md-whiteframe-z2" md-component-id="sidenav_overlay"></md-sidenav>
+        <side-nav-insides class="side-nav sidenav-inline md-sidenav-left" ng-class="{'side-nav-open' : globals.sidenavIsOpen === true && $mdMedia('gt-sm'),'rainbow2' : queryParams.classPath == 'Memes', 'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}"></side-nav-insides>
         <!----- The content, ie posts, resources, etc. ------->
         <md-fab-speed-dial id="speed_dial_container" md-direction="up" md-open="globals.FABisOpen" ng-class="{ 'slide-out' : globals.FABisHidden }" class="md-fling md-hover-full md-fab-bottom-right" ng-mouseenter="globals.FABisOpen = true" ng-mouseleave="globals.FABisOpen = false">
             <md-fab-trigger>
