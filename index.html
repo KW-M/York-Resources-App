@@ -509,6 +509,8 @@
             this.onLoad = function(callback) {
                 $q.all([LibraryLoadPromise.promise, FireSignInPromise.promise, GSignInPromise.promise]).then(function() {
                     console.log("everything Loaded")
+                    console.log(GUser)
+                    console.log(FireUser)
                     callback();
                 });
             }
