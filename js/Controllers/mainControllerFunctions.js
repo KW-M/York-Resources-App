@@ -177,7 +177,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       }).then(function(resp) {
          console.log('getClassList', resp)
          console.log('getClassList', JSON.parse(resp.result.response.result))
-         $scope.classList = JSON.parse(resp.result.response.result).classList
+         $scope.classList = JSON.parse(resp.result.response.result).content.classList
       }, console.warn)
       gapi.client.request({
             'root': 'https://people.googleapis.com',
