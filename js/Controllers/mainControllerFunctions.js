@@ -175,7 +175,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       runAppsScript('classAndTeacherHandler', {
          operation: 'getList',
       }).then(function(resp) {
-         //console.log('getClassList', resp)
+         console.log('getClassList', resp)
          console.log('getClassList', JSON.parse(resp.result.response.result))
          $scope.classList = JSON.parse(resp.result.response.result).classList
       }, console.warn)
