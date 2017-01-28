@@ -30,7 +30,6 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <!--  Preloaded CSS & JS:  -->
     <link rel="stylesheet" href="css/preRenderStyles.css" />
-    <script src="https://apis.google.com/js/api.js"></script>
 </head>
 
 <body ng-app="StudyHub" ng-controller="AppController">
@@ -522,7 +521,7 @@
 
             this.onLoad = function(callback) {
                 $q.all([LibraryLoadPromise.promise, FireSignInPromise.promise, GSignInPromise.promise]).then(function() {
-                    console.log("everything Loaded")
+                    console.log("All Auth Done")
                     callback();
                 });
             }
