@@ -172,12 +172,13 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       //    'path': '/v1/people/me?fields=photos%2Furl',
       //    'method': 'GET',
       // })
-      
+
 var xhr = new XMLHttpRequest();
-xhr.open('GET', 'http://example.com/', true);
-xhr.setRequestHeader(header, value);
+xhr.open('POST', 'https://script.google.com/a/macros/york.org/s/AKfycbwIkvLKyDqGe4gzf_hC80akuuxiOW-yzBiNJl0xVrXwDHLHLPg/exec', true);
+xhr.setRequestHeader('Authorization', 'Bearer ' + authorizationService.getGAuthToken());
 xhr.withCredentials = true;
 xhr.send(null);
+console.log(xhr)
       // $http({
       //    method: 'POST',
       //    url: 'https://script.google.com/a/macros/york.org/s/AKfycbwIkvLKyDqGe4gzf_hC80akuuxiOW-yzBiNJl0xVrXwDHLHLPg/exec',
