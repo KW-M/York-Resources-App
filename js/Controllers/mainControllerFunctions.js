@@ -164,7 +164,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    }
 
    function loadData() {
-      var getStartupData = readGppsScript('getStartupData').then(function(data) {
+      var getStartupData = readGAppsScript('getStartupData').then(function(data) {
          console.log(JSON.parse(data.result.response.result))
       })
       var getProfilePic = gapi.client.request({
@@ -225,7 +225,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          'devMode': true,
       }));
    }
-   
+
    function writeGAppsScript(scriptFunction, payload) {
       return (gapi.client.script.scripts.run({
          'scriptId': 'MZMSm56uR7QYFSkt-WuDJEPA9VMeL9Grb',
