@@ -164,18 +164,20 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    }
 
    function loadData() {
-      var getStartupData = runAppsScript('getStartupData').then(function(data) {
-         console.log(JSON.parse(data.result.response.result))
-      })
-      var getProfilePic = gapi.client.request({
-         'root': 'https://people.googleapis.com',
-         'path': '/v1/people/me?fields=photos%2Furl',
-         'method': 'GET',
-      })
+      // var getStartupData = runAppsScript('getStartupData').then(function(data) {
+      //    console.log(JSON.parse(data.result.response.result))
+      // })
+      // var getProfilePic = gapi.client.request({
+      //    'root': 'https://people.googleapis.com',
+      //    'path': '/v1/people/me?fields=photos%2Furl',
+      //    'method': 'GET',
+      // })
       
-      $http.jsonp('https://script.google.com/a/macros/york.org/s/AKfycbwIkvLKyDqGe4gzf_hC80akuuxiOW-yzBiNJl0xVrXwDHLHLPg/exec', {jsonpCallbackParam: 'callback'}).then(function(argument) {
-         console.log(argument)
-      })
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'http://example.com/', true);
+xhr.setRequestHeader(header, value);
+xhr.withCredentials = true;
+xhr.send(null);
       // $http({
       //    method: 'POST',
       //    url: 'https://script.google.com/a/macros/york.org/s/AKfycbwIkvLKyDqGe4gzf_hC80akuuxiOW-yzBiNJl0xVrXwDHLHLPg/exec',
