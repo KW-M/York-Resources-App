@@ -431,7 +431,7 @@
             });
 
             function updateSigninStatus(Input) {
-                // Input is either a boolean from GAuth.isSignedIn.get() or a Firebase User object from FireAuth.currentUser
+                // Input is either a boolean from GAuth.isSignedIn.get() or a Firebase User object from self.FireAuth.currentUser
                 if (Input === true) {
                     GSignedIn = true;
                     self.GUser = gapi.auth2.getAuthInstance().currentUser.get();
@@ -448,14 +448,14 @@
                     FireSignInPromise.resolve(self.FireUser);
                 }
                 // Use the variables specified here
-                if (GSignedIn && FireUser && FireUser != 'None' && isUserEqual(self.GUser, self.FireUser)) {
+                if (GSignedIn && self.FireUser && self.FireUser != 'None' && isUserEqual(self.GUser, self.FireUser)) {
                     console.log("Everything is SignedIn")
                 }
-                else if (GSignedIn && FireUser && FireUser != 'None' && !isUserEqual(GUser, FireUser)) {
+                else if (GSignedIn && self.FireUser && self.FireUser != 'None' && !isUserEqual(self.GUser, self.FireUser)) {
                     console.log("Different Firebase user, signing into Firebase...")
                     SignIntoFirebase()
                 }
-                else if (GSignedIn && FireUser != 'None') {
+                else if (GSignedIn && self.FireUser != 'None') {
                     console.log("No Firebase user, signing into Firebase...")
                     SignIntoFirebase()
                 }

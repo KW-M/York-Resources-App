@@ -182,11 +182,12 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       getUserPrefs.then(function(response) {
          $timeout(function() {
             $scope.myInfo = JSON.parse(response.result.response.result).content;
-            $scope.myInfo.Email = authorizationService.FireGUser.Email;
-            $scope.myInfo.StaredClasses.forEach(function(className, index) {
-               $scope.myInfo.StaredClasses[index] = $scope.findClassObject(className);
+            console.log(authorizationService)
+            $scope.myInfo.Email = authorizationService.FireUser.email;
+            $scope.myInfo.staredClasses.forEach(function(className, index) {
+               $scope.myInfo.staredClasses[index] = $scope.findClassObject(className);
             })
-            $scope.myInfo.StaredClasses.push({
+            $scope.myInfo.staredClasses.push({
                Name: 'Other',
                Color: 'hsla(200, 70%, 75%,',
             })
