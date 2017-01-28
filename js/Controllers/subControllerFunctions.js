@@ -258,7 +258,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 					if (Class.Name == className) {
 						Class.Color = $scope.classList[Catagories].Color
 						Class.Catagory = $scope.classList[Catagories].Catagory
-						for (var StaredNum = 0; StaredNum < $scope.myInfo.StaredClasses.length; StaredNum++) {
+						for (var StaredNum = 0; StaredNum < $scope.myInfo.staredClasses.length; StaredNum++) {
 							if ($scope.myInfo.StaredClasses[StaredNum].Name == className) {
 								Class.Stared = true;
 								return (Class)
