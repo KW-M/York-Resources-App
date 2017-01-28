@@ -253,7 +253,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}
 		else {
 			for (var Catagories = 0; Catagories < $scope.classList.length; Catagories++) {
-				for (var ClassNum = 0; ClassNum < $scope.classList[Catagories].Classes.length; ClassNum++) {
+				for (var ClassNum = 0; ClassNum < $scope.classList[Catagories].classes.length; ClassNum++) {
 					var Class = $scope.classList[Catagories].Classes[ClassNum]
 					if (Class.Name == className) {
 						Class.Color = $scope.classList[Catagories].Color
