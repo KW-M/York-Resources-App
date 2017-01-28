@@ -137,13 +137,15 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    //----------------------------------------------------
    //------------- Signin & Initiation ------------------
    authorizationService.onLoad(function() {
-      gapi.load('picker', {
-         'callback': function() {
-            loadData();
-            initiateDrivePicker();
-            authorizationService.hideSigninDialog();
-         }
-      })
+      loadData().then(function() {
+         console.log("loading done")
+         gapi.load('picker', {
+            'callback': function() {
+               initiateDrivePicker();
+               authorizationService.hideSigninDialog();
+            }
+         })
+      });
    })
 
    function initiateDrivePicker() {
@@ -159,31 +161,44 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    }
 
    function loadData() {
-      runAppsScript('userPreferencesHandler', {
+      var getUserPrefs = runAppsScript('userPreferencesHandler', {
          operation: 'getUser',
-      }).then(function(resp) {
-         //console.log('getUser', resp)
-         console.log('getUser', JSON.parse(resp.result.response.result))
-         $scope.myInfo = JSON.parse(resp.result.response.result).content
-      }, console.warn)
-      runAppsScript('labelHandler', {
-         operation: 'getLabels',
-      }).then(function(resp) {
-         //console.log('getLabels', resp)
-         console.log('getLabels', JSON.parse(resp.result.response.result))
-      }, console.warn)
-      runAppsScript('classAndTeacherHandler', {
+      })
+      var getClasses = runAppsScript('classAndTeacherHandler', {
          operation: 'getList',
-      }).then(function(resp) {
+      })
+      var getLabels = runAppsScript('labelHandler', {
+         operation: 'getLabels',
+      })
+      var getProfilePic = gapi.client.request({
+         'root': 'https://people.googleapis.com',
+         'path': '/v1/people/me?fields=photos%2Furl',
+         'method': 'GET',
+      })
+
+      getUserPrefs.then(function(response) {
+         //console.log('getUser', resp)
+         console.log('getUser', JSON.parse(response.result.response.result))
+         $scope.myInfo = JSON.parse(response.result.response.result).content
+      }, console.warn)
+
+      getClasses.then(function(response) {
+         //console.log('getLabels', resp)
+         console.log('getLabels', JSON.parse(response.result.response.result))
+      }, console.warn)
+
+      getLabels.then(function(resp) {
          console.log('getClassList', resp)
          console.log('getClassList', JSON.parse(resp.result.response.result))
          $scope.classList = JSON.parse(resp.result.response.result).content.classList
+         $scope.teacherList = JSON.parse(resp.result.response.result).content.teacherList
       }, console.warn)
-      gapi.client.request({
-            'root': 'https://people.googleapis.com',
-            'path': '/v1/people/me?fields=photos%2Furl',
-            'method': 'GET',
-      }).then(function(res){console.log(res)})
+
+      getProfilePic.then(function(res) {
+         console.log(res)
+      })
+
+      return $q.all([getUserPrefs, getClasses, getLabels])
    }
 
    function runAppsScript(scriptFunction, payload) {

@@ -129,8 +129,8 @@
                 <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button unselectable" id="account_button" aria-label="account" style="height:36px;width:36px;border-radius:50%;background-image:url('images/accountPic.jpg'); background-size: 36px 36px;"></md-button>
                 <md-menu-content>
                     <md-menu-item layout="column" style="padding: 6px 16px;" class="unselectable">
-                        <p class="user-name" style="font-weight: bold; font-size:13px; padding: 0px">{{myInfo.Name}}</p>
-                        <p class="user-name" style="color: #666; font-size:13px; padding: 0px">{{myInfo.Email}}</p>
+                        <p class="user-name" style="font-weight: bold; font-size:13px; padding: 0px">{{myInfo.name}}</p>
+                        <p class="user-name" style="color: #666; font-size:13px; padding: 0px">{{myInfo.email}}</p>
                     </md-menu-item>
                     <md-menu-item>
                         <md-button id="signout_button" ng-click="signOut()">
@@ -293,11 +293,11 @@
                                     <md-button class="md-icon-button" area-label="Flag" ng-click="::unFlagPost(Post,$index)" ng-hide="Post.Flagged == false">
                                         <md-icon class="md-warn">flag</md-icon>
                                     </md-button>
-                                    <md-button class="md-icon-button" area-label="Flag" ng-click="::flagPost(Post,$index)" ng-hide="Post.Creator.Email === myInfo.Email || Post.Flagged == true">
+                                    <md-button class="md-icon-button" area-label="Flag" ng-click="::flagPost(Post,$index)" ng-hide="post.creator.email === myInfo.email || Post.Flagged == true">
                                         <md-icon>flag</md-icon>
                                     </md-button>
                                     <md-menu>
-                                        <md-button ng-click="::$mdOpenMenu($event)" ng-show="::Post.Creator.Email === myInfo.Email" class="md-icon-button">
+                                        <md-button ng-click="::$mdOpenMenu($event)" ng-show="::Post.creator.email === myInfo.email" class="md-icon-button">
                                             <md-icon>more_vert</md-icon>
                                         </md-button>
                                         <md-menu-content>
