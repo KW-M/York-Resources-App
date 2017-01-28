@@ -165,7 +165,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
 
    function loadData() {
       var getStartupData = runAppsScript('getStartupData').then(function(data) {
-         console.log(data)
+         console.log(JSON.parse(data.result.response.result))
       })
       // var getUserPrefs = runAppsScript('userPreferencesHandler', {
       //    operation: 'getUser',
