@@ -182,7 +182,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       getUserPrefs.then(function(response) {
          $timeout(function() {
             $scope.myInfo = JSON.parse(response.result.response.result).content;
-            $scope.myInfo.Email = FireGUser.Email;
+            $scope.myInfo.Email = authorizationService.FireGUser.Email;
             $scope.myInfo.StaredClasses.forEach(function(className, index) {
                $scope.myInfo.StaredClasses[index] = $scope.findClassObject(className);
             })
@@ -215,7 +215,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          //    $scope.myInfo.profilePicture = response.result
          //    $scope.teacherList = result.teacherList
          // })
-         console.log(res)
+         console.log(response)
       })
 
       return $q.all([getUserPrefs, getClasses, getLabels])

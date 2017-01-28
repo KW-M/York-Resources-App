@@ -381,6 +381,7 @@
     <script src="js/generalFunctions.js"></script>
     <script>
         app.service('authorizationService', function($q, $mdDialog) {
+            var self = this;
             firebase.initializeApp({
                 apiKey: "AIzaSyB573SRLOsDHPmXIG-j7pMF9kqfO57MiRM",
                 authDomain: "york-studyhub.firebaseapp.com",
@@ -388,18 +389,18 @@
                 storageBucket: "york-studyhub.appspot.com",
                 messagingSenderId: "632148950209"
             });
-            var FireAuth = firebase.auth();
-            var FireDatabase = firebase.database();
-            var FireStorage = firebase.storage();
+            self.FireAuth = firebase.auth();
+            self.FireDatabase = firebase.database();
+            self.FireStorage = firebase.storage();
             var FireGAuth = new firebase.auth.GoogleAuthProvider();
-            var FireUser = 'None';
+            self.FireUser = 'None';
             var FireSignInPromise = $q.defer();
 
-            FireAuth.onAuthStateChanged(updateSigninStatus);
+            self.FireAuth.onAuthStateChanged(updateSigninStatus);
 
             // ---------- End Firebase Auth, Begin Google API Library and auth2 ------------ //
 
-            var GUser = null;
+            self.GUser = null;
             var GSignedIn = false;
             var GSignInPromise = $q.defer();
             var LibraryLoadPromise = $q.defer();
@@ -433,8 +434,8 @@
                 // Input is either a boolean from GAuth.isSignedIn.get() or a Firebase User object from FireAuth.currentUser
                 if (Input === true) {
                     GSignedIn = true;
-                    GUser = gapi.auth2.getAuthInstance().currentUser.get();
-                    GSignInPromise.resolve(GUser);
+                    self.GUser = gapi.auth2.getAuthInstance().currentUser.get();
+                    GSignInPromise.resolve(self.GUser);
                     hideSigninButton()
                 }
                 else if (Input === false) {
@@ -443,11 +444,11 @@
                     showSigninButton()
                 }
                 else if (typeof(Input) == 'object') {
-                    FireUser = Input;
-                    FireSignInPromise.resolve(FireUser);
+                    self.FireUser = Input;
+                    FireSignInPromise.resolve(self.FireUser);
                 }
                 // Use the variables specified here
-                if (GSignedIn && FireUser && FireUser != 'None' && isUserEqual(GUser, FireUser)) {
+                if (GSignedIn && FireUser && FireUser != 'None' && isUserEqual(self.GUser, self.FireUser)) {
                     console.log("Everything is SignedIn")
                 }
                 else if (GSignedIn && FireUser && FireUser != 'None' && !isUserEqual(GUser, FireUser)) {
@@ -485,7 +486,7 @@
             window.signOut = function() {
                 gapi.auth2.getAuthInstance().signOut().then(function() {
                     setTimeout(function() {
-                        FireAuth.signOut().then(function() {
+                        self.FireAuth.signOut().then(function() {
                             console.log("All Signed Out")
                         }, console.warn);
                     }, 500)
