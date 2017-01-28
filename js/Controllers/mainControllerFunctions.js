@@ -164,8 +164,17 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    }
 
    function loadData() {
+      $scope.myInfo = {
+         Email: authorizationService.FireUser.email
+      }
       var getStartupData = readGAppsScript('getStartupData').then(function(data) {
-         console.log(JSON.parse(data.result.response.result))
+         console.log(data)
+         var dataObj = JSON.parse(data.result.response.result);
+         $timeout(function() {
+            $scope.myInfo = dataObj;
+            $scope.myInfo.Email = authorizationService.FireUser.email;
+         });
+         console.log(dataObj)
       })
       var getProfilePic = gapi.client.request({
          'root': 'https://people.googleapis.com',
@@ -207,13 +216,13 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       // }, console.warn)
 
       getProfilePic.then(function(response) {
-         $timeout(function() {
-            $scope.myInfo.profilePicture = response.result
-         })
+         // $timeout(function() {
+         //    $scope.myInfo.profilePicture = response.result
+         // })
          console.log(response)
       })
 
-      return $q.all([getUserPrefs, getClasses, getLabels])
+      //return $q.all([getUserPrefs, getClasses, getLabels])
    }
 
    function readGAppsScript(scriptFunction, payload) {
