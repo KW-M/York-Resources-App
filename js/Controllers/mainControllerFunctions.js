@@ -164,28 +164,14 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    }
 
    function loadData() {
-      // var getStartupData = runAppsScript('getStartupData').then(function(data) {
-      //    console.log(JSON.parse(data.result.response.result))
-      // })
-      // var getProfilePic = gapi.client.request({
-      //    'root': 'https://people.googleapis.com',
-      //    'path': '/v1/people/me?fields=photos%2Furl',
-      //    'method': 'GET',
-      // })
-
-var xhr = new XMLHttpRequest();
-xhr.open('POST', 'https://script.google.com/a/macros/york.org/s/AKfycbwIkvLKyDqGe4gzf_hC80akuuxiOW-yzBiNJl0xVrXwDHLHLPg/exec', true);
-xhr.setRequestHeader('Authorization', 'Bearer ' + authorizationService.getGAuthToken());
-xhr.withCredentials = true;
-xhr.send(null);
-console.log(xhr)
-      // $http({
-      //    method: 'POST',
-      //    url: 'https://script.google.com/a/macros/york.org/s/AKfycbwIkvLKyDqGe4gzf_hC80akuuxiOW-yzBiNJl0xVrXwDHLHLPg/exec',
-      //    headers: {
-      //       'Authorization': 'Bearer ' + authorizationService.getGAuthToken(),
-      //    },
-      // })
+      var getStartupData = readGppsScript('getStartupData').then(function(data) {
+         console.log(JSON.parse(data.result.response.result))
+      })
+      var getProfilePic = gapi.client.request({
+         'root': 'https://people.googleapis.com',
+         'path': '/v1/people/me?fields=photos%2Furl',
+         'method': 'GET',
+      })
 
       // getUserPrefs.then(function(response) {
       //    $timeout(function() {
@@ -231,7 +217,16 @@ console.log(xhr)
       //return $q.all([getUserPrefs, getClasses, getLabels])
    }
 
-   function runAppsScript(scriptFunction, payload) {
+   function readGAppsScript(scriptFunction, payload) {
+      return (gapi.client.script.scripts.run({
+         'scriptId': 'MuWC0NB4CLnMdc_XDwj7F_PA9VMeL9Grb',
+         'function': scriptFunction,
+         'parameters': [JSON.stringify(payload)],
+         'devMode': true,
+      }));
+   }
+   
+   function writeGAppsScript(scriptFunction, payload) {
       return (gapi.client.script.scripts.run({
          'scriptId': 'MZMSm56uR7QYFSkt-WuDJEPA9VMeL9Grb',
          'function': scriptFunction,
