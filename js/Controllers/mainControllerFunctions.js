@@ -182,9 +182,9 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       getUserPrefs.then(function(response) {
          $timeout(function() {
             $scope.myInfo = JSON.parse(response.result.response.result).content;
-            $scope.myInfo.Email = FireUser.Email;
-            $scope.myInfo.StaredClasses.forEach(function(Class, Index) {
-               $scope.myInfo.StaredClasses.push($scope.findClassObject(Class))
+            $scope.myInfo.Email = FireGUser.Email;
+            $scope.myInfo.StaredClasses.forEach(function(className, index) {
+               $scope.myInfo.StaredClasses[index] = $scope.findClassObject(className);
             })
             $scope.myInfo.StaredClasses.push({
                Name: 'Other',
@@ -193,19 +193,28 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          })
       }, console.warn)
 
-      getLabels.then(function(response) {
-         //console.log('getLabels', resp)
-         console.log('getLabels', JSON.parse(response.result.response.result))
+      getLabels.then(function(resp) {
+         $timeout(function() {
+            $scope.labels = JSON.parse(resp.result.response.result).content;
+         })
+         console.log('getLabels', JSON.parse(resp.result.response.result))
       }, console.warn)
 
       getClasses.then(function(resp) {
+         var result = JSON.parse(resp.result.response.result).content;
+         $timeout(function() {
+            $scope.classList = result.classList
+            $scope.teacherList = result.teacherList
+         })
          console.log('getClassList', resp)
-         console.log('getClassList', JSON.parse(resp.result.response.result))
-         $scope.classList = JSON.parse(resp.result.response.result).content.classList
-         $scope.teacherList = JSON.parse(resp.result.response.result).content.teacherList
+         console.log('getClassList', result)
       }, console.warn)
 
-      getProfilePic.then(function(res) {
+      getProfilePic.then(function(response) {
+         // $timeout(function() {
+         //    $scope.myInfo.profilePicture = response.result
+         //    $scope.teacherList = result.teacherList
+         // })
          console.log(res)
       })
 
