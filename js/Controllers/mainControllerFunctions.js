@@ -180,9 +180,17 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       })
 
       getUserPrefs.then(function(response) {
-         //console.log('getUser', resp)
-         console.log('getUser', JSON.parse(response.result.response.result))
-         $scope.myInfo = JSON.parse(response.result.response.result).content
+         $timeout(function() {
+            $scope.myInfo = JSON.parse(response.result.response.result).content;
+            $scope.myInfo.Email = FireUser.Email;
+            $scope.myInfo.StaredClasses.forEach(function(Class, Index) {
+               $scope.myInfo.StaredClasses.push($scope.findClassObject(Class))
+            })
+            $scope.myInfo.StaredClasses.push({
+               Name: 'Other',
+               Color: 'hsla(200, 70%, 75%,',
+            })
+         })
       }, console.warn)
 
       getLabels.then(function(response) {
