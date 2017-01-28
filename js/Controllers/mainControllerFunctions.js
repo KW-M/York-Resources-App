@@ -172,13 +172,17 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          'path': '/v1/people/me?fields=photos%2Furl',
          'method': 'GET',
       })
-      $http({
-         method: 'POST',
-         url: 'https://script.google.com/a/macros/york.org/s/AKfycbwIkvLKyDqGe4gzf_hC80akuuxiOW-yzBiNJl0xVrXwDHLHLPg/exec',
-         headers: {
-            'Authorization': 'Bearer ' + authorizationService.getGAuthToken(),
-         },
+      
+      $http.jsonp('https://script.google.com/a/macros/york.org/s/AKfycbwIkvLKyDqGe4gzf_hC80akuuxiOW-yzBiNJl0xVrXwDHLHLPg/exec', {jsonpCallbackParam: 'callback'}).then(function(argument) {
+         console.log(argument)
       })
+      // $http({
+      //    method: 'POST',
+      //    url: 'https://script.google.com/a/macros/york.org/s/AKfycbwIkvLKyDqGe4gzf_hC80akuuxiOW-yzBiNJl0xVrXwDHLHLPg/exec',
+      //    headers: {
+      //       'Authorization': 'Bearer ' + authorizationService.getGAuthToken(),
+      //    },
+      // })
 
       // getUserPrefs.then(function(response) {
       //    $timeout(function() {
