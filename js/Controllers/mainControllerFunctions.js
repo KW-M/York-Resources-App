@@ -207,14 +207,13 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       // }, console.warn)
 
       getProfilePic.then(function(response) {
-         // $timeout(function() {
-         //    $scope.myInfo.profilePicture = response.result
-         //    $scope.teacherList = result.teacherList
-         // })
+         $timeout(function() {
+            $scope.myInfo.profilePicture = response.result
+         })
          console.log(response)
       })
 
-      //return $q.all([getUserPrefs, getClasses, getLabels])
+      return $q.all([getUserPrefs, getClasses, getLabels])
    }
 
    function readGAppsScript(scriptFunction, payload) {
