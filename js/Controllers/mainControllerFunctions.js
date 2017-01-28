@@ -168,12 +168,15 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          Email: authorizationService.FireUser.email
       }
       var getStartupData = readGAppsScript('getStartupData').then(function(data) {
-         console.log(data)
          var dataObj = JSON.parse(data.result.response.result);
          $timeout(function() {
-            $scope.myInfo = dataObj;
+            $scope.labels = dataObj.labels;
+            $scope.myInfo = dataObj.userPrefs;
+            $scope.classList = dataObj.classes;
+            $scope.teacherList = dataObj.teachers;
             $scope.myInfo.Email = authorizationService.FireUser.email;
          });
+         console.log(data)
          console.log(dataObj)
       })
       var getProfilePic = gapi.client.request({
