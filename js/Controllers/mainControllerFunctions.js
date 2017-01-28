@@ -137,15 +137,14 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    //----------------------------------------------------
    //------------- Signin & Initiation ------------------
    authorizationService.onLoad(function() {
-      loadData().then(function() {
-         console.log("loading done")
-         gapi.load('picker', {
+      loadData()
+      var pickerPromise = $q.Defer
+      gapi.load('picker', {
             'callback': function() {
                initiateDrivePicker();
                authorizationService.hideSigninDialog();
             }
          })
-      });
    })
 
    function initiateDrivePicker() {
@@ -182,12 +181,12 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          $scope.myInfo = JSON.parse(response.result.response.result).content
       }, console.warn)
 
-      getClasses.then(function(response) {
+      getLabels.then(function(response) {
          //console.log('getLabels', resp)
          console.log('getLabels', JSON.parse(response.result.response.result))
       }, console.warn)
 
-      getLabels.then(function(resp) {
+      getClasses.then(function(resp) {
          console.log('getClassList', resp)
          console.log('getClassList', JSON.parse(resp.result.response.result))
          $scope.classList = JSON.parse(resp.result.response.result).content.classList
