@@ -164,8 +164,8 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    }
 
    function loadData() {
-      var getStartupData = runAppsScript('userPreferencesHandler', {
-         operation: 'getUser',
+      var getStartupData = runAppsScript('getStartupData').then(function(data) {
+         console.log(data)
       })
       // var getUserPrefs = runAppsScript('userPreferencesHandler', {
       //    operation: 'getUser',
@@ -223,7 +223,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          console.log(response)
       })
 
-      return $q.all([getUserPrefs, getClasses, getLabels])
+      //return $q.all([getUserPrefs, getClasses, getLabels])
    }
 
    function runAppsScript(scriptFunction, payload) {
