@@ -167,15 +167,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       var getStartupData = runAppsScript('getStartupData').then(function(data) {
          console.log(JSON.parse(data.result.response.result))
       })
-      // var getUserPrefs = runAppsScript('userPreferencesHandler', {
-      //    operation: 'getUser',
-      // })
-      // var getClasses = runAppsScript('classAndTeacherHandler', {
-      //    operation: 'getList',
-      // })
-      // var getLabels = runAppsScript('labelHandler', {
-      //    operation: 'getLabels',
-      // })
       var getProfilePic = gapi.client.request({
          'root': 'https://people.googleapis.com',
          'path': '/v1/people/me?fields=photos%2Furl',
