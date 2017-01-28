@@ -173,9 +173,12 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          'method': 'GET',
       })
       $http({
-  method: 'Po',
-  url: '/someUrl'
-})
+         method: 'POST',
+         url: 'https://script.google.com/a/macros/york.org/s/AKfycbwIkvLKyDqGe4gzf_hC80akuuxiOW-yzBiNJl0xVrXwDHLHLPg/exec',
+         headers: {
+            'Authorization': 'Bearer ' + authorizationService.getGAuthToken(),
+         },
+      })
 
       // getUserPrefs.then(function(response) {
       //    $timeout(function() {
