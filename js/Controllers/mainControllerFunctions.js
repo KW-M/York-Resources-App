@@ -170,8 +170,17 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       var getStartupData = readGAppsScript('getStartupData').then(function(data) {
          var dataObj = JSON.parse(data.result.response.result);
          $timeout(function() {
+            $scope.myInfo = {
+               contributions: dataObj.userPrefs.contributions
+               email: authorizationService.FireUser.email
+               flagDate: 1484294400000
+               moderator: true
+               name: "Kyle Worcester-Moore"
+               quizletUsername: "Kyle_Worcester-Moore"
+               staredClasses: Array[2]
+               visits: 463
+            };
             $scope.labels = dataObj.labels;
-            $scope.myInfo = dataObj.userPrefs;
             $scope.classList = dataObj.classes;
             $scope.teacherList = dataObj.teachers;
             $scope.myInfo.email = authorizationService.FireUser.email;

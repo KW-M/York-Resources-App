@@ -126,7 +126,7 @@
                 </md-menu-content>
             </md-menu>
             <md-menu md-position-mode="target-right target">
-                <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button unselectable" id="account_button" ng-style="{'background-image': 'url('myInfo.profileImage + ''}" aria-label="account" style="height:36px;width:36px;border-radius:50%;background-image:url('images/accountPic.jpg'); background-size: 36px 36px;">
+                <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button unselectable" id="account_button" ng-style="{'background-image': 'url(' + (myInfo.profilePicture || 'images/accountPic.jpg') + ')'}" aria-label="account" style="height:36px;width:36px;border-radius:50%;background-image:url('images/accountPic.jpg'); background-size: 36px 36px;">
                 </md-button>
                 <md-menu-content>
                     <md-menu-item layout="column" style="padding: 6px 16px;" class="unselectable">
