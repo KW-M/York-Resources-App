@@ -410,8 +410,9 @@
                 // Initialize oauth
                 gapi.auth2.init({
                     'client_id': '632148950209-60a3db9qm6q31sids128mvstddg2qme7.apps.googleusercontent.com',
-                    'scope': 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/script.external_request https://www.googleapis.com/auth/script.scriptapp https://www.googleapis.com/auth/script.storage https://www.googleapis.com/auth/spreadsheets',
+                    'scope': 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/script.external_request https://www.googleapis.com/auth/script.scriptapp https://www.googleapis.com/auth/script.storage https://www.googleapis.com/auth/spreadsheets',
                     'hosted_domain': 'york.org',
+                    fetch_basic_profile: false,
                 }).then(function(GAuth) {
                     // Listen for sign-in state changes.
                     GAuth.isSignedIn.listen(updateSigninStatus);
