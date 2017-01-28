@@ -137,14 +137,18 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    //----------------------------------------------------
    //------------- Signin & Initiation ------------------
    authorizationService.onLoad(function() {
-      loadData()
-      var pickerPromise = $q.Defer
+      var pickerPromise = $q.defer();
       gapi.load('picker', {
-            'callback': function() {
-               initiateDrivePicker();
-               authorizationService.hideSigninDialog();
-            }
-         })
+         'callback': function() {
+            initiateDrivePicker();
+            pickerPromise.resolve();
+         }
+      })
+      $q.all([loadData(), pickerPromise]).then(function() {
+         console.log("Everything Loaded")
+         authorizationService.hideSigninDialog();
+         //More stuff...
+      })
    })
 
    function initiateDrivePicker() {
