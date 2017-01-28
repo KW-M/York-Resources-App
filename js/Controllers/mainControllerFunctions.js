@@ -184,13 +184,13 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             $scope.myInfo = JSON.parse(response.result.response.result).content;
             console.log(authorizationService)
             $scope.myInfo.Email = authorizationService.FireUser.email;
-            $scope.myInfo.staredClasses.forEach(function(className, index) {
-               $scope.myInfo.staredClasses[index] = $scope.findClassObject(className);
-            })
-            $scope.myInfo.staredClasses.push({
-               Name: 'Other',
-               Color: 'hsla(200, 70%, 75%,',
-            })
+            // $scope.myInfo.staredClasses.forEach(function(className, index) {
+            //    $scope.myInfo.staredClasses[index] = $scope.findClassObject(className);
+            // })
+            // $scope.myInfo.staredClasses.push({
+            //    Name: 'Other',
+            //    Color: 'hsla(200, 70%, 75%,',
+            // })
          })
       }, console.warn)
 
@@ -205,6 +205,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          var result = JSON.parse(resp.result.response.result).content;
          $timeout(function() {
             $scope.classList = result.classList
+            console.log(JSON.stringify(result.classList))
             $scope.teacherList = result.teacherList
          })
          console.log('getClassList', resp)
