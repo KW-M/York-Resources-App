@@ -164,53 +164,56 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    }
 
    function loadData() {
-      var getUserPrefs = runAppsScript('userPreferencesHandler', {
+      var getStartupData = runAppsScript('userPreferencesHandler', {
          operation: 'getUser',
       })
-      var getClasses = runAppsScript('classAndTeacherHandler', {
-         operation: 'getList',
-      })
-      var getLabels = runAppsScript('labelHandler', {
-         operation: 'getLabels',
-      })
+      // var getUserPrefs = runAppsScript('userPreferencesHandler', {
+      //    operation: 'getUser',
+      // })
+      // var getClasses = runAppsScript('classAndTeacherHandler', {
+      //    operation: 'getList',
+      // })
+      // var getLabels = runAppsScript('labelHandler', {
+      //    operation: 'getLabels',
+      // })
       var getProfilePic = gapi.client.request({
          'root': 'https://people.googleapis.com',
          'path': '/v1/people/me?fields=photos%2Furl',
          'method': 'GET',
       })
 
-      getUserPrefs.then(function(response) {
-         $timeout(function() {
-            $scope.myInfo = JSON.parse(response.result.response.result).content;
-            console.log(authorizationService)
-            $scope.myInfo.Email = authorizationService.FireUser.email;
-            // $scope.myInfo.staredClasses.forEach(function(className, index) {
-            //    $scope.myInfo.staredClasses[index] = $scope.findClassObject(className);
-            // })
-            // $scope.myInfo.staredClasses.push({
-            //    Name: 'Other',
-            //    Color: 'hsla(200, 70%, 75%,',
-            // })
-         })
-      }, console.warn)
+      // getUserPrefs.then(function(response) {
+      //    $timeout(function() {
+      //       $scope.myInfo = JSON.parse(response.result.response.result).content;
+      //       console.log(authorizationService)
+      //       $scope.myInfo.Email = authorizationService.FireUser.email;
+      //       // $scope.myInfo.staredClasses.forEach(function(className, index) {
+      //       //    $scope.myInfo.staredClasses[index] = $scope.findClassObject(className);
+      //       // })
+      //       // $scope.myInfo.staredClasses.push({
+      //       //    Name: 'Other',
+      //       //    Color: 'hsla(200, 70%, 75%,',
+      //       // })
+      //    })
+      // }, console.warn)
 
-      getLabels.then(function(resp) {
-         $timeout(function() {
-            $scope.labels = JSON.parse(resp.result.response.result).content;
-         })
-         console.log('getLabels', JSON.parse(resp.result.response.result))
-      }, console.warn)
+      // getLabels.then(function(resp) {
+      //    $timeout(function() {
+      //       $scope.labels = JSON.parse(resp.result.response.result).content;
+      //    })
+      //    console.log('getLabels', JSON.parse(resp.result.response.result))
+      // }, console.warn)
 
-      getClasses.then(function(resp) {
-         var result = JSON.parse(resp.result.response.result).content;
-         $timeout(function() {
-            $scope.classList = result.classList
-            console.log(JSON.stringify(result.classList))
-            $scope.teacherList = result.teacherList
-         })
-         console.log('getClassList', resp)
-         console.log('getClassList', result)
-      }, console.warn)
+      // getClasses.then(function(resp) {
+      //    var result = JSON.parse(resp.result.response.result).content;
+      //    $timeout(function() {
+      //       $scope.classList = result.classList
+      //       console.log(JSON.stringify(result.classList))
+      //       $scope.teacherList = result.teacherList
+      //    })
+      //    console.log('getClassList', resp)
+      //    console.log('getClassList', result)
+      // }, console.warn)
 
       getProfilePic.then(function(response) {
          // $timeout(function() {

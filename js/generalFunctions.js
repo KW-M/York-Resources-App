@@ -10,7 +10,6 @@
     } else {
       //tough luck
     }
-
   }
 
   function chooseRandom(inputArray) {
