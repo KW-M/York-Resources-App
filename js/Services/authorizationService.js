@@ -1,7 +1,7 @@
 /*Define the authorizationService service for Angular */ /*global angular*/ /*global gapi*/ /*global app*/
-app.service('authorizationi------------Service', authiService);
+app.service('authorizationService', authService);
 
-function authiService($mdDialog) {
+function authService($mdDialog) {
     var self = this;
     var signinButton = angular.element(document.getElementById('signin_button'));
     var signinSpinner = angular.element(document.getElementById('signin_spinner'));
