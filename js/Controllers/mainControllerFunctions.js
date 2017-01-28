@@ -172,6 +172,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          'path': '/v1/people/me?fields=photos%2Furl',
          'method': 'GET',
       })
+      $http
 
       // getUserPrefs.then(function(response) {
       //    $timeout(function() {
