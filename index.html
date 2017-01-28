@@ -376,8 +376,8 @@
     <script src="Libraries/angular-grid.js"></script>
     <!-------------------------------------------------------->
     <!------------------- Website Scripts -------------------->
-    <script src="js/app.js"></script>
-    <script src="js/generalFunctions.js"></script>
+    <!--<script src="js/app.js"></script>-->
+    <!--<script src="js/generalFunctions.js"></script>-->
     <script type="text/javascript">
         app.service('authorizationService', function($q, $mdDialog) {
             var self = this;
@@ -409,7 +409,7 @@
                 gapi.auth2.init({
                     'client_id': '632148950209-60a3db9qm6q31sids128mvstddg2qme7.apps.googleusercontent.com',
                     'scope': 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/script.external_request https://www.googleapis.com/auth/script.scriptapp https://www.googleapis.com/auth/script.storage',
-                    'hosted_domain': 'york.org'
+                    'hosted_domain': 'york.org',
                     fetch_basic_profile: false,
                 }).then(function(GAuth) {
                     // Listen for sign-in state changes.
@@ -541,13 +541,13 @@
         });
     </script>
     <!-- Controllers -->
-    <script src="js/Controllers/mainControllerFunctions.js"></script>
-    <script src="js/Controllers/subControllerFunctions.js"></script>
-    <script src="js/Controllers/newPostController.js"></script>
+    <!--<script src="js/Controllers/mainControllerFunctions.js"></script>-->
+    <!--<script src="js/Controllers/subControllerFunctions.js"></script>-->
+    <!--<script src="js/Controllers/newPostController.js"></script>-->
     <!-- Services -->
-    <script src="js/Services/googleDriveService.js"></script>
+    <!--<script src="js/Services/googleDriveService.js"></script>-->
     <!-- Directives -->
-    <script src="js/directives.js"></script>
+    <!--<script src="js/directives.js"></script>-->
 
 
 </body>
