@@ -5,9 +5,11 @@
   function log(input, logWithoutDevMode) {
     if (devMode === true) {
       console.log(input)
-    } else if (logWithoutDevMode === true) {
+    }
+    else if (logWithoutDevMode === true) {
       console.log(input)
-    } else {
+    }
+    else {
       //tough luck
     }
   }
@@ -17,7 +19,7 @@
     return inputArray[number]
   }
 
-  Date.prototype.addDays = function (days) {
+  Date.prototype.addDays = function(days) {
     this.setDate(this.getDate() + parseInt(days));
     return this;
   };
@@ -32,7 +34,7 @@
     });
     if (!timer[typeName]) {
       processTheQueue(typeName); // start immediately on the first invocation
-      timer[typeName] = setInterval(function () {
+      timer[typeName] = setInterval(function() {
         processTheQueue(typeName)
       }, interval || 150);
     }
@@ -46,8 +48,9 @@
       console.log(tokenExpiration)
       if (new Date(tokenExpiration) > new Date()) {
         runPromise(item);
-      } else {
-        
+      }
+      else {
+
       }
     }
     if (theQueue[typeName].length === 0) {
@@ -57,18 +60,15 @@
 
   function runPromise(item) {
     var promise = item.promiseFunc();
-    promise.then(item.action, function (error) {
+    promise.then(item.action, function(error) {
       APIErrorHandeler(error, item);
       if (item.Err) {
         item.Err(error);
-      } else {
-        if (delay < 4) {
-          setTimeout(function () {
-            runPromise(item);
-          }, (delay = Math.max(delay *= 2, 1)) * 1000);
-        } else {
-          item.Err(error) || "";
-        }
+      }
+      else if (delay < 4) {
+        setTimeout(function() {
+          runPromise(item);
+        }, (delay = Math.max(delay *= 2, 1)) * 1000);
       }
     });
   }
@@ -79,7 +79,7 @@
     return result;
   }
 
-  document.addEventListener('touchmove', function (e) {
+  document.addEventListener('touchmove', function(e) {
     e.preventDefault();
   }, false);
 
@@ -96,9 +96,9 @@
    *   var d = new Date().toRFC3339LocaleString();  =>  "2010-07-25T19:51:31.427+08:00"
    */
 
-  Number.prototype.toPaddedString = function (len, fillchar) {
+  Number.prototype.toPaddedString = function(len, fillchar) {
     var result = this.toString();
-    if (typeof (fillchar) == 'undefined') {
+    if (typeof(fillchar) == 'undefined') {
       fillchar = '0'
     };
     while (result.length < len) {
@@ -107,7 +107,7 @@
     return result;
   }
 
-  Date.prototype.toRFC3339UTCString = function (supressFormating, supressMillis) {
+  Date.prototype.toRFC3339UTCString = function(supressFormating, supressMillis) {
     var dSep = (supressFormating ? '' : '-');
     var tSep = (supressFormating ? '' : ':');
     var result = this.getUTCFullYear().toString();
@@ -120,7 +120,7 @@
     return result + 'Z';
   }
 
-  Date.prototype.toRFC3339LocaleString = function (supressFormating, supressMillis) {
+  Date.prototype.toRFC3339LocaleString = function(supressFormating, supressMillis) {
     var dSep = (supressFormating ? '' : '-');
     var tSep = (supressFormating ? '' : ':');
     var result = this.getFullYear().toString();
@@ -137,7 +137,7 @@
     return result;
   }
 
-  Date.parseRFC3339 = function (dString) {
+  Date.parseRFC3339 = function(dString) {
     if (typeof dString != 'string') return;
     var result;
     var regexp = /(\d\d\d\d)(-)?(\d\d)(-)?(\d\d)(T)?(\d\d)(:)?(\d\d)?(:)?(\d\d)?([\.,]\d+)?($|Z|([+-])(\d\d)(:)?(\d\d)?)/i;
@@ -165,7 +165,8 @@
           offset *= ((d[14] == '-') ? -1 : 1);
           result.setTime(result.getTime() - offset * 60 * 1000);
         }
-      } else {
+      }
+      else {
         result = new Date(year, mon, day, hour, mins, secs, millis);
       }
     }
@@ -174,9 +175,10 @@
 
   if (typeof Date.parse != 'function') {
     Date.parse = Date.parseRFC3339;
-  } else {
+  }
+  else {
     var oldparse = Date.parse;
-    Date.parse = function (d) {
+    Date.parse = function(d) {
       var result = Date.parseRFC3339(d);
       if (!result && oldparse) {
         result = oldparse(d);
@@ -185,7 +187,7 @@
     }
   }
 
-  var caesarShift = function (str, amount) {
+  var caesarShift = function(str, amount) {
     //Call it like this: caesarShift('Attack at dawn!', 12); Returns "Mffmow mf pmiz!"
     // And reverse it like this: caesarShift('Mffmow mf pmiz!', -12); Returns "Attack at dawn!"
     if (amount < 0)
@@ -204,3 +206,4 @@
     }
     return output;
   };
+  
