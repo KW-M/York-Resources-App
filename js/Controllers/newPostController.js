@@ -106,6 +106,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         });
         promiseQueue().addPromise('drive', APIService.runGAScript('savePost', {
             operation: 'savePost',
+            postId: '1PJhfrKIxE59cWRBlVL-dBp-tOuUBsrWagBDchAQrzfQ',
             content: $scope.post,
         }), function (reply) {
             console.log(reply)
