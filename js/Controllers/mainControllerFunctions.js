@@ -170,7 +170,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          name: profile.getName(),
          profilePicture: profile.getImageUrl(),
       }
-      var getStartupData = readGAppsScript('test').then(function(data) {
+      var getStartupData = readGAppsScript('getStartupData').then(function(data) {
          var dataObj = JSON.parse(data.result.response.result);
          $timeout(function() {
             for (var property in dataObj.userPrefs) {
@@ -238,7 +238,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          'scriptId': 'MuWC0NB4CLnMdc_XDwj7F_PA9VMeL9Grb',
          'function': scriptFunction,
          'parameters': [JSON.stringify(payload)],
-         'devMode': true,
+//         'devMode': true,
       }));
    }
 
