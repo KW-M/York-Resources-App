@@ -77,11 +77,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       //$location.hash(query.id || null);
    };
 
-   function listenForURLChange() {
-      onLocationChange();
-      $rootScope.$on('$locationChangeSuccess', onLocationChange);
-   }
-
    function onLocationChange() {
       $scope.queryParams.q = $location.search().q || null;
       $scope.queryParams.classPath = $location.path().replace("/", "").replace("-", " ") || 'All Posts';
@@ -132,6 +127,25 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.getFiles()
          }
       }, 1000)
+   }
+
+   function listenForURLChange() {
+      onLocationChange();
+      $rootScope.$on('$locationChangeSuccess', onLocationChange);
+   }
+
+   if (window.location.search) {
+      var unformated = window.location.search.match(/state=([^&]+)(?:$|&)/)
+      var shareInput = JSON.parse(decodeURIComponent(unformated[1]));
+      if (shareInput.exportIds) {
+         var id = shareInput.exportIds[0]
+      }
+      else if (shareInput.ids) {
+         var id = shareInput.ids[0]
+      }
+      $scope.newPost({
+         Link: 'https://drive.google.com/?open=' + id
+      }, 'new')
    }
 
    //----------------------------------------------------
@@ -201,7 +215,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          parent: angular.element(document.body),
          preserveScope: true,
          locals: {
-            Post: postObj,
+            ost: postObj,
             operation: operation
          },
          onComplete: function() {
@@ -404,11 +418,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
 
    content_container.onscroll = function(event) {
-      //called whenever the content_container scrolls
-      // if (performantScrollEnabled === false && $scope.angularGridOptions.performantScroll === false) {
-      //    $scope.angularGridOptions.performantScroll = true;
-      //    performantScrollEnabled = true;
-      // }
       var yScroll = content_container.scrollTop;
       $timeout(function() {
          if (yScroll >= 120 && $scope.globals.FABisHidden == true) {
@@ -454,20 +463,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             gapi.auth2.getAuthInstance().signOut();
          }
       }
-   }
-
-   if (window.location.search) {
-      var unformated = window.location.search.match(/state=([^&]+)(?:$|&)/)
-      var shareInput = JSON.parse(decodeURIComponent(unformated[1]));
-      if (shareInput.exportIds) {
-         var id = shareInput.exportIds[0]
-      }
-      else if (shareInput.ids) {
-         var id = shareInput.ids[0]
-      }
-      $scope.newPost({
-         Link: 'https://drive.google.com/?open=' + id
-      }, 'new')
    }
 
    //----------------------------------------------------
