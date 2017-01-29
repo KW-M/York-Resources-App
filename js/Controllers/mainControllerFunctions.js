@@ -456,17 +456,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
    }
 
-   $scope.updateVisiblePosts = function(array, callback) {
-      $timeout(function() {
-         if (array) {
-            $scope.visiblePosts = array;
-         }
-         if (callback) {
-            callback();
-         }
-      })
-   }
-
    if (window.location.search) {
       var unformated = window.location.search.match(/state=([^&]+)(?:$|&)/)
       var shareInput = JSON.parse(decodeURIComponent(unformated[1]));
@@ -481,6 +470,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }, 'new')
    }
 
+   //----------------------------------------------------
+   //---------------- Utility Functions --------------------
    var theQueue = {};
    var timer = {};
    var delay = 0;
@@ -542,6 +533,17 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             }
          });
       }
+   }
+
+   $scope.updateVisiblePosts = function(array, callback) {
+      $timeout(function() {
+         if (array) {
+            $scope.visiblePosts = array;
+         }
+         if (callback) {
+            callback();
+         }
+      })
    }
 
    //----------------------------------------------------
