@@ -172,8 +172,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       }
 
       var getStartupData = readGAppsScript('getStartupData').then(function(data) {
-         console.log(data)
-         console.log(dataObj)
          var dataObj = JSON.parse(data.result.response.result);
          $timeout(function() {
             for (var property in dataObj.userPrefs) {
@@ -187,6 +185,8 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             $scope.classList = dataObj.classes;
             $scope.teacherList = dataObj.teachers;
          });
+         console.log(data)
+         console.log(dataObj)
       }, console.warn)
       return getStartupData;
    }
