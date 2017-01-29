@@ -417,6 +417,7 @@
                     // Listen for sign-in state changes.
                     GAuth.isSignedIn.listen(updateSigninStatus);
                     // Handle the initial sign-in state.
+                    console.log(GAuth.isSignedIn.get())
                     updateSigninStatus(GAuth.isSignedIn.get());
                     // show sign in prompt if sign in button is clicked.
                     GAuth.attachClickHandler('signin_button', null, null, console.warn)
@@ -433,6 +434,8 @@
             });
 
             function updateSigninStatus(Input) {
+                console.log(Input)
+                //console.log(GAuth.isSignedIn.get())
                 // Input is either a boolean from GAuth.isSignedIn.get() or a Firebase User object from self.FireAuth.currentUser
                 if (Input === true) {
                     GSignedIn = true;
