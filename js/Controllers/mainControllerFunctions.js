@@ -1,7 +1,7 @@
 /*global app*/ /*global angular*/ /*global gapi*/ /*global google*/ /*global queue*/ /*global subControllerFunctions*/
 app.controller('AppController', controllerFunction)
    //controllerFunction.$inject(['$scope', '$mdDialog', '$window', '$timeout', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', 'angularGridInstance'])
-function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $window, $http, $timeout, $sce, $mdSidenav, $mdMedia, $mdTheming, authorizationService, GoogleDriveService, $q, $location, angularGridInstance) {
+function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $window, $http, $timeout, $sce, $mdSidenav, $mdMedia, $mdTheming,  $q, $location, angularGridInstance) {
    var self = this;
    var content_container = document.getElementById("content_container");
    var layout_grid = document.getElementById("layout_grid");
@@ -170,7 +170,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          profilePicture: profile.getImageUrl(),
       }
 
-      var getStartupData = readGAppsScript('getStartupData').then(function(data) {
+      var getStartupData = APIService.runGAScript('getStartupData').then(function(data) {
          console.log(data)
          var dataObj = JSON.parse(data.result.response.result);
          $timeout(function() {
