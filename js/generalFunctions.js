@@ -1,3 +1,4 @@
+  var gUser = gapi.auth2.getAuthInstance().currentUser.get()
   var devMode = false;
   var theQueue = {};
   var timer = {};
@@ -23,55 +24,7 @@
     this.setDate(this.getDate() + parseInt(days));
     return this;
   };
-  // Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
-  function queue(typeName, promiseFunc, action, error, interval) {
-    typeName = typeName || 'general'
-    if (!theQueue[typeName]) theQueue[typeName] = []
-    theQueue[typeName].push({
-      promiseFunc: promiseFunc,
-      action: action,
-      err: error,
-    });
-    if (!timer[typeName]) {
-      processTheQueue(typeName); // start immediately on the first invocation
-      timer[typeName] = setInterval(function() {
-        processTheQueue(typeName)
-      }, interval || 150);
-    }
-  };
 
-  function processTheQueue(typeName) {
-    var item = theQueue[typeName].shift();
-    if (item) {
-      var delay = 0;
-      var tokenExpiration = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true).expires_at
-      console.log(tokenExpiration)
-      if (new Date(tokenExpiration) > new Date()) {
-        runPromise(item);
-      }
-      else {
-
-      }
-    }
-    if (theQueue[typeName].length === 0) {
-      clearInterval(timer[typeName]), timer[typeName] = null;
-    }
-  }
-
-  function runPromise(item) {
-    var promise = item.promiseFunc();
-    promise.then(item.action, function(error) {
-      APIErrorHandeler(error, item);
-      if (item.Err) {
-        item.Err(error);
-      }
-      else if (delay < 4) {
-        setTimeout(function() {
-          runPromise(item);
-        }, (delay = Math.max(delay *= 2, 1)) * 1000);
-      }
-    });
-  }
 
   function addDays(date, days) {
     var result = new Date(date);
@@ -206,4 +159,3 @@
     }
     return output;
   };
-  
