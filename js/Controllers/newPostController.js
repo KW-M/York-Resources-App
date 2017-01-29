@@ -112,7 +112,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
             operation: 'savePost',
             postId: '1PJhfrKIxE59cWRBlVL-dBp-tOuUBsrWagBDchAQrzfQ',
             content: $scope.post,
-        }), function (reply) {
+        }, true), function (reply) {
             console.log(reply)
             $mdToast.hide();
             $mdDialog.hide();
