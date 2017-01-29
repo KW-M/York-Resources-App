@@ -172,6 +172,8 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       }
 
       var getStartupData = readGAppsScript('getStartupData').then(function(data) {
+         console.log(data)
+         console.log(dataObj)
          var dataObj = JSON.parse(data.result.response.result);
          $timeout(function() {
             for (var property in dataObj.userPrefs) {
@@ -185,22 +187,8 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
             $scope.classList = dataObj.classes;
             $scope.teacherList = dataObj.teachers;
          });
-         console.log(data)
-         console.log(dataObj)
       }, console.warn)
-
-      // var getProfilePic = gapi.client.request({
-      //    'root': 'https://people.googleapis.com',
-      //    'path': '/v1/people/me?fields=photos%2Furl',
-      //    'method': 'GET',
-      // }).then(function(response) {
-      //    $timeout(function() {
-      //       $scope.myInfo.profilePicture = response.result.photos[0].url;
-      //    })
-      //    console.log(response)
-      // })
-
-      //return $q.all([getUserPrefs, getClasses, getLabels])
+      return getStartupData;
    }
 
    function readGAppsScript(scriptFunction, payload) {
