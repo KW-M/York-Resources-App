@@ -18,17 +18,17 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
             name: '',
                 catagory: '',
                 color: 'ff00ff',
-        }
+        };
         $scope.post.creator = (operation == 'new') ? ({
-            ClassOf: $scope.myInfo.ClassOf,
-            Email: $scope.myInfo.Email,
-            Me: true,
-            Name: $scope.myInfo.Name,
+            classOf: $scope.myInfo.ClassOf,
+            email: $scope.myInfo.Email,
+            me: true,
+            name: $scope.myInfo.Name,
         }) : ($scope.post.creator || {
-            ClassOf: '',
-            Email: '',
-            Me: null,
-            Name: ''
+            classOf: '',
+            email: '',
+            me: null,
+            name: ''
         })
         $scope.post.id = $scope.post.id || ''
         $scope.post.attachmentId = $scope.post.attachmentId || ''
@@ -48,15 +48,14 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
 
     $scope.findType = function () {
         $timeout(function () {
+            $scope.post.attachmentName = '';
+            $scope.post.attachmentIcon = '';
+            $scope.post.attachmentId = '';
+            $scope.post.previewImage = '';
             if ($scope.post.link === '') {
                 $scope.previewLoading = false;
-                $scope.post.previewImage = '';
-                $scope.post.attachmentId = '';
-                $scope.post.attachmentName = '';
-                $scope.post.attachmentIcon = '';
                 $scope.post.type = 'NoLink';
             } else if ($scope.post.link.match(/(?:http|https):\/\/.{2,}/)) {
-                $scope.post.previewImage = ''; // will be the down arrow photo
                 $scope.previewLoading = true;
                 $scope.post.type = 'link';
             } else if ($scope.post.link.length > 9) {
@@ -65,30 +64,17 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
             } else {
                 $scope.post.type = 'noLink';
             }
+
         })
     };
 
     $scope.$watch('post.link', function () {
         if (typeof (linkChangeTimer) == 'number') clearTimeout(linkChangeTimer);
-        linkChangeTimer = setTimeout(function () {
-            $scope.post.previewImage = '';
-            $scope.post.attachmentId = '';
-            $scope.post.attachmentName = '';
-            $scope.post.attachmentIcon = '';
-            runFindType();
-        }, 500)
+        linkChangeTimer = setTimeout(function () {}, 500)
     })
 
-    function runFindType() {
-        if ($scope.myInfo !== undefined) {
-            $scope.findType();
-        } else {
-            document.addEventListener('userInfoLoaded', $scope.findType);
-        }
-    }
-
     $scope.isReadyToSubmit = function () {
-        if ($scope.post.class.Name === '' || $scope.post.class === undefined) {
+        if ($scope.post.class.name === '' || $scope.post.class === undefined) {
             $mdToast.show({
                 template: '<md-toast><div class="md-toast-content">Select a class for this post.</div><md-toast>',
                 hideDelay: 1500,
