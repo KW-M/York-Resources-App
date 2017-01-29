@@ -138,32 +138,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //----------------------------------------------------
    //------------- Signin & Initiation ------------------
    authorizationService.onLoad(function() {
-      var pickerPromise = $q.defer();
-      gapi.load('picker', {
-         'callback': function() {
-            initiateDrivePicker();
-            pickerPromise.resolve();
-         }
-      })
-      $q.all([loadData(), pickerPromise]).then(function() {
-         console.log("Everything Loaded")
-         authorizationService.hideSigninDialog();
-      })
-   })
-
-   function initiateDrivePicker() {
-      var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
-      var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
-      var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
-      var recentsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(false).setSelectFolderEnabled(true).setLabel('Recents');
-
-      drivePicker = new google.picker.PickerBuilder().setDeveloperKey("AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA").setOrigin(window.location.protocol + '//' + window.location.host).setOAuthToken(authorizationService.getGAuthToken()).setCallback(self.pickerCallback)
-         .addView(docsView).addView(recentsView).addView(sharedView).build();
-      uploadPicker = new google.picker.PickerBuilder().setDeveloperKey("AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA").setOrigin(window.location.protocol + '//' + window.location.host).setOAuthToken(authorizationService.getGAuthToken()).setCallback(self.pickerCallback)
-         .addView(uploadView).enableFeature(google.picker.Feature.NAV_HIDDEN).hideTitleBar().build();
-   }
-
-   function loadData() {
       var profile = authorizationService.GUser.getBasicProfile()
       $scope.myInfo = {
          email: profile.getEmail(),
@@ -188,7 +162,33 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          });
          console.log(dataObj)
       }, console.warn)
-      return getStartupData;
+
+      var pickerPromise = $q.defer();
+      gapi.load('picker'
+      // , {
+      //    'callback': function() {
+      //       initiateDrivePicker();
+      //       pickerPromise.resolve();
+      //    }
+      ).then(function (res) {
+         console.log(res)
+      },console.warn)
+      $q.all([loadData(), pickerPromise]).then(function() {
+         console.log("Everything Loaded")
+         authorizationService.hideSigninDialog();
+      })
+   })
+
+   function initiateDrivePicker() {
+      var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
+      var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
+      var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
+      var recentsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(false).setSelectFolderEnabled(true).setLabel('Recents');
+
+      drivePicker = new google.picker.PickerBuilder().setDeveloperKey("AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA").setOrigin(window.location.protocol + '//' + window.location.host).setOAuthToken(authorizationService.getGAuthToken()).setCallback(self.pickerCallback)
+         .addView(docsView).addView(recentsView).addView(sharedView).build();
+      uploadPicker = new google.picker.PickerBuilder().setDeveloperKey("AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA").setOrigin(window.location.protocol + '//' + window.location.host).setOAuthToken(authorizationService.getGAuthToken()).setCallback(self.pickerCallback)
+         .addView(uploadView).enableFeature(google.picker.Feature.NAV_HIDDEN).hideTitleBar().build();
    }
 
    //----------------------------------------------------
