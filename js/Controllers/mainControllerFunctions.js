@@ -54,7 +54,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    //----------------------------------------------------
    //------------------- Routing ------------------------
-   $scope.gotoRoute = function(query) {
+   $scope.gotoRoute = function (query) {
       if (query.classPath !== undefined) {
          $scope.toggleSidebar(true);
          $location.search({
@@ -67,8 +67,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $location.search({
                q: null
             });
-         }
-         else {
+         } else {
             $location.search({
                q: query.q || $scope.queryParams.q
             });
@@ -91,38 +90,34 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          if ($scope.queryParams.q != $scope.previousSearch) {
             $scope.updateVisiblePosts([]);
          }
-      }
-      else {
+      } else {
          $scope.queryParams.flagged = null
          $scope.queryParams.type = null
          $scope.queryParams.creatorEmail = null
       }
       if ($scope.queryParams.classPath === 'All Posts') {
          $scope.queryParams.flagged = false;
-      }
-      else if ($scope.queryParams.classPath === 'Your Posts') {
+      } else if ($scope.queryParams.classPath === 'Your Posts') {
          $scope.queryParams.creatorEmail = $scope.myInfo.Email;
-      }
-      else if ($scope.queryParams.classPath === 'Flagged Posts') {
+      } else if ($scope.queryParams.classPath === 'Flagged Posts') {
          $scope.queryParams.flagged = true
-      }
-      else {
+      } else {
          $scope.searchPrefix = 'Search Within'
             //$scope.classTitle = $scope.queryParams.classPath;
          $scope.queryParams.flagged = false
       }
       generateQueryString();
       if ($scope.queryParams.q === null) {
-         $scope.updateVisiblePosts($scope.filterPosts($scope.allPosts), function() {
+         $scope.updateVisiblePosts($scope.filterPosts($scope.allPosts), function () {
             hideSpinner();
          });
       }
       $scope.getFiles();
-      $timeout(function() {
+      $timeout(function () {
          $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
          $scope.visibleLabels = $scope.sortLabels($scope.allLabels);
       })
-      getFileTimer = setInterval(function() {
+      getFileTimer = setInterval(function () {
          if (conurancy_counter == 0 && content_container.scrollHeight == content_container.clientHeight) {
             $scope.getFiles()
          }
@@ -139,8 +134,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       var shareInput = JSON.parse(decodeURIComponent(unformated[1]));
       if (shareInput.exportIds) {
          var id = shareInput.exportIds[0]
-      }
-      else if (shareInput.ids) {
+      } else if (shareInput.ids) {
          var id = shareInput.ids[0]
       }
       $scope.newPost({
@@ -152,7 +146,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //------------- Signin & Initiation ------------------
    var drivePicker, uploadPicker;
 
-   authorizationService.onLoad(function() {
+   authorizationService.onLoad(function () {
       var profile = authorizationService.GUser.getBasicProfile()
       $scope.myInfo = {
          email: profile.getEmail(),
@@ -160,10 +154,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          profilePicture: profile.getImageUrl(),
       }
 
-      var getStartupData = APIService.runGAScript('getStartupData')().then(function(data) {
+      var getStartupData = APIService.runGAScript('getStartupData')().then(function (data) {
          console.log(data)
          var dataObj = JSON.parse(data.result.response.result);
-         $timeout(function() {
+         $timeout(function () {
             for (var property in dataObj.userPrefs) {
                $scope.myInfo[property] = dataObj.userPrefs[property];
             }
@@ -180,13 +174,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
       var pickerPromise = $q.defer();
       gapi.load('picker', {
-         'callback': function() {
+         'callback': function () {
             initiateDrivePicker();
             pickerPromise.resolve();
          }
       })
 
-      $q.all([getStartupData, pickerPromise]).then(function() {
+      $q.all([getStartupData, pickerPromise]).then(function () {
          console.log("Everything Loaded")
          authorizationService.hideSigninDialog();
       })
@@ -206,7 +200,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    //----------------------------------------------------
    //--------------- Creating Posts ---------------------
-   $scope.newPost = function(postObj, operation, event) {
+   $scope.newPost = function (postObj, operation, event) {
       $scope.newPostScroll = 0;
       $mdDialog.show({
          templateUrl: 'templates/createPost.html',
@@ -215,10 +209,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          parent: angular.element(document.body),
          preserveScope: true,
          locals: {
-            ost: postObj,
+            post: postObj,
             operation: operation
          },
-         onComplete: function() {
+         onComplete: function () {
             var newPostDialog = document.getElementById("new_post_dialog");
             var newPostHeaderLink = document.getElementById("header_link");
             var newPostHeaderMetadata = document.getElementById("Metadata");
@@ -228,15 +222,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             var newPostScroll = document.getElementsByClassName('new_post_dialog_scroll')[0];
             newPostScroll.style.opacity = 1
             var newPostHeader = document.getElementById('dialog_header');
-            newPostScroll.onscroll = function() {
+            newPostScroll.onscroll = function () {
                   if (newPostScroll.scrollTop < 141) {
-                     $timeout(function() {
+                     $timeout(function () {
                         $scope.newPostScroll = newPostScroll.scrollTop;
                      })
                      newPostHeaderImage.style.top = -20 - (newPostScroll.scrollTop / 5) + 'px';
-                  }
-                  else {
-                     $timeout(function() {
+                  } else {
+                     $timeout(function () {
                         $scope.newPostScroll = 140;
                      })
                   }
@@ -244,7 +237,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                // The md-select directive eats keydown events for some quick select
                // logic. Since we have a search input here, we don't need that logic.
             var selectSearchInput = angular.element(document.getElementById('class_select_input'))
-            selectSearchInput.on('keydown', function(ev) {
+            selectSearchInput.on('keydown', function (ev) {
                ev.stopPropagation();
             });
          },
@@ -262,32 +255,30 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          //    height: rect.height,
          //    width: rect.width,
          // }//('#new_post_button'),
-      }).then(function() {
+      }).then(function () {
          //done
       });
    };
 
-   $scope.showPicker = function(type, restorePost) {
+   $scope.showPicker = function (type, restorePost) {
       $scope.restorePost = restorePost || false;
       if (type == "Drive") {
          drivePicker.setVisible(true);
-      }
-      else if (type == "Upload") {
+      } else if (type == "Upload") {
          uploadPicker.setVisible(true);
       }
    };
 
-   self.pickerCallback = function(data) {
+   self.pickerCallback = function (data) {
       //drivePicker.dispose();
       if (data.action == google.picker.Action.PICKED) {
          if ($scope.restorePost == true) {
-            $timeout(function() {
+            $timeout(function () {
                $scope.Post.AttachmentId = data.docs[0].id;
                $scope.Post.Link = data.docs[0].url;
                $scope.Post.Title = $scope.Post.Title || data.docs[0].name;
             })
-         }
-         else {
+         } else {
             $scope.newPost({
                AttachmentId: data.docs[0].id,
                Link: data.docs[0].url,
@@ -299,7 +290,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    //----------------------------------------------------
    //--------- loading and filtering posts --------------
-   $scope.getFiles = function() {
+   $scope.getFiles = function () {
       conurancy_counter++;
       var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
@@ -309,26 +300,24 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          no_more_footer.style.display = 'none';
          no_posts_footer.style.display = 'none';
          footer_problem.style.display = 'none';
-         queue('drive', GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function(fileList) {
+         queue('drive', GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function (fileList) {
             for (var fileCount = 0; fileCount < fileList.result.files.length; fileCount++) {
                if (!$scope.queryParams.q && deDuplicationIndex[fileList.result.files[fileCount].id] === undefined) {
                   //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
                   formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[fileCount]) //format and save the new post to the formatted files list array
                   deDuplicationIndex[fileList.result.files[fileCount].id] = 1; //mark this id as used with a "1".
-               }
-               else if ($scope.queryParams.q) {
+               } else if ($scope.queryParams.q) {
                   formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[fileCount]) //format and save the new post to the formatted files list array
                }
             }
             sortPostsByType(formattedFileList, queryString, $scope.queryParams);
             if (fileList.result.nextPageToken !== undefined) {
                classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken; //if we haven't reached the end of our search:
-            }
-            else {
+            } else {
                classPageTokenSelectionIndex[$scope.queryPropertyString] = "end" //if we have reached the end of our search:
             }
             hideSpinner();
-         }, function() {
+         }, function () {
             no_more_footer.style.display = 'none';
             no_posts_footer.style.display = 'none';
             no_more_footer.style.display = 'none';
@@ -342,17 +331,16 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       if (classPageTokenSelectionIndex[$scope.queryPropertyString] === "end") {
          loading_spinner.style.display = 'none';
          clearInterval(getFileTimer);
-         $timeout(function() {
+         $timeout(function () {
             if ($scope.visiblePosts.length > 0) {
                no_more_footer.style.display = 'block';
-            }
-            else {
+            } else {
                layout_grid.style.height = '0px';
                no_posts_footer.style.display = 'block';
             }
          }, 200)
       }
-      $timeout(function() {
+      $timeout(function () {
          angularGridInstance.postsGrid.refresh();
       }, 1000)
    }
@@ -383,15 +371,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          if (queryParams.q === $scope.previousSearch) {
             console.log('sameSearch')
             $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
-         }
-         else {
+         } else {
             console.log('newSearch')
             $scope.searchPosts = formattedFileList;
          }
          $scope.previousSearch = $scope.queryParams.q || null;
          $scope.updateVisiblePosts($scope.searchPosts);
-      }
-      else {
+      } else {
          $scope.allPosts = $scope.allPosts.concat(formattedFileList);
          if ($scope.queryPropertyString == queryString) {
             $scope.updateVisiblePosts($scope.visiblePosts.concat($scope.filterPosts(formattedFileList)));
@@ -402,7 +388,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    //----------------------------------------------------
    //---------------- Event Watchers --------------------
-   $scope.$watch('searchInputTxt', function(newValue) {
+   $scope.$watch('searchInputTxt', function (newValue) {
       var input = newValue || null
       var query = $scope.queryParams.q || null;
       if (input != query) {
@@ -412,14 +398,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
    }, false);
 
-   $scope.$watch('allPosts', function(newValue) {
+   $scope.$watch('allPosts', function (newValue) {
       console.log('allPosts Changed')
    }, true);
 
 
-   content_container.onscroll = function(event) {
+   content_container.onscroll = function (event) {
       var yScroll = content_container.scrollTop;
-      $timeout(function() {
+      $timeout(function () {
          if (yScroll >= 120 && $scope.globals.FABisHidden == true) {
             $scope.globals.FABisHidden = false;
          }
@@ -430,31 +416,31 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       })
    };
 
-   window.addEventListener("resize", function() {
-      $timeout(function() {
+   window.addEventListener("resize", function () {
+      $timeout(function () {
          if ($mdMedia('gt-sm')) {
             $mdSidenav('sidenav_overlay').close();
          }
       })
    });
 
-   document.onkeydown = function(e) {
+   document.onkeydown = function (e) {
       if (e.altKey && e.ctrlKey) {
          if (e.keyCode == 68) {
             devMode = !devMode
-            $timeout(function() {
+            $timeout(function () {
                $scope.devMode = devMode;
             })
          }
          if (e.keyCode == 75) {
             alert('handeling signin click')
-            authorizationService.handleSigninClick(function() {
+            authorizationService.handleSigninClick(function () {
                alert('done')
             });
          }
          if (e.keyCode == 76) {
             alert('running siginin initialization')
-            authorizationService.initilize(function() {
+            authorizationService.initilize(function () {
                alert('done')
             })
          }
@@ -472,9 +458,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    var delay = 0;
 
    // Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
-   window.promiseQueue = function() {
+   window.promiseQueue = function () {
       var queueSelf = this;
-      this.addPromise = function(typeName, promiseFunc, action, error, interval) {
+      this.addPromise = function (typeName, promiseFunc, action, error, interval) {
          typeName = typeName || 'general';
          if (!theQueue[typeName]) theQueue[typeName] = []
          theQueue[typeName].push({
@@ -484,7 +470,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          });
          if (!timer[typeName]) {
             processTheQueue(typeName); // start immediately on the first invocation
-            timer[typeName] = setInterval(function() {
+            timer[typeName] = setInterval(function () {
                processTheQueue(typeName)
             }, interval || 150);
          }
@@ -496,13 +482,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             var delay = 0;
             if (new Date(authorizationService.GUser.getAuthResponse(true).expires_at) > new Date()) {
                queueSelf.runPromise(item);
-            }
-            else {
-               authorizationService.GUser.reloadAuthResponse().then(function(res) {
+            } else {
+               authorizationService.GUser.reloadAuthResponse().then(function (res) {
                   console.log('reloaded token')
-               }, function(err) {
+               }, function (err) {
                   console.warn(err)
-                  gapi.auth2.getAuthInstance().signOut().then(function() {
+                  gapi.auth2.getAuthInstance().signOut().then(function () {
                      authorizationService.showSigninButton();
                   })
                })
@@ -514,15 +499,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          }
       }
 
-      this.runPromise = function(item) {
+      this.runPromise = function (item) {
          var promise = item.promiseFunc();
-         promise.then(item.action, function(error) {
+         promise.then(item.action, function (error) {
             APIErrorHandeler(error, item);
             if (item.Err) {
                item.Err(error);
-            }
-            else if (delay < 4) {
-               setTimeout(function() {
+            } else if (delay < 4) {
+               setTimeout(function () {
                   runPromise(item);
                }, (delay = Math.max(delay *= 2, 1)) * 1000);
             }
@@ -530,8 +514,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
    }
 
-   $scope.updateVisiblePosts = function(array, callback) {
-      $timeout(function() {
+   $scope.updateVisiblePosts = function (array, callback) {
+      $timeout(function () {
          if (array) {
             $scope.visiblePosts = array;
          }
@@ -544,7 +528,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //----------------------------------------------------
    //---------------------- dev -------------------------
 
-   $scope.logDuplicationIndexes = function() {
+   $scope.logDuplicationIndexes = function () {
       console.log({
          deDuplicationIndex: deDuplicationIndex,
          classPageTokenSelectionIndex: classPageTokenSelectionIndex
