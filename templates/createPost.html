@@ -57,14 +57,14 @@
       </div>
       <div id="new_post_content" ng-class="{'small-header': post.type == 'NoLink' && operation == 'view'}">
          <div flex layout="row">
-            <md-select ng-model="post.class" ng-model-options="{trackBy: '$value.name'}" ng-hide="operation == 'view'" class="md-no-underline" placeholder="Class" id="class_dropdown_button" md-on-close="clearClassSelectSearch()">
+            <md-select ng-model="post.class" ng-model-options="{trackBy: '$value.name'}" ng-if="operation != 'view'" class="md-no-underline" placeholder="Class" id="class_dropdown_button" md-on-close="clearClassSelectSearch()">
                <md-select-header class="classSelectSearchbox">
                   <input ng-model="classSelectSearch" id="class_select_input" type="text" placeholder="Search for a class.." class="md-text">
                </md-select-header>
                <!--<md-option ng-if="!classSelectSearch" ng-value="{'name': favClass.name, 'catagory': favClass.catagory, 'color': favClass.color}" ng-repeat="favClass in myInfo.staredClasses">{{::favClass.name}}</md-option>-->
                <md-optgroup ng-repeat="catagory in ::classList" ng-class="{'hide-label': classSelectSearch}">
                   <label class="side-nav-header md-container-ignore" ng-style="::{'background-color': catagory.color + ' 1)'}">{{::catagory.catagory}}</label>
-                  <md-option ng-value="{'name': name.name || '', 'catagory' : catagory.catagory  || '', 'color': catagory.color  || ''}" ng-repeat="name in catagory.classes | filter : classSelectSearch">{{::name.name}}</md-option>
+                  <md-option ng-value="{'name': catagory.catagory, 'catagory' : catagory.catagory  || '', 'color': catagory.color || ''}" ng-repeat="name in catagory.classes | filter : classSelectSearch">{{::name.name}}</md-option>
                </md-optgroup>
             </md-select>
             <div style="display:flex">
