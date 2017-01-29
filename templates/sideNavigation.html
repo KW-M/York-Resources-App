@@ -46,7 +46,7 @@
                     </md-button>
                     <div class="overlay-search sidenav-class-search" ng-class="{'search-visible' : globals.sideNavClassSearchOpen}">
                         <md-input-container md-no-float style="margin: auto; height: 36px;">
-                            <input ng-model="sideNavClassSearch" placeholder="Filter Classes" id="sidenav_class_search_input"/>
+                            <input ng-model="sideNavClassSearch" placeholder="Filter Classes" id="sidenav_class_search_input" />
                         </md-input-container>
                         <md-button class="md-icon-button" ng-click="toggleSidenavClassSearch(false)">
                             <md-icon>close</md-icon>
@@ -56,8 +56,8 @@
             </md-list-item>
             <md-list>
                 <div flex layout="column" ng-if="!sideNavClassSearch">
-                    <md-button ng-repeat="favClass in myInfo.staredClasses" class="side-nav-class" ng-click="gotoRoute({classPath: favClass.name})" ng-class="{ 'selected' : queryParams.classpath == favClass }">
-                        {{favClass}}
+                    <md-button ng-repeat="favClass in myInfo.staredClasses" class="side-nav-class" ng-click="gotoRoute({classPath: favClass.name})" ng-class="{ 'selected' : queryParams.classpath == favClass.name }">
+                        {{favClass.name}}
                     </md-button>
                 </div>
                 <div ng-repeat="navCatagory in classList" flex layout="column">
@@ -68,7 +68,9 @@
                 </div>
             </md-list>
         </md-list>
-        <div style="text-align: center;box-shadow: inset rgba(0, 0, 0, 0.24) 0px 18px 12px -20px;padding: 6px 0 0 0;" ng-if="sideNavClassSearch">Think a class or teacher is missing? <md-button ng-click="openFeedbackDialog()">Tell us about it.</md-button></div>
+        <div style="text-align: center;box-shadow: inset rgba(0, 0, 0, 0.24) 0px 18px 12px -20px;padding: 6px 0 0 0;" ng-if="sideNavClassSearch">Think a class or teacher is missing?
+            <md-button ng-click="openFeedbackDialog()">Tell us about it.</md-button>
+        </div>
     </div>
 </div>
 <div class="side-nav-bottom">
