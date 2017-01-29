@@ -64,39 +64,45 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
             } else {
                 $scope.post.type = 'noLink';
             }
+            if ($scope.myInfo != undefined) getPreview();
+            if ($scope.myInfo == undefined) document.addEventListener('userInfoLoaded', getPreview());
 
+            function getPreview() {
+                // body...
+            }
         })
     };
 
     $scope.$watch('post.link', function () {
         if (typeof (linkChangeTimer) == 'number') clearTimeout(linkChangeTimer);
-        linkChangeTimer = setTimeout(function () {}, 500)
+        linkChangeTimer = setTimeout($scope.findType, 500)
     })
 
     $scope.isReadyToSubmit = function () {
-        if ($scope.post.class.name === '' || $scope.post.class === undefined) {
-            $mdToast.show({
-                template: '<md-toast><div class="md-toast-content">Select a class for this post.</div><md-toast>',
-                hideDelay: 1500,
-                parent: document.getElementById('new_post_dialog'),
-            });
-        } else {
-            if (($scope.post.title === '' || $scope.post.title === undefined) && ($scope.post.description === '' || $scope.post.description === undefined)) {
-                $mdToast.show($mdToast.simple().textContent('Posts must have a title or description.').hideDelay(1500).parent(document.getElementById('new_post_dialog')));
+        var dialogElement =
+            if ($scope.post.class.name === '' || $scope.post.class === undefined) {
+                $mdToast.show({
+                    template: '<md-toast><div class="md-toast-content">Select a class for this post.</div><md-toast>',
+                    hideDelay: 1500,
+                    parent: document.getElementById('new_post_dialog'),
+                });
             } else {
-                if ($scope.post.type === "gDrive") {
-                    $mdToast.show({
-                        template: '<md-toast> <div class="md-toast-content" style="justify-content: center;"> <div> <div class="md-toast-text" style="padding: 6px 0 0 0px;">How should the attached file be shared?</div> <div style="display:flex"> <md-select ng-model="shareSelect"> <md-option value="view"> York students can view </md-option> <md-option value="comment"> York students can comment </md-option> <md-option value="edit"> York students can edit </md-option> </md-select> <md-button style="color:rgb(68,138,255)" ng-click="shareFile()">Share</md-button> </div></div></div></md-toast>',
-                        hideDelay: false,
-                        parent: document.getElementById('new_post_dialog'),
-                        toastClass: 'shareLevelToast',
-                        scope: $scope,
-                    })
+                if (($scope.post.title === '' || $scope.post.title === undefined) && ($scope.post.description === '' || $scope.post.description === undefined)) {
+                    $mdToast.show($mdToast.simple().textContent('Posts must have a title or description.').hideDelay(1500).parent(document.getElementById('new_post_dialog')));
                 } else {
-                    submitCheck();
+                    if ($scope.post.type === "gDrive") {
+                        $mdToast.show({
+                            template: '<md-toast> <div class="md-toast-content" style="justify-content: center;"> <div> <div class="md-toast-text" style="padding: 6px 0 0 0px;">How should the attached file be shared?</div> <div style="display:flex"> <md-select ng-model="shareSelect"> <md-option value="view"> York students can view </md-option> <md-option value="comment"> York students can comment </md-option> <md-option value="edit"> York students can edit </md-option> </md-select> <md-button style="color:rgb(68,138,255)" ng-click="shareFile()">Share</md-button> </div></div></div></md-toast>',
+                            hideDelay: false,
+                            parent: document.getElementById('new_post_dialog'),
+                            toastClass: 'shareLevelToast',
+                            scope: $scope,
+                        })
+                    } else {
+                        submitCheck();
+                    }
                 }
             }
-        }
 
         function submitCheck() {
             $mdToast.show({
