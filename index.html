@@ -382,7 +382,7 @@
     <script src="js/generalFunctions.js"></script>
     <!-- Services -->
     <script type="text/javascript">
-        app.service('authorizationService', function($q, $mdDialog) {
+        app.service('authorizationService', function ($q, $mdDialog) {
             var self = this;
             firebase.initializeApp({
                 apiKey: "AIzaSyB573SRLOsDHPmXIG-j7pMF9kqfO57MiRM",
@@ -407,14 +407,14 @@
             var GSignInPromise = $q.defer();
             var LibraryLoadPromise = $q.defer();
 
-            gapi.load('client:auth2', function() {
+            gapi.load('client:auth2', function () {
                 // Initialize oauth
                 gapi.auth2.init({
                     'client_id': '632148950209-60a3db9qm6q31sids128mvstddg2qme7.apps.googleusercontent.com',
                     'scope': 'https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/script.external_request https://www.googleapis.com/auth/script.scriptapp https://www.googleapis.com/auth/script.storage https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive',
                     'hosted_domain': 'york.org',
                     fetch_basic_profile: true,
-                }).then(function(GAuth) {
+                }).then(function (GAuth) {
                     // Listen for sign-in state changes.
                     GAuth.isSignedIn.listen(updateSigninStatus);
                     // Handle the initial sign-in state.
@@ -427,7 +427,7 @@
                 gapi.client.init({
                     'apiKey': 'AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA',
                     'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest', 'https://www.googleapis.com/discovery/v1/apis/script/v1/rest'],
-                }).then(function() {
+                }).then(function () {
                     console.log("Loaded APIs")
                     LibraryLoadPromise.resolve();
                 }, console.warn)
@@ -438,24 +438,12 @@
                     self.GUser = gapi.auth2.getAuthInstance().currentUser.get();
                     GSignedIn = true;
                     hideSigninButton()
-                    self.GUser.reloadAuthResponse().then(function(res) {
-                        console.log('reloaded',res)
-                        GSignInPromise.resolve(self.GUser);
-                    }, function(err) {
-                        console.warn(err)
-                        gapi.auth2.getAuthInstance().signOut().then(function() {
-                            GSignedIn = false;
-                            self.GUser = null;
-                            showSigninButton()
-                        })
-                    })
-                }
-                else if (Input === false) {
+                    GSignInPromise.resolve(self.GUser);
+                } else if (Input === false) {
                     GSignedIn = false;
                     self.GUser = null;
                     showSigninButton()
-                }
-                else if (Input == null || Input.displayName != undefined) {
+                } else if (Input == null || Input.displayName != undefined) {
                     self.FireUser = Input;
                 }
 
@@ -463,12 +451,10 @@
                 if (GSignedIn && self.FireUser && self.FireUser != 'None' && isUserEqual(self.GUser, self.FireUser)) {
                     console.log("Everything is SignedIn")
                     FireSignInPromise.resolve(self.FireUser);
-                }
-                else if (GSignedIn && self.FireUser && self.FireUser != 'None' && !isUserEqual(self.GUser, self.FireUser)) {
+                } else if (GSignedIn && self.FireUser && self.FireUser != 'None' && !isUserEqual(self.GUser, self.FireUser)) {
                     console.log("Different Firebase user, signing into Firebase...")
                     SignIntoFirebase()
-                }
-                else if (GSignedIn && self.FireUser != 'None') {
+                } else if (GSignedIn && self.FireUser != 'None') {
                     console.log("No Firebase user, signing into Firebase...")
                     SignIntoFirebase()
                 }
@@ -477,9 +463,9 @@
                     // Sign in with id_token credential from the gapi Google user.
                     var credential = firebase.auth.GoogleAuthProvider.credential(self.GUser.getAuthResponse().id_token);
                     console.log(credential)
-                    firebase.auth().signInWithCredential(credential).then(function() {
+                    firebase.auth().signInWithCredential(credential).then(function () {
                         FireSignInPromise.resolve(self.FireUser);
-                    },console.warn).catch(console.warn);
+                    }, console.warn).catch(console.warn);
                 }
 
                 function isUserEqual(googleUser, firebaseUser) {
@@ -497,10 +483,10 @@
                 }
             }
 
-            window.signOut = function() {
-                gapi.auth2.getAuthInstance().signOut().then(function() {
-                    setTimeout(function() {
-                        self.FireAuth.signOut().then(function() {
+            window.signOut = function () {
+                gapi.auth2.getAuthInstance().signOut().then(function () {
+                    setTimeout(function () {
+                        self.FireAuth.signOut().then(function () {
                             console.log("All Signed Out")
                         }, console.warn);
                     }, 500)
@@ -520,7 +506,7 @@
             function showSigninButton() {
                 self.showSigninDialog()
                 signinSpinner.addClass('fadeOut');
-                setTimeout(function() {
+                setTimeout(function () {
                     signinButton.addClass('fadeIn');
                     datButton.style.display = 'none';
                 }, 500);
@@ -529,28 +515,28 @@
 
             function hideSigninButton() {
                 signinSpinner.removeClass('fadeOut');
-                setTimeout(function() {
+                setTimeout(function () {
                     signinButton.removeClass('fadeIn');
                     datButton.style.display = 'inline-block';
                 }, 500);
             };
 
-            this.onLoad = function(callback) {
-                $q.all([LibraryLoadPromise.promise, FireSignInPromise.promise, GSignInPromise.promise]).then(function() {
+            this.onLoad = function (callback) {
+                $q.all([LibraryLoadPromise.promise, FireSignInPromise.promise, GSignInPromise.promise]).then(function () {
                     console.log("All Auth Done")
                     callback();
                 });
             }
 
-            this.hideSigninDialog = function() {
+            this.hideSigninDialog = function () {
                 signinBackdrop.addClass('fadeOut');
             };
 
-            this.showSigninDialog = function() {
+            this.showSigninDialog = function () {
                 signinBackdrop.removeClass('fadeOut');
             };
 
-            this.getGAuthToken = function() {
+            this.getGAuthToken = function () {
                 return (gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true).access_token)
             }
         });
