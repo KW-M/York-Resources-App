@@ -1,5 +1,7 @@
 var devMode = false;
 
+//------- Utility Functions ---------
+
 function log(input, logWithoutDevMode) {
   if (devMode === true) {
     console.log(input)
@@ -17,16 +19,14 @@ function chooseRandom(inputArray) {
   return inputArray[number]
 }
 
+//------- Prototype Additons ---------
+
 Date.prototype.addDays = function(days) {
   this.setDate(this.getDate() + parseInt(days));
   return this;
 };
 
-function addDays(date, days) {
-  var result = new Date(date);
-  result.setDate(result.getDate() + days);
-  return result;
-}
+//------- Prototype Additons ---------
 
 document.addEventListener('touchmove', function(e) {
   //e.preventDefault();
