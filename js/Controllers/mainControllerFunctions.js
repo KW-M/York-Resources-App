@@ -2,7 +2,6 @@
 app.controller('AppController', controllerFunction)
    //controllerFunction.$inject(['$scope', '$mdDialog', '$window', '$timeout', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', 'angularGridInstance'])
 function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, $location, $http, $sce, $mdDialog, $mdToast, $mdSidenav, $mdMedia, $mdTheming, authorizationService, APIService, angularGridInstance) {
-   console.log(APIService)
    var self = this;
    var content_container = document.getElementById("content_container");
    var layout_grid = document.getElementById("layout_grid");
