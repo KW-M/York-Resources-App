@@ -104,67 +104,70 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
             template: '<md-toast><span style="font-size:18px; max-width: 200px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="36"></md-progress-circular></md-toast>',
             hideDelay: 3000000,
         });
-        promiseQueue.addPromise('drive', GoogleDriveService.updateDriveFile(response.data, metadata), function (reply) {
-            $timeout(function () {
-                $scope.allPosts.push($scope.post)
-                $scope.visiblePosts = $scope.filterPosts($scope.allPosts);
-            })
+        promiseQueue.addPromise('drive', APIService.runGAScript('runRemoteScript', {
+                $scope.post,
+                "AKfycbxME_4iEULk_guUMF4uEQrumAiLsFaxyFt407wg9ANJHuQ4_kU"), function (reply) {
+                console.log(reply)
+                $mdToast.hide();
+                $mdDialog.hide();
+                $scope.dialog_container.style.opacity = 1;
+                $scope.dialog_container.style.pointerEvents = 'all';
+                $timeout(function () {
+                    $scope.allPosts.push($scope.post)
+                    $scope.visiblePosts = $scope.filterPosts($scope.allPosts);
+                })
+            }, onError, 150);
+        }
+
+        $scope.shareFile = function () {
+            if ($scope.shareSelect == 'view') var role = 'reader';
+            if ($scope.shareSelect == 'comment') var role = 'commenter';
+            if ($scope.shareSelect == 'edit') var role = 'writer';
+            promiseQueue.addPromise('drive', APIService.shareFile($scope.post.attachmentId, role), null, console.warn, 150);
             $mdToast.hide();
-            $mdDialog.hide();
+        }
+
+        function onError(error) {
+            console.warn(error);
             $scope.dialog_container.style.opacity = 1;
             $scope.dialog_container.style.pointerEvents = 'all';
-        }, onError, 150);
-    }
-
-    $scope.shareFile = function () {
-        if ($scope.shareSelect == 'view') var role = 'reader';
-        if ($scope.shareSelect == 'comment') var role = 'commenter';
-        if ($scope.shareSelect == 'edit') var role = 'writer';
-        promiseQueue.addPromise('drive', APIService.shareFile($scope.post.attachmentId, role), null, console.warn, 150);
-        $mdToast.hide();
-    }
-
-    function onError(error) {
-        console.warn(error);
-        $scope.dialog_container.style.opacity = 1;
-        $scope.dialog_container.style.pointerEvents = 'all';
-        $mdToast.show($mdToast.simple().textContent('Error Posting, try again.').hideDelay(5000));
-    }
-
-    $scope.clearLink = function () {
-        $timeout(function () {
-            $scope.post.link = ""
-            $scope.post.previewImage = ""
-            $scope.post.type = "NoLink"
-        })
-    }
-
-    $scope.clearClassSelectSearch = function () {
-        $timeout(function () {
-            $scope.classSelectSearch = '';
-        });
-    }
-
-    $scope.closeDialog = function () {
-        $scope.post.title = originalpost.title || ''
-        $scope.post.description = originalpost.description || ''
-        $scope.post.link = originalpost.link || ''
-        $scope.post.labels = originalpost.labels || []
-        $scope.post.type = originalpost.type || 'noLink'
-        $scope.post.updateDate = originalpost.updateDate || new Date()
-        $scope.post.class = originalpost.class || {
-            Name: '',
-                Catagory: '',
-                Color: '#ffffff',
+            $mdToast.show($mdToast.simple().textContent('Error Posting, try again.').hideDelay(5000));
         }
-        $scope.post.id = originalpost.id || $scope.post.id || ''
-        $scope.post.attachmentId = originalpost.attachmentId || ''
-        $scope.post.attachmentName = originalpost.attachmentName || ''
-        $scope.post.attachmentIcon = originalpost.attachmentIcon || ''
-        $scope.post.previewImage = originalpost.previewImage || ''
-        $mdDialog.hide();
-    };
-    $scope.hideToast = function () {
-        $mdToast.hide()
+
+        $scope.clearLink = function () {
+            $timeout(function () {
+                $scope.post.link = ""
+                $scope.post.previewImage = ""
+                $scope.post.type = "NoLink"
+            })
+        }
+
+        $scope.clearClassSelectSearch = function () {
+            $timeout(function () {
+                $scope.classSelectSearch = '';
+            });
+        }
+
+        $scope.closeDialog = function () {
+            $scope.post.title = originalpost.title || ''
+            $scope.post.description = originalpost.description || ''
+            $scope.post.link = originalpost.link || ''
+            $scope.post.labels = originalpost.labels || []
+            $scope.post.type = originalpost.type || 'noLink'
+            $scope.post.updateDate = originalpost.updateDate || new Date()
+            $scope.post.class = originalpost.class || {
+                Name: '',
+                    Catagory: '',
+                    Color: '#ffffff',
+            }
+            $scope.post.id = originalpost.id || $scope.post.id || ''
+            $scope.post.attachmentId = originalpost.attachmentId || ''
+            $scope.post.attachmentName = originalpost.attachmentName || ''
+            $scope.post.attachmentIcon = originalpost.attachmentIcon || ''
+            $scope.post.previewImage = originalpost.previewImage || ''
+            $mdDialog.hide();
+        };
+        $scope.hideToast = function () {
+            $mdToast.hide()
+        }
     }
-}
