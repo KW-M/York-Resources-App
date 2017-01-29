@@ -22,15 +22,13 @@
     return this;
   };
   // Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
-  function queue(typeName, promise, action, error, interval) {
+  function queue(typeName, promiseFunc, action, error, interval) {
     typeName = typeName || 'general'
-    if (!theQueue[typeName]) {
-      theQueue[typeName] = [];
-    }
+    if (!theQueue[typeName]) theQueue[typeName] = []
     theQueue[typeName].push({
-      Promise: promise,
+      promiseFunc: promiseFunc,
       Action: action,
-      Err: error
+      Err: error,
     });
     if (!timer[typeName]) {
       processTheQueue(typeName); // start immediately on the first invocation
