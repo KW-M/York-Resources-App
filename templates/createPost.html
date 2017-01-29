@@ -1,23 +1,23 @@
 <link rel="stylesheet" href="css/createPost.css" />
 <md-dialog id="new_post_dialog">
-   <md-dialog-content class="new_post_dialog_scroll" style="opacity:0" ng-style="{'background-color': Post.Class.Color + ' 0.6)'}">
-      <div id="dialog_header" class="post-card-header" ng-class="{'no-link':Post.Type == 'NoLink','md-whiteframe-3dp': (operation == 'view' && Post.Link == '' && newPostScroll > 0) || (operation != 'view' && newPostScroll > 139),'not-operation-view':operation != 'view'}"
-         md-ink-ripple="{{Post.Link != '' && operation == 'view'}}" ng-click="openLink(Post.Link, operation != 'view')" ng-style="{'height': ((operation == 'view' && Post.Link == '') ? (60):(200-newPostScroll)) + 'px'}">
-         <img ng-src="{{Post.PreviewImage}}" id="header_image" ng-class="{'post-card-image':operation == 'view'}"></img>
+   <md-dialog-content class="new_post_dialog_scroll" style="opacity:0" ng-style="{'background-color': post.class.color + ' 0.6)'}">
+      <div id="dialog_header" class="post-card-header" ng-class="{'no-link':post.type == 'NoLink','md-whiteframe-3dp': (operation == 'view' && post.link == '' && newPostScroll > 0) || (operation != 'view' && newPostScroll > 139),'not-operation-view':operation != 'view'}"
+         md-ink-ripple="{{post.link != '' && operation == 'view'}}" ng-click="openLink(post.link, operation != 'view')" ng-style="{'height': ((operation == 'view' && post.link == '') ? (60):(200-newPostScroll)) + 'px'}">
+         <img ng-src="{{post.previewImage}}" id="header_image" ng-class="{'post-card-image':operation == 'view'}"></img>
          <div class="gradient-overlay new-post-img-gradient">
             <div id="header_title" style="opacity: 0" class="gradient-overlay-metadata metadata-regular">
                <h5 style="margin: 0">{{Post.Title}}</h5>
-               <span style="font-weight:700; font-size:14px"><md-icon class="small-icon" style="color:white">people</md-icon> {{Post.Class.Name || 'No class'}}</span>
-               <span ng-hide="Post.Tags.length < 1"><md-icon class="small-icon" style="color:white">style</md-icon>{{Post.Tags.join(', ')}}</span>
+               <span style="font-weight:700; font-size:14px"><md-icon class="small-icon" style="color:white">people</md-icon> {{post.class.name || 'No class'}}</span>
+               <span ng-hide="post.tags.length < 1"><md-icon class="small-icon" style="color:white">style</md-icon>{{post.tags.join(', ')}}</span>
             </div>
             <div class="gradient-overlay-metadata metadata-regular" ng-hide="operation != 'view'">
-               <span ng-hide="Post.Class.Name == null"><md-icon>people</md-icon> {{Post.Class.Name}}</span>
-               <span><md-icon>event</md-icon> {{Post.CreationDate | date : "mm/dd/yyyy"}}</span>
+               <span ng-hide="post.class.name == null"><md-icon>people</md-icon> {{post.class.name}}</span>
+               <span><md-icon>event</md-icon> {{post.creationDate | date : "mm/dd/yyyy"}}</span>
             </div>
-            <div class="gradient-overlay-metadata metadata-link" style="font-size:18px" ng-hide="Post.Link == '' || Post.Type == 'gDrive' || operation != 'view'">
-               <span><md-icon>language</md-icon> {{removeHttp(Post.Link)}}</span>
+            <div class="gradient-overlay-metadata metadata-link" style="font-size:18px" ng-hide="post.link == '' || post.type == 'gDrive' || operation != 'view'">
+               <span><md-icon>language</md-icon> {{removeHttp(post.link)}}</span>
             </div>
-            <div class="md-chips gradient-overlay-metadata" style="position:absolute; padding: 0 40px 0 8px" ng-class="{'metadata-link': operation == 'view'}" ng-hide="Post.Type != 'gDrive'">
+            <div class="md-chips gradient-overlay-metadata" style="position:absolute; padding: 0 40px 0 8px" ng-class="{'metadata-link': operation == 'view'}" ng-hide="post.type != 'gDrive'">
                <md-chip>
                   <div class="md-chip-content">
                      <img ng-src="{{Post.AttachmentIcon}}" style="margin-right:4px"></img>
@@ -29,8 +29,8 @@
                </md-chip>
             </div>
             <div id="header_link_input_container" class="gradient-overlay-metadata" ng-hide="operation == 'view'">
-               <md-input-container id="header_link_input" md-no-float ng-hide="Post.Type == 'gDrive'">
-                  <input ng-model="Post.Link" style="color:white" placeholder="http://" type="text">
+               <md-input-container id="header_link_input" md-no-float ng-hide="post.type == 'gDrive'">
+                  <input ng-model="post.link" style="color:white" placeholder="http://" type="text">
                </md-input-container>
                <md-menu md-position-mode="target-right target" class="attach-menu">
                   <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" style="margin:0">
@@ -55,7 +55,7 @@
          </div>
          <md-progress-linear class="link-loading" md-mode="indeterminate" ng-disabled="!previewLoading"></md-progress-linear>
       </div>
-      <div id="new_post_content" ng-class="{'small-header': Post.Type == 'NoLink' && operation == 'view'}">
+      <div id="new_post_content" ng-class="{'small-header': post.type == 'NoLink' && operation == 'view'}">
          <div flex layout="row">
             <md-select ng-model="Post.Class" ng-model-options="{trackBy: '$value.Name'}" ng-hide="operation == 'view'" class="md-no-underline" placeholder="Class" id="class_dropdown_button" md-on-close="clearClassSelectSearch()">
                <md-select-header class="classSelectSearchbox">
@@ -85,14 +85,14 @@
                </md-input-container>
             </div>
          </div>
-         <div class="md-dialog-content ">
+         <div class="md-dialog-content unselectable">
             <input ng-model="Post.Title" ng-readonly="operation === 'view'" class="new-post-title md-title" placeholder="Title" md-autofocus>
             <p class="post-card-creator md-subhead" style="margin:0" ng-hide="::Post.Creator.Name == undefined || Post.Creator.Name == myInfo.Name"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::Post.Creator.ClassOf}})</span></p>
             <div contenteditable="{{operation != 'view'}}" ng-model="Post.Description" class="new-post-body"></div>
          </div>
       </div>
    </md-dialog-content>
-   <md-dialog-actions ng-hide="operation === 'view'" layout="row" style="align-items: center;" ng-style="{'background-color': Post.Class.Color + ' 0.6)'}">
+   <md-dialog-actions ng-hide="operation === 'view'" layout="row" style="align-items: center;" ng-style="{'background-color': post.class.color + ' 0.6)'}">
       <md-button id="New_Post_Submit" ng-click="isReadyToSubmit()" ng-disabled="previewLoading" class="md-raised">Save</md-button>
       <!--<md-button class="text-formating-button md-icon-button " style="margin: 0 -6px 0 0; padding: 0;">-->
       <!--   <md-icon style="font-size:18px; line-height: 24px;">format_bold</md-icon>-->
@@ -112,7 +112,7 @@
          <md-icon ng-hide="operation == 'new'" style="font-size:26px; line-height: 25px">close</md-icon>
       </md-button>
    </md-dialog-actions>
-   <md-dialog-actions ng-show="operation === 'view'" layout="row" style="align-items: center;" ng-style="{'background-color': Post.Class.Color + ' 0.6)'}">
+   <md-dialog-actions ng-show="operation === 'view'" layout="row" style="align-items: center;" ng-style="{'background-color': post.class.color + ' 0.6)'}">
       <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(Post)">
          <span class="like-counter">{{Post.Likes.length}}</span>
          <md-icon ng-class="{'md-accent' : Post.userLiked}" style="margin-top: -8px">thumb_up</md-icon>
