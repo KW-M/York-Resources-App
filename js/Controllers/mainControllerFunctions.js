@@ -190,24 +190,6 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
       return getStartupData;
    }
 
-   function readGAppsScript(scriptFunction, payload) {
-      return (gapi.client.script.scripts.run({
-         'scriptId': 'MuWC0NB4CLnMdc_XDwj7F_PA9VMeL9Grb',
-         'function': scriptFunction,
-         'parameters': [JSON.stringify(payload)],
-         //         'devMode': true,
-      }));
-   }
-
-   function writeGAppsScript(scriptFunction, payload) {
-      return (gapi.client.script.scripts.run({
-         'scriptId': 'MZMSm56uR7QYFSkt-WuDJEPA9VMeL9Grb',
-         'function': 'callRemoteScript',
-         'parameters': [JSON.stringify(payload)],
-         'devMode': true,
-      }));
-   }
-
    //----------------------------------------------------
    //--------------- Creating Posts ---------------------
    $scope.newPost = function(postObj, operation, event) {
