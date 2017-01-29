@@ -415,7 +415,10 @@
                     fetch_basic_profile: true,
                 }).then(function(GAuth) {
                     // Listen for sign-in state changes.
-                    GAuth.isSignedIn.listen(updateSigninStatus);
+                    GAuth.isSignedIn.listen(function(t){
+                        console.log(list)
+                        updateSigninStatus(t)
+                    });
                     // Handle the initial sign-in state.
                     updateSigninStatus(GAuth.isSignedIn.get());
                     // show sign in prompt if sign in button is clicked.
@@ -455,11 +458,12 @@
                     self.GUser = null;
                     showSigninButton()
                 }
-                else if (typeof(Input) == 'object') {
+                else if (Input.displayName != undefined) {
                     console.log("fireResolved")
                     self.FireUser = Input;
                     FireSignInPromise.resolve(self.FireUser);
                 }
+
                 // Use the variables specified here
                 if (GSignedIn && self.FireUser && self.FireUser != 'None' && isUserEqual(self.GUser, self.FireUser)) {
                     console.log("Everything is SignedIn")
