@@ -34,7 +34,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $scope.post.attachmentId = $scope.post.attachmentId || ''
         $scope.post.attachmentName = $scope.post.attachmentName || ''
         $scope.post.attachmentIcon = $scope.post.attachmentIcon || ''
-        $scope.post.Likes = $scope.post.Likes || []
+        $scope.post.likes = $scope.post.likes || []
         $scope.post.previewImage = $scope.post.previewImage || ''
         $scope.findType();
     })
