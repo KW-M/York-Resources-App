@@ -58,8 +58,8 @@
       <div id="new_post_content" ng-class="{'small-header': post.type == 'NoLink' && operation == 'view'}">
          {{post.class}}
          <div flex layout="row">
-            <md-select ng-model="post.class" ng-model-options="{trackBy: $value.catgory}" ng-if="operation != 'view'" class="md-no-underline" placeholder="Class" id="class_dropdown_button" md-on-close="clearClassSelectSearch()">
-               <md-option ng-value="catagoryObj" ng-repeat="catagoryObj in classList">{{catagoryObj}}</md-option>
+            <md-select ng-model="post.class" ng-model-options="{trackBy: $value.catagory}" class="md-no-underline" placeholder="Class" id="class_dropdown_button" md-on-close="clearClassSelectSearch()">
+               <md-option ng-value="{{category:catagoryObj.catagory}}" ng-repeat="catagoryObj in classList">{{catagoryObj.catagory}}</md-option>
                <!--<md-select-header class="classSelectSearchbox">-->
                <!--   <input ng-model="classSelectSearch" id="class_select_input" type="text" placeholder="Search for a class.." class="md-text">-->
                <!--</md-select-header>-->
