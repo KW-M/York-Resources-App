@@ -357,7 +357,7 @@
     <!-------------------------------------------------------->
     <!---------------------- Libraries ----------------------->
     <!-- Google API and Authentication Library -->
-	<!--<script src="https://apis.google.com/js/api.js"></script>-->
+    <!--<script src="https://apis.google.com/js/api.js"></script>-->
     <!-- Angular Material -->
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
     <!-- Angular Core Add-on Libraries -->
@@ -368,11 +368,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-messages.min.js"></script>
     <!-- Firebase Libraries -->
     <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-auth.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-storage.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-database.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-messaging.js"></script>
     <!-- Other Libraries -->
     <script src="Libraries/detect-element-resize.js"></script>
     <script src="Libraries/angular-grid.js"></script>
@@ -417,7 +417,6 @@
                     // Listen for sign-in state changes.
                     GAuth.isSignedIn.listen(updateSigninStatus);
                     // Handle the initial sign-in state.
-                    console.log(GAuth.isSignedIn.get())
                     updateSigninStatus(GAuth.isSignedIn.get());
                     // show sign in prompt if sign in button is clicked.
                     GAuth.attachClickHandler('signin_button', null, null, console.warn)
@@ -436,10 +435,14 @@
             function updateSigninStatus(Input) {
                 console.log(Input)
                 if (Input === true) {
-                    GSignedIn = true;
                     self.GUser = gapi.auth2.getAuthInstance().currentUser.get();
-                    GSignInPromise.resolve(self.GUser);
-                    hideSigninButton()
+                    if (self.GUser.getBasicProfile().getName() != undefined) {
+                       GSignedIn = true;
+                       GSignInPromise.resolve(self.GUser);
+                       hideSigninButton()
+                    } else {
+                        showSigninButton()
+                    }
                 }
                 else if (Input === false) {
                     GSignedIn = false;
