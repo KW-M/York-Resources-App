@@ -20,10 +20,10 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 color: 'ff00ff',
         };
         $scope.post.creator = (operation == 'new') ? ({
-            classOf: $scope.myInfo.ClassOf,
-            email: $scope.myInfo.Email,
+            classOf: $scope.myInfo.classOf,
+            email: $scope.myInfo.email,
             me: true,
-            name: $scope.myInfo.Name,
+            name: $scope.myInfo.name,
         }) : ($scope.post.creator || {
             classOf: '',
             email: '',
