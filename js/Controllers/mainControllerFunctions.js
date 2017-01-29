@@ -170,7 +170,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          name: profile.getName(),
          profilePicture: profile.getImageUrl(),
       }
-      var getStartupData = readGAppsScript('getStartupData').then(function(data) {
+      var getStartupData = readGAppsScript('test').then(function(data) {
          var dataObj = JSON.parse(data.result.response.result);
          $timeout(function() {
             for (var property in dataObj.userPrefs) {
