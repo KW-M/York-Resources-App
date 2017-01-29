@@ -164,16 +164,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }, console.warn)
 
       var pickerPromise = $q.defer();
-      gapi.load('picker'
-      // , {
-      //    'callback': function() {
-      //       initiateDrivePicker();
-      //       pickerPromise.resolve();
-      //    }
-      ).then(function (res) {
-         console.log(res)
-      },console.warn)
-      $q.all([loadData(), pickerPromise]).then(function() {
+      gapi.load('picker', {
+         'callback': function() {
+            initiateDrivePicker();
+            pickerPromise.resolve();
+         }
+      })
+
+      $q.all([getStartupData, pickerPromise]).then(function() {
          console.log("Everything Loaded")
          authorizationService.hideSigninDialog();
       })
