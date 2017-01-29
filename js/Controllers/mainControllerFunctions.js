@@ -203,17 +203,17 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       $scope.newPostScroll = 0;
       var dialogConfig = {
             templateUrl: 'templates/createPost.html',
-            controller: ['$scope', '$timeout', '$http', '$mdDialog', 'APIService', 'authorizationService', '$mdToast', "Post", "operation", newPostController],
+            controller: ['$scope', '$timeout', '$http', '$mdDialog', 'APIService', 'authorizationService', '$mdToast', "post", "operation", newPostController],
             scope: $scope,
-            parent: angular.element(document.body),
-            preserveScope: true,
             locals: {
                post: postObj,
                operation: operation
             },
+            preserveScope: true,
             onComplete: onDialogLoaded,
             clickOutsideToClose: false,
             fullscreen: $mdMedia('xs'),
+            parent: angular.element(document.body),
          }
          // openFrom: {
          //    top: rect.top,
@@ -229,29 +229,26 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          // }//('#new_post_button'),
 
       function onDialogLoaded() {
-         var newPostDialog = document.getElementById("new_post_dialog");
-         var newPostHeaderLink = document.getElementById("header_link");
-         var newPostHeaderMetadata = document.getElementById("Metadata");
-         var newPostHeaderImage = document.getElementById("header_image");
-         var newPostHeaderTitle = document.getElementById("header_title");
          $scope.dialog_container = document.getElementsByClassName('md-dialog-container')[0]
          var newPostScroll = document.getElementsByClassName('new_post_dialog_scroll')[0];
-         newPostScroll.style.opacity = 1
+         var newPostHeaderImage = document.getElementById("header_image");
          var newPostHeader = document.getElementById('dialog_header');
+         newPostScroll.style.opacity = 1;
          newPostScroll.onscroll = function () {
-               if (newPostScroll.scrollTop < 141) {
-                  $timeout(function () {
-                     $scope.newPostScroll = newPostScroll.scrollTop;
-                  })
-                  newPostHeaderImage.style.top = -20 - (newPostScroll.scrollTop / 5) + 'px';
-               } else {
-                  $timeout(function () {
-                     $scope.newPostScroll = 140;
-                  })
-               }
+            if (newPostScroll.scrollTop < 141) {
+               $timeout(function () {
+                  $scope.newPostScroll = newPostScroll.scrollTop;
+               })
+               newPostHeaderImage.style.top = -20 - (newPostScroll.scrollTop / 5) + 'px';
+            } else {
+               $timeout(function () {
+                  $scope.newPostScroll = 140;
+               })
             }
-            // The md-select directive eats keydown events for some quick select
-            // logic. Since we have a search input here, we don't need that logic.
+         }
+
+         // The md-select directive eats keydown events for some quick select
+         // logic. Since we have a search input in the class Select M, we don't need that logic.
          var selectSearchInput = angular.element(document.getElementById('class_select_input'))
          selectSearchInput.on('keydown', function (ev) {
             ev.stopPropagation();
