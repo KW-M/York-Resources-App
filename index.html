@@ -397,10 +397,7 @@
             self.FireUser = 'None';
             var FireSignInPromise = $q.defer();
 
-            self.FireAuth.onAuthStateChanged(function(t) {
-                console.log("flistener")
-                updateSigninStatus(t)
-            });
+            self.FireAuth.onAuthStateChanged(updateSigninStatus);
 
             // ---------- End Firebase Auth, Begin Google API Library and auth2 ------------ //
 
@@ -418,12 +415,8 @@
                     fetch_basic_profile: true,
                 }).then(function(GAuth) {
                     // Listen for sign-in state changes.
-                    GAuth.isSignedIn.listen(function(t) {
-                        console.log("Glistener")
-                        updateSigninStatus(t)
-                    });
+                    GAuth.isSignedIn.listen(updateSigninStatus);
                     // Handle the initial sign-in state.
-                    console.log("Ginitial")
                     updateSigninStatus(GAuth.isSignedIn.get());
                     // show sign in prompt if sign in button is clicked.
                     GAuth.attachClickHandler('signin_button', null, null, console.warn)
