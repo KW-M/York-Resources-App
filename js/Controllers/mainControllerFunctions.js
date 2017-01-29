@@ -164,10 +164,11 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    }
 
    function loadData() {
-      console.log(authorizationService.GUser)
-      console.log(authorizationService.GUser.getBasicProfile())
+      var profile = authorizationService.GUser.getBasicProfile()
       $scope.myInfo = {
-         email: authorizationService.GUser.email
+         email: profile.getEmail(),
+         name: profile.getName(),
+         profilePicture: profile.getImageUrl(),
       }
       var getStartupData = readGAppsScript('getStartupData').then(function(data) {
          var dataObj = JSON.parse(data.result.response.result);
