@@ -4,38 +4,38 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     console.log(postObj)
     var linkChangeTimer = null;
     var originalPost = angular.copy(postObj);
-    $scope.Post = postObj;
+    $scope.post = postObj;
     $timeout(function () {
-        $scope.Post.Title = $scope.Post.Title || ''
-        $scope.Post.Description = $scope.Post.Description || ''
-        $scope.Post.Link = $scope.Post.Link || ''
-        $scope.Post.Labels = $scope.Post.Labels || []
-        $scope.Post.Type = $scope.Post.Type || 'noLink'
-        $scope.Post.Flagged = $scope.Post.Flagged || false
-        $scope.Post.CreationDate = $scope.Post.CreationDate || new Date()
-        $scope.Post.UpdateDate = $scope.Post.UpdateDate || new Date()
-        $scope.Post.Class = $scope.Post.Class || {
+        $scope.post.Title = $scope.post.Title || ''
+        $scope.post.Description = $scope.post.Description || ''
+        $scope.post.Link = $scope.post.Link || ''
+        $scope.post.Labels = $scope.post.Labels || []
+        $scope.post.Type = $scope.post.Type || 'noLink'
+        $scope.post.Flagged = $scope.post.Flagged || false
+        $scope.post.CreationDate = $scope.post.CreationDate || new Date()
+        $scope.post.UpdateDate = $scope.post.UpdateDate || new Date()
+        $scope.post.Class = $scope.post.Class || {
             Name: '',
             Catagory: '',
             Color: 'ff00ff',
         }
-        $scope.Post.Creator = (operation == 'new') ? ({
+        $scope.post.Creator = (operation == 'new') ? ({
             ClassOf: $scope.myInfo.ClassOf,
             Email: $scope.myInfo.Email,
             Me: true,
             Name: $scope.myInfo.Name,
-        }) : ($scope.Post.Creator || {
+        }) : ($scope.post.Creator || {
             ClassOf: '',
             Email: '',
             Me: null,
             Name: ''
         })
-        $scope.Post.Id = $scope.Post.Id || ''
-        $scope.Post.AttachmentId = $scope.Post.AttachmentId || ''
-        $scope.Post.AttachmentName = $scope.Post.AttachmentName || ''
-        $scope.Post.AttachmentIcon = $scope.Post.AttachmentIcon || ''
-        $scope.Post.Likes = $scope.Post.Likes || []
-        $scope.Post.PreviewImage = $scope.Post.PreviewImage || ''
+        $scope.post.Id = $scope.post.Id || ''
+        $scope.post.AttachmentId = $scope.post.AttachmentId || ''
+        $scope.post.AttachmentName = $scope.post.AttachmentName || ''
+        $scope.post.AttachmentIcon = $scope.post.AttachmentIcon || ''
+        $scope.post.Likes = $scope.post.Likes || []
+        $scope.post.PreviewImage = $scope.post.PreviewImage || ''
         runFindType();
     })
 
@@ -47,31 +47,31 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     $scope.shareSelect = "view"
 
     $scope.findType = function () {
-        if ($scope.Post.Link === '') {
-            $scope.Post.PreviewImage = '';
-            $scope.Post.AttachmentId = '';
-            $scope.Post.AttachmentName = '';
-            $scope.Post.AttachmentIcon = '';
-            $scope.Post.Type = 'NoLink';
+        if ($scope.post.Link === '') {
+            $scope.post.PreviewImage = '';
+            $scope.post.AttachmentId = '';
+            $scope.post.AttachmentName = '';
+            $scope.post.AttachmentIcon = '';
+            $scope.post.Type = 'NoLink';
             $timeout(function () {
-                $scope.Post.PreviewImage = ''; // will be the down arrow photo
+                $scope.post.PreviewImage = ''; // will be the down arrow photo
                 $scope.previewLoading = false;
                 document.dispatchEvent(new window.Event('urlPreviewLoaded'));
             })
-        } else if ($scope.Post.Link.match(/(?:http|https):\/\/.{2,}/)) {
+        } else if ($scope.post.Link.match(/(?:http|https):\/\/.{2,}/)) {
             $timeout(function () {
-                $scope.Post.PreviewImage = ''; // will be the down arrow photo
+                $scope.post.PreviewImage = ''; // will be the down arrow photo
                 $scope.previewLoading = true;
-                $scope.Post.Type = 'link';
+                $scope.post.Type = 'link';
             })
-        } else if ($scope.Post.Link.length > 9) {
+        } else if ($scope.post.Link.length > 9) {
             $timeout(function () {
-                $scope.Post.Link = "http://" + $scope.Post.Link;
-                $scope.Post.Type = 'link';
+                $scope.post.Link = "http://" + $scope.post.Link;
+                $scope.post.Type = 'link';
             })
         } else {
             $timeout(function () {
-                $scope.Post.Type = 'noLink';
+                $scope.post.Type = 'noLink';
             })
         }
     };
@@ -79,10 +79,10 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     $scope.$watch('Post.Link', function () {
         if (typeof (linkChangeTimer) == 'number') clearTimeout(linkChangeTimer);
         linkChangeTimer = setTimeout(function () {
-            $scope.Post.PreviewImage = '';
-            $scope.Post.AttachmentId = '';
-            $scope.Post.AttachmentName = '';
-            $scope.Post.AttachmentIcon = '';
+            $scope.post.PreviewImage = '';
+            $scope.post.AttachmentId = '';
+            $scope.post.AttachmentName = '';
+            $scope.post.AttachmentIcon = '';
             runFindType();
         }, 500)
     })
@@ -96,17 +96,17 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     }
 
     $scope.isReadyToSubmit = function () {
-        if ($scope.Post.Class.Name === '' || $scope.Post.Class === undefined) {
+        if ($scope.post.Class.Name === '' || $scope.post.Class === undefined) {
             $mdToast.show({
                 template: '<md-toast><div class="md-toast-content">Select a class for this post.</div><md-toast>',
                 hideDelay: 1500,
                 parent: document.getElementById('new_post_dialog'),
             });
         } else {
-            if (($scope.Post.Title === '' || $scope.Post.Title === undefined) && ($scope.Post.Description === '' || $scope.Post.Description === undefined)) {
+            if (($scope.post.Title === '' || $scope.post.Title === undefined) && ($scope.post.Description === '' || $scope.post.Description === undefined)) {
                 $mdToast.show($mdToast.simple().textContent('Posts must have a title or description.').hideDelay(1500).parent(document.getElementById('new_post_dialog')));
             } else {
-                if ($scope.Post.Type === "gDrive") {
+                if ($scope.post.Type === "gDrive") {
                     $mdToast.show({
                         template: '<md-toast> <div class="md-toast-content" style="justify-content: center;"> <div> <div class="md-toast-text" style="padding: 6px 0 0 0px;">How should the attached file be shared?</div> <div style="display:flex"> <md-select ng-model="shareSelect"> <md-option value="view"> York students can view </md-option> <md-option value="comment"> York students can comment </md-option> <md-option value="edit"> York students can edit </md-option> </md-select> <md-button style="color:rgb(68,138,255)" ng-click="shareFile()">Share</md-button> </div></div></div></md-toast>',
                         hideDelay: false,
@@ -138,90 +138,80 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     $scope.submit = function () {
         $scope.dialog_container.style.opacity = 0;
         $scope.dialog_container.style.pointerEvents = 'none';
-        if ($scope.operation === 'new') {
-            var metadata = $scope.convertPostToDriveMetadata($scope.Post);
-            console.log({
-                Post: $scope.Post,
-                Metadata: metadata
-            });
-            queue('other', GoogleDriveService.AppsScriptNewFile(), function (response) {
-                $scope.Post.Id = response.data;
-                $timeout(function () {
-                    $scope.allPosts.push($scope.Post)
-                    $scope.visiblePosts = $scope.filterPosts($scope.allPosts);
-                })
-                queue('drive', GoogleDriveService.updateDriveFile(response.data, metadata), function (reply) {
-                    $scope.updateLastPosted();
-                    $mdToast.hide();
-                    $mdDialog.hide();
-                    $scope.dialog_container.style.opacity = 1;
-                    $scope.dialog_container.style.pointerEvents = 'all';
-                }, onError, 150);
-            }, onError, 2);
-        } else if ($scope.operation === 'update') {
-            var metadata = $scope.convertPostToDriveMetadata($scope.Post);
-            console.log({
-                Post: $scope.Post,
-                Metadata: metadata
-            });
-            queue('drive', GoogleDriveService.updateDriveFile(postObj.Id, metadata), function (reply) {
-                console.log(reply.result);
-                $mdToast.hide();
-            }, onError, 150);
-        }
-    }
-
-    $scope.shareFile = function () {
-        if ($scope.shareSelect == 'view') var role = 'reader';
-        if ($scope.shareSelect == 'comment') var role = 'commenter';
-        if ($scope.shareSelect == 'edit') var role = 'writer';
-        queue('drive', APIService..shareFileDomain($scope.Post.AttachmentId, role), null, function (err) {
-            console.warn(err)
-        }, 150)
-        $mdToast.hide();
-    }
-
-    function onError(error) {
-        console.warn(error);
-        $scope.dialog_container.style.opacity = 1;
-        $scope.dialog_container.style.pointerEvents = 'all';
-        $mdToast.show($mdToast.simple().textContent('Error Posting, try again.').hideDelay(5000));
-    }
-
-    $scope.clearLink = function () {
-        $timeout(function () {
-            $scope.Post.Link = ""
-            $scope.Post.PreviewImage = ""
-            $scope.Post.Type = "NoLink"
-        })
-    }
-
-    $scope.clearClassSelectSearch = function () {
-        $timeout(function () {
-            $scope.classSelectSearch = '';
+        $scope.post.Id = response.data;
+        queue('drive', GoogleDriveService.updateDriveFile(response.data, metadata), function (reply) {
+            $timeout(function () {
+                $scope.allPosts.push($scope.post)
+                $scope.visiblePosts = $scope.filterPosts($scope.allPosts);
+            })
+            $scope.updateLastPosted();
+            $mdToast.hide();
+            $mdDialog.hide();
+            $scope.dialog_container.style.opacity = 1;
+            $scope.dialog_container.style.pointerEvents = 'all';
+        }, onError, 150);
+    } else if ($scope.operation === 'update') {
+        var metadata = $scope.convertPostToDriveMetadata($scope.post);
+        console.log({
+            Post: $scope.post,
+            Metadata: metadata
         });
+        queue('drive', GoogleDriveService.updateDriveFile(postObj.Id, metadata), function (reply) {
+            console.log(reply.result);
+            $mdToast.hide();
+        }, onError, 150);
     }
+}
 
-    $scope.closeDialog = function () {
-        $scope.Post.Title = originalPost.Title || ''
-        $scope.Post.Description = originalPost.Description || ''
-        $scope.Post.Link = originalPost.Link || ''
-        $scope.Post.Labels = originalPost.Labels || []
-        $scope.Post.Type = originalPost.Type || 'noLink'
-        $scope.Post.UpdateDate = originalPost.UpdateDate || new Date()
-        $scope.Post.Class = originalPost.Class || {
-            Name: '',
-            Catagory: '',
-            Color: '#ffffff',
-        }
-        $scope.Post.Id = originalPost.Id || $scope.Post.Id || ''
-        $scope.Post.AttachmentId = originalPost.AttachmentId || ''
-        $scope.Post.AttachmentName = originalPost.AttachmentName || ''
-        $scope.Post.AttachmentIcon = originalPost.AttachmentIcon || ''
-        $scope.Post.PreviewImage = originalPost.PreviewImage || ''
-        $mdDialog.hide();
-    };
-    $scope.hideToast = function () {
-        $mdToast.hide()
+$scope.shareFile = function () {
+    if ($scope.shareSelect == 'view') var role = 'reader';
+    if ($scope.shareSelect == 'comment') var role = 'commenter';
+    if ($scope.shareSelect == 'edit') var role = 'writer';
+    promiseQueue.addPromise('drive', APIService.shareFile($scope.post.AttachmentId, role), null, console.warn, 150);
+    $mdToast.hide();
+}
+
+function onError(error) {
+    console.warn(error);
+    $scope.dialog_container.style.opacity = 1;
+    $scope.dialog_container.style.pointerEvents = 'all';
+    $mdToast.show($mdToast.simple().textContent('Error Posting, try again.').hideDelay(5000));
+}
+
+$scope.clearLink = function () {
+    $timeout(function () {
+        $scope.post.Link = ""
+        $scope.post.PreviewImage = ""
+        $scope.post.Type = "NoLink"
+    })
+}
+
+$scope.clearClassSelectSearch = function () {
+    $timeout(function () {
+        $scope.classSelectSearch = '';
+    });
+}
+
+$scope.closeDialog = function () {
+    $scope.post.Title = originalPost.Title || ''
+    $scope.post.Description = originalPost.Description || ''
+    $scope.post.Link = originalPost.Link || ''
+    $scope.post.Labels = originalPost.Labels || []
+    $scope.post.Type = originalPost.Type || 'noLink'
+    $scope.post.UpdateDate = originalPost.UpdateDate || new Date()
+    $scope.post.Class = originalPost.Class || {
+        Name: '',
+        Catagory: '',
+        Color: '#ffffff',
     }
+    $scope.post.Id = originalPost.Id || $scope.post.Id || ''
+    $scope.post.AttachmentId = originalPost.AttachmentId || ''
+    $scope.post.AttachmentName = originalPost.AttachmentName || ''
+    $scope.post.AttachmentIcon = originalPost.AttachmentIcon || ''
+    $scope.post.PreviewImage = originalPost.PreviewImage || ''
+    $mdDialog.hide();
+};
+$scope.hideToast = function () {
+    $mdToast.hide()
+}
 }

@@ -274,9 +274,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       if (data.action == google.picker.Action.PICKED) {
          if ($scope.restorePost == true) {
             $timeout(function () {
-               $scope.Post.AttachmentId = data.docs[0].id;
-               $scope.Post.Link = data.docs[0].url;
-               $scope.Post.Title = $scope.Post.Title || data.docs[0].name;
+               $scope.post.AttachmentId = data.docs[0].id;
+               $scope.post.Link = data.docs[0].url;
+               $scope.post.Title = $scope.post.Title || data.docs[0].name;
             })
          } else {
             $scope.newPost({
