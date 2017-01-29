@@ -151,9 +151,11 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
 
     $scope.clearLink = function () {
         $timeout(function () {
-            $scope.post.link = ""
-            $scope.post.previewImage = ""
-            $scope.post.type = "NoLink"
+            $scope.post.link = null;
+            $scope.post.type = "noLink";
+            $scope.post.previewImage = null;
+            $scope.post.attachmentName = null;
+            $scope.post.attachmentIcon = null;
         })
     }
 

@@ -29,7 +29,7 @@
                </md-chip>
             </div>
             <div id="header_link_input_container" class="gradient-overlay-metadata" ng-hide="operation == 'view'">
-               <md-input-container id="header_link_input" md-no-float ng-hide="post.type == 'gDrive'">
+               <md-input-container id="header_link_input" md-no-float ng-if="!post.attachmentName">
                   <input ng-model="post.link" style="color:white" placeholder="http://" type="text">
                </md-input-container>
                <md-menu md-position-mode="target-right target" class="attach-menu">
