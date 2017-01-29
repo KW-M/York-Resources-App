@@ -22,10 +22,11 @@
                   <div class="md-chip-content">
                      <img ng-src="{{post.attachmentIcon}}" style="margin-right:4px"></img>
                      <span>{{post.attachmentName}}</span>
-                     <button class="md-chip-remove" style="margin-right:-10px; pointer-events:initial" ng-click="clearLink()">
+                     <button class="md-chip-remove" style="margin-right:-8px; pointer-events:initial" ng-click="clearLink()">
                         <md-icon style="color:rgb(66,66,66)">close</md-icon>
                      </button>
                   </div>
+                  <md-tooltip md-autohide>{{removeHttp(post.link)}}</md-tooltip>
                </md-chip>
             </div>
             <div id="header_link_input_container" class="gradient-overlay-metadata" ng-hide="operation == 'view'">
