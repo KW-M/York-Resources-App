@@ -436,15 +436,19 @@
                 console.log(Input)
                 if (Input === true) {
                     self.GUser = gapi.auth2.getAuthInstance().currentUser.get();
-                    self.GUser.reloadAuthResponse().then(function() {
                         GSignedIn = true;
                         GSignInPromise.resolve(self.GUser);
                         hideSigninButton()
-                    },function(err) {
-                        console.warn(err)
-                        GSignedIn = false;
-                        self.GUser = null;
-                        showSigninButton()
+                    // self.GUser.reloadAuthResponse().then(function() {
+                    //     GSignedIn = true;
+                    //     GSignInPromise.resolve(self.GUser);
+                    //     hideSigninButton()
+                    // },function(err) {
+                    //     console.warn(err)
+                    //     GSignedIn = false;
+                    //     self.GUser = null;
+                    //     showSigninButton()
+                    // })
                 }
                 else if (Input === false) {
                     GSignedIn = false;
@@ -452,6 +456,7 @@
                     showSigninButton()
                 }
                 else if (typeof(Input) == 'object') {
+                    console.log("fireResolved")
                     self.FireUser = Input;
                     FireSignInPromise.resolve(self.FireUser);
                 }
