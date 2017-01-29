@@ -69,7 +69,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
 
             function getPreview() {
                 if ($scope.post.link.match(/(?:http|https):\/\/.{2,}/)) {
-                    promiseQueue().addPromise('drive', APIService.runGAScript('getLinkPreview', $scope.post.link), function (previewObj) {
+                    promiseQueue().addPromise('drive', APIService.runGAScript('getLinkPreview', $scope.post.link, false), function (previewObj) {
                         console.log(previewObj)
                     }, console.warn, 150);
                 }
