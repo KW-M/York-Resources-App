@@ -485,59 +485,62 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    var delay = 0;
 
    // Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
-   window.queueAPI = function(typeName, promiseFunc, action, error, interval) {
-      typeName = typeName || 'general';
-      if (!theQueue[typeName]) theQueue[typeName] = []
-      theQueue[typeName].push({
-         promiseFunc: promiseFunc,
-         action: action,
-         err: error,
-      });
-      if (!timer[typeName]) {
-         processTheQueue(typeName); // start immediately on the first invocation
-         timer[typeName] = setInterval(function() {
-            processTheQueue(typeName)
-         }, interval || 150);
-      }
-   };
-
-   function processTheQueue(typeName) {
-      var item = theQueue[typeName].shift();
-      if (item) {
-         var delay = 0;
-         if (new Date(authorizationService.GUser.getAuthResponse(true).expires_at) > new Date()) {
-            runPromise(item);
+   window.promiseQueue = function() {
+      var queueSelf = this;
+      this.addPromise = function(typeName, promiseFunc, action, error, interval) {
+         typeName = typeName || 'general';
+         if (!theQueue[typeName]) theQueue[typeName] = []
+         theQueue[typeName].push({
+            promiseFunc: promiseFunc,
+            action: action,
+            err: error,
+         });
+         if (!timer[typeName]) {
+            processTheQueue(typeName); // start immediately on the first invocation
+            timer[typeName] = setInterval(function() {
+               processTheQueue(typeName)
+            }, interval || 150);
          }
-         else {
-            gUser.reloadAuthResponse().then(function(res) {
-               console.log('reloaded token')
-            }, function(err) {
-               console.warn(err)
-               gapi.auth2.getAuthInstance().signOut().then(function() {
-                  showSigninButton()
+      };
+
+      function processTheQueue(typeName) {
+         var item = theQueue[typeName].shift();
+         if (item) {
+            var delay = 0;
+            if (new Date(authorizationService.GUser.getAuthResponse(true).expires_at) > new Date()) {
+               queueSelf.runPromise(item);
+            }
+            else {
+               authorizationService.GUser.reloadAuthResponse().then(function(res) {
+                  console.log('reloaded token')
+               }, function(err) {
+                  console.warn(err)
+                  gapi.auth2.getAuthInstance().signOut().then(function() {
+                     authorizationService.showSigninButton();
+                  })
                })
-            })
 
+            }
+         }
+         if (theQueue[typeName].length === 0) {
+            clearInterval(timer[typeName]), timer[typeName] = null;
          }
       }
-      if (theQueue[typeName].length === 0) {
-         clearInterval(timer[typeName]), timer[typeName] = null;
-      }
-   }
 
-   window.runPromise(item) {
-      var promise = item.promiseFunc();
-      promise.then(item.action, function(error) {
-         APIErrorHandeler(error, item);
-         if (item.Err) {
-            item.Err(error);
-         }
-         else if (delay < 4) {
-            setTimeout(function() {
-               runPromise(item);
-            }, (delay = Math.max(delay *= 2, 1)) * 1000);
-         }
-      });
+      this.runPromise = function(item) {
+         var promise = item.promiseFunc();
+         promise.then(item.action, function(error) {
+            APIErrorHandeler(error, item);
+            if (item.Err) {
+               item.Err(error);
+            }
+            else if (delay < 4) {
+               setTimeout(function() {
+                  runPromise(item);
+               }, (delay = Math.max(delay *= 2, 1)) * 1000);
+            }
+         });
+      }
    }
 
    //----------------------------------------------------
