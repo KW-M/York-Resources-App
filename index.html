@@ -397,10 +397,10 @@
             self.FireUser = 'None';
             var FireSignInPromise = $q.defer();
 
-            self.FireAuth.onAuthStateChanged(function(t){
-                        console.log("flistener")
-                        updateSigninStatus(t)
-                    });
+            self.FireAuth.onAuthStateChanged(function(t) {
+                console.log("flistener")
+                updateSigninStatus(t)
+            });
 
             // ---------- End Firebase Auth, Begin Google API Library and auth2 ------------ //
 
@@ -418,7 +418,7 @@
                     fetch_basic_profile: true,
                 }).then(function(GAuth) {
                     // Listen for sign-in state changes.
-                    GAuth.isSignedIn.listen(function(t){
+                    GAuth.isSignedIn.listen(function(t) {
                         console.log("Glistener")
                         updateSigninStatus(t)
                     });
@@ -442,35 +442,24 @@
             function updateSigninStatus(Input) {
                 console.log(Input)
                 if (Input === true) {
-                        self.GUser = gapi.auth2.getAuthInstance().currentUser.get();
-                        GSignedIn = true;
-                        GSignInPromise.resolve(self.GUser);
-                        hideSigninButton()
-                    // self.GUser.reloadAuthResponse().then(function() {
-                    //     GSignedIn = true;
-                    //     GSignInPromise.resolve(self.GUser);
-                    //     hideSigninButton()
-                    // },function(err) {
-                    //     console.warn(err)
-                    //     GSignedIn = false;
-                    //     self.GUser = null;
-                    //     showSigninButton()
-                    // })
+                    self.GUser = gapi.auth2.getAuthInstance().currentUser.get();
+                    GSignedIn = true;
+                    GSignInPromise.resolve(self.GUser);
+                    hideSigninButton()
                 }
                 else if (Input === false) {
                     GSignedIn = false;
                     self.GUser = null;
                     showSigninButton()
                 }
-                else if (Input && Input.displayName != undefined) {
-                    console.log("fireResolved")
+                else if (Input == null || Input.displayName != undefined) {
                     self.FireUser = Input;
-                    FireSignInPromise.resolve(self.FireUser);
                 }
 
                 // Use the variables specified here
                 if (GSignedIn && self.FireUser && self.FireUser != 'None' && isUserEqual(self.GUser, self.FireUser)) {
                     console.log("Everything is SignedIn")
+                    FireSignInPromise.resolve(self.FireUser);
                 }
                 else if (GSignedIn && self.FireUser && self.FireUser != 'None' && !isUserEqual(self.GUser, self.FireUser)) {
                     console.log("Different Firebase user, signing into Firebase...")
@@ -488,6 +477,7 @@
                     var credential = firebase.auth.GoogleAuthProvider.credential(self.GUser.getAuthResponse().id_token);
                     firebase.auth().signInWithCredential(credential).then(function() {
                         console.log("fireSignin")
+                        FireSignInPromise.resolve(self.FireUser);
                     }).catch(console.warn);
                 }
 
