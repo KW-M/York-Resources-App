@@ -397,7 +397,10 @@
             self.FireUser = 'None';
             var FireSignInPromise = $q.defer();
 
-            self.FireAuth.onAuthStateChanged(updateSigninStatus);
+            self.FireAuth.onAuthStateChanged(function(t){
+                        console.log("flistener")
+                        updateSigninStatus(t)
+                    });
 
             // ---------- End Firebase Auth, Begin Google API Library and auth2 ------------ //
 
@@ -416,10 +419,11 @@
                 }).then(function(GAuth) {
                     // Listen for sign-in state changes.
                     GAuth.isSignedIn.listen(function(t){
-                        console.log(list)
+                        console.log("Glistener")
                         updateSigninStatus(t)
                     });
                     // Handle the initial sign-in state.
+                    console.log("Ginitial")
                     updateSigninStatus(GAuth.isSignedIn.get());
                     // show sign in prompt if sign in button is clicked.
                     GAuth.attachClickHandler('signin_button', null, null, console.warn)
@@ -438,7 +442,7 @@
             function updateSigninStatus(Input) {
                 console.log(Input)
                 if (Input === true) {
-                    self.GUser = gapi.auth2.getAuthInstance().currentUser.get();
+                        self.GUser = gapi.auth2.getAuthInstance().currentUser.get();
                         GSignedIn = true;
                         GSignInPromise.resolve(self.GUser);
                         hideSigninButton()
@@ -458,7 +462,7 @@
                     self.GUser = null;
                     showSigninButton()
                 }
-                else if (Input.displayName != undefined) {
+                else if (Input && Input.displayName != undefined) {
                     console.log("fireResolved")
                     self.FireUser = Input;
                     FireSignInPromise.resolve(self.FireUser);
@@ -476,6 +480,8 @@
                     console.log("No Firebase user, signing into Firebase...")
                     SignIntoFirebase()
                 }
+
+                console.log(self.FireUser)
 
                 function SignIntoFirebase() {
                     // Sign in with id_token credential from the gapi Google user.
