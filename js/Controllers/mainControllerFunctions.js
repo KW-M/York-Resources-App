@@ -228,6 +228,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          //    width: rect.width,
          // }//('#new_post_button'),
 
+      $mdDialog.show(dialogConfig).then(function () {
+         //done
+      });
+
       function onDialogLoaded() {
          $scope.dialog_container = document.getElementsByClassName('md-dialog-container')[0]
          var newPostScroll = document.getElementsByClassName('new_post_dialog_scroll')[0];
@@ -247,17 +251,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             }
          }
 
-         // The md-select directive eats keydown events for some quick select
-         // logic. Since we have a search input in the class Select M, we don't need that logic.
+         // The md-select directive eats keydown events for some quick select logic.
+         // Since we have a search input in the course selector, we don 't need that logic.
          var selectSearchInput = angular.element(document.getElementById('class_select_input'))
          selectSearchInput.on('keydown', function (ev) {
             ev.stopPropagation();
          });
       }
-
-      $mdDialog.show(dialogConfig).then(function () {
-         //done
-      });
    };
 
    $scope.showPicker = function (type, restorePost) {
@@ -270,7 +270,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    };
 
    self.pickerCallback = function (data) {
-      //drivePicker.dispose();
       if (data.action == google.picker.Action.PICKED) {
          if ($scope.restorePost == true) {
             $timeout(function () {
