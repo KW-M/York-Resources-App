@@ -79,32 +79,20 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     })
 
     $scope.isReadyToSubmit = function () {
-        var dialogElement =
-            if ($scope.post.class.name === '' || $scope.post.class === undefined) {
-                $mdToast.show({
-                    template: '<md-toast><div class="md-toast-content">Select a class for this post.</div><md-toast>',
-                    hideDelay: 1500,
-                    parent: document.getElementById('new_post_dialog'),
-                });
-            } else {
-                if (($scope.post.title === '' || $scope.post.title === undefined) && ($scope.post.description === '' || $scope.post.description === undefined)) {
-                    $mdToast.show($mdToast.simple().textContent('Posts must have a title or description.').hideDelay(1500).parent(document.getElementById('new_post_dialog')));
-                } else {
-                    if ($scope.post.type === "gDrive") {
-                        $mdToast.show({
-                            template: '<md-toast> <div class="md-toast-content" style="justify-content: center;"> <div> <div class="md-toast-text" style="padding: 6px 0 0 0px;">How should the attached file be shared?</div> <div style="display:flex"> <md-select ng-model="shareSelect"> <md-option value="view"> York students can view </md-option> <md-option value="comment"> York students can comment </md-option> <md-option value="edit"> York students can edit </md-option> </md-select> <md-button style="color:rgb(68,138,255)" ng-click="shareFile()">Share</md-button> </div></div></div></md-toast>',
-                            hideDelay: false,
-                            parent: document.getElementById('new_post_dialog'),
-                            toastClass: 'shareLevelToast',
-                            scope: $scope,
-                        })
-                    } else {
-                        submitCheck();
-                    }
-                }
-            }
-
-        function submitCheck() {
+        var dialogElement = document.getElementById('new_post_dialog')
+        if ($scope.post.class.name === '' || $scope.post.class === undefined) {
+            $mdToast.show($mdToast.simple().textContent('Chose a class for this post.').hideDelay(1500).parent(dialogElement));
+        } else if (($scope.post.title === '' || $scope.post.title === undefined) && ($scope.post.description === '' || $scope.post.description === undefined)) {
+            $mdToast.show($mdToast.simple().textContent('Posts must have a title or description.').hideDelay(1500).parent(dialogElement));
+        } else if ($scope.post.type === "gDrive") {
+            $mdToast.show({
+                template: '<md-toast> <div class="md-toast-content" style="justify-content: center;"> <div> <div class="md-toast-text" style="padding: 6px 0 0 0px;">How should the attached file be shared?</div> <div style="display:flex"> <md-select ng-model="shareSelect"> <md-option value="view"> York students can view </md-option> <md-option value="comment"> York students can comment </md-option> <md-option value="edit"> York students can edit </md-option> </md-select> <md-button style="color:rgb(68,138,255)" ng-click="shareFile()">Share</md-button> </div></div></div></md-toast>',
+                toastClass: 'shareLevelToast',
+                hideDelay: false,
+                parent: dialogElement,
+                scope: $scope,
+            })
+        } else {
             $mdToast.show({
                 template: '<md-toast><span style="font-size:18px; max-width: 200px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="36"></md-progress-circular></md-toast>',
                 hideDelay: 3000000,
@@ -117,6 +105,11 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 $scope.submit();
             }
         }
+    }
+
+    function submitCheck() {
+
+
     }
 
     $scope.submit = function () {
