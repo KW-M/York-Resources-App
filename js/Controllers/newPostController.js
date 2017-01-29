@@ -15,9 +15,9 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $scope.post.creationDate = $scope.post.creationDate || new Date()
         $scope.post.updateDate = $scope.post.updateDate || new Date();
         $scope.post.class = $scope.post.class || {
-            //name: '',
-            catagory: '',
-                color: 'ff00ff',
+            name: '',
+                catagory: '',
+                color: 'ff00ff'
         };
         $scope.post.creator = (operation == 'new') ? ({
             classOf: $scope.myInfo.classOf,
