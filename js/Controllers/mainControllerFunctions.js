@@ -202,7 +202,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
    function writeGAppsScript(scriptFunction, payload) {
       return (gapi.client.script.scripts.run({
          'scriptId': 'MZMSm56uR7QYFSkt-WuDJEPA9VMeL9Grb',
-         'function': scriptFunction,
+         'function': 'callRemoteScript',
          'parameters': [JSON.stringify(payload)],
          'devMode': true,
       }));
