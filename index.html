@@ -475,6 +475,7 @@
                 function SignIntoFirebase() {
                     // Sign in with id_token credential from the gapi Google user.
                     var credential = firebase.auth.GoogleAuthProvider.credential(self.GUser.getAuthResponse().id_token);
+                    console.log(credential)
                     firebase.auth().signInWithCredential(credential).then(function() {
                         FireSignInPromise.resolve(self.FireUser);
                     },console.warn).catch(console.warn);
