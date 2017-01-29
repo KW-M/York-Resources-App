@@ -113,10 +113,10 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
             $mdDialog.hide();
             $scope.dialog_container.style.opacity = 1;
             $scope.dialog_container.style.pointerEvents = 'all';
-            $timeout(function () {
-                $scope.allPosts.push($scope.post)
-                $scope.visiblePosts = $scope.filterPosts($scope.allPosts);
-            })
+            // $timeout(function () {
+            //     $scope.allPosts.push($scope.post)
+            //     $scope.visiblePosts = $scope.filterPosts($scope.allPosts);
+            // })
         }, onError, 150);
     }
 
