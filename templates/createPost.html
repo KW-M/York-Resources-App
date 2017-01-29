@@ -55,17 +55,19 @@
          </div>
          <md-progress-linear class="link-loading" md-mode="indeterminate" ng-disabled="!previewLoading"></md-progress-linear>
       </div>
+      {{classList}}
       <div id="new_post_content" ng-class="{'small-header': post.type == 'NoLink' && operation == 'view'}">
          <div flex layout="row">
             <md-select ng-model="post.class" ng-model-options="{trackBy: $value.hello}" ng-if="operation != 'view'" class="md-no-underline" placeholder="Class" id="class_dropdown_button" md-on-close="clearClassSelectSearch()">
-               <md-select-header class="classSelectSearchbox">
-                  <input ng-model="classSelectSearch" id="class_select_input" type="text" placeholder="Search for a class.." class="md-text">
-               </md-select-header>
+               <!--<md-option ng-value="{'name': catagoryObj.catagory}" ng-repeat="catagoryObj in classList">{{catagoryObj}}</md-option>-->
+               <!--<md-select-header class="classSelectSearchbox">-->
+               <!--   <input ng-model="classSelectSearch" id="class_select_input" type="text" placeholder="Search for a class.." class="md-text">-->
+               <!--</md-select-header>-->
                <!--<md-option ng-if="!classSelectSearch" ng-value="{'name': favClass.name, 'catagory': favClass.catagory, 'color': favClass.color}" ng-repeat="favClass in myInfo.staredClasses">{{::favClass.name}}</md-option>-->
-               <md-optgroup ng-repeat="catagoryObj in classList" ng-class="{'hide-label': classSelectSearch}">
-                  <!--<label class="side-nav-header md-container-ignore" ng-style="::{'background-color': catagoryObj.color + ' 1)'}">{{::catagoryObj.catagory}}</label>-->
-                  <md-option ng-value="::{'name': classObj['name'], 'catagory': ::catagoryObj['catagory'], 'color': ::catagoryObj['color']}" ng-repeat="classObj in catagoryObj.classes | filter : classSelectSearch">{{::classObj.name}}</md-option>
-               </md-optgroup>
+               <!--<md-optgroup ng-repeat="catagoryObj in classList" ng-class="{'hide-label': classSelectSearch}">-->
+               <!--<label class="side-nav-header md-container-ignore" ng-style="::{'background-color': catagoryObj.color + ' 1)'}">{{::catagoryObj.catagory}}</label>-->
+               <!--<md-option ng-value="::{'name': classObj['name'], 'catagory': catagoryObj['catagory'], 'color': catagoryObj['color']}" ng-repeat="classObj in catagoryObj.classes | filter : classSelectSearch">{{::classObj.name}}</md-option>-->
+               <!--</md-optgroup>-->
                <!---->
             </md-select>
             <div style="display:flex">
