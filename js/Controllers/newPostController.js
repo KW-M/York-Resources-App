@@ -74,7 +74,9 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                         var previewObj = JSON.parse(data.result.response.result);
                         $timeout(function () {
                             $scope.post.previewImage = previewObj.image
-                            $scope.post.att = previewObj.image
+                            $scope.post.attachmentIcon = previewObj.icon
+                            $scope.post.attachmentName = previewObj.title
+                            $scope.previewLoading = false;
                         })
                     }, console.warn, 150);
 
