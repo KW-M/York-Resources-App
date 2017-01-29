@@ -1,5 +1,5 @@
 //   We don't define the "new post controller" here because it was alredy
-//   defined by the $md-dialog in the newPost function on mainController. 
+//   defined by the $md-dialog in the newPost function on mainController.
 function newPostController($scope, $timeout, $http, $mdDialog, APIService, authorizationService, $mdToast, postObj, operation) {
     console.log(postObj)
     var linkChangeTimer = null;
@@ -63,17 +63,19 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
             $timeout(function() {
                 $scope.Post.PreviewImage = ''; // will be the down arrow photo
                 $scope.previewLoading = true;
-                $scope.Post.Type = 'Link';
+                $scope.Post.Type = 'link';
             })
         }
         else if ($scope.Post.Link.length > 9) {
             $timeout(function() {
                 $scope.Post.Link = "http://" + $scope.Post.Link;
-                $scope.Post.Type = 'Link';
+                $scope.Post.Type = 'link';
             })
         }
         else {
-            $scope.Post.Type = 'NoLink';
+            $timeout(function() {
+                $scope.Post.Type = 'noLink';
+            })
         }
     };
 
