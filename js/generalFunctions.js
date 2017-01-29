@@ -27,8 +27,8 @@
     if (!theQueue[typeName]) theQueue[typeName] = []
     theQueue[typeName].push({
       promiseFunc: promiseFunc,
-      Action: action,
-      Err: error,
+      action: action,
+      err: error,
     });
     if (!timer[typeName]) {
       processTheQueue(typeName); // start immediately on the first invocation
@@ -47,15 +47,7 @@
       if (new Date(tokenExpiration) > new Date()) {
         runPromise(item);
       } else {
-        gapi.auth2.init({
-					client_id: '632148950209-60a3db9qm6q31sis128mvstddg2qme7.apps.googleusercontent.com',
-					scope: 'email https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.install',
-					fetch_basic_profile: false,
-					hosted_domain: 'york.org'
-				}).then(function(){
-				  console.log("auth init run")
-				  runPromise(item)
-				})
+        
       }
     }
     if (theQueue[typeName].length === 0) {
@@ -64,9 +56,9 @@
   }
 
   function runPromise(item) {
-    var thePromise = item.Promise;
-    thePromise.then(item.Action, function (error) {
-      DriveErrorHandeler(error,item);
+    var promise = item.promiseFunc();
+    promise.then(item.action, function (error) {
+      APIErrorHandeler(error, item);
       if (item.Err) {
         item.Err(error);
       } else {
