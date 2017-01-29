@@ -511,6 +511,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             }
          });
       }
+      return this
    }
 
    $scope.updateVisiblePosts = function (array, callback) {
