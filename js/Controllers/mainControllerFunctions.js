@@ -183,7 +183,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          console.log(data)
          console.log(dataObj)
          console.log(authorizationService.FireUser)
-      })
+      },console.warn)
       var getProfilePic = gapi.client.request({
          'root': 'https://people.googleapis.com',
          'path': '/v1/people/me?fields=photos%2Furl',

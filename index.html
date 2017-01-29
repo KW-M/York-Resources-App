@@ -433,7 +433,6 @@
             });
 
             function updateSigninStatus(Input) {
-                console.log(Input)
                 if (Input === true) {
                     self.GUser = gapi.auth2.getAuthInstance().currentUser.get();
                     GSignedIn = true;
@@ -469,7 +468,6 @@
                     // Sign in with id_token credential from the gapi Google user.
                     var credential = firebase.auth.GoogleAuthProvider.credential(self.GUser.getAuthResponse().id_token);
                     firebase.auth().signInWithCredential(credential).then(function() {
-                        console.log("fireSignin")
                         FireSignInPromise.resolve(self.FireUser);
                     }).catch(console.warn);
                 }
