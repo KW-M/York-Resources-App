@@ -513,6 +513,7 @@
             var datButton = document.getElementById('dat_button');
 
             function showSigninButton() {
+                self.showSigninDialog()
                 signinSpinner.addClass('fadeOut');
                 setTimeout(function() {
                     signinButton.addClass('fadeIn');
