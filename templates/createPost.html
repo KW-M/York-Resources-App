@@ -61,10 +61,10 @@
                <md-select-header class="classSelectSearchbox">
                   <input ng-model="classSelectSearch" id="class_select_input" type="text" placeholder="Search for a class.." class="md-text">
                </md-select-header>
-               <md-option ng-if="!classSelectSearch" ng-value="{'Name': favClass.Name, 'Catagory' : favClass.Catagory, 'Color':favClass.Color}" ng-repeat="favClass in myInfo.StaredClasses">{{::favClass.Name}}</md-option>
-               <md-optgroup ng-repeat="Catagory in ::classList" ng-class="{'hide-label': classSelectSearch}">
-                  <label class="side-nav-header md-container-ignore" ng-style="::{'background-color': Catagory.Color + ' 1)'}">{{::Catagory.Catagory}}</label>
-                  <md-option ng-value="{'Name': Name.Name || '', 'Catagory' : Catagory.Catagory  || '', 'Color':Catagory.Color  || ''}" ng-repeat="Name in Catagory.Classes | filter : classSelectSearch">{{::Name.Name}}</md-option>
+               <md-option ng-if="!classSelectSearch" ng-value="{'name': favClass.name, 'catagory': favClass.catagory, 'color': favClass.color}" ng-repeat="favClass in myInfo.staredClasses">{{::favClass.name}}</md-option>
+               <md-optgroup ng-repeat="catagory in ::classList" ng-class="{'hide-label': classSelectSearch}">
+                  <label class="side-nav-header md-container-ignore" ng-style="::{'background-color': catagory.color + ' 1)'}">{{::catagory.catagory}}</label>
+                  <md-option ng-value="{'name': name.name || '', 'catagory' : catagory.catagory  || '', 'color': catagory.color  || ''}" ng-repeat="name in catagory.classes | filter : classSelectSearch">{{::name.name}}</md-option>
                </md-optgroup>
             </md-select>
             <div style="display:flex">
@@ -114,11 +114,11 @@
       </md-button>
    </md-dialog-actions>
    <md-dialog-actions ng-show="operation === 'view'" layout="row" style="align-items: center;" ng-style="{'background-color': post.class.color + ' 0.6)'}">
-      <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(Post)">
-         <span class="like-counter">{{Post.Likes.length}}</span>
-         <md-icon ng-class="{'md-accent' : Post.userLiked}" style="margin-top: -8px">thumb_up</md-icon>
+      <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(post)">
+         <span class="like-counter">{{post.likes.length}}</span>
+         <md-icon ng-class="{'md-accent' : post.userLiked}" style="margin-top: -8px">thumb_up</md-icon>
       </md-button>
-      <md-button class="md-icon-button" area-label="Flag" ng-click="::flagPost(Post)" ng-hide="post.creator.email == myInfo.email && post.flagged == false">
+      <md-button class="md-icon-button" area-label="Flag" ng-click="flagPost(post)" ng-hide="post.creator.email == myInfo.email && post.flagged == false">
          <md-icon ng-class="{'md-warn' : post.flagged == true}">flag</md-icon>
       </md-button>
       <md-button class="md-icon-button" ng-click="operation = 'update'">
