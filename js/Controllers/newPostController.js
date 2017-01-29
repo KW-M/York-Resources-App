@@ -104,7 +104,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
             template: '<md-toast><span style="font-size:18px; max-width: 200px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="36"></md-progress-circular></md-toast>',
             hideDelay: 3000000,
         });
-        promiseQueue().addPromise('drive', APIService.runGAScript('runRemoteScript', {
+        promiseQueue().addPromise('drive', APIService.runGAScript('savePost', {
             operation: 'savePost',
             content: $scope.post,
         }), function (reply) {
