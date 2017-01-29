@@ -93,48 +93,26 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 scope: $scope,
             })
         } else {
-            $mdToast.show({
-                template: '<md-toast><span style="font-size:18px; max-width: 200px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="36"></md-progress-circular></md-toast>',
-                hideDelay: 3000000,
-            });
-            if ($scope.previewLoading) {
-                document.addEventListener('urlPreviewLoaded', function () {
-                    $scope.submit();
-                });
-            } else {
-                $scope.submit();
-            }
+            $scope.submit();
         }
-    }
-
-    function submitCheck() {
-
-
     }
 
     $scope.submit = function () {
         $scope.dialog_container.style.opacity = 0;
         $scope.dialog_container.style.pointerEvents = 'none';
-        $scope.post.id = response.data;
-        queue('drive', GoogleDriveService.updateDriveFile(response.data, metadata), function (reply) {
+        $mdToast.show({
+            template: '<md-toast><span style="font-size:18px; max-width: 200px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="36"></md-progress-circular></md-toast>',
+            hideDelay: 3000000,
+        });
+        promiseQueue.addPromise('drive', GoogleDriveService.updateDriveFile(response.data, metadata), function (reply) {
             $timeout(function () {
                 $scope.allPosts.push($scope.post)
                 $scope.visiblePosts = $scope.filterPosts($scope.allPosts);
             })
-            $scope.updateLastPosted();
             $mdToast.hide();
             $mdDialog.hide();
             $scope.dialog_container.style.opacity = 1;
             $scope.dialog_container.style.pointerEvents = 'all';
-        }, onError, 150);
-        var metadata = $scope.convertPostToDriveMetadata($scope.post);
-        console.log({
-            Post: $scope.post,
-            Metadata: metadata
-        });
-        queue('drive', GoogleDriveService.updateDriveFile(postObj.Id, metadata), function (reply) {
-            console.log(reply.result);
-            $mdToast.hide();
         }, onError, 150);
     }
 
