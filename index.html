@@ -436,13 +436,15 @@
                 if (Input === true) {
                     self.GUser = gapi.auth2.getAuthInstance().currentUser.get();
                     GSignedIn = true;
-                    GSignInPromise.resolve(self.GUser);
                     hideSigninButton()
-                    self.GUser.reloadAuthResponse().then(null, function(err) {
+                    self.GUser.reloadAuthResponse().then(function(res) {
+                        console.log('reloaded',res)
+                        GSignInPromise.resolve(self.GUser);
+                    }, function(err) {
                         console.warn(err)
-                        gapi.auth2.getAuthInstance().signOut().then(function(argument) {
+                        gapi.auth2.getAuthInstance().signOut().then(function() {
                             GSignedIn = false;
-                            
+                            self.GUser = null;
                             showSigninButton()
                         })
                     })
@@ -470,14 +472,12 @@
                     SignIntoFirebase()
                 }
 
-                console.log(self.FireUser)
-
                 function SignIntoFirebase() {
                     // Sign in with id_token credential from the gapi Google user.
                     var credential = firebase.auth.GoogleAuthProvider.credential(self.GUser.getAuthResponse().id_token);
                     firebase.auth().signInWithCredential(credential).then(function() {
                         FireSignInPromise.resolve(self.FireUser);
-                    }).catch(console.warn);
+                    },console.warn).catch(console.warn);
                 }
 
                 function isUserEqual(googleUser, firebaseUser) {
