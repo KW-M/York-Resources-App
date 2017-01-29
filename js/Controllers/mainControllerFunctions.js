@@ -170,65 +170,35 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          name: profile.getName(),
          profilePicture: profile.getImageUrl(),
       }
+
       var getStartupData = readGAppsScript('getStartupData').then(function(data) {
          var dataObj = JSON.parse(data.result.response.result);
          $timeout(function() {
             for (var property in dataObj.userPrefs) {
                $scope.myInfo[property] = dataObj.userPrefs[property];
             }
+            $scope.myInfo.staredClasses.push({
+               Name: 'Other',
+               Color: 'hsla(200, 70%, 75%,',
+            })
             $scope.labels = dataObj.labels;
             $scope.classList = dataObj.classes;
             $scope.teacherList = dataObj.teachers;
          });
          console.log(data)
          console.log(dataObj)
-         console.log(authorizationService.FireUser)
-      },console.warn)
-      var getProfilePic = gapi.client.request({
-         'root': 'https://people.googleapis.com',
-         'path': '/v1/people/me?fields=photos%2Furl',
-         'method': 'GET',
-      })
+      }, console.warn)
 
-      // getUserPrefs.then(function(response) {
+      // var getProfilePic = gapi.client.request({
+      //    'root': 'https://people.googleapis.com',
+      //    'path': '/v1/people/me?fields=photos%2Furl',
+      //    'method': 'GET',
+      // }).then(function(response) {
       //    $timeout(function() {
-      //       $scope.myInfo = JSON.parse(response.result.response.result).content;
-      //       console.log(authorizationService)
-      //       $scope.myInfo.Email = authorizationService.FireUser.email;
-      //       // $scope.myInfo.staredClasses.forEach(function(className, index) {
-      //       //    $scope.myInfo.staredClasses[index] = $scope.findClassObject(className);
-      //       // })
-      //       // $scope.myInfo.staredClasses.push({
-      //       //    Name: 'Other',
-      //       //    Color: 'hsla(200, 70%, 75%,',
-      //       // })
+      //       $scope.myInfo.profilePicture = response.result.photos[0].url;
       //    })
-      // }, console.warn)
-
-      // getLabels.then(function(resp) {
-      //    $timeout(function() {
-      //       $scope.labels = JSON.parse(resp.result.response.result).content;
-      //    })
-      //    console.log('getLabels', JSON.parse(resp.result.response.result))
-      // }, console.warn)
-
-      // getClasses.then(function(resp) {
-      //    var result = JSON.parse(resp.result.response.result).content;
-      //    $timeout(function() {
-      //       $scope.classList = result.classList
-      //       console.log(JSON.stringify(result.classList))
-      //       $scope.teacherList = result.teacherList
-      //    })
-      //    console.log('getClassList', resp)
-      //    console.log('getClassList', result)
-      // }, console.warn)
-
-      getProfilePic.then(function(response) {
-         $timeout(function() {
-            $scope.myInfo.profilePicture = response.result.photos[0].url;
-         })
-         console.log(response)
-      })
+      //    console.log(response)
+      // })
 
       //return $q.all([getUserPrefs, getClasses, getLabels])
    }
@@ -238,7 +208,7 @@ function controllerFunction($scope, $rootScope, $filter, $mdDialog, $mdToast, $w
          'scriptId': 'MuWC0NB4CLnMdc_XDwj7F_PA9VMeL9Grb',
          'function': scriptFunction,
          'parameters': [JSON.stringify(payload)],
-//         'devMode': true,
+         //         'devMode': true,
       }));
    }
 
