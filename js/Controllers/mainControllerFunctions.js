@@ -11,7 +11,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    var no_posts_footer = document.getElementById("no_posts_footer");
    var footer_problem = document.getElementById("footer_problem");
 
-   var drivePicker, uploadPicker;
    var getFileTimer = null;
    var conurancy_counter = 0;
 
@@ -137,6 +136,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    //----------------------------------------------------
    //------------- Signin & Initiation ------------------
+   var drivePicker, uploadPicker;
+
    authorizationService.onLoad(function() {
       var profile = authorizationService.GUser.getBasicProfile()
       $scope.myInfo = {
