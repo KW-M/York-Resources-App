@@ -73,7 +73,8 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                         console.log(data)
                         var previewObj = JSON.parse(data.result.response.result);
                         $timeout(function () {
-                            $scope.post.previewImage = previewObj.
+                            $scope.post.previewImage = previewObj.image
+                            $scope.post.att = previewObj.image
                         })
                     }, console.warn, 150);
 
