@@ -77,6 +77,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                             $scope.post.attachmentIcon = previewObj.icon
                             $scope.post.attachmentName = previewObj.title
                             $scope.previewLoading = false;
+                            if ($scope.post.title == '') $scope.post.title = previewObj.title;
                         })
                     }, console.warn, 150);
 

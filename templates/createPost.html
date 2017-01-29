@@ -17,7 +17,7 @@
             <div class="gradient-overlay-metadata metadata-link" style="font-size:18px" ng-hide="post.link == '' || post.type == 'gDrive' || operation != 'view'">
                <span><md-icon>language</md-icon> {{removeHttp(post.link)}}</span>
             </div>
-            <div class="md-chips gradient-overlay-metadata" style="position:absolute; padding: 0 40px 0 8px" ng-class="{'metadata-link': operation == 'view'}" ng-hide="post.type != 'gDrive'">
+            <div class="md-chips gradient-overlay-metadata" style="position:absolute; padding: 0 40px 0 8px" ng-class="{'metadata-link': operation == 'view'}" ng-if="post.attachmentName">
                <md-chip>
                   <div class="md-chip-content">
                      <img ng-src="{{post.attachmentIcon}}" style="margin-right:4px"></img>
@@ -62,9 +62,9 @@
                <md-select-header class="classSelectSearchbox">
                   <input ng-model="classSelectSearch" id="class_select_input" type="text" placeholder="Search for a class.." class="md-text">
                </md-select-header>
-<!--<div>-->
-<!--<md-option ng-if="!classSelectSearch" ng-value="{'name': favClass.name, 'catagory': favClass.catagory, 'color': favClass.color}" ng-repeat="favClass in myInfo.staredClasses">{{::favClass.name}}</md-option>-->
-<!--</div>-->
+               <!--<div>-->
+               <!--<md-option ng-if="!classSelectSearch" ng-value="{'name': favClass.name, 'catagory': favClass.catagory, 'color': favClass.color}" ng-repeat="favClass in myInfo.staredClasses">{{::favClass.name}}</md-option>-->
+               <!--</div>-->
                <md-optgroup ng-repeat="catagoryObj in classList" ng-class="{'hide-label': classSelectSearch}">
                   <label class="side-nav-header md-container-ignore" ng-style="::{'background-color': catagoryObj.color + ' 1)'}">{{::catagoryObj.catagory}}</label>
                   <div ng-repeat="classObj in catagoryObj.classes | filter : classSelectSearch">
