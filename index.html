@@ -436,11 +436,16 @@
                 console.log(Input)
                 if (Input === true) {
                     self.GUser = gapi.auth2.getAuthInstance().currentUser.get();
-                    self.GUser.reloadAuthResponse().then(function() 
+                    self.GUser.reloadAuthResponse().then(function() {
                         GSignedIn = true;
                         GSignInPromise.resolve(self.GUser);
                         hideSigninButton()
-                    ,console.warn)
+                    },function(err) {
+                        console.warn(err)
+                        GSignedIn = false;
+                        GUser = null;
+                        showSigninButton()
+                    })
                 }
                 else if (Input === false) {
                     GSignedIn = false;
