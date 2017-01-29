@@ -1,5 +1,5 @@
     /* we don't define the "new post controller" here because it was alredy
-                                                                                                                                                                                                                                                                                                                                                   defined by the $md-dialog in the newPost function on mainController.   */
+                                                                                                                                                                                                                                                                                                                                                               defined by the $md-dialog in the newPost function on mainController.   */
     function newPostController($scope, $timeout, $http, $mdDialog, GoogleDriveService, authorizationService, $mdToast, postObj, operation) {
         console.log(postObj)
         var linkChangeTimer = null;
@@ -301,11 +301,11 @@
             $mdToast.hide()
         }
         $scope.returnClassObj = function (Class, catagory) {
-            // return {
-            //     name: class.name,
-            //     catagory: catagory.catagory,
-            //     color: catagory.color
-            // }
+            return {
+                    name: Class.name,
+                        catagory: catagory.catagory,
+                        color: catagory.color
+                    }
+            }
         }
-    }
     

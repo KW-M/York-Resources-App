@@ -62,9 +62,9 @@
                   <input ng-model="classSelectSearch" id="class_select_input" type="text" placeholder="Search for a class.." class="md-text">
                </md-select-header>
                <!--<md-option ng-if="!classSelectSearch" ng-value="{'name': favClass.name, 'catagory': favClass.catagory, 'color': favClass.color}" ng-repeat="favClass in myInfo.staredClasses">{{::favClass.name}}</md-option>-->
-               <md-optgroup ng-repeat="catagory in ::classList" ng-class="{'hide-label': classSelectSearch}">
-                  <label class="side-nav-header md-container-ignore" ng-style="::{'background-color': catagory.color + ' 1)'}">{{::catagory.catagory}}</label>
-                  <md-option ng-value="returnClassObj(name,catagory)" ng-repeat="name in catagory.classes | filter : classSelectSearch">{{::name.name}}</md-option>
+               <md-optgroup ng-repeat="catagoryObj in ::classList" ng-class="{'hide-label': classSelectSearch}">
+                  <label class="side-nav-header md-container-ignore" ng-style="::{'background-color': catagoryObj.color + ' 1)'}">{{::catagoryObj.catagory}}</label>
+                  <md-option ng-value="{name: classObj.name, catagory: catagoryObj.catagory, color: catagoryObj.color}" ng-repeat="classObj in catagoryObj.classes | filter : classSelectSearch">{{::classObj.name}}</md-option>
                </md-optgroup>
             </md-select>
             <div style="display:flex">
