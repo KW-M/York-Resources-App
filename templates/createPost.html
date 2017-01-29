@@ -44,7 +44,9 @@
                      </md-menu-item>
                      <md-menu-item>
                         <md-button ng-click="::showPicker('Upload', true, 'update')">
-                           <span style="display:flex"><span flex>Upload File</span><md-icon style="margin: auto 0px">file_upload</md-icon></span>
+                           <span style="display:flex"><span flex>Upload File</span>
+                           <md-icon style="margin: auto 0px">file_upload</md-icon>
+                           </span>
                         </md-button>
                      </md-menu-item>
                   </md-menu-content>
@@ -83,7 +85,7 @@
                </md-input-container>
             </div>
          </div>
-         <div class="md-dialog-content">
+         <div class="md-dialog-content ">
             <input ng-model="Post.Title" ng-readonly="operation === 'view'" class="new-post-title md-title" placeholder="Title" md-autofocus>
             <p class="post-card-creator md-subhead" style="margin:0" ng-hide="::Post.Creator.Name == undefined || Post.Creator.Name == myInfo.Name"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::Post.Creator.ClassOf}})</span></p>
             <div contenteditable="{{operation != 'view'}}" ng-model="Post.Description" class="new-post-body"></div>

@@ -273,15 +273,15 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       if (data.action == google.picker.Action.PICKED) {
          if ($scope.restorePost == true) {
             $timeout(function () {
-               $scope.post.AttachmentId = data.docs[0].id;
-               $scope.post.Link = data.docs[0].url;
-               $scope.post.Title = $scope.post.Title || data.docs[0].name;
+               $scope.post.attachmentId = data.docs[0].id;
+               $scope.post.link = data.docs[0].url;
+               $scope.post.title = $scope.post.title || data.docs[0].name;
             })
          } else {
             $scope.newPost({
-               AttachmentId: data.docs[0].id,
-               Link: data.docs[0].url,
-               Title: data.docs[0].name,
+               attachmentId: data.docs[0].id,
+               link: data.docs[0].url,
+               title: data.docs[0].name,
             }, 'new');
          }
       }

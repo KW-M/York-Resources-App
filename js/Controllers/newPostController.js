@@ -36,7 +36,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $scope.post.attachmentIcon = $scope.post.attachmentIcon || ''
         $scope.post.Likes = $scope.post.Likes || []
         $scope.post.previewImage = $scope.post.previewImage || ''
-        runFindType();
+        $scope.findType();
     })
 
     //temproary variables
