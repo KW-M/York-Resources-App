@@ -435,8 +435,6 @@
 
             function updateSigninStatus(Input) {
                 console.log(Input)
-                //console.log(GAuth.isSignedIn.get())
-                // Input is either a boolean from GAuth.isSignedIn.get() or a Firebase User object from self.FireAuth.currentUser
                 if (Input === true) {
                     GSignedIn = true;
                     self.GUser = gapi.auth2.getAuthInstance().currentUser.get();
