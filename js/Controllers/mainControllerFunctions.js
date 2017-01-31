@@ -165,7 +165,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                name: 'Other',
                color: 'hsla(200, 70%, 75%,',
             })
-            $scope.labels = dataObj.labels;
+            $scope.allLabels = dataObj.labels;
             $scope.classList = dataObj.classes;
             $scope.teacherList = dataObj.teachers;
          });
