@@ -114,11 +114,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
          $scope.visibleLabels = $scope.sortLabels($scope.allLabels);
       });
-      getFileTimer = setInterval(function () {
-         if (conurancy_counter == 0 && content_container.scrollHeight == content_container.clientHeight) {
-            $scope.getFiles()
-         }
-      }, 1000)
+      // getFileTimer = setInterval(function () {
+      //    if (conurancy_counter == 0 && content_container.scrollHeight == content_container.clientHeight) {
+      //       $scope.getFiles()
+      //    }
+      // }, 1000)
    }
 
    function listenForURLChange() {
