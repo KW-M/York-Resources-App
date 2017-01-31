@@ -223,7 +223,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          console.log(postsData)
          var postsArray = JSON.parse(postsData.result.response.result);
          $timeout(function () {
-            $a
+            //$scope.allPosts.push(postsArray[0])
+            sortPostsByType(postsArray, null, $scope.queryParams);
             setTimeout(angularGridInstance.postsGrid.refresh, 1000);
          }, 1000)
       }, console.warn, 150);
@@ -411,9 +412,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          $scope.updateVisiblePosts($scope.searchPosts);
       } else {
          $scope.allPosts = $scope.allPosts.concat(formattedFileList);
-         if ($scope.queryPropertyString == queryString) {
-            $scope.updateVisiblePosts($scope.visiblePosts.concat($scope.filterPosts(formattedFileList)));
-         }
+         //if ($scope.queryPropertyString == queryString) {
+         $scope.updateVisiblePosts($scope.visiblePosts.concat($scope.filterPosts(formattedFileList)));
+         // }
       }
       conurancy_counter = conurancy_counter - 1
    }
