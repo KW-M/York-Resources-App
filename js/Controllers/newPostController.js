@@ -4,6 +4,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     console.log(postObj)
     var linkChangeTimer = null;
     var originalPost = angular.copy(postObj);
+    console.log(originalPost)
     $scope.post = postObj;
     $timeout(function () {
         $scope.post.title = $scope.post.title || ''
