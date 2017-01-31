@@ -180,6 +180,12 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			} else {
 				var Creator = true;
 			}
+			console.log({
+				Flagged: Flagged,
+				Class: Class,
+				Type: Type,
+				Creator: Creator,
+			})
 			return Flagged && Class && Type && Creator;
 		});
 		return ($scope.sortByDateAndLikes(output))

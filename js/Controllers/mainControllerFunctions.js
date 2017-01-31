@@ -571,5 +571,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       })
    }
 
-   //less important functions are delegated to another file;subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia, $timeout, $filter, $mdSidenav, authorizationService, APIService, angularGridInstance);
+   //less important functions are delegated to another file;
+   subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia, $timeout, $filter, $mdSidenav, authorizationService, APIService, angularGridInstance);
 }
