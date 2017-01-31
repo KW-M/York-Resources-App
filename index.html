@@ -258,7 +258,7 @@
                 </span>
                 <div name="Posts Grid" ng-hide="queryParams.classPath == 'Quizlet'">
                     <div angular-grid="visiblePosts" id="layout_grid" ag-gutter-size="12" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="getFiles()">
-                        <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': post.class.color + ' 0.6)'}" class="post-card raise-on-hover">
+                        <div ng-repeat="post in visiblePosts track by post.id" ng-style="{'background-color': post.class.color + ' 0.6)'}" class="post-card raise-on-hover">
                             <div class="post-card-header unselectable" md-ink-ripple="{{post.link != ''}}" ng-class="{'no-link': post.link == '', 'gDrive-type': post.type == 'gDrive'}" ng-click="openLink(post.link)">
                                 <img ng-src="{{post.previewImage||'https://ssl.gstatic.com/atari/images/simple-header-blended-small.png'}}" class="post-card-image unselectable" ng-hide="post.link == ''"></img>
                                 <div class="gradient-overlay">
@@ -266,8 +266,8 @@
                                         <span ng-hide="post.class.name == null"><md-icon>people</md-icon> {{post.class.name}}</span>
                                         <span><md-icon>event</md-icon> {{post.creationDate | date : "mm/dd/yyyy"}}</span>
                                     </div>
-                                    <div ng-hide="Post.Tags.length < 1" class="gradient-overlay-metadata metadata-regular unselectable">
-                                        <span><md-icon>style</md-icon> {{Post.Tags.join(', ')}}</span>
+                                    <div ng-hide="post.tags.length < 1" class="gradient-overlay-metadata metadata-regular unselectable">
+                                        <span><md-icon>style</md-icon> {{post.tags.join(', ')}}</span>
                                     </div>
                                     <div ng-hide="post.link == '' || post.type == 'gDrive'" class="gradient-overlay-metadata metadata-link unselectable" style="font-size:18px">
                                         <span><md-icon>language</md-icon> {{removeHttp(post.link)}}</span>
@@ -283,26 +283,26 @@
                                 </div>
                             </div>
                             <div>
-                                <p class="post-card-title md-title">{{Post.Title}}</p>
+                                <p class="post-card-title md-title">{{post.title}}</p>
                                 <p class="post-card-creator unselectable"><span>By {{::post.creator.name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::post.creator.classOf}})</span></p>
                                 <p id="post_card_description" class="md-body-1" ng-bind-html="post.description" ng-hide="post.description === ''"></p>
                                 <md-card-actions layout="row" style="align-items: center;">
                                     <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(Post)">
-                                        <span class="like-counter">{{Post.Likes.length}}</span>
-                                        <md-icon ng-class="{'md-accent' : Post.userLiked}" style="margin-top: -8px">thumb_up</md-icon>
+                                        <span class="like-counter">{{post.likes.length}}</span>
+                                        <md-icon ng-class="{'md-accent' : post.userLiked}" style="margin-top: -8px">thumb_up</md-icon>
                                     </md-button>
-                                    <md-button class="md-icon-button" area-label="Flag" ng-click="::unFlagPost(Post,$index)" ng-hide="Post.Flagged == false">
+                                    <md-button class="md-icon-button" area-label="Flag" ng-click="::unFlagPost(Post,$index)" ng-hide="post.flagged == false">
                                         <md-icon class="md-warn">flag</md-icon>
                                     </md-button>
-                                    <md-button class="md-icon-button" area-label="Flag" ng-click="::flagPost(Post,$index)" ng-hide="post.creator.email === myInfo.email || Post.Flagged == true">
+                                    <md-button class="md-icon-button" area-label="Flag" ng-click="::flagPost(Post,$index)" ng-hide="post.creator.email === myInfo.email || post.flagged == true">
                                         <md-icon>flag</md-icon>
                                     </md-button>
                                     <md-menu>
-                                        <md-button ng-click="::$mdOpenMenu($event)" ng-show="::Post.creator.email === myInfo.email" class="md-icon-button">
+                                        <md-button ng-click="::$mdOpenMenu($event)" ng-show="::post.creator.email === myInfo.email" class="md-icon-button">
                                             <md-icon>more_vert</md-icon>
                                         </md-button>
                                         <md-menu-content>
-                                            <md-menu-item ng-hide="::Post.Flagged === true">
+                                            <md-menu-item ng-hide="::post.flagged === true">
                                                 <md-button ng-click="flagPost(Post,$index)">
                                                     <md-icon>flag</md-icon>Flag</md-button>
                                             </md-menu-item>
