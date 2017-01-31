@@ -79,7 +79,7 @@
             <div hide-xs show-gt-xs class="search-bar-container unselectable">
                 <div style="width:100%; max-width:720px; position:relative">
                     <md-icon class="search-bar-icon">search</md-icon>
-                    <input md-delay="300" class="search-bar unselectable" ng-model="searchInputTxt" ng-model-options="{ debounce: 500 }" placeholder="{{searchPrefix + ' ' + (selectedClass.Stared != null ? selectedClass.Name:'')}}" />
+                    <input md-delay="300" class="search-bar unselectable" ng-model="searchInputTxt" ng-model-options="{ debounce: 500 }" placeholder="{{searchPrefix + ' ' + (selectedClass.stared != null ? selectedClass.name:'')}}" />
                     <md-button ng-class="{'has-text': searchInputTxt}" ng-click="searchInputTxt = ''" class='search-bar-clear-button md-icon-button'>
                         <md-icon style="color:rgb(117,117,117)">close</md-icon>
                     </md-button>
@@ -200,7 +200,7 @@
             </md-fab-actions>
         </md-fab-speed-dial>
         <div id="content_container">
-            <div class="content-padding content-top-bar" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}" ng-style="{'background-color': selectedClass.Color + ' 1)'}">
+            <div class="content-padding content-top-bar" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}" ng-style="{'background-color': selectedClass.color + ' 1)'}">
                 <div style="display: flex;align-items: center; margin-top: 12px;">
                     <span class="md-display-1">{{queryParams.classPath}}</span>
                     <span style="flex:1;text-align:center">
@@ -209,13 +209,13 @@
                        <md-button ng-show="queryParams.classPath == 'Quizlet'">
                     <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>open_in_browser</md-icon>Open Class</md-button>
                     </span>
-                    <md-button class="star-button" ng-if="selectedClass.Stared != null">
-                        <md-icon style='color: white;font-size: 22px'>{{selectedClass.Stared ? 'star' : 'star_outline'}}</md-icon>
-                        <span style="margin-left: 6px;">{{selectedClass.Stared ? 'un' : ''}}Star Class</span>
+                    <md-button class="star-button" ng-if="selectedClass.stared != null">
+                        <md-icon style='color: white;font-size: 22px'>{{selectedClass.stared ? 'star' : 'star_outline'}}</md-icon>
+                        <span style="margin-left: 6px;">{{selectedClass.stared ? 'un' : ''}}Star Class</span>
                         <md-tooltip>Coming Soon</md-tooltip>
                     </md-button>
                 </div>
-                <div style="padding-bottom:8px"><span class="md-caption">{{selectedClass.Rules || 'Dont post test or homework answers. Do post what will help other students get to the answers on their own.'}}</span><span ng-if="false"> - <a href="#">edit</a></span></div>
+                <div style="padding-bottom:8px"><span class="md-caption">{{selectedClass.rules || 'Dont post test or homework answers. Do post what will help other students get to the answers on their own.'}}</span><span ng-if="false"> - <a href="#">edit</a></span></div>
                 <div class="create-post-bar-top" ng-hide="queryParams.classPath == 'Quizlet'">
                     <span md-ink-ripple="true" class="create-post-bar-text unselectable" flex ng-click="::newPost({},'new')">
                         <md-icon style="margin-top: -3px;">add_circle</md-icon>
