@@ -196,53 +196,54 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}));
 	};
 	$scope.findClassObject = function (className) {
+		console.log(className == 'All Posts');
 		if (className == 'All Posts') {
 			return ({
-				Name: 'All Posts',
-				Color: 'hsla(200, 70%, 75%,',
-				Catagory: null,
-				Rules: null,
-				Stared: null,
+				name: 'All Posts',
+				color: 'hsla(200, 70%, 75%,',
+				catagory: null,
+				rules: null,
+				stared: null,
 			})
 		} else if (className == 'Your Posts') {
 			return ({
-				Name: 'Your Posts',
-				Color: 'hsla(114, 89%, 42%,',
-				Catagory: null,
-				Rules: null,
-				Stared: null,
+				name: 'Your Posts',
+				color: 'hsla(114, 89%, 42%,',
+				catagory: null,
+				rules: null,
+				stared: null,
 			})
 		} else if (className == 'Flagged Posts') {
 			return ({
-				Name: 'Flagged Posts',
-				Color: 'hsla(15, 95%, 65%,',
-				Catagory: null,
-				Rules: null,
-				Stared: null,
+				name: 'Flagged Posts',
+				color: 'hsla(15, 95%, 65%,',
+				catagory: null,
+				rules: null,
+				stared: null,
 			})
 		} else if (className == 'Quizlet') {
 			return ({
-				Name: 'Quizlet',
-				Color: 'hsla(229, 46%, 49%,',
-				Catagory: null,
-				Rules: null,
-				Stared: null,
+				name: 'Quizlet',
+				color: 'hsla(229, 46%, 49%,',
+				catagory: null,
+				rules: null,
+				stared: null,
 			})
 		} else if (className == 'Memes') {
 			return ({
-				Name: 'Memes',
-				Color: 'hsla(200, 70%, 75%,',
-				Catagory: null,
-				Rules: 'What da heck are you doing here??',
-				Stared: false,
+				name: 'Memes',
+				color: 'hsla(200, 70%, 75%,',
+				catagory: null,
+				rules: 'What da heck are you doing here??',
+				stared: false,
 			})
 		} else if (className == 'Other') {
 			return ({
-				Name: 'Other',
-				Color: 'hsla(200, 70%, 75%,',
-				Catagory: null,
-				Rules: null,
-				Stared: null,
+				name: 'Other',
+				color: 'hsla(200, 70%, 75%,',
+				catagory: null,
+				rules: null,
+				stared: null,
 			})
 		} else {
 			for (var Catagories = 0; Catagories < $scope.classList.length; Catagories++) {
