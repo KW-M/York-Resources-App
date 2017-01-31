@@ -241,17 +241,17 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		} else {
 			for (var Catagories = 0; Catagories < $scope.classList.length; Catagories++) {
 				for (var ClassNum = 0; ClassNum < $scope.classList[Catagories].classes.length; ClassNum++) {
-					var Class = $scope.classList[Catagories].Classes[ClassNum]
-					if (Class.Name == className) {
-						Class.Color = $scope.classList[Catagories].Color
-						Class.Catagory = $scope.classList[Catagories].Catagory
+					var Class = $scope.classList[Catagories].classes[ClassNum]
+					if (Class.name == className) {
+						Class.color = $scope.classList[Catagories].color
+						Class.catagory = $scope.classList[Catagories].catagory
 						for (var StaredNum = 0; StaredNum < $scope.myInfo.staredClasses.length; StaredNum++) {
-							if ($scope.myInfo.StaredClasses[StaredNum].Name == className) {
-								Class.Stared = true;
+							if ($scope.myInfo.StaredClasses[StaredNum].name == className) {
+								Class.stared = true;
 								return (Class)
 							}
 						}
-						Class.Stared = false;
+						Class.stared = false;
 						return (Class)
 					}
 				}
@@ -522,14 +522,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}, 2000);
 	};
 	$scope.openLink = function (link, dontOpen) {
-		if (link !== "" && link !== undefined && dontOpen != true) {
-			window.open(link);
-		}
+		if (link !== "" && link !== undefined && dontOpen != true) window.open(link)
 	};
 	$scope.removeHttp = function (input) {
 		if (input) {
-			var url = input.replace(/(?:http|https):\/\//, '')
-			return (url.replace('www.', ''))
+			return (input.replace(/(?:http|https):\/\//, '').replace('www.', ''))
 		} else {
 			return input
 		}
@@ -540,7 +537,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 
 	//----------------------------------------------------
 	//-------------------- dialogs -----------------------
-
 	function DialogController(scope, $mdDialog) {
 		scope.hideDialog = function () {
 			$mdDialog.hide();
