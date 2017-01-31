@@ -204,11 +204,11 @@
                 <div style="display: flex;align-items: center; margin-top: 12px;">
                     <span class="md-display-1">{{queryParams.classPath}}</span>
                     <span style="flex:1;text-align:center">
-                                           <md-button ng-click="openLink('https://quizlet.com/create-set')" ng-show="queryParams.classPath == 'Quizlet'">
-                                        <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>add_to_photos</md-icon>Create Set</md-button>
-                                           <md-button ng-show="queryParams.classPath == 'Quizlet'">
-                                        <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>open_in_browser</md-icon>Open Class</md-button>
-                                        </span>
+                        <md-button ng-click="openLink('https://quizlet.com/create-set')" ng-show="queryParams.classPath == 'Quizlet'">
+                        <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>add_to_photos</md-icon>Create Set</md-button>
+                        <md-button ng-show="queryParams.classPath == 'Quizlet'">
+                        <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>open_in_browser</md-icon>Open Class</md-button>
+                    </span>
                     <md-button class="star-button" ng-if="selectedClass.stared != null">
                         <md-icon style='color: white;font-size: 22px'>{{selectedClass.stared ? 'star' : 'star_outline'}}</md-icon>
                         <span style="margin-left: 6px;">{{selectedClass.stared ? 'un' : ''}}Star Class</span>
@@ -233,15 +233,14 @@
             </div>
             <div class="content-padding" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'ugly-brown' : queryParams.classPath == 'Memes' , 'gt-sm': $mdMedia('gt-sm')}" style="padding-top: 34px; padding-bottom: 8px;">
                 <span ng-show="devMode">
-                    <md-button ng-click="consoleLog(myInfo, true)">
-                                                Log My Info</md-button>
+                    <md-button ng-click="consoleLog(myInfo, true)">Log My Info</md-button>
                     <md-button ng-click="consoleLog({'string': queryPropertyString, 'properties':queryProperties}, true)">Log Search Query string</md-button>
                     <md-button ng-click="logDuplicationIndexes()">Log page & deduplication Indexes</md-button>
-<md-button ng-click="consoleLog({queryParam: queryParam, query: queryParam.q, classParam: classParam, selectedClass: selectedClass, idParam: idParam}, true)">Log URL Paramiters</md-button>
-                                            <md-button ng-click="consoleLog(visiblePosts)">Log Visible Posts Array</md-button>
-                                            <md-button ng-click="consoleLog(allPosts)">Log All Posts Array</md-button>
-                                            <md-button ng-click="refreshLayout()">Refresh Layout</md-button>
-                                            <p>all: {{allPosts.length}} Visible: {{visiblePosts.length}}</p>
+                    <md-button ng-click="consoleLog({queryParam: queryParam, query: queryParam.q, classParam: classParam, selectedClass: selectedClass, idParam: idParam}, true)">Log URL Paramiters</md-button>
+                    <md-button ng-click="consoleLog(visiblePosts)">Log Visible Posts Array</md-button>
+                    <md-button ng-click="consoleLog(allPosts)">Log All Posts Array</md-button>
+                    <md-button ng-click="refreshLayout()">Refresh Layout</md-button>
+                    <p>all: {{allPosts.length}} Visible: {{visiblePosts.length}}</p>
                 </span>
                 <div name="Posts Grid" ng-hide="queryParams.classPath == 'Quizlet'">
                     <div angular-grid="visiblePosts" id="layout_grid" ag-gutter-size="12" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="getFiles()">
