@@ -410,9 +410,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          $scope.previousSearch = $scope.queryParams.q || null;
          $scope.updateVisiblePosts($scope.searchPosts);
       } else {
-         $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+         $timeout(function () {
+            $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+            $scope.updateVisiblePosts($scope.visiblePosts.concat($scope.filterPosts(formattedFileList)));
+         })
+
          //if ($scope.queryPropertyString == queryString) {
-         $scope.updateVisiblePosts($scope.visiblePosts.concat($scope.filterPosts(formattedFileList)));
          // }
       }
       conurancy_counter = conurancy_counter - 1
@@ -548,6 +551,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    $scope.updateVisiblePosts = function (array, callback) {
+      console.log(array)
       $timeout(function () {
          if (array) {
             $scope.visiblePosts = array;
