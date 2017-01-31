@@ -118,21 +118,24 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
             hideDelay: 3000000,
         });
         promiseQueue().addPromise('drive', APIService.runGAScript('savePost', {
-            operation: 'savePost',
-            postId: '1PJhfrKIxE59cWRBlVL-dBp-tOuUBsrWagBDchAQrzfQ',
-            content: $scope.post,
-        }, true), function (reply) {
-            console.log(reply)
-
-            $mdToast.hide();
-            $mdDialog.hide();
-            $scope.dialog_container.style.opacity = 1;
-            $scope.dialog_container.style.pointerEvents = 'all';
-            // $timeout(function () {
-            //     $scope.allPosts.push($scope.post)
-            //     $scope.visiblePosts = $scope.filterPosts($scope.allPosts);
-            // })
-        }, onError, 150);
+                operation: 'savePost',
+                postId: '1PJhfrKIxE59cWRBlVL-dBp-tOuUBsrWagBDchAQrzfQ',
+                content: $scope.post,
+            }, true), function (postData) {
+                console.log(postData)
+                var createdPost = JSON.parse(postData.result.response.result);
+                console.log(createdPost)
+                addFireDatabaseRef(createdPost).then(fun)
+                $mdToast.hide();
+                $mdDialog.hide();
+                $scope.dialog_container.style.opacity = 1;
+                $scope.dialog_container.style.pointerEvents = 'all';
+                // $timeout(function () {
+                //     $scope.allPosts.push($scope.post)
+                //     $scope.visiblePosts = $scope.filterPosts($scope.allPosts);
+                // })
+            },
+            onError, 150);
     }
 
     function addFireDatabaseRef(post) {
