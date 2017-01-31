@@ -179,374 +179,361 @@
                 <md-button id="new_post_button" class="md-fab md-accent raise-on-hover" ng-click="FABClick($event)">
                     <md-tooltip md-direction="left" md-autohide>Create Post</md-tooltip>
                     <md-icon class="unselectable">add</md-icon>
-                    </md-button>
-                    </md-fab-trigger>
-                    <md-fab-actions>
-                        <md-button class="md-fab md-raised md-mini" ng-click="::showPicker('Drive')">
-                            <md-tooltip md-direction="left" md-autohide>Add Drive file</md-tooltip>
-                            <img class="unselectable" style="width:22px; height:22px; margin-top:8px" src="images/drive_icon.svg">
-                        </md-button>
-                        <!--<md-button class="md-fab md-raised md-mini">-->
-                        <!--    <label class="custom-file-upload" style=>-->
-                        <!--    <input type="file" accept="image/*" capture="camera" style="display:none"/>-->
-                        <!--    <md-tooltip md-direction="left" md-autohide>Take Photo</md-tooltip>-->
-                        <!--    <md-icon class="unselectable" style="color:black">camera</md-icon>-->
-                        <!--        </label>-->
-                        <!--</md-button>-->
-                        <md-button class="md-fab md-raised md-mini" ng-click="::showPicker('Upload')">
-                            <md-tooltip md-direction="left" md-autohide>Upload</md-tooltip>
-                            <md-icon class="unselectable" style="color:black">file_upload</md-icon>
-                        </md-button>
-                    </md-fab-actions>
-                    </md-fab-speed-dial>
-                    <div id="content_container">
-                        <div class="content-padding content-top-bar" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}" ng-style="{'background-color': selectedClass.color + ' 1)'}">
-                            <div style="display: flex;align-items: center; margin-top: 12px;">
-                                <span class="md-display-1">{{queryParams.classPath}}</span>
-                                <span style="flex:1;text-align:center">
+                </md-button>
+            </md-fab-trigger>
+            <md-fab-actions>
+                <md-button class="md-fab md-raised md-mini" ng-click="::showPicker('Drive')">
+                    <md-tooltip md-direction="left" md-autohide>Add Drive file</md-tooltip>
+                    <img class="unselectable" style="width:22px; height:22px; margin-top:8px" src="images/drive_icon.svg">
+                </md-button>
+                <!--<md-button class="md-fab md-raised md-mini">-->
+                <!--    <label class="custom-file-upload" style=>-->
+                <!--    <input type="file" accept="image/*" capture="camera" style="display:none"/>-->
+                <!--    <md-tooltip md-direction="left" md-autohide>Take Photo</md-tooltip>-->
+                <!--    <md-icon class="unselectable" style="color:black">camera</md-icon>-->
+                <!--        </label>-->
+                <!--</md-button>-->
+                <md-button class="md-fab md-raised md-mini" ng-click="::showPicker('Upload')">
+                    <md-tooltip md-direction="left" md-autohide>Upload</md-tooltip>
+                    <md-icon class="unselectable" style="color:black">file_upload</md-icon>
+                </md-button>
+            </md-fab-actions>
+        </md-fab-speed-dial>
+        <div id="content_container">
+            <div class="content-padding content-top-bar" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}" ng-style="{'background-color': selectedClass.color + ' 1)'}">
+                <div style="display: flex;align-items: center; margin-top: 12px;">
+                    <span class="md-display-1">{{queryParams.classPath}}</span>
+                    <span style="flex:1;text-align:center">
                                            <md-button ng-click="openLink('https://quizlet.com/create-set')" ng-show="queryParams.classPath == 'Quizlet'">
                                         <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>add_to_photos</md-icon>Create Set</md-button>
                                            <md-button ng-show="queryParams.classPath == 'Quizlet'">
                                         <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>open_in_browser</md-icon>Open Class</md-button>
                                         </span>
-                                <md-button class="star-button" ng-if="selectedClass.stared != null">
-                                    <md-icon style='color: white;font-size: 22px'>{{selectedClass.stared ? 'star' : 'star_outline'}}</md-icon>
-                                    <span style="margin-left: 6px;">{{selectedClass.stared ? 'un' : ''}}Star Class</span>
-                                    <md-tooltip>Coming Soon</md-tooltip>
-                                </md-button>
-                            </div>
-                            <div style="padding-bottom:8px"><span class="md-caption">{{selectedClass.rules || 'Dont post test or homework answers. Do post what will help other students get to the answers on their own.'}}</span><span ng-if="false"> - <a href="#">edit</a></span></div>
-                            <div class="create-post-bar-top" ng-hide="queryParams.classPath == 'Quizlet'">
-                                <span md-ink-ripple="true" class="create-post-bar-text unselectable" flex ng-click="::newPost({},'new')">
-                                            <md-icon style="margin-top: -3px;">add_circle</md-icon>
-                                            <span>Share a link or resource...</span>
-                                </span>
-                                <span ng-click="::showPicker('Upload')">
-                                            <md-tooltip md-direction="::down">Upload</md-tooltip>
-                                            <md-icon class="unselectable" style="color: black;">file_upload</md-icon>
-                                        </span>
-                                <span ng-click="::showPicker('Drive')">
-                                            <md-tooltip md-direction="::down">Add Drive file</md-tooltip>
-                                            <md-icon class="unselectable" md-svg-icon="driveIcon"></md-icon>
-                                        </span>
-                            </div>
-                        </div>
-                        <div class="content-padding" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'ugly-brown' : queryParams.classPath == 'Memes' , 'gt-sm': $mdMedia('gt-sm')}" style="padding-top: 34px; padding-bottom: 8px;">
-                            <span ng-show="devMode">
-                                            <md-button ng-click="consoleLog(myInfo, true)">
-                                                Log My Info
-                                            </md-button>
-                                            <md-button ng-click="consoleLog({'string': queryPropertyString, 'properties':queryProperties}, true)">
-                                                Log Search Query string
-                                            </md-button>
-                                            <md-button ng-click="logDuplicationIndexes()">
-                                                Log page & deduplication Indexes
-                                            </md-button>
-                                            <md-button ng-click="consoleLog({queryParam: queryParam, query: queryParam.q, classParam: classParam, selectedClass: selectedClass, idParam: idParam}, true)">
-                                                Log URL Paramiters
-                                            </md-button>
-                                            <md-button ng-click="consoleLog(visiblePosts)">
-                                                Log Visible Posts Array
-                                            </md-button>
-                                            <md-button ng-click="consoleLog(allPosts)">
-                                                Log All Posts Array
-                                            </md-button>
-                                            <md-button ng-click="refreshLayout()">
-                                                Refresh Layout
-                                            </md-button>
-                                            all: {{allPosts.length}} Visible: {{visiblePosts.length}}
-                                    </span>
-                            <div name="Posts Grid" ng-hide="queryParams.classPath == 'Quizlet'">
-                                <div angular-grid="visiblePosts" id="layout_grid" ag-gutter-size="12" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="getFiles()">
-                                    <div ng-repeat="post in visiblePosts track by post.id" ng-style="{'background-color': post.class.color + ' 0.6)'}" class="post-card raise-on-hover">
-                                        <div class="post-card-header unselectable" md-ink-ripple="{{post.link != ''}}" ng-class="{'no-link': post.link == '', 'gDrive-type': post.type == 'gDrive'}" ng-click="openLink(post.link)">
-                                            <img ng-src="{{post.previewImage||'https://ssl.gstatic.com/atari/images/simple-header-blended-small.png'}}" class="post-card-image unselectable" ng-hide="post.link == ''"></img>
-                                            <div class="gradient-overlay">
-                                                <div class="gradient-overlay-metadata metadata-regular unselectable">
-                                                    <span ng-hide="post.class.name == null"><md-icon>people</md-icon> {{post.class.name}}</span>
-                                                    <span><md-icon>event</md-icon> {{post.creationDate | date : "mm/dd/yyyy"}}</span>
-                                                </div>
-                                                <div ng-hide="post.tags.length < 1" class="gradient-overlay-metadata metadata-regular unselectable">
-                                                    <span><md-icon>style</md-icon> {{post.tags.join(', ')}}</span>
-                                                </div>
-                                                <div ng-hide="post.link == '' || post.type == 'gDrive'" class="gradient-overlay-metadata metadata-link unselectable" style="font-size:18px">
-                                                    <span><md-icon>language</md-icon> {{removeHttp(post.link)}}</span>
-                                                </div>
-                                                <div class="gradient-overlay-metadata md-chips metadata-link unselectable" ng-hide="post.type != 'gDrive'" style="width:100%">
-                                                    <md-chip>
-                                                        <div class="md-chip-content unselectable">
-                                                            <img ng-src="{{post.attachmentIcon}}" style="margin-right:4px"></img>
-                                                            <span>{{post.attachmentName}}</span>
-                                                        </div>
-                                                    </md-chip>
-                                                </div>
+                    <md-button class="star-button" ng-if="selectedClass.stared != null">
+                        <md-icon style='color: white;font-size: 22px'>{{selectedClass.stared ? 'star' : 'star_outline'}}</md-icon>
+                        <span style="margin-left: 6px;">{{selectedClass.stared ? 'un' : ''}}Star Class</span>
+                        <md-tooltip>Coming Soon</md-tooltip>
+                    </md-button>
+                </div>
+                <div style="padding-bottom:8px"><span class="md-caption">{{selectedClass.rules || 'Dont post test or homework answers. Do post what will help other students get to the answers on their own.'}}</span><span ng-if="false"> - <a href="#">edit</a></span></div>
+                <div class="create-post-bar-top" ng-hide="queryParams.classPath == 'Quizlet'">
+                    <span md-ink-ripple="true" class="create-post-bar-text unselectable" flex ng-click="::newPost({},'new')">
+                        <md-icon style="margin-top: -3px;">add_circle</md-icon>
+                        <span>Share a link or resource...</span>
+                    </span>
+                    <span ng-click="::showPicker('Upload')">
+                        <md-tooltip md-direction="::down">Upload</md-tooltip>
+                        <md-icon class="unselectable" style="color: black;">file_upload</md-icon>
+                    </span>
+                    <span ng-click="::showPicker('Drive')">
+                        <md-tooltip md-direction="::down">Add Drive file</md-tooltip>
+                        <md-icon class="unselectable" md-svg-icon="driveIcon"></md-icon>
+                    </span>
+                </div>
+            </div>
+            <div class="content-padding" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'ugly-brown' : queryParams.classPath == 'Memes' , 'gt-sm': $mdMedia('gt-sm')}" style="padding-top: 34px; padding-bottom: 8px;">
+                <span ng-show="devMode">
+                    <md-button ng-click="consoleLog(myInfo, true)">
+                                                Log My Info</md-button>
+                    <md-button ng-click="consoleLog({'string': queryPropertyString, 'properties':queryProperties}, true)">Log Search Query string</md-button>
+                    <md-button ng-click="logDuplicationIndexes()">Log page & deduplication Indexes</md-button>
+<md-button ng-click="consoleLog({queryParam: queryParam, query: queryParam.q, classParam: classParam, selectedClass: selectedClass, idParam: idParam}, true)">Log URL Paramiters</md-button>
+                                            <md-button ng-click="consoleLog(visiblePosts)">Log Visible Posts Array</md-button>
+                                            <md-button ng-click="consoleLog(allPosts)">Log All Posts Array</md-button>
+                                            <md-button ng-click="refreshLayout()">Refresh Layout</md-button>
+                                            <p>all: {{allPosts.length}} Visible: {{visiblePosts.length}}</p>
+                </span>
+                <div name="Posts Grid" ng-hide="queryParams.classPath == 'Quizlet'">
+                    <div angular-grid="visiblePosts" id="layout_grid" ag-gutter-size="12" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="getFiles()">
+                        <div ng-repeat="post in visiblePosts track by post.id" ng-style="{'background-color': post.class.color + ' 0.6)'}" class="post-card raise-on-hover">
+                            <div class="post-card-header unselectable" md-ink-ripple="{{post.link != ''}}" ng-class="{'no-link': post.link == '', 'gDrive-type': post.type == 'gDrive'}" ng-click="openLink(post.link)">
+                                <img ng-src="{{post.previewImage||'https://ssl.gstatic.com/atari/images/simple-header-blended-small.png'}}" class="post-card-image unselectable" ng-hide="post.link == ''"></img>
+                                <div class="gradient-overlay">
+                                    <div class="gradient-overlay-metadata metadata-regular unselectable">
+                                        <span ng-hide="post.class.name == null"><md-icon>people</md-icon> {{post.class.name}}</span>
+                                        <span><md-icon>event</md-icon> {{post.creationDate | date : "mm/dd/yyyy"}}</span>
+                                    </div>
+                                    <div ng-hide="post.tags.length < 1" class="gradient-overlay-metadata metadata-regular unselectable">
+                                        <span><md-icon>style</md-icon> {{post.tags.join(', ')}}</span>
+                                    </div>
+                                    <div ng-hide="post.link == '' || post.type == 'gDrive'" class="gradient-overlay-metadata metadata-link unselectable" style="font-size:18px">
+                                        <span><md-icon>language</md-icon> {{removeHttp(post.link)}}</span>
+                                    </div>
+                                    <div class="gradient-overlay-metadata md-chips metadata-link unselectable" ng-hide="post.type != 'gDrive'" style="width:100%">
+                                        <md-chip>
+                                            <div class="md-chip-content unselectable">
+                                                <img ng-src="{{post.attachmentIcon}}" style="margin-right:4px"></img>
+                                                <span>{{post.attachmentName}}</span>
                                             </div>
-                                        </div>
-                                        <div>
-                                            <p class="post-card-title md-title">{{post.title}}</p>
-                                            <p class="post-card-creator unselectable"><span>By {{::post.creator.name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::post.creator.classOf}})</span></p>
-                                            <p id="post_card_description" class="md-body-1" ng-bind-html="post.description" ng-hide="post.description === ''"></p>
-                                            <md-card-actions layout="row" style="align-items: center;">
-                                                <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(Post)">
-                                                    <span class="like-counter">{{post.likes.length}}</span>
-                                                    <md-icon ng-class="{'md-accent' : post.userLiked}" style="margin-top: -8px">thumb_up</md-icon>
-                                                </md-button>
-                                                <md-button class="md-icon-button" area-label="Flag" ng-click="::unFlagPost(Post,$index)" ng-hide="post.flagged == false">
-                                                    <md-icon class="md-warn">flag</md-icon>
-                                                </md-button>
-                                                <md-button class="md-icon-button" area-label="Flag" ng-click="::flagPost(Post,$index)" ng-hide="post.creator.email === myInfo.email || post.flagged == true">
-                                                    <md-icon>flag</md-icon>
-                                                </md-button>
-                                                <md-menu>
-                                                    <md-button ng-click="::$mdOpenMenu($event)" ng-show="::post.creator.email === myInfo.email" class="md-icon-button">
-                                                        <md-icon>more_vert</md-icon>
-                                                    </md-button>
-                                                    <md-menu-content>
-                                                        <md-menu-item ng-hide="::post.flagged === true">
-                                                            <md-button ng-click="flagPost(post,$index)">
-                                                                <md-icon>flag</md-icon>Flag</md-button>
-                                                        </md-menu-item>
-                                                        <md-menu-item>
-                                                            <md-button ng-click="::confirmDelete(post,$index)">
-                                                                <md-icon>delete</md-icon>Delete</md-button>
-                                                        </md-menu-item>
-                                                        <md-menu-item>
-                                                            <md-button ng-click="newPost(post,'update')">
-                                                                <md-icon>edit</md-icon>Edit</md-button>
-                                                        </md-menu-item>
-                                                        <md-menu-item ng-show="devMode">
-                                                            <md-button ng-click="::logPostToConsole(post,$index)">
-                                                                <md-icon>edit</md-icon>Console Log Post</md-button>
-                                                        </md-menu-item>
-                                                    </md-menu-content>
-                                                </md-menu>
-                                                <span flex></span>
-                                                <md-button id="open_button" ng-hide="post.description == ''" class="md-button md-accent" ng-click="newPost(post, 'view')" aria-label="Open resource">More</md-button>
-                                            </md-card-actions>
-                                        </div>
+                                        </md-chip>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="footer-container">
-                            <div class="footer">
-                                <div id="no_posts_footer" style="display: none;">
-                                    <h3 style="margin: 0;">It's so lonely here</h3>
-                                    <p style="margin: 0;font-size: 14px;font-weight: 200;">Be the first to post</p>
-                                    <img src="images/Lonely Island.png" style="width: 216px; padding-top: 12px;" />
-                                </div>
-                                <div id="no_more_footer" style="display: none;">
-                                    <h3 style="margin: 0;">No more posts? Has everyone gone to sleep?</h3>
-                                    <p style="margin: 0;font-size: 14px;font-weight: 200;">Maybe you should Contribute.</p>
-                                    <img src="images/Lonely Island.png" style="width: 216px; padding-top: 12px;" />
-                                </div>
-                                <div id="footer_problem" style="display: none; align-items: center;">
-                                    <div style="margin-right:-120px;margin-left: 120px;z-index:1;margin-top: 20px;">
-                                        <h3 style="margin: 0; text-shadow: 0px 0px 10px rgb(242, 242, 242);">Houston, we have a problem!</h3>
-                                        <p style="margin: 0;font-size: 14px;font-weight: 200;">Something's not quite right, try
-                                            <md-button class="md-accent md-raised">Reloading</md-button>
-                                            <p>
-                                    </div>
-                                    <img src="images/rocket problem.png" style="width:300px" />
-                                </div>
-                                <md-progress-circular id="loading_spinner" style="display: none;margin: auto;" class="md-accent" md-mode="indeterminate" md-diameter="30px"></md-progress-circular>
+                            <div>
+                                <p class="post-card-title md-title">{{post.title}}</p>
+                                <p class="post-card-creator unselectable"><span>By {{::post.creator.name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::post.creator.classOf}})</span></p>
+                                <p id="post_card_description" class="md-body-1" ng-bind-html="post.description" ng-hide="post.description === ''"></p>
+                                <md-card-actions layout="row" style="align-items: center;">
+                                    <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(post)">
+                                        <span class="like-counter">{{post.likes.length}}</span>
+                                        <md-icon ng-class="{'md-accent' : post.userLiked}" style="margin-top: -8px">thumb_up</md-icon>
+                                    </md-button>
+                                    <md-button class="md-icon-button" area-label="Flag" ng-click="::unFlagPost(post,$index)" ng-hide="post.flagged == false">
+                                        <md-icon class="md-warn">flag</md-icon>
+                                    </md-button>
+                                    <md-button class="md-icon-button" area-label="Flag" ng-click="::flagPost(post,$index)" ng-hide="post.creator.email === myInfo.email || post.flagged == true">
+                                        <md-icon>flag</md-icon>
+                                    </md-button>
+                                    <md-menu>
+                                        <md-button ng-click="::$mdOpenMenu($event)" ng-show="::post.creator.email === myInfo.email" class="md-icon-button">
+                                            <md-icon>more_vert</md-icon>
+                                        </md-button>
+                                        <md-menu-content>
+                                            <md-menu-item ng-hide="::post.flagged === true">
+                                                <md-button ng-click="flagPost(post,$index)">
+                                                    <md-icon>flag</md-icon>Flag</md-button>
+                                            </md-menu-item>
+                                            <md-menu-item>
+                                                <md-button ng-click="::confirmDelete(post,$index)">
+                                                    <md-icon>delete</md-icon>Delete</md-button>
+                                            </md-menu-item>
+                                            <md-menu-item>
+                                                <md-button ng-click="newPost(post,'update')">
+                                                    <md-icon>edit</md-icon>Edit</md-button>
+                                            </md-menu-item>
+                                            <md-menu-item ng-show="devMode">
+                                                <md-button ng-click="::logPostToConsole(post,$index)">
+                                                    <md-icon>edit</md-icon>Console Log Post</md-button>
+                                            </md-menu-item>
+                                        </md-menu-content>
+                                    </md-menu>
+                                    <span flex></span>
+                                    <md-button id="open_button" ng-hide="post.description == ''" class="md-button md-accent" ng-click="newPost(post, 'view')" aria-label="Open resource">More</md-button>
+                                </md-card-actions>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="footer-container">
+                <div class="footer">
+                    <div id="no_posts_footer" style="display: none;">
+                        <h3 style="margin: 0;">It's so lonely here</h3>
+                        <p style="margin: 0;font-size: 14px;font-weight: 200;">Be the first to post</p>
+                        <img src="images/Lonely Island.png" style="width: 216px; padding-top: 12px;" />
                     </div>
-                    <!-------------------------------------------------------->
-                    <!---------------------- Libraries ----------------------->
-                    <!-- Google API and Authentication Library -->
-                    <!--<script src="https://apis.google.com/js/api.js"></script>-->
-                    <!-- Angular Material -->
-                    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
-                    <!-- Angular Core Add-on Libraries -->
-                    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-aria.min.js"></script>
-                    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-route.min.js"></script>
-                    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.min.js"></script>
-                    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.min.js"></script>
-                    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-messages.min.js"></script>
-                    <!-- Firebase Libraries -->
-                    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
-                    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-app.js"></script>
-                    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-auth.js"></script>
-                    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-storage.js"></script>
-                    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-database.js"></script>
-                    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-messaging.js"></script>
-                    <!-- Other Libraries -->
-                    <script src="Libraries/detect-element-resize.js"></script>
-                    <script src="Libraries/angular-grid.js"></script>
-                    <!-------------------------------------------------------->
-                    <!------------------- Website Scripts -------------------->
-                    <script src="js/app.js"></script>
-                    <script src="js/generalFunctions.js"></script>
-                    <!-- Services -->
-                    <script src="js/Services/APIService.js"></script>
-                    <script type="text/javascript">
-                        app.service('authorizationService', function ($q, $mdDialog) {
-                            var self = this;
-                            firebase.initializeApp({
-                                apiKey: "AIzaSyB573SRLOsDHPmXIG-j7pMF9kqfO57MiRM",
-                                authDomain: "york-studyhub.firebaseapp.com",
-                                databaseURL: "https://york-studyhub.firebaseio.com",
-                                storageBucket: "york-studyhub.appspot.com",
-                                messagingSenderId: "632148950209"
-                            });
-                            self.FireAuth = firebase.auth();
-                            self.FireDatabase = firebase.database();
-                            self.FireStorage = firebase.storage();
-                            var FireGAuth = new firebase.auth.GoogleAuthProvider();
-                            self.FireUser = 'None';
-                            var FireSignInPromise = $q.defer();
-                    
-                            self.FireAuth.onAuthStateChanged(updateSigninStatus);
-                    
-                            // ---------- End Firebase Auth, Begin Google API Library and auth2 ------------ //
-                    
-                            self.GUser = null;
-                            var GSignedIn = false;
-                            var GSignInPromise = $q.defer();
-                            var LibraryLoadPromise = $q.defer();
-                    
-                            gapi.load('client:auth2', function () {
-                                // Initialize oauth
-                                gapi.auth2.init({
-                                    'client_id': '632148950209-60a3db9qm6q31sids128mvstddg2qme7.apps.googleusercontent.com',
-                                    'scope': 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/script.external_request https://www.googleapis.com/auth/script.scriptapp https://www.googleapis.com/auth/script.storage https://www.googleapis.com/auth/spreadsheets',
-                                    'hosted_domain': 'york.org',
-                                    fetch_basic_profile: true,
-                                }).then(function (GAuth) {
-                                    // Listen for sign-in state changes.
-                                    GAuth.isSignedIn.listen(updateSigninStatus);
-                                    // Handle the initial sign-in state.
-                                    updateSigninStatus(GAuth.isSignedIn.get());
-                                    // show sign in prompt if sign in button is clicked.
-                                    GAuth.attachClickHandler('signin_button', null, null, console.warn)
-                                }, console.warn)
-                    
-                                // Initialize API libraries
-                                gapi.client.init({
-                                    'apiKey': 'AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA',
-                                    'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest', 'https://www.googleapis.com/discovery/v1/apis/script/v1/rest'],
-                                }).then(function () {
-                                    console.log("Loaded APIs")
-                                    LibraryLoadPromise.resolve();
-                                }, console.warn)
-                            });
-                    
-                            function updateSigninStatus(Input) {
-                                if (Input === true) {
-                                    self.GUser = gapi.auth2.getAuthInstance().currentUser.get();
-                                    GSignedIn = true;
-                                    GSignInPromise.resolve(self.GUser);
-                                    hideSigninButton()
-                                } else if (Input === false) {
-                                    GSignedIn = false;
-                                    self.GUser = null;
-                                    showSigninButton()
-                                } else if (Input == null || Input.displayName != undefined) {
-                                    self.FireUser = Input;
-                                }
-                    
-                                // Use the variables specified here
-                                if (GSignedIn && self.FireUser && self.FireUser != 'None' && isUserEqual(self.GUser, self.FireUser)) {
-                                    console.log("Everything is SignedIn")
-                                    FireSignInPromise.resolve(self.FireUser);
-                                } else if (GSignedIn && self.FireUser && self.FireUser != 'None' && !isUserEqual(self.GUser, self.FireUser)) {
-                                    console.log("Different Firebase user, signing into Firebase...")
-                                    SignIntoFirebase()
-                                } else if (GSignedIn && self.FireUser != 'None') {
-                                    console.log("No Firebase user, signing into Firebase...")
-                                    SignIntoFirebase()
-                                }
-                    
-                                console.log(self.FireUser)
-                    
-                                function SignIntoFirebase() {
-                                    // Sign in with id_token credential from the gapi Google user.
-                                    var credential = firebase.auth.GoogleAuthProvider.credential(self.GUser.getAuthResponse().id_token);
-                                    firebase.auth().signInWithCredential(credential).then(function () {
-                                        FireSignInPromise.resolve(self.FireUser);
-                                    }).catch(console.warn);
-                                }
-                    
-                                function isUserEqual(googleUser, firebaseUser) {
-                                    if (firebaseUser) {
-                                        var providerData = firebaseUser.providerData;
-                                        for (var i = 0; i < providerData.length; i++) {
-                                            if (providerData[i].providerId === firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
-                                                providerData[i].uid === googleUser.getBasicProfile().getId()) {
-                                                // We don't need to reauth the Firebase connection.
-                                                return true;
-                                            }
-                                        }
-                                    }
-                                    return false;
-                                }
+                    <div id="no_more_footer" style="display: none;">
+                        <h3 style="margin: 0;">No more posts? Has everyone gone to sleep?</h3>
+                        <p style="margin: 0;font-size: 14px;font-weight: 200;">Maybe you should Contribute.</p>
+                        <img src="images/Lonely Island.png" style="width: 216px; padding-top: 12px;" />
+                    </div>
+                    <div id="footer_problem" style="display: none; align-items: center;">
+                        <div style="margin-right:-120px;margin-left: 120px;z-index:1;margin-top: 20px;">
+                            <h3 style="margin: 0; text-shadow: 0px 0px 10px rgb(242, 242, 242);">Houston, we have a problem!</h3>
+                            <p style="margin: 0;font-size: 14px;font-weight: 200;">Something's not quite right, try
+                                <md-button class="md-accent md-raised">Reloading</md-button>
+                                <p>
+                        </div>
+                        <img src="images/rocket problem.png" style="width:300px" />
+                    </div>
+                    <md-progress-circular id="loading_spinner" style="display: none;margin: auto;" class="md-accent" md-mode="indeterminate" md-diameter="30px"></md-progress-circular>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-------------------------------------------------------->
+    <!---------------------- Libraries ----------------------->
+    <!-- Google API and Authentication Library -->
+    <!--<script src="https://apis.google.com/js/api.js"></script>-->
+    <!-- Angular Material -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
+    <!-- Angular Core Add-on Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-messages.min.js"></script>
+    <!-- Firebase Libraries -->
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-messaging.js"></script>
+    <!-- Other Libraries -->
+    <script src="Libraries/detect-element-resize.js"></script>
+    <script src="Libraries/angular-grid.js"></script>
+    <!-------------------------------------------------------->
+    <!------------------- Website Scripts -------------------->
+    <script src="js/app.js"></script>
+    <script src="js/generalFunctions.js"></script>
+    <!-- Services -->
+    <script src="js/Services/APIService.js"></script>
+    <script type="text/javascript">
+        app.service('authorizationService', function ($q, $mdDialog) {
+            var self = this;
+            firebase.initializeApp({
+                apiKey: "AIzaSyB573SRLOsDHPmXIG-j7pMF9kqfO57MiRM",
+                authDomain: "york-studyhub.firebaseapp.com",
+                databaseURL: "https://york-studyhub.firebaseio.com",
+                storageBucket: "york-studyhub.appspot.com",
+                messagingSenderId: "632148950209"
+            });
+            self.FireAuth = firebase.auth();
+            self.FireDatabase = firebase.database();
+            self.FireStorage = firebase.storage();
+            var FireGAuth = new firebase.auth.GoogleAuthProvider();
+            self.FireUser = 'None';
+            var FireSignInPromise = $q.defer();
+
+            self.FireAuth.onAuthStateChanged(updateSigninStatus);
+
+            // ---------- End Firebase Auth, Begin Google API Library and auth2 ------------ //
+
+            self.GUser = null;
+            var GSignedIn = false;
+            var GSignInPromise = $q.defer();
+            var LibraryLoadPromise = $q.defer();
+
+            gapi.load('client:auth2', function () {
+                // Initialize oauth
+                gapi.auth2.init({
+                    'client_id': '632148950209-60a3db9qm6q31sids128mvstddg2qme7.apps.googleusercontent.com',
+                    'scope': 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/script.external_request https://www.googleapis.com/auth/script.scriptapp https://www.googleapis.com/auth/script.storage https://www.googleapis.com/auth/spreadsheets',
+                    'hosted_domain': 'york.org',
+                    fetch_basic_profile: true,
+                }).then(function (GAuth) {
+                    // Listen for sign-in state changes.
+                    GAuth.isSignedIn.listen(updateSigninStatus);
+                    // Handle the initial sign-in state.
+                    updateSigninStatus(GAuth.isSignedIn.get());
+                    // show sign in prompt if sign in button is clicked.
+                    GAuth.attachClickHandler('signin_button', null, null, console.warn)
+                }, console.warn)
+
+                // Initialize API libraries
+                gapi.client.init({
+                    'apiKey': 'AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA',
+                    'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest', 'https://www.googleapis.com/discovery/v1/apis/script/v1/rest'],
+                }).then(function () {
+                    console.log("Loaded APIs")
+                    LibraryLoadPromise.resolve();
+                }, console.warn)
+            });
+
+            function updateSigninStatus(Input) {
+                if (Input === true) {
+                    self.GUser = gapi.auth2.getAuthInstance().currentUser.get();
+                    GSignedIn = true;
+                    GSignInPromise.resolve(self.GUser);
+                    hideSigninButton()
+                } else if (Input === false) {
+                    GSignedIn = false;
+                    self.GUser = null;
+                    showSigninButton()
+                } else if (Input == null || Input.displayName != undefined) {
+                    self.FireUser = Input;
+                }
+
+                // Use the variables specified here
+                if (GSignedIn && self.FireUser && self.FireUser != 'None' && isUserEqual(self.GUser, self.FireUser)) {
+                    console.log("Everything is SignedIn")
+                    FireSignInPromise.resolve(self.FireUser);
+                } else if (GSignedIn && self.FireUser && self.FireUser != 'None' && !isUserEqual(self.GUser, self.FireUser)) {
+                    console.log("Different Firebase user, signing into Firebase...")
+                    SignIntoFirebase()
+                } else if (GSignedIn && self.FireUser != 'None') {
+                    console.log("No Firebase user, signing into Firebase...")
+                    SignIntoFirebase()
+                }
+
+                console.log(self.FireUser)
+
+                function SignIntoFirebase() {
+                    // Sign in with id_token credential from the gapi Google user.
+                    var credential = firebase.auth.GoogleAuthProvider.credential(self.GUser.getAuthResponse().id_token);
+                    firebase.auth().signInWithCredential(credential).then(function () {
+                        FireSignInPromise.resolve(self.FireUser);
+                    }).catch(console.warn);
+                }
+
+                function isUserEqual(googleUser, firebaseUser) {
+                    if (firebaseUser) {
+                        var providerData = firebaseUser.providerData;
+                        for (var i = 0; i < providerData.length; i++) {
+                            if (providerData[i].providerId === firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
+                                providerData[i].uid === googleUser.getBasicProfile().getId()) {
+                                // We don't need to reauth the Firebase connection.
+                                return true;
                             }
-                    
-                            window.signOut = function () {
-                                gapi.auth2.getAuthInstance().signOut().then(function () {
-                                    setTimeout(function () {
-                                        self.FireAuth.signOut().then(function () {
-                                            console.log("All Signed Out")
-                                        }, console.warn);
-                                    }, 500)
-                                }, console.warn);
-                    
-                                var logout = document.createElement("img");
-                                logout.setAttribute("src", "https://mail.google.com/mail/u/0/?logout&hl=en");
-                                logout.style.display = "none";
-                                var logoutImg = document.body.appendChild(logout);
-                            }
-                    
-                            var signinBackdrop = angular.element(document.getElementById('overlay_background'));
-                            var signinButton = angular.element(document.getElementById('signin_button'));
-                            var signinSpinner = angular.element(document.getElementById('signin_spinner'));
-                            var datButton = document.getElementById('dat_button');
-                    
-                            function showSigninButton() {
-                                self.showSigninDialog()
-                                signinSpinner.addClass('fadeOut');
-                                setTimeout(function () {
-                                    signinButton.addClass('fadeIn');
-                                    datButton.style.display = 'none';
-                                }, 500);
-                                signinBackdrop[0].style.zIndex = "2000"
-                            }
-                    
-                            function hideSigninButton() {
-                                signinSpinner.removeClass('fadeOut');
-                                setTimeout(function () {
-                                    signinButton.removeClass('fadeIn');
-                                    datButton.style.display = 'inline-block';
-                                }, 500);
-                            };
-                    
-                            this.onLoad = function (callback) {
-                                $q.all([LibraryLoadPromise.promise, FireSignInPromise.promise, GSignInPromise.promise]).then(function () {
-                                    console.log("All Auth Done")
-                                    callback();
-                                });
-                            }
-                    
-                            this.hideSigninDialog = function () {
-                                signinBackdrop.addClass('fadeOut');
-                            };
-                    
-                            this.showSigninDialog = function () {
-                                signinBackdrop.removeClass('fadeOut');
-                            };
-                    
-                            this.getGAuthToken = function () {
-                                return (gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true).access_token)
-                            }
-                        });
-                    </script>
-                    <!-- Controllers -->
-                    <script src="js/Controllers/mainControllerFunctions.js"></script>
-                    <script src="js/Controllers/subControllerFunctions.js"></script>
-                    <script src="js/Controllers/newPostController.js"></script>
+                        }
+                    }
+                    return false;
+                }
+            }
+
+            window.signOut = function () {
+                gapi.auth2.getAuthInstance().signOut().then(function () {
+                    setTimeout(function () {
+                        self.FireAuth.signOut().then(function () {
+                            console.log("All Signed Out")
+                        }, console.warn);
+                    }, 500)
+                }, console.warn);
+
+                var logout = document.createElement("img");
+                logout.setAttribute("src", "https://mail.google.com/mail/u/0/?logout&hl=en");
+                logout.style.display = "none";
+                var logoutImg = document.body.appendChild(logout);
+            }
+
+            var signinBackdrop = angular.element(document.getElementById('overlay_background'));
+            var signinButton = angular.element(document.getElementById('signin_button'));
+            var signinSpinner = angular.element(document.getElementById('signin_spinner'));
+            var datButton = document.getElementById('dat_button');
+
+            function showSigninButton() {
+                self.showSigninDialog()
+                signinSpinner.addClass('fadeOut');
+                setTimeout(function () {
+                    signinButton.addClass('fadeIn');
+                    datButton.style.display = 'none';
+                }, 500);
+                signinBackdrop[0].style.zIndex = "2000"
+            }
+
+            function hideSigninButton() {
+                signinSpinner.removeClass('fadeOut');
+                setTimeout(function () {
+                    signinButton.removeClass('fadeIn');
+                    datButton.style.display = 'inline-block';
+                }, 500);
+            };
+
+            this.onLoad = function (callback) {
+                $q.all([LibraryLoadPromise.promise, FireSignInPromise.promise, GSignInPromise.promise]).then(function () {
+                    console.log("All Auth Done")
+                    callback();
+                });
+            }
+
+            this.hideSigninDialog = function () {
+                signinBackdrop.addClass('fadeOut');
+            };
+
+            this.showSigninDialog = function () {
+                signinBackdrop.removeClass('fadeOut');
+            };
+
+            this.getGAuthToken = function () {
+                return (gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true).access_token)
+            }
+        });
+    </script>
+    <!-- Controllers -->
+    <script src="js/Controllers/mainControllerFunctions.js"></script>
+    <script src="js/Controllers/subControllerFunctions.js"></script>
+    <script src="js/Controllers/newPostController.js"></script>
     <!-- Directives -->
     <script src="js/directives.js"></script>
 </body>
