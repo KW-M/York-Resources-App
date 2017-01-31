@@ -180,22 +180,22 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     }
 
     $scope.closeDialog = function () {
-        $scope.post.title = originalpost.title || ''
-        $scope.post.description = originalpost.description || ''
-        $scope.post.link = originalpost.link || ''
-        $scope.post.labels = originalpost.labels || []
-        $scope.post.type = originalpost.type || 'noLink'
-        $scope.post.updateDate = originalpost.updateDate || new Date()
-        $scope.post.class = originalpost.class || {
+        $scope.post.title = originalPost.title || ''
+        $scope.post.description = originalPost.description || ''
+        $scope.post.link = originalPost.link || ''
+        $scope.post.labels = originalPost.labels || []
+        $scope.post.type = originalPost.type || 'noLink'
+        $scope.post.updateDate = originalPost.updateDate || new Date()
+        $scope.post.class = originalPost.class || {
             Name: '',
                 Catagory: '',
                 Color: '#ffffff',
         }
-        $scope.post.id = originalpost.id || $scope.post.id || ''
-        $scope.post.attachmentId = originalpost.attachmentId || ''
-        $scope.post.attachmentName = originalpost.attachmentName || ''
-        $scope.post.attachmentIcon = originalpost.attachmentIcon || ''
-        $scope.post.previewImage = originalpost.previewImage || ''
+        $scope.post.id = originalPost.id || $scope.post.id || ''
+        $scope.post.attachmentId = originalPost.attachmentId || ''
+        $scope.post.attachmentName = originalPost.attachmentName || ''
+        $scope.post.attachmentIcon = originalPost.attachmentIcon || ''
+        $scope.post.previewImage = originalPost.previewImage || ''
         $mdDialog.hide();
     };
     $scope.hideToast = function () {

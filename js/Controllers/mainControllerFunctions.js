@@ -237,10 +237,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       $scope.newPostScroll = 0;
       var dialogConfig = {
             templateUrl: 'templates/createPost.html',
-            controller: ['$scope', '$timeout', '$http', '$mdDialog', 'APIService', 'authorizationService', '$mdToast', "post", "operation", newPostController],
+            controller: ['$scope', '$timeout', '$http', '$mdDialog', 'APIService', 'authorizationService', '$mdToast', "postO", "operation", newPostController],
             scope: $scope,
             locals: {
-               post: postObj,
+               postObj: postObj,
                operation: operation
             },
             preserveScope: true,
