@@ -127,7 +127,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 console.log(createdPost)
                 addFireDatabaseRef(createdPost).then(function () {
                     $mdToast.hide();
-                    $mdDialog.hide();
+                    $mdDialog.hide().then();
                     $scope.dialog_container.style.opacity = 1;
                     $scope.dialog_container.style.pointerEvents = 'all';
                     // $timeout(function () {
