@@ -107,9 +107,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
       generateQueryString();
       if ($scope.queryParams.q === null) {
-         $scope.updateVisiblePosts($scope.filterPosts($scope.allPosts), function () {
-            hideSpinner();
-         });
+         $scope.updateVisiblePosts($scope.filterPosts($scope.allPosts), hideSpinner);
       }
       $scope.getFiles();
       $timeout(function () {
