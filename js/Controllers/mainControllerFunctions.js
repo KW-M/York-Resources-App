@@ -202,7 +202,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function getDatabase(argument) {
       authorizationService.FireDatabase.ref('posts').on('child_added', function (childSnapshot, prevChildKey) {
          var val = childSnapshot.val()
-         postMemory[childSnapshot.key] = {
+         $scope.postMemory[childSnapshot.key] = {
             updateDate: val.D,
             class: val.C,
             email: val.E,
@@ -210,13 +210,30 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             loadStatus: 'Not Loaded'
          }
          console.log('child changed: ' + childSnapshot.key + ' previous key: ' + prevChildKey, childSnapshot.val())
-         console.log(postMemory)
-         postIdAccumulator.push(postMemory[childSnapshot.key])
-         if (postIdAccumulator.length = 4) getPosts()
+         console.log($scope.postMemory)
+            //postIdAccumulator.push(postMemory[childSnapshot.key])
+            //if (postIdAccumulator.length = 4) getPosts()
+         getPosts([childSnapshot.key])
       });
    }
 
-   function getPosts() {
+   function getPosts(idArray) {
+      promiseQueue().addPromise('drive', APIService.runGAScript('savePost', postId, true), function (postData) {
+            console.log(postData)
+            var createdPost = JSON.parse(postData.result.response.result);
+            console.log(createdPost)
+            addFireDatabaseRef(createdPost).then(function () {
+               $mdToast.hide();
+               $mdDialog.hide();
+               $scope.dialog_container.style.opacity = 1;
+               $scope.dialog_container.style.pointerEvents = 'all';
+               // $timeout(function () {
+               //     $scope.allPosts.push($scope.post)
+               //     $scope.visiblePosts = $scope.filterPosts($scope.allPosts);
+               // })
+            })
+         },
+         onError, 150);
       console.log(postIdAccumulator)
    }
 
