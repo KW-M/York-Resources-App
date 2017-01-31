@@ -119,7 +119,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         });
         promiseQueue().addPromise('drive', APIService.runGAScript('savePost', {
                 operation: 'savePost',
-                postId: '1PJhfrKIxE59cWRBlVL-dBp-tOuUBsrWagBDchAQrzfQ',
+                postId: $scope.post.id,
                 content: $scope.post,
             }, true), function (postData) {
                 console.log(postData)
@@ -127,7 +127,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 console.log(createdPost)
                 addFireDatabaseRef(createdPost).then(function () {
                     $mdToast.hide();
-                    $mdDialog.hide().then();
+                    $mdDialog.hide();
                     $scope.dialog_container.style.opacity = 1;
                     $scope.dialog_container.style.pointerEvents = 'all';
                     // $timeout(function () {
