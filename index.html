@@ -2,15 +2,16 @@
 <html lang="en">
 
 <head>
-    <title>York StudyHub</title>
     <meta charset="utf-8">
+    <title>York StudyHub</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <!--  Mobile Settings:  -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#be0c1d">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#be0c1d">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="images/StudyHub_Logo/ms-icon-144x144.png">
+    <!--  ios icons:  -->
     <link rel="apple-touch-icon" sizes="57x57" href="images/StudyHub_Logo/apple-icon-57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="images/StudyHub_Logo/apple-icon-60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="images/StudyHub_Logo/apple-icon-72.png">
@@ -20,29 +21,22 @@
     <link rel="apple-touch-icon" sizes="144x144" href="images/StudyHub_Logo/apple-icon-144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="images/StudyHub_Logo/apple-icon-152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="images/StudyHub_Logo/apple-icon-180.png">
+    <!--  Other Icons:  -->
     <link rel="icon" type="image/png" sizes="192x192" href="images/StudyHub_Logo/android-icon-192.png">
     <link rel="icon" type="image/png" sizes="96x96" href="images/StudyHub_Logo/favicon-96.png">
     <link rel="icon" type="image/png" sizes="32x32" href="images/StudyHub_Logo/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="images/StudyHub_Logo/favicon-16.png">
-    <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="css/preRenderStyles.css" />
+    <meta name="msapplication-TileImage" content="images/StudyHub_Logo/ms-icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <!--  Preloaded CSS & JS:  -->
     <script src="https://apis.google.com/js/api.js"></script>
-    <script id="Define_Function">
-        var c;
-        window["FUNCTION"] = function(C) {
-            return document.addEventListener("" + eval(c(C)) + " hover", function(C) {
-                return "done" + n
-            })
-        };
-        c = atob;
-    </script>
+    <link rel="stylesheet" href="css/preRenderStyles.css" />
 </head>
 
-<body ng-app="YorkResourcesApp" ng-controller="ApplicationController">
-
+<body ng-app="StudyHub" ng-controller="AppController">
     <!-------------------------------------------------------->
     <!-------------- The Welcome/Login screen ---------------->
-    <div id="overlay_background" class="overlay-background">
+    <div id="overlay_background">
         <div id="welcome_dialog">
             <div class="signin-dialog-padding">
                 <h1 style="margin-top:-6px">Welcome</h1>
@@ -70,7 +64,7 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Roboto+Mono|Roboto+Slab|Material+Icons" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
     <!-------------------------------------------------------->
     <!------------------- The top toolbar -------------------->
     <md-toolbar class="md-whiteframe-z2 ng-cloak toolbar-top" ng-class="{'rainbow' : queryParams.classPath == 'Memes' }">
@@ -85,7 +79,7 @@
             <div hide-xs show-gt-xs class="search-bar-container unselectable">
                 <div style="width:100%; max-width:720px; position:relative">
                     <md-icon class="search-bar-icon">search</md-icon>
-                    <input md-delay="300" class="search-bar unselectable" ng-model="searchInputTxt" ng-model-options="{ debounce: 500 }" placeholder="{{searchPrefix + ' ' + (selectedClass.Stared != null ? selectedClass.Name:'')}}" />
+                    <input md-delay="300" class="search-bar unselectable" ng-model="searchInputTxt" ng-model-options="{ debounce: 500 }" placeholder="{{searchPrefix + ' ' + (selectedClass.stared != null ? selectedClass.name:'')}}" />
                     <md-button ng-class="{'has-text': searchInputTxt}" ng-click="searchInputTxt = ''" class='search-bar-clear-button md-icon-button'>
                         <md-icon style="color:rgb(117,117,117)">close</md-icon>
                     </md-button>
@@ -132,14 +126,15 @@
                 </md-menu-content>
             </md-menu>
             <md-menu md-position-mode="target-right target">
-                <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button unselectable" id="account_button" aria-label="account" style="height:36px;width:36px;border-radius:50%;background-image:url('images/accountPic.jpg'); background-size: 36px 36px;"></md-button>
+                <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button unselectable" id="account_button" ng-style="{'background-image': 'url(' + (myInfo.profilePicture || 'images/accountPic.jpg') + ')'}" aria-label="account" style="height:36px;width:36px;border-radius:50%;background-image:url('images/accountPic.jpg'); background-size: 36px 36px;">
+                </md-button>
                 <md-menu-content>
                     <md-menu-item layout="column" style="padding: 6px 16px;" class="unselectable">
-                        <p class="user-name" style="font-weight: bold; font-size:13px; padding: 0px">{{myInfo.Name}}</p>
-                        <p class="user-name" style="color: #666; font-size:13px; padding: 0px">{{myInfo.Email}}</p>
+                        <p class="user-name" style="font-weight: bold; font-size:13px; padding: 0px">{{myInfo.name}}</p>
+                        <p class="user-name" style="color: #666; font-size:13px; padding: 0px">{{myInfo.email}}</p>
                     </md-menu-item>
                     <md-menu-item>
-                        <md-button id="signout_button" ng-click="signOut()">
+                        <md-button id="signout_button" onclick="signOut()">
                             <md-icon>exit_to_app</md-icon>
                             <span>Sign out</span>
                         </md-button>
@@ -205,22 +200,22 @@
             </md-fab-actions>
         </md-fab-speed-dial>
         <div id="content_container">
-            <div class="content-padding content-top-bar" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}" ng-style="{'background-color': selectedClass.Color + ' 1)'}">
+            <div class="content-padding content-top-bar" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}" ng-style="{'background-color': selectedClass.color + ' 1)'}">
                 <div style="display: flex;align-items: center; margin-top: 12px;">
                     <span class="md-display-1">{{queryParams.classPath}}</span>
                     <span style="flex:1;text-align:center">
-                       <md-button ng-click="openLink('https://quizlet.com/create-set')" ng-show="queryParams.classPath == 'Quizlet'">
-                    <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>add_to_photos</md-icon>Create Set</md-button>
-                       <md-button ng-show="queryParams.classPath == 'Quizlet'">
-                    <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>open_in_browser</md-icon>Open Class</md-button>
+                        <md-button ng-click="openLink('https://quizlet.com/create-set')" ng-show="queryParams.classPath == 'Quizlet'">
+                        <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>add_to_photos</md-icon>Create Set</md-button>
+                        <md-button ng-show="queryParams.classPath == 'Quizlet'">
+                        <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>open_in_browser</md-icon>Open Class</md-button>
                     </span>
-                    <md-button class="star-button" ng-if="selectedClass.Stared != null">
-                        <md-icon style='color: white;font-size: 22px'>{{selectedClass.Stared ? 'star' : 'star_outline'}}</md-icon>
-                        <span style="margin-left: 6px;">{{selectedClass.Stared ? 'un' : ''}}Star Class</span>
+                    <md-button class="star-button" ng-if="selectedClass.stared != null">
+                        <md-icon style='color: white;font-size: 22px'>{{selectedClass.stared ? 'star' : 'star_outline'}}</md-icon>
+                        <span style="margin-left: 6px;">{{selectedClass.stared ? 'un' : ''}}Star Class</span>
                         <md-tooltip>Coming Soon</md-tooltip>
                     </md-button>
                 </div>
-                <div style="padding-bottom:8px"><span class="md-caption">{{selectedClass.Rules || 'Dont post test or homework answers. Do post what will help other students get to the answers on their own.'}}</span><span ng-if="false"> - <a href="#">edit</a></span></div>
+                <div style="padding-bottom:8px"><span class="md-caption">{{selectedClass.rules || 'Dont post test or homework answers. Do post what will help other students get to the answers on their own.'}}</span><span ng-if="false"> - <a href="#">edit</a></span></div>
                 <div class="create-post-bar-top" ng-hide="queryParams.classPath == 'Quizlet'">
                     <span md-ink-ripple="true" class="create-post-bar-text unselectable" flex ng-click="::newPost({},'new')">
                         <md-icon style="margin-top: -3px;">add_circle</md-icon>
@@ -238,95 +233,81 @@
             </div>
             <div class="content-padding" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'ugly-brown' : queryParams.classPath == 'Memes' , 'gt-sm': $mdMedia('gt-sm')}" style="padding-top: 34px; padding-bottom: 8px;">
                 <span ng-show="devMode">
-                        <md-button ng-click="consoleLog(myInfo, true)">
-                            Log My Info
-                        </md-button>
-                        <md-button ng-click="consoleLog({'string': queryPropertyString, 'properties':queryProperties}, true)">
-                            Log Search Query string
-                        </md-button>
-                        <md-button ng-click="logDuplicationIndexes()">
-                            Log page & deduplication Indexes
-                        </md-button>
-                        <md-button ng-click="consoleLog({queryParam: queryParam, query: queryParam.q, classParam: classParam, selectedClass: selectedClass, idParam: idParam}, true)">
-                            Log URL Paramiters
-                        </md-button>
-                        <md-button ng-click="consoleLog(visiblePosts)">
-                            Log Visible Posts Array
-                        </md-button>
-                        <md-button ng-click="consoleLog(allPosts)">
-                            Log All Posts Array
-                        </md-button>
-                        <md-button ng-click="refreshLayout()">
-                            Refresh Layout
-                        </md-button>
-                        all: {{allPosts.length}} Visible: {{visiblePosts.length}}
+                    <md-button ng-click="consoleLog(myInfo, true)">Log My Info</md-button>
+                    <md-button ng-click="consoleLog({'string': queryPropertyString, 'properties':queryProperties}, true)">Log Search Query string</md-button>
+                    <md-button ng-click="logDuplicationIndexes()">Log page & deduplication Indexes</md-button>
+                    <md-button ng-click="consoleLog({queryParam: queryParam, query: queryParam.q, classParam: classParam, selectedClass: selectedClass, idParam: idParam}, true)">Log URL Paramiters</md-button>
+                    <md-button ng-click="consoleLog(visiblePosts)">Log Visible Posts Array</md-button>
+                    <md-button ng-click="consoleLog(allPosts)">Log All Posts Array</md-button>
+                    <md-button ng-click="refreshLayout()">Refresh Layout</md-button>
+                    <p>all: {{allPosts.length}} Visible: {{visiblePosts.length}}</p>
                 </span>
                 <div name="Posts Grid" ng-hide="queryParams.classPath == 'Quizlet'">
                     <div angular-grid="visiblePosts" id="layout_grid" ag-gutter-size="12" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="getFiles()">
-                        <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color + ' 0.6)'}" class="post-card raise-on-hover">
-                            <div class="post-card-header unselectable" md-ink-ripple="{{Post.Link != ''}}" ng-class="{'no-link': Post.Link == '', 'gDrive-type': Post.Type == 'gDrive'}" ng-click="openLink(Post.Link)">
-                                <img ng-src="{{Post.PreviewImage||'https://ssl.gstatic.com/atari/images/simple-header-blended-small.png'}}" class="post-card-image unselectable" ng-hide="Post.Link == ''"></img>
+                        <div ng-repeat="post in visiblePosts track by post.id" ng-style="{'background-color': post.class.color + ' 0.6)'}" class="post-card raise-on-hover">
+                            <div class="post-card-header unselectable" md-ink-ripple="{{post.link != ''}}" ng-class="{'no-link': post.link == '', 'gDrive-type': post.type == 'gDrive'}" ng-click="openLink(post.link)">
+                                <img ng-src="{{post.previewImage||'https://ssl.gstatic.com/atari/images/simple-header-blended-small.png'}}" class="post-card-image unselectable" ng-hide="post.link == ''"></img>
                                 <div class="gradient-overlay">
                                     <div class="gradient-overlay-metadata metadata-regular unselectable">
-                                        <span ng-hide="Post.Class.Name == null"><md-icon>people</md-icon> {{Post.Class.Name}}</span>
-                                        <span><md-icon>event</md-icon> {{Post.CreationDate | date : "mm/dd/yyyy"}}</span>
+                                        <span ng-hide="post.class.name == null"><md-icon>people</md-icon> {{post.class.name}}</span>
+                                        <span><md-icon>event</md-icon> {{post.creationDate | date : "mm/dd/yyyy"}}</span>
                                     </div>
-                                    <div ng-hide="Post.Tags.length < 1" class="gradient-overlay-metadata metadata-regular unselectable">
-                                        <span><md-icon>style</md-icon> {{Post.Tags.join(', ')}}</span>
+                                    <div ng-hide="post.tags.length < 1" class="gradient-overlay-metadata metadata-regular unselectable">
+                                        <span><md-icon>style</md-icon> {{post.tags.join(', ')}}</span>
                                     </div>
-                                    <div ng-hide="Post.Link == '' || Post.Type == 'gDrive'" class="gradient-overlay-metadata metadata-link unselectable" style="font-size:18px">
-                                        <span><md-icon>language</md-icon> {{removeHttp(Post.Link)}}</span>
+                                    <div ng-hide="post.link == '' || post.type == 'gDrive'" class="gradient-overlay-metadata metadata-link unselectable" style="font-size:18px">
+                                        <span><md-icon>language</md-icon> {{removeHttp(post.link)}}</span>
                                     </div>
-                                    <div class="gradient-overlay-metadata md-chips metadata-link unselectable" ng-hide="Post.Type != 'gDrive'" style="width:100%">
+                                    <div class="gradient-overlay-metadata md-chips metadata-link unselectable" ng-hide="post.type != 'gDrive'" style="width:100%">
                                         <md-chip>
                                             <div class="md-chip-content unselectable">
-                                                <img ng-src="{{Post.AttachmentIcon}}" style="margin-right:4px"></img>
-                                                <span>{{Post.AttachmentName}}</span>
+                                                <img ng-src="{{post.attachmentIcon}}" style="margin-right:4px"></img>
+                                                <span>{{post.attachmentName}}</span>
                                             </div>
                                         </md-chip>
                                     </div>
                                 </div>
                             </div>
                             <div>
-                                <p class="post-card-title md-title">{{Post.Title}}</p>
-                                <p class="post-card-creator unselectable"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::Post.Creator.ClassOf}})</span></p>
-                                <p id="post_card_description" class="md-body-1" ng-bind-html="Post.Description" ng-hide="Post.Description === ''"></p>
+                                <p class="post-card-title md-title">{{post.title}}</p>
+                                <p class="post-card-creator unselectable"><span>By {{::post.creator.name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::post.creator.classOf}})</span></p>
+                                <p id="post_card_description" class="md-body-1" ng-bind-html="post.description" ng-hide="post.description === ''"></p>
                                 <md-card-actions layout="row" style="align-items: center;">
-                                    <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(Post)">
-                                        <span class="like-counter">{{Post.Likes.length}}</span>
-                                        <md-icon ng-class="{'md-accent' : Post.userLiked}" style="margin-top: -8px">thumb_up</md-icon>
+                                    <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(post)">
+                                        <span class="like-counter">{{post.likes.length}}</span>
+                                        <md-icon ng-class="{'md-accent' : post.userLiked}" style="margin-top: -8px">thumb_up</md-icon>
                                     </md-button>
-                                    <md-button class="md-icon-button" area-label="Flag" ng-click="::unFlagPost(Post,$index)" ng-hide="Post.Flagged == false">
+                                    <md-button class="md-icon-button" area-label="Flag" ng-click="::unFlagPost(post,$index)" ng-hide="post.flagged == false">
                                         <md-icon class="md-warn">flag</md-icon>
                                     </md-button>
-                                    <md-button class="md-icon-button" area-label="Flag" ng-click="::flagPost(Post,$index)" ng-hide="Post.Creator.Email === myInfo.Email || Post.Flagged == true">
+                                    <md-button class="md-icon-button" area-label="Flag" ng-click="::flagPost(post,$index)" ng-hide="post.creator.email === myInfo.email || post.flagged == true">
                                         <md-icon>flag</md-icon>
                                     </md-button>
                                     <md-menu>
-                                        <md-button ng-click="::$mdOpenMenu($event)" ng-show="::Post.Creator.Email === myInfo.Email" class="md-icon-button">
+                                        <md-button ng-click="::$mdOpenMenu($event)" ng-show="::post.creator.email === myInfo.email" class="md-icon-button">
                                             <md-icon>more_vert</md-icon>
                                         </md-button>
                                         <md-menu-content>
-                                            <md-menu-item ng-hide="::Post.Flagged === true">
-                                                <md-button ng-click="flagPost(Post,$index)">
+                                            <md-menu-item ng-hide="::post.flagged === true">
+                                                <md-button ng-click="flagPost(post,$index)">
                                                     <md-icon>flag</md-icon>Flag</md-button>
                                             </md-menu-item>
                                             <md-menu-item>
-                                                <md-button ng-click="::confirmDelete(Post,$index)">
+                                                <md-button ng-click="::confirmDelete(post,$index)">
                                                     <md-icon>delete</md-icon>Delete</md-button>
                                             </md-menu-item>
                                             <md-menu-item>
-                                                <md-button ng-click="newPost(Post,'update')">
+                                                <md-button ng-click="newPost(post,'update')">
                                                     <md-icon>edit</md-icon>Edit</md-button>
                                             </md-menu-item>
                                             <md-menu-item ng-show="devMode">
-                                                <md-button ng-click="::logPostToConsole(Post,$index)">
+                                                <md-button ng-click="::logPostToConsole(post,$index)">
                                                     <md-icon>edit</md-icon>Console Log Post</md-button>
                                             </md-menu-item>
                                         </md-menu-content>
                                     </md-menu>
                                     <span flex></span>
-                                    <md-button id="open_button" ng-hide="Post.Description == ''" class="md-button md-accent" ng-click="newPost(Post, 'view')" aria-label="Open resource">More</md-button>
+                                    <md-button id="open_button" ng-hide="post.description == ''" class="md-button md-accent" ng-click="newPost(post, 'view')" aria-label="Open resource">More</md-button>
                                 </md-card-actions>
                             </div>
                         </div>
@@ -361,34 +342,199 @@
     </div>
     <!-------------------------------------------------------->
     <!---------------------- Libraries ----------------------->
+    <!-- Google API and Authentication Library -->
+    <!--<script src="https://apis.google.com/js/api.js"></script>-->
+    <!-- Angular Material -->
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-aria.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-messages.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.js"></script>
-    <script src="Libraries/ng-sanitize-1.5.7.js"></script>
-    <script src="Libraries/angular-grid.js"></script>
+    <!-- Angular Core Add-on Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-messages.min.js"></script>
+    <!-- Firebase Libraries -->
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-messaging.js"></script>
+    <!-- Other Libraries -->
     <script src="Libraries/detect-element-resize.js"></script>
-
-    <!-- Main Scripts -->
+    <script src="Libraries/angular-grid.js"></script>
+    <!-------------------------------------------------------->
+    <!------------------- Website Scripts -------------------->
     <script src="js/app.js"></script>
     <script src="js/generalFunctions.js"></script>
-
-    <!-- Directives -->
-    <script src="js/directives.js"></script>
-
     <!-- Services -->
-    <script src="js/Services/authorizationService.js"></script>
-    <script src="js/Services/googleDriveService.js"></script>
+    <script src="js/Services/APIService.js"></script>
+    <script type="text/javascript">
+        app.service('authorizationService', function ($q, $mdDialog) {
+            var self = this;
+            firebase.initializeApp({
+                apiKey: "AIzaSyB573SRLOsDHPmXIG-j7pMF9kqfO57MiRM",
+                authDomain: "york-studyhub.firebaseapp.com",
+                databaseURL: "https://york-studyhub.firebaseio.com",
+                storageBucket: "york-studyhub.appspot.com",
+                messagingSenderId: "632148950209"
+            });
+            self.FireAuth = firebase.auth();
+            self.FireDatabase = firebase.database();
+            self.FireStorage = firebase.storage();
+            var FireGAuth = new firebase.auth.GoogleAuthProvider();
+            self.FireUser = 'None';
+            var FireSignInPromise = $q.defer();
 
+            self.FireAuth.onAuthStateChanged(updateSigninStatus);
+
+            // ---------- End Firebase Auth, Begin Google API Library and auth2 ------------ //
+
+            self.GUser = null;
+            var GSignedIn = false;
+            var GSignInPromise = $q.defer();
+            var LibraryLoadPromise = $q.defer();
+
+            gapi.load('client:auth2', function () {
+                // Initialize oauth
+                gapi.auth2.init({
+                    'client_id': '632148950209-60a3db9qm6q31sids128mvstddg2qme7.apps.googleusercontent.com',
+                    'scope': 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/script.external_request https://www.googleapis.com/auth/script.scriptapp https://www.googleapis.com/auth/script.storage https://www.googleapis.com/auth/spreadsheets',
+                    'hosted_domain': 'york.org',
+                    fetch_basic_profile: true,
+                }).then(function (GAuth) {
+                    // Listen for sign-in state changes.
+                    GAuth.isSignedIn.listen(updateSigninStatus);
+                    // Handle the initial sign-in state.
+                    updateSigninStatus(GAuth.isSignedIn.get());
+                    // show sign in prompt if sign in button is clicked.
+                    GAuth.attachClickHandler('signin_button', null, null, console.warn)
+                }, console.warn)
+
+                // Initialize API libraries
+                gapi.client.init({
+                    'apiKey': 'AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA',
+                    'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest', 'https://www.googleapis.com/discovery/v1/apis/script/v1/rest'],
+                }).then(function () {
+                    console.log("Loaded APIs")
+                    LibraryLoadPromise.resolve();
+                }, console.warn)
+            });
+
+            function updateSigninStatus(Input) {
+                if (Input === true) {
+                    self.GUser = gapi.auth2.getAuthInstance().currentUser.get();
+                    GSignedIn = true;
+                    GSignInPromise.resolve(self.GUser);
+                    hideSigninButton()
+                } else if (Input === false) {
+                    GSignedIn = false;
+                    self.GUser = null;
+                    showSigninButton()
+                } else if (Input == null || Input.displayName != undefined) {
+                    self.FireUser = Input;
+                }
+
+                // Use the variables specified here
+                if (GSignedIn && self.FireUser && self.FireUser != 'None' && isUserEqual(self.GUser, self.FireUser)) {
+                    console.log("Everything is SignedIn")
+                    FireSignInPromise.resolve(self.FireUser);
+                } else if (GSignedIn && self.FireUser && self.FireUser != 'None' && !isUserEqual(self.GUser, self.FireUser)) {
+                    console.log("Different Firebase user, signing into Firebase...")
+                    SignIntoFirebase()
+                } else if (GSignedIn && self.FireUser != 'None') {
+                    console.log("No Firebase user, signing into Firebase...")
+                    SignIntoFirebase()
+                }
+
+                console.log(self.FireUser)
+
+                function SignIntoFirebase() {
+                    // Sign in with id_token credential from the gapi Google user.
+                    var credential = firebase.auth.GoogleAuthProvider.credential(self.GUser.getAuthResponse().id_token);
+                    firebase.auth().signInWithCredential(credential).then(function () {
+                        FireSignInPromise.resolve(self.FireUser);
+                    }).catch(console.warn);
+                }
+
+                function isUserEqual(googleUser, firebaseUser) {
+                    if (firebaseUser) {
+                        var providerData = firebaseUser.providerData;
+                        for (var i = 0; i < providerData.length; i++) {
+                            if (providerData[i].providerId === firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
+                                providerData[i].uid === googleUser.getBasicProfile().getId()) {
+                                // We don't need to reauth the Firebase connection.
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+                }
+            }
+
+            window.signOut = function () {
+                gapi.auth2.getAuthInstance().signOut().then(function () {
+                    setTimeout(function () {
+                        self.FireAuth.signOut().then(function () {
+                            console.log("All Signed Out")
+                        }, console.warn);
+                    }, 500)
+                }, console.warn);
+
+                var logout = document.createElement("img");
+                logout.setAttribute("src", "https://mail.google.com/mail/u/0/?logout&hl=en");
+                logout.style.display = "none";
+                var logoutImg = document.body.appendChild(logout);
+            }
+
+            var signinBackdrop = angular.element(document.getElementById('overlay_background'));
+            var signinButton = angular.element(document.getElementById('signin_button'));
+            var signinSpinner = angular.element(document.getElementById('signin_spinner'));
+            var datButton = document.getElementById('dat_button');
+
+            function showSigninButton() {
+                self.showSigninDialog()
+                signinSpinner.addClass('fadeOut');
+                setTimeout(function () {
+                    signinButton.addClass('fadeIn');
+                    datButton.style.display = 'none';
+                }, 500);
+                signinBackdrop[0].style.zIndex = "2000"
+            }
+
+            function hideSigninButton() {
+                signinSpinner.removeClass('fadeOut');
+                setTimeout(function () {
+                    signinButton.removeClass('fadeIn');
+                    datButton.style.display = 'inline-block';
+                }, 500);
+            };
+
+            this.onLoad = function (callback) {
+                $q.all([LibraryLoadPromise.promise, FireSignInPromise.promise, GSignInPromise.promise]).then(function () {
+                    console.log("All Auth Done")
+                    callback();
+                });
+            }
+
+            this.hideSigninDialog = function () {
+                signinBackdrop.addClass('fadeOut');
+            };
+
+            this.showSigninDialog = function () {
+                signinBackdrop.removeClass('fadeOut');
+            };
+
+            this.getGAuthToken = function () {
+                return (gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true).access_token)
+            }
+        });
+    </script>
     <!-- Controllers -->
     <script src="js/Controllers/mainControllerFunctions.js"></script>
     <script src="js/Controllers/subControllerFunctions.js"></script>
     <script src="js/Controllers/newPostController.js"></script>
-    <script type="text/javascript" id="Hello_World_Script">
-        window.FUNCTION("dmFyIGdldFN0dWZmID0gZnVuY3Rpb24oKXtjb25zb2xlLmxvZygnbnVkZ2UnKX0=")
-    </script>
-    <!---->
+    <!-- Directives -->
+    <script src="js/directives.js"></script>
 </body>
 
 </html>
