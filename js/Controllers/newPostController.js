@@ -123,6 +123,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
             content: $scope.post,
         }, true), function (reply) {
             console.log(reply)
+
             $mdToast.hide();
             $mdDialog.hide();
             $scope.dialog_container.style.opacity = 1;
@@ -132,6 +133,15 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
             //     $scope.visiblePosts = $scope.filterPosts($scope.allPosts);
             // })
         }, onError, 150);
+    }
+
+    function addFireDatabaseRef(post) {
+        return authorizationService.FireDatabase.ref('posts/' + post.id).set({
+            T: post.title,
+            E: post.creator.email,
+            C: post.class.name,
+            D: post.updateDate
+        });
     }
 
     $scope.shareFile = function () {

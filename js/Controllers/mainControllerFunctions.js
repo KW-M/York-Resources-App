@@ -144,7 +144,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //----------------------------------------------------
    //------------- Signin & Initiation ------------------
    var drivePicker, uploadPicker;
-   $scope.postMemory
+   var postIdAccumulator = [];
+   $scope.postMemory = {};
 
    authorizationService.onLoad(function () {
       var profile = authorizationService.GUser.getBasicProfile()
@@ -199,36 +200,24 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function getDatabase(argument) {
-      // authorizationService.FireDatabase.ref('posts').on('child_added', function (childSnapshot, prevChildKey) {
-      //    var val = childSnapshot.val()
-      //    postMemory[childSnapshot.key] = {
-      //       updateDate: val.D,
-      //       class: val.C,
-      //       email: val.E,
-      //       title: val.T,
-      //       loadStatus: 'Not Loaded'
-      //    }
-      //    console.log('child changed: ' + childSnapshot.key + ' previous key: ' + prevChildKey, childSnapshot.val())
-      //    console.log(postMemory)
-      // });
-      // authorizationService.FireDatabase.ref('posts').on('child_removed', function (childSnapshot, prevChildKey) {
-      //    var val = childSnapshot.val()
-      //    delete postMemory[childSnapshot.key];
+      authorizationService.FireDatabase.ref('posts').on('child_added', function (childSnapshot, prevChildKey) {
+         var val = childSnapshot.val()
+         postMemory[childSnapshot.key] = {
+            updateDate: val.D,
+            class: val.C,
+            email: val.E,
+            title: val.T,
+            loadStatus: 'Not Loaded'
+         }
+         console.log('child changed: ' + childSnapshot.key + ' previous key: ' + prevChildKey, childSnapshot.val())
+         console.log(postMemory)
+         postIdAccumulator.push(postMemory[childSnapshot.key])
+         if (postIdAccumulator.length = 4) getPosts()
+      });
+   }
 
-      //    console.log('child removed: ' + childSnapshot.key + ' previous key: ' + prevChildKey, childSnapshot.val())
-      //    console.log(postMemory)
-      // });
-      // authorizationService.FireDatabase.ref('posts').on('child_changed', function (childSnapshot, prevChildKey) {
-      //    var val = childSnapshot.val()
-      //    postMemory[childSnapshot.key].updateDate = val.D
-      //    postMemory[childSnapshot.key].class = val.C
-      //    postMemory[childSnapshot.key].email = val.E
-      //    postMemory[childSnapshot.key].title = val.T
-      //    postMemory[childSnapshot.key].loadStatus = 'Update Pending'
-
-      //    console.log('child removed: ' + childSnapshot.key + ' previous key: ' + prevChildKey, childSnapshot.val())
-      //    console.log(postMemory)
-      // });
+   function getPosts() {
+      console.log(postIdAccumulator)
    }
 
    //----------------------------------------------------
