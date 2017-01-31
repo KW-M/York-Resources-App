@@ -258,25 +258,25 @@
                 </span>
                 <div name="Posts Grid" ng-hide="queryParams.classPath == 'Quizlet'">
                     <div angular-grid="visiblePosts" id="layout_grid" ag-gutter-size="12" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="getFiles()">
-                        <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': Post.Class.Color + ' 0.6)'}" class="post-card raise-on-hover">
-                            <div class="post-card-header unselectable" md-ink-ripple="{{Post.Link != ''}}" ng-class="{'no-link': Post.Link == '', 'gDrive-type': Post.Type == 'gDrive'}" ng-click="openLink(Post.Link)">
-                                <img ng-src="{{Post.PreviewImage||'https://ssl.gstatic.com/atari/images/simple-header-blended-small.png'}}" class="post-card-image unselectable" ng-hide="Post.Link == ''"></img>
+                        <div ng-repeat="Post in visiblePosts track by Post.Id" ng-style="{'background-color': post.class.color + ' 0.6)'}" class="post-card raise-on-hover">
+                            <div class="post-card-header unselectable" md-ink-ripple="{{post.link != ''}}" ng-class="{'no-link': post.link == '', 'gDrive-type': post.type == 'gDrive'}" ng-click="openLink(post.link)">
+                                <img ng-src="{{post.previewImage||'https://ssl.gstatic.com/atari/images/simple-header-blended-small.png'}}" class="post-card-image unselectable" ng-hide="post.link == ''"></img>
                                 <div class="gradient-overlay">
                                     <div class="gradient-overlay-metadata metadata-regular unselectable">
-                                        <span ng-hide="Post.Class.Name == null"><md-icon>people</md-icon> {{Post.Class.Name}}</span>
-                                        <span><md-icon>event</md-icon> {{Post.CreationDate | date : "mm/dd/yyyy"}}</span>
+                                        <span ng-hide="post.class.name == null"><md-icon>people</md-icon> {{post.class.name}}</span>
+                                        <span><md-icon>event</md-icon> {{post.creationDate | date : "mm/dd/yyyy"}}</span>
                                     </div>
                                     <div ng-hide="Post.Tags.length < 1" class="gradient-overlay-metadata metadata-regular unselectable">
                                         <span><md-icon>style</md-icon> {{Post.Tags.join(', ')}}</span>
                                     </div>
-                                    <div ng-hide="Post.Link == '' || Post.Type == 'gDrive'" class="gradient-overlay-metadata metadata-link unselectable" style="font-size:18px">
-                                        <span><md-icon>language</md-icon> {{removeHttp(Post.Link)}}</span>
+                                    <div ng-hide="post.link == '' || post.type == 'gDrive'" class="gradient-overlay-metadata metadata-link unselectable" style="font-size:18px">
+                                        <span><md-icon>language</md-icon> {{removeHttp(post.link)}}</span>
                                     </div>
-                                    <div class="gradient-overlay-metadata md-chips metadata-link unselectable" ng-hide="Post.Type != 'gDrive'" style="width:100%">
+                                    <div class="gradient-overlay-metadata md-chips metadata-link unselectable" ng-hide="post.type != 'gDrive'" style="width:100%">
                                         <md-chip>
                                             <div class="md-chip-content unselectable">
-                                                <img ng-src="{{Post.AttachmentIcon}}" style="margin-right:4px"></img>
-                                                <span>{{Post.AttachmentName}}</span>
+                                                <img ng-src="{{post.attachmentIcon}}" style="margin-right:4px"></img>
+                                                <span>{{post.attachmentName}}</span>
                                             </div>
                                         </md-chip>
                                     </div>
@@ -284,8 +284,8 @@
                             </div>
                             <div>
                                 <p class="post-card-title md-title">{{Post.Title}}</p>
-                                <p class="post-card-creator unselectable"><span>By {{::Post.Creator.Name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::Post.Creator.ClassOf}})</span></p>
-                                <p id="post_card_description" class="md-body-1" ng-bind-html="Post.Description" ng-hide="Post.Description === ''"></p>
+                                <p class="post-card-creator unselectable"><span>By {{::post.creator.name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::post.creator.classOf}})</span></p>
+                                <p id="post_card_description" class="md-body-1" ng-bind-html="post.description" ng-hide="post.description === ''"></p>
                                 <md-card-actions layout="row" style="align-items: center;">
                                     <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(Post)">
                                         <span class="like-counter">{{Post.Likes.length}}</span>
@@ -321,7 +321,7 @@
                                         </md-menu-content>
                                     </md-menu>
                                     <span flex></span>
-                                    <md-button id="open_button" ng-hide="Post.Description == ''" class="md-button md-accent" ng-click="newPost(Post, 'view')" aria-label="Open resource">More</md-button>
+                                    <md-button id="open_button" ng-hide="post.description == ''" class="md-button md-accent" ng-click="newPost(Post, 'view')" aria-label="Open resource">More</md-button>
                                 </md-card-actions>
                             </div>
                         </div>
