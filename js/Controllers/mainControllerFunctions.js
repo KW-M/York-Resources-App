@@ -184,6 +184,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       $q.all([getStartupData, pickerPromise]).then(function () {
          console.log("Everything Loaded")
          authorizationService.hideSigninDialog();
+         getDatabase()
       })
    })
 
@@ -199,7 +200,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          .addView(uploadView).enableFeature(google.picker.Feature.NAV_HIDDEN).hideTitleBar().build();
    }
 
-   function getDatabase(argument) {
+   function getDatabase() {
       authorizationService.FireDatabase.ref('posts').on('child_added', function (childSnapshot, prevChildKey) {
          var val = childSnapshot.val()
          $scope.postMemory[childSnapshot.key] = {
@@ -218,22 +219,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function getPosts(idArray) {
-      promiseQueue().addPromise('drive', APIService.runGAScript('savePost', postId, true), function (postData) {
-            console.log(postData)
-            var createdPost = JSON.parse(postData.result.response.result);
-            console.log(createdPost)
-            addFireDatabaseRef(createdPost).then(function () {
-               $mdToast.hide();
-               $mdDialog.hide();
-               $scope.dialog_container.style.opacity = 1;
-               $scope.dialog_container.style.pointerEvents = 'all';
-               // $timeout(function () {
-               //     $scope.allPosts.push($scope.post)
-               //     $scope.visiblePosts = $scope.filterPosts($scope.allPosts);
-               // })
-            })
-         },
-         onError, 150);
+      promiseQueue().addPromise('drive', APIService.runGAScript('getPost', idArray, true), function (postsData) {
+         console.log(postsData)
+      }, console.warn, 150);
       console.log(postIdAccumulator)
    }
 
