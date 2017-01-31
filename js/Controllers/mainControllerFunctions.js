@@ -59,7 +59,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          $location.search({
             q: null
          });
-         $location.path(query.classPath.replace(" ", "-") || query.classPath);
+         $location.path(query.classPath.replace(/ /g, "-") || query.classPath);
       }
       if (query.q !== undefined) {
          if (query.q === null || query.q == '') {
@@ -77,7 +77,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function onLocationChange() {
       $scope.queryParams.q = $location.search().q || null;
-      $scope.queryParams.classPath = $location.path().replace(/\//, "").replace(/-/, " ") || 'All Posts';
+      $scope.queryParams.classPath = $location.path().replace(/\//g, "").replace(/-/g, " ") || 'All Posts';
+      console.log($scope.queryParams.classPath)
       $scope.queryParams.id = $location.hash();
       $scope.searchInputTxt = $scope.queryParams.q;
 
@@ -410,10 +411,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          $scope.previousSearch = $scope.queryParams.q || null;
          $scope.updateVisiblePosts($scope.searchPosts);
       } else {
-         $timeout(function () {
-            $scope.allPosts = $scope.allPosts.concat(formattedFileList);
-            $scope.updateVisiblePosts($scope.visiblePosts.concat($scope.filterPosts(formattedFileList)));
-         })
+         $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+         $scope.updateVisiblePosts($scope.visiblePosts.concat($scope.filterPosts(formattedFileList)));
 
          //if ($scope.queryPropertyString == queryString) {
          // }
@@ -572,6 +571,5 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       })
    }
 
-   //less important functions are delegated to another file;
-   subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia, $timeout, $filter, $mdSidenav, authorizationService, APIService, angularGridInstance);
+   //less important functions are delegated to another file;subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia, $timeout, $filter, $mdSidenav, authorizationService, APIService, angularGridInstance);
 }
