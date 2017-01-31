@@ -219,8 +219,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function getPosts(idArray) {
-      promiseQueue().addPromise('drive', APIService.runGAScript('getPost', idArray, true), function (postsData) {
+      promiseQueue().addPromise('drive', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
          console.log(postsData)
+         var postsArray = JSON.parse(postsData.result.response.result);
+         $timeout(function () {
+            $a
+            setTimeout(angularGridInstance.postsGrid.refresh, 1000);
+         }, 1000)
       }, console.warn, 150);
       console.log(postIdAccumulator)
    }
