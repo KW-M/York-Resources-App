@@ -204,17 +204,17 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       var postsFireRef = authorizationService.FireDatabase.ref('posts')
       postsFireRef.orderByChild('D').once('value', function (snapshot) {
          snapshot.forEach(function (childSnapshot) {
-            convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded')
+            $scope.postsRecord.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'))
          });
-         postsFireRef.orderByChild('D').startAt(Date.now()).on('child_added', function (childSnapshot) {
+         postsFireRef.startAt(Date.now()).on('child_added', function (childSnapshot) {
             console.log('newChild', childSnapshot.val())
             $scope.postsRecord.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'));
             getPosts([childSnapshot.key])
          });
          postsFireRef.on('child_removed', function (childSnapshot) {
-
+            console.log('removedChild', childSnapshot.val())
          });
-         postsFireRef.orderByChild('D').startAt(Date.now()).on('child_changed', function (childSnapshot) {
+         postsFireRef.on('child_changed', function (childSnapshot) {
             console.log('changedChild', childSnapshot.val())
          });
          //       //postIdAccumulator.push(postMemory[childSnapshot.key])
