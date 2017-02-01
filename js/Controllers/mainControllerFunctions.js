@@ -203,27 +203,47 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function getDatabase() {
       var postsFireRef = authorizationService.FireDatabase.ref('posts')
       postsFireRef.orderByChild('D').once('value', function (snapshot) {
+         makePostsReferenceArray(snapshot.val());
          postsFireRef.orderByChild('D').startAt(Date.now()).on('child_added', function (childSnapshot) {
+            var val = childSnapshot.val();
+            console.log('newChild', val)
+            $scope.postsRecord.push({
+               postId: objKey,
+               title: val.T,
+               class: va.C,
+               email: postObj.E,
+               updateDate: postObj.D,
+               loadStatus: 'notLoaded',
+            })
+            getPosts([childSnapshot.key])
+         });
+         postsFireRef.orderByChild('D').startAt(Date.now()).on('child_removed', function (childSnapshot) {
             console.log('newChild', childSnapshot)
          });
-         // authorizationService.FireDatabase.ref('posts').on('child_added', function (childSnapshot, prevChildKey) {
-         //    var val = childSnapshot.val()
-         //    $scope.postMemory[childSnapshot.key] = {
-         //       updateDate: val.D,
-         //       class: val.C,
-         //       email: val.E,
-         //       title: val.T,
-         //       loadStatus: 'Not Loaded'
-         //    }
-         //    console.log('child changed: ' + childSnapshot.key + ' previous key: ' + prevChildKey, childSnapshot.val())
-         //    console.log($scope.postMemory)
+         postsFireRef.orderByChild('D').startAt(Date.now()).on('child_changed', function (childSnapshot) {
+            console.log('newChild', childSnapshot)
+         });
          //       //postIdAccumulator.push(postMemory[childSnapshot.key])
          //       //if (postIdAccumulator.length = 4) getPosts()
-         //    getPosts([childSnapshot.key])
+         //    
          // });
       })
 
-      function () makeRefrence
+      function makePostsReferenceArray(allData) {
+         for (var objKey in allData) {
+            if (allData.hasOwnProperty(objKey)) {
+               var postObj = allData[objKey];
+               $scope.postsRecord.push({
+                  postId: objKey,
+                  title: postObj.T,
+                  class: postObj.C,
+                  email: postObj.E,
+                  updateDate: postObj.D,
+                  loadStatus: 'notLoaded',
+               })
+            }
+         }
+      }
    }
 
    function getPosts(idArray) {
