@@ -202,10 +202,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function getDatabase() {
       var postsRef = authorizationService.FireDatabase.ref('posts')
-      postsRef.once('value', function (snapshot) {
+      postsRef.orderByChild('D').postsRef.once('value', function (snapshot) {
          console.log('allData', snapshot)
+         postsRef.orderByChild('D').startAt(Date.now()).on('child_added', function (snapshot) {
+            console.log('new record', snap.key());
+         });
          postsRef.on('child_added', function (childSnapshot) {
-            console.log('childAdded', childSnapshot)
+
          });
          // authorizationService.FireDatabase.ref('posts').on('child_added', function (childSnapshot, prevChildKey) {
          //    var val = childSnapshot.val()

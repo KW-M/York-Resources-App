@@ -145,7 +145,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
             T: post.title,
             E: post.creator.email,
             C: post.class.name,
-            D: post.updateDate
+            D: firebase.database.ServerValue.TIMESTAMP
         });
     }
 
