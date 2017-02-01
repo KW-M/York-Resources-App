@@ -208,17 +208,17 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             var val = childSnapshot.val();
             console.log('newChild', val)
             $scope.postsRecord.push({
-               postId: objKey,
                title: val.T,
-               class: va.C,
-               email: postObj.E,
-               updateDate: postObj.D,
+               class: val.C,
+               email: val.E,
+               updateDate: val.D,
                loadStatus: 'notLoaded',
+               postId: childSnapshot.key,
             })
             getPosts([childSnapshot.key])
          });
          postsFireRef.orderByChild('D').startAt(Date.now()).on('child_removed', function (childSnapshot) {
-            console.log('newChild', childSnapshot)
+
          });
          postsFireRef.orderByChild('D').startAt(Date.now()).on('child_changed', function (childSnapshot) {
             console.log('newChild', childSnapshot)
