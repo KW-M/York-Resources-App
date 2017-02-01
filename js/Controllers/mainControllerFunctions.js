@@ -204,7 +204,16 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       var postsRef = authorizationService.FireDatabase.ref('posts')
       postsRef.orderByChild('D').once('value', function (snapshot) {
          var allData = snapshot.val();
-
+         for (var objKey in allData) {
+            if (allData.hasOwnProperty(objKey)) {
+               var postObj = {
+                  title = allData[objKey].T,
+                  class = allData[objKey].C,
+                  email = allData[objKey].C,
+                  updateDate = allData[objKey].,
+               }
+            }
+         }
          postsRef.orderByChild('D').startAt(Date.now()).on('child_added', function (childSnapshot) {
             console.log('newChild', childSnapshot)
          });
