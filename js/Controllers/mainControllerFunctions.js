@@ -201,21 +201,25 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function getDatabase() {
-      authorizationService.FireDatabase.ref('posts').on('child_added', function (childSnapshot, prevChildKey) {
-         var val = childSnapshot.val()
-         $scope.postMemory[childSnapshot.key] = {
-            updateDate: val.D,
-            class: val.C,
-            email: val.E,
-            title: val.T,
-            loadStatus: 'Not Loaded'
-         }
-         console.log('child changed: ' + childSnapshot.key + ' previous key: ' + prevChildKey, childSnapshot.val())
-         console.log($scope.postMemory)
-            //postIdAccumulator.push(postMemory[childSnapshot.key])
-            //if (postIdAccumulator.length = 4) getPosts()
-         getPosts([childSnapshot.key])
+      // authorizationService.FireDatabase.ref('posts').on('child_added', function (childSnapshot, prevChildKey) {
+      //    var val = childSnapshot.val()
+      //    $scope.postMemory[childSnapshot.key] = {
+      //       updateDate: val.D,
+      //       class: val.C,
+      //       email: val.E,
+      //       title: val.T,
+      //       loadStatus: 'Not Loaded'
+      //    }
+      //    console.log('child changed: ' + childSnapshot.key + ' previous key: ' + prevChildKey, childSnapshot.val())
+      //    console.log($scope.postMemory)
+      //       //postIdAccumulator.push(postMemory[childSnapshot.key])
+      //       //if (postIdAccumulator.length = 4) getPosts()
+      //    getPosts([childSnapshot.key])
+      // });
+      authorizationService.FireDatabase.ref('posts').once('value', function (snapshot) {
+         console.log(snapshot)
       });
+
    }
 
    function getPosts(idArray) {
