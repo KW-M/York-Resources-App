@@ -144,7 +144,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //------------- Signin & Initiation ------------------
    var drivePicker, uploadPicker;
    var postIdAccumulator = [];
-   $scope.postMemory = {};
+   $scope.postsRecord = [];
 
    authorizationService.onLoad(function () {
       var profile = authorizationService.GUser.getBasicProfile()
