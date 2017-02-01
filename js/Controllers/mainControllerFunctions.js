@@ -217,29 +217,19 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          postsFireRef.on('child_changed', function (childSnapshot) {
             console.log('changedChild', childSnapshot.val())
          });
-         //       //postIdAccumulator.push(postMemory[childSnapshot.key])
-         //       //if (postIdAccumulator.length = 4) getPosts()
-         //    
-         // });
       })
-
-      function makePostsReferenceArray(allData) {
-         for (var objKey in allData) {
-            if (allData.hasOwnProperty(objKey)) {
-               $scope.postsRecord.push(convertFirePost(objKey, allData[objKey], 'notLoaded'));
-            }
-         }
-      }
 
       function convertFirePost(key, value, loadStatus) {
          return {
-            postId: key,
+            id: key,
             title: value.T,
             class: {
                name: value.C,
             },
-            email: value.E,
-            updateDate: postObj.D,
+            creator: {
+               email: value.E,
+            },
+            updateDate: value.D,
             loadStatus: loadStatus,
          }
       }
