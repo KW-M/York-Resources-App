@@ -201,20 +201,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function getDatabase() {
-      var postsRef = authorizationService.FireDatabase.ref('posts')
-      postsRef.orderByChild('D').once('value', function (snapshot) {
-         var allData = snapshot.val();
-         for (var objKey in allData) {
-            if (allData.hasOwnProperty(objKey)) {
-               var postObj = {
-                  title = allData[objKey].T,
-                  class = allData[objKey].C,
-                  email = allData[objKey].C,
-                  updateDate = allData[objKey].,
-               }
-            }
-         }
-         postsRef.orderByChild('D').startAt(Date.now()).on('child_added', function (childSnapshot) {
+      var postsFireRef = authorizationService.FireDatabase.ref('posts')
+      postsFireRef.orderByChild('D').once('value', function (snapshot) {
+         postsFireRef.orderByChild('D').startAt(Date.now()).on('child_added', function (childSnapshot) {
             console.log('newChild', childSnapshot)
          });
          // authorizationService.FireDatabase.ref('posts').on('child_added', function (childSnapshot, prevChildKey) {
@@ -233,6 +222,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          //    getPosts([childSnapshot.key])
          // });
       })
+
+      function () makeRefrence
    }
 
    function getPosts(idArray) {
@@ -582,12 +573,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //---------------------- dev -------------------------
 
    $scope.logDuplicationIndexes = function () {
-      console.log({
-         deDuplicationIndex: deDuplicationIndex,
-         classPageTokenSelectionIndex: classPageTokenSelectionIndex
-      })
-   }
-
-   //less important functions are delegated to another file;
+         console.log({
+            deDuplicationIndex: deDuplicationIndex,
+            classPageTokenSelectionIndex: classPageTokenSelectionIndex
+         })
+      } //less important functions are delegated to another file;
    subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia, $timeout, $filter, $mdSidenav, authorizationService, APIService, angularGridInstance);
 }
