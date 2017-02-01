@@ -217,19 +217,19 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          postsFireRef.on('child_changed', function (childSnapshot) {
             console.log('changedChild', childSnapshot.val())
          });
+         console.log($scope.postsRecord);
       })
 
       function convertFirePost(key, value, loadStatus) {
          return {
             id: key,
             title: value.T,
-            class: {
-               name: value.C,
-            },
+            class: $scope.findClassObject(value.C),
             creator: {
                email: value.E,
+               classOf: value.E.match(/\d+/)[0] || '∞'
             },
-            updateDate: value.D,
+            updateDate: Date(value.D),
             loadStatus: loadStatus,
          }
       }
