@@ -204,7 +204,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       var postsRef = authorizationService.FireDatabase.ref('posts')
       postsRef.once('value', function (snapshot) {
          console.log('allData', snapshot)
-         authorizationService.FireDatabase.ref('posts').on('child_added', function (childSnapshot) {
+         postsRef.on('child_added', function (childSnapshot) {
             console.log('childAdded', childSnapshot)
          });
          // authorizationService.FireDatabase.ref('posts').on('child_added', function (childSnapshot, prevChildKey) {
