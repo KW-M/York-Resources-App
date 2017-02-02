@@ -245,7 +245,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          var postsArray = JSON.parse(postsData.result.response.result);
          $timeout(function () {
             //$scope.allPosts.push(postsArray[0])
-            sortPostsByType(postsArray, null, $scope.queryParams);
             setTimeout(angularGridInstance.postsGrid.refresh, 1000);
          }, 1000)
       }, console.warn, 150);
@@ -256,8 +255,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       var filterObj = $scope.filterPosts($scope.allPosts)
       $scope.sortByDateAndLikes(filterObj.filtered).forEach(function (postObj, index) {
          if (postObj.loadStatus != 'Loaded') {
-            //assemble array
-         } else {}
+
+         }
       })
       filterObj.filteredOut.forEach(function (postObj, index) {
          if (postObj.loadStatus == 'Loaded') {

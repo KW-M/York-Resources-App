@@ -6,8 +6,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	function findPostById(id, array) {
 		var item = 0;
 		for (item in array) {
-			if (array[item].Id == id) return (item)
+			if (array[item].id == id) return (item)
 		}
+	}
+	$scope.getIdPostArrayIndex = function (id) {
+		var
 	}
 
 	function findItemInArray(value, array) {
