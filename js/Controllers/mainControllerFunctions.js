@@ -263,10 +263,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       $scope.sortedPosts.forEach(function (postObj, index) {
          if (postObj.loadStatus != 'Loaded') {
             postIdAccumulator.push(postObj.id)
-            if (postIdAccumulator.length = 3) {
-               getPosts(postIdAccumulator)
-               postIdAccumulator = [];
-            }
+            getPosts(postIdAccumulator)
+            postIdAccumulator = [];
+            // if (postIdAccumulator.length = 3) {
+            //    getPosts(postIdAccumulator)
+            //    postIdAccumulator = [];
+            // }
          }
       });
       filterObj.filteredOut.forEach(function (postObj, index) {
@@ -284,7 +286,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             }
             var indexes = $scope.getIdPostArrayIndex(postObj.id)
             $scope.allPosts[indexes.allPosts] = slimedObj;
-            $scope.sortedPosts[indexes.allPosts] = sli;
+            $scope.sortedPosts[indexes.allPosts] = slimedObj;
             $scope.visiblePosts.splice(indexes.visiblePosts, 1);
          }
       })
