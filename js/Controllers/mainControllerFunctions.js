@@ -14,8 +14,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    var conurancy_counter = 0;
 
    $scope.allPosts = [];
-   $scope.visiblePosts = [];
+   $scope.sortedPosts = [];
    $scope.searchPosts = [];
+   $scope.visiblePosts = [];
+
 
    var deDuplicationIndex = {};
    var classPageTokenSelectionIndex = {};
@@ -248,7 +250,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function loadPosts() {
-      $scope.allPosts.forEach(postObj)
+      $scope.allPosts.forEach(function (postObj, index) {
+
+         if (postObj.loadStatus != 'Loaded') {} else {}
+      })
    }
 
    //----------------------------------------------------
