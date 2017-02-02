@@ -185,12 +185,18 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				var Creator = true;
 			}
 			if (Flagged && Class && Type && Creator) {
-				filtered.push()
-			} else {}
+				filtered.push(inputSet[count])
+			} else {
+				filteredOut.push(inputSet[count])
+			}
 		};
-		return output;
+		return {
+			filtered: filtered,
+			filteredOut: filteredOut
+		};
 		//return ($scope.sortByDateAndLikes(output))
 	}
+
 	$scope.sortByDateAndLikes = function (arrayToSort) {
 		return (arrayToSort.sort(function (a, b) {
 			return b.creationDate.addDays(b.likes.length * 2 || 0) - a.creationDate.addDays(a.likes.length * 2 || 0);
