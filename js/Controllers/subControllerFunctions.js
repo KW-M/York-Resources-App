@@ -10,7 +10,18 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}
 	}
 	$scope.getIdPostArrayIndex = function (id) {
-		var
+		return {
+			allPosts: findPostIndexById(id, $scope.allPosts),
+			sortedPosts: findPostIndexById(id, $scope.sortedPosts),
+			visiblePosts: findPostIndexById(id, $scope.visiblePosts),
+		}
+
+		function findPostIndexById(id, array) {
+			var index = 0;
+			for (index in array) {
+				if (array[index].id == id) return (index)
+			}
+		}
 	}
 
 	function findItemInArray(value, array) {
