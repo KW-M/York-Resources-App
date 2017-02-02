@@ -255,10 +255,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function loadPosts() {
       var filterObj = $scope.filterPosts($scope.allPosts)
       filterObj.filtered.forEach(function (postObj, index) {
-         if (postObj.loadStatus != 'Loaded') {} else {}
+         if (postObj.loadStatus != 'Loaded') {
+            //assemble array
+         } else {}
       })
-      filterObj.filtered.forEach(function (postObj, index) {
-         if (postObj.loadStatus != 'Loaded') {} else {}
+      filterObj.filteredOut.forEach(function (postObj, index) {
+         if (postObj.loadStatus == 'Loaded') {
+            // restore unloaded format
+         }
       })
    }
 
