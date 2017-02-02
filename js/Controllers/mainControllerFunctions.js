@@ -144,7 +144,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //------------- Signin & Initiation ------------------
    var drivePicker, uploadPicker;
    var postIdAccumulator = [];
-   //$scope.allPosts = [];
 
    authorizationService.onLoad(function () {
       var profile = authorizationService.GUser.getBasicProfile()
@@ -235,8 +234,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
    }
 
-   function
-
    function getPosts(idArray) {
       promiseQueue().addPromise('drive', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
          console.log(postsData)
@@ -248,6 +245,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          }, 1000)
       }, console.warn, 150);
       console.log(postIdAccumulator)
+   }
+
+   function loadPosts(argument) {
+      // body...
    }
 
    //----------------------------------------------------
