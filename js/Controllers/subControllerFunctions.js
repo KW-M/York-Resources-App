@@ -161,8 +161,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	$scope.filterPosts = function (inputSet) {
 		var filtered = []
 		var filteredOut = []
+
 		var count = 0
-		var max = inputSet.length
 		for (inputSet
 			if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
 				var Flagged = post.flagged === $scope.queryParams.flagged;
