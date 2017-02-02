@@ -246,6 +246,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          var postsArray = JSON.parse(postsData.result.response.result);
          $timeout(function () {
             postsArray.forEach(function function_name(postObj) {
+               postObj.loadStatus = 'Loaded';
                var indexes = $scope.getIdPostArrayIndex(postObj.id)
                $scope.allPosts[indexes.allPosts] = postObj;
                $scope.sortedPosts[indexes.allPosts] = postObj;
@@ -270,7 +271,21 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       });
       filterObj.filteredOut.forEach(function (postObj, index) {
          if (postObj.loadStatus == 'Loaded') {
-            console.log('unLoaded')
+            var slimedObj = {
+               id: postObj.id,
+               title: postObj.title,
+               class: postObj.class,
+               creator: postObj.creator,
+               flagged: postObj.flagged,
+               likeCount: postObj.likes.length,
+               updateDate: postObj.updateDate,
+               creationDate: postObj.creationDate,
+               loadStatus: 'UnLoaded',
+            }
+            var indexes = $scope.getIdPostArrayIndex(postObj.id)
+            $scope.allPosts[indexes.allPosts] = slimedObj;
+            $scope.sortedPosts[indexes.allPosts] = sli;
+            $scope.visiblePosts.splice(indexes.visiblePosts, 1);
          }
       })
    }

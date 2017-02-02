@@ -16,7 +16,11 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 				if (array[index].id == id) return (index)
 			}
 		}
-
+		return {
+			allPosts: findPostIndexById(id, $scope.allPosts),
+			sortedPosts: findPostIndexById(id, $scope.sortedPosts),
+			visiblePosts: findPostIndexById(id, $scope.visiblePosts),
+		}
 	}
 
 	function findItemInArray(value, array) {
