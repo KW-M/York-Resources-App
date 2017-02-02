@@ -144,7 +144,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //------------- Signin & Initiation ------------------
    var drivePicker, uploadPicker;
    var postIdAccumulator = [];
-   $scope.postsRecord = [];
+   //$scope.allPosts = [];
 
    authorizationService.onLoad(function () {
       var profile = authorizationService.GUser.getBasicProfile()
@@ -204,11 +204,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       var postsFireRef = authorizationService.FireDatabase.ref('posts')
       postsFireRef.orderByChild('D').once('value', function (snapshot) {
          snapshot.forEach(function (childSnapshot) {
-            $scope.postsRecord.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'))
+            $scope.allPosts.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'))
          });
          postsFireRef.startAt(Date.now()).on('child_added', function (childSnapshot) {
             console.log('newChild', childSnapshot.val())
-            $scope.postsRecord.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'));
+            $scope.allPosts.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'));
             getPosts([childSnapshot.key])
          });
          postsFireRef.on('child_removed', function (childSnapshot) {
@@ -217,7 +217,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          postsFireRef.on('child_changed', function (childSnapshot) {
             console.log('changedChild', childSnapshot.val())
          });
-         console.log($scope.postsRecord);
+         console.log($scope.allPosts);
       })
 
       function convertFirePost(key, value, loadStatus) {
@@ -234,6 +234,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          }
       }
    }
+
+   function
 
    function getPosts(idArray) {
       promiseQueue().addPromise('drive', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
