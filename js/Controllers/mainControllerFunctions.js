@@ -255,6 +255,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function loadPosts() {
       $scope.sortedPosts = $scope.filterPosts($scope.allPosts)
       $scope.sortedPosts.forEach(function (postObj, index) {
+
          if (postObj.loadStatus != 'Loaded') {} else {}
       })
    }
