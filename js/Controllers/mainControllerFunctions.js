@@ -230,7 +230,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                email: value.E,
                classOf: value.E.match(/\d+/)[0] || '∞'
             },
-            updateDate: Date(value.D),
+            flagged: value.F,
+            likeCount: value.L,
+            updateDate: Date(value.DU),
+            creationDate: Date(value.DC),
             loadStatus: loadStatus,
          }
       }

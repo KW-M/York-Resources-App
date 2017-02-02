@@ -146,6 +146,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
             E: post.creator.email,
             C: post.class.name,
             F: false,
+            L: post.likes.length,
             DC: post.creationDate,
             DU: firebase.database.ServerValue.TIMESTAMP,
         });
