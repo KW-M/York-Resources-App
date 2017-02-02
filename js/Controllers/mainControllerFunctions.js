@@ -14,8 +14,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    var conurancy_counter = 0;
 
    $scope.allPosts = [];
-   $scope.searchPosts = [];
    $scope.visiblePosts = [];
+   $scope.searchPosts = [];
 
    var deDuplicationIndex = {};
    var classPageTokenSelectionIndex = {};
@@ -247,8 +247,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       console.log(postIdAccumulator)
    }
 
-   function loadPosts(argument) {
-      // body...
+   function loadPosts() {
+      $scope.allPosts.forEach(postObj)
    }
 
    //----------------------------------------------------
