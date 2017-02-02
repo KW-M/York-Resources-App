@@ -206,6 +206,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       postsFireRef.orderByChild('D').once('value', function (snapshot) {
          snapshot.forEach(function (childSnapshot) {
             $scope.allPosts.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'))
+            loadPosts()
          });
          postsFireRef.startAt(Date.now()).on('child_added', function (childSnapshot) {
             console.log('newChild', childSnapshot.val())
@@ -266,7 +267,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                postIdAccumulator = [];
             }
          }
-      }) filterObj.filteredOut.forEach(function (postObj, index) {
+      });
+      filterObj.filteredOut.forEach(function (postObj, index) {
          if (postObj.loadStatus == 'Loaded') {
             console.log('unLoaded')
          }
