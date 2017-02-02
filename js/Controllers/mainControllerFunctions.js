@@ -253,8 +253,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function loadPosts() {
-      $scope.all.filterPosts($scope.allPosts)
-      $scope.allPosts.forEach(function (postObj, index) {
+      $scope.sortedPosts = $scope.filterPosts($scope.allPosts)
+      $scope.sortedPosts.forEach(function (postObj, index) {
          if (postObj.loadStatus != 'Loaded') {} else {}
       })
    }
