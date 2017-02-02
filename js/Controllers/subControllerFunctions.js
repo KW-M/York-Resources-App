@@ -188,7 +188,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			})
 			return Flagged && Class && Type && Creator;
 		});
-		return ($scope.sortByDateAndLikes(output))
+		return output;
+		//return ($scope.sortByDateAndLikes(output))
 	}
 	$scope.sortByDateAndLikes = function (arrayToSort) {
 		return (arrayToSort.sort(function (a, b) {
