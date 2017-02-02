@@ -248,24 +248,27 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                var indexes = $scope.getIdPostArrayIndex(postObj.id)
                $scope.allPosts[indexes.allPosts] = postObj;
                $scope.sortedPosts[indexes.allPosts] = postObj;
-               $scope.visiblePosts[indexes.visiblePosts] = postObj;
+               $scope.visiblePosts.push(postObj);
             })
             setTimeout(angularGridInstance.postsGrid.refresh, 1000);
          }, 1000)
       }, console.warn, 150);
-      console.log(postIdAccumulator)
    }
 
    function loadPosts() {
       var filterObj = $scope.filterPosts($scope.allPosts)
-      $scope.sortByDateAndLikes(filterObj.filtered).forEach(function (postObj, index) {
+      $scope.sortedPosts = $scope.sortByDateAndLikes(filterObj.filtered)
+      $scope.sortedPosts.forEach(function (postObj, index) {
          if (postObj.loadStatus != 'Loaded') {
-
+            postIdAccumulator.push(postObj.id)
+            if (postIdAccumulator.length = 3) {
+               getPosts(postIdAccumulator)
+               postIdAccumulator = [];
+            }
          }
-      })
-      filterObj.filteredOut.forEach(function (postObj, index) {
+      }) filterObj.filteredOut.forEach(function (postObj, index) {
          if (postObj.loadStatus == 'Loaded') {
-            console.log('unNeeded')
+            console.log('unLoaded')
          }
       })
    }
