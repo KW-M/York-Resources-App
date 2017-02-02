@@ -244,7 +244,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          console.log(postsData)
          var postsArray = JSON.parse(postsData.result.response.result);
          $timeout(function () {
-            //$scope.allPosts.push(postsArray[0])
+            postsArray.forEach(function function_name(postObj) {
+               var indexes = $scope.getIdPostArrayIndex(postObj.id)
+               $scope.allPosts[indexes.allPosts] = postObj;
+               $scope.sortedPosts[indexes.allPosts] = postObj;
+               $scope.visiblePosts[indexes.visiblePosts] = postObj;
+            })
             setTimeout(angularGridInstance.postsGrid.refresh, 1000);
          }, 1000)
       }, console.warn, 150);
