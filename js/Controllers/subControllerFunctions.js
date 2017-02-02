@@ -199,7 +199,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 
 	$scope.sortByDateAndLikes = function (arrayToSort) {
 		return (arrayToSort.sort(function (a, b) {
-			return b.creationDate.addDays(b.likes.length * 2 || 0) - a.creationDate.addDays(a.likes.length * 2 || 0);
+			return b.creationDate.addDays((b.likes.length || b.likeCount || 0) * 2) - a.creationDate.addDays((a.likes.length || a.likeCount || 0) * 2);
 		}));
 	};
 	$scope.findClassObject = function (className) {
