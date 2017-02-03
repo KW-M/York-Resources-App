@@ -110,7 +110,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       if ($scope.queryParams.q === null) {
          //$scope.updateVisiblePosts($scope.filterPosts($scope.allPosts), hideSpinner);
       }
-      //$scope.getFiles();
+      $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
+      console.log($scope.selectedClass)
+         //$scope.getFiles();
       $timeout(function () {
          console.log($scope.queryParams.classPath)
          $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
@@ -182,8 +184,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
       $q.all([getStartupData, pickerPromise]).then(function () {
          console.log("Everything Loaded")
-         getDatabase();
          listenForURLChange();
+         getDatabase();
          authorizationService.hideSigninDialog();
       })
    })
