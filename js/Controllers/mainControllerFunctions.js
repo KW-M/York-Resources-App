@@ -234,8 +234,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             },
             flagged: value.F,
             likeCount: value.L,
-            updateDate: Date(value.DU || value.D),
-            creationDate: Date(value.D),
+            updateDate: new Date(value.DU || value.D),
+            creationDate: new Date(value.DC),
             loadStatus: loadStatus,
          }
       }
