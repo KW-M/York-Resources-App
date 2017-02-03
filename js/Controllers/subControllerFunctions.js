@@ -183,6 +183,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			} else {
 				var Flagged = true;
 			}
+			console.log
 			if ($scope.queryParams.classPath !== null && $scope.queryParams.classPath !== undefined && $scope.selectedClass !== false && $scope.selectedClass.stared !== null) {
 				var Class = inputSet[count].class.name === $scope.queryParams.classPath;
 			} else {
