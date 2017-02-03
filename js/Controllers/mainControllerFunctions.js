@@ -247,6 +247,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          $timeout(function () {
             postsArray.forEach(function function_name(postObj) {
                postObj.loadStatus = 'Loaded';
+               postObj.updateDate = new Date(postObj.updateDate)
+               postObj.updateDate = new Date(postObj.updateDate)
                var indexes = $scope.getIdPostArrayIndex(postObj.id)
                $scope.allPosts[indexes.allPosts] = postObj;
                $scope.sortedPosts[indexes.allPosts] = postObj;
