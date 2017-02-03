@@ -214,7 +214,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 
 	$scope.sortByDateAndLikes = function (arrayToSort) {
 		return (arrayToSort.sort(function (a, b) {
-			console.log(b.cr)
+			console.log(b)
 			var alikes = (a.likes != undefined ? a.likes.length : a.likeCount) * 2
 			var blikes = (b.likes != undefined ? b.likes.length : b.likeCount) * 2
 			return b.creationDate.addDays(blikes) - a.creationDate.addDays(alikes);
