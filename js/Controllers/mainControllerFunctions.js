@@ -109,7 +109,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
       //generateQueryString();
       if ($scope.queryParams.q === null) {
-         $scope.updateVisiblePosts($scope.filterPosts($scope.allPosts), hideSpinner);
+         //$scope.updateVisiblePosts($scope.filterPosts($scope.allPosts), hideSpinner);
       }
       //$scope.getFiles();
       $timeout(function () {
@@ -206,19 +206,19 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       postsFireRef.orderByChild('D').once('value', function (snapshot) {
          snapshot.forEach(function (childSnapshot) {
             $scope.allPosts.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'))
-            loadPosts()
          });
-         postsFireRef.startAt(Date.now()).on('child_added', function (childSnapshot) {
-            console.log('newChild', childSnapshot.val())
-            $scope.allPosts.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'));
-            getPosts([childSnapshot.key])
-         });
-         postsFireRef.on('child_removed', function (childSnapshot) {
-            console.log('removedChild', childSnapshot.val())
-         });
-         postsFireRef.on('child_changed', function (childSnapshot) {
-            console.log('changedChild', childSnapshot.val())
-         });
+         // postsFireRef.startAt(Date.now()).on('child_added', function (childSnapshot) {
+         //    console.log('newChild', childSnapshot.val())
+         //    $scope.allPosts.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'));
+         //    getPosts([childSnapshot.key])
+         // });
+         // postsFireRef.on('child_removed', function (childSnapshot) {
+         //    console.log('removedChild', childSnapshot.val())
+         // });
+         // postsFireRef.on('child_changed', function (childSnapshot) {
+         //    console.log('changedChild', childSnapshot.val())
+         // });
+         loadPosts()
          console.log($scope.allPosts);
       })
 
