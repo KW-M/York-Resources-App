@@ -262,17 +262,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function loadPosts() {
       var filterObj = $scope.filterPosts($scope.allPosts)
       $scope.sortedPosts = $scope.sortByDateAndLikes(filterObj.filtered)
-      $scope.sortedPosts.forEach(function (postObj, index) {
-         if (postObj.loadStatus != 'Loaded') {
-            postIdAccumulator.push(postObj.id)
-            getPosts(postIdAccumulator)
-            postIdAccumulator = [];
-            // if (postIdAccumulator.length = 3) {
-            //    getPosts(postIdAccumulator)
-            //    postIdAccumulator = [];
-            // }
-         }
-      });
       filterObj.filteredOut.forEach(function (postObj, index) {
          if (postObj.loadStatus == 'Loaded') {
             var slimedObj = {
