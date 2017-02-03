@@ -111,12 +111,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          //$scope.updateVisiblePosts($scope.filterPosts($scope.allPosts), hideSpinner);
       }
       $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
-      console.log($scope.selectedClass)
-         //$scope.getFiles();
+      // console.log($scope.selectedClass)
+      loadPosts()
       $timeout(function () {
-         console.log($scope.queryParams.classPath)
-         $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
-         //$scope.visibleLabels = $scope.sortLabels($scope.allLabels);
+         $scope.selectedClass = $scope.selectedClass
+            // $scope.visibleLabels = $scope.sortLabels($scope.allLabels);
       });
       // getFileTimer = setInterval(function () {
       //    if (conurancy_counter == 0 && content_container.scrollHeight == content_container.clientHeight) {
