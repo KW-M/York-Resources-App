@@ -235,7 +235,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             flagged: value.F,
             likeCount: value.L,
             updateDate: Date(value.DU || value.D),
-            creationDate: Date(value.DU),
+            creationDate: Date(value.D),
             loadStatus: loadStatus,
          }
       }
