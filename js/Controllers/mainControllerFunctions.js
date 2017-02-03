@@ -80,7 +80,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function onLocationChange() {
       $scope.queryParams.q = $location.search().q || null;
       $scope.queryParams.classPath = $location.path().replace(/\//g, "").replace(/-/g, " ") || 'All Posts';
-      console.log($scope.queryParams.classPath)
       $scope.queryParams.id = $location.hash();
       $scope.searchInputTxt = $scope.queryParams.q;
 
@@ -115,7 +114,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       $timeout(function () {
          console.log($scope.queryParams.classPath)
          $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
-         $scope.visibleLabels = $scope.sortLabels($scope.allLabels);
+         //$scope.visibleLabels = $scope.sortLabels($scope.allLabels);
       });
       // getFileTimer = setInterval(function () {
       //    if (conurancy_counter == 0 && content_container.scrollHeight == content_container.clientHeight) {

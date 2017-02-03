@@ -216,7 +216,6 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		}));
 	};
 	$scope.findClassObject = function (className) {
-		console.log(className == 'All Posts');
 		if (className == 'All Posts') {
 			return ({
 				name: 'All Posts',
