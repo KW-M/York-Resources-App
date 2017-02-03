@@ -214,7 +214,10 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 
 	$scope.sortByDateAndLikes = function (arrayToSort) {
 		return (arrayToSort.sort(function (a, b) {
-			return b.creationDate.addDays((b.likes.length || b.likeCount || 0) * 2) - a.creationDate.addDays((a.likes.length || a.likeCount || 0) * 2);
+			console.log(b.cr)
+			var alikes = (a.likes != undefined ? a.likes.length : a.likeCount) * 2
+			var blikes = (b.likes != undefined ? b.likes.length : b.likeCount) * 2
+			return b.creationDate.addDays(blikes) - a.creationDate.addDays(alikes);
 		}));
 	};
 	$scope.findClassObject = function (className) {
