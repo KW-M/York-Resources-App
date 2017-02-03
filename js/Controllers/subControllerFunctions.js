@@ -172,6 +172,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	//----------------------------------------------------
 	//-------------- Filtering & Sorting -----------------
 	$scope.filterPosts = function (inputSet) {
+		console.log(inputSet)
 		var filtered = []
 		var filteredOut = []
 		var max = inputSet.length
