@@ -15,18 +15,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.searchPosts = [];
    $scope.visiblePosts = [];
 
-   $scope.queryParams = {
-      q: undefined, //undefined to make search popunder show with no text in  field
-      flagged: false,
-      type: null,
-      classPath: 'Loading...',
-      creatorEmail: null,
-      id: null,
-   };
-   $scope.queryPropertyString = '';
-   $scope.previousSearch = undefined;
-   $scope.searchPlaceholder = 'Search';
-
    $scope.allLabels = [];
    $scope.visibleLabels = [];
    $scope.labelSearch = null;
@@ -47,6 +35,19 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    //----------------------------------------------------
    //------------------- Routing ------------------------
+   $scope.queryParams = {
+      q: undefined, //undefined to make search popunder show with no text in  field
+      flagged: false,
+      type: null,
+      classPath: 'Loading...',
+      creatorEmail: null,
+      id: null,
+   };
+   $scope.searchPlaceholder = 'Search';
+
+   $scope.queryPropertyString = '';
+   $scope.previousSearch = undefined;
+
    $scope.gotoRoute = function (query) {
       if (query.classPath !== undefined) {
          $scope.toggleSidebar(true);
@@ -238,7 +239,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    //----------------------------------------------------
-   //---------------- Loading Posts ---------------------
+   //----------- loading and sorting posts --------------
    var getFileTimer = null;
    var conurancy_counter = 0;
 
@@ -303,6 +304,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          postIdAccumulator = [];
       }
    }
+
+
 
    //----------------------------------------------------
    //--------------- Creating Posts ---------------------
@@ -395,7 +398,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    //----------------------------------------------------
-   //--------- loading and filtering posts --------------
+   //--------- searhing --------------
    $scope.getFiles = function () {
       var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
@@ -430,24 +433,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             content_container.scrollTop = content_container.scrollHeight;
          }, 150);
       }
-   }
-
-   function hideSpinner() {
-      if (classPageTokenSelectionIndex[$scope.queryPropertyString] === "end") {
-         loading_spinner.style.display = 'none';
-         clearInterval(getFileTimer);
-         $timeout(function () {
-            if ($scope.visiblePosts.length > 0) {
-               no_more_footer.style.display = 'block';
-            } else {
-               layout_grid.style.height = '0px';
-               no_posts_footer.style.display = 'block';
-            }
-         }, 200)
-      }
-      $timeout(function () {
-         angularGridInstance.postsGrid.refresh();
-      }, 1000)
    }
 
    function generateQueryString() {
