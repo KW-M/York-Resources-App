@@ -190,13 +190,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          });
          postsFireRef.on('child_removed', function (childSnapshot) {
             var id = childSnapshot.val();
-            var indexes = $scope.getIdPostArrayIndex(id);
+            var indexes = getIdIndexInPostArrays(id);
             $scope.allPosts.splice(indexes.allPosts, 1);
             $scope.sortedPosts.splice(indexes.sortedPosts, 1);
             $scope.visiblePosts.splice(indexes.visiblePosts, 1);
          });
          postsFireRef.on('child_changed', function (childSnapshot) {
-            var indexes = $scope.getIdPostArrayIndex(postObj.id)
+            var indexes = getIdIndexInPostArrays(postObj.id)
             $scope.allPosts[indexes.allPosts].loadStatus = 'Changed';
             $scope.sortedPosts[indexes.sortedPosts] = 'Changed';
             sortPosts()
@@ -255,7 +255,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                creationDate: postObj.creationDate,
                loadStatus: 'UnLoaded',
             }
-            var indexes = $scope.getIdPostArrayIndex(postObj.id)
+            var indexes = getIdIndexInPostArrays(postObj.id)
             $scope.allPosts[indexes.allPosts] = slimedObj;
             $scope.sortedPosts[indexes.sortedPosts] = slimedObj;
             $scope.visiblePosts.splice(indexes.visiblePosts, 1);
@@ -325,7 +325,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          var postsArray = JSON.parse(postsData.result.response.result);
          $timeout(function () {
             postsArray.forEach(function (postObj) {
-               var indexes = $scope.getIdPostArrayIndex(postObj.id)
+               var indexes = getIdIndexInPostArrays(postObj.id)
                postObj.loadStatus = 'Loaded';
                postObj.updateDate = new Date(postObj.updateDate)
                postObj.creationDate = new Date(postObj.creationDate)
@@ -601,6 +601,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    //----------------------------------------------------
    //------------------UI Actions------------------------
+      $scope.FABClick = function () { //called by the top left toolbar menu button
+      if ($scope.globals.FABisOpen == true) {
+         $scope.newPost({}, 'new')
+      }
+
+   };
    $scope.toggleSidebar = function (close) { //called by the top left toolbar menu button
       if (close === true) {
          $mdSidenav('sidenav_overlay').close();
@@ -611,15 +617,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $mdSidenav('sidenav_overlay').toggle();
          }
       }
-   };
-   $scope.FABClick = function () { //called by the top left toolbar menu button
-      if ($scope.globals.FABisOpen == true) {
-         $scope.newPost({}, 'new')
-      }
-
-   };
-   $scope.signOut = function () {
-      authorizationService.handleSignoutClick();
    };
    $scope.toggleMobileSearch = function (toOpen) {
       $timeout(function () {
@@ -813,6 +810,19 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             callback();
          }
       })
+   }
+
+   function getIdIndexInPostArrays(id) {
+      function findPostIndexById(id, array) {
+         var index = 0;
+         for (index in array) {
+            if (array[index].id == id) return (index)
+         }
+      }
+      return {
+         allPosts: findPostIndexById(id, $scope.allPosts),
+         sortedPosts: findPostIndexById(id, $scope.sortedPosts),
+      }
    }
 
    //----------------------------------------------------
