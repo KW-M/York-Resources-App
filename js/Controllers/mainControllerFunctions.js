@@ -411,44 +411,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    //----------------------------------------------------
    //------------------ Searching -----------------------
-   $scope.queryPropertyString = '';
-   $scope.previousSearch = undefined;
-
-   $scope.getFiles = function () {
-      var formattedFileList = [];
-      var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
-      var queryString = $scope.queryPropertyString;
-      if (nextPageToken !== "end") {
-         loading_spinner.style.display = 'block';
-         no_more_footer.style.display = 'none';
-         no_posts_footer.style.display = 'none';
-         footer_problem.style.display = 'none';
-         queue('drive', GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function (fileList) {
-            for (var fileCount = 0; fileCount < fileList.result.files.length; fileCount++) {
-               if (!$scope.queryParams.q && deDuplicationIndex[fileList.result.files[fileCount].id] === undefined) {
-                  //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
-                  formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[fileCount]) //format and save the new post to the formatted files list array
-                  deDuplicationIndex[fileList.result.files[fileCount].id] = 1; //mark this id as used with a "1".
-               } else if ($scope.queryParams.q) {
-                  formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[fileCount]) //format and save the new post to the formatted files list array
-               }
-            }
-            sortPostsByType(formattedFileList, queryString, $scope.queryParams);
-            if (fileList.result.nextPageToken !== undefined) {
-               classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken; //if we haven't reached the end of our search:
-            } else {
-               classPageTokenSelectionIndex[$scope.queryPropertyString] = "end" //if we have reached the end of our search:
-            }
-            hideSpinner();
-         }, function () {
-            no_more_footer.style.display = 'none';
-            no_posts_footer.style.display = 'none';
-            no_more_footer.style.display = 'none';
-            footer_problem.style.display = 'flex';
-            content_container.scrollTop = content_container.scrollHeight;
-         }, 150);
-      }
-   }
+   var queryPropertyString = '';
+   var previousSearch = undefined;
 
    function generateQueryString() {
       var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false"
@@ -470,39 +434,74 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       $scope.queryPropertyString = query;
    }
 
-   function sortPostsByType(formattedFileList, queryString, queryParams) {
-      if (queryParams.q) {
-         console.log('hasQueryParams')
-         if (queryParams.q === $scope.previousSearch) {
-            console.log('sameSearch')
-            $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
-         } else {
-            console.log('newSearch')
-            $scope.searchPosts = formattedFileList;
-         }
-         $scope.previousSearch = $scope.queryParams.q || null;
-         $scope.updateVisiblePosts($scope.searchPosts);
-      } else {
-         $scope.allPosts = $scope.allPosts.concat(formattedFileList);
-         $scope.updateVisiblePosts($scope.visiblePosts.concat($scope.filterPosts(formattedFileList)));
-
-         //if ($scope.queryPropertyString == queryString) {
-         // }
-      }
-      conurancy_counter = conurancy_counter - 1
-   }
-
-   //----------------------------------------------------
-   //---------------- Event Watchers --------------------
    $scope.$watch('searchInputTxt', function (newValue) {
       var input = newValue || null
       var query = $scope.queryParams.q || null;
-      if (input != query) {
-         $scope.gotoRoute({
-            q: input
-         })
-      }
+      if (input != query) $scope.gotoRoute({
+         q: input
+      })
    }, false);
+
+   // $scope.getFiles = function () {
+   //    var formattedFileList = [];
+   //    var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
+   //    var queryString = $scope.queryPropertyString;
+   //    if (nextPageToken !== "end") {
+   //       loading_spinner.style.display = 'block';
+   //       no_more_footer.style.display = 'none';
+   //       no_posts_footer.style.display = 'none';
+   //       footer_problem.style.display = 'none';
+   //       queue('drive', GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function (fileList) {
+   //          for (var fileCount = 0; fileCount < fileList.result.files.length; fileCount++) {
+   //             if (!$scope.queryParams.q && deDuplicationIndex[fileList.result.files[fileCount].id] === undefined) {
+   //                //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
+   //                formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[fileCount]) //format and save the new post to the formatted files list array
+   //                deDuplicationIndex[fileList.result.files[fileCount].id] = 1; //mark this id as used with a "1".
+   //             } else if ($scope.queryParams.q) {
+   //                formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[fileCount]) //format and save the new post to the formatted files list array
+   //             }
+   //          }
+   //          sortPostsByType(formattedFileList, queryString, $scope.queryParams);
+   //          if (fileList.result.nextPageToken !== undefined) {
+   //             classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken; //if we haven't reached the end of our search:
+   //          } else {
+   //             classPageTokenSelectionIndex[$scope.queryPropertyString] = "end" //if we have reached the end of our search:
+   //          }
+   //          hideSpinner();
+   //       }, function () {
+   //          no_more_footer.style.display = 'none';
+   //          no_posts_footer.style.display = 'none';
+   //          no_more_footer.style.display = 'none';
+   //          footer_problem.style.display = 'flex';
+   //          content_container.scrollTop = content_container.scrollHeight;
+   //       }, 150);
+   //    }
+   // }
+
+   // function sortPostsByType(formattedFileList, queryString, queryParams) {
+   //    if (queryParams.q) {
+   //       console.log('hasQueryParams')
+   //       if (queryParams.q === $scope.previousSearch) {
+   //          console.log('sameSearch')
+   //          $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
+   //       } else {
+   //          console.log('newSearch')
+   //          $scope.searchPosts = formattedFileList;
+   //       }
+   //       $scope.previousSearch = $scope.queryParams.q || null;
+   //       $scope.updateVisiblePosts($scope.searchPosts);
+   //    } else {
+   //       $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+   //       $scope.updateVisiblePosts($scope.visiblePosts.concat($scope.filterPosts(formattedFileList)));
+
+   //       //if ($scope.queryPropertyString == queryString) {
+   //       // }
+   //    }
+   //    conurancy_counter = conurancy_counter - 1
+   // }
+
+   //----------------------------------------------------
+   //---------------- Event Watchers --------------------
 
    $scope.$watch('allPosts', function (newValue) {
       console.log('allPosts Changed')
@@ -524,9 +523,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    window.addEventListener("resize", function () {
       $timeout(function () {
-         if ($mdMedia('gt-sm')) {
-            $mdSidenav('sidenav_overlay').close();
-         }
+         if ($mdMedia('gt-sm')) $mdSidenav('sidenav_overlay').close()
       })
    });
 
