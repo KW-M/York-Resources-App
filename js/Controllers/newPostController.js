@@ -48,7 +48,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     $scope.shareSelect = "view"
 
     $scope.findType = function () {
-        $timeout(function () {
+        if (operation != 'view') $timeout(function () {
             $scope.post.attachmentName = '';
             $scope.post.attachmentIcon = '';
             $scope.post.attachmentId = '';
