@@ -60,7 +60,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          $location.search({
             q: null
          });
-         $location.path(query.classPath.replace(/ /g, "-") || query.classPath);
+         $location.path(query.classPath.replace(/ /g, "~") || query.classPath);
       }
       if (query.q !== undefined) {
          if (query.q === null || query.q == '') {
@@ -78,7 +78,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function onLocationChange() {
       $scope.queryParams.q = $location.search().q || null;
-      $scope.queryParams.classPath = $location.path().replace(/\//g, "").replace(/-/g, " ") || 'All Posts';
+      $scope.queryParams.classPath = $location.path().replace(/\//g, "").replace(/~/g, " ") || 'All Posts';
       $scope.queryParams.id = $location.hash();
       $scope.searchInputTxt = $scope.queryParams.q;
 
@@ -111,7 +111,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
       $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
       // console.log($scope.selectedClass)
-      sortPosts()
+      sortPosts();
       $timeout(function () {
          $scope.selectedClass = $scope.selectedClass
             // $scope.visibleLabels = $scope.sortLabels($scope.allLabels);
@@ -644,5 +644,5 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             classPageTokenSelectionIndex: classPageTokenSelectionIndex
          })
       } //less important functions are delegated to another file;
-   subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia, $timeout, $filter, $mdSidenav, authorizationService, APIService, angularGridInstance);
+   subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia, $timeout, $filter, $mdSidenav, authorizationService, APIService, angularGridInstance); {}
 }
