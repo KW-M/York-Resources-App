@@ -202,7 +202,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             sortPosts()
          });
          if ($scope.sortedPosts.length != 0) $scope.loadPosts();
-         if ($scope.sortedPosts.length = 0) $scope.loadPosts();
+         if ($scope.sortedPosts.length == 0) $scope.sortPosts();
          console.log($scope.allPosts);
       })
 
