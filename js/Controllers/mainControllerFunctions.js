@@ -112,7 +112,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
       $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
       // console.log($scope.selectedClass)
-      loadPosts()
+      sortPosts()
       $timeout(function () {
          $scope.selectedClass = $scope.selectedClass
             // $scope.visibleLabels = $scope.sortLabels($scope.allLabels);
@@ -218,7 +218,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          // postsFireRef.on('child_changed', function (childSnapshot) {
          //    console.log('changedChild', childSnapshot.val())
          // });
-         loadPosts()
+         $scope.loadPosts()
          console.log($scope.allPosts);
       })
 
@@ -281,10 +281,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.visiblePosts.splice(indexes.visiblePosts, 1);
          }
       })
-      loadPosts()
+      $scope.loadPosts()
    }
 
-   $scope.loadPosts = function() {
+   $scope.loadPosts = function () {
       $scope.sortedPosts.forEach(function (postObj, index) {
          if (postObj.loadStatus != 'Loaded') {
             postIdAccumulator.push(postObj.id)
