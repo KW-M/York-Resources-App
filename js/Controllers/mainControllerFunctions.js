@@ -236,7 +236,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function sortPosts() {
       hideSpinner(false)
       var filterObj = $scope.filterPosts($scope.allPosts)
-      $scope.sortedPosts = $scope.sortByDateAndLikes(filterObj.filtered)
+      $scope.sortedPosts = filterObj.filtered.sort(function (a, b) {
+         console.log(b)
+         var alikes = (a.likes != undefined ? a.likes.length : a.likeCount) * 2
+         var blikes = (b.likes != undefined ? b.likes.length : b.likeCount) * 2
+         return b.creationDate.addDays(blikes) - a.creationDate.addDays(alikes);
+      })
       filterObj.filteredOut.forEach(function (postObj) {
          if (postObj.loadStatus == 'Loaded') {
             var slimedObj = {
@@ -257,6 +262,43 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          }
       })
       loadPosts()
+
+      function filterPosts(inputSet) {
+         var filtered = [];
+         var filteredOut = [];
+         var max = inputSet.length;
+         for (var count = 0; count < max; count++) {
+            if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
+               var Flagged = inputSet[count].flagged === $scope.queryParams.flagged;
+            } else {
+               var Flagged = true;
+            }
+            if ($scope.queryParams.classPath !== null && $scope.queryParams.classPath !== undefined && $scope.selectedClass !== false && $scope.selectedClass.stared !== null) {
+               var Class = inputSet[count].class.name === $scope.queryParams.classPath;
+            } else {
+               var Class = inputSet[count].class.name !== 'Memes';
+            }
+            if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) {
+               var Type = inputSet[count].type === $scope.queryParams.type;
+            } else {
+               var Type = true;
+            }
+            if ($scope.queryParams.creatorEmail !== null && $scope.queryParams.creatorEmail !== undefined) {
+               var Creator = inputSet[count].creator.email === $scope.queryParams.creatorEmail;
+            } else {
+               var Creator = true;
+            }
+            if (Flagged && Class && Type && Creator) {
+               filtered.push(inputSet[count])
+            } else {
+               filteredOut.push(inputSet[count])
+            }
+         };
+         return {
+            filtered: filtered,
+            filteredOut: filteredOut
+         };
+      }
    }
 
    function loadPosts() {
@@ -451,54 +493,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    //----------------------------------------------------
    //-------------- Filtering & Sorting -----------------
-   $scope.filterPosts = function (inputSet) {
-      console.log(inputSet)
-      var filtered = []
-      var filteredOut = []
-      var max = inputSet.length
-      var count;
-      for (count = 0; count < max; count++) {
-         if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
-            var Flagged = inputSet[count].flagged === $scope.queryParams.flagged;
-         } else {
-            var Flagged = true;
-         }
-         console.log($scope.selectedClass)
-         if ($scope.queryParams.classPath !== null && $scope.queryParams.classPath !== undefined && $scope.selectedClass !== false && $scope.selectedClass.stared !== null) {
-            var Class = inputSet[count].class.name === $scope.queryParams.classPath;
-         } else {
-            var Class = inputSet[count].class.name !== 'Memes';
-         }
-         if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) {
-            var Type = inputSet[count].type === $scope.queryParams.type;
-         } else {
-            var Type = true;
-         }
-         if ($scope.queryParams.creatorEmail !== null && $scope.queryParams.creatorEmail !== undefined) {
-            var Creator = inputSet[count].creator.email === $scope.queryParams.creatorEmail;
-         } else {
-            var Creator = true;
-         }
-         if (Flagged && Class && Type && Creator) {
-            filtered.push(inputSet[count])
-         } else {
-            filteredOut.push(inputSet[count])
-         }
-      };
-      return {
-         filtered: filtered,
-         filteredOut: filteredOut
-      };
-      //return ($scope.sortByDateAndLikes(output))
-   }
-   $scope.sortByDateAndLikes = function (arrayToSort) {
-      return (arrayToSort.sort(function (a, b) {
-         console.log(b)
-         var alikes = (a.likes != undefined ? a.likes.length : a.likeCount) * 2
-         var blikes = (b.likes != undefined ? b.likes.length : b.likeCount) * 2
-         return b.creationDate.addDays(blikes) - a.creationDate.addDays(alikes);
-      }));
-   };
    $scope.findClassObject = function (className) {
       if (className == 'All Posts') {
          return ({
@@ -808,7 +802,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       return this
    }
 
-   function updateVisiblePosts (array, callback) {
+   function updateVisiblePosts(array, callback) {
       console.log(array)
       $timeout(function () {
          if (array) {
@@ -823,26 +817,26 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //----------------------------------------------------
    //---------------------- dev -------------------------
    $scope.consoleLogInput = function (input, asAlert) {
-		console.log(input)
-		if (asAlert) window.alert(JSON.stringify(input, null, 4))
-	}
-	
-	$scope.consoleLogVariable = function (input, asAlert) {
-		console.log(self[input])
-		if (asAlert) window.alert(JSON.stringify(self[input], null, 4))
-	}
-	
-	$scope.logPostToConsole = function (content, arrayIndex) {
-		console.log({
-			'loggedPostContent': content,
-			'arrayIndex': arrayIndex,
-			'converted': 'not used'
-		});
-	}
-	
-	$scope.refreshLayout = angularGridInstance.postsGrid.refresh;
-	
-   
-    //less important functions are delegated to another file;
+      console.log(input)
+      if (asAlert) window.alert(JSON.stringify(input, null, 4))
+   }
+
+   $scope.consoleLogVariable = function (input, asAlert) {
+      console.log(self[input])
+      if (asAlert) window.alert(JSON.stringify(self[input], null, 4))
+   }
+
+   $scope.logPostToConsole = function (content, arrayIndex) {
+      console.log({
+         'loggedPostContent': content,
+         'arrayIndex': arrayIndex,
+         'converted': 'not used'
+      });
+   }
+
+   $scope.refreshLayout = angularGridInstance.postsGrid.refresh;
+
+
+   //less important functions are delegated to another file;
    subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia, $timeout, $filter, $mdSidenav, authorizationService, APIService, angularGridInstance); {}
 }
