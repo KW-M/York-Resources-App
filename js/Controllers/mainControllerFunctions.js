@@ -28,7 +28,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.visibleLabels = [];
    $scope.labelSearch = null;
 
-   $scope.userList = [];
    $scope.restorePost = false;
    $scope.globals = {
       sidenavIsOpen: true,
@@ -118,9 +117,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             // $scope.visibleLabels = $scope.sortLabels($scope.allLabels);
       });
       getFileTimer = setInterval(function () {
-         if (conurancy_counter == 0 && content_container.scrollHeight == content_container.clientHeight) {
-            $scope.getFiles()
-         }
+         if (conurancy_counter == 0 && content_container.scrollHeight == content_container.clientHeight) $scope.loadPosts()
       }, 1000);
    }
 
