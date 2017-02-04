@@ -251,7 +251,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                postObj.creationDate = new Date(postObj.creationDate)
                var indexes = $scope.getIdPostArrayIndex(postObj.id)
                $scope.allPosts[indexes.allPosts] = postObj;
-               $scope.sortedPosts[indexes.allPosts] = postObj;
+               $scope.sortedPosts[indexes.sortedPosts] = postObj;
                $scope.visiblePosts.push(postObj);
             })
             setTimeout(angularGridInstance.postsGrid.refresh, 1000);
@@ -277,7 +277,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             }
             var indexes = $scope.getIdPostArrayIndex(postObj.id)
             $scope.allPosts[indexes.allPosts] = slimedObj;
-            $scope.sortedPosts[indexes.allPosts] = slimedObj;
+            $scope.sortedPosts[indexes.sPosts] = slimedObj;
             $scope.visiblePosts.splice(indexes.visiblePosts, 1);
          }
       })
