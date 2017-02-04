@@ -234,6 +234,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.searchPosts = [];
 
    function sortPosts() {
+      hideSpinner(false)
       var filterObj = $scope.filterPosts($scope.allPosts)
       $scope.sortedPosts = $scope.sortByDateAndLikes(filterObj.filtered)
       filterObj.filteredOut.forEach(function (postObj) {
@@ -259,6 +260,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function loadPosts() {
+      hideSpinner(false)
       $scope.sortedPosts.forEach(function (postObj, index) {
          if (postObj.loadStatus != 'Loaded') {
             postIdAccumulator.push(postObj.id)
@@ -291,6 +293,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             })
             setTimeout(angularGridInstance.postsGrid.refresh, 1000);
             conurancy_counter--;
+            hideSpinner(true)
          })
       }, console.warn, 150);
    }
@@ -309,8 +312,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          }, 200)
       } else {
          loading_spinner.style.display = 'block';
-         no_more_footer.style.display = 'none';
          no_posts_footer.style.display = 'none';
+         no_more_footer.style.display = 'none';
          footer_problem.style.display = 'none';
       }
    }
