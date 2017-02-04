@@ -235,7 +235,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function sortPosts() {
       hideSpinner(false)
-      var filterObj = $scope.filterPosts($scope.allPosts)
+      var filterObj = filterPosts($scope.allPosts)
       $scope.sortedPosts = filterObj.filtered.sort(function (a, b) {
          console.log(b)
          var alikes = (a.likes != undefined ? a.likes.length : a.likeCount) * 2
@@ -324,14 +324,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          console.log(postsData)
          var postsArray = JSON.parse(postsData.result.response.result);
          $timeout(function () {
-            postsArray.forEach(function function_name(postObj) {
+            postsArray.forEach(function (postObj) {
+               var indexes = $scope.getIdPostArrayIndex(postObj.id)
                postObj.loadStatus = 'Loaded';
                postObj.updateDate = new Date(postObj.updateDate)
                postObj.creationDate = new Date(postObj.creationDate)
-               var indexes = $scope.getIdPostArrayIndex(postObj.id)
                $scope.allPosts[indexes.allPosts] = postObj;
                $scope.sortedPosts[indexes.sortedPosts] = postObj;
-               $scope.visiblePosts.push(postObj);
             })
             setTimeout(angularGridInstance.postsGrid.refresh, 1000);
             conurancy_counter--;
@@ -459,7 +458,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    $scope.newPost = newPost;
-   
+
    //----------------------------------------------------
    //------------------ Searching -----------------------
    var queryPropertyString = '';
@@ -836,7 +835,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       });
    }
 
-   $scope.refreshLayout = angularGridInstance.postsGrid.refresh;
+   $scope.refreshLayout = function () {
+      angularGridInstance.postsGrid.refresh();
+   }
 
 
    //less important functions are delegated to another file;
