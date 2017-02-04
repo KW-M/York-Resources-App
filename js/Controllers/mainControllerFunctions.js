@@ -4,11 +4,6 @@ app.controller('AppController', controllerFunction)
 function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, $location, $http, $sce, $mdDialog, $mdToast, $mdSidenav, $mdMedia, $mdTheming, authorizationService, APIService, angularGridInstance) {
    var self = this;
    var content_container = document.getElementById("content_container");
-   var layout_grid = document.getElementById("layout_grid");
-   var loading_spinner = document.getElementById("loading_spinner");
-   var no_more_footer = document.getElementById("no_more_footer");
-   var no_posts_footer = document.getElementById("no_posts_footer");
-   var footer_problem = document.getElementById("footer_problem");
 
    $scope.allPosts = [];
    $scope.sortedPosts = [];
@@ -44,9 +39,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       id: null,
    };
    $scope.searchPlaceholder = 'Search';
-
-   $scope.queryPropertyString = '';
-   $scope.previousSearch = undefined;
 
    $scope.gotoRoute = function (query) {
       if (query.classPath !== undefined) {
@@ -184,9 +176,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
       var recentsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(false).setSelectFolderEnabled(true).setLabel('Recents');
 
-      drivePicker = new google.picker.PickerBuilder().setDeveloperKey("AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA").setOrigin(window.location.protocol + '//' + window.location.host).setOAuthToken(authorizationService.getGAuthToken()).setCallback(pickerCallback)
+      drivePicker = new google.picker.PickerBuilder().setDeveloperKey("AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA").setOrigin(window.location.protocol + '//' + window.location.host).setOAuthToken(authorizationService.getGAuthToken()).setCallback(drivePickerCallback)
          .addView(docsView).addView(recentsView).addView(sharedView).build();
-      uploadPicker = new google.picker.PickerBuilder().setDeveloperKey("AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA").setOrigin(window.location.protocol + '//' + window.location.host).setOAuthToken(authorizationService.getGAuthToken()).setCallback(pickerCallback)
+      uploadPicker = new google.picker.PickerBuilder().setDeveloperKey("AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA").setOrigin(window.location.protocol + '//' + window.location.host).setOAuthToken(authorizationService.getGAuthToken()).setCallback(drivePickerCallback)
          .addView(uploadView).enableFeature(google.picker.Feature.NAV_HIDDEN).hideTitleBar().build();
    }
 
@@ -323,6 +315,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    //----------------------------------------------------
    //--------------- Creating Posts ---------------------
+   var layout_grid = document.getElementById("layout_grid");
+   var footer_problem = document.getElementById("footer_problem");
+   var no_more_footer = document.getElementById("no_more_footer");
+   var no_posts_footer = document.getElementById("no_posts_footer");
+   var loading_spinner = document.getElementById("loading_spinner");
+
    function newPost(postObj, operation, event) {
       $scope.newPostScroll = 0;
       var dialogConfig = {
@@ -412,7 +410,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    //----------------------------------------------------
-   //--------- searhing --------------
+   //------------------ Searching -----------------------
+   $scope.queryPropertyString = '';
+   $scope.previousSearch = undefined;
+
    $scope.getFiles = function () {
       var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
