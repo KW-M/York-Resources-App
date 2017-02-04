@@ -241,6 +241,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
    }
 
+   //----------------------------------------------------
+   //---------------- Loading Posts ---------------------
+   var getFileTimer = null;
+   var conurancy_counter = 0;
+
    function getPosts(idArray) {
       conurancy_counter++;
       promiseQueue().addPromise('drive', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
