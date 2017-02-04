@@ -57,54 +57,52 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       //$location.hash(query.id || null);
    };
 
-   function onLocationChange() {
-      $scope.queryParams.q = $location.search().q || null;
-      $scope.queryParams.classPath = $location.path().replace(/\//g, "").replace(/-/g, " ").replace(/~/g, "-") || 'All Posts';
-      $scope.queryParams.id = $location.hash();
-      $scope.searchInputTxt = $scope.queryParams.q;
-
-      no_more_footer.style.display = 'none';
-      no_posts_footer.style.display = 'none';
-      footer_problem.style.display = 'none';
-      $scope.searchPrefix = 'Search';
-      if ($scope.queryParams.q !== null) {
-         if ($scope.queryParams.q != $scope.previousSearch) {
-            $scope.updateVisiblePosts([]);
-         }
-      } else {
-         $scope.queryParams.flagged = null
-         $scope.queryParams.type = null
-         $scope.queryParams.creatorEmail = null
-      }
-      if ($scope.queryParams.classPath === 'All Posts') {
-         $scope.queryParams.flagged = false;
-      } else if ($scope.queryParams.classPath === 'Your Posts') {
-         $scope.queryParams.creatorEmail = $scope.myInfo.Email;
-      } else if ($scope.queryParams.classPath === 'Flagged Posts') {
-         $scope.queryParams.flagged = true
-      } else {
-         $scope.searchPrefix = 'Search Within';
-         $scope.queryParams.flagged = false
-      }
-      //generateQueryString();
-      if ($scope.queryParams.q === null) {
-         //$scope.updateVisiblePosts($scope.filterPosts($scope.allPosts), hideSpinner);
-      }
-      $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
-      // console.log($scope.selectedClass)
-      sortPosts();
-      $timeout(function () {
-         $scope.selectedClass = $scope.selectedClass
-            // $scope.visibleLabels = $scope.sortLabels($scope.allLabels);
-      });
-      getFileTimer = setInterval(function () {
-         if (conurancy_counter == 0 && content_container.scrollHeight == content_container.clientHeight) $scope.loadPosts()
-      }, 1000);
-   }
-
    function listenForURLChange() {
       onLocationChange();
       $rootScope.$on('$locationChangeSuccess', onLocationChange);
+
+      function onLocationChange() {
+         $scope.queryParams.q = $location.search().q || null;
+         $scope.queryParams.classPath = $location.path().replace(/\//g, "").replace(/-/g, " ").replace(/~/g, "-") || 'All Posts';
+         $scope.queryParams.id = $location.hash();
+         $scope.searchInputTxt = $scope.queryParams.q;
+
+         no_more_footer.style.display = 'none';
+         no_posts_footer.style.display = 'none';
+         footer_problem.style.display = 'none';
+         $scope.searchPrefix = 'Search';
+         if ($scope.queryParams.q !== null) {
+            if ($scope.queryParams.q != $scope.previousSearch) {
+               $scope.updateVisiblePosts([]);
+            }
+         } else {
+            $scope.queryParams.flagged = null
+            $scope.queryParams.type = null
+            $scope.queryParams.creatorEmail = null
+         }
+         if ($scope.queryParams.classPath === 'All Posts') {
+            $scope.queryParams.flagged = false;
+         } else if ($scope.queryParams.classPath === 'Your Posts') {
+            $scope.queryParams.creatorEmail = $scope.myInfo.Email;
+         } else if ($scope.queryParams.classPath === 'Flagged Posts') {
+            $scope.queryParams.flagged = true
+         } else {
+            $scope.searchPrefix = 'Search Within';
+            $scope.queryParams.flagged = false
+         }
+         //generateQueryString();
+         if ($scope.queryParams.q === null) {
+            //$scope.updateVisiblePosts($scope.filterPosts($scope.allPosts), hideSpinner);
+         }
+         $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
+         sortPosts();
+         $timeout(function () {
+            $scope.selectedClass = $scope.selectedClass
+         });
+         getFileTimer = setInterval(function () {
+            if (conurancy_counter == 0 && content_container.scrollHeight == content_container.clientHeight) $scope.loadPosts()
+         }, 1000);
+      }
    }
 
    if (window.location.search) {
