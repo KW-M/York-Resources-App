@@ -292,6 +292,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    $scope.loadPosts = function () {
+      conurancy_counter++;
       $scope.sortedPosts.forEach(function (postObj, index) {
          if (postObj.loadStatus != 'Loaded') {
             postIdAccumulator.push(postObj.id)
@@ -400,7 +401,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //----------------------------------------------------
    //--------- loading and filtering posts --------------
    $scope.getFiles = function () {
-      conurancy_counter++;
       var formattedFileList = [];
       var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
       var queryString = $scope.queryPropertyString;
