@@ -201,7 +201,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.sortedPosts[indexes.sortedPosts] = 'Changed';
             sortPosts()
          });
-         $scope.loadPosts();
+         if ($scope.sortedPosts.length != 0) $scope.loadPosts();
+         if ($scope.sortedPosts.length = 0) $scope.loadPosts();
          console.log($scope.allPosts);
       })
 
