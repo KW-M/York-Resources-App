@@ -491,7 +491,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       };
       //return ($scope.sortByDateAndLikes(output))
    }
-
    $scope.sortByDateAndLikes = function (arrayToSort) {
       return (arrayToSort.sort(function (a, b) {
          console.log(b)
@@ -661,9 +660,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    //----------------------------------------------------
    //---------------- Event Watchers --------------------
-   // $scope.$watch('allPosts', function (newValue) {
-   //    console.log('allPosts Changed')
-   // }, true);
    window.addEventListener("resize", function () {
       if ($mdMedia('gt-sm')) $mdSidenav('sidenav_overlay').close()
    });
@@ -812,7 +808,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       return this
    }
 
-   $scope.updateVisiblePosts = function (array, callback) {
+   function updateVisiblePosts (array, callback) {
       console.log(array)
       $timeout(function () {
          if (array) {
@@ -826,12 +822,27 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    //----------------------------------------------------
    //---------------------- dev -------------------------
-
-   $scope.logDuplicationIndexes = function () {
-         console.log({
-            deDuplicationIndex: deDuplicationIndex,
-            classPageTokenSelectionIndex: classPageTokenSelectionIndex
-         })
-      } //less important functions are delegated to another file;
+   $scope.consoleLogInput = function (input, asAlert) {
+		console.log(input)
+		if (asAlert) window.alert(JSON.stringify(input, null, 4))
+	}
+	
+	$scope.consoleLogVariable = function (input, asAlert) {
+		console.log(self[input])
+		if (asAlert) window.alert(JSON.stringify(self[input], null, 4))
+	}
+	
+	$scope.logPostToConsole = function (content, arrayIndex) {
+		console.log({
+			'loggedPostContent': content,
+			'arrayIndex': arrayIndex,
+			'converted': 'not used'
+		});
+	}
+	
+	$scope.refreshLayout = angularGridInstance.postsGrid.refresh;
+	
+   
+    //less important functions are delegated to another file;
    subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia, $timeout, $filter, $mdSidenav, authorizationService, APIService, angularGridInstance); {}
 }

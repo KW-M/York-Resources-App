@@ -492,27 +492,8 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
    //    }
    //    conurancy_counter = conurancy_counter - 1
    // }
-		//----------------------------------------------------
-		//---------------------- dev -------------------------
-	$scope.consoleLog = function (input, asAlert) {
-		console.log(input)
-		if (asAlert) {
-			window.alert(JSON.stringify(input, null, 4))
-		}
-	}
-	
-	$scope.refreshLayout = function () {
-		angularGridInstance.postsGrid.refresh();
-	}
-	$scope.logPostToConsole = function (content, arrayIndex) {
-		window.alert(JSON.stringify({
-			'loggedPostContent': content,
-			'arrayIndex': arrayIndex
-		}, null, 4));
-		console.log({
-			'loggedPostContent': content,
-			'arrayIndex': arrayIndex,
-			'converted': $scope.convertPostToDriveMetadata(content)
-		});
-	}
+      // $scope.$watch('allPosts', function (newValue) {
+   //    console.log('allPosts Changed')
+   // }, true);
+		
 }
