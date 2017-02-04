@@ -2,13 +2,8 @@
 app.controller('AppController', controllerFunction)
    //controllerFunction.$inject(['$scope', '$mdDialog', '$window', '$timeout', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', 'angularGridInstance'])
 function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, $location, $http, $sce, $mdDialog, $mdToast, $mdSidenav, $mdMedia, $mdTheming, authorizationService, APIService, angularGridInstance) {
-   var self = this;
    var content_container = document.getElementById("content_container");
-
-   $scope.allPosts = [];
-   $scope.sortedPosts = [];
-   $scope.searchPosts = [];
-   $scope.visiblePosts = [];
+   var self = this;
 
    $scope.allLabels = [];
    $scope.visibleLabels = [];
@@ -230,8 +225,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    //----------------------------------------------------
    //----------- loading and sorting posts --------------
-   var getFileTimer = null;
    var conurancy_counter = 0;
+   var getFileTimer = null;
+
+   $scope.allPosts = [];
+   $scope.sortedPosts = [];
+   $scope.searchPosts = [];
+   $scope.visiblePosts = [];
 
    function sortPosts() {
       var filterObj = $scope.filterPosts($scope.allPosts)
@@ -291,26 +291,21 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             })
             setTimeout(angularGridInstance.postsGrid.refresh, 1000);
             conurancy_counter--;
-         }, 1000)
+         })
       }, console.warn, 150);
    }
 
    function hideSpinner() {
-      if (classPageTokenSelectionIndex[$scope.queryPropertyString] === "end") {
-         loading_spinner.style.display = 'none';
-         clearInterval(getFileTimer);
-         $timeout(function () {
-            if ($scope.visiblePosts.length > 0) {
-               no_more_footer.style.display = 'block';
-            } else {
-               layout_grid.style.height = '0px';
-               no_posts_footer.style.display = 'block';
-            }
-         }, 200)
-      }
+      loading_spinner.style.display = 'none';
+      clearInterval(getFileTimer);
       $timeout(function () {
-         angularGridInstance.postsGrid.refresh();
-      }, 1000)
+         if ($scope.visiblePosts.length > 0) {
+            no_more_footer.style.display = 'block';
+         } else {
+            layout_grid.style.height = '0px';
+            no_posts_footer.style.display = 'block';
+         }
+      }, 200)
    }
 
    //----------------------------------------------------
@@ -502,12 +497,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    //----------------------------------------------------
    //---------------- Event Watchers --------------------
-
-   $scope.$watch('allPosts', function (newValue) {
-      console.log('allPosts Changed')
-   }, true);
-
-
+   // $scope.$watch('allPosts', function (newValue) {
+   //    console.log('allPosts Changed')
+   // }, true);
    content_container.onscroll = function (event) {
       var yScroll = content_container.scrollTop;
       $timeout(function () {
@@ -522,9 +514,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    };
 
    window.addEventListener("resize", function () {
-      $timeout(function () {
-         if ($mdMedia('gt-sm')) $mdSidenav('sidenav_overlay').close()
-      })
+      if ($mdMedia('gt-sm')) $mdSidenav('sidenav_overlay').close()
    });
 
    document.onkeydown = function (e) {
