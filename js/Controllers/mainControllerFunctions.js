@@ -303,15 +303,18 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       var index, cancel;
       var postIdAccumulator = [];
       var max = $scope.sortedPosts.length
-      for (index = 0; index < max && !cancel; index++) {
+      for (index = 0; index < max;) {
          var postObj = $scope.sortedPosts[index];
          if (postObj.loadStatus != 'Loaded') {
-            postIdAccumulator.push(postObj.id)
-            if (postIdAccumulator.length == 3) {
-               if (index + 1 == max) getPosts(postIdAccumulator, true);
-               if (index + 1 != max) getPosts(postIdAccumulator, false);
-            }
+            // postIdAccumulator.push(postObj.id)
+            // if (postIdAccumulator.length == 3) {
+            //    if (index + 1 == max) getPosts(postIdAccumulator, true);
+            //    if (index + 1 != max) getPosts(postIdAccumulator, false);
+            //    return;
+            // }
          }
+
+         console.log(max, index + 1)
       }
       console.log(max, index + 1)
          // if (postIdAccumulator.length != 0 && index + 1 == max) {
