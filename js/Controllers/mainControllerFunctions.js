@@ -281,9 +281,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.visiblePosts.splice(indexes.visiblePosts, 1);
          }
       })
+      loadPosts()
    }
 
-   function loadPosts() {
+   $scope.loadPosts = function() {
       $scope.sortedPosts.forEach(function (postObj, index) {
          if (postObj.loadStatus != 'Loaded') {
             postIdAccumulator.push(postObj.id)
@@ -293,9 +294,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             }
          }
       });
-
-      getPosts(postIdAccumulator)
-      postIdAccumulator = [];
+      if (postIdAccumulator.length != 0) {
+         getPosts(postIdAccumulator)
+         postIdAccumulator = [];
+      }
    }
 
    //----------------------------------------------------
