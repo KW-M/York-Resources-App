@@ -147,7 +147,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
 
       var getStartupData = APIService.runGAScript('getStartupData')().then(function (data) {
-         console.log(data)
          var dataObj = JSON.parse(data.result.response.result);
          $timeout(function () {
             for (var property in dataObj.userPrefs) {
@@ -161,7 +160,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.classList = dataObj.classes;
             $scope.teacherList = dataObj.teachers;
          });
-         console.log(dataObj)
       }, console.warn)
 
       var pickerPromise = $q.defer();
@@ -186,9 +184,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
       var recentsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(false).setSelectFolderEnabled(true).setLabel('Recents');
 
-      drivePicker = new google.picker.PickerBuilder().setDeveloperKey("AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA").setOrigin(window.location.protocol + '//' + window.location.host).setOAuthToken(authorizationService.getGAuthToken()).setCallback(self.pickerCallback)
+      drivePicker = new google.picker.PickerBuilder().setDeveloperKey("AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA").setOrigin(window.location.protocol + '//' + window.location.host).setOAuthToken(authorizationService.getGAuthToken()).setCallback(pickerCallback)
          .addView(docsView).addView(recentsView).addView(sharedView).build();
-      uploadPicker = new google.picker.PickerBuilder().setDeveloperKey("AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA").setOrigin(window.location.protocol + '//' + window.location.host).setOAuthToken(authorizationService.getGAuthToken()).setCallback(self.pickerCallback)
+      uploadPicker = new google.picker.PickerBuilder().setDeveloperKey("AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA").setOrigin(window.location.protocol + '//' + window.location.host).setOAuthToken(authorizationService.getGAuthToken()).setCallback(pickerCallback)
          .addView(uploadView).enableFeature(google.picker.Feature.NAV_HIDDEN).hideTitleBar().build();
    }
 
@@ -243,27 +241,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    var getFileTimer = null;
    var conurancy_counter = 0;
 
-   function getPosts(idArray) {
-      conurancy_counter++;
-      promiseQueue().addPromise('drive', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
-         console.log(postsData)
-         var postsArray = JSON.parse(postsData.result.response.result);
-         $timeout(function () {
-            postsArray.forEach(function function_name(postObj) {
-               postObj.loadStatus = 'Loaded';
-               postObj.updateDate = new Date(postObj.updateDate)
-               postObj.creationDate = new Date(postObj.creationDate)
-               var indexes = $scope.getIdPostArrayIndex(postObj.id)
-               $scope.allPosts[indexes.allPosts] = postObj;
-               $scope.sortedPosts[indexes.sortedPosts] = postObj;
-               $scope.visiblePosts.push(postObj);
-            })
-            setTimeout(angularGridInstance.postsGrid.refresh, 1000);
-            conurancy_counter--;
-         }, 1000)
-      }, console.warn, 150);
-   }
-
    function sortPosts() {
       var filterObj = $scope.filterPosts($scope.allPosts)
       $scope.sortedPosts = $scope.sortByDateAndLikes(filterObj.filtered)
@@ -289,7 +266,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       $scope.loadPosts()
    }
 
-   $scope.loadPosts = function () {
+   function loadPosts() {
       $scope.sortedPosts.forEach(function (postObj, index) {
          if (postObj.loadStatus != 'Loaded') {
             postIdAccumulator.push(postObj.id)
@@ -305,11 +282,48 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
    }
 
+   function getPosts(idArray) {
+      conurancy_counter++;
+      promiseQueue().addPromise('drive', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
+         console.log(postsData)
+         var postsArray = JSON.parse(postsData.result.response.result);
+         $timeout(function () {
+            postsArray.forEach(function function_name(postObj) {
+               postObj.loadStatus = 'Loaded';
+               postObj.updateDate = new Date(postObj.updateDate)
+               postObj.creationDate = new Date(postObj.creationDate)
+               var indexes = $scope.getIdPostArrayIndex(postObj.id)
+               $scope.allPosts[indexes.allPosts] = postObj;
+               $scope.sortedPosts[indexes.sortedPosts] = postObj;
+               $scope.visiblePosts.push(postObj);
+            })
+            setTimeout(angularGridInstance.postsGrid.refresh, 1000);
+            conurancy_counter--;
+         }, 1000)
+      }, console.warn, 150);
+   }
 
+   function hideSpinner() {
+      if (classPageTokenSelectionIndex[$scope.queryPropertyString] === "end") {
+         loading_spinner.style.display = 'none';
+         clearInterval(getFileTimer);
+         $timeout(function () {
+            if ($scope.visiblePosts.length > 0) {
+               no_more_footer.style.display = 'block';
+            } else {
+               layout_grid.style.height = '0px';
+               no_posts_footer.style.display = 'block';
+            }
+         }, 200)
+      }
+      $timeout(function () {
+         angularGridInstance.postsGrid.refresh();
+      }, 1000)
+   }
 
    //----------------------------------------------------
    //--------------- Creating Posts ---------------------
-   $scope.newPost = function (postObj, operation, event) {
+   function newPost(postObj, operation, event) {
       $scope.newPostScroll = 0;
       var dialogConfig = {
             templateUrl: 'templates/createPost.html',
@@ -370,7 +384,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
    };
 
-   $scope.showPicker = function (type, restorePost) {
+   function showDrivePicker(type, restorePost) {
       $scope.restorePost = restorePost || false;
       if (type == "Drive") {
          drivePicker.setVisible(true);
@@ -379,7 +393,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
    };
 
-   self.pickerCallback = function (data) {
+   function drivePickerCallback(data) {
       if (data.action == google.picker.Action.PICKED) {
          if ($scope.restorePost == true) {
             $timeout(function () {
