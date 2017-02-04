@@ -201,8 +201,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.sortedPosts[indexes.sortedPosts] = 'Changed';
             sortPosts()
          });
-         if ($scope.sortedPosts.length != 0) $scope.loadPosts();
-         if ($scope.sortedPosts.length == 0) $scope.sortPosts();
+         if ($scope.sortedPosts.length != 0) loadPosts();
+         if ($scope.sortedPosts.length == 0) sortPosts();
          console.log($scope.allPosts);
       })
 
@@ -233,6 +233,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.sortedPosts = [];
    $scope.searchPosts = [];
    $scope.visiblePosts = [];
+   $scope.loadPosts = loadPosts
 
    function sortPosts() {
       var filterObj = $scope.filterPosts($scope.allPosts)
@@ -256,7 +257,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.visiblePosts.splice(indexes.visiblePosts, 1);
          }
       })
-      $scope.loadPosts()
+      loadPosts()
    }
 
    function loadPosts() {
