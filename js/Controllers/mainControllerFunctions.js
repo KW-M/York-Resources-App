@@ -117,11 +117,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          $scope.selectedClass = $scope.selectedClass
             // $scope.visibleLabels = $scope.sortLabels($scope.allLabels);
       });
-      // getFileTimer = setInterval(function () {
-      //    if (conurancy_counter == 0 && content_container.scrollHeight == content_container.clientHeight) {
-      //       $scope.getFiles()
-      //    }
-      // }, 1000)
+      getFileTimer = setInterval(function () {
+         if (conurancy_counter == 0 && content_container.scrollHeight == content_container.clientHeight) {
+            $scope.getFiles()
+         }
+      }, 1000);
    }
 
    function listenForURLChange() {
@@ -263,7 +263,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                $scope.visiblePosts.push(postObj);
             })
             setTimeout(angularGridInstance.postsGrid.refresh, 1000);
-            conurancy_counter;
+            conurancy_counter--;
          }, 1000)
       }, console.warn, 150);
    }
