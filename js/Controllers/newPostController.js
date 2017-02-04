@@ -48,43 +48,45 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     $scope.shareSelect = "view"
 
     $scope.findType = function () {
-        if (operation != 'view') $timeout(function () {
-            $scope.post.attachmentName = '';
-            $scope.post.attachmentIcon = '';
-            $scope.post.attachmentId = '';
-            $scope.post.previewImage = '';
-            if ($scope.post.link === '') {
-                $scope.previewLoading = false;
-                $scope.post.type = 'NoLink';
-            } else if ($scope.post.link.match(/(?:http|https):\/\/.{2,}/)) {
-                $scope.previewLoading = true;
-                $scope.post.type = 'link';
-            } else if ($scope.post.link.length > 9) {
-                $scope.post.link = "http://" + $scope.post.link;
-                $scope.post.type = 'link';
-            } else {
-                $scope.post.type = 'noLink';
-            }
-            if ($scope.myInfo != undefined) getPreview();
-            if ($scope.myInfo == undefined) document.addEventListener('userInfoLoaded', getPreview());
-
-            function getPreview() {
-                if ($scope.post.link.match(/(?:http|https):\/\/.{2,}/)) {
-                    promiseQueue().addPromise('drive', APIService.runGAScript('getLinkPreview', $scope.post.link, false), function (data) {
-                        console.log(data)
-                        var previewObj = JSON.parse(data.result.response.result);
-                        $timeout(function () {
-                            $scope.post.previewImage = previewObj.image
-                            $scope.post.attachmentIcon = previewObj.icon
-                            $scope.post.attachmentName = previewObj.title
-                            $scope.previewLoading = false;
-                            if ($scope.post.title == '') $scope.post.title = previewObj.title;
-                        })
-                    }, console.warn, 150);
-
+        if ($scope.operation != 'view') {
+            $timeout(function () {
+                $scope.post.attachmentName = '';
+                $scope.post.attachmentIcon = '';
+                $scope.post.attachmentId = '';
+                $scope.post.previewImage = '';
+                if ($scope.post.link === '') {
+                    $scope.previewLoading = false;
+                    $scope.post.type = 'NoLink';
+                } else if ($scope.post.link.match(/(?:http|https):\/\/.{2,}/)) {
+                    $scope.previewLoading = true;
+                    $scope.post.type = 'link';
+                } else if ($scope.post.link.length > 9) {
+                    $scope.post.link = "http://" + $scope.post.link;
+                    $scope.post.type = 'link';
+                } else {
+                    $scope.post.type = 'noLink';
                 }
-            }
-        })
+                if ($scope.myInfo != undefined) getPreview();
+                if ($scope.myInfo == undefined) document.addEventListener('userInfoLoaded', getPreview());
+
+                function getPreview() {
+                    if ($scope.post.link.match(/(?:http|https):\/\/.{2,}/)) {
+                        promiseQueue().addPromise('drive', APIService.runGAScript('getLinkPreview', $scope.post.link, false), function (data) {
+                            console.log(data)
+                            var previewObj = JSON.parse(data.result.response.result);
+                            $timeout(function () {
+                                $scope.post.previewImage = previewObj.image
+                                $scope.post.attachmentIcon = previewObj.icon
+                                $scope.post.attachmentName = previewObj.title
+                                $scope.previewLoading = false;
+                                if ($scope.post.title == '') $scope.post.title = previewObj.title;
+                            })
+                        }, console.warn, 150);
+
+                    }
+                }
+            })
+        }
     };
 
     $scope.$watch('post.link', function () {
