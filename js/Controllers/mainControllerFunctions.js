@@ -455,6 +455,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    $scope.newPost = newPost;
+   
+   $scope.$watch('sortedPosts', function () {
+      var max = $scope.sortedPosts.length
+      for(var index = 0; index < max; index++){
+         if($scope.sortedPosts[i])
+      }
+   }, true);
 
    //----------------------------------------------------
    //------------------ Searching -----------------------
