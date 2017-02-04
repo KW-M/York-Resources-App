@@ -73,7 +73,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          $scope.searchPrefix = 'Search';
          if ($scope.queryParams.q !== null) {
             if ($scope.queryParams.q != $scope.previousSearch) {
-               $scope.updateVisiblePosts([]);
+               updateVisiblePosts([]);
             }
          } else {
             $scope.queryParams.flagged = null
@@ -90,18 +90,18 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.searchPrefix = 'Search Within';
             $scope.queryParams.flagged = false
          }
-         //generateQueryString();
+         // generateQueryString();
          // if ($scope.queryParams.q === null) {
-         //    //$scope.updateVisiblePosts($scope.filterPosts($scope.allPosts), hideSpinner);
+            //$scope.updateVisiblePosts($scope.filterPosts($scope.allPosts), hideSpinner);
          // }
          $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
-         sortPosts();
          $timeout(function () {
             $scope.selectedClass = $scope.selectedClass
          });
          getFileTimer = setInterval(function () {
             if (conurancy_counter == 0 && content_container.scrollHeight == content_container.clientHeight) $scope.loadPosts()
          }, 1000);
+         sortPosts();
       }
    }
 
@@ -799,11 +799,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       return this
    }
 
-   function updateVisiblePosts(array, callback) {
+   function updateSortedPosts(array, callback) {
       console.log(array)
       $timeout(function () {
          if (array) {
-            $scope.visiblePosts = array;
+            $scope.sortedPosts = array;
          }
          if (callback) {
             callback();
