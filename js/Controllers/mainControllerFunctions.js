@@ -15,12 +15,18 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.searchPosts = [];
    $scope.visiblePosts = [];
 
-
-   var deDuplicationIndex = {};
-   var classPageTokenSelectionIndex = {};
-
+   $scope.queryParams = {
+      q: undefined, //undefined to make search popunder show with no text in  field
+      flagged: false,
+      type: null,
+      classPath: 'Loading...',
+      creatorEmail: null,
+      id: null,
+   };
+   $scope.queryPropertyString = '';
    $scope.previousSearch = undefined;
    $scope.searchPlaceholder = 'Search';
+
    $scope.allLabels = [];
    $scope.visibleLabels = [];
    $scope.labelSearch = null;
@@ -32,16 +38,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       FABisHidden: true,
       addBarTopIsHidden: false,
       mobileSearchIsOpen: false,
-   };
-
-   $scope.queryPropertyString = '';
-   $scope.queryParams = {
-      q: undefined, //undefined to make search popunder show with no text in  field
-      flagged: false,
-      type: null,
-      classPath: 'Loading...',
-      creatorEmail: null,
-      id: null,
    };
 
    $scope.$mdMedia = $mdMedia;
