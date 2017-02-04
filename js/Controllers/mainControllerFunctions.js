@@ -301,7 +301,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function loadPosts() {
       hideSpinner(false)
-      $scope.sortedPosts.forEach(function (postObj, index) {
+      var max = $scope.sortedPosts.length
+      for 
          if (postObj.loadStatus != 'Loaded') {
             postIdAccumulator.push(postObj.id)
             if (postIdAccumulator.length == 3) {
