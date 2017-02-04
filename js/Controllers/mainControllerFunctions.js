@@ -259,7 +259,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }, console.warn, 150);
    }
 
-   function loadPosts() {
+   function sortPosts() {
       var filterObj = $scope.filterPosts($scope.allPosts)
       $scope.sortedPosts = $scope.sortByDateAndLikes(filterObj.filtered)
       filterObj.filteredOut.forEach(function (postObj, index) {
@@ -277,10 +277,22 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             }
             var indexes = $scope.getIdPostArrayIndex(postObj.id)
             $scope.allPosts[indexes.allPosts] = slimedObj;
-            $scope.sortedPosts[indexes.sPosts] = slimedObj;
+            $scope.sortedPosts[indexes.sortedPosts] = slimedObj;
             $scope.visiblePosts.splice(indexes.visiblePosts, 1);
          }
       })
+   }
+
+   function loadPosts() {
+      $scope.sortedPosts.forEach(function (postObj, index) {
+         if (postObj.loadStatus != 'Loaded') {
+            postIdAccumulator.push(postObj.id)
+               // if (postIdAccumulator.length = 3) {
+               //    getPosts(postIdAccumulator)
+               //    postIdAccumulator = [];
+               // }
+         }
+      });
    }
 
    //----------------------------------------------------
