@@ -169,57 +169,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 		// spreadsheetRow[5] = $scope.myInfo.LastBeenFlaggedDate || '';
 		// return (spreadsheetRow);
 	};
-	//----------------------------------------------------
-	//-------------- Filtering & Sorting -----------------
-	$scope.filterPosts = function (inputSet) {
-		console.log(inputSet)
-		var filtered = []
-		var filteredOut = []
-		var max = inputSet.length
-		var count;
-		for (count = 0; count < max; count++) {
-			if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
-				var Flagged = inputSet[count].flagged === $scope.queryParams.flagged;
-			} else {
-				var Flagged = true;
-			}
-			console.log($scope.selectedClass)
-			if ($scope.queryParams.classPath !== null && $scope.queryParams.classPath !== undefined && $scope.selectedClass !== false && $scope.selectedClass.stared !== null) {
-				var Class = inputSet[count].class.name === $scope.queryParams.classPath;
-			} else {
-				var Class = inputSet[count].class.name !== 'Memes';
-			}
-			if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) {
-				var Type = inputSet[count].type === $scope.queryParams.type;
-			} else {
-				var Type = true;
-			}
-			if ($scope.queryParams.creatorEmail !== null && $scope.queryParams.creatorEmail !== undefined) {
-				var Creator = inputSet[count].creator.email === $scope.queryParams.creatorEmail;
-			} else {
-				var Creator = true;
-			}
-			if (Flagged && Class && Type && Creator) {
-				filtered.push(inputSet[count])
-			} else {
-				filteredOut.push(inputSet[count])
-			}
-		};
-		return {
-			filtered: filtered,
-			filteredOut: filteredOut
-		};
-		//return ($scope.sortByDateAndLikes(output))
-	}
 
-	$scope.sortByDateAndLikes = function (arrayToSort) {
-		return (arrayToSort.sort(function (a, b) {
-			console.log(b)
-			var alikes = (a.likes != undefined ? a.likes.length : a.likeCount) * 2
-			var blikes = (b.likes != undefined ? b.likes.length : b.likeCount) * 2
-			return b.creationDate.addDays(blikes) - a.creationDate.addDays(alikes);
-		}));
-	};
 	$scope.findClassObject = function (className) {
 		if (className == 'All Posts') {
 			return ({

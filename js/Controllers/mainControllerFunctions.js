@@ -503,6 +503,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //    conurancy_counter = conurancy_counter - 1
    // }
 
+
+
    //----------------------------------------------------
    //---------------- Event Watchers --------------------
    // $scope.$watch('allPosts', function (newValue) {
