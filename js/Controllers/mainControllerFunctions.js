@@ -232,8 +232,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.allPosts = [];
    $scope.sortedPosts = [];
    $scope.searchPosts = [];
-   $scope.visiblePosts = [];
-   $scope.loadPosts = loadPosts
 
    function sortPosts() {
       var filterObj = $scope.filterPosts($scope.allPosts)
@@ -297,18 +295,27 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }, console.warn, 150);
    }
 
-   function hideSpinner() {
-      loading_spinner.style.display = 'none';
-      clearInterval(getFileTimer);
-      $timeout(function () {
-         if ($scope.visiblePosts.length > 0) {
-            no_more_footer.style.display = 'block';
-         } else {
-            layout_grid.style.height = '0px';
-            no_posts_footer.style.display = 'block';
-         }
-      }, 200)
+   function hideSpinner(hide) {
+      if (hide == true) {
+         loading_spinner.style.display = 'none';
+         clearInterval(getFileTimer);
+         $timeout(function () {
+            if ($scope.visiblePosts.length > 0) {
+               no_more_footer.style.display = 'block';
+            } else {
+               layout_grid.style.height = '0px';
+               no_posts_footer.style.display = 'block';
+            }
+         }, 200)
+      } else {
+         loading_spinner.style.display = 'block';
+         no_more_footer.style.display = 'none';
+         no_posts_footer.style.display = 'none';
+         footer_problem.style.display = 'none';
+      }
    }
+
+   $scope.loadPosts = loadPosts;
 
    //----------------------------------------------------
    //--------------- Creating Posts ---------------------
@@ -439,41 +446,37 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       })
    }, false);
 
-   // $scope.getFiles = function () {
-   //    var formattedFileList = [];
-   //    var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
-   //    var queryString = $scope.queryPropertyString;
-   //    if (nextPageToken !== "end") {
-   //       loading_spinner.style.display = 'block';
-   //       no_more_footer.style.display = 'none';
-   //       no_posts_footer.style.display = 'none';
-   //       footer_problem.style.display = 'none';
-   //       queue('drive', GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function (fileList) {
-   //          for (var fileCount = 0; fileCount < fileList.result.files.length; fileCount++) {
-   //             if (!$scope.queryParams.q && deDuplicationIndex[fileList.result.files[fileCount].id] === undefined) {
-   //                //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
-   //                formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[fileCount]) //format and save the new post to the formatted files list array
-   //                deDuplicationIndex[fileList.result.files[fileCount].id] = 1; //mark this id as used with a "1".
-   //             } else if ($scope.queryParams.q) {
-   //                formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[fileCount]) //format and save the new post to the formatted files list array
-   //             }
-   //          }
-   //          sortPostsByType(formattedFileList, queryString, $scope.queryParams);
-   //          if (fileList.result.nextPageToken !== undefined) {
-   //             classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken; //if we haven't reached the end of our search:
-   //          } else {
-   //             classPageTokenSelectionIndex[$scope.queryPropertyString] = "end" //if we have reached the end of our search:
-   //          }
-   //          hideSpinner();
-   //       }, function () {
-   //          no_more_footer.style.display = 'none';
-   //          no_posts_footer.style.display = 'none';
-   //          no_more_footer.style.display = 'none';
-   //          footer_problem.style.display = 'flex';
-   //          content_container.scrollTop = content_container.scrollHeight;
-   //       }, 150);
-   //    }
-   // }
+   $scope.getFiles = function () {
+      var formattedFileList = [];
+      var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
+      var queryString = $scope.queryPropertyString;
+      if (nextPageToken !== "end") {
+         queue('drive', GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function (fileList) {
+            for (var fileCount = 0; fileCount < fileList.result.files.length; fileCount++) {
+               if (!$scope.queryParams.q && deDuplicationIndex[fileList.result.files[fileCount].id] === undefined) {
+                  //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
+                  formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[fileCount]) //format and save the new post to the formatted files list array
+                  deDuplicationIndex[fileList.result.files[fileCount].id] = 1; //mark this id as used with a "1".
+               } else if ($scope.queryParams.q) {
+                  formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[fileCount]) //format and save the new post to the formatted files list array
+               }
+            }
+            sortPostsByType(formattedFileList, queryString, $scope.queryParams);
+            if (fileList.result.nextPageToken !== undefined) {
+               classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken; //if we haven't reached the end of our search:
+            } else {
+               classPageTokenSelectionIndex[$scope.queryPropertyString] = "end" //if we have reached the end of our search:
+            }
+            hideSpinner();
+         }, function () {
+            no_more_footer.style.display = 'none';
+            no_posts_footer.style.display = 'none';
+            no_more_footer.style.display = 'none';
+            footer_problem.style.display = 'flex';
+            content_container.scrollTop = content_container.scrollHeight;
+         }, 150);
+      }
+   }
 
    // function sortPostsByType(formattedFileList, queryString, queryParams) {
    //    if (queryParams.q) {
