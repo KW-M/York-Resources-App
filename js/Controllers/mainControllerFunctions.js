@@ -287,12 +287,15 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       $scope.sortedPosts.forEach(function (postObj, index) {
          if (postObj.loadStatus != 'Loaded') {
             postIdAccumulator.push(postObj.id)
-               // if (postIdAccumulator.length = 3) {
-               //    getPosts(postIdAccumulator)
-               //    postIdAccumulator = [];
-               // }
+            if (postIdAccumulator.length == 3) {
+               getPosts(postIdAccumulator)
+               postIdAccumulator = [];
+            }
          }
       });
+
+      getPosts(postIdAccumulator)
+      postIdAccumulator = [];
    }
 
    //----------------------------------------------------
