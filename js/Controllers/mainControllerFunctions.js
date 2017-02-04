@@ -121,7 +121,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //----------------------------------------------------
    //------------- Signin & Initiation ------------------
    var drivePicker, uploadPicker;
-   var postIdAccumulator = [];
 
    authorizationService.onLoad(function () {
       var profile = authorizationService.GUser.getBasicProfile()
@@ -301,19 +300,17 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function loadPosts() {
       hideSpinner(false)
+      var postIdAccumulator = [];
       var max = $scope.sortedPosts.length
-      for 
+      for (var index = 0; index < max; index++) {
+         var postObj = $scope.sortedPosts[index];
          if (postObj.loadStatus != 'Loaded') {
             postIdAccumulator.push(postObj.id)
             if (postIdAccumulator.length == 3) {
+               if (index+1 == )
                getPosts(postIdAccumulator)
-               postIdAccumulator = [];
             }
          }
-      });
-      if (postIdAccumulator.length != 0) {
-         getPosts(postIdAccumulator)
-         postIdAccumulator = [];
       }
    }
 
