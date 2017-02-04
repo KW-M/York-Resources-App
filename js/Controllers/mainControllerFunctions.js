@@ -320,7 +320,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       };
    }
 
-   function getPosts(idArray) {
+   function getPosts(idArray, end) {
       conurancy_counter++;
       promiseQueue().addPromise('drive', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
          console.log(postsData)
@@ -335,8 +335,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                $scope.sortedPosts[indexes.sortedPosts] = postObj;
             })
             setTimeout(angularGridInstance.postsGrid.refresh, 1000);
+            if (end) hideSpinner(true, true)
             conurancy_counter--;
-            hideSpinner(true)
          })
       }, console.warn, 150);
    }
@@ -349,9 +349,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             if (!end) {
                layout_grid.style.height = '0px';
                no_posts_footer.style.display = 'block';
-            } else {
-               no_more_footer.style.display = 'block';
             }
+            if (end) no_more_footer.style.display = 'block';
          }, 200)
       } else {
          loading_spinner.style.display = 'block';
