@@ -437,48 +437,61 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 	$scope.closeDialog = function () {
 		$mdDialog.hide();
 	};
-	//----------------------------------------------------
-	//----------------- Error Handling -------------------
-	window.DriveErrorHandeler = function (error, item) {
-		console.warn(error);
-		console.log(item);
-		if (error.hasOwnProperty('expectedDomain')) {
-			gapi.auth2.getAuthInstance().signOut();
-			$mdDialog.show($mdDialog.alert({
-				title: 'Sorry.',
-				htmlContent: "<p>York Study Resources only works with York Google accounts right now.</p><p>If you have an email account ending with @york.org, please login with it, or ask Mr.Brookhouser if you don't have one.<p>",
-				ok: 'Ok'
-			})).then(function () {
-				angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
-				setTimeout(function () {
-					angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
-				}, 500);
-			});
-		}
-		if (error.result) {
-			// var newItem = JSON.parse(JSON.stringify(item).replace(/(?:"Authorization":"Bearer )[^"]+/,'"Authorization":"Bearer woop woop ' + authorizationService.getAuthToken() + '"'));
-			// 		console.log(newItem)
-			if (error.result.error.errors[0].message == 'Invalid Credentials') {
-				console.warn("invalid credentials")
-				$mdToast.show($mdToast.simple().textContent('Please signin again.')).hideDelay(8000);
-				authorizationService.showSigninButton();
-				authorizationService.showSigninDialog();
-			} else if (error.result.error.errors[0].reason == 'dailyLimitExceededUnreg') {
-				console.warn('daily limit reached')
-				$mdToast.show($mdToast.simple().textContent('Please signin again.')).hideDelay(8000);
-			}
-		}
-		if (item.Err) {
-			item.Err(error)
-		}
-	}
-	window.clearUserInfo = function () {
-			$timeout(function (argument) {
-				$scope.myInfo = {};
-				$scope.visiblePosts = [];
-				$scope.userList = [];
-			})
-		}
+
+		
+   $scope.getFiles = function () {
+      var formattedFileList = [];
+      var nextPageToken = classPageTokenSelectionIndex[$scope.queryPropertyString] || "";
+      var queryString = $scope.queryPropertyString;
+      if (nextPageToken !== "end") {
+         queue('drive', GoogleDriveService.getListOfFlies($scope.queryPropertyString, nextPageToken, 3), function (fileList) {
+            for (var fileCount = 0; fileCount < fileList.result.files.length; fileCount++) {
+               if (!$scope.queryParams.q && deDuplicationIndex[fileList.result.files[fileCount].id] === undefined) {
+                  //if the deDuplication obj doesn't have the file's id as a key, it hasn't already been downloaded.
+                  formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[fileCount]) //format and save the new post to the formatted files list array
+                  deDuplicationIndex[fileList.result.files[fileCount].id] = 1; //mark this id as used with a "1".
+               } else if ($scope.queryParams.q) {
+                  formattedFileList[fileCount] = $scope.convertDriveToPost(fileList.result.files[fileCount]) //format and save the new post to the formatted files list array
+               }
+            }
+            sortPostsByType(formattedFileList, queryString, $scope.queryParams);
+            if (fileList.result.nextPageToken !== undefined) {
+               classPageTokenSelectionIndex[$scope.queryPropertyString] = fileList.result.nextPageToken; //if we haven't reached the end of our search:
+            } else {
+               classPageTokenSelectionIndex[$scope.queryPropertyString] = "end" //if we have reached the end of our search:
+            }
+            hideSpinner();
+         }, function () {
+            no_more_footer.style.display = 'none';
+            no_posts_footer.style.display = 'none';
+            no_more_footer.style.display = 'none';
+            footer_problem.style.display = 'flex';
+            content_container.scrollTop = content_container.scrollHeight;
+         }, 150);
+      }
+   }
+
+   // function sortPostsByType(formattedFileList, queryString, queryParams) {
+   //    if (queryParams.q) {
+   //       console.log('hasQueryParams')
+   //       if (queryParams.q === $scope.previousSearch) {
+   //          console.log('sameSearch')
+   //          $scope.searchPosts = $scope.searchPosts.concat(formattedFileList);
+   //       } else {
+   //          console.log('newSearch')
+   //          $scope.searchPosts = formattedFileList;
+   //       }
+   //       $scope.previousSearch = $scope.queryParams.q || null;
+   //       $scope.updateVisiblePosts($scope.searchPosts);
+   //    } else {
+   //       $scope.allPosts = $scope.allPosts.concat(formattedFileList);
+   //       $scope.updateVisiblePosts($scope.visiblePosts.concat($scope.filterPosts(formattedFileList)));
+
+   //       //if ($scope.queryPropertyString == queryString) {
+   //       // }
+   //    }
+   //    conurancy_counter = conurancy_counter - 1
+   // }
 		//----------------------------------------------------
 		//---------------------- dev -------------------------
 	$scope.consoleLog = function (input, asAlert) {
@@ -487,6 +500,7 @@ function subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia
 			window.alert(JSON.stringify(input, null, 4))
 		}
 	}
+	
 	$scope.refreshLayout = function () {
 		angularGridInstance.postsGrid.refresh();
 	}

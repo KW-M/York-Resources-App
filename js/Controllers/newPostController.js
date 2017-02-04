@@ -40,6 +40,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $scope.findType();
     })
 
+
     //temproary variables
     $scope.operation = operation;
     $scope.previewThumbnail = "";
