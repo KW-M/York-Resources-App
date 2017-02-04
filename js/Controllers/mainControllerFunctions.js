@@ -92,7 +92,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          }
          // generateQueryString();
          // if ($scope.queryParams.q === null) {
-            //$scope.updateVisiblePosts($scope.filterPosts($scope.allPosts), hideSpinner);
+         //$scope.updateVisiblePosts($scope.filterPosts($scope.allPosts), hideSpinner);
          // }
          $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
          $timeout(function () {
@@ -233,6 +233,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function sortPosts() {
       hideSpinner(false)
+      $scope.visiblePosts = [];
       var filterObj = filterPosts($scope.allPosts)
       $scope.sortedPosts = filterObj.filtered.sort(function (a, b) {
          console.log(b)
@@ -356,6 +357,16 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
    }
 
+   $scope.$watch('sortedPosts', function () {
+      var visible = [];
+      var max = $scope.sortedPosts.length
+      for (var index = 0; index < max; index++) {
+         var postObj = $scope.sortedPosts[index]
+         if (postObj.loadStatus == 'Loaded') visible.push(postObj);
+      }
+      $scope.visiblePosts = visible;
+   }, true);
+
    $scope.loadPosts = loadPosts;
 
    //----------------------------------------------------
@@ -455,13 +466,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    $scope.newPost = newPost;
-   
-   $scope.$watch('sortedPosts', function () {
-      var max = $scope.sortedPosts.length
-      for(var index = 0; index < max; index++){
-         if($scope.sortedPosts[i])
-      }
-   }, true);
 
    //----------------------------------------------------
    //------------------ Searching -----------------------
