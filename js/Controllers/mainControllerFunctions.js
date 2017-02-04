@@ -10,9 +10,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    var no_posts_footer = document.getElementById("no_posts_footer");
    var footer_problem = document.getElementById("footer_problem");
 
-   var getFileTimer = null;
-   var conurancy_counter = 0;
-
    $scope.allPosts = [];
    $scope.sortedPosts = [];
    $scope.searchPosts = [];
