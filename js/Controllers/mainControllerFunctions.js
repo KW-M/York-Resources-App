@@ -60,7 +60,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          $location.search({
             q: null
          });
-         $location.path(query.classPath.replace(/ /g, "~") || query.classPath);
+         $location.path(query.classPath.replace(/-/g, "~").replace(/ /g, "-") || query.classPath);
       }
       if (query.q !== undefined) {
          if (query.q === null || query.q == '') {
@@ -78,7 +78,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function onLocationChange() {
       $scope.queryParams.q = $location.search().q || null;
-      $scope.queryParams.classPath = $location.path().replace(/\//g, "").replace(/~/g, " ") || 'All Posts';
+      $scope.queryParams.classPath = $location.path().replace(/\//g, "").replace(/-/g, " ").replace(/~/g, "-") || 'All Posts';
       $scope.queryParams.id = $location.hash();
       $scope.searchInputTxt = $scope.queryParams.q;
 
