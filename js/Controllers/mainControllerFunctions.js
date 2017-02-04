@@ -207,18 +207,25 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          snapshot.forEach(function (childSnapshot) {
             $scope.allPosts.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'))
          });
-         // postsFireRef.startAt(Date.now()).on('child_added', function (childSnapshot) {
-         //    console.log('newChild', childSnapshot.val())
-         //    $scope.allPosts.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'));
-         //    getPosts([childSnapshot.key])
-         // });
-         // postsFireRef.on('child_removed', function (childSnapshot) {
-         //    console.log('removedChild', childSnapshot.val())
-         // });
-         // postsFireRef.on('child_changed', function (childSnapshot) {
-         //    console.log('changedChild', childSnapshot.val())
-         // });
-         $scope.loadPosts()
+         postsFireRef.startAt(Date.now()).on('child_added', function (childSnapshot) {
+            console.log('newChild', childSnapshot.val())
+            $scope.allPosts.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'));
+            getPosts([childSnapshot.key])
+         });
+         postsFireRef.on('child_removed', function (childSnapshot) {
+            var id = childSnapshot.val();
+            var indexes = $scope.getIdPostArrayIndex(id);
+            $scope.allPosts.splice(indexes.allPosts, 1);
+            $scope.sortedPosts.splice(indexes.sortedPosts, 1);
+            $scope.visiblePosts.splice(indexes.visiblePosts, 1);
+         });
+         postsFireRef.on('child_changed', function (childSnapshot) {
+            var indexes = $scope.getIdPostArrayIndex(postObj.id)
+            $scope.allPosts[indexes.allPosts].loadStatus = 'Changed';
+            $scope.sortedPosts[indexes.sortedPosts] = 'Changed';
+            sortPosts()
+         });
+         $scope.loadPosts();
          console.log($scope.allPosts);
       })
 
