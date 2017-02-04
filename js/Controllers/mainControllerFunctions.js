@@ -269,7 +269,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function sortPosts() {
       var filterObj = $scope.filterPosts($scope.allPosts)
       $scope.sortedPosts = $scope.sortByDateAndLikes(filterObj.filtered)
-      filterObj.filteredOut.forEach(function (postObj, index) {
+      filterObj.filteredOut.forEach(function (postObj) {
          if (postObj.loadStatus == 'Loaded') {
             var slimedObj = {
                id: postObj.id,
