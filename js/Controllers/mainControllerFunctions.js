@@ -458,6 +458,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
    }
 
+   $scope.newPost = newPost;
+   
    //----------------------------------------------------
    //------------------ Searching -----------------------
    var queryPropertyString = '';
