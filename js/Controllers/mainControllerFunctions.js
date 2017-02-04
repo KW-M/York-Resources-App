@@ -248,6 +248,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function getPosts(idArray) {
+      conurancy_counter++;
       promiseQueue().addPromise('drive', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
          console.log(postsData)
          var postsArray = JSON.parse(postsData.result.response.result);
@@ -262,6 +263,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                $scope.visiblePosts.push(postObj);
             })
             setTimeout(angularGridInstance.postsGrid.refresh, 1000);
+            conurancy_counter;
          }, 1000)
       }, console.warn, 150);
    }
@@ -292,7 +294,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    $scope.loadPosts = function () {
-      conurancy_counter++;
       $scope.sortedPosts.forEach(function (postObj, index) {
          if (postObj.loadStatus != 'Loaded') {
             postIdAccumulator.push(postObj.id)
