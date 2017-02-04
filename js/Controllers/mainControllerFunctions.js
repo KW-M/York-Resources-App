@@ -91,9 +91,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.queryParams.flagged = false
          }
          //generateQueryString();
-         if ($scope.queryParams.q === null) {
-            //$scope.updateVisiblePosts($scope.filterPosts($scope.allPosts), hideSpinner);
-         }
+         // if ($scope.queryParams.q === null) {
+         //    //$scope.updateVisiblePosts($scope.filterPosts($scope.allPosts), hideSpinner);
+         // }
          $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
          sortPosts();
          $timeout(function () {
