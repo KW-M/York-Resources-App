@@ -258,7 +258,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             var indexes = getIdIndexInPostArrays(postObj.id)
             $scope.allPosts[indexes.allPosts] = slimedObj;
             $scope.sortedPosts[indexes.sortedPosts] = slimedObj;
-            $scope.visiblePosts.splice(indexes.visiblePosts, 1);
          }
       })
       loadPosts()
@@ -344,11 +343,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          loading_spinner.style.display = 'none';
          clearInterval(getFileTimer);
          $timeout(function () {
-            if ($scope.visiblePosts.length > 0) {
-               no_more_footer.style.display = 'block';
-            } else {
+            if ($scope.sortedPosts.length == 0) {
                layout_grid.style.height = '0px';
                no_posts_footer.style.display = 'block';
+            } else {
+               no_more_footer.style.display = 'block';
             }
          }, 200)
       } else {
@@ -483,7 +482,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
       $scope.queryPropertyString = query;
    }
-
    $scope.$watch('searchInputTxt', function (newValue) {
       var input = newValue || null
       var query = $scope.queryParams.q || null;
@@ -601,7 +599,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    //----------------------------------------------------
    //------------------UI Actions------------------------
-      $scope.FABClick = function () { //called by the top left toolbar menu button
+   $scope.signOut = function () {
+      authorizationService.handleSignoutClick();
+   };
+   $scope.FABClick = function () { //called by the top left toolbar menu button
       if ($scope.globals.FABisOpen == true) {
          $scope.newPost({}, 'new')
       }
