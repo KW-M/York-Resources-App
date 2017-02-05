@@ -316,7 +316,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
       if (postIdAccumulator.length != 0 && index == max) {
          getPosts(postIdAccumulator, true)
-      } else {
+      } else if (max == 0) {
+         console.log('loadHide')
          hideSpinner(true, false)
       };
    }
@@ -336,14 +337,18 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                $scope.sortedPosts[indexes.sortedPosts] = postObj;
             })
             setTimeout(angularGridInstance.postsGrid.refresh, 1000);
-            if (end) hideSpinner(true, true)
+
+            if (end) {
+               console.log('postHide')
+               hideSpinner(true, true)
+            }
             conurancy_counter--;
          })
       }, console.warn, 150);
    }
 
    function hideSpinner(hide, end) {
-      console.log('Hide:'+hide+end)
+      console.log('Hide:' + hide + end)
       if (hide == true) {
          loading_spinner.style.display = 'none';
          clearInterval(getFileTimer);
