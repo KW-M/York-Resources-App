@@ -212,7 +212,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             class: $scope.findClassObject(value.C),
             creator: {
                email: value.E,
-               classOf: value.E.match(/\d+/)[0] || '∞'
+               classOf: (value.E.match(/\d+/) || ['∞'])[0]
             },
             flagged: value.F,
             likeCount: value.L,
