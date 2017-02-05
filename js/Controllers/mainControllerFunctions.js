@@ -596,16 +596,16 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    };
    $scope.sortLabels = function () {
       var output = [];
-      var max = $scope.allLabels.length;
-      $scope.allLabels.forEach(function (label) {
-         if (item.type == 'Teacher') {
-            item.classesTaught.forEach(function (classTaught) {
-               if (classTaught == $scope.queryParams.classPath) output.push(item);
-            });
-         } else {
+      var max = $scope.allLabels.length
+      for (var labelCount = 0; labelCount < max; labelCount++) {
+         var label = $scope.allLabels[labelCount]
+         var classMax = label.classes.length;
+         for (var classCount = 0; classCount < max; classCount++) {
+            var labelClass = label.classes[classCount]
+            if (labelClass == $scope.post.class.name) 
             output.push(item);
-         }
-      })
+         );
+      }
       output = output.sort(function (a, b) {
          var aUsage, bUsage
          if (a.type == 'Teacher') {
