@@ -486,6 +486,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    $scope.newPost = newPost;
+   $scope.showDrivePicker = showDrivePicker;
 
    //----------------------------------------------------
    //------------------ Searching -----------------------
