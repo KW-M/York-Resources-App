@@ -186,13 +186,6 @@
                     <md-tooltip md-direction="left" md-autohide>Add Drive file</md-tooltip>
                     <img class="unselectable" style="width:22px; height:22px; margin-top:8px" src="images/drive_icon.svg">
                 </md-button>
-                <!--<md-button class="md-fab md-raised md-mini">-->
-                <!--    <label class="custom-file-upload" style=>-->
-                <!--    <input type="file" accept="image/*" capture="camera" style="display:none"/>-->
-                <!--    <md-tooltip md-direction="left" md-autohide>Take Photo</md-tooltip>-->
-                <!--    <md-icon class="unselectable" style="color:black">camera</md-icon>-->
-                <!--        </label>-->
-                <!--</md-button>-->
                 <md-button class="md-fab md-raised md-mini" ng-click="::showPicker('Upload')">
                     <md-tooltip md-direction="left" md-autohide>Upload</md-tooltip>
                     <md-icon class="unselectable" style="color:black">file_upload</md-icon>
@@ -248,13 +241,10 @@
                                         <span ng-hide="post.class.name == null"><md-icon>people</md-icon> {{post.class.name}}</span>
                                         <span><md-icon>event</md-icon> {{post.creationDate | date : "mm/dd/yyyy"}}</span>
                                     </div>
-                                    <div ng-hide="post.tags.length < 1" class="gradient-overlay-metadata metadata-regular unselectable">
-                                        <span><md-icon>style</md-icon> {{post.tags.join(', ')}}</span>
+                                    <div ng-if="post.labels.length != 0" class="gradient-overlay-metadata metadata-regular unselectable">
+                                        <span><md-icon>style</md-icon> {{post.labels.join(', ')}}</span>
                                     </div>
-                                    <div ng-hide="post.link == '' || post.type == 'gDrive'" class="gradient-overlay-metadata metadata-link unselectable" style="font-size:18px">
-                                        <span><md-icon>language</md-icon> {{removeHttp(post.link)}}</span>
-                                    </div>
-                                    <div class="gradient-overlay-metadata md-chips metadata-link unselectable" ng-hide="post.type != 'gDrive'" style="width:100%">
+                                    <div class="gradient-overlay-metadata md-chips metadata-link unselectable" ng-if="post.attachmentName" style="width:100%">
                                         <md-chip>
                                             <div class="md-chip-content unselectable">
                                                 <img ng-src="{{post.attachmentIcon}}" style="margin-right:4px"></img>
