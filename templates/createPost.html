@@ -11,7 +11,7 @@
 				</div>
 				<div class="gradient-overlay-metadata metadata-regular" ng-if="operation == 'view'">
 					<span ng-hide="post.class.name == null"><md-icon>people</md-icon> {{post.class.name}}</span>
-					<span><md-icon>event</md-icon> {{post.creationDate | date : "mm/dd/yyyy"}}</span>
+					<span><md-icon>event</md-icon> {{post.creationDate | date}}</span>
 				</div>
 				<div class="md-chips gradient-overlay-metadata" style="position:absolute; padding: 0 40px 0 8px" ng-class="{'metadata-link': operation == 'view'}" ng-if="post.attachmentName">
 					<md-chip>
