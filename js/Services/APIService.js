@@ -8,13 +8,13 @@ app.service('APIService', ['$q', '$http', function ($q, $http) {
             return gapi.client.script.scripts.run({
                 'scriptId': 'MuWC0NB4CLnMdc_XDwj7F_PA9VMeL9Grb',
                 'function': scriptFunction,
-                'parameters': [(stringify) ? JSON.stringify(payload) : payload, remoteId || "AKfycbxME_4iEULk_guUMF4uEQrumAiLsFaxyFt407wg9ANJHuQ4_kU"],
+                'parameters': [(stringify) ? JSON.stringify(payload) : payload, remoteId],
                 //'devMode': true,
             });
         }
     }
 
-    //---------------- Share a Drive File in the domain -----------------
+    //---------------- Share a Drive File With the York Domain -----------------
     this.shareFile = function (fileID, role) {
         return function () {
             return gapi.client.drive.permissions.create({
