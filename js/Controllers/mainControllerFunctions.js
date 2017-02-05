@@ -334,7 +334,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function getPosts(idArray, end) {
       conurancyCounter = conurancyCounter + 1;
-      promiseQueue().addPromise('drive', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
+      promiseQueue().addPromise('script', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
          conurancyCounter = conurancyCounter - 1;
          console.log(conurancyCounter)
          console.log(postsData)
@@ -685,7 +685,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.confirmDelete = function (content, arrayIndex) {
       var confirm = $mdDialog.confirm().title('Permanently delete this?').ariaLabel('Delete?').ok('Delete').cancel('Cancel');
       $mdDialog.show(confirm).then(function () {
-   
+         promiseQueue().addPromise('script', APIService.runGAScript('deletePost', content.id, false), function (returnedValue) {
+            console.log(returnedValue)
+         }, console.warn, 150);
       });
    };
    // $scope.flagPost = function (content, arrayIndex) {
@@ -945,7 +947,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.openLink = function (link, dontOpen) {
       if (link !== "" && link !== undefined && dontOpen != true) window.open(link)
    };
-   
+
    $scope.removeHttp = function (input) {
       if (input) {
          return (input.replace(/(?:http|https):\/\//, '').replace('www.', ''))
