@@ -328,6 +328,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             postsFullyLoaded = true;
          } else if (max == 0) {
             hideSpinner(true)
+            postsFullyLoaded = true;
          };
       }
    }
