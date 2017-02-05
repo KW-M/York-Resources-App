@@ -134,6 +134,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
       var getStartupData = APIService.runGAScript('getStartupData')().then(function (data) {
          var dataObj = JSON.parse(data.result.response.result);
+         console.log(dataObj)
          $timeout(function () {
             for (var property in dataObj.userPrefs) {
                $scope.myInfo[property] = dataObj.userPrefs[property];
