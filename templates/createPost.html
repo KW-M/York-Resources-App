@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="css/createPost.css" />
 <md-dialog id="new_post_dialog">
    <md-dialog-content class="new_post_dialog_scroll" style="opacity:0" ng-style="{'background-color': post.class.color + ' 0.6)'}">
       <div id="dialog_header" class="post-card-header" ng-class="{'no-link':post.type == 'NoLink','md-whiteframe-3dp': (operation == 'view' && post.link == '' && newPostScroll > 0) || (operation != 'view' && newPostScroll > 139),'not-operation-view':operation != 'view'}"
