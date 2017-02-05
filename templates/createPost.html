@@ -1,6 +1,6 @@
 <md-dialog id="new_post_dialog">
 	<md-dialog-content class="new_post_dialog_scroll" style="opacity:0" ng-style="{'background-color': post.class.color + ' 0.6)'}">
-		<div id="dialog_header" class="post-card-header" ng-class="{'no-link':post.type == 'NoLink','md-whiteframe-3dp': (operation == 'view' && post.link == '' && newPostScroll > 0) || (operation != 'view' && newPostScroll > 139),'not-operation-view':operation != 'view'}"
+		<div id="dialog_header" class="post-card-header" ng-class="{'no-link':post.type == 'NoLink','md-whiteframe-3dp': (operation == 'view' && post.link == '' && newPostScroll > 0) || (operation != 'view' && newPostScroll > 139),}"
 			md-ink-ripple="{{post.link != '' && operation == 'view'}}" ng-click="openLink(post.link, operation != 'view')" ng-style="{'height': ((operation == 'view' && post.link == '') ? (60):(200-newPostScroll)) + 'px'}">
 			<img ng-src="{{post.previewImage}}" id="header_image" ng-class="{'post-card-image':operation == 'view'}"></img>
 			<div class="gradient-overlay new-post-img-gradient">
@@ -18,9 +18,9 @@
 						<div class="md-chip-content">
 							<img ng-src="{{post.attachmentIcon}}" style="margin-right:4px"></img>
 							<span>{{post.attachmentName}}</span>
-							<button class="md-chip-remove" style="margin-right:-8px; pointer-events:initial" ng-click="clearLink()">
-                        <md-icon style="color:rgb(66,66,66)">close</md-icon>
-                     </button>
+							<button class="md-chip-remove" style="margin-right:-8px; pointer-events:initial" ng-click="clearLink()" ng-if="operation != 'view'">
+                        		<md-icon style="color:rgb(66,66,66)">close</md-icon>
+                     		</button>
 						</div>
 					</md-chip>
 				</div>
