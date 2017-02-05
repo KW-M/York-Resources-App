@@ -343,6 +343,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function hideSpinner(hide, end) {
+      console.log('Hide:'+hide+end)
       if (hide == true) {
          loading_spinner.style.display = 'none';
          clearInterval(getFileTimer);
