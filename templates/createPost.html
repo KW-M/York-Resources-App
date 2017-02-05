@@ -55,7 +55,8 @@
          </div>
          <md-progress-linear class="link-loading" md-mode="indeterminate" ng-disabled="!previewLoading"></md-progress-linear>
       </div>
-      <div id="new_post_content" ng-class="{'small-header': post.type == 'NoLink' && operation == 'view'}">
+      <div id="new_post_content">
+      	 <div class="header-spacer" ng-class="{'small-spacer': post.type == 'NoLink' && operation == 'view'}"></div>
          <div flex layout="row">
             <md-select ng-model="post.class" ng-model-options="{trackBy: $value.name}" ng-if="operation != 'view'" class="md-no-underline" placeholder="Class" id="class_dropdown_button" md-on-close="clearClassSelectSearch()">
                <md-select-header class="classSelectSearchbox">
