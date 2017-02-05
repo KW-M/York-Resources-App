@@ -192,7 +192,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             var indexes = getIdIndexInPostArrays(id);
             $scope.allPosts.splice(indexes.allPosts, 1);
             $scope.sortedPosts.splice(indexes.sortedPosts, 1);
-            $scope.visiblePosts.splice(indexes.visiblePosts, 1);
          });
          postsFireRef.on('child_changed', function (childSnapshot) {
             var indexes = getIdIndexInPostArrays(postObj.id)
@@ -235,7 +234,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function sortPosts() {
       hideSpinner(false)
-      $scope.visiblePosts = [];
       var filterObj = filterPosts($scope.allPosts)
       $scope.sortedPosts = filterObj.filtered.sort(function (a, b) {
          console.log(b)
@@ -349,7 +347,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                $scope.allPosts[indexes.allPosts] = postObj;
                $scope.sortedPosts[indexes.sortedPosts] = postObj;
             })
-            setTimeout(angularGridInstance.postsGrid.refresh, 1000);
+            //setTimeout(angularGridInstance.postsGrid.refresh, 1000);
             hideSpinner(true);
          })
       }, console.warn, 150);
@@ -374,19 +372,19 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
    }
 
-   $scope.$watch('sortedPosts', function () {
-      var visible = [];
-      var max = $scope.sortedPosts.length
-      for (var index = 0; index < max; index++) {
-         var postObj = $scope.sortedPosts[index]
-         if (postObj.loadStatus == 'Loaded') visible.push(postObj);
-      }
-      $timeout(function () {
-         $scope.visiblePosts = visible;
-         angularGridInstance.postsGrid.refresh();
-         if ($scope.visiblePosts.length == 0) layout_grid.style.height = '0px';
-      })
-   }, true);
+   // $scope.$watch('sortedPosts', function () {
+   //    var visible = [];
+   //    var max = $scope.sortedPosts.length
+   //    for (var index = 0; index < max; index++) {
+   //       var postObj = $scope.sortedPosts[index]
+   //       if (postObj.loadStatus == 'Loaded') visible.push(postObj);
+   //    }
+   //    $timeout(function () {
+   //       $scope.visiblePosts = visible;
+   //       angularGridInstance.postsGrid.refresh();
+   //       if ($scope.visiblePosts.length == 0) layout_grid.style.height = '0px';
+   //    })
+   // }, true);
 
    $scope.loadPosts = loadPosts;
 
