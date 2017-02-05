@@ -363,8 +363,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          if ($scope.sortedPosts.length == 0) {
             layout_grid.style.height = '0px';
             no_posts_footer.style.display = 'block';
-         }
-         if (postsFullyLoaded == true) {
+         } else if (postsFullyLoaded == true) {
             no_more_footer.style.display = 'block';
          }
       } else {
