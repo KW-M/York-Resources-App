@@ -594,9 +594,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       return false
       console.warn('could not find class: ' + className);
    };
-   $scope.sortLabels = function (input) {
+   $scope.sortLabels = function () {
       var output = [];
-      input.forEach(function (item) {
+      var max = $scope.allLabels.length;
+      $scope.allLabels.forEach(function (label) {
          if (item.type == 'Teacher') {
             item.classesTaught.forEach(function (classTaught) {
                if (classTaught == $scope.queryParams.classPath) output.push(item);
