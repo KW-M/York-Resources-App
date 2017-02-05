@@ -73,7 +73,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          $scope.searchPrefix = 'Search';
          if ($scope.queryParams.q !== null) {
             if ($scope.queryParams.q != $scope.previousSearch) {
-               updateVisiblePosts([]);
+               updateSortedPosts([]);
             }
          } else {
             $scope.queryParams.flagged = null
@@ -101,7 +101,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          getFileTimer = setInterval(function () {
             if (conurancy_counter == 0 && content_container.scrollHeight == content_container.clientHeight) $scope.loadPosts()
          }, 1000);
-         sortPosts();
+         if ($scope.allPosts.length != 0)sortPosts();
       }
    }
 
@@ -310,14 +310,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             if (postIdAccumulator.length == 3) {
                if (index == max) getPosts(postIdAccumulator, true);
                if (index != max) getPosts(postIdAccumulator, false);
-               return;
+               return true;
             }
          }
       }
       if (postIdAccumulator.length != 0 && index == max) {
          getPosts(postIdAccumulator, true)
       } else if (max == 0) {
-         console.log('loadHide')
          hideSpinner(true, false)
       };
    }
@@ -339,7 +338,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             setTimeout(angularGridInstance.postsGrid.refresh, 1000);
 
             if (end) {
-               console.log('postHide')
                hideSpinner(true, true)
             }
             conurancy_counter--;
@@ -348,7 +346,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function hideSpinner(hide, end) {
-      console.log('Hide:' + hide + end)
+      console.warn('Hide:' + hide + end)
       if (hide == true) {
          loading_spinner.style.display = 'none';
          clearInterval(getFileTimer);
