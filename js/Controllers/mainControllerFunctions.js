@@ -99,8 +99,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.selectedClass = $scope.selectedClass
          });
          getFileTimer = setInterval(function () {
-            console.log(conurancy_counter)
-            if (conurancy_counter == 0 && content_container.scrollHeight == content_container.clientHeight) $scope.loadPosts()
+            console.log(conurancyCounter)
+            if (conurancyCounter == 0 && content_container.scrollHeight == content_container.clientHeight) $scope.loadPosts()
          }, 1000);
          postsFullyLoaded = false;
          if ($scope.allPosts.length != 0) sortPosts();
@@ -188,6 +188,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             getPosts([childSnapshot.key])
          });
          postsFireRef.on('child_removed', function (childSnapshot) {
+            console.log('childremoved', childSnapshot)
             var id = childSnapshot.val();
             var indexes = getIdIndexInPostArrays(id);
             $scope.allPosts.splice(indexes.allPosts, 1);
@@ -225,7 +226,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //----------------------------------------------------
    //----------- Loading and Sorting Posts --------------
    var postsFullyLoaded = false;
-   var conurancy_counter = 0;
+   var conurancyCounter = 0;
    var getFileTimer = null;
 
    $scope.allPosts = [];
@@ -332,10 +333,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function getPosts(idArray, end) {
-      ++conurancy_counter;
+      conurancyCounter = conurancyCounter+1;
       promiseQueue().addPromise('drive', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
-         --conurancy_counter;
-         console.log(conurancy_counter)
+         conurancyCounter = conurancyCounter-1;
+         console.log(conurancyCounter)
          console.log(postsData)
          var postsArray = JSON.parse(postsData.result.response.result);
          postsArray.forEach(function (postObj) {
