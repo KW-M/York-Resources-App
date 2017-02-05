@@ -38,9 +38,9 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $scope.post.likes = $scope.post.likes || []
         $scope.post.previewImage = $scope.post.previewImage || ''
         $scope.findType();
+        $scope.sortLabels();
     })
-
-
+    
     //temproary variables
     $scope.operation = operation;
     $scope.previewThumbnail = "";
