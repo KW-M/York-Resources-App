@@ -333,7 +333,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function getPosts(idArray, end) {
-      //conurancy_counter++;
+      ++conurancy_counter;
       promiseQueue().addPromise('drive', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
          --conurancy_counter;
          console.log(conurancy_counter)
