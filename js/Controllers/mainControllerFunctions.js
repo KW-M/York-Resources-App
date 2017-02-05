@@ -686,7 +686,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       var confirm = $mdDialog.confirm().title('Permanently delete this?').ariaLabel('Delete?').ok('Delete').cancel('Cancel');
       $mdDialog.show(confirm).then(function () {
          promiseQueue().addPromise('script', APIService.runGAScript('deletePost', content.id, false), function (returnedValue) {
-            console.log(returnedValue)
+            //if (returnedValue.result.response == true) //authorizationService.FireDatabase.ref('posts/' + content.id).remove().then()
          }, console.warn, 150);
       });
    };
