@@ -333,9 +333,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function getPosts(idArray, end) {
-      conurancyCounter = conurancyCounter+1;
+      conurancyCounter = conurancyCounter + 1;
       promiseQueue().addPromise('drive', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
-         conurancyCounter = conurancyCounter-1;
+         conurancyCounter = conurancyCounter - 1;
          console.log(conurancyCounter)
          console.log(postsData)
          var postsArray = JSON.parse(postsData.result.response.result);
@@ -681,6 +681,93 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    //----------------------------------------------------
+   // --------------- Post Card Functions ---------------
+   $scope.confirmDelete = function (content, arrayIndex) {
+      var confirm = $mdDialog.confirm().title('Permanently delete this?').ariaLabel('Delete?').ok('Delete').cancel('Cancel');
+      $mdDialog.show(confirm).then(function () {
+   
+      });
+   };
+   // $scope.flagPost = function (content, arrayIndex) {
+   //    content.Flagged = true;
+   //    if ($scope.queryParams.classPath != 'flagged') {
+   //       $timeout(function () { //makes angular update values
+   //          $scope.visiblePosts.splice(arrayIndex, 1);
+   //       });
+   //    }
+   //    $scope.allPosts[findPostById(content.Id, $scope.allPosts)].Flagged = true;
+   //    queue('drive', GoogleDriveService.updateFlagged(content.Id, true), null, function (err) {
+   //       $timeout(function () { //makes angular update values
+   //          content.Flagged = false;
+   //          $scope.visiblePosts.splice(arrayIndex, 0, content);
+   //       });
+   //       $mdToast.showSimple('Error flagging post, try again.');
+   //       console.warn(err)
+   //    }, 150);
+   //    //set the poster's has flagged date back
+   //    for (var item = 0; item < $scope.userList.length; item++) {
+   //       if ($scope.userList[item][0] && $scope.userList[item][0] == content.Creator.Email) {
+   //          var range = 'Sheet1!H' + (item + 2);
+   //          var today = $filter('date')(new Date(), 'M/d/yy');
+   //          queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, [today]), null, function (err) {
+   //             $timeout(function () { //makes angular update values
+   //                content.Flagged = false;
+   //                $scope.visiblePosts.splice(arrayIndex, 0, content);
+   //             });
+   //             console.warn(err)
+   //             $mdToast.showSimple('Error flagging post, try again.');
+   //          }, 2);
+   //       }
+   //    }
+   // };
+   // $scope.unFlagPost = function (content, arrayIndex) {
+   //    var timeoutDate = new Date($scope.myInfo.LastBeenFlaggedDate.getTime() + 7 * 86400000);
+   //    if (timeoutDate < new Date()) {
+   //       content.Flagged = false;
+   //       if ($scope.queryParams.classPath == 'flagged') {
+   //          $timeout(function () { //makes angular update values
+   //             $scope.visiblePosts.splice(arrayIndex, 1);
+   //          });
+   //       }
+   //       $scope.allPosts[findPostById(content.Id, $scope.allPosts)].Flagged = false;
+   //       $scope.updateVisiblePosts($scope.filterPosts($scope.allPosts));
+   //       queue('drive', GoogleDriveService.updateFlagged(content.Id, false), null, function (err) {
+   //          $mdToast.showSimple('Error unflagging post, try again.');
+   //          console.warn(err)
+   //       }, 150);
+   //    } else {
+   //       $mdDialog.show($mdDialog.alert({
+   //          title: 'Uh Oh.',
+   //          htmlContent: '<p style="margin: 0 0 2px 0">One of your posts has been flagged within the past week.<br>To unlock the ability to unflag posts, don\'t let your posts get flagged this week.</p>',
+   //          ok: 'Ok'
+   //       }));
+   //    }
+   // };
+   $scope.likePost = function (content) {
+      var userLikeIndex = findItemInArray($scope.myInfo.Email, content.Likes)
+      if (userLikeIndex == -1) {
+         content.userLiked = true;
+         content.Likes.push($scope.myInfo.Email);
+      } else {
+         content.userLiked = false;
+         content.Likes.splice(userLikeIndex, 1);
+      }
+      if (typeof (likeClickTimer[content.Id]) == 'number') clearTimeout(likeClickTimer[content.Id]);
+      likeClickTimer[content.Id] = setTimeout(function () {
+         var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
+         allArrayPost.userLiked = content.userLiked;
+         allArrayPost.Likes = content.Likes;
+         var name = allArrayPost.Likes.length + "{]|[}" + JSON.stringify(allArrayPost.Likes)
+         queue('drive', GoogleDriveService.updateDriveFile(content.Id, {
+            name: name
+         }), null, function (err) {
+            $mdToast.showSimple('Error liking post, try again.');
+            console.warn(err)
+         }, 150);
+      }, 2000);
+   };
+
+   //----------------------------------------------------
    //---------------- Event Watchers --------------------
    window.addEventListener("resize", function () {
       if ($mdMedia('gt-sm')) $mdSidenav('sidenav_overlay').close()
@@ -852,6 +939,18 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       return {
          allPosts: findPostIndexById(id, $scope.allPosts),
          sortedPosts: findPostIndexById(id, $scope.sortedPosts),
+      }
+   }
+
+   $scope.openLink = function (link, dontOpen) {
+      if (link !== "" && link !== undefined && dontOpen != true) window.open(link)
+   };
+   
+   $scope.removeHttp = function (input) {
+      if (input) {
+         return (input.replace(/(?:http|https):\/\//, '').replace('www.', ''))
+      } else {
+         return input
       }
    }
 
