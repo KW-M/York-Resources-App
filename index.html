@@ -236,9 +236,9 @@
                     <md-button ng-click="consoleLogInput(myInfo, true)">Log My Info</md-button>
                     <!--<md-button ng-click="consoleLogInput({'string': queryPropertyString, 'properties':queryProperties}, true)">Log Search Query string</md-button>-->
                     <md-button ng-click="consoleLog({queryParam: queryParam, query: queryParam.q, classParam: classParam, selectedClass: selectedClass, idParam: idParam}, true)">Log URL Paramiters</md-button>
-                    <md-button ng-click="consoleLogInput({visiblePosts)">Log Post Arrays</md-button>
+                    <md-button ng-click="consoleLogInput({allPosts:allPosts,sortedPosts:sortedPosts,visiblePosts:visiblePosts})">Log Post Arrays</md-button>
                     <md-button ng-click="refreshLayout()">Refresh Layout</md-button>
-                    <p>all: {{allPosts.length}} Visible: {{visiblePosts.length}}</p>
+                    <p>All: {{allPosts.length}} orted: {{allPosts.length}} Visible: {{visiblePosts.length}}</p>
                 </span>
                 <div name="Posts Grid" ng-hide="queryParams.classPath == 'Quizlet'">
                     <div angular-grid="visiblePosts" id="layout_grid" ag-gutter-size="12" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="loadPosts()">
