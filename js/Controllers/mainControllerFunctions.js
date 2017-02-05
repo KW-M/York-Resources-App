@@ -612,38 +612,34 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
       var max = $scope.teacherList.length
       for (var teacherCount = 0; teacherCount < max; teacherCount++) {
-         var teacher = $scope.teacherList[labelCount]
+         var teacher = $scope.teacherList[labelCount];
          teacher.type = 'teacher'
+         var newTeacher = output.push(teacher);
          var classMax = teacher.classes.length;
          for (var classCount = 0; classCount < classMax && classCount != -1; classCount++) {
             var teacherClass = teacher.classes[classCount]
             if (labelClass == $scope.post.class.name) {
-               output.push(newLabel);
-               classCount = -1;
+               newTeacher.totalUsage = 
+                  classCount = -1;
             };
+
          }
       }
       output = output.sort(function (a, b) {
          var aUsage, bUsage
-         if (a.type == 'Teacher') {
+         if (a.type == 'teacher') {
             aUsage = 100000;
          } else {
             aUsage = a.totalUsage
-            a.linkedClasses.forEach(function (linkedClass) {
-               if (linkedClass.Name == $scope.queryParams.classPath) aUsage = linkedClass.Usage + 1000;
-            });
          }
-         if (b.type == 'Teacher') {
+         if (b.type == 'teacher') {
             bUsage = 100000;
          } else {
             bUsage = b.totalUsage
-            b.linkedClasses.forEach(function (linkedClass) {
-               if (linkedClass.Name == $scope.queryParams.classPath) bUsage = linkedClass.Usage + 1000;
-            });
          }
          return bUsage - aUsage;
       })
-      return output
+      $scope.sortedLabels = output;
    };
 
    //----------------------------------------------------
