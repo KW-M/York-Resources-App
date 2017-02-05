@@ -10,18 +10,28 @@ md-dialog#new_post_dialog {
    transition: opacity 0.3s ease;
 }
 
+
 /*#new_post_content {*/
+
+
 /*   margin-top: 200px;*/
+
+
 /*}*/
 
-.header-spacer{
+.header-spacer {
    height: 200px;
    width: 100%;
 }
 
-.header-spacer.small-spacer{
+.header-spacer.has-link {
+   cursor: pointer;
+}
+
+.header-spacer.small-spacer {
    height: 60px;
 }
+
 
 /*------- New Post Header Styles --------*/
 
@@ -72,11 +82,15 @@ md-dialog#new_post_dialog {
 
 #header_link_input input {
    border-color: rgba(255, 255, 255, 0.12);
-   pointer-events:initial;
+   pointer-events: initial;
 }
 
 #header_link_input input::-webkit-input-placeholder {
    color: rgba(255, 255, 255, 0.6);
+}
+
+.attach-menu {
+   pointer-events: initial;
 }
 
 #header_title {
@@ -97,6 +111,7 @@ md-progress-linear.link-loading {
    z-index: 1000;
    height: 2px;
 }
+
 
 /*------- New Post body Styles --------*/
 
@@ -154,6 +169,7 @@ input.new-post-title {
    -webkit-user-select: none;
    -ms-user-select: none;
 }
+
 
 /*------- New Post Action Bar Styles --------*/
 
