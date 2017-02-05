@@ -99,6 +99,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.selectedClass = $scope.selectedClass
          });
          getFileTimer = setInterval(function () {
+            console.log(conurancy_counter)
             if (conurancy_counter == 0 && content_container.scrollHeight == content_container.clientHeight) $scope.loadPosts()
          }, 1000);
          postsFullyLoaded = false;
@@ -301,32 +302,34 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function loadPosts() {
-      hideSpinner(false);
-      var index, cancel;
-      var postIdAccumulator = [];
-      var max = $scope.sortedPosts.length
-      for (index = 0; index < max; index++) {
-         var postObj = $scope.sortedPosts[index];
-         if (postObj.loadStatus != 'Loaded') {
-            postIdAccumulator.push(postObj.id)
-            if (postIdAccumulator.length == 3) {
-               if (index == max) {
-                  postsFullyLoaded = true;
-                  getPosts(postIdAccumulator, true)
-               } else {
-                  postsFullyLoaded = false;
-                  getPosts(postIdAccumulator, false);
+      if (!postsFullyLoaded) {
+         hideSpinner(false);
+         var index, cancel;
+         var postIdAccumulator = [];
+         var max = $scope.sortedPosts.length
+         for (index = 0; index < max; index++) {
+            var postObj = $scope.sortedPosts[index];
+            if (postObj.loadStatus != 'Loaded') {
+               postIdAccumulator.push(postObj.id)
+               if (postIdAccumulator.length == 3) {
+                  if (index == max) {
+                     postsFullyLoaded = true;
+                     getPosts(postIdAccumulator, true)
+                  } else {
+                     postsFullyLoaded = false;
+                     getPosts(postIdAccumulator, false);
+                  }
+                  return true;
                }
-               return true;
             }
          }
+         if (postIdAccumulator.length != 0 && index == max) {
+            getPosts(postIdAccumulator)
+            postsFullyLoaded = true;
+         } else if (max == 0) {
+            hideSpinner(true)
+         };
       }
-      if (postIdAccumulator.length != 0 && index == max) {
-         getPosts(postIdAccumulator)
-         postsFullyLoaded = true;
-      } else if (max == 0) {
-         hideSpinner(true)
-      };
    }
 
    function getPosts(idArray, end) {
@@ -355,15 +358,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       if (hide == true) {
          loading_spinner.style.display = 'none';
          clearInterval(getFileTimer);
-         $timeout(function () {
-            if ($scope.sortedPosts.length == 0) {
-               layout_grid.style.height = '0px';
-               no_posts_footer.style.display = 'block';
-            }
-            if (postsFullyLoaded == true) {
-               no_more_footer.style.display = 'block';
-            }
-         }, 200)
+         if ($scope.sortedPosts.length == 0) {
+            layout_grid.style.height = '0px';
+            no_posts_footer.style.display = 'block';
+         }
+         if (postsFullyLoaded == true) {
+            no_more_footer.style.display = 'block';
+         }
       } else {
          loading_spinner.style.display = 'block';
          no_posts_footer.style.display = 'none';
