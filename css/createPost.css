@@ -43,6 +43,9 @@ md-dialog#new_post_dialog {
    pointer-events: none;
    background-color: rgb(161, 10, 25);
 }
+#dialog_header.view {
+   pointer-events: initial;
+}
 
 #new_post_content.small-header+.post-card-header#dialog_header {
    height: 60px;
