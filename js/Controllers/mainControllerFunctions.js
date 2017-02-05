@@ -599,12 +599,29 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       var max = $scope.allLabels.length
       for (var labelCount = 0; labelCount < max; labelCount++) {
          var label = $scope.allLabels[labelCount]
+         var newLabel = label
          var classMax = label.classes.length;
-         for (var classCount = 0; classCount < max; classCount++) {
+         for (var classCount = 0; classCount < max && classCount != -1; classCount++) {
             var labelClass = label.classes[classCount]
-            if (labelClass == $scope.post.class.name) 
-            output.push(item);
-         );
+            if (labelClass.name == $scope.post.class.name) {
+               newLabel.totalUsage = label.totalUsage + (labelClass.usage * 2) + 1000
+               classCount = -1;
+            };
+         }
+         output.push(newLabel);
+      }
+      for (var teacherCount = 0; teacherCount < max; teacherCount++) {
+         var teacher = $scope.allLabels[labelCount]
+         var newLabel = label
+         var classMax = label.classes.length;
+         for (var classCount = 0; classCount < max && classCount != -1; classCount++) {
+            var labelClass = label.classes[classCount]
+            if (labelClass.name == $scope.post.class.name) {
+               newLabel.totalUsage = label.totalUsage + (labelClass.usage * 2) + 1000
+               classCount = -1;
+            };
+         }
+         output.push(newLabel);
       }
       output = output.sort(function (a, b) {
          var aUsage, bUsage
