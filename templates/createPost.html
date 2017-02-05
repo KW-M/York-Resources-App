@@ -7,13 +7,12 @@
             <div id="header_title" style="opacity: 0" class="gradient-overlay-metadata metadata-regular">
                <h5 style="margin: 0">{{post.title}}</h5>
                <span style="font-weight:700; font-size:14px"><md-icon class="small-icon" style="color:white">people</md-icon> {{post.class.name || 'No class'}}</span>
-               <span ng-hide="post.tags.length < 1"><md-icon class="small-icon" style="color:white">style</md-icon>{{post.tags.join(', ')}}</span>
+               <span ng-if="post.tags.length != 0"><md-icon class="small-icon" style="color:white">style</md-icon>{{post.tags.join(', ')}}</span>
             </div>
             <div class="gradient-overlay-metadata metadata-regular" ng-hide="operation != 'view'">
                <span ng-hide="post.class.name == null"><md-icon>people</md-icon> {{post.class.name}}</span>
                <span><md-icon>event</md-icon> {{post.creationDate | date : "mm/dd/yyyy"}}</span>
             </div>
-
             <div class="md-chips gradient-overlay-metadata" style="position:absolute; padding: 0 40px 0 8px" ng-class="{'metadata-link': operation == 'view'}" ng-if="post.attachmentName">
                <md-chip>
                   <div class="md-chip-content">
@@ -53,7 +52,9 @@
          <md-progress-linear class="link-loading" md-mode="indeterminate" ng-disabled="!previewLoading"></md-progress-linear>
       </div>
       <div id="new_post_content">
-      	 <div class="header-spacer" ng-class="{'small-spacer': post.type == 'NoLink' && operation == 'view'}" title="{{removeHttp(post.link)}}"><md-tooltip md-autohide md-direction="top" md-delay="1000"><md-icon>language</md-icon> {{removeHttp(post.link)}}</md-tooltip></div>
+      	 <div class="header-spacer" ng-class="{'small-spacer': post.type == 'NoLink' && operation == 'view'}" title="{{removeHttp(post.link)}}">
+      	 	<!--<md-tooltip md-autohide md-direction="top" md-delay="1000"><md-icon>language</md-icon> {{removeHttp(post.link)}}</md-tooltip>-->
+      	 </div>
          <div flex layout="row">
             <md-select ng-model="post.class" ng-model-options="{trackBy: $value.name}" ng-if="operation != 'view'" class="md-no-underline" placeholder="Class" id="class_dropdown_button" md-on-close="clearClassSelectSearch()">
                <md-select-header class="classSelectSearchbox">

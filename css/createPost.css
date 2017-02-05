@@ -19,7 +19,7 @@ md-dialog#new_post_dialog {
    width: 100%;
 }
 
-.header-spacer.small-header{
+.header-spacer.small-spacer{
    height: 60px;
 }
 
@@ -59,7 +59,7 @@ md-dialog#new_post_dialog {
    display: flex;
    transition: opacity 0.5s ease;
    justify-content: flex-end;
-   pointer-events:initial;
+   pointer-events: none;
 }
 
 #header_link_input {
@@ -67,10 +67,12 @@ md-dialog#new_post_dialog {
    width: 100%;
    margin: auto 0;
    font-size: 20px;
+   pointer-events: none;
 }
 
 #header_link_input input {
    border-color: rgba(255, 255, 255, 0.12);
+   pointer-events:initial;
 }
 
 #header_link_input input::-webkit-input-placeholder {
