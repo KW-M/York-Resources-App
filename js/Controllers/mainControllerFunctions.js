@@ -101,6 +101,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          getFileTimer = setInterval(function () {
             if (conurancy_counter == 0 && content_container.scrollHeight == content_container.clientHeight) $scope.loadPosts()
          }, 1000);
+         postsFullyLoaded = false;
          if ($scope.allPosts.length != 0) sortPosts();
       }
    }
@@ -309,8 +310,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          if (postObj.loadStatus != 'Loaded') {
             postIdAccumulator.push(postObj.id)
             if (postIdAccumulator.length == 3) {
-               if (index == max) getPosts(postIdAccumulator, true);
-               if (index != max) getPosts(postIdAccumulator, false);
+               if (index == max) {
+                  postsFullyLoaded = true;
+                  getPosts(postIdAccumulator, true)
+               } else {
+                  postsFullyLoaded = false;
+                  getPosts(postIdAccumulator, false);
+               }
                return true;
             }
          }
@@ -345,7 +351,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function hideSpinner(hide) {
-      console.warn('Hide:' + hide)
+      console.warn('Hide:' + hide + 'length' + $scope.sortedPosts.length + 'fullLoad' + postsFullyLoaded)
       if (hide == true) {
          loading_spinner.style.display = 'none';
          clearInterval(getFileTimer);
@@ -353,7 +359,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             if ($scope.sortedPosts.length == 0) {
                layout_grid.style.height = '0px';
                no_posts_footer.style.display = 'block';
-            } else if (postsFullyLoaded == true) {
+            }
+            if (postsFullyLoaded == true) {
                no_more_footer.style.display = 'block';
             }
          }, 200)
