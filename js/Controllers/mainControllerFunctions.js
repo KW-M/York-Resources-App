@@ -599,29 +599,29 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       var max = $scope.allLabels.length
       for (var labelCount = 0; labelCount < max; labelCount++) {
          var label = $scope.allLabels[labelCount]
-         var newLabel = label
+         var newLabel = output.push(label);
+         newLabel.type = 'label'
          var classMax = label.classes.length;
-         for (var classCount = 0; classCount < max && classCount != -1; classCount++) {
+         for (var classCount = 0; classCount < classMax && classCount != -1; classCount++) {
             var labelClass = label.classes[classCount]
             if (labelClass.name == $scope.post.class.name) {
-               newLabel.totalUsage = label.totalUsage + (labelClass.usage * 2) + 1000
+               newLabel.totalUsage = label.totalUsage + (labelClass.usage * 2) + 10000
                classCount = -1;
             };
          }
-         output.push(newLabel);
       }
+      var max = $scope.teacherList.length
       for (var teacherCount = 0; teacherCount < max; teacherCount++) {
-         var teacher = $scope.allLabels[labelCount]
-         var newLabel = label
-         var classMax = label.classes.length;
-         for (var classCount = 0; classCount < max && classCount != -1; classCount++) {
-            var labelClass = label.classes[classCount]
-            if (labelClass.name == $scope.post.class.name) {
-               newLabel.totalUsage = label.totalUsage + (labelClass.usage * 2) + 1000
+         var teacher = $scope.teacherList[labelCount]
+         teacher.type = 'teacher'
+         var classMax = teacher.classes.length;
+         for (var classCount = 0; classCount < classMax && classCount != -1; classCount++) {
+            var teacherClass = teacher.classes[classCount]
+            if (labelClass == $scope.post.class.name) {
+               output.push(newLabel);
                classCount = -1;
             };
          }
-         output.push(newLabel);
       }
       output = output.sort(function (a, b) {
          var aUsage, bUsage
