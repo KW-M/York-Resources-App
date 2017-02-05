@@ -101,7 +101,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          getFileTimer = setInterval(function () {
             if (conurancy_counter == 0 && content_container.scrollHeight == content_container.clientHeight) $scope.loadPosts()
          }, 1000);
-         if ($scope.allPosts.length != 0)sortPosts();
+         if ($scope.allPosts.length != 0) sortPosts();
       }
    }
 
@@ -223,6 +223,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    //----------------------------------------------------
    //----------- Loading and Sorting Posts --------------
+   var postsFullyLoaded = false;
    var conurancy_counter = 0;
    var getFileTimer = null;
 
@@ -315,9 +316,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          }
       }
       if (postIdAccumulator.length != 0 && index == max) {
-         getPosts(postIdAccumulator, true)
+         getPosts(postIdAccumulator)
+         postsFullyLoaded = true;
       } else if (max == 0) {
-         hideSpinner(true, false)
+         hideSpinner(true)
       };
    }
 
@@ -336,26 +338,24 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                $scope.sortedPosts[indexes.sortedPosts] = postObj;
             })
             setTimeout(angularGridInstance.postsGrid.refresh, 1000);
-
-            if (end) {
-               hideSpinner(true, true)
-            }
+            hideSpinner(true);
             conurancy_counter--;
          })
       }, console.warn, 150);
    }
 
-   function hideSpinner(hide, end) {
-      console.warn('Hide:' + hide + end)
+   function hideSpinner(hide) {
+      console.warn('Hide:' + hide)
       if (hide == true) {
          loading_spinner.style.display = 'none';
          clearInterval(getFileTimer);
          $timeout(function () {
-            if (end == false) {
+            if ($scope.sortedPosts.length == 0) {
                layout_grid.style.height = '0px';
                no_posts_footer.style.display = 'block';
+            } else if (postsFullyLoaded == true) {
+               no_more_footer.style.display = 'block';
             }
-            if (end == true) no_more_footer.style.display = 'block';
          }, 200)
       } else {
          loading_spinner.style.display = 'block';
