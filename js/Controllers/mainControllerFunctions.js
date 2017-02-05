@@ -381,9 +381,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          var postObj = $scope.sortedPosts[index]
          if (postObj.loadStatus == 'Loaded') visible.push(postObj);
       }
-      $timeout(function() {
+      $timeout(function () {
          $scope.visiblePosts = visible;
          angularGridInstance.postsGrid.refresh();
+         if ($scope.visiblePosts.length == 0) layout_grid.style.height = '0px';
       })
    }, true);
 
