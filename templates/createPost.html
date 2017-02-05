@@ -52,7 +52,7 @@
          <md-progress-linear class="link-loading" md-mode="indeterminate" ng-disabled="!previewLoading"></md-progress-linear>
       </div>
       <div id="new_post_content">
-      	 <div class="header-spacer" ng-class="{'small-spacer': post.type == 'NoLink' && operation == 'view'}" title="{{removeHttp(post.link)}}">
+      	 <div class="header-spacer" ng-class="{'small-spacer': post.type == 'NoLink' && operation == 'view','has-link': post.link != ''}" title="{{removeHttp(post.link)}}" ng-click="openLink(post.link)" >
       	 	<!--<md-tooltip md-autohide md-direction="top" md-delay="1000"><md-icon>language</md-icon> {{removeHttp(post.link)}}</md-tooltip>-->
       	 </div>
          <div flex layout="row">
