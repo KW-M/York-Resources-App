@@ -338,17 +338,17 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          console.log(conurancy_counter)
          console.log(postsData)
          var postsArray = JSON.parse(postsData.result.response.result);
-         $timeout(function () {
-            postsArray.forEach(function (postObj) {
-               var indexes = getIdIndexInPostArrays(postObj.id)
-               postObj.loadStatus = 'Loaded';
-               postObj.updateDate = new Date(postObj.updateDate)
-               postObj.creationDate = new Date(postObj.creationDate)
+         postsArray.forEach(function (postObj) {
+            var indexes = getIdIndexInPostArrays(postObj.id)
+            postObj.loadStatus = 'Loaded';
+            postObj.updateDate = new Date(postObj.updateDate)
+            postObj.creationDate = new Date(postObj.creationDate)
+            $timeout(function () {
                $scope.allPosts[indexes.allPosts] = postObj;
                $scope.sortedPosts[indexes.sortedPosts] = postObj;
             })
-            //setTimeout(angularGridInstance.postsGrid.refresh, 1000);
             hideSpinner(true);
+            //setTimeout(angularGridInstance.postsGrid.refresh, 1000);
          })
       }, console.warn, 150);
    }
