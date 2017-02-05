@@ -594,42 +594,45 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       return false
       console.warn('could not find class: ' + className);
    };
-   
    $scope.sortLabels = function () {
       var output = [];
-      var max = $scope.allLabels.length
-      for (var labelCount = 0; labelCount < max; labelCount++) {
-         var label = $scope.allLabels[labelCount]
-         var newLabel = output.push(label);
-         newLabel.type = 'label'
-         var classMax = label.classes.length;
-         for (var classCount = 0; classCount < classMax && classCount != -1; classCount++) {
-            var labelClass = label.classes[classCount]
-            if (labelClass.name == $scope.post.class.name) {
-               newLabel.totalUsage = label.totalUsage + (labelClass.usage * 2) + 10000
-               classCount = -1;
-            };
-         }
-      }
-      var max = $scope.teacherList.length
-      for (var teacherCount = 0; teacherCount < max; teacherCount++) {
-         var teacher = $scope.teacherList[labelCount];
-         var newTeacher = output.push(teacher);
-         newTeacher.type = 'teacher'
-         var classMax = teacher.classes.length;
-         for (var classCount = 0; classCount < classMax && classCount != -1; classCount++) {
-            var teacherClass = teacher.classes[classCount]
-            if (labelClass == $scope.post.class.name) {
-               newTeacher.totalUsage = 100000
-               classCount = -1;
-            };
-            if (classCount != -1) {
-               newTeacher.totalUsage = 0
+      if ($scope.post && $scope.post.class && $scope.post.class.name != '') {
+         var max = $scope.allLabels.length
+         for (var labelCount = 0; labelCount < max; labelCount++) {
+            var label = $scope.allLabels[labelCount]
+            var newLabel = output.push(label);
+            newLabel.type = 'label'
+            var classMax = label.classes.length;
+            for (var classCount = 0; classCount < classMax && classCount != -1; classCount++) {
+               var labelClass = label.classes[classCount]
+               if (labelClass.name == $scope.post.class.name) {
+                  newLabel.totalUsage = label.totalUsage + (labelClass.usage * 2) + 10000
+                  classCount = -1;
+               };
             }
          }
+         var max = $scope.teacherList.length
+         for (var teacherCount = 0; teacherCount < max; teacherCount++) {
+            var teacher = $scope.teacherList[labelCount];
+            var newTeacher = output.push(teacher);
+            newTeacher.type = 'teacher'
+            var classMax = teacher.classes.length;
+            for (var classCount = 0; classCount < classMax && classCount != -1; classCount++) {
+               var teacherClass = teacher.classes[classCount]
+               if (labelClass == $scope.post.class.name) {
+                  newTeacher.totalUsage = 100000
+                  classCount = -1;
+               };
+               if (classCount != -1) {
+                  newTeacher.totalUsage = 0
+               }
+            }
+         }
+      } else {
+         output = $scope.allLabels.concat($scope.teacherList);
       }
       output = output.sort(function (a, b) {
-         return b.totalUsage - a.totalUsage;
+         return (b.totalUsage || 0) - (a.totalUsage || 0);
       })
       $scope.sortedLabels = output;
    };

@@ -180,7 +180,8 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         })
     }
 
-    $scope.clearClassSelectSearch = function () {
+    $scope.classSelectDone = function () {
+        $scope.sortLabels();
         $timeout(function () {
             $scope.classSelectSearch = '';
         });
