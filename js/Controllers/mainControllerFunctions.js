@@ -335,6 +335,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function getPosts(idArray, end) {
       conurancy_counter++;
       promiseQueue().addPromise('drive', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
+         --conurancy_counter;
+         console.log(conurancy_counter)
          console.log(postsData)
          var postsArray = JSON.parse(postsData.result.response.result);
          $timeout(function () {
@@ -348,7 +350,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             })
             setTimeout(angularGridInstance.postsGrid.refresh, 1000);
             hideSpinner(true);
-            conurancy_counter--;
          })
       }, console.warn, 150);
    }
