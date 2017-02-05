@@ -946,7 +946,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    $scope.openLink = function (link, dontOpen) {
-      if (link !== "" && link !== undefined && dontOpen != true) window.open(link)
+      console.log(link)
+      if (link != "" && link != undefined && dontOpen != true) window.open(link)
    };
 
    $scope.removeHttp = function (input) {
