@@ -189,7 +189,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          });
          postsFireRef.on('child_removed', function (childSnapshot) {
             console.log('childremoved', childSnapshot)
-            var id = childSnapshot.val();
+            var id = childSnapshot.key;
             var indexes = getIdIndexInPostArrays(id);
             $scope.allPosts.splice(indexes.allPosts, 1);
             $scope.sortedPosts.splice(indexes.sortedPosts, 1);
@@ -687,9 +687,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       $mdDialog.show(confirm).then(function () {
          promiseQueue().addPromise('script', APIService.runGAScript('deletePost', content.id, false), function (returnedValue) {
             console.log(returnedValue.result.response.result)
-            if (returnedValue.result.response.result == true) authorizationService.FireDatabase.ref('posts/' + content.id).remove().then(function () {
-               console.log('deleted')
-            })
+            if (returnedValue.result.response.result == true) authorizationService.FireDatabase.ref('posts/' + content.id).remove().then(null, console.warn)
          }, console.warn, 150);
       });
    };
