@@ -74,18 +74,12 @@
 				<div style="display:flex">
 					<div class="label-container" style="padding-bottom:6px">
 						{{post.labels}}
-						{{allLabels}}
-						<!--<div style="display:inline" ng-if="labelSearch == null || labelSearch == ''">-->
-						<!--	<div class="label unselectable label-active" ng-click="moveLabeltoAllTeachers($index)" ng-repeat="Label in post.teachers">{{teacher.name.text}}</div>-->
-						<!--</div>-->
+						{{sortedLabels}}
 						<div style="display:inline" ng-if="labelSearch == null || labelSearch == ''">
-							<div class="label unselectable label-active" ng-click="moveLabeltoAllLabels($index)" ng-repeat="Label in post.labels">{{Label.text}}</div>
-						</div>
-						<div ng-if="operation != 'view' && labelSearch == null || labelSearch == ''" style="width: 100%;text-align: center;display:inline">
-							<div class="label unselectable" ng-click="moveLabeltoActive(Label.name)" ng-repeat="Label in allLabels">{{Label.name}}</div>
+							<div class="label unselectable label-active" ng-click="moveLabeltoSortedLabels($index)" ng-repeat="Label in post.labels">{{Label.text}}</div>
 						</div>
 						<div ng-if="!(labelSearch == null || labelSearch == '')" style="width: 100%;text-align: center;display:inline">
-							<div class="label unselectable" ng-click="moveLabeltoActive(Label.name)" ng-repeat="Label in allLabels | filter:labelSearch as filteredLabels">{{Label.name}}</div>
+							<div class="label unselectable" ng-click="moveLabeltoActive(Label.name)" ng-repeat="label in sortedLabels | filter:labelSearch as filteredLabels">{{label.name}}</div>
 							<span ng-if="filteredLabels.length === 0">Add this new label: <span class="label" ng-click="addLabel(labelSearch)">{{labelSearch}}</span></span>
 						</div>
 					</div>
