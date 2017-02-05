@@ -381,7 +381,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          var postObj = $scope.sortedPosts[index]
          if (postObj.loadStatus == 'Loaded') visible.push(postObj);
       }
-      $scope.visiblePosts = visible;
+      $timeout(function() {
+         $scope.visiblePosts = visible;
+         angularGridInstance.postsGrid.refresh();
+      })
    }, true);
 
    $scope.loadPosts = loadPosts;
