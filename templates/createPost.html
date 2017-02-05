@@ -1,141 +1,144 @@
 <md-dialog id="new_post_dialog">
-   <md-dialog-content class="new_post_dialog_scroll" style="opacity:0" ng-style="{'background-color': post.class.color + ' 0.6)'}">
-      <div id="dialog_header" class="post-card-header" ng-class="{'no-link':post.type == 'NoLink','md-whiteframe-3dp': (operation == 'view' && post.link == '' && newPostScroll > 0) || (operation != 'view' && newPostScroll > 139),'not-operation-view':operation != 'view'}"
-         md-ink-ripple="{{post.link != '' && operation == 'view'}}" ng-click="openLink(post.link, operation != 'view')" ng-style="{'height': ((operation == 'view' && post.link == '') ? (60):(200-newPostScroll)) + 'px'}">
-         <img ng-src="{{post.previewImage}}" id="header_image" ng-class="{'post-card-image':operation == 'view'}"></img>
-         <div class="gradient-overlay new-post-img-gradient">
-            <div id="header_title" style="opacity: 0" class="gradient-overlay-metadata metadata-regular">
-               <h5 style="margin: 0">{{post.title}}</h5>
-               <span style="font-weight:700; font-size:14px"><md-icon class="small-icon" style="color:white">people</md-icon> {{post.class.name || 'No class'}}</span>
-               <span ng-if="post.tags.length != 0"><md-icon class="small-icon" style="color:white">style</md-icon>{{post.tags.join(', ')}}</span>
-            </div>
-            <div class="gradient-overlay-metadata metadata-regular" ng-if="operation == 'view'">
-               <span ng-hide="post.class.name == null"><md-icon>people</md-icon> {{post.class.name}}</span>
-               <span><md-icon>event</md-icon> {{post.creationDate | date : "mm/dd/yyyy"}}</span>
-            </div>
-            <div class="md-chips gradient-overlay-metadata" style="position:absolute; padding: 0 40px 0 8px" ng-class="{'metadata-link': operation == 'view'}" ng-if="post.attachmentName">
-               <md-chip>
-                  <div class="md-chip-content">
-                     <img ng-src="{{post.attachmentIcon}}" style="margin-right:4px"></img>
-                     <span>{{post.attachmentName}}</span>
-                     <button class="md-chip-remove" style="margin-right:-8px; pointer-events:initial" ng-click="clearLink()">
+	<md-dialog-content class="new_post_dialog_scroll" style="opacity:0" ng-style="{'background-color': post.class.color + ' 0.6)'}">
+		<div id="dialog_header" class="post-card-header" ng-class="{'no-link':post.type == 'NoLink','md-whiteframe-3dp': (operation == 'view' && post.link == '' && newPostScroll > 0) || (operation != 'view' && newPostScroll > 139),'not-operation-view':operation != 'view'}"
+			md-ink-ripple="{{post.link != '' && operation == 'view'}}" ng-click="openLink(post.link, operation != 'view')" ng-style="{'height': ((operation == 'view' && post.link == '') ? (60):(200-newPostScroll)) + 'px'}">
+			<img ng-src="{{post.previewImage}}" id="header_image" ng-class="{'post-card-image':operation == 'view'}"></img>
+			<div class="gradient-overlay new-post-img-gradient">
+				<div id="header_title" style="opacity: 0" class="gradient-overlay-metadata metadata-regular">
+					<h5 style="margin: 0">{{post.title}}</h5>
+					<span style="font-weight:700; font-size:14px"><md-icon class="small-icon" style="color:white">people</md-icon> {{post.class.name || 'No class'}}</span>
+					<span ng-if="post.tags.length != 0"><md-icon class="small-icon" style="color:white">style</md-icon>{{post.tags.join(', ')}}</span>
+				</div>
+				<div class="gradient-overlay-metadata metadata-regular" ng-if="operation == 'view'">
+					<span ng-hide="post.class.name == null"><md-icon>people</md-icon> {{post.class.name}}</span>
+					<span><md-icon>event</md-icon> {{post.creationDate | date : "mm/dd/yyyy"}}</span>
+				</div>
+				<div class="md-chips gradient-overlay-metadata" style="position:absolute; padding: 0 40px 0 8px" ng-class="{'metadata-link': operation == 'view'}" ng-if="post.attachmentName">
+					<md-chip>
+						<div class="md-chip-content">
+							<img ng-src="{{post.attachmentIcon}}" style="margin-right:4px"></img>
+							<span>{{post.attachmentName}}</span>
+							<button class="md-chip-remove" style="margin-right:-8px; pointer-events:initial" ng-click="clearLink()">
                         <md-icon style="color:rgb(66,66,66)">close</md-icon>
                      </button>
-                  </div>
-               </md-chip>
-            </div>
-            <div id="header_link_input_container" class="gradient-overlay-metadata" ng-hide="operation == 'view'">
-               <md-input-container id="header_link_input" md-no-float ng-if="!post.attachmentName">
-                  <input ng-model="post.link" style="color:white" placeholder="http://" type="text">
-               </md-input-container>
-               <md-menu md-position-mode="target-right target" class="attach-menu">
-                  <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" style="margin:0">
-                     <md-icon md-menu-origin style="font-size: 24px">attach_file</md-icon>
-                  </md-button>
-                  <md-menu-content>
-                     <md-menu-item>
-                        <md-button ng-click="::showDrivePicker('Drive', true, 'update')">
-                           <span style="display:flex"><span flex>Attatch Drive File</span><img md-menu-align-target class="unselectable" style="width:22px; height:22px; margin: auto 0 auto 16px; opacity: 0.54;" src="images/drive_icon.svg"></span>
-                        </md-button>
-                     </md-menu-item>
-                     <md-menu-item>
-                        <md-button ng-click="::showDrivePicker('Upload', true, 'update')">
-                           <span style="display:flex"><span flex>Upload File</span>
-                           <md-icon style="margin: auto 0px">file_upload</md-icon>
-                           </span>
-                        </md-button>
-                     </md-menu-item>
-                  </md-menu-content>
-               </md-menu>
-            </div>
-         </div>
-         <md-progress-linear class="link-loading" md-mode="indeterminate" ng-disabled="!previewLoading"></md-progress-linear>
-      </div>
-      <div id="new_post_content">
-      	 <div class="header-spacer" ng-class="{'small-spacer': post.type == 'NoLink' && operation == 'view','has-link': post.link != ''}" title="{{removeHttp(post.link)}}" ng-click="openLink(post.link)" >
-      	 	<!--<md-tooltip md-autohide md-direction="top" md-delay="1000"><md-icon>language</md-icon> {{removeHttp(post.link)}}</md-tooltip>-->
-      	 </div>
-         <div flex layout="row">
-            <md-select ng-model="post.class" ng-model-options="{trackBy: $value.name}" ng-if="operation != 'view'" class="md-no-underline" placeholder="Class" id="class_dropdown_button" md-on-close="clearClassSelectSearch()">
-               <md-select-header class="classSelectSearchbox">
-                  <input ng-model="classSelectSearch" id="class_select_input" type="text" placeholder="Search for a class.." class="md-text">
-               </md-select-header>
-               <div ng-repeat="favClass in myInfo.staredClasses" ng-if="!classSelectSearch">
-                  <md-option ng-value="favClass">{{::favClass.name}}</md-option>
-               </div>
-               <md-optgroup ng-repeat="catagoryObj in classList" ng-class="{'hide-label': classSelectSearch}">
-                  <label class="side-nav-header md-container-ignore" ng-style="::{'background-color': catagoryObj.color + ' 1)'}">{{::catagoryObj.catagory}}</label>
-                  <div ng-repeat="classObj in catagoryObj.classes | filter : classSelectSearch">
-                     <span style="display:none">{{classObj.catagory = catagoryObj.catagory}} {{classObj.color = catagoryObj.color}}</span>
-                     <md-option ng-value="classObj">{{::classObj.name}}</md-option>
-                  </div>
-               </md-optgroup>
-            </md-select>
-            <div style="display:flex">
-               <div class="label-container" style="padding-bottom:6px">
-                  <div style="display:inline" ng-if="labelSearch == null || labelSearch == ''">
-                     <div class="label unselectable label-active" ng-click="moveLabeltoAllLabels($index)" ng-repeat="Label in post.labels">{{Label.text}}</div>
-                  </div>
-                  <div ng-if="operation != 'view' && labelSearch == null || labelSearch == ''" style="width: 100%;text-align: center;display:inline">
-                     <div class="label unselectable" ng-click="moveLabeltoActive(Label.name)" ng-repeat="Label in allLabels">{{Label.name}}</div>
-                  </div>
-<div ng-if="!(labelSearch == null || labelSearch == '')" style="width: 100%;text-align: center;display:inline">
-   <div class="label unselectable" ng-click="moveLabeltoActive(Label.name)" ng-repeat="Label in allLabels | filter:labelSearch as filteredLabels">{{Label.name}}</div>
-   <span ng-if="filteredLabels.length === 0">Add this new label: <span class="label" ng-click="addLabel(labelSearch)">{{labelSearch}}</span></span>
-</div>
-               </div>
-               <md-input-container md-no-float class="md-input-min-height" style="width: 102px;margin: auto;" ng-if="operation != 'view'">
-                  <input type="text" placeholder="Find a Label..." ng-model="labelSearch">
-               </md-input-container>
-            </div>
-         </div>
-         <div class="md-dialog-content unselectable">
-            <input ng-model="post.title" ng-readonly="operation === 'view'" class="new-post-title md-title" placeholder="Title" md-autofocus>
-            <p class="post-card-creator md-subhead" style="margin:0" ng-hide="::post.creator.name == undefined || post.creator.name == myInfo.name"><span>By {{::post.creator.name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::post.creator.classOf}})</span>
-            </p>
-            <div contenteditable="{{operation != 'view'}}" ng-model="post.description" class="new-post-body"></div>
-         </div>
-      </div>
-   </md-dialog-content>
-   <md-dialog-actions ng-hide="operation === 'view'" layout="row" style="align-items: center;" ng-style="{'background-color': post.class.color + ' 0.6)'}">
-      <md-button id="New_Post_Submit" ng-click="isReadyToSubmit()" ng-disabled="previewLoading" class="md-raised">Save</md-button>
-      <!--<md-button class="text-formating-button md-icon-button " style="margin: 0 -6px 0 0; padding: 0;">-->
-      <!--   <md-icon style="font-size:18px; line-height: 24px;">format_bold</md-icon>-->
-      <!--</md-button>-->
-      <!--<md-button class="text-formating-button md-icon-button " style="margin: 0 -6px 0 0; padding: 0;">-->
-      <!--   <md-icon style="font-size:18px; line-height: 24px;">format_italic</md-icon>-->
-      <!--</md-button>-->
-      <!--<md-button class="text-formating-button md-icon-button " style="margin: 0 -6px 0 0; padding: 0;">-->
-      <!--   <md-icon style="font-size:18px; line-height: 24px;">format_underline</md-icon>-->
-      <!--</md-button>-->
-      <!--<md-button class="md-icon-button text-format-button" style="margin: 0 -6px 0 0; padding: 0;">-->
-      <!--   <md-icon style="font-size:18px;line-height: 24px;">format_list_bulleted</md-icon>-->
-      <!--</md-button>-->
-      <span flex></span>
-      <md-button class="md-icon-button text-format-button hover_black" style="margin-right:0px;" ng-click="closeDialog()">
-         <md-icon ng-show="operation == 'new'" style="font-size:26px; line-height: 25px">delete</md-icon>
-         <md-icon ng-hide="operation == 'new'" style="font-size:26px; line-height: 25px">close</md-icon>
-      </md-button>
-   </md-dialog-actions>
-   <md-dialog-actions ng-show="operation === 'view'" layout="row" style="align-items: center;" ng-style="{'background-color': post.class.color + ' 0.6)'}">
-      <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(post)">
-         <span class="like-counter">{{post.likes.length}}</span>
-         <md-icon ng-class="{'md-accent' : post.userLiked}" style="margin-top: -8px">thumb_up</md-icon>
-      </md-button>
-      <md-button class="md-icon-button" area-label="Flag" ng-click="flagPost(post)" ng-hide="post.creator.email == myInfo.email && post.flagged == false">
-         <md-icon ng-class="{'md-warn' : post.flagged == true}">flag</md-icon>
-      </md-button>
-      <md-button class="md-icon-button" ng-click="operation = 'update'">
-         <md-icon>edit</md-icon>
-      </md-button>
-      <md-button class="md-icon-button" ng-click="::confirmDelete(post,$index)">
-         <md-icon>delete</md-icon>
-      </md-button>
-      <md-button class="md-icon-button" ng-show="devMode" ng-click="::logPostToConsole(post,$index)">
-         <md-icon>edit</md-icon>Console Log Post</md-button>
-      <span flex></span>
-      <md-button class="md-icon-button text-format-button hover_black" style="margin-right:0px;" ng-click="closeDialog()">
-         <md-icon style="font-size:26px; line-height: 25px">close</md-icon>
-      </md-button>
-   </md-dialog-actions>
+						</div>
+					</md-chip>
+				</div>
+				<div id="header_link_input_container" class="gradient-overlay-metadata" ng-hide="operation == 'view'">
+					<md-input-container id="header_link_input" md-no-float ng-if="!post.attachmentName">
+						<input ng-model="post.link" style="color:white" placeholder="http://" type="text">
+					</md-input-container>
+					<md-menu md-position-mode="target-right target" class="attach-menu">
+						<md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" style="margin:0">
+							<md-icon md-menu-origin style="font-size: 24px">attach_file</md-icon>
+						</md-button>
+						<md-menu-content>
+							<md-menu-item>
+								<md-button ng-click="::showDrivePicker('Drive', true, 'update')">
+									<span style="display:flex"><span flex>Attatch Drive File</span><img md-menu-align-target class="unselectable" style="width:22px; height:22px; margin: auto 0 auto 16px; opacity: 0.54;" src="images/drive_icon.svg"></span>
+								</md-button>
+							</md-menu-item>
+							<md-menu-item>
+								<md-button ng-click="::showDrivePicker('Upload', true, 'update')">
+									<span style="display:flex"><span flex>Upload File</span>
+									<md-icon style="margin: auto 0px">file_upload</md-icon>
+									</span>
+								</md-button>
+							</md-menu-item>
+						</md-menu-content>
+					</md-menu>
+				</div>
+			</div>
+			<md-progress-linear class="link-loading" md-mode="indeterminate" ng-disabled="!previewLoading"></md-progress-linear>
+		</div>
+		<div id="new_post_content">
+			<div class="header-spacer" ng-class="{'small-spacer': post.type == 'NoLink' && operation == 'view','has-link': post.link != ''}" title="{{removeHttp(post.link)}}" ng-click="openLink(post.link)">
+				<!--<md-tooltip md-autohide md-direction="top" md-delay="1000"><md-icon>language</md-icon> {{removeHttp(post.link)}}</md-tooltip>-->
+			</div>
+			<div flex layout="row">
+				<md-select ng-model="post.class" ng-model-options="{trackBy: $value.name}" ng-if="operation != 'view'" class="md-no-underline" placeholder="Class" id="class_dropdown_button" md-on-close="clearClassSelectSearch()">
+					<md-select-header class="classSelectSearchbox">
+						<input ng-model="classSelectSearch" id="class_select_input" type="text" placeholder="Search for a class.." class="md-text">
+					</md-select-header>
+					<div ng-repeat="favClass in myInfo.staredClasses" ng-if="!classSelectSearch">
+						<md-option ng-value="favClass">{{::favClass.name}}</md-option>
+					</div>
+					<md-optgroup ng-repeat="catagoryObj in classList" ng-class="{'hide-label': classSelectSearch}">
+						<label class="side-nav-header md-container-ignore" ng-style="::{'background-color': catagoryObj.color + ' 1)'}">{{::catagoryObj.catagory}}</label>
+						<div ng-repeat="classObj in catagoryObj.classes | filter : classSelectSearch">
+							<span style="display:none">{{classObj.catagory = catagoryObj.catagory}} {{classObj.color = catagoryObj.color}}</span>
+							<md-option ng-value="classObj">{{::classObj.name}}</md-option>
+						</div>
+					</md-optgroup>
+				</md-select>
+				<div style="display:flex">
+					<div class="label-container" style="padding-bottom:6px">
+						<!--<div style="display:inline" ng-if="labelSearch == null || labelSearch == ''">-->
+						<!--	<div class="label unselectable label-active" ng-click="moveLabeltoAllTeachers($index)" ng-repeat="Label in post.teachers">{{teacher.name.text}}</div>-->
+						<!--</div>-->
+						<div style="display:inline" ng-if="labelSearch == null || labelSearch == ''">
+							<div class="label unselectable label-active" ng-click="moveLabeltoAllLabels($index)" ng-repeat="Label in post.labels">{{Label.text}}</div>
+						</div>
+						<div ng-if="operation != 'view' && labelSearch == null || labelSearch == ''" style="width: 100%;text-align: center;display:inline">
+							<div class="label unselectable" ng-click="moveLabeltoActive(Label.name)" ng-repeat="Label in allLabels">{{Label.name}}</div>
+						</div>
+						<div ng-if="!(labelSearch == null || labelSearch == '')" style="width: 100%;text-align: center;display:inline">
+							<div class="label unselectable" ng-click="moveLabeltoActive(Label.name)" ng-repeat="Label in allLabels | filter:labelSearch as filteredLabels">{{Label.name}}</div>
+							<span ng-if="filteredLabels.length === 0">Add this new label: <span class="label" ng-click="addLabel(labelSearch)">{{labelSearch}}</span></span>
+						</div>
+					</div>
+					<md-input-container md-no-float class="md-input-min-height" style="width: 102px;margin: auto;" ng-if="operation != 'view'">
+						<input type="text" placeholder="Find a Label..." ng-model="labelSearch">
+					</md-input-container>
+				</div>
+			</div>
+			<div class="md-dialog-content unselectable">
+				<input ng-model="post.title" ng-readonly="operation === 'view'" class="new-post-title md-title" placeholder="Title" md-autofocus>
+				<p class="post-card-creator md-subhead" style="margin:0" ng-hide="::post.creator.name == undefined || post.creator.name == myInfo.name"><span>By {{::post.creator.name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::post.creator.classOf}})</span>
+				</p>
+				<div contenteditable="{{operation != 'view'}}" ng-model="post.description" class="new-post-body"></div>
+			</div>
+		</div>
+	</md-dialog-content>
+	<md-dialog-actions ng-hide="operation === 'view'" layout="row" style="align-items: center;" ng-style="{'background-color': post.class.color + ' 0.6)'}">
+		<md-button id="New_Post_Submit" ng-click="isReadyToSubmit()" ng-disabled="previewLoading" class="md-raised">Save</md-button>
+		<!--<md-button class="text-formating-button md-icon-button " style="margin: 0 -6px 0 0; padding: 0;">-->
+		<!--   <md-icon style="font-size:18px; line-height: 24px;">format_bold</md-icon>-->
+		<!--</md-button>-->
+		<!--<md-button class="text-formating-button md-icon-button " style="margin: 0 -6px 0 0; padding: 0;">-->
+		<!--   <md-icon style="font-size:18px; line-height: 24px;">format_italic</md-icon>-->
+		<!--</md-button>-->
+		<!--<md-button class="text-formating-button md-icon-button " style="margin: 0 -6px 0 0; padding: 0;">-->
+		<!--   <md-icon style="font-size:18px; line-height: 24px;">format_underline</md-icon>-->
+		<!--</md-button>-->
+		<!--<md-button class="md-icon-button text-format-button" style="margin: 0 -6px 0 0; padding: 0;">-->
+		<!--   <md-icon style="font-size:18px;line-height: 24px;">format_list_bulleted</md-icon>-->
+		<!--</md-button>-->
+		<span flex></span>
+		<md-button class="md-icon-button text-format-button hover_black" style="margin-right:0px;" ng-click="closeDialog()">
+			<md-icon ng-show="operation == 'new'" style="font-size:26px; line-height: 25px">delete</md-icon>
+			<md-icon ng-hide="operation == 'new'" style="font-size:26px; line-height: 25px">close</md-icon>
+		</md-button>
+	</md-dialog-actions>
+	<md-dialog-actions ng-show="operation === 'view'" layout="row" style="align-items: center;" ng-style="{'background-color': post.class.color + ' 0.6)'}">
+		<md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(post)">
+			<span class="like-counter">{{post.likes.length}}</span>
+			<md-icon ng-class="{'md-accent' : post.userLiked}" style="margin-top: -8px">thumb_up</md-icon>
+		</md-button>
+		<md-button class="md-icon-button" area-label="Flag" ng-click="flagPost(post)" ng-hide="post.creator.email == myInfo.email && post.flagged == false">
+			<md-icon ng-class="{'md-warn' : post.flagged == true}">flag</md-icon>
+		</md-button>
+		<md-button class="md-icon-button" ng-click="operation = 'update'">
+			<md-icon>edit</md-icon>
+		</md-button>
+		<md-button class="md-icon-button" ng-click="::confirmDelete(post,$index)">
+			<md-icon>delete</md-icon>
+		</md-button>
+		<md-button class="md-icon-button" ng-show="devMode" ng-click="::logPostToConsole(post,$index)">
+			<md-icon>edit</md-icon>Console Log Post</md-button>
+		<span flex></span>
+		<md-button class="md-icon-button text-format-button hover_black" style="margin-right:0px;" ng-click="closeDialog()">
+			<md-icon style="font-size:26px; line-height: 25px">close</md-icon>
+		</md-button>
+	</md-dialog-actions>
 </md-dialog>
