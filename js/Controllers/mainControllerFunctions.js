@@ -793,13 +793,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          }
       }
       $timeout(function () {
-         $scope.post.labels.push($scope.sortedLabels.splice(findLabelIndex(labelName), 1))
+         $scope.labelSearch = "";
+         $scope.post.labels.push($scope.sortedLabels.splice(findLabelIndex(labelName), 1)[0])
       });
    }
 
    $scope.moveLabelToSortedLabels = function (labelIndex) {
       $timeout(function () {
-         $scope.sortedLabels.push($scope.post.labels.splice(labelIndex, 1))
+         $scope.sortedLabels.push($scope.post.labels.splice(labelIndex, 1)[0])
       });
    }
 
