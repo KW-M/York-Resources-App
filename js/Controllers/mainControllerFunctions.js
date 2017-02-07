@@ -597,20 +597,20 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.sortLabels = function () {
       var output = [];
       if ($scope.post && $scope.post.class && $scope.post.class.name != '') {
-         // var max = $scope.allLabels.length
-         // for (var labelCount = 0; labelCount < max; labelCount++) {
-         //    var label = $scope.allLabels[labelCount]
-         //    var newLabel = output.push(label);
-         //    newLabel.type = 'label'
-         //    var classMax = label.classes.length;
-         //    for (var classCount = 0; classCount < classMax && classCount != -1; classCount++) {
-         //       var labelClass = label.classes[classCount]
-         //       if (labelClass.name == $scope.post.class.name) {
-         //          newLabel.totalUsage = label.totalUsage + (labelClass.usage * 2) + 10000
-         //          classCount = -1;
-         //       };
-         //    }
-         // }
+         var max = $scope.allLabels.length
+         for (var labelCount = 0; labelCount < max; labelCount++) {
+            var label = $scope.allLabels[labelCount]
+            var newLabel = output.push(label);
+            newLabel.type = 'label'
+            var classMax = label.classes.length;
+            // for (var classCount = 0; classCount < classMax && classCount != -1; classCount++) {
+            //    var labelClass = label.classes[classCount]
+            //    if (labelClass.name == $scope.post.class.name) {
+            //       newLabel.totalUsage = label.totalUsage + (labelClass.usage * 2) + 10000
+            //       classCount = -1;
+            //    };
+            // }
+         }
          // var max = $scope.teacherList.length
          // for (var teacherCount = 0; teacherCount < max; teacherCount++) {
          //    var teacher = $scope.teacherList[teacherCount];
