@@ -597,7 +597,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       console.warn('could not find class: ' + className);
    };
    $scope.sortLabels = function (input) {
-      var output = [];
       if ($scope.sortedLabels && $scope.post && $scope.post.class && $scope.post.class.name != '') {
          var max = $scope.sortedLabels.length
          for (var labelCount = 0; labelCount < max; labelCount++) {
@@ -606,8 +605,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             for (var classCount = 0; classCount < classMax; classCount++) {
                var labelClass = label.classes[classCount]
                if (labelClass.name == $scope.post.class.name) {
-                  if (label.type == 'Label') label.sortOrder = (labelClass.usage * 2) + 10000
-                  if (label.type == 'Teacher') label.sortOrder = 100000
+                  if (label.type == 'Label') label.sortOrder = (labelClass.usage * 2) + 1000
+                  if (label.type == 'Teacher') label.sortOrder = 100000;
                   classCount = classMax + 1;
                };
                if (classCount != classMax + 1) label.sortOrder = label.totalUsage || 1
@@ -628,9 +627,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          //    }
          // }
       } else {
-         output = input || labelList.concat(teacherList);
+         $scope.sortedLabels = input || labelList.concat(teacherList);
       }
-      var $scope.sortedLabels = $scope.sortedLabels.sort(function (a, b) {
+      $scope.sortedLabels = $scope.sortedLabels.sort(function (a, b) {
          return (b.sortOrder || b.totalUsage || 1) - (a.sortOrder || a.totalUsage || 1);
       })
       return($scope.sortedLabels)
