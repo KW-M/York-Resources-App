@@ -123,6 +123,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //----------------------------------------------------
    //------------- Signin & Initiation ------------------
    var drivePicker, uploadPicker;
+   var labelList, teacherList;
 
    authorizationService.onLoad(function () {
       var profile = authorizationService.GUser.getBasicProfile()
@@ -143,10 +144,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                name: 'Other',
                color: 'hsla(200, 70%, 75%,',
             })
-            var = dataObj.classes;
-            var = dataObj.labels;
-            $scope.teacherList = dataObj.teachers;
-            $scope.allLabels = 
+            labelList = dataObj.labels;
+            teacherList = dataObj.teachers;
+            $scope.classList = dataObj.classes;
+            
+            $scope.allLabels = $scope.sortLabels()
          });
       }, console.warn)
 
@@ -597,7 +599,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    };
    $scope.sortLabels = function () {
       var output = [];
-      if ($scope.post && $scope.post.class && $scope.post.class.name != '') {
+      if ($scope.allLabels && $scope.post && $scope.post.class && $scope.post.class.name != '') {
          var max = $scope.allLabels.length
          for (var labelCount = 0; labelCount < max; labelCount++) {
             var label = $scope.allLabels[labelCount]
@@ -632,15 +634,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             }
          }
       } else {
-         output = $scope.allLabels.concat($scope.teacherList);
+         output = $scope.labelList.concat($scope.teacherList);
       }
-      output = output.sort(function (a, b) {
+      return (output.sort(function (a, b) {
          return (b.totalUsage || 1) - (a.totalUsage || 1);
-      })
-      console.log(output)
-      $timeout(function () {
-         $scope.sortedLabels = output;
-      })
+      }))
    };
 
    //----------------------------------------------------
