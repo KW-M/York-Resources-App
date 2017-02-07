@@ -630,9 +630,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       } else {
          output = input || labelList.concat(teacherList);
       }
-      return (output.sort(function (a, b) {
+      var $scope.sortedLabels = $scope.sortedLabels.sort(function (a, b) {
          return (b.sortOrder || b.totalUsage || 1) - (a.sortOrder || a.totalUsage || 1);
-      }))
+      })
+      return($scope.sortedLabels)
    };
 
    //----------------------------------------------------

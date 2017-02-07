@@ -40,7 +40,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $scope.findType();
         $scope.sortLabels();
     })
-    
+
     //temproary variables
     $scope.operation = operation;
     $scope.previewThumbnail = "";
@@ -135,10 +135,6 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                     $mdDialog.hide();
                     $scope.dialog_container.style.opacity = 1;
                     $scope.dialog_container.style.pointerEvents = 'all';
-                    // $timeout(function () {
-                    //     $scope.allPosts.push($scope.post)
-                    //     $scope.visiblePosts = $scope.filterPosts($scope.allPosts);
-                    // })
                 })
             },
             onError, 150);
@@ -171,23 +167,6 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $mdToast.show($mdToast.simple().textContent('Error Posting, try again.').hideDelay(5000));
     }
 
-    $scope.clearLink = function () {
-        $timeout(function () {
-            $scope.post.link = null;
-            $scope.post.type = "noLink";
-            $scope.post.previewImage = null;
-            $scope.post.attachmentName = null;
-            $scope.post.attachmentIcon = null;
-        })
-    }
-
-    $scope.classSelectDone = function () {
-        $scope.sortLabels();
-        $timeout(function () {
-            $scope.classSelectSearch = '';
-        });
-    }
-
     $scope.closeDialog = function () {
         $scope.post.title = originalPost.title || ''
         $scope.post.description = originalPost.description || ''
@@ -207,6 +186,23 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $scope.post.previewImage = originalPost.previewImage || ''
         $mdDialog.hide();
     };
+
+    $scope.clearLink = function () {
+        $timeout(function () {
+            $scope.post.link = null;
+            $scope.post.type = "noLink";
+            $scope.post.previewImage = null;
+            $scope.post.attachmentName = null;
+            $scope.post.attachmentIcon = null;
+        })
+    }
+
+    $scope.classSelectDone = function () {
+        $timeout(function () {
+            $scope.sortedLabels = $scope.sortLabels();
+            $scope.classSelectSearch = '';
+        });
+    }
     $scope.hideToast = function () {
         $mdToast.hide()
     }
