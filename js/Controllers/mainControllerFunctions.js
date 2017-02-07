@@ -786,22 +786,21 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    $scope.moveLabelToPostLabels = function (labelName) {
-      $scope.sortedLabels
-   }
-   
-   $scope.moveLabelToSortedLabels = function (activeLabelIndex) {
-      var label = $scope.Post.Labels.splice(activeLabelIndex, 1)
-      $scope.allLabels.push(label[0]);
-      $timeout(function () {
-         $scope.visibleLabels = $scope.sortLabels($scope.allLabels)
-      })
-   }
-   
-   function findLabel (labelName) {
-      var max = $scope.sortedLabels.length
-      for (var labelCount = 0; labelCount < max; labelCount++) {
-         if ($scope.sortedLabels[labelCount].name == labelName) return labelCount
+      function findLabelIndex(labelName) {
+         var max = $scope.sortedLabels.length
+         for (var labelCount = 0; labelCount < max; labelCount++) {
+            if ($scope.sortedLabels[labelCount].name == labelName) return labelCount
+         }
       }
+      $timeout(function () {
+         $scope.post.labels.push($scope.sortedLabels.splice(findLabelIndex(labelName), 1))
+      });
+   }
+
+   $scope.moveLabelToSortedLabels = function (labelIndex) {
+      $timeout(function () {
+         $scope.sortedLabels.push($scope.post.labels.splice(labelIndex, 1))
+      });
    }
 
    function transferAllLabels() {
@@ -814,7 +813,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          $scope.sortedLabels = $scope.sortLabels()
       })
    }
-   
+
    //----------------------------------------------------
    //---------------- Event Watchers --------------------
    window.addEventListener("resize", function () {
