@@ -804,17 +804,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       });
    }
 
-   function transferAllLabels() {
-      $scope.queryParams.labels.forEach(function () {
-         var label = $scope.post.labels.pop()
-         $scope.allLabels.push(label);
-      })
-      $timeout(function () {
-         $scope.labelSearch = ""
-         $scope.sortedLabels = $scope.sortLabels()
-      })
-   }
-
    //----------------------------------------------------
    //---------------- Event Watchers --------------------
    window.addEventListener("resize", function () {
