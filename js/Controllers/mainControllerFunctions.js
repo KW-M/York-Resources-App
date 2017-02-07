@@ -147,8 +147,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             labelList = dataObj.labels;
             teacherList = dataObj.teachers;
             $scope.classList = dataObj.classes;
-            
-            $scope.allLabels = $scope.sortLabels()
+            $scope.sortedLabels = $scope.sortLabels(labelList.concat(teacherList))
          });
       }, console.warn)
 
@@ -597,20 +596,17 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       return false
       console.warn('could not find class: ' + className);
    };
-   $scope.sortLabels = function () {
+   $scope.sortLabels = function (input) {
       var output = [];
-      if ($scope.allLabels && $scope.post && $scope.post.class && $scope.post.class.name != '') {
-         var max = $scope.allLabels.length
+      if ($scope.sortedLabels && $scope.post && $scope.post.class && $scope.post.class.name != '') {
+         var max = $scope.sortedLabels.length
          for (var labelCount = 0; labelCount < max; labelCount++) {
             var label = $scope.allLabels[labelCount]
-            var newLabel = output[output.push(label) - 1];
-            newLabel.type = 'label'
             var classMax = label.classes.length;
             for (var classCount = 0; classCount < classMax; classCount++) {
-               var labelClass = newLabel.classes[classCount]
+               var labelClass = label.classes[classCount]
                if (labelClass.name == $scope.post.class.name) {
-                  console.log(newLabel.totalUsage)
-                  newLabel.totalUsage = (labelClass.usage * 2) + 10000
+                  label.sortOrder = (labelClass.usage * 2) + 10000
                   console.log(newLabel.totalUsage)
                   classCount = classMax + 1;
                };
@@ -634,7 +630,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             }
          }
       } else {
-         output = $scope.labelList.concat($scope.teacherList);
+         output = input || labelList.concat(teacherList);
       }
       return (output.sort(function (a, b) {
          return (b.totalUsage || 1) - (a.totalUsage || 1);
