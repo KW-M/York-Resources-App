@@ -143,9 +143,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                name: 'Other',
                color: 'hsla(200, 70%, 75%,',
             })
-            $scope.allLabels = dataObj.labels;
-            $scope.classList = dataObj.classes;
+            var = dataObj.classes;
+            var = dataObj.labels;
             $scope.teacherList = dataObj.teachers;
+            $scope.allLabels = 
          });
       }, console.warn)
 
@@ -609,7 +610,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                   console.log(newLabel.totalUsage)
                   newLabel.totalUsage = (labelClass.usage * 2) + 10000
                   console.log(newLabel.totalUsage)
-                  classCount = classMax+1;
+                  classCount = classMax + 1;
                };
             }
          }
@@ -623,9 +624,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                var teacherClass = newTeacher.classes[classCount]
                if (teacherClass == $scope.post.class.name) {
                   newTeacher.totalUsage = 1000000
-                  classCount = classMax+1;
+                  classCount = classMax + 1;
                };
-               if (classCount != classMax+1) {
+               if (classCount != classMax + 1) {
                   newTeacher.totalUsage = 1
                }
             }
