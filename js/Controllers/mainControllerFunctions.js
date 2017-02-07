@@ -601,39 +601,37 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       if ($scope.sortedLabels && $scope.post && $scope.post.class && $scope.post.class.name != '') {
          var max = $scope.sortedLabels.length
          for (var labelCount = 0; labelCount < max; labelCount++) {
-            var label = $scope.allLabels[labelCount]
+            var label = $scope.sortedLabels[labelCount];
             var classMax = label.classes.length;
             for (var classCount = 0; classCount < classMax; classCount++) {
                var labelClass = label.classes[classCount]
                if (labelClass.name == $scope.post.class.name) {
-                  label.sortOrder = (labelClass.usage * 2) + 10000
-                  console.log(newLabel.totalUsage)
+                  if (label.type == 'Label') label.sortOrder = (labelClass.usage * 2) + 10000
+                  if (label.type == 'Teacher') label.sortOrder = 100000
                   classCount = classMax + 1;
                };
+               if (classCount != classMax + 1) label.sortOrder = label.totalUsage || 1
             }
          }
-         var max = $scope.teacherList.length
-         for (var teacherCount = 0; teacherCount < max; teacherCount++) {
-            var teacher = $scope.teacherList[teacherCount];
-            var newTeacher = output[output.push(teacher) - 1];
-            newTeacher.type = 'teacher'
-            var classMax = teacher.classes.length;
-            for (var classCount = 0; classCount < classMax; classCount++) {
-               var teacherClass = newTeacher.classes[classCount]
-               if (teacherClass == $scope.post.class.name) {
-                  newTeacher.totalUsage = 1000000
-                  classCount = classMax + 1;
-               };
-               if (classCount != classMax + 1) {
-                  newTeacher.totalUsage = 1
-               }
-            }
-         }
+         // var max = $scope.teacherList.length
+         // for (var teacherCount = 0; teacherCount < max; teacherCount++) {
+         //    var teacher = $scope.teacherList[teacherCount];
+         //    var newTeacher = output[output.push(teacher) - 1];
+         //    newTeacher.type = 'teacher'
+         //    var classMax = teacher.classes.length;
+         //    for (var classCount = 0; classCount < classMax; classCount++) {
+         //       var teacherClass = newTeacher.classes[classCount]
+         //       if (teacherClass == $scope.post.class.name) {
+         //          newTeacher.totalUsage = 1000000
+         //          classCount = classMax + 1;
+         //       };
+         //    }
+         // }
       } else {
          output = input || labelList.concat(teacherList);
       }
       return (output.sort(function (a, b) {
-         return (b.totalUsage || 1) - (a.totalUsage || 1);
+         return (b.sortOrder || b.totalUsage || 1) - (a.sortOrder || a.totalUsage || 1);
       }))
    };
 
