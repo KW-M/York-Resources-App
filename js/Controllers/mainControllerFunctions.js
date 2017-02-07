@@ -604,10 +604,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             newLabel.type = 'label'
             var classMax = label.classes.length;
             for (var classCount = 0; classCount < classMax && classCount != -1; classCount++) {
-               var labelClass = neabel.classes[classCount]
+               var labelClass = newLabel.classes[classCount]
                if (labelClass.name == $scope.post.class.name) {
-                  console.log(newLabel)
-                  newLabel.totalUsage = label.totalUsage + (labelClass.usage * 2) + 10000
+                  console.log(newLabel.totalUsage)
+                  newLabel.totalUsage = label.totalUsage + (labelClass.usage * 2) + 1000
+                  console.log(newLabel.totalUsage)
                   //classCount = -1;
                };
             }
