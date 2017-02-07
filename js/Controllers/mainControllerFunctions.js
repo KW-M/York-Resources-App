@@ -766,6 +766,80 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }, 2000);
    };
 
+
+
+	//----------------------------------------------------
+	//------------------Handleing Labels------------------------
+	$scope.addLabel = function (labelName) {
+		var newLabel = {
+			text: labelName,
+			linkedClasses: [{
+				Name: $scope.queryParams.classPath,
+				Usage: 1,
+			}],
+			totalUsage: 1
+		}
+		var labelIndex = $scope.Post.Labels.length;
+		queue('sheets', GoogleDriveService.appendSpreadsheetRange('Labels!A2:A', [labelName, null, $scope.queryParams.classPath + ",1"], 'class'), null, function (err) {
+			$mdToast.showSimple('Error adding label, try again.');
+			$scope.Post.Labels.splice(labelIndex, 1);
+		}, 2);
+		$timeout(function () {
+			$scope.labelSearch = "";
+			$scope.Post.Labels.push(newLabel);
+		})
+	}
+	$scope.transferAllLabels = function () {
+		$scope.queryParams.labels.forEach(function () {
+			var label = $scope.Post.Labels.pop()
+			$scope.allLabels.push(label);
+		})
+		$timeout(function () {
+			$scope.labelSearch = "";
+			$scope.visibleLabels = $scope.sortLabels($scope.allLabels)
+		})
+	}
+	$scope.moveLabeltoActive = function (labelName) {
+		$scope.allLabels.every(function (Label, Index) {
+			if (Label.text == labelName) {
+				$scope.allLabels.splice(Index, 1);
+				$scope.Post.Labels.push(Label);
+				return false
+			} else {
+				return true
+			}
+		})
+		$timeout(function () {
+			$scope.labelSearch = "";
+			$scope.visibleLabels = $scope.sortLabels($scope.allLabels)
+		})
+	}
+	$scope.moveLabeltoAllLabels = function (activeLabelIndex) {
+		var label = $scope.Post.Labels.splice(activeLabelIndex, 1)
+		$scope.allLabels.push(label[0]);
+		$timeout(function () {
+			$scope.visibleLabels = $scope.sortLabels($scope.allLabels)
+		})
+	}
+	$scope.findLabel = function (labelName) {
+		for (var labelCount = 0; labelCount < $scope.allLabels.length; labelCount++) {
+			var Label = $scope.allLabels[labelCount];
+			if (Label.text == labelName) return labelName
+		}
+		var newLabel = {
+				text: labelName,
+				linkedClasses: [{
+					Name: $scope.queryParams.classPath,
+					Usage: 1,
+				}],
+				totalUsage: 1
+			}
+			// $timeout(function() {
+			// 	$scope.allLabels.push(newLabel);
+			// })
+		return newLabel;
+	}
+
    //----------------------------------------------------
    //---------------- Event Watchers --------------------
    window.addEventListener("resize", function () {
