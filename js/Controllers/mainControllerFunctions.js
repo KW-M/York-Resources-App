@@ -613,7 +613,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          }
          var max = $scope.teacherList.length
          for (var teacherCount = 0; teacherCount < max; teacherCount++) {
-            var teacher = $scope.teacherList[labelCount];
+            var teacher = $scope.teacherList[teacherCount];
             var newTeacher = output.push(teacher);
             newTeacher.type = 'teacher'
             var classMax = teacher.classes.length;
