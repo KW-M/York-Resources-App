@@ -603,13 +603,16 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             var newLabel = output.push(label);
             newLabel.type = 'label'
             var classMax = label.classes.length;
-            // for (var classCount = 0; classCount < classMax && classCount != -1; classCount++) {
-            //    var labelClass = label.classes[classCount]
-            //    if (labelClass.name == $scope.post.class.name) {
-            //       newLabel.totalUsage = label.totalUsage + (labelClass.usage * 2) + 10000
-            //       classCount = -1;
-            //    };
-            // }
+            console.log(newLabel)
+            console.log(classMax)
+            for (var classCount = 0; classCount < classMax && classCount != -1; classCount++) {
+               var labelClass = label.classes[classCount]
+                           console.log(labelClass)
+               if (labelClass.name == $scope.post.class.name) {
+                  newLabel.totalUsage = label.totalUsage + (labelClass.usage * 2) + 10000
+                  classCount = -1;
+               };
+            }
          }
          // var max = $scope.teacherList.length
          // for (var teacherCount = 0; teacherCount < max; teacherCount++) {
