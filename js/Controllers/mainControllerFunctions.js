@@ -600,10 +600,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          var max = $scope.allLabels.length
          for (var labelCount = 0; labelCount < max; labelCount++) {
             var label = $scope.allLabels[labelCount]
-            var newLabel = output.push(label);
+            var push = output.push(label)
+            console.log(push)
+             console.log(output)
+            var newLabel = output[push-1];
+                        console.log(newLabel)
             newLabel.type = 'label'
             var classMax = label.classes.length;
-            console.log(newLabel)
+
             console.log(classMax)
             for (var classCount = 0; classCount < classMax && classCount != -1; classCount++) {
                var labelClass = label.classes[classCount]
