@@ -607,9 +607,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                var labelClass = newLabel.classes[classCount]
                if (labelClass.name == $scope.post.class.name) {
                   console.log(newLabel.totalUsage)
-                  newLabel.totalUsage = (labelClass.usage * 2) + 1000
+                  newLabel.totalUsage = (labelClass.usage * 2) + 10000
                   console.log(newLabel.totalUsage)
-                  classCount = classMax;
+                  classCount = classMax+1;
                };
             }
          }
@@ -622,7 +622,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             for (var classCount = 0; classCount < classMax; classCount++) {
                var teacherClass = newTeacher.classes[classCount]
                if (teacherClass == $scope.post.class.name) {
-                  newTeacher.totalUsage = 100000
+                  newTeacher.totalUsage = 1000000
                   classCount = classMax+1;
                };
                if (classCount != classMax+1) {
