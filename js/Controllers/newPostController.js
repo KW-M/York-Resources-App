@@ -122,23 +122,23 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
             template: '<md-toast><span style="font-size:18px; max-width: 200px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="36"></md-progress-circular></md-toast>',
             hideDelay: 3000000,
         });
-        $scope.post.labels =
-            promiseQueue().addPromise('drive', APIService.runGAScript('savePost', {
-                    operation: 'savePost',
-                    postId: $scope.post.id,
-                    content: $scope.post,
-                }, true), function (postData) {
-                    console.log(postData)
-                    var createdPost = JSON.parse(postData.result.response.result);
-                    console.log(createdPost)
-                    addFireDatabaseRef(createdPost).then(function () {
-                        $mdToast.hide();
-                        $mdDialog.hide();
-                        $scope.dialog_container.style.opacity = 1;
-                        $scope.dialog_container.style.pointerEvents = 'all';
-                    })
-                },
-                onError, 150);
+        $scope.post.labels = transferAllLabels();
+        promiseQueue().addPromise('drive', APIService.runGAScript('savePost', {
+                operation: 'savePost',
+                postId: $scope.post.id,
+                content: $scope.post,
+            }, true), function (postData) {
+                console.log(postData)
+                var createdPost = JSON.parse(postData.result.response.result);
+                console.log(createdPost)
+                addFireDatabaseRef(createdPost).then(function () {
+                    $mdToast.hide();
+                    $mdDialog.hide();
+                    $scope.dialog_container.style.opacity = 1;
+                    $scope.dialog_container.style.pointerEvents = 'all';
+                })
+            },
+            onError, 150);
     }
 
     function addFireDatabaseRef(post) {
@@ -162,12 +162,13 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     }
 
     function transferAllLabels() {
-        var output
-        $scope.post.labels.forEach(function () {
-            var label = $scope.post.labels.pop()
-            $scope.allLabels.push(label);
+        var output = [];
+        var max = $scope.post.labels.length
+        for (var c = 0; c < max; c++) {
+            var label = $scope.post.labels.pop();
+            $scope.sortedLabels.push(label);
             output.push(label.name);
-        })
+        }
         return output
     }
 
@@ -179,6 +180,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     }
 
     $scope.closeDialog = function () {
+        transferAllLabels();
         $scope.post.title = originalPost.title || ''
         $scope.post.description = originalPost.description || ''
         $scope.post.link = originalPost.link || ''
