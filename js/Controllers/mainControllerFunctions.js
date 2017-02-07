@@ -604,7 +604,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             newLabel.type = 'label'
             var classMax = label.classes.length;
             for (var classCount = 0; classCount < classMax && classCount != -1; classCount++) {
-               var labelClass = label.classes[classCount]
+               var labelClass = neabel.classes[classCount]
                if (labelClass.name == $scope.post.class.name) {
                   console.log(newLabel)
                   newLabel.totalUsage = label.totalUsage + (labelClass.usage * 2) + 10000
@@ -612,23 +612,23 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                };
             }
          }
-         // var max = $scope.teacherList.length
-         // for (var teacherCount = 0; teacherCount < max; teacherCount++) {
-         //    var teacher = $scope.teacherList[teacherCount];
-         //    var newTeacher = output[output.push(teacher) - 1];
-         //    newTeacher.type = 'teacher'
-         //    var classMax = teacher.classes.length;
-         //    for (var classCount = 0; classCount < classMax && classCount != -1; classCount++) {
-         //       var teacherClass = teacher.classes[classCount]
-         //       if (teacherClass == $scope.post.class.name) {
-         //          newTeacher.totalUsage = 100000
-         //          classCount = -1;
-         //       };
-         //       if (classCount != -1) {
-         //          newTeacher.totalUsage = 0
-         //       }
-         //    }
-         // }
+         var max = $scope.teacherList.length
+         for (var teacherCount = 0; teacherCount < max; teacherCount++) {
+            var teacher = $scope.teacherList[teacherCount];
+            var newTeacher = output[output.push(teacher) - 1];
+            newTeacher.type = 'teacher'
+            var classMax = teacher.classes.length;
+            for (var classCount = 0; classCount < classMax && classCount != -1; classCount++) {
+               var teacherClass = newTeacher.classes[classCount]
+               if (teacherClass == $scope.post.class.name) {
+                  newTeacher.totalUsage = 100000
+                  //classCount = -1;
+               };
+               if (classCount != -1) {
+                  newTeacher.totalUsage = 0
+               }
+            }
+         }
       } else {
          output = $scope.allLabels.concat($scope.teacherList);
       }
