@@ -785,45 +785,23 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       })
    }
 
-   $scope.moveLabeltoActive = function (labelName) {
-      $scope.allLabels.every(function (Label, Index) {
-         if (Label.text == labelName) {
-            $scope.allLabels.splice(Index, 1);
-            $scope.Post.Labels.push(Label);
-            return false
-         } else {
-            return true
-         }
-      })
-      $timeout(function () {
-         $scope.labelSearch = "";
-         $scope.visibleLabels = $scope.sortLabels($scope.allLabels)
-      })
+   $scope.moveLabelToPostLabels = function (labelName) {
+      $scope.sortedLabels
    }
-   $scope.moveLabeltoAllLabels = function (activeLabelIndex) {
+   
+   $scope.moveLabelToSortedLabels = function (activeLabelIndex) {
       var label = $scope.Post.Labels.splice(activeLabelIndex, 1)
       $scope.allLabels.push(label[0]);
       $timeout(function () {
          $scope.visibleLabels = $scope.sortLabels($scope.allLabels)
       })
    }
-   $scope.findLabel = function (labelName) {
-      for (var labelCount = 0; labelCount < $scope.allLabels.length; labelCount++) {
-         var Label = $scope.allLabels[labelCount];
-         if (Label.text == labelName) return labelName
+   
+   function findLabel (labelName) {
+      var max = $scope.sortedLabels.length
+      for (var labelCount = 0; labelCount < max; labelCount++) {
+         if ($scope.sortedLabels[labelCount].name == labelName) return labelCount
       }
-      var newLabel = {
-            text: labelName,
-            linkedClasses: [{
-               Name: $scope.queryParams.classPath,
-               Usage: 1,
-            }],
-            totalUsage: 1
-         }
-         // $timeout(function() {
-         // 	$scope.allLabels.push(newLabel);
-         // })
-      return newLabel;
    }
 
    function transferAllLabels() {
