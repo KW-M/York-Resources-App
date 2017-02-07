@@ -607,9 +607,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                var labelClass = newLabel.classes[classCount]
                if (labelClass.name == $scope.post.class.name) {
                   console.log(newLabel.totalUsage)
-                  newLabel.totalUsage = label.totalUsage + (labelClass.usage * 2) + 1000
+                  newLabel.totalUsage = (labelClass.usage * 2) + 1000
                   console.log(newLabel.totalUsage)
-                  //classCount = -1;
+                  classCount = -2;
                };
             }
          }
@@ -619,14 +619,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             var newTeacher = output[output.push(teacher) - 1];
             newTeacher.type = 'teacher'
             var classMax = teacher.classes.length;
-            for (var classCount = 0; classCount < classMax && classCount != -1; classCount++) {
+            for (var classCount = 0; classCount < classMax && classCount != -2; classCount++) {
                var teacherClass = newTeacher.classes[classCount]
                if (teacherClass == $scope.post.class.name) {
                   newTeacher.totalUsage = 100000
-                  //classCount = -1;
+                  classCount = -2;
                };
-               if (classCount != -1) {
-                  newTeacher.totalUsage = 0
+               if (classCount != -2) {
+                  newTeacher.totalUsage = 1
                }
             }
          }
@@ -634,7 +634,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          output = $scope.allLabels.concat($scope.teacherList);
       }
       output = output.sort(function (a, b) {
-         return (b.totalUsage || 0) - (a.totalUsage || 0);
+         return (b.totalUsage || 1) - (a.totalUsage || 1);
       })
       console.log(output)
       $timeout(function () {
