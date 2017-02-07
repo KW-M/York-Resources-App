@@ -603,13 +603,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             var newLabel = output[output.push(label) - 1];
             newLabel.type = 'label'
             var classMax = label.classes.length;
-            for (var classCount = 0; classCount < classMax && classCount != -1; classCount++) {
+            for (var classCount = 0; classCount < classMax; classCount++) {
                var labelClass = newLabel.classes[classCount]
                if (labelClass.name == $scope.post.class.name) {
                   console.log(newLabel.totalUsage)
                   newLabel.totalUsage = (labelClass.usage * 2) + 1000
                   console.log(newLabel.totalUsage)
-                  classCount = -2;
+                  classCount = classMax;
                };
             }
          }
@@ -619,13 +619,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             var newTeacher = output[output.push(teacher) - 1];
             newTeacher.type = 'teacher'
             var classMax = teacher.classes.length;
-            for (var classCount = 0; classCount < classMax && classCount != -2; classCount++) {
+            for (var classCount = 0; classCount < classMax; classCount++) {
                var teacherClass = newTeacher.classes[classCount]
                if (teacherClass == $scope.post.class.name) {
                   newTeacher.totalUsage = 100000
-                  classCount = -2;
+                  classCount = classMax+1;
                };
-               if (classCount != -2) {
+               if (classCount != classMax+1) {
                   newTeacher.totalUsage = 1
                }
             }
