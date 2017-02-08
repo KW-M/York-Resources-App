@@ -56,6 +56,7 @@
 				<!--<md-tooltip md-autohide md-direction="top" md-delay="1000"><md-icon>language</md-icon> {{removeHttp(post.link)}}</md-tooltip>-->
 			</div>
 			<div flex layout="row">
+				<div flex layout="row">
 				<md-select ng-model="post.class" ng-model-options="{trackBy: $value.name}" ng-if="operation != 'view'" class="md-no-underline" placeholder="Class" id="class_dropdown_button" md-on-close="classSelectDone()">
 					<md-select-header class="classSelectSearchbox">
 						<input ng-model="classSelectSearch" id="class_select_input" type="text" placeholder="Search for a class.." class="md-text">
@@ -79,6 +80,7 @@
 						<div class="label unselectable" ng-click="moveLabelToPostLabels(label.name)" ng-repeat="label in sortedLabels  | filter: labelSearch as filteredLabels">{{label.name}}</div>
 						<span ng-if="filteredLabels.length == 0">Add this new label: <span class="label" ng-click="addLabel(labelSearch)">{{labelSearch}}</span></span>
 					</div>
+				</div>
 				</div>
 				<md-input-container md-no-float class="md-input-min-height" style="width: 102px;margin: auto;" ng-if="operation != 'view'">
 					<input type="text" placeholder="Find a Label..." ng-model="labelSearch">
