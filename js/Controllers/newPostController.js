@@ -116,13 +116,12 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     }
 
     $scope.submit = function () {
-        $scope.dialog_container.style.opacity = 0;
+        $scope.dialog_container.style.opacity = 0.75;
         $scope.dialog_container.style.pointerEvents = 'none';
         $mdToast.show({
             template: '<md-toast><span style="font-size:18px; max-width: 200px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="36"></md-progress-circular></md-toast>',
             hideDelay: 3000000,
         });
-
         promiseQueue().addPromise('drive', APIService.runGAScript('savePost', {
                 operation: 'savePost',
                 postId: $scope.post.id,
@@ -136,10 +135,10 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                     $mdDialog.hide();
                     $scope.dialog_container.style.opacity = 1;
                     $scope.dialog_container.style.pointerEvents = 'all';
+                    resetAllLabels();
                 })
             },
             onError, 150);
-        resetAllLabels()
     }
 
     function addFireDatabaseRef(post) {
