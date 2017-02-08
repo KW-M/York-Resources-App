@@ -791,7 +791,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       $timeout(function () {
          $scope.labelSearch = "";
          var labelObj = $scope.sortedLabels[findLabelIndex(labelName)]
-         $scope.post.labels.push(labelObj.name)
+         if (labelObj.type == 'teacher') $scope.post.labels.push(labelObj.name)
          labelObj.active = true;
       });
    }
