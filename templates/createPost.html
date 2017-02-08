@@ -57,7 +57,7 @@
 			</div>
 			<div flex layout="row">
 				<div flex layout="row" class="label-container">
-				<md-select ng-model="post.class" ng-model-options="{trackBy: $value.name}" ng-if="operation != 'view'" class="md-no-underline" placeholder="Class" id="class_dropdown_button" md-on-close="classSelectDone()">
+				<md-select ng-model="post.class" ng-model-options="{trackBy: $value.name}" ng-if="operation != 'view'" class="md-no-underline" placeholder="Class" id="class_dropdown_button" md-on-close="classSelectDone()" reqired="true">
 					<md-select-header class="classSelectSearchbox">
 						<input ng-model="classSelectSearch" id="class_select_input" type="text" placeholder="Search for a class.." class="md-text">
 					</md-select-header>
@@ -77,7 +77,7 @@
 						<div class="label unselectable label-active" ng-click="moveLabelToSortedLabels($index)" ng-repeat="label in post.labels">{{label}}</div>
 					</div>
 					<div style="width: 100%;text-align: center;display:inline" ng-if="operation != 'view'">
-						<div class="label unselectable" ng-click="moveLabelToPostLabels(label.name)" ng-repeat="label in sortedLabels  | filter: labelSearch as filteredLabels" ng-if="label.active == false">{{label.name}}</div>
+						<div class="label unselectable" ng-click="moveLabelToPostLabels(label.name)" ng-repeat="label in sortedLabels  | filter: labelSearch as filteredLabels" ng-if="!label.active">{{label.name}}</div>
 						<span ng-if="filteredLabels.length == 0">Add this new label: <span class="label" ng-click="addLabel(labelSearch)">{{labelSearch}}</span></span>
 					</div>
 				</div>
