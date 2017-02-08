@@ -786,12 +786,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    $scope.moveLabelToPostLabels = function (labelName) {
-      function findLabelIndex(labelName) {
-         var max = $scope.sortedLabels.length
-         for (var labelCount = 0; labelCount < max; labelCount++) {
-            if ($scope.sortedLabels[labelCount].name == labelName) return labelCount
-         }
-      }
       $timeout(function () {
          $scope.labelSearch = "";
          $scope.post.labels.push($scope.sortedLabels.splice(findLabelIndex(labelName), 1)[0])
@@ -803,6 +797,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          $scope.sortedLabels.push($scope.post.labels.splice(labelIndex, 1)[0])
       });
    }
+   
+   function findLabelIndex(labelName) {
+         var max = $scope.sortedLabels.length
+         for (var labelCount = 0; labelCount < max; labelCount++) {
+            if ($scope.sortedLabels[labelCount].name == labelName) return labelCount
+         }
+      }
 
    //----------------------------------------------------
    //---------------- Event Watchers --------------------
