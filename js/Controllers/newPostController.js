@@ -56,7 +56,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 $scope.post.attachmentIcon = '';
                 $scope.post.attachmentId = '';
                 $scope.post.previewImage = '';
-                if ($scope.post.link === '') {
+                if ($scope.post.link == '') {
                     $scope.previewLoading = false;
                     $scope.post.type = 'NoLink';
                 } else if ($scope.post.link.match(/(?:http|https):\/\/.{2,}/)) {
@@ -116,7 +116,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     }
 
     $scope.submit = function () {
-        $scope.dialog_container.style.opacity = 0.75;
+        $scope.dialog_container.style.opacity = 0.8;
         $scope.dialog_container.style.pointerEvents = 'none';
         $mdToast.show({
             template: '<md-toast><span style="font-size:18px; max-width: 200px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="36"></md-progress-circular></md-toast>',
