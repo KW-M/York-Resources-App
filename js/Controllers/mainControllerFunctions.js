@@ -798,7 +798,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    $scope.moveLabelToSortedLabels = function (labelIndex) {
       $timeout(function () {
-         var labelName = $scope.post.labels.splice(labelIndex,1)[0]
+         var labelName = $scope.post.labels.splice(labelIndex, 1)[0]
          $scope.sortedLabels[findLabelIndex(labelName)].active = false;
       });
    }
@@ -1021,8 +1021,4 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.refreshLayout = function () {
       angularGridInstance.postsGrid.refresh();
    }
-
-
-   //less important functions are delegated to another file;
-   subControllerFunctions($scope, $location, $mdDialog, $mdToast, $mdMedia, $timeout, $filter, $mdSidenav, authorizationService, APIService, angularGridInstance); {}
 }
