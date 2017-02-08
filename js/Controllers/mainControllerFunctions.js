@@ -678,6 +678,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    //----------------------------------------------------
    // --------------- Post Card Functions ---------------
+   var likeClickTimer = {}
+   
    $scope.confirmDelete = function (content, arrayIndex) {
       var confirm = $mdDialog.confirm().title('Permanently delete this?').ariaLabel('Delete?').ok('Delete').cancel('Cancel');
       $mdDialog.show(confirm).then(function () {
@@ -743,7 +745,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //    }
    // };
    $scope.likePost = function (content) {
-      var userLikeIndex = findItemInArray($scope.myInfo.Email, content.Likes)
+      var userLikeIndex = findItemInArray($scope.myInfo.mail, content.Likes)
       if (userLikeIndex == -1) {
          content.userLiked = true;
          content.Likes.push($scope.myInfo.Email);
