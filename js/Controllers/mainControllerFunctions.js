@@ -679,7 +679,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //----------------------------------------------------
    // --------------- Post Card Functions ---------------
    var likeClickTimer = {}
-   
+
    $scope.confirmDelete = function (content, arrayIndex) {
       var confirm = $mdDialog.confirm().title('Permanently delete this?').ariaLabel('Delete?').ok('Delete').cancel('Cancel');
       $mdDialog.show(confirm).then(function () {
@@ -745,7 +745,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //    }
    // };
    $scope.likePost = function (content) {
-      var userLikeIndex = findItemInArray($scope.myInfo.mail, content.Likes)
+      var userLikeIndex = findItemInArray($scope.myInfo.email, content.Likes)
       if (userLikeIndex == -1) {
          content.userLiked = true;
          content.Likes.push($scope.myInfo.Email);
@@ -755,15 +755,21 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
       if (typeof (likeClickTimer[content.Id]) == 'number') clearTimeout(likeClickTimer[content.Id]);
       likeClickTimer[content.Id] = setTimeout(function () {
-         var allArrayPost = $scope.allPosts[findPostById(content.Id, $scope.allPosts)];
+         var allArrayPost = $scope.allPosts[getIdIndexInPostArrays(content.Id).allPosts];
          allArrayPost.userLiked = content.userLiked;
          allArrayPost.Likes = content.Likes;
-         var name = allArrayPost.Likes.length + "{]|[}" + JSON.stringify(allArrayPost.Likes)
-         queue('drive', GoogleDriveService.updateDriveFile(content.Id, {
-            name: name
-         }), null, function (err) {
-            $mdToast.showSimple('Error liking post, try again.');
-            console.warn(err)
+         promiseQueue().addPromise('drive', APIService.runGAScript('getLinkPreview', $scope.post.link, false), function (data) {
+            console.log(data)
+            var previewObj = JSON.parse(data.result.response.result);
+            $timeout(function () {
+               $scope.post.previewImage = previewObj.image
+               $scope.post.attachmentIcon = previewObj.icon
+               $scope.post.attachmentName = previewObj.title
+               $scope.previewLoading = false;
+               if ($scope.post.title == '') $scope.post.title = previewObj.title;
+            })
+         }, function(err){
+            console.warn(ree)
          }, 150);
       }, 2000);
    };
