@@ -768,8 +768,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                $scope.previewLoading = false;
                if ($scope.post.title == '') $scope.post.title = previewObj.title;
             })
-         }, function(err){
-            console.warn(ree)
+         }, function (err) {
+            console.warn(err)
+            $mdToast.showSimple('Error liking post, try again.');
          }, 150);
       }, 2000);
    };
