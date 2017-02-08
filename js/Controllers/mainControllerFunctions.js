@@ -773,9 +773,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.addLabel = function (labelName) {
       $timeout(function () {
          $scope.labelSearch = "";
-         $scope.post.labels.push({
+         $scope.post.labels.push(labelName);
+         $scope.sortedLabels.push({
             name: labelName,
             type: 'Label',
+            active: true,
             linkedClasses: [{
                name: $scope.post.class.name,
                usage: 1,
@@ -788,22 +790,25 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.moveLabelToPostLabels = function (labelName) {
       $timeout(function () {
          $scope.labelSearch = "";
-         $scope.post.labels.push($scope.sortedLabels.splice(findLabelIndex(labelName), 1)[0])
+         var labelObj = $scope.sortedLabels[findLabelIndex(labelName)]
+         $scope.post.labels.push(labelObj.name)
+         labelObj.active = true;
       });
    }
 
    $scope.moveLabelToSortedLabels = function (labelIndex) {
       $timeout(function () {
-         $scope.sortedLabels.push($scope.post.labels.splice(labelIndex, 1)[0])
+         var labelName = $scope.post.labels.splice(labelIndex,1)[0]
+         $scope.sortedLabels[findLabelIndex(labelName)].active = false;
       });
    }
-   
+
    function findLabelIndex(labelName) {
-         var max = $scope.sortedLabels.length
-         for (var labelCount = 0; labelCount < max; labelCount++) {
-            if ($scope.sortedLabels[labelCount].name == labelName) return labelCount
-         }
+      var max = $scope.sortedLabels.length
+      for (var labelCount = 0; labelCount < max; labelCount++) {
+         if ($scope.sortedLabels[labelCount].name == labelName) return labelCount
       }
+   }
 
    //----------------------------------------------------
    //---------------- Event Watchers --------------------
