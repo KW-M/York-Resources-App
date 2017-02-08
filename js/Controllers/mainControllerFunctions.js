@@ -791,14 +791,15 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       $timeout(function () {
          $scope.labelSearch = "";
          var labelObj = $scope.sortedLabels[findLabelIndex(labelName)]
-         if (labelObj.type == 'teacher') $scope.post.labels.push(labelObj.name)
+         if (labelObj.type == 'Label') $scope.post.labels.push(labelObj.name);
+         if (labelObj.type == 'Teacher') $scope.post.teachers.push(labelObj.name);
          labelObj.active = true;
       });
    }
 
-   $scope.moveLabelToSortedLabels = function (labelIndex) {
+   $scope.moveLabelToSortedLabels = function (array, labelIndex) {
       $timeout(function () {
-         var labelName = $scope.post.labels.splice(labelIndex, 1)[0]
+         var labelName = array.splice(labelIndex, 1)[0]
          $scope.sortedLabels[findLabelIndex(labelName)].active = false;
       });
    }
