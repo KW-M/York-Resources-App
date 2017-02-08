@@ -519,18 +519,13 @@ button.selected.md-button {
 }
 
 .label-container {
-    padding-bottom: 6px;
     box-shadow: inset rgba(0, 0, 0, 0.27) -10px 2px 24px -17px, inset rgba(0, 0, 0, 0.27) 10px -2px 24px -17px;
-    border-radius: 3px;
-    width: 300px;
     overflow: auto;
     white-space: nowrap;
-    display: inline-block;
     font-family: Roboto, Helvetica Neue, sans-serif;
     font-size: 16px;
-    padding: 0 0 8px 3px;
-    flex: 1;
     vertical-align: middle;
+    border-top-right-radius: 50px;
 }
 
 .label-container::-webkit-scrollbar {
