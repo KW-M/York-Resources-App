@@ -43,8 +43,8 @@ md-dialog#new_post_dialog {
    pointer-events: none;
    background-color: rgb(161, 10, 25);
 }
-#dialog_header.view {
-   pointer-events: initial;
+.view #dialog_header {
+   pointer-events: initial;v
 }
 
 #new_post_content.small-header+.post-card-header#dialog_header {

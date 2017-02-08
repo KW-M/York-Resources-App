@@ -528,14 +528,9 @@ button.selected.md-button {
     border-top-right-radius: 50px;
 }
 
-.label-container.view {
-    box-shadow: inset rgba(0, 0, 0, 0.27) -10px 2px 24px -17px, inset rgba(0, 0, 0, 0.27) 10px -2px 24px -17px;
-    overflow: auto;
-    white-space: nowrap;
-    font-family: Roboto, Helvetica Neue, sans-serif;
-    font-size: 16px;
-    vertical-align: middle;
-    border-top-right-radius: 50px;
+.view .label-container {
+    padding-left: 8px;
+    border-top-right-radius: 0px;
 }
 
 .label-container::-webkit-scrollbar {
@@ -560,6 +555,10 @@ button.selected.md-button {
     position: relative;
     background: rgba(224, 224, 224, 0.5);
     box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.12);
+}
+
+.view .label-container .label{
+    cursor: default;
 }
 
 .label-container .label:hover {
@@ -812,7 +811,7 @@ button.selected.md-button {
 }
 
 .gradient-overlay .gradient-overlay-metadata span {
-	text-shadow: 0px 2px 23px rgba(0,0,0,0.6);
+    text-shadow: 0px 2px 23px rgba(0, 0, 0, 0.6);
     text-overflow: ellipsis;
     overflow: hidden;
 }
