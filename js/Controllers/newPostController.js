@@ -122,7 +122,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
             template: '<md-toast><span style="font-size:18px; max-width: 200px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="36"></md-progress-circular></md-toast>',
             hideDelay: 3000000,
         });
-        $scope.post.labels = transferAllLabels();
+
         promiseQueue().addPromise('drive', APIService.runGAScript('savePost', {
                 operation: 'savePost',
                 postId: $scope.post.id,
@@ -139,6 +139,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 })
             },
             onError, 150);
+        resetAllLabels()
     }
 
     function addFireDatabaseRef(post) {
@@ -161,15 +162,11 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $mdToast.hide();
     }
 
-    function transferAllLabels() {
-        var output = [];
-        var max = $scope.post.labels.length
-        for (var c = 0; c < max; c++) {
-            var label = $scope.post.labels.pop();
-            $scope.sortedLabels.push(label);
-            output.push(label.name);
+    function resetAllLabels() {
+        var max = $scope.sortedLabels.length
+        for (var labelCount = 0; labelCount < max; labelCount++) {
+            $scope.sortedLabels[labelCount].active == false;
         }
-        return output
     }
 
     function onError(error) {
@@ -180,7 +177,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     }
 
     $scope.closeDialog = function () {
-        transferAllLabels();
+        resetAllLabels();
         $scope.post.title = originalPost.title || ''
         $scope.post.description = originalPost.description || ''
         $scope.post.link = originalPost.link || ''
