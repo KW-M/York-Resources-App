@@ -337,6 +337,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function getPosts(idArray, end) {
+      console.log(idArray)
       conurancyCounter = conurancyCounter + 1;
       promiseQueue().addPromise('script', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
          conurancyCounter = conurancyCounter - 1;
