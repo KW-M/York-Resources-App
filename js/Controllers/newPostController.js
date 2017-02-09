@@ -147,9 +147,9 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
             E: post.creator.email,
             C: post.class.name,
             F: post.flagged,
-            T: post.teachers.join(","),
-            L: post.labels.join(","),
-            LC: post.likeCount.length,
+            T: $scope.post.teachers.join(","),
+            L: $scope.post.labels,
+            LC: post.likeCount,
             DC: post.creationDate,
             DU: firebase.database.ServerValue.TIMESTAMP,
         });
