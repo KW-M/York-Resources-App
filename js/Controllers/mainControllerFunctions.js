@@ -357,6 +357,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             fullPost.loadStatus = 'Loaded';
             var indexes = getIdIndexInPostArrays(fullPost.id)
             console.log(indexes)
+            console.log(fullPost)
             mergeFirebasePost(fullPost, $scope.allPosts[indexes.allPosts])
             $timeout(function () {
                if (($scope.allPosts[indexes.allPosts] || {}).loadStatus != 'Loaded') loadedCounter++
