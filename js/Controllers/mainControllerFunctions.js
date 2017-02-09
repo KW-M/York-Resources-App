@@ -223,6 +223,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             creationDate: new Date(value.DC),
             loadStatus: loadStatus,
          }
+         
       }
    }
 

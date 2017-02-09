@@ -143,11 +143,12 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
 
     function addFireDatabaseRef(post) {
         return authorizationService.FireDatabase.ref('posts/' + post.id).set({
-            T: post.title,
             E: post.creator.email,
             C: post.class.name,
-            F: false,
-            L: post.likes.length,
+            F: post.flagged,
+            T: post.teachers,
+            L: post.labels,
+            LC: post.likeCount.length,
             DC: post.creationDate,
             DU: firebase.database.ServerValue.TIMESTAMP,
         });
