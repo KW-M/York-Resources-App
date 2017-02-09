@@ -270,7 +270,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             var indexes = getIdIndexInPostArrays(postObj.id)
             $scope.allPosts[indexes.allPosts] = slimedObj;
             $scope.sortedPosts[indexes.sortedPosts] = slimedObj;
-            loadedCounter--;
+            loadedCounter = loadedCounter - 1;
          }
       })
       loadPosts()
@@ -356,20 +356,21 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          postsArray.forEach(function (fullPost) {
             fullPost.loadStatus = 'Loaded';
             var indexes = getIdIndexInPostArrays(fullPost.id)
+            console.log(indexes)
             mergeFirebasePost(fullPost, $scope.allPosts[indexes.allPosts])
             $timeout(function () {
                $scope.allPosts[indexes.allPosts] = fullPost;
                $scope.sortedPosts[indexes.sortedPosts] = fullPost;
-               loadedCounter++
                if (callBack) callBack();
             })
+            loadedCounter++;
          })
          hideSpinner();
       }, console.warn, 150);
    }
 
    function hideSpinner(hide) {
-      
+      console.log("LoadCount:" + loadedCounter)
       if ($scope.sortedPosts.length == 0) {
          layout_grid.style.height = '0px';
          loading_spinner.style.display = 'none';
