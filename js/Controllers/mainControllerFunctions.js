@@ -200,6 +200,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          postsFireRef.on('child_changed', function (childSnapshot) {
             console.log(childSnapshot)
             var indexes = getIdIndexInPostArrays(childSnapshot.key)
+            console.log(indexes);
             ($scope.allPosts[indexes.allPosts] || {}).loadStatus = 'Changed';
             ($scope.sortedPosts[indexes.sortedPosts] || {}).loadStatus = 'Changed';
             sortPosts()
