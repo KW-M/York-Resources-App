@@ -188,14 +188,15 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          postsFireRef.orderByChild('DC').startAt(Date.now()).on('child_added', function (childSnapshot) {
             console.log('newChild', childSnapshot.val())
             $scope.allPosts.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'));
-            getPosts([childSnapshot.key])
+            getPosts([childSnapshot.key], sortPosts)
          });
          postsFireRef.on('child_removed', function (childSnapshot) {
             console.log('childremoved', childSnapshot)
-            var id = childSnapshot.key;
-            var indexes = getIdIndexInPostArrays(id);
-            $scope.allPosts.splice(indexes.allPosts, 1);
-            $scope.sortedPosts.splice(indexes.sortedPosts, 1);
+            var indexes = getIdIndexInPostArrays(childSnapshot.key);
+            $timeout(function () {
+               $scope.allPosts.splice(indexes.allPosts, 1);
+               $scope.sortedPosts.splice(indexes.sortedPosts, 1);
+            })
          });
          // postsFireRef.on('child_changed', function (childSnapshot) {
          //    console.log(childSnapshot)
@@ -338,7 +339,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
    }
 
-   function getPosts(idArray, end) {
+   function getPosts(idArray, callBack) {
       console.log(idArray)
       conurancyCounter = conurancyCounter + 1;
       promiseQueue().addPromise('script', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
@@ -353,6 +354,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $timeout(function () {
                $scope.allPosts[indexes.allPosts] = fullPost;
                $scope.sortedPosts[indexes.sortedPosts] = fullPost;
+               if (callBack) callBack();
             })
          })
          hideSpinner(true);
