@@ -343,23 +343,23 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          console.log(conurancyCounter)
          console.log(postsData)
          var postsArray = JSON.parse(postsData.result.response.result);
-         postsArray.forEach(function (postObj) {
-            var indexes = getIdIndexInPostArrays(postObj.id)
-            var unloadedPost = $scope.allPosts[indexes.allPosts];
+         postsArray.forEach(function (fullPost) {
+            var indexes = getIdIndexInPostArrays(fullPost.id)
+            mergeFirebasePost(fullPost, $scope.allPosts[indexes.allPosts])
             $timeout(function () {
-               $scope.allPosts[indexes.allPosts] = postObj;
-               $scope.sortedPosts[indexes.sortedPosts] = postObj;
+               $scope.allPosts[indexes.allPosts] = fullPost;
+               $scope.sortedPosts[indexes.sortedPosts] = fullPost;
             })
             hideSpinner(true);
-            //setTimeout(angularGridInstance.postsGrid.refresh, 1000);
          })
       }, console.warn, 150);
 
       function mergeFirebasePost(fullPost, slimedPost) {
          fullPost.class = slimedPost.class
-         fullPost.creator.E = slimedPost.class
+         fullPost.likeCount = slimedPost.likeCount
          fullPost.updateDate = slimedPost.updateDate
          fullPost.creationDate = slimedPost.creationDate
+         fullPost.creator.classOf = slimedPost.creator.classOf
          fullPost.loadStatus = 'Loaded';
       }
    }
