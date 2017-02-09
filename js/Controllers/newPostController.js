@@ -147,7 +147,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
             E: post.creator.email,
             C: post.class.name,
             F: post.flagged,
-            T: $scope.post.teachers.join(","),
+            T: $scope.post.teachers,
             L: $scope.post.labels,
             LC: post.likeCount,
             DC: post.creationDate,
