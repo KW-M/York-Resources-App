@@ -203,11 +203,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             var indexes = getIdIndexInPostArrays(childSnapshot.key)
             var oldPost = $scope.allPosts[indexes.allPosts]
             var newSlimPost = convertFirePost(childSnapshot.key, childSnapshot.val(), 'Loaded')
-            var mergeFirebasePost(fullPost, slimedPost)
-            if (newSlimPost.updateDate != oldPost.updateDate) {
-               ($scope.allPosts[indexes.allPosts] || {}).loadStatus = 'Changed';
-               ($scope.sortedPosts[indexes.sortedPosts] || {}).loadStatus = 'Changed';
-            }
+            var mergedFullPost = mergeFirebasePost(oldPost, newSlimPost);
+            //if (newSlimPost.updateDate != oldPost.updateDate) mergedFullPost.loadStatus = 'Changed';
+            $scope.allPosts[indexes.allPosts] = mergedFullPost;
+            $scope.sortedPosts[indexes.sortedPosts] = mergedFullPost;
             sortPosts()
          });
          if ($scope.sortedPosts.length != 0) loadPosts();
