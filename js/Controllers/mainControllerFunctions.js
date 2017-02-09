@@ -201,10 +201,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          postsFireRef.on('child_changed', function (childSnapshot) {
             console.log(childSnapshot)
             var indexes = getIdIndexInPostArrays(childSnapshot.key)
-            console.log(indexes);
-            ($scope.allPosts[indexes.allPosts] || {}).loadStatus = 'Changed';
-            ($scope.sortedPosts[indexes.sortedPosts] || {}).loadStatus = 'Changed';
-          // sortPosts()
+            var oldPost = $scope.allPosts[indexes.allPosts]
+            var newSlimPost = convertFirePost(childSnapshot.key, childSnapshot.val(), 'Loaded')
+            var mergeFirebasePost(fullPost, slimedPost)
+            if (newSlimPost.updateDate != oldPost.updateDate) {
+               ($scope.allPosts[indexes.allPosts] || {}).loadStatus = 'Changed';
+               ($scope.sortedPosts[indexes.sortedPosts] || {}).loadStatus = 'Changed';
+            }
+            sortPosts()
          });
          if ($scope.sortedPosts.length != 0) loadPosts();
          if ($scope.sortedPosts.length == 0) sortPosts();
