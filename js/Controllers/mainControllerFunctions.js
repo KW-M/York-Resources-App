@@ -753,13 +753,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                 operation: 'likePost',
                 postId: content.id,
                 content: content.userLiked,
-            }, false), function (data) {
+            }, true), function (data) {
                console.log(data)
                var res = data.result.response.result.split(" ");
                console.log(res[1])
                $timeout(function () {
-                  $scope.allPosts[arrayIndecies.allPosts].userLiked = res[0];
-                  $scope.sortedPosts[arrayIndecies.sortedPosts].userLiked = res[0];
+                  ($scope.allPosts[arrayIndecies.allPosts] || {}).userLiked = res[0];
+                  ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).userLiked = res[0];
                })
          }, function (err) {
             console.warn(err)
