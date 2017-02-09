@@ -239,6 +239,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //----------- Loading and Sorting Posts --------------
    var postsFullyLoaded = false;
    var conurancyCounter = 0;
+   var loadedCounter = 0;
    var getFileTimer = null;
 
    $scope.allPosts = [];
@@ -246,7 +247,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.searchPosts = [];
 
    function sortPosts() {
-      hideSpinner(false)
       var filterObj = filterPosts($scope.allPosts)
       $scope.sortedPosts = filterObj.filtered.sort(function (a, b) {
          console.log(b)
@@ -270,6 +270,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             var indexes = getIdIndexInPostArrays(postObj.id)
             $scope.allPosts[indexes.allPosts] = slimedObj;
             $scope.sortedPosts[indexes.sortedPosts] = slimedObj;
+            loadedCounter--;
          }
       })
       loadPosts()
@@ -359,16 +360,21 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $timeout(function () {
                $scope.allPosts[indexes.allPosts] = fullPost;
                $scope.sortedPosts[indexes.sortedPosts] = fullPost;
+               loadedCounter++
                if (callBack) callBack();
             })
          })
-         hideSpinner(true);
+         hideSpinner();
       }, console.warn, 150);
    }
 
    function hideSpinner(hide) {
-      console.warn('Hide:' + hide + 'length' + $scope.sortedPosts.length + 'fullLoad' + postsFullyLoaded)
-      if (hide == true) {
+         if ($scope.sortedPosts.length == 0) {
+            layout_grid.style.height = '0px';
+            no_posts_footer.style.display = 'block';
+         } else if ($scope.sortedPosts.length == load) {
+            no_more_footer.style.display = 'block';
+         }
          loading_spinner.style.display = 'none';
          clearInterval(getFileTimer);
          if ($scope.sortedPosts.length == 0) {
