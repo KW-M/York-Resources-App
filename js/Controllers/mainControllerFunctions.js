@@ -262,7 +262,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                class: postObj.class,
                creator: postObj.creator,
                flagged: postObj.flagged,
-               likeCount: postObj.likes.length,
+               likeCount: postObj.likeCount,
                updateDate: postObj.updateDate,
                creationDate: postObj.creationDate,
                loadStatus: 'UnLoaded',
@@ -369,20 +369,16 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function hideSpinner(hide) {
-         if ($scope.sortedPosts.length == 0) {
-            layout_grid.style.height = '0px';
-            no_posts_footer.style.display = 'block';
-         } else if ($scope.sortedPosts.length == load) {
-            no_more_footer.style.display = 'block';
-         }
+      
+      if ($scope.sortedPosts.length == 0) {
+         layout_grid.style.height = '0px';
          loading_spinner.style.display = 'none';
+         no_posts_footer.style.display = 'block';
          clearInterval(getFileTimer);
-         if ($scope.sortedPosts.length == 0) {
-            layout_grid.style.height = '0px';
-            no_posts_footer.style.display = 'block';
-         } else if (postsFullyLoaded == true) {
-            no_more_footer.style.display = 'block';
-         }
+      } else if ($scope.sortedPosts.length == loadedCounter) {
+         loading_spinner.style.display = 'none';
+         no_more_footer.style.display = 'block';
+         clearInterval(getFileTimer);
       } else {
          loading_spinner.style.display = 'block';
          no_posts_footer.style.display = 'none';
