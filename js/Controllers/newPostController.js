@@ -147,8 +147,8 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
             E: post.creator.email,
             C: post.class.name,
             F: post.flagged,
-            T: post.teachers,
-            L: post.labels,
+            T: post.teachers.join(","),
+            L: post.labels.join(","),
             LC: post.likeCount.length,
             DC: post.creationDate,
             DU: firebase.database.ServerValue.TIMESTAMP,
@@ -162,7 +162,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         promiseQueue().addPromise('drive', APIService.shareFile($scope.post.attachmentId, role), null, console.warn, 150);
         $mdToast.hide();
     }
-    
+
        //----------------------------------------------------
    //------------------Handleing Labels------------------------
    $scope.addLabel = function (labelName) {
