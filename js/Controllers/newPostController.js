@@ -161,6 +161,49 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         promiseQueue().addPromise('drive', APIService.shareFile($scope.post.attachmentId, role), null, console.warn, 150);
         $mdToast.hide();
     }
+    
+       //----------------------------------------------------
+   //------------------Handleing Labels------------------------
+   $scope.addLabel = function (labelName) {
+      $timeout(function () {
+         $scope.labelSearch = "";
+         $scope.post.labels.push(labelName);
+         $scope.sortedLabels.push({
+            name: labelName,
+            type: 'Label',
+            active: true,
+            linkedClasses: [{
+               name: $scope.post.class.name,
+               usage: 1,
+            }],
+            totalUsage: 1
+         });
+      })
+   }
+
+   $scope.moveLabelToPostLabels = function (labelName) {
+      $timeout(function () {
+         $scope.labelSearch = "";
+         var labelObj = $scope.sortedLabels[findLabelIndex(labelName)]
+         if (labelObj.type == 'Label') $scope.post.labels.push(labelObj.name);
+         if (labelObj.type == 'Teacher') $scope.post.teachers.push(labelObj.name);
+         labelObj.active = true;
+      });
+   }
+
+   $scope.moveLabelToSortedLabels = function (array, labelIndex) {
+      $timeout(function () {
+         var labelName = array.splice(labelIndex, 1)[0]
+         $scope.sortedLabels[findLabelIndex(labelName)].active = false;
+      });
+   }
+
+   function findLabelIndex(labelName) {
+      var max = $scope.sortedLabels.length
+      for (var labelCount = 0; labelCount < max; labelCount++) {
+         if ($scope.sortedLabels[labelCount].name == labelName) return labelCount
+      }
+   }
 
     function resetAllLabels() {
         var max = $scope.sortedLabels.length
