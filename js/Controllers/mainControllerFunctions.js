@@ -181,7 +181,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function getDatabase() {
       var postsFireRef = authorizationService.FireDatabase.ref('posts')
-      postsFireRef.orderByChild('D').once('value', function (snapshot) {
+      postsFireRef.orderByChild('DC').once('value', function (snapshot) {
          snapshot.forEach(function (childSnapshot) {
             $scope.allPosts.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'))
          });
@@ -198,14 +198,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                $scope.sortedPosts.splice(indexes.sortedPosts, 1);
             })
          });
-         // postsFireRef.on('child_changed', function (childSnapshot) {
-         //    console.log(childSnapshot)
-         //    var indexes = getIdIndexInPostArrays(childSnapshot.key)
-         //    console.log(indexes);
-         //    ($scope.allPosts[indexes.allPosts] || {}).loadStatus = 'Changed';
-         //    ($scope.sortedPosts[indexes.sortedPosts] || {}).loadStatus = 'Changed';
-         //  // sortPosts()
-         // });
+         postsFireRef.on('child_changed', function (childSnapshot) {
+            console.log(childSnapshot)
+            var indexes = getIdIndexInPostArrays(childSnapshot.key)
+            console.log(indexes);
+            ($scope.allPosts[indexes.allPosts] || {}).loadStatus = 'Changed';
+            ($scope.sortedPosts[indexes.sortedPosts] || {}).loadStatus = 'Changed';
+          // sortPosts()
+         });
          if ($scope.sortedPosts.length != 0) loadPosts();
          if ($scope.sortedPosts.length == 0) sortPosts();
          console.log($scope.allPosts);
