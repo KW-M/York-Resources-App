@@ -350,8 +350,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                $scope.allPosts[indexes.allPosts] = fullPost;
                $scope.sortedPosts[indexes.sortedPosts] = fullPost;
             })
-            hideSpinner(true);
          })
+         hideSpinner(true);
       }, console.warn, 150);
 
       function mergeFirebasePost(fullPost, slimedPost) {
