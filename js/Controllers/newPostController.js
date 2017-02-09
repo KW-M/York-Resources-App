@@ -11,6 +11,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $scope.post.description = $scope.post.description || ''
         $scope.post.link = $scope.post.link || ''
         $scope.post.labels = $scope.post.labels || []
+        $scope.post.teachers = $scope.post.teachers || []
         $scope.post.type = $scope.post.type || 'noLink'
         $scope.post.flagged = $scope.post.flagged || false
         $scope.post.creationDate = $scope.post.creationDate || new Date()
