@@ -345,9 +345,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          var postsArray = JSON.parse(postsData.result.response.result);
          postsArray.forEach(function (postObj) {
             var indexes = getIdIndexInPostArrays(postObj.id)
-            postObj.loadStatus = 'Loaded';
-            postObj.updateDate = new Date(postObj.updateDate)
-            postObj.creationDate = new Date(postObj.creationDate)
+            var unloadedPost = $scope.allPosts[indexes.allPosts];
             $timeout(function () {
                $scope.allPosts[indexes.allPosts] = postObj;
                $scope.sortedPosts[indexes.sortedPosts] = postObj;
@@ -356,6 +354,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             //setTimeout(angularGridInstance.postsGrid.refresh, 1000);
          })
       }, console.warn, 150);
+
+      function mergeFirebasePost(fullPost, slimedPost) {
+         fullPost.class = slimedPost.class
+         fullPost.creator.E = slimedPost.class
+         fullPost.updateDate = slimedPost.updateDate
+         fullPost.creationDate = slimedPost.creationDate
+         fullPost.loadStatus = 'Loaded';
+      }
    }
 
    function hideSpinner(hide) {
