@@ -143,7 +143,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     }
 
     function addFireDatabaseRef(post) {
-        return authorizationService.FireDatabase.ref('posts/' + post.id).set({
+        var fireObj = {
             F: post.flagged,
             C: post.class.name,
             LC: post.likeCount,
@@ -152,7 +152,8 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
             T: $scope.post.teachers,
             DU: firebase.database.ServerValue.TIMESTAMP,
             DC: post.creationDate,
-        });
+        }
+        return authorizationService.FireDatabase.ref('posts/' + post.id).set(fireObj);
     }
 
     $scope.shareFile = function () {
