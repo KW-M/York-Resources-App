@@ -198,9 +198,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.sortedPosts.splice(indexes.sortedPosts, 1);
          });
          postsFireRef.on('child_changed', function (childSnapshot) {
-            var indexes = getIdIndexInPostArrays(postObj.id)
-            $scope.allPosts[indexes.allPosts].loadStatus = 'Changed';
-            $scope.sortedPosts[indexes.sortedPosts] = 'Changed';
+            console.log(childSnapshot)
+            var indexes = getIdIndexInPostArrays(childSnapshot.key)
+            ($scope.allPosts[indexes.allPosts] || {}).loadStatus = 'Changed';
+            ($scope.sortedPosts[indexes.sortedPosts] || {}).loadStatus = 'Changed';
             sortPosts()
          });
          if ($scope.sortedPosts.length != 0) loadPosts();
@@ -345,8 +346,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          console.log(postsData)
          var postsArray = JSON.parse(postsData.result.response.result);
          postsArray.forEach(function (fullPost) {
-            var indexes = getIdIndexInPostArrays(fullPost.id)
             fullPost.loadStatus = 'Loaded';
+            var indexes = getIdIndexInPostArrays(fullPost.id)
             mergeFirebasePost(fullPost, $scope.allPosts[indexes.allPosts])
             $timeout(function () {
                $scope.allPosts[indexes.allPosts] = fullPost;
