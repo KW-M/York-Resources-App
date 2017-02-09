@@ -185,7 +185,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          snapshot.forEach(function (childSnapshot) {
             $scope.allPosts.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'))
          });
-         postsFireRef.startAt(Date.now()).on('child_added', function (childSnapshot) {
+         postsFireRef.orderByChild('D').startAt(Date.now()).on('child_added', function (childSnapshot) {
             console.log('newChild', childSnapshot.val())
             $scope.allPosts.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'));
             getPosts([childSnapshot.key])
@@ -203,7 +203,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             console.log(indexes);
             ($scope.allPosts[indexes.allPosts] || {}).loadStatus = 'Changed';
             ($scope.sortedPosts[indexes.sortedPosts] || {}).loadStatus = 'Changed';
-            sortPosts()
+           // sortPosts()
          });
          if ($scope.sortedPosts.length != 0) loadPosts();
          if ($scope.sortedPosts.length == 0) sortPosts();
