@@ -211,19 +211,19 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       function convertFirePost(key, value, loadStatus) {
          return {
             id: key,
-            title: value.T,
-            class: $scope.findClassObject(value.C),
             creator: {
                email: value.E,
                classOf: (value.E.match(/\d+/) || ['∞'])[0]
             },
+            labels: value.L,
             flagged: value.F,
-            likeCount: value.L,
-            updateDate: new Date(value.DU || value.D),
+            teachers: value.T,
+            likeCount: value.LC,
+            updateDate: new Date(value.DU),
             creationDate: new Date(value.DC),
+            class: $scope.findClassObject(value.C),
             loadStatus: loadStatus,
          }
-         
       }
    }
 
@@ -750,17 +750,17 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       likeClickTimer[content.Id] = setTimeout(function () {
          var arrayIndecies = getIdIndexInPostArrays(content.Id)
          promiseQueue().addPromise('drive', APIService.runGAScript('likePost', {
-                operation: 'likePost',
-                postId: content.id,
-                content: content.userLiked,
-            }, true), function (data) {
-               console.log(data)
-               var res = data.result.response.result.split(" ");
-               console.log(res[1])
-               $timeout(function () {
-                  ($scope.allPosts[arrayIndecies.allPosts] || {}).userLiked = res[0];
-                  ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).userLiked = res[0];
-               })
+            operation: 'likePost',
+            postId: content.id,
+            content: content.userLiked,
+         }, true), function (data) {
+            console.log(data)
+            var res = data.result.response.result.split(" ");
+            console.log(res[1])
+            $timeout(function () {
+               ($scope.allPosts[arrayIndecies.allPosts] || {}).userLiked = res[0];
+               ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).userLiked = res[0];
+            })
          }, function (err) {
             console.warn(err)
             $mdToast.showSimple('Error liking post, try again.');
