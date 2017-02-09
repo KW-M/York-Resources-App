@@ -679,7 +679,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //----------------------------------------------------
    // --------------- Post Card Functions ---------------
    var likeClickTimer = {}
-
    $scope.confirmDelete = function (content, arrayIndex) {
       var confirm = $mdDialog.confirm().title('Permanently delete this?').ariaLabel('Delete?').ok('Delete').cancel('Cancel');
       $mdDialog.show(confirm).then(function () {
