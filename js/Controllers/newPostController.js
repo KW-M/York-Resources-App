@@ -144,14 +144,14 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
 
     function addFireDatabaseRef(post) {
         return authorizationService.FireDatabase.ref('posts/' + post.id).set({
-            E: post.creator.email,
-            C: post.class.name,
             F: post.flagged,
-            T: $scope.post.teachers,
-            L: $scope.post.labels,
+            C: post.class.name,
             LC: post.likeCount,
-            DC: post.creationDate,
+            E: post.creator.email,
+            L: $scope.post.labels,
+            T: $scope.post.teachers,
             DU: firebase.database.ServerValue.TIMESTAMP,
+            DC: post.creationDate,
         });
     }
 
@@ -163,48 +163,48 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $mdToast.hide();
     }
 
-       //----------------------------------------------------
-   //------------------Handleing Labels------------------------
-   $scope.addLabel = function (labelName) {
-      $timeout(function () {
-         $scope.labelSearch = "";
-         $scope.post.labels.push(labelName);
-         $scope.sortedLabels.push({
-            name: labelName,
-            type: 'Label',
-            active: true,
-            linkedClasses: [{
-               name: $scope.post.class.name,
-               usage: 1,
-            }],
-            totalUsage: 1
-         });
-      })
-   }
+    //----------------------------------------------------
+    //------------------Handleing Labels------------------------
+    $scope.addLabel = function (labelName) {
+        $timeout(function () {
+            $scope.labelSearch = "";
+            $scope.post.labels.push(labelName);
+            $scope.sortedLabels.push({
+                name: labelName,
+                type: 'Label',
+                active: true,
+                linkedClasses: [{
+                    name: $scope.post.class.name,
+                    usage: 1,
+                }],
+                totalUsage: 1
+            });
+        })
+    }
 
-   $scope.moveLabelToPostLabels = function (labelName) {
-      $timeout(function () {
-         $scope.labelSearch = "";
-         var labelObj = $scope.sortedLabels[findLabelIndex(labelName)]
-         if (labelObj.type == 'Label') $scope.post.labels.push(labelObj.name);
-         if (labelObj.type == 'Teacher') $scope.post.teachers.push(labelObj.name);
-         labelObj.active = true;
-      });
-   }
+    $scope.moveLabelToPostLabels = function (labelName) {
+        $timeout(function () {
+            $scope.labelSearch = "";
+            var labelObj = $scope.sortedLabels[findLabelIndex(labelName)]
+            if (labelObj.type == 'Label') $scope.post.labels.push(labelObj.name);
+            if (labelObj.type == 'Teacher') $scope.post.teachers.push(labelObj.name);
+            labelObj.active = true;
+        });
+    }
 
-   $scope.moveLabelToSortedLabels = function (array, labelIndex) {
-      $timeout(function () {
-         var labelName = array.splice(labelIndex, 1)[0]
-         $scope.sortedLabels[findLabelIndex(labelName)].active = false;
-      });
-   }
+    $scope.moveLabelToSortedLabels = function (array, labelIndex) {
+        $timeout(function () {
+            var labelName = array.splice(labelIndex, 1)[0]
+            $scope.sortedLabels[findLabelIndex(labelName)].active = false;
+        });
+    }
 
-   function findLabelIndex(labelName) {
-      var max = $scope.sortedLabels.length
-      for (var labelCount = 0; labelCount < max; labelCount++) {
-         if ($scope.sortedLabels[labelCount].name == labelName) return labelCount
-      }
-   }
+    function findLabelIndex(labelName) {
+        var max = $scope.sortedLabels.length
+        for (var labelCount = 0; labelCount < max; labelCount++) {
+            if ($scope.sortedLabels[labelCount].name == labelName) return labelCount
+        }
+    }
 
     function resetAllLabels() {
         var max = $scope.sortedLabels.length

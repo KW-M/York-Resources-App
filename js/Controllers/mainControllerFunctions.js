@@ -346,6 +346,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          var postsArray = JSON.parse(postsData.result.response.result);
          postsArray.forEach(function (fullPost) {
             var indexes = getIdIndexInPostArrays(fullPost.id)
+            fullPost.loadStatus = 'Loaded';
             mergeFirebasePost(fullPost, $scope.allPosts[indexes.allPosts])
             $timeout(function () {
                $scope.allPosts[indexes.allPosts] = fullPost;
@@ -354,15 +355,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          })
          hideSpinner(true);
       }, console.warn, 150);
-
-      function mergeFirebasePost(fullPost, slimedPost) {
-         fullPost.class = slimedPost.class
-         fullPost.likeCount = slimedPost.likeCount
-         fullPost.updateDate = slimedPost.updateDate
-         fullPost.creationDate = slimedPost.creationDate
-         fullPost.creator.classOf = slimedPost.creator.classOf
-         fullPost.loadStatus = 'Loaded';
-      }
    }
 
    function hideSpinner(hide) {
@@ -961,6 +953,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       } else {
          return input
       }
+   }
+
+   function mergeFirebasePost(fullPost, slimedPost) {
+      fullPost.class = slimedPost.class
+      fullPost.likeCount = slimedPost.likeCount
+      fullPost.updateDate = slimedPost.updateDate
+      fullPost.creationDate = slimedPost.creationDate
+      fullPost.creator.classOf = slimedPost.creator.classOf
    }
 
    //----------------------------------------------------
