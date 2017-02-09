@@ -359,11 +359,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             console.log(indexes)
             mergeFirebasePost(fullPost, $scope.allPosts[indexes.allPosts])
             $timeout(function () {
+               if (($scope.allPosts[indexes.allPosts] || {}).loadStatus != 'Loaded') loadedCounter++
                $scope.allPosts[indexes.allPosts] = fullPost;
                $scope.sortedPosts[indexes.sortedPosts] = fullPost;
                if (callBack) callBack();
             })
-            loadedCounter++;
          })
          hideSpinner();
       }, console.warn, 150);
