@@ -285,7 +285,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             Flagged = true;
 
          if ($scope.queryParams.classPath !== null && $scope.queryParams.classPath !== undefined) {
-            if ($scope.selectedClass !== false && ($scope.selectedClass == 'Other' || $scope.selectedClass.stared != null)) Class = inputSet[count].class.name == $scope.queryParams.classPath;
+            if ($scope.selectedClass !== false && ($scope.queryParams.classPath == 'Other' || $scope.selectedClass.stared != null)) Class = inputSet[count].class.name == $scope.queryParams.classPath;
          } else {
             Class = inputSet[count].class.name !== 'Memes';
          }
@@ -307,6 +307,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
 
    function loadPosts() {
+      hideSpinner()
       if (conurancyCounter == 0 && $scope.sortedPosts.length != 0 && $scope.sortedPosts.length != loadedCounter) {
          var index;
          var postIdAccumulator = [];
@@ -343,11 +344,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.allPosts[indexes.allPosts] = postsArray[count];
             $scope.sortedPosts[indexes.sortedPosts] = postsArray[count];
             console.log($scope.sortedPosts[indexes.sortedPosts])
-            $timeout(function () {
-               $scope.sortedPosts[indexes.sortedPosts];
-               if(callBack) callBack()
-            })
          }
+         $timeout(function () {
+            $scope.sortedPosts = $scope.sortedPosts;
+            hideSpinner()
+            if (callBack) callBack()
+         })
       }, console.warn, 150);
    }
 
