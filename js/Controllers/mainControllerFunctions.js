@@ -335,6 +335,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          console.log(conurancyCounter)
          console.log(postsData)
          var postsArray = JSON.parse(postsData.result.response.result);
+         console.log(postsArray);
          var max = postsArray.length;
          for (var count = 0; count < max; count++) {
             loadedCounter++;
@@ -343,7 +344,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             mergeFirebasePost(postsArray[count], $scope.allPosts[indexes.allPosts])
             $scope.allPosts[indexes.allPosts] = postsArray[count];
             $scope.sortedPosts[indexes.sortedPosts] = postsArray[count];
-            console.log(sort)
+            console.log($scope.sortedPosts[indexes.sortedPosts])
             $timeout(function () {
                $scope.sortedPosts[indexes.sortedPosts] = postsArray[count]
             })
