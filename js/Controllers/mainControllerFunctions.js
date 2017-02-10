@@ -347,8 +347,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          }
          $timeout(function () {
             $scope.sortedPosts = $scope.sortedPosts;
-            hideSpinner()
             if (callBack) callBack()
+            setTimeout(hideSpinner,500)
          })
       }, console.warn, 150);
    }
