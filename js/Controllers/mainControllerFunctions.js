@@ -344,13 +344,15 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             loadedCounter++;
             console.log(loadedCounter + " : " + max)
             var indexes = getIdIndexInPostArrays(fullPost.id);
-                        console.log(fullPost)
             mergeFirebasePost(fullPost, $scope.allPosts[indexes.allPosts])
-                        console.log(fullPost)
+            $scope.allPosts[indexes.allPosts] = fullPost;
+            $scope.sortedPosts[indexes.sortedPosts] = fullPost;
+            console.log(fullPost)
+            console.log($scope.sortedPosts[indexes.sortedPosts])
             $timeout(function () {
                $scope.allPosts[indexes.allPosts] = fullPost;
-               $scope.sortedPosts[indexes.sortedPosts] = fullPost;
-               if (callBack) callBack();
+            $scope.sortedPosts[indexes.sortedPosts] = fullPost;
+               //if (callBack) callBack();
             })
          }
          hideSpinner();
