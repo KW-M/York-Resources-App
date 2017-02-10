@@ -310,7 +310,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function loadPosts() {
       if (conurancyCounter == 0 && $scope.sortedPosts.length != 0 && $scope.sortedPosts.length != loadedCounter) {
-         conurancyCounter++;
          var index, cancel;
          var postIdAccumulator = [];
          var max = $scope.sortedPosts.length
@@ -330,7 +329,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function getPosts(idArray, callBack) {
-      console.log(idArray)
+      conurancyCounter++;
       promiseQueue().addPromise('script', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
          conurancyCounter--;
          console.log(conurancyCounter)
@@ -338,18 +337,16 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          var postsArray = JSON.parse(postsData.result.response.result);
          var max = postsArray.length;
          for (var count = 0; count < max; count++) {
-            var fullPost = postsArray[count];
-            fullPost.loadStatus = 'Loaded';
             loadedCounter++;
-            var indexes = getIdIndexInPostArrays(fullPost.id);
-            mergeFirebasePost(fullPost, $scope.allPosts[indexes.allPosts])
-            $scope.allPosts[indexes.allPosts] = fullPost;
+            postsArray[count].loadStatus = 'Loaded';
+            var indexes = getIdIndexInPostArrays(postsArray[count].id);
+            mergeFirebasePost(postsArray[count], $scope.allPosts[indexes.allPosts])
+            $scope.allPosts[indexes.allPosts] = postsArray[count];
+            $scope.sortedPosts[indexes.sortedPosts] = postsArray[count];
             $timeout(function () {
-               $scope.sortedPosts[indexes.sortedPosts] = fullPost;
-               if (callBack) callBack();
+               $scope.sortedPosts[indexes.sortedPosts] = postsArray[count]
             })
          }
-         $timeout(hideSpinner,500)
       }, console.warn, 150);
    }
 
