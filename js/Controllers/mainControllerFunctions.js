@@ -310,7 +310,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function loadPosts() {
       if (conurancyCounter == 0 && $scope.sortedPosts.length != 0 && $scope.sortedPosts.length != loadedCounter) {
-         var index, cancel;
+         var index;
          var postIdAccumulator = [];
          var max = $scope.sortedPosts.length
          for (index = 0; index < max; index++) {
@@ -318,7 +318,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             if (postObj.loadStatus != 'Loaded') {
                postIdAccumulator.push(postObj.id)
                console.log(postIdAccumulator)
-               if (postIdAccumulator.length == 7) {
+               if (postIdAccumulator.length == 4) {
                   getPosts(postIdAccumulator);
                   return true;
                }
@@ -343,6 +343,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             mergeFirebasePost(postsArray[count], $scope.allPosts[indexes.allPosts])
             $scope.allPosts[indexes.allPosts] = postsArray[count];
             $scope.sortedPosts[indexes.sortedPosts] = postsArray[count];
+            console.log(sort)
             $timeout(function () {
                $scope.sortedPosts[indexes.sortedPosts] = postsArray[count]
             })
