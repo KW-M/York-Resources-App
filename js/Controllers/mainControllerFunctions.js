@@ -250,8 +250,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       var filterObj = filterPosts($scope.allPosts)
       $scope.sortedPosts = filterObj.filtered.sort(function (a, b) {
          console.log(b)
-         var alikes = (a.likes != undefined ? a.likes.length : a.likeCount) * 2
-         var blikes = (b.likes != undefined ? b.likes.length : b.likeCount) * 2
+         var alikes = (a.likeCount) * 2
+         var blikes = (b.likeCount) * 2
          return b.creationDate.addDays(blikes) - a.creationDate.addDays(alikes);
       })
       filterObj.filteredOut.forEach(function (postObj) {
