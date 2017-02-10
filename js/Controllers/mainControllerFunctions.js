@@ -310,23 +310,24 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
 
    function loadPosts() {
-      
-      conurancyCounter++;
-      var index, cancel;
-      var postIdAccumulator = [];
-      var max = $scope.sortedPosts.length
-      for (index = 0; index < max; index++) {
-         var postObj = $scope.sortedPosts[index];
-         if (postObj.loadStatus != 'Loaded') {
-            postIdAccumulator.push(postObj.id)
-            console.log(postIdAccumulator)
-            if (postIdAccumulator.length == 3) {
-               getPosts(postIdAccumulator);
-               return true;
+      if (conurancyCounter == 0 && $scope.sortedPosts.length != loadedCounter) {
+         conurancyCounter++;
+         var index, cancel;
+         var postIdAccumulator = [];
+         var max = $scope.sortedPosts.length
+         for (index = 0; index < max; index++) {
+            var postObj = $scope.sortedPosts[index];
+            if (postObj.loadStatus != 'Loaded') {
+               postIdAccumulator.push(postObj.id)
+               console.log(postIdAccumulator)
+               if (postIdAccumulator.length == 3) {
+                  getPosts(postIdAccumulator);
+                  return true;
+               }
             }
          }
+         if (postIdAccumulator.length != 0) getPosts(postIdAccumulator);
       }
-      if (postIdAccumulator.length != 0) getPosts(postIdAccumulator);
    }
 
    function getPosts(idArray, callBack) {
@@ -343,9 +344,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             loadedCounter++;
             console.log(loadedCounter + " : " + max)
             var indexes = getIdIndexInPostArrays(fullPost.id);
-            console.log(indexes)
-            console.log(fullPost)
+                        console.log(fullPost)
             mergeFirebasePost(fullPost, $scope.allPosts[indexes.allPosts])
+                        console.log(fullPost)
             $timeout(function () {
                $scope.allPosts[indexes.allPosts] = fullPost;
                $scope.sortedPosts[indexes.sortedPosts] = fullPost;
