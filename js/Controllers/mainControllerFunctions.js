@@ -247,7 +247,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function sortPosts() {
       var filterObj = filterPosts($scope.allPosts)
-      console.log(filterObj)
       $scope.sortedPosts = filterObj.filtered.sort(function (a, b) {
          return b.creationDate.addDays((b.likeCount || 0) * 2) - a.creationDate.addDays((a.likeCount || 0) * 2);
       })
