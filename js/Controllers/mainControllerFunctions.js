@@ -285,9 +285,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          var Class = true;
          var Creator = true;
          var Flagged = true;
-         if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
-            var Flagged = inputSet[count].flagged === $scope.queryParams.flagged;
-         }
          if ($scope.queryParams.classPath !== null && $scope.queryParams.classPath !== undefined) {
             if ($scope.selectedClass !== false && ($scope.selectedClass == 'Other' || $scope.selectedClass.stared !== null)) {
                var Class = inputSet[count].class.name === $scope.queryParams.classPath;
@@ -295,14 +292,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                var Class = inputSet[count].class.name !== 'Memes';
             }
          }
-         if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) {
-            var Type = inputSet[count].type === $scope.queryParams.type;
-         } else {
-            var Type = true;
-         }
-         if ($scope.queryParams.creatorEmail !== null && $scope.queryParams.creatorEmail !== undefined) {
-            var Creator = inputSet[count].creator.email === $scope.queryParams.creatorEmail;
-         }
+         if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) Type = inputSet[count].type === $scope.queryParams.type;
+         
+         if ($scope.queryParams.creatorEmail !== null && $scope.queryParams.creatorEmail !== undefined) Creator = inputSet[count].creator.email === $scope.queryParams.creatorEmail;
          if (Flagged && Class && Type && Creator) {
             filtered.push(inputSet[count])
          } else {
