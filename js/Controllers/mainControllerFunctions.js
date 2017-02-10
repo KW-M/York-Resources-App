@@ -286,8 +286,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             Flagged = true;
          //$scope.selectedClass == 'Other' ||
          if ($scope.queryParams.classPath !== null && $scope.queryParams.classPath !== undefined) {
-            console.log($scope.queryParams.classPath + "  " + $scope.selectedClass.stared)
-            if ($scope.selectedClass !== false && $scope.selectedClass.stared != null) Class = inputSet[count].class.name === $scope.queryParams.classPath;
+            // console.log($scope.queryParams.classPath,$scope.selectedClass)
+            // console.log(inputSet[count].class.name+" : "+$scope.queryParams.classPath)
+            if ($scope.selectedClass !== false && $scope.selectedClass.stared != null) Class = inputSet[count].class.name == $scope.queryParams.classPath;
          } else {
             var Class = inputSet[count].class.name !== 'Memes';
          }
