@@ -310,6 +310,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
 
    function loadPosts() {
+      
+      conurancyCounter++;
       var index, cancel;
       var postIdAccumulator = [];
       var max = $scope.sortedPosts.length
@@ -318,8 +320,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          if (postObj.loadStatus != 'Loaded') {
             postIdAccumulator.push(postObj.id)
             console.log(postIdAccumulator)
-            if (postIdAccumulator.length == 3) getPosts(postIdAccumulator);
-            return true;
+            if (postIdAccumulator.length == 3) {
+               getPosts(postIdAccumulator);
+               return true;
+            }
          }
       }
       if (postIdAccumulator.length != 0) getPosts(postIdAccumulator);
@@ -327,9 +331,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function getPosts(idArray, callBack) {
       console.log(idArray)
-      conurancyCounter++;
       promiseQueue().addPromise('script', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
-         conurancyCounter = conurancyCounter - 1;
+         conurancyCounter--;
          console.log(conurancyCounter)
          console.log(postsData)
          var postsArray = JSON.parse(postsData.result.response.result);
@@ -338,6 +341,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             var fullPost = postsArray[count];
             fullPost.loadStatus = 'Loaded';
             loadedCounter++;
+            console.log(loadedCounter + " : " + max)
             var indexes = getIdIndexInPostArrays(fullPost.id);
             console.log(indexes)
             console.log(fullPost)
