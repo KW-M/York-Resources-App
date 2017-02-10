@@ -318,7 +318,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             if (postObj.loadStatus != 'Loaded') {
                postIdAccumulator.push(postObj.id)
                console.log(postIdAccumulator)
-               if (postIdAccumulator.length == 4) {
+               if (postIdAccumulator.length == 5) {
                   getPosts(postIdAccumulator);
                   return true;
                }
@@ -346,7 +346,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.sortedPosts[indexes.sortedPosts] = postsArray[count];
             console.log($scope.sortedPosts[indexes.sortedPosts])
             $timeout(function () {
-               $scope.sortedPosts[indexes.sortedPosts] = postsArray[count]
+               $scope.sortedPosts[indexes.sortedPosts];
+               //if(callBack)callBack()
             })
          }
       }, console.warn, 150);
