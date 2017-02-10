@@ -355,12 +355,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          var postsArray = JSON.parse(postsData.result.response.result);
          postsArray.forEach(function (fullPost) {
             fullPost.loadStatus = 'Loaded';
+            loadedCounter++;
             var indexes = getIdIndexInPostArrays(fullPost.id)
             console.log(indexes)
             console.log(fullPost)
             mergeFirebasePost(fullPost, $scope.allPosts[indexes.allPosts])
             $timeout(function () {
-               loadedCounter++
                $scope.allPosts[indexes.allPosts] = fullPost;
                $scope.sortedPosts[indexes.sortedPosts] = fullPost;
                if (callBack) callBack();
