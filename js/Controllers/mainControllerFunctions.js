@@ -248,6 +248,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function sortPosts() {
       var filterObj = filterPosts($scope.allPosts)
+      console.log(filterObj)
       $scope.sortedPosts = filterObj.filtered.sort(function (a, b) {
          return b.creationDate.addDays((b.likeCount || 0) * 2) - a.creationDate.addDays((a.likeCount || 0) * 2);
       })
@@ -283,8 +284,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             Class = true,
             Creator = true,
             Flagged = true;
+            //$scope.selectedClass == 'Other' ||
          if ($scope.queryParams.classPath !== null && $scope.queryParams.classPath !== undefined) {
-            if ($scope.selectedClass !== false && ($scope.selectedClass == 'Other' || $scope.selectedClass.stared !== null)) {
+            if ($scope.selectedClass !== false && ( $scope.selectedClass.stared !== null)) {
                var Class = inputSet[count].class.name === $scope.queryParams.classPath;
             } else {
                var Class = inputSet[count].class.name !== 'Memes';
@@ -293,6 +295,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) Type = inputSet[count].type === $scope.queryParams.type;
          if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) Flagged = inputSet[count].flagged === $scope.queryParams.flagged;
          if ($scope.queryParams.creatorEmail !== null && $scope.queryParams.creatorEmail !== undefined) Creator = inputSet[count].creator.email === $scope.queryParams.creatorEmail;
+         console.log(Flagged+Class+Type+Creator)
          if (Flagged && Class && Type && Creator) {
             filtered.push(inputSet[count])
          } else {
@@ -314,10 +317,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          var postObj = $scope.sortedPosts[index];
          if (postObj.loadStatus != 'Loaded') {
             postIdAccumulator.push(postObj.id)
-            if (postIdAccumulator.length == 3) {
-               getPosts(postIdAccumulator)
-               getPosts(postIdAccumulator);
-            }
+            console.log(postIdAccumulator)
+            if (postIdAccumulator.length == 3) getPosts(postIdAccumulator)
             return true;
          }
       }
