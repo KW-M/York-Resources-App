@@ -284,18 +284,17 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             Class = true,
             Creator = true,
             Flagged = true;
-            //$scope.selectedClass == 'Other' ||
+         //$scope.selectedClass == 'Other' ||
          if ($scope.queryParams.classPath !== null && $scope.queryParams.classPath !== undefined) {
-            if ($scope.selectedClass !== false && ( $scope.selectedClass.stared !== null)) {
-               var Class = inputSet[count].class.name === $scope.queryParams.classPath;
-            } else {
-               var Class = inputSet[count].class.name !== 'Memes';
-            }
+            console.log($scope.queryParams.classPath + "  " + $scope.selectedClass.stared)
+            if ($scope.selectedClass !== false && $scope.selectedClass.stared != null) Class = inputSet[count].class.name === $scope.queryParams.classPath;
+         } else {
+            var Class = inputSet[count].class.name !== 'Memes';
          }
          if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) Type = inputSet[count].type === $scope.queryParams.type;
          if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) Flagged = inputSet[count].flagged === $scope.queryParams.flagged;
          if ($scope.queryParams.creatorEmail !== null && $scope.queryParams.creatorEmail !== undefined) Creator = inputSet[count].creator.email === $scope.queryParams.creatorEmail;
-         console.log(Flagged+Class+Type+Creator)
+         console.log(Flagged + " C" + Class + " T" + Type + " CR" + Creator, inputSet[count])
          if (Flagged && Class && Type && Creator) {
             filtered.push(inputSet[count])
          } else {
