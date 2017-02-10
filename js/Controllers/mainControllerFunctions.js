@@ -309,34 +309,29 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 }
 
 function loadPosts() {
-
-      var index, cancel;
-      var postIdAccumulator = [];
-      var max = $scope.sortedPosts.length
-      for (index = 0; index < max; index++) {
-         var postObj = $scope.sortedPosts[index];
-         if (postObj.loadStatus != 'Loaded') {
-            postIdAccumulator.push(postObj.id)
-            if (postIdAccumulator.length == 3) {
-               if (index == max) {
-                  postsFullyLoaded = true;
-                  getPosts(postIdAccumulator, true)
-               } else {
-                  postsFullyLoaded = false;
-                  getPosts(postIdAccumulator, false);
-               }
-               return true;
-            }
+   var index, cancel;
+   var postIdAccumulator = [];
+   var max = $scope.sortedPosts.length
+   for (index = 0; index < max; index++) {
+      var postObj = $scope.sortedPosts[index];
+      if (postObj.loadStatus != 'Loaded') {
+         postIdAccumulator.push(postObj.id)
+         if (postIdAccumulator.length == 3) {
+            getPosts(postIdAccumulator)
+            getPosts(postIdAccumulator);
          }
+         return true;
       }
-      if (postIdAccumulator.length != 0 && index == max) {
-         getPosts(postIdAccumulator)
-         postsFullyLoaded = true;
-      } else if (max == 0) {
-         hideSpinner(true)
-         postsFullyLoaded = true;
-      };
    }
+}
+if (postIdAccumulator.length != 0 && index == max) {
+   getPosts(postIdAccumulator)
+   postsFullyLoaded = true;
+} else if (max == 0) {
+   hideSpinner(true)
+   postsFullyLoaded = true;
+
+}
 }
 
 function getPosts(idArray, callBack) {
