@@ -353,10 +353,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          console.log(conurancyCounter)
          console.log(postsData)
          var postsArray = JSON.parse(postsData.result.response.result);
-         postsArray.forEach(function (fullPost) {
+         var max = postsArray.length;
+         for (var count = 0; count < max; count++) {
+            var fullPost = postsArray[count];
             fullPost.loadStatus = 'Loaded';
             loadedCounter++;
-            var indexes = getIdIndexInPostArrays(fullPost.id)
+            var indexes = getIdIndexInPostArrays(fullPost.id);
             console.log(indexes)
             console.log(fullPost)
             mergeFirebasePost(fullPost, $scope.allPosts[indexes.allPosts])
@@ -365,7 +367,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                $scope.sortedPosts[indexes.sortedPosts] = fullPost;
                if (callBack) callBack();
             })
-         })
+         }
          hideSpinner();
       }, console.warn, 150);
    }
