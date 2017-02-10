@@ -268,13 +268,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             }
             var indexes = getIdIndexInPostArrays(postObj.id)
             $scope.allPosts[indexes.allPosts] = slimedObj;
-            $scope.sortedPosts[indexes.sortedPosts] = slimedObj;
             loadedCounter--;
          }
       }
+      loadPosts()
    }
-
-   loadPosts()
 
    function filterPosts(inputSet) {
       var filtered = [];
@@ -306,688 +304,680 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          filteredOut: filteredOut
       };
    }
-}
 
-function loadPosts() {
-   var index, cancel;
-   var postIdAccumulator = [];
-   var max = $scope.sortedPosts.length
-   for (index = 0; index < max; index++) {
-      var postObj = $scope.sortedPosts[index];
-      if (postObj.loadStatus != 'Loaded') {
-         postIdAccumulator.push(postObj.id)
-         if (postIdAccumulator.length == 3) {
-            getPosts(postIdAccumulator)
-            getPosts(postIdAccumulator);
-         }
-         return true;
-      }
-   }
-}
-if (postIdAccumulator.length != 0 && index == max) {
-   getPosts(postIdAccumulator)
-   postsFullyLoaded = true;
-} else if (max == 0) {
-   hideSpinner(true)
-   postsFullyLoaded = true;
 
-}
-}
-
-function getPosts(idArray, callBack) {
-   console.log(idArray)
-   conurancyCounter = conurancyCounter + 1;
-   promiseQueue().addPromise('script', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
-      conurancyCounter = conurancyCounter - 1;
-      console.log(conurancyCounter)
-      console.log(postsData)
-      var postsArray = JSON.parse(postsData.result.response.result);
-      var max = postsArray.length;
-      for (var count = 0; count < max; count++) {
-         var fullPost = postsArray[count];
-         fullPost.loadStatus = 'Loaded';
-         loadedCounter++;
-         var indexes = getIdIndexInPostArrays(fullPost.id);
-         console.log(indexes)
-         console.log(fullPost)
-         mergeFirebasePost(fullPost, $scope.allPosts[indexes.allPosts])
-         $timeout(function () {
-            $scope.allPosts[indexes.allPosts] = fullPost;
-            $scope.sortedPosts[indexes.sortedPosts] = fullPost;
-            if (callBack) callBack();
-         })
-      }
-      hideSpinner();
-   }, console.warn, 150);
-}
-
-function hideSpinner(hide) {
-   console.log("LoadCount:" + loadedCounter)
-   if ($scope.sortedPosts.length == 0) {
-      layout_grid.style.height = '0px';
-      loading_spinner.style.display = 'none';
-      no_posts_footer.style.display = 'block';
-      clearInterval(getFileTimer);
-   } else if ($scope.sortedPosts.length == loadedCounter) {
-      loading_spinner.style.display = 'none';
-      no_more_footer.style.display = 'block';
-      clearInterval(getFileTimer);
-   } else {
-      loading_spinner.style.display = 'block';
-      no_posts_footer.style.display = 'none';
-      no_more_footer.style.display = 'none';
-      footer_problem.style.display = 'none';
-   }
-}
-
-// $scope.$watch('sortedPosts', function () {
-//    var visible = [];
-//    var max = $scope.sortedPosts.length
-//    for (var index = 0; index < max; index++) {
-//       var postObj = $scope.sortedPosts[index]
-//       if (postObj.loadStatus == 'Loaded') visible.push(postObj);
-//    }
-//    $timeout(function () {
-//       $scope.visiblePosts = visible;
-//       angularGridInstance.postsGrid.refresh();
-//       if ($scope.visiblePosts.length == 0) layout_grid.style.height = '0px';
-//    })
-// }, true);
-
-$scope.loadPosts = loadPosts;
-
-//----------------------------------------------------
-//--------------- Creating Posts ---------------------
-var layout_grid = document.getElementById("layout_grid");
-var footer_problem = document.getElementById("footer_problem");
-var no_more_footer = document.getElementById("no_more_footer");
-var no_posts_footer = document.getElementById("no_posts_footer");
-var loading_spinner = document.getElementById("loading_spinner");
-
-function newPost(postObj, operation, event) {
-   $scope.newPostScroll = 0;
-   var dialogConfig = {
-         templateUrl: 'templates/createPost.html',
-         controller: ['$scope', '$timeout', '$http', '$mdDialog', 'APIService', 'authorizationService', '$mdToast', "postObj", "operation", newPostController],
-         locals: {
-            postObj: postObj,
-            operation: operation
-         },
-         scope: $scope,
-         preserveScope: true,
-         onComplete: onDialogLoaded,
-         clickOutsideToClose: false,
-         fullscreen: $mdMedia('xs'),
-         parent: angular.element(document.body),
-      }
-      // openFrom: {
-      //    top: rect.top,
-      //    left: rect.left,
-      //    height: rect.height,
-      //    width: rect.width,
-      // },
-      // closeTo: {
-      //    top: rect.top,
-      //    left: rect.left,
-      //    height: rect.height,
-      //    width: rect.width,
-      // }//('#new_post_button'),
-
-   $mdDialog.show(dialogConfig).then(function () {
-      //done
-   });
-
-   function onDialogLoaded() {
-      $scope.dialog_container = document.getElementsByClassName('md-dialog-container')[0]
-      var newPostScroll = document.getElementsByClassName('new_post_dialog_scroll')[0];
-      var newPostHeaderImage = document.getElementById("header_image");
-      var newPostHeader = document.getElementById('dialog_header');
-      newPostScroll.style.opacity = 1;
-      newPostScroll.onscroll = function () {
-         if (newPostScroll.scrollTop < 141) {
-            $timeout(function () {
-               $scope.newPostScroll = newPostScroll.scrollTop;
-            })
-            newPostHeaderImage.style.top = -20 - (newPostScroll.scrollTop / 5) + 'px';
-         } else {
-            $timeout(function () {
-               $scope.newPostScroll = 140;
-            })
+   function loadPosts() {
+      var index, cancel;
+      var postIdAccumulator = [];
+      var max = $scope.sortedPosts.length
+      for (index = 0; index < max; index++) {
+         var postObj = $scope.sortedPosts[index];
+         if (postObj.loadStatus != 'Loaded') {
+            postIdAccumulator.push(postObj.id)
+            if (postIdAccumulator.length == 3) {
+               getPosts(postIdAccumulator)
+               getPosts(postIdAccumulator);
+            }
+            return true;
          }
       }
-
-      // The md-select directive eats keydown events for some quick select logic.
-      // Since we have a search input in the course selector, we don 't need that logic.
-      var selectSearchInput = angular.element(document.getElementById('class_select_input'))
-      selectSearchInput.on('keydown', function (ev) {
-         ev.stopPropagation();
-      });
+      if (postIdAccumulator.length != 0) getPosts(postIdAccumulator)
    }
-};
 
-function showDrivePicker(type, restorePost) {
-   $scope.restorePost = restorePost || false;
-   if (type == "Drive") {
-      drivePicker.setVisible(true);
-   } else if (type == "Upload") {
-      uploadPicker.setVisible(true);
+   function getPosts(idArray, callBack) {
+      console.log(idArray)
+      conurancyCounter++;
+      promiseQueue().addPromise('script', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
+         conurancyCounter = conurancyCounter - 1;
+         console.log(conurancyCounter)
+         console.log(postsData)
+         var postsArray = JSON.parse(postsData.result.response.result);
+         var max = postsArray.length;
+         for (var count = 0; count < max; count++) {
+            var fullPost = postsArray[count];
+            fullPost.loadStatus = 'Loaded';
+            loadedCounter++;
+            var indexes = getIdIndexInPostArrays(fullPost.id);
+            console.log(indexes)
+            console.log(fullPost)
+            mergeFirebasePost(fullPost, $scope.allPosts[indexes.allPosts])
+            $timeout(function () {
+               $scope.allPosts[indexes.allPosts] = fullPost;
+               $scope.sortedPosts[indexes.sortedPosts] = fullPost;
+               if (callBack) callBack();
+            })
+         }
+         hideSpinner();
+      }, console.warn, 150);
    }
-};
 
-function drivePickerCallback(data) {
-   if (data.action == google.picker.Action.PICKED) {
-      if ($scope.restorePost == true) {
-         $timeout(function () {
-            $scope.post.attachmentId = data.docs[0].id;
-            $scope.post.link = data.docs[0].url;
-            $scope.post.title = $scope.post.title || data.docs[0].name;
-         })
+   function hideSpinner(hide) {
+      console.log("LoadCount:" + loadedCounter)
+      if ($scope.sortedPosts.length == 0) {
+         layout_grid.style.height = '0px';
+         loading_spinner.style.display = 'none';
+         no_posts_footer.style.display = 'block';
+         clearInterval(getFileTimer);
+      } else if ($scope.sortedPosts.length == loadedCounter) {
+         loading_spinner.style.display = 'none';
+         no_more_footer.style.display = 'block';
+         clearInterval(getFileTimer);
       } else {
-         $scope.newPost({
-            attachmentId: data.docs[0].id,
-            link: data.docs[0].url,
-            title: data.docs[0].name,
-         }, 'new');
+         loading_spinner.style.display = 'block';
+         no_posts_footer.style.display = 'none';
+         no_more_footer.style.display = 'none';
+         footer_problem.style.display = 'none';
       }
    }
-}
 
-$scope.newPost = newPost;
-$scope.showDrivePicker = showDrivePicker;
+   // $scope.$watch('sortedPosts', function () {
+   //    var visible = [];
+   //    var max = $scope.sortedPosts.length
+   //    for (var index = 0; index < max; index++) {
+   //       var postObj = $scope.sortedPosts[index]
+   //       if (postObj.loadStatus == 'Loaded') visible.push(postObj);
+   //    }
+   //    $timeout(function () {
+   //       $scope.visiblePosts = visible;
+   //       angularGridInstance.postsGrid.refresh();
+   //       if ($scope.visiblePosts.length == 0) layout_grid.style.height = '0px';
+   //    })
+   // }, true);
 
-//----------------------------------------------------
-//------------------ Searching -----------------------
-var queryPropertyString = '';
-var previousSearch = undefined;
+   $scope.loadPosts = loadPosts;
 
-function generateQueryString() {
-   var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false"
-   if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
-      query = query + " and properties has { key='Flagged' and value='" + $scope.queryParams.flagged + "' }";
-   }
-   if ($scope.queryParams.creatorEmail !== null && $scope.queryParams.creatorEmail !== undefined) {
-      query = query + " and '" + $scope.queryParams.creatorEmail + "' in owners"
-   }
-   if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) {
-      query = query + " and properties has { key='Type' and value='" + $scope.queryParams.type + "' }"
-   }
-   if ($scope.queryParams.classPath !== null && $scope.queryParams.classPath !== undefined && $scope.queryParams.classPath !== 'Your Posts' && $scope.queryParams.classPath !== 'All Posts' && $scope.queryParams.classPath !== 'Flagged Posts') {
-      query = query + " and properties has { key='ClassName' and value='" + $scope.queryParams.classPath + "' }"
-   }
-   if ($scope.queryParams.q !== null && $scope.queryParams.q !== undefined) {
-      query = query + " and fullText contains '" + $scope.queryParams.q + "'";
-   }
-   $scope.queryPropertyString = query;
-}
-$scope.$watch('searchInputTxt', function (newValue) {
-   var input = newValue || null
-   var query = $scope.queryParams.q || null;
-   if (input != query) $scope.gotoRoute({
-      q: input
-   })
-}, false);
+   //----------------------------------------------------
+   //--------------- Creating Posts ---------------------
+   var layout_grid = document.getElementById("layout_grid");
+   var footer_problem = document.getElementById("footer_problem");
+   var no_more_footer = document.getElementById("no_more_footer");
+   var no_posts_footer = document.getElementById("no_posts_footer");
+   var loading_spinner = document.getElementById("loading_spinner");
 
-//----------------------------------------------------
-//-------------- Filtering & Sorting -----------------
-$scope.findClassObject = function (className) {
-   if (className == 'All Posts') {
-      return ({
-         name: 'All Posts',
-         color: 'hsla(200, 70%, 75%,',
-         catagory: null,
-         rules: null,
-         stared: null,
-      })
-   } else if (className == 'Your Posts') {
-      return ({
-         name: 'Your Posts',
-         color: 'hsla(114, 89%, 42%,',
-         catagory: null,
-         rules: null,
-         stared: null,
-      })
-   } else if (className == 'Flagged Posts') {
-      return ({
-         name: 'Flagged Posts',
-         color: 'hsla(15, 95%, 65%,',
-         catagory: null,
-         rules: null,
-         stared: null,
-      })
-   } else if (className == 'Quizlet') {
-      return ({
-         name: 'Quizlet',
-         color: 'hsla(229, 46%, 49%,',
-         catagory: null,
-         rules: null,
-         stared: null,
-      })
-   } else if (className == 'Memes') {
-      return ({
-         name: 'Memes',
-         color: 'hsla(200, 70%, 75%,',
-         catagory: null,
-         rules: 'What da heck are you doing here??',
-         stared: false,
-      })
-   } else if (className == 'Other') {
-      return ({
-         name: 'Other',
-         color: 'hsla(200, 70%, 75%,',
-         catagory: null,
-         rules: null,
-         stared: null,
-      })
-   } else {
-      for (var Catagories = 0; Catagories < $scope.classList.length; Catagories++) {
-         for (var ClassNum = 0; ClassNum < $scope.classList[Catagories].classes.length; ClassNum++) {
-            var Class = $scope.classList[Catagories].classes[ClassNum]
-            if (Class.name == className) {
-               Class.color = $scope.classList[Catagories].color
-               Class.catagory = $scope.classList[Catagories].catagory
-               for (var StaredNum = 0; StaredNum < $scope.myInfo.staredClasses.length; StaredNum++) {
-                  if ($scope.myInfo.staredClasses[StaredNum].name == className) {
-                     Class.stared = true;
-                     return (Class)
-                  }
-               }
-               Class.stared = false;
-               return (Class)
+   function newPost(postObj, operation, event) {
+      $scope.newPostScroll = 0;
+      var dialogConfig = {
+            templateUrl: 'templates/createPost.html',
+            controller: ['$scope', '$timeout', '$http', '$mdDialog', 'APIService', 'authorizationService', '$mdToast', "postObj", "operation", newPostController],
+            locals: {
+               postObj: postObj,
+               operation: operation
+            },
+            scope: $scope,
+            preserveScope: true,
+            onComplete: onDialogLoaded,
+            clickOutsideToClose: false,
+            fullscreen: $mdMedia('xs'),
+            parent: angular.element(document.body),
+         }
+         // openFrom: {
+         //    top: rect.top,
+         //    left: rect.left,
+         //    height: rect.height,
+         //    width: rect.width,
+         // },
+         // closeTo: {
+         //    top: rect.top,
+         //    left: rect.left,
+         //    height: rect.height,
+         //    width: rect.width,
+         // }//('#new_post_button'),
+
+      $mdDialog.show(dialogConfig).then(function () {
+         //done
+      });
+
+      function onDialogLoaded() {
+         $scope.dialog_container = document.getElementsByClassName('md-dialog-container')[0]
+         var newPostScroll = document.getElementsByClassName('new_post_dialog_scroll')[0];
+         var newPostHeaderImage = document.getElementById("header_image");
+         var newPostHeader = document.getElementById('dialog_header');
+         newPostScroll.style.opacity = 1;
+         newPostScroll.onscroll = function () {
+            if (newPostScroll.scrollTop < 141) {
+               $timeout(function () {
+                  $scope.newPostScroll = newPostScroll.scrollTop;
+               })
+               newPostHeaderImage.style.top = -20 - (newPostScroll.scrollTop / 5) + 'px';
+            } else {
+               $timeout(function () {
+                  $scope.newPostScroll = 140;
+               })
             }
          }
-      }
-   }
-   return false
-   console.warn('could not find class: ' + className);
-};
-$scope.sortLabels = function (input) {
-   if ($scope.sortedLabels && $scope.post && $scope.post.class && $scope.post.class.name != '') {
-      var max = $scope.sortedLabels.length
-      for (var labelCount = 0; labelCount < max; labelCount++) {
-         var label = $scope.sortedLabels[labelCount];
-         var classMax = label.classes.length;
-         for (var classCount = 0; classCount < classMax; classCount++) {
-            var labelClass = label.classes[classCount]
-            if (labelClass == $scope.post.class.name || labelClass.name == $scope.post.class.name) {
-               if (label.type == 'Label') label.sortOrder = (labelClass.usage * 2) + 1000
-               if (label.type == 'Teacher') label.sortOrder = 100000;
-               classCount = classMax + 1;
-            };
-            if (classCount != classMax + 1) label.sortOrder = label.totalUsage || 1
-         }
-      }
-   } else {
-      $scope.sortedLabels = input || labelList.concat(teacherList);
-   }
-   $scope.sortedLabels = $scope.sortedLabels.sort(function (a, b) {
-      return (b.sortOrder || b.totalUsage || 1) - (a.sortOrder || a.totalUsage || 1);
-   })
-   console.log($scope.sortedLabels)
-   return ($scope.sortedLabels)
-};
 
-//----------------------------------------------------
-//------------------UI Actions------------------------
-$scope.signOut = function () {
-   authorizationService.handleSignoutClick();
-};
-$scope.FABClick = function () { //called by the top left toolbar menu button
-   if ($scope.globals.FABisOpen == true) {
-      $scope.newPost({}, 'new')
-   }
-
-};
-$scope.toggleSidebar = function (close) { //called by the top left toolbar menu button
-   if (close === true) {
-      $mdSidenav('sidenav_overlay').close();
-   } else {
-      if ($mdMedia('gt-sm')) {
-         $scope.globals.sidenavIsOpen = !$scope.globals.sidenavIsOpen;
-      } else {
-         $mdSidenav('sidenav_overlay').toggle();
-      }
-   }
-};
-$scope.toggleMobileSearch = function (toOpen) {
-   $timeout(function () {
-      $scope.globals.mobileSearchIsOpen = toOpen;
-      $scope.searchInputTxt = '';
-   })
-   if (toOpen == true) {
-      document.getElementById("mobile_search_input").focus();
-   } else {
-      document.getElementById("mobile_search_input").blur();
-   }
-}
-$scope.toggleSidenavClassSearch = function (toOpen) {
-   $timeout(function () {
-      $scope.globals.sideNavClassSearchOpen = toOpen;
-      $scope.sideNavClassSearch = '';
-   })
-   if (toOpen == true) {
-      document.getElementById("sidenav_class_search_input").focus();
-   } else {
-      document.getElementById("sidenav_class_search_input").blur();
-   }
-}
-$scope.openQuizletWindow = function (argument) {
-   var quizWindow = window.open("", "_blank", "status=no,menubar=no,toolbar=no");
-   quizWindow.resizeTo(9000, 140)
-   quizWindow.moveTo(0, 0);
-   quizWindow.document.write("<div style='display:flex;align-items: center;height: 100%;'><span>Your Quizlet username should be here.</span><div style='flex:1;height: 2px;margin-left: 5px;background:black;'></div><div style=' width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 10px solid; '></div><div style=' width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 10px solid; margin-right: 160px; '></div></div>");
-   setTimeout(function () {
-      quizWindow.location = "https://quizlet.com"
-   }, 3000);
-}
-
-//----------------------------------------------------
-// --------------- Post Card Functions ---------------
-var likeClickTimer = {}
-$scope.confirmDelete = function (content, arrayIndex) {
-   var confirm = $mdDialog.confirm().title('Permanently delete this?').ariaLabel('Delete?').ok('Delete').cancel('Cancel');
-   $mdDialog.show(confirm).then(function () {
-      promiseQueue().addPromise('script', APIService.runGAScript('deletePost', content.id, false), function (returnedValue) {
-         console.log(returnedValue.result.response.result)
-         if (returnedValue.result.response.result == true) authorizationService.FireDatabase.ref('posts/' + content.id).remove().then(null, console.warn)
-      }, console.warn, 150);
-   });
-};
-// $scope.flagPost = function (content, arrayIndex) {
-//    content.Flagged = true;
-//    if ($scope.queryParams.classPath != 'flagged') {
-//       $timeout(function () { //makes angular update values
-//          $scope.visiblePosts.splice(arrayIndex, 1);
-//       });
-//    }
-//    $scope.allPosts[findPostById(content.Id, $scope.allPosts)].Flagged = true;
-//    queue('drive', GoogleDriveService.updateFlagged(content.Id, true), null, function (err) {
-//       $timeout(function () { //makes angular update values
-//          content.Flagged = false;
-//          $scope.visiblePosts.splice(arrayIndex, 0, content);
-//       });
-//       $mdToast.showSimple('Error flagging post, try again.');
-//       console.warn(err)
-//    }, 150);
-//    //set the poster's has flagged date back
-//    for (var item = 0; item < $scope.userList.length; item++) {
-//       if ($scope.userList[item][0] && $scope.userList[item][0] == content.Creator.Email) {
-//          var range = 'Sheet1!H' + (item + 2);
-//          var today = $filter('date')(new Date(), 'M/d/yy');
-//          queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, [today]), null, function (err) {
-//             $timeout(function () { //makes angular update values
-//                content.Flagged = false;
-//                $scope.visiblePosts.splice(arrayIndex, 0, content);
-//             });
-//             console.warn(err)
-//             $mdToast.showSimple('Error flagging post, try again.');
-//          }, 2);
-//       }
-//    }
-// };
-// $scope.unFlagPost = function (content, arrayIndex) {
-//    var timeoutDate = new Date($scope.myInfo.LastBeenFlaggedDate.getTime() + 7 * 86400000);
-//    if (timeoutDate < new Date()) {
-//       content.Flagged = false;
-//       if ($scope.queryParams.classPath == 'flagged') {
-//          $timeout(function () { //makes angular update values
-//             $scope.visiblePosts.splice(arrayIndex, 1);
-//          });
-//       }
-//       $scope.allPosts[findPostById(content.Id, $scope.allPosts)].Flagged = false;
-//       $scope.updateVisiblePosts($scope.filterPosts($scope.allPosts));
-//       queue('drive', GoogleDriveService.updateFlagged(content.Id, false), null, function (err) {
-//          $mdToast.showSimple('Error unflagging post, try again.');
-//          console.warn(err)
-//       }, 150);
-//    } else {
-//       $mdDialog.show($mdDialog.alert({
-//          title: 'Uh Oh.',
-//          htmlContent: '<p style="margin: 0 0 2px 0">One of your posts has been flagged within the past week.<br>To unlock the ability to unflag posts, don\'t let your posts get flagged this week.</p>',
-//          ok: 'Ok'
-//       }));
-//    }
-// };
-$scope.likePost = function (content) {
-   content.userLiked = !content.userLiked || false;
-   if (typeof (likeClickTimer[content.Id]) == 'number') clearTimeout(likeClickTimer[content.Id]);
-   likeClickTimer[content.Id] = setTimeout(function () {
-      var arrayIndecies = getIdIndexInPostArrays(content.Id)
-      promiseQueue().addPromise('drive', APIService.runGAScript('likePost', {
-         operation: 'likePost',
-         postId: content.id,
-         content: content.userLiked,
-      }, true), function (data) {
-         console.log(data)
-         var res = data.result.response.result.split(" ");
-         console.log(res[1])
-         $timeout(function () {
-            ($scope.allPosts[arrayIndecies.allPosts] || {}).userLiked = res[0];
-            ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).userLiked = res[0];
-         })
-      }, function (err) {
-         console.warn(err)
-         $mdToast.showSimple('Error liking post, try again.');
-      }, 150);
-   }, 3000);
-};
-
-//----------------------------------------------------
-//---------------- Event Watchers --------------------
-window.addEventListener("resize", function () {
-   if ($mdMedia('gt-sm')) $mdSidenav('sidenav_overlay').close()
-});
-content_container.onscroll = function (event) {
-   var yScroll = content_container.scrollTop;
-   $timeout(function () {
-      if (yScroll >= 120 && $scope.globals.FABisHidden == true) {
-         $scope.globals.FABisHidden = false;
-      }
-      if (yScroll <= 120 && $scope.globals.FABisHidden == false) {
-         $scope.globals.FABisOpen = false;
-         $scope.globals.FABisHidden = true;
-      }
-   })
-};
-document.onkeydown = function (e) {
-   if (e.altKey && e.ctrlKey) {
-      if (e.keyCode == 68) {
-         devMode = !devMode
-         $timeout(function () {
-            $scope.devMode = devMode;
-         })
-      }
-      if (e.keyCode == 75) {
-         alert('handeling signin click')
-         authorizationService.handleSigninClick(function () {
-            alert('done')
+         // The md-select directive eats keydown events for some quick select logic.
+         // Since we have a search input in the course selector, we don 't need that logic.
+         var selectSearchInput = angular.element(document.getElementById('class_select_input'))
+         selectSearchInput.on('keydown', function (ev) {
+            ev.stopPropagation();
          });
-      }
-      if (e.keyCode == 76) {
-         alert('running siginin initialization')
-         authorizationService.initilize(function () {
-            alert('done')
-         })
-      }
-      if (e.keyCode == 77) {
-         alert('signing out')
-         gapi.auth2.getAuthInstance().signOut();
-      }
-   }
-}
-
-//----------------------------------------------------
-//----------------- Error Handling -------------------
-window.DriveErrorHandeler = function (error, item) {
-   console.warn(error);
-   console.log(item);
-   if (error.hasOwnProperty('expectedDomain')) {
-      gapi.auth2.getAuthInstance().signOut();
-      $mdDialog.show($mdDialog.alert({
-         title: 'Sorry.',
-         htmlContent: "<p>York Study Resources only works with York Google accounts right now.</p><p>If you have an email account ending with @york.org, please login with it, or ask Mr.Brookhouser if you don't have one.<p>",
-         ok: 'Ok'
-      })).then(function () {
-         angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
-         setTimeout(function () {
-            angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
-         }, 500);
-      });
-   }
-   if (error.result) {
-      // var newItem = JSON.parse(JSON.stringify(item).replace(/(?:"Authorization":"Bearer )[^"]+/,'"Authorization":"Bearer woop woop ' + authorizationService.getAuthToken() + '"'));
-      // 		console.log(newItem)
-      if (error.result.error.errors[0].message == 'Invalid Credentials') {
-         console.warn("invalid credentials")
-         $mdToast.show($mdToast.simple().textContent('Please signin again.')).hideDelay(8000);
-         authorizationService.showSigninButton();
-         authorizationService.showSigninDialog();
-      } else if (error.result.error.errors[0].reason == 'dailyLimitExceededUnreg') {
-         console.warn('daily limit reached')
-         $mdToast.show($mdToast.simple().textContent('Please signin again.')).hideDelay(8000);
-      }
-   }
-   if (item.Err) {
-      item.Err(error)
-   }
-}
-window.clearUserInfo = function () {
-   $timeout(function () {
-      $scope.myInfo = {};
-      $scope.sortedPosts = [];
-   })
-}
-
-//----------------------------------------------------
-//---------------- Utility Functions --------------------
-var theQueue = {};
-var timer = {};
-var delay = 0;
-
-// Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
-window.promiseQueue = function () {
-   var queueSelf = this;
-   this.addPromise = function (typeName, promiseFunc, action, error, interval) {
-      typeName = typeName || 'general';
-      if (!theQueue[typeName]) theQueue[typeName] = []
-      theQueue[typeName].push({
-         promiseFunc: promiseFunc,
-         action: action,
-         err: error,
-      });
-      if (!timer[typeName]) {
-         processTheQueue(typeName); // start immediately on the first invocation
-         timer[typeName] = setInterval(function () {
-            processTheQueue(typeName)
-         }, interval || 150);
       }
    };
 
-   function processTheQueue(typeName) {
-      var item = theQueue[typeName].shift();
-      if (item) {
-         var delay = 0;
-         if (new Date(authorizationService.GUser.getAuthResponse(true).expires_at) > new Date()) {
-            queueSelf.runPromise(item);
-         } else {
-            authorizationService.GUser.reloadAuthResponse().then(function (res) {
-               console.log('reloaded token')
-            }, function (err) {
-               console.warn(err)
-               gapi.auth2.getAuthInstance().signOut().then(function () {
-                  authorizationService.showSigninButton();
-               })
-            })
-
-         }
+   function showDrivePicker(type, restorePost) {
+      $scope.restorePost = restorePost || false;
+      if (type == "Drive") {
+         drivePicker.setVisible(true);
+      } else if (type == "Upload") {
+         uploadPicker.setVisible(true);
       }
-      if (theQueue[typeName].length === 0) {
-         clearInterval(timer[typeName]), timer[typeName] = null;
+   };
+
+   function drivePickerCallback(data) {
+      if (data.action == google.picker.Action.PICKED) {
+         if ($scope.restorePost == true) {
+            $timeout(function () {
+               $scope.post.attachmentId = data.docs[0].id;
+               $scope.post.link = data.docs[0].url;
+               $scope.post.title = $scope.post.title || data.docs[0].name;
+            })
+         } else {
+            $scope.newPost({
+               attachmentId: data.docs[0].id,
+               link: data.docs[0].url,
+               title: data.docs[0].name,
+            }, 'new');
+         }
       }
    }
 
-   this.runPromise = function (item) {
-      var promise = item.promiseFunc();
-      promise.then(item.action, function (error) {
-         APIErrorHandeler(error, item);
-         if (item.Err) {
-            item.Err(error);
-         } else if (delay < 4) {
-            setTimeout(function () {
-               runPromise(item);
-            }, (delay = Math.max(delay *= 2, 1)) * 1000);
+   $scope.newPost = newPost;
+   $scope.showDrivePicker = showDrivePicker;
+
+   //----------------------------------------------------
+   //------------------ Searching -----------------------
+   var queryPropertyString = '';
+   var previousSearch = undefined;
+
+   function generateQueryString() {
+      var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false"
+      if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
+         query = query + " and properties has { key='Flagged' and value='" + $scope.queryParams.flagged + "' }";
+      }
+      if ($scope.queryParams.creatorEmail !== null && $scope.queryParams.creatorEmail !== undefined) {
+         query = query + " and '" + $scope.queryParams.creatorEmail + "' in owners"
+      }
+      if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) {
+         query = query + " and properties has { key='Type' and value='" + $scope.queryParams.type + "' }"
+      }
+      if ($scope.queryParams.classPath !== null && $scope.queryParams.classPath !== undefined && $scope.queryParams.classPath !== 'Your Posts' && $scope.queryParams.classPath !== 'All Posts' && $scope.queryParams.classPath !== 'Flagged Posts') {
+         query = query + " and properties has { key='ClassName' and value='" + $scope.queryParams.classPath + "' }"
+      }
+      if ($scope.queryParams.q !== null && $scope.queryParams.q !== undefined) {
+         query = query + " and fullText contains '" + $scope.queryParams.q + "'";
+      }
+      $scope.queryPropertyString = query;
+   }
+   $scope.$watch('searchInputTxt', function (newValue) {
+      var input = newValue || null
+      var query = $scope.queryParams.q || null;
+      if (input != query) $scope.gotoRoute({
+         q: input
+      })
+   }, false);
+
+   //----------------------------------------------------
+   //-------------- Filtering & Sorting -----------------
+   $scope.findClassObject = function (className) {
+      if (className == 'All Posts') {
+         return ({
+            name: 'All Posts',
+            color: 'hsla(200, 70%, 75%,',
+            catagory: null,
+            rules: null,
+            stared: null,
+         })
+      } else if (className == 'Your Posts') {
+         return ({
+            name: 'Your Posts',
+            color: 'hsla(114, 89%, 42%,',
+            catagory: null,
+            rules: null,
+            stared: null,
+         })
+      } else if (className == 'Flagged Posts') {
+         return ({
+            name: 'Flagged Posts',
+            color: 'hsla(15, 95%, 65%,',
+            catagory: null,
+            rules: null,
+            stared: null,
+         })
+      } else if (className == 'Quizlet') {
+         return ({
+            name: 'Quizlet',
+            color: 'hsla(229, 46%, 49%,',
+            catagory: null,
+            rules: null,
+            stared: null,
+         })
+      } else if (className == 'Memes') {
+         return ({
+            name: 'Memes',
+            color: 'hsla(200, 70%, 75%,',
+            catagory: null,
+            rules: 'What da heck are you doing here??',
+            stared: false,
+         })
+      } else if (className == 'Other') {
+         return ({
+            name: 'Other',
+            color: 'hsla(200, 70%, 75%,',
+            catagory: null,
+            rules: null,
+            stared: null,
+         })
+      } else {
+         for (var Catagories = 0; Catagories < $scope.classList.length; Catagories++) {
+            for (var ClassNum = 0; ClassNum < $scope.classList[Catagories].classes.length; ClassNum++) {
+               var Class = $scope.classList[Catagories].classes[ClassNum]
+               if (Class.name == className) {
+                  Class.color = $scope.classList[Catagories].color
+                  Class.catagory = $scope.classList[Catagories].catagory
+                  for (var StaredNum = 0; StaredNum < $scope.myInfo.staredClasses.length; StaredNum++) {
+                     if ($scope.myInfo.staredClasses[StaredNum].name == className) {
+                        Class.stared = true;
+                        return (Class)
+                     }
+                  }
+                  Class.stared = false;
+                  return (Class)
+               }
+            }
          }
+      }
+      return false
+      console.warn('could not find class: ' + className);
+   };
+   $scope.sortLabels = function (input) {
+      if ($scope.sortedLabels && $scope.post && $scope.post.class && $scope.post.class.name != '') {
+         var max = $scope.sortedLabels.length
+         for (var labelCount = 0; labelCount < max; labelCount++) {
+            var label = $scope.sortedLabels[labelCount];
+            var classMax = label.classes.length;
+            for (var classCount = 0; classCount < classMax; classCount++) {
+               var labelClass = label.classes[classCount]
+               if (labelClass == $scope.post.class.name || labelClass.name == $scope.post.class.name) {
+                  if (label.type == 'Label') label.sortOrder = (labelClass.usage * 2) + 1000
+                  if (label.type == 'Teacher') label.sortOrder = 100000;
+                  classCount = classMax + 1;
+               };
+               if (classCount != classMax + 1) label.sortOrder = label.totalUsage || 1
+            }
+         }
+      } else {
+         $scope.sortedLabels = input || labelList.concat(teacherList);
+      }
+      $scope.sortedLabels = $scope.sortedLabels.sort(function (a, b) {
+         return (b.sortOrder || b.totalUsage || 1) - (a.sortOrder || a.totalUsage || 1);
+      })
+      console.log($scope.sortedLabels)
+      return ($scope.sortedLabels)
+   };
+
+   //----------------------------------------------------
+   //------------------UI Actions------------------------
+   $scope.signOut = function () {
+      authorizationService.handleSignoutClick();
+   };
+   $scope.FABClick = function () { //called by the top left toolbar menu button
+      if ($scope.globals.FABisOpen == true) {
+         $scope.newPost({}, 'new')
+      }
+
+   };
+   $scope.toggleSidebar = function (close) { //called by the top left toolbar menu button
+      if (close === true) {
+         $mdSidenav('sidenav_overlay').close();
+      } else {
+         if ($mdMedia('gt-sm')) {
+            $scope.globals.sidenavIsOpen = !$scope.globals.sidenavIsOpen;
+         } else {
+            $mdSidenav('sidenav_overlay').toggle();
+         }
+      }
+   };
+   $scope.toggleMobileSearch = function (toOpen) {
+      $timeout(function () {
+         $scope.globals.mobileSearchIsOpen = toOpen;
+         $scope.searchInputTxt = '';
+      })
+      if (toOpen == true) {
+         document.getElementById("mobile_search_input").focus();
+      } else {
+         document.getElementById("mobile_search_input").blur();
+      }
+   }
+   $scope.toggleSidenavClassSearch = function (toOpen) {
+      $timeout(function () {
+         $scope.globals.sideNavClassSearchOpen = toOpen;
+         $scope.sideNavClassSearch = '';
+      })
+      if (toOpen == true) {
+         document.getElementById("sidenav_class_search_input").focus();
+      } else {
+         document.getElementById("sidenav_class_search_input").blur();
+      }
+   }
+   $scope.openQuizletWindow = function (argument) {
+      var quizWindow = window.open("", "_blank", "status=no,menubar=no,toolbar=no");
+      quizWindow.resizeTo(9000, 140)
+      quizWindow.moveTo(0, 0);
+      quizWindow.document.write("<div style='display:flex;align-items: center;height: 100%;'><span>Your Quizlet username should be here.</span><div style='flex:1;height: 2px;margin-left: 5px;background:black;'></div><div style=' width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 10px solid; '></div><div style=' width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 10px solid; margin-right: 160px; '></div></div>");
+      setTimeout(function () {
+         quizWindow.location = "https://quizlet.com"
+      }, 3000);
+   }
+
+   //----------------------------------------------------
+   // --------------- Post Card Functions ---------------
+   var likeClickTimer = {}
+   $scope.confirmDelete = function (content, arrayIndex) {
+      var confirm = $mdDialog.confirm().title('Permanently delete this?').ariaLabel('Delete?').ok('Delete').cancel('Cancel');
+      $mdDialog.show(confirm).then(function () {
+         promiseQueue().addPromise('script', APIService.runGAScript('deletePost', content.id, false), function (returnedValue) {
+            console.log(returnedValue.result.response.result)
+            if (returnedValue.result.response.result == true) authorizationService.FireDatabase.ref('posts/' + content.id).remove().then(null, console.warn)
+         }, console.warn, 150);
+      });
+   };
+   // $scope.flagPost = function (content, arrayIndex) {
+   //    content.Flagged = true;
+   //    if ($scope.queryParams.classPath != 'flagged') {
+   //       $timeout(function () { //makes angular update values
+   //          $scope.visiblePosts.splice(arrayIndex, 1);
+   //       });
+   //    }
+   //    $scope.allPosts[findPostById(content.Id, $scope.allPosts)].Flagged = true;
+   //    queue('drive', GoogleDriveService.updateFlagged(content.Id, true), null, function (err) {
+   //       $timeout(function () { //makes angular update values
+   //          content.Flagged = false;
+   //          $scope.visiblePosts.splice(arrayIndex, 0, content);
+   //       });
+   //       $mdToast.showSimple('Error flagging post, try again.');
+   //       console.warn(err)
+   //    }, 150);
+   //    //set the poster's has flagged date back
+   //    for (var item = 0; item < $scope.userList.length; item++) {
+   //       if ($scope.userList[item][0] && $scope.userList[item][0] == content.Creator.Email) {
+   //          var range = 'Sheet1!H' + (item + 2);
+   //          var today = $filter('date')(new Date(), 'M/d/yy');
+   //          queue('sheets', GoogleDriveService.updateSpreadsheetRange(range, [today]), null, function (err) {
+   //             $timeout(function () { //makes angular update values
+   //                content.Flagged = false;
+   //                $scope.visiblePosts.splice(arrayIndex, 0, content);
+   //             });
+   //             console.warn(err)
+   //             $mdToast.showSimple('Error flagging post, try again.');
+   //          }, 2);
+   //       }
+   //    }
+   // };
+   // $scope.unFlagPost = function (content, arrayIndex) {
+   //    var timeoutDate = new Date($scope.myInfo.LastBeenFlaggedDate.getTime() + 7 * 86400000);
+   //    if (timeoutDate < new Date()) {
+   //       content.Flagged = false;
+   //       if ($scope.queryParams.classPath == 'flagged') {
+   //          $timeout(function () { //makes angular update values
+   //             $scope.visiblePosts.splice(arrayIndex, 1);
+   //          });
+   //       }
+   //       $scope.allPosts[findPostById(content.Id, $scope.allPosts)].Flagged = false;
+   //       $scope.updateVisiblePosts($scope.filterPosts($scope.allPosts));
+   //       queue('drive', GoogleDriveService.updateFlagged(content.Id, false), null, function (err) {
+   //          $mdToast.showSimple('Error unflagging post, try again.');
+   //          console.warn(err)
+   //       }, 150);
+   //    } else {
+   //       $mdDialog.show($mdDialog.alert({
+   //          title: 'Uh Oh.',
+   //          htmlContent: '<p style="margin: 0 0 2px 0">One of your posts has been flagged within the past week.<br>To unlock the ability to unflag posts, don\'t let your posts get flagged this week.</p>',
+   //          ok: 'Ok'
+   //       }));
+   //    }
+   // };
+   $scope.likePost = function (content) {
+      content.userLiked = !content.userLiked || false;
+      if (typeof (likeClickTimer[content.Id]) == 'number') clearTimeout(likeClickTimer[content.Id]);
+      likeClickTimer[content.Id] = setTimeout(function () {
+         var arrayIndecies = getIdIndexInPostArrays(content.Id)
+         promiseQueue().addPromise('drive', APIService.runGAScript('likePost', {
+            operation: 'likePost',
+            postId: content.id,
+            content: content.userLiked,
+         }, true), function (data) {
+            console.log(data)
+            var res = data.result.response.result.split(" ");
+            console.log(res[1])
+            $timeout(function () {
+               ($scope.allPosts[arrayIndecies.allPosts] || {}).userLiked = res[0];
+               ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).userLiked = res[0];
+            })
+         }, function (err) {
+            console.warn(err)
+            $mdToast.showSimple('Error liking post, try again.');
+         }, 150);
+      }, 3000);
+   };
+
+   //----------------------------------------------------
+   //---------------- Event Watchers --------------------
+   window.addEventListener("resize", function () {
+      if ($mdMedia('gt-sm')) $mdSidenav('sidenav_overlay').close()
+   });
+   content_container.onscroll = function (event) {
+      var yScroll = content_container.scrollTop;
+      $timeout(function () {
+         if (yScroll >= 120 && $scope.globals.FABisHidden == true) {
+            $scope.globals.FABisHidden = false;
+         }
+         if (yScroll <= 120 && $scope.globals.FABisHidden == false) {
+            $scope.globals.FABisOpen = false;
+            $scope.globals.FABisHidden = true;
+         }
+      })
+   };
+   document.onkeydown = function (e) {
+      if (e.altKey && e.ctrlKey) {
+         if (e.keyCode == 68) {
+            devMode = !devMode
+            $timeout(function () {
+               $scope.devMode = devMode;
+            })
+         }
+         if (e.keyCode == 75) {
+            alert('handeling signin click')
+            authorizationService.handleSigninClick(function () {
+               alert('done')
+            });
+         }
+         if (e.keyCode == 76) {
+            alert('running siginin initialization')
+            authorizationService.initilize(function () {
+               alert('done')
+            })
+         }
+         if (e.keyCode == 77) {
+            alert('signing out')
+            gapi.auth2.getAuthInstance().signOut();
+         }
+      }
+   }
+
+   //----------------------------------------------------
+   //----------------- Error Handling -------------------
+   window.DriveErrorHandeler = function (error, item) {
+      console.warn(error);
+      console.log(item);
+      if (error.hasOwnProperty('expectedDomain')) {
+         gapi.auth2.getAuthInstance().signOut();
+         $mdDialog.show($mdDialog.alert({
+            title: 'Sorry.',
+            htmlContent: "<p>York Study Resources only works with York Google accounts right now.</p><p>If you have an email account ending with @york.org, please login with it, or ask Mr.Brookhouser if you don't have one.<p>",
+            ok: 'Ok'
+         })).then(function () {
+            angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
+            setTimeout(function () {
+               angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
+            }, 500);
+         });
+      }
+      if (error.result) {
+         // var newItem = JSON.parse(JSON.stringify(item).replace(/(?:"Authorization":"Bearer )[^"]+/,'"Authorization":"Bearer woop woop ' + authorizationService.getAuthToken() + '"'));
+         // 		console.log(newItem)
+         if (error.result.error.errors[0].message == 'Invalid Credentials') {
+            console.warn("invalid credentials")
+            $mdToast.show($mdToast.simple().textContent('Please signin again.')).hideDelay(8000);
+            authorizationService.showSigninButton();
+            authorizationService.showSigninDialog();
+         } else if (error.result.error.errors[0].reason == 'dailyLimitExceededUnreg') {
+            console.warn('daily limit reached')
+            $mdToast.show($mdToast.simple().textContent('Please signin again.')).hideDelay(8000);
+         }
+      }
+      if (item.Err) {
+         item.Err(error)
+      }
+   }
+   window.clearUserInfo = function () {
+      $timeout(function () {
+         $scope.myInfo = {};
+         $scope.sortedPosts = [];
+      })
+   }
+
+   //----------------------------------------------------
+   //---------------- Utility Functions --------------------
+   var theQueue = {};
+   var timer = {};
+   var delay = 0;
+
+   // Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
+   window.promiseQueue = function () {
+      var queueSelf = this;
+      this.addPromise = function (typeName, promiseFunc, action, error, interval) {
+         typeName = typeName || 'general';
+         if (!theQueue[typeName]) theQueue[typeName] = []
+         theQueue[typeName].push({
+            promiseFunc: promiseFunc,
+            action: action,
+            err: error,
+         });
+         if (!timer[typeName]) {
+            processTheQueue(typeName); // start immediately on the first invocation
+            timer[typeName] = setInterval(function () {
+               processTheQueue(typeName)
+            }, interval || 150);
+         }
+      };
+
+      function processTheQueue(typeName) {
+         var item = theQueue[typeName].shift();
+         if (item) {
+            var delay = 0;
+            if (new Date(authorizationService.GUser.getAuthResponse(true).expires_at) > new Date()) {
+               queueSelf.runPromise(item);
+            } else {
+               authorizationService.GUser.reloadAuthResponse().then(function (res) {
+                  console.log('reloaded token')
+               }, function (err) {
+                  console.warn(err)
+                  gapi.auth2.getAuthInstance().signOut().then(function () {
+                     authorizationService.showSigninButton();
+                  })
+               })
+
+            }
+         }
+         if (theQueue[typeName].length === 0) {
+            clearInterval(timer[typeName]), timer[typeName] = null;
+         }
+      }
+
+      this.runPromise = function (item) {
+         var promise = item.promiseFunc();
+         promise.then(item.action, function (error) {
+            APIErrorHandeler(error, item);
+            if (item.Err) {
+               item.Err(error);
+            } else if (delay < 4) {
+               setTimeout(function () {
+                  runPromise(item);
+               }, (delay = Math.max(delay *= 2, 1)) * 1000);
+            }
+         });
+      }
+      return this
+   }
+
+   function updateSortedPosts(array, callback) {
+      console.log(array)
+      $timeout(function () {
+         if (array) {
+            $scope.sortedPosts = array;
+         }
+         if (callback) {
+            callback();
+         }
+      })
+   }
+
+   function getIdIndexInPostArrays(id) {
+      function findPostIndexById(id, array) {
+         var index = 0;
+         for (index in array) {
+            if (array[index].id == id) return (index)
+         }
+      }
+      return {
+         allPosts: findPostIndexById(id, $scope.allPosts),
+         sortedPosts: findPostIndexById(id, $scope.sortedPosts),
+      }
+   }
+
+   $scope.openLink = function (link, dontOpen) {
+      console.log(link)
+      if (link != "" && link != undefined && dontOpen != true) window.open(link)
+   };
+
+   $scope.removeHttp = function (input) {
+      if (input) {
+         return (input.replace(/(?:http|https):\/\//, '').replace('www.', ''))
+      } else {
+         return input
+      }
+   }
+
+   function mergeFirebasePost(fullPost, slimedPost) {
+      fullPost.class = slimedPost.class
+      fullPost.likeCount = slimedPost.likeCount
+      fullPost.updateDate = slimedPost.updateDate
+      fullPost.creationDate = slimedPost.creationDate
+      fullPost.creator.classOf = slimedPost.creator.classOf
+   }
+
+   //----------------------------------------------------
+   //---------------------- dev -------------------------
+   $scope.consoleLogInput = function (input, asAlert) {
+      console.log(input)
+      if (asAlert) window.alert(JSON.stringify(input, null, 4))
+   }
+
+   $scope.consoleLogVariable = function (input, asAlert) {
+      console.log(self[input])
+      if (asAlert) window.alert(JSON.stringify(self[input], null, 4))
+   }
+
+   $scope.logPostToConsole = function (content, arrayIndex) {
+      console.log({
+         'loggedPostContent': content,
+         'arrayIndex': arrayIndex,
+         'converted': 'not used'
       });
    }
-   return this
-}
 
-function updateSortedPosts(array, callback) {
-   console.log(array)
-   $timeout(function () {
-      if (array) {
-         $scope.sortedPosts = array;
-      }
-      if (callback) {
-         callback();
-      }
-   })
-}
-
-function getIdIndexInPostArrays(id) {
-   function findPostIndexById(id, array) {
-      var index = 0;
-      for (index in array) {
-         if (array[index].id == id) return (index)
-      }
+   $scope.refreshLayout = function () {
+      angularGridInstance.postsGrid.refresh();
    }
-   return {
-      allPosts: findPostIndexById(id, $scope.allPosts),
-      sortedPosts: findPostIndexById(id, $scope.sortedPosts),
-   }
-}
-
-$scope.openLink = function (link, dontOpen) {
-   console.log(link)
-   if (link != "" && link != undefined && dontOpen != true) window.open(link)
-};
-
-$scope.removeHttp = function (input) {
-   if (input) {
-      return (input.replace(/(?:http|https):\/\//, '').replace('www.', ''))
-   } else {
-      return input
-   }
-}
-
-function mergeFirebasePost(fullPost, slimedPost) {
-   fullPost.class = slimedPost.class
-   fullPost.likeCount = slimedPost.likeCount
-   fullPost.updateDate = slimedPost.updateDate
-   fullPost.creationDate = slimedPost.creationDate
-   fullPost.creator.classOf = slimedPost.creator.classOf
-}
-
-//----------------------------------------------------
-//---------------------- dev -------------------------
-$scope.consoleLogInput = function (input, asAlert) {
-   console.log(input)
-   if (asAlert) window.alert(JSON.stringify(input, null, 4))
-}
-
-$scope.consoleLogVariable = function (input, asAlert) {
-   console.log(self[input])
-   if (asAlert) window.alert(JSON.stringify(self[input], null, 4))
-}
-
-$scope.logPostToConsole = function (content, arrayIndex) {
-   console.log({
-      'loggedPostContent': content,
-      'arrayIndex': arrayIndex,
-      'converted': 'not used'
-   });
-}
-
-$scope.refreshLayout = function () {
-   angularGridInstance.postsGrid.refresh();
-}
 }
