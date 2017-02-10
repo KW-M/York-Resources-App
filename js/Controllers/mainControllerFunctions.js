@@ -98,10 +98,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          $timeout(function () {
             $scope.selectedClass = $scope.selectedClass
          });
-         getFileTimer = setInterval(function () {
-            console.log(conurancyCounter)
-            if (conurancyCounter == 0 && content_container.scrollHeight == content_container.clientHeight) $scope.loadPosts()
-         }, 1000);
+         // getFileTimer = setInterval(function () {
+         //    console.log(conurancyCounter)
+         //    if (conurancyCounter == 0 && content_container.scrollHeight == content_container.clientHeight) $scope.loadPosts()
+         // }, 1000);
          postsFullyLoaded = false;
          if ($scope.allPosts.length != 0) sortPosts();
       }
@@ -318,11 +318,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          if (postObj.loadStatus != 'Loaded') {
             postIdAccumulator.push(postObj.id)
             console.log(postIdAccumulator)
-            if (postIdAccumulator.length == 3) getPosts(postIdAccumulator)
+            if (postIdAccumulator.length == 3) getPosts(postIdAccumulator);
             return true;
          }
       }
-      if (postIdAccumulator.length != 0) getPosts(postIdAccumulator)
+      if (postIdAccumulator.length != 0) getPosts(postIdAccumulator);
    }
 
    function getPosts(idArray, callBack) {
