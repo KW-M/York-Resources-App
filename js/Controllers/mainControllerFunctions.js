@@ -350,12 +350,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             console.log(fullPost)
             console.log($scope.sortedPosts[indexes.sortedPosts])
             $timeout(function () {
-               $scope.allPosts[indexes.allPosts] = fullPost;
-            $scope.sortedPosts[indexes.sortedPosts] = fullPost;
-               //if (callBack) callBack();
+               $scope.sortedPosts[indexes.sortedPosts]
+               if (callBack) callBack();
             })
          }
-         hideSpinner();
+         $timeout(hideSpinner,500)
       }, console.warn, 150);
    }
 
