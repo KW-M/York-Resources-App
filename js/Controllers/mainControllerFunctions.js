@@ -98,10 +98,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          $timeout(function () {
             $scope.selectedClass = $scope.selectedClass
          });
-         // getFileTimer = setInterval(function () {
-         //    console.log(conurancyCounter)
-         //    if (conurancyCounter == 0 && content_container.scrollHeight == content_container.clientHeight) $scope.loadPosts()
-         // }, 1000);
+         getFileTimer = setInterval(function () {
+            if (conurancyCounter == 0 && content_container.scrollHeight == content_container.clientHeight) $scope.loadPosts()
+         }, 1000);
          postsFullyLoaded = false;
          if ($scope.allPosts.length != 0) sortPosts();
       }
@@ -310,7 +309,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
 
    function loadPosts() {
-      if (conurancyCounter == 0 && $scope.sortedPosts.length != loadedCounter) {
+      if (conurancyCounter == 0 && $scope.sortedPosts.length != 0 && $scope.sortedPosts.length != loadedCounter) {
          conurancyCounter++;
          var index, cancel;
          var postIdAccumulator = [];
@@ -320,7 +319,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             if (postObj.loadStatus != 'Loaded') {
                postIdAccumulator.push(postObj.id)
                console.log(postIdAccumulator)
-               if (postIdAccumulator.length == 3) {
+               if (postIdAccumulator.length == 7) {
                   getPosts(postIdAccumulator);
                   return true;
                }
@@ -342,15 +341,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             var fullPost = postsArray[count];
             fullPost.loadStatus = 'Loaded';
             loadedCounter++;
-            console.log(loadedCounter + " : " + max)
             var indexes = getIdIndexInPostArrays(fullPost.id);
             mergeFirebasePost(fullPost, $scope.allPosts[indexes.allPosts])
             $scope.allPosts[indexes.allPosts] = fullPost;
-            $scope.sortedPosts[indexes.sortedPosts] = fullPost;
-            console.log(fullPost)
-            console.log($scope.sortedPosts[indexes.sortedPosts])
             $timeout(function () {
-               $scope.sortedPosts[indexes.sortedPosts]
+               $scope.sortedPosts[indexes.sortedPosts] = fullPost;
                if (callBack) callBack();
             })
          }
