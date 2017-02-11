@@ -340,11 +340,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       conurancyCounter++;
       console.log(idArray)
       promiseQueue().addPromise('script', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
+                     console.log(postsData)
          var postsArray = JSON.parse(postsData.result.response.result);
+         console.log(postsArray)
          if (postsArray.error == undefined) {
             conurancyCounter--;
             console.log(conurancyCounter)
-            console.log(postsData)
             console.log(postsArray);
             var max = postsArray.length;
             for (var count = 0; count < max; count++) {
@@ -364,7 +365,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             })
          } else {
             conurancyCounter--;
-            var indexes = getIdIndexInPostArrays(postsData.id);
+            var indexes = getIdIndexInPostArrays(postsArray.id);
+            console.log(postsArray.id)
             console.log(indexes)
             $scope.allPosts.splice(indexes.allPosts, 1)
             $scope.sortedPosts.splice(indexes.sortedPosts, 1)
