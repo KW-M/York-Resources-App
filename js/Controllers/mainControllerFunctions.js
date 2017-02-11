@@ -202,7 +202,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             var indexes = getIdIndexInPostArrays(childSnapshot.key)
             var oldPost = $scope.allPosts[indexes.allPosts]
             var newSlimPost = convertFirePost(childSnapshot.key, childSnapshot.val(), 'Loaded')
+            console.log(newSlimPost)
             var mergedFullPost = mergeFirebasePost(oldPost, newSlimPost);
+            console.log(mergedFullPost)
             if (newSlimPost.updateDate != oldPost.updateDate) {
                mergedFullPost.loadStatus = 'Changed'
                var reSortPosts = true;
