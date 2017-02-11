@@ -701,7 +701,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             console.log(returnedValue.result.response.result)
             console.log(content.id)
             if (returnedValue.result.response.result == true) {
-               authorizationService.FireDatabase.ref('posts/' + content.id).remove().then($mdToast.hide, console.warn)
+               authorizationService.FireDatabase.ref('posts/' + content.id).set().then($mdToast.hide, console.warn)
             };
          }, console.warn, 150);
       });
