@@ -342,7 +342,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       console.log(idArray)
       promiseQueue().addPromise('script', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
          var postsArray = JSON.parse(postsData.result.response.result);
-         if (postsData.error == undefined && postsArray.error == undefined) {
+         if (postsArray.error == undefined) {
             conurancyCounter--;
             console.log(conurancyCounter)
             console.log(postsData)
