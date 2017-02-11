@@ -715,6 +715,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                ($scope.allPosts[arrayIndecies.allPosts] || {}).likeCount = res[1];
                ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).userLiked = res[0];
                ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).likeCount = res[1];
+               authorizationService.FireDatabase.ref('posts/' + content.id).update({
+                  LC: content.likeCount
+               })
             })
          }, function (err) {
             console.warn(err)
