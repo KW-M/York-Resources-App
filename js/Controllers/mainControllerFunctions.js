@@ -949,13 +949,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    $scope.logPostToConsole = function (post, arrayIndex) {
+      alert('FirebaseLink: https://york-studyhub.firebaseio.com/posts/' + post.id + '\n')
       console.log({
          'postContent': post,
          'sortedArrayIndex': arrayIndex,
          'firebaseDatabaseRefrenceLink': 'https://york-studyhub.firebaseio.com/posts/' + post.id,
          'GDriveFileRefrenceLink': 'https://drive.google.com/drive/u/0/#my-drive?action=locate&id=' + post.id,
-         'AltGDriveLink': 'https://drive.google.com/drive/u/0/#my-drive?action=locate&id=' + post.id,
-
+         'AltGDriveLink': 'https://drive.google.com/file/d/' + post.id + '/view',
       });
    }
 
