@@ -687,8 +687,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.likePost = function (content) {
       if (content.userLiked == false) {
          content.userLiked = true;
+         content.likeCount++;
       } else {
          content.userLiked = false;
+         content.likeCount--;
       }
       if (typeof (likeClickTimer[content.Id]) == 'number') clearTimeout(likeClickTimer[content.Id]);
       likeClickTimer[content.Id] = setTimeout(function () {
@@ -703,7 +705,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             console.log(res[1])
             $timeout(function () {
                ($scope.allPosts[arrayIndecies.allPosts] || {}).userLiked = res[0];
+               ($scope.allPosts[arrayIndecies.allPosts] || {}).likeCount = res[1];
                ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).userLiked = res[0];
+               ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).likeCount = res[1];
             })
          }, function (err) {
             console.warn(err)

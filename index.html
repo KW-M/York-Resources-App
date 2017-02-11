@@ -260,7 +260,7 @@
                                 <p id="post_card_description" class="md-body-1" ng-bind-html="post.description" ng-hide="post.description === ''"></p>
                                 <md-card-actions layout="row" style="align-items: center;">
                                     <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(post)">
-                                        <span class="like-counter">{{post.likes.length}}</span>
+                                        <span class="like-counter">{{post.likeCount}}</span>
                                         <md-icon ng-class="{'md-accent' : post.userLiked}" style="margin-top: -8px">thumb_up</md-icon>
                                     </md-button>
                                     <md-button class="md-icon-button" area-label="Flag" ng-click="::unFlagPost(post,$index)" ng-hide="post.flagged == false">
