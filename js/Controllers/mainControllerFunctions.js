@@ -329,26 +329,32 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function getPosts(idArray, callBack) {
       conurancyCounter++;
       promiseQueue().addPromise('script', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
-         conurancyCounter--;
-         console.log(conurancyCounter)
-         console.log(postsData)
-         var postsArray = JSON.parse(postsData.result.response.result);
-         console.log(postsArray);
-         var max = postsArray.length;
-         for (var count = 0; count < max; count++) {
-            loadedCounter++;
-            postsArray[count].loadStatus = 'Loaded';
-            var indexes = getIdIndexInPostArrays(postsArray[count].id);
-            mergeFirebasePost(postsArray[count], $scope.allPosts[indexes.allPosts])
-            $scope.allPosts[indexes.allPosts] = postsArray[count];
-            $scope.sortedPosts[indexes.sortedPosts] = postsArray[count];
-            console.log($scope.sortedPosts[indexes.sortedPosts])
+         if (postsData.error = undefined) {
+            conurancyCounter--;
+            console.log(conurancyCounter)
+            console.log(postsData)
+            var postsArray = JSON.parse(postsData.result.response.result);
+            console.log(postsArray);
+            var max = postsArray.length;
+            for (var count = 0; count < max; count++) {
+               loadedCounter++;
+               postsArray[count].loadStatus = 'Loaded';
+               var indexes = getIdIndexInPostArrays(postsArray[count].id);
+               mergeFirebasePost(postsArray[count], $scope.allPosts[indexes.allPosts])
+               $scope.allPosts[indexes.allPosts] = postsArray[count];
+               $scope.sortedPosts[indexes.sortedPosts] = postsArray[count];
+               console.log($scope.sortedPosts[indexes.sortedPosts])
+            }
+            $timeout(function () {
+               $scope.sortedPosts = $scope.sortedPosts;
+               if (callBack) callBack()
+               setTimeout(hideSpinner, 500)
+            })
+         } else {
+            var indexes = getIdIndexInPostArrays(postsData.id);
+            $scope.allPosts.splice(indexes.allPosts,1)
+            $scope.sortedPosts.splice(indexes.sortedPosts,1)
          }
-         $timeout(function () {
-            $scope.sortedPosts = $scope.sortedPosts;
-            if (callBack) callBack()
-            setTimeout(hideSpinner,500)
-         })
       }, console.warn, 150);
    }
 
