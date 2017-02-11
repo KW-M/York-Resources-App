@@ -949,7 +949,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    $scope.logPostToConsole = function (post, arrayIndex) {
-      alert('FirebaseLink: https://york-studyhub.firebaseio.com/posts/' + post.id + '\n')
+      $mdToast.showSimple(JSON.stringify(post, null, '\t'))
+      //  'FirebaseLink: https://york-studyhub.firebaseio.com/posts/' + post.id + '\nGDriveLink: https://drive.google.com/drive/u/0/#my-drive?action=locate&id=' + post.id)
       console.log({
          'postContent': post,
          'sortedArrayIndex': arrayIndex,
