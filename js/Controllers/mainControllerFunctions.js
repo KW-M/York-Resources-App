@@ -321,12 +321,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       if (conurancyCounter == 0 && $scope.sortedPosts.length != 0 && $scope.sortedPosts.length != loadedCounter) {
          var index;
          var postIdAccumulator = [];
-         var max = $scope.sortedPosts.length
+         var max = $scope.sortedPosts.length;
          for (index = 0; index < max; index++) {
             var postObj = $scope.sortedPosts[index];
             if (postObj.loadStatus != 'Loaded') {
                postIdAccumulator.push(postObj.id)
-               console.log(postIdAccumulator)
                if (postIdAccumulator.length == 5) {
                   getPosts(postIdAccumulator);
                   return true;
