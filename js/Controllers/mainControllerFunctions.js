@@ -329,7 +329,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function getPosts(idArray, callBack) {
       conurancyCounter++;
       promiseQueue().addPromise('script', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
-         if (postsData.error = undefined) {
+         if (postsData.error == undefined) {
             conurancyCounter--;
             console.log(conurancyCounter)
             console.log(postsData)
@@ -351,6 +351,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                setTimeout(hideSpinner, 500)
             })
          } else {
+            conurancyCounter--;
             var indexes = getIdIndexInPostArrays(postsData.id);
             $scope.allPosts.splice(indexes.allPosts,1)
             $scope.sortedPosts.splice(indexes.sortedPosts,1)
