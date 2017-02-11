@@ -700,7 +700,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          promiseQueue().addPromise('script', APIService.runGAScript('deletePost', content.id, false), function (returnedValue) {
             console.log(returnedValue.result.response.result)
             console.log(content.id)
-            if (returnedValue.result.response.result == true) authorizationService.FireDatabase.ref('posts/' + content.id).remove().then($mdToast.hide, console.warn);
+            if (returnedValue.result.response.result == true) {
+               authorizationService.FireDatabase.ref('posts/' + content.id).remove().then($mdToast.hide, console.warn)
+            };
          }, console.warn, 150);
       });
    };
