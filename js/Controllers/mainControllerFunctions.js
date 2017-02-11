@@ -353,8 +353,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          } else {
             conurancyCounter--;
             var indexes = getIdIndexInPostArrays(postsData.id);
-            $scope.allPosts.splice(indexes.allPosts,1)
-            $scope.sortedPosts.splice(indexes.sortedPosts,1)
+            $scope.allPosts.splice(indexes.allPosts, 1)
+            $scope.sortedPosts.splice(indexes.sortedPosts, 1)
          }
       }, console.warn, 150);
    }
@@ -692,6 +692,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       });
    };
    $scope.likePost = function (content) {
+      content.likeCount = content.likeCount || 0;
       if (content.userLiked == false) {
          content.userLiked = true;
          content.likeCount++;
@@ -701,15 +702,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
       if (typeof (likeClickTimer[content.Id]) == 'number') clearTimeout(likeClickTimer[content.Id]);
       likeClickTimer[content.Id] = setTimeout(function () {
-         var arrayIndecies = getIdIndexInPostArrays(content.Id)
          promiseQueue().addPromise('drive', APIService.runGAScript('likePost', {
             operation: 'likePost',
             postId: content.id,
             content: content.userLiked,
          }, true), function (data) {
+            var arrayIndecies = getIdIndexInPostArrays(content.Id)
             console.log(data)
             var res = data.result.response.result.split(" ");
-            console.log(res[1])
             $timeout(function () {
                ($scope.allPosts[arrayIndecies.allPosts] || {}).userLiked = res[0];
                ($scope.allPosts[arrayIndecies.allPosts] || {}).likeCount = res[1];
