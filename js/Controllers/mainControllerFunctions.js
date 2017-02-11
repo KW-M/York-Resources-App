@@ -205,7 +205,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             var mergedFullPost = mergeFirebasePost(oldPost, newSlimPost);
             if (newSlimPost.updateDate != oldPost.updateDate) {
                mergedFullPost.loadStatus = 'Changed'
-               var reSortPosts =true;
+               var reSortPosts = true;
             } else if (newSlimPost.likeCount != oldPost.likeCount) {
                var reOrderPosts = true
             }
