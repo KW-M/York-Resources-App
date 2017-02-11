@@ -360,13 +360,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $timeout(function () {
                $scope.sortedPosts = $scope.sortedPosts;
                if (callBack) callBack()
-               setTimeout(hideSpinner, 500)
+               setTimeout(hideSpinner, 750)
             })
          } else {
-            conurancyCounter--;
             var indexes = getIdIndexInPostArrays(postsArray.id);
             $scope.allPosts.splice(indexes.allPosts, 1)
             $scope.sortedPosts.splice(indexes.sortedPosts, 1)
+            conurancyCounter--;
          }
       }, console.warn, 150);
    }
