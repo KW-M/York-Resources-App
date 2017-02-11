@@ -197,18 +197,24 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                $scope.sortedPosts.splice(indexes.sortedPosts, 1);
             })
          });
-         postsFireRef.on('child_changed', function (childSnapshot,oldSnapshot) {
+         postsFireRef.on('child_changed', function (childSnapshot, oldSnapshot) {
             console.log(childSnapshot)
             var indexes = getIdIndexInPostArrays(childSnapshot.key)
             var oldPost = $scope.allPosts[indexes.allPosts]
             var newSlimPost = convertFirePost(childSnapshot.key, childSnapshot.val(), 'Loaded')
             var mergedFullPost = mergeFirebasePost(oldPost, newSlimPost);
-            if (newSlimPost.updateDate != oldPost.updateDate) { mergedFullPost.loadStatus = 'Changed'}else if(newSlimPost.likeCount != oldPost.updateDate);
+            if (newSlimPost.updateDate != oldPost.updateDate) {
+               mergedFullPost.loadStatus = 'Changed'
+               var reSortPosts =true;
+            } else if (newSlimPost.likeCount != oldPost.likeCount) {
+               var reOrderPosts = true
+            }
             $timeout(function () {
                $scope.allPosts[indexes.allPosts] = mergedFullPost;
                $scope.sortedPosts[indexes.sortedPosts] = mergedFullPost;
+               if (reOrderPosts) $scope.sortedPosts = orderPosts($scope.sortedPosts)
+               if (reSortPosts) sortPosts()
             })
-            sortPosts()
          });
          if ($scope.sortedPosts.length != 0) loadPosts();
          if ($scope.sortedPosts.length == 0) sortPosts();
