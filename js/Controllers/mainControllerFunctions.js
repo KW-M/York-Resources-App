@@ -340,38 +340,33 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       conurancyCounter++;
       console.log(idArray)
       promiseQueue().addPromise('script', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
-                     console.log(postsData)
          var postsArray = JSON.parse(postsData.result.response.result);
-         console.log(postsArray)
-         if (postsArray.error == undefined) {
-            conurancyCounter--;
-            console.log(conurancyCounter)
-            console.log(postsArray);
-            var max = postsArray.length;
-            for (var count = 0; count < max; count++) {
-               loadedCounter++;
-               postsArray[count].loadStatus = 'Loaded';
-               var indexes = getIdIndexInPostArrays(postsArray[count].id);
-               console.log(indexes)
-               mergeFirebasePost(postsArray[count], $scope.allPosts[indexes.allPosts])
-               $scope.allPosts[indexes.allPosts] = postsArray[count];
-               $scope.sortedPosts[indexes.sortedPosts] = postsArray[count];
-               console.log($scope.sortedPosts[indexes.sortedPosts])
-            }
-            $timeout(function () {
-               $scope.sortedPosts = $scope.sortedPosts;
-               if (callBack) callBack()
-               setTimeout(hideSpinner, 500)
-            })
-         } else {
-            conurancyCounter--;
-            var indexes = getIdIndexInPostArrays(postsArray.id);
-            console.log(postsArray.id)
+         conurancyCounter--;
+         console.log(conurancyCounter)
+         console.log(postsArray);
+         var max = postsArray.length;
+         for (var count = 0; count < max; count++) {
+            loadedCounter++;
+            postsArray[count].loadStatus = 'Loaded';
+            var indexes = getIdIndexInPostArrays(postsArray[count].id);
             console.log(indexes)
-            $scope.allPosts.splice(indexes.allPosts, 1)
-            $scope.sortedPosts.splice(indexes.sortedPosts, 1)
+            mergeFirebasePost(postsArray[count], $scope.allPosts[indexes.allPosts])
+            $scope.allPosts[indexes.allPosts] = postsArray[count];
+            $scope.sortedPosts[indexes.sortedPosts] = postsArray[count];
+            console.log($scope.sortedPosts[indexes.sortedPosts])
          }
-      }, console.warn, 150);
+         $timeout(function () {
+            $scope.sortedPosts = $scope.sortedPosts;
+            if (callBack) callBack()
+            setTimeout(hideSpinner, 500)
+         })
+      }, function (err) {
+         conurancyCounter--;
+         var indexes = getIdIndexInPostArrays(err.id);
+         $scope.allPosts.splice(indexes.allPosts, 1)
+         $scope.sortedPosts.splice(indexes.sortedPosts, 1)
+         console.warn(err)
+      }, 150);
    }
 
    function hideSpinner(hide) {
