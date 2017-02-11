@@ -952,7 +952,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       console.log({
          'postContent': post,
          'sortedArrayIndex': arrayIndex,
-         'firebaseDatabaseRefrenceLink': 'https://york-studyhub.firebaseio.com/posts/' + post.id
+         'firebaseDatabaseRefrenceLink': 'https://york-studyhub.firebaseio.com/posts/' + post.id,
+         'GDriveFileRefrenceLink': 'https://drive.google.com/drive/u/0/#my-drive?action=locate&id=' + post.id,
+         'AltGDriveLink': 'https://drive.google.com/drive/u/0/#my-drive?action=locate&id=' + post.id,
 
       });
    }
