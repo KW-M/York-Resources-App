@@ -342,7 +342,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       console.log(idArray)
       promiseQueue().addPromise('script', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
          var postsArray = JSON.parse(postsData.result.response.result);
-         if (postsArray.error == undefined) {
+         if (postsData.error == undefined && postsArray.error == undefined) {
             conurancyCounter--;
             console.log(conurancyCounter)
             console.log(postsData)
@@ -352,6 +352,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                loadedCounter++;
                postsArray[count].loadStatus = 'Loaded';
                var indexes = getIdIndexInPostArrays(postsArray[count].id);
+               console.log(indexes)
                mergeFirebasePost(postsArray[count], $scope.allPosts[indexes.allPosts])
                $scope.allPosts[indexes.allPosts] = postsArray[count];
                $scope.sortedPosts[indexes.sortedPosts] = postsArray[count];
