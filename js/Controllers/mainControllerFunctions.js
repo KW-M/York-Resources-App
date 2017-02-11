@@ -341,11 +341,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       conurancyCounter++;
       console.log(idArray)
       promiseQueue().addPromise('script', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
-         if (postsData.error == undefined) {
+         var postsArray = JSON.parse(postsData.result.response.result);
+         if (postsArray.error == undefined) {
             conurancyCounter--;
             console.log(conurancyCounter)
             console.log(postsData)
-            var postsArray = JSON.parse(postsData.result.response.result);
             console.log(postsArray);
             var max = postsArray.length;
             for (var count = 0; count < max; count++) {
