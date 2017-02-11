@@ -197,13 +197,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                $scope.sortedPosts.splice(indexes.sortedPosts, 1);
             })
          });
-         postsFireRef.on('child_changed', function (childSnapshot) {
+         postsFireRef.on('child_changed', function (childSnapshot,oldSnapshot) {
             console.log(childSnapshot)
             var indexes = getIdIndexInPostArrays(childSnapshot.key)
             var oldPost = $scope.allPosts[indexes.allPosts]
             var newSlimPost = convertFirePost(childSnapshot.key, childSnapshot.val(), 'Loaded')
             var mergedFullPost = mergeFirebasePost(oldPost, newSlimPost);
-            if (newSlimPost.updateDate != oldPost.updateDate) mergedFullPost.loadStatus = 'Changed';
+            if (newSlimPost.updateDate != oldPost.updateDate) { mergedFullPost.loadStatus = 'Changed'}else if(newSlimPost.likeCount != oldPost.updateDate);
             $timeout(function () {
                $scope.allPosts[indexes.allPosts] = mergedFullPost;
                $scope.sortedPosts[indexes.sortedPosts] = mergedFullPost;
@@ -247,9 +247,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function sortPosts() {
       var filterObj = filterPosts($scope.allPosts)
-      $scope.sortedPosts = filterObj.filtered.sort(function (a, b) {
-         return b.creationDate.addDays((b.likeCount || 0) * 2) - a.creationDate.addDays((a.likeCount || 0) * 2);
-      })
+      $scope.sortedPosts = orderPosts(filterObj.filtered)
       var max = filterObj.filteredOut.length
       for (var count = 0; count < max; count++) {
          var postObj = filterObj.filteredOut[count];
@@ -271,6 +269,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          }
       }
       loadPosts()
+   }
+
+   function orderPosts(inputSet) {
+      return inputSet.sort(function (a, b) {
+         return b.creationDate.addDays((b.likeCount || 0) * 2) - a.creationDate.addDays((a.likeCount || 0) * 2);
+      })
    }
 
    function filterPosts(inputSet) {
@@ -303,7 +307,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          filteredOut: filteredOut
       };
    }
-
 
    function loadPosts() {
       hideSpinner()
