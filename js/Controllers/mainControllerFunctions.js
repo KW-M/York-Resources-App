@@ -696,14 +696,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.confirmDelete = function (content, arrayIndex) {
       var confirm = $mdDialog.confirm().title('Permanently delete this?').ariaLabel('Delete?').ok('Delete').cancel('Cancel');
       $mdDialog.show(confirm).then(function () {
-         $mdToast.showSimple('Deleting...');
+         $mdToast.show({template:'Deleting...',hideDelay: 10000});
          promiseQueue().addPromise('script', APIService.runGAScript('deletePost', content.id, false), function (returnedValue) {
             console.log(returnedValue.result.response.result)
             console.log(content.id)
-            if (returnedValue.result.response.result == true || returnedValue.result.response.result == 'true') {
-               console.log(authorizationService.FireDatabase.ref('posts/' + content.id))
-               authorizationService.FireDatabase.ref('posts/' + content.id).remove().then($mdToast.hide, console.warn)
-            };
+            if (returnedValue.result.response.result == true || returnedValue.result.response.result == 'true') authorizationService.FireDatabase.ref('posts/' + content.id).remove().then($mdToast.hide, console.warn);
          }, console.warn, 150);
       });
    };
