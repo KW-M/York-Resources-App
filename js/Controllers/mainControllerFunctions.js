@@ -696,7 +696,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.deletePost = function (post) {
       var confirm = $mdDialog.confirm().title('Permanently delete this?').ariaLabel('Delete?').ok('Delete').cancel('Cancel');
       $mdDialog.show(confirm).then(function () {
-         $mdToast.show({template:'<md-toast>Deleting...<md-toast>',hideDelay: 10000});
+         $mdToast.show({
+            template: '<md-toast>Deleting...<md-toast>',
+            hideDelay: 10000
+         });
          promiseQueue().addPromise('script', APIService.runGAScript('deletePost', post.id, false), function (returnedValue) {
             console.log(returnedValue.result.response.result)
             console.log(post.id)
@@ -720,8 +723,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             postId: post.id,
             post: post.userLiked,
          }, true), function (data) {
-            var arrayIndecies = getIdIndexInPostArrays(post.Id)
             console.log(data)
+            var arrayIndecies = getIdIndexInPostArrays(post.id)
             var res = data.result.response.result.split(" ");
             $timeout(function () {
                ($scope.allPosts[arrayIndecies.allPosts] || {}).userLiked = res[0];
@@ -736,7 +739,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             console.warn(err)
             $mdToast.showSimple('Problem liking the post, try again.');
          }, 150);
-      }, 3000);
+      }, 000);
    };
 
    //----------------------------------------------------
