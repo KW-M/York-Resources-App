@@ -348,6 +348,7 @@
 //       }
 //   }
 
+
 //   // function sortPostsByType(formattedFileList, queryString, queryParams) {
 //   //    if (queryParams.q) {
 //   //       console.log('hasQueryParams')
