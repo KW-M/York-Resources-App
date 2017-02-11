@@ -731,15 +731,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                ($scope.allPosts[arrayIndecies.allPosts] || {}).likeCount = res[1];
                ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).userLiked = res[0];
                ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).likeCount = res[1];
-               authorizationService.FireDatabase.ref('posts/' + post.id).update({
-                  LC: post.likeCount
-               })
+               authorizationService.FireDatabase.ref('posts/' + post.id).update({'/LC':post.likeCount})
             })
          }, function (err) {
             console.warn(err)
             $mdToast.showSimple('Problem liking the post, try again.');
          }, 150);
-      }, 000);
+      }, 2000);
    };
 
    //----------------------------------------------------
