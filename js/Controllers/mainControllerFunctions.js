@@ -365,6 +365,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          } else {
             conurancyCounter--;
             var indexes = getIdIndexInPostArrays(postsData.id);
+            console.log(indexes)
             $scope.allPosts.splice(indexes.allPosts, 1)
             $scope.sortedPosts.splice(indexes.sortedPosts, 1)
          }
