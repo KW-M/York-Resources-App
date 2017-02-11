@@ -948,11 +948,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       if (asAlert) window.alert(JSON.stringify(self[input], null, 4))
    }
 
-   $scope.logPostToConsole = function (content, arrayIndex) {
+   $scope.logPostToConsole = function (post, arrayIndex) {
       console.log({
-         'loggedPostContent': content,
-         'arrayIndex': arrayIndex,
-         'converted': 'not used'
+         'postContent': post,
+         'sortedArrayIndex': arrayIndex,
+         'firebaseDatabaseRefrenceLink': 'https://york-studyhub.firebaseio.com/posts/' + post.id
+
       });
    }
 
