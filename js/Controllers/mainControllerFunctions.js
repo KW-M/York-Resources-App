@@ -693,34 +693,34 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //----------------------------------------------------
    // --------------- Post Card Functions ---------------
    var likeClickTimer = {}
-   $scope.confirmDelete = function (content, arrayIndex) {
+   $scope.deletePost = function (post) {
       var confirm = $mdDialog.confirm().title('Permanently delete this?').ariaLabel('Delete?').ok('Delete').cancel('Cancel');
       $mdDialog.show(confirm).then(function () {
          $mdToast.show({template:'<md-toast>Deleting...<md-toast>',hideDelay: 10000});
-         promiseQueue().addPromise('script', APIService.runGAScript('deletePost', content.id, false), function (returnedValue) {
+         promiseQueue().addPromise('script', APIService.runGAScript('deletePost', post.id, false), function (returnedValue) {
             console.log(returnedValue.result.response.result)
-            console.log(content.id)
+            console.log(post.id)
             if (returnedValue.result.response.result == true || returnedValue.result.response.result == 'true') authorizationService.FireDatabase.ref('posts/' + content.id).remove().then($mdToast.hide, console.warn);
          }, console.warn, 150);
       });
    };
-   $scope.likePost = function (content) {
-      content.likeCount = content.likeCount || 0;
-      if (content.userLiked == false) {
-         content.userLiked = true;
-         content.likeCount++;
+   $scope.likePost = function (post) {
+      post.likeCount = post.likeCount || 0;
+      if (post.userLiked == false) {
+         post.userLiked = true;
+         post.likeCount++;
       } else {
-         content.userLiked = false;
-         content.likeCount--;
+         post.userLiked = false;
+         post.likeCount--;
       }
-      if (typeof (likeClickTimer[content.Id]) == 'number') clearTimeout(likeClickTimer[content.Id]);
-      likeClickTimer[content.Id] = setTimeout(function () {
+      if (typeof (likeClickTimer[post.id]) == 'number') clearTimeout(likeClickTimer[post.id]);
+      likeClickTimer[post.Id] = setTimeout(function () {
          promiseQueue().addPromise('drive', APIService.runGAScript('likePost', {
             operation: 'likePost',
-            postId: content.id,
-            content: content.userLiked,
+            postId: post.id,
+            post: post.userLiked,
          }, true), function (data) {
-            var arrayIndecies = getIdIndexInPostArrays(content.Id)
+            var arrayIndecies = getIdIndexInPostArrays(post.Id)
             console.log(data)
             var res = data.result.response.result.split(" ");
             $timeout(function () {
@@ -728,13 +728,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                ($scope.allPosts[arrayIndecies.allPosts] || {}).likeCount = res[1];
                ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).userLiked = res[0];
                ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).likeCount = res[1];
-               authorizationService.FireDatabase.ref('posts/' + content.id).update({
-                  LC: content.likeCount
+               authorizationService.FireDatabase.ref('posts/' + post.id).update({
+                  LC: post.likeCount
                })
             })
          }, function (err) {
             console.warn(err)
-            $mdToast.showSimple('Error liking post, try again.');
+            $mdToast.showSimple('Problem liking the post, try again.');
          }, 150);
       }, 3000);
    };
