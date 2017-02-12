@@ -814,6 +814,8 @@ button.selected.md-button {
     text-shadow: 0px 2px 23px rgba(0, 0, 0, 0.6);
     text-overflow: ellipsis;
     overflow: hidden;
+    padding: 10px;
+    margin: -10px;
 }
 
 .gradient-overlay md-icon.material-icons {
@@ -829,6 +831,7 @@ button.selected.md-button {
     margin: 0 auto;
     background: rgba(224, 224, 224, .80);
     color: rgb(66, 66, 66);
+    text-shadow: none;
 }
 
 .gradient-overlay .gradient-overlay-metadata.metadata-link {
