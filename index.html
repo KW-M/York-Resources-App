@@ -229,7 +229,7 @@
                     <md-button ng-click="consoleLogInput(myInfo, true)">Log My Info</md-button>
                     <md-button ng-click="consoleLogInput({allPosts:allPosts,sortedPosts:sortedPosts,visiblePosts:visiblePosts})">Log Post Arrays</md-button>
                     <md-button ng-click="refreshLayout()">Refresh Layout</md-button>
-                    <p>All: {{allPosts.length}} Sorted: {{sortedPosts.length}} Visible: {{visiblePosts.length}}</p>
+                    <p>TotalPosts: {{allPosts.length}} Sorted: {{sortedPosts.length}}</p>
                 </span>
                     <div name="Posts Grid" ng-hide="queryParams.classPath == 'Quizlet'">
                         <div angular-grid="sortedPosts" id="layout_grid" ag-gutter-size="12" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="loadPosts()">
