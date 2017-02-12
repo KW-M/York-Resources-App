@@ -44,6 +44,7 @@ app.directive('contenteditable', ['$sce', function ($sce) {
 app.directive('descriptionOverflow', function(){
     return {
         link: function(scope, elm){
+            elm = elm[0]
             console.log(scope.post);
             console.log(elm);
             console.log(elm.clientHeight + " " + elm.scrollHeight)

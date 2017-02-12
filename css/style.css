@@ -723,7 +723,7 @@ button.selected.md-button {
 
 .post-card-title {
     margin: 0px;
-    padding: 20px 16px 0px 16px;
+    padding: 0 16px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
