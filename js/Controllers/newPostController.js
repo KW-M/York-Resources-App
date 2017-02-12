@@ -227,8 +227,11 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         }
         var max = $scope.sortedLabels.length;
         for (var labelCount = 0; labelCount < max; labelCount++) {
-            if (refrenceObj[$scope.sortedLabels[labelCount].name] == true) $scope.sortedLabels[labelCount].active == true;
+            console.log(refrenceObj[$scope.sortedLabels[labelCount].name],$scope.sortedLabels[labelCount])
+            if (refrenceObj[$scope.sortedLabels[labelCount].name] == true) {console.log('tis true')
+            $scope.sortedLabels[labelCount].active == true;
         }
+        console.log(refrenceObj)
     }
 
     function onError(error) {
