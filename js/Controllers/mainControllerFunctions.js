@@ -200,7 +200,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          postsFireRef.on('child_changed', function (childSnapshot, oldSnapshot) {
             console.log(childSnapshot)
             var indexes = getIdIndexInPostArrays(childSnapshot.key)
+                           console.log(indexes)
             var oldPost = $scope.allPosts[indexes.allPosts]
+                           console.log(oldPost)
             var newSlimPost = convertFirePost(childSnapshot.key, childSnapshot.val(), 'Loaded')
             console.log(newSlimPost)
             var mergedFullPost = mergeFirebasePost(oldPost, newSlimPost);
@@ -730,10 +732,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             res[1] = parseInt(res[1])
             console.log(res)
             $timeout(function () {
-               ($scope.allPosts[arrayIndecies.allPosts] || {}).userLiked = res[0];
-               ($scope.allPosts[arrayIndecies.allPosts] || {}).likeCount = res[1];
-               ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).userLiked = res[0];
-               ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).likeCount = res[1];
+               // ($scope.allPosts[arrayIndecies.allPosts] || {}).userLiked = res[0];
+               // ($scope.allPosts[arrayIndecies.allPosts] || {}).likeCount = res[1];
+               // ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).userLiked = res[0];
+               // ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).likeCount = res[1];
                authorizationService.FireDatabase.ref('posts/' + post.id + '/LC').set(res[1])
             })
          }, function (err) {
