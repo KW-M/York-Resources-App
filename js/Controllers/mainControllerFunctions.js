@@ -974,11 +974,15 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          'GDriveFileRefrenceLink': 'https://drive.google.com/drive/u/0/#my-drive?action=locate&id=' + post.id,
          'AltGDriveLink': 'https://drive.google.com/file/d/' + post.id + '/view',
       });
+      var html = '<a href="https://york-studyhub.firebaseio.com/posts/' + post.id + '">FirebaseLink</a>' +
+      '<a href="https://drive.google.com/drive/u/0/#my-drive?action=locate&id=' + post.id + '">GDriveLink</a>' +
+      '<a href="https://drive.google.com/drive/u/0/#my-drive?action=locate&id=' + post.id + '">GDriveLink</a>' +
+      
+      showInfoPopup('Post Data', 'Below is a JSON representation of the Post', post, true, '<a href="http://www.google.com">extraHtml<a>');
    }
 
    $scope.refreshLayout = function () {
       angularGridInstance.postsGrid.refresh();
-      showInfoPopup('title', 'helpful ness is rad', null, true, '<a href="http://www.google.com">extraHtml<a>');
    }
 
    function showInfoPopup(title, helpText, content, preToast, extraHtml) {
@@ -992,7 +996,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
       function showPanel() {
          if(typeof(content) == 'object' || typeof(content) == 'array') {
-            var formatedContent = JSON.st
+            var formatedContent = JSON.stringify(content, null, '\t')
          }
          else {
             var formatedContent = content;
