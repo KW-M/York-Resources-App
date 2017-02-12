@@ -981,24 +981,27 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       angularGridInstance.postsGrid.refresh();
    }
 
-   function showInfoPopup() {
-      $mdPanel.open({
-         attachTo: angular.element(document.body),
-         controller: PanelDialogCtrl,
-         locals: {
-            'selected': this.selected,
-            'desserts': this.desserts
-         },
-         disableParentScroll: false,
-         template: 'panel.tmpl.html',
-         hasBackdrop: false,
-         panelClass: 'demo-dialog-example',
-         position: $mdPanel.newPanelPosition().absolute().center(),
-         trapFocus: false,
-         zIndex: 15000,
-         clickOutsideToClose: false,
-         escapeToClose: true,
-         focusOnOpen: false,
-      });
+   function showInfoPopup(title, helpText, content, preToast) {
+      if (preToast) {
+         
+      } else {
+         showPanel();
+      }
+      function showPanel() {
+         $mdPanel.open({
+            attachTo: angular.element(document.body),
+            controller: PanelDialogCtrl,
+            disableParentScroll: false,
+            template: '<div><h1>'+title+'</h1><p>'+helpText+'</p><p>'+cp+'</p></div>',
+            hasBackdrop: false,
+            panelClass: 'demo-dialog-example',
+            position: $mdPanel.newPanelPosition().absolute().center(),
+            trapFocus: false,
+            zIndex: 15000,
+            clickOutsideToClose: false,
+            escapeToClose: true,
+            focusOnOpen: false,
+         });
+      }
    }
 }
