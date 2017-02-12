@@ -214,9 +214,20 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         }
     }
 
-    function hiddeSelectedLabels() {
-        var objO
-        for ()
+    function hideSelectedLabels() {
+        var refrenceObj = {}
+        var maxLabels = $scope.post.labels.length
+        for (var labelCount = 0; labelCount < maxLabels; labelCount++) {
+           refrenceObj[$scope.post.labels[labelCount]] = true;
+        }
+        var maxTeachers = $scope.post.teachers.length
+        for (var labelCount = 0; labelCount < maxTeachers; labelCount++) {
+            refrenceObj[$scope.post.teachers[labelCount]] = true;
+        }
+        var max = $scope.sortedLabels.length
+        for (var labelCount = 0; labelCount < max; labelCount++) {
+            if (refrenceObj[$scope.sortedLabels[labelCount].name] == true) $scope.sortedLabels[labelCount].active == true;
+        }
     }
 
     function onError(error) {
