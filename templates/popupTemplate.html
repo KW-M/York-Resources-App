@@ -1,9 +1,19 @@
 <style type="text/css">
 	.popup {
 		padding: 16px 20px 0px 20px;
-		overflow:scroll;
 		max-width: 400px;
-		max-height: ;
+		max-height: 50vh;
+	}
+	
+	.popupBody {
+		overflow: auto;
 	}
 </style>
-<div class="hidden popup"><h1>{{::title}}</h1><p>{{::helpText}}</p><p>{{::formatedContent}}</p><md-button md-autofocus flex ng-click="closePopup()">close<md-button></div>
+<div class="hidden popup">
+	<h1>{{::title}}</h1>
+	<div class="popupBody">
+		<p>{{::helpText}}</p>
+		<p>{{::formatedContent}}</p>
+	</div>
+	<md-button md-autofocus flex ng-click="closePopup()">close</md-button>
+</div>
