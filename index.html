@@ -241,7 +241,7 @@
                                             <span ng-if="post.class.name"><md-icon>class</md-icon> {{post.class.name}}</span>
                                             <span ng-if="post.teachers"><md-icon>face</md-icon> {{post.teachers.join(' & ')}}</span>
                                         </div>
-                                        <div class="gradient-overlay-metadata metadata-regular unselectable">
+                                        <div class="gradient-overlay-metadata metadata-regular unselectable" style="font-style: oblique">
                                             <span ng-if="post.creationDate"><md-icon>today</md-icon> {{post.creationDate | date : "mm/dd/yyyy"}}</span>
                                             <span ng-if="post.labels"><md-icon>local_offer</md-icon> {{post.labels.join(', ')}}</span>
                                         </div>
