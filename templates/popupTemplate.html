@@ -16,7 +16,7 @@
 <div class="popup md-whiteframe-z3">
 	<h1>{{::title}}</h1>
 	<div class="popupBody">
-		<p>{{::helpText}}</p>
+		<p ng-bindHtml></p>
 		<p>{{::formatedContent}}</p>
 	</div>
 	<md-button md-autofocus flex ng-click="closePopup()">close</md-button>

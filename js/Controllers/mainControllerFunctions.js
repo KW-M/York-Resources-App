@@ -970,22 +970,19 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       console.log({
          'postContent': post,
          'sortedArrayIndex': arrayIndex,
-         'firebaseDatabaseRefrenceLink': 'https://york-studyhub.firebaseio.com/posts/' + post.id,
-         'GDriveFileRefrenceLink': 'https://drive.google.com/drive/u/0/#my-drive?action=locate&id=' + post.id,
-         'AltGDriveLink': 'https://drive.google.com/file/d/' + post.id + '/view',
       });
       var html = '<a href="https://york-studyhub.firebaseio.com/posts/' + post.id + '">FirebaseLink</a>' +
       '<a href="https://drive.google.com/drive/u/0/#my-drive?action=locate&id=' + post.id + '">GDriveLink</a>' +
-      '<a href="https://drive.google.com/drive/u/0/#my-drive?action=locate&id=' + post.id + '">GDriveLink</a>' +
-      
-      showInfoPopup('Post Data', 'Below is a JSON representation of the Post', post, true, '<a href="http://www.google.com">extraHtml<a>');
+      '<a href="https://drive.google.com/file/d/' + post.id + '/view">AltGDriveLink</a></br>' +
+      'sortedArrayIndex: '+arrayIndex+'</br>Below is a JSON representation of the Post:';
+      showInfoPopup('Post Data', html, post, false);
    }
 
    $scope.refreshLayout = function () {
       angularGridInstance.postsGrid.refresh();
    }
 
-   function showInfoPopup(title, helpText, content, preToast, extraHtml) {
+   function showInfoPopup(title, helpHtml, content, preToast, extraHtml) {
       if (preToast) {
          $mdToast.show($mdToast.simple().textContent(title).action('Details').highlightAction(true).highlightClass('md-accent')).then(function (response) {
             if (response == 'ok') showPanel();
@@ -1005,9 +1002,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             attachTo: angular.element(document.body),
             controller: function (mdPanelRef,$scope) {
                $scope.title = title;
-               $scope.helpText = helpText;
+               $scope.helpHtml = $sce.trustAsHtml(helpHtml);
                $scope.formatedContent = formatedContent;
-               $scope.extraHtml =  $sce.trustAsHtml(extraHtml);
                $scope.closePopup = function () {
                   mdPanelRef.close()
                }
