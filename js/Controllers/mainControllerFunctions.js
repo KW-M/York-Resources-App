@@ -933,14 +933,16 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function mergeFirebasePost(fullPost, slimedPost) {
       var fullPostCopy = fullPost
-      fullPostCopy.class = slimedPost.class
-      fullPostCopy.labels = slimedPost.labels
-      fullPostCopy.teachers = slimedPost.teachers
-      fullPostCopy.likeCount = slimedPost.likeCount
-      fullPostCopy.updateDate = slimedPost.updateDate
-      fullPostCopy.creationDate = slimedPost.creationDate
-      fullPostCopy.creator.classOf = slimedPost.creator.classOf
-      return fullPostCopy;
+      fullPost.class = slimedPost.class
+      fullPost.labels = slimedPost.labels
+      fullPost.teachers = slimedPost.teachers
+      fullPost.likeCount = slimedPost.likeCount
+      fullPost.updateDate = slimedPost.updateDate
+      fullPost.creationDate = slimedPost.creationDate
+      fullPost.creator.classOf = slimedPost.creator.classOf
+      var fullPostNew = fullPost
+      fullPost = fullPostCopy;
+      return fullPostNew;
    }
 
    //----------------------------------------------------
