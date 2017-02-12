@@ -984,7 +984,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function showInfoPopup(title, helpText, content, preToast) {
       if (preToast) {
-         $mdToast.show($mdToast.simple().textContent(title).action('MORE')).then(function (response) {
+         $mdToast.show($mdToast.simple().textContent(title).action('MORE').highlightAction(true).highlightClass('md-accent')).then(function (response) {
             if (response == 'ok') showPanel();
          });
       } else {
@@ -995,9 +995,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
          $mdPanel.open({
             attachTo: angular.element(document.body),
-            controller: function (panelRef, $scope) {
+            controller: function (mdPanelRef,$scope) {
                $scope.closePopup = function () {
-                  panelRef.close()
+                  mdPanelRef.close()
                }
             },
             disableParentScroll: false,
