@@ -207,10 +207,16 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $timeout(function () {
                $scope.allPosts[indexes.allPosts] = mergedFullPost;
                $scope.sortedPosts[indexes.sortedPosts] = mergedFullPost;
-               
-               if (reOrderPosts) $scope.sortedPosts = orderPosts($scope.sortedPosts);
-               if (reSortPosts) sortPosts();
-               if (reLoadPosts) loadPosts();
+               if (newSlimPost.updateDate != oldPost.updateDate) {
+                  console.log('fullUpdate')
+                  $scope.allPosts[indexes.allPosts].loadStatus = 'Changed'
+                  loadPosts();
+               } else if (newSlimPost.flagged != oldPost.flagged) {
+                  sortPosts();
+               } else if (newSlimPost.likeCount != oldPost.likeCount) {
+                  console.log('reorderUpdate')
+                  $scope.sortedPosts = orderPosts($scope.sortedPosts);
+               }
             })
          });
          if ($scope.sortedPosts.length != 0) loadPosts();
