@@ -703,7 +703,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          promiseQueue().addPromise('script', APIService.runGAScript('deletePost', post.id, false), function (returnedValue) {
             console.log(returnedValue.result.response.result)
             console.log(post.id)
-            if (returnedValue.result.response.result == true || returnedValue.result.response.result == 'true') authorizationService.FireDatabase.ref('posts/' + content.id).remove().then($mdToast.hide, console.warn);
+            if (returnedValue.result.response.result == true || returnedValue.result.response.result == 'true') authorizationService.FireDatabase.ref('posts/' + post.id).remove().then($mdToast.hide, console.warn);
          }, console.warn, 150);
       });
    };
