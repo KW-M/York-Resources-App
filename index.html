@@ -258,7 +258,7 @@
                                 <div>
                                     <p class="post-card-title md-title">{{post.title}}</p>
                                     <p class="post-card-creator unselectable"><span>By {{::post.creator.name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::post.creator.classOf}})</span></p>
-                                    <p id="post_card_description" class="md-body-1" ng-bind-html="post.description" ng-hide="post.description === ''"></p>
+                                    <p id="post_card_description" class="md-body-1" ng-bind-html="post.description" ng-if="post.description != ''" description-overflow></p>
                                     <md-card-actions layout="row" style="align-items: center;">
                                         <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(post)">
                                             <span class="like-counter">{{post.likeCount}}</span>

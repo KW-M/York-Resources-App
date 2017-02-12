@@ -40,10 +40,12 @@ app.directive('contenteditable', ['$sce', function ($sce) {
         }
     };
 }]);
+//var resizeListener = addResizeListener(content_container, windowResizeCallback);
 app.directive('descriptionOverflow', function(){
     return {
         link: function(scope, elm){
-            console.log(scope.);
+            console.log(scope.post);
+            console.log(elm);
         }
     }
 });
