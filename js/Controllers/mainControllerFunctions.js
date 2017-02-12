@@ -966,7 +966,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    $scope.logPostToConsole = function (post, arrayIndex) {
-      $mdToast.showSimple(JSON.stringify(post, null, '\t'))
          //  'FirebaseLink: https://york-studyhub.firebaseio.com/posts/' + post.id + '\nGDriveLink: https://drive.google.com/drive/u/0/#my-drive?action=locate&id=' + post.id)
       console.log({
          'postContent': post,
@@ -992,13 +991,19 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
 
       function showPanel() {
+         if(typeof(content) == 'object' || typeof(content) == 'array') {
+            var formatedContent = JSON.st
+         }
+         else {
+            var formatedContent = content;
+         }
          $mdPanel.open({
             attachTo: angular.element(document.body),
             controller: function (mdPanelRef,$scope) {
                $scope.title = title;
                $scope.helpText = helpText;
                $scope.formatedContent = formatedContent;
-               $scope.extraHtml =  $sce.getTrustedHtml extraHtml
+               $scope.extraHtml =  $sce.trustAsHtml(extraHtml);
                $scope.closePopup = function () {
                   mdPanelRef.close()
                }
