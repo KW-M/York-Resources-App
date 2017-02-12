@@ -46,12 +46,17 @@ app.directive('descriptionOverflow', ['$timeout', function ($timeout) {
     return {
         link: function (scope, elm) {
             elm = elm[0]
+            var likeClickTimer = null;
             detectOverflow()
             addResizeListener(resizeListenElm, detectOverflow);
+
             function detectOverflow() {
-                $timeout(function () {
-                    scope.post.isOverflowed = elm.clientHeight < elm.scrollHeight;
-                })
+                if (typeof (likeClickTimer) == 'number') clearTimeout(likeClickTimer);
+                likeClickTimer = setTimeout(function () {
+                    $timeout(function () {
+                        scope.post.isOverflowed = elm.clientHeight < elm.scrollHeight;
+                    })
+                }, 1000)
             }
         }
     }
