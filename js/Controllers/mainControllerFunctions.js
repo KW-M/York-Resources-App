@@ -202,17 +202,17 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             var indexes = getIdIndexInPostArrays(childSnapshot.key)
             var oldPost = $scope.allPosts[indexes.allPosts]
             var newSlimPost = convertFirePost(childSnapshot.key, childSnapshot.val(), 'Loaded')
-            var mergedFullPost = mergeFirebasePost(oldPost, newSlimPost);
             if (newSlimPost.updateDate != oldPost.updateDate) {
                console.log('fullUpdate')
-               mergedFullPost.loadStatus = 'Changed'
+               oldPost.loadStatus = 'Changed'
                var reSortPosts = true;
             } else if (newSlimPost.flagged != oldPost.flagged) {
                var reSortPosts = true;
             } else if (newSlimPost.likeCount != oldPost.likeCount) {
                console.log('reorderUpdate')
-               var reOrderPosts = true
+               var reOrderPosts = true;
             }
+            var mergedFullPost = mergeFirebasePost(oldPost, newSlimPost);
             $timeout(function () {
                $scope.allPosts[indexes.allPosts] = mergedFullPost;
                $scope.sortedPosts[indexes.sortedPosts] = mergedFullPost;
