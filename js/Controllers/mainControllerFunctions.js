@@ -353,7 +353,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                loadedCounter++;
                postsArray[count].loadStatus = 'Loaded';
                var indexes = getIdIndexInPostArrays(postsArray[count].id);
-               mergeFirebasePost(postsArray[count], $scope.allPosts[indexes.allPosts])
+               postsArray[count] = mergeFirebasePost(postsArray[count], $scope.allPosts[indexes.allPosts])
                $scope.allPosts[indexes.allPosts] = postsArray[count];
                $scope.sortedPosts[indexes.sortedPosts] = postsArray[count];
             }
@@ -932,6 +932,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function mergeFirebasePost(fullPost, slimedPost) {
+      var fullPost
       fullPost.class = slimedPost.class
       fullPost.likeCount = slimedPost.likeCount
       fullPost.updateDate = slimedPost.updateDate
