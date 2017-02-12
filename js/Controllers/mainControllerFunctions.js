@@ -210,6 +210,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                if (newSlimPost.updateDate != oldPost.updateDate) {
                   console.log('fullUpdate')
                   $scope.allPosts[indexes.allPosts].loadStatus = 'Changed'
+                  loadedCounter--;
                   loadPosts();
                } else if (newSlimPost.flagged != oldPost.flagged) {
                   sortPosts();
