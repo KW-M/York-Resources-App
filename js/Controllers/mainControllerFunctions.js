@@ -726,6 +726,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             console.log(data)
             var arrayIndecies = getIdIndexInPostArrays(post.id)
             var res = data.result.response.result.split(" ");
+            console.log(res)
             $timeout(function () {
                ($scope.allPosts[arrayIndecies.allPosts] || {}).userLiked = res[0];
                ($scope.allPosts[arrayIndecies.allPosts] || {}).likeCount = res[1];
