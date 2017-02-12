@@ -1,7 +1,7 @@
 /*global app*/ /*global angular*/ /*global gapi*/ /*global google*/ /*global queue*/ /*global subControllerFunctions*/
 app.controller('AppController', controllerFunction)
    //controllerFunction.$inject(['$scope', '$mdDialog', '$window', '$timeout', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', 'angularGridInstance'])
-function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, $location, $http, $sce, $mdDialog, $mdToast, $mdSidenav, $mdMedia, $mdTheming, authorizationService, APIService, angularGridInstance) {
+function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, $location, $http, $sce, $mdDialog, $mdPanel, $mdToast, $mdSidenav, $mdMedia, $mdTheming, authorizationService, APIService, angularGridInstance) {
    var content_container = document.getElementById("content_container");
    var self = this;
 
@@ -861,7 +861,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             if (new Date(authorizationService.GUser.getAuthResponse(true).expires_at) > new Date()) {
                queueSelf.runPromise(item);
             } else {
-               reAuth(function() {
+               reAuth(function () {
                   queueSelf.runPromise(item)
                })
             }
@@ -873,11 +873,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
       this.runPromise = function (item) {
          var promise = item.promiseFunc();
-         promise.then(function(output){
-            console.log('output',output)
+         promise.then(function (output) {
+            console.log('output', output)
             item.action(output)
          }, function (error) {
-            console.log('err',error)
+            console.log('err', error)
             APIErrorHandeler(error, item);
             if (item.Err) {
                item.Err(error);
@@ -979,5 +979,26 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    $scope.refreshLayout = function () {
       angularGridInstance.postsGrid.refresh();
+   }
+
+   function showInfoPopup() {
+      $mdPanel.open({
+         attachTo: angular.element(document.body),
+         controller: PanelDialogCtrl,
+         locals: {
+            'selected': this.selected,
+            'desserts': this.desserts
+         },
+         disableParentScroll: false,
+         template: 'panel.tmpl.html',
+         hasBackdrop: false,
+         panelClass: 'demo-dialog-example',
+         position: $mdPanel.newPanelPosition().absolute().center(),
+         trapFocus: false,
+         zIndex: 15000,
+         clickOutsideToClose: false,
+         escapeToClose: true,
+         focusOnOpen: false,
+      });
    }
 }
