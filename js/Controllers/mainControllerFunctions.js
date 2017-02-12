@@ -979,12 +979,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    $scope.refreshLayout = function () {
       angularGridInstance.postsGrid.refresh();
-      showInfoPopup('title', 'helpful', null, true);
+      showInfoPopup('title', 'helpful ness is rad', null, true);
    }
 
    function showInfoPopup(title, helpText, content, preToast) {
       if (preToast) {
-         $mdToast.show($mdToast.simple().textContent(title).action('MORE').highlightAction(true).highlightClass('md-accent')).then(function (response) {
+         $mdToast.show($mdToast.simple().textContent(title).action('Dets').highlightAction(true).highlightClass('md-accent')).then(function (response) {
             if (response == 'ok') showPanel();
          });
       } else {
@@ -992,13 +992,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
 
       function showPanel() {
-
          $mdPanel.open({
             attachTo: angular.element(document.body),
             controller: function (mdPanelRef,$scope) {
                $scope.title = title;
                $scope.helpText = helpText;
-               
+
                $scope.closePopup = function () {
                   mdPanelRef.close()
                }
@@ -1006,8 +1005,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             disableParentScroll: false,
             templateUrl: 'templates/popupTemplate.html',
             panelClass: 'demo-dialog-example',
-            position: $mdPanel.newPanelPosition().absolute().center(),
-            animation:.openFrom({top:0, left:0}).withAnimation($mdPanel.animation.SCALE);
+            position: $mdPanel.newPanelPosition().absolute().bottom('16px').left('16px'),
+            animation: $mdPanel.newPanelAnimation().openFrom({top:0, left:0}).withAnimation($mdPanel.animation.SCALE),
             trapFocus: false,
             zIndex: 15000,
             hasBackdrop: false,
