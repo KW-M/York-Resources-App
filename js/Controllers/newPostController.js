@@ -230,6 +230,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
             console.log(refrenceObj[$scope.sortedLabels[labelCount].name],$scope.sortedLabels[labelCount])
             if (refrenceObj[$scope.sortedLabels[labelCount].name] == true) {console.log('tis true')
             $scope.sortedLabels[labelCount].active == true;
+            }
         }
         console.log(refrenceObj)
     }

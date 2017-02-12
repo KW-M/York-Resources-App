@@ -111,8 +111,7 @@
 		<!--</md-button>-->
 		<span flex></span>
 		<md-button class="md-icon-button text-format-button hover_black" style="margin-right:0px;" ng-click="closeDialog()">
-			<md-icon ng-show="operation == 'new'" style="font-size:26px; line-height: 25px">delete</md-icon>
-			<md-icon ng-hide="operation == 'new'" style="font-size:26px; line-height: 25px">close</md-icon>
+			<md-icon style="font-size:26px; line-height: 25px">{{operation == 'new' ? 'delete' : 'close'}}</md-icon>
 		</md-button>
 	</md-dialog-actions>
 	<md-dialog-actions ng-show="operation === 'view'" layout="row" style="align-items: center;" ng-style="{'background-color': post.class.color + ' 0.6)'}">
