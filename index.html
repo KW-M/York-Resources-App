@@ -242,6 +242,7 @@
                                         <span><md-icon>event</md-icon> {{post.creationDate | date : "mm/dd/yyyy"}}</span>
                                     </div>
                                     <div ng-if="post.labels.length != 0" class="gradient-overlay-metadata metadata-regular unselectable">
+                                        <span><md-icon>style</md-icon> {{post.teachers.join(' & ')}}</span>
                                         <span><md-icon>style</md-icon> {{post.labels.join(', ')}}</span>
                                     </div>
                                     <div class="gradient-overlay-metadata md-chips metadata-link unselectable" ng-if="post.attachmentName" style="width:100%">
