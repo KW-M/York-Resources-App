@@ -30,7 +30,7 @@
     transition: opacity .3s;
 }
 
- #welcome_dialog {
+ #welcome-dialog {
  	top: 0;
     bottom: 0;
     right: 0;
