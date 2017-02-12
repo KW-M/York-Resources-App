@@ -971,8 +971,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          'postContent': post,
          'sortedArrayIndex': arrayIndex,
       });
-      var html = '<a href="https://york-studyhub.firebaseio.com/posts/' + post.id + '">FirebaseLink</a>' +
-      '<a href="https://drive.google.com/drive/u/0/#my-drive?action=locate&id=' + post.id + '">GDriveLink</a>' +
+      var html = '<a href="https://york-studyhub.firebaseio.com/posts/' + post.id + '">FirebaseLink</a></br>' +
+      '<a href="https://drive.google.com/drive/u/0/#my-drive?action=locate&id=' + post.id + '">GDriveLink</a></br>' +
       '<a href="https://drive.google.com/file/d/' + post.id + '/view">AltGDriveLink</a></br>' +
       'sortedArrayIndex: '+arrayIndex+'</br>Below is a JSON representation of the Post:';
       showInfoPopup('Post Data', html, post, false);
@@ -993,7 +993,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
       function showPanel() {
          if(typeof(content) == 'object' || typeof(content) == 'array') {
-            var formatedContent = JSON.stringify(content, null, '\t')
+            var formatedContent = JSON.stringify(content, null, '    ')
          }
          else {
             var formatedContent = content;
