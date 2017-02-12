@@ -242,8 +242,8 @@
                                             <span ng-if="post.teachers"><md-icon>face</md-icon> {{post.teachers.join(' & ')}}</span>
                                         </div>
                                         <div class="gradient-overlay-metadata metadata-regular unselectable">
-                                            <span ng-if="post.creationDate"><md-icon>event</md-icon> {{post.creationDate | date : "mm/dd/yyyy"}}</span>
-                                            <span ng-if="post.labels"><md-icon>label</md-icon> {{post.labels.join(', ')}}</span>
+                                            <span ng-if="post.creationDate"><md-icon>today</md-icon> {{post.creationDate | date : "mm/dd/yyyy"}}</span>
+                                            <span ng-if="post.labels"><md-icon>local_offer</md-icon> {{post.labels.join(', ')}}</span>
                                         </div>
                                         <div class="gradient-overlay-metadata md-chips metadata-link unselectable" ng-if="post.attachmentName" style="width:100%">
                                             <md-chip>
