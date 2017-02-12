@@ -995,18 +995,18 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
          $mdPanel.open({
             attachTo: angular.element(document.body),
-            // controller: function (panelRef, $scope) {
-            //    $scope.closePopup = function () {
-            //       panelRef.close()
-            //    }
-            // },
+            controller: function (panelRef, $scope) {
+               $scope.closePopup = function () {
+                  panelRef.close()
+               }
+            },
             disableParentScroll: false,
-            template: '<div class=""><h1>' + title + '</h1><p>' + helpText + '</p><p>' + 'formatedContent' + '</p><md-button md-autofocus flex ng-click="closePopup()">close<md-button></div>',
-            hasBackdrop: false,
+            templateUrl: 'templates/popupTemplate.html',
             panelClass: 'demo-dialog-example',
             position: $mdPanel.newPanelPosition().absolute().center(),
             trapFocus: false,
             zIndex: 15000,
+                        hasBackdrop: false,
             clickOutsideToClose: false,
             escapeToClose: true,
             focusOnOpen: false,
