@@ -50,7 +50,6 @@ app.directive('descriptionOverflow', ['$timeout', function ($timeout) {
             addResizeListener(resizeListenElm, detectOverflow);
             function detectOverflow() {
                 $timeout(function () {
-                    console.log(elm.clientHeight + " " + elm.scrollHeight)
                     scope.post.isOverflowed = elm.clientHeight < elm.scrollHeight;
                 })
             }
