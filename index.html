@@ -273,21 +273,21 @@
                                                 <md-icon>more_vert</md-icon>
                                             </md-button>
                                             <md-menu-content>
-                                                <md-menu-item>
-                                                    <md-button ng-click="::newPost(post,'update')" ng-if="post.creator.email == myInfo.email">
+                                                <md-menu-item ng-if="post.creator.email == myInfo.email">
+                                                    <md-button ng-click="::newPost(post,'update')">
                                                         <md-icon>edit</md-icon>Edit</md-button>
                                                 </md-menu-item>
-                                                <md-menu-item>
-                                                    <md-button ng-click="::deletePost(post)" ng-if="post.creator.email == myInfo.email">
+                                                <md-menu-item ng-if="post.creator.email == myInfo.email">
+                                                    <md-button ng-click="::deletePost(post)">
                                                         <md-icon>delete</md-icon>Delete</md-button>
                                                 </md-menu-item>
                                                 <md-menu-item ng-if="post.flagged != true && post.creator.email != myInfo.email">
                                                     <md-button ng-click="::flagPost(post)">
                                                         <md-icon>flag</md-icon>Flag</md-button>
                                                 </md-menu-item>
-                                                <md-menu-item ng-show="devMode">
+                                                <md-menu-item ng-if="devMode == true">
                                                     <md-button ng-click="::logPostToConsole(post,$index)">
-                                                        <md-icon>edit</md-icon>Debug Post</md-button>
+                                                        <md-icon>bug_report</md-icon>Debug Post</md-button>
                                                 </md-menu-item>
                                             </md-menu-content>
                                         </md-menu>
