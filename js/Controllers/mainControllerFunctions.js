@@ -873,7 +873,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
       this.runPromise = function (item) {
          var promise = item.promiseFunc();
-         promise.then(item.action, function (error) {
+         promise.then(function(output){
+            console.log('output',output)
+            item.action(output)
+         }, function (error) {
+            console.log('err',error)
             APIErrorHandeler(error, item);
             if (item.Err) {
                item.Err(error);
