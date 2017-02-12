@@ -40,6 +40,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $scope.post.previewImage = $scope.post.previewImage || ''
         $scope.findType();
         $scope.sortLabels();
+        hideSelectedLabels();
     })
 
     //temproary variables
@@ -224,7 +225,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         for (var labelCount = 0; labelCount < maxTeachers; labelCount++) {
             refrenceObj[$scope.post.teachers[labelCount]] = true;
         }
-        var max = $scope.sortedLabels.length
+        var max = $scope.sortedLabels.length;
         for (var labelCount = 0; labelCount < max; labelCount++) {
             if (refrenceObj[$scope.sortedLabels[labelCount].name] == true) $scope.sortedLabels[labelCount].active == true;
         }
