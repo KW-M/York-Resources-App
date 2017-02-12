@@ -353,11 +353,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                loadedCounter++;
                postsArray[count].loadStatus = 'Loaded';
                var indexes = getIdIndexInPostArrays(postsArray[count].id);
-               console.log(indexes)
                mergeFirebasePost(postsArray[count], $scope.allPosts[indexes.allPosts])
                $scope.allPosts[indexes.allPosts] = postsArray[count];
                $scope.sortedPosts[indexes.sortedPosts] = postsArray[count];
-               console.log($scope.sortedPosts[indexes.sortedPosts])
             }
             $timeout(function () {
                $scope.sortedPosts = $scope.sortedPosts;
@@ -732,10 +730,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             res[1] = parseInt(res[1])
             console.log(res)
             $timeout(function () {
-               // ($scope.allPosts[arrayIndecies.allPosts] || {}).userLiked = res[0];
-               // ($scope.allPosts[arrayIndecies.allPosts] || {}).likeCount = res[1];
-               // ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).userLiked = res[0];
-               // ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).likeCount = res[1];
+               ($scope.allPosts[arrayIndecies.allPosts] || {}).userLiked = res[0];
+               ($scope.allPosts[arrayIndecies.allPosts] || {}).likeCount = res[1];
+               ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).userLiked = res[0];
+               ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).likeCount = res[1];
                authorizationService.FireDatabase.ref('posts/' + post.id + '/LC').set(res[1])
             })
          }, function (err) {
@@ -939,6 +937,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       fullPost.updateDate = slimedPost.updateDate
       fullPost.creationDate = slimedPost.creationDate
       fullPost.creator.classOf = slimedPost.creator.classOf
+      return fullPost;
    }
 
    //----------------------------------------------------
