@@ -983,16 +983,22 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function showInfoPopup(title, helpText, content, preToast) {
       if (preToast) {
-         
+
       } else {
          showPanel();
       }
+
       function showPanel() {
+
          $mdPanel.open({
             attachTo: angular.element(document.body),
-            controller: PanelDialogCtrl,
+            controller: function (panelRef, $scope) {
+               $scope.closePopup = function () {
+                  panelRef.close()
+               }
+            },
             disableParentScroll: false,
-            template: '<div><h1>'+title+'</h1><p>'+helpText+'</p><p>'+cp+'</p></div>',
+            template: '<div><h1>' + title + '</h1><p>' + helpText + '</p><p>' + formatedContent + '</p><md-button md-autofocus flex ng-click="closePopup">close<md-button></div>',
             hasBackdrop: false,
             panelClass: 'demo-dialog-example',
             position: $mdPanel.newPanelPosition().absolute().center(),
