@@ -217,7 +217,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                $scope.allPosts[indexes.allPosts] = mergedFullPost;
                $scope.sortedPosts[indexes.sortedPosts] = mergedFullPost;
                if (reOrderPosts) $scope.sortedPosts = orderPosts($scope.sortedPosts);
-               if (reSortPosts) sortPosts();
+               if (reSortPosts) {
+                  console.log('sortingPosts')
+                  sortPosts();
+               }
             })
          });
          if ($scope.sortedPosts.length != 0) loadPosts();
@@ -932,13 +935,15 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function mergeFirebasePost(fullPost, slimedPost) {
-      var fullPost
-      fullPost.class = slimedPost.class
-      fullPost.likeCount = slimedPost.likeCount
-      fullPost.updateDate = slimedPost.updateDate
-      fullPost.creationDate = slimedPost.creationDate
-      fullPost.creator.classOf = slimedPost.creator.classOf
-      return fullPost;
+      var fullPostCopy = fullPost
+      fullPostCopy.class = slimedPost.class
+      fullPostCopy.labels = slimedPost.labels
+      fullPostCopy.teachers = slimedPost.teachers
+      fullPostCopy.likeCount = slimedPost.likeCount
+      fullPostCopy.updateDate = slimedPost.updateDate
+      fullPostCopy.creationDate = slimedPost.creationDate
+      fullPostCopy.creator.classOf = slimedPost.creator.classOf
+      return fullPostCopy;
    }
 
    //----------------------------------------------------
@@ -955,7 +960,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    $scope.logPostToConsole = function (post, arrayIndex) {
       $mdToast.showSimple(JSON.stringify(post, null, '\t'))
-      //  'FirebaseLink: https://york-studyhub.firebaseio.com/posts/' + post.id + '\nGDriveLink: https://drive.google.com/drive/u/0/#my-drive?action=locate&id=' + post.id)
+         //  'FirebaseLink: https://york-studyhub.firebaseio.com/posts/' + post.id + '\nGDriveLink: https://drive.google.com/drive/u/0/#my-drive?action=locate&id=' + post.id)
       console.log({
          'postContent': post,
          'sortedArrayIndex': arrayIndex,
