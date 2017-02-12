@@ -265,37 +265,34 @@
                                             <md-icon md-svg-src="images/thumb_outline.svg" ng-if="post.userLiked == false" style="margin-top: -8px"></md-icon>
                                             <md-icon ng-class="{'md-accent' : post.userLiked}" ng-if="post.userLiked == true" style="margin-top: -8px">thumb_up</md-icon>
                                         </md-button>
-                                        <md-button class="md-icon-button" area-label="Flag" ng-click="::unFlagPost(post,$index)" ng-hide="post.flagged == false">
+                                        <md-button class="md-icon-button" area-label="Flag" ng-click="::unFlagPost(post,$index)" ng-if="post.flagged == true">
                                             <md-icon class="md-warn">flag</md-icon>
                                         </md-button>
-                                        <md-button class="md-icon-button" area-label="Flag" ng-click="::flagPost(post,$index)" ng-if="post.creator.email === myInfo.email || post.flagged == true">
-                                            <md-icon>flag</md-icon>
-                                        </md-button>
                                         <md-menu>
-                                            <md-button ng-click="::$mdOpenMenu($event)" ng-show="::post.creator.email === myInfo.email" class="md-icon-button">
+                                            <md-button ng-click="::$mdOpenMenu($event)" class="md-icon-button">
                                                 <md-icon>more_vert</md-icon>
                                             </md-button>
                                             <md-menu-content>
-                                                <md-menu-item ng-hide="::post.flagged === true">
-                                                    <md-button ng-click="flagPost(post,$index)">
-                                                        <md-icon>flag</md-icon>Flag</md-button>
+                                                <md-menu-item>
+                                                    <md-button ng-click="::newPost(post,'update')" ng-if="post.creator.email == myInfo.email">
+                                                        <md-icon>edit</md-icon>Edit</md-button>
                                                 </md-menu-item>
                                                 <md-menu-item>
-                                                    <md-button ng-click="::deletePost(post)">
+                                                    <md-button ng-click="::deletePost(post)" ng-if="post.creator.email == myInfo.email">
                                                         <md-icon>delete</md-icon>Delete</md-button>
                                                 </md-menu-item>
-                                                <md-menu-item>
-                                                    <md-button ng-click="newPost(post,'update')">
-                                                        <md-icon>edit</md-icon>Edit</md-button>
+                                                <md-menu-item ng-if="post.flagged != true && post.creator.email != myInfo.email">
+                                                    <md-button ng-click="::flagPost(post)">
+                                                        <md-icon>flag</md-icon>Flag</md-button>
                                                 </md-menu-item>
                                                 <md-menu-item ng-show="devMode">
                                                     <md-button ng-click="::logPostToConsole(post,$index)">
-                                                        <md-icon>edit</md-icon>Console Log Post</md-button>
+                                                        <md-icon>edit</md-icon>Debug Post</md-button>
                                                 </md-menu-item>
                                             </md-menu-content>
                                         </md-menu>
                                         <span flex></span>
-                                        <md-button id="open_button" ng-hide="post.description == ''" class="md-button md-accent" ng-click="newPost(post, 'view')" aria-label="Open resource">More</md-button>
+                                        <md-button id="open_button" ng-hide="post.description == ''" class="md-button md-accent" ng-click="newPost(post, 'view')">More</md-button>
                                     </md-card-actions>
                                 </div>
                             </div>
