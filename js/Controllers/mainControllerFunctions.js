@@ -789,7 +789,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    //----------------------------------------------------
    //----------------- Error Handling -------------------
-   window.DriveErrorHandeler = function (error, item) {
+   window.APIErrorHandeler = function (error, item) {
       console.warn(error);
       console.log(item);
       if (error.hasOwnProperty('expectedDomain')) {
@@ -806,16 +806,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          });
       }
       if (error.result) {
-         // var newItem = JSON.parse(JSON.stringify(item).replace(/(?:"Authorization":"Bearer )[^"]+/,'"Authorization":"Bearer woop woop ' + authorizationService.getAuthToken() + '"'));
-         // 		console.log(newItem)
          if (error.result.error.errors[0].message == 'Invalid Credentials') {
             console.warn("invalid credentials")
             $mdToast.show($mdToast.simple().textContent('Please signin again.')).hideDelay(8000);
             authorizationService.showSigninButton();
-            authorizationService.showSigninDialog();
          } else if (error.result.error.errors[0].reason == 'dailyLimitExceededUnreg') {
             console.warn('daily limit reached')
             $mdToast.show($mdToast.simple().textContent('Please signin again.')).hideDelay(8000);
+            authorizationService.showSigninButton();
          }
       }
       if (item.Err) {
