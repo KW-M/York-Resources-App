@@ -861,15 +861,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             if (new Date(authorizationService.GUser.getAuthResponse(true).expires_at) > new Date()) {
                queueSelf.runPromise(item);
             } else {
-               authorizationService.GUser.reloadAuthResponse().then(function (res) {
-                  console.log('reloaded token')
-               }, function (err) {
-                  console.warn(err)
-                  gapi.auth2.getAuthInstance().signOut().then(function () {
-                     authorizationService.showSigninButton();
-                  })
+               reAuth(function() {
+                  queueSelf.runPromise(item)
                })
-
             }
          }
          if (theQueue[typeName].length === 0) {
@@ -890,6 +884,16 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             }
          });
       }
+
+      function reAuth(callback) {
+         authorizationService.GUser.reloadAuthResponse().then(callback, function (err) {
+            console.warn(err)
+            gapi.auth2.getAuthInstance().signOut().then(function () {
+               authorizationService.showSigninButton();
+            })
+         })
+      }
+
       return this
    }
 
