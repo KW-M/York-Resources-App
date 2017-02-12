@@ -721,7 +721,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          promiseQueue().addPromise('drive', APIService.runGAScript('likePost', {
             operation: 'likePost',
             postId: post.id,
-            post: post.userLiked,
+            content: post.userLiked,
          }, true), function (data) {
             console.log(data)
             var arrayIndecies = getIdIndexInPostArrays(post.id)
