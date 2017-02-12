@@ -717,7 +717,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          post.likeCount--;
       }
       if (typeof (likeClickTimer[post.id]) == 'number') clearTimeout(likeClickTimer[post.id]);
-      likeClickTimer[post.Id] = setTimeout(function () {
+      likeClickTimer[post.id] = setTimeout(function () {
          promiseQueue().addPromise('drive', APIService.runGAScript('likePost', {
             operation: 'likePost',
             postId: post.id,
@@ -731,7 +731,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                ($scope.allPosts[arrayIndecies.allPosts] || {}).likeCount = res[1];
                ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).userLiked = res[0];
                ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).likeCount = res[1];
-               authorizationService.FireDatabase.ref('posts/' + post.id).update({'/LC':post.likeCount})
+               authorizationService.FireDatabase.ref('posts/' + post.id + '/LC').set(res[1])
             })
          }, function (err) {
             console.warn(err)
