@@ -121,8 +121,8 @@
               agId = scope.agId || scope.dep_agId, // angularGridId is deprecated
               listElms,
               reflowCount = 0, //to keep tack of times reflowgrid been called
-              timeoutPromise;
-              var content_container = document.getElementById("content_container");
+              timeoutPromise,
+              content_container = document.getElementById("content_container");//---my addition---
             element.addClass('angular-grid');
 
 
