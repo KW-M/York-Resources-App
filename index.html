@@ -238,12 +238,12 @@
                                 <img ng-src="{{post.previewImage||'https://ssl.gstatic.com/atari/images/simple-header-blended-small.png'}}" class="post-card-image unselectable" ng-hide="post.link == ''"></img>
                                 <div class="gradient-overlay">
                                     <div class="gradient-overlay-metadata metadata-regular unselectable">
-                                        <span ng-hide="post.class.name == null"><md-icon>people</md-icon> {{post.class.name}}</span>
+                                        <span ng-hide="post.class.name == null"><md-icon>class</md-icon> {{post.class.name}}</span>
                                         <span><md-icon>event</md-icon> {{post.creationDate | date : "mm/dd/yyyy"}}</span>
                                     </div>
                                     <div ng-if="post.labels.length != 0" class="gradient-overlay-metadata metadata-regular unselectable">
-                                        <span><md-icon>style</md-icon> {{post.teachers.join(' & ')}}</span>
-                                        <span><md-icon>style</md-icon> {{post.labels.join(', ')}}</span>
+                                        <span><md-icon>face</md-icon> {{post.teachers.join(' & ')}}</span>
+                                        <span><md-icon>label</md-icon> {{post.labels.join(', ')}}</span>
                                     </div>
                                     <div class="gradient-overlay-metadata md-chips metadata-link unselectable" ng-if="post.attachmentName" style="width:100%">
                                         <md-chip>
