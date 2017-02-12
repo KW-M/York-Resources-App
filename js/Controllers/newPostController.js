@@ -213,12 +213,10 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
             $scope.sortedLabels[labelCount].active == false;
         }
     }
-    
+
     function hiddeSelectedLabels() {
-        var max = $scope.post.Labels.lengt
-        for (var labelCount = 0; labelCount < max; labelCount++) {
-            $scope.sortedLabels[labelCount].active == false;
-        }
+        var objO
+        for ()
     }
 
     function onError(error) {
