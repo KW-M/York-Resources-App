@@ -46,6 +46,7 @@ app.directive('descriptionOverflow', function(){
         link: function(scope, elm){
             console.log(scope.post);
             console.log(elm);
+            scope.post.isOverflowed = elm.clientHeight < elm.scrollHeight;
         }
     }
 });
