@@ -996,6 +996,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          $mdPanel.open({
             attachTo: angular.element(document.body),
             controller: function (mdPanelRef,$scope) {
+               $scope.title = title;
+               $scope.helpText = helpText;
+               
                $scope.closePopup = function () {
                   mdPanelRef.close()
                }
@@ -1004,9 +1007,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             templateUrl: 'templates/popupTemplate.html',
             panelClass: 'demo-dialog-example',
             position: $mdPanel.newPanelPosition().absolute().center(),
+            animation:.openFrom({top:0, left:0}).withAnimation($mdPanel.animation.SCALE);
             trapFocus: false,
             zIndex: 15000,
-                        hasBackdrop: false,
+            hasBackdrop: false,
             clickOutsideToClose: false,
             escapeToClose: true,
             focusOnOpen: false,
