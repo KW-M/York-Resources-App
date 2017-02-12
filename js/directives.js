@@ -41,14 +41,18 @@ app.directive('contenteditable', ['$sce', function ($sce) {
     };
 }]);
 //var resizeListener = addResizeListener(content_container, windowResizeCallback);
-app.directive('descriptionOverflow', function(){
+app.directive('descriptionOverflow', ['$timeout', function ($timeout) {
     return {
-        link: function(scope, elm){
+        link: function (scope, elm) {
             elm = elm[0]
             console.log(scope.post);
-            console.log(elm);
-            console.log(elm.clientHeight + " " + elm.scrollHeight)
-            scope.post.isOverflowed = elm.clientHeight < elm.scrollHeight;
+            console.log({
+                element: elm
+            });
+            $timeout(function () {
+                console.log(elm.clientHeight + " " + elm.scrollHeight)
+                scope.post.isOverflowed = elm.clientHeight < elm.scrollHeight;
+            }, 500)
         }
     }
-});
+}]);
