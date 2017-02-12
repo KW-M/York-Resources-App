@@ -979,12 +979,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    $scope.refreshLayout = function () {
       angularGridInstance.postsGrid.refresh();
-      showInfoPopup('title', 'helpful ness is rad', null, true);
+      showInfoPopup('title', 'helpful ness is rad', null, true, '<a href="http://www.google.com">extraHtml<a>');
    }
 
-   function showInfoPopup(title, helpText, content, preToast) {
+   function showInfoPopup(title, helpText, content, preToast, extraHtml) {
       if (preToast) {
-         $mdToast.show($mdToast.simple().textContent(title).action('Dets').highlightAction(true).highlightClass('md-accent')).then(function (response) {
+         $mdToast.show($mdToast.simple().textContent(title).action('Details').highlightAction(true).highlightClass('md-accent')).then(function (response) {
             if (response == 'ok') showPanel();
          });
       } else {
@@ -997,7 +997,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             controller: function (mdPanelRef,$scope) {
                $scope.title = title;
                $scope.helpText = helpText;
-
+               $scope.formatedContent = formatedContent;
+               $scope.extraHtml =  $sce.getTrustedHtml extraHtml
                $scope.closePopup = function () {
                   mdPanelRef.close()
                }
