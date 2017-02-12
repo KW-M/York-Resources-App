@@ -48,7 +48,6 @@ app.directive('descriptionOverflow', ['$timeout', function ($timeout) {
             elm = elm[0]
             detectOverflow()
             addResizeListener(resizeListenElm, detectOverflow);
-
             function detectOverflow() {
                 $timeout(function () {
                     console.log(elm.clientHeight + " " + elm.scrollHeight)
