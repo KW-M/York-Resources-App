@@ -213,7 +213,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                var reOrderPosts = true;
             }
             var mergedFullPost = mergeFirebasePost(oldPost, newSlimPost);
-            console.log(merged)
+            console.log(mergedFullPost)
             $timeout(function () {
                $scope.allPosts[indexes.allPosts] = mergedFullPost;
                $scope.sortedPosts[indexes.sortedPosts] = mergedFullPost;
