@@ -831,7 +831,10 @@ button.selected.md-button {
     margin: 0 auto;
     background: rgba(224, 224, 224, .80);
     color: rgb(66, 66, 66);
-    text-shadow: none;
+}
+
+.gradient-overlay .gradient-overlay-metadata md-chip span{
+    text-shadow: none
 }
 
 .gradient-overlay .gradient-overlay-metadata.metadata-link {
