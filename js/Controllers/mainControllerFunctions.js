@@ -979,19 +979,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    $scope.refreshLayout = function () {
       angularGridInstance.postsGrid.refresh();
-      showInfoPopup('title', 'helpful', null, false);
+      showInfoPopup('title', 'helpful', null, true);
    }
 
    function showInfoPopup(title, helpText, content, preToast) {
       if (preToast) {
-         var toast = $mdToast.simple()
-            .textContent('Marked as read')
-            .action('MORE')
-
-         $mdToast.show($mdToast.simple().textContent('Marked as read').action('MORE')).then(function (response) {
-            if (response == 'ok') {
-               alert('You clicked the \'UNDO\' action.');
-            }
+         $mdToast.show($mdToast.simple().textContent(title).action('MORE')).then(function (response) {
+            if (response == 'ok') showPanel();
          });
       } else {
          showPanel();
@@ -1007,7 +1001,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             //    }
             // },
             disableParentScroll: false,
-            template: '<div><h1>' + title + '</h1><p>' + helpText + '</p><p>' + 'formatedContent' + '</p><md-button md-autofocus flex ng-click="closePopup()">close<md-button></div>',
+            template: '<div class=""><h1>' + title + '</h1><p>' + helpText + '</p><p>' + 'formatedContent' + '</p><md-button md-autofocus flex ng-click="closePopup()">close<md-button></div>',
             hasBackdrop: false,
             panelClass: 'demo-dialog-example',
             position: $mdPanel.newPanelPosition().absolute().center(),
