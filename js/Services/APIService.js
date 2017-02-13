@@ -19,7 +19,7 @@ app.service('APIService', ['$q', '$http', function ($q, $http) {
         return function () {
             return gapi.client.drive.files.list({
                 q: query || null,
-                fields: 'files(name,id,properties),nextPageToken',
+                fields: 'files(id),nextPageToken',
                 pageToken: pageToken || null,
                 pageSize: 100,
             });

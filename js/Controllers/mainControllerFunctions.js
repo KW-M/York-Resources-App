@@ -326,7 +326,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       var filteredOut = [];
       var max = inputSet.length;
       for (var idCount = 0; idCount < max; idCount++) {
-         idIndex[inputSet[idCount]] = true;
+         idIndex[inputSet[idCount].id] = true;
       };
       max = $scope.allPosts.length;
       for (var count = 0; count < max; count++) {
