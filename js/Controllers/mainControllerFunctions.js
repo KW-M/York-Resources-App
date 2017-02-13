@@ -71,8 +71,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          no_more_footer.style.display = 'none';
          no_posts_footer.style.display = 'none';
          footer_problem.style.display = 'none';
+
          if ($scope.queryParams.q == null) {
-            $scope.queryParams.flagged = false
+            $scope.queryParams.flagged = null
             $scope.queryParams.type = null
             $scope.queryParams.creatorEmail = null
          }
@@ -83,14 +84,16 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          } else if ($scope.queryParams.classPath == 'Flagged Posts') {
             $scope.queryParams.flagged = true
          } else {
+            $scope.queryParams.flagged = false;
             $scope.searchPrefix = 'Search Within';
          }
+
          $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
          if ($scope.allPosts.length != 0) {
-            if ($scope.queryParams.q = null && $scope.queryParams.q != previousSearch) {
+            if ($scope.queryParams.q != null && $scope.queryParams.q != previousSearch) {
+               previousSearch = $scope.queryParams.q
                generateQueryString();
                sortPosts(true);
-
             } else {
                sortPosts();
             }
@@ -253,7 +256,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.sortedPosts = [];
    $scope.searchPosts = [];
 
-   function sortPosts() {
+   function sortPosts(newSearch) {
+      if ($scope.queryParams.q == null) {
       var filterObj = filterPosts($scope.allPosts)
       $scope.sortedPosts = orderPosts(filterObj.filtered)
       var max = filterObj.filteredOut.length
@@ -275,6 +279,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.allPosts[indexes.allPosts] = slimedObj;
             loadedCounter--;
          }
+      }
       }
       loadPosts()
    }
