@@ -62,43 +62,45 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       $rootScope.$on('$locationChangeSuccess', onLocationChange);
 
       function onLocationChange() {
-         $scope.queryParams.q = $location.search().q || null;
          $scope.queryParams.classPath = $location.path().replace(/\//g, "").replace(/-/g, " ").replace(/~/g, "-") || 'All Posts';
-         $scope.queryParams.id = $location.hash();
+         $scope.queryParams.q = $location.search().q || null;
          $scope.searchInputTxt = $scope.queryParams.q;
+         $scope.queryParams.id = $location.hash();
+         $scope.searchPrefix = 'Search';
 
          no_more_footer.style.display = 'none';
          no_posts_footer.style.display = 'none';
          footer_problem.style.display = 'none';
-         $scope.searchPrefix = 'Search';
          if ($scope.queryParams.q == null) {
-            $scope.queryParams.flagged = null
+            $scope.queryParams.flagged = false
             $scope.queryParams.type = null
             $scope.queryParams.creatorEmail = null
          }
-         if ($scope.queryParams.classPath === 'All Posts') {
+         if ($scope.queryParams.classPath == 'All Posts') {
             $scope.queryParams.flagged = false;
-         } else if ($scope.queryParams.classPath === 'Your Posts') {
+         } else if ($scope.queryParams.classPath == 'Your Posts') {
             $scope.queryParams.creatorEmail = $scope.myInfo.Email;
-         } else if ($scope.queryParams.classPath === 'Flagged Posts') {
+         } else if ($scope.queryParams.classPath == 'Flagged Posts') {
             $scope.queryParams.flagged = true
          } else {
             $scope.searchPrefix = 'Search Within';
-            $scope.queryParams.flagged = false
          }
          $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
-         // $timeout(function () {
-         //    $scope.selectedClass = $scope.selectedClass
-         // });
          if ($scope.allPosts.length != 0) {
             if ($scope.queryParams.q = null && $scope.queryParams.q != previousSearch) {
                generateQueryString();
                sortPosts(true);
-               previousSearch = $scope.queryParams.q
+
             } else {
                sortPosts();
             }
          }
+         getFileTimer = setInterval(function () {
+            if (conurancyCounter == 0 && content_container.scrollHeight == content_container.clientHeight) $scope.loadPosts()
+         }, 1000);
+         // $timeout(function () {
+         //    $scope.selectedClass = $scope.selectedClass
+         // });
       }
    }
 
