@@ -253,8 +253,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       } else {
          promiseQueue().addPromise('drive', APIService.searchGDrive(generateQueryString()), function (postsData) {
             console.log(postsData)
-            var postsArray = JSON.parse(postsData.result.response.result);
-            catagorizePosts(seperatePosts(postsArray))
+            catagorizePosts(seperatePosts(postsData.result.files))
          },console.warn, 150)
       }
 
@@ -551,6 +550,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       if ($scope.queryParams.q !== null && $scope.queryParams.q !== undefined) {
          query += " and fullText contains '" + $scope.queryParams.q + "'";
       }
+      console.log(query)
       return query
    }
 

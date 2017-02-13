@@ -19,7 +19,6 @@ app.service('APIService', ['$q', '$http', function ($q, $http) {
         return function () {
             return gapi.client.drive.files.list({
                 q: query || null,
-                orderBy: 'createdTime desc,name',
                 fields: 'files(name,id,properties),nextPageToken',
                 pageToken: pageToken || null,
                 pageSize: 100,
