@@ -317,6 +317,27 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          filteredOut: filteredOut
       };
    }
+   
+   function seperatePosts(inputSet) {
+      var filtered = [];
+      var filteredOut = [];
+      
+      var max = inputSet.length;
+      for (var idCount = 0; idCount < max; idCount++) {
+
+      };
+      for (var count = 0; count < max; count++) {
+         if (Flagged && Class && Type && Creator) {
+            filtered.push(inputSet[count])
+         } else {
+            filteredOut.push(inputSet[count])
+         }
+      };
+      return {
+         filtered: filtered,
+         filteredOut: filteredOut
+      };
+   }
 
    function loadPosts() {
       hideSpinner()
