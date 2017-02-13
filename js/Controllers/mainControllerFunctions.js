@@ -1015,7 +1015,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
       function showPanel() {
          if (typeof (content) == 'object' || typeof (content) == 'array') {
-            var formatedContent = JSON.stringify(content, null, '\n    ')
+            var formatedContent = JSON.stringify(content, undefined, )
+            console.log(formatedContent)
          } else {
             var formatedContent = content;
          }
