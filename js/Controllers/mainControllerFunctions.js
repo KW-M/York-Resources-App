@@ -60,9 +60,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function listenForURLChange() {
       onLocationChange();
       $rootScope.$on('$locationChangeSuccess', onLocationChange);
+      getFileTimer = setInterval(function () {
+         if (conurancyCounter == 0 && content_container.scrollHeight == content_container.clientHeight) $scope.loadPosts()
+      }, 1000);
 
       function onLocationChange() {
          $scope.queryParams.classPath = $location.path().replace(/\//g, "").replace(/-/g, " ").replace(/~/g, "-") || 'All Posts';
+         $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
          $scope.queryParams.q = $location.search().q || null;
          $scope.searchInputTxt = $scope.queryParams.q;
          $scope.queryParams.id = $location.hash();
@@ -87,23 +91,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.queryParams.flagged = false;
             $scope.searchPrefix = 'Search Within';
          }
-
-         $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
-         if ($scope.allPosts.length != 0) {
-            if ($scope.queryParams.q != null && $scope.queryParams.q != previousSearch) {
-               previousSearch = $scope.queryParams.q
-               generateQueryString();
-               sortPosts(true);
-            } else {
-               sortPosts();
-            }
-         }
-         getFileTimer = setInterval(function () {
-            if (conurancyCounter == 0 && content_container.scrollHeight == content_container.clientHeight) $scope.loadPosts()
-         }, 1000);
-         // $timeout(function () {
-         //    $scope.selectedClass = $scope.selectedClass
-         // });
+         if ($scope.allPosts.length != 0) sortPosts($scope.queryParams.q != previousSearch);
+         $timeout(function () {
+            $scope.selectedClass = $scope.selectedClass;
+         });
       }
    }
 
@@ -258,28 +249,32 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function sortPosts(newSearch) {
       if ($scope.queryParams.q == null) {
-      var filterObj = filterPosts($scope.allPosts)
-      $scope.sortedPosts = orderPosts(filterObj.filtered)
-      var max = filterObj.filteredOut.length
-      for (var count = 0; count < max; count++) {
-         var postObj = filterObj.filteredOut[count];
-         if (postObj.loadStatus == 'Loaded') {
-            var slimedObj = {
-               id: postObj.id,
-               title: postObj.title,
-               class: postObj.class,
-               creator: postObj.creator,
-               flagged: postObj.flagged,
-               likeCount: postObj.likeCount,
-               updateDate: postObj.updateDate,
-               creationDate: postObj.creationDate,
-               loadStatus: 'UnLoaded',
+         var filterObj = filterPosts($scope.allPosts)
+         $scope.sortedPosts = orderPosts(filterObj.filtered)
+         var max = filterObj.filteredOut.length
+         for (var count = 0; count < max; count++) {
+            var postObj = filterObj.filteredOut[count];
+            if (postObj.loadStatus == 'Loaded') {
+               var slimedObj = {
+                  id: postObj.id,
+                  title: postObj.title,
+                  class: postObj.class,
+                  creator: postObj.creator,
+                  flagged: postObj.flagged,
+                  likeCount: postObj.likeCount,
+                  updateDate: postObj.updateDate,
+                  creationDate: postObj.creationDate,
+                  loadStatus: 'UnLoaded',
+               }
+               var indexes = getIdIndexInPostArrays(postObj.id)
+               $scope.allPosts[indexes.allPosts] = slimedObj;
+               loadedCounter--;
             }
-            var indexes = getIdIndexInPostArrays(postObj.id)
-            $scope.allPosts[indexes.allPosts] = slimedObj;
-            loadedCounter--;
          }
-      }
+      } else {
+         if(new)
+         previousSearch = $scope.queryParams.q;
+         generateQueryString();
       }
       loadPosts()
    }
