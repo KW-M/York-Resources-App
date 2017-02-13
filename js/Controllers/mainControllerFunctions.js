@@ -250,6 +250,15 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function sortPosts(newSearch) {
       if ($scope.queryParams.q == null) {
          var filterObj = filterPosts($scope.allPosts)
+      } else {
+         promiseQueue().addPromise('script', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
+            console.log(postsData)
+            var postsArray = JSON.parse(postsData.result.response.result);
+            generateQueryString();
+         })
+      }
+
+      function distributePosts(filterObj) {
          $scope.sortedPosts = orderPosts(filterObj.filtered)
          var max = filterObj.filteredOut.length
          for (var count = 0; count < max; count++) {
@@ -271,14 +280,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                loadedCounter--;
             }
          }
-      } else {
-         promiseQueue().addPromise('script', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
-            console.log(postsData)
-            var postsArray = JSON.parse(postsData.result.response.result);
-            generateQueryString();
-         })
+         loadPosts()
       }
-      loadPosts()
    }
 
    function orderPosts(inputSet) {
@@ -322,19 +325,18 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       var idIndex = {}
       var filtered = [];
       var filteredOut = [];
-      
       var max = inputSet.length;
       for (var idCount = 0; idCount < max; idCount++) {
-
+         idIndex[inputSet[idCount]] = true;
       };
       max = $scope.allPosts.length;
       for (var count = 0; count < max; count++) {
-         if ($scope.allPosts.id == ) {
-            filtered.push(inputSet[count])
+         if (idIndex[$scope.allPosts[count].id] == true) {
+            filtered.push($scope.allPosts[count])
          } else {
-            filteredOut.push(inputSet[count])
+            filteredOut.push($scope.allPosts[count]);
          }
-      };
+      }
       return {
          filtered: filtered,
          filteredOut: filteredOut
