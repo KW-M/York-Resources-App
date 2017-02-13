@@ -1015,7 +1015,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
       function showPanel() {
          if (typeof (content) == 'object' || typeof (content) == 'array') {
-            var formatedContent = JSON.stringify(content, undefined, )
+            var formatedContent = JSON.stringify(content, undefined, 4)
             console.log(formatedContent)
          } else {
             var formatedContent = content;
@@ -1025,7 +1025,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             controller: function (mdPanelRef, $scope) {
                $scope.title = title;
                $scope.helpHtml = $sce.trustAsHtml(helpHtml);
-               $scope.formatedContent = formatedContent;
+               $scope.formatedContent = $sce.trustAsHtml(formatedContent);
                $scope.closePopup = function () {
                   mdPanelRef.close()
                }
