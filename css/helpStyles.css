@@ -156,3 +156,7 @@
     .help-body {
         margin: 4px 0px 12px;
     }
+    
+    .not-visible.help-loaded {
+        visibility: visible;
+    }
