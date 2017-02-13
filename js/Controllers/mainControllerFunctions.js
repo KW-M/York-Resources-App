@@ -995,9 +995,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       });
       var html = '<a href="https://york-studyhub.firebaseio.com/posts/' + post.id + '">FirebaseLink</a></br>' +
          '<a href="https://drive.google.com/drive/u/0/#my-drive?action=locate&id=' + post.id + '">GDriveLink</a></br>' +
-         '<a href="https://drive.google.com/file/d/' + post.id + '/view">AltGDriveLink</a></br>' +
-         'sortedArrayIndex: ' + arrayIndex + '</br>Below is a JSON representation of the Post:';
-      showInfoPopup('Post Data', html, post, true);
+         '<a href="https://drive.google.com/file/d/' + post.id + '/view">AltGDriveLink</a></br></br>' +
+         'sortedArrayIndex: ' + arrayIndex + '</br></br>Below is a JSON representation of the Post.';
+      showInfoPopup('Post Data', html, post, false);
    }
 
    $scope.refreshLayout = function () {
@@ -1015,7 +1015,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
       function showPanel() {
          if (typeof (content) == 'object' || typeof (content) == 'array') {
-            var formatedContent = JSON.stringify(content, null, '    ')
+            var formatedContent = JSON.stringify(content, null, '\n    ')
          } else {
             var formatedContent = content;
          }
@@ -1034,7 +1034,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             panelClass: 'demo-dialog-example',
             position: $mdPanel.newPanelPosition().absolute().bottom('16px').left('16px'),
             animation: $mdPanel.newPanelAnimation().openFrom({
-               top: 0,
+               bottom: 0,
                left: 0
             }).withAnimation($mdPanel.animation.SCALE),
             trapFocus: false,
