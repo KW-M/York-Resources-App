@@ -421,7 +421,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             controller: ['$scope', '$timeout', '$http', '$mdDialog', 'APIService', 'authorizationService', '$mdToast', "postObj", "operation", newPostController],
             locals: {
                postObj: postObj,
-               operation: operation
+               operation: operation,
             },
             scope: $scope,
             preserveScope: true,
