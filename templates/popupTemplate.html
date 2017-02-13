@@ -10,7 +10,7 @@
 		display: flex;
 		flex-direction: column;
 	}
-
+	
 	.popupBody {
 		padding: 2px 20px 0px 20px;
 		overflow: auto;
@@ -24,7 +24,7 @@
 	</md-toolbar>
 	<div class="popupBody" flex>
 		<p ng-bind-html="::helpHtml"></p>
-		<p ng-bind-html="::formatedContent"></p>
+		<pre>{{::formatedContent}}</pre>
 	</div>
 	<md-button md-autofocus flex ng-click="closePopup()">close</md-button>
 </div>
