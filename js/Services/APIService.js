@@ -14,14 +14,14 @@ app.service('APIService', ['$q', '$http', function ($q, $http) {
         }
     }
 
-    //---------------- Gets A list of the Drive File With the York Domain -----------------
-    this.queryGDrive = function (query, pageToken, pageSize) {
+    //---------------- Gets A list of Drive Files That Match the Query string -----------------
+    this.searchGDrive = function (query, pageToken) {
         return function () {
             return gapi.client.drive.files.list({
-                pageSize: pageSize,
-                pageToken: pageToken,
                 q: query || null,
-                fields: 'files(name,id,modifiedTime,createdTime,properties,description,owners(displayName,emailAddress)),nextPageToken', //
+                fields: 'files(name,id,properties),nextPageToken',
+                pageToken: pageToken || null,
+                pageSize: 100,
             });
         }
     };
