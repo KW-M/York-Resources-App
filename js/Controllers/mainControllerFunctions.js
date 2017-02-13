@@ -254,11 +254,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          promiseQueue().addPromise('drive', APIService.searchGDrive(generateQueryString()), function (postsData) {
             console.log(postsData)
             catagorizePosts(seperatePosts(postsData.result.files))
-         },console.warn, 150)
+         }, console.warn, 150)
       }
 
       function catagorizePosts(filterObj) {
-         $scope.sortedPosts = orderPosts(filterObj.filtered)
+         $timeout(function () {
+            $scope.sortedPosts = orderPosts(filterObj.filtered)
+            loadPosts()
+         })
          var max = filterObj.filteredOut.length
          for (var count = 0; count < max; count++) {
             var postObj = filterObj.filteredOut[count];
@@ -279,7 +282,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                loadedCounter--;
             }
          }
-         loadPosts()
       }
    }
 
