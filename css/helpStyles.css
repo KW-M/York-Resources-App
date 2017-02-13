@@ -134,6 +134,15 @@
         margin: 0;
     }
     
+    .help-content {
+        padding: 24px;
+        font-family: Roboto, "Helvetica Neue", Helvetica, sans-serif;
+        font-size: 13px;
+        outline: none;
+        background-color: white;
+        
+    }
+    
     .help-h1 {
         color: rgb(33, 33, 33);
         font-weight: 400;
@@ -143,4 +152,8 @@
     }
     
     .help-h2 {}
+    
+    .help-body {
+        margin: 4px 0px 12px;
+    }
     
