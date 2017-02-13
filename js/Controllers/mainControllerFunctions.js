@@ -255,7 +255,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             console.log(postsData)
             var postsArray = JSON.parse(postsData.result.response.result);
             catagorizePosts(seperatePosts(postsArray))
-         })
+         },console.warn, 150)
       }
 
       function catagorizePosts(filterObj) {
