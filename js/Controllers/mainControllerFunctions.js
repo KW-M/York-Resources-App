@@ -71,11 +71,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          no_posts_footer.style.display = 'none';
          footer_problem.style.display = 'none';
          $scope.searchPrefix = 'Search';
-         if ($scope.queryParams.q !== null) {
-            if ($scope.queryParams.q != $scope.previousSearch) {
-               updateSortedPosts([]);
-            }
-         } else {
+         if ($scope.queryParams.q == null) {
             $scope.queryParams.flagged = null
             $scope.queryParams.type = null
             $scope.queryParams.creatorEmail = null
@@ -90,10 +86,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.searchPrefix = 'Search Within';
             $scope.queryParams.flagged = false
          }
-         // generateQueryString();
-         // if ($scope.queryParams.q === null) {
-         //$scope.updateVisiblePosts($scope.filterPosts($scope.allPosts), hideSpinner);
-         // }
          $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
          $timeout(function () {
             $scope.selectedClass = $scope.selectedClass
@@ -101,6 +93,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          getFileTimer = setInterval(function () {
             if (conurancyCounter == 0 && content_container.scrollHeight == content_container.clientHeight) $scope.loadPosts()
          }, 1000);
+         if ($scope.queryParams.q === null) {
+            if ($scope.queryParams.q != $scope.previousSearch) {
+               generateQueryString();
+               updateSortedPosts([]);
+            } else {
+
+            }
+         }
          postsFullyLoaded = false;
          if ($scope.allPosts.length != 0) sortPosts();
       }
@@ -964,15 +964,15 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    $scope.logPostToConsole = function (post, arrayIndex) {
-         //  'FirebaseLink: https://york-studyhub.firebaseio.com/posts/' + post.id + '\nGDriveLink: https://drive.google.com/drive/u/0/#my-drive?action=locate&id=' + post.id)
+      //  'FirebaseLink: https://york-studyhub.firebaseio.com/posts/' + post.id + '\nGDriveLink: https://drive.google.com/drive/u/0/#my-drive?action=locate&id=' + post.id)
       console.log({
          'postContent': post,
          'sortedArrayIndex': arrayIndex,
       });
       var html = '<a href="https://york-studyhub.firebaseio.com/posts/' + post.id + '">FirebaseLink</a></br>' +
-      '<a href="https://drive.google.com/drive/u/0/#my-drive?action=locate&id=' + post.id + '">GDriveLink</a></br>' +
-      '<a href="https://drive.google.com/file/d/' + post.id + '/view">AltGDriveLink</a></br>' +
-      'sortedArrayIndex: '+arrayIndex+'</br>Below is a JSON representation of the Post:';
+         '<a href="https://drive.google.com/drive/u/0/#my-drive?action=locate&id=' + post.id + '">GDriveLink</a></br>' +
+         '<a href="https://drive.google.com/file/d/' + post.id + '/view">AltGDriveLink</a></br>' +
+         'sortedArrayIndex: ' + arrayIndex + '</br>Below is a JSON representation of the Post:';
       showInfoPopup('Post Data', html, post, true);
    }
 
@@ -990,15 +990,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
 
       function showPanel() {
-         if(typeof(content) == 'object' || typeof(content) == 'array') {
+         if (typeof (content) == 'object' || typeof (content) == 'array') {
             var formatedContent = JSON.stringify(content, null, '    ')
-         }
-         else {
+         } else {
             var formatedContent = content;
          }
          $mdPanel.open({
             attachTo: angular.element(document.body),
-            controller: function (mdPanelRef,$scope) {
+            controller: function (mdPanelRef, $scope) {
                $scope.title = title;
                $scope.helpHtml = $sce.trustAsHtml(helpHtml);
                $scope.formatedContent = formatedContent;
@@ -1010,7 +1009,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             templateUrl: 'templates/popupTemplate.html',
             panelClass: 'demo-dialog-example',
             position: $mdPanel.newPanelPosition().absolute().bottom('16px').left('16px'),
-            animation: $mdPanel.newPanelAnimation().openFrom({top:0, left:0}).withAnimation($mdPanel.animation.SCALE),
+            animation: $mdPanel.newPanelAnimation().openFrom({
+               top: 0,
+               left: 0
+            }).withAnimation($mdPanel.animation.SCALE),
             trapFocus: false,
             zIndex: 15000,
             hasBackdrop: false,
