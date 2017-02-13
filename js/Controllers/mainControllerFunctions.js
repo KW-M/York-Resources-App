@@ -251,7 +251,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       if ($scope.queryParams.q == null) {
          catagorizePosts(filterPosts($scope.allPosts))
       } else {
-         promiseQueue().addPromise('script', APIService.searchGDrive(generateQueryString()), function (postsData) {
+         promiseQueue().addPromise('drive', APIService.searchGDrive(generateQueryString()), function (postsData) {
             console.log(postsData)
             var postsArray = JSON.parse(postsData.result.response.result);
             catagorizePosts(seperatePosts(postsArray))
@@ -556,8 +556,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    $scope.$watch('searchInputTxt', function (newValue) {
       var input = newValue || null
-      var query =;
-      if (input != query) $scope.gotoRoute({
+      if (input != ($scope.queryParams.q || null)) $scope.gotoRoute({
          q: input
       })
    }, false);
