@@ -247,18 +247,18 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.sortedPosts = [];
    $scope.searchPosts = [];
 
-   function sortPosts(newSearch) {
+   function sortPosts() {
       if ($scope.queryParams.q == null) {
-         var filterObj = filterPosts($scope.allPosts)
+         catagorizePosts(filterPosts($scope.allPosts))
       } else {
-         promiseQueue().addPromise('script', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
+         promiseQueue().addPromise('script', APIService.searchGDrive(generateQueryString()), function (postsData) {
             console.log(postsData)
             var postsArray = JSON.parse(postsData.result.response.result);
-            generateQueryString();
+            catagorizePosts(seperatePosts(postsArray))
          })
       }
 
-      function distributePosts(filterObj) {
+      function catagorizePosts(filterObj) {
          $scope.sortedPosts = orderPosts(filterObj.filtered)
          var max = filterObj.filteredOut.length
          for (var count = 0; count < max; count++) {
@@ -532,31 +532,31 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    //----------------------------------------------------
    //------------------ Searching -----------------------
-   var queryPropertyString = '';
    var previousSearch = undefined;
 
    function generateQueryString() {
       var query = "'0B5NVuDykezpkbUxvOUMyNnRsUGc' in parents and trashed = false"
       if ($scope.queryParams.flagged !== null && $scope.queryParams.flagged !== undefined) {
-         query = query + " and properties has { key='Flagged' and value='" + $scope.queryParams.flagged + "' }";
+         query += " and properties has { key='Flagged' and value='" + $scope.queryParams.flagged + "' }";
       }
       if ($scope.queryParams.creatorEmail !== null && $scope.queryParams.creatorEmail !== undefined) {
-         query = query + " and '" + $scope.queryParams.creatorEmail + "' in owners"
+         query += " and '" + $scope.queryParams.creatorEmail + "' in owners"
       }
       if ($scope.queryParams.type !== null && $scope.queryParams.type !== undefined) {
-         query = query + " and properties has { key='Type' and value='" + $scope.queryParams.type + "' }"
+         query += " and properties has { key='Type' and value='" + $scope.queryParams.type + "' }"
       }
       if ($scope.queryParams.classPath !== null && $scope.queryParams.classPath !== undefined && $scope.queryParams.classPath !== 'Your Posts' && $scope.queryParams.classPath !== 'All Posts' && $scope.queryParams.classPath !== 'Flagged Posts') {
-         query = query + " and properties has { key='ClassName' and value='" + $scope.queryParams.classPath + "' }"
+         query += " and properties has { key='ClassName' and value='" + $scope.queryParams.classPath + "' }"
       }
       if ($scope.queryParams.q !== null && $scope.queryParams.q !== undefined) {
-         query = query + " and fullText contains '" + $scope.queryParams.q + "'";
+         query += " and fullText contains '" + $scope.queryParams.q + "'";
       }
-      $scope.queryPropertyString = query;
+      return query
    }
+
    $scope.$watch('searchInputTxt', function (newValue) {
       var input = newValue || null
-      var query = $scope.queryParams.q || null;
+      var query =;
       if (input != query) $scope.gotoRoute({
          q: input
       })
