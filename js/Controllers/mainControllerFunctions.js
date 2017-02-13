@@ -272,9 +272,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             }
          }
       } else {
-         if(new)
-         previousSearch = $scope.queryParams.q;
-         generateQueryString();
+         promiseQueue().addPromise('script', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
+            console.log(postsData)
+            var postsArray = JSON.parse(postsData.result.response.result);
+            generateQueryString();
+         })
       }
       loadPosts()
    }

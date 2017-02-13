@@ -14,6 +14,18 @@ app.service('APIService', ['$q', '$http', function ($q, $http) {
         }
     }
 
+    //---------------- Gets A list of the Drive File With the York Domain -----------------
+    this.queryGDrive = function (query, pageToken, pageSize) {
+        return function () {
+            return gapi.client.drive.files.list({
+                pageSize: pageSize,
+                pageToken: pageToken,
+                q: query || null,
+                fields: 'files(name,id,modifiedTime,createdTime,properties,description,owners(displayName,emailAddress)),nextPageToken', //
+            });
+        }
+    };
+
     //---------------- Share a Drive File With the York Domain -----------------
     this.shareFile = function (fileID, role) {
         return function () {
