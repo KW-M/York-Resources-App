@@ -1,5 +1,5 @@
     /*---------- help and first run element styles -------- */
-    
+
     .credits-cover {
         height: 100%;
         width: 100%;
@@ -13,56 +13,56 @@
         pointer-events: none;
         transition: opacity 0.5s ease, bottom 0.5s ease;
     }
-    
+
     .credits-cover-visible {
         transition: opacity 0.5s ease, bottom 0.5s ease;
         opacity: 1;
         pointer-events: initial;
         bottom: 0px;
     }
-    
+
     .credit-grid-tile {
         background-color: #eff0f2;
     }
-    
+
     .onboardingDialog md-tabs.md-accent {
         height: 100%
     }
-    
+
     .onboardingDialog md-tabs-wrapper {
         display: none;
     }
-    
+
     .onboardingDialog md-tabs-content-wrapper {
         top: 0px;
     }
-    
+
     .onboardingDialogButton.md-button.md-fab {
         background-color: white
     }
-    
+
     .onboardingDialogButton.md-button.md-fab:hover {
         background-color: white
     }
-    
+
     .onboardingDialogButton.md-button.md-fab md-icon {
         color: rgb(71, 140, 249)
     }
-    
+
     .dotPageIndicatorContainer {
         position: absolute;
         left: 50%;
         top: 50%;
         transform: translateX(-50%) translateY(-50%);
     }
-    
+
     .dotPageIndicator.dotPageIndicatorActive {
         width: 12px;
         height: 12px;
         transform: translateY(1px);
         background-color: white;
     }
-    
+
     .dotPageIndicator {
         width: 10px;
         height: 10px;
@@ -70,7 +70,7 @@
         border-radius: 50%;
         display: inline-block;
     }
-    
+
     .onboardingImageContainer {
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
@@ -78,7 +78,7 @@
         width: 100%;
         background-color: #7986cb;
     }
-    
+
     .onboardingDialog {
         background-color: #3f51b5;
         border-radius: 10px;
@@ -88,27 +88,27 @@
         width: 630px;
         white-space: initial;
     }
-    
+
     .onboardingDialog.blueBackground {
         background-color: #68a143
     }
-    
+
     .onboardingDialog.greenBackground {
         background-color: #68a143
     }
-    
+
     .onboardingTextContainer {
         padding: 12px;
         padding-top: 32px;
     }
-    
+
     .onboardingTextHeader {
         color: white;
         font-size: 24px;
         line-height: 32px;
         padding-bottom: 8px;
     }
-    
+
     .onboardingText {
         color: white;
         font-weight: 300;
@@ -118,42 +118,45 @@
         padding-left: 24px;
         padding-right: 24px;
     }
-    
+
     md-tabs.help-tabs md-tabs-wrapper {
         position: fixed;
         z-index: 100;
         width: 100%;
         background-color: white;
     }
-    
+
     md-tabs.help-tabs md-tabs-content-wrapper {
         margin-top: 48px;
     }
-    
+
     .help-tabs h1 {
         margin: 0;
     }
-    
+
     .help-content {
         padding: 24px;
         font-family: Roboto, "Helvetica Neue", Helvetica, sans-serif;
         font-size: 13px;
         outline: none;
         background-color: white;
-        
-    }
-    
-    .help-h1 {
         color: rgb(33, 33, 33);
+    }
+
+    .help-h1 {
         font-weight: 400;
         font-size: 34px;
         line-height: 40px;
         margin: 0px 0px 8px;
     }
-    
-    .help-h2 {}
-    
+
+    .help-h2 {
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 32px;
+        margin: 32px 0px 8px;
+    }
+
     .help-body {
         margin: 4px 0px 12px;
     }
-    
