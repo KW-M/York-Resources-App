@@ -317,8 +317,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          filteredOut: filteredOut
       };
    }
-   
+
    function seperatePosts(inputSet) {
+      var idIndex = {}
       var filtered = [];
       var filteredOut = [];
       
@@ -326,8 +327,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       for (var idCount = 0; idCount < max; idCount++) {
 
       };
+      max = $scope.allPosts.length;
       for (var count = 0; count < max; count++) {
-         if (Flagged && Class && Type && Creator) {
+         if ($scope.allPosts.id == ) {
             filtered.push(inputSet[count])
          } else {
             filteredOut.push(inputSet[count])
