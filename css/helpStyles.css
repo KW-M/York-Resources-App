@@ -119,20 +119,28 @@
         padding-right: 24px;
     }
     
-    md-tabs.help-tabs md-tabs-wrapper{
-            position: fixed;
-    z-index: 100;
-    width: 100%;
-    background-color: white;
+    md-tabs.help-tabs md-tabs-wrapper {
+        position: fixed;
+        z-index: 100;
+        width: 100%;
+        background-color: white;
     }
     
-    md-tabs.help-tabs md-tabs-content-wrapper{
-        margin-top:48px;
+    md-tabs.help-tabs md-tabs-content-wrapper {
+        margin-top: 48px;
     }
     
     .help-tabs h1 {
-        margin:0;
+        margin: 0;
     }
     
+    .help-h1 {
+        color: rgb(33, 33, 33);
+        font-weight: 400;
+        font-size: 34px;
+        line-height: 40px;
+        margin: 0px 0px 8px;
+    }
     
+    .help-h2 {}
     
