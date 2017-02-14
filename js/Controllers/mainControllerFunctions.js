@@ -707,7 +707,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
    }
    
-   
    $scope.openQuizletWindow = function (argument) {
       var quizWindow = window.open("", "_blank", "status=no,menubar=no,toolbar=no");
       quizWindow.resizeTo(9000, 140)
