@@ -621,13 +621,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                if (Class.name == className) {
                   Class.color = $scope.classList[Catagories].color
                   Class.catagory = $scope.classList[Catagories].catagory
-                  for (var StaredNum = 0; StaredNum < $scope.myInfo.staredClasses.length; StaredNum++) {
-                     if ($scope.myInfo.staredClasses[StaredNum].name == className) {
-                        Class.stared = true;
-                        return (Class)
-                     }
-                  }
-                  Class.stared = false;
                   return (Class)
                }
             }
@@ -707,7 +700,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
    }
    $scope.userStarClass = function (classObj) {
+      var trueClassObj = $scope.findClassObject(classObj.name)
       classObj.stared = !classObj.stared || true;
+      trueClassObj.stared = classObj.stared;
       if (classObj.stared) {
          $scope.myInfo.staredClasses.push()
       } else {
