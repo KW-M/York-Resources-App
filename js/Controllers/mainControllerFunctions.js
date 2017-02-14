@@ -699,13 +699,19 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.userStarClass = function (classObj) {
       var trueClassObj = $scope.findClassObject(classObj.name)
       for (var count = 0, max = $scope.myInfo.staredClasses.length; count < max; count++) {
-         if ($scope.myInfo.staredClasses[count] == classObj.name) {
-            $scope.myInfo.staredClasses.splice(count, 1)
+         if ($scope.myInfo.staredClasses[count].name == classObj.name) {
+            console.log('unstaringClass')
             classObj.stared = false;
             trueClassObj.stared = false;
+            $scope.myInfo.staredClasses.splice(count, 1)
+            return false;
          }
       }
-      trueClassObj.stared = classObj.stared;
+      console.log('staringClass')
+      classObj.stared = true;
+      trueClassObj.stared = true;
+      $scope.myInfo.staredClasses.push(classObj)
+      return true;
    }
    $scope.openQuizletWindow = function () {
       var quizWindow = window.open("", "_blank", "status=no,menubar=no,toolbar=no");
