@@ -700,31 +700,32 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.userStarClass = function (classObj) {
       var trueClassObj = $scope.findClassObject(classObj.name)
       for (var count = 0, max = $scope.myInfo.staredClasses.length; count < max; count++) {
-         if ($scope.myInfo.staredClasses[count].name == classObj.name) {
-            console.log('unstaringClass')
-            classObj.stared = false;
-            trueClassObj.stared = false;
-            $scope.myInfo.staredClasses.splice(count, 1)
-         }
+         if ($scope.myInfo.staredClasses[count].name == classObj.name) setStared(false)
       }
-      if (count == max) {
-         console.log('staringClass')
-         classObj.stared = true;
-         trueClassObj.stared = true;
-         $scope.myInfo.staredClasses.push(classObj)
-      }
+      if (count == max) setStared(true)
       if (typeof (starClickTimer[classObj.name]) == 'number') clearTimeout(starClickTimer[classObj.name]);
       starClickTimer[classObj.name] = setTimeout(function () {
-         promiseQueue().addPromise('drive', APIService.runGAScript('updateUserData', {
+         promiseQueue().addPromise('drive', APIService.runGAScript('saveUserPrefs', {
             operation: 'updateUserData',
-            content: {},
+            content: {
+               starClass: classObj.name
+            },
          }, true), function (data) {
             console.log(data)
+            //setStared(!classObj.stared);
          }, function (err) {
             console.warn(err)
+            setStared(!classObj.stared);
             $mdToast.showSimple('Problem staringClass, try again.');
          }, 150);
       }, 2000);
+
+      function setStared(isStared) {
+         classObj.stared = isStared;
+         trueClassObj.stared = isStared;
+         if (isStared == true) $scope.myInfo.staredClasses.push(classObj)
+         if (isStared == false) $scope.myInfo.staredClasses.splice(count, 1)
+      }
    }
    $scope.openQuizletWindow = function () {
       var quizWindow = window.open("", "_blank", "status=no,menubar=no,toolbar=no");
