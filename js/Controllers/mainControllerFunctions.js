@@ -712,7 +712,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          $scope.myInfo.staredClasses.push()
       } else {
          for(var count = 0, max = $scope.myInfo.staredClasses.length; count < max; count++){
-            $scope.myInfo.staredClasses.splice(count)
+            $scope.myInfo.staredClasses.splice(count,1)
          }
       }
    }
