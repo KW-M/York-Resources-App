@@ -59,6 +59,7 @@
                     <md-button ng-repeat="favClass in myInfo.staredClasses" class="side-nav-class" ng-click="gotoRoute({classPath: favClass.name})" ng-class="{ 'selected' : queryParams.classpath == favClass.name }">
                         {{favClass.name}}
                     </md-button>
+                    <md-button class="side-nav-class" ng-click="gotoRoute({classPath: 'Other'})" ng-class="{ 'selected' : queryParams.classpath == 'Other' }">Other</md-button>
                 </div>
                 <div ng-repeat="navCatagory in classList" flex layout="column">
                     <label ng-hide="sideNavClassSearch" class="side-nav-header" ng-style="::{'background-color': navCatagory.color + ' 1)'}">{{navCatagory.catagory}}</label>

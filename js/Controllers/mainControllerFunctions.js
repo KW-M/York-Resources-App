@@ -131,10 +131,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             for (var property in dataObj.userPrefs) {
                $scope.myInfo[property] = dataObj.userPrefs[property];
             }
-            $scope.myInfo.staredClasses.push({
-               name: 'Other',
-               color: 'hsla(200, 70%, 75%,',
-            })
             labelList = dataObj.labels;
             teacherList = dataObj.teachers;
             $scope.classList = dataObj.classes;
