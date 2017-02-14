@@ -654,6 +654,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    //----------------------------------------------------
    //------------------UI Actions------------------------
+   var starClickTimer = {}
    $scope.signOut = function () {
       authorizationService.handleSignoutClick();
    };
@@ -712,8 +713,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          trueClassObj.stared = true;
          $scope.myInfo.staredClasses.push(classObj)
       }
-      if (typeof (likeClickTimer[post.id]) == 'number') clearTimeout(likeClickTimer[post.id]);
-      likeClickTimer[post.id] = setTimeout(function () {
+      if (typeof (starClickTimer[classObj.name]) == 'number') clearTimeout(starClickTimer[classObj.name]);
+      starClickTimer[classObj.name] = setTimeout(function () {
          promiseQueue().addPromise('drive', APIService.runGAScript('updateUserData', {
             operation: 'updateUserData',
             content: {},
