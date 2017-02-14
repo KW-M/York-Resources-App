@@ -158,7 +158,7 @@
                                 <span>Feedback</span>
                             </md-button>
                         </md-menu-item>
-                        <md-button id="quizlet_connect_button" ng-if class="md-raised unselectable" ng-click="openQuizletDialog()"><span>Connect Quizlet</span>
+                        <md-button id="quizlet_connect_button" ng-if="myInfo.quizletUsername == undefined || myInfo.quizletUsername == null" class="md-raised unselectable" ng-click="openQuizletDialog()"><span>Connect Quizlet</span>
                             <md-icon md-svg-src="images/quizlet_logo.svg" style="color: white;margin: auto 0px auto 10px;"></md-icon>
                         </md-button>
                     </md-menu-content>
@@ -195,12 +195,12 @@
                     <div style="display: flex;align-items: center; margin-top: 12px;">
                         <span class="md-display-1">{{queryParams.classPath}}</span>
                         <span style="flex:1;text-align:center">
-                        <md-button ng-click="openLink('https://quizlet.com/create-set')" ng-show="queryParams.classPath == 'Quizlet'">
-                        <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>add_to_photos</md-icon>Create Set</md-button>
-                        <md-button ng-show="queryParams.classPath == 'Quizlet'">
-                        <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>open_in_browser</md-icon>Open Class</md-button>
-                    </span>
-                        <md-button class="star-button" ng-if="selectedClass.stared != null">
+                            <md-button ng-click="openLink('https://quizlet.com/create-set')" ng-show="queryParams.classPath == 'Quizlet'">
+                                <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>add_to_photos</md-icon>Create Set</md-button>
+                            <md-button ng-show="queryParams.classPath == 'Quizlet'">
+                                <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>open_in_browser</md-icon>Open Class</md-button>
+                        </span>
+                        <md-button class="star-button" ng-if="selectedClass.stared != null" ng-click="userStarClass(selectedClass)">
                             <md-icon style='color: white;font-size: 22px'>{{selectedClass.stared ? 'star' : 'star_outline'}}</md-icon>
                             <span style="margin-left: 6px;">{{selectedClass.stared ? 'un' : ''}}Star Class</span>
                             <md-tooltip>Coming Soon</md-tooltip>
