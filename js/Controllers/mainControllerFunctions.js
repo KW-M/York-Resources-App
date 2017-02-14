@@ -704,14 +704,26 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             classObj.stared = false;
             trueClassObj.stared = false;
             $scope.myInfo.staredClasses.splice(count, 1)
-            return false;
          }
       }
-      console.log('staringClass')
-      classObj.stared = true;
-      trueClassObj.stared = true;
-      $scope.myInfo.staredClasses.push(classObj)
-      return true;
+      if (count == max) {
+         console.log('staringClass')
+         classObj.stared = true;
+         trueClassObj.stared = true;
+         $scope.myInfo.staredClasses.push(classObj)
+      }
+      if (typeof (likeClickTimer[post.id]) == 'number') clearTimeout(likeClickTimer[post.id]);
+      likeClickTimer[post.id] = setTimeout(function () {
+         promiseQueue().addPromise('drive', APIService.runGAScript('updateUserData', {
+            operation: 'updateUserData',
+            content: {},
+         }, true), function (data) {
+            console.log(data)
+         }, function (err) {
+            console.warn(err)
+            $mdToast.showSimple('Problem staringClass, try again.');
+         }, 150);
+      }, 2000);
    }
    $scope.openQuizletWindow = function () {
       var quizWindow = window.open("", "_blank", "status=no,menubar=no,toolbar=no");
