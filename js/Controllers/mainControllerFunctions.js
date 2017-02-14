@@ -700,7 +700,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.userStarClass = function (classObj) {
       var trueClassObj = $scope.findClassObject(classObj.name)
       for (var count = 0, max = $scope.myInfo.staredClasses.length; count < max; count++) {
-         if ($scope.myInfo.staredClasses[count].name == classObj.name) setStared(false,count)
+         if ($scope.myInfo.staredClasses[count].name == classObj.name) {setStared(false,count)
       }
       if (count == max) setStared(true)
       if (typeof (starClickTimer[classObj.name]) == 'number') clearTimeout(starClickTimer[classObj.name]);
