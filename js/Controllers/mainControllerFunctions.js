@@ -698,15 +698,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
    $scope.userStarClass = function (classObj) {
       var trueClassObj = $scope.findClassObject(classObj.name)
-      classObj.stared = !classObj.stared || true;
-      trueClassObj.stared = classObj.stared;
-      if (classObj.stared == true) {
-         $scope.myInfo.staredClasses.push(classObj)
-      } else {
-         for(var count = 0, max = $scope.myInfo.staredClasses.length; count < max; count++){
-            $scope.myInfo.staredClasses.splice(count,1)
+      for (var count = 0, max = $scope.myInfo.staredClasses.length; count < max; count++) {
+         if ($scope.myInfo.staredClasses[count] == classObj.name) {
+            $scope.myInfo.staredClasses.splice(count, 1)
+            classObj.stared = false;
+            trueClassObj.stared = false;
          }
       }
+      trueClassObj.stared = classObj.stared;
    }
    $scope.openQuizletWindow = function () {
       var quizWindow = window.open("", "_blank", "status=no,menubar=no,toolbar=no");
