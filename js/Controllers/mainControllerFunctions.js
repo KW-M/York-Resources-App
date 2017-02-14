@@ -621,6 +621,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                if (Class.name == className) {
                   Class.color = $scope.classList[Catagories].color
                   Class.catagory = $scope.classList[Catagories].catagory
+                  Class.stared = Class.stared || false;
                   return (Class)
                }
             }
@@ -703,8 +704,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       var trueClassObj = $scope.findClassObject(classObj.name)
       classObj.stared = !classObj.stared || true;
       trueClassObj.stared = classObj.stared;
-      if (classObj.stared) {
-         $scope.myInfo.staredClasses.push()
+      if (classObj.stared == true) {
+         $scope.myInfo.staredClasses.push(classObj)
       } else {
          for(var count = 0, max = $scope.myInfo.staredClasses.length; count < max; count++){
             $scope.myInfo.staredClasses.splice(count,1)
@@ -794,7 +795,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          fullscreen: ($mdMedia('xs')),
       });
    };
-
    $scope.openFeedbackDialog = function () { //called by the top right toolbar help button
       $mdDialog.show({
          templateUrl: 'templates/feedback.html',
@@ -804,7 +804,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          fullscreen: ($mdMedia('xs')),
       });
    };
-
    $scope.openOnboardingDialog = function () { //called by the top right toolbar help button
       $mdDialog.show({
          templateUrl: 'templates/onboard.html',
