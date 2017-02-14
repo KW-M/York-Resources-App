@@ -706,7 +706,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       if (typeof (starClickTimer[classObj.name]) == 'number') clearTimeout(starClickTimer[classObj.name]);
       starClickTimer[classObj.name] = setTimeout(function () {
          promiseQueue().addPromise('drive', APIService.runGAScript('saveUserPrefs', {
-            operation: 'updateUserData',
+            operation: 'saveUserPrefs',
             content: {
                starClass: classObj.name
             },
