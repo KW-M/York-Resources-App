@@ -706,8 +706,17 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          document.getElementById("sidenav_class_search_input").blur();
       }
    }
-   
-   $scope.openQuizletWindow = function (argument) {
+   $scope.userStarClass = function (classObj) {
+      classObj.stared = !classObj.stared || true;
+      if (classObj.stared) {
+         $scope.myInfo.staredClasses.push()
+      } else {
+         for(var count = 0, max = ; count < max; count++){
+            $scope.myInfo.staredClasses.splice(index)
+         }
+      }
+   }
+   $scope.openQuizletWindow = function () {
       var quizWindow = window.open("", "_blank", "status=no,menubar=no,toolbar=no");
       quizWindow.resizeTo(9000, 140)
       quizWindow.moveTo(0, 0);
@@ -770,53 +779,53 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }, 2000);
    };
 
-	//----------------------------------------------------
-	//-------------------- dialogs -----------------------
-	function DialogController(scope, $mdDialog) {
-		scope.hideDialog = function () {
-			$mdDialog.hide();
-		};
-		scope.cancelDialog = function () {
-			$mdDialog.cancel();
-		};
-		scope.myEmail = $scope.myInfo.Email
-	}
-	$scope.openHelpDialog = function () { //called by the top right toolbar help button
-		$mdDialog.show({
-			templateUrl: 'templates/help.html',
-			controller: DialogController,
-			parent: angular.element(document.body),
-			clickOutsideToClose: true,
-			fullscreen: ($mdMedia('xs')),
-		});
-	};
-	
-	$scope.openFeedbackDialog = function () { //called by the top right toolbar help button
-		$mdDialog.show({
-			templateUrl: 'templates/feedback.html',
-			controller: DialogController,
-			parent: angular.element(document.body),
-			clickOutsideToClose: true,
-			fullscreen: ($mdMedia('xs')),
-		});
-	};
-	
-	$scope.openOnboardingDialog = function () { //called by the top right toolbar help button
-		$mdDialog.show({
-			templateUrl: 'templates/onboard.html',
-			controller: DialogController,
-			parent: angular.element(document.body),
-			// scope: {
-			// 	fullscreen:	$mdMedia('xs'),
-			// },
-			clickOutsideToClose: false,
-			fullscreen: ($mdMedia('xs')),
-		});
-		authorizationService.hideSigninDialog();
-	};
-	$scope.closeDialog = function () {
-		$mdDialog.hide();
-	};
+   //----------------------------------------------------
+   //-------------------- dialogs -----------------------
+   function DialogController(scope, $mdDialog) {
+      scope.hideDialog = function () {
+         $mdDialog.hide();
+      };
+      scope.cancelDialog = function () {
+         $mdDialog.cancel();
+      };
+      scope.myEmail = $scope.myInfo.Email
+   }
+   $scope.openHelpDialog = function () { //called by the top right toolbar help button
+      $mdDialog.show({
+         templateUrl: 'templates/help.html',
+         controller: DialogController,
+         parent: angular.element(document.body),
+         clickOutsideToClose: true,
+         fullscreen: ($mdMedia('xs')),
+      });
+   };
+
+   $scope.openFeedbackDialog = function () { //called by the top right toolbar help button
+      $mdDialog.show({
+         templateUrl: 'templates/feedback.html',
+         controller: DialogController,
+         parent: angular.element(document.body),
+         clickOutsideToClose: true,
+         fullscreen: ($mdMedia('xs')),
+      });
+   };
+
+   $scope.openOnboardingDialog = function () { //called by the top right toolbar help button
+      $mdDialog.show({
+         templateUrl: 'templates/onboard.html',
+         controller: DialogController,
+         parent: angular.element(document.body),
+         // scope: {
+         // 	fullscreen:	$mdMedia('xs'),
+         // },
+         clickOutsideToClose: false,
+         fullscreen: ($mdMedia('xs')),
+      });
+      authorizationService.hideSigninDialog();
+   };
+   $scope.closeDialog = function () {
+      $mdDialog.hide();
+   };
 
    //----------------------------------------------------
    //---------------- Event Watchers --------------------
