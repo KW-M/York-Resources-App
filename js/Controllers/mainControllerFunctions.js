@@ -711,8 +711,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       if (classObj.stared) {
          $scope.myInfo.staredClasses.push()
       } else {
-         for(var count = 0, max = ; count < max; count++){
-            $scope.myInfo.staredClasses.splice(index)
+         for(var count = 0, max = $scope.myInfo.staredClasses.length; count < max; count++){
+            $scope.myInfo.staredClasses.splice(count)
          }
       }
    }
