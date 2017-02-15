@@ -124,7 +124,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          profilePicture: profile.getImageUrl(),
       }
 
-      var getStartupData = APIService.runGAScript('getStartupData')().then(function (data) {
+      promiseQueue().addPromise('drive', APIService.runGAScript('getStartupData'), function (data) {
          var dataObj = JSON.parse(data.result.response.result);
          console.log(dataObj)
          $timeout(function () {
@@ -136,7 +136,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.classList = dataObj.classes;
             $scope.sortedLabels = $scope.sortLabels(labelList.concat(teacherList))
          });
-      }, console.warn)
+      }, function (err) {
+         console.warn(err)
+         setStared(!classObj.stared);
+         $mdToast.showSimple('Problem initializing, try reLoading the .');
+      }, 150);
+      var getStartupData = ().then(, console.warn)
 
       var pickerPromise = $q.defer();
       gapi.load('picker', {
@@ -700,7 +705,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.userStarClass = function (classObj) {
       var trueClassObj = $scope.findClassObject(classObj.name)
       for (var count = 0, max = $scope.myInfo.staredClasses.length; count < max; count++) {
-         if ($scope.myInfo.staredClasses[count].name == classObj.name) {setStared(false,count)
+         if ($scope.myInfo.staredClasses[count].name == classObj.name) {
+            setStared(false, count)
+         }
       }
       if (count == max) setStared(true)
       if (typeof (starClickTimer[classObj.name]) == 'number') clearTimeout(starClickTimer[classObj.name]);
@@ -712,7 +719,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             },
          }, true), function (data) {
             console.log(data)
-            //setStared(!classObj.stared);
+               //setStared(!classObj.stared);
          }, function (err) {
             console.warn(err)
             setStared(!classObj.stared);
@@ -720,7 +727,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          }, 150);
       }, 2000);
 
-      function setStared(isStared,count) {
+      function setStared(isStared, count) {
          classObj.stared = isStared;
          trueClassObj.stared = isStared;
          if (isStared == true) $scope.myInfo.staredClasses.push(classObj)
