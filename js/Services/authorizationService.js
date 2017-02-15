@@ -100,10 +100,7 @@ function authService($mdDialog) {
             htmlContent: "<p>York Study Resources only works with York Google accounts right now.</p><p>If you have an email account ending with @york.org, please login with it, or ask Mr.Brookhouser if you don't have one.<p>",
             ok: 'Ok'
         })).then(function() {
-            angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
-            setTimeout(function() {
-                angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
-            }, 500);
+            self.showSigninButton()
         });
     }
 
