@@ -956,18 +956,22 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          var promise = item.promiseFunc();
          promise.then(function (output) {
             console.log('output', output)
-            item.action(output)
+            if (output.result && output.result.error)
+               item.action(output)
          }, function (error) {
             console.log('err', error)
             APIErrorHandeler(error, item);
-            if (item.Err) {
-               item.Err(error);
-            } else if (delay < 4) {
+         });
+
+         function errorBackoff() {
+            if (delay < 4) {
                setTimeout(function () {
                   runPromise(item);
                }, (delay = Math.max(delay *= 2, 1)) * 1000);
+            } else if (item.Err) {
+               item.Err(error);
             }
-         });
+         }
       }
    }
 
