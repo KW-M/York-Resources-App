@@ -734,8 +734,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       function setStared(isStared, count) {
          classObj.stared = isStared;
          trueClassObj.stared = isStared;
+         console.log(classObj.isStared)
+         console.log(count)
          if (isStared == true) $scope.myInfo.staredClasses.push(classObj)
          if (isStared == false) $scope.myInfo.staredClasses.splice(count, 1)
+         console.log($scope.myInfo.staredClasses)
       }
    }
    $scope.openQuizletWindow = function () {
