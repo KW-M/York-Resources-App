@@ -23,9 +23,9 @@ function authService($mdDialog) {
             // Handle the initial sign-in state.
             updateSigninStatus(authinstance.isSignedIn.get());
             // show sign in prompt if sign in button is clicked
-            authinstance.attachClickHandler('signin_button', null, console.log, handleError)
+            authinstance.attachClickHandler('signin_button', null, console.log, console.log)
             datButton.style.display = 'inline-block';
-        });
+        },console.log);
 
         function updateSigninStatus(isSignedIn) {
             if (isSignedIn) {
