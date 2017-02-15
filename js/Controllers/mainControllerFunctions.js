@@ -894,14 +894,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       console.warn(error);
       console.log(item);
       if (error.hasOwnProperty('expectedDomain')) {
-         gapi.auth2.getAuthInstance().signOut();
-         $mdDialog.show($mdDialog.alert({
-            title: 'Sorry.',
-            htmlContent: "<p>York Study Resources only works with York Google accounts right now.</p><p>If you have an email account ending with @york.org, please login with it, or ask Mr.Brookhouser if you don't have one.<p>",
-            ok: 'Ok'
-         })).then(function () {
-            authorizationService.
-         });
+
       }
       if (error.result) {
          if (error.result.error.errors[0].message == 'Invalid Credentials') {
