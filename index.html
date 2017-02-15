@@ -481,7 +481,8 @@
                         signinButton.addClass('fadeIn');
                         datButton.style.display = 'none';
                     }, 500);
-                    if (dontRaise == true) {
+                    if (dontRaise) {
+                        console.log('donttrue')
                         signinBackdrop[0].style.zIndex = "75"
                     } else {
                         signinBackdrop[0].style.zIndex = "2000"
