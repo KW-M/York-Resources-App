@@ -957,7 +957,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          });
 
          function errorBackoff(error, item) {
-            APIErrorHandeler(error, item).then(function () {
+            var errorHandled = APIErrorHandeler(error, item);
+            if (errorHandled) errorHandled.then(function () {
                if (delay < 4) {
                   setTimeout(function () {
                      promiseQueue.runPromise(item);
@@ -1083,7 +1084,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function showInfoPopup(title, helpHtml, content, preToast) {
       if (preToast) {
-         var toastPromise = $mdToast.show($mdToast.simple().textContent(title).action('Details').highlightAction(true).highlightClass('md-accent')).hideDelay(20000).then(function (response) {
+         var toastPromise = $mdToast.show($mdToast.simple().textContent(title).action('Details').highlightAction(true).highlightClass('md-accent').hideDelay(7000)).then(function (response) {
             if (response == 'ok') showPanel();
          });
       } else {
