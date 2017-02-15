@@ -94,7 +94,7 @@ function authService($mdDialog) {
     }
 
     this.showNonYorkDialog = function() {
-        gapi.auth2.getAuthInstance().signOut();
+        self.handleSignoutClick()
         $mdDialog.show($mdDialog.alert({
             title: 'Sorry.',
             htmlContent: "<p>York Study Resources only works with York Google accounts right now.</p><p>If you have an email account ending with @york.org, please login with it, or ask Mr.Brookhouser if you don't have one.<p>",
