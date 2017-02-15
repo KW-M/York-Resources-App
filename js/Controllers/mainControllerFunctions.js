@@ -899,14 +899,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             if (error.result.error.details[0] == 'fluff') {
 
             } else {
-               showInfoPopup(error.result.error.details[0].errorMessage || 'Error', 'Below is the returned error:', error, true)
+               return showInfoPopup(error.result.error.details[0].errorMessage || 'Error', 'Below is the returned error:', error, true)
             }
          } else if (error.result.error.errors) {
             if (error.result.error.errors[0].message == 'Invalid Credentials' || error.result.error.errors[0].reason == 'dailyLimitExceededUnreg') {
-               showInfoPopup('Please signin again.', 'Below is the returned error object:', error, true)
                authorizationService.showSigninButton();
+               return showInfoPopup('Please signin again.', 'Below is the returned error object:', error, true)
             } else {
-               showInfoPopup(error.result.error.errors[0].message || 'Error', 'Below is the returned error:', error, true)
+               return showInfoPopup(error.result.error.errors[0].message || 'Error', 'Below is the returned error:', error, true)
             }
          }
       }
@@ -1083,12 +1083,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function showInfoPopup(title, helpHtml, content, preToast) {
       if (preToast) {
-         $mdToast.show($mdToast.simple().textContent(title).action('Details').highlightAction(true).highlightClass('md-accent')).hideDelay(10000).then(function (response) {
+         var toastPromise = $mdToast.show($mdToast.simple().textContent(title).action('Details').highlightAction(true).highlightClass('md-accent')).hideDelay(20000).then(function (response) {
             if (response == 'ok') showPanel();
          });
       } else {
          showPanel();
       }
+      return toastPromise
 
       function showPanel() {
          if (typeof (content) == 'object' || typeof (content) == 'array') {
