@@ -1,11 +1,11 @@
 {
  "name": "York StudyHub",
  "short_name": "StudyHub",
- "start_url": "/",
  "display": "standalone",
+ "start_url": "/",
  "theme_color": "#fff",
  "background_color": "#fff",
- "description": "A learning platform for York, designed to increase sharing",
+ "description": "A sharing and learning platform designed for the York community.",
  "icons": [{
   "src": "images\/StudyHub_Logo\/android-icon-36.png",
   "sizes": "36x36",
@@ -32,7 +32,7 @@
   "type": "image\/png",
   "density": "3.0"
  }, {
-  "src": "\/images\/android-icon-192x192.png",
+  "src": "images\/StudyHub_Logo\/android-icon-192.png",
   "sizes": "192x192",
   "type": "image\/png",
   "density": "4.0"
