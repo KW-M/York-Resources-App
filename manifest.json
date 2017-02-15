@@ -3,6 +3,7 @@
  "short_name": "StudyHub",
  "start_url": "/",
  "display": "standalone",
+ "theme_color": "#fff",
  "background_color": "#fff",
  "description": "A learning platform for York, designed to increase sharing",
  "icons": [{
