@@ -893,9 +893,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    window.APIErrorHandeler = function (error, item) {
       console.warn(error);
       console.log(item);
-      if (error.hasOwnProperty('expectedDomain')) {
-
-      }
+      if (error.hasOwnProperty('expectedDomain')) authorizationService.showNonYorkDialog()
       if (error.result) {
          if (error.result.error.errors[0].message == 'Invalid Credentials') {
             console.warn("invalid credentials")

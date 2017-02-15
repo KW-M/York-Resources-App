@@ -390,7 +390,10 @@
                         // Handle the initial sign-in state.
                         updateSigninStatus(GAuth.isSignedIn.get());
                         // show sign in prompt if sign in button is clicked.
-                        GAuth.attachClickHandler('signin_button', null, null, console.warn)
+                        GAuth.attachClickHandler('signin_button', null, null, function (error) {
+                            console.log(error)
+                            if (error.hasOwnProperty('expectedDomain')) self.showNonYorkDialog()
+                        })
                     }, console.warn)
 
                     // Initialize API libraries
@@ -507,6 +510,17 @@
 
                 this.getGAuthToken = function () {
                     return (gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true).access_token)
+                }
+
+                this.showNonYorkDialog = function () {
+                    signOut()
+                    $mdDialog.show($mdDialog.alert({
+                        title: 'Sorry.',
+                        htmlContent: "<p>York Study Resources only works with York Google accounts right now.</p><p>If you have an email account ending with @york.org, please login with it, or ask Mr.Brookhouser if you don't have one.<p>",
+                        ok: 'Ok'
+                    })).then(function () {
+                        showSigninButton()
+                    });
                 }
             });
         </script>
