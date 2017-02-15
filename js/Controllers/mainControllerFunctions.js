@@ -705,6 +705,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.userStarClass = function (classObj) {
       var trueClassObj = $scope.findClassObject(classObj.name)
       for (var count = 0, max = $scope.myInfo.staredClasses.length; count < max; count++) {
+         console.log(max)
          console.log($scope.myInfo.staredClasses[count].name +" " + classObj.name)
          if ($scope.myInfo.staredClasses[count].name == classObj.name) {
             console.log('settingStaredFalse')
