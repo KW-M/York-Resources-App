@@ -714,7 +714,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             count = max;
          }
       }
-      if (count == max+1) setStared(true)
+      console.log(count+","+max)
+      if (count != max+1) setStared(true)
       if (typeof (starClickTimer[classObj.name]) == 'number') clearTimeout(starClickTimer[classObj.name]);
       starClickTimer[classObj.name] = setTimeout(function () {
          promiseQueue.addPromise('drive', APIService.runGAScript('saveUserPrefs', {
@@ -724,7 +725,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             },
          }, true), function (data) {
             console.log(data)
-               //setStared(!classObj.stared);
+            setStared(data.result.response.result == 'true');
          }, function (err) {
             console.warn(err)
             setStared(!classObj.stared);
