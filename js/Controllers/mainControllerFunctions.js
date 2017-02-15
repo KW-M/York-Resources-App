@@ -1057,7 +1057,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //---------------------- dev -------------------------
    $scope.consoleLogInput = function (input, asAlert) {
       console.log(input)
-      if (asAlert) window.alert(JSON.stringify(input, null, 4))
+      if (asAlert) showInfoPopup('Logged',null,input,false)
    }
 
    $scope.consoleLogVariable = function (input, asAlert) {
