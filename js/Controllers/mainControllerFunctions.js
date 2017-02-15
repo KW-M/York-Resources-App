@@ -896,17 +896,17 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       if (error.hasOwnProperty('expectedDomain')) authorizationService.showNonYorkDialog()
       if (error.result && error.result.error) {
          if (error.result.error.details) {
-            if (error.result.error.details[0] == 'fluff'){
+            if (error.result.error.details[0] == 'fluff') {
 
             } else {
-
+               showInfoPopup(error.result.error.details[0].errorMessage || 'Error', 'Below is the returned error:', error, true)
             }
          } else if (error.result.error.errors) {
             if (error.result.error.errors[0].message == 'Invalid Credentials' || error.result.error.errors[0].reason == 'dailyLimitExceededUnreg') {
-               showInfoPopup('Please signin again.','Below is the returned error object:',error,true)
+               showInfoPopup('Please signin again.', 'Below is the returned error object:', error, true)
                authorizationService.showSigninButton();
             } else {
-showInfoPopup('Please signin again.','Below is the returned error object:',error,true)
+               showInfoPopup(error.result.error.errors[0].message || 'Error', 'Below is the returned error:', error, true)
             }
          }
       }
@@ -946,8 +946,11 @@ showInfoPopup('Please signin again.','Below is the returned error object:',error
          var promise = item.promiseFunc();
          promise.then(function (output) {
             console.log('output', output)
-            if (output.result && output.result.error)
+            if (output.result && output.result.error) {
+               errorBackoff(output, item)
+            } else {
                item.action(output)
+            }
          }, function (error) {
             console.log('err', error)
             errorBackoff(error, item)
