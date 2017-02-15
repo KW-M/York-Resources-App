@@ -54,7 +54,6 @@
                 <div class="signin-dialog-tip">
                     <h3>Tips:</h3>
                     <p>Look for the mobile update comming soon.</p>
-                    <!--<md-button ng-click="openOnboardingDialog()">onboard</md-button>-->
                     <div style="display:none">
                         <md-button style="display:none" id="dat_button" ng-click="::gotoRoute({classPath:'/Memes'})"><span style="opacity:0.5">meme</span></md-button>
                     </div>
@@ -482,10 +481,10 @@
                         signinButton.addClass('fadeIn');
                         datButton.style.display = 'none';
                     }, 500);
-                    if (dontRaise != true) {
-                        signinBackdrop[0].style.zIndex = "2000"
+                    if (dontRaise == true) {
+                        signinBackdrop[0].style.zIndex = "75"
                     } else {
-                        signinBackdrop[0].style.zIndex = "80"
+                        signinBackdrop[0].style.zIndex = "2000"
                     }
                 }
 
