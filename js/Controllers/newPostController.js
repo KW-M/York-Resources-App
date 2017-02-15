@@ -75,7 +75,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
 
                 function getPreview() {
                     if ($scope.post.link.match(/(?:http|https):\/\/.{2,}/)) {
-                        promiseQueue().addPromise('drive', APIService.runGAScript('getLinkPreview', $scope.post.link, false), function (data) {
+                        promiseQueue.addPromise('drive', APIService.runGAScript('getLinkPreview', $scope.post.link, false), function (data) {
                             console.log(data)
                             var previewObj = JSON.parse(data.result.response.result);
                             $timeout(function () {
@@ -124,7 +124,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
             template: '<md-toast><span style="font-size:18px; max-width: 200px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="36"></md-progress-circular></md-toast>',
             hideDelay: 3000000,
         });
-        promiseQueue().addPromise('drive', APIService.runGAScript('savePost', {
+        promiseQueue.addPromise('drive', APIService.runGAScript('savePost', {
                 operation: 'savePost',
                 postId: $scope.post.id,
                 content: $scope.post,
@@ -161,7 +161,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         if ($scope.shareSelect == 'view') var role = 'reader';
         if ($scope.shareSelect == 'comment') var role = 'commenter';
         if ($scope.shareSelect == 'edit') var role = 'writer';
-        promiseQueue().addPromise('drive', APIService.shareFile($scope.post.attachmentId, role), null, console.warn, 150);
+        promiseQueue.addPromise('drive', APIService.shareFile($scope.post.attachmentId, role), null, console.warn, 150);
         $mdToast.hide();
     }
 

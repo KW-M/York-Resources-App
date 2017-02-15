@@ -125,7 +125,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
 
       var getStartupData = $q.defer();
-      promiseQueue().addPromise('drive', APIService.runGAScript('getStartupData'), function (data) {
+      promiseQueue.addPromise('drive', APIService.runGAScript('getStartupData'), function (data) {
          var dataObj = JSON.parse(data.result.response.result);
          console.log(dataObj)
          $timeout(function () {
@@ -252,7 +252,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       if ($scope.queryParams.q == null) {
          catagorizePosts(filterPosts($scope.allPosts))
       } else {
-         promiseQueue().addPromise('drive', APIService.searchGDrive(generateQueryString()), function (postsData) {
+         promiseQueue.addPromise('drive', APIService.searchGDrive(generateQueryString()), function (postsData) {
             console.log(postsData)
             catagorizePosts(seperatePosts(postsData.result.files))
          }, console.warn, 150)
@@ -368,7 +368,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function getPosts(idArray, callBack) {
       conurancyCounter++;
       console.log(idArray)
-      promiseQueue().addPromise('script', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
+      promiseQueue.addPromise('script', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
          console.log(postsData)
          var postsArray = JSON.parse(postsData.result.response.result);
          if (postsArray.error == undefined) {
@@ -712,7 +712,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       if (count == max) setStared(true)
       if (typeof (starClickTimer[classObj.name]) == 'number') clearTimeout(starClickTimer[classObj.name]);
       starClickTimer[classObj.name] = setTimeout(function () {
-         promiseQueue().addPromise('drive', APIService.runGAScript('saveUserPrefs', {
+         promiseQueue.addPromise('drive', APIService.runGAScript('saveUserPrefs', {
             operation: 'saveUserPrefs',
             content: {
                starClass: classObj.name
@@ -754,7 +754,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             template: '<md-toast>Deleting...<md-toast>',
             hideDelay: 10000
          });
-         promiseQueue().addPromise('script', APIService.runGAScript('deletePost', post.id, false), function (returnedValue) {
+         promiseQueue.addPromise('script', APIService.runGAScript('deletePost', post.id, false), function (returnedValue) {
             console.log(returnedValue.result.response.result)
             console.log(post.id)
             if (returnedValue.result.response.result == true || returnedValue.result.response.result == 'true') authorizationService.FireDatabase.ref('posts/' + post.id).remove().then($mdToast.hide, console.warn);
@@ -772,7 +772,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
       if (typeof (likeClickTimer[post.id]) == 'number') clearTimeout(likeClickTimer[post.id]);
       likeClickTimer[post.id] = setTimeout(function () {
-         promiseQueue().addPromise('drive', APIService.runGAScript('likePost', {
+         promiseQueue.addPromise('drive', APIService.runGAScript('likePost', {
             operation: 'likePost',
             postId: post.id,
             content: post.userLiked,
@@ -900,10 +900,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             htmlContent: "<p>York Study Resources only works with York Google accounts right now.</p><p>If you have an email account ending with @york.org, please login with it, or ask Mr.Brookhouser if you don't have one.<p>",
             ok: 'Ok'
          })).then(function () {
-            angular.element(document.querySelector('#login_spinner')).addClass('fadeOut');
-            setTimeout(function () {
-               angular.element(document.querySelector('#auth_button')).addClass('fadeIn');
-            }, 500);
+            authorizationService.
          });
       }
       if (error.result) {
@@ -967,7 +964,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             APIErrorHandeler(error, item).then(function () {
                if (delay < 4) {
                   setTimeout(function () {
-                     promiseQueuerunPromise(item);
+                     promiseQueue.runPromise(item);
                   }, (delay = Math.max(delay *= 2, 1)) * 1000);
                } else if (item.Err) {
                   delay = 1;
