@@ -414,7 +414,7 @@
                     } else if (Input === false) {
                         GSignedIn = false;
                         self.GUser = null;
-                        showSigninButton()
+                        self.showSigninButton()
                     } else if (Input == null || Input.displayName != undefined) {
                         self.FireUser = Input;
                     }
@@ -474,7 +474,7 @@
                 var signinSpinner = angular.element(document.getElementById('signin_spinner'));
                 var datButton = document.getElementById('dat_button');
 
-                function showSigninButton() {
+                this.showSigninButton = function () {
                     self.showSigninDialog()
                     signinSpinner.addClass('fadeOut');
                     setTimeout(function () {
@@ -521,7 +521,7 @@
                         htmlContent: "<p>York Study Resources only works with York Google accounts right now.</p><p>If you have an email account ending with @york.org, please login with it, or ask Mr.Brookhouser if you don't have one.<p>",
                         ok: 'Ok'
                     })).then(function () {
-                        showSigninButton(true)
+                        this.showSigninButton()
                     });
                 }
             });

@@ -896,7 +896,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       if (error.hasOwnProperty('expectedDomain')) authorizationService.showNonYorkDialog()
       if (error.result) {
          if (error.result.error.errors[0].message == 'Invalid Credentials') {
-            console.warn("invalid credentials")
             $mdToast.show($mdToast.simple().textContent('Please signin again.')).hideDelay(8000);
             authorizationService.showSigninButton();
          } else if (error.result.error.errors[0].reason == 'dailyLimitExceededUnreg') {
@@ -904,9 +903,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $mdToast.show($mdToast.simple().textContent('Please signin again.')).hideDelay(8000);
             authorizationService.showSigninButton();
          }
-      }
-      if (item.Err) {
-         item.Err(error)
       }
    }
 
