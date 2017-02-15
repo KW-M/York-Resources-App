@@ -711,9 +711,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          if ($scope.myInfo.staredClasses[count].name == classObj.name) {
             console.log('settingStaredFalse')
             setStared(false, count)
+            count = max;
          }
       }
-      if (count == max) setStared(true)
+      if (count == max+1) setStared(true)
       if (typeof (starClickTimer[classObj.name]) == 'number') clearTimeout(starClickTimer[classObj.name]);
       starClickTimer[classObj.name] = setTimeout(function () {
          promiseQueue.addPromise('drive', APIService.runGAScript('saveUserPrefs', {
@@ -734,7 +735,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       function setStared(isStared, count) {
          classObj.stared = isStared;
          trueClassObj.stared = isStared;
-         console.log(classObj.isStared)
+         console.log(classObj.stared)
          console.log(count)
          if (isStared == true) $scope.myInfo.staredClasses.push(classObj)
          if (isStared == false) $scope.myInfo.staredClasses.splice(count, 1)
