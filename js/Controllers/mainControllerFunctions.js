@@ -960,17 +960,22 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                item.action(output)
          }, function (error) {
             console.log('err', error)
-            APIErrorHandeler(error, item);
+            errorBackoff(error, item)
          });
 
-         function errorBackoff() {
-            if (delay < 4) {
-               setTimeout(function () {
-                  runPromise(item);
-               }, (delay = Math.max(delay *= 2, 1)) * 1000);
-            } else if (item.Err) {
-               item.Err(error);
-            }
+         function errorBackoff(error, item) {
+            APIErrorHandeler(error, item).then(function () {
+               if (delay < 4) {
+                  setTimeout(function () {
+                     promiseQueuerunPromise(item);
+                  }, (delay = Math.max(delay *= 2, 1)) * 1000);
+               } else if (item.Err) {
+                  delay = 1;
+                  item.Err(error);
+               } else {
+                  delay = 1;
+               }
+            });
          }
       }
    }
