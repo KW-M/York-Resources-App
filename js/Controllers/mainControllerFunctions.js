@@ -889,6 +889,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    //----------------------------------------------------
    //----------------- Error Handling -------------------
+   
    window.APIErrorHandeler = function (error, item) {
       console.warn(error);
       console.log(item);
@@ -920,6 +921,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          item.Err(error)
       }
    }
+   
    window.clearUserInfo = function () {
       $timeout(function () {
          $scope.myInfo = {};
@@ -929,28 +931,48 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    //----------------------------------------------------
    //---------------- Utility Functions --------------------
+   var promiseQueue = {}
    var theQueue = {};
    var timer = {};
    var delay = 0;
 
    // Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
-   window.promiseQueue = function () {
+   (function () {
       var queueSelf = this;
-      this.addPromise = function (typeName, promiseFunc, action, error, interval) {
-         typeName = typeName || 'general';
-         if (!theQueue[typeName]) theQueue[typeName] = []
-         theQueue[typeName].push({
-            promiseFunc: promiseFunc,
-            action: action,
-            err: error,
-         });
-         if (!timer[typeName]) {
-            processTheQueue(typeName); // start immediately on the first invocation
-            timer[typeName] = setInterval(function () {
-               processTheQueue(typeName)
-            }, interval || 150);
+      promiseQueue = {
+         addPromise: function (typeName, promiseFunc, action, error, interval) {
+            typeName = typeName || 'general';
+            if (!theQueue[typeName]) theQueue[typeName] = []
+            theQueue[typeName].push({
+               promiseFunc: promiseFunc,
+               action: action,
+               err: error,
+            });
+            if (!timer[typeName]) {
+               processTheQueue(typeName); // start immediately on the first invocation
+               timer[typeName] = setInterval(function () {
+                  processTheQueue(typeName)
+               }, interval || 150);
+            }
+         },
+         runPromise: function (item) {
+            var promise = item.promiseFunc();
+            promise.then(function (output) {
+               console.log('output', output)
+               item.action(output)
+            }, function (error) {
+               console.log('err', error)
+               APIErrorHandeler(error, item);
+               if (item.Err) {
+                  item.Err(error);
+               } else if (delay < 4) {
+                  setTimeout(function () {
+                     runPromise(item);
+                  }, (delay = Math.max(delay *= 2, 1)) * 1000);
+               }
+            });
          }
-      };
+      }
 
       function processTheQueue(typeName) {
          var item = theQueue[typeName].shift();
@@ -969,24 +991,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          }
       }
 
-      this.runPromise = function (item) {
-         var promise = item.promiseFunc();
-         promise.then(function (output) {
-            console.log('output', output)
-            item.action(output)
-         }, function (error) {
-            console.log('err', error)
-            APIErrorHandeler(error, item);
-            if (item.Err) {
-               item.Err(error);
-            } else if (delay < 4) {
-               setTimeout(function () {
-                  runPromise(item);
-               }, (delay = Math.max(delay *= 2, 1)) * 1000);
-            }
-         });
-      }
-
       function reAuth(callback) {
          authorizationService.GUser.reloadAuthResponse().then(callback, function (err) {
             console.warn(err)
@@ -995,9 +999,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             })
          })
       }
-
-      return this
-   }
+   })();
 
    function updateSortedPosts(array, callback) {
       console.log(array)
