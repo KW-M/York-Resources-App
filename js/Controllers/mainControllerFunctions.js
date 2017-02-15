@@ -124,6 +124,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          profilePicture: profile.getImageUrl(),
       }
 
+      var getStartupData = $q.defer();
       promiseQueue().addPromise('drive', APIService.runGAScript('getStartupData'), function (data) {
          var dataObj = JSON.parse(data.result.response.result);
          console.log(dataObj)
@@ -135,13 +136,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             teacherList = dataObj.teachers;
             $scope.classList = dataObj.classes;
             $scope.sortedLabels = $scope.sortLabels(labelList.concat(teacherList))
+            //getStartupData.resolve();
          });
       }, function (err) {
          console.warn(err)
-         setStared(!classObj.stared);
-         $mdToast.showSimple('Problem initializing, try reLoading the .');
+         $mdToast.showSimple('Problem initializing, try reloading the page.');
       }, 150);
-      var getStartupData = ().then(, console.warn)
 
       var pickerPromise = $q.defer();
       gapi.load('picker', {
