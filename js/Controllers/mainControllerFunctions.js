@@ -894,14 +894,22 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       console.warn(error);
       console.log(item);
       if (error.hasOwnProperty('expectedDomain')) authorizationService.showNonYorkDialog()
-      if (error.result) {
-         if (error.result.error.errors[0].message == 'Invalid Credentials') {
-            $mdToast.show($mdToast.simple().textContent('Please signin again.')).hideDelay(8000);
-            authorizationService.showSigninButton();
-         } else if (error.result.error.errors[0].reason == 'dailyLimitExceededUnreg') {
-            console.warn('daily limit reached')
-            $mdToast.show($mdToast.simple().textContent('Please signin again.')).hideDelay(8000);
-            authorizationService.showSigninButton();
+      if (error.result && error.result.error) {
+         if (error.result.error.details) {
+            if (error.result.error.details[0] == 'fluff'){
+               
+            } else {
+               
+            }
+         } else if (error.result.error.errors) {
+            if (error.result.error.errors[0].message == 'Invalid Credentials') {
+               $mdToast.show($mdToast.simple().textContent('Please signin again.')).hideDelay(8000);
+               authorizationService.showSigninButton();
+            } else if (error.result.error.errors[0].reason == 'dailyLimitExceededUnreg') {
+               console.warn('daily limit reached')
+               $mdToast.show($mdToast.simple().textContent('Please signin again.')).hideDelay(8000);
+               authorizationService.showSigninButton();
+            }
          }
       }
    }
