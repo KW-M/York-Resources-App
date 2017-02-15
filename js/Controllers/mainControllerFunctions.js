@@ -136,7 +136,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             teacherList = dataObj.teachers;
             $scope.classList = dataObj.classes;
             $scope.sortedLabels = $scope.sortLabels(labelList.concat(teacherList))
-            //getStartupData.resolve();
+            getStartupData.resolve();
          });
       }, function (err) {
          console.warn(err)
@@ -151,7 +151,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          }
       })
 
-      $q.all([getStartupData, pickerPromise]).then(function () {
+      $q.all([getStartupData.promise, pickerPromise.promise]).then(function () {
          console.log("Everything Loaded")
          listenForURLChange();
          getDatabase();
