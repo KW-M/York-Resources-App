@@ -897,18 +897,16 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       if (error.result && error.result.error) {
          if (error.result.error.details) {
             if (error.result.error.details[0] == 'fluff'){
-               
+
             } else {
-               
+
             }
          } else if (error.result.error.errors) {
-            if (error.result.error.errors[0].message == 'Invalid Credentials') {
-               $mdToast.show($mdToast.simple().textContent('Please signin again.')).hideDelay(8000);
+            if (error.result.error.errors[0].message == 'Invalid Credentials' || error.result.error.errors[0].reason == 'dailyLimitExceededUnreg') {
+               showInfoPopup('Please signin again.','Below is the returned error object:',error,true)
                authorizationService.showSigninButton();
-            } else if (error.result.error.errors[0].reason == 'dailyLimitExceededUnreg') {
-               console.warn('daily limit reached')
-               $mdToast.show($mdToast.simple().textContent('Please signin again.')).hideDelay(8000);
-               authorizationService.showSigninButton();
+            } else {
+showInfoPopup('Please signin again.','Below is the returned error object:',error,true)
             }
          }
       }
@@ -1080,9 +1078,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       angularGridInstance.postsGrid.refresh();
    }
 
-   function showInfoPopup(title, helpHtml, content, preToast, extraHtml) {
+   function showInfoPopup(title, helpHtml, content, preToast) {
       if (preToast) {
-         $mdToast.show($mdToast.simple().textContent(title).action('Details').highlightAction(true).highlightClass('md-accent')).then(function (response) {
+         $mdToast.show($mdToast.simple().textContent(title).action('Details').highlightAction(true).highlightClass('md-accent')).hideDelay(10000).then(function (response) {
             if (response == 'ok') showPanel();
          });
       } else {
