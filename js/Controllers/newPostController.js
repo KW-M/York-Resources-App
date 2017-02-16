@@ -79,7 +79,10 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                             console.log(data)
                             var previewObj = JSON.parse(data.result.response.result);
                             if (previewObj.error) {
+                                $scope.post.attachmentName = 'Link Error'
+                                $scope.post.previewImage = 'https://iread50shades.files.wordpress.com/2015/02/deadlink.png'
                                 $scope.showInfoPopup('Problem showing link, is your attachment link a valid website URL?', 'Below is the returned error:', previewObj, true)
+                                $scope.previewLoading = false;
                             } else {
                                 $timeout(function () {
                                     $scope.post.previewImage = previewObj.image
