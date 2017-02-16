@@ -713,9 +713,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             },
          }, true), function (data) {
             console.log(data)
-                        classObj.stared = data.result.response.result == 'true';
+            classObj.stared = data.result.response.result == 'true';
             trueClassObj.stared = classObj.stared;
-            setStared();
          }, function (err) {
             console.warn(err)
             classObj.stared = !classObj.stared || true;
@@ -724,11 +723,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }, 1000);
 
       function setStared() {
+         console.log('settingstared', classObj.stared)
          for (var count = 0, max = $scope.myInfo.staredClasses.length; count < max; count++) {
             if ($scope.myInfo.staredClasses[count].name == classObj.name && classObj.stared == true) {
                classObj.stared = false;
                trueClassObj.stared = false;
-               $scope.myInfo.staredClasses.splice(count, 1)
+               $scope.myInfo.staredClasses.splice(count, 1);
+               console.log('unstared', classObj.stared)
                count = max;
             }
          }
@@ -736,6 +737,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             classObj.stared = true;
             trueClassObj.stared = true;
             $scope.myInfo.staredClasses.push(classObj)
+            console.log('stared', classObj.stared)
          }
       }
    }
@@ -1086,7 +1088,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       angularGridInstance.postsGrid.refresh();
    }
 
-   $scope.showInfoPopup = function(title, helpHtml, content, preToast) {
+   $scope.showInfoPopup = function (title, helpHtml, content, preToast) {
       if (preToast) {
          var toastPromise = $mdToast.show($mdToast.simple().textContent(title).action('Details').highlightAction(true).highlightClass('md-accent').hideDelay(7000)).then(function (response) {
             if (response == 'ok') showPanel();
