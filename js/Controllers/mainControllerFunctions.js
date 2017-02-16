@@ -707,7 +707,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          var trueClassObj = $scope.findClassObject(classObj.name)
          trueClassObj.stared = classObj.stared;
          for (var count = 0, max = $scope.myInfo.staredClasses.length; count < max; count++) {
-            if ($scope.myInfo.staredClasses[count].name == classObj.name && classObj.stared == true) {
+            if ($scope.myInfo.staredClasses[count].name == classObj.name) {
                classObj.stared = false;
                trueClassObj.stared = false;
                $scope.myInfo.staredClasses.splice(count, 1);
@@ -716,12 +716,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             }
          }
          console.log(count + " " + max)
-         if (count != max + 2 && classObj.stared == false) {
+         if (count != max + 2) {
             classObj.stared = true;
             trueClassObj.stared = true;
             $scope.myInfo.staredClasses.push(classObj)
             console.log('stared', classObj.stared)
          }
+         scopeUpdate(classObj.stared)
          promiseQueue.addPromise('drive', APIService.runGAScript('saveUserPrefs', {
             operation: 'saveUserPrefs',
             content: {
@@ -732,15 +733,17 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             classObj.stared = data.result.response.result == 'true';
             console.log('stared2', classObj.stared)
             trueClassObj.stared = classObj.stared;
-            
+            scopeUpdate(classObj.stared)
          }, function (err) {
             console.warn(err)
             classObj.stared = !classObj.stared;
             trueClassObj.stared = classObj.stared;
+            scopeUpdate(classObj.stared)
          }, 150, 'Problem adding favorite, try again.');
       }, 1000);
+
       function scopeUpdate(vari) {
-         $timeout(function() {
+         $timeout(function () {
             vari = vari;
          })
       }
