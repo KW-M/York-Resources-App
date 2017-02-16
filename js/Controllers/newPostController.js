@@ -7,9 +7,11 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     console.log(originalPost)
     $scope.post = postObj;
     if ($scope.myInfo != undefined) {
-        initializePost
+        $timeout(initializePost)
     } else {
-        $scope.$watch('myInfo', function () {
+        var initWatch = $scope.$watch('myInfo', function () {
+            console.log('initDone')
+            initWatch();
             $timeout(initializePost)
         })
     }
@@ -49,7 +51,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $scope.findType();
         $scope.sortLabels();
         hideSelectedLabels();
-    })
+    }
 
 //temproary variables
 $scope.operation = operation;
