@@ -106,6 +106,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       } else if (shareInput.ids) {
          var id = shareInput.ids[0]
       }
+      $mdToast.show({
+         template: '<md-toast><span style="font-size:18px; max-width: 200px">Loading...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="36"></md-progress-circular></md-toast>',
+         hideDelay: 3000000,
+      });
       newPost({
          link: 'https://drive.google.com/?open=' + id
       }, 'new')
