@@ -714,6 +714,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          }, true), function (data) {
             console.log(data)
             classObj.stared = data.result.response.result == 'true';
+            console.log('stared2', classObj.stared)
             trueClassObj.stared = classObj.stared;
          }, function (err) {
             console.warn(err)
