@@ -79,7 +79,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                             console.log(data)
                             var previewObj = JSON.parse(data.result.response.result);
                             if (previewObj.error) {
-                                $scope.showInfoPopup('Error', 'Below is the returned error:', error, true)
+                                $scope.showInfoPopup('Problem showing link, is your attachment link a valid website URL?', 'Below is the returned error:', previewObj, true)
                             } else {
                                 $timeout(function () {
                                     $scope.post.previewImage = previewObj.image
