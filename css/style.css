@@ -474,6 +474,7 @@ button.selected.md-button {
 }
 
 .content-padding {
+    flex: 0 0 auto;
     padding-left: 8px;
     padding-right: 100px;
 }
@@ -519,18 +520,18 @@ button.selected.md-button {
 }
 
 .label-container {
-    padding-bottom: 6px;
     box-shadow: inset rgba(0, 0, 0, 0.27) -10px 2px 24px -17px, inset rgba(0, 0, 0, 0.27) 10px -2px 24px -17px;
-    border-radius: 3px;
-    width: 300px;
     overflow: auto;
     white-space: nowrap;
-    display: inline-block;
     font-family: Roboto, Helvetica Neue, sans-serif;
     font-size: 16px;
-    padding: 0 0 8px 3px;
-    flex: 1;
     vertical-align: middle;
+    border-top-right-radius: 50px;
+}
+
+.view .label-container {
+    padding-left: 8px;
+    border-top-right-radius: 0px;
 }
 
 .label-container::-webkit-scrollbar {
@@ -555,6 +556,10 @@ button.selected.md-button {
     position: relative;
     background: rgba(224, 224, 224, 0.5);
     box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.12);
+}
+
+.view .label-container .label{
+    cursor: default;
 }
 
 .label-container .label:hover {
@@ -693,6 +698,7 @@ button.selected.md-button {
 /*------- Posts Footer Styles --------*/
 
 .footer-container {
+    flex: 0  auto;
     display: flex;
     align-items: center;
     height: 100%;
@@ -719,7 +725,7 @@ button.selected.md-button {
 
 .post-card-title {
     margin: 0px;
-    padding: 20px 16px 0px 16px;
+    padding: 0 16px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -782,14 +788,14 @@ button.selected.md-button {
 }
 
 .gradient-overlay {
-    top: 0;
+    bottom: 0;
     right: 0;
     left: 0;
     height: 56px;
     position: absolute;
     display: flex;
     color: white;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, .5), rgba(0, 0, 0, 0));
+    background: linear-gradient(to top, rgba(0, 0, 0, .5), rgba(0, 0, 0, 0));
     flex-direction: column;
     justify-content: center;
 }
@@ -807,8 +813,11 @@ button.selected.md-button {
 }
 
 .gradient-overlay .gradient-overlay-metadata span {
+    text-shadow: 0px 2px 23px rgba(0, 0, 0, 0.6);
     text-overflow: ellipsis;
     overflow: hidden;
+    padding: 10px;
+    margin: -10px;
 }
 
 .gradient-overlay md-icon.material-icons {
@@ -824,6 +833,10 @@ button.selected.md-button {
     margin: 0 auto;
     background: rgba(224, 224, 224, .80);
     color: rgb(66, 66, 66);
+}
+
+.gradient-overlay .gradient-overlay-metadata md-chip span{
+    text-shadow: none
 }
 
 .gradient-overlay .gradient-overlay-metadata.metadata-link {

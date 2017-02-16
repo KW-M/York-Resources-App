@@ -1,39 +1,35 @@
 <link rel="stylesheet" href="css/helpStyles.css" />
-<md-dialog style="overflow: hidden;">
+<md-dialog style="overflow: hidden;" class="not-visible help-loaded">
   <md-dialog-content>
     <div style="height:100%; overflow:auto">
       <md-tabs md-dynamic-height md-border-bottom class="help-tabs">
         <md-tab label="About">
-          <md-content class="md-padding">
-            <h1 class="md-display-1">About the Project</h1>
-            what?
-          </md-content>
-        </md-tab>
-        <md-tab label="Creating Posts">
-          <md-content class="md-padding">
-            <h1 class="md-display-1">Creating Posts</h1>
-            <p>at non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
-          </md-content>
-        </md-tab>
-        <md-tab label="Searching">
-          <md-content class="md-padding">
-            <h1 class="md-display-1">Searching</h1>
-            Search man. Search!
+          <md-content class="help-content">
+            <h1 class="help-h1">StudyHub Help</h1>
+            <div class="help-body">
+              Click one of the help topics at the top for further help.</br>
+              To see the people and things behind StudyHub, click on the credits button at the bottom.</br>
+              For technical help and documentation, see <a href="https://goo.gl/LbUC6u">goo.gl/LbUC6u</a></br>
+            </div>
+            <h2 class="help-h2">Misson</h2>
+            <div class="help-body">
+              Studyhub was designed to make studying easier and facilitate sharing across York.</br>We really value your support in its mission, by sharing your amazing work with Studyhub.
+            </div>
           </md-content>
         </md-tab>
         <md-tab label="Troubleshooting">
-          <md-content class="md-padding">
-            <h1 class="md-display-1">Troubleshooting</h1>
+          <md-content class="help-content">
+            <h1 class="help-h1">Troubleshooting</h1>
             <p>
               <ol>
-                <li class="md-subhead">Try refreshing the page</li>
-                <span>Click here -> </span><md-button class="md-raised" href="http://www.google.com">refresh</md-button>
-                <li class="md-subhead">Try incognito or private mode</li>
+                <li class="help-h2">Try refreshing the page.</li>
+                <li class="help-h2">Try incognito or private mode:</li>
                 <div>In Chrome:</div>
                 <ol style="margin: 4px 0px 12px; outline: 0px; padding: 0px; vertical-align: baseline; color: rgb(33, 33, 33); font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 13px; ">
                   <li style="margin: 4px 0px 4px 20px;">At the top&nbsp;right, click&nbsp;More&nbsp;<img src="https://lh3.ggpht.com/N5LLlFszQeMqXo6Z6UF1VXFN4k3UxO8H8ZU3FV8AjUhomHuRCrwUeKMg1BhuFxKwqQ=w18-h18" width="18" height="18" alt="More" title="More" style="vertical-align: middle; max-width: 100%;">&nbsp;
                     <img src="https://lh3.googleusercontent.com/nHFGZ_9xjCh-mP83zMzXQVJF5VYf2n6kwoBIxB2zv3V4VPT4gNTtBye8lYznogLqLPY=w13-h18" width="13" height="18" alt="and then" title="and then" style="vertical-align: middle; max-width: 100%;">&nbsp;<strong>New Incognito Window</strong>.</li>
-                  <li style="margin: 4px 0px 4px 20px;">A new window will open. In the top corner, check for the gray Incognito icon&nbsp;<img src="https://lh3.googleusercontent.com/lcUE4uBygwOmri9bQNgUP3-NtJL29oeH5r8cE-3I5XMF0QuAXMJ_JJakxifLBfnv5PU=w18" width="18" height="18" alt="Incognito mode" title="Incognito mode" style="vertical-align: middle; max-width: 100%;"></li>
+                  <li style="margin: 4px 0px 4px 20px;">A new window will open. In the top corner, check for the gray Incognito icon&nbsp;<img src="https://lh3.googleusercontent.com/lcUE4uBygwOmri9bQNgUP3-NtJL29oeH5r8cE-3I5XMF0QuAXMJ_JJakxifLBfnv5PU=w18" width="18" height="18" alt="Incognito mode"
+                      title="Incognito mode" style="vertical-align: middle; max-width: 100%;"></li>
                 </ol>
                 <div>In Safari:</div>
                 <ol style="margin: 4px 0px 12px; outline: 0px; padding: 0px; vertical-align: baseline; color: rgb(33, 33, 33); font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 13px; ">
@@ -42,10 +38,11 @@
                 </ol>
                 <div>In Edge:</div>
                 <ol style="margin: 4px 0px 12px; outline: 0px; padding: 0px; vertical-align: baseline; color: rgb(33, 33, 33); font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 13px;">
-                  <li style="margin: 4px 0px 4px 20px;">At the top&nbsp;right, click&nbsp;More&nbsp;<img src="https://lh3.ggpht.com/N5LLlFszQeMqXo6Z6UF1VXFN4k3UxO8H8ZU3FV8AjUhomHuRCrwUeKMg1BhuFxKwqQ=w18-h18" width="18" height="18" style="transform:rotate(90deg); vertical-align: middle;" alt="More" title="More" style="vertical-align: middle; max-width: 100%;">&nbsp;
+                  <li style="margin: 4px 0px 4px 20px;">At the top&nbsp;right, click&nbsp;More&nbsp;<img src="https://lh3.ggpht.com/N5LLlFszQeMqXo6Z6UF1VXFN4k3UxO8H8ZU3FV8AjUhomHuRCrwUeKMg1BhuFxKwqQ=w18-h18" width="18" height="18" style="transform:rotate(90deg); vertical-align: middle;" alt="More"
+                      title="More" style="vertical-align: middle; max-width: 100%;">&nbsp;
                     <img src="https://lh3.googleusercontent.com/nHFGZ_9xjCh-mP83zMzXQVJF5VYf2n6kwoBIxB2zv3V4VPT4gNTtBye8lYznogLqLPY=w13-h18" width="13" height="18" alt="and then" title="and then" style="vertical-align: middle; max-width: 100%;">&nbsp;<strong>New InPrivate Window</strong>.</li>
                 </ol>
-                <span>If you are having trouble loging when not in incognito/private mode, try going to google.com and loging out there</span>
+                <span>If you are having trouble signing in when not in incognito/private mode, try going to <a href="https://accounts.google.com/Logout?continue=https://www.google.com">http://www.google.com</a> and signing out there</span>
                 <ol>
             </p>
           </md-content>
@@ -53,7 +50,41 @@
       </md-tabs>
     </div>
     <div class="md-padding credits-cover" ng-class="{'credits-cover-visible' : creditsVisible}" ng-click="creditsVisible = false" style="background-color: wheat; z-index:200">
-
+      <h1 class="help-h1">Credits</h1>
+      <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="3" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
+        <md-grid-tile class="credit-grid-tile" md-whiteframe="1" md-rowspan="1" md-colspan="2">
+          <span><h4 style="margin: 0px;">Design and Development:</h4><p>Kyle Worcester-Moore & Jared Aldape Duron</p></span>
+        </md-grid-tile>
+        <md-grid-tile class="credit-grid-tile" md-whiteframe="1" md-rowspan="1" md-colspan="2">
+          <span><h4 style="margin: 0px;">Inspired and published with help from:</h4><a href="http://www.kevinbrookhouser.com/">Kevin Brookhouser</a><br>and the<br> <a href="http://www.20time.org/">20Time Project</a><span>
+        </md-grid-tile>
+        <md-grid-tile class="credit-grid-tile" md-whiteframe="2" md-rowspan="1" md-colspan="2">
+          <a href="https://angularjs.org/" class="ng-scope">
+            <img src="https://angularjs.org/img/ng-logo.png" alt="Powered by Angular Js" style="width: 160px;padding: 20px;box-sizing: border-box;">
+            <p style="margin: 0;text-align: center;">Angular JS</p>
+          </a>
+          <span style="font-size: 30px;">&amp;</span>
+          <a href="https://material.angularjs.org/" class="ng-scope">
+            <img style="width: 160px;" src="https://material.angularjs.org/latest/img/icons/angular-logo.svg" alt="Powered by Angular material">
+            <p style="margin: 0;text-align: center">Angular Material</p>
+          </a>
+        </md-grid-tile>
+        <md-grid-tile class="credit-grid-tile" md-whiteframe="1" md-rowspan="1" md-colspan="1">
+          <span style="text-align: center">Created for: <img src="http://www.york.org/uploaded/code/dist/images/common/logo.svg" class="ng-scope" style="width: 75%;padding: 12px"></span>
+        </md-grid-tile>
+        <md-grid-tile class="credit-grid-tile" md-whiteframe="1" md-rowspan="1" md-colspan="1">
+          <a href="https://github.com/s-yadav/angulargrid" flex="" class="ng-scope flex" style="text-decoration: none;text-align: center;">
+            <p style="margin: 0;">AngularGrid <span style="color: black;">By</span></p>
+            <p style="margin: 0;color: black;">Sudhanshu Yadav</p>
+          </a>
+        </md-grid-tile>
+        <md-grid-tile class="credit-grid-tile" md-whiteframe="1" md-rowspan="1" md-colspan="1">
+          <a href="https://quizlet.com/"><img src='https://quizlet.com/static/ThisUsesQuizlet-Blue.png' alt='Powered by Quizlet' /></a>
+        </md-grid-tile>
+        <md-grid-tile class="credit-grid-tile" md-whiteframe="1" md-rowspan="1" md-colspan="1">
+          <span style="text-align: center">Hosted By: <img src="http://blog.petegoo.com/images/github.pages.jpg" class="ng-scope" style="width: 100%;margin: 12px 0;"></span>
+        </md-grid-tile>
+      </md-grid-list>
     </div>
   </md-dialog-content>
   <md-dialog-actions>

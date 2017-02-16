@@ -39,7 +39,7 @@
         <md-list>
             <md-list-item>
                 <md-menu-item>
-                    <md-icon style="width:24px;">group</md-icon>
+                    <md-icon style="width:24px;">class</md-icon>
                     <span style="padding:0" flex>Classes</span>
                     <md-button style="margin:auto" class="md-icon-button" ng-click="toggleSidenavClassSearch(true)">
                         <md-icon>search</md-icon>
@@ -59,6 +59,7 @@
                     <md-button ng-repeat="favClass in myInfo.staredClasses" class="side-nav-class" ng-click="gotoRoute({classPath: favClass.name})" ng-class="{ 'selected' : queryParams.classpath == favClass.name }">
                         {{favClass.name}}
                     </md-button>
+                    <md-button class="side-nav-class" ng-click="gotoRoute({classPath: 'Other'})" ng-class="{ 'selected' : queryParams.classpath == 'Other' }">Other</md-button>
                 </div>
                 <div ng-repeat="navCatagory in classList" flex layout="column">
                     <label ng-hide="sideNavClassSearch" class="side-nav-header" ng-style="::{'background-color': navCatagory.color + ' 1)'}">{{navCatagory.catagory}}</label>
@@ -77,9 +78,9 @@
     <md-list style="padding: 6px 0 0 0;">
         <md-list-item>
             <md-menu-item>
-                <md-button>
-                    <md-icon>settings</md-icon>
-                    Settings
+                <md-button ng-click="::openHelpDialog()">
+                    <md-icon>help</md-icon>
+                    Help
                 </md-button>
             </md-menu-item>
         </md-list-item>
@@ -88,14 +89,6 @@
                 <md-button ng-click="openFeedbackDialog()">
                     <md-icon>feedback</md-icon>
                     Send Feedback
-                </md-button>
-            </md-menu-item>
-        </md-list-item>
-        <md-list-item show-sm show-xs hide-gt-sm>
-            <md-menu-item>
-                <md-button ng-click="::openHelpDialog()">
-                    <md-icon>help</md-icon>
-                    Help
                 </md-button>
             </md-menu-item>
         </md-list-item>
