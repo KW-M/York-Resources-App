@@ -106,8 +106,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       } else if (shareInput.ids) {
          var id = shareInput.ids[0]
       }
-      $scope.newPost({
-         Link: 'https://drive.google.com/?open=' + id
+      newPost({
+         link: 'https://drive.google.com/?open=' + id
       }, 'new')
    }
 
