@@ -474,6 +474,7 @@ button.selected.md-button {
 }
 
 .content-padding {
+    flex: 0 0 auto;
     padding-left: 8px;
     padding-right: 100px;
 }
@@ -697,6 +698,7 @@ button.selected.md-button {
 /*------- Posts Footer Styles --------*/
 
 .footer-container {
+    flex: 0 0 auto;
     display: flex;
     align-items: center;
     height: 100%;
