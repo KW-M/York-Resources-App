@@ -905,8 +905,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          if (error.result.error.details) {
             if (error.result.error.details[0]) {
                if (error.result.error.details[0].errorMessage == 'Authorization is required to perform that action.') {
-                  $scope.showInfoPopup('Please signin again.', 'Below is the returned error object:', error, true)
+                  $scope.showInfoPopup('Signin error, retrying...', 'Below is the returned error object:', error, true)
                   return reAuth()
+               } else {
+                  return $scope.showInfoPopup(item.errMsg || error.result.error.details[0].errorMessage || 'Error', 'Below is the returned error:', error, true)
                }
             } else {
                return $scope.showInfoPopup(item.errMsg || error.result.error.details[0].errorMessage || 'Error', 'Below is the returned error:', error, true)
