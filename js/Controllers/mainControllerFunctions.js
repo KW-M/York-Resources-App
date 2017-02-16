@@ -713,24 +713,26 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             },
          }, true), function (data) {
             console.log(data)
-            setStared(data.result.response.result == 'true');
+                        classObj.stared = data.result.response.result == 'true';
+            trueClassObj.stared = classObj.stared;
+            setStared();
          }, function (err) {
             console.warn(err)
             classObj.stared = !classObj.stared || true;
             trueClassObj.stared = classObj.stared;
          }, 150, 'Problem adding favorite, try again.');
-      }, 2000);
+      }, 1000);
 
       function setStared() {
          for (var count = 0, max = $scope.myInfo.staredClasses.length; count < max; count++) {
-            if ($scope.myInfo.staredClasses[count].name == classObj.name) {
+            if ($scope.myInfo.staredClasses[count].name == classObj.name && classObj.stared == true) {
                classObj.stared = false;
                trueClassObj.stared = false;
                $scope.myInfo.staredClasses.splice(count, 1)
                count = max;
             }
          }
-         if (count != max + 1) {
+         if (count != max + 1 && classObj.stared == false) {
             classObj.stared = true;
             trueClassObj.stared = true;
             $scope.myInfo.staredClasses.push(classObj)
