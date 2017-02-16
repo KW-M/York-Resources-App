@@ -50,8 +50,12 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $scope.post.likes = $scope.post.likes || []
         $scope.post.previewImage = $scope.post.previewImage || ''
         $scope.findType();
-        $scope.sortLabels();
+        $scope.sortLabels()
         hideSelectedLabels();
+        $scope.$watch('post.link', function () {
+            if (typeof (linkChangeTimer) == 'number') clearTimeout(linkChangeTimer);
+            linkChangeTimer = setTimeout($scope.findType, 1000)
+        })
     }
 
     //temproary variables
@@ -110,11 +114,6 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
             })
         }
     };
-
-    $scope.$watch('post.link', function () {
-        if (typeof (linkChangeTimer) == 'number') clearTimeout(linkChangeTimer);
-        linkChangeTimer = setTimeout($scope.findType, 500)
-    })
 
     $scope.isReadyToSubmit = function () {
         var dialogElement = document.getElementById('new_post_dialog')
