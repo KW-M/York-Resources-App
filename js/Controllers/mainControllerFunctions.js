@@ -255,7 +255,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          promiseQueue.addPromise('drive', APIService.searchGDrive(generateQueryString()), function (postsData) {
             console.log(postsData)
             catagorizePosts(seperatePosts(postsData.result.files))
-         }, console.warn, 150)
+         }, null, 150, 'Error searching ')
       }
 
       function catagorizePosts(filterObj) {
@@ -765,7 +765,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             console.log(returnedValue.result.response.result)
             console.log(post.id)
             if (returnedValue.result.response.result == true || returnedValue.result.response.result == 'true') authorizationService.FireDatabase.ref('posts/' + post.id).remove().then($mdToast.hide, console.warn);
-         }, console.warn, 150);
+         }, null, 150, 'Problem deleting the post, try again.');
       });
    };
    $scope.likePost = function (post) {
@@ -797,10 +797,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).likeCount = res[1];
                authorizationService.FireDatabase.ref('posts/' + post.id + '/LC').set(res[1])
             })
-         }, function (err) {
-            console.warn(err)
-            $mdToast.showSimple('Problem liking the post, try again.');
-         }, 150);
+         }, null, 150, 'Problem liking the post, try again.');
       }, 2000);
    };
 
@@ -933,7 +930,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    var delay = 0;
 
    // Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
-   var promiseQueue = {
+   window.promiseQueue = {
       addPromise: function (typeName, promiseFunc, action, error, interval, errMsg) {
          typeName = typeName || 'general';
          if (!theQueue[typeName]) theQueue[typeName] = []
