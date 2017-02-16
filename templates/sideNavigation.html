@@ -78,9 +78,9 @@
     <md-list style="padding: 6px 0 0 0;">
         <md-list-item>
             <md-menu-item>
-                <md-button>
-                    <md-icon>settings</md-icon>
-                    Settings
+                <md-button ng-click="::openHelpDialog()">
+                    <md-icon>help</md-icon>
+                    Help
                 </md-button>
             </md-menu-item>
         </md-list-item>
@@ -89,14 +89,6 @@
                 <md-button ng-click="openFeedbackDialog()">
                     <md-icon>feedback</md-icon>
                     Send Feedback
-                </md-button>
-            </md-menu-item>
-        </md-list-item>
-        <md-list-item show-sm show-xs hide-gt-sm>
-            <md-menu-item>
-                <md-button ng-click="::openHelpDialog()">
-                    <md-icon>help</md-icon>
-                    Help
                 </md-button>
             </md-menu-item>
         </md-list-item>
