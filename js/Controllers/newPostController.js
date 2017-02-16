@@ -10,10 +10,12 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $timeout(initializePost)
     } else {
         var initWatch = $scope.$watch('myInfo', function () {
-            console.log('initDone')
-            $mdToast.hide
-            initWatch();
-            $timeout(initializePost)
+            if ($scope.myInfo.name != undefined) {
+                console.log('initDone')
+                $mdToast.hide
+                initWatch();
+                $timeout(initializePost)
+            }
         })
     }
 
