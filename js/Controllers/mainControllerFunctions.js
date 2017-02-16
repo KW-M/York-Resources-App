@@ -731,11 +731,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                trueClassObj.stared = false;
                $scope.myInfo.staredClasses.splice(count, 1);
                console.log('unstared', classObj.stared)
-               count = max+1;
+               count = max + 1;
             }
          }
          console.log(count + " " + max)
-         if (count != max+2 && classObj.stared == false) {
+         if (count != max + 2 && classObj.stared == false) {
             classObj.stared = true;
             trueClassObj.stared = true;
             $scope.myInfo.staredClasses.push(classObj)
@@ -903,8 +903,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       if (error.hasOwnProperty('expectedDomain')) authorizationService.showNonYorkDialog()
       if (error.result && error.result.error) {
          if (error.result.error.details) {
-            if (error.result.error.details[0] == 'fluff') {
-
+            if (error.result.error.details[0]) {
+               if (error.result.error.details[0].errorMessage == 'Authorization is required to perform that action.') {
+                  $scope.showInfoPopup('Please signin again.', 'Below is the returned error object:', error, true)
+                  return reAuth()
+               }
             } else {
                return $scope.showInfoPopup(item.errMsg || error.result.error.details[0].errorMessage || 'Error', 'Below is the returned error:', error, true)
             }
@@ -1000,12 +1003,16 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function reAuth(callback) {
-      authorizationService.GUser.reloadAuthResponse().then(callback, function (err) {
-         console.warn(err)
-         gapi.auth2.getAuthInstance().signOut().then(function () {
-            authorizationService.showSigninButton();
+      if (callback) {
+         authorizationService.GUser.reloadAuthResponse().then(callback, function (err) {
+            console.warn(err)
+            gapi.auth2.getAuthInstance().signOut().then(function () {
+               authorizationService.showSigninButton();
+            })
          })
-      })
+      } else {
+         return authorizationService.GUser.reloadAuthResponse()
+      }
    }
 
    $scope.removeHttp = function (input) {
