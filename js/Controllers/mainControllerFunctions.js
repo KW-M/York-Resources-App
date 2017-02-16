@@ -700,8 +700,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
    }
    $scope.userStarClass = function (classObj) {
-      classObj.stared = !classObj.stared || true;
+      classObj.stared = (classObj.stared || true) == true ;
+      console.log(classObj)
       console.log(classObj.stared)
+      console.log(!classObj.stared)
       if (typeof (starClickTimer[classObj.name]) == 'number') clearTimeout(starClickTimer[classObj.name]);
       starClickTimer[classObj.name] = setTimeout(function () {
          console.log('settingstared', classObj.stared)
