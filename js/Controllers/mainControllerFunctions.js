@@ -703,7 +703,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       classObj.stared = !classObj.stared;
       if (typeof (starClickTimer[classObj.name]) == 'number') clearTimeout(starClickTimer[classObj.name]);
       starClickTimer[classObj.name] = setTimeout(function () {
-         console.log('settingstared', classObj.stared)
          var trueClassObj = $scope.findClassObject(classObj.name)
          trueClassObj.stared = classObj.stared;
          for (var count = 0, max = $scope.myInfo.staredClasses.length; count < max; count++) {
@@ -711,16 +710,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                classObj.stared = false;
                trueClassObj.stared = false;
                $scope.myInfo.staredClasses.splice(count, 1);
-               console.log('unstared', classObj.stared)
                count = max + 1;
             }
          }
-         console.log(count + " " + max)
          if (count != max + 2) {
             classObj.stared = true;
             trueClassObj.stared = true;
             $scope.myInfo.staredClasses.push(classObj)
-            console.log('stared', classObj.stared)
          }
          scopeUpdate(classObj.stared)
          promiseQueue.addPromise('drive', APIService.runGAScript('saveUserPrefs', {
@@ -729,13 +725,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                starClass: classObj.name
             },
          }, true), function (data) {
-            console.log(data)
             classObj.stared = data.result.response.result == 'true';
-            console.log('stared2', classObj.stared)
             trueClassObj.stared = classObj.stared;
             scopeUpdate(classObj.stared)
          }, function (err) {
-            console.warn(err)
             classObj.stared = !classObj.stared;
             trueClassObj.stared = classObj.stared;
             scopeUpdate(classObj.stared)
