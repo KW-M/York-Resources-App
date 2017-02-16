@@ -698,7 +698,7 @@ button.selected.md-button {
 /*------- Posts Footer Styles --------*/
 
 .footer-container {
-    flex: 0 0 auto;
+    flex: 0  auto;
     display: flex;
     align-items: center;
     height: 100%;
