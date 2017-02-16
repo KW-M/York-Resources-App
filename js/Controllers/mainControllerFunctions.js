@@ -700,48 +700,45 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
    }
    $scope.userStarClass = function (classObj) {
-      var trueClassObj = $scope.findClassObject(classObj.name)
       classObj.stared = !classObj.stared || true;
-      trueClassObj.stared = classObj.stared;
+      console.log(classObj.stared)
       if (typeof (starClickTimer[classObj.name]) == 'number') clearTimeout(starClickTimer[classObj.name]);
       starClickTimer[classObj.name] = setTimeout(function () {
-         setStared();
-         promiseQueue.addPromise('drive', APIService.runGAScript('saveUserPrefs', {
-            operation: 'saveUserPrefs',
-            content: {
-               starClass: classObj.name
-            },
-         }, true), function (data) {
-            console.log(data)
-            classObj.stared = data.result.response.result == 'true';
-            console.log('stared2', classObj.stared)
-            trueClassObj.stared = classObj.stared;
-         }, function (err) {
-            console.warn(err)
-            classObj.stared = !classObj.stared || true;
-            trueClassObj.stared = classObj.stared;
-         }, 150, 'Problem adding favorite, try again.');
-      }, 1000);
-
-      function setStared() {
          console.log('settingstared', classObj.stared)
-         for (var count = 0, max = $scope.myInfo.staredClasses.length; count < max; count++) {
-            if ($scope.myInfo.staredClasses[count].name == classObj.name && classObj.stared == true) {
-               classObj.stared = false;
-               trueClassObj.stared = false;
-               $scope.myInfo.staredClasses.splice(count, 1);
-               console.log('unstared', classObj.stared)
-               count = max + 1;
-            }
-         }
-         console.log(count + " " + max)
-         if (count != max + 2 && classObj.stared == false) {
-            classObj.stared = true;
-            trueClassObj.stared = true;
-            $scope.myInfo.staredClasses.push(classObj)
-            console.log('stared', classObj.stared)
-         }
-      }
+         // var trueClassObj = $scope.findClassObject(classObj.name)
+         // trueClassObj.stared = classObj.stared;
+         // for (var count = 0, max = $scope.myInfo.staredClasses.length; count < max; count++) {
+         //    if ($scope.myInfo.staredClasses[count].name == classObj.name && classObj.stared == true) {
+         //       classObj.stared = false;
+         //       trueClassObj.stared = false;
+         //       $scope.myInfo.staredClasses.splice(count, 1);
+         //       console.log('unstared', classObj.stared)
+         //       count = max + 1;
+         //    }
+         // }
+         // console.log(count + " " + max)
+         // if (count != max + 2 && classObj.stared == false) {
+         //    classObj.stared = true;
+         //    trueClassObj.stared = true;
+         //    $scope.myInfo.staredClasses.push(classObj)
+         //    console.log('stared', classObj.stared)
+         // }
+         // promiseQueue.addPromise('drive', APIService.runGAScript('saveUserPrefs', {
+         //    operation: 'saveUserPrefs',
+         //    content: {
+         //       starClass: classObj.name
+         //    },
+         // }, true), function (data) {
+         //    console.log(data)
+         //    classObj.stared = data.result.response.result == 'true';
+         //    console.log('stared2', classObj.stared)
+         //    trueClassObj.stared = classObj.stared;
+         // }, function (err) {
+         //    console.warn(err)
+         //    classObj.stared = !classObj.stared || true;
+         //    trueClassObj.stared = classObj.stared;
+         // }, 150, 'Problem adding favorite, try again.');
+      }, 1000);
    }
 
    $scope.openQuizletWindow = function () {
