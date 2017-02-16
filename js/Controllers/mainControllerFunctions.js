@@ -704,6 +704,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
    $scope.userStarClass = function (classObj) {
       var trueClassObj = $scope.findClassObject(classObj.name)
+      setStared(!false, count)
       for (var count = 0, max = $scope.myInfo.staredClasses.length; count < max; count++) {
          console.log(max)
          console.log($scope.myInfo.staredClasses[count])
