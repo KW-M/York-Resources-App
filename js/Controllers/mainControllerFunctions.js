@@ -395,7 +395,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.sortedPosts.splice(indexes.sortedPosts, 1)
             conurancyCounter--;
          }
-      }, console.warn, 150);
+      }, null, 150, 'Error retrieving posts, try reloading the page');
    }
 
    function hideSpinner(hide) {
@@ -721,7 +721,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             console.warn(err)
             classObj.stared = !classObj.stared || true;
             trueClassObj.stared = classObj.stared;
-         }, 150, 'Problem staring class, try again.');
+         }, 150, 'Problem adding favorite, try again.');
       }, 2000);
 
       function setStared() {
