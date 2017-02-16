@@ -730,10 +730,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                trueClassObj.stared = false;
                $scope.myInfo.staredClasses.splice(count, 1);
                console.log('unstared', classObj.stared)
-               count = max;
+               count = max+1;
             }
          }
-         if (count != max + 1 && classObj.stared == false) {
+         console.log(count + " " + max)
+         if (count != max+2 && classObj.stared == false) {
             classObj.stared = true;
             trueClassObj.stared = true;
             $scope.myInfo.staredClasses.push(classObj)
