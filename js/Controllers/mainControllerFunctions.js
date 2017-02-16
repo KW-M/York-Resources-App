@@ -138,10 +138,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.sortedLabels = $scope.sortLabels(labelList.concat(teacherList))
             getStartupData.resolve();
          });
-      }, function (err) {
-         console.warn(err)
-         $mdToast.showSimple('Problem initializing, try reloading the page.');
-      }, 150);
+      }, null, 150, 'Problem initializing, try reloading the page.');
 
       var pickerPromise = $q.defer();
       gapi.load('picker', {
@@ -255,7 +252,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          promiseQueue.addPromise('drive', APIService.searchGDrive(generateQueryString()), function (postsData) {
             console.log(postsData)
             catagorizePosts(seperatePosts(postsData.result.files))
-         }, null, 150, 'Error searching ')
+         }, null, 150, 'Error searching, try again')
       }
 
       function catagorizePosts(filterObj) {
