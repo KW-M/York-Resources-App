@@ -708,7 +708,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       trueClassObj.stared = classObj.stared;
       if (typeof (starClickTimer[classObj.name]) == 'number') clearTimeout(starClickTimer[classObj.name]);
       starClickTimer[classObj.name] = setTimeout(function () {
-
+         setStared();
          promiseQueue.addPromise('drive', APIService.runGAScript('saveUserPrefs', {
             operation: 'saveUserPrefs',
             content: {
@@ -719,27 +719,28 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             setStared(data.result.response.result == 'true');
          }, function (err) {
             console.warn(err)
-            setStared(!classObj.stared);
+            classObj.stared = !classObj.stared || true;
+            trueClassObj.stared = classObj.stared;
          }, 150, 'Problem staring class, try again.');
       }, 2000);
 
-      function setStared(isStared, count) {
+      function setStared() {
          for (var count = 0, max = $scope.myInfo.staredClasses.length; count < max; count++) {
             if ($scope.myInfo.staredClasses[count].name == classObj.name) {
-               classObj.stared = true;
-               trueClassObj.stared = true;
+               classObj.stared = false;
+               trueClassObj.stared = false;
                $scope.myInfo.staredClasses.splice(count, 1)
                count = max;
             }
          }
          if (count != max + 1) {
-            setStared(true)
-         classObj.stared = isStared;
-         trueClassObj.stared = isStared;
-         if (isStared == true) $scope.myInfo.staredClasses.push(classObj)
-         if (isStared == false)
+            classObj.stared = true;
+            trueClassObj.stared = true;
+            $scope.myInfo.staredClasses.push(classObj)
+         }
       }
    }
+
    $scope.openQuizletWindow = function () {
       var quizWindow = window.open("", "_blank", "status=no,menubar=no,toolbar=no");
       quizWindow.resizeTo(9000, 140)
@@ -912,7 +913,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                authorizationService.showSigninButton();
                return showInfoPopup('Please signin again.', 'Below is the returned error object:', error, true)
             } else {
-               return showInfoPopup(error.result.error.errors[0].message || 'Error', 'Below is the returned error:', error, true)
+               return showInfoPopup(item.errMsg || error.result.error.errors[0].message || 'Error', 'Below is the returned error:', error, true)
             }
          }
       }
@@ -933,13 +934,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    // Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
    var promiseQueue = {
-      addPromise: function (typeName, promiseFunc, action, error, interval) {
+      addPromise: function (typeName, promiseFunc, action, error, interval, errMsg) {
          typeName = typeName || 'general';
          if (!theQueue[typeName]) theQueue[typeName] = []
          theQueue[typeName].push({
             promiseFunc: promiseFunc,
             action: action,
             err: error,
+            errMsg: errMsg,
          });
          if (!timer[typeName]) {
             processTheQueue(typeName); // start immediately on the first invocation
