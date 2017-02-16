@@ -900,14 +900,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             if (error.result.error.details[0] == 'fluff') {
 
             } else {
-               return showInfoPopup(error.result.error.details[0].errorMessage || 'Error', 'Below is the returned error:', error, true)
+               return $scope.showInfoPopup(item.errMsg || error.result.error.details[0].errorMessage || 'Error', 'Below is the returned error:', error, true)
             }
          } else if (error.result.error.errors) {
             if (error.result.error.errors[0].message == 'Invalid Credentials' || error.result.error.errors[0].reason == 'dailyLimitExceededUnreg') {
                authorizationService.showSigninButton();
-               return showInfoPopup('Please signin again.', 'Below is the returned error object:', error, true)
+               return $scope.showInfoPopup('Please signin again.', 'Below is the returned error object:', error, true)
             } else {
-               return showInfoPopup(item.errMsg || error.result.error.errors[0].message || 'Error', 'Below is the returned error:', error, true)
+               return $scope.showInfoPopup(item.errMsg || error.result.error.errors[0].message || 'Error', 'Below is the returned error:', error, true)
             }
          }
       }
@@ -1059,7 +1059,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //---------------------- dev -------------------------
    $scope.consoleLogInput = function (input, asAlert) {
       console.log(input)
-      if (asAlert) showInfoPopup('Logged', null, input, false)
+      if (asAlert) $scope.showInfoPopup('Logged', null, input, false)
    }
 
    $scope.consoleLogVariable = function (input, asAlert) {
@@ -1077,14 +1077,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          '<a href="https://drive.google.com/drive/u/0/#my-drive?action=locate&id=' + post.id + '">GDriveLink</a></br>' +
          '<a href="https://drive.google.com/file/d/' + post.id + '/view">AltGDriveLink</a></br></br>' +
          'sortedArrayIndex: ' + arrayIndex + '</br></br>Below is a JSON representation of the Post.';
-      showInfoPopup('Post Data', html, post, false);
+      $scope.showInfoPopup('Post Data', html, post, false);
    }
 
    $scope.refreshLayout = function () {
       angularGridInstance.postsGrid.refresh();
    }
 
-   function showInfoPopup(title, helpHtml, content, preToast) {
+   $scope.showInfoPopup = function(title, helpHtml, content, preToast) {
       if (preToast) {
          var toastPromise = $mdToast.show($mdToast.simple().textContent(title).action('Details').highlightAction(true).highlightClass('md-accent').hideDelay(7000)).then(function (response) {
             if (response == 'ok') showPanel();

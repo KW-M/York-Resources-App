@@ -78,13 +78,17 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                         promiseQueue.addPromise('drive', APIService.runGAScript('getLinkPreview', $scope.post.link, false), function (data) {
                             console.log(data)
                             var previewObj = JSON.parse(data.result.response.result);
-                            $timeout(function () {
-                                $scope.post.previewImage = previewObj.image
-                                $scope.post.attachmentIcon = previewObj.icon
-                                $scope.post.attachmentName = previewObj.title
-                                $scope.previewLoading = false;
-                                if ($scope.post.title == '') $scope.post.title = previewObj.title;
-                            })
+                            if (previewObj.error) {
+                                $scope.showInfoPopup('Error', 'Below is the returned error:', error, true)
+                            } else {
+                                $timeout(function () {
+                                    $scope.post.previewImage = previewObj.image
+                                    $scope.post.attachmentIcon = previewObj.icon
+                                    $scope.post.attachmentName = previewObj.title
+                                    $scope.previewLoading = false;
+                                    if ($scope.post.title == '') $scope.post.title = previewObj.title;
+                                })
+                            }
                         }, null, 150, 'Problem showing link preview, is your attachment link an actual URL?');
 
                     }
@@ -219,7 +223,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         var refrenceObj = {}
         var maxLabels = $scope.post.labels.length
         for (var labelCount = 0; labelCount < maxLabels; labelCount++) {
-           refrenceObj[$scope.post.labels[labelCount]] = true;
+            refrenceObj[$scope.post.labels[labelCount]] = true;
         }
         var maxTeachers = $scope.post.teachers.length
         for (var labelCount = 0; labelCount < maxTeachers; labelCount++) {
@@ -229,7 +233,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         for (var labelCount = 0; labelCount < max; labelCount++) {
             if (refrenceObj[$scope.sortedLabels[labelCount].name] == true) $scope.sortedLabels[labelCount].active = true;
         }
-        $timeout(function() {
+        $timeout(function () {
             $scope.sortedLabels = $scope.sortedLabels;
         })
     }
