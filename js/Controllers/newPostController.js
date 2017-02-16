@@ -85,7 +85,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                                 $scope.previewLoading = false;
                                 if ($scope.post.title == '') $scope.post.title = previewObj.title;
                             })
-                        }, console.warn, 150);
+                        }, null, 150, 'Problem showing link preview, is your attachment link an actual URL?');
 
                     }
                 }
@@ -140,7 +140,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                     resetAllLabels();
                 })
             },
-            onError, 150, 'Error Posting, try again.');
+            onError, 150, 'Error posting, try again.');
     }
 
     function addFireDatabaseRef(post) {
@@ -161,7 +161,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         if ($scope.shareSelect == 'view') var role = 'reader';
         if ($scope.shareSelect == 'comment') var role = 'commenter';
         if ($scope.shareSelect == 'edit') var role = 'writer';
-        promiseQueue.addPromise('drive', APIService.shareFile($scope.post.attachmentId, role), null, null, 150, 'The attached file couln't );
+        promiseQueue.addPromise('drive', APIService.shareFile($scope.post.attachmentId, role), null, null, 150, "The attached file couln't be shared, please share it manualy.");
         $mdToast.hide();
     }
 
