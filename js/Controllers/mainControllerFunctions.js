@@ -704,21 +704,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
    $scope.userStarClass = function (classObj) {
       var trueClassObj = $scope.findClassObject(classObj.name)
-      setStared(!false, count)
-      for (var count = 0, max = $scope.myInfo.staredClasses.length; count < max; count++) {
-         console.log(max)
-         console.log($scope.myInfo.staredClasses[count])
-         console.log($scope.myInfo.staredClasses[count].name +" " + classObj.name)
-         if ($scope.myInfo.staredClasses[count].name == classObj.name) {
-            console.log('settingStaredFalse')
-            setStared(false, count)
-            count = max;
-         }
-      }
-      console.log(count+","+max)
-      if (count != max+1) setStared(true)
+      classObj.stared = !classObj.stared || true;
+      trueClassObj.stared = classObj.stared;
       if (typeof (starClickTimer[classObj.name]) == 'number') clearTimeout(starClickTimer[classObj.name]);
       starClickTimer[classObj.name] = setTimeout(function () {
+
          promiseQueue.addPromise('drive', APIService.runGAScript('saveUserPrefs', {
             operation: 'saveUserPrefs',
             content: {
@@ -730,18 +720,24 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          }, function (err) {
             console.warn(err)
             setStared(!classObj.stared);
-            $mdToast.showSimple('Problem staringClass, try again.');
-         }, 150);
+         }, 150, 'Problem staring class, try again.');
       }, 2000);
 
       function setStared(isStared, count) {
+         for (var count = 0, max = $scope.myInfo.staredClasses.length; count < max; count++) {
+            if ($scope.myInfo.staredClasses[count].name == classObj.name) {
+               classObj.stared = true;
+               trueClassObj.stared = true;
+               $scope.myInfo.staredClasses.splice(count, 1)
+               count = max;
+            }
+         }
+         if (count != max + 1) {
+            setStared(true)
          classObj.stared = isStared;
          trueClassObj.stared = isStared;
-         console.log(classObj.stared)
-         console.log(count)
          if (isStared == true) $scope.myInfo.staredClasses.push(classObj)
-         if (isStared == false) $scope.myInfo.staredClasses.splice(count, 1)
-         console.log($scope.myInfo.staredClasses)
+         if (isStared == false)
       }
    }
    $scope.openQuizletWindow = function () {
@@ -1067,7 +1063,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //---------------------- dev -------------------------
    $scope.consoleLogInput = function (input, asAlert) {
       console.log(input)
-      if (asAlert) showInfoPopup('Logged',null,input,false)
+      if (asAlert) showInfoPopup('Logged', null, input, false)
    }
 
    $scope.consoleLogVariable = function (input, asAlert) {
