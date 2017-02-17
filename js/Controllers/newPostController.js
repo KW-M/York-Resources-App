@@ -87,8 +87,6 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                     $scope.post.type = 'noLink';
                 }
                 if ($scope.myInfo != undefined) getPreview();
-                if ($scope.myInfo == undefined) document.addEventListener('userInfoLoaded', getPreview());
-
                 function getPreview() {
                     if ($scope.post.link.match(/(?:http|https):\/\/.{2,}/)) {
                         promiseQueue.addPromise('drive', APIService.runGAScript('getLinkPreview', $scope.post.link, false), function (data) {
@@ -104,6 +102,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                                     $scope.post.previewImage = previewObj.image
                                     $scope.post.attachmentIcon = previewObj.icon
                                     $scope.post.attachmentName = previewObj.title
+                                    $scope.post.type = previewObj.type
                                     $scope.previewLoading = false;
                                     if ($scope.post.title == '') $scope.post.title = previewObj.title;
                                 })
@@ -122,7 +121,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
             $mdToast.show($mdToast.simple().textContent('Chose a class for this post.').hideDelay(1500).parent(dialogElement));
         } else if (($scope.post.title === '' || $scope.post.title === undefined) && ($scope.post.description === '' || $scope.post.description === undefined)) {
             $mdToast.show($mdToast.simple().textContent('Posts must have a title or description.').hideDelay(1500).parent(dialogElement));
-        } else if ($scope.post.type === "gDrive") {
+        } else if ($scope.post.type === "GDrive") {
             $mdToast.show({
                 template: '<md-toast> <div class="md-toast-content" style="justify-content: center;"> <div> <div class="md-toast-text" style="padding: 6px 0 0 0px;">How should the attached file be shared?</div> <div style="display:flex"> <md-select ng-model="shareSelect"> <md-option value="view"> York students can view </md-option> <md-option value="comment"> York students can comment </md-option> <md-option value="edit"> York students can edit </md-option> </md-select> <md-button style="color:rgb(68,138,255)" ng-click="shareFile()">Share</md-button> </div></div></div></md-toast>',
                 toastClass: 'shareLevelToast',
