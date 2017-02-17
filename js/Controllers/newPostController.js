@@ -11,10 +11,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     } else {
         var initWatch = $scope.$watch('myInfo', function () {
             if ($scope.myInfo.name != undefined) {
-                console.log('initDone')
-
                 $timeout(initializePost)
-                $mdToast.hide()
                 initWatch();
             }
         })
@@ -55,6 +52,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $scope.findType();
         $scope.sortLabels()
         hideSelectedLabels();
+        $mdToast.hide()
         $scope.$watch('post.link', function () {
             if (typeof (linkChangeTimer) == 'number') clearTimeout(linkChangeTimer);
             linkChangeTimer = setTimeout($scope.findType, 1000)
