@@ -119,7 +119,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //----------------------------------------------------
    //------------- Signin & Initiation ------------------
    var drivePicker, uploadPicker;
-   var labelList, teacherList;
+   var labelList;
 
    authorizationService.onLoad(function () {
       var profile = authorizationService.GUser.getBasicProfile()
@@ -138,7 +138,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                $scope.myInfo[property] = dataObj.userPrefs[property];
             }
             $scope.classList = dataObj.classes;
-            $scope.sortedLabels = $scope.sortLabels(dataObj.labels)
+            labelList = dataObj.labels
+            $scope.sortedLabels = $scope.sortLabels(labelList)
             getStartupData.resolve();
          });
       }, null, 150, 'Problem initializing, try reloading the page.');
