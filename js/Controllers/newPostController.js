@@ -102,6 +102,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                                     $scope.post.previewImage = previewObj.image
                                     $scope.post.attachmentIcon = previewObj.icon
                                     $scope.post.attachmentName = previewObj.title
+                                    $scope.post.attachmentId = previewObj.attachmentId
                                     $scope.post.type = previewObj.type
                                     $scope.previewLoading = false;
                                     if ($scope.post.title == '') $scope.post.title = previewObj.title;
