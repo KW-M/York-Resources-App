@@ -154,10 +154,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
       $q.all([getStartupData.promise, pickerPromise.promise]).then(function () {
          console.log("Everything Loaded")
-         document.dispatchEvent(new Event('userInitializatinDone'));
          listenForURLChange();
-         getDatabase();
          authorizationService.hideSigninDialog();
+         document.dispatchEvent(new Event('userInitializatinDone'));
+         getDatabase();
       })
    })
 
