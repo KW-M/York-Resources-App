@@ -11,7 +11,6 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     } else {
         document.addEventListener('userInitializatinDone', function (argument) {
             $timeout(initializePost)
-            
         })
     }
 
