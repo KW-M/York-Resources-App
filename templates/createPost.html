@@ -60,6 +60,7 @@
 					<md-select ng-model="post.class" ng-model-options="{trackBy: $value.name}" ng-if="operation != 'view'" class="md-no-underline" placeholder="Class" id="class_dropdown_button" md-on-close="classSelectDone()" reqired="true" style="flex: 0 0 auto">
 						<md-select-header class="classSelectSearchbox">
 							<input ng-model="classSelectSearch" id="class_select_input" type="text" placeholder="Search for a class.." class="md-text">
+							<md-progress-circular md-mode="indeterminate" ng-if="classList == undefined"></md-progress-circular>
 						</md-select-header>
 						<div ng-repeat="favClass in myInfo.staredClasses" ng-if="!classSelectSearch">
 							<md-option ng-value="favClass">{{::favClass.name}}</md-option>

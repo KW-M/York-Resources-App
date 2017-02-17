@@ -126,7 +126,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 template: '<md-toast> <div class="md-toast-content" style="justify-content: center;"> <div> <div class="md-toast-text" style="padding: 6px 0 0 0px;">How should the attached file be shared?</div> <div style="display:flex"> <md-select ng-model="shareSelect"> <md-option value="view"> York students can view </md-option> <md-option value="comment"> York students can comment </md-option> <md-option value="edit"> York students can edit </md-option> </md-select> <md-button style="color:rgb(68,138,255)" ng-click="shareFile()">Share</md-button> </div></div></div></md-toast>',
                 toastClass: 'shareLevelToast',
                 hideDelay: false,
-                //parent: dialogElement,
+                parent: document,//dialogElement,
                 scope: {
                     shareSelect: '',
                     shareFile: function (shareSelection){
