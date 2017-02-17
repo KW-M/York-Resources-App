@@ -6,6 +6,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     var originalPost = angular.copy(postObj);
     console.log(originalPost)
     $scope.post = postObj;
+    $scope.otherClass = {name:'Other',catagory:'Other',color:'hsla(230, 70%, 75%,',stared:null};
     if ($scope.myInfo != undefined) {
         $timeout(initializePost)
     } else {
