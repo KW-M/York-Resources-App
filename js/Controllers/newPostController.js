@@ -178,16 +178,16 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     }
 
     $scope.shareFile = function () {
-        if ($scope.shareSelect == 'view') var role = 'reader';
-        if ($scope.shareSelect == 'comment') var role = 'commenter';
-        if ($scope.shareSelect == 'edit') var role = 'writer';
-        promiseQueue.addPromise('drive', APIService.shareFile($scope.post.attachmentId, role), $scope.submit, null, 150, "The attached file couln't be shared, please share it manualy.");
-        $mdToast.show({
-            template: '<md-toast>Sharing...</md-toast>',
-            hideDelay: false,
-            parent: document.getElementById('new_post_dialog'),
-            scope: $scope,
-        })
+        // if ($scope.shareSelect == 'view') var role = 'reader';
+        // if ($scope.shareSelect == 'comment') var role = 'commenter';
+        // if ($scope.shareSelect == 'edit') var role = 'writer';
+        // promiseQueue.addPromise('drive', APIService.shareFile($scope.post.attachmentId, role), $scope.submit, null, 150, "The attached file couln't be shared, please share it manualy.");
+        // $mdToast.show({
+        //     template: '<md-toast>Sharing...</md-toast>',
+        //     hideDelay: false,
+        //     parent: document.getElementById('new_post_dialog'),
+        //     scope: $scope,
+        // })
     }
 
     //----------------------------------------------------
