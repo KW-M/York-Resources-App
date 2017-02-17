@@ -52,6 +52,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $scope.findType();
         $scope.sortLabels()
         hideSelectedLabels();
+        console.log('Hiding Toast')
         $mdToast.hide()
         $scope.$watch('post.link', function () {
             if (typeof (linkChangeTimer) == 'number') clearTimeout(linkChangeTimer);
