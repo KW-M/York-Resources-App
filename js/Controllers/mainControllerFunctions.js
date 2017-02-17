@@ -137,10 +137,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             for (var property in dataObj.userPrefs) {
                $scope.myInfo[property] = dataObj.userPrefs[property];
             }
-            labelList = dataObj.labels;
-            teacherList = dataObj.teachers;
             $scope.classList = dataObj.classes;
-            $scope.sortedLabels = $scope.sortLabels(labelList.concat(teacherList))
+            $scope.sortedLabels = $scope.sortLabels(dataObj.labels)
             getStartupData.resolve();
          });
       }, null, 150, 'Problem initializing, try reloading the page.');
@@ -643,14 +641,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                var labelClass = label.classes[classCount]
                if (labelClass == $scope.post.class.name || labelClass.name == $scope.post.class.name) {
                   if (label.type == 'Label') label.sortOrder = (labelClass.usage * 2) + 1000
-                  if (label.type == 'Teacher') label.sortOrder = 100000;
+                  if (label.type == 'Teacher') label.sortOrder = (labelClass.usage * 2) + 100000;
                   classCount = classMax + 1;
                };
                if (classCount != classMax + 1) label.sortOrder = label.totalUsage || 1
             }
          }
       } else {
-         $scope.sortedLabels = input || labelList.concat(teacherList);
+         $scope.sortedLabels = input || labelList;
       }
       $scope.sortedLabels = $scope.sortedLabels.sort(function (a, b) {
          return (b.sortOrder || b.totalUsage || 1) - (a.sortOrder || a.totalUsage || 1);
@@ -746,7 +744,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          })
       }
    }
-
    $scope.openQuizletWindow = function () {
       var quizWindow = window.open("", "_blank", "status=no,menubar=no,toolbar=no");
       quizWindow.resizeTo(9000, 140)
