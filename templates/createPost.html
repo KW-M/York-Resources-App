@@ -74,7 +74,7 @@
 						</md-optgroup>
 					</md-select>
 					<div style="padding-bottom:6px">
-						<md-progress-circular md-mode="indeterminate" ng-if="classList == undefined" style="margin:auto" ></md-progress-circular>
+						<md-progress-circular md-mode="indeterminate" ng-if="classList == undefined" style="margin:auto" md-diameter="32"></md-progress-circular>
 						<div style="display:inline" ng-if="labelSearch == null || labelSearch == ''">
 							<div class="label unselectable label-active" ng-click="moveLabelToSortedLabels(post.teachers,$index)" ng-repeat="teacher in post.teachers">{{teacher}}</div>
 							<div class="label unselectable label-active" ng-click="moveLabelToSortedLabels(post.labels,$index)" ng-repeat="label in post.labels">{{label}}</div>
@@ -121,8 +121,8 @@
 			<span class="like-counter">{{post.likes.length}}</span>
 			<md-icon ng-class="{'md-accent' : post.userLiked}" style="margin-top: -8px">thumb_up</md-icon>
 		</md-button>
-		<md-button class="md-icon-button" area-label="Flag" ng-click="flagPost(post)" ng-hide="post.creator.email == myInfo.email && post.flagged == false">
-			<md-icon ng-class="{'md-warn' : post.flagged == true}">flag</md-icon>
+		<md-button class="md-icon-button" area-label="Flag" ng-click="flagPost(post)" ng-if="post.flagged == true"ng-hide="post.creator.email == myInfo.email && post.flagged == false">
+			<md-icon class="md-warn">flag</md-icon>
 		</md-button>
 		<md-button class="md-icon-button" ng-click="operation = 'update'">
 			<md-icon>edit</md-icon>
