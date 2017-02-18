@@ -1,5 +1,5 @@
-<md-dialog id="new_post_dialog" flex layout="column">
-	<md-dialog-content class="new_post_dialog_scroll" style="opacity:0" ng-style="{'background-color': post.class.color + ' 0.6)'}" ng-class="{'view':operation == 'view'}">
+<md-dialog id="new_post_dialog" >
+	<md-dialog-content class="new_post_dialog_scroll" style="opacity:0" ng-style="{'background-color': post.class.color + ' 0.6)'}" ng-class="{'view':operation == 'view'}" flex layout="column">
 		<div id="dialog_header" class="post-card-header" ng-class="{'no-link':post.type == 'NoLink','md-whiteframe-3dp': (operation == 'view' && post.link == '' && newPostScroll > 0) || (operation != 'view' && newPostScroll > 139)}" md-ink-ripple="{{post.link != '' && operation == 'view'}}"
 			ng-click="openLink(post.link, operation != 'view')" ng-style="{'height': ((operation == 'view' && post.link == '') ? (60):(200-newPostScroll)) + 'px'}" title="{{removeHttp(post.link)}}">
 			<img ng-src="{{post.previewImage}}" id="header_image" ng-class="{'post-card-image':operation == 'view'}"></img>
@@ -89,11 +89,11 @@
 					<input type="text" placeholder="Find a Label..." ng-model="labelSearch">
 				</md-input-container>
 			</div>
-			<div class="md-dialog-content unselectable">
+			<div class="md-dialog-content unselectable" flex layout="column">
 				<input ng-model="post.title" ng-readonly="operation === 'view'" class="new-post-title md-title" placeholder="Title" md-autofocus>
 				<p class="post-card-creator md-subhead" style="margin:0" ng-hide="::post.creator.name == undefined || post.creator.name == myInfo.name"><span>By {{::post.creator.name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::post.creator.classOf}})</span>
 				</p>
-				<div contenteditable="{{operation != 'view'}}" ng-model="post.description" class="new-post-body"></div>
+				<div contenteditable="{{operation != 'view'}}" ng-model="post.description" class="new-post-body" flex="1"></div>
 			</div>
 		</div>
 	</md-dialog-content>
