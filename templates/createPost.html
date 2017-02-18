@@ -55,8 +55,8 @@
 			<div class="header-spacer" ng-class="{'small-spacer': post.type == 'NoLink' && operation == 'view','has-link': post.link != ''}" title="{{removeHttp(post.link)}}" ng-click="openLink(post.link)">
 				<!--<md-tooltip md-autohide md-direction="top" md-delay="1000"><md-icon>language</md-icon> {{removeHttp(post.link)}}</md-tooltip>-->
 			</div>
-			<div flex="0" layout="row">
-				<div flex layout="row" class="label-container" ng-style="{'max-width': (300 + (post.labels.length * 95)) + 'px'}">
+			<div layout="row">
+				<div layout="row" class="label-container" ng-style="{'max-width': (300 + (post.labels.length * 95)) + 'px'}">
 					<md-select ng-model="post.class" ng-model-options="{trackBy: $value.name}" ng-if="operation != 'view'" class="md-no-underline" placeholder="Class" id="class_dropdown_button" md-on-close="classSelectDone()" reqired="true" style="flex: 0 0 auto">
 						<md-select-header class="classSelectSearchbox">
 							<input ng-model="classSelectSearch" id="class_select_input" type="text" placeholder="Search for a class.." class="md-text">
@@ -93,7 +93,7 @@
 				<input ng-model="post.title" ng-readonly="operation === 'view'" class="new-post-title md-title" placeholder="Title" md-autofocus>
 				<p class="post-card-creator md-subhead" style="margin:0" ng-hide="::post.creator.name == undefined || post.creator.name == myInfo.name"><span>By {{::post.creator.name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::post.creator.classOf}})</span>
 				</p>
-				<div contenteditable="{{operation != 'view'}}" ng-model="post.description" class="new-post-body" flex="1"></div>
+				<div contenteditable="{{operation != 'view'}}" ng-model="post.description" class="new-post-body" flex></div>
 			</div>
 		</div>
 	</md-dialog-content>
