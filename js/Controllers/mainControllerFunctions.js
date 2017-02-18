@@ -641,7 +641,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             for (var classCount = 0, classMax = label.classes.length; classCount < classMax; classCount++) {
                var labelClass = label.classes[classCount]
                 console.log(labelClass)
-               if (labelClass == $scope.post.class.name || labelClass.name == $scope.post.class.name) {
+                console.log(labelClass.name + "" +$scope.post.class.name)
+               if (labelClass.name == $scope.post.class.name) {
+                                  console.log(label.type)
                   if (label.type == 'Label') label.sortOrder = (labelClass.usage * 2) + 1000
                   if (label.type == 'Teacher') label.sortOrder = (labelClass.usage * 2) + 100000;
                   classCount = classMax + 1;
