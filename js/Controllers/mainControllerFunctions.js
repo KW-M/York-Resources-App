@@ -635,11 +635,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    };
    $scope.sortLabels = function (input) {
       if ($scope.sortedLabels && $scope.post && $scope.post.class && $scope.post.class.name != '') {
-         var max = $scope.sortedLabels.length
-         for (var labelCount = 0; labelCount < max; labelCount++) {
+         for (var labelCount = 0, max = $scope.sortedLabels.length; labelCount < max; labelCount++) {
             var label = $scope.sortedLabels[labelCount];
-            var classMax = label.classes.length;
-            for (var classCount = 0; classCount < classMax; classCount++) {
+            for (var classCount = 0, classMax = label.classes.length; classCount < classMax; classCount++) {
                var labelClass = label.classes[classCount]
                if (labelClass == $scope.post.class.name || labelClass.name == $scope.post.class.name) {
                   if (label.type == 'Label') label.sortOrder = (labelClass.usage * 2) + 1000
