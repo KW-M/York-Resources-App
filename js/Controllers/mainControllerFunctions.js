@@ -644,8 +644,16 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                 console.log(labelClass.name + "" +$scope.post.class.name)
                if (labelClass.name == $scope.post.class.name) {
                    console.log(label.type)
-                  if (label.type == 'Label') label.sortOrder = (labelClass.usage * 2) + 1000
-                  if (label.type == 'Teacher') label.sortOrder = (labelClass.usage * 2) + 100000;
+                  if (label.type == 'Label') {
+                     console.log('isLabel')
+                     label.sortOrder = (labelClass.usage * 2) + 1000
+                  }
+                  if (label.type == 'Teacher') {
+                     label.sortOrder = (labelClass.usage * 2) + 100000;
+
+                     console.log('isTeacher')
+                  }
+                  console.log(label.sortOrder + " " + labelClass.usage);
                   classCount = classMax + 1;
                };
             };
