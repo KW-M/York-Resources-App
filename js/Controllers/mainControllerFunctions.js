@@ -661,7 +661,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          $scope.sortedLabels = input || labelList;
       }
       $scope.sortedLabels = $scope.sortedLabels.sort(function (a, b) {
-         console.log(b.sortOrder)
+         console.log(b.name + b.sortOrder)
          return (b.sortOrder || b.totalUsage || 1) - (a.sortOrder || a.totalUsage || 1);
       })
       console.log($scope.sortedLabels)
