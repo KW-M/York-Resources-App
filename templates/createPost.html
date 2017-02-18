@@ -1,4 +1,4 @@
-<md-dialog id="new_post_dialog">
+<md-dialog id="new_post_dialog" flex layout="column">
 	<md-dialog-content class="new_post_dialog_scroll" style="opacity:0" ng-style="{'background-color': post.class.color + ' 0.6)'}" ng-class="{'view':operation == 'view'}">
 		<div id="dialog_header" class="post-card-header" ng-class="{'no-link':post.type == 'NoLink','md-whiteframe-3dp': (operation == 'view' && post.link == '' && newPostScroll > 0) || (operation != 'view' && newPostScroll > 139)}" md-ink-ripple="{{post.link != '' && operation == 'view'}}"
 			ng-click="openLink(post.link, operation != 'view')" ng-style="{'height': ((operation == 'view' && post.link == '') ? (60):(200-newPostScroll)) + 'px'}" title="{{removeHttp(post.link)}}">
@@ -51,11 +51,11 @@
 			</div>
 			<md-progress-linear class="link-loading" md-mode="indeterminate" ng-disabled="!previewLoading"></md-progress-linear>
 		</div>
-		<div id="new_post_content">
+		<div id="new_post_content" flex layout="column">
 			<div class="header-spacer" ng-class="{'small-spacer': post.type == 'NoLink' && operation == 'view','has-link': post.link != ''}" title="{{removeHttp(post.link)}}" ng-click="openLink(post.link)">
 				<!--<md-tooltip md-autohide md-direction="top" md-delay="1000"><md-icon>language</md-icon> {{removeHttp(post.link)}}</md-tooltip>-->
 			</div>
-			<div flex layout="row">
+			<div flex="0" layout="row">
 				<div flex layout="row" class="label-container" ng-style="{'max-width': (300 + (post.labels.length * 95)) + 'px'}">
 					<md-select ng-model="post.class" ng-model-options="{trackBy: $value.name}" ng-if="operation != 'view'" class="md-no-underline" placeholder="Class" id="class_dropdown_button" md-on-close="classSelectDone()" reqired="true" style="flex: 0 0 auto">
 						<md-select-header class="classSelectSearchbox">
