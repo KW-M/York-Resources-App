@@ -654,7 +654,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                   classCount = classMax + 1;
                };
             };
-            if (classCount != classMax + 1) {
+            if (classCount != classMax + 2) {
                if (label.type == 'Teacher') {
                   $scope.sortedLabels[labelCount].sortOrder = 0;
                } else {
@@ -665,6 +665,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       } else {
          $scope.sortedLabels = input || labelList;
       }
+      console.log($scope.sortedLabels)
       $scope.sortedLabels = $scope.sortedLabels.sort(function (a, b) {
          console.log(b.name + b.sortOrder)
          if (b.sortOrder != undefined) {
