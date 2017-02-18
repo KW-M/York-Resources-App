@@ -138,8 +138,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                $scope.myInfo[property] = dataObj.userPrefs[property];
             }
             $scope.classList = dataObj.classes;
-            labelList = dataObj.labels
-            $scope.sortedLabels = $scope.sortLabels(labelList)
+            $scope.sortedLabels = dataObj.labels
+            $scope.sortLabels()
             getStartupData.resolve();
          });
       }, null, 150, 'Problem initializing, try reloading the page.');
