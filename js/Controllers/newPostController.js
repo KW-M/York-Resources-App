@@ -134,20 +134,19 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 hideDelay: false,
                 parent: angular.element(dialogElement),
                 controller: function (scope) {
-                    scope.shareSelect = 'view',
-                        shareFile = function () {
-                            if ($scope.shareSelect == 'view') var role = 'reader';
-                            if ($scope.shareSelect == 'comment') var role = 'commenter';
-                            if ($scope.shareSelect == 'edit') var role = 'writer';
-                            // promiseQueue.addPromise('drive', APIService.shareFile($scope.post.attachmentId, role), $scope.submit, null, 150, "The attached file couln't be shared, please share it manualy.");
-                            $mdToast.show({
-                                template: '<md-toast>Sharing...</md-toast>',
-                                hideDelay: false,
-                                parent: angular.element(document.getElementById('new_post_dialog')),
-                                scope: $scope,
-                            })
-                        }
-
+                    scope.shareSelect = 'view';
+                    scope.shareFile = function () {
+                        if (scope.shareSelect == 'view') var role = 'reader';
+                        if (scope.shareSelect == 'comment') var role = 'commenter';
+                        if (scope.shareSelect == 'edit') var role = 'writer';
+                        promiseQueue.addPromise('drive', APIService.shareFile($scope.post.attachmentId, role), $scope.submit, null, 150, "The attached file couln't be shared, please share it manualy.");
+                        $mdToast.show({
+                            template: '<md-toast>Sharing...</md-toast>',
+                            hideDelay: false,
+                            parent: angular.element(document.getElementById('new_post_dialog')),
+                            scope: $scope,
+                        })
+                    }
                 },
             })
         } else {
