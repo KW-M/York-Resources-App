@@ -637,31 +637,28 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       if ($scope.sortedLabels && $scope.post && $scope.post.class && $scope.post.class.name != '') {
          for (var labelCount = 0, max = $scope.sortedLabels.length; labelCount < max; labelCount++) {
             var label = $scope.sortedLabels[labelCount];
-            console.log(label)
             for (var classCount = 0, classMax = label.classes.length; classCount < classMax; classCount++) {
                var labelClass = label.classes[classCount]
-                console.log(labelClass)
-                console.log(labelClass.name + "" +$scope.post.class.name)
+               console.log(labelClass.usage + labelClass.name + "" + $scope.post.class.name)
                if (labelClass.name == $scope.post.class.name) {
-                   console.log(label.type)
+                  console.log(label.type)
                   if (label.type == 'Label') {
                      console.log('isLabel')
-                     label.sortOrder = (labelClass.usage * 2) + 1000
+                     $scope.sortedLabels[labelCount].sortOrder = (labelClass.usage * 2) + 1000
                   }
                   if (label.type == 'Teacher') {
-                     label.sortOrder = (labelClass.usage * 2) + 100000;
-
+                     $scope.sortedLabels[labelCount].sortOrder = (labelClass.usage * 2) + 100000;
                      console.log('isTeacher')
                   }
-                  console.log(label.sortOrder + " " + labelClass.usage);
+                  console.log($scope.sortedLabels[labelCount].sortOrder + " " + labelClass.usage);
                   classCount = classMax + 1;
                };
             };
             if (classCount != classMax + 1) {
                if (label.type == 'Teacher') {
-                  label.sortOrder = 0;
+                  $scope.sortedLabels[labelCount].sortOrder = 0;
                } else {
-                  label.sortOrder = label.totalUsage || 1
+                  $scope.sortedLabels[labelCount].sortOrder = label.totalUsage || 1
                }
             }
          }
