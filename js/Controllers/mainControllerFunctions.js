@@ -637,14 +637,22 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       if ($scope.sortedLabels && $scope.post && $scope.post.class && $scope.post.class.name != '') {
          for (var labelCount = 0, max = $scope.sortedLabels.length; labelCount < max; labelCount++) {
             var label = $scope.sortedLabels[labelCount];
+            console.log(label)
             for (var classCount = 0, classMax = label.classes.length; classCount < classMax; classCount++) {
                var labelClass = label.classes[classCount]
+                console.log(labelClass)
                if (labelClass == $scope.post.class.name || labelClass.name == $scope.post.class.name) {
                   if (label.type == 'Label') label.sortOrder = (labelClass.usage * 2) + 1000
                   if (label.type == 'Teacher') label.sortOrder = (labelClass.usage * 2) + 100000;
                   classCount = classMax + 1;
                };
-               if (classCount != classMax + 1) label.sortOrder = label.totalUsage || 1
+            };
+            if (classCount != classMax + 1) {
+               if (label.type == 'Teacher') {
+                  label.sortOrder = 0;
+               } else {
+                  label.sortOrder = label.totalUsage || 1
+               }
             }
          }
       } else {
