@@ -119,7 +119,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //----------------------------------------------------
    //------------- Signin & Initiation ------------------
    var drivePicker, uploadPicker;
-   var labelList;
 
    authorizationService.onLoad(function () {
       var profile = authorizationService.GUser.getBasicProfile()

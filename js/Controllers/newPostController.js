@@ -159,7 +159,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $scope.dialog_container.style.opacity = 0.8;
         $scope.dialog_container.style.pointerEvents = 'none';
         $mdToast.show({
-            template: '<md-toast><span style="font-size:18px; max-width: 200px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="36"></md-progress-circular></md-toast>',
+            template: '<md-toast><span style="font-size:18px; max-width: 200px">Posting</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="32"></md-progress-circular></md-toast>',
             hideDelay: 3000000,
         });
         promiseQueue.addPromise('drive', APIService.runGAScript('savePost', {
