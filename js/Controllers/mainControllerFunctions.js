@@ -643,7 +643,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                 console.log(labelClass)
                 console.log(labelClass.name + "" +$scope.post.class.name)
                if (labelClass.name == $scope.post.class.name) {
-                                  console.log(label.type)
+                   console.log(label.type)
                   if (label.type == 'Label') label.sortOrder = (labelClass.usage * 2) + 1000
                   if (label.type == 'Teacher') label.sortOrder = (labelClass.usage * 2) + 100000;
                   classCount = classMax + 1;
@@ -661,6 +661,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          $scope.sortedLabels = input || labelList;
       }
       $scope.sortedLabels = $scope.sortedLabels.sort(function (a, b) {
+         console.log(b.sortOrder)
          return (b.sortOrder || b.totalUsage || 1) - (a.sortOrder || a.totalUsage || 1);
       })
       console.log($scope.sortedLabels)
