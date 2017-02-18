@@ -133,12 +133,12 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 toastClass: 'shareLevelToast',
                 hideDelay: false,
                 //parent: document, //dialogElement,
-                // scope: {
-                //     shareSelect: '',
+                scope: {
+                    shareSelect: 'view',
                 //     // shareFile: function (shareSelection) {
                 //     //     console.log(shareSelection)
                 //     // },
-                // },
+                },
             })
         } else {
             $scope.submit();
