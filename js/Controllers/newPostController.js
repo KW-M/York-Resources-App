@@ -174,9 +174,9 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 addFireDatabaseRef(createdPost).then(function () {
                     $mdToast.hide();
                     $mdDialog.hide();
+                    resetAllLabels();
                     $scope.dialog_container.style.opacity = 1;
                     $scope.dialog_container.style.pointerEvents = 'all';
-                    resetAllLabels();
                 })
             },
             onError, 150, 'Error posting, try again.');
@@ -242,7 +242,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     function resetAllLabels() {
         var max = $scope.sortedLabels.length
         for (var labelCount = 0; labelCount < max; labelCount++) {
-            $scope.sortedLabels[labelCount].active == false;
+            $scope.sortedLabels[labelCount].active = false;
         }
     }
 
