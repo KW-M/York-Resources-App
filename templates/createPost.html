@@ -116,7 +116,7 @@
 			<md-icon style="font-size:26px; line-height: 25px">{{operation == 'new' ? 'delete' : 'close'}}</md-icon>
 		</md-button>
 	</md-dialog-actions>
-	<md-dialog-actions ng-if="operation != 'view'" layout="row" style="align-items: center;" ng-style="{'background-color': post.class.color + ' 0.6)'}">
+	<md-dialog-actions ng-if="operation == 'view'" layout="row" style="align-items: center;" ng-style="{'background-color': post.class.color + ' 0.6)'}">
 		<md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(post)">
 			<span class="like-counter">{{post.likes.length}}</span>
 			<md-icon ng-class="{'md-accent' : post.userLiked}" style="margin-top: -8px">thumb_up</md-icon>
