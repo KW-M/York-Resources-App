@@ -206,7 +206,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 name: labelName,
                 type: 'Label',
                 active: true,
-                linkedClasses: [{
+                classes: [{
                     name: $scope.post.class.name,
                     usage: 1,
                 }],
