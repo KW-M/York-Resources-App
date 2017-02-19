@@ -194,9 +194,9 @@
                     <div style="display: flex;align-items: center; margin-top: 12px;">
                         <span class="md-display-1">{{queryParams.classPath}}</span>
                         <span style="flex:1;text-align:center">
-                            <md-button ng-click="openLink('https://quizlet.com/create-set')" ng-show="queryParams.classPath == 'Quizlet'">
+                            <md-button ng-click="openLink('https://quizlet.com/create-set')" ng-="queryParams.classPath == 'Quizlet'">
                                 <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>add_to_photos</md-icon>Create Set</md-button>
-                            <md-button ng-show="queryParams.classPath == 'Quizlet'">
+                            <md-button ng-if="queryParams.classPath == 'Quizlet'">
                                 <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>open_in_browser</md-icon>Open Class</md-button>
                         </span>
                         <md-button class="star-button" ng-if="selectedClass.stared != null" ng-click="userStarClass(selectedClass)">
