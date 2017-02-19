@@ -57,7 +57,7 @@
 			</div>
 			<div layout="row">
 				<div layout="row" class="label-container" ng-style="{'max-width': (300 + (post.labels.length * 95)) + 'px'}">
-					<md-select ng-model="post.class" ng-model-options="{trackBy: $value.name}" ng-if="operation != 'view'" class="md-no-underline" placeholder="Class" id="class_dropdown_button" md-on-close="classSelectDone()" reqired="true" style="flex: 0 0 auto">
+					<md-select ng-model="post.class" ng-model-options="{trackBy: $value.name}" ng-if="operation != 'view'" class="md-no-underline" placeholder="Class" id="class_dropdown_button" md-on-close="classSelectDone()" ng-required="true" style="flex: 0 0 auto">
 						<md-select-header class="classSelectSearchbox">
 							<input ng-model="classSelectSearch" id="class_select_input" type="text" placeholder="Search for a class.." class="md-text">
 						</md-select-header>
