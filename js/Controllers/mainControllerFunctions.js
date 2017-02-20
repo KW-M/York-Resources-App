@@ -902,10 +902,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //----------------------------------------------------
    //----------------- Error Handling -------------------
 
-   window.APIErrorHandeler = function (error, item) {
+   window.APIErrorHandeler = function (error, item, tries) {
       console.warn(error);
       console.log(item);
-      sendErrorEmail(error)
+      if (tries == 2) sendErrorEmail(error)
       if (error.hasOwnProperty('expectedDomain')) authorizationService.showNonYorkDialog()
       if (error.result && error.result.error) {
          if (error.result.error.details) {
@@ -932,19 +932,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
 
    function sendErrorEmail(error) {
-      promiseQueue.addPromise('drive', APIService.runGAScript('sendErrorEmail'), function (data) {
-         var dataObj = JSON.parse(data.result.response.result);
-         console.log(dataObj)
-         $timeout(function () {
-            for (var property in dataObj.userPrefs) {
-               $scope.myInfo[property] = dataObj.userPrefs[property];
-            }
-            $scope.classList = dataObj.classes;
-            $scope.sortedLabels = dataObj.labels
-            $scope.sortLabels()
-            getStartupData.resolve();
-         });
-      }, null, 150, 'Problem initializing, try reloading the page.');
+      promiseQueue.addPromise('drive', APIService.runGAScript('sendErrorEmail'), null, null, 150, 'Problem connecting, make sure you have an internet connection.');
    }
 
    window.clearUserInfo = function () {
@@ -982,7 +970,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          var promise = item.promiseFunc();
          promise.then(function (output) {
             console.log('output', output)
-            if (output.result && (output.result.error || output.result.response.result == 'Error')) {
+            if (output.result && (output.result.error || output.result.response.result == 'Error' || output.result.response.result == 'Err')) {
                errorBackoff(output, item)
             } else {
                item.action(output)
@@ -993,7 +981,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          });
 
          function errorBackoff(error, item) {
-            var errorHandled = APIErrorHandeler(error, item);
+            var errorHandled = APIErrorHandeler(error, item, delay || 0);
             if (errorHandled) errorHandled.then(function () {
                if (delay < 4) {
                   setTimeout(function () {
