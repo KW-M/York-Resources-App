@@ -264,8 +264,8 @@
                                         <md-button class="md-icon-button" area-label="Flag" ng-click="::unFlagPost(post,$index)" ng-if="post.flagged == true">
                                             <md-icon class="md-warn">flag</md-icon>
                                         </md-button>
-                                        <md-menu>
-                                            <md-button ng-click="::$mdOpenMenu($event)" class="md-icon-button" ng-if="post.creator.email == myInfo.email">
+                                        <md-menu ng-if="post.creator.email == myInfo.email || devMode == true">
+                                            <md-button ng-click="::$mdOpenMenu($event)" class="md-icon-button">
                                                 <md-icon>more_vert</md-icon>
                                             </md-button>
                                             <md-menu-content>
