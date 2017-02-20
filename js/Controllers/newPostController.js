@@ -58,6 +58,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         console.log('Hiding Toast')
         $mdToast.hide()
         $scope.$watch('post.link', function () {
+            $scope.previewLoading = true
             if (typeof (linkChangeTimer) == 'number') clearTimeout(linkChangeTimer);
             linkChangeTimer = setTimeout($scope.findType, 1000)
         })
@@ -81,41 +82,35 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 if ($scope.post.link == '') {
                     $scope.previewLoading = false;
                     $scope.post.type = 'NoLink';
-                } else if ($scope.post.link.match(/(?:http|https):\/\/.{2,}/)) {
-                    $scope.previewLoading = true;
-                    $scope.post.type = 'link';
                 } else if ($scope.post.link.length > 9) {
                     $scope.post.link = "http://" + $scope.post.link;
                     $scope.post.type = 'link';
+                } else if ($scope.post.link.match(/(?:http|https):\/\/.{2,}/)) {
+                    $scope.previewLoading = true;
+                    $scope.post.type = 'link';
+                    promiseQueue.addPromise('drive', APIService.runGAScript('getLinkPreview', $scope.post.link, false), function (data) {
+                        console.log(data)
+                        var previewObj = JSON.parse(data.result.response.result);
+                        if (previewObj.error) {
+                            $scope.post.attachmentName = 'Link Error'
+                            $scope.post.previewImage = 'https://iread50shades.files.wordpress.com/2015/02/deadlink.png'
+                            $scope.showInfoPopup('Problem showing link, is your attachment link a valid website URL?', 'Below is the returned error:', previewObj, true)
+                            $scope.previewLoading = false;
+                        } else {
+                            $timeout(function () {
+                                $scope.post.previewImage = previewObj.image
+                                $scope.post.attachmentIcon = previewObj.icon
+                                $scope.post.attachmentName = previewObj.title
+                                $scope.post.attachmentId = previewObj.attachmentId
+                                $scope.post.type = previewObj.type
+                                if ($scope.post.title == '') $scope.post.title = previewObj.title;
+                                $scope.previewLoading = false;
+                                document.dispatchEvent(new Event('linkPreviewLoaded'));
+                            })
+                        }
+                    }, null, 150, 'Problem showing link preview, is your attachment link an actual URL?');
                 } else {
                     $scope.post.type = 'noLink';
-                }
-                if ($scope.myInfo != undefined) getPreview();
-
-                function getPreview() {
-                    if ($scope.post.link.match(/(?:http|https):\/\/.{2,}/)) {
-                        promiseQueue.addPromise('drive', APIService.runGAScript('getLinkPreview', $scope.post.link, false), function (data) {
-                            console.log(data)
-                            var previewObj = JSON.parse(data.result.response.result);
-                            if (previewObj.error) {
-                                $scope.post.attachmentName = 'Link Error'
-                                $scope.post.previewImage = 'https://iread50shades.files.wordpress.com/2015/02/deadlink.png'
-                                $scope.showInfoPopup('Problem showing link, is your attachment link a valid website URL?', 'Below is the returned error:', previewObj, true)
-                                $scope.previewLoading = false;
-                            } else {
-                                $timeout(function () {
-                                    $scope.post.previewImage = previewObj.image
-                                    $scope.post.attachmentIcon = previewObj.icon
-                                    $scope.post.attachmentName = previewObj.title
-                                    $scope.post.attachmentId = previewObj.attachmentId
-                                    $scope.post.type = previewObj.type
-                                    $scope.previewLoading = false;
-                                    if ($scope.post.title == '') $scope.post.title = previewObj.title;
-                                })
-                            }
-                        }, null, 150, 'Problem showing link preview, is your attachment link an actual URL?');
-
-                    }
                 }
             })
         }
@@ -149,8 +144,12 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                     }
                 },
             })
+        } else if ($scope.previewLoading == true || $scope.myInfo == undefined) {
+            $scope.dialog_container.style.opacity = 0.8;
+            $scope.dialog_container.style.pointerEvents = 'none';
+            document.addEventListener('linkPreviewLoaded', $scope.submit)
         } else {
-            $scope.submit();
+            $scope.submit()
         }
     }
 
