@@ -964,7 +964,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          var promise = item.promiseFunc();
          promise.then(function (output) {
             console.log('output', output)
-            if (output.result && output.result.error) {
+            if (output.result && output.result.error ) {
                errorBackoff(output, item)
             } else {
                item.action(output)
