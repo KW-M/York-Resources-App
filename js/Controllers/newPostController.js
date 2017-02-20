@@ -82,9 +82,6 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 if ($scope.post.link == '') {
                     $scope.previewLoading = false;
                     $scope.post.type = 'NoLink';
-                } else if ($scope.post.link.length > 9) {
-                    $scope.post.link = "http://" + $scope.post.link;
-                    $scope.post.type = 'link';
                 } else if ($scope.post.link.match(/(?:http|https):\/\/.{2,}/)) {
                     $scope.previewLoading = true;
                     $scope.post.type = 'link';
@@ -109,6 +106,9 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                             })
                         }
                     }, null, 150, 'Problem showing link preview, is your attachment link an actual URL?');
+                }  else if ($scope.post.link.length > 9) {
+                    $scope.post.link = "http://" + $scope.post.link;
+                    $scope.post.type = 'link';
                 } else {
                     $scope.post.type = 'noLink';
                 }
