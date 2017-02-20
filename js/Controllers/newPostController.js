@@ -294,7 +294,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $timeout(function () {
             $scope.post.link = null;
             $scope.post.type = "noLink";
-            $scope.post.previewImage = null;
+            $scope.post.previewImage = '';
             $scope.post.attachmentName = null;
             $scope.post.attachmentIcon = null;
         })
