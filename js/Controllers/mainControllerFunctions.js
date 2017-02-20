@@ -905,6 +905,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    window.APIErrorHandeler = function (error, item) {
       console.warn(error);
       console.log(item);
+      sendErrorEmail(error)
       if (error.hasOwnProperty('expectedDomain')) authorizationService.showNonYorkDialog()
       if (error.result && error.result.error) {
          if (error.result.error.details) {
@@ -927,6 +928,23 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             }
          }
       }
+   }
+
+
+   function sendErrorEmail(error) {
+      promiseQueue.addPromise('drive', APIService.runGAScript('sendErrorEmail'), function (data) {
+         var dataObj = JSON.parse(data.result.response.result);
+         console.log(dataObj)
+         $timeout(function () {
+            for (var property in dataObj.userPrefs) {
+               $scope.myInfo[property] = dataObj.userPrefs[property];
+            }
+            $scope.classList = dataObj.classes;
+            $scope.sortedLabels = dataObj.labels
+            $scope.sortLabels()
+            getStartupData.resolve();
+         });
+      }, null, 150, 'Problem initializing, try reloading the page.');
    }
 
    window.clearUserInfo = function () {
@@ -964,7 +982,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          var promise = item.promiseFunc();
          promise.then(function (output) {
             console.log('output', output)
-            if (output.result && output.result.error ) {
+            if (output.result && (output.result.error || output.result.response.result == 'Error')) {
                errorBackoff(output, item)
             } else {
                item.action(output)
