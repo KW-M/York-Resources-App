@@ -932,7 +932,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
 
    function sendErrorEmail(error) {
-      promiseQueue.addPromise('drive', APIService.runGAScript('sendErrorEmail'), null, null, 150, 'Problem connecting, make sure you have an internet connection.');
+      promiseQueue.addPromise('drive', APIService.runGAScript('sendEmailError'), null, null, 150, 'Problem connecting, make sure you have an internet connection.');
    }
 
    window.clearUserInfo = function () {
