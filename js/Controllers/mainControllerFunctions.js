@@ -370,7 +370,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function getPosts(idArray, callBack) {
       conurancyCounter++;
       console.log(idArray)
-      promiseQueue.addPromise('script', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
+      promiseQueue.addPromise('script', APIService.runGAScript('getPosts', idArray), function (postsData) {
          console.log(postsData)
          var postsArray = JSON.parse(postsData.result.response.result);
          if (postsArray.error == undefined) {
@@ -733,7 +733,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             content: {
                starClass: classObj.name
             },
-         }, false), function (data) {
+         }), function (data) {
             classObj.stared = data.result.response.result == 'true';
             trueClassObj.stared = classObj.stared;
             scopeUpdate(classObj.stared)
@@ -792,7 +792,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             operation: 'likePost',
             postId: post.id,
             content: post.userLiked,
-         }, true), function (data) {
+         }), function (data) {
             console.log(data)
             var arrayIndecies = getIdIndexInPostArrays(post.id)
             var res = data.result.response.result.split(" ");

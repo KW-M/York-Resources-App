@@ -85,7 +85,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 } else if ($scope.post.link.match(/(?:http|https):\/\/.{2,}/)) {
                     $scope.previewLoading = true;
                     $scope.post.type = 'link';
-                    promiseQueue.addPromise('drive', APIService.runGAScript('getLinkPreview', $scope.post.link, false), function (data) {
+                    promiseQueue.addPromise('drive', APIService.runGAScript('getLinkPreview', $scope.post.link), function (data) {
                         console.log(data)
                         var previewObj = JSON.parse(data.result.response.result);
                         if (previewObj.error) {
@@ -166,7 +166,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 operation: 'savePost',
                 postId: $scope.post.id,
                 content: $scope.post,
-            }, true), function (postData) {
+            }), function (postData) {
                 console.log(postData)
                 var createdPost = JSON.parse(postData.result.response.result);
                 console.log(createdPost)
