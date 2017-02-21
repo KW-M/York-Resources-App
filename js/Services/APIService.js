@@ -8,7 +8,7 @@ app.service('APIService', ['$q', '$http', function ($q, $http) {
             return gapi.client.script.scripts.run({
                 'scriptId': 'MuWC0NB4CLnMdc_XDwj7F_PA9VMeL9Grb',
                 'function': scriptFunction,
-                'parameters': [stringify ? JSON.stringify(payload) : payload, remoteId],
+                'parameters': [payload, remoteId],
                 //'devMode': true,
             });
         }
