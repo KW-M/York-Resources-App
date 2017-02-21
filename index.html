@@ -388,7 +388,7 @@
                         updateSigninStatus(GAuth.isSignedIn.get());
                         // show sign in prompt if sign in button is clicked.
                         GAuth.attachClickHandler('signin_button', null, null, function (error) {
-                            console.log(error)
+                            console.warn(error)
                             if (error.hasOwnProperty('expectedDomain')) self.showNonYorkDialog()
                         })
                     }, console.warn)
