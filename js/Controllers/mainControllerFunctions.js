@@ -971,7 +971,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          var promise = item.promiseFunc();
          promise.then(function (output) {
             console.log('output', output)
-            if (output.result && (output.result.error || output.result.response.result == 'Error' || output.result.response.result == 'Err')) {
+            if (output.result && !output.result.hasOwnProperty('kind') && (output.result.error || output.result.response.result == 'Error' || output.result.response.result == 'Err')) {
                errorBackoff(output, item)
             } else {
                item.action(output)
