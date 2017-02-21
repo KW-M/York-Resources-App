@@ -732,7 +732,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             content: {
                starClass: classObj.name
             },
-         }, true), function (data) {
+         }, false), function (data) {
             classObj.stared = data.result.response.result == 'true';
             trueClassObj.stared = classObj.stared;
             scopeUpdate(classObj.stared)
