@@ -171,11 +171,12 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 var createdPost = JSON.parse(postData.result.response.result);
                 console.log(createdPost)
                 addFireDatabaseRef(createdPost).then(function () {
-                    $mdToast.hide();
                     $mdDialog.hide();
                     resetAllLabels();
                     $scope.dialog_container.style.opacity = 1;
                     $scope.dialog_container.style.pointerEvents = 'all';
+                    
+                                        $mdToast.hide();
                 })
             },
             onError, 150, 'Error posting, try again.');
