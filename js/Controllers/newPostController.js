@@ -106,7 +106,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                             })
                         }
                     }, null, 150, 'Problem showing link preview, is your attachment link an actual URL?');
-                }  else if ($scope.post.link.length > 9) {
+                } else if ($scope.post.link.length > 9) {
                     $scope.post.link = "http://" + $scope.post.link;
                     $scope.post.type = 'link';
                 } else {
@@ -135,12 +135,12 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                         if (scope.shareSelect == 'comment') var role = 'commenter';
                         if (scope.shareSelect == 'edit') var role = 'writer';
                         promiseQueue.addPromise('drive', APIService.shareFile($scope.post.attachmentId, role), $scope.submit, null, 150, "The attached file couln't be shared, please share it manualy.");
-                        $mdToast.show({
-                            template: '<md-toast>Sharing...</md-toast>',
-                            hideDelay: false,
-                            parent: angular.element(document.getElementById('new_post_dialog')),
-                            scope: $scope,
-                        })
+                        // $mdToast.show({
+                        //     template: '<md-toast>Sharing...</md-toast>',
+                        //     hideDelay: false,
+                        //     parent: angular.element(document.getElementById('new_post_dialog')),
+                        //     scope: $scope,
+                        // })
                     }
                 },
             })
@@ -159,17 +159,19 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $scope.dialog_container.style.opacity = 0.8;
         $scope.dialog_container.style.pointerEvents = 'none';
         console.log('posting toast show')
-        $mdToast.show({
-            template: '<md-toast><span style="font-size:18px;" flex>Posting</span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="32"></md-progress-circular></md-toast>',
-            hideDelay: false,
-        });
+        $timeout(function () {
+            $mdToast.show({
+                template: '<md-toast><span style="font-size:18px;" flex>Posting</span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="32"></md-progress-circular></md-toast>',
+                hideDelay: false,
+            });
+        },1000)
         console.log('Sent Post:', $scope.post)
         promiseQueue.addPromise('drive', APIService.runGAScript('savePost', {
                 operation: 'savePost',
                 postId: $scope.post.id,
                 content: $scope.post,
             }), function (postData) {
-                 console.log('1st dialog hide')
+                console.log('1st dialog hide')
                 var createdPost = JSON.parse(postData.result.response.result);
                 console.log('Created Post:', createdPost)
                 addFireDatabaseRef(createdPost).then(function () {
