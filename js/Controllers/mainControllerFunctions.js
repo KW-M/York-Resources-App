@@ -766,8 +766,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          },
       }), function () {
          $scope.myInfo.quizletUsername = username;
+         gotoRoute({classPath: 'All Posts'});
          $mdToast.show({
-            template: '<md-toast>Connection successful </md-button ng-click="launchQuizet()">launch York Quizlet</md-button><md-toast>',
+            template: '<md-toast>Connection successful <md-button ng-click="launchQuizet()">launch York Quizlet</md-button><md-toast>',
             hideDelay: 10000,
             controller: function(scope) {
                scope.launchQuizet = function() {
