@@ -774,7 +774,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          });
          $timeout(function () {
             $mdToast.show({
-               template: '<md-toast>Connection successful <md-button ng-click="launchQuizet()" class="md-accent">launch York Quizlet</md-button><md-toast>',
+               template: '<md-toast><span>Connection successful <md-button ng-click="launchQuizet()" class="md-accent">launch York Quizlet</md-button></span></md-toast>',
                hideDelay: 10000,
                controller: function (scope) {
                   scope.launchQuizet = function () {
