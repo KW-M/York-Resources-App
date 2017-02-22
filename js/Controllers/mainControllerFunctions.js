@@ -593,9 +593,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             rules: null,
             stared: null,
          })
-      } else if (className == 'Quizlet') {
+      } else if (className == 'York Quizlet') {
          return ({
-            name: 'Quizlet',
+            name: 'York Quizlet',
             color: 'hsla(229, 46%, 49%,',
             catagory: null,
             rules: null,
