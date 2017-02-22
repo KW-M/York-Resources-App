@@ -752,7 +752,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
    $scope.goToQuzletPage = function () {
       if ($scope.myInfo.quizletUsername == undefined || $scope.myInfo.quizletUsername == '') {
-         $scope.gotoRoute({classPath: 'York Quizlet'});
+         $scope.gotoRoute({
+            classPath: 'York Quizlet'
+         });
       } else {
          window.open('https://quizlet.com/join/nVZb4UAU9')
       }
@@ -767,20 +769,17 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }), function () {
          $mdToast.hide();
          $scope.myInfo.quizletUsername = username;
-         $scope.gotoRoute({classPath: 'All Posts'});
-         $timeout(function () {
-            $mdToast.show({
-            template: '<md-toast>Connection successful <md-button ng-click="launchQuizet()">launch York Quizlet</md-button><md-toast>',
-            hideDelay: 10000,
-            controller: function(scope) {
-               scope.launchQuizet = function() {
-                  window.open('https://quizlet.com/join/nVZb4UAU9')
-               }
-            }
+         $scope.gotoRoute({
+            classPath: 'All Posts'
          });
-        },500)
+         $timeout(function () {
+            $mdToast.show($mdToast.simple().textContent('Connection successful').action('launch York Quizlet').highlightAction(true).highlightClass('md-accent').hideDelay(10000)).then(function (response) {
+               if (response == 'ok') window.open('https://quizlet.com/join/nVZb4UAU9');
+            });
+         }, 500)
       }, null, 150, 'Problem connecting Quizlet, try again.');
    }
+
    // $scope.checkQuizletName = function(quizletName) {
    //    $http.get('https://api.quizlet.com/2.0/users/' + quizletName + '/sets?client_id=ZvJPu87NPA').then(console.log,console.warn)
    // }
