@@ -752,7 +752,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
    $scope.goToQuzletPage = function () {
       if ($scope.myInfo.quizletUsername == undefined || $scope.myInfo.quizletUsername == '') {
-         gotoRoute({classPath: 'York Quizlet'});
+         $scope.gotoRoute({classPath: 'York Quizlet'});
       } else {
          window.open('https://quizlet.com/join/nVZb4UAU9')
       }
@@ -766,7 +766,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          },
       }), function () {
          $scope.myInfo.quizletUsername = username;
-         gotoRoute({classPath: 'All Posts'});
+         $scope.gotoRoute({classPath: 'All Posts'});
          $mdToast.show({
             template: '<md-toast>Connection successful <md-button ng-click="launchQuizet()">launch York Quizlet</md-button><md-toast>',
             hideDelay: 10000,
