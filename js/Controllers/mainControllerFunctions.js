@@ -750,7 +750,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          })
       }
    }
-   $scope.openQuizletWindow = function () {
+   $scope.goToQuzletPage =  function () {
+      if ($scope.myInfo.quizletUsername == undefined || $scope.myInfo.quizletUsername == '') {
+         window
+      }
+   }
+   $scope.openQuizletAssistWindow = function () {
       var quizWindow = window.open("", "_blank", "status=no,menubar=no,toolbar=no");
       quizWindow.resizeTo(9000, 140)
       quizWindow.moveTo(0, 0);
@@ -758,7 +763,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       setTimeout(function () {
          quizWindow.location = "https://quizlet.com"
       }, 3000);
-   }
+   };
 
    //----------------------------------------------------
    // --------------- Post Card Functions ---------------

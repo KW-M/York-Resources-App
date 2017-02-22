@@ -138,12 +138,6 @@
                                 <span>Sign out</span>
                             </md-button>
                         </md-menu-item>
-                        <!--<md-menu-item>-->
-                        <!--    <md-button ng-click="::openHelpDialog()">-->
-                        <!--        <md-icon>settings</md-icon>-->
-                        <!--        <span>Settings</span>-->
-                        <!--    </md-button>-->
-                        <!--</md-menu-item>-->
                         <md-divider></md-divider>
                         <md-menu-item>
                             <md-button ng-click="::openHelpDialog()">
@@ -157,7 +151,7 @@
                                 <span>Feedback</span>
                             </md-button>
                         </md-menu-item>
-                        <md-button id="quizlet_connect_button" ng-if="myInfo.quizletUsername == undefined || myInfo.quizletUsername == null" class="md-raised unselectable" ng-click="openQuizletDialog()"><span>Connect Quizlet</span>
+                        <md-button id="quizlet_connect_button" ng-if="myInfo.quizletUsername == undefined || myInfo.quizletUsername == ''" class="md-raised unselectable" ng-click="openQuizletDialog()"><span>Connect Quizlet</span>
                             <md-icon md-svg-src="images/quizlet_logo.svg" style="color: white;margin: auto 0px auto 10px;"></md-icon>
                         </md-button>
                     </md-menu-content>
