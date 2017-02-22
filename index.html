@@ -187,19 +187,19 @@
                 <div class="content-padding content-top-bar" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}" ng-style="{'background-color': selectedClass.color + ' 1)'}">
                     <div style="display: flex;align-items: center; margin-top: 12px;">
                         <span class="md-display-1">{{queryParams.classPath}}</span>
-                        <span style="flex:1;text-align:center">
-                            <md-button ng-click="openLink('https://quizlet.com/create-set')" ng-if="queryParams.classPath == 'Quizlet'">
-                                <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>add_to_photos</md-icon>Create Set</md-button>
-                            <md-button ng-if="queryParams.classPath == 'Quizlet'">
-                                <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>open_in_browser</md-icon>Open Class</md-button>
-                        </span>
+                        <!--<span style="flex:1;text-align:center">-->
+                        <!--    <md-button ng-click="openLink('https://quizlet.com/create-set')" ng-if="queryParams.classPath == 'Quizlet'">-->
+                        <!--        <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>add_to_photos</md-icon>Create Set</md-button>-->
+                        <!--    <md-button ng-if="queryParams.classPath == 'Quizlet'">-->
+                        <!--        <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>open_in_browser</md-icon>Open Class</md-button>-->
+                        <!--</span>-->
                         <md-button class="star-button" ng-if="selectedClass.stared != null" ng-click="userStarClass(selectedClass)">
                             <md-icon style='color: white;font-size: 22px'>{{selectedClass.stared ? 'star' : 'star_outline'}}</md-icon>
                             <span style="margin-left: 6px;">{{selectedClass.stared ? 'un' : ''}}Star Class</span>
                         </md-button>
                     </div>
-                    <div style="padding-bottom:8px"><span class="md-caption">{{selectedClass.rules || 'Dont post test or homework answers. Do post what will help other students get to the answers on their own.'}}</span><span ng-if="false"> - <a href="#">edit</a></span></div>
-                    <div class="create-post-bar-top" ng-hide="queryParams.classPath == 'Quizlet'">
+                    <div style="padding-bottom:8px" ng-hide="queryParams.classPath == 'York Quizlet'"><span class="md-caption">{{selectedClass.rules || 'Dont post test or homework answers. Do post what will help other students get to the answers on their own.'}}</span><span ng-if="false"> - <a href="#">edit</a></span></div>
+                    <div class="create-post-bar-top" ng-hide="queryParams.classPath == 'York Quizlet'">
                         <span md-ink-ripple="true" class="create-post-bar-text unselectable" flex ng-click="::newPost({},'new')">
                         <md-icon style="margin-top: -3px;">add_circle</md-icon>
                         <span>Share a link or resource...</span>
@@ -214,7 +214,7 @@
                     </span>
                     </div>
                 </div>
-                <div class="content-padding" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'ugly-brown' : queryParams.classPath == 'Memes' , 'gt-sm': $mdMedia('gt-sm')}" style="padding-top: 34px; padding-bottom: 8px;">
+                <div class="content-padding" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'ugly-brown' : queryParams.classPath == 'Memes' , 'gt-sm': $mdMedia('gt-sm')}" style="padding-top: 34px; padding-bottom: 8px;" ng-hide="queryParams.classPath == 'York Quizlet'">
                     <span ng-if="devMode">
                         <md-button ng-click="consoleLogInput(myInfo, true)">Log My Info</md-button>
                         <md-button ng-click="consoleLogInput({allPosts:allPosts,sortedPosts:sortedPosts,visiblePosts:visiblePosts})">Log Post Arrays</md-button>
@@ -290,7 +290,7 @@
                     </div>
                 </div>
                 <div class="footer-container">
-                    <div class="footer" ng-show="classPath != 'York Quizlet'">
+                    <div class="footer" ng-hide="queryParams.classPath == 'York Quizlet'">
                         <div id="no_posts_footer" style="display: none;">
                             <h3 style="margin: 0;">It's so lonely here</h3>
                             <p style="margin: 0;font-size: 14px;font-weight: 200;">Be the first to post</p>
@@ -311,8 +311,11 @@
                         </div>
                         <md-progress-circular id="loading_spinner" style="display: none;margin: auto;" class="md-accent" md-mode="indeterminate" md-diameter="30px"></md-progress-circular>
                     </div>
-                    <div class="footer" ng-if="classPath == 'York Quizlet'">
+                    <div class="footer" ng-if="queryParams.classPath == 'York Quizlet'">
                         <div>By connecting Quizlet to StudyHub, you can </div>
+                        <md-input-container>
+                            <input type="text" placeholder="Quizlet Username" ng-model="labelSearch">
+                        </md-input-container>
                     </div>
                 </div>
             </div>
