@@ -752,8 +752,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
    $scope.goToQuzletPage =  function () {
       if ($scope.myInfo.quizletUsername == undefined || $scope.myInfo.quizletUsername == '') {
-         window
+         $scope.gotoRoute('York Quizlet');
+      } else {
+         window.open('https://quizlet.com/join/nVZb4UAU9')
       }
+   }
+   $scope.addQuizetUsername = function(username) {
+      
    }
    $scope.openQuizletAssistWindow = function () {
       var quizWindow = window.open("", "_blank", "status=no,menubar=no,toolbar=no");
