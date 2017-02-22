@@ -760,30 +760,32 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
    }
    $scope.addQuizetUsername = function (username) {
-      $mdToast.showSimple('Connecting...')
-      promiseQueue.addPromise('drive', APIService.runGAScript('saveUserPrefs', {
-         operation: 'saveUserPrefs',
-         content: {
-            quizletUsername: username,
-         },
-      }), function () {
-         $mdToast.hide();
-         $scope.myInfo.quizletUsername = username;
-         $scope.gotoRoute({
-            classPath: 'All Posts'
-         });
-         $timeout(function () {
-            $mdToast.show({
-               template: '<md-toast><span>Connection successful <md-button ng-click="launchQuizet()" class="md-accent">launch York Quizlet</md-button></span></md-toast>',
-               hideDelay: 10000,
-               controller: function (scope) {
-                  scope.launchQuizet = function () {
-                     window.open('https://quizlet.com/join/nVZb4UAU9')
-                  }
-               }
+      if (username && username != '') {
+         $mdToast.showSimple('Connecting...')
+         promiseQueue.addPromise('drive', APIService.runGAScript('saveUserPrefs', {
+            operation: 'saveUserPrefs',
+            content: {
+               quizletUsername: username,
+            },
+         }), function () {
+            $mdToast.hide();
+            $scope.myInfo.quizletUsername = username;
+            $scope.gotoRoute({
+               classPath: 'All Posts'
             });
-         }, 500)
-      }, null, 150, 'Problem connecting Quizlet, try again.');
+            $timeout(function () {
+               $mdToast.show({
+                  template: '<md-toast><span>Connection successful <md-button ng-click="launchQuizet()" class="md-accent">launch York Quizlet</md-button></span></md-toast>',
+                  hideDelay: 10000,
+                  controller: function (scope) {
+                     scope.launchQuizet = function () {
+                        window.open('https://quizlet.com/join/nVZb4UAU9')
+                     }
+                  }
+               });
+            }, 500)
+         }, null, 150, 'Problem connecting Quizlet, try again.');
+      }
    }
 
    // $scope.checkQuizletName = function(quizletName) {
