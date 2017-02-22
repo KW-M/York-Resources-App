@@ -752,7 +752,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
    $scope.goToQuzletPage = function () {
       if ($scope.myInfo.quizletUsername == undefined || $scope.myInfo.quizletUsername == '') {
-         $scope.gotoRoute('York Quizlet');
+         gotoRoute({classPath: 'York Quizlet'});
       } else {
          window.open('https://quizlet.com/join/nVZb4UAU9')
       }

@@ -312,9 +312,9 @@
                         <md-progress-circular id="loading_spinner" style="display: none;margin: auto;" class="md-accent" md-mode="indeterminate" md-diameter="30px"></md-progress-circular>
                     </div>
                     <div class="footer" ng-if="queryParams.classPath == 'York Quizlet'">
-                        <div>By connecting your Quizlet to StudyHub, you'll get access to a collection of Quizlet sets made soely by york students for york classes. Connecting will also sync any public quizlet sets you make with the York Quizlet Class.</div>
-                        <md-input-container>
-                            <input type="text" md-no-float placeholder="Quizlet Username" ng-model="quizletNameInput" ng-change="checkQuizletName(quizletNameInput)">
+                        <div style="align-text:center">By connecting your Quizlet to StudyHub, you'll get access to a collection of Quizlet sets made soely by york students for york classes.<br>Connecting will also sync any public quizlet sets you make with the York Quizlet Class.<br>Enter your Quizlet username to connect.</div>
+                        <md-input-container md-no-float>
+                            <input type="text" placeholder="Quizlet Username" ng-model="quizletNameInput" ng-change="checkQuizletName(quizletNameInput)" style="align-text:center">
                             <md-button ng-click="openQuizletAssistWindow()">What's my username?</md-button>
                             <md-button ng-click="addQuizetUsername(quizletNameInput)" class="md-accent">Connect</md-button>
                         </md-input-container>
