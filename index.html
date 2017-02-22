@@ -138,12 +138,6 @@
                                 <span>Sign out</span>
                             </md-button>
                         </md-menu-item>
-                        <!--<md-menu-item>-->
-                        <!--    <md-button ng-click="::openHelpDialog()">-->
-                        <!--        <md-icon>settings</md-icon>-->
-                        <!--        <span>Settings</span>-->
-                        <!--    </md-button>-->
-                        <!--</md-menu-item>-->
                         <md-divider></md-divider>
                         <md-menu-item>
                             <md-button ng-click="::openHelpDialog()">
@@ -157,7 +151,7 @@
                                 <span>Feedback</span>
                             </md-button>
                         </md-menu-item>
-                        <md-button id="quizlet_connect_button" ng-if="myInfo.quizletUsername == undefined || myInfo.quizletUsername == null" class="md-raised unselectable" ng-click="openQuizletDialog()"><span>Connect Quizlet</span>
+                        <md-button id="quizlet_connect_button" ng-if="myInfo.quizletUsername == undefined || myInfo.quizletUsername == ''" class="md-raised unselectable" ng-click="goToQuzletPage()"><span>Connect Quizlet</span>
                             <md-icon md-svg-src="images/quizlet_logo.svg" style="color: white;margin: auto 0px auto 10px;"></md-icon>
                         </md-button>
                     </md-menu-content>
@@ -179,11 +173,11 @@
                     </md-button>
                 </md-fab-trigger>
                 <md-fab-actions>
-                    <md-button class="md-fab md-raised md-mini" ng-click="::showPicker('Drive')">
+                    <md-button class="md-fab md-raised md-mini" ng-click="::showDrivePicker('Drive')">
                         <md-tooltip md-direction="left" md-autohide>Add Drive file</md-tooltip>
                         <img class="unselectable" style="width:22px; height:22px; margin-top:8px" src="images/drive_icon.svg">
                     </md-button>
-                    <md-button class="md-fab md-raised md-mini" ng-click="::showPicker('Upload')">
+                    <md-button class="md-fab md-raised md-mini" ng-click="::showDrivePicker('Upload')">
                         <md-tooltip md-direction="left" md-autohide>Upload</md-tooltip>
                         <md-icon class="unselectable" style="color:black">file_upload</md-icon>
                     </md-button>
@@ -193,19 +187,19 @@
                 <div class="content-padding content-top-bar" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}" ng-style="{'background-color': selectedClass.color + ' 1)'}">
                     <div style="display: flex;align-items: center; margin-top: 12px;">
                         <span class="md-display-1">{{queryParams.classPath}}</span>
-                        <span style="flex:1;text-align:center">
-                            <md-button ng-click="openLink('https://quizlet.com/create-set')" ng-show="queryParams.classPath == 'Quizlet'">
-                                <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>add_to_photos</md-icon>Create Set</md-button>
-                            <md-button ng-show="queryParams.classPath == 'Quizlet'">
-                                <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>open_in_browser</md-icon>Open Class</md-button>
-                        </span>
+                        <!--<span style="flex:1;text-align:center">-->
+                        <!--    <md-button ng-click="openLink('https://quizlet.com/create-set')" ng-if="queryParams.classPath == 'Quizlet'">-->
+                        <!--        <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>add_to_photos</md-icon>Create Set</md-button>-->
+                        <!--    <md-button ng-if="queryParams.classPath == 'Quizlet'">-->
+                        <!--        <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>open_in_browser</md-icon>Open Class</md-button>-->
+                        <!--</span>-->
                         <md-button class="star-button" ng-if="selectedClass.stared != null" ng-click="userStarClass(selectedClass)">
                             <md-icon style='color: white;font-size: 22px'>{{selectedClass.stared ? 'star' : 'star_outline'}}</md-icon>
                             <span style="margin-left: 6px;">{{selectedClass.stared ? 'un' : ''}}Star Class</span>
                         </md-button>
                     </div>
-                    <div style="padding-bottom:8px"><span class="md-caption">{{selectedClass.rules || 'Dont post test or homework answers. Do post what will help other students get to the answers on their own.'}}</span><span ng-if="false"> - <a href="#">edit</a></span></div>
-                    <div class="create-post-bar-top" ng-hide="queryParams.classPath == 'Quizlet'">
+                    <div style="padding-bottom:8px" ng-hide="queryParams.classPath == 'York Quizlet'"><span class="md-caption">{{selectedClass.rules || 'Dont post test or homework answers. Do post what will help other students get to the answers on their own.'}}</span><span ng-if="false"> - <a href="#">edit</a></span></div>
+                    <div class="create-post-bar-top" ng-hide="queryParams.classPath == 'York Quizlet'">
                         <span md-ink-ripple="true" class="create-post-bar-text unselectable" flex ng-click="::newPost({},'new')">
                         <md-icon style="margin-top: -3px;">add_circle</md-icon>
                         <span>Share a link or resource...</span>
@@ -220,13 +214,13 @@
                     </span>
                     </div>
                 </div>
-                <div class="content-padding" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'ugly-brown' : queryParams.classPath == 'Memes' , 'gt-sm': $mdMedia('gt-sm')}" style="padding-top: 34px; padding-bottom: 8px;">
+                <div class="content-padding" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'ugly-brown' : queryParams.classPath == 'Memes' , 'gt-sm': $mdMedia('gt-sm')}" style="padding-top: 34px; padding-bottom: 8px;" ng-hide="queryParams.classPath == 'York Quizlet'">
                     <span ng-if="devMode">
-                    <md-button ng-click="consoleLogInput(myInfo, true)">Log My Info</md-button>
-                    <md-button ng-click="consoleLogInput({allPosts:allPosts,sortedPosts:sortedPosts,visiblePosts:visiblePosts})">Log Post Arrays</md-button>
-                    <md-button ng-click="refreshLayout()">Refresh Layout</md-button>
-                    <p>TotalPosts: {{allPosts.length}} Sorted: {{sortedPosts.length}}</p>
-                </span>
+                        <md-button ng-click="consoleLogInput(myInfo, true)">Log My Info</md-button>
+                        <md-button ng-click="consoleLogInput({allPosts:allPosts,sortedPosts:sortedPosts,visiblePosts:visiblePosts})">Log Post Arrays</md-button>
+                        <md-button ng-click="refreshLayout()">Refresh Layout</md-button>
+                        <p>TotalPosts: {{allPosts.length}} Sorted: {{sortedPosts.length}}</p>
+                    </span>
                     <div name="Posts Grid" ng-hide="queryParams.classPath == 'Quizlet'">
                         <div angular-grid="sortedPosts" id="layout_grid" ag-gutter-size="12" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="loadPosts()">
                             <div ng-repeat="post in sortedPosts track by post.id" ng-style="{'background-color': post.class.color + ' 0.6)'}" class="post-card raise-on-hover" ng-if="post.loadStatus == 'Loaded'">
@@ -238,7 +232,7 @@
                                             <span ng-if="post.teachers"><md-icon>face</md-icon> {{post.teachers.join(' & ')}}</span>
                                         </div>
                                         <div class="gradient-overlay-metadata metadata-regular unselectable" style="font-style: oblique">
-                                            <span ng-if="post.creationDate"><md-icon>today</md-icon> {{post.creationDate | date : "mm/dd/yyyy"}}</span>
+                                            <span ng-if="post.creationDate"><md-icon>today</md-icon> {{post.creationDate | date : "shortDate"}}</span>
                                             <span ng-if="post.labels"><md-icon>local_offer</md-icon> {{post.labels.join(', ')}}</span>
                                         </div>
                                         <div class="gradient-overlay-metadata md-chips metadata-link unselectable" ng-if="post.attachmentName" style="width:100%">
@@ -264,16 +258,16 @@
                                         <md-button class="md-icon-button" area-label="Flag" ng-click="::unFlagPost(post,$index)" ng-if="post.flagged == true">
                                             <md-icon class="md-warn">flag</md-icon>
                                         </md-button>
-                                        <md-menu>
+                                        <md-menu ng-if="post.creator.email == myInfo.email || devMode == true">
                                             <md-button ng-click="::$mdOpenMenu($event)" class="md-icon-button">
                                                 <md-icon>more_vert</md-icon>
                                             </md-button>
                                             <md-menu-content>
-                                                <md-menu-item ng-if="post.creator.email == myInfo.email">
+                                                <md-menu-item ng-if="post.creator.email == myInfo.email || devMode == true">
                                                     <md-button ng-click="::newPost(post,'update')">
                                                         <md-icon>edit</md-icon>Edit</md-button>
                                                 </md-menu-item>
-                                                <md-menu-item ng-if="post.creator.email == myInfo.email">
+                                                <md-menu-item ng-if="post.creator.email == myInfo.email || devMode == true">
                                                     <md-button ng-click="::deletePost(post)">
                                                         <md-icon>delete</md-icon>Delete</md-button>
                                                 </md-menu-item>
@@ -296,7 +290,7 @@
                     </div>
                 </div>
                 <div class="footer-container">
-                    <div class="footer">
+                    <div class="footer" ng-hide="queryParams.classPath == 'York Quizlet'">
                         <div id="no_posts_footer" style="display: none;">
                             <h3 style="margin: 0;">It's so lonely here</h3>
                             <p style="margin: 0;font-size: 14px;font-weight: 200;">Be the first to post</p>
@@ -316,6 +310,14 @@
                             <img src="images/rocket problem.png" style="width:300px" />
                         </div>
                         <md-progress-circular id="loading_spinner" style="display: none;margin: auto;" class="md-accent" md-mode="indeterminate" md-diameter="30px"></md-progress-circular>
+                    </div>
+                    <div class="footer" ng-if="queryParams.classPath == 'York Quizlet'">
+                        <div style="align-text:center">By connecting your Quizlet to StudyHub, you'll get access to a collection of Quizlet sets made soley by York students for York classes.<br>Connecting will also sync any public quizlet sets you make with the York Quizlet Class. Enter your Quizlet username below to connect.</div>
+                        <md-input-container md-no-float>
+                            <input type="text" placeholder="Quizlet Username" ng-model="quizletNameInput" ng-change="checkQuizletName(quizletNameInput)" style="text-align: center;">
+                            <md-button ng-click="openQuizletAssistWindow()">What's my username?</md-button>
+                            <md-button ng-click="addQuizetUsername(quizletNameInput)" class="md-accent">Connect</md-button>
+                        </md-input-container>
                     </div>
                 </div>
             </div>
@@ -388,7 +390,7 @@
                         updateSigninStatus(GAuth.isSignedIn.get());
                         // show sign in prompt if sign in button is clicked.
                         GAuth.attachClickHandler('signin_button', null, null, function (error) {
-                            console.log(error)
+                            console.warn(error)
                             if (error.hasOwnProperty('expectedDomain')) self.showNonYorkDialog()
                         })
                     }, console.warn)

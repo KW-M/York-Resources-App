@@ -106,15 +106,19 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       } else if (shareInput.ids) {
          var id = shareInput.ids[0]
       }
-      $scope.newPost({
-         Link: 'https://drive.google.com/?open=' + id
+      authorizationService.hideSigninDialog();
+      $mdToast.show({
+         template: '<md-toast><span style="font-size:18px; max-width: 200px">Loading</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="32"></md-progress-circular></md-toast>',
+         hideDelay: 3000000,
+      });
+      newPost({
+         link: (id != undefined) ? 'https://drive.google.com/?open=' + id : null
       }, 'new')
    }
 
    //----------------------------------------------------
    //------------- Signin & Initiation ------------------
    var drivePicker, uploadPicker;
-   var labelList, teacherList;
 
    authorizationService.onLoad(function () {
       var profile = authorizationService.GUser.getBasicProfile()
@@ -132,10 +136,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             for (var property in dataObj.userPrefs) {
                $scope.myInfo[property] = dataObj.userPrefs[property];
             }
-            labelList = dataObj.labels;
-            teacherList = dataObj.teachers;
             $scope.classList = dataObj.classes;
-            $scope.sortedLabels = $scope.sortLabels(labelList.concat(teacherList))
+            $scope.sortedLabels = dataObj.labels
+            $scope.sortLabels()
             getStartupData.resolve();
          });
       }, null, 150, 'Problem initializing, try reloading the page.');
@@ -151,8 +154,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       $q.all([getStartupData.promise, pickerPromise.promise]).then(function () {
          console.log("Everything Loaded")
          listenForURLChange();
-         getDatabase();
          authorizationService.hideSigninDialog();
+         document.dispatchEvent(new Event('userInitializatinDone'));
+         getDatabase();
       })
    })
 
@@ -161,9 +165,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       var docsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setParent("root");
       var sharedView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setOwnedByMe(false);
       var recentsView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(false).setSelectFolderEnabled(true).setLabel('Recents');
+      var staredView = new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(true).setStarred(true).setLabel('Stared');
 
       drivePicker = new google.picker.PickerBuilder().setDeveloperKey("AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA").setOrigin(window.location.protocol + '//' + window.location.host).setOAuthToken(authorizationService.getGAuthToken()).setCallback(drivePickerCallback)
-         .addView(docsView).addView(recentsView).addView(sharedView).build();
+         .addView(docsView).addView(sharedView).addView(recentsView).addView(staredView).build();
       uploadPicker = new google.picker.PickerBuilder().setDeveloperKey("AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA").setOrigin(window.location.protocol + '//' + window.location.host).setOAuthToken(authorizationService.getGAuthToken()).setCallback(drivePickerCallback)
          .addView(uploadView).enableFeature(google.picker.Feature.NAV_HIDDEN).hideTitleBar().build();
    }
@@ -365,7 +370,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function getPosts(idArray, callBack) {
       conurancyCounter++;
       console.log(idArray)
-      promiseQueue.addPromise('script', APIService.runGAScript('getPosts', idArray, false), function (postsData) {
+      promiseQueue.addPromise('script', APIService.runGAScript('getPosts', idArray), function (postsData) {
          console.log(postsData)
          var postsArray = JSON.parse(postsData.result.response.result);
          if (postsArray.error == undefined) {
@@ -588,9 +593,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             rules: null,
             stared: null,
          })
-      } else if (className == 'Quizlet') {
+      } else if (className == 'York Quizlet') {
          return ({
-            name: 'Quizlet',
+            name: 'York Quizlet',
             color: 'hsla(229, 46%, 49%,',
             catagory: null,
             rules: null,
@@ -629,26 +634,30 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       console.warn('could not find class: ' + className);
    };
    $scope.sortLabels = function (input) {
-      if ($scope.sortedLabels && $scope.post && $scope.post.class && $scope.post.class.name != '') {
-         var max = $scope.sortedLabels.length
-         for (var labelCount = 0; labelCount < max; labelCount++) {
-            var label = $scope.sortedLabels[labelCount];
-            var classMax = label.classes.length;
-            for (var classCount = 0; classCount < classMax; classCount++) {
+      if ($scope.sortedLabels && $scope.post && $scope.post.class && $scope.post.class.name != '') var classChosen = true;
+      for (var labelCount = 0, max = $scope.sortedLabels.length; labelCount < max; labelCount++) {
+         var label = $scope.sortedLabels[labelCount];
+         var classMax, classCount = 0;
+         if (classChosen) {
+            for (classCount = 0, classMax = label.classes.length; classCount < classMax; classCount++) {
                var labelClass = label.classes[classCount]
-               if (labelClass == $scope.post.class.name || labelClass.name == $scope.post.class.name) {
-                  if (label.type == 'Label') label.sortOrder = (labelClass.usage * 2) + 1000
-                  if (label.type == 'Teacher') label.sortOrder = 100000;
+               if (labelClass.name == $scope.post.class.name) {
+                  if (label.type == 'Teacher') $scope.sortedLabels[labelCount].sortOrder = (labelClass.usage * 2) + 10000;
+                  if (label.type == 'Label') $scope.sortedLabels[labelCount].sortOrder = (labelClass.usage * 2) + 1000;
                   classCount = classMax + 1;
-               };
-               if (classCount != classMax + 1) label.sortOrder = label.totalUsage || 1
+               }
             }
          }
-      } else {
-         $scope.sortedLabels = input || labelList.concat(teacherList);
+         if (classCount != classMax + 2) {
+            if (label.type == 'Teacher') {
+               $scope.sortedLabels[labelCount].sortOrder = 0;
+            } else {
+               $scope.sortedLabels[labelCount].sortOrder = label.totalUsage || 1
+            }
+         }
       }
       $scope.sortedLabels = $scope.sortedLabels.sort(function (a, b) {
-         return (b.sortOrder || b.totalUsage || 1) - (a.sortOrder || a.totalUsage || 1);
+         return (b.sortOrder || 0) - (a.sortOrder || 0);
       })
       console.log($scope.sortedLabels)
       return ($scope.sortedLabels)
@@ -724,7 +733,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             content: {
                starClass: classObj.name
             },
-         }, true), function (data) {
+         }), function (data) {
             classObj.stared = data.result.response.result == 'true';
             trueClassObj.stared = classObj.stared;
             scopeUpdate(classObj.stared)
@@ -741,8 +750,38 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          })
       }
    }
-
-   $scope.openQuizletWindow = function () {
+   $scope.goToQuzletPage = function () {
+      if ($scope.myInfo.quizletUsername == undefined || $scope.myInfo.quizletUsername == '') {
+         $scope.gotoRoute({classPath: 'York Quizlet'});
+      } else {
+         window.open('https://quizlet.com/join/nVZb4UAU9')
+      }
+   }
+   $scope.addQuizetUsername = function (username) {
+      $mdToast.showSimple('Connecting...')
+      promiseQueue.addPromise('drive', APIService.runGAScript('saveUserPrefs', {
+         operation: 'saveUserPrefs',
+         content: {
+            quizletUsername: username,
+         },
+      }), function () {
+         $scope.myInfo.quizletUsername = username;
+         $scope.gotoRoute({classPath: 'All Posts'});
+         $mdToast.show({
+            template: '<md-toast>Connection successful <md-button ng-click="launchQuizet()">launch York Quizlet</md-button><md-toast>',
+            hideDelay: 10000,
+            controller: function(scope) {
+               scope.launchQuizet = function() {
+                  window.open('https://quizlet.com/join/nVZb4UAU9')
+               }
+            }
+         });
+      }, null, 150, 'Problem connecting Quizlet, try again.');
+   }
+   // $scope.checkQuizletName = function(quizletName) {
+   //    $http.get('https://api.quizlet.com/2.0/users/' + quizletName + '/sets?client_id=ZvJPu87NPA').then(console.log,console.warn)
+   // }
+   $scope.openQuizletAssistWindow = function () {
       var quizWindow = window.open("", "_blank", "status=no,menubar=no,toolbar=no");
       quizWindow.resizeTo(9000, 140)
       quizWindow.moveTo(0, 0);
@@ -750,7 +789,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       setTimeout(function () {
          quizWindow.location = "https://quizlet.com"
       }, 3000);
-   }
+   };
 
    //----------------------------------------------------
    // --------------- Post Card Functions ---------------
@@ -784,7 +823,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             operation: 'likePost',
             postId: post.id,
             content: post.userLiked,
-         }, true), function (data) {
+         }), function (data) {
             console.log(data)
             var arrayIndecies = getIdIndexInPostArrays(post.id)
             var res = data.result.response.result.split(" ");
@@ -895,9 +934,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //----------------------------------------------------
    //----------------- Error Handling -------------------
 
-   window.APIErrorHandeler = function (error, item) {
+   window.APIErrorHandeler = function (error, item, tries) {
       console.warn(error);
       console.log(item);
+      if (tries == 2) sendErrorEmail(error)
       if (error.hasOwnProperty('expectedDomain')) authorizationService.showNonYorkDialog()
       if (error.result && error.result.error) {
          if (error.result.error.details) {
@@ -920,6 +960,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             }
          }
       }
+   }
+
+
+   function sendErrorEmail(error) {
+      promiseQueue.addPromise('drive', APIService.runGAScript('sendEmailError'), null, null, 150, 'Problem connecting, make sure you have an internet connection.');
    }
 
    window.clearUserInfo = function () {
@@ -957,7 +1002,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          var promise = item.promiseFunc();
          promise.then(function (output) {
             console.log('output', output)
-            if (output.result && output.result.error) {
+            if (output.result && (output.result.hasOwnProperty('kind') == false) && (output.result.hasOwnProperty('files') == false) && (output.result.error || output.result.response.result == 'Error' || output.result.response.result == 'Err')) {
                errorBackoff(output, item)
             } else {
                item.action(output)
@@ -968,7 +1013,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          });
 
          function errorBackoff(error, item) {
-            var errorHandled = APIErrorHandeler(error, item);
+            var errorHandled = APIErrorHandeler(error, item, delay || 0);
             if (errorHandled) errorHandled.then(function () {
                if (delay < 4) {
                   setTimeout(function () {

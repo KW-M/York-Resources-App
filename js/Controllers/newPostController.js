@@ -6,7 +6,21 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     var originalPost = angular.copy(postObj);
     console.log(originalPost)
     $scope.post = postObj;
-    $timeout(function () {
+    $scope.otherClass = {
+        name: 'Other',
+        catagory: 'Other',
+        color: 'hsla(230, 70%, 75%,',
+        stared: null
+    };
+    if ($scope.myInfo != undefined) {
+        $timeout(initializePost)
+    } else {
+        document.addEventListener('userInitializatinDone', function (argument) {
+            $timeout(initializePost)
+        })
+    }
+
+    function initializePost() {
         $scope.post.title = $scope.post.title || ''
         $scope.post.description = $scope.post.description || ''
         $scope.post.link = $scope.post.link || ''
@@ -39,9 +53,16 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $scope.post.likes = $scope.post.likes || []
         $scope.post.previewImage = $scope.post.previewImage || ''
         $scope.findType();
-        $scope.sortLabels();
+        $scope.sortLabels()
         hideSelectedLabels();
-    })
+        console.log('Hiding Toast')
+        $mdToast.hide()
+        $scope.$watch('post.link', function () {
+            $scope.previewLoading = true
+            if (typeof (linkChangeTimer) == 'number') clearTimeout(linkChangeTimer);
+            linkChangeTimer = setTimeout($scope.findType, 1000)
+        })
+    }
 
     //temproary variables
     $scope.operation = operation;
@@ -49,7 +70,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     $scope.previewLoading = false;
     $scope.labelSearch = "";
     $scope.classSearch = "";
-    $scope.shareSelect = "view"
+    //$scope.shareSelect = "view"
 
     $scope.findType = function () {
         if ($scope.operation != 'view') {
@@ -64,46 +85,36 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 } else if ($scope.post.link.match(/(?:http|https):\/\/.{2,}/)) {
                     $scope.previewLoading = true;
                     $scope.post.type = 'link';
-                } else if ($scope.post.link.length > 9) {
+                    promiseQueue.addPromise('drive', APIService.runGAScript('getLinkPreview', $scope.post.link), function (data) {
+                        console.log(data)
+                        var previewObj = JSON.parse(data.result.response.result);
+                        if (previewObj.error) {
+                            $scope.post.attachmentName = 'Link Error'
+                            $scope.post.previewImage = 'https://iread50shades.files.wordpress.com/2015/02/deadlink.png'
+                            $scope.showInfoPopup('Problem showing link, is your attachment link a valid website URL?', 'Below is the returned error:', previewObj, true)
+                            $scope.previewLoading = false;
+                        } else {
+                            $timeout(function () {
+                                $scope.post.previewImage = previewObj.image
+                                $scope.post.attachmentIcon = previewObj.icon
+                                $scope.post.attachmentName = previewObj.title
+                                $scope.post.attachmentId = previewObj.attachmentId
+                                $scope.post.type = previewObj.type
+                                if ($scope.post.title == '') $scope.post.title = previewObj.title;
+                                $scope.previewLoading = false;
+                                document.dispatchEvent(new Event('linkPreviewLoaded'));
+                            })
+                        }
+                    }, null, 150, 'Problem showing link preview, is your attachment link an actual URL?');
+                }  else if ($scope.post.link.length > 9) {
                     $scope.post.link = "http://" + $scope.post.link;
                     $scope.post.type = 'link';
                 } else {
                     $scope.post.type = 'noLink';
                 }
-                if ($scope.myInfo != undefined) getPreview();
-                if ($scope.myInfo == undefined) document.addEventListener('userInfoLoaded', getPreview());
-
-                function getPreview() {
-                    if ($scope.post.link.match(/(?:http|https):\/\/.{2,}/)) {
-                        promiseQueue.addPromise('drive', APIService.runGAScript('getLinkPreview', $scope.post.link, false), function (data) {
-                            console.log(data)
-                            var previewObj = JSON.parse(data.result.response.result);
-                            if (previewObj.error) {
-                                $scope.post.attachmentName = 'Link Error'
-                                $scope.post.previewImage = 'https://iread50shades.files.wordpress.com/2015/02/deadlink.png'
-                                $scope.showInfoPopup('Problem showing link, is your attachment link a valid website URL?', 'Below is the returned error:', previewObj, true)
-                                $scope.previewLoading = false;
-                            } else {
-                                $timeout(function () {
-                                    $scope.post.previewImage = previewObj.image
-                                    $scope.post.attachmentIcon = previewObj.icon
-                                    $scope.post.attachmentName = previewObj.title
-                                    $scope.previewLoading = false;
-                                    if ($scope.post.title == '') $scope.post.title = previewObj.title;
-                                })
-                            }
-                        }, null, 150, 'Problem showing link preview, is your attachment link an actual URL?');
-
-                    }
-                }
             })
         }
     };
-
-    $scope.$watch('post.link', function () {
-        if (typeof (linkChangeTimer) == 'number') clearTimeout(linkChangeTimer);
-        linkChangeTimer = setTimeout($scope.findType, 500)
-    })
 
     $scope.isReadyToSubmit = function () {
         var dialogElement = document.getElementById('new_post_dialog')
@@ -111,40 +122,65 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
             $mdToast.show($mdToast.simple().textContent('Chose a class for this post.').hideDelay(1500).parent(dialogElement));
         } else if (($scope.post.title === '' || $scope.post.title === undefined) && ($scope.post.description === '' || $scope.post.description === undefined)) {
             $mdToast.show($mdToast.simple().textContent('Posts must have a title or description.').hideDelay(1500).parent(dialogElement));
-        } else if ($scope.post.type === "gDrive") {
+        } else if ($scope.post.type === "GDrive") {
             $mdToast.show({
                 template: '<md-toast> <div class="md-toast-content" style="justify-content: center;"> <div> <div class="md-toast-text" style="padding: 6px 0 0 0px;">How should the attached file be shared?</div> <div style="display:flex"> <md-select ng-model="shareSelect"> <md-option value="view"> York students can view </md-option> <md-option value="comment"> York students can comment </md-option> <md-option value="edit"> York students can edit </md-option> </md-select> <md-button style="color:rgb(68,138,255)" ng-click="shareFile()">Share</md-button> </div></div></div></md-toast>',
                 toastClass: 'shareLevelToast',
                 hideDelay: false,
-                parent: dialogElement,
-                scope: $scope,
+                parent: angular.element(dialogElement),
+                controller: function (scope) {
+                    scope.shareSelect = 'view';
+                    scope.shareFile = function () {
+                        if (scope.shareSelect == 'view') var role = 'reader';
+                        if (scope.shareSelect == 'comment') var role = 'commenter';
+                        if (scope.shareSelect == 'edit') var role = 'writer';
+                        promiseQueue.addPromise('drive', APIService.shareFile($scope.post.attachmentId, role), $scope.submit, null, 150, "The attached file couln't be shared, please share it manualy.");
+                        $mdToast.show({
+                            template: '<md-toast>Sharing...</md-toast>',
+                            hideDelay: false,
+                            parent: angular.element(document.getElementById('new_post_dialog')),
+                            scope: $scope,
+                        })
+                    }
+                },
             })
+        } else if ($scope.previewLoading == true || $scope.myInfo == undefined) {
+            $scope.dialog_container.style.opacity = 0.8;
+            $scope.dialog_container.style.pointerEvents = 'none';
+            document.addEventListener('linkPreviewLoaded', $scope.submit)
         } else {
-            $scope.submit();
+            $scope.submit()
         }
     }
 
     $scope.submit = function () {
+        console.log('1st toast hide')
+        $mdToast.hide();
         $scope.dialog_container.style.opacity = 0.8;
         $scope.dialog_container.style.pointerEvents = 'none';
+        console.log('posting toast show')
         $mdToast.show({
-            template: '<md-toast><span style="font-size:18px; max-width: 200px">Posting...</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="36"></md-progress-circular></md-toast>',
-            hideDelay: 3000000,
+            template: '<md-toast><span style="font-size:18px;" flex>Posting</span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="32"></md-progress-circular></md-toast>',
+            hideDelay: false,
         });
+        console.log('Sent Post:', $scope.post)
         promiseQueue.addPromise('drive', APIService.runGAScript('savePost', {
                 operation: 'savePost',
                 postId: $scope.post.id,
                 content: $scope.post,
-            }, true), function (postData) {
-                console.log(postData)
+            }), function (postData) {
+                 console.log('1st dialog hide')
                 var createdPost = JSON.parse(postData.result.response.result);
-                console.log(createdPost)
+                console.log('Created Post:', createdPost)
                 addFireDatabaseRef(createdPost).then(function () {
-                    $mdToast.hide();
+                    console.log('dialog hide')
                     $mdDialog.hide();
+                    resetAllLabels();
                     $scope.dialog_container.style.opacity = 1;
                     $scope.dialog_container.style.pointerEvents = 'all';
-                    resetAllLabels();
+                    console.log('3nd tost hide')
+                    $mdToast.hide();
+                    console.log('3nd tost hide done')
                 })
             },
             onError, 150, 'Error posting, try again.');
@@ -164,14 +200,6 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         return authorizationService.FireDatabase.ref('posts/' + post.id).set(fireObj);
     }
 
-    $scope.shareFile = function () {
-        if ($scope.shareSelect == 'view') var role = 'reader';
-        if ($scope.shareSelect == 'comment') var role = 'commenter';
-        if ($scope.shareSelect == 'edit') var role = 'writer';
-        promiseQueue.addPromise('drive', APIService.shareFile($scope.post.attachmentId, role), null, null, 150, "The attached file couln't be shared, please share it manualy.");
-        $mdToast.hide();
-    }
-
     //----------------------------------------------------
     //------------------Handleing Labels------------------------
     $scope.addLabel = function (labelName) {
@@ -182,7 +210,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 name: labelName,
                 type: 'Label',
                 active: true,
-                linkedClasses: [{
+                classes: [{
                     name: $scope.post.class.name,
                     usage: 1,
                 }],
@@ -218,7 +246,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     function resetAllLabels() {
         var max = $scope.sortedLabels.length
         for (var labelCount = 0; labelCount < max; labelCount++) {
-            $scope.sortedLabels[labelCount].active == false;
+            $scope.sortedLabels[labelCount].active = false;
         }
     }
 
@@ -271,7 +299,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $timeout(function () {
             $scope.post.link = null;
             $scope.post.type = "noLink";
-            $scope.post.previewImage = null;
+            $scope.post.previewImage = '';
             $scope.post.attachmentName = null;
             $scope.post.attachmentIcon = null;
         })
