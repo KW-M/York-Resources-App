@@ -290,7 +290,7 @@
                     </div>
                 </div>
                 <div class="footer-container">
-                    <div class="footer">
+                    <div class="footer" ng-if="classPath != 'York Quizlet'">
                         <div id="no_posts_footer" style="display: none;">
                             <h3 style="margin: 0;">It's so lonely here</h3>
                             <p style="margin: 0;font-size: 14px;font-weight: 200;">Be the first to post</p>
@@ -310,6 +310,9 @@
                             <img src="images/rocket problem.png" style="width:300px" />
                         </div>
                         <md-progress-circular id="loading_spinner" style="display: none;margin: auto;" class="md-accent" md-mode="indeterminate" md-diameter="30px"></md-progress-circular>
+                    </div>
+                    <div class="footer" ng-if="classPath == 'York Quizlet'">
+                        <div></div>
                     </div>
                 </div>
             </div>

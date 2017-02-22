@@ -765,7 +765,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             },
          }), function (data) {
             $mdToast.showSimple('Connection successful, launching Quizlet...').then(function(){
-               window.open
+               window.open('https://quizlet.com/join/nVZb4UAU9')
             })
          }, null, 150, 'Problem connecting Quizlet, try again.');
    }
