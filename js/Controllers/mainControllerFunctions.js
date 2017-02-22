@@ -765,10 +765,19 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             quizletUsername: username,
          },
       }), function (data) {
-         $mdToast.showSimple('Connection successful, launching Quizlet...').then(function () {
-            window.open('https://quizlet.com/join/nVZb4UAU9')
-         })
+         $mdToast.show({
+            template: '<md-toast>Connection successful </md-button ng-click="launchQuizet()">launch York Quizlet</md-button><md-toast>',
+            hideDelay: 10000,
+            controller: function(scope) {
+               scope.launchQuizet = function() {
+                  window.open('https://quizlet.com/join/nVZb4UAU9')
+               }
+            }
+         });
       }, null, 150, 'Problem connecting Quizlet, try again.');
+   }
+   $scope.checkQuizletName = function(quizletName) {
+      $http.get('https://api.quizlet.com/2.0/users/' + formattedArray[i].QuizletName + '/sets?client_id=ZvJPu87NPA')
    }
    $scope.openQuizletAssistWindow = function () {
       var quizWindow = window.open("", "_blank", "status=no,menubar=no,toolbar=no");
