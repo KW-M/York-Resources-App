@@ -758,7 +758,16 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
    }
    $scope.addQuizetUsername = function(username) {
-      
+      promiseQueue.addPromise('drive', APIService.runGAScript('saveUserPrefs', {
+            operation: 'saveUserPrefs',
+            content: {
+               quizletUsername: username,
+            },
+         }), function (data) {
+            $mdToast.showSimple('Connection successful, launching Quizlet...').then(function(){
+               window.open
+            })
+         }, null, 150, 'Problem connecting Quizlet, try again.');
    }
    $scope.openQuizletAssistWindow = function () {
       var quizWindow = window.open("", "_blank", "status=no,menubar=no,toolbar=no");
