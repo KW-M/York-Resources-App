@@ -314,9 +314,10 @@
                     <div class="footer" ng-if="queryParams.classPath == 'York Quizlet'">
                         <div>By connecting Quizlet to StudyHub, you can </div>
                         <md-input-container>
-                            <input type="text" placeholder="Quizlet Username" ng-model="quizletNameInput">
+                            <input type="text" md-no-raise placeholder="Quizlet Username" ng-model="quizletNameInput">
+                            <md-button ng-click="openQuizletAssistWindow()">What's my username?</md-button>
+                            <md-button ng-click="addQuizetUsername(quizletNameInput)" class="md-accent">Connect</md-button>
                         </md-input-container>
-                        <md-button ng-click="addQuizetUsername(quizletNameInput)">Connect</md-button>
                     </div>
                 </div>
             </div>
