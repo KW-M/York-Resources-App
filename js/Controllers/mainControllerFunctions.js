@@ -765,9 +765,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             quizletUsername: username,
          },
       }), function () {
+         $mdToast.hide();
          $scope.myInfo.quizletUsername = username;
          $scope.gotoRoute({classPath: 'All Posts'});
-         $mdToast.show({
+         $timeout(function () {
+            $mdToast.show({
             template: '<md-toast>Connection successful <md-button ng-click="launchQuizet()">launch York Quizlet</md-button><md-toast>',
             hideDelay: 10000,
             controller: function(scope) {
@@ -776,6 +778,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                }
             }
          });
+        },500)
       }, null, 150, 'Problem connecting Quizlet, try again.');
    }
    // $scope.checkQuizletName = function(quizletName) {
