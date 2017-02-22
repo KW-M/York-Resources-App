@@ -764,7 +764,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          content: {
             quizletUsername: username,
          },
-      }), function (data) {
+      }), function () {
+         $scope.myInfo.quizletUsername = username;
          $mdToast.show({
             template: '<md-toast>Connection successful </md-button ng-click="launchQuizet()">launch York Quizlet</md-button><md-toast>',
             hideDelay: 10000,
@@ -776,9 +777,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          });
       }, null, 150, 'Problem connecting Quizlet, try again.');
    }
-   $scope.checkQuizletName = function(quizletName) {
-      $http.get('https://api.quizlet.com/2.0/users/' + quizletName + '/sets?client_id=ZvJPu87NPA').then(console.log,console.warn)
-   }
+   // $scope.checkQuizletName = function(quizletName) {
+   //    $http.get('https://api.quizlet.com/2.0/users/' + quizletName + '/sets?client_id=ZvJPu87NPA').then(console.log,console.warn)
+   // }
    $scope.openQuizletAssistWindow = function () {
       var quizWindow = window.open("", "_blank", "status=no,menubar=no,toolbar=no");
       quizWindow.resizeTo(9000, 140)
