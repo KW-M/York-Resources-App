@@ -773,8 +773,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             classPath: 'All Posts'
          });
          $timeout(function () {
-            $mdToast.show($mdToast.simple().textContent('Connection successful').action('launch York Quizlet').highlightAction(true).highlightClass('md-accent').hideDelay(10000)).then(function (response) {
-               if (response == 'ok') window.open('https://quizlet.com/join/nVZb4UAU9');
+            $mdToast.show({
+               template: '<md-toast>Connection successful <md-button ng-click="launchQuizet()" class="md-accent">launch York Quizlet</md-button><md-toast>',
+               hideDelay: 10000,
+               controller: function (scope) {
+                  scope.launchQuizet = function () {
+                     window.open('https://quizlet.com/join/nVZb4UAU9')
+                  }
+               }
             });
          }, 500)
       }, null, 150, 'Problem connecting Quizlet, try again.');
