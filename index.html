@@ -179,11 +179,11 @@
                     </md-button>
                 </md-fab-trigger>
                 <md-fab-actions>
-                    <md-button class="md-fab md-raised md-mini" ng-click="::showPicker('Drive')">
+                    <md-button class="md-fab md-raised md-mini" ng-click="::showDrivePicker('Drive')">
                         <md-tooltip md-direction="left" md-autohide>Add Drive file</md-tooltip>
                         <img class="unselectable" style="width:22px; height:22px; margin-top:8px" src="images/drive_icon.svg">
                     </md-button>
-                    <md-button class="md-fab md-raised md-mini" ng-click="::showPicker('Upload')">
+                    <md-button class="md-fab md-raised md-mini" ng-click="::showDrivePicker('Upload')">
                         <md-tooltip md-direction="left" md-autohide>Upload</md-tooltip>
                         <md-icon class="unselectable" style="color:black">file_upload</md-icon>
                     </md-button>
@@ -222,11 +222,11 @@
                 </div>
                 <div class="content-padding" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'ugly-brown' : queryParams.classPath == 'Memes' , 'gt-sm': $mdMedia('gt-sm')}" style="padding-top: 34px; padding-bottom: 8px;">
                     <span ng-if="devMode">
-                    <md-button ng-click="consoleLogInput(myInfo, true)">Log My Info</md-button>
-                    <md-button ng-click="consoleLogInput({allPosts:allPosts,sortedPosts:sortedPosts,visiblePosts:visiblePosts})">Log Post Arrays</md-button>
-                    <md-button ng-click="refreshLayout()">Refresh Layout</md-button>
-                    <p>TotalPosts: {{allPosts.length}} Sorted: {{sortedPosts.length}}</p>
-                </span>
+                        <md-button ng-click="consoleLogInput(myInfo, true)">Log My Info</md-button>
+                        <md-button ng-click="consoleLogInput({allPosts:allPosts,sortedPosts:sortedPosts,visiblePosts:visiblePosts})">Log Post Arrays</md-button>
+                        <md-button ng-click="refreshLayout()">Refresh Layout</md-button>
+                        <p>TotalPosts: {{allPosts.length}} Sorted: {{sortedPosts.length}}</p>
+                    </span>
                     <div name="Posts Grid" ng-hide="queryParams.classPath == 'Quizlet'">
                         <div angular-grid="sortedPosts" id="layout_grid" ag-gutter-size="12" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="loadPosts()">
                             <div ng-repeat="post in sortedPosts track by post.id" ng-style="{'background-color': post.class.color + ' 0.6)'}" class="post-card raise-on-hover" ng-if="post.loadStatus == 'Loaded'">
@@ -269,11 +269,11 @@
                                                 <md-icon>more_vert</md-icon>
                                             </md-button>
                                             <md-menu-content>
-                                                <md-menu-item ng-if="post.creator.email == myInfo.email">
+                                                <md-menu-item ng-if="post.creator.email == myInfo.email || devMode == true">
                                                     <md-button ng-click="::newPost(post,'update')">
                                                         <md-icon>edit</md-icon>Edit</md-button>
                                                 </md-menu-item>
-                                                <md-menu-item ng-if="post.creator.email == myInfo.email">
+                                                <md-menu-item ng-if="post.creator.email == myInfo.email || devMode == true">
                                                     <md-button ng-click="::deletePost(post)">
                                                         <md-icon>delete</md-icon>Delete</md-button>
                                                 </md-menu-item>

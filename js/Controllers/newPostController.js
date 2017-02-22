@@ -156,8 +156,8 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     $scope.submit = function () {
         console.log('1st toast hide')
         //$mdToast.hide();
-        $scope.dialog_container.style.opacity = 0.8;
-        $scope.dialog_container.style.pointerEvents = 'none';
+        // $scope.dialog_container.style.opacity = 0.8;
+        // $scope.dialog_container.style.pointerEvents = 'none';
         console.log('posting toast show')
         // $mdToast.show({
         //     template: '<md-toast><span style="font-size:18px; max-width: 200px">Posting</span><span flex></span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="32"></md-progress-circular></md-toast>',
@@ -176,9 +176,9 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 addFireDatabaseRef(createdPost).then(function () {
                      console.log('dialog hide')
                    // $mdDialog.hide();
-                    resetAllLabels();
-                    $scope.dialog_container.style.opacity = 1;
-                    $scope.dialog_container.style.pointerEvents = 'all';
+                    // resetAllLabels();
+                    // $scope.dialog_container.style.opacity = 1;
+                    // $scope.dialog_container.style.pointerEvents = 'all';
                     console.log('3nd tost hide')
                                   //      $mdToast.hide();
                                         console.log('3nd tost hide done')
