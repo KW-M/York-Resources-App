@@ -313,7 +313,8 @@
                     </div>
                     <div class="footer" ng-if="queryParams.classPath == 'York Quizlet'">
                         <h3>Quizlet Connect</h3>
-                        <div style="margin: 0 8px">By connecting your Quizlet Account to StudyHub, you'll get access to a nearly all of the Quizlet sets made for York classes by York students in one searchable place. Connecting will also sync any public Quizlet sets you make with the York Quizlet Class. Enter your Quizlet username below to connect.</div>
+                        <div style="margin: 0 8px">By connecting your Quizlet Account to StudyHub, you'll get access to a nearly all of the Quizlet sets made for York classes by York students in one searchable place. Connecting will also sync any public Quizlet sets you make with
+                            the York Quizlet Class. Enter your Quizlet username below to connect.</div>
                         <md-input-container md-no-float>
                             <input type="text" placeholder="Quizlet Username" ng-model="quizletNameInput" style="text-align: center;">
                             <md-button ng-click="openQuizletAssistWindow()">What's my username?</md-button>
@@ -352,6 +353,14 @@
         <!-- Services -->
         <script src="js/Services/APIService.js"></script>
         <script type="text/javascript">
+            window.onerror = function (messageOrEvent, source, lineno, colno, error) {
+                if (window.globalErrorNotifier != undefined) {
+                    window.globalErrorNotifier(messageOrEvent, source, lineno, colno, error)
+                } else {
+                    window.alert('Error:\n' + messageOrEvent)
+                }
+                return false
+            };
             app.service('authorizationService', function ($q, $mdDialog) {
                 var self = this;
                 firebase.initializeApp({
