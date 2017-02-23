@@ -29,6 +29,17 @@
         <meta name="msapplication-TileImage" content="images/StudyHub_Logo/ms-icon-144x144.png">
         <meta name="msapplication-TileColor" content="#ffffff">
         <!--  Preloaded CSS & JS:  -->
+        <script type="text/javascript">
+            window.onerror = function (messageOrEvent, source, lineno, colno, error) {
+                window.alert('Error:\n' + messageOrEvent)
+                if (window.globalErrorNotifier != undefined) {
+                    window.globalErrorNotifier(messageOrEvent, source, lineno, colno, error)
+                } else {
+
+                }
+                return false
+            };
+        </script>
         <script src="https://apis.google.com/js/api.js"></script>
         <link rel="stylesheet" href="css/preRenderStyles.css" />
     </head>
@@ -353,14 +364,6 @@
         <!-- Services -->
         <script src="js/Services/APIService.js"></script>
         <script type="text/javascript">
-            window.onerror = function (messageOrEvent, source, lineno, colno, error) {
-                if (window.globalErrorNotifier != undefined) {
-                    window.globalErrorNotifier(messageOrEvent, source, lineno, colno, error)
-                } else {
-                    window.alert('Error:\n' + messageOrEvent)
-                }
-                return false
-            };
             app.service('authorizationService', function ($q, $mdDialog) {
                 var self = this;
                 firebase.initializeApp({
