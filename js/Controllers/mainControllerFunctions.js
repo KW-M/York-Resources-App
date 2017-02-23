@@ -1025,13 +1025,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          function errorBackoff(error, item) {
             var errorHandled = APIErrorHandeler(error, item, delay || 0);
             if (errorHandled) errorHandled.then(function () {
+               if (delay == 1  && item.Err) item.Err(error);
                if (delay < 4) {
                   setTimeout(function () {
                      promiseQueue.runPromise(item);
                   }, (delay = Math.max(delay *= 2, 1)) * 1000);
-               } else if (item.Err) {
-                  delay = 1;
-                  item.Err(error);
                } else {
                   delay = 1;
                }
