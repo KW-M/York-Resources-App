@@ -988,7 +988,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //---------------- Utility Functions --------------------
    var theQueue = {};
    var timer = {};
-   var delay = 0;
+   var delay = 1;
 
    // Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
    window.promiseQueue = {
@@ -1023,9 +1023,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          });
 
          function errorBackoff(error, item) {
-            var errorHandled = APIErrorHandeler(error, item, delay || 0);
+            var errorHandled = APIErrorHandeler(error, item, delay || 1);
             if (errorHandled) errorHandled.then(function () {
-               if (delay == 1  && item.Err) item.Err(error);
+               if (item.Err) item.Err(error);
                if (delay < 4) {
                   setTimeout(function () {
                      promiseQueue.runPromise(item);
