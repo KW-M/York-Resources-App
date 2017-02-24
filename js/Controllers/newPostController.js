@@ -70,7 +70,6 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     $scope.previewLoading = false;
     $scope.labelSearch = "";
     $scope.classSearch = "";
-    //$scope.shareSelect = "view"
 
     $scope.findType = function () {
         if ($scope.operation != 'view') {
@@ -124,23 +123,18 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
             $mdToast.show($mdToast.simple().textContent('Posts must have a title or description.').hideDelay(1500).parent(dialogElement));
         } else if ($scope.post.type === "GDrive") {
             $mdToast.show({
-                template: '<md-toast> <div class="md-toast-content" style="justify-content: center;"> <div> <div class="md-toast-text" style="padding: 6px 0 0 0px;">How should the attached file be shared?</div> <div style="display:flex"> <md-select ng-model="shareSelect"> <md-option value="view"> York students can view </md-option> <md-option value="comment"> York students can comment </md-option> <md-option value="edit"> York students can edit </md-option> </md-select> <md-button style="color:rgb(68,138,255)" ng-click="shareFile()">Share</md-button> </div></div></div></md-toast>',
+                template: '<md-toast> <div class="md-toast-content" style="justify-content: center;"> <div> <div class="md-toast-text" style="padding: 6px 0 0 0px;">How should the attached file be shared?</div> <div style="display:flex"> <md-select ng-model="shareSelect"> <md-option value="reader"> York students can view </md-option> <md-option value="commenter"> York students can comment </md-option> <md-option value="writer"> York students can edit </md-option> <md-option value="none"> I\'ve already shared the file </md-option> </md-select> <md-button style="color:rgb(68,138,255)" ng-click="shareFile()">Share</md-button> </div></div></div></md-toast>',
                 toastClass: 'shareLevelToast',
                 hideDelay: false,
                 parent: angular.element(dialogElement),
                 controller: function (scope) {
-                    scope.shareSelect = 'view';
+                    scope.shareSelect = 'reader';
                     scope.shareFile = function () {
-                        if (scope.shareSelect == 'view') var role = 'reader';
-                        if (scope.shareSelect == 'comment') var role = 'commenter';
-                        if (scope.shareSelect == 'edit') var role = 'writer';
-                        promiseQueue.addPromise('drive', APIService.shareFile($scope.post.attachmentId, role), $scope.submit, null, 150, "The attached file couln't be shared, please share it manualy.");
-                        // $mdToast.show({
-                        //     template: '<md-toast>Sharing...</md-toast>',
-                        //     hideDelay: false,
-                        //     parent: angular.element(document.getElementById('new_post_dialog')),
-                        //     scope: $scope,
-                        // })
+                        if (scope.shareSelect != 'none') {
+                            promiseQueue.addPromise('drive', APIService.shareFile($scope.post.attachmentId, scope.shareSelect), $scope.submit, $scope.submit, 150, "The attached file couln't be shared, please share it manualy.");
+                        } else {
+                            $scope.submit()
+                        }
                     }
                 },
             })
@@ -164,7 +158,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 template: '<md-toast><span style="font-size:18px;" flex>Posting</span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="32"></md-progress-circular></md-toast>',
                 hideDelay: false,
             });
-        },1000)
+        }, 1000)
         console.log('Sent Post:', $scope.post)
         promiseQueue.addPromise('drive', APIService.runGAScript('savePost', {
                 operation: 'savePost',

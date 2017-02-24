@@ -84,7 +84,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          if ($scope.queryParams.classPath == 'All Posts') {
             $scope.queryParams.flagged = false;
          } else if ($scope.queryParams.classPath == 'Your Posts') {
-            $scope.queryParams.creatorEmail = $scope.myInfo.Email;
+            $scope.queryParams.creatorEmail = $scope.myInfo.email;
          } else if ($scope.queryParams.classPath == 'Flagged Posts') {
             $scope.queryParams.flagged = true
          } else {
@@ -134,7 +134,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          console.log(dataObj)
          $timeout(function () {
             for (var property in dataObj.userPrefs) {
-               $scope.myInfo[property] = dataObj.userPrefs[property];
+               if (property != 'name') $scope.myInfo[property] = dataObj.userPrefs[property];
             }
             $scope.classList = dataObj.classes;
             $scope.sortedLabels = dataObj.labels
@@ -312,6 +312,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          if ($scope.queryParams.type != null && $scope.queryParams.type !== undefined) Type = inputSet[count].type == $scope.queryParams.type;
          if ($scope.queryParams.flagged != null && $scope.queryParams.flagged !== undefined) Flagged = inputSet[count].flagged == $scope.queryParams.flagged;
          if ($scope.queryParams.creatorEmail != null && $scope.queryParams.creatorEmail !== undefined) Creator = inputSet[count].creator.email == $scope.queryParams.creatorEmail;
+         console.log($scope.queryParams.creatorEmail + " " + $scope.myInfo.email);
          console.log(Flagged + " C" + Class + " T" + Type + " CR" + Creator, inputSet[count])
          if (Flagged && Class && Type && Creator) {
             filtered.push(inputSet[count])
@@ -988,7 +989,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //---------------- Utility Functions --------------------
    var theQueue = {};
    var timer = {};
-   var delay = 0;
+   var delay = 1;
 
    // Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
    window.promiseQueue = {
@@ -1023,15 +1024,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          });
 
          function errorBackoff(error, item) {
-            var errorHandled = APIErrorHandeler(error, item, delay || 0);
+            var errorHandled = APIErrorHandeler(error, item, delay || 1);
             if (errorHandled) errorHandled.then(function () {
+               if (item.err) item.err(error);
                if (delay < 4) {
                   setTimeout(function () {
                      promiseQueue.runPromise(item);
                   }, (delay = Math.max(delay *= 2, 1)) * 1000);
-               } else if (item.Err) {
-                  delay = 1;
-                  item.Err(error);
                } else {
                   delay = 1;
                }
