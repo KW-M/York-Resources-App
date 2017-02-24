@@ -134,7 +134,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          console.log(dataObj)
          $timeout(function () {
             for (var property in dataObj.userPrefs) {
-               $scope.myInfo[property] = dataObj.userPrefs[property];
+               if (property != 'name') $scope.myInfo[property] = dataObj.userPrefs[property];
             }
             $scope.classList = dataObj.classes;
             $scope.sortedLabels = dataObj.labels
@@ -1025,7 +1025,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          function errorBackoff(error, item) {
             var errorHandled = APIErrorHandeler(error, item, delay || 1);
             if (errorHandled) errorHandled.then(function () {
-               if (item.Err) item.Err(error);
+               if (item.err) item.err(error);
                if (delay < 4) {
                   setTimeout(function () {
                      promiseQueue.runPromise(item);
