@@ -70,7 +70,6 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     $scope.previewLoading = false;
     $scope.labelSearch = "";
     $scope.classSearch = "";
-    //$scope.shareSelect = "view"
 
     $scope.findType = function () {
         if ($scope.operation != 'view') {
