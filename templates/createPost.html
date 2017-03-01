@@ -126,7 +126,7 @@
 		<md-button class="md-icon-button" ng-click="operation = 'update'" ng-if="post.creator.email == myInfo.email || devMode == true">
 			<md-icon>edit</md-icon>
 		</md-button>
-		<md-button class="md-icon-button" ng-click="deletePost(post)" ng-if="post.creator.email == myInfo.email">
+		<md-button class="md-icon-button" ng-click="deletePost(post)" ng-if="post.creator.email == myInfo.email || devMode == true">
 			<md-icon>delete</md-icon>
 		</md-button>
 		<md-button class="md-icon-button" ng-if="devMode" ng-click="::logPostToConsole(post,$index)">
