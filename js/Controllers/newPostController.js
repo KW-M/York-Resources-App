@@ -51,7 +51,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $scope.post.attachmentName = $scope.post.attachmentName || ''
         $scope.post.attachmentIcon = $scope.post.attachmentIcon || ''
         $scope.post.likes = $scope.post.likes || []
-        $scope.post.previewImage = $scope.post.previewImage || ''
+        $scope.post.previewImage = $scope.post.previewImage || $scope.getMaterialBackground() || '';
         $scope.findType();
         $scope.sortLabels()
         hideSelectedLabels();
@@ -77,7 +77,6 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 $scope.post.attachmentName = '';
                 $scope.post.attachmentIcon = '';
                 $scope.post.attachmentId = '';
-                $scope.post.previewImage = '';
                 if ($scope.post.link == '') {
                     $scope.previewLoading = false;
                     $scope.post.type = 'NoLink';
@@ -108,7 +107,9 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 } else if ($scope.post.link.length > 9) {
                     $scope.post.link = "http://" + $scope.post.link;
                     $scope.post.type = 'link';
+                    $scope.previewLoading = false;
                 } else {
+                    $scope.previewLoading = false;
                     $scope.post.type = 'noLink';
                 }
             })
@@ -293,9 +294,10 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
 
     $scope.clearLink = function () {
         $timeout(function () {
+            
             $scope.post.link = null;
             $scope.post.type = "noLink";
-            $scope.post.previewImage = '';
+            $scope.post.previewImage = $scope.getMaterialBackground();
             $scope.post.attachmentName = null;
             $scope.post.attachmentIcon = null;
         })
