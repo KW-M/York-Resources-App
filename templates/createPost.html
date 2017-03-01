@@ -116,13 +116,14 @@
 	</md-dialog-actions>
 	<md-dialog-actions ng-if="operation == 'view'" layout="row" style="align-items: center;" ng-style="{'background-color': post.class.color + ' 0.6)'}">
 		<md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(post)">
-			<span class="like-counter">{{post.likes.length}}</span>
-			<md-icon ng-class="{'md-accent' : post.userLiked}" style="margin-top: -8px">thumb_up</md-icon>
+			<span class="like-counter">{{post.likeCount}}</span>
+			<md-icon md-svg-src="images/thumb_outline.svg" ng-if="post.userLiked == false" style="margin-top: -8px"></md-icon>
+			<md-icon ng-class="{'md-accent' : post.userLiked}" ng-if="post.userLiked == true" style="margin-top: -8px">thumb_up</md-icon>
 		</md-button>
 		<md-button class="md-icon-button" area-label="Flag" ng-click="flagPost(post)" ng-if="post.flagged == true">
 			<md-icon class="md-warn">flag</md-icon>
 		</md-button>
-		<md-button class="md-icon-button" ng-click="operation = 'update'" ng-if="post.creator.email == myInfo.email">
+		<md-button class="md-icon-button" ng-click="operation = 'update'" ng-if="post.creator.email == myInfo.email || devMode == true">
 			<md-icon>edit</md-icon>
 		</md-button>
 		<md-button class="md-icon-button" ng-click="deletePost(post)" ng-if="post.creator.email == myInfo.email">
