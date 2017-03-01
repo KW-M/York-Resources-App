@@ -53,7 +53,7 @@
                 </div>
                 <div class="signin-dialog-tip">
                     <h3>Tips:</h3>
-                    <p>Look for the mobile update comming soon.</p>
+                    <p id="tip_text"></p>
                     <div style="display:none">
                         <md-button style="display:none" id="dat_button" ng-click="::gotoRoute({classPath:'/Memes'})"><span style="opacity:0.5">meme</span></md-button>
                     </div>
@@ -202,7 +202,7 @@
                     <div class="create-post-bar-top" ng-hide="queryParams.classPath == 'York Quizlet'">
                         <span md-ink-ripple="true" class="create-post-bar-text unselectable" flex ng-click="::newPost({},'new')">
                         <md-icon style="margin-top: -3px;">add_circle</md-icon>
-                        <span>Share a link or resource...</span>
+                        <span>Share a resource...</span>
                         </span>
                         <span ng-click="::showDrivePicker('Upload')">
                         <md-tooltip md-direction="::down">Upload</md-tooltip>
@@ -527,6 +527,9 @@
                     });
                 }
             });
+            
+            var tipText = 
+            var tips = ["Look for the mobile update comming soon.", "Share from GDrive Right-click > open With > "]
         </script>
         <!-- Controllers -->
         <script src="js/Controllers/mainControllerFunctions.js"></script>
