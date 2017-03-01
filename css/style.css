@@ -759,11 +759,11 @@ button.selected.md-button {
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    border-bottom: solid 1px black;
     border-radius: 3px 3px 0 0;
 }
 
 .post-card .post-card-header {
+    border-bottom: solid 1px black;
     background-image: url(https://ssl.gstatic.com/atari/images/simple-header-blended-small.png);
 }
 
