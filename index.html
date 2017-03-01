@@ -53,7 +53,7 @@
                 </div>
                 <div class="signin-dialog-tip">
                     <h3>Tips:</h3>
-                    <p id="tip_text"></p>
+                    <p id="tip_text">Share from GDrive, right-click > Open With > StudyHub</p>
                     <div style="display:none">
                         <md-button style="display:none" id="dat_button" ng-click="::gotoRoute({classPath:'/Memes'})"><span style="opacity:0.5">meme</span></md-button>
                     </div>
@@ -527,9 +527,9 @@
                     });
                 }
             });
-            
-            var tipText = 
-            var tips = ["Look for the mobile update comming soon.", "Share from GDrive Right-click > open With > "]
+
+            var tips = ["Look for the mobile update comming soon.", "Share from GDrive, right-click > Open With > StudyHub"]
+                document.getElementById("tip_text").innerHTML = tips[Math.floor(Math.random() * tips.length)];
         </script>
         <!-- Controllers -->
         <script src="js/Controllers/mainControllerFunctions.js"></script>
