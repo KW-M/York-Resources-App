@@ -732,6 +732,7 @@ button.selected.md-button {
 }
 
 .post-card-creator {
+    flex: 0 0 auto;
     margin: 0px 16px 0px 16px;
     font-size: 13px;
     color: rgba(0, 0, 0, .54);
