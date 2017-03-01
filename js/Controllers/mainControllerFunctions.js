@@ -1124,7 +1124,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.getMaterialBackground = function () {
          return 'images/material_backgrounds/' + (Math.floor(Math.random() * 31) + 1) + '.jpg';
       }
-      
+
       //----------------------------------------------------
       //---------------------- dev -------------------------
    $scope.consoleLogInput = function (input, asAlert) {

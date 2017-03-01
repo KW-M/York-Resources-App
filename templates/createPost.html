@@ -114,7 +114,7 @@
 			<md-icon style="font-size:26px; line-height: 25px">{{operation == 'new' ? 'delete' : 'close'}}</md-icon>
 		</md-button>
 	</md-dialog-actions>
-	<md-dialog-actions ng-if="operation == 'view'" layout="row" style="align-items: center;" ng-style="{'background-color': post.class.color + ' 0.6)'}">
+	<md-dialog-actions ng-show="operation == 'view'" layout="row" style="align-items: center;" ng-style="{'background-color': post.class.color + ' 0.6)'}">
 		<md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(post)">
 			<span class="like-counter">{{post.likeCount}}</span>
 			<md-icon md-svg-src="images/thumb_outline.svg" ng-if="post.userLiked == false" style="margin-top: -8px"></md-icon>
@@ -129,8 +129,8 @@
 		<md-button class="md-icon-button" ng-click="deletePost(post)" ng-if="post.creator.email == myInfo.email || devMode == true">
 			<md-icon>delete</md-icon>
 		</md-button>
-		<md-button class="md-icon-button" ng-if="devMode" ng-click="::logPostToConsole(post,$index)">
-			<md-icon>debug</md-icon>
+		<md-button class="md-icon-button" ng-if="devMode == true" ng-click="::logPostToConsole(post,$index)">
+			<md-icon>bug_report</md-icon>
 		</md-button>
 		<span flex></span>
 		<md-button class="md-icon-button text-format-button hover_black" style="margin-right:0px;" ng-click="closeDialog()">
