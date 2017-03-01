@@ -1121,9 +1121,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       return fullPostNew;
    }
 
-
-   //----------------------------------------------------
-   //---------------------- dev -------------------------
+   $scope.getMaterialBackground = function () {
+         return 'images/material_backgrounds/' + (Math.floor(Math.random() * 31) + 1) + '.jpg';
+      }
+      
+      //----------------------------------------------------
+      //---------------------- dev -------------------------
    $scope.consoleLogInput = function (input, asAlert) {
       console.log(input)
       if (asAlert) $scope.showInfoPopup('Logged', null, input, false)

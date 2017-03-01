@@ -51,14 +51,12 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $scope.post.attachmentName = $scope.post.attachmentName || ''
         $scope.post.attachmentIcon = $scope.post.attachmentIcon || ''
         $scope.post.likes = $scope.post.likes || []
-        $scope.post.previewImage = $scope.post.previewImage || ''
+        $scope.post.previewImage = $scope.post.previewImage || $scope.getMaterialBackground() || '';
         $scope.findType();
         $scope.sortLabels()
         hideSelectedLabels();
-        console.log('Hiding Toast')
         $mdToast.hide()
         $scope.$watch('post.link', function () {
-            $scope.previewLoading = true
             if (typeof (linkChangeTimer) == 'number') clearTimeout(linkChangeTimer);
             linkChangeTimer = setTimeout($scope.findType, 1000)
         })
@@ -77,7 +75,6 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 $scope.post.attachmentName = '';
                 $scope.post.attachmentIcon = '';
                 $scope.post.attachmentId = '';
-                $scope.post.previewImage = '';
                 if ($scope.post.link == '') {
                     $scope.previewLoading = false;
                     $scope.post.type = 'NoLink';
@@ -105,10 +102,12 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                             })
                         }
                     }, null, 150, 'Problem showing link preview, is your attachment link an actual URL?');
-                } else if ($scope.post.link.length > 9) {
+                } else if ($scope.post.link.length > 4 & $scope.post.link.substring(0,3) != 'htt') {
                     $scope.post.link = "http://" + $scope.post.link;
                     $scope.post.type = 'link';
+                    $scope.previewLoading = false;
                 } else {
+                    $scope.previewLoading = false;
                     $scope.post.type = 'noLink';
                 }
             })
@@ -293,9 +292,10 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
 
     $scope.clearLink = function () {
         $timeout(function () {
+            $scope.previewLoading = false;
             $scope.post.link = null;
             $scope.post.type = "noLink";
-            $scope.post.previewImage = '';
+            $scope.post.previewImage = $scope.getMaterialBackground();
             $scope.post.attachmentName = null;
             $scope.post.attachmentIcon = null;
         })

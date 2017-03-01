@@ -530,6 +530,7 @@ button.selected.md-button {
 }
 
 .view .label-container {
+    flex: 1;
     padding-left: 8px;
     border-top-right-radius: 0px;
 }
@@ -558,7 +559,7 @@ button.selected.md-button {
     box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.12);
 }
 
-.view .label-container .label{
+.view .label-container .label {
     cursor: default;
 }
 
@@ -698,7 +699,7 @@ button.selected.md-button {
 /*------- Posts Footer Styles --------*/
 
 .footer-container {
-    flex: 0  auto;
+    flex: 0 auto;
     display: flex;
     align-items: center;
     height: 100%;
@@ -732,6 +733,7 @@ button.selected.md-button {
 }
 
 .post-card-creator {
+    flex: 0 0 auto;
     margin: 0px 16px 0px 16px;
     font-size: 13px;
     color: rgba(0, 0, 0, .54);
@@ -835,7 +837,7 @@ button.selected.md-button {
     color: rgb(66, 66, 66);
 }
 
-.gradient-overlay .gradient-overlay-metadata md-chip span{
+.gradient-overlay .gradient-overlay-metadata md-chip span {
     text-shadow: none
 }
 

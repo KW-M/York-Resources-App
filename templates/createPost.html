@@ -52,11 +52,9 @@
 			<md-progress-linear class="link-loading" md-mode="indeterminate" ng-disabled="!previewLoading"></md-progress-linear>
 		</div>
 		<div id="new_post_content" flex layout="column">
-			<div class="header-spacer" ng-class="{'small-spacer': post.type == 'NoLink' && operation == 'view','has-link': post.link != ''}" title="{{removeHttp(post.link)}}" ng-click="openLink(post.link)">
-				<!--<md-tooltip md-autohide md-direction="top" md-delay="1000"><md-icon>language</md-icon> {{removeHttp(post.link)}}</md-tooltip>-->
-			</div>
-			<div layout="row">
-				<div layout="row" class="label-container" ng-style="{'max-width': (300 + (post.labels.length * 95)) + 'px'}">
+			<div class="header-spacer" ng-class="{'small-spacer': post.type == 'NoLink' && operation == 'view','has-link': post.link != ''}" title="{{removeHttp(post.link)}}" ng-click="openLink(post.link)"></div>
+			<div layout="row" style="flex: 0 0 auto;">
+				<div layout="row" class="label-container" ng-style="{'max-width': operation != 'view' ? ((300 + (post.labels.length * 95)) + 'px') : '100%'}">
 					<md-select ng-model="post.class" ng-model-options="{trackBy: $value.name}" ng-if="operation != 'view'" class="md-no-underline" placeholder="Class" id="class_dropdown_button" md-on-close="classSelectDone()" ng-required="true" style="flex: 0 0 auto">
 						<md-select-header class="classSelectSearchbox">
 							<input ng-model="classSelectSearch" id="class_select_input" type="text" placeholder="Search for a class.." class="md-text">
@@ -90,7 +88,7 @@
 				</md-input-container>
 			</div>
 			<div class="md-dialog-content unselectable" flex layout="column">
-				<input ng-model="post.title" ng-readonly="operation === 'view'" class="new-post-title md-title" placeholder="Title" md-autofocus>
+				<input ng-model="post.title" ng-readonly="operation == 'view'" class="new-post-title md-title" placeholder="Title" md-autofocus>
 				<p class="post-card-creator md-subhead" style="margin:0" ng-hide="::post.creator.name == undefined || post.creator.name == myInfo.name"><span>By {{::post.creator.name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::post.creator.classOf}})</span>
 				</p>
 				<div contenteditable="{{operation != 'view'}}" ng-model="post.description" class="new-post-body" flex></div>
@@ -118,16 +116,17 @@
 	</md-dialog-actions>
 	<md-dialog-actions ng-if="operation == 'view'" layout="row" style="align-items: center;" ng-style="{'background-color': post.class.color + ' 0.6)'}">
 		<md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(post)">
-			<span class="like-counter">{{post.likes.length}}</span>
-			<md-icon ng-class="{'md-accent' : post.userLiked}" style="margin-top: -8px">thumb_up</md-icon>
+			<span class="like-counter">{{post.likeCount}}</span>
+			<md-icon md-svg-src="images/thumb_outline.svg" ng-if="post.userLiked == false" style="margin-top: -8px"></md-icon>
+			<md-icon ng-class="{'md-accent' : post.userLiked}" ng-if="post.userLiked == true" style="margin-top: -8px">thumb_up</md-icon>
 		</md-button>
 		<md-button class="md-icon-button" area-label="Flag" ng-click="flagPost(post)" ng-if="post.flagged == true">
 			<md-icon class="md-warn">flag</md-icon>
 		</md-button>
-		<md-button class="md-icon-button" ng-click="operation = 'update'" ng-if="post.creator.email == myInfo.email">
+		<md-button class="md-icon-button" ng-click="operation = 'update'" ng-if="post.creator.email == myInfo.email || devMode == true">
 			<md-icon>edit</md-icon>
 		</md-button>
-		<md-button class="md-icon-button" ng-click="deletePost(post)" ng-if="post.creator.email == myInfo.email">
+		<md-button class="md-icon-button" ng-click="deletePost(post)" ng-if="post.creator.email == myInfo.email || devMode == true">
 			<md-icon>delete</md-icon>
 		</md-button>
 		<md-button class="md-icon-button" ng-if="devMode" ng-click="::logPostToConsole(post,$index)">

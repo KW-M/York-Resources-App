@@ -10,16 +10,8 @@ md-dialog#new_post_dialog {
    transition: opacity 0.3s ease;
 }
 
-
-/*#new_post_content {*/
-
-
-/*   margin-top: 200px;*/
-
-
-/*}*/
-
 .header-spacer {
+   flex: 0 0 auto;
    height: 200px;
    width: 100%;
 }
@@ -43,6 +35,7 @@ md-dialog#new_post_dialog {
    pointer-events: none;
    background-color: rgb(161, 10, 25);
 }
+
 .view #dialog_header {
    pointer-events: initial;
 }
@@ -137,6 +130,7 @@ md-chips md-chips-wrap.md-chips {
 }
 
 input.new-post-title {
+   flex: 0 0 auto;
    background-color: rgba(0, 0, 0, 0);
    font-weight: bold;
    font-family: 'Roboto Condensed', 'Droid Sans', arial, sans-serif;
