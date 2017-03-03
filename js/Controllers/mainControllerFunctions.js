@@ -221,6 +221,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       })
 
       function convertFirePost(key, value, loadStatus) {
+         console.log("date updated",new Date(value.DU))
          return {
             id: key,
             creator: {
