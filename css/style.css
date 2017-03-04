@@ -777,7 +777,7 @@ button.selected.md-button {
 
 .post-card-image {
     width: 100%;
-    display: flex;
+    display: flex
     border-radius: 3px 3px 0 0;
     transition: all 0.3s ease;
     transform: translateY(-1%);
