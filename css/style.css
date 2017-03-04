@@ -764,6 +764,973 @@ button.selected.md-button {
 
 .post-card .post-card-header {
     border-bottom: solid 1px black;
+}
+
+.post-card-header.no-link {
+    height: 56px;
+    cursor: default;
+}
+
+.post-card-header.not-operation-view {
+    cursor: default;
+}
+
+.post-card-image {
+    width: 100%;
+    margin-top: -2.5%;
+    display: flex;
+    border-radius: 3px 3px 0 0;
+    transition: all 0.3s ease;
+    transform: translateY(2.5%);
+}
+
+.post-card-header:not(.no-link):hover .post-card-image {
+    transform: translateY(0);
+}
+
+.gradient-overlay {
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 56px;
+    position: absolute;
+    display: flex;
+    color: white;
+    background: linear-gradient(to top, rgba(0, 0, 0, .5), rgba(0, 0, 0, 0));
+    flex-direction: column;
+    justify-content: center;
+}
+
+.gradient-overlay .gradient-overlay-metadata {
+    width: 100%;
+    padding: 0 4px;
+    display: flex;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+    justify-content: space-around;
+}
+
+.gradient-overlay .gradient-overlay-metadata span {
+    text-shadow: 0px 2px 23px rgba(0, 0, 0, 0.6);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding: 10px;
+    margin: -10px;
+}
+
+.gradient-overlay md-icon.material-icons {
+    height: 1em;
+    width: 1em;
+    min-height: 0;
+    min-width: 0;
+    color: white;
+    font-size: 18px;
+}
+
+.gradient-overlay .gradient-overlay-metadata md-chip {
+    margin: 0 auto;
+    background: rgba(224, 224, 224, .80);
+    color: rgb(66, 66, 66);
+}
+
+.gradient-overlay .gradient-overlay-metadata md-chip span {
+    text-shadow: none
+}
+
+.gradient-overlay .gradient-overlay-metadata.metadata-link {
+    padding: 0px 16px;
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.post-card-header:not(.no-link):hover .gradient-overlay-metadata.metadata-link {
+    opacity: 1
+}
+
+.post-card-header:not(.no-link):hover .gradient-overlay-metadata.metadata-regular {
+    opacity: 0;
+}
+
+
+/* ------ Post Bottom Toolbar Styles ------- */
+
+.like-counter {
+    font-size: 16px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.54);
+}
+
+#like_thumb_button {
+    min-width: 1px;
+    border-radius: 100px;
+}
+
+#like_thumb_button:hover {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+#like_thumb_button.md-button .md-ripple-container {
+    border-radius: 100px;
+}
+
+.material-icons.small-icon {
+    font-size: 12pt;
+    height: 1.17em;
+    width: 1em;
+    min-width: 0;
+    min-height: 0;
+}
+
+
+/* ------ Post Card Transitions ------- */
+
+.post-card.ng-leave {
+    -webkit-transition: all ease 400ms;
+    transition: all ease 400ms;
+}
+
+.post-card.ng-leave.ng-leave-active {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    opacity: 0;
+}
+
+.post-card.ng-enter {
+    -webkit-transition: all ease-out 400ms;
+    transition: all ease-out 00ms;
+    -webkit-transition-delay: 500ms;
+    transition-delay: 500ms;
+    -webkit-transform: translateY(150px);
+    transform: translateY(150px);
+    opacity: 0;
+}
+
+.post-card.ng-enter.ng-enter-active {
+    -webkit-transform: scale(1) translateY(0);
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+
+/*-------------------------------------------------------------
+----------------- Post Creation Dialog Styles -----------------*/
+
+
+/*------- Class Selector Styles ----------*/
+
+.classSelectSearchbox input {
+    border: none;
+    outline: none;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+}
+
+.classSelectSearchbox {
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1), 0 0 0 0 rgba(0, 0, 0, 0.14), 0 0 0 0 rgba(0, 0, 0, 0.12);
+    padding-left: 10.667px;
+    height: 48px;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: auto;
+}
+
+.shareLevelToast md-select:not([disabled]) {
+    border-radius: 3px;
+    padding-left: 6px;
+    margin: 8px 0px;
+    transition: background-color .4s cubic-bezier(.25, .8, .25, 1);
+}
+
+.shareLevelToast md-select:not([disabled]):hover {
+    background-color: rgba(158, 158, 158, 0.2);
+}
+
+.shareLevelToast md-select:not([disabled]) .md-select-value {
+    color: white;
+    border: none;
+}
+
+.shareLevelToast md-select:not([disabled]):focus .md-select-value {
+    color: white;
+    border: none;
+}
+
+.shareLevelToast {
+    z-index: 4;
+}
+/* ---- Table of contents: -----
+    Universal Styles
+        General Styles
+        General Transitions
+        General Animations
+    Main Toolbar Styles
+        Search Bar Styles
+        User Menu Styles
+    Side Navigation Styles
+
+    Content Container Styles
+        Content Top Bar Styles
+        -XXX- Create Post Top Bar Styles
+        Create Post FAB Styles
+        Posts Footer Styles
+    Post Card Styles
+        Post Card Header Styles
+        Post Card Bottom Toolbar Styles
+        Post Card Transitions
+    Post Creation Dialog Styles
+        Class Selector Styles
+*/
+
+
+/*---------------------------------------------------------
+-------------------- Universal Styles ---------------------*/
+
+button:focus,
+div:focus,
+span:focus {
+    outline: 0;
+}
+
+
+/*----- General Styles -----*/
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.default-mouse {
+    cursor: default;
+}
+
+.not-visible {
+    visibility: hidden;
+}
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.no-border {
+    border: none;
+    outline: none;
+}
+
+.no-border:focus {
+    border: none;
+    outline: none;
+}
+
+.dark-icon {
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.dark-icon:hover {
+    color: black;
+}
+
+.hover-black:hover {
+    color: black;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.rounded {
+    border-radius: 3px;
+}
+
+.rounded-right {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.rounded-left {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.md-input-min-height {
+    margin: 0;
+    height: 30px;
+}
+
+md-input-container.md-input-min-height .md-errors-spacer {
+    display: none;
+}
+
+
+/*------ General Transitions ------ */
+
+.fadeIn {
+    opacity: 1;
+    pointer-events: initial;
+    transition: opacity 0.5s ease;
+}
+
+.fadeOut {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.darken-on-hover:hover {
+    background-color: rgba(158, 158, 158, 0.2);
+}
+
+.raise-on-hover:hover {
+    transition: .2s;
+    box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32);
+}
+
+.ugly-brown:hover {
+    background-color: #4d442e !important;
+}
+
+
+/*------- General Animations ------*/
+
+.rainbow:hover {
+    filter: blur(5px);
+    -webkit-animation: rainbow 1s infinite;
+    -ms-animation: rainbow 1s infinite;
+    -o-animation: rainbow 1s infinite;
+    animation: rainbow 1s infinite;
+}
+
+@keyframes rainbow {
+    0% {
+        background-color: #ff0000;
+    }
+    10% {
+        background-color: #ff8000;
+    }
+    20% {
+        background-color: #ffff00;
+    }
+    30% {
+        background-color: #80ff00;
+    }
+    40% {
+        background-color: #00ff00;
+    }
+    50% {
+        background-color: #00ff80;
+    }
+    60% {
+        background-color: #00ffff;
+    }
+    70% {
+        background-color: #0080ff;
+    }
+    80% {
+        background-color: #0000ff;
+    }
+    90% {
+        background-color: #8000ff;
+    }
+    100% {
+        background-color: #ff0080;
+    }
+}
+
+.rainbow2:hover {
+    -webkit-animation: rainbow2 4s infinite;
+    -ms-animation: rainbow2 4s infinite;
+    -o-animation: rainbow2 4s infinite;
+    animation: rainbow2 4s infinite;
+}
+
+@keyframes rainbow2 {
+    0% {
+        background-color: #ff0000;
+        filter: invert(0%);
+    }
+    5% {
+        background-image: url(http://lorempixel.com/251/200/animals/Dummy-Text/)
+    }
+    20% {
+        background-image: url(http://machinemachine.net/text/wp-content/uploads/2011/05/tumblr_ll41yxdmG31qzpy7ko1_r1_500.gif)
+    }
+    50% {
+        background-image: url(http://lorempixel.com/200/200/animals/Dummy-Text/)
+    }
+    60% {
+        filter: invert(80%);
+        background-image: url(http://lorempixel.com/225/200/animals/)
+    }
+    70% {
+        background-image: url(http://lorempixel.com/250/200/animals/)
+    }
+    100% {
+        background-image: none;
+        background-color: #4d442e;
+        filter: invert(0%);
+    }
+}
+
+
+/*---------------------------------------------------------
+------------------- Main Toolbar Styles -------------------*/
+
+.toolbar-top {
+    z-index: 65;
+}
+
+#york_study_logo {
+    margin: 16px 24px 16px 0;
+}
+
+
+/*------- Search Bar Styles ------*/
+
+.search-bar-container {
+    flex: 1;
+    margin: 0 10px 0 24px;
+    position: relative;
+}
+
+.search-bar {
+    padding: 0 40px 0 52px;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    height: 40px;
+    width: 100%;
+    font-size: 14px;
+}
+
+md-icon.material-icons.search-bar-icon {
+    margin: 8px 15px;
+    position: absolute;
+    color: #757575;
+    z-index: 60;
+    pointer-events: none;
+}
+
+.md-button.md-icon-button.search-bar-clear-button {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    margin: 0;
+    transform: scale(0.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity ease 200ms, transform ease 200ms;
+}
+
+.md-button.md-icon-button.search-bar-clear-button.has-text {
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: inherit;
+}
+
+.overlay-search {
+    z-index: 100;
+    left: 0px;
+    padding-right: 16px;
+    background-color: rgb(161, 10, 25);
+    position: absolute;
+    opacity: 0;
+    top: -100%;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    transition: top 0.2s ease, opacity 0.2s ease;
+}
+
+.overlay-search.search-visible {
+    opacity: 1;
+    top: 0px;
+    pointer-events: initial;
+}
+
+
+/*------- User Menu Styles ------*/
+
+#account_picture {
+    Height: 3.5em;
+    Width: 3.5em;
+}
+
+#quizlet_connect_button.md-button {
+    background: -webkit-gradient(linear, 0 100%, 0 0, from(#2072de), to(#1d67c7));
+    background: -webkit-linear-gradient(#2072de, #1d67c7);
+    background: -moz-linear-gradient(#2072de, #1d67c7);
+    background: -o-linear-gradient(#2072de, #1d67c7);
+    background: linear-gradient(#2072de, #1d67c7);
+    color: white;
+}
+
+
+/*------------- Shortcut Menu Settings----------- */
+
+button.md-button.shortcut-menu-button {
+    text-transform: none;
+    line-height: 12px;
+    padding-bottom: 8px;
+}
+
+.shortcut-menu-image {
+    height: 64px;
+    width: 64px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.shortcut-google-image {
+    background-image: url(https://ssl.gstatic.com/gb/images/p1_a4541be8.png);
+    -webkit-background-size: 64px 2065px;
+    background-size: 64px 2065px;
+}
+
+
+/*--------------------------------------------------------------
+------------------- Side Navigation styles --------------------- */
+
+.sidenav-inline {
+    width: 252px;
+    background-color: #f2f2f2;
+    overflow: Hidden;
+    margin-right: 100px;
+    margin-left: -256px;
+    transition: margin 1s;
+    overflow-y: auto;
+}
+
+.sidenav-inline.side-nav-open {
+    margin-left: 0px;
+    margin-right: 4px;
+}
+
+.sidenav-inline.xs,
+.sidenav-inline.sm {
+    margin-right: 0px;
+    margin-left: -256px;
+}
+
+.side-nav-scroll {
+    overflow-y: auto;
+}
+
+.side-nav-scroll::-webkit-scrollbar {
+    background: transparent;
+    width: 8px;
+}
+
+.side-nav-scroll::-webkit-scrollbar-thumb {
+    background: #bdbdbd;
+}
+
+.side-nav md-menu-item {
+    user-select: none;
+    width: 100%;
+}
+
+.sidenav-overlay .overlay-search.sidenav-class-search {
+    background-color: #fff;
+    width: 100%;
+    top: 0px;
+    left: -100%;
+    margin: 0;
+    box-sizing: border-box;
+    transition: left 0.2s ease, opacity 0.2s ease;
+}
+
+.sidenav-inline .overlay-search.sidenav-class-search {
+    background-color: #f2f2f2;
+    width: 100%;
+    top: 0px;
+    left: -100%;
+    box-sizing: border-box;
+    transition: left 0.2s ease, opacity 0.2s ease;
+}
+
+.overlay-search.sidenav-class-search.search-visible {
+    left: 0;
+}
+
+.side-nav-classes md-menu-item>.md-button {
+    border-radius: 3px;
+}
+
+.side-nav-section {
+    border-bottom: 1px solid #ddd;
+}
+
+.side-nav-header {
+    display: block;
+    font-size: 14px;
+    text-transform: uppercase;
+    padding: 16px;
+    font-weight: 500;
+    user-select: none;
+    border-top-right-radius: 50px;
+    box-shadow: 1px 4px 6px -3px rgba(0, 0, 0, .1), -2px 7px 14px 1px rgba(0, 0, 0, .07)
+}
+
+.side-nav-class.md-button {
+    text-transform: none;
+    font-weight: 400;
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    text-align: start;
+    margin: 0 2px;
+    padding: 0 32px;
+    height: 48px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 16px;
+}
+
+.side-nav-classes {
+    margin-left: 12px;
+}
+
+.side-nav-bottom {
+    /*width: 100%;*/
+    border-top: 1px solid #ddd;
+}
+
+button.selected.md-button {
+    background-color: rgba(0, 0, 0, .05);
+    font-weight: bold;
+    color: #212121;
+}
+
+
+/*--------------------------------------------------------
+--------------- Content Container Styles -----------------*/
+
+#content_container {
+    display: flex;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex-direction: column;
+    flex: 1;
+}
+
+.content-padding {
+    flex: 0 0 auto;
+    padding-left: 8px;
+    padding-right: 100px;
+}
+
+.content-padding.content-top-bar {
+    padding-left: 24px;
+    padding-right: 24px;
+    margin-left: 8px;
+    margin-right: 100px;
+}
+
+.content-padding.sm {
+    padding-left: 24px;
+    padding-right: 24px
+}
+
+.content-padding.content-top-bar.sm {
+    padding-left: 16px;
+    padding-right: 16px;
+    margin-left: 24px;
+    margin-right: 24px;
+}
+
+.content-padding.xs {
+    padding-left: 8px;
+    padding-right: 4px;
+}
+
+.content-padding.content-top-bar.xs {
+    margin-left: 0px;
+    margin-right: 0px;
+    border-radius: 0px;
+}
+
+
+/* -------- Content Top Bar -------- */
+
+.content-top-bar {
+    background-color: rgb(219, 224, 229);
+    position: relative;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.label-container {
+    box-shadow: inset rgba(0, 0, 0, 0.27) -10px 2px 24px -17px, inset rgba(0, 0, 0, 0.27) 10px -2px 24px -17px;
+    overflow: auto;
+    white-space: nowrap;
+    font-family: Roboto, Helvetica Neue, sans-serif;
+    font-size: 16px;
+    vertical-align: middle;
+    border-top-right-radius: 50px;
+}
+
+.view .label-container {
+    flex: 1;
+    padding-left: 8px;
+    border-top-right-radius: 0px;
+}
+
+.label-container::-webkit-scrollbar {
+    background: rgba(255, 255, 255, 0.08);
+    height: 3px;
+}
+
+.label-container::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.label-container .label {
+    cursor: pointer;
+    border-radius: 16px;
+    display: inline-block;
+    height: 32px;
+    line-height: 32px;
+    margin: 8px 8px 0 0;
+    padding: 0 12px;
+    box-sizing: border-box;
+    max-width: 100%;
+    position: relative;
+    background: rgba(224, 224, 224, 0.5);
+    box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.12);
+}
+
+.view .label-container .label {
+    cursor: default;
+}
+
+.label-container .label:hover {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+}
+
+.label-container .label.label-active {
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .26);
+}
+
+.content-top-bar button.md-button.md-ink-ripple {
+    color: white;
+}
+
+.content-top-bar button.md-button.md-ink-ripple:hover {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+}
+
+.content-top-bar button.md-button.star-button {
+    min-width: 36px;
+    max-width: 36px;
+    transition: box-shadow .4s cubic-bezier(.25, .8, .25, 1), background-color .4s cubic-bezier(.25, .8, .25, 1), max-width .4s cubic-bezier(.25, .8, .25, 1);
+}
+
+.content-top-bar button.md-button.star-button:hover {
+    max-width: 150px;
+}
+
+
+/*------- Create Post Top Bar Styles -------- */
+
+.create-post-bar-top {
+    width: 100%;
+    max-width: 570px;
+    min-height: 48px;
+    margin: 0px auto -22px auto;
+    padding-right: 6px;
+    position: relative;
+    display: flex;
+    box-sizing: border-box;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.create-post-bar-top:hover {
+    background-color: rgb(232, 232, 232);
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
+}
+
+.create-post-bar-text {
+    height: 100%;
+    top: 0px;
+    padding: 12px 0 12px 10px;
+    box-sizing: border-box;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-transform: none;
+    font-family: 'Roboto Slab', serif;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.create-post-bar-text:hover>md-icon {
+    color: black;
+}
+
+.create-post-bar-top>span:not(.create-post-bar-text) {
+    height: 46px;
+    top: 0px;
+    padding: 12px 8px 12px 8px;
+    box-sizing: border-box;
+    display: inline-block;
+    color: black;
+    opacity: 0.6;
+    margin: 0 6px;
+    outline: none;
+    min-width: 0;
+    width: 40px;
+}
+
+.create-post-bar-top>span:not(.create-post-bar-text):hover {
+    opacity: 1;
+}
+
+
+/*------ Create Post FAB Styles -------- */
+
+#speed_dial_container {
+    padding-bottom: 20px;
+    bottom: 0px;
+    opacity: 1;
+    transition: all 0.4s ease;
+}
+
+#speed_dial_container.slide-out {
+    padding-bottom: 0px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#speed_dial_container #new_post_button {
+    transition: box-shadow 1s;
+}
+
+#speed_dial_container:hover #new_post_button {
+    box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32);
+    transition: box-shadow 0.3s;
+}
+
+
+/*------- Quizlet Bar Styles --------*/
+
+.quizlet-bar-top {
+    min-height: 100%;
+    margin-top: -22px;
+}
+
+.quizlet-bar-top button.md-button.md-ink-ripple {
+    padding: 0 12px;
+    border-radius: 25px;
+    background-color: rgba(66, 87, 178, 0.78);
+    color: white;
+}
+
+.quizlet-bar-top button.md-button.md-ink-ripple:hover {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+    background-color: rgb(66, 87, 178);
+}
+
+
+/*------- Posts Footer Styles --------*/
+
+.footer-container {
+    flex: 0 auto;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.footer {
+    text-align: center;
+    padding: 40px 0 20px 0;
+    margin: auto;
+}
+
+
+/*------------------------------------------------------------
+----------------------- Post Card Styles ---------------------*/
+
+.post-card {
+    border-radius: 3px;
+    background-color: white;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
+    transition: all 400ms ease;
+}
+
+.post-card-title {
+    margin: 0px;
+    padding: 0 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.post-card-creator {
+    flex: 0 0 auto;
+    margin: 0px 16px 0px 16px;
+    font-size: 13px;
+    color: rgba(0, 0, 0, .54);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
+}
+
+#post_card_description {
+    overflow: hidden;
+    margin: 16px 16px 0 16px;
+    max-height: 7em;
+    color: black;
+}
+
+
+/*------- Post Card Header Styles -------*/
+
+.post-card-header {
+    height: 200px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 3px 3px 0 0;
+}
+
+.post-card .post-card-header {
+    border-bottom: solid 1px black;
     background-image: url(https://ssl.gstatic.com/atari/images/simple-header-blended-small.png);
 }
 
