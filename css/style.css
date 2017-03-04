@@ -838,14 +838,20 @@ button.selected.md-button {
     text-shadow: none
 }
 
-.gradient-overlay .gradient-overlay-metadata.metadata-link {
-    padding: 0px 16px;
+.gradient-overlay .metadata-link {
+    padding: 0px 12px;
     position: absolute;
-    opacity: 0;
+    /* opacity: 0;
     pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    justify-content: space-around;
 }
 
-.post-card-header:not(.no-link):hover .gradient-overlay-metadata.metadata-link {
+.post-card-header:not(.no-link):hover .metadata-link {
     opacity: 1
 }
 
