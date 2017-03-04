@@ -221,7 +221,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       })
 
       function convertFirePost(key, value, loadStatus) {
-         console.log("date updated",new Date(value.DU))
+         console.log("date created", new Date(value.DC))
          return {
             id: key,
             creator: {
@@ -377,16 +377,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          var postsArray = JSON.parse(postsData.result.response.result);
          if (postsArray.error == undefined) {
             conurancyCounter--;
-            console.log(conurancyCounter)
-            console.log(postsArray);
             var max = postsArray.length;
             for (var count = 0; count < max; count++) {
-               loadedCounter++;
-               postsArray[count].loadStatus = 'Loaded';
                var indexes = getIdIndexInPostArrays(postsArray[count].id);
+               postsArray[count].loadStatus = 'Loaded';
                postsArray[count] = mergeFirebasePost(postsArray[count], $scope.allPosts[indexes.allPosts])
                $scope.allPosts[indexes.allPosts] = postsArray[count];
                $scope.sortedPosts[indexes.sortedPosts] = postsArray[count];
+               loadedCounter++;
             }
             $timeout(function () {
                $scope.sortedPosts = $scope.sortedPosts;
