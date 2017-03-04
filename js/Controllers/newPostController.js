@@ -78,7 +78,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 if ($scope.post.link == '') {
                     $scope.previewLoading = false;
                     $scope.post.type = 'NoLink';
-                } else if ($scope.post.link.match(/(?:http|https):\/\/.{2,}/)) {
+                } else if (($scope.post.link || '').match(/(?:http|https):\/\/.{2,}/)) {
                     $scope.previewLoading = true;
                     $scope.post.type = 'link';
                     promiseQueue.addPromise('drive', APIService.runGAScript('getLinkPreview', $scope.post.link), function (data) {
@@ -101,7 +101,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                                 document.dispatchEvent(new Event('linkPreviewLoaded'));
                             })
                         }
-                    }, null, 150, 'Problem showing link preview, is your attachment link an actual URL?');
+                    }, onError, 150, 'Problem showing link preview, is your attachment link an actual URL?');
                 } else if ($scope.post.link.length > 4 & $scope.post.link.substring(0,3) != 'htt') {
                     $scope.post.link = "http://" + $scope.post.link;
                     $scope.post.type = 'link';
@@ -147,11 +147,9 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     }
 
     $scope.submit = function () {
-        console.log('1st toast hide')
         $mdToast.hide();
         $scope.dialog_container.style.opacity = 0.8;
         $scope.dialog_container.style.pointerEvents = 'none';
-        console.log('posting toast show')
         $timeout(function () {
             $mdToast.show({
                 template: '<md-toast><span style="font-size:18px;" flex>Posting</span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="32"></md-progress-circular></md-toast>',
@@ -164,18 +162,14 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 postId: $scope.post.id,
                 content: $scope.post,
             }), function (postData) {
-                console.log('1st dialog hide')
                 var createdPost = JSON.parse(postData.result.response.result);
                 console.log('Created Post:', createdPost)
                 addFireDatabaseRef(createdPost).then(function () {
-                    console.log('dialog hide')
                     $mdDialog.hide();
                     resetAllLabels();
                     $scope.dialog_container.style.opacity = 1;
-                    $scope.dialog_container.style.pointerEvents = 'all';
-                    console.log('3nd tost hide')
+                    $scope.dialog_container.style.pointerEvents = 'all'
                     $mdToast.hide();
-                    console.log('3nd tost hide done')
                 })
             },
             onError, 150, 'Error posting, try again.');

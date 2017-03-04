@@ -33,7 +33,7 @@ md-dialog#new_post_dialog {
    position: absolute;
    z-index: 1000;
    pointer-events: none;
-   background-color: rgb(161, 10, 25);
+   background-color: rgba(153, 151, 151, 0.75);;
 }
 
 .view #dialog_header {
@@ -48,7 +48,6 @@ md-dialog#new_post_dialog {
    top: -20px;
    width: 100%;
    position: absolute;
-   background-color: #bccac7;
    filter: brightness(85%);
 }
 

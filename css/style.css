@@ -233,7 +233,6 @@ md-input-container.md-input-min-height .md-errors-spacer {
     margin: 16px 24px 16px 0;
 }
 
-
 /*------- Search Bar Styles ------*/
 
 .search-bar-container {
@@ -759,12 +758,11 @@ button.selected.md-button {
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    border-bottom: solid 1px black;
     border-radius: 3px 3px 0 0;
 }
 
 .post-card .post-card-header {
-    background-image: url(https://ssl.gstatic.com/atari/images/simple-header-blended-small.png);
+    border-bottom: solid 1px black;
 }
 
 .post-card-header.no-link {
@@ -778,15 +776,14 @@ button.selected.md-button {
 
 .post-card-image {
     width: 100%;
-    margin-top: -2.5%;
     display: flex;
     border-radius: 3px 3px 0 0;
     transition: all 0.3s ease;
-    transform: translateY(2.5%);
+    transform: translateY(-1%);
 }
 
 .post-card-header:not(.no-link):hover .post-card-image {
-    transform: translateY(0);
+    transform: translateY(-3.5%);
 }
 
 .gradient-overlay {
@@ -841,14 +838,20 @@ button.selected.md-button {
     text-shadow: none
 }
 
-.gradient-overlay .gradient-overlay-metadata.metadata-link {
-    padding: 0px 16px;
+.gradient-overlay .metadata-link {
+    padding: 0px 12px;
     position: absolute;
     opacity: 0;
     pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    justify-content: space-around;
 }
 
-.post-card-header:not(.no-link):hover .gradient-overlay-metadata.metadata-link {
+.post-card-header:not(.no-link):hover .metadata-link {
     opacity: 1
 }
 

@@ -221,6 +221,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       })
 
       function convertFirePost(key, value, loadStatus) {
+         console.log("date created", new Date(value.DC))
          return {
             id: key,
             creator: {
@@ -376,16 +377,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          var postsArray = JSON.parse(postsData.result.response.result);
          if (postsArray.error == undefined) {
             conurancyCounter--;
-            console.log(conurancyCounter)
-            console.log(postsArray);
             var max = postsArray.length;
             for (var count = 0; count < max; count++) {
-               loadedCounter++;
-               postsArray[count].loadStatus = 'Loaded';
                var indexes = getIdIndexInPostArrays(postsArray[count].id);
+               postsArray[count].loadStatus = 'Loaded';
                postsArray[count] = mergeFirebasePost(postsArray[count], $scope.allPosts[indexes.allPosts])
                $scope.allPosts[indexes.allPosts] = postsArray[count];
                $scope.sortedPosts[indexes.sortedPosts] = postsArray[count];
+               loadedCounter++;
             }
             $timeout(function () {
                $scope.sortedPosts = $scope.sortedPosts;
@@ -667,6 +666,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //----------------------------------------------------
    //------------------UI Actions------------------------
    var starClickTimer = {}
+   $scope.refresh = function() {
+      sortPosts();
+      angularGridInstance.postsGrid.refresh();
+   }
    $scope.signOut = function () {
       authorizationService.handleSignoutClick();
    };
@@ -1116,17 +1119,18 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       fullPost.updateDate = slimedPost.updateDate
       fullPost.creationDate = slimedPost.creationDate
       fullPost.creator.classOf = slimedPost.creator.classOf
+      fullPost.previewImage = fullPost.previewImage || $scope.getMaterialBackground();
       var fullPostNew = fullPost
       fullPost = fullPostCopy;
       return fullPostNew;
    }
 
    $scope.getMaterialBackground = function () {
-         return 'images/material_backgrounds/' + (Math.floor(Math.random() * 31) + 1) + '.jpg';
-      }
-      
-      //----------------------------------------------------
-      //---------------------- dev -------------------------
+      return 'images/material_backgrounds/' + (Math.floor(Math.random() * 81) + 1) + '.png';
+   }
+
+   //----------------------------------------------------
+   //---------------------- dev -------------------------
    $scope.consoleLogInput = function (input, asAlert) {
       console.log(input)
       if (asAlert) $scope.showInfoPopup('Logged', null, input, false)
