@@ -13,7 +13,8 @@
 					<span ng-hide="post.class.name == null"><md-icon>people</md-icon> {{post.class.name}}</span>
 					<span><md-icon>event</md-icon> {{post.creationDate | date}}</span>
 				</div>
-				<div class="md-chips gradient-overlay-metadata" style="position:absolute; padding: 0 40px 0 8px" ng-class="{'metadata-link': operation == 'view'}" ng-if="post.attachmentName">
+				<div ng-class="{'metadata-link': operation == 'view'}" ng-if="post.attachmentName">
+				<div class="md-chips gradient-overlay-metadata" style="position:absolute; padding: 0 40px 0 8px">
 					<md-chip>
 						<div class="md-chip-content">
 							<img ng-src="{{post.attachmentIcon}}" style="margin-right:4px"></img>
@@ -23,6 +24,7 @@
                      		</button>
 						</div>
 					</md-chip>
+				</div>
 				</div>
 				<div id="header_link_input_container" class="gradient-overlay-metadata" ng-hide="operation == 'view'">
 					<md-input-container id="header_link_input" md-no-float ng-if="!post.attachmentName">

@@ -841,7 +841,7 @@ button.selected.md-button {
 .gradient-overlay .metadata-link {
     padding: 0px 12px;
     position: absolute;
-    /* opacity: 0;
+    opacity: 0;
     pointer-events: none;
     display: flex;
     flex-direction: column;
