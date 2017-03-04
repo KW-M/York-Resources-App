@@ -239,13 +239,15 @@
                                             <span ng-if="post.creationDate"><md-icon>today</md-icon> {{post.creationDate | date : "shortDate"}}</span>
                                             <span ng-if="post.labels"><md-icon>local_offer</md-icon> {{post.labels.join(', ')}}</span>
                                         </div>
-                                        <div class="gradient-overlay-metadata md-chips metadata-link unselectable" ng-if="post.attachmentName" style="width:100%">
-                                            <md-chip>
-                                                <div class="md-chip-content unselectable">
-                                                    <img ng-src="{{post.attachmentIcon}}" style="margin-right:4px"></img>
-                                                    <span>{{post.attachmentName}}</span>
-                                                </div>
-                                            </md-chip>
+                                        <div class="metadata-link">
+                                            <div class="gradient-overlay-metadata md-chips unselectable" ng-if="post.attachmentName" style="width:100%">
+                                                <md-chip>
+                                                    <div class="md-chip-content unselectable">
+                                                        <img ng-src="{{post.attachmentIcon}}" style="margin-right:4px"></img>
+                                                        <span>{{post.attachmentName}}</span>
+                                                    </div>
+                                                </md-chip>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

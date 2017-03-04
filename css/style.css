@@ -233,7 +233,6 @@ md-input-container.md-input-min-height .md-errors-spacer {
     margin: 16px 24px 16px 0;
 }
 
-
 /*------- Search Bar Styles ------*/
 
 .search-bar-container {
@@ -777,7 +776,7 @@ button.selected.md-button {
 
 .post-card-image {
     width: 100%;
-    display: flex
+    display: flex;
     border-radius: 3px 3px 0 0;
     transition: all 0.3s ease;
     transform: translateY(-1%);

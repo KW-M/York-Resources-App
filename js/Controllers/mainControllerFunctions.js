@@ -666,6 +666,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //----------------------------------------------------
    //------------------UI Actions------------------------
    var starClickTimer = {}
+   $scope.refresh = function() {
+      sortPosts();
+      angularGridInstance.postsGrid.refresh();
+   }
    $scope.signOut = function () {
       authorizationService.handleSignoutClick();
    };

@@ -15,6 +15,7 @@
  	flex: 1;
  	flex-direction: row;
  	z-index: 0;
+ 	overflow: hidden;
  }
 
  /*------------ login dialog styles ----------- */
