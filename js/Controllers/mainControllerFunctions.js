@@ -1115,6 +1115,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       fullPost.updateDate = slimedPost.updateDate
       fullPost.creationDate = slimedPost.creationDate
       fullPost.creator.classOf = slimedPost.creator.classOf
+      fullPost.previewImage = fullPost.previewImage || $scope.getMaterialBackground();
       var fullPostNew = fullPost
       fullPost = fullPostCopy;
       return fullPostNew;
