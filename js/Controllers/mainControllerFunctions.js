@@ -1030,7 +1030,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             var errorHandled = APIErrorHandeler(error, item, delay || 1);
             if (errorHandled) errorHandled.then(function () {
                if (item.err) item.err(error);
-               if (delay <= ((typeof(typeof) == 'number') ? item.showErr : 4)) {
+               if (delay <= ((typeof(item.showErr) == 'number') ? item.showErr : 4)) {
                   setTimeout(function () {
                      promiseQueue.runPromise(item);
                   }, (delay = Math.max(delay *= 2, 1)) * 1000);
