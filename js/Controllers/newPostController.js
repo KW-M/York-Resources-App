@@ -102,7 +102,8 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                             })
                         }
                     }, function(){
-                        
+                        $scope.previewLoading = false;
+                        $scope.post.previewImage = 'https://iread50shades.files.wordpress.com/2015/02/deadlink.png'
                     }, 150, 'Problem showing link preview, is your attachment link a valid URL?', 1);
                 } else if ($scope.post.link && $scope.post.link.length > 4 && $scope.post.link.substring(0, 3) != 'htt') {
                     $scope.post.link = "http://" + $scope.post.link;
@@ -263,9 +264,6 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     function onError(error) {
         $scope.dialog_container.style.opacity = 1;
         $scope.dialog_container.style.pointerEvents = 'all';
-        $timeout(function () {
-            $scope.previewLoading = false;
-        })
     }
 
     $scope.closeDialog = function () {
