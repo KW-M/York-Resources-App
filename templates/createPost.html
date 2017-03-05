@@ -89,7 +89,7 @@
 					<input type="text" placeholder="Find a Label..." ng-model="labelSearch">
 				</md-input-container>
 			</div>
-			<div class="md-dialog-content unselectable" flex layout="column">
+			<div class="md-dialog-content" flex layout="column">
 				<input ng-model="post.title" ng-readonly="operation == 'view'" class="new-post-title md-title" placeholder="Title" md-autofocus>
 				<p class="post-card-creator md-subhead" style="margin:0" ng-hide="::post.creator.name == undefined || post.creator.name == myInfo.name"><span>By {{::post.creator.name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::post.creator.classOf}})</span>
 				</p>
