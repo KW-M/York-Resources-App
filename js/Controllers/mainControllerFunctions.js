@@ -992,7 +992,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //---------------- Utility Functions --------------------
    var theQueue = {};
    var timer = {};
-   var delay = 1;
 
    // Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
    window.promiseQueue = {
@@ -1005,6 +1004,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             err: error,
             errMsg: errMsg,
             showErr: showErr || true,
+            delay
          });
          if (!timer[typeName]) {
             processTheQueue(typeName); // start immediately on the first invocation
