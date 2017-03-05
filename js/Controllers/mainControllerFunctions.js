@@ -1016,14 +1016,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       runPromise: function (item) {
          var promise = item.promiseFunc();
          promise.then(function (output) {
-            console.log('output', output)
+            console.log('item', item)
             if (output.result && (output.result.hasOwnProperty('kind') == false) && (output.result.hasOwnProperty('files') == false) && (output.result.error || output.result.response.result == 'Error' || output.result.response.result == 'Err')) {
                errorBackoff(output, item)
             } else {
                item.action(output)
             }
          }, function (error) {
-            console.log('err', error)
             errorBackoff(error, item)
          });
 
