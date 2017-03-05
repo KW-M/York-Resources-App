@@ -949,7 +949,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    window.APIErrorHandeler = function (error, item, tries) {
       console.warn(error);
       console.log(item);
-      var showErr = item.showErr == true || tries == item.showErr;
+      var showErr = item.showErr === true || tries == item.showErr;
+      console.log(showErr + " " + tries + " " + item.showErr)
       if (tries == 2) sendErrorEmail(error)
       if (error.hasOwnProperty('expectedDomain')) authorizationService.showNonYorkDialog()
       if (error.result && error.result.error) {
@@ -977,7 +978,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
 
    function sendErrorEmail(error) {
-      promiseQueue.addPromise('drive', APIService.runGAScript('sendEmailError'), null, null, 150, 'Problem connecting, make sure you have an internet connection.');
+      promiseQueue.addPromise('drive', APIService.runGAScript('sendEmailError', error), null, null, 150, 'Problem connecting, make sure you have an internet connection.');
    }
 
    window.clearUserInfo = function () {
