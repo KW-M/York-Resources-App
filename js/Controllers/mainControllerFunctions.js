@@ -1004,7 +1004,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             err: error,
             errMsg: errMsg,
             showErr: showErr || true,
-            delay
+            delay:1
          });
          if (!timer[typeName]) {
             processTheQueue(typeName); // start immediately on the first invocation
@@ -1028,16 +1028,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
          function errorBackoff(error, item) {
             if (item.showErr == 1 && item.err) item.err(error);
-            var errorHandled = APIErrorHandeler(error, item, delay || 1);
+            var errorHandled = APIErrorHandeler(error, item, item.delay || 1);
             if (errorHandled) errorHandled.then(function () {
                console.log(item.showErr)
                if (item.showErr != 1 && item.err) item.err(error);
-               if (delay <= ((typeof(item.showErr) == 'number') ? item.showErr : 4)) {
+               if (item.delay <= ((typeof(item.showErr) == 'number') ? item.showErr : 4)) {
                   setTimeout(function () {
                      promiseQueue.runPromise(item);
-                  }, (delay = Math.max(delay *= 2, 1)) * 1000);
-               } else {
-                  delay = 1;
+                  }, (item.delay = Math.max(item.delay *= 2, 1)) * 1000);
                }
             });
          }
