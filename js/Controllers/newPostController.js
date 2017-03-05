@@ -101,8 +101,10 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                                 document.dispatchEvent(new Event('linkPreviewLoaded'));
                             })
                         }
-                    }, onError, 150, 'Problem showing link preview, is your attachment link a valid URL?',1);
-                } else if ($scope.post.link && $scope.post.link.length > 4 && $scope.post.link.substring(0,3) != 'htt') {
+                    }, function(){
+                        
+                    }, 150, 'Problem showing link preview, is your attachment link a valid URL?', 1);
+                } else if ($scope.post.link && $scope.post.link.length > 4 && $scope.post.link.substring(0, 3) != 'htt') {
                     $scope.post.link = "http://" + $scope.post.link;
                     $scope.post.type = 'link';
                     $scope.previewLoading = false;
@@ -130,7 +132,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                     scope.shareSelect = 'reader';
                     scope.shareFile = function () {
                         if (scope.shareSelect != 'none') {
-                            promiseQueue.addPromise('drive', APIService.shareFile($scope.post.attachmentId, scope.shareSelect), $scope.submit, $scope.submit, 150, "The attached file couln't be shared, please share it manualy.",2);
+                            promiseQueue.addPromise('drive', APIService.shareFile($scope.post.attachmentId, scope.shareSelect), $scope.submit, $scope.submit, 150, "The attached file couln't be shared, please share it manualy.", 2);
                         } else {
                             $scope.submit()
                         }
@@ -172,7 +174,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                     $mdToast.hide();
                 })
             },
-            onError, 150, 'Error posting, try again.',2);
+            onError, 150, 'Error posting, try again.', 2);
     }
 
     function addFireDatabaseRef(post) {
@@ -261,6 +263,9 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     function onError(error) {
         $scope.dialog_container.style.opacity = 1;
         $scope.dialog_container.style.pointerEvents = 'all';
+        $timeout(function () {
+            $scope.previewLoading = false;
+        })
     }
 
     $scope.closeDialog = function () {
