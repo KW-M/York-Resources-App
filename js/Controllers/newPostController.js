@@ -172,7 +172,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                     $mdToast.hide();
                 })
             },
-            onError, 150, 'Error posting, try again.',);
+            onError, 150, 'Error posting, try again.',2);
     }
 
     function addFireDatabaseRef(post) {

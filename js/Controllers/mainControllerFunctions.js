@@ -1029,6 +1029,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          function errorBackoff(error, item) {
             var errorHandled = APIErrorHandeler(error, item, delay || 1);
             if (errorHandled) errorHandled.then(function () {
+               console.log(item.showErr)
                if (item.err) item.err(error);
                if (delay <= ((typeof(item.showErr) == 'number') ? item.showErr : 4)) {
                   setTimeout(function () {
