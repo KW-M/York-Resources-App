@@ -102,7 +102,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                             })
                         }
                     }, onError, 150, 'Problem showing link preview, is your attachment link a valid URL?',1);
-                } else if ($scope.post.link.length > 4 & $scope.post.link.substring(0,3) != 'htt') {
+                } else if ($scope.post.link && $scope.post.link.length > 4 && $scope.post.link.substring(0,3) != 'htt') {
                     $scope.post.link = "http://" + $scope.post.link;
                     $scope.post.type = 'link';
                     $scope.previewLoading = false;
