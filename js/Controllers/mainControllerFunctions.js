@@ -258,8 +258,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          promiseQueue.addPromise('drive', APIService.searchGDrive(generateQueryString()), function (postsData) {
             console.log(postsData)
             catagorizePosts(seperatePosts(postsData.result.files))
-         }, null, 150, 'Error searching, try again')
+         }, null, 150, 'Error searching, try again', 2)
       }
+      angularGridInstance.postsGrid.refresh();
 
       function catagorizePosts(filterObj) {
          $timeout(function () {
@@ -666,7 +667,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //----------------------------------------------------
    //------------------UI Actions------------------------
    var starClickTimer = {}
-   $scope.refresh = function() {
+   $scope.refresh = function () {
       sortPosts();
       angularGridInstance.postsGrid.refresh();
    }
@@ -788,13 +789,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                   }
                });
             }, 500)
-         }, null, 150, 'Problem connecting Quizlet, try again.');
+         }, null, 150, 'Trouble connecting, double check your username & remmber CaSe CoUnTs.', 1);
       }
    }
 
-   // $scope.checkQuizletName = function(quizletName) {
-   //    $http.get('https://api.quizlet.com/2.0/users/' + quizletName + '/sets?client_id=ZvJPu87NPA').then(console.log,console.warn)
-   // }
    $scope.openQuizletAssistWindow = function () {
       var quizWindow = window.open("", "_blank", "status=no,menubar=no,toolbar=no");
       quizWindow.resizeTo(9000, 140)
@@ -951,6 +949,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    window.APIErrorHandeler = function (error, item, tries) {
       console.warn(error);
       console.log(item);
+      var showErr = item.showErr == true || tries == item.showErr;
       if (tries == 2) sendErrorEmail(error)
       if (error.hasOwnProperty('expectedDomain')) authorizationService.showNonYorkDialog()
       if (error.result && error.result.error) {
@@ -960,17 +959,17 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                   $scope.showInfoPopup('Signin error, retrying...', 'Below is the returned error object:', error, true)
                   return reAuth()
                } else {
-                  return $scope.showInfoPopup(item.errMsg || error.result.error.details[0].errorMessage || 'Error', 'Below is the returned error:', error, true)
+                  if (showErr) return $scope.showInfoPopup(item.errMsg || error.result.error.details[0].errorMessage || 'Error', 'Below is the returned error:', error, true)
                }
             } else {
-               return $scope.showInfoPopup(item.errMsg || error.result.error.details[0].errorMessage || 'Error', 'Below is the returned error:', error, true)
+               if (showErr) return $scope.showInfoPopup(item.errMsg || error.result.error.details[0].errorMessage || 'Error', 'Below is the returned error:', error, true)
             }
-         } else if (error.result.error.errors) {
+         } else if (error.result.error.errors || item.showErr == true) {
             if (error.result.error.errors[0].message == 'Invalid Credentials' || error.result.error.errors[0].reason == 'dailyLimitExceededUnreg') {
                authorizationService.showSigninButton();
                return $scope.showInfoPopup('Please signin again.', 'Below is the returned error object:', error, true)
             } else {
-               return $scope.showInfoPopup(item.errMsg || error.result.error.errors[0].message || 'Error', 'Below is the returned error:', error, true)
+               if (showErr) return $scope.showInfoPopup(item.errMsg || error.result.error.errors[0].message || 'Error', 'Below is the returned error:', error, true)
             }
          }
       }
@@ -996,7 +995,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    // Take a promise.  Queue 'action'.  On 'action' faulure, run 'error' and continue.
    window.promiseQueue = {
-      addPromise: function (typeName, promiseFunc, action, error, interval, errMsg) {
+      addPromise: function (typeName, promiseFunc, action, error, interval, errMsg, showErr) {
          typeName = typeName || 'general';
          if (!theQueue[typeName]) theQueue[typeName] = []
          theQueue[typeName].push({
@@ -1004,6 +1003,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             action: action,
             err: error,
             errMsg: errMsg,
+            showErr: showErr || true,
          });
          if (!timer[typeName]) {
             processTheQueue(typeName); // start immediately on the first invocation
@@ -1030,7 +1030,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             var errorHandled = APIErrorHandeler(error, item, delay || 1);
             if (errorHandled) errorHandled.then(function () {
                if (item.err) item.err(error);
-               if (delay < 4) {
+               if (delay <= ((typeof(typeof) == 'number') ? item.showErr : 4)) {
                   setTimeout(function () {
                      promiseQueue.runPromise(item);
                   }, (delay = Math.max(delay *= 2, 1)) * 1000);

@@ -54,6 +54,9 @@
                     </div>
                 </md-menu-item>
             </md-list-item>
+            <md-list-item> 
+            Click the star icon to put your favorite classes up top.
+            </md-list-item>
             <md-list>
                 <div flex layout="column" ng-if="!sideNavClassSearch">
                     <md-button ng-repeat="favClass in myInfo.staredClasses" class="side-nav-class" ng-click="gotoRoute({classPath: favClass.name})" ng-class="{ 'selected' : queryParams.classpath == favClass.name }">
