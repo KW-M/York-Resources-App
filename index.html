@@ -61,7 +61,7 @@
             </div>
         </div>
         <script>
-            var tips = ["Look for the mobile update comming soon.", "Share from GDrive, right-click > Open With > StudyHub.", "Hand-write notes? on your phone, tap upload & snap a picture.", "o to York Quizlet for a great resource & quick way to help."]
+            var tips = ["Look for the mobile update comming soon.", "Share from GDrive, right-click > Open With > StudyHub.", "Hand-write notes? on your phone, tap upload & snap a picture.", "Go to York Quizlet for a great resource & quick way to help."]
             document.getElementById("tip_text").innerHTML = tips[Math.floor(Math.random() * tips.length)];
         </script>
         <link rel="stylesheet" href="css/style.css" />
@@ -202,7 +202,7 @@
                             <span style="margin-left: 6px;">{{selectedClass.stared ? 'un' : ''}}Star Class</span>
                         </md-button>
                     </div>
-                    <div style="padding-bottom:8px" ng-hide="queryParams.classPath == 'York Quizlet'"><span class="md-caption">{{selectedClass.rules || 'Dont post test or homework answers. Do post what will help other students get to the answers on their own.'}}</span><span ng-if="false"> - <a href="#">edit</a></span></div>
+                    <div style="padding-bottom:8px" ng-hide="queryParams.classPath == 'York Quizlet'"><span class="md-caption">{{selectedClass.rules || 'Remember not to post test or homework answers. Do post what will help other students get to the answers on their own.'}}</span></div>
                     <div class="create-post-bar-top" ng-hide="queryParams.classPath == 'York Quizlet'">
                         <span md-ink-ripple="true" class="create-post-bar-text unselectable" flex ng-click="::newPost({},'new')">
                         <md-icon style="margin-top: -3px;">add_circle</md-icon>

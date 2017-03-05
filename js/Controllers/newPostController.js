@@ -101,8 +101,11 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                                 document.dispatchEvent(new Event('linkPreviewLoaded'));
                             })
                         }
-                    }, onError, 150, 'Problem showing link preview, is your attachment link an actual URL?');
-                } else if ($scope.post.link.length > 4 & $scope.post.link.substring(0,3) != 'htt') {
+                    }, function(){
+                        $scope.previewLoading = false;
+                        $scope.post.previewImage = 'https://iread50shades.files.wordpress.com/2015/02/deadlink.png'
+                    }, 150, 'Problem showing link preview, is your attachment link a valid URL?', 1);
+                } else if ($scope.post.link && $scope.post.link.length > 4 && $scope.post.link.substring(0, 3) != 'htt') {
                     $scope.post.link = "http://" + $scope.post.link;
                     $scope.post.type = 'link';
                     $scope.previewLoading = false;
@@ -130,7 +133,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                     scope.shareSelect = 'reader';
                     scope.shareFile = function () {
                         if (scope.shareSelect != 'none') {
-                            promiseQueue.addPromise('drive', APIService.shareFile($scope.post.attachmentId, scope.shareSelect), $scope.submit, $scope.submit, 150, "The attached file couln't be shared, please share it manualy.");
+                            promiseQueue.addPromise('drive', APIService.shareFile($scope.post.attachmentId, scope.shareSelect), $scope.submit, $scope.submit, 150, "The attached file couln't be shared, please share it manualy.", 2);
                         } else {
                             $scope.submit()
                         }
@@ -172,7 +175,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                     $mdToast.hide();
                 })
             },
-            onError, 150, 'Error posting, try again.');
+            onError, 150, 'Error posting, try again.', 2);
     }
 
     function addFireDatabaseRef(post) {
