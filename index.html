@@ -169,7 +169,7 @@
             <md-sidenav side-nav-insides class="side-nav md-sidenav-left md-whiteframe-z2 sidenav-overlay" md-component-id="sidenav_overlay"></md-sidenav>
             <side-nav-insides class="side-nav md-sidenav-left sidenav-inline" ng-class="{'side-nav-open' : globals.sidenavIsOpen === true && $mdMedia('gt-sm'),'rainbow2' : queryParams.classPath == 'Memes', 'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}"></side-nav-insides>
             <!----- The content, ie posts, resources, etc. ------->
-            <md-fab-speed-dial id="speed_dial_container" md-direction="up" md-open="globals.FABisOpen" ng-class="{ 'slide-out' : globals.FABisHidden }" class="md-fling md-hover-full md-fab-bottom-right" ng-mouseenter="globals.FABisOpen = true" ng-mouseleave="globals.FABisOpen = false">
+            <md-fab-speed-dial id="speed_dial_container" ng-disabled="offline" md-direction="up" md-open="globals.FABisOpen" ng-class="{ 'slide-out' : globals.FABisHidden }" class="md-fling md-hover-full md-fab-bottom-right" ng-mouseenter="globals.FABisOpen = true" ng-mouseleave="globals.FABisOpen = false">
                 <md-fab-trigger>
                     <md-button id="new_post_button" class="md-fab md-accent raise-on-hover" ng-click="FABClick($event)">
                         <md-tooltip md-direction="left" md-autohide>Create Post</md-tooltip>
@@ -184,7 +184,7 @@
                     <md-button class="md-fab md-raised md-mini" ng-click="::showDrivePicker('Upload')">
                         <md-tooltip md-direction="left" md-autohide>Upload</md-tooltip>
                         <md-icon hide-xs class="unselectable" style="color:black">file_upload</md-icon>
-                        <md-icon show-xs class="unselectable" style="color:black">camera_alt</md-icon>
+                        <md-icon hide-gt-xs class="unselectable" style="color:black">camera_alt</md-icon>
                     </md-button>
                 </md-fab-actions>
             </md-fab-speed-dial>
