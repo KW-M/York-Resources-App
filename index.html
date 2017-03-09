@@ -82,7 +82,7 @@
                 <div hide-xs show-gt-xs class="search-bar-container unselectable">
                     <div style="width:100%; max-width:720px; position:relative">
                         <md-icon class="search-bar-icon">search</md-icon>
-                        <input md-delay="300" class="search-bar unselectable" ng-model="searchInputTxt" ng-model-options="{ debounce: 500 }" placeholder="{{searchPrefix + ' ' + (selectedClass.stared != null ? selectedClass.name:'')}}" />
+                        <input md-delay="300" class="search-bar unselectable" ng-model="searchInputTxt" ng-model-options="{ debounce: 500 }" placeholder="{{searchPrefix + ' ' + (selectedClass.stared != null ? selectedClass.name:'')}}" ng-disabled="offline"/>
                         <md-button ng-class="{'has-text': searchInputTxt}" ng-click="searchInputTxt = ''" class='search-bar-clear-button md-icon-button'>
                             <md-icon style="color:rgb(117,117,117)">close</md-icon>
                         </md-button>
@@ -94,7 +94,7 @@
                     </md-button>
                     <div class="search-bar-container unselectable" style="margin:0">
                         <md-icon class="search-bar-icon">search</md-icon>
-                        <input class="search-bar unselectable" ng-model="searchInputTxt" ng-model-options="{ debounce: 500 }" placeholder="{{searchPrefix + ' ' + classTitle}}" id="mobile_search_input" />
+                        <input class="search-bar unselectable" ng-model="searchInputTxt" ng-model-options="{ debounce: 500 }" placeholder="{{searchPrefix + ' ' + classTitle}}" id="mobile_search_input" ng-disabled="offline"/>
                         <md-button ng-class="{'has-text': searchInputTxt}" ng-click="searchInputTxt = ''" class='search-bar-clear-button md-icon-button'>
                             <md-icon style="color:rgb(117,117,117)">close</md-icon>
                         </md-button>
@@ -129,7 +129,7 @@
                     </md-menu-content>
                 </md-menu>
                 <md-menu md-position-mode="target-right target">
-                    <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button unselectable" id="account_button" ng-style="{'background-image': 'url(' + (myInfo.profilePicture || 'images/accountPic.jpg') + ')'}" aria-label="account" style="height:36px;width:36px;border-radius:50%;background-image:url('images/accountPic.jpg'); background-size: 36px 36px;">
+                    <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button unselectable" id="account_button" ng-style="{'background-image': 'url(' + (myInfo.profilePicture || 'images/accountPic.jpg') + ')'}" aria-label="account" style="height:36px;width:36px;border-radius:50%;background-image:url('images/accountPic.jpg'); background-size: 36px 36px;" ng-disabled="offline">
                     </md-button>
                     <md-menu-content>
                         <md-menu-item layout="column" style="padding: 6px 16px;" class="unselectable">
@@ -169,19 +169,19 @@
             <md-sidenav side-nav-insides class="side-nav md-sidenav-left md-whiteframe-z2 sidenav-overlay" md-component-id="sidenav_overlay"></md-sidenav>
             <side-nav-insides class="side-nav md-sidenav-left sidenav-inline" ng-class="{'side-nav-open' : globals.sidenavIsOpen === true && $mdMedia('gt-sm'),'rainbow2' : queryParams.classPath == 'Memes', 'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}"></side-nav-insides>
             <!----- The content, ie posts, resources, etc. ------->
-            <md-fab-speed-dial id="speed_dial_container" ng-disabled="offline" md-direction="up" md-open="globals.FABisOpen" ng-class="{ 'slide-out' : globals.FABisHidden }" class="md-fling md-hover-full md-fab-bottom-right" ng-mouseenter="globals.FABisOpen = true" ng-mouseleave="globals.FABisOpen = false">
+            <md-fab-speed-dial id="speed_dial_container" md-direction="up" md-open="globals.FABisOpen" ng-class="{ 'slide-out' : globals.FABisHidden }" class="md-fling md-hover-full md-fab-bottom-right" ng-mouseenter="globals.FABisOpen = true" ng-mouseleave="globals.FABisOpen = false">
                 <md-fab-trigger>
-                    <md-button id="new_post_button" class="md-fab md-accent raise-on-hover" ng-click="FABClick($event)">
+                    <md-button id="new_post_button" class="md-fab md-accent raise-on-hover" ng-click="FABClick($event)" ng-disabled="offline">
                         <md-tooltip md-direction="left" md-autohide>Create Post</md-tooltip>
                         <md-icon class="unselectable">add</md-icon>
                     </md-button>
                 </md-fab-trigger>
                 <md-fab-actions>
-                    <md-button class="md-fab md-raised md-mini" ng-click="::showDrivePicker('Drive')">
+                    <md-button class="md-fab md-raised md-mini" ng-click="::showDrivePicker('Drive')" ng-disabled="offline">
                         <md-tooltip md-direction="left" md-autohide>Add Drive file</md-tooltip>
                         <img class="unselectable" style="width:22px; height:22px; margin-top:8px" src="images/drive_icon.svg">
                     </md-button>
-                    <md-button class="md-fab md-raised md-mini" ng-click="::showDrivePicker('Upload')">
+                    <md-button class="md-fab md-raised md-mini" ng-click="::showDrivePicker('Upload')" ng-disabled="offline">
                         <md-tooltip md-direction="left" md-autohide>Upload</md-tooltip>
                         <md-icon hide-xs class="unselectable" style="color:black">file_upload</md-icon>
                         <md-icon hide-gt-xs class="unselectable" style="color:black">camera_alt</md-icon>
@@ -198,13 +198,13 @@
                         <!--    <md-button ng-if="queryParams.classPath == 'Quizlet'">-->
                         <!--        <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>open_in_browser</md-icon>Open Class</md-button>-->
                         <!--</span>-->
-                        <md-button class="star-button" ng-if="selectedClass.stared != null" ng-click="userStarClass(selectedClass)">
+                        <md-button class="star-button" ng-if="selectedClass.stared != null" ng-click="userStarClass(selectedClass)" ng-disabled="offline">
                             <md-icon style='color: white;font-size: 22px'>{{selectedClass.stared ? 'star' : 'star_outline'}}</md-icon>
                             <span style="margin-left: 6px;">{{selectedClass.stared ? 'un' : ''}}Star Class</span>
                         </md-button>
                     </div>
-                    <div style="padding-bottom:8px" ng-hide="queryParams.classPath == 'York Quizlet'"><span class="md-caption">{{selectedClass.rules || 'Remember not to post test or homework answers. Do post what will help other students get to the answers on their own.'}}</span></div>
-                    <div class="create-post-bar-top" ng-hide="queryParams.classPath == 'York Quizlet'">
+                    <div style="padding-bottom:8px" ng-hide="queryParams.classPath == 'York Quizlet'"><span class="md-caption">{{selectedClass.rules || 'Do not post test or homework answers. Do post what will help other students get to the answers on their own.'}}</span></div>
+                    <div class="create-post-bar-top" ng-hide="queryParams.classPath == 'York Quizlet' || offline">
                         <span md-ink-ripple="true" class="create-post-bar-text unselectable" flex ng-click="::newPost({},'new')">
                         <md-icon style="margin-top: -3px;">add_circle</md-icon>
                         <span>Share a resource...</span>
