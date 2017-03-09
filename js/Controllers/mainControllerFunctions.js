@@ -217,7 +217,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          });
          if ($scope.sortedPosts.length != 0) loadPosts();
          if ($scope.sortedPosts.length == 0) sortPosts();
-         console.log($scope.allPosts);
+         firebase.database().ref(".info/connected").on("value", function (snap) {
+            if (snap.val() === true) {
+               alert("connected");
+            } else {
+               alert("not connected");
+            }
+         });
       })
 
       function convertFirePost(key, value, loadStatus) {
@@ -1004,7 +1010,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             err: error,
             errMsg: errMsg,
             showErr: showErr || true,
-            delay:1
+            delay: 1
          });
          if (!timer[typeName]) {
             processTheQueue(typeName); // start immediately on the first invocation
@@ -1032,7 +1038,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             if (errorHandled) errorHandled.then(function () {
                console.log(item.showErr)
                if (item.showErr != 1 && item.err) item.err(error);
-               if (item.delay <= ((typeof(item.showErr) == 'number') ? item.showErr : 4)) {
+               if (item.delay <= ((typeof (item.showErr) == 'number') ? item.showErr : 4)) {
                   setTimeout(function () {
                      promiseQueue.runPromise(item);
                   }, (item.delay = Math.max(item.delay *= 2, 1)) * 1000);
