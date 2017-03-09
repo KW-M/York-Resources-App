@@ -259,15 +259,15 @@
                                         <p id="post_card_description" class="md-body-1" ng-bind-html="post.description" ng-if="post.description != ''" description-overflow></p>
                                     </div>
                                     <md-card-actions layout="row" style="align-items: center;">
-                                        <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(post)">
+                                        <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(post)" ng-disabled="offline">
                                             <span class="like-counter">{{post.likeCount}}</span>
                                             <md-icon md-svg-src="images/thumb_outline.svg" ng-if="post.userLiked == false" style="margin-top: -8px"></md-icon>
                                             <md-icon ng-class="{'md-accent' : post.userLiked}" ng-if="post.userLiked == true" style="margin-top: -8px">thumb_up</md-icon>
                                         </md-button>
-                                        <md-button class="md-icon-button" area-label="Flag" ng-click="::unFlagPost(post,$index)" ng-if="post.flagged == true">
+                                        <md-button class="md-icon-button" area-label="Flag" ng-click="::unFlagPost(post,$index)" ng-if="post.flagged == true" ng-disabled="offline">
                                             <md-icon class="md-warn">flag</md-icon>
                                         </md-button>
-                                        <md-menu ng-if="post.creator.email == myInfo.email || devMode == true">
+                                        <md-menu ng-if="post.creator.email == myInfo.email || devMode == true" >
                                             <md-button ng-click="::$mdOpenMenu($event)" class="md-icon-button">
                                                 <md-icon>more_vert</md-icon>
                                             </md-button>
