@@ -218,11 +218,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          if ($scope.sortedPosts.length != 0) loadPosts();
          if ($scope.sortedPosts.length == 0) sortPosts();
          firebase.database().ref(".info/connected").on("value", function (snap) {
-            if (snap.val() === true) {
-               alert("connected");
+            if (snap.val() === false) {
+               $mdToast.show($mdToast.simple().textContent("You are offline, many functions are unavailable.").action('X').hideDelay(false))
             } else {
-               alert("not connected");
+               $mdToast.hide();
             }
+            $timeout(function () {
+               $scope.offline = !snap.val()
+            })
          });
       })
 
