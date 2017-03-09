@@ -983,6 +983,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             }
          }
       }
+      return $q.defer().resolve().promise;
    }
 
 
@@ -1036,12 +1037,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          });
 
          function errorBackoff(error, item) {
+            console.log(item.showErr + " item delay" + item.delay)
             if (item.showErr == 1 && item.err) item.err(error);
             var errorHandled = APIErrorHandeler(error, item, item.delay || 1);
             if (errorHandled) errorHandled.then(function () {
-               console.log(item.showErr)
                if (item.showErr != 1 && item.err) item.err(error);
-               if (item.delay <= ((typeof (item.showErr) == 'number') ? item.showErr : 4)) {
+               if (item.delay <= (item.showErr !== true) ? item.showErr : 4) {
                   setTimeout(function () {
                      promiseQueue.runPromise(item);
                   }, (item.delay = Math.max(item.delay *= 2, 1)) * 1000);
