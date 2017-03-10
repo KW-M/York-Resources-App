@@ -262,6 +262,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.postSpinnerMode = 'indeterminate'
 
    function sortPosts() {
+      console.log('sortingPosts')
       $scope.postSpinnerMode = 'indeterminate';
       if ($scope.queryParams.q == null) {
          catagorizePosts(filterPosts($scope.allPosts))
@@ -276,6 +277,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       function catagorizePosts(filterObj) {
          $timeout(function () {
             $scope.sortedPosts = orderPosts(filterObj.filtered)
+            console.log('Sorting Done - loading')
             loadPosts()
          })
          var max = filterObj.filteredOut.length
@@ -325,14 +327,15 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          if ($scope.queryParams.type != null && $scope.queryParams.type !== undefined) Type = inputSet[count].type == $scope.queryParams.type;
          if ($scope.queryParams.flagged != null && $scope.queryParams.flagged !== undefined) Flagged = inputSet[count].flagged == $scope.queryParams.flagged;
          if ($scope.queryParams.creatorEmail != null && $scope.queryParams.creatorEmail !== undefined) Creator = inputSet[count].creator.email == $scope.queryParams.creatorEmail;
-         console.log($scope.queryParams.creatorEmail + " " + $scope.myInfo.email);
-         console.log(Flagged + " C" + Class + " T" + Type + " CR" + Creator, inputSet[count])
+         //console.log($scope.queryParams.creatorEmail + " " + $scope.myInfo.email);
+        // console.log(Flagged + " C" + Class + " T" + Type + " CR" + Creator, inputSet[count])
          if (Flagged && Class && Type && Creator) {
             filtered.push(inputSet[count])
          } else {
             filteredOut.push(inputSet[count])
          }
       };
+      console.log('done filtering');
       return {
          filtered: filtered,
          filteredOut: filteredOut
@@ -364,10 +367,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function loadPosts() {
       hideSpinner() //may or may not hide spinner
       if (conurancyCounter == 0 && $scope.sortedPosts.length != 0 && $scope.sortedPosts.length != loadedCounter) {
+         console.log('loading Posts')
          var index;
          var postIdAccumulator = [];
          var max = $scope.sortedPosts.length;
          $timeout(function () {
+            console.log('loading Posts - spinner Determinate')
             $scope.postLoadProgress = 50;
             $scope.postSpinnerMode == 'determinate';
          })
@@ -376,6 +381,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             if (postObj.loadStatus != 'Loaded') {
                postIdAccumulator.push(postObj.id)
                if (postIdAccumulator.length == 5) {
+                  console.log('loading Posts - getting from database')
                   getPostsFromGDrive(postIdAccumulator);
                   return true;
                }
@@ -390,6 +396,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       for (var idCount = 0; idCount < idArray.length; idCount++) {
          localforage.getItem(idArray[idCount]).then(function (value) {
             if (value !== null) {
+               console.log('got from cache - post #' + idCount)
                addFullPost(value);
                idArray.splice(idCount, 1)
             }
@@ -398,29 +405,30 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          });
       };
       if (idArray.length > 0) {
-         // promiseQueue.addPromise('script', APIService.runGAScript('getPosts', idArray), function (postsData) {
-         //    console.log(postsData)
-         //    var postsArray = JSON.parse(postsData.result.response.result);
-         //    if (postsArray.error == undefined) {
-         //       conurancyCounter--;
-         //       var max = postsArray.length;
-         //       for (var count = 0; count < max; count++) {
-         //          var post = addFullPost(postsArray[count])
-         //          localforage.setItem(post.id, post);
-         //       }
-         //       $timeout(function () {
-         //          $scope.sortedPosts = $scope.sortedPosts;
-         //          if (callBack) callBack()
-         //          setTimeout(hideSpinner, 750)
-         //       })
-         //    } else {
-         //       var indexes = getIdIndexInPostArrays(postsArray.id);
-         //       $scope.allPosts.splice(indexes.allPosts, 1)
-         //       $scope.sortedPosts.splice(indexes.sortedPosts, 1)
-         //       conurancyCounter--;
-         //       $scope.postLoadProgress -= 10;
-         //    }
-         // }, null, 150, 'Error retrieving posts, try reloading the page');
+          console.log('getting from gdrive - post #' + idCount)
+         promiseQueue.addPromise('script', APIService.runGAScript('getPosts', idArray), function (postsData) {
+            console.log(postsData)
+            var postsArray = JSON.parse(postsData.result.response.result);
+            if (postsArray.error == undefined) {
+               conurancyCounter--;
+               var max = postsArray.length;
+               for (var count = 0; count < max; count++) {
+                  var post = addFullPost(postsArray[count])
+                  localforage.setItem(post.id, post);
+               }
+               $timeout(function () {
+                  $scope.sortedPosts = $scope.sortedPosts;
+                  if (callBack) callBack()
+                  setTimeout(hideSpinner, 750)
+               })
+            } else {
+               var indexes = getIdIndexInPostArrays(postsArray.id);
+               $scope.allPosts.splice(indexes.allPosts, 1)
+               $scope.sortedPosts.splice(indexes.sortedPosts, 1)
+               conurancyCounter--;
+               $scope.postLoadProgress -= 10;
+            }
+         }, null, 150, 'Error retrieving posts, try reloading the page');
       } else {
          $timeout(function () {
             $scope.sortedPosts = $scope.sortedPosts;
