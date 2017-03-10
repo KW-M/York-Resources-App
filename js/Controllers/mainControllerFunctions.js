@@ -144,6 +144,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          profilePicture: profile.getImageUrl(),
       }
 
+      var progressTimeout = setInterval(function () {
+         window.progressInitializationSpinner(1, 'increment')
+      }, 1000)
       var getStartupData = $q.defer();
       promiseQueue.addPromise('drive', APIService.runGAScript('getStartupData'), function (data) {
          var dataObj = JSON.parse(data.result.response.result);
@@ -156,7 +159,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.sortedLabels = dataObj.labels
             $scope.sortLabels()
             getStartupData.resolve();
-            window.progressInitializationSpinner(20, 'increment')
+            clearInterval(progressTimeout);
+            window.progressInitializationSpinner(10, 'increment')
          });
       }, null, 150, 'Problem initializing, try reloading the page.');
 
@@ -170,7 +174,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       })
 
       $q.all([getStartupData.promise, pickerPromise.promise]).then(function () {
-         window.progressInitializationSpinner(20,'increment')
          console.log("Everything Loaded")
          listenForURLChange();
          authorizationService.hideSigninDialog();

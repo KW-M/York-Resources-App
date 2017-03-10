@@ -412,7 +412,7 @@
                         'apiKey': 'AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA',
                         'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest', 'https://www.googleapis.com/discovery/v1/apis/script/v1/rest'],
                     }).then(function () {
-                        window.progressInitializationSpinner(1, 'increment')
+                        window.progressInitializationSpinner(10, 'increment')
                         console.log("Loaded APIs")
                         LibraryLoadPromise.resolve();
                     }, console.warn)
@@ -424,7 +424,7 @@
                         GSignedIn = true;
                         GSignInPromise.resolve(self.GUser);
                         window.changeInitializationSpinner('determinate')
-                        window.progressInitializationSpinner(20, 'increment')
+                        window.progressInitializationSpinner(10, 'increment')
                         hideSigninButton()
                     } else if (Input === false) {
                         GSignedIn = false;
