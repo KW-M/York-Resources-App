@@ -98,7 +98,7 @@
 		</div>
 	</md-dialog-content>
 	<md-dialog-actions ng-if="operation != 'view'" layout="row" style="align-items: center;" ng-style="{'background-color': post.class.color + ' 0.6)'}">
-		<md-button id="New_Post_Submit" ng-click="isReadyToSubmit()" ng-disabled="previewLoading" class="md-raised">Save</md-button>
+		<md-button id="New_Post_Submit" ng-click="isReadyToSubmit()" ng-disabled="previewLoading || offline" class="md-raised">Save</md-button>
 		<!--<md-button class="text-formating-button md-icon-button " style="margin: 0 -6px 0 0; padding: 0;">-->
 		<!--   <md-icon style="font-size:18px; line-height: 24px;">format_bold</md-icon>-->
 		<!--</md-button>-->
@@ -117,18 +117,18 @@
 		</md-button>
 	</md-dialog-actions>
 	<md-dialog-actions ng-show="operation == 'view'" layout="row" style="align-items: center;" ng-style="{'background-color': post.class.color + ' 0.6)'}">
-		<md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(post)">
+		<md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(post)" ng-disabled="offline">
 			<span class="like-counter">{{post.likeCount}}</span>
 			<md-icon md-svg-src="images/thumb_outline.svg" ng-if="post.userLiked == false" style="margin-top: -8px"></md-icon>
 			<md-icon ng-class="{'md-accent' : post.userLiked}" ng-if="post.userLiked == true" style="margin-top: -8px">thumb_up</md-icon>
 		</md-button>
-		<md-button class="md-icon-button" area-label="Flag" ng-click="flagPost(post)" ng-if="post.flagged == true">
+		<md-button class="md-icon-button" area-label="Flag" ng-click="flagPost(post)" ng-if="post.flagged == true" ng-disabled="offline">
 			<md-icon class="md-warn">flag</md-icon>
 		</md-button>
-		<md-button class="md-icon-button" ng-click="operation = 'update'" ng-if="post.creator.email == myInfo.email || devMode == true">
+		<md-button class="md-icon-button" ng-click="operation = 'update'" ng-if="post.creator.email == myInfo.email || devMode == true" ng-disabled="offline">
 			<md-icon>edit</md-icon>
 		</md-button>
-		<md-button class="md-icon-button" ng-click="deletePost(post)" ng-if="post.creator.email == myInfo.email || devMode == true">
+		<md-button class="md-icon-button" ng-click="deletePost(post)" ng-if="post.creator.email == myInfo.email || devMode == true" ng-disabled="offline">
 			<md-icon>delete</md-icon>
 		</md-button>
 		<md-button class="md-icon-button" ng-if="devMode == true" ng-click="::logPostToConsole(post,$index)">
