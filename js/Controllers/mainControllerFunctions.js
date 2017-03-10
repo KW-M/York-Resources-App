@@ -156,7 +156,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.sortedLabels = dataObj.labels
             $scope.sortLabels()
             getStartupData.resolve();
-            window.progressInitializationSpinner(30, 'increment')
+            window.progressInitializationSpinner(20, 'increment')
          });
       }, null, 150, 'Problem initializing, try reloading the page.');
 
@@ -165,16 +165,17 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          'callback': function () {
             initiateDrivePicker();
             pickerPromise.resolve();
-            window.progressInitializationSpinner(20, 'increment')
+            window.progressInitializationSpinner(10, 'increment')
          }
       })
 
       $q.all([getStartupData.promise, pickerPromise.promise]).then(function () {
-         window.progressInitializationSpinner(100)
+         window.progressInitializationSpinner(20,'increment')
          console.log("Everything Loaded")
          listenForURLChange();
          authorizationService.hideSigninDialog();
          document.dispatchEvent(new Event('userInitializatinDone'));
+         window.progressInitializationSpinner(100, undefined)
          getDatabase();
       })
    })
