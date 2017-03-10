@@ -398,29 +398,29 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          });
       };
       if (idArray.length > 0) {
-         promiseQueue.addPromise('script', APIService.runGAScript('getPosts', idArray), function (postsData) {
-            console.log(postsData)
-            var postsArray = JSON.parse(postsData.result.response.result);
-            if (postsArray.error == undefined) {
-               conurancyCounter--;
-               var max = postsArray.length;
-               for (var count = 0; count < max; count++) {
-                  var post = addFullPost(postsArray[count])
-                  localforage.setItem(post.id, post);
-               }
-               $timeout(function () {
-                  $scope.sortedPosts = $scope.sortedPosts;
-                  if (callBack) callBack()
-                  setTimeout(hideSpinner, 750)
-               })
-            } else {
-               var indexes = getIdIndexInPostArrays(postsArray.id);
-               $scope.allPosts.splice(indexes.allPosts, 1)
-               $scope.sortedPosts.splice(indexes.sortedPosts, 1)
-               conurancyCounter--;
-               $scope.postLoadProgress -= 10;
-            }
-         }, null, 150, 'Error retrieving posts, try reloading the page');
+         // promiseQueue.addPromise('script', APIService.runGAScript('getPosts', idArray), function (postsData) {
+         //    console.log(postsData)
+         //    var postsArray = JSON.parse(postsData.result.response.result);
+         //    if (postsArray.error == undefined) {
+         //       conurancyCounter--;
+         //       var max = postsArray.length;
+         //       for (var count = 0; count < max; count++) {
+         //          var post = addFullPost(postsArray[count])
+         //          localforage.setItem(post.id, post);
+         //       }
+         //       $timeout(function () {
+         //          $scope.sortedPosts = $scope.sortedPosts;
+         //          if (callBack) callBack()
+         //          setTimeout(hideSpinner, 750)
+         //       })
+         //    } else {
+         //       var indexes = getIdIndexInPostArrays(postsArray.id);
+         //       $scope.allPosts.splice(indexes.allPosts, 1)
+         //       $scope.sortedPosts.splice(indexes.sortedPosts, 1)
+         //       conurancyCounter--;
+         //       $scope.postLoadProgress -= 10;
+         //    }
+         // }, null, 150, 'Error retrieving posts, try reloading the page');
       } else {
          $timeout(function () {
             $scope.sortedPosts = $scope.sortedPosts;
@@ -436,7 +436,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          value = mergeFirebasePost(value, $scope.allPosts[indexes.allPosts])
          $scope.allPosts[indexes.allPosts] = value;
          $scope.sortedPosts[indexes.sortedPosts] = value;
-         $scope.postLoadProgress += 10;
          loadedCounter++;
          return value
       };
