@@ -425,7 +425,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       } else {
          $timeout(function () {
             $scope.sortedPosts = $scope.sortedPosts;
-            $scope.postLoadProgress == 100;
+            $scope.postSpinnerMode == 'indeterminate';
             if (callBack) callBack()
             setTimeout(hideSpinner, 750)
          })

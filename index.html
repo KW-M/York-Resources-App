@@ -318,7 +318,7 @@
                             </div>
                             <img src="images/rocket problem.png" style="width:300px" />
                         </div>
-                        <md-progress-circular id="loading_spinner" style="display: none;margin: auto;" class="md-accent" md-mode="indeterminate" md-diameter="30px"></md-progress-circular>
+                        <md-progress-circular id="loading_spinner" style="display: none;margin: auto;" class="md-accent" md-mode="{{postSpinnerMode}}" value="{{postLoadProgress}}" md-diameter="30px"></md-progress-circular>
                     </div>
                     <div class="footer" ng-if="queryParams.classPath == 'York Quizlet'">
                         <h3>Quizlet Connect</h3>
