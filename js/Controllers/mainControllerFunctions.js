@@ -382,32 +382,54 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function getPosts(idArray, callBack) {
       conurancyCounter++;
       console.log(idArray)
-      promiseQueue.addPromise('script', APIService.runGAScript('getPosts', idArray), function (postsData) {
-         console.log(postsData)
-         var postsArray = JSON.parse(postsData.result.response.result);
-         if (postsArray.error == undefined) {
-            conurancyCounter--;
-            var max = postsArray.length;
-            for (var count = 0; count < max; count++) {
-               var indexes = getIdIndexInPostArrays(postsArray[count].id);
-               postsArray[count].loadStatus = 'Loaded';
-               postsArray[count] = mergeFirebasePost(postsArray[count], $scope.allPosts[indexes.allPosts])
-               $scope.allPosts[indexes.allPosts] = postsArray[count];
-               $scope.sortedPosts[indexes.sortedPosts] = postsArray[count];
-               loadedCounter++;
+      for (var idCount = 0; idCount < idArray.length; idCount++) {
+         localforage.getItem(idArray[idCount]).then(function (value) {
+            addFullPost(value);
+            idArray.splice(idCount, 1)
+         }).catch(function (err) {
+            $scope.showInfoPopup('Error loading cache, try reloading the page', null, err, true)
+         });
+      };
+      if (idArray.length > 0) {
+         promiseQueue.addPromise('script', APIService.runGAScript('getPosts', idArray), function (postsData) {
+            console.log(postsData)
+            var postsArray = JSON.parse(postsData.result.response.result);
+            if (postsArray.error == undefined) {
+               conurancyCounter--;
+               var max = postsArray.length;
+               for (var count = 0; count < max; count++) {
+                  var post = addFullPost(postsArray[count])
+                  localforage.setItem(post.id,post);
+               }
+               $timeout(function () {
+                  $scope.sortedPosts = $scope.sortedPosts;
+                  if (callBack) callBack()
+                  setTimeout(hideSpinner, 750)
+               })
+            } else {
+               var indexes = getIdIndexInPostArrays(postsArray.id);
+               $scope.allPosts.splice(indexes.allPosts, 1)
+               $scope.sortedPosts.splice(indexes.sortedPosts, 1)
+               conurancyCounter--;
             }
-            $timeout(function () {
-               $scope.sortedPosts = $scope.sortedPosts;
-               if (callBack) callBack()
-               setTimeout(hideSpinner, 750)
-            })
-         } else {
-            var indexes = getIdIndexInPostArrays(postsArray.id);
-            $scope.allPosts.splice(indexes.allPosts, 1)
-            $scope.sortedPosts.splice(indexes.sortedPosts, 1)
-            conurancyCounter--;
-         }
-      }, null, 150, 'Error retrieving posts, try reloading the page');
+         }, null, 150, 'Error retrieving posts, try reloading the page');
+      } else {
+         $timeout(function () {
+            $scope.sortedPosts = $scope.sortedPosts;
+            if (callBack) callBack()
+            setTimeout(hideSpinner, 750)
+         })
+      }
+
+      function addFullPost(value) {
+         var indexes = getIdIndexInPostArrays(value.id);
+         value.loadStatus = 'Loaded';
+         value = mergeFirebasePost(value, $scope.allPosts[indexes.allPosts])
+         $scope.allPosts[indexes.allPosts] = value;
+         $scope.sortedPosts[indexes.sortedPosts] = value;
+         loadedCounter++;
+         return value
+      };
    }
 
    function hideSpinner(hide) {
