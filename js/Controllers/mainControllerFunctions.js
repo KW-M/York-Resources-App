@@ -370,6 +370,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          console.log('loading Posts')
          var index;
          var postIdAccumulator = [];
+         var remotePostIdAccumulator = [];
          var max = $scope.sortedPosts.length;
          $timeout(function () {
             console.log('loading Posts - spinner Determinate')
@@ -380,24 +381,29 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             var postObj = $scope.sortedPosts[index];
             if (postObj.loadStatus != 'Loaded') {
                postIdAccumulator.push(postObj.id)
-               if (postIdAccumulator.length === 20) getCachedPosts;
+               if (postIdAccumulator.length === 20) {
+                  getCachedPosts();
+                  index = max + 1
+               }
             }
          }
-         
-         
-         localforage.getItem(postObj.id).then(function (value) {
+
+function getCachedPosts() {
+   for (idCount = 0; idCount < max; idCount++) {
+           localforage.getItem(postObj.id).then(function (value) {
             if (value !== null) {
                addFullPost(value);
             } else {
                if (postIdAccumulator.length == 5) {
                   getPostsFromGDrive(postIdAccumulator);
-                  index = max + 1
                }
             }
          }).catch(function (err) {
             $scope.showInfoPopup('Error loading cache, try reloading the page', null, err, true)
          });
-         
+}}
+
+
          if (remotePostIdAccumulator.length != 0) getPostsFromGDrive(postIdAccumulator);
       }
    }
