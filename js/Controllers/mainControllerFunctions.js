@@ -262,13 +262,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.postSpinnerMode = 'indeterminate'
 
    function sortPosts() {
-      $scope.postSpinnerMode = 'determinate';
-      $scope.postLoadProgress = 5;
+      $scope.postSpinnerMode = 'indeterminate';
       if ($scope.queryParams.q == null) {
          catagorizePosts(filterPosts($scope.allPosts))
       } else {
          promiseQueue.addPromise('drive', APIService.searchGDrive(generateQueryString()), function (postsData) {
-            $scope.postLoadProgress = 20;
             console.log(postsData)
             catagorizePosts(seperatePosts(postsData.result.files))
          }, null, 150, 'Error searching, try again', 2)
@@ -276,10 +274,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       angularGridInstance.postsGrid.refresh();
 
       function catagorizePosts(filterObj) {
-         $scope.postLoadProgress = 20;
          $timeout(function () {
             $scope.sortedPosts = orderPosts(filterObj.filtered)
-            $scope.postLoadProgress = 40;
             loadPosts()
          })
          var max = filterObj.filteredOut.length
@@ -388,6 +384,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function getPosts(idArray, callBack) {
       conurancyCounter++;
       $scope.postLoadProgress = 50;
+      $scope.postSpinnerMode == 'determinate';
       for (var idCount = 0; idCount < idArray.length; idCount++) {
          localforage.getItem(idArray[idCount]).then(function (value) {
             if (value !== null) {
