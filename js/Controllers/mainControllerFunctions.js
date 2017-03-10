@@ -395,12 +395,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       var idCount;
       conurancyCounter++;
       for (idCount = 0;idCount < idArray.length; idCount++) {
-         console.log(gettingCached )
+         console.log('gettingCached #' + idCount)
          localforage.getItem(idArray[idCount]).then(function (value) {
             if (value !== null) {
-               console.log('got from cache - post #' + idCount)
                addFullPost(value);
-               idArray.splice(idCount, 1)
+               idArray.splice(idCount-1, 1)
+               console.log(idArray)
             }
          }).catch(function (err) {
             $scope.showInfoPopup('Error loading cache, try reloading the page', null, err, true)
