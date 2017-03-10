@@ -230,7 +230,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       })
 
       function convertFirePost(key, value, loadStatus) {
-         console.log("date created", new Date(value.DC))
+         //console.log("date created", new Date(value.DC))
          return {
             id: key,
             creator: {
@@ -392,8 +392,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function getPostsFromGDrive(idArray, callBack) {
+      var idCount;
       conurancyCounter++;
-      for (var idCount = 0; idCount < idArray.length; idCount++) {
+      for (idCount = 0;idCount < idArray.length; idCount++) {
+         console.log(gettingCached )
          localforage.getItem(idArray[idCount]).then(function (value) {
             if (value !== null) {
                console.log('got from cache - post #' + idCount)
@@ -405,7 +407,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          });
       };
       if (idArray.length > 0) {
-          console.log('getting from gdrive - post #' + idCount)
+          console.log('getting from gdrive')
          promiseQueue.addPromise('script', APIService.runGAScript('getPosts', idArray), function (postsData) {
             console.log(postsData)
             var postsArray = JSON.parse(postsData.result.response.result);
@@ -413,12 +415,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                conurancyCounter--;
                var max = postsArray.length;
                for (var count = 0; count < max; count++) {
+                   console.log('got from gdrive - post #' + count)
                   var post = addFullPost(postsArray[count])
                   localforage.setItem(post.id, post);
                }
                $timeout(function () {
                   $scope.sortedPosts = $scope.sortedPosts;
                   if (callBack) callBack()
+                  console.log('done Loding, hiding spinner in 700 ms')
                   setTimeout(hideSpinner, 750)
                })
             } else {
