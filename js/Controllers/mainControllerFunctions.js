@@ -379,22 +379,26 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          for (index = 0; index < max; index++) {
             var postObj = $scope.sortedPosts[index];
             if (postObj.loadStatus != 'Loaded') {
-               localforage.getItem(postObj.id).then(function (value) {
-                  if (value !== null) {
-                     addFullPost(value);
-                  } else {
-                     postIdAccumulator.push(postObj.id)
-                     if (postIdAccumulator.length == 5) {
-                        getPostsFromGDrive(postIdAccumulator);
-                        index = max + 1
-                     }
-                  }
-               }).catch(function (err) {
-                  $scope.showInfoPopup('Error loading cache, try reloading the page', null, err, true)
-               });
+               postIdAccumulator.push(postObj.id)
+               if (postIdAccumulator.length === 20) getCachedPosts;
             }
          }
-         if (postIdAccumulator.length != 0) getPostsFromGDrive(postIdAccumulator);
+         
+         
+         localforage.getItem(postObj.id).then(function (value) {
+            if (value !== null) {
+               addFullPost(value);
+            } else {
+               if (postIdAccumulator.length == 5) {
+                  getPostsFromGDrive(postIdAccumulator);
+                  index = max + 1
+               }
+            }
+         }).catch(function (err) {
+            $scope.showInfoPopup('Error loading cache, try reloading the page', null, err, true)
+         });
+         
+         if (remotePostIdAccumulator.length != 0) getPostsFromGDrive(postIdAccumulator);
       }
    }
 
@@ -438,6 +442,16 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          })
       }
    }
+
+   function addFullPost(value) {
+      var indexes = getIdIndexInPostArrays(value.id);
+      value.loadStatus = 'Loaded';
+      value = mergeFirebasePost(value, $scope.allPosts[indexes.allPosts])
+      $scope.allPosts[indexes.allPosts] = value;
+      $scope.sortedPosts[indexes.sortedPosts] = value;
+      loadedCounter++;
+      return value
+   };
 
    function hideSpinner(hide) {
       console.log("LoadCount:" + loadedCounter)
