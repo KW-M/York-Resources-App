@@ -119,7 +119,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //----------------------------------------------------
    //------------- Signin & Initiation ------------------
    var drivePicker, uploadPicker;
-   $scope.initializationProgress = 10;
+   $scope.initializationProgress = 2;
    $scope.initializationSpinnerMode = 'indeterminate'
 
    window.progressInitializationSpinner = function (progress, mode) {
@@ -136,7 +136,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    authorizationService.onLoad(function () {
-      window.progressInitializationSpinner(8, 'increment')
+      window.progressInitializationSpinner(15, 'increment')
       var profile = authorizationService.GUser.getBasicProfile()
       $scope.myInfo = {
          email: profile.getEmail(),
@@ -145,7 +145,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
 
       var progressTimeout = setInterval(function () {
-         window.progressInitializationSpinner(6, 'increment')
+         window.progressInitializationSpinner(7, 'increment')
       }, 750)
       var getStartupData = $q.defer();
       promiseQueue.addPromise('drive', APIService.runGAScript('getStartupData'), function (data) {
@@ -160,7 +160,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.sortLabels()
             getStartupData.resolve();
             clearInterval(progressTimeout);
-            window.progressInitializationSpinner(8, 'increment')
+            window.progressInitializationSpinner(10, 'increment')
          });
       }, null, 150, 'Problem initializing, try reloading the page.');
 
@@ -169,7 +169,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          'callback': function () {
             initiateDrivePicker();
             pickerPromise.resolve();
-            window.progressInitializationSpinner(8, 'increment')
+            window.progressInitializationSpinner(10, 'increment')
          }
       })
 
