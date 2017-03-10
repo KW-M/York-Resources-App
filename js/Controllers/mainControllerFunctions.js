@@ -259,6 +259,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.allPosts = [];
    $scope.sortedPosts = [];
    $scope.searchPosts = [];
+   $scope.postSpinner
 
    function sortPosts() {
       if ($scope.queryParams.q == null) {
