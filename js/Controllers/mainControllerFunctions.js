@@ -124,11 +124,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    window.progressInitializationSpinner = function (progress, mode) {
       $timeout(function () {
-         if (mode === 'increment') $scope.initializationProgress = progress
-         if (progress) $scope.initializationProgress = progress;
+         if (mode === 'increment') $scope.initializationProgress += progress
+         if (mode === undefined) $scope.initializationProgress = progress;
       })
    }
-   
+
       window.changeInitializationSpinner = function (progress, mode) {
       $timeout(function () {
          if (progress) $scope.initializationProgress = progress;

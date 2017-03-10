@@ -388,6 +388,7 @@
                 var LibraryLoadPromise = $q.defer();
 
                 gapi.load('client:auth2', function () {
+                    window.progressInitializationSpinner(10, 'increment')
                     // Initialize oauth
                     gapi.auth2.init({
                         'client_id': '632148950209-60a3db9qm6q31sids128mvstddg2qme7.apps.googleusercontent.com',
@@ -395,7 +396,7 @@
                         'hosted_domain': 'york.org',
                         fetch_basic_profile: true,
                     }).then(function (GAuth) {
-                        window.progressInitializationSpinner()
+                        window.progressInitializationSpinner(10, 'increment')
                         // Listen for sign-in state changes.
                         GAuth.isSignedIn.listen(updateSigninStatus);
                         // Handle the initial sign-in state.
@@ -412,6 +413,7 @@
                         'apiKey': 'AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA',
                         'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest', 'https://www.googleapis.com/discovery/v1/apis/script/v1/rest'],
                     }).then(function () {
+                        window.progressInitializationSpinner(10, 'increment')
                         console.log("Loaded APIs")
                         LibraryLoadPromise.resolve();
                     }, console.warn)
