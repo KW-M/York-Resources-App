@@ -370,6 +370,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          console.log('loading Posts')
          var index;
          var postIdAccumulator = [];
+         var postPromiseAccumulator = [];
          var remotePostIdAccumulator = [];
          var max = $scope.sortedPosts.length;
          $timeout(function () {
@@ -381,50 +382,46 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             var postObj = $scope.sortedPosts[index];
             console.log(postObj)
             if (postObj.loadStatus != 'Loaded') {
-               postIdAccumulator.push(localforage.getItem(postObj.id))
+               postIdAccumulator.push(postObj.id)
+               postPromiseAccumulator.push(localforage.getItem(postObj.id))
                if (postIdAccumulator.length === 6) {
-                  $q.all(postIdAccumulator).then()
+                  $q.all(postIdAccumulator).then(handleCachedPosts).catch(function (err) {
+                     $scope.showInfoPopup('Error loading cache, try reloading the page', null, err, true)
+                  })
                   index = max + 1
                }
             }
          }
 
-         function getCachedPosts() {
-            console.log(postIdAccumulator)
-                  var cacheLoadCount = 0
-                  var max = postIdAccumulator.length
-                  for (var idCount = 0; idCount < max; idCount++) {
-                     localforage.getItem(postIdAccumulator[idCount]).then(function (value) {
-                        cacheLoadCount++
-                        if (value !== null) {
-                           addFullPost(value);
-                        } else {
-                           remotePostIdAccumulator.push(postIdAccumulator[idCount]);
-                           console.log(remotePostIdAccumulator)
-                           if (remotePostIdAccumulator.length === 5) {
-                              getPostsFromGDrive(remotePostIdAccumulator);
-                              idCount = max + 1
-                           }
-                        }
-                        if (cacheLoadCount === postIdAccumulator.length) {
-                           console.log(remotePostIdAccumulator)
-                           if (remotePostIdAccumulator.length != 0) {
-                              getPostsFromGDrive(remotePostIdAccumulator);
-                              $timeout(function () {
-                                 $scope.sortedPosts = $scope.sortedPosts;
-                              })
-                           } else {
-                              $timeout(function () {
-                                 $scope.sortedPosts = $scope.sortedPosts;
-                                 $scope.postSpinnerMode == 'indeterminate';
-                                 setTimeout(hideSpinner, 750)
-                              })
-                           }
-                        }
-                     }).catch(function (err) {
-                        $scope.showInfoPopup('Error loading cache, try reloading the page', null, err, true)
-                     });
+         function handleCachedPosts(valueArray) {
+            var max = valueArray.length;
+            for (var valueCount = 0; valueCount < max; valueCount++) {
+               if (value !== null) {
+                  addFullPost(value);
+               } else {
+                  remotePostIdAccumulator.push(postIdAccumulator[idCount]);
+                  console.log(remotePostIdAccumulator)
+                  if (remotePostIdAccumulator.length === 5) {
+                     getPostsFromGDrive(remotePostIdAccumulator);
+                     idCount = max + 1
                   }
+               }
+            }
+            if (cacheLoadCount === postIdAccumulator.length) {
+               console.log(remotePostIdAccumulator)
+               if (remotePostIdAccumulator.length != 0) {
+                  getPostsFromGDrive(remotePostIdAccumulator);
+                  $timeout(function () {
+                     $scope.sortedPosts = $scope.sortedPosts;
+                  })
+               } else {
+                  $timeout(function () {
+                     $scope.sortedPosts = $scope.sortedPosts;
+                     $scope.postSpinnerMode == 'indeterminate';
+                     setTimeout(hideSpinner, 750)
+                  })
+               }
+            }
          }
       }
    }
