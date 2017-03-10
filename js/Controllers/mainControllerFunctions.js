@@ -379,9 +379,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          })
          for (index = 0; index < max; index++) {
             var postObj = $scope.sortedPosts[index];
+            console.log(postObj)
             if (postObj.loadStatus != 'Loaded') {
                postIdAccumulator.push(postObj.id)
-               if (postIdAccumulator.length === 3) {
+               if (postIdAccumulator.length === 6) {
                   getCachedPosts();
                   index = max + 1
                }
@@ -389,39 +390,43 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          }
 
          function getCachedPosts() {
-            var cacheLoadCount = 0
-            var max = postIdAccumulator.length
-            for (var idCount = 0; idCount < max; idCount++) {
-               localforage.getItem(postIdAccumulator[idCount]).then(function (value) {
-                  cacheLoadCount++
-                  if (value !== null) {
-                     addFullPost(value);
-                  } else {
-                     remotePostIdAccumulator.push(postIdAccumulator[idCount]);
-                     if (remotePostIdAccumulator.length === 5) {
-                        getPostsFromGDrive(remotePostIdAccumulator);
-                        idCount = max + 1
-                     }
-                     console.log(remotePostIdAccumulator)
+            console.log(postIdAccumulator)
+                  var cacheLoadCount = 0
+                  var max = postIdAccumulator.length
+                  for (var idCount = 0; idCount < max; idCount++) {
+                     console.log()
                   }
-                  if (cacheLoadCount === postIdAccumulator.length) {
-                     if (remotePostIdAccumulator.length != 0) {
-                        getPostsFromGDrive(remotePostIdAccumulator);
-                        $timeout(function () {
-                           $scope.sortedPosts = $scope.sortedPosts;
-                        })
-                     } else {
-                        $timeout(function () {
-                           $scope.sortedPosts = $scope.sortedPosts;
-                           $scope.postSpinnerMode == 'indeterminate';
-                           setTimeout(hideSpinner, 750)
-                        })
-                     }
-                  }
-               }).catch(function (err) {
-                  $scope.showInfoPopup('Error loading cache, try reloading the page', null, err, true)
-               });
-            }
+               //       localforage.getItem(postIdAccumulator[idCount]).then(function (value) {
+               //          cacheLoadCount++
+               //          if (value !== null) {
+               //             addFullPost(value);
+               //          } else {
+               //             remotePostIdAccumulator.push(postIdAccumulator[idCount]);
+               //             console.log(remotePostIdAccumulator)
+               //             if (remotePostIdAccumulator.length === 5) {
+               //                getPostsFromGDrive(remotePostIdAccumulator);
+               //                idCount = max + 1
+               //             }
+               //          }
+               //          if (cacheLoadCount === postIdAccumulator.length) {
+               //             console.log(remotePostIdAccumulator)
+               //             if (remotePostIdAccumulator.length != 0) {
+               //                getPostsFromGDrive(remotePostIdAccumulator);
+               //                $timeout(function () {
+               //                   $scope.sortedPosts = $scope.sortedPosts;
+               //                })
+               //             } else {
+               //                $timeout(function () {
+               //                   $scope.sortedPosts = $scope.sortedPosts;
+               //                   $scope.postSpinnerMode == 'indeterminate';
+               //                   setTimeout(hideSpinner, 750)
+               //                })
+               //             }
+               //          }
+               //       }).catch(function (err) {
+               //          $scope.showInfoPopup('Error loading cache, try reloading the page', null, err, true)
+               //       });
+               //    }
          }
       }
    }
