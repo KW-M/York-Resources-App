@@ -412,7 +412,7 @@
                         'apiKey': 'AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA',
                         'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest', 'https://www.googleapis.com/discovery/v1/apis/script/v1/rest'],
                     }).then(function () {
-                        window.progressInitializationSpinner(10, 'increment')
+                        window.progressInitializationSpinner(15, 'increment')
                         console.log("Loaded APIs")
                         LibraryLoadPromise.resolve();
                     }, console.warn)
@@ -423,9 +423,8 @@
                         self.GUser = gapi.auth2.getAuthInstance().currentUser.get();
                         GSignedIn = true;
                         GSignInPromise.resolve(self.GUser);
-                        window.progressInitializationSpinner(0)
                         window.changeInitializationSpinner('determinate')
-                        window.progressInitializationSpinner(20, 'increment')
+                        window.progressInitializationSpinner(10, 'increment')
                         hideSigninButton()
                     } else if (Input === false) {
                         GSignedIn = false;
@@ -439,7 +438,7 @@
                     if (GSignedIn && self.FireUser && self.FireUser != 'None' && isUserEqual(self.GUser, self.FireUser)) {
                         console.log("Everything is SignedIn")
                         FireSignInPromise.resolve(self.FireUser);
-                        window.progressInitializationSpinner(33, 'increment')
+                        window.progressInitializationSpinner(15, 'increment')
                     } else if (GSignedIn && self.FireUser && self.FireUser != 'None' && !isUserEqual(self.GUser, self.FireUser)) {
                         console.log("Different Firebase user, signing into Firebase...")
                         SignIntoFirebase()
@@ -453,7 +452,7 @@
                         var credential = firebase.auth.GoogleAuthProvider.credential(self.GUser.getAuthResponse().id_token);
                         firebase.auth().signInWithCredential(credential).then(function () {
                             FireSignInPromise.resolve(self.FireUser);
-                            window.progressInitializationSpinner(33, 'increment')
+                            window.progressInitializationSpinner(20, 'increment')
                         }).catch(console.warn);
                     }
 

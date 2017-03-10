@@ -136,6 +136,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    authorizationService.onLoad(function () {
+      window.progressInitializationSpinner(10, 'increment')
       var profile = authorizationService.GUser.getBasicProfile()
       $scope.myInfo = {
          email: profile.getEmail(),
@@ -155,6 +156,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.sortedLabels = dataObj.labels
             $scope.sortLabels()
             getStartupData.resolve();
+            window.progressInitializationSpinner(30, 'increment')
          });
       }, null, 150, 'Problem initializing, try reloading the page.');
 
@@ -163,10 +165,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          'callback': function () {
             initiateDrivePicker();
             pickerPromise.resolve();
+            window.progressInitializationSpinner(20, 'increment')
          }
       })
 
       $q.all([getStartupData.promise, pickerPromise.promise]).then(function () {
+         window.progressInitializationSpinner(100)
          console.log("Everything Loaded")
          listenForURLChange();
          authorizationService.hideSigninDialog();
