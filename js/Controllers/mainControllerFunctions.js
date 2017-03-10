@@ -367,6 +367,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          var index;
          var postIdAccumulator = [];
          var max = $scope.sortedPosts.length;
+         $timeout(function () {
+            $scope.postLoadProgress = 50;
+            $scope.postSpinnerMode == 'determinate';
+         })
          for (index = 0; index < max; index++) {
             var postObj = $scope.sortedPosts[index];
             if (postObj.loadStatus != 'Loaded') {
@@ -381,10 +385,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
    }
 
-   function getPosts(idArray, callBack) {
+   function getPostsFromGDrive(idArray, callBack) {
       conurancyCounter++;
-      $scope.postLoadProgress = 50;
-      $scope.postSpinnerMode == 'determinate';
       for (var idCount = 0; idCount < idArray.length; idCount++) {
          localforage.getItem(idArray[idCount]).then(function (value) {
             if (value !== null) {
