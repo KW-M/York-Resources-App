@@ -119,9 +119,17 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //----------------------------------------------------
    //------------- Signin & Initiation ------------------
    var drivePicker, uploadPicker;
+   $scope.initializationProgress = 10;
+   $scope.initializationSpinnerMode = 'indeterminate'
 
-   window.progressInitializationSpinner =function function_name(argument) {
-      // body...
+   window.progressInitializationSpinner = function (progress, mode) {
+      $timeout(function () {
+         if (progress) $scope.initializationProgress = progress;
+         if (mode) {
+            if mode
+            $scope.initializationSpinnerMode = mode;
+         }
+      })
    }
 
    authorizationService.onLoad(function () {
@@ -263,8 +271,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.allPosts = [];
    $scope.sortedPosts = [];
    $scope.searchPosts = [];
-   $scope.initializationProgress = 10;
-   $scope.initializationSpinnerMode = 'indeterminate'
 
    function sortPosts() {
       console.log('sortingPosts')

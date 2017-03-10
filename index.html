@@ -395,6 +395,7 @@
                         'hosted_domain': 'york.org',
                         fetch_basic_profile: true,
                     }).then(function (GAuth) {
+                        window.progressInitializationSpinner()
                         // Listen for sign-in state changes.
                         GAuth.isSignedIn.listen(updateSigninStatus);
                         // Handle the initial sign-in state.
