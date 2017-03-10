@@ -145,7 +145,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
 
       var progressTimeout = setInterval(function () {
-         window.progressInitializationSpinner(5, 'increment')
+         window.progressInitializationSpinner(6, 'increment')
       }, 750)
       var getStartupData = $q.defer();
       promiseQueue.addPromise('drive', APIService.runGAScript('getStartupData'), function (data) {
