@@ -259,11 +259,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.allPosts = [];
    $scope.sortedPosts = [];
    $scope.searchPosts = [];
-   $scope.postSpinnerMode = 'indeterminate'
+   $scope.initializationProgress = ''
+   $scope.initializationSpinnerMode = 'indeterminate'
 
    function sortPosts() {
       console.log('sortingPosts')
-      $scope.postSpinnerMode = 'indeterminate';
       if ($scope.queryParams.q == null) {
          catagorizePosts(filterPosts($scope.allPosts))
       } else {
@@ -375,8 +375,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          var max = $scope.sortedPosts.length;
          $timeout(function () {
             console.log('loading Posts - spinner Determinate')
-            $scope.postLoadProgress = 50;
-            $scope.postSpinnerMode == 'determinate';
          })
          for (index = 0; index < max; index++) {
             var postObj = $scope.sortedPosts[index];
@@ -416,7 +414,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             } else {
                $timeout(function () {
                   $scope.sortedPosts = $scope.sortedPosts;
-                  $scope.postSpinnerMode == 'indeterminate';
                   setTimeout(hideSpinner, 750)
                })
             }
@@ -443,7 +440,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                $scope.sortedPosts = $scope.sortedPosts;
                if (callBack) callBack()
                console.log('done Loding, hiding spinner in 700 ms')
-               $scope.postSpinnerMode == 'indeterminate';
                setTimeout(hideSpinner, 750)
             })
          } else {
@@ -451,7 +447,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.allPosts.splice(indexes.allPosts, 1)
             $scope.sortedPosts.splice(indexes.sortedPosts, 1)
             conurancyCounter--;
-            $scope.postLoadProgress -= 10;
          }
       }, null, 150, 'Error retrieving posts, try reloading the page');
    }
