@@ -381,7 +381,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             var postObj = $scope.sortedPosts[index];
             if (postObj.loadStatus != 'Loaded') {
                postIdAccumulator.push(postObj.id)
-               if (postIdAccumulator.length === 20) {
+               if (postIdAccumulator.length === 14) {
                   getCachedPosts();
                   index = max + 1
                }
@@ -408,50 +408,51 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                });
             }
          }
-
-         if (cacheLoadCount === postIdAccumulator.length && remotePostIdAccumulator.length != 0) getPostsFromGDrive(remotePostIdAccumulator);
+         if (cacheLoadCount === postIdAccumulator.length) {
+            if (remotePostIdAccumulator.length != 0) {
+               getPostsFromGDrive(remotePostIdAccumulator);
+            } else {
+               $timeout(function () {
+                  $scope.sortedPosts = $scope.sortedPosts;
+                  if (callBack) callBack()
+                  $scope.postSpinnerMode == 'indeterminate';
+                  setTimeout(hideSpinner, 750)
+               })
+            }
+         }
       }
    }
 
    function getPostsFromGDrive(idArray, callBack) {
       var idCount;
       conurancyCounter++;
-
-      if (idArray.length > 0) {
-         console.log('getting from gdrive')
-         promiseQueue.addPromise('script', APIService.runGAScript('getPosts', idArray), function (postsData) {
-            console.log(postsData)
-            var postsArray = JSON.parse(postsData.result.response.result);
-            if (postsArray.error == undefined) {
-               conurancyCounter--;
-               var max = postsArray.length;
-               for (var count = 0; count < max; count++) {
-                  console.log('got from gdrive - post #' + count)
-                  var post = addFullPost(postsArray[count])
-                  localforage.setItem(post.id, post);
-               }
-               $timeout(function () {
-                  $scope.sortedPosts = $scope.sortedPosts;
-                  if (callBack) callBack()
-                  console.log('done Loding, hiding spinner in 700 ms')
-                  setTimeout(hideSpinner, 750)
-               })
-            } else {
-               var indexes = getIdIndexInPostArrays(postsArray.id);
-               $scope.allPosts.splice(indexes.allPosts, 1)
-               $scope.sortedPosts.splice(indexes.sortedPosts, 1)
-               conurancyCounter--;
-               $scope.postLoadProgress -= 10;
+      console.log('getting from gdrive')
+      promiseQueue.addPromise('script', APIService.runGAScript('getPosts', idArray), function (postsData) {
+         console.log(postsData)
+         var postsArray = JSON.parse(postsData.result.response.result);
+         if (postsArray.error == undefined) {
+            conurancyCounter--;
+            var max = postsArray.length;
+            for (var count = 0; count < max; count++) {
+               console.log('got from gdrive - post #' + count)
+               var post = addFullPost(postsArray[count])
+               localforage.setItem(post.id, post);
             }
-         }, null, 150, 'Error retrieving posts, try reloading the page');
-      } else {
-         $timeout(function () {
-            $scope.sortedPosts = $scope.sortedPosts;
-            $scope.postSpinnerMode == 'indeterminate';
-            if (callBack) callBack()
-            setTimeout(hideSpinner, 750)
-         })
-      }
+            $timeout(function () {
+               $scope.sortedPosts = $scope.sortedPosts;
+               if (callBack) callBack()
+               console.log('done Loding, hiding spinner in 700 ms')
+               $scope.postSpinnerMode == 'indeterminate';
+               setTimeout(hideSpinner, 750)
+            })
+         } else {
+            var indexes = getIdIndexInPostArrays(postsArray.id);
+            $scope.allPosts.splice(indexes.allPosts, 1)
+            $scope.sortedPosts.splice(indexes.sortedPosts, 1)
+            conurancyCounter--;
+            $scope.postLoadProgress -= 10;
+         }
+      }, null, 150, 'Error retrieving posts, try reloading the page');
    }
 
    function addFullPost(value) {
