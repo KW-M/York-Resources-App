@@ -384,10 +384,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       console.log(idArray)
       for (var idCount = 0; idCount < idArray.length; idCount++) {
          localforage.getItem(idArray[idCount]).then(function (value) {
-            if(value !== null) {
-            addFullPost(value);
-            idArray.splice(idCount, 1)
-            
+            if (value !== null) {
+               addFullPost(value);
+               idArray.splice(idCount, 1)
+            }
          }).catch(function (err) {
             $scope.showInfoPopup('Error loading cache, try reloading the page', null, err, true)
          });
@@ -401,7 +401,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                var max = postsArray.length;
                for (var count = 0; count < max; count++) {
                   var post = addFullPost(postsArray[count])
-                  localforage.setItem(post.id,post);
+                  localforage.setItem(post.id, post);
                }
                $timeout(function () {
                   $scope.sortedPosts = $scope.sortedPosts;
