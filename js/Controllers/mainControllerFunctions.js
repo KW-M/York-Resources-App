@@ -174,7 +174,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       })
 
       $q.all([getStartupData.promise, pickerPromise.promise]).then(function () {
-                  window.progressInitializationSpinner(100, undefined)
+         window.progressInitializationSpinner(100, undefined)
          console.log("Everything Loaded")
          listenForURLChange();
          authorizationService.hideSigninDialog();
@@ -394,9 +394,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          var postPromiseAccumulator = [];
          var remotePostIdAccumulator = [];
          var max = $scope.sortedPosts.length;
-         $timeout(function () {
-            console.log('loading Posts - spinner Determinate')
-         })
+         console.log('loading Posts - spinner Determinate')
          for (index = 0; index < max; index++) {
             var postObj = $scope.sortedPosts[index];
             console.log(postObj)
