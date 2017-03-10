@@ -366,7 +366,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function loadPosts() {
-      hideSpinner()
+      hideSpinner() //may or may not hide spinner
       if (conurancyCounter == 0 && $scope.sortedPosts.length != 0 && $scope.sortedPosts.length != loadedCounter) {
          var index;
          var postIdAccumulator = [];
@@ -387,7 +387,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function getPosts(idArray, callBack) {
       conurancyCounter++;
-      console.log(idArray)
+      $scope.postLoadProgress = 50;
       for (var idCount = 0; idCount < idArray.length; idCount++) {
          localforage.getItem(idArray[idCount]).then(function (value) {
             if (value !== null) {
@@ -419,11 +419,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                $scope.allPosts.splice(indexes.allPosts, 1)
                $scope.sortedPosts.splice(indexes.sortedPosts, 1)
                conurancyCounter--;
+               $scope.postLoadProgress -= 10;
             }
          }, null, 150, 'Error retrieving posts, try reloading the page');
       } else {
          $timeout(function () {
             $scope.sortedPosts = $scope.sortedPosts;
+            $scope.postLoadProgress == 100;
             if (callBack) callBack()
             setTimeout(hideSpinner, 750)
          })
@@ -435,6 +437,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          value = mergeFirebasePost(value, $scope.allPosts[indexes.allPosts])
          $scope.allPosts[indexes.allPosts] = value;
          $scope.sortedPosts[indexes.sortedPosts] = value;
+         $scope.postLoadProgress += 10;
          loadedCounter++;
          return value
       };
