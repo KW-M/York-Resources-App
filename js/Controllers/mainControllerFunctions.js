@@ -402,6 +402,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                         getPostsFromGDrive(remotePostIdAccumulator);
                         idCount = max + 1
                      }
+                     console.log(remotePostIdAccumulator)
                   }
                   if (cacheLoadCount === postIdAccumulator.length) {
                      if (remotePostIdAccumulator.length != 0) {
@@ -428,7 +429,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function getPostsFromGDrive(idArray, callBack) {
       var idCount;
       conurancyCounter++;
-      console.log('getting from gdrive')
+      console.log('getting from gdrive', idArray)
       promiseQueue.addPromise('script', APIService.runGAScript('getPosts', idArray), function (postsData) {
          console.log(postsData)
          var postsArray = JSON.parse(postsData.result.response.result);
