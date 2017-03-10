@@ -379,25 +379,19 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          for (index = 0; index < max; index++) {
             var postObj = $scope.sortedPosts[index];
             if (postObj.loadStatus != 'Loaded') {
-               while (idCount < idArray.length;)
-               for (idCount = 0;  idCount++) {
-                  console.log('gettingCached #' + idCount)
-                  localforage.getItem(idArray[idCount]).then(function (value) {
-                     if (value !== null) {
-                        addFullPost(value);
-                        idArray.splice(idCount - 1, 1)
-                        console.log(idArray)
+               localforage.getItem(postObj.id).then(function (value) {
+                  if (value !== null) {
+                     addFullPost(value);
+                  } else {
+                     postIdAccumulator.push(postObj.id)
+                     if (postIdAccumulator.length == 5) {
+                        getPostsFromGDrive(postIdAccumulator);
+                        index = max + 1
                      }
-                  }).catch(function (err) {
-                     $scope.showInfoPopup('Error loading cache, try reloading the page', null, err, true)
-                  });
-               };
-               postIdAccumulator.push(postObj.id)
-               if (postIdAccumulator.length == 5) {
-                  console.log('loading Posts - getting from database')
-                  getPostsFromGDrive(postIdAccumulator);
-                  return true;
-               }
+                  }
+               }).catch(function (err) {
+                  $scope.showInfoPopup('Error loading cache, try reloading the page', null, err, true)
+               });
             }
          }
          if (postIdAccumulator.length != 0) getPostsFromGDrive(postIdAccumulator);
@@ -443,16 +437,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             setTimeout(hideSpinner, 750)
          })
       }
-
-      function addFullPost(value) {
-         var indexes = getIdIndexInPostArrays(value.id);
-         value.loadStatus = 'Loaded';
-         value = mergeFirebasePost(value, $scope.allPosts[indexes.allPosts])
-         $scope.allPosts[indexes.allPosts] = value;
-         $scope.sortedPosts[indexes.sortedPosts] = value;
-         loadedCounter++;
-         return value
-      };
    }
 
    function hideSpinner(hide) {
