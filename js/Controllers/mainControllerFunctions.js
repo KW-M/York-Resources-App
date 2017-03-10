@@ -136,7 +136,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    authorizationService.onLoad(function () {
-      window.progressInitializationSpinner(10, 'increment')
+      window.progressInitializationSpinner(8, 'increment')
       var profile = authorizationService.GUser.getBasicProfile()
       $scope.myInfo = {
          email: profile.getEmail(),
@@ -145,8 +145,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
 
       var progressTimeout = setInterval(function () {
-         window.progressInitializationSpinner(1, 'increment')
-      }, 1000)
+         window.progressInitializationSpinner(5, 'increment')
+      }, 750)
       var getStartupData = $q.defer();
       promiseQueue.addPromise('drive', APIService.runGAScript('getStartupData'), function (data) {
          var dataObj = JSON.parse(data.result.response.result);
@@ -160,7 +160,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.sortLabels()
             getStartupData.resolve();
             clearInterval(progressTimeout);
-            window.progressInitializationSpinner(10, 'increment')
+            window.progressInitializationSpinner(8, 'increment')
          });
       }, null, 150, 'Problem initializing, try reloading the page.');
 
@@ -169,16 +169,16 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          'callback': function () {
             initiateDrivePicker();
             pickerPromise.resolve();
-            window.progressInitializationSpinner(10, 'increment')
+            window.progressInitializationSpinner(8, 'increment')
          }
       })
 
       $q.all([getStartupData.promise, pickerPromise.promise]).then(function () {
+                  window.progressInitializationSpinner(100, undefined)
          console.log("Everything Loaded")
          listenForURLChange();
          authorizationService.hideSigninDialog();
          document.dispatchEvent(new Event('userInitializatinDone'));
-         window.progressInitializationSpinner(100, undefined)
          getDatabase();
       })
    })

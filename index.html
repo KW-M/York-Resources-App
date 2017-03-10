@@ -388,7 +388,7 @@
                 var LibraryLoadPromise = $q.defer();
 
                 gapi.load('client:auth2', function () {
-                    window.progressInitializationSpinner(10, 'increment')
+                    window.progressInitializationSpinner(8, 'increment')
                     // Initialize oauth
                     gapi.auth2.init({
                         'client_id': '632148950209-60a3db9qm6q31sids128mvstddg2qme7.apps.googleusercontent.com',
@@ -412,7 +412,7 @@
                         'apiKey': 'AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA',
                         'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest', 'https://www.googleapis.com/discovery/v1/apis/script/v1/rest'],
                     }).then(function () {
-                        window.progressInitializationSpinner(10, 'increment')
+                        window.progressInitializationSpinner(8, 'increment')
                         console.log("Loaded APIs")
                         LibraryLoadPromise.resolve();
                     }, console.warn)
@@ -424,7 +424,7 @@
                         GSignedIn = true;
                         GSignInPromise.resolve(self.GUser);
                         window.changeInitializationSpinner('determinate')
-                        window.progressInitializationSpinner(10, 'increment')
+                        window.progressInitializationSpinner(8, 'increment')
                         hideSigninButton()
                     } else if (Input === false) {
                         GSignedIn = false;
@@ -438,7 +438,7 @@
                     if (GSignedIn && self.FireUser && self.FireUser != 'None' && isUserEqual(self.GUser, self.FireUser)) {
                         console.log("Everything is SignedIn")
                         FireSignInPromise.resolve(self.FireUser);
-                        window.progressInitializationSpinner(10, 'increment')
+                        window.progressInitializationSpinner(8, 'increment')
                     } else if (GSignedIn && self.FireUser && self.FireUser != 'None' && !isUserEqual(self.GUser, self.FireUser)) {
                         console.log("Different Firebase user, signing into Firebase...")
                         SignIntoFirebase()
