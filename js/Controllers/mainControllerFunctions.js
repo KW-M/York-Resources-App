@@ -381,9 +381,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             var postObj = $scope.sortedPosts[index];
             console.log(postObj)
             if (postObj.loadStatus != 'Loaded') {
-               postIdAccumulator.push(postObj.id)
+               postIdAccumulator.push(localforage.getItem(postObj.id))
                if (postIdAccumulator.length === 6) {
-                  getCachedPosts();
+                  $q.all(postIdAccumulator).then()
                   index = max + 1
                }
             }
