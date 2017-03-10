@@ -120,6 +120,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    //------------- Signin & Initiation ------------------
    var drivePicker, uploadPicker;
 
+   window.progressInitializationSpinner =function function_name(argument) {
+      // body...
+   }
+
    authorizationService.onLoad(function () {
       var profile = authorizationService.GUser.getBasicProfile()
       $scope.myInfo = {
@@ -259,7 +263,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.allPosts = [];
    $scope.sortedPosts = [];
    $scope.searchPosts = [];
-   $scope.initializationProgress = ''
+   $scope.initializationProgress = 10;
    $scope.initializationSpinnerMode = 'indeterminate'
 
    function sortPosts() {
