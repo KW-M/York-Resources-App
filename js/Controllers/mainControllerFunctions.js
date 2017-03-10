@@ -328,7 +328,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          if ($scope.queryParams.flagged != null && $scope.queryParams.flagged !== undefined) Flagged = inputSet[count].flagged == $scope.queryParams.flagged;
          if ($scope.queryParams.creatorEmail != null && $scope.queryParams.creatorEmail !== undefined) Creator = inputSet[count].creator.email == $scope.queryParams.creatorEmail;
          //console.log($scope.queryParams.creatorEmail + " " + $scope.myInfo.email);
-        // console.log(Flagged + " C" + Class + " T" + Type + " CR" + Creator, inputSet[count])
+         // console.log(Flagged + " C" + Class + " T" + Type + " CR" + Creator, inputSet[count])
          if (Flagged && Class && Type && Creator) {
             filtered.push(inputSet[count])
          } else {
@@ -379,6 +379,19 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          for (index = 0; index < max; index++) {
             var postObj = $scope.sortedPosts[index];
             if (postObj.loadStatus != 'Loaded') {
+               while (idCount < idArray.length;)
+               for (idCount = 0;  idCount++) {
+                  console.log('gettingCached #' + idCount)
+                  localforage.getItem(idArray[idCount]).then(function (value) {
+                     if (value !== null) {
+                        addFullPost(value);
+                        idArray.splice(idCount - 1, 1)
+                        console.log(idArray)
+                     }
+                  }).catch(function (err) {
+                     $scope.showInfoPopup('Error loading cache, try reloading the page', null, err, true)
+                  });
+               };
                postIdAccumulator.push(postObj.id)
                if (postIdAccumulator.length == 5) {
                   console.log('loading Posts - getting from database')
@@ -394,20 +407,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function getPostsFromGDrive(idArray, callBack) {
       var idCount;
       conurancyCounter++;
-      for (idCount = 0;idCount < idArray.length; idCount++) {
-         console.log('gettingCached #' + idCount)
-         localforage.getItem(idArray[idCount]).then(function (value) {
-            if (value !== null) {
-               addFullPost(value);
-               idArray.splice(idCount-1, 1)
-               console.log(idArray)
-            }
-         }).catch(function (err) {
-            $scope.showInfoPopup('Error loading cache, try reloading the page', null, err, true)
-         });
-      };
+
       if (idArray.length > 0) {
-          console.log('getting from gdrive')
+         console.log('getting from gdrive')
          promiseQueue.addPromise('script', APIService.runGAScript('getPosts', idArray), function (postsData) {
             console.log(postsData)
             var postsArray = JSON.parse(postsData.result.response.result);
@@ -415,7 +417,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                conurancyCounter--;
                var max = postsArray.length;
                for (var count = 0; count < max; count++) {
-                   console.log('got from gdrive - post #' + count)
+                  console.log('got from gdrive - post #' + count)
                   var post = addFullPost(postsArray[count])
                   localforage.setItem(post.id, post);
                }
