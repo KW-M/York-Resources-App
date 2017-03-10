@@ -182,7 +182,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          postsFireRef.orderByChild('DC').startAt(Date.now()).on('child_added', function (childSnapshot) {
             console.log('newChild', childSnapshot.val())
             $scope.allPosts.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'));
-            getPosts([childSnapshot.key], sortPosts)
+            getPostsFromGDrive([childSnapshot.key], sortPosts)
          });
          postsFireRef.on('child_removed', function (childSnapshot) {
             console.log('childremoved', childSnapshot)
@@ -376,12 +376,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             if (postObj.loadStatus != 'Loaded') {
                postIdAccumulator.push(postObj.id)
                if (postIdAccumulator.length == 5) {
-                  getPosts(postIdAccumulator);
+                  getPostsFromGDrive(postIdAccumulator);
                   return true;
                }
             }
          }
-         if (postIdAccumulator.length != 0) getPosts(postIdAccumulator);
+         if (postIdAccumulator.length != 0) getPostsFromGDrive(postIdAccumulator);
       }
    }
 
