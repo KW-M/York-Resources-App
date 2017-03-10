@@ -388,23 +388,28 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             }
          }
 
-function getCachedPosts() {
-   for (idCount = 0; idCount < max; idCount++) {
-           localforage.getItem(postObj.id).then(function (value) {
-            if (value !== null) {
-               addFullPost(value);
-            } else {
-               if (postIdAccumulator.length == 5) {
-                  getPostsFromGDrive(postIdAccumulator);
-               }
+         function getCachedPosts() {
+            var cacheLoadCount
+            var max = postIdAccumulator.length
+            for (var idCount = 0; idCount < max; idCount++) {
+               localforage.getItem(postIdAccumulator[idCount]).then(function (value) {
+                  cacheLoadCount++
+                  if (value !== null) {
+                     addFullPost(value);
+                  } else {
+                     remotePostIdAccumulator.push(postIdAccumulator[idCount]);
+                     if (remotePostIdAccumulator.length === 5) {
+                        getPostsFromGDrive(remotePostIdAccumulator);
+                        idCount = max + 1
+                     }
+                  }
+               }).catch(function (err) {
+                  $scope.showInfoPopup('Error loading cache, try reloading the page', null, err, true)
+               });
             }
-         }).catch(function (err) {
-            $scope.showInfoPopup('Error loading cache, try reloading the page', null, err, true)
-         });
-}}
+         }
 
-
-         if (remotePostIdAccumulator.length != 0) getPostsFromGDrive(postIdAccumulator);
+         if (cacheLoadCount === postIdAccumulator.length && remotePostIdAccumulator.length != 0) getPostsFromGDrive(remotePostIdAccumulator);
       }
    }
 
