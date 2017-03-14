@@ -402,7 +402,6 @@
                         updateSigninStatus(GAuth.isSignedIn.get());
                         // show sign in prompt if sign in button is clicked.
                         GAuth.attachClickHandler('signin_button', null, null, function (error) {
-                            console.warn(error)
                             if (error.hasOwnProperty('expectedDomain')) self.showNonYorkDialog()
                         })
                     }, console.warn)
@@ -481,13 +480,7 @@
                     var logoutImg = document.body.appendChild(logout);
                     gapi.auth2.getAuthInstance().signOut().then(function () {
                         setTimeout(function () {
-                            self.FireAuth.signOut().then(function () {
-                                if (callback) {
-                                    $q.all([FireSignInPromise.promise, GSignInPromise.promise]).then(function () {
-                                        callback();
-                                    });
-                                }
-                            }, console.warn);
+                            self.FireAuth.signOut().then(null, console.warn);
                         }, 500)
                     }, console.warn);
                 }
@@ -519,11 +512,9 @@
                     }, 500);
                 };
 
-                this.onLoad = function (callback) {
-                    $q.all([LibraryLoadPromise.promise, FireSignInPromise.promise, GSignInPromise.promise]).then(function () {
-                        callback();
-                    });
-                }
+                $q.all([LibraryLoadPromise.promise, FireSignInPromise.promise, GSignInPromise.promise]).then(function () {
+                    callback();
+                });
 
                 this.hideSigninDialog = function () {
                     signinBackdrop.addClass('fadeOut');
