@@ -435,6 +435,8 @@
                         GSignInPromise = $q.defer();
                         FireSignInPromise = $q.defer();
                         self.onLoad(window.signinDone)
+                        window.changeInitializationSpinner('indeterminate')
+                        window.progressInitializationSpinner(2, undefined)
                     } else if (Input == null || Input.displayName != undefined) {
                         self.FireUser = Input;
                     }
