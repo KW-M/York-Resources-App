@@ -135,9 +135,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       })
    }
 
-   authorizationService.onLoad(handleSignin)
-
-   function handleSignin() {
+   window.signinDone = function() {
       window.progressInitializationSpinner(15, 'increment')
       var profile = authorizationService.GUser.getBasicProfile()
       $scope.myInfo = {

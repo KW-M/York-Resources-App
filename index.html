@@ -432,6 +432,9 @@
                         GSignedIn = false;
                         self.GUser = null;
                         self.showSigninButton()
+                        GSignInPromise = $q.defer();
+                        FireSignInPromise = $q.defer();
+                        self.onLoad(window.signinDone)
                     } else if (Input == null || Input.displayName != undefined) {
                         self.FireUser = Input;
                     }
@@ -512,9 +515,13 @@
                     }, 500);
                 };
 
-                $q.all([LibraryLoadPromise.promise, FireSignInPromise.promise, GSignInPromise.promise]).then(function () {
-                    callback();
-                });
+                this.onLoad = function (callback) {
+                    $q.all([LibraryLoadPromise.promise, FireSignInPromise.promise, GSignInPromise.promise]).then(function () {
+                        callback();
+                    });
+                }
+
+                this.onLoad(window.signinDone)
 
                 this.hideSigninDialog = function () {
                     signinBackdrop.addClass('fadeOut');
