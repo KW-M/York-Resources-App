@@ -475,10 +475,6 @@
                 }
 
                 this.signOut = function (callback) {
-                    if (callback) {
-                        GSignInPromise = $q.defer();
-                        FireSignInPromise = $q.defer();
-                    }
                     var logout = document.createElement("img");
                     logout.setAttribute("src", "https://mail.google.com/mail/u/0/?logout&hl=en");
                     logout.style.display = "none";
