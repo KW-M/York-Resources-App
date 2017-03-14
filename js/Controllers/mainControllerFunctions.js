@@ -751,7 +751,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       angularGridInstance.postsGrid.refresh();
    }
    $scope.signOut = function () {
-      authorizationService.handleSignoutClick();
+      authorizationService.signOut();
    };
    $scope.FABClick = function () { //called by the top left toolbar menu button
       if ($scope.globals.FABisOpen == true) {

@@ -138,7 +138,7 @@
                             <p class="user-name" style="color: #666; font-size:13px; padding: 0px">{{myInfo.email}}</p>
                         </md-menu-item>
                         <md-menu-item>
-                            <md-button id="signout_button" onclick="signOut()">
+                            <md-button id="signout_button" ng-click="signOut()">
                                 <md-icon>exit_to_app</md-icon>
                                 <span>Sign out</span>
                             </md-button>
@@ -474,7 +474,11 @@
                     }
                 }
 
-                window.signOut = function () {
+                this.signOut = function (callback) {
+                    if (callback) {
+                        GSignInPromise = $q.defer();
+                        FireSignInPromise = $q.defer();
+                    }
                     var logout = document.createElement("img");
                     logout.setAttribute("src", "https://mail.google.com/mail/u/0/?logout&hl=en");
                     logout.style.display = "none";
@@ -482,7 +486,11 @@
                     gapi.auth2.getAuthInstance().signOut().then(function () {
                         setTimeout(function () {
                             self.FireAuth.signOut().then(function () {
-                                
+                                if (callback) {
+                                    $q.all([FireSignInPromise.promise, GSignInPromise.promise]).then(function () {
+                                        callback();
+                                    });
+                                }
                             }, console.warn);
                         }, 500)
                     }, console.warn);
@@ -534,7 +542,7 @@
                 }
 
                 this.showNonYorkDialog = function () {
-                    signOut()
+                    self.signOut()
                     $mdDialog.show($mdDialog.alert({
                         title: 'Sorry.',
                         htmlContent: "<p>York Study Resources only works with York Google accounts right now.</p><p>If you have an email account ending with @york.org, please login with it, or ask Mr.Brookhouser if you don't have one.<p>",
