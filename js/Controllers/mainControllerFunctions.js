@@ -146,7 +146,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
       var progressTimeout = setInterval(function () {
          window.progressInitializationSpinner(2, 'increment')
-      }, 20)
+      }, 245)
       var getStartupData = $q.defer();
       promiseQueue.addPromise('drive', APIService.runGAScript('getStartupData'), function (data) {
          var dataObj = JSON.parse(data.result.response.result);
@@ -738,7 +738,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       angularGridInstance.postsGrid.refresh();
    }
    $scope.signOut = function () {
-      authorizationService.signOut(handleSignin);
+      authorizationService.signOut();
    };
    $scope.FABClick = function () { //called by the top left toolbar menu button
       if ($scope.globals.FABisOpen == true) {
