@@ -135,7 +135,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       })
    }
 
-   authorizationService.onLoad(function () {
+   authorizationService.onLoad(handleSignin)
+
+   function handleSignin() {
       window.progressInitializationSpinner(15, 'increment')
       var profile = authorizationService.GUser.getBasicProfile()
       $scope.myInfo = {
@@ -181,7 +183,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          document.dispatchEvent(new Event('userInitializatinDone'));
          getDatabase();
       })
-   })
+   }
 
    function initiateDrivePicker() {
       var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
@@ -242,7 +244,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          if ($scope.sortedPosts.length == 0) sortPosts();
          firebase.database().ref(".info/connected").on("value", function (snap) {
             if (snap.val() === false) {
-               $mdToast.show($mdToast.simple().textContent("You are offline, many functions are unavailable.").action('X').hideDelay(false))
+               $mdToast.show($mdToast.simple().textContent("You are offline, many functions are unavailable.").action('✕').hideDelay(false))
             } else {
                $mdToast.hide();
             }
@@ -751,7 +753,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       angularGridInstance.postsGrid.refresh();
    }
    $scope.signOut = function () {
-      authorizationService.signOut();
+      authorizationService.signOut(handleSignin);
    };
    $scope.FABClick = function () { //called by the top left toolbar menu button
       if ($scope.globals.FABisOpen == true) {
