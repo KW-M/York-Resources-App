@@ -389,6 +389,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function loadPosts() {
       hideSpinner() //may or may not hide spinner
+      console.log('concurancy',conurancyCounter)
       if (conurancyCounter == 0 && $scope.sortedPosts.length != 0 && $scope.sortedPosts.length != loadedCounter) {
          conurancyCounter++;
          var index;
@@ -426,7 +427,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                }
             }
             console.log(remotePostIdAccumulator)
-            if (remotePostIdAccumulator.length != 0) {
+            if (remotePostIdAccumulator.length !== 0) {
                getPostsFromGDrive(remotePostIdAccumulator);
                $timeout(function () {
                   $scope.sortedPosts = $scope.sortedPosts;
@@ -434,7 +435,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             } else {
                $timeout(function () {
                   $scope.sortedPosts = $scope.sortedPosts;
-                  conurancyCounter;
+                  conurancyCounter--;
                   setTimeout(hideSpinner, 750)
                })
             }
