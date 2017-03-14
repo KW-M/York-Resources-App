@@ -134,10 +134,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          $scope.initializationSpinnerMode = mode;
       })
    }
-   
-   authorizationService.onLoad(signinDone)
 
-   window.signinDone = function() {
+   window.signinDone = function () {
       window.progressInitializationSpinner(15, 'increment')
       var profile = authorizationService.GUser.getBasicProfile()
       $scope.myInfo = {
@@ -147,8 +145,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
 
       var progressTimeout = setInterval(function () {
-         window.progressInitializationSpinner(7, 'increment')
-      }, 750)
+         window.progressInitializationSpinner(2, 'increment')
+      }, 20)
       var getStartupData = $q.defer();
       promiseQueue.addPromise('drive', APIService.runGAScript('getStartupData'), function (data) {
          var dataObj = JSON.parse(data.result.response.result);
@@ -184,6 +182,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          getDatabase();
       })
    }
+
+   authorizationService.onLoad(window.signinDone)
 
    function initiateDrivePicker() {
       var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
