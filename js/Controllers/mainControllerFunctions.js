@@ -434,6 +434,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             } else {
                $timeout(function () {
                   $scope.sortedPosts = $scope.sortedPosts;
+                  conurancyCounter;
                   setTimeout(hideSpinner, 750)
                })
             }
