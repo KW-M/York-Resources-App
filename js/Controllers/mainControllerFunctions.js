@@ -201,7 +201,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function getDatabase() {
       var postsFireRef = authorizationService.FireDatabase.ref('posts')
       postsFireRef.orderByChild('DC').once('value', function (snapshot) {
-         snapshot.forEach(function (childSnapshot) {
+         if ($scope.allPosts.length === 0) snapshot.forEach(function (childSnapshot) {
             $scope.allPosts.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'))
          });
          postsFireRef.orderByChild('DC').startAt(Date.now()).on('child_added', function (childSnapshot) {
@@ -500,21 +500,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          footer_problem.style.display = 'none';
       }
    }
-
-   // $scope.$watch('sortedPosts', function () {
-   //    var visible = [];
-   //    var max = $scope.sortedPosts.length
-   //    for (var index = 0; index < max; index++) {
-   //       var postObj = $scope.sortedPosts[index]
-   //       if (postObj.loadStatus == 'Loaded') visible.push(postObj);
-   //    }
-   //    $timeout(function () {
-   //       $scope.visiblePosts = visible;
-   //       angularGridInstance.postsGrid.refresh();
-   //       if ($scope.visiblePosts.length == 0) layout_grid.style.height = '0px';
-   //    })
-   // }, true);
-
    $scope.loadPosts = loadPosts;
 
    //----------------------------------------------------
