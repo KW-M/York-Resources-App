@@ -434,7 +434,7 @@
                         self.showSigninButton()
                         GSignInPromise = $q.defer();
                         FireSignInPromise = $q.defer();
-                        self.onLoad(window.signinDone)
+                        self.onLoad(windowsigninDone)
                     } else if (Input == null || Input.displayName != undefined) {
                         self.FireUser = Input;
                     }
@@ -520,8 +520,6 @@
                         callback();
                     });
                 }
-
-                this.onLoad(window.signinDone)
 
                 this.hideSigninDialog = function () {
                     signinBackdrop.addClass('fadeOut');

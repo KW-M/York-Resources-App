@@ -134,6 +134,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          $scope.initializationSpinnerMode = mode;
       })
    }
+   
+   authorizationService.onLoad(signinDone)
 
    window.signinDone = function() {
       window.progressInitializationSpinner(15, 'increment')
