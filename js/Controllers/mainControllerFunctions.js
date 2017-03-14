@@ -390,13 +390,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function loadPosts() {
       hideSpinner() //may or may not hide spinner
       if (conurancyCounter == 0 && $scope.sortedPosts.length != 0 && $scope.sortedPosts.length != loadedCounter) {
-         console.log('loading Posts')
+         conurancyCounter++;
          var index;
          var postIdAccumulator = [];
          var postPromiseAccumulator = [];
          var remotePostIdAccumulator = [];
          var max = $scope.sortedPosts.length;
-         console.log('loading Posts - spinner Determinate')
          for (index = 0; index < max; index++) {
             var postObj = $scope.sortedPosts[index];
             console.log(postObj)
@@ -444,7 +443,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function getPostsFromGDrive(idArray, callBack) {
       var idCount;
-      conurancyCounter++;
       console.log('getting from gdrive', idArray)
       promiseQueue.addPromise('script', APIService.runGAScript('getPosts', idArray), function (postsData) {
          console.log(postsData)
