@@ -390,7 +390,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function loadPosts() {
       hideSpinner() //may or may not hide spinner
       console.log('concurancy',conurancyCounter)
-      if (conurancyCounter == 0 && $scope.sortedPosts.length != 0 && $scope.sortedPosts.length != loadedCounter) {
+      if (conurancyCounter === 0 && $scope.sortedPosts.length !== 0 && $scope.sortedPosts.length !== loadedCounter) {
          conurancyCounter++;
          var index;
          var postIdAccumulator = [];
