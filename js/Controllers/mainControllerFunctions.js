@@ -201,10 +201,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function getDatabase() {
       var postsFireRef = authorizationService.FireDatabase.ref('posts')
       postsFireRef.orderByChild('DC').once('value', function (snapshot) {
-         if ($scope.allPosts.length === 0) for (var index = 0, max = snapshot.length; index < max; index++) {
-            var childSnapshot = snapshot[index]
-            $scope.allPosts.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'))
-         };
+         if ($scope.allPosts.length === 0)
+            for (var index = 0, max = snapshot.length; index < max; index++) {
+               var childSnapshot = snapshot[index]
+               $scope.allPosts.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'))
+            };
          postsFireRef.orderByChild('DC').startAt(Date.now()).on('child_added', function (childSnapshot) {
             console.log('newChild', childSnapshot.val())
             $scope.allPosts.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'));
@@ -390,12 +391,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function loadPosts() {
       hideSpinner() //may or may not hide spinner
-      console.log('concurancy',conurancyCounter)
+      console.log('concurancy', conurancyCounter)
       if (conurancyCounter === 0 && $scope.sortedPosts.length !== 0 && $scope.sortedPosts.length !== loadedCounter) {
          conurancyCounter++;
          var postIdAccumulator = [];
          var postPromiseAccumulator = [];
-         var remotePostIdAccumulator = [];
          for (var index = 0, max = $scope.sortedPosts.length; index < max; index++) {
             var postObj = $scope.sortedPosts[index];
             console.log(postObj)
@@ -411,12 +411,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             }
          }
 
-         function handleCachedPosts(valueArray) {
-            var max = valueArray.length;
-            for (var valueCount = 0; valueCount < max; valueCount++) {
-               var value = valueArray[valueCount]
-               if (value !== null) {
-                  addFullPost(value);
+         function handleCachedPosts(cachedPostsArray) {
+            var remotePostIdAccumulator = [];
+            for (var valueCount = 0, max = cachedPostsArray.length; valueCount < max; valueCount++) {
+               var post = cachedPostsArray[valueCount]
+               if (post !== null) {
+                  addFullPost(post);
                } else {
                   remotePostIdAccumulator.push(postIdAccumulator[valueCount]);
                   console.log(remotePostIdAccumulator)

@@ -5,6 +5,9 @@ var app = angular.module('StudyHub', ['ngMaterial', 'ngRoute', 'angularGrid', 'n
 app.config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $locationProvider) {
     //$locationProvider.html5Mode(true);
     //routing:
+    
+    //configuring cache (Localforge not Angular) 
+    localforage
 
     //defining icons:
     $mdIconProvider.icon("driveIcon", "images/drive_icon.svg", 18);
