@@ -2,12 +2,18 @@
 var app = angular.module('StudyHub', ['ngMaterial', 'ngRoute', 'angularGrid', 'ngSanitize']);
 
 //universaly applying configurations/options for the angular module (app) named "app" above
-app.config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $locationProvider) {
+app.config(function ($mdThemingProvider, $mdIconProvider, $routeProvider, $locationProvider) {
     //$locationProvider.html5Mode(true);
     //routing:
-    
-    //configuring cache (Localforge not Angular) 
-    localforage
+
+    //configuring cache (Localforage not Angular) 
+    localforage.config({
+        driver: localforage.WEBSQL, // Force WebSQL; same as using setDriver()
+        name: 'StudyHub',
+        size: 4980736, // Size of database, in bytes. WebSQL-only for now.
+        storeName: 'StudyHub Offline Cache', // Should be alphanumeric, with underscores.
+        description: 'Keeps some posts in a local cache for quick load times and offline support.'
+    });
 
     //defining icons:
     $mdIconProvider.icon("driveIcon", "images/drive_icon.svg", 18);
@@ -126,7 +132,7 @@ app.config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $locati
         'contrastDarkColors': '50 100 200 A100 A200'
     });
     $mdThemingProvider.theme('default')
-    .primaryPalette('YorkRed')
+        .primaryPalette('YorkRed')
 
     //.accentPalette('YorkBlue')
     //.accentPalette('yorkLightBlue')
