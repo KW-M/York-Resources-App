@@ -8,9 +8,7 @@ app.config(function ($mdThemingProvider, $mdIconProvider, $routeProvider, $locat
 
     //configuring cache (Localforage not Angular) 
     localforage.config({
-        driver: localforage.WEBSQL, // Force WebSQL; same as using setDriver()
-        name: 'StudyHub',
-        size: 4980736, // Size of database, in bytes. WebSQL-only for now.
+        name: 'StudyHub Offline Cache',
         storeName: 'StudyHub Offline Cache', // Should be alphanumeric, with underscores.
         description: 'Keeps some posts in a local cache for quick load times and offline support.'
     });
