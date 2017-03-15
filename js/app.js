@@ -4,12 +4,11 @@ var app = angular.module('StudyHub', ['ngMaterial', 'ngRoute', 'angularGrid', 'n
 //universaly applying configurations/options for the angular module (app) named "app" above
 app.config(function ($mdThemingProvider, $mdIconProvider, $routeProvider, $locationProvider) {
     //$locationProvider.html5Mode(true);
-    //routing:
 
     //configuring cache (Localforage not Angular) 
     localforage.config({
         name: 'StudyHub Offline Cache',
-        storeName: 'StudyHub Offline Cache', // Should be alphanumeric, with underscores.
+        storeName: 'StudyHub_Offline_Cache', // Should be alphanumeric, with underscores.
         description: 'Keeps some posts in a local cache for quick load times and offline support.'
     });
 
