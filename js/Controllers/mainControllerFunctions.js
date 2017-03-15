@@ -201,9 +201,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function getDatabase() {
       var postsFireRef = authorizationService.FireDatabase.ref('posts')
       postsFireRef.orderByChild('DC').once('value', function (snapshot) {
-         if ($scope.allPosts.length === 0) snapshot.forEach(function (childSnapshot) {
+         if ($scope.allPosts.length === 0) for (var index = 0, max = snapshot.length; index < max; index++) {
+            var childSnapshot = snapshot[index]
             $scope.allPosts.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'))
-         });
+         };
          postsFireRef.orderByChild('DC').startAt(Date.now()).on('child_added', function (childSnapshot) {
             console.log('newChild', childSnapshot.val())
             $scope.allPosts.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'));
@@ -392,12 +393,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       console.log('concurancy',conurancyCounter)
       if (conurancyCounter === 0 && $scope.sortedPosts.length !== 0 && $scope.sortedPosts.length !== loadedCounter) {
          conurancyCounter++;
-         var index;
          var postIdAccumulator = [];
          var postPromiseAccumulator = [];
          var remotePostIdAccumulator = [];
-         var max = $scope.sortedPosts.length;
-         for (index = 0; index < max; index++) {
+         for (var index = 0, max = $scope.sortedPosts.length; index < max; index++) {
             var postObj = $scope.sortedPosts[index];
             console.log(postObj)
             if (postObj.loadStatus != 'Loaded') {
