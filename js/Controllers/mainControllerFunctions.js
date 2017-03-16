@@ -65,7 +65,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }, 1000);
 
       function onLocationChange() {
-         console.log('ur changed')
+         console.log('url changed')
          $scope.queryParams.classPath = $location.path().replace(/\//g, "").replace(/-/g, " ").replace(/~/g, "-") || 'All Posts';
          $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
          $scope.queryParams.q = $location.search().q || null;
@@ -202,11 +202,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function getDatabase() {
       var postsFireRef = authorizationService.FireDatabase.ref('posts')
       postsFireRef.orderByChild('DC').once('value', function (snapshot) {
-         if ($scope.allPosts.length === 0)
+         console.log('snapshotis',$scope.allPosts.length)
+         if ($scope.allPosts.length === 0) {
             for (var index = 0, max = snapshot.length; index < max; index++) {
                var childSnapshot = snapshot[index]
                $scope.allPosts.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'))
             };
+         }
          postsFireRef.orderByChild('DC').startAt(Date.now()).on('child_added', function (childSnapshot) {
             console.log('newChild', childSnapshot.val())
             $scope.allPosts.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'));
