@@ -411,7 +411,7 @@
                         'apiKey': 'AIzaSyAhXIGkYgfAG9LXhAuwbePD3z_qSVWUSNA',
                         'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest', 'https://www.googleapis.com/discovery/v1/apis/script/v1/rest'],
                     }).then(function () {
-                        window.progressInitializationSpinner(5, 'increment')
+                        window.progressInitializationSpinner(6, 'increment')
                         console.log("Loaded APIs")
                         LibraryLoadPromise.resolve();
                     }, console.warn)
@@ -423,10 +423,10 @@
                         GSignedIn = true;
                         GSignInPromise.resolve(self.GUser);
                         window.changeInitializationSpinner('determinate')
-                        window.progressInitializationSpinner(10, 'increment')
+                        window.progressInitializationSpinner(8, 'increment')
                         setTimeout(function (argument) {
-                            window.progressInitializationSpinner(10, 'increment')
-                        }, 100)
+                            window.progressInitializationSpinner(8, 'increment')
+                        }, 150)
                         hideSigninButton()
                     } else if (Input === false) {
                         GSignedIn = false;
@@ -436,7 +436,7 @@
                         FireSignInPromise = $q.defer();
                         self.onLoad(window.signinDone)
                         window.changeInitializationSpinner('indeterminate')
-                        window.progressInitializationSpinner(2, undefined)
+                        window.progressInitializationSpinner(8, undefined)
                     } else if (Input == null || Input.displayName != undefined) {
                         self.FireUser = Input;
                     }
@@ -445,7 +445,7 @@
                     if (GSignedIn && self.FireUser && self.FireUser != 'None' && isUserEqual(self.GUser, self.FireUser)) {
                         console.log("Everything is SignedIn")
                         FireSignInPromise.resolve(self.FireUser);
-                        window.progressInitializationSpinner(10, 'increment')
+                        window.progressInitializationSpinner(8, 'increment')
                     } else if (GSignedIn && self.FireUser && self.FireUser != 'None' && !isUserEqual(self.GUser, self.FireUser)) {
                         console.log("Different Firebase user, signing into Firebase...")
                         SignIntoFirebase()
@@ -459,7 +459,7 @@
                         var credential = firebase.auth.GoogleAuthProvider.credential(self.GUser.getAuthResponse().id_token);
                         firebase.auth().signInWithCredential(credential).then(function () {
                             FireSignInPromise.resolve(self.FireUser);
-                            window.progressInitializationSpinner(10, 'increment')
+                            window.progressInitializationSpinner(8, 'increment')
                         }).catch(console.warn);
                     }
 
