@@ -201,14 +201,18 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function getDatabase() {
       var postsFireRef = authorizationService.FireDatabase.ref('posts')
-      postsFireRef.orderByChild('DC').once('value', function (snapshot) {
-         console.log('snapshotis',$scope.allPosts.length)
-         if ($scope.allPosts.length === 0) {
-            for (var index = 0, max = snapshot.length; index < max; index++) {
-               var childSnapshot = snapshot[index]
+      if ($scope.allPosts.length === 0) {
+         postsFireRef.orderByChild('DC').once('value', function (snapshot) {
+            snapshot.forEach(function (childSnapshot) {
                $scope.allPosts.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'))
-            };
-         }
+            });
+            setupDatabase()
+         })
+      } else {
+         setupDatabase()
+      }
+
+      function setupDatabase() {
          postsFireRef.orderByChild('DC').startAt(Date.now()).on('child_added', function (childSnapshot) {
             console.log('newChild', childSnapshot.val())
             $scope.allPosts.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'));
@@ -256,8 +260,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $timeout(function () {
                $scope.offline = !snap.val()
             })
-         });
-      })
+         })
+      }
 
       function convertFirePost(key, value, loadStatus) {
          //console.log("date created", new Date(value.DC))
