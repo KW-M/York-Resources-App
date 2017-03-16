@@ -65,6 +65,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }, 1000);
 
       function onLocationChange() {
+         console.log('ur changed')
          $scope.queryParams.classPath = $location.path().replace(/\//g, "").replace(/-/g, " ").replace(/~/g, "-") || 'All Posts';
          $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
          $scope.queryParams.q = $location.search().q || null;
