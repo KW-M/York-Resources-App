@@ -956,7 +956,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    };
    $scope.openOnboardingDialog = function () { //called by the top right toolbar help button
       $mdDialog.show({
-         templateUrl: 'templates/onboard.html',
+         templateUrl: 'onboard.html',
          controller: DialogController,
          parent: angular.element(document.body),
          // scope: {
