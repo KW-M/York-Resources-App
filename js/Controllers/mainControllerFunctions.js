@@ -969,9 +969,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          templateUrl: 'onboard.html',
          controller: DialogController,
          parent: angular.element(document.body),
-         // scope: {
-         // 	fullscreen:	$mdMedia('xs'),
-         // },
+         scope: {
+         	//fullscreen:	$mdMedia('xs'),
+         //	onboardingPageNumber: 0,
+         },
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
          onComplete: function () {
