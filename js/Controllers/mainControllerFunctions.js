@@ -935,8 +935,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          $mdDialog.cancel();
       };
       scope.setIntroPage = function (pgNumber) {
-         scope.onboardingPageNumber = pgNumber;
-         HYPE.documents["StudyHub"].
+         var pageArray = ['Access', 'Contribute', 'Improve']
+         HYPE.documents["StudyHub Intro"].showSceneNamed(pageArray[pgNumber], "Crossfade", 0.5)
+         $timeout(function () {
+            scope.onboardingPageNumber = pgNumber;
+         })
       }
       scope.myEmail = $scope.myInfo.Email
    }
