@@ -955,6 +955,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       });
    };
    $scope.openOnboardingDialog = function () { //called by the top right toolbar help button
+      document.body.appendChild(document.createElement("script").setAttribute("src","StudyHub%20Intro.hyperesources/studyhubintro_hype_generated_script.js?7182"))
       $mdDialog.show({
          templateUrl: 'onboard.html',
          controller: DialogController,
