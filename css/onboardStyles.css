@@ -73,10 +73,10 @@
 }
 
 .onboardingTextContainer {
-    bottom: 0
+    bottom: 0;
     left:0;
     right:0;
-    position: absolute
+    position: absolute;
     padding: 12px;
     padding-top: 32px;
 }
