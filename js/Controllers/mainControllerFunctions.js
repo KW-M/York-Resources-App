@@ -942,6 +942,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          })
       }
       scope.myEmail = $scope.myInfo.Email
+      scope.fullscreen = $mdMedia('xs'),
+      scope.onboardingPageNumber = 0,
    }
    $scope.openHelpDialog = function () { //called by the top right toolbar help button
       $mdDialog.show({
@@ -969,10 +971,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          templateUrl: 'onboard.html',
          controller: DialogController,
          parent: angular.element(document.body),
-         scope: {
-         	//fullscreen:	$mdMedia('xs'),
-         //	onboardingPageNumber: 0,
-         },
+         // scope: {
+         // 	//fullscreen:	$mdMedia('xs'),
+         // //	onboardingPageNumber: 0,
+         // },
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
          onComplete: function () {
