@@ -955,7 +955,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       });
    };
    $scope.openOnboardingDialog = function () { //called by the top right toolbar help button
-      document.body.appendChild(document.createElement("script").setAttribute("src","StudyHub%20Intro.hyperesources/studyhubintro_hype_generated_script.js?7182"))
+      var hypeScript = document.createElement("script")
+      hypeScript.setAttribute("src", "StudyHub%20Intro.hyperesources/studyhubintro_hype_generated_script.js?7182")
+      hypeScript.setAttribute("type", "text/javascript")
       $mdDialog.show({
          templateUrl: 'onboard.html',
          controller: DialogController,
@@ -965,6 +967,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          // },
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
+         onComplete: function () {
+            document.body.appendChild(hypeScript)
+         }
       });
       authorizationService.hideSigninDialog();
    };
