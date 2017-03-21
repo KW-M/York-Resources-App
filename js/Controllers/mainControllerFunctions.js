@@ -942,8 +942,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          })
       }
       scope.myEmail = $scope.myInfo.Email
-      scope.fullscreen = $mdMedia('xs'),
-      scope.onboardingPageNumber = 0,
+      scope.fullscreen = $mdMedia('xs');
+      scope.onboardingPageNumber = 0;
    }
    $scope.openHelpDialog = function () { //called by the top right toolbar help button
       $mdDialog.show({

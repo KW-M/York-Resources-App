@@ -55,7 +55,7 @@
 }
 
 .onboardingDialog {
-    background-color: #3f51b5;
+    background-color: rgb(154, 201, 255);
     border-radius: 10px;
     font-family: Roboto;
     text-align: center;
