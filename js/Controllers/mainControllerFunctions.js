@@ -934,6 +934,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       scope.cancelDialog = function () {
          $mdDialog.cancel();
       };
+      scope.setIntroPage = function (pgNumber) {
+         scope.onboardingPageNumber = pgNumber;
+         HYPE.documents["StudyHub"].
+      }
       scope.myEmail = $scope.myInfo.Email
    }
    $scope.openHelpDialog = function () { //called by the top right toolbar help button

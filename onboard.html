@@ -16,9 +16,9 @@
       <div class="onboardingTextHeader">Contribute your own work</div>
       <div class="onboardingText">To help current students, and those to come get more out of learning at York.</div>
     </div>
-  <md-dialog-actions style="position:absolute;bottom">
+  <md-dialog-actions style="position:absolute;bottom:0;left:0;right:0;">
     <md-button ng-hide="onboardingPageNumber === 2 || fullscreen !== true" class="md-accent" style="color:white" ng-click="onboardingPageNumber = onboardingPageNumber + 1">Next</md-button>
-    <md-button ng-hide="onboardingPageNumber !== 2 && fullscreen === true" class="md-accent" style="color:white" ng-click="hideDialog()"><span ng-hide="onboardingPageNumber === 2">Skip</span><span ng-hide="onboardingPageNumber !== 2">Get Started</span></md-button>
+    <md-button ng-hide="onboardingPageNumber !== 2 && fullscreen === true" class="md-accent" style="color:white" ng-click="hideDialog()"><span ng-if="onboardingPageNumber !== 2">Get Started</span></md-button>
     <div class="dotPageIndicatorContainer">
       <div class="dotPageIndicator" ng-class="{'dotPageIndicatorActive' : onboardingPageNumber === 0}"></div>
       <div class="dotPageIndicator" ng-class="{'dotPageIndicatorActive' : onboardingPageNumber === 1}"></div>
