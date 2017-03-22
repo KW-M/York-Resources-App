@@ -410,15 +410,19 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                postIdAccumulator.push(postObj.id)
                postPromiseAccumulator.push(localforage.getItem(postObj.id))
                if (postIdAccumulator.length === 6) {
+                  var IdListPromise = $q.defer()
+                  postPromiseAccumulator.push(IdListPromise.promise)
                   $q.all(postPromiseAccumulator).then(handleCachedPosts).catch(function (err) {
                      $scope.showInfoPopup('Error loading cache, try reloading the page', null, err, true)
                   })
+                  IdListPromise.resolve(postIdAccumulator);
                   index = max + 1
                }
             }
          }
 
          function handleCachedPosts(cachedPostsArray) {
+            postIdAccumulator = cachedPostsArray
             var remotePostIdAccumulator = [];
             for (var valueCount = 0, max = cachedPostsArray.length; valueCount < max; valueCount++) {
                var post = cachedPostsArray[valueCount]
