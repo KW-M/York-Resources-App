@@ -412,6 +412,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                if (postIdAccumulator.length === 6) {
                   var IdListPromise = $q.defer()
                   postPromiseAccumulator.push(IdListPromise.promise)
+                  console.log(postPromiseAccumulator)
                   $q.all(postPromiseAccumulator).then(handleCachedPosts).catch(function (err) {
                      $scope.showInfoPopup('Error loading cache, try reloading the page', null, err, true)
                   })
@@ -422,7 +423,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          }
 
          function handleCachedPosts(cachedPostsArray) {
-            console.log(ca)
+            console.log(cachedPostsArray)
             var IdAccumulator = cachedPostsArray.pop()
             var remotePostIdAccumulator = [];
             for (var valueCount = 0, max = cachedPostsArray.length; valueCount < max; valueCount++) {
