@@ -423,8 +423,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          }
 
          function handleCachedPosts(cachedPostsArray) {
-            console.log(cachedPostsArray)
             var IdAccumulator = cachedPostsArray.pop()
+                        console.log(cachedPostsArray)
+                        console.log(IdAccumulator)
             var remotePostIdAccumulator = [];
             for (var valueCount = 0, max = cachedPostsArray.length; valueCount < max; valueCount++) {
                var post = cachedPostsArray[valueCount]
