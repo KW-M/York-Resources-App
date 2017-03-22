@@ -422,14 +422,15 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          }
 
          function handleCachedPosts(cachedPostsArray) {
-            postIdAccumulator = cachedPostsArray
+            console.log(ca)
+            var IdAccumulator = cachedPostsArray.pop()
             var remotePostIdAccumulator = [];
             for (var valueCount = 0, max = cachedPostsArray.length; valueCount < max; valueCount++) {
                var post = cachedPostsArray[valueCount]
                if (post !== null) {
                   addFullPost(post);
                } else {
-                  remotePostIdAccumulator.push(postIdAccumulator[valueCount]);
+                  remotePostIdAccumulator.push(IdAccumulator[valueCount]);
                   console.log(remotePostIdAccumulator)
                   if (remotePostIdAccumulator.length === 5) {
                      getPostsFromGDrive(remotePostIdAccumulator);
