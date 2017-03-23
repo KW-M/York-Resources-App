@@ -1298,4 +1298,5 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          });
       }
    }
+   
 }
