@@ -462,6 +462,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function getPostsFromGDrive(idArray, callBack) {
       var idCount;
       console.log('getting from gdrive', idArray)
+      conurancyCounter++;
       promiseQueue.addPromise('script', APIService.runGAScript('getPosts', idArray), function (postsData) {
          console.log(postsData)
          var postsArray = JSON.parse(postsData.result.response.result);
@@ -485,7 +486,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.sortedPosts.splice(indexes.sortedPosts, 1)
             conurancyCounter--;
          }
-      }, null, 150, 'Error retrieving posts, try reloading the page');
+      }, function(){conurancyCounter--;}, 150, 'Error retrieving posts, try reloading the page');
    }
 
    function addFullPost(value) {
