@@ -424,8 +424,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
          function handleCachedPosts(cachedPostsArray) {
             var IdAccumulator = cachedPostsArray.pop()
-                        console.log(cachedPostsArray)
-                        console.log(IdAccumulator)
+            console.log(cachedPostsArray)
+            console.log(IdAccumulator)
             var remotePostIdAccumulator = [];
             for (var valueCount = 0, max = cachedPostsArray.length; valueCount < max; valueCount++) {
                var post = cachedPostsArray[valueCount]
@@ -1001,15 +1001,18 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    });
    content_container.onscroll = function (event) {
       var yScroll = content_container.scrollTop;
-      $timeout(function () {
-         if (yScroll >= 120 && $scope.globals.FABisHidden == true) {
+      if (yScroll >= 120 && $scope.globals.FABisHidden == true) {
+         $timeout(function () {
             $scope.globals.FABisHidden = false;
-         }
-         if (yScroll <= 120 && $scope.globals.FABisHidden == false) {
+         })
+      }
+      if (yScroll <= 120 && $scope.globals.FABisHidden == false) {
+         $timeout(function () {
             $scope.globals.FABisOpen = false;
             $scope.globals.FABisHidden = true;
-         }
-      })
+         })
+      }
+
    };
    document.onkeydown = function (e) {
       if (e.altKey && e.ctrlKey) {
@@ -1298,5 +1301,5 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          });
       }
    }
-   
+
 }

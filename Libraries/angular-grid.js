@@ -610,7 +610,7 @@
                 listElms = getListElms();
                 ngCheckAnim().then(function () {
                   //handle images
-                  handleImage();
+                  //handleImage();
                   $timeout(function () {
                     //to handle scroll appearance
                     reflowGrids();
@@ -685,7 +685,6 @@
               try {
                 win.off('resize', windowResizeCallback);
                 removeResizeListener(content_container, windowResizeCallback);
-                win.off('resize', windowResizeCallback);
               } catch (e) {
                 console.log(e)
               }
