@@ -406,23 +406,28 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          var postPromiseAccumulator = [];
          for (var index = 0, max = $scope.sortedPosts.length; index < max; index++) {
             var postObj = $scope.sortedPosts[index];
-            console.log('postObj',postObj)
+            console.log('postObj', postObj)
             if (postObj.loadStatus !== 'Loaded') {
                postIdAccumulator.push(postObj.id)
                postPromiseAccumulator.push(localforage.getItem(postObj.id))
                if (postIdAccumulator.length === 6) {
-                  var IdListPromise = $q.defer()
-                  postPromiseAccumulator.push(IdListPromise.promise)
-                  console.log(postPromiseAccumulator)
-                  $q.all(postPromiseAccumulator).then(handleCachedPosts).catch(function (err) {
-                     $scope.showInfoPopup('Error loading cache, try reloading the page', null, err, true)
-                     conurancyCounter--;
-                     console.log('concurancy2-', conurancyCounter)
-                  })
-                  IdListPromise.resolve(postIdAccumulator);
+                  handlePostList()
                   index = max + 1
                }
             }
+         }
+         if (postIdAccumulator.length !== 0) handlePostList()
+
+         function handlePostList() {
+            var IdListPromise = $q.defer()
+            postPromiseAccumulator.push(IdListPromise.promise)
+            console.log(postPromiseAccumulator)
+            $q.all(postPromiseAccumulator).then(handleCachedPosts).catch(function (err) {
+               $scope.showInfoPopup('Error loading cache, try reloading the page', null, err, true)
+               conurancyCounter--;
+               console.log('concurancy2-', conurancyCounter)
+            })
+            IdListPromise.resolve(postIdAccumulator);
          }
 
          function handleCachedPosts(cachedPostsArray) {
@@ -493,7 +498,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             conurancyCounter--;
             console.log('concurancy7-', conurancyCounter)
          }
-      }, function(){conurancyCounter--;console.log('concurancy8-', conurancyCounter)}, 150, 'Error retrieving posts, try reloading the page');
+      }, function () {
+         conurancyCounter--;
+         console.log('concurancy8-', conurancyCounter)
+      }, 150, 'Error retrieving posts, try reloading the page');
    }
 
    function addFullPost(value) {
