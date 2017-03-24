@@ -436,11 +436,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                   console.log(remotePostIdAccumulator)
                   if (remotePostIdAccumulator.length === 5) {
                      getPostsFromGDrive(remotePostIdAccumulator);
+                     remotePostIdAccumulator = [];
                   }
                }
             }
             console.log(remotePostIdAccumulator)
             if (remotePostIdAccumulator.length !== 0) {
+               conurancyCounter++;
                getPostsFromGDrive(remotePostIdAccumulator);
                $timeout(function () {
                   $scope.sortedPosts = $scope.sortedPosts;
