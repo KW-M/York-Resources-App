@@ -3,6 +3,7 @@
   <md-icon>arrow_back</md-icon>
 </md-button>
 <md-dialog style="max-width: 500px; height:100%; max-height:600px;" class="onboardingDialog">
+  <>
     <div id="studyhubintro_hype_container" style="position:absolute;top:0;bottom:0;left:0;right:0;z-index:-1;overflow:hidden;-webkit-transform-style:flat;"></div>
     <div style="position:absolute;bottom:0;left:0;right:0;">
     <div class="onboardingTextContainer" ng-if="onboardingPageNumber === 0">
@@ -19,7 +20,7 @@
     </div>
   <md-dialog-actions style="position:absolute;bottom:0;left:0;right:0;">
     <md-button ng-if="onboardingPageNumber !== 2 && fullscreen === true" class="md-accent" style="color:white" ng-click="setIntroPage(onboardingPageNumber - 1)">Next</md-button>
-    <md-button ng-if="onboardingPageNumber === 2 && fullscreen === true" class="md-accent" style="color:white" ng-click="hideDialog()"><span ng-if="onboardingPageNumber !== 2">Get Started</span></md-button>
+    <md-button ng-if="onboardingPageNumber === 2 && fullscreen === true" class="md-accent" style="color:white" ng-click="hideDialog()">Get Started</md-button>
     <div class="dotPageIndicatorContainer">
       <div class="dotPageIndicator" ng-class="{'dotPageIndicatorActive' : onboardingPageNumber === 0}"></div>
       <div class="dotPageIndicator" ng-class="{'dotPageIndicatorActive' : onboardingPageNumber === 1}"></div>
@@ -28,7 +29,9 @@
   </md-dialog-actions>
   </div>
 </md-dialog>
-<md-button class="md-fab onboardingDialogButton" aria-label="next" ng-click="setIntroPage(onboardingPageNumber + 1)" style="margin-left: 16px;">
-  <md-icon ng-if="onboardingPageNumber !== 2">arrow_forward</md-icon>
-  <md-icon ng-if="onboardingPageNumber === 2">check</md-icon>
+<md-button ng-if="onboardingPageNumber !== 2" class="md-fab onboardingDialogButton" aria-label="next" ng-click="setIntroPage(onboardingPageNumber + 1)" style="margin-left: 16px;">
+  <md-icon >arrow_forward</md-icon>
+</md-button>
+<md-button ng-if="onboardingPageNumber === 2"class="md-fab onboardingDialogButton" aria-label="next" ng-click="hideDialog()" style="margin-left: 16px;">
+  <md-icon >check</md-icon>
 </md-button>
