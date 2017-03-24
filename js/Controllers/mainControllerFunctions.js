@@ -451,7 +451,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                $timeout(function () {
                   $scope.sortedPosts = $scope.sortedPosts;
                   setTimeout(hideSpinner, 750)
-                  if (remotePostIdAccumulator.length !== 5) conurancyCounter--;
+                  //if (remotePostIdAccumulator.length !== 5) 
+                  conurancyCounter--;
                })
             }
          }
