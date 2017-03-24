@@ -162,7 +162,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             getStartupData.resolve();
             clearInterval(progressTimeout);
             window.progressInitializationSpinner(10, 'increment')
-            if (true) $scope.openOnboardingDialog();
+            console.log($scope.myInfo.visits)
+            if ($scope.myInfo.visits <= 1) $scope.openOnboardingDialog();
          });
       }, null, 150, 'Problem initializing, try reloading the page.');
 
