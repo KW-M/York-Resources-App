@@ -113,7 +113,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          hideDelay: 3000000,
       });
       newPost({
-         link: (id != undefined) ? 'https://drive.google.com/?open=' + id : null
+         link: (id != undefined) ? 'https://drive.google.com/file/d/' + id + '/edit': null
       }, 'new')
    }
 
