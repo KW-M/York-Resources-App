@@ -61,7 +61,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       onLocationChange();
       $rootScope.$on('$locationChangeSuccess', onLocationChange);
       getFileTimer = setInterval(function () {
-         if (conurancyCounter == 0 && content_container.scrollHeight == content_container.clientHeight) $scope.loadPosts()
+         if (conurancyCounter === 0 && content_container.scrollHeight === content_container.clientHeight) $scope.loadPosts()
       }, 1000);
 
       function onLocationChange() {
@@ -398,9 +398,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function loadPosts() {
       hideSpinner() //may or may not hide spinner
-      console.log('concurancy', conurancyCounter)
+      console.log('concurancy0', conurancyCounter)
       if (conurancyCounter === 0 && $scope.sortedPosts.length !== 0 && $scope.sortedPosts.length !== loadedCounter) {
          conurancyCounter++;
+         console.log('concurancy1+', conurancyCounter)
          var postIdAccumulator = [];
          var postPromiseAccumulator = [];
          for (var index = 0, max = $scope.sortedPosts.length; index < max; index++) {
@@ -416,6 +417,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                   $q.all(postPromiseAccumulator).then(handleCachedPosts).catch(function (err) {
                      $scope.showInfoPopup('Error loading cache, try reloading the page', null, err, true)
                      conurancyCounter--;
+                     console.log('concurancy2-', conurancyCounter)
                   })
                   IdListPromise.resolve(postIdAccumulator);
                   index = max + 1
@@ -447,12 +449,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                $timeout(function () {
                   $scope.sortedPosts = $scope.sortedPosts;
                   conurancyCounter--;
+                  console.log('concurancy3-', conurancyCounter)
                })
             } else {
                $timeout(function () {
                   $scope.sortedPosts = $scope.sortedPosts;
                   setTimeout(hideSpinner, 750)
                   conurancyCounter--;
+                  console.log('concurancy4-', conurancyCounter)
                })
             }
          }
@@ -463,11 +467,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       var idCount;
       console.log('getting from gdrive', idArray)
       conurancyCounter++;
+      console.log('concurancy5+', conurancyCounter)
       promiseQueue.addPromise('script', APIService.runGAScript('getPosts', idArray), function (postsData) {
          console.log(postsData)
          var postsArray = JSON.parse(postsData.result.response.result);
          if (postsArray.error == undefined) {
             conurancyCounter--;
+            console.log('concurancy6-', conurancyCounter)
             var max = postsArray.length;
             for (var count = 0; count < max; count++) {
                console.log('got from gdrive - post #' + count)
@@ -485,8 +491,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.allPosts.splice(indexes.allPosts, 1)
             $scope.sortedPosts.splice(indexes.sortedPosts, 1)
             conurancyCounter--;
+            console.log('concurancy7-', conurancyCounter)
          }
-      }, function(){conurancyCounter--}, 150, 'Error retrieving posts, try reloading the page');
+      }, function(){conurancyCounter--;console.log('concurancy8-', conurancyCounter)}, 150, 'Error retrieving posts, try reloading the page');
    }
 
    function addFullPost(value) {
