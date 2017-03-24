@@ -61,10 +61,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       onLocationChange();
       $rootScope.$on('$locationChangeSuccess', onLocationChange);
       getFileTimer = setInterval(function () {
-         if (conurancyCounter == 0 && content_container.scrollHeight == content_container.clientHeight) $scope.loadPosts()
+         if (conurancyCounter === 0 && content_container.scrollHeight === content_container.clientHeight) $scope.loadPosts()
       }, 1000);
 
       function onLocationChange() {
+         console.log('url changed')
          $scope.queryParams.classPath = $location.path().replace(/\//g, "").replace(/-/g, " ").replace(/~/g, "-") || 'All Posts';
          $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
          $scope.queryParams.q = $location.search().q || null;
@@ -112,15 +113,31 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          hideDelay: 3000000,
       });
       newPost({
-         link: (id != undefined) ? 'https://drive.google.com/?open=' + id : null
+         link: (id != undefined) ? 'https://drive.google.com/file/d/' + id : null
       }, 'new')
    }
 
    //----------------------------------------------------
    //------------- Signin & Initiation ------------------
    var drivePicker, uploadPicker;
+   $scope.initializationProgress = 2;
+   $scope.initializationSpinnerMode = 'indeterminate'
 
-   authorizationService.onLoad(function () {
+   window.progressInitializationSpinner = function (progress, mode) {
+      $timeout(function () {
+         if (mode === 'increment') $scope.initializationProgress += progress
+         if (mode === undefined) $scope.initializationProgress = progress;
+      })
+   }
+
+   window.changeInitializationSpinner = function (mode) {
+      $timeout(function () {
+         $scope.initializationSpinnerMode = mode;
+      })
+   }
+
+   window.signinDone = function () {
+      window.progressInitializationSpinner(15, 'increment')
       var profile = authorizationService.GUser.getBasicProfile()
       $scope.myInfo = {
          email: profile.getEmail(),
@@ -128,6 +145,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          profilePicture: profile.getImageUrl(),
       }
 
+      var progressTimeout = setInterval(function () {
+         window.progressInitializationSpinner(2, 'increment')
+      }, 250)
       var getStartupData = $q.defer();
       promiseQueue.addPromise('drive', APIService.runGAScript('getStartupData'), function (data) {
          var dataObj = JSON.parse(data.result.response.result);
@@ -140,6 +160,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.sortedLabels = dataObj.labels
             $scope.sortLabels()
             getStartupData.resolve();
+            clearInterval(progressTimeout);
+            window.progressInitializationSpinner(10, 'increment')
+            console.log($scope.myInfo.visits)
+            if ($scope.myInfo.visits <= 1) $scope.openOnboardingDialog();
          });
       }, null, 150, 'Problem initializing, try reloading the page.');
 
@@ -148,17 +172,21 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          'callback': function () {
             initiateDrivePicker();
             pickerPromise.resolve();
+            window.progressInitializationSpinner(10, 'increment')
          }
       })
 
       $q.all([getStartupData.promise, pickerPromise.promise]).then(function () {
+         window.progressInitializationSpinner(100, undefined)
          console.log("Everything Loaded")
          listenForURLChange();
          authorizationService.hideSigninDialog();
          document.dispatchEvent(new Event('userInitializatinDone'));
          getDatabase();
       })
-   })
+   }
+
+   authorizationService.onLoad(window.signinDone)
 
    function initiateDrivePicker() {
       var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
@@ -175,14 +203,22 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function getDatabase() {
       var postsFireRef = authorizationService.FireDatabase.ref('posts')
-      postsFireRef.orderByChild('DC').once('value', function (snapshot) {
-         snapshot.forEach(function (childSnapshot) {
-            $scope.allPosts.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'))
-         });
+      if ($scope.allPosts.length === 0) {
+         postsFireRef.orderByChild('DC').once('value', function (snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+               $scope.allPosts.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'))
+            });
+            setupDatabase()
+         })
+      } else {
+         setupDatabase()
+      }
+
+      function setupDatabase() {
          postsFireRef.orderByChild('DC').startAt(Date.now()).on('child_added', function (childSnapshot) {
             console.log('newChild', childSnapshot.val())
             $scope.allPosts.push(convertFirePost(childSnapshot.key, childSnapshot.val(), 'notLoaded'));
-            getPosts([childSnapshot.key], sortPosts)
+            getPostsFromGDrive([childSnapshot.key], sortPosts)
          });
          postsFireRef.on('child_removed', function (childSnapshot) {
             console.log('childremoved', childSnapshot)
@@ -217,11 +253,20 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          });
          if ($scope.sortedPosts.length != 0) loadPosts();
          if ($scope.sortedPosts.length == 0) sortPosts();
-         console.log($scope.allPosts);
-      })
+         firebase.database().ref(".info/connected").on("value", function (snap) {
+            if (snap.val() === false) {
+               $mdToast.show($mdToast.simple().textContent("You are offline, many functions are unavailable.").action('✕').hideDelay(false))
+            } else {
+               $mdToast.hide();
+            }
+            $timeout(function () {
+               $scope.offline = !snap.val()
+            })
+         })
+      }
 
       function convertFirePost(key, value, loadStatus) {
-         console.log("date created", new Date(value.DC))
+         //console.log("date created", new Date(value.DC))
          return {
             id: key,
             creator: {
@@ -252,6 +297,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    $scope.searchPosts = [];
 
    function sortPosts() {
+      console.log('sortingPosts')
       if ($scope.queryParams.q == null) {
          catagorizePosts(filterPosts($scope.allPosts))
       } else {
@@ -265,6 +311,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       function catagorizePosts(filterObj) {
          $timeout(function () {
             $scope.sortedPosts = orderPosts(filterObj.filtered)
+            console.log('Sorting Done - loading')
             loadPosts()
          })
          var max = filterObj.filteredOut.length
@@ -314,14 +361,15 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          if ($scope.queryParams.type != null && $scope.queryParams.type !== undefined) Type = inputSet[count].type == $scope.queryParams.type;
          if ($scope.queryParams.flagged != null && $scope.queryParams.flagged !== undefined) Flagged = inputSet[count].flagged == $scope.queryParams.flagged;
          if ($scope.queryParams.creatorEmail != null && $scope.queryParams.creatorEmail !== undefined) Creator = inputSet[count].creator.email == $scope.queryParams.creatorEmail;
-         console.log($scope.queryParams.creatorEmail + " " + $scope.myInfo.email);
-         console.log(Flagged + " C" + Class + " T" + Type + " CR" + Creator, inputSet[count])
+         //console.log($scope.queryParams.creatorEmail + " " + $scope.myInfo.email);
+         // console.log(Flagged + " C" + Class + " T" + Type + " CR" + Creator, inputSet[count])
          if (Flagged && Class && Type && Creator) {
             filtered.push(inputSet[count])
          } else {
             filteredOut.push(inputSet[count])
          }
       };
+      console.log('done filtering');
       return {
          filtered: filtered,
          filteredOut: filteredOut
@@ -351,45 +399,98 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function loadPosts() {
-      hideSpinner()
-      if (conurancyCounter == 0 && $scope.sortedPosts.length != 0 && $scope.sortedPosts.length != loadedCounter) {
-         var index;
+      hideSpinner() //may or may not hide spinner
+      console.log('concurancy0', conurancyCounter)
+      if (conurancyCounter === 0 && $scope.sortedPosts.length !== 0 && $scope.sortedPosts.length !== loadedCounter) {
+         conurancyCounter++;
+         console.log('concurancy1+', conurancyCounter)
          var postIdAccumulator = [];
-         var max = $scope.sortedPosts.length;
-         for (index = 0; index < max; index++) {
+         var postPromiseAccumulator = [];
+         for (var index = 0, max = $scope.sortedPosts.length; index < max; index++) {
             var postObj = $scope.sortedPosts[index];
-            if (postObj.loadStatus != 'Loaded') {
+            console.log('postObj', postObj)
+            if (postObj.loadStatus !== 'Loaded') {
                postIdAccumulator.push(postObj.id)
-               if (postIdAccumulator.length == 5) {
-                  getPosts(postIdAccumulator);
-                  return true;
+               postPromiseAccumulator.push(localforage.getItem(postObj.id))
+               if (postIdAccumulator.length === 6) {
+                  handlePostList()
+                  index = max + 1
                }
             }
          }
-         if (postIdAccumulator.length != 0) getPosts(postIdAccumulator);
+         if (postIdAccumulator.length !== 0 && index !== max + 2) handlePostList()
+
+         function handlePostList() {
+            var IdListPromise = $q.defer()
+            postPromiseAccumulator.push(IdListPromise.promise)
+            console.log(postPromiseAccumulator)
+            $q.all(postPromiseAccumulator).then(handleCachedPosts).catch(function (err) {
+               $scope.showInfoPopup('Error loading cache, try reloading the page', null, err, true)
+               conurancyCounter--;
+               console.log('concurancy2-', conurancyCounter)
+            })
+            IdListPromise.resolve(postIdAccumulator);
+         }
+
+         function handleCachedPosts(cachedPostsArray) {
+            var IdAccumulator = cachedPostsArray.pop()
+            console.log(cachedPostsArray)
+            console.log(IdAccumulator)
+            var remotePostIdAccumulator = [];
+            for (var valueCount = 0, max = cachedPostsArray.length; valueCount < max; valueCount++) {
+               var post = cachedPostsArray[valueCount]
+               if (post !== null) {
+                  addFullPost(post);
+               } else {
+                  remotePostIdAccumulator.push(IdAccumulator[valueCount]);
+                  console.log(remotePostIdAccumulator)
+                  if (remotePostIdAccumulator.length === 5) {
+                     getPostsFromGDrive(remotePostIdAccumulator);
+                     remotePostIdAccumulator = [];
+                  }
+               }
+            }
+            console.log(remotePostIdAccumulator)
+            if (remotePostIdAccumulator.length !== 0) {
+               getPostsFromGDrive(remotePostIdAccumulator);
+               $timeout(function () {
+                  $scope.sortedPosts = $scope.sortedPosts;
+                  conurancyCounter--;
+                  console.log('concurancy3-', conurancyCounter)
+               })
+            } else {
+               $timeout(function () {
+                  $scope.sortedPosts = $scope.sortedPosts;
+                  setTimeout(hideSpinner, 750)
+                  conurancyCounter--;
+                  console.log('concurancy4-', conurancyCounter)
+               })
+            }
+         }
       }
    }
 
-   function getPosts(idArray, callBack) {
+   function getPostsFromGDrive(idArray, callBack) {
+      var idCount;
+      console.log('getting from gdrive', idArray)
       conurancyCounter++;
-      console.log(idArray)
+      console.log('concurancy5+', conurancyCounter)
       promiseQueue.addPromise('script', APIService.runGAScript('getPosts', idArray), function (postsData) {
          console.log(postsData)
          var postsArray = JSON.parse(postsData.result.response.result);
          if (postsArray.error == undefined) {
             conurancyCounter--;
+            console.log('concurancy6-', conurancyCounter)
             var max = postsArray.length;
             for (var count = 0; count < max; count++) {
-               var indexes = getIdIndexInPostArrays(postsArray[count].id);
-               postsArray[count].loadStatus = 'Loaded';
-               postsArray[count] = mergeFirebasePost(postsArray[count], $scope.allPosts[indexes.allPosts])
-               $scope.allPosts[indexes.allPosts] = postsArray[count];
-               $scope.sortedPosts[indexes.sortedPosts] = postsArray[count];
-               loadedCounter++;
+               console.log('got from gdrive - post #' + count)
+               var post = addFullPost(postsArray[count])
+               localforage.setItem(post.id, post);
             }
             $timeout(function () {
                $scope.sortedPosts = $scope.sortedPosts;
                if (callBack) callBack()
+               console.log('done Loding, hiding spinner in 700 ms')
                setTimeout(hideSpinner, 750)
             })
          } else {
@@ -397,9 +498,23 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.allPosts.splice(indexes.allPosts, 1)
             $scope.sortedPosts.splice(indexes.sortedPosts, 1)
             conurancyCounter--;
+            console.log('concurancy7-', conurancyCounter)
          }
-      }, null, 150, 'Error retrieving posts, try reloading the page');
+      }, function () {
+         conurancyCounter--;
+         console.log('concurancy8-', conurancyCounter)
+      }, 150, 'Error retrieving posts, try reloading the page');
    }
+
+   function addFullPost(value) {
+      var indexes = getIdIndexInPostArrays(value.id);
+      value.loadStatus = 'Loaded';
+      value = mergeFirebasePost(value, $scope.allPosts[indexes.allPosts])
+      $scope.allPosts[indexes.allPosts] = value;
+      $scope.sortedPosts[indexes.sortedPosts] = value;
+      loadedCounter++;
+      return value
+   };
 
    function hideSpinner(hide) {
       console.log("LoadCount:" + loadedCounter)
@@ -419,21 +534,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          footer_problem.style.display = 'none';
       }
    }
-
-   // $scope.$watch('sortedPosts', function () {
-   //    var visible = [];
-   //    var max = $scope.sortedPosts.length
-   //    for (var index = 0; index < max; index++) {
-   //       var postObj = $scope.sortedPosts[index]
-   //       if (postObj.loadStatus == 'Loaded') visible.push(postObj);
-   //    }
-   //    $timeout(function () {
-   //       $scope.visiblePosts = visible;
-   //       angularGridInstance.postsGrid.refresh();
-   //       if ($scope.visiblePosts.length == 0) layout_grid.style.height = '0px';
-   //    })
-   // }, true);
-
    $scope.loadPosts = loadPosts;
 
    //----------------------------------------------------
@@ -672,7 +772,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       angularGridInstance.postsGrid.refresh();
    }
    $scope.signOut = function () {
-      authorizationService.handleSignoutClick();
+      authorizationService.signOut();
    };
    $scope.FABClick = function () { //called by the top left toolbar menu button
       if ($scope.globals.FABisOpen == true) {
@@ -862,7 +962,16 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       scope.cancelDialog = function () {
          $mdDialog.cancel();
       };
+      scope.setIntroPage = function (pgNumber) {
+         var pageArray = ['Access', 'Contribute', 'Improve']
+         HYPE.documents["StudyHub Intro"].showSceneNamed(pageArray[pgNumber], "Crossfade", 0.5)
+         $timeout(function () {
+            scope.onboardingPageNumber = pgNumber;
+         })
+      }
       scope.myEmail = $scope.myInfo.Email
+      scope.fullscreen = $mdMedia('xs');
+      scope.onboardingPageNumber = 0;
    }
    $scope.openHelpDialog = function () { //called by the top right toolbar help button
       $mdDialog.show({
@@ -883,15 +992,22 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       });
    };
    $scope.openOnboardingDialog = function () { //called by the top right toolbar help button
+      var hypeScript = document.createElement("script")
+      hypeScript.setAttribute("src", "StudyHub%20Intro.hyperesources/studyhubintro_hype_generated_script.js?7182")
+      hypeScript.setAttribute("type", "text/javascript")
       $mdDialog.show({
-         templateUrl: 'templates/onboard.html',
+         templateUrl: 'onboard.html',
          controller: DialogController,
          parent: angular.element(document.body),
          // scope: {
-         // 	fullscreen:	$mdMedia('xs'),
+         // 	//fullscreen:	$mdMedia('xs'),
+         // //	onboardingPageNumber: 0,
          // },
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
+         onComplete: function () {
+            document.body.appendChild(hypeScript)
+         }
       });
       authorizationService.hideSigninDialog();
    };
@@ -906,15 +1022,18 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    });
    content_container.onscroll = function (event) {
       var yScroll = content_container.scrollTop;
-      $timeout(function () {
-         if (yScroll >= 120 && $scope.globals.FABisHidden == true) {
+      if (yScroll >= 120 && $scope.globals.FABisHidden == true) {
+         $timeout(function () {
             $scope.globals.FABisHidden = false;
-         }
-         if (yScroll <= 120 && $scope.globals.FABisHidden == false) {
+         })
+      }
+      if (yScroll <= 120 && $scope.globals.FABisHidden == false) {
+         $timeout(function () {
             $scope.globals.FABisOpen = false;
             $scope.globals.FABisHidden = true;
-         }
-      })
+         })
+      }
+
    };
    document.onkeydown = function (e) {
       if (e.altKey && e.ctrlKey) {
@@ -974,6 +1093,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             }
          }
       }
+      return $q.defer().resolve().promise;
    }
 
 
@@ -1004,7 +1124,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             err: error,
             errMsg: errMsg,
             showErr: showErr || true,
-            delay:1
+            delay: 1
          });
          if (!timer[typeName]) {
             processTheQueue(typeName); // start immediately on the first invocation
@@ -1027,12 +1147,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          });
 
          function errorBackoff(error, item) {
+            console.log(item.showErr + " item delay" + item.delay)
             if (item.showErr == 1 && item.err) item.err(error);
             var errorHandled = APIErrorHandeler(error, item, item.delay || 1);
             if (errorHandled) errorHandled.then(function () {
-               console.log(item.showErr)
                if (item.showErr != 1 && item.err) item.err(error);
-               if (item.delay <= ((typeof(item.showErr) == 'number') ? item.showErr : 4)) {
+               if (item.delay <= (item.showErr !== true) ? item.showErr : 4) {
                   setTimeout(function () {
                      promiseQueue.runPromise(item);
                   }, (item.delay = Math.max(item.delay *= 2, 1)) * 1000);
@@ -1202,4 +1322,5 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          });
       }
    }
+
 }

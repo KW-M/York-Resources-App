@@ -2,9 +2,15 @@
 var app = angular.module('StudyHub', ['ngMaterial', 'ngRoute', 'angularGrid', 'ngSanitize']);
 
 //universaly applying configurations/options for the angular module (app) named "app" above
-app.config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $locationProvider) {
+app.config(function ($mdThemingProvider, $mdIconProvider, $routeProvider, $locationProvider) {
     //$locationProvider.html5Mode(true);
-    //routing:
+
+    //configuring cache (Localforage not Angular) 
+    localforage.config({
+        name: 'StudyHub Offline Cache',
+        storeName: 'StudyHub_Offline_Cache', // Should be alphanumeric, with underscores.
+        description: 'Keeps some posts in a local cache for quick load times and offline support.'
+    });
 
     //defining icons:
     $mdIconProvider.icon("driveIcon", "images/drive_icon.svg", 18);
@@ -123,7 +129,7 @@ app.config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $locati
         'contrastDarkColors': '50 100 200 A100 A200'
     });
     $mdThemingProvider.theme('default')
-    .primaryPalette('YorkRed')
+        .primaryPalette('YorkRed')
 
     //.accentPalette('YorkBlue')
     //.accentPalette('yorkLightBlue')

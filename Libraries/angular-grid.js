@@ -167,6 +167,7 @@
             code to allow performant scroll
             *****/
             var scrollNs = {}; //namespace for performantScroll
+            scrollNs.scrollContInfo = getScrollContainerInfo();
 
             function findPos(obj, withRespectTo) {
               withRespectTo = withRespectTo || document.body;
@@ -318,7 +319,6 @@
             }
 
             setTimeout(function () {
-              scrollNs.scrollContInfo = getScrollContainerInfo();
               scrollNs.scrollContInfo.$elm.on('scroll', scrollHandler);
             }, 0);
 
@@ -516,9 +516,9 @@
                     clones.remove();
 
                     //update the scroll container info
-                    if (options.performantScroll || scope.infiniteScroll) {
-                      scrollNs.scrollContInfo = getScrollContainerInfo();
-                    }
+                    // if (options.performantScroll || scope.infiniteScroll) { MEEEEEEEEEEEEEEEEEEEEEEEEEEE
+                    //   scrollNs.scrollContInfo = getScrollContainerInfo();
+                    // }
 
                     //if performantScroll is enabled calculate the page info, and reflect dom elements to reflect visible pages
                     if (options.performantScroll) {
@@ -610,7 +610,7 @@
                 listElms = getListElms();
                 ngCheckAnim().then(function () {
                   //handle images
-                  handleImage();
+                  //handleImage();
                   $timeout(function () {
                     //to handle scroll appearance
                     reflowGrids();
@@ -685,7 +685,6 @@
               try {
                 win.off('resize', windowResizeCallback);
                 removeResizeListener(content_container, windowResizeCallback);
-                win.off('resize', windowResizeCallback);
               } catch (e) {
                 console.log(e)
               }

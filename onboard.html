@@ -1,0 +1,37 @@
+<link rel="stylesheet" href="css/onboardStyles.css" />
+<md-button class="md-fab onboardingDialogButton" ng-class="{'not-visible' : onboardingPageNumber === 0}" ng-click="setIntroPage(onboardingPageNumber - 1)" aria-label="previous" style="margin-right: 16px;">
+  <md-icon>arrow_back</md-icon>
+</md-button>
+<md-dialog style="max-width: 500px; height:100%; max-height:600px;" class="onboardingDialog">
+  <md-progress-circular style="margin: 200px auto 0 auto;z-index:-1" class="md-primary" md-mode="indeterminate" md-diameter="30px"></md-progress-circular>
+    <div id="studyhubintro_hype_container" style="position:absolute;top:0;bottom:0;left:0;right:0;z-index:-1;overflow:hidden;-webkit-transform-style:flat;"></div>
+    <div style="position:absolute;bottom:0;left:0;right:0;">
+    <div class="onboardingTextContainer" ng-if="onboardingPageNumber === 0">
+      <div class="onboardingTextHeader">Access a library of study resources</div>
+      <div class="onboardingText">Tailor made for York classes<br> by York students, for York students.</div>
+    </div>
+    <div class="onboardingTextContainer" ng-if="onboardingPageNumber === 1">
+      <div class="onboardingTextHeader">Contribute your work</div>
+      <div class="onboardingText">And enrich learning for everyone in the York community.</div>
+    </div>
+    <div class="onboardingTextContainer" ng-if="onboardingPageNumber === 2">
+      <div class="onboardingTextHeader">Improve your learning</div>
+      <div class="onboardingText">And build on the work of others to push twards success.</div>
+    </div>
+  <md-dialog-actions style="position:absolute;bottom:0;left:0;right:0;">
+    <md-button ng-if="onboardingPageNumber !== 2 && fullscreen === true" class="md-accent" style="color:white" ng-click="setIntroPage(onboardingPageNumber + 1)">Next</md-button>
+    <md-button ng-if="onboardingPageNumber === 2 && fullscreen === true" class="md-accent" style="color:white" ng-click="hideDialog()">Get Started</md-button>
+    <div class="dotPageIndicatorContainer">
+      <div class="dotPageIndicator" ng-class="{'dotPageIndicatorActive' : onboardingPageNumber === 0}"></div>
+      <div class="dotPageIndicator" ng-class="{'dotPageIndicatorActive' : onboardingPageNumber === 1}"></div>
+      <div class="dotPageIndicator" ng-class="{'dotPageIndicatorActive' : onboardingPageNumber === 2}"></div>
+    </div>
+  </md-dialog-actions>
+  </div>
+</md-dialog>
+<md-button ng-if="onboardingPageNumber !== 2" class="md-fab onboardingDialogButton" aria-label="next" ng-click="setIntroPage(onboardingPageNumber + 1)" style="margin-left: 16px;">
+  <md-icon >arrow_forward</md-icon>
+</md-button>
+<md-button ng-if="onboardingPageNumber === 2"class="md-fab onboardingDialogButton" aria-label="next" ng-click="hideDialog()" style="margin-left: 16px;">
+  <md-icon >check</md-icon>
+</md-button>

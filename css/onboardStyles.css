@@ -55,13 +55,14 @@
 }
 
 .onboardingDialog {
-    background-color: #3f51b5;
+    background-color: rgb(154, 201, 255);
     border-radius: 10px;
     font-family: Roboto;
     text-align: center;
     vertical-align: top;
     width: 630px;
     white-space: initial;
+    overflow: hidden;
 }
 
 .onboardingDialog.blueBackground {
@@ -73,19 +74,23 @@
 }
 
 .onboardingTextContainer {
+    bottom: 0;
+    left:0;
+    right:0;
+    position: absolute;
     padding: 12px;
     padding-top: 32px;
 }
 
 .onboardingTextHeader {
-    color: white;
+    color: black;
     font-size: 24px;
     line-height: 32px;
     padding-bottom: 8px;
 }
 
 .onboardingText {
-    color: white;
+    color: black;
     font-weight: 300;
     font-size: 16px;
     height: 96px;
