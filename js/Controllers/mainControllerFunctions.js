@@ -405,8 +405,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          var postPromiseAccumulator = [];
          for (var index = 0, max = $scope.sortedPosts.length; index < max; index++) {
             var postObj = $scope.sortedPosts[index];
-            console.log(postObj)
-            if (postObj.loadStatus != 'Loaded') {
+            console.log('postObj',postObj)
+            if (postObj.loadStatus !== 'Loaded') {
                postIdAccumulator.push(postObj.id)
                postPromiseAccumulator.push(localforage.getItem(postObj.id))
                if (postIdAccumulator.length === 6) {
