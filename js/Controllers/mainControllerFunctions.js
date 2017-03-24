@@ -415,6 +415,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                   console.log(postPromiseAccumulator)
                   $q.all(postPromiseAccumulator).then(handleCachedPosts).catch(function (err) {
                      $scope.showInfoPopup('Error loading cache, try reloading the page', null, err, true)
+                     conurancyCounter--;
                   })
                   IdListPromise.resolve(postIdAccumulator);
                   index = max + 1
@@ -442,16 +443,15 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             }
             console.log(remotePostIdAccumulator)
             if (remotePostIdAccumulator.length !== 0) {
-               // if (conurancyCounter === 1) conurancyCounter = 2;
-               // getPostsFromGDrive(remotePostIdAccumulator);
+               getPostsFromGDrive(remotePostIdAccumulator);
                $timeout(function () {
                   $scope.sortedPosts = $scope.sortedPosts;
+                  conurancyCounter--;
                })
             } else {
                $timeout(function () {
                   $scope.sortedPosts = $scope.sortedPosts;
                   setTimeout(hideSpinner, 750)
-                  //if (remotePostIdAccumulator.length !== 5)
                   conurancyCounter--;
                })
             }
@@ -486,7 +486,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             $scope.sortedPosts.splice(indexes.sortedPosts, 1)
             conurancyCounter--;
          }
-      }, function(){conurancyCounter--;}, 150, 'Error retrieving posts, try reloading the page');
+      }, function(){conurancyCounter--}, 150, 'Error retrieving posts, try reloading the page');
    }
 
    function addFullPost(value) {
