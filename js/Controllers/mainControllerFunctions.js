@@ -1007,9 +1007,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
          onComplete: function () {
-            setTimeout(function(){
-               document.body.appendChild(hypeScript)
-            },300)
+
          }
       });
       authorizationService.hideSigninDialog();
