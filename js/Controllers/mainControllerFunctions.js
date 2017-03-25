@@ -964,13 +964,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       };
       scope.setIntroPage = function (pgNumber) {
          var pageArray = ['Access', 'Contribute', 'Improve']
-         HYPE.documents["StudyHub Intro"].showSceneNamed(pageArray[pgNumber], "Crossfade", 0.5)
+         HYPE.documents["StudyHub Intro"].showSceneNamed(pageArray[pgNumber])
          $timeout(function () {
             scope.onboardingPageNumber = pgNumber;
          })
       }
-      scope.openOnboardingDialog = $scope.openOnboardingDialog()
-      scope.myEmail = $scope.myInfo.Email
+      //scope.openOnboardingDialog = $scope.openOnboardingDialog();
+      scope.myEmail = $scope.myInfo.Email;
       scope.fullscreen = $mdMedia('xs');
       scope.onboardingPageNumber = 0;
    }
