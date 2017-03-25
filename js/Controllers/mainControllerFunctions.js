@@ -412,7 +412,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             if (postObj.loadStatus !== 'Loaded') {
                postIdAccumulator.push(postObj.id)
                postPromiseAccumulator.push(localforage.getItem(postObj.id))
-               if (postIdAccumulator.length === 6) {
+               if (postIdAccumulator.length === 9) {
                   handlePostList()
                   index = max + 1
                }
