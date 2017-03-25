@@ -412,7 +412,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             if (postObj.loadStatus !== 'Loaded') {
                postIdAccumulator.push(postObj.id)
                postPromiseAccumulator.push(localforage.getItem(postObj.id))
-               if (postIdAccumulator.length === 6) {
+               if (postIdAccumulator.length === 9) {
                   handlePostList()
                   index = max + 1
                }
@@ -964,12 +964,13 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       };
       scope.setIntroPage = function (pgNumber) {
          var pageArray = ['Access', 'Contribute', 'Improve']
-         HYPE.documents["StudyHub Intro"].showSceneNamed(pageArray[pgNumber], "Crossfade", 0.5)
+         document.getElementById('Hype_Frame').contentWindow.HYPE.documents["StudyHub Intro"].showSceneNamed(pageArray[pgNumber])
          $timeout(function () {
             scope.onboardingPageNumber = pgNumber;
          })
       }
-      scope.myEmail = $scope.myInfo.Email
+      scope.openOnboardingDialog = $scope.openOnboardingDialog;
+      scope.myEmail = $scope.myInfo.Email;
       scope.fullscreen = $mdMedia('xs');
       scope.onboardingPageNumber = 0;
    }
@@ -992,9 +993,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       });
    };
    $scope.openOnboardingDialog = function () { //called by the top right toolbar help button
-      var hypeScript = document.createElement("script")
-      hypeScript.setAttribute("src", "StudyHub%20Intro.hyperesources/studyhubintro_hype_generated_script.js?7182")
-      hypeScript.setAttribute("type", "text/javascript")
       $mdDialog.show({
          templateUrl: 'onboard.html',
          controller: DialogController,
@@ -1005,9 +1003,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          // },
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
-         onComplete: function () {
-            document.body.appendChild(hypeScript)
-         }
       });
       authorizationService.hideSigninDialog();
    };
