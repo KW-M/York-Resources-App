@@ -964,7 +964,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       };
       scope.setIntroPage = function (pgNumber) {
          var pageArray = ['Access', 'Contribute', 'Improve']
-         HYPE.documents["StudyHub Intro"].showSceneNamed(pageArray[pgNumber])
+         document.getElementById('Hype_Frame').contentWindow.HYPE.documents["StudyHub Intro"].showSceneNamed(pageArray[pgNumber])
          $timeout(function () {
             scope.onboardingPageNumber = pgNumber;
          })
