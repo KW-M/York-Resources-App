@@ -1007,6 +1007,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
          onComplete: function () {
+            tr
             document.body.appendChild(hypeScript)
          }
       });
