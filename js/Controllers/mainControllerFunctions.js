@@ -969,7 +969,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             scope.onboardingPageNumber = pgNumber;
          })
       }
-      scope.openOnboardingDialog = $scope.openOnboardingDialog
+      scope.openOnboardingDialog = $scope.openOnboardingDialog()
       scope.myEmail = $scope.myInfo.Email
       scope.fullscreen = $mdMedia('xs');
       scope.onboardingPageNumber = 0;
@@ -1007,7 +1007,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
          onComplete: function () {
-
+            document.body.appendChild(hypeScript)
          }
       });
       authorizationService.hideSigninDialog();
