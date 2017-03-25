@@ -969,6 +969,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             scope.onboardingPageNumber = pgNumber;
          })
       }
+      scope.openOnboardingDialog = $scope.openOnboardingDialog
       scope.myEmail = $scope.myInfo.Email
       scope.fullscreen = $mdMedia('xs');
       scope.onboardingPageNumber = 0;
