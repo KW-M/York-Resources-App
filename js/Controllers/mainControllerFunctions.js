@@ -518,10 +518,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function purgeLocalCache() {
       function cleanupCache() {
-         for (var postCount = 0; postCount < Things.length; postCount++) {
-            $scope.allPosts[postCount]
+         for (var postCount = 0, max = $scope.allPosts.length; postCount < max; postCount++) {
+            var post = $scope.allPosts[postCount]
+            
          }
-
       }
       
       var t;
@@ -532,7 +532,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
       function resetTimer() {
          clearTimeout(t);
-         t = setTimeout(logout, 10000)
+         t = setTimeout(cleanupCache, 10000)
       }
    }
 
