@@ -514,7 +514,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function purgeLocalCache() {
       function cleanupCache() {
-         loiterate(iteratorCallback, successCallback)
+         var tempPostArray = []
+         localforage.iterate(function(value,key,iteration#){
+            if (value.class.stared === true) {
+               
+            }
+         }, null)
       }
       
       var t;
