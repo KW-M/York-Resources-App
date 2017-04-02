@@ -515,8 +515,26 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       loadedCounter++;
       return value
    };
-   
-   function purgeLocalCache {}
+
+   function purgeLocalCache() {
+      function cleanupCache() {
+         for (var postCount = 0; postCount < Things.length; postCount++) {
+            $scope.allPosts[postCount]
+         }
+
+      }
+      
+      var t;
+      document.onmousemove = resetTimer;
+      document.onmousedown = resetTimer;
+      document.onkeypress = resetTimer;
+      document.onscroll = resetTimer
+
+      function resetTimer() {
+         clearTimeout(t);
+         t = setTimeout(logout, 10000)
+      }
+   }
 
    function hideSpinner(hide) {
       console.log("LoadCount:" + loadedCounter)
