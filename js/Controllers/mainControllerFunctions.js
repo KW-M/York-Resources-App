@@ -222,15 +222,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          });
          postsFireRef.on('child_removed', function (childSnapshot) {
             console.log('childremoved', childSnapshot)
-            var indexes = getIdIndexInPostArrays(childSnapshot.key);
             $timeout(function () {
-               $scope.allPosts.splice(indexes.allPosts, 1);
-               $scope.sortedPosts.splice(indexes.sortedPosts, 1);
+               $scope.allPosts.splice(getIdIndexInPostArrays(childSnapshot.key,$scope.allPosts), 1);
+               $scope.sortedPosts.splice(getIdIndexInPostArrays(childSnapshot.key,$scope.sortedPosts), 1);
             })
          });
          postsFireRef.on('child_changed', function (childSnapshot, oldSnapshot) {
             console.log(childSnapshot)
-            var oldPost = $scope.allPosts[indexes.allPosts]
+            var oldPost = $scope.allPosts[getIdIndexInPostArrays(childSnapshot.key,$scope.allPosts)]
             var newSlimPost = convertFirePost(childSnapshot.key, childSnapshot.val(), 'Loaded')
             var mergedFullPost = mergeFirebasePost(oldPost, newSlimPost);
             console.log(mergedFullPost)
@@ -515,9 +514,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function purgeLocalCache() {
       function cleanupCache() {
-         for (var postCount = 0, max = $scope.allPosts.length; postCount < max; postCount++) {
-            var post = $scope.allPosts[postCount]
-         }
+         loiterate(iteratorCallback, successCallback)
       }
       
       var t;
@@ -952,20 +949,17 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             postId: post.id,
             content: post.userLiked,
          }), function (data) {
-            console.log(data)
-            var allArrayIndex = 
-            var sortedArrayIndex = getIdIndexInSortedPosts(post.id)
             var res = data.result.response.result.split(" ");
             res[0] = res[0] == 'true'
             res[1] = parseInt(res[1])
             console.log(res)
             $timeout(function () {
-               var allPostsPost = ($scope.allPosts[getIdIndexInPostArrays(childSnapshot.key,$scope.allPosts)] || {})
+               var allPostsPost = ($scope.allPosts[getIdIndexInPostArrays(post.id,$scope.allPosts)] || {})
                allPostsPost.userLiked = res[0];
                allPostsPost.likeCount = res[1];
-               var sortedPostsPost = ($scope.sortedPosts[arrayIndecies.sortedPosts] || {})
-               ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).userLiked = res[0];
-               ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).likeCount = res[1];
+               var sortedPostsPost = ($scope.sortedPosts[getIdIndexInPostArrays(post.id,$scope.sortedPosts)] || {})
+               sortedPostsPost.userLiked = res[0];
+               sortedPostsPost.likeCount = res[1];
                authorizationService.FireDatabase.ref('posts/' + post.id + '/LC').set(res[1])
             })
          }, null, 150, 'Problem liking the post, try again.');
