@@ -230,17 +230,16 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          });
          postsFireRef.on('child_changed', function (childSnapshot, oldSnapshot) {
             console.log(childSnapshot)
-            var indexes = getIdIndexInPostArrays(childSnapshot.key)
             var oldPost = $scope.allPosts[indexes.allPosts]
             var newSlimPost = convertFirePost(childSnapshot.key, childSnapshot.val(), 'Loaded')
             var mergedFullPost = mergeFirebasePost(oldPost, newSlimPost);
             console.log(mergedFullPost)
             $timeout(function () {
-               $scope.allPosts[indexes.allPosts] = mergedFullPost;
-               $scope.sortedPosts[indexes.sortedPosts] = mergedFullPost;
+               $scope.allPosts[getIdIndexInPostArrays(childSnapshot.key,$scope.allPosts)] = mergedFullPost;
+               $scope.sortedPosts[getIdIndexInPostArrays(childSnapshot.key,$scope.sortedPosts)] = mergedFullPost;
                if (newSlimPost.updateDate != oldPost.updateDate) {
                   console.log('fullUpdate')
-                  $scope.allPosts[indexes.allPosts].loadStatus = 'Changed'
+                  $scope.allPosts[getIdIndexInPostArrays(childSnapshot.key,$scope.allPosts)].loadStatus = 'Changed'
                   loadedCounter--;
                   loadPosts();
                } else if (newSlimPost.flagged != oldPost.flagged) {
@@ -954,15 +953,17 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             content: post.userLiked,
          }), function (data) {
             console.log(data)
-            var allArrayIndex = getIdIndexInAllPosts(post.id)
+            var allArrayIndex = 
             var sortedArrayIndex = getIdIndexInSortedPosts(post.id)
             var res = data.result.response.result.split(" ");
             res[0] = res[0] == 'true'
             res[1] = parseInt(res[1])
             console.log(res)
             $timeout(function () {
-               ($scope.allPosts[allArrayIndex] || {}).userLiked = res[0];
-               ($scope.allPosts[sortedArrayIndex] || {}).likeCount = res[1];
+               var allPostsPost = ($scope.allPosts[getIdIndexInPostArrays(childSnapshot.key,$scope.allPosts)] || {})
+               allPostsPost.userLiked = res[0];
+               allPostsPost.likeCount = res[1];
+               var sortedPostsPost = ($scope.sortedPosts[arrayIndecies.sortedPosts] || {})
                ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).userLiked = res[0];
                ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).likeCount = res[1];
                authorizationService.FireDatabase.ref('posts/' + post.id + '/LC').set(res[1])
