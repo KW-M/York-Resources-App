@@ -495,8 +495,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             })
          } else {
             var indexes = getIdIndexInPostArrays(postsArray.id);
-            $scope.allPosts.splice(indexes.allPosts, 1)
-            $scope.sortedPosts.splice(indexes.sortedPosts, 1)
+            $scope.allPosts.splice(getIdIndexInPostArrays(postsArray.id,$scope.allPosts), 1)
+            $scope.sortedPosts.splice(getIdIndexInPostArrays(postsArray.id,$scope.sortedPosts), 1)
             conurancyCounter--;
             console.log('concurancy7-', conurancyCounter)
          }
@@ -507,11 +507,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function addFullPost(value) {
-      var indexes = getIdIndexInPostArrays(value.id);
       value.loadStatus = 'Loaded';
       value = mergeFirebasePost(value, $scope.allPosts[indexes.allPosts])
-      $scope.allPosts[indexes.allPosts] = value;
-      $scope.sortedPosts[indexes.sortedPosts] = value;
+      $scope.allPosts[getIdIndexInPostArrays(value.id,$scope.allPosts)] = value;
+      $scope.sortedPosts[getIdIndexInPostArrays(value.id,$scope.sortedPosts)] = value;
       loadedCounter++;
       return value
    };
@@ -957,14 +956,15 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             content: post.userLiked,
          }), function (data) {
             console.log(data)
-            var allArrayIndex = getIdIndexInArrays(post.id)
+            var allArrayIndex = getIdIndexInAllPosts(post.id)
+            var sortedArrayIndex = getIdIndexInSortedPosts(post.id)
             var res = data.result.response.result.split(" ");
             res[0] = res[0] == 'true'
             res[1] = parseInt(res[1])
             console.log(res)
             $timeout(function () {
-               ($scope.allPosts[arrayIndecies.allPosts] || {}).userLiked = res[0];
-               ($scope.allPosts[arrayIndecies.allPosts] || {}).likeCount = res[1];
+               ($scope.allPosts[allArrayIndex] || {}).userLiked = res[0];
+               ($scope.allPosts[sortedArrayIndex] || {}).likeCount = res[1];
                ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).userLiked = res[0];
                ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).likeCount = res[1];
                authorizationService.FireDatabase.ref('posts/' + post.id + '/LC').set(res[1])
@@ -1219,17 +1219,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       if (link != "" && link != undefined && dontOpen != true) window.open(link)
    };
 
-   function getIdIndexInPostArrays(id) {
-      function findPostIndexById(id, array) {
+   function getIdIndexInPostArrays(id,array) {
          var index = 0;
          for (index in array) {
             if (array[index].id == id) return (index)
          }
-      }
-      return {
-         allPosts: findPostIndexById(id, $scope.allPosts),
-         sortedPosts: findPostIndexById(id, $scope.sortedPosts),
-      }
    }
 
    function updateSortedPosts(array, callback) {
