@@ -329,8 +329,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                   creationDate: postObj.creationDate,
                   loadStatus: 'UnLoaded',
                }
-               var indexes = getIdIndexInPostArrays(postObj.id)
-               $scope.allPosts[indexes.allPosts] = slimedObj;
+               $scope.allPosts[getIdIndexInPostArrays(postObj.id,$scope.allPosts)] = slimedObj;
                loadedCounter--;
             }
          }
@@ -494,7 +493,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                setTimeout(hideSpinner, 750)
             })
          } else {
-            var indexes = getIdIndexInPostArrays(postsArray.id);
+          
             $scope.allPosts.splice(getIdIndexInPostArrays(postsArray.id,$scope.allPosts), 1)
             $scope.sortedPosts.splice(getIdIndexInPostArrays(postsArray.id,$scope.sortedPosts), 1)
             conurancyCounter--;
@@ -517,9 +516,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function purgeLocalCache() {
       function cleanupCache() {
-         while (var postCount = 0, max = $scope.allPosts.length; postCount < max; postCount++) {
+         for (var postCount = 0, max = $scope.allPosts.length; postCount < max; postCount++) {
             var post = $scope.allPosts[postCount]
-            
          }
       }
       
