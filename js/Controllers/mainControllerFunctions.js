@@ -518,7 +518,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function purgeLocalCache() {
       function cleanupCache() {
-         for (var postCount = 0, max = $scope.allPosts.length; postCount < max; postCount++) {
+         while (var postCount = 0, max = $scope.allPosts.length; postCount < max; postCount++) {
             var post = $scope.allPosts[postCount]
             
          }
@@ -957,7 +957,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             content: post.userLiked,
          }), function (data) {
             console.log(data)
-            var arrayIndecies = getIdIndexInPostArrays(post.id)
+            var allArrayIndex = getIdIndexInArrays(post.id)
             var res = data.result.response.result.split(" ");
             res[0] = res[0] == 'true'
             res[1] = parseInt(res[1])
