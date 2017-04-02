@@ -515,6 +515,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       loadedCounter++;
       return value
    };
+   
+   function purgeLocalCache {}
 
    function hideSpinner(hide) {
       console.log("LoadCount:" + loadedCounter)
@@ -1090,7 +1092,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
       return $q.defer().resolve().promise;
    }
-
 
    function sendErrorEmail(error) {
       promiseQueue.addPromise('drive', APIService.runGAScript('sendEmailError', error), null, null, 150, 'Problem connecting, make sure you have an internet connection.');
