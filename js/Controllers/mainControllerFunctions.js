@@ -515,11 +515,16 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function purgeLocalCache() {
       function cleanupCache() {
          var tempPostArray = []
-         localforage.iterate(function(value,key,iteration#){
+         localforage.iterate(function(value,key,count){
             if (value.class.stared === true) {
-               
+               tempPostArray.push(value)
+            } else {
+               localforage.removeItem(key)
             }
-         }, null)
+         }, function() {
+            tempPostArray = orderPosts(tempPostArray)
+            for (tempPostCount = , max)
+         })
       }
       
       var t;
