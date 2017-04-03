@@ -417,6 +417,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                }
             }
          }
+         console.log('postIdAccumulator',postIdAccumulator);
          if (postIdAccumulator.length === 0 && index !== max + 2) conurancyCounter--;
          if (postIdAccumulator.length !== 0 && index !== max + 2) handlePostList()
 
