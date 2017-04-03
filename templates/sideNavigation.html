@@ -64,10 +64,12 @@
                     </md-button>
                     <md-button class="side-nav-class" ng-click="gotoRoute({classPath: 'Other'})" ng-class="{ 'selected' : queryParams.classpath == 'Other' }">Other</md-button>
                 </div>
-                <div ng-repeat="navCatagory in classList" flex layout="column">
+                <div ng-repeat="::navCatagory in classList" flex layout="column">
                     <label ng-hide="sideNavClassSearch" class="side-nav-header" ng-style="::{'background-color': navCatagory.color + ' 1)'}">{{navCatagory.catagory}}</label>
-                    <md-button class="side-nav-class" ng-repeat="navClass in navCatagory.classes | filter:sideNavClassSearch" ng-click="gotoRoute({classPath: navClass.name})" ng-class="{ 'selected' : queryParams.classPath == navClass.name }">
-                        {{navClass.name}}
+                    <md-button class="side-nav-class" ng-repeat="navClass in navCatagory.classes | filter:sideNavClassSearch" ng-click="::gotoRoute({classPath: navClass.name})" >
+                        
+                    <!--ng-class="{ 'selected' : queryParams.classPath == ::navClass.name }">-->
+                        {{::navClass.name}}
                     </md-button>
                 </div>
             </md-list>

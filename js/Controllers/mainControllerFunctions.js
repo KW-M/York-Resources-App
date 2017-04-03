@@ -214,6 +214,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          setupDatabase()
       }
 
+      purgeLocalCache()//starts a inactivity timeout to clear unnesisary cached items
+
       function setupDatabase() {
          postsFireRef.orderByChild('DC').startAt(Date.now()).on('child_added', function (childSnapshot) {
             console.log('newChild', childSnapshot.val())
@@ -222,25 +224,23 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          });
          postsFireRef.on('child_removed', function (childSnapshot) {
             console.log('childremoved', childSnapshot)
-            var indexes = getIdIndexInPostArrays(childSnapshot.key);
             $timeout(function () {
-               $scope.allPosts.splice(indexes.allPosts, 1);
-               $scope.sortedPosts.splice(indexes.sortedPosts, 1);
+               $scope.allPosts.splice(getIdIndexInPostArrays(childSnapshot.key, $scope.allPosts), 1);
+               $scope.sortedPosts.splice(getIdIndexInPostArrays(childSnapshot.key, $scope.sortedPosts), 1);
             })
          });
          postsFireRef.on('child_changed', function (childSnapshot, oldSnapshot) {
             console.log(childSnapshot)
-            var indexes = getIdIndexInPostArrays(childSnapshot.key)
-            var oldPost = $scope.allPosts[indexes.allPosts]
+            var oldPost = $scope.allPosts[getIdIndexInPostArrays(childSnapshot.key, $scope.allPosts)]
             var newSlimPost = convertFirePost(childSnapshot.key, childSnapshot.val(), 'Loaded')
             var mergedFullPost = mergeFirebasePost(oldPost, newSlimPost);
             console.log(mergedFullPost)
             $timeout(function () {
-               $scope.allPosts[indexes.allPosts] = mergedFullPost;
-               $scope.sortedPosts[indexes.sortedPosts] = mergedFullPost;
+               $scope.allPosts[getIdIndexInPostArrays(childSnapshot.key, $scope.allPosts)] = mergedFullPost;
+               $scope.sortedPosts[getIdIndexInPostArrays(childSnapshot.key, $scope.sortedPosts)] = mergedFullPost;
                if (newSlimPost.updateDate != oldPost.updateDate) {
                   console.log('fullUpdate')
-                  $scope.allPosts[indexes.allPosts].loadStatus = 'Changed'
+                  $scope.allPosts[getIdIndexInPostArrays(childSnapshot.key, $scope.allPosts)].loadStatus = 'Changed'
                   loadedCounter--;
                   loadPosts();
                } else if (newSlimPost.flagged != oldPost.flagged) {
@@ -329,8 +329,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                   creationDate: postObj.creationDate,
                   loadStatus: 'UnLoaded',
                }
-               var indexes = getIdIndexInPostArrays(postObj.id)
-               $scope.allPosts[indexes.allPosts] = slimedObj;
+               $scope.allPosts[getIdIndexInPostArrays(postObj.id, $scope.allPosts)] = slimedObj;
                loadedCounter--;
             }
          }
@@ -418,6 +417,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                }
             }
          }
+         console.log('postIdAccumulator',postIdAccumulator);
+         if (postIdAccumulator.length === 0 && index !== max + 2) conurancyCounter--;
          if (postIdAccumulator.length !== 0 && index !== max + 2) handlePostList()
 
          function handlePostList() {
@@ -494,9 +495,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                setTimeout(hideSpinner, 750)
             })
          } else {
-            var indexes = getIdIndexInPostArrays(postsArray.id);
-            $scope.allPosts.splice(indexes.allPosts, 1)
-            $scope.sortedPosts.splice(indexes.sortedPosts, 1)
+
+            $scope.allPosts.splice(getIdIndexInPostArrays(postsArray.id, $scope.allPosts), 1)
+            $scope.sortedPosts.splice(getIdIndexInPostArrays(postsArray.id, $scope.sortedPosts), 1)
             conurancyCounter--;
             console.log('concurancy7-', conurancyCounter)
          }
@@ -507,14 +508,56 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function addFullPost(value) {
-      var indexes = getIdIndexInPostArrays(value.id);
+      var allPostsIndex = getIdIndexInPostArrays(value.id, $scope.allPosts)
       value.loadStatus = 'Loaded';
-      value = mergeFirebasePost(value, $scope.allPosts[indexes.allPosts])
-      $scope.allPosts[indexes.allPosts] = value;
-      $scope.sortedPosts[indexes.sortedPosts] = value;
+      value = mergeFirebasePost(value, $scope.allPosts[allPostsIndex])
+      $scope.allPosts[allPostsIndex] = value;
+      $scope.sortedPosts[getIdIndexInPostArrays(value.id, $scope.sortedPosts)] = value;
       loadedCounter++;
       return value
    };
+
+   function purgeLocalCache() {
+      function cleanupCache() {
+         console.log('purging cache')
+         var maxCacheSize, actualCacheSize
+         localforage.getItem('postCacheMaxSize').then(function (maxSize) {
+            maxCacheSize = maxSize || 50;
+            return localforage.length();
+         }).then(function (cacheSize) {
+            actualCacheSize = cacheSize;
+            if (actualCacheSize > maxCacheSize) {
+               var tempPostArray = []
+               localforage.iterate(function (value, key, count) {
+                  if (key !== 'postCacheMaxSize') {
+                     if (value.class.stared === true) {
+                        tempPostArray.push(value)
+                     } else {
+                        localforage.removeItem(key)
+                     }
+                  }
+               }, function () {
+                  tempPostArray = orderPosts(tempPostArray)
+                  for (var tempPostCount = maxCacheSize, max = tempPostArray.length; tempPostCount < max; tempPostCount ++) {
+                     localforage.removeItem(tempPostArray[tempPostCount].id)
+                  }
+               })
+            }
+         })
+
+      }
+
+      var t;
+      document.onmousemove = resetTimer;
+      document.onmousedown = resetTimer;
+      document.onkeypress = resetTimer;
+      document.onscroll = resetTimer
+
+      function resetTimer() {
+         clearTimeout(t);
+         t = setTimeout(cleanupCache, 10000)
+      }
+   }
 
    function hideSpinner(hide) {
       console.log("LoadCount:" + loadedCounter)
@@ -936,17 +979,17 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             postId: post.id,
             content: post.userLiked,
          }), function (data) {
-            console.log(data)
-            var arrayIndecies = getIdIndexInPostArrays(post.id)
             var res = data.result.response.result.split(" ");
             res[0] = res[0] == 'true'
             res[1] = parseInt(res[1])
             console.log(res)
             $timeout(function () {
-               ($scope.allPosts[arrayIndecies.allPosts] || {}).userLiked = res[0];
-               ($scope.allPosts[arrayIndecies.allPosts] || {}).likeCount = res[1];
-               ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).userLiked = res[0];
-               ($scope.sortedPosts[arrayIndecies.sortedPosts] || {}).likeCount = res[1];
+               var allPostsPost = ($scope.allPosts[getIdIndexInPostArrays(post.id, $scope.allPosts)] || {})
+               allPostsPost.userLiked = res[0];
+               allPostsPost.likeCount = res[1];
+               var sortedPostsPost = ($scope.sortedPosts[getIdIndexInPostArrays(post.id, $scope.sortedPosts)] || {})
+               sortedPostsPost.userLiked = res[0];
+               sortedPostsPost.likeCount = res[1];
                authorizationService.FireDatabase.ref('posts/' + post.id + '/LC').set(res[1])
             })
          }, null, 150, 'Problem liking the post, try again.');
@@ -1091,7 +1134,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       return $q.defer().resolve().promise;
    }
 
-
    function sendErrorEmail(error) {
       promiseQueue.addPromise('drive', APIService.runGAScript('sendEmailError', error), null, null, 150, 'Problem connecting, make sure you have an internet connection.');
    }
@@ -1200,16 +1242,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       if (link != "" && link != undefined && dontOpen != true) window.open(link)
    };
 
-   function getIdIndexInPostArrays(id) {
-      function findPostIndexById(id, array) {
-         var index = 0;
-         for (index in array) {
-            if (array[index].id == id) return (index)
-         }
-      }
-      return {
-         allPosts: findPostIndexById(id, $scope.allPosts),
-         sortedPosts: findPostIndexById(id, $scope.sortedPosts),
+   function getIdIndexInPostArrays(id, array) {
+      var index = 0;
+      for (index in array) {
+         if (array[index].id == id) return (index)
       }
    }
 

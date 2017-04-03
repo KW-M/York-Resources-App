@@ -194,12 +194,6 @@
                 <div class="content-padding content-top-bar" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}" ng-style="{'background-color': selectedClass.color + ' 1)'}">
                     <div style="display: flex;align-items: center; margin-top: 12px;">
                         <span class="md-display-1">{{queryParams.classPath}}</span>
-                        <!--<span style="flex:1;text-align:center">-->
-                        <!--    <md-button ng-click="openLink('https://quizlet.com/create-set')" ng-if="queryParams.classPath == 'Quizlet'">-->
-                        <!--        <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>add_to_photos</md-icon>Create Set</md-button>-->
-                        <!--    <md-button ng-if="queryParams.classPath == 'Quizlet'">-->
-                        <!--        <md-icon style='color: white;font-size: 22px;margin-right: 6px;'>open_in_browser</md-icon>Open Class</md-button>-->
-                        <!--</span>-->
                         <md-button class="star-button" ng-if="selectedClass.stared != null" ng-click="userStarClass(selectedClass)" ng-disabled="offline">
                             <md-icon style='color: white;font-size: 22px'>{{selectedClass.stared ? 'star' : 'star_outline'}}</md-icon>
                             <span style="margin-left: 6px;">{{selectedClass.stared ? 'un' : ''}}Star Class</span>
@@ -228,9 +222,9 @@
                         <md-button ng-click="refreshLayout()">Refresh Layout</md-button>
                         <p>TotalPosts: {{allPosts.length}} Sorted: {{sortedPosts.length}}</p>
                     </span>
-                    <div name="Posts Grid" ng-hide="queryParams.classPath == 'Quizlet'" style="margin-bottom:24px">
+                    <div name="Posts Grid" ng-hide="queryParams.classPath == 'Quizlet'">
                         <div angular-grid="sortedPosts" id="layout_grid" ag-gutter-size="12" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="loadPosts()" ag-infinite-scroll-distance="2.25" ag-infinite-scroll-delay="2000">
-                            <div ng-repeat="post in sortedPosts track by post.id" ng-style="{'background-color': post.class.color + ' 0.6)'}" class="post-card raise-on-hover" ng-if="post.loadStatus == 'Loaded'">
+                            <div ng-repeat="post in sortedPosts track by post.id" ng-style="{'background-color': post.class.color + ' 0.6)'}" class="post-card" ng-if="post.loadStatus == 'Loaded'">
                                 <div class="post-card-header unselectable" md-ink-ripple="{{post.link != ''}}" ng-class="{'no-link': post.link == '', 'gDrive-type': post.type == 'gDrive'}" ng-click="openLink(post.link)" title="{{removeHttp(post.link)}}">
                                     <img ng-src="{{post.previewImage||'https://ssl.gstatic.com/atari/images/simple-header-blended-small.png'}}" class="post-card-image unselectable"></img>
                                     <div class="gradient-overlay">
@@ -301,7 +295,7 @@
                     </div>
                 </div>
                 <div class="footer-container">
-                    <div class="footer" ng-hide="queryParams.classPath === 'York Quizlet'">
+                    <div class="footer" ng-hide="queryParams.classPath == 'York Quizlet'">
                         <div id="no_posts_footer" style="display: none;">
                             <h3 style="margin: 0;">It's so lonely here</h3>
                             <p style="margin: 0;font-size: 14px;font-weight: 200;">Be the first to post</p>
@@ -322,7 +316,7 @@
                         </div>
                         <md-progress-circular id="loading_spinner" style="display: none;margin: auto;" class="md-accent" md-mode="indeterminate" md-diameter="30px"></md-progress-circular>
                     </div>
-                    <div class="footer" ng-if="queryParams.classPath === 'York Quizlet'">
+                    <div class="footer" ng-if="queryParams.classPath == 'York Quizlet'">
                         <h3>Quizlet Connect</h3>
                         <div style="margin: 0 8px">By connecting your Quizlet Account to StudyHub, you'll get access to a nearly all of the Quizlet sets made for York classes by York students in one searchable place. Connecting will also sync any public Quizlet sets you make with
                             the York Quizlet Class. Enter your Quizlet username below to connect.</div>
