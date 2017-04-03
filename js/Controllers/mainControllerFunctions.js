@@ -506,9 +506,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function addFullPost(value) {
+      var allPostsIndex = getIdIndexInPostArrays(value.id, $scope.allPosts)
       value.loadStatus = 'Loaded';
-      value = mergeFirebasePost(value, $scope.allPosts[indexes.allPosts])
-      $scope.allPosts[getIdIndexInPostArrays(value.id, $scope.allPosts)] = value;
+      value = mergeFirebasePost(value, $scope.allPosts[allPostsIndex])
+      $scope.allPosts[allPostsIndex] = value;
       $scope.sortedPosts[getIdIndexInPostArrays(value.id, $scope.sortedPosts)] = value;
       loadedCounter++;
       return value
