@@ -514,20 +514,30 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function purgeLocalCache() {
       function cleanupCache() {
-         var maxCacheSize = localforage.getItem('postCacheMaxSize').then()
-         var tempPostArray = []
-         localforage.iterate(function (value, key, count) {
-            if (key !== 'postCacheMaxSize') {
-               if (value.class.stared === true) {
-                  tempPostArray.push(value)
-               } else {
-                  localforage.removeItem(key)
-               }
+         var maxCacheSize, actualCacheSize
+         localforage.getItem('postCacheMaxSize').then(function (maxSize) {
+            maxCacheSize = maxSize || 50;
+            return localforage.length();
+         }).then(function (cacheSize) {
+            actualCacheSize = cacheSize;
+            if (actualCacheSize > maxCacheSize) {
+               var tempPostArray = []
+               localforage.iterate(function (value, key, count) {
+                  if (key !== 'postCacheMaxSize') {
+                     if (value.class.stared === true) {
+                        tempPostArray.push(value)
+                     } else {
+                        localforage.removeItem(key)
+                     }
+                  }
+               }, function () {
+                  tempPostArray = orderPosts(tempPostArray)
+                  for (tempPostCount = maxCacheSize, max = tempPostArray.length; tempPostCount < max; tempPostCount ++) {
+                  
+               })
             }
-         }, function () {
-            tempPostArray = orderPosts(tempPostArray)
-            for (tempPostCount = localforage, max = tempPostArray.length)
          })
+
       }
 
       var t;
