@@ -223,22 +223,22 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          postsFireRef.on('child_removed', function (childSnapshot) {
             console.log('childremoved', childSnapshot)
             $timeout(function () {
-               $scope.allPosts.splice(getIdIndexInPostArrays(childSnapshot.key,$scope.allPosts), 1);
-               $scope.sortedPosts.splice(getIdIndexInPostArrays(childSnapshot.key,$scope.sortedPosts), 1);
+               $scope.allPosts.splice(getIdIndexInPostArrays(childSnapshot.key, $scope.allPosts), 1);
+               $scope.sortedPosts.splice(getIdIndexInPostArrays(childSnapshot.key, $scope.sortedPosts), 1);
             })
          });
          postsFireRef.on('child_changed', function (childSnapshot, oldSnapshot) {
             console.log(childSnapshot)
-            var oldPost = $scope.allPosts[getIdIndexInPostArrays(childSnapshot.key,$scope.allPosts)]
+            var oldPost = $scope.allPosts[getIdIndexInPostArrays(childSnapshot.key, $scope.allPosts)]
             var newSlimPost = convertFirePost(childSnapshot.key, childSnapshot.val(), 'Loaded')
             var mergedFullPost = mergeFirebasePost(oldPost, newSlimPost);
             console.log(mergedFullPost)
             $timeout(function () {
-               $scope.allPosts[getIdIndexInPostArrays(childSnapshot.key,$scope.allPosts)] = mergedFullPost;
-               $scope.sortedPosts[getIdIndexInPostArrays(childSnapshot.key,$scope.sortedPosts)] = mergedFullPost;
+               $scope.allPosts[getIdIndexInPostArrays(childSnapshot.key, $scope.allPosts)] = mergedFullPost;
+               $scope.sortedPosts[getIdIndexInPostArrays(childSnapshot.key, $scope.sortedPosts)] = mergedFullPost;
                if (newSlimPost.updateDate != oldPost.updateDate) {
                   console.log('fullUpdate')
-                  $scope.allPosts[getIdIndexInPostArrays(childSnapshot.key,$scope.allPosts)].loadStatus = 'Changed'
+                  $scope.allPosts[getIdIndexInPostArrays(childSnapshot.key, $scope.allPosts)].loadStatus = 'Changed'
                   loadedCounter--;
                   loadPosts();
                } else if (newSlimPost.flagged != oldPost.flagged) {
@@ -327,7 +327,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                   creationDate: postObj.creationDate,
                   loadStatus: 'UnLoaded',
                }
-               $scope.allPosts[getIdIndexInPostArrays(postObj.id,$scope.allPosts)] = slimedObj;
+               $scope.allPosts[getIdIndexInPostArrays(postObj.id, $scope.allPosts)] = slimedObj;
                loadedCounter--;
             }
          }
@@ -491,9 +491,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                setTimeout(hideSpinner, 750)
             })
          } else {
-          
-            $scope.allPosts.splice(getIdIndexInPostArrays(postsArray.id,$scope.allPosts), 1)
-            $scope.sortedPosts.splice(getIdIndexInPostArrays(postsArray.id,$scope.sortedPosts), 1)
+
+            $scope.allPosts.splice(getIdIndexInPostArrays(postsArray.id, $scope.allPosts), 1)
+            $scope.sortedPosts.splice(getIdIndexInPostArrays(postsArray.id, $scope.sortedPosts), 1)
             conurancyCounter--;
             console.log('concurancy7-', conurancyCounter)
          }
@@ -506,27 +506,30 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function addFullPost(value) {
       value.loadStatus = 'Loaded';
       value = mergeFirebasePost(value, $scope.allPosts[indexes.allPosts])
-      $scope.allPosts[getIdIndexInPostArrays(value.id,$scope.allPosts)] = value;
-      $scope.sortedPosts[getIdIndexInPostArrays(value.id,$scope.sortedPosts)] = value;
+      $scope.allPosts[getIdIndexInPostArrays(value.id, $scope.allPosts)] = value;
+      $scope.sortedPosts[getIdIndexInPostArrays(value.id, $scope.sortedPosts)] = value;
       loadedCounter++;
       return value
    };
 
    function purgeLocalCache() {
       function cleanupCache() {
+         var maxCacheSize = localforage.getItem('postCacheMaxSize').then()
          var tempPostArray = []
-         localforage.iterate(function(value,key,count){
-            if (value.class.stared === true) {
-               tempPostArray.push(value)
-            } else {
-               localforage.removeItem(key)
+         localforage.iterate(function (value, key, count) {
+            if (key !== 'postCacheMaxSize') {
+               if (value.class.stared === true) {
+                  tempPostArray.push(value)
+               } else {
+                  localforage.removeItem(key)
+               }
             }
-         }, function() {
+         }, function () {
             tempPostArray = orderPosts(tempPostArray)
-            for (tempPostCount = , max)
+            for (tempPostCount = localforage, max = tempPostArray.length)
          })
       }
-      
+
       var t;
       document.onmousemove = resetTimer;
       document.onmousedown = resetTimer;
@@ -964,10 +967,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             res[1] = parseInt(res[1])
             console.log(res)
             $timeout(function () {
-               var allPostsPost = ($scope.allPosts[getIdIndexInPostArrays(post.id,$scope.allPosts)] || {})
+               var allPostsPost = ($scope.allPosts[getIdIndexInPostArrays(post.id, $scope.allPosts)] || {})
                allPostsPost.userLiked = res[0];
                allPostsPost.likeCount = res[1];
-               var sortedPostsPost = ($scope.sortedPosts[getIdIndexInPostArrays(post.id,$scope.sortedPosts)] || {})
+               var sortedPostsPost = ($scope.sortedPosts[getIdIndexInPostArrays(post.id, $scope.sortedPosts)] || {})
                sortedPostsPost.userLiked = res[0];
                sortedPostsPost.likeCount = res[1];
                authorizationService.FireDatabase.ref('posts/' + post.id + '/LC').set(res[1])
@@ -1222,11 +1225,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       if (link != "" && link != undefined && dontOpen != true) window.open(link)
    };
 
-   function getIdIndexInPostArrays(id,array) {
-         var index = 0;
-         for (index in array) {
-            if (array[index].id == id) return (index)
-         }
+   function getIdIndexInPostArrays(id, array) {
+      var index = 0;
+      for (index in array) {
+         if (array[index].id == id) return (index)
+      }
    }
 
    function updateSortedPosts(array, callback) {
