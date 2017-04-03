@@ -214,6 +214,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          setupDatabase()
       }
 
+      purgeLocalCache()//starts a inactivity timeout to clear unnesisary cached items
+
       function setupDatabase() {
          postsFireRef.orderByChild('DC').startAt(Date.now()).on('child_added', function (childSnapshot) {
             console.log('newChild', childSnapshot.val())
@@ -514,6 +516,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function purgeLocalCache() {
       function cleanupCache() {
+         console.log('purging cache')
          var maxCacheSize, actualCacheSize
          localforage.getItem('postCacheMaxSize').then(function (maxSize) {
             maxCacheSize = maxSize || 50;
@@ -532,8 +535,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                   }
                }, function () {
                   tempPostArray = orderPosts(tempPostArray)
-                  for (tempPostCount = maxCacheSize, max = tempPostArray.length; tempPostCount < max; tempPostCount ++) {
-                  
+                  for (var tempPostCount = maxCacheSize, max = tempPostArray.length; tempPostCount < max; tempPostCount ++) {
+                     localforage.removeItem(tempPostArray[tempPostCount].id)
+                  }
                })
             }
          })
