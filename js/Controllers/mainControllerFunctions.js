@@ -457,7 +457,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             if (remotePostIdAccumulator.length !== 0) {
                getPostsFromGDrive(remotePostIdAccumulator);
                $timeout(function () {
-                  $scope.sortedPosts = $scope.sortedPosts;
                   conurancyCounter--;
                   console.log('concurancy3-', conurancyCounter)
                })
