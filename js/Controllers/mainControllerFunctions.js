@@ -306,7 +306,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             catagorizePosts(seperatePosts(postsData.result.files))
          }, null, 150, 'Error searching, try again', 2)
       }
-      angularGridInstance.postsGrid.refresh();
 
       function catagorizePosts(filterObj) {
          $timeout(function () {
