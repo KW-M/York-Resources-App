@@ -67,7 +67,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          getFileTimer = setInterval(function () {
             if ($scope.sortedPosts.length === 0 || $scope.sortedPosts.length === loadedCounter) hideSpinner();
             if ((($scope.sortedPosts.length * 600) / (content_container.scrollWidth / 300)) < content_container.scrollHeight) angularGridInstance.postsGrid.refresh();
-            if (conurancyCounter === 0 && content_container.scrollHeight === content_container.clientHeight) $scope.loadPosts()
+            //if (conurancyCounter === 0 && content_container.scrollHeight === content_container.clientHeight) $scope.loadPosts()
          }, 1000);
          $scope.queryParams.classPath = $location.path().replace(/\//g, "").replace(/-/g, " ").replace(/~/g, "-") || 'All Posts';
          $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
