@@ -60,12 +60,15 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function listenForURLChange() {
       onLocationChange();
       $rootScope.$on('$locationChangeSuccess', onLocationChange);
-      getFileTimer = setInterval(function () {
-         if (conurancyCounter === 0 && content_container.scrollHeight === content_container.clientHeight) $scope.loadPosts()
-      }, 1000);
 
       function onLocationChange() {
          console.log('url changed')
+         clearInterval(getFileTimer)
+         getFileTimer = setInterval(function () {
+            if ($scope.sortedPosts.length === 0 || $scope.sortedPosts.length === loadedCounter) hideSpinner();
+            if ((($scope.sortedPosts.length * 600) / (content_container.scrollWidth / 300)) < content_container.scrollHeight) angularGridInstance.postsGrid.refresh();
+            if (conurancyCounter === 0 && content_container.scrollHeight < content_container.clientHeight) $scope.loadPosts()
+         }, 1000);
          $scope.queryParams.classPath = $location.path().replace(/\//g, "").replace(/-/g, " ").replace(/~/g, "-") || 'All Posts';
          $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
          $scope.queryParams.q = $location.search().q || null;
@@ -214,7 +217,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          setupDatabase()
       }
 
-      purgeLocalCache()//starts a inactivity timeout to clear unnesisary cached items
+      purgeLocalCache() //starts a inactivity timeout to clear unnesisary cached items
 
       function setupDatabase() {
          postsFireRef.orderByChild('DC').startAt(Date.now()).on('child_added', function (childSnapshot) {
@@ -266,7 +269,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
 
       function convertFirePost(key, value, loadStatus) {
-         //console.log("date created", new Date(value.DC))
+         console.log("date created", new Date(value.DC))
          return {
             id: key,
             creator: {
@@ -306,7 +309,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             catagorizePosts(seperatePosts(postsData.result.files))
          }, null, 150, 'Error searching, try again', 2)
       }
-      angularGridInstance.postsGrid.refresh();
 
       function catagorizePosts(filterObj) {
          $timeout(function () {
@@ -338,7 +340,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function orderPosts(inputSet) {
       return inputSet.sort(function (a, b) {
-         return b.creationDate.addDays((b.likeCount || 0) * 2) - a.creationDate.addDays((a.likeCount || 0) * 2);
+         return addDays(b.creationDate, (b.likeCount || 0) * 2) - addDays(a.creationDate, (a.likeCount || 0) * 2);
       })
    }
 
@@ -417,7 +419,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                }
             }
          }
-         console.log('postIdAccumulator',postIdAccumulator);
+         console.log('postIdAccumulator', postIdAccumulator);
          if (postIdAccumulator.length === 0 && index !== max + 2) conurancyCounter--;
          if (postIdAccumulator.length !== 0 && index !== max + 2) handlePostList()
 
@@ -455,7 +457,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             if (remotePostIdAccumulator.length !== 0) {
                getPostsFromGDrive(remotePostIdAccumulator);
                $timeout(function () {
-                  $scope.sortedPosts = $scope.sortedPosts;
                   conurancyCounter--;
                   console.log('concurancy3-', conurancyCounter)
                })
@@ -538,7 +539,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                   }
                }, function () {
                   tempPostArray = orderPosts(tempPostArray)
-                  for (var tempPostCount = maxCacheSize, max = tempPostArray.length; tempPostCount < max; tempPostCount ++) {
+                  for (var tempPostCount = maxCacheSize, max = tempPostArray.length; tempPostCount < max; tempPostCount++) {
                      localforage.removeItem(tempPostArray[tempPostCount].id)
                   }
                })
@@ -559,14 +560,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
    }
 
-   function hideSpinner(hide) {
+   function hideSpinner() {
       console.log("LoadCount:" + loadedCounter)
-      if ($scope.sortedPosts.length == 0) {
+      if ($scope.sortedPosts.length === 0) {
          layout_grid.style.height = '0px';
          loading_spinner.style.display = 'none';
          no_posts_footer.style.display = 'block';
          clearInterval(getFileTimer);
-      } else if ($scope.sortedPosts.length == loadedCounter) {
+      } else if ($scope.sortedPosts.length === loadedCounter) {
          loading_spinner.style.display = 'none';
          no_more_footer.style.display = 'block';
          clearInterval(getFileTimer);
@@ -995,6 +996,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          }, null, 150, 'Problem liking the post, try again.');
       }, 2000);
    };
+   $scope.formatDate = function (date) {
+      console.log(date)
+      return (date.getMonth() + 1) + '/' + date.getDate() + '/' + (date.getFullYear() - 2000)
+   }
 
    //----------------------------------------------------
    //-------------------- dialogs -----------------------

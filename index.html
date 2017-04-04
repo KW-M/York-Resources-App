@@ -62,7 +62,7 @@
             </div>
         </div>
         <script>
-            var tips = ["Look for the mobile update comming soon.", "Share from GDrive, right-click > Open With > StudyHub.", "Hand-write notes? on your phone, tap upload & snap a picture.", "Go to York Quizlet for a great resource & quick way to help."]
+            var tips = ["Try out the mobile version and add it to your home screen.", "Share from GDrive, right-click > Open With > StudyHub.", "Hand-write notes? on your phone, tap upload & snap a picture.", "Go to York Quizlet for a great resource & quick way to help.", "Click the star next to a classe's title to favorite it."]
             document.getElementById("tip_text").innerHTML = tips[Math.floor(Math.random() * tips.length)];
         </script>
         <link rel="stylesheet" href="css/style.css" />
@@ -222,8 +222,8 @@
                         <md-button ng-click="refreshLayout()">Refresh Layout</md-button>
                         <p>TotalPosts: {{allPosts.length}} Sorted: {{sortedPosts.length}}</p>
                     </span>
-                    <div name="Posts Grid" ng-hide="queryParams.classPath == 'Quizlet'">
-                        <div angular-grid="sortedPosts" id="layout_grid" ag-gutter-size="12" angular-grid-id="postsGrid" refreshOnImgLoad="false" ag-scroll-container="#content_container" ag-infinite-scroll="loadPosts()" ag-infinite-scroll-distance="2.25" ag-infinite-scroll-delay="2000">
+                    <div name="Posts Grid" ng-if="queryParams.classPath !== 'Quizlet'">
+                        <div angular-grid="sortedPosts" id="layout_grid" ag-gutter-size="12" ag-id="postsGrid" ag-refresh-on-img-load="false" ag-scroll-container="#content_container" ag-infinite-scroll="loadPosts()" ag-infinite-scroll-delay="2500" ag-performant-scroll="false" ag-page-size="2">
                             <div ng-repeat="post in sortedPosts track by post.id" ng-style="{'background-color': post.class.color + ' 0.6)'}" class="post-card" ng-if="post.loadStatus == 'Loaded'">
                                 <div class="post-card-header unselectable" md-ink-ripple="{{post.link != ''}}" ng-class="{'no-link': post.link == '', 'gDrive-type': post.type == 'gDrive'}" ng-click="openLink(post.link)" title="{{removeHttp(post.link)}}">
                                     <img ng-src="{{post.previewImage||'https://ssl.gstatic.com/atari/images/simple-header-blended-small.png'}}" class="post-card-image unselectable"></img>
@@ -233,7 +233,7 @@
                                             <span ng-if="post.teachers"><md-icon>face</md-icon> {{post.teachers.join(' & ')}}</span>
                                         </div>
                                         <div class="gradient-overlay-metadata metadata-regular unselectable" style="font-style: oblique">
-                                            <span ng-if="post.creationDate"><md-icon>today</md-icon> {{post.creationDate | date : "shortDate"}}</span>
+                                            <span ng-if="post.creationDate"><md-icon>today</md-icon> {{::formatDate(post.creationDate)}}</span>
                                             <span ng-if="post.labels"><md-icon>local_offer</md-icon> {{post.labels.join(', ')}}</span>
                                         </div>
                                         <div class="metadata-link">
@@ -268,11 +268,11 @@
                                                 <md-icon>more_vert</md-icon>
                                             </md-button>
                                             <md-menu-content>
-                                                <md-menu-item ng-if="post.creator.email == myInfo.email || devMode == true">
+                                                <md-menu-item ng-if="post.creator.email == myInfo.email || myInfo.moderator === true">
                                                     <md-button ng-click="::newPost(post,'update')">
                                                         <md-icon>edit</md-icon>Edit</md-button>
                                                 </md-menu-item>
-                                                <md-menu-item ng-if="post.creator.email == myInfo.email || devMode == true">
+                                                <md-menu-item ng-if="post.creator.email == myInfo.email || myInfo.moderator === true">
                                                     <md-button ng-click="::deletePost(post)">
                                                         <md-icon>delete</md-icon>Delete</md-button>
                                                 </md-menu-item>
