@@ -233,7 +233,7 @@
                                             <span ng-if="post.teachers"><md-icon>face</md-icon> {{post.teachers.join(' & ')}}</span>
                                         </div>
                                         <div class="gradient-overlay-metadata metadata-regular unselectable" style="font-style: oblique">
-                                            <span ng-if="post.creationDate"><md-icon>today</md-icon> {{post.creationDate | date : "shortDate"}}</span>
+                                            <span ng-if="post.creationDate"><md-icon>today</md-icon> {{post.creationDate}}</span>
                                             <span ng-if="post.labels"><md-icon>local_offer</md-icon> {{post.labels.join(', ')}}</span>
                                         </div>
                                         <div class="metadata-link">
@@ -268,11 +268,11 @@
                                                 <md-icon>more_vert</md-icon>
                                             </md-button>
                                             <md-menu-content>
-                                                <md-menu-item ng-if="post.creator.email == myInfo.email || devMode == true">
+                                                <md-menu-item ng-if="post.creator.email == myInfo.email || myInfo.moderator === true">
                                                     <md-button ng-click="::newPost(post,'update')">
                                                         <md-icon>edit</md-icon>Edit</md-button>
                                                 </md-menu-item>
-                                                <md-menu-item ng-if="post.creator.email == myInfo.email || devMode == true">
+                                                <md-menu-item ng-if="post.creator.email == myInfo.email || myInfo.moderator === true">
                                                     <md-button ng-click="::deletePost(post)">
                                                         <md-icon>delete</md-icon>Delete</md-button>
                                                 </md-menu-item>
