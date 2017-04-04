@@ -995,7 +995,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          }, null, 150, 'Problem liking the post, try again.');
       }, 2000);
    };
-   $
+   $scope.formatDate = function(date) {
+      return date.month
+   }
 
    //----------------------------------------------------
    //-------------------- dialogs -----------------------
