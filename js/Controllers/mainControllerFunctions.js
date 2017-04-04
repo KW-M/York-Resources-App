@@ -63,10 +63,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
       function onLocationChange() {
          console.log('url changed')
-         clearTimeout()
+         clearInterval(getFileTimer)
          getFileTimer = setInterval(function () {
-            if ($scope.sortedPosts.length === loadedCounter)
-               if ((($scope.sortedPosts.length * 600) / (content_container.scrollWidth / 300)) < content_container.scrollHeight) angularGridInstance.postsGrid.refresh();
+            if ($scope.sortedPosts.length === 0 || $scope.sortedPosts.length === loadedCounter) hideSpinner();
+            if ((($scope.sortedPosts.length * 600) / (content_container.scrollWidth / 300)) < content_container.scrollHeight) angularGridInstance.postsGrid.refresh();
             if (conurancyCounter === 0 && content_container.scrollHeight === content_container.clientHeight) $scope.loadPosts()
          }, 1000);
          $scope.queryParams.classPath = $location.path().replace(/\//g, "").replace(/-/g, " ").replace(/~/g, "-") || 'All Posts';
@@ -561,7 +561,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
    }
 
-   function hideSpinner(hide) {
+   function hideSpinner() {
       console.log("LoadCount:" + loadedCounter)
       if ($scope.sortedPosts.length === 0) {
          layout_grid.style.height = '0px';
