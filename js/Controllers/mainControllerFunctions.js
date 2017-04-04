@@ -997,7 +997,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    };
    $scope.formatDate = function(date) {
       console.log(date)
-      return (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getYear()
+      return (date.getMonth() + 1) + '/' + date.getDate() + '/' + (date.getFullYear() - 2000)
    }
 
    //----------------------------------------------------
