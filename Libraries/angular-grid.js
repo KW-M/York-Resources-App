@@ -190,11 +190,13 @@
               var container = $(document.querySelector(options.scrollContainer)),
                 contElm = container[0];
 
+              var $elm = options.scrollContainer === 'body' ? win : container;
+
               return {
-                height: contElm.offsetHeight,
+                height: $elm[0].innerHeight || $elm[0].offsetHeight,
                 scrollHeight: contElm.scrollHeight,
                 startFrom: findPos(domElm, contElm).top,
-                $elm: options.scrollContainer == 'body' ? win : container
+                $elm: $elm
               };
             }
 
