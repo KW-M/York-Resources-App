@@ -17,8 +17,8 @@ function chooseRandom(inputArray) {
 
 //------- Prototype Additions ---------
 
-Date.prototype.addDays = function (days) {
-  var newDateString = this.getDate() + parseInt(days)
+function addDays (date, days) {
+  var newDateString = date.getDate() + parseInt(days)
   return (new Date(newDateString))
 };
 

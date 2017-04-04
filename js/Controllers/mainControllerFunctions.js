@@ -266,7 +266,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }
 
       function convertFirePost(key, value, loadStatus) {
-         //console.log("date created", new Date(value.DC))
+         console.log("date created", new Date(value.DC))
          return {
             id: key,
             creator: {
@@ -338,7 +338,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function orderPosts(inputSet) {
       return inputSet.sort(function (a, b) {
-         return b.creationDate.addDays((b.likeCount || 0) * 2) - a.creationDate.addDays((a.likeCount || 0) * 2);
+         return addDays(b.creationDate,(b.likeCount || 0) * 2) - addDays(a.creationDate,(a.likeCount || 0) * 2);
       })
    }
 
