@@ -61,7 +61,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       onLocationChange();
       $rootScope.$on('$locationChangeSuccess', onLocationChange);
       getFileTimer = setInterval(function () {
-        // if (conurancyCounter === 0 && content_container.scrollHeight === content_container.clientHeight) $scope.loadPosts()
+         if (($scope.sortedPosts.length/(content_container.scrollWidth / 300)) + 00 < content_container.scrollHeight)
+         if (conurancyCounter === 0 && content_container.scrollHeight === content_container.clientHeight) $scope.loadPosts()
       }, 1000);
 
       function onLocationChange() {
