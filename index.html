@@ -223,7 +223,7 @@
                         <p>TotalPosts: {{allPosts.length}} Sorted: {{sortedPosts.length}}</p>
                     </span>
                     <div name="Posts Grid" ng-if=":classPathChange:queryParams.classPath !== 'Quizlet'">
-                            <div id="layout_grid" angular-grid="sortedPosts" ag-id="postsGrid" ag-infinite-scroll="loadPosts()" ag-options="{gutterSize: 12, refreshOnImgLoad: false, scrollContainer: '#content_container'}">
+                        <div id="layout_grid" angular-grid="sortedPosts" ag-id="postsGrid" ag-infinite-scroll="loadPosts()" ag-options="{gutterSize: 12, refreshOnImgLoad: false, scrollContainer: '#content_container'}">
                             <div ng-repeat="post in sortedPosts track by post.id" ng-if="post.loadStatus == 'Loaded'" class="post-card" ng-style="{'background-color': post.class.color + ' 0.6)'}">
                                 <div class="post-card-header unselectable" md-ink-ripple="{{post.link != ''}}" ng-class="{'no-link': post.link == '', 'gDrive-type': post.type == 'gDrive'}" ng-click="openLink(post.link)" title="{{removeHttp(post.link)}}">
                                     <img ng-src="{{post.previewImage||'https://ssl.gstatic.com/atari/images/simple-header-blended-small.png'}}" class="post-card-image unselectable"></img>
@@ -295,7 +295,7 @@
                     </div>
                 </div>
                 <div class="footer-container">
-                    <div class="footer" ng-hide="queryParams.classPath === 'York Quizlet'">
+                    <div class="footer" ng-hide=":classPathChange:queryParams.classPath === 'York Quizlet'">
                         <div id="no_posts_footer" style="display: none;">
                             <h3 style="margin: 0;">It's so lonely here</h3>
                             <p style="margin: 0;font-size: 14px;font-weight: 200;">Be the first to post</p>
@@ -316,7 +316,7 @@
                         </div>
                         <md-progress-circular id="loading_spinner" style="display: none;margin: auto;" class="md-accent" md-mode="indeterminate" md-diameter="30px"></md-progress-circular>
                     </div>
-                    <div class="footer" ng-if="queryParams.classPath === 'York Quizlet'">
+                    <div class="footer" ng-if=":classPathChange:queryParams.classPath === 'York Quizlet'">
                         <h3>Quizlet Connect</h3>
                         <div style="margin: 0 8px">By connecting your Quizlet Account to StudyHub, you'll get access to a nearly all of the Quizlet sets made for York classes by York students in one searchable place. Connecting will also sync any public Quizlet sets you make with
                             the York Quizlet Class. Enter your Quizlet username below to connect.</div>
@@ -331,8 +331,6 @@
         </div>
         <!-------------------------------------------------------->
         <!---------------------- Libraries ----------------------->
-        <!-- Google API and Authentication Library -->
-        <!--<script src="https://apis.google.com/js/api.js"></script>-->
         <!-- Angular Material -->
         <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
         <!-- Angular Core Add-on Libraries -->
@@ -349,7 +347,9 @@
         <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-database.js"></script>
         <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-messaging.js"></script>
         <!-- Other Libraries -->
+        <script src="Libraries/angular-bind-notify.min.js"></script>
         <script src="Libraries/detect-element-resize.js"></script>
+        <script src="Libraries/local-forage.min.js"></script>
         <script src="Libraries/angular-grid.js"></script>
         <!-------------------------------------------------------->
         <!------------------- Website Scripts -------------------->
@@ -542,8 +542,6 @@
                 }
             });
         </script>
-        <script src="Libraries/angular-bind-notify.min.js"></script>
-        <script src="Libraries/local-forage.min.js"></script>
         <!-- Controllers -->
         <script src="js/Controllers/mainControllerFunctions.js"></script>
         <script src="js/Controllers/subControllerFunctions.js"></script>
