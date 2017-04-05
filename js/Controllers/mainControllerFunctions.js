@@ -487,7 +487,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             for (var count = 0; count < max; count++) {
                console.log('got from gdrive - post #' + count)
                var post = addFullPost(postsArray[count])
-               if (post.class.stared === true) localforage.setItem(post.id, post);
+               if (post.class.stared === true && navigator.webkitTemporaryStorage !== undefined) localforage.setItem(post.id, post);
             }
             $timeout(function () {
                $scope.sortedPosts = $scope.sortedPosts;
