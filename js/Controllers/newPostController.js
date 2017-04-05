@@ -52,7 +52,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $scope.post.attachmentIcon = $scope.post.attachmentIcon || ''
         $scope.post.likes = $scope.post.likes || []
         $scope.post.previewImage = $scope.post.previewImage || $scope.getMaterialBackground() || '';
-        if (operation === 'Update') $scope.post.loadStatus = 'Updating'
+        if (operation === 'update') $timeout(function(){$scope.post.loadStatus = 'Updating'})
         $scope.findType();
         $scope.sortLabels()
         hideSelectedLabels();
