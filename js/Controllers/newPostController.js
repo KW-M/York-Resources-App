@@ -35,7 +35,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 catagory: '',
                 color: 'ff00ff'
         };
-        $scope.post.creator = (operation == 'new') ? ({
+        $scope.post.creator = (operation === 'new') ? ({
             classOf: $scope.myInfo.classOf,
             email: $scope.myInfo.email,
             me: true,
