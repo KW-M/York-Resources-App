@@ -191,12 +191,12 @@
                 </md-fab-actions>
             </md-fab-speed-dial>
             <div id="content_container">
-                <div class="content-padding content-top-bar" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}" ng-style="{'background-color': selectedClass.color + ' 1)'}">
+                <div class="content-padding content-top-bar" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}" ng-style=":classPathChange:{'background-color': selectedClass.color + ' 1)'}">
                     <div style="display: flex;align-items: center; margin-top: 12px;">
-                        <span class="md-display-1">{{queryParams.classPath}}</span>
+                        <span class="md-display-1">{{:classPathChange:queryParams.classPath}}</span>
                         <md-button class="star-button" ng-if="selectedClass.stared != null" ng-click="userStarClass(selectedClass)" ng-disabled="offline">
-                            <md-icon style='color: white;font-size: 22px'>{{selectedClass.stared ? 'star' : 'star_outline'}}</md-icon>
-                            <span style="margin-left: 6px;">{{selectedClass.stared ? 'un' : ''}}Star Class</span>
+                            <md-icon style='color: white;font-size: 22px'>{{:classPathChange:selectedClass.stared ? 'star' : 'star_outline'}}</md-icon>
+                            <span style="margin-left: 6px;">{{:classPathChange:selectedClass.stared ? 'un' : ''}}Star Class</span>
                         </md-button>
                     </div>
                     <div style="padding-bottom:8px" ng-hide="queryParams.classPath == 'York Quizlet'"><span class="md-caption">{{selectedClass.rules || 'Do not post test or homework answers. Do post what will help other students get to the answers on their own.'}}</span></div>
@@ -215,14 +215,14 @@
                     </span>
                     </div>
                 </div>
-                <div class="content-padding" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'ugly-brown' : queryParams.classPath == 'Memes' , 'gt-sm': $mdMedia('gt-sm')}" style="padding-top: 34px; padding-bottom: 8px;" ng-hide="queryParams.classPath == 'York Quizlet'">
+                <div class="content-padding" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'ugly-brown' : queryParams.classPath == 'Memes' , 'gt-sm': $mdMedia('gt-sm')}" style="padding-top: 34px; padding-bottom: 8px;">
                     <span ng-if="devMode">
                         <md-button ng-click="consoleLogInput(myInfo, true)">Log My Info</md-button>
                         <md-button ng-click="consoleLogInput({allPosts:allPosts,sortedPosts:sortedPosts,visiblePosts:visiblePosts})">Log Post Arrays</md-button>
                         <md-button ng-click="refreshLayout()">Refresh Layout</md-button>
                         <p>TotalPosts: {{allPosts.length}} Sorted: {{sortedPosts.length}}</p>
                     </span>
-                    <div name="Posts Grid" ng-if=":classChange:queryParams.classPath !== 'Quizlet'">
+                    <div name="Posts Grid" ng-if=":classPathChange:queryParams.classPath !== 'Quizlet'">
                             <div angular-grid="sortedPosts" ag-id="postsGrid" ag-infinite-scroll="loadPosts()" ag-options="{gutterSize: 12, refreshOnImgLoad: false, scrollContainer: '#content_container'}">
                             <div ng-repeat="post in sortedPosts track by post.id" ng-if="post.loadStatus == 'Loaded'" class="post-card" ng-style="{'background-color': post.class.color + ' 0.6)'}">
                                 <div class="post-card-header unselectable" md-ink-ripple="{{post.link != ''}}" ng-class="{'no-link': post.link == '', 'gDrive-type': post.type == 'gDrive'}" ng-click="openLink(post.link)" title="{{removeHttp(post.link)}}">
@@ -295,7 +295,7 @@
                     </div>
                 </div>
                 <div class="footer-container">
-                    <div class="footer" ng-hide="queryParams.classPath == 'York Quizlet'">
+                    <div class="footer" ng-hide=":classPathChange:queryParams.classPath === 'York Quizlet'">
                         <div id="no_posts_footer" style="display: none;">
                             <h3 style="margin: 0;">It's so lonely here</h3>
                             <p style="margin: 0;font-size: 14px;font-weight: 200;">Be the first to post</p>
@@ -316,7 +316,7 @@
                         </div>
                         <md-progress-circular id="loading_spinner" style="display: none;margin: auto;" class="md-accent" md-mode="indeterminate" md-diameter="30px"></md-progress-circular>
                     </div>
-                    <div class="footer" ng-if="queryParams.classPath == 'York Quizlet'">
+                    <div class="footer" ng-if=":classPathChange:queryParams.classPath === 'York Quizlet'">
                         <h3>Quizlet Connect</h3>
                         <div style="margin: 0 8px">By connecting your Quizlet Account to StudyHub, you'll get access to a nearly all of the Quizlet sets made for York classes by York students in one searchable place. Connecting will also sync any public Quizlet sets you make with
                             the York Quizlet Class. Enter your Quizlet username below to connect.</div>
