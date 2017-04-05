@@ -233,7 +233,7 @@
                                             <span ng-if="post.teachers"><md-icon>face</md-icon> {{post.teachers.join(' & ')}}</span>
                                         </div>
                                         <div class="gradient-overlay-metadata metadata-regular unselectable" style="font-style: oblique">
-                                            <span ng-if="post.creationDate"><md-icon>today</md-icon> {{::formatDate(post.creationDate)}}</span>
+                                            <span ng-if="post.creationDate"><md-icon>today</md-icon> {{formatDate(post.creationDate)}}</span>
                                             <span ng-if="post.labels"><md-icon>local_offer</md-icon> {{post.labels.join(', ')}}</span>
                                         </div>
                                         <div class="metadata-link">
@@ -295,7 +295,7 @@
                     </div>
                 </div>
                 <div class="footer-container">
-                    <div class="footer" ng-hide=":classPathChange:queryParams.classPath === 'York Quizlet'">
+                    <div class="footer" ng-hide="queryParams.classPath === 'York Quizlet'">
                         <div id="no_posts_footer" style="display: none;">
                             <h3 style="margin: 0;">It's so lonely here</h3>
                             <p style="margin: 0;font-size: 14px;font-weight: 200;">Be the first to post</p>
@@ -316,7 +316,7 @@
                         </div>
                         <md-progress-circular id="loading_spinner" style="display: none;margin: auto;" class="md-accent" md-mode="indeterminate" md-diameter="30px"></md-progress-circular>
                     </div>
-                    <div class="footer" ng-if=":classPathChange:queryParams.classPath === 'York Quizlet'">
+                    <div class="footer" ng-if="queryParams.classPath === 'York Quizlet'">
                         <h3>Quizlet Connect</h3>
                         <div style="margin: 0 8px">By connecting your Quizlet Account to StudyHub, you'll get access to a nearly all of the Quizlet sets made for York classes by York students in one searchable place. Connecting will also sync any public Quizlet sets you make with
                             the York Quizlet Class. Enter your Quizlet username below to connect.</div>
