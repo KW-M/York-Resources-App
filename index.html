@@ -224,76 +224,76 @@
                     </span>
                     <div name="Posts Grid" ng-if="queryParams.classPath !== 'Quizlet'">
                         <!--<div  angular-grid="sortedPosts"  id="layout_grid" ag-gutter-size="12"  ag-refresh-on-img-load="false" ag-scroll-container="#content_container"  ag-infinite-scroll-delay="2500" ag-performant-scroll="false" ag-page-size="2">-->
-                            <div  angular-grid="sortedPosts" ag-id="postsGrid" ag-options="{gutterSize: 12, refreshOnImgLoad: false, scrollContainer: '#content_container', performantScroll:true}">
-                            <div ng-repeat="post in sortedPosts track by post.id" ng-style="{'background-color': post.class.color + ' 0.6)'}" style="height:50px">
-</div>
-                            <!--<div ng-repeat="post in sortedPosts track by post.id" ng-if="post.loadStatus == 'Loaded'" class="post-card" ng-style="{'background-color': post.class.color + ' 0.6)'}">-->
-                            <!--    <div class="post-card-header unselectable" md-ink-ripple="{{post.link != ''}}" ng-class="{'no-link': post.link == '', 'gDrive-type': post.type == 'gDrive'}" ng-click="openLink(post.link)" title="{{removeHttp(post.link)}}">-->
-                            <!--        <img ng-src="{{post.previewImage||'https://ssl.gstatic.com/atari/images/simple-header-blended-small.png'}}" class="post-card-image unselectable"></img>-->
-                            <!--        <div class="gradient-overlay">-->
-                            <!--            <div class="gradient-overlay-metadata metadata-regular unselectable" style="margin: 5px 0 2px 0;">-->
-                            <!--                <span ng-if="post.class.name"><md-icon>class</md-icon> {{post.class.name}}</span>-->
-                            <!--                <span ng-if="post.teachers"><md-icon>face</md-icon> {{post.teachers.join(' & ')}}</span>-->
-                            <!--            </div>-->
-                            <!--            <div class="gradient-overlay-metadata metadata-regular unselectable" style="font-style: oblique">-->
-                            <!--                <span ng-if="post.creationDate"><md-icon>today</md-icon> {{::formatDate(post.creationDate)}}</span>-->
-                            <!--                <span ng-if="post.labels"><md-icon>local_offer</md-icon> {{post.labels.join(', ')}}</span>-->
-                            <!--            </div>-->
-                            <!--            <div class="metadata-link">-->
-                            <!--                <div class="gradient-overlay-metadata md-chips unselectable" ng-if="post.attachmentName" style="width:100%">-->
-                            <!--                    <md-chip>-->
-                            <!--                        <div class="md-chip-content unselectable">-->
-                            <!--                            <img ng-src="{{post.attachmentIcon}}" style="margin-right:4px"></img>-->
-                            <!--                            <span>{{post.attachmentName}}</span>-->
-                            <!--                        </div>-->
-                            <!--                    </md-chip>-->
-                            <!--                </div>-->
-                            <!--            </div>-->
-                            <!--        </div>-->
-                            <!--    </div>-->
-                            <!--    <div>-->
-                            <!--        <div ng-click="newPost(post, 'view')" style="padding-top: 20px; cursor: pointer;">-->
-                            <!--            <p class="post-card-title md-title">{{post.title}}</p>-->
-                            <!--            <p class="post-card-creator unselectable"><span>By {{::post.creator.name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::post.creator.classOf}})</span></p>-->
-                            <!--            <p id="post_card_description" class="md-body-1" ng-bind-html="post.description" ng-if="post.description != ''" description-overflow></p>-->
-                            <!--        </div>-->
-                            <!--        <md-card-actions layout="row" style="align-items: center;">-->
-                            <!--            <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(post)" ng-disabled="offline">-->
-                            <!--                <span class="like-counter">{{post.likeCount}}</span>-->
-                            <!--                <md-icon md-svg-src="images/thumb_outline.svg" ng-if="post.userLiked == false" style="margin-top: -8px"></md-icon>-->
-                            <!--                <md-icon ng-class="{'md-accent' : post.userLiked}" ng-if="post.userLiked == true" style="margin-top: -8px">thumb_up</md-icon>-->
-                            <!--            </md-button>-->
-                            <!--            <md-button class="md-icon-button" area-label="Flag" ng-click="::unFlagPost(post,$index)" ng-if="post.flagged == true" ng-disabled="offline">-->
-                            <!--                <md-icon class="md-warn">flag</md-icon>-->
-                            <!--            </md-button>-->
-                            <!--            <md-menu ng-if="post.creator.email == myInfo.email || devMode == true">-->
-                            <!--                <md-button ng-click="::$mdOpenMenu($event)" class="md-icon-button">-->
-                            <!--                    <md-icon>more_vert</md-icon>-->
-                            <!--                </md-button>-->
-                            <!--                <md-menu-content>-->
-                            <!--                    <md-menu-item ng-if="post.creator.email == myInfo.email || myInfo.moderator === true">-->
-                            <!--                        <md-button ng-click="::newPost(post,'update')">-->
-                            <!--                            <md-icon>edit</md-icon>Edit</md-button>-->
-                            <!--                    </md-menu-item>-->
-                            <!--                    <md-menu-item ng-if="post.creator.email == myInfo.email || myInfo.moderator === true">-->
-                            <!--                        <md-button ng-click="::deletePost(post)">-->
-                            <!--                            <md-icon>delete</md-icon>Delete</md-button>-->
-                            <!--                    </md-menu-item>-->
-                                                <!--<md-menu-item ng-if="post.flagged != true && post.creator.email != myInfo.email">-->
-                                                <!--    <md-button ng-click="::flagPost(post)">-->
-                                                <!--        <md-icon>flag</md-icon>Flag</md-button>-->
-                                                <!--</md-menu-item>-->
-                            <!--                    <md-menu-item ng-if="devMode == true">-->
-                            <!--                        <md-button ng-click="::logPostToConsole(post,$index)">-->
-                            <!--                            <md-icon>bug_report</md-icon>Debug Post</md-button>-->
-                            <!--                    </md-menu-item>-->
-                            <!--                </md-menu-content>-->
-                            <!--            </md-menu>-->
-                            <!--            <span flex></span>-->
-                            <!--            <md-button id="open_button" ng-if="post.isOverflowed == true" class="md-button md-accent" ng-click="newPost(post, 'view')">More</md-button>-->
-                            <!--        </md-card-actions>-->
-                            <!--    </div>-->
-                            <!--</div>-->
+                            <div  angular-grid="sortedPosts" ag-id="postsGrid" ag-options="{gutterSize: 12, refreshOnImgLoad: false, scrollContainer: '#content_container', performantScroll:true, }">
+<!--                            <div ng-repeat="post in sortedPosts track by post.id" ng-style="{'background-color': post.class.color + ' 0.6)'}" style="height:50px">-->
+<!--</div>-->
+                            <div ng-repeat="post in sortedPosts track by post.id" ng-if="post.loadStatus == 'Loaded'" class="post-card" ng-style="{'background-color': post.class.color + ' 0.6)'}">
+                                <div class="post-card-header unselectable" md-ink-ripple="{{post.link != ''}}" ng-class="{'no-link': post.link == '', 'gDrive-type': post.type == 'gDrive'}" ng-click="openLink(post.link)" title="{{removeHttp(post.link)}}">
+                                    <img ng-src="{{post.previewImage||'https://ssl.gstatic.com/atari/images/simple-header-blended-small.png'}}" class="post-card-image unselectable"></img>
+                                    <div class="gradient-overlay">
+                                        <div class="gradient-overlay-metadata metadata-regular unselectable" style="margin: 5px 0 2px 0;">
+                                            <span ng-if="post.class.name"><md-icon>class</md-icon> {{post.class.name}}</span>
+                                            <span ng-if="post.teachers"><md-icon>face</md-icon> {{post.teachers.join(' & ')}}</span>
+                                        </div>
+                                        <div class="gradient-overlay-metadata metadata-regular unselectable" style="font-style: oblique">
+                                            <span ng-if="post.creationDate"><md-icon>today</md-icon> {{::formatDate(post.creationDate)}}</span>
+                                            <span ng-if="post.labels"><md-icon>local_offer</md-icon> {{post.labels.join(', ')}}</span>
+                                        </div>
+                                        <div class="metadata-link">
+                                            <div class="gradient-overlay-metadata md-chips unselectable" ng-if="post.attachmentName" style="width:100%">
+                                                <md-chip>
+                                                    <div class="md-chip-content unselectable">
+                                                        <img ng-src="{{post.attachmentIcon}}" style="margin-right:4px"></img>
+                                                        <span>{{post.attachmentName}}</span>
+                                                    </div>
+                                                </md-chip>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div ng-click="newPost(post, 'view')" style="padding-top: 20px; cursor: pointer;">
+                                        <p class="post-card-title md-title">{{post.title}}</p>
+                                        <p class="post-card-creator unselectable"><span>By {{::post.creator.name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::post.creator.classOf}})</span></p>
+                                        <p id="post_card_description" class="md-body-1" ng-bind-html="post.description" ng-if="post.description != ''" description-overflow></p>
+                                    </div>
+                                    <md-card-actions layout="row" style="align-items: center;">
+                                        <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(post)" ng-disabled="offline">
+                                            <span class="like-counter">{{post.likeCount}}</span>
+                                            <md-icon md-svg-src="images/thumb_outline.svg" ng-if="post.userLiked == false" style="margin-top: -8px"></md-icon>
+                                            <md-icon ng-class="{'md-accent' : post.userLiked}" ng-if="post.userLiked == true" style="margin-top: -8px">thumb_up</md-icon>
+                                        </md-button>
+                                        <md-button class="md-icon-button" area-label="Flag" ng-click="::unFlagPost(post,$index)" ng-if="post.flagged == true" ng-disabled="offline">
+                                            <md-icon class="md-warn">flag</md-icon>
+                                        </md-button>
+                                        <md-menu ng-if="post.creator.email == myInfo.email || devMode == true">
+                                            <md-button ng-click="::$mdOpenMenu($event)" class="md-icon-button">
+                                                <md-icon>more_vert</md-icon>
+                                            </md-button>
+                                            <md-menu-content>
+                                                <md-menu-item ng-if="post.creator.email == myInfo.email || myInfo.moderator === true">
+                                                    <md-button ng-click="::newPost(post,'update')">
+                                                        <md-icon>edit</md-icon>Edit</md-button>
+                                                </md-menu-item>
+                                                <md-menu-item ng-if="post.creator.email == myInfo.email || myInfo.moderator === true">
+                                                    <md-button ng-click="::deletePost(post)">
+                                                        <md-icon>delete</md-icon>Delete</md-button>
+                                                </md-menu-item>
+                                                <md-menu-item ng-if="post.flagged != true && post.creator.email != myInfo.email">
+                                                    <md-button ng-click="::flagPost(post)">
+                                                        <md-icon>flag</md-icon>Flag</md-button>
+                                                </md-menu-item>
+                                                <md-menu-item ng-if="devMode == true">
+                                                    <md-button ng-click="::logPostToConsole(post,$index)">
+                                                        <md-icon>bug_report</md-icon>Debug Post</md-button>
+                                                </md-menu-item>
+                                            </md-menu-content>
+                                        </md-menu>
+                                        <span flex></span>
+                                        <md-button id="open_button" ng-if="post.isOverflowed == true" class="md-button md-accent" ng-click="newPost(post, 'view')">More</md-button>
+                                    </md-card-actions>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
