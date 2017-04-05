@@ -1002,7 +1002,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
 window.brodcastDate = function(argument) {
-   $scope.$broadcast('$$rebind::' + 'updateDate');
+   $scope.$broadcast('$$rebind::' + 'updatePostGrid');
 }
    //----------------------------------------------------
    //-------------------- dialogs -----------------------
