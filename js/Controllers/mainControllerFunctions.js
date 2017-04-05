@@ -1001,6 +1001,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       return newDate.toString()
    }
 
+window.brodcastDate = function(argument) {
+   $scope.$broadcast('$$rebind::' + 'updateDate');
+}
    //----------------------------------------------------
    //-------------------- dialogs -----------------------
    function DialogController(scope, $mdDialog) {
