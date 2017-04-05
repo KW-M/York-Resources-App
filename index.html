@@ -71,7 +71,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
         <!-------------------------------------------------------->
         <!------------------- The top toolbar -------------------->
-        <md-toolbar class="md-whiteframe-z2 ng-cloak toolbar-top" ng-class="{'rainbow' : queryParams.classPath == 'Memes' }">
+        <md-toolbar class="md-whiteframe-z2 ng-cloak toolbar-top" ng-class=":classPathChange:{'rainbow' : queryParams.classPath == 'Memes' }">
             <div class="md-toolbar-tools">
                 <md-button class="md-icon-button" ng-click="::toggleSidebar()">
                     <md-icon>menu</md-icon>
@@ -194,23 +194,23 @@
                 <div class="content-padding content-top-bar" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}" ng-style=":classPathChange:{'background-color': selectedClass.color + ' 1)'}">
                     <div style="display: flex;align-items: center; margin-top: 12px;">
                         <span class="md-display-1">{{:classPathChange:queryParams.classPath}}</span>
-                        <md-button class="star-button" ng-if="selectedClass.stared != null" ng-click="userStarClass(selectedClass)" ng-disabled="offline">
+                        <md-button class="star-button" ng-if=":classPathChange:selectedClass.stared != null" ng-click="userStarClass(selectedClass)" ng-disabled="offline">
                             <md-icon style='color: white;font-size: 22px'>{{:classPathChange:selectedClass.stared ? 'star' : 'star_outline'}}</md-icon>
                             <span style="margin-left: 6px;">{{:classPathChange:selectedClass.stared ? 'un' : ''}}Star Class</span>
                         </md-button>
                     </div>
-                    <div style="padding-bottom:8px" ng-hide="queryParams.classPath == 'York Quizlet'"><span class="md-caption">{{selectedClass.rules || 'Do not post test or homework answers. Do post what will help other students get to the answers on their own.'}}</span></div>
-                    <div class="create-post-bar-top" ng-hide="queryParams.classPath == 'York Quizlet' || offline">
+                    <div style="padding-bottom:8px" ng-if=":classPathChange:queryParams.classPath !== 'York Quizlet'"><span class="md-caption">{{:classPathChange:selectedClass.rules || 'Do not post test or homework answers. Do post what will help other students get to the answers on their own.'}}</span></div>
+                    <div class="create-post-bar-top" ng-if=":classPathChange:queryParams.classPath !== 'York Quizlet' || offline">
                         <span md-ink-ripple="true" class="create-post-bar-text unselectable" flex ng-click="::newPost({},'new')">
                         <md-icon style="margin-top: -3px;">add_circle</md-icon>
                         <span>Share a resource...</span>
                         </span>
                         <span ng-click="::showDrivePicker('Upload')">
-                        <md-tooltip md-direction="::down">Upload</md-tooltip>
+                        <md-tooltip md-direction="down">Upload</md-tooltip>
                         <md-icon class="unselectable" style="color: black;">file_upload</md-icon>
                     </span>
                         <span ng-click="::showDrivePicker('Drive')">
-                        <md-tooltip md-direction="::down">Add Drive file</md-tooltip>
+                        <md-tooltip md-direction="down">Add Drive file</md-tooltip>
                         <md-icon class="unselectable" md-svg-icon="driveIcon"></md-icon>
                     </span>
                     </div>
