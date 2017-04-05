@@ -5,6 +5,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     var linkChangeTimer = null;
     var originalPost = angular.copy(postObj);
     console.log(originalPost)
+    postObj.loadStatus = 'Updating';
     $scope.post = postObj;
     $scope.otherClass = {
         name: 'Other',
@@ -21,6 +22,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     }
 
     function initializePost() {
+        $scope.post.loadStatus = 'Updating';
         $scope.post.title = $scope.post.title || ''
         $scope.post.description = $scope.post.description || ''
         $scope.post.link = $scope.post.link || ''
@@ -53,7 +55,6 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $scope.post.likes = $scope.post.likes || []
         $scope.post.previewImage = $scope.post.previewImage || $scope.getMaterialBackground() || '';
         //if (operation === 'update')
-        $timeout(function(){$scope.post.loadStatus = 'Updating'})
         $scope.findType();
         $scope.sortLabels()
         hideSelectedLabels();
