@@ -98,6 +98,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          if ($scope.allPosts.length != 0) sortPosts($scope.queryParams.q != previousSearch);
          $timeout(function () {
             $scope.selectedClass = $scope.selectedClass;
+            $scope.$broadcast('$$rebind::' + 'classPathChange');
          });
       }
    }
@@ -1001,9 +1002,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       return newDate.toString()
    }
 
-window.brodcastDate = function(argument) {
-   $scope.$broadcast('$$rebind::' + 'updatePostGrid');
-}
    //----------------------------------------------------
    //-------------------- dialogs -----------------------
    function DialogController(scope, $mdDialog) {
