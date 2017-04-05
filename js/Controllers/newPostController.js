@@ -21,7 +21,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     }
 
     function initializePost() {
-        $scope.post.loadStatus = 'Updating';
+
         $scope.post.title = $scope.post.title || ''
         $scope.post.description = $scope.post.description || ''
         $scope.post.link = $scope.post.link || ''

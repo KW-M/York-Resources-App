@@ -591,6 +591,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function newPost(postObj, operation, event) {
       $scope.newPostScroll = 0;
+      postObj.loadStatus = 'Updating';
       var dialogConfig = {
             templateUrl: 'templates/createPost.html',
             controller: ['$scope', '$timeout', '$http', '$mdDialog', 'APIService', 'authorizationService', '$mdToast', "postObj", "operation", newPostController],
@@ -619,7 +620,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          // }//('#new_post_button'),
 
       $mdDialog.show(dialogConfig).then(function () {
-         //done
+         postObj.loadStatus = 'Loaded';
       });
 
       function onDialogLoaded() {
