@@ -224,24 +224,24 @@
                     </span>
                     <div name="Posts Grid" ng-if=":classPathChange:queryParams.classPath !== 'Quizlet'">
                         <div id="layout_grid" angular-grid="sortedPosts" ag-id="postsGrid" ag-infinite-scroll="loadPosts()" ag-options="{gutterSize: 12, refreshOnImgLoad: false, scrollContainer: '#content_container'}">
-                            <div ng-repeat="post in sortedPosts track by post.id" ng-if="post.loadStatus == 'Loaded'" class="post-card" ng-style="{'background-color': post.class.color + ' 0.6)'}">
-                                <div class="post-card-header unselectable" md-ink-ripple="{{post.link != ''}}" ng-class="{'no-link': post.link == '', 'gDrive-type': post.type == 'gDrive'}" ng-click="openLink(post.link)" title="{{removeHttp(post.link)}}">
-                                    <img ng-src="{{post.previewImage||'https://ssl.gstatic.com/atari/images/simple-header-blended-small.png'}}" class="post-card-image unselectable"></img>
+                            <div ng-repeat="post in sortedPosts track by post.id" ng-if="post.loadStatus == 'Loaded'" class="post-card" ng-style="::{'background-color': post.class.color + ' 0.6)'}">
+                                <div class="post-card-header unselectable" md-ink-ripple="{{::post.link != ''}}" ng-class="::{'no-link': post.link == '', 'gDrive-type': post.type == 'gDrive'}" ng-click="openLink(post.link)" title="{{::removeHttp(post.link)}}">
+                                    <img ng-src="{{::post.previewImage||'https://ssl.gstatic.com/atari/images/simple-header-blended-small.png'}}" class="post-card-image unselectable"></img>
                                     <div class="gradient-overlay">
                                         <div class="gradient-overlay-metadata metadata-regular unselectable" style="margin: 5px 0 2px 0;">
-                                            <span ng-if="post.class.name"><md-icon>class</md-icon> {{post.class.name}}</span>
-                                            <span ng-if="post.teachers"><md-icon>face</md-icon> {{post.teachers.join(' & ')}}</span>
+                                            <span ng-if="::post.class.name"><md-icon>class</md-icon> {{::post.class.name}}</span>
+                                            <span ng-if="::post.teachers"><md-icon>face</md-icon> {{::post.teachers.join(' & ')}}</span>
                                         </div>
                                         <div class="gradient-overlay-metadata metadata-regular unselectable" style="font-style: oblique">
-                                            <span ng-if="post.creationDate"><md-icon>today</md-icon> {{formatDate(post.creationDate)}}</span>
-                                            <span ng-if="post.labels"><md-icon>local_offer</md-icon> {{post.labels.join(', ')}}</span>
+                                            <span ng-if="::post.creationDate"><md-icon>today</md-icon> {{::formatDate(post.creationDate)}}</span>
+                                            <span ng-if="::post.labels"><md-icon>local_offer</md-icon> {{::post.labels.join(', ')}}</span>
                                         </div>
                                         <div class="metadata-link">
-                                            <div class="gradient-overlay-metadata md-chips unselectable" ng-if="post.attachmentName" style="width:100%">
+                                            <div class="gradient-overlay-metadata md-chips unselectable" ng-if="::post.attachmentName" style="width:100%">
                                                 <md-chip>
                                                     <div class="md-chip-content unselectable">
-                                                        <img ng-src="{{post.attachmentIcon}}" style="margin-right:4px"></img>
-                                                        <span>{{post.attachmentName}}</span>
+                                                        <img ng-src="{{::post.attachmentIcon}}" style="margin-right:4px"></img>
+                                                        <span>{{::post.attachmentName}}</span>
                                                     </div>
                                                 </md-chip>
                                             </div>
