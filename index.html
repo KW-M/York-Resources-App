@@ -224,7 +224,7 @@
                     </span>
                     <div name="Posts Grid" ng-if="queryParams.classPath !== 'Quizlet'">
                         <!--<div  angular-grid="sortedPosts"  id="layout_grid" ag-gutter-size="12" ag-id="postsGrid" ag-refresh-on-img-load="false" ag-scroll-container="#content_container"  ag-infinite-scroll-delay="2500" ag-performant-scroll="false" ag-page-size="2">-->
-                            <div  angular-grid="::sortedPosts" ag-scroll-container="'#content_container'"  ag-performant-scroll="true" ag-page-size="2">
+                            <div  angular-grid="sortedPosts" ag-scroll-container="#content_container"  ag-performant-scroll="true" ag-page-size="2">
                             <div ng-repeat="post in sortedPosts track by post.id" ng-style="{'background-color': post.class.color + ' 0.6)'}" style="height:50px">
 </div>
                             <!--<div ng-repeat="post in sortedPosts track by post.id" ng-if="post.loadStatus == 'Loaded'" class="post-card" ng-style="{'background-color': post.class.color + ' 0.6)'}">-->
