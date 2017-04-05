@@ -224,9 +224,9 @@
                     </span>
                     <div name="Posts Grid" ng-if="queryParams.classPath !== 'Quizlet'">
                         <div  id="layout_grid" ag-gutter-size="12" ag-id="postsGrid" ag-refresh-on-img-load="false" ag-scroll-container="#content_container"  ag-infinite-scroll-delay="2500" ag-performant-scroll="false" ag-page-size="2">
-                            <div ng-repeat="post in sortedPosts track by post.id" ng-style="{'background-color': post.class.color + ' 0.6)'}" class="post-card" ng-if="post.loadStatus == 'Loaded'">
-                                <!--angular-grid="sortedPosts"-->
-                                <div class="post-card-header unselectable" md-ink-ripple="{{post.link != ''}}" ng-class="{'no-link': post.link == '', 'gDrive-type': post.type == 'gDrive'}" ng-click="openLink(post.link)" title="{{removeHttp(post.link)}}">
+                            <div ng-repeat="post in sortedPosts track by post.id" class="post-card" >
+                                <!--angular-grid="sortedPosts" ng-if="post.loadStatus == 'Loaded'" -->
+                            <!--    <div class="post-card-header unselectable" md-ink-ripple="{{post.link != ''}}" ng-class="{'no-link': post.link == '', 'gDrive-type': post.type == 'gDrive'}" ng-click="openLink(post.link)" title="{{removeHttp(post.link)}}">-->
                                     <img ng-src="{{post.previewImage||'https://ssl.gstatic.com/atari/images/simple-header-blended-small.png'}}" class="post-card-image unselectable"></img>
                                     <div class="gradient-overlay">
                                         <div class="gradient-overlay-metadata metadata-regular unselectable" style="margin: 5px 0 2px 0;">
@@ -234,7 +234,7 @@
                                             <span ng-if="post.teachers"><md-icon>face</md-icon> {{post.teachers.join(' & ')}}</span>
                                         </div>
                                         <div class="gradient-overlay-metadata metadata-regular unselectable" style="font-style: oblique">
-                                            <span ng-if="post.creationDate"><md-icon>today</md-icon> {{formatDate(post.creationDate)}}</span>
+                                            <span ng-if="post.creationDate"><md-icon>today</md-icon> {{::formatDate(post.creationDate)}}</span>
                                             <span ng-if="post.labels"><md-icon>local_offer</md-icon> {{post.labels.join(', ')}}</span>
                                         </div>
                                         <div class="metadata-link">
@@ -248,7 +248,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                <!--</div>-->
                                 <div>
                                     <div ng-click="newPost(post, 'view')" style="padding-top: 20px; cursor: pointer;">
                                         <p class="post-card-title md-title">{{post.title}}</p>
