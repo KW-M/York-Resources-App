@@ -4,27 +4,27 @@
 			ng-click="openLink(post.link, operation != 'view')" ng-style="{'height': ((operation == 'view' && post.link == '') ? (60):(200-newPostScroll)) + 'px'}" title="{{removeHttp(post.link)}}">
 			<img ng-src="{{post.previewImage}}" id="header_image" ng-class="{'post-card-image':operation == 'view'}"></img>
 			<div class="gradient-overlay new-post-img-gradient">
-				<div id="header_title" style="opacity: 0" class="gradient-overlay-metadata metadata-regular">
-					<h5 style="margin: 0">{{post.title}}</h5>
-					<span style="font-weight:700; font-size:14px"><md-icon class="small-icon" style="color:white">people</md-icon> {{post.class.name || 'No class'}}</span>
-					<span ng-if="post.tags.length != 0"><md-icon class="small-icon" style="color:white">style</md-icon>{{post.tags.join(', ')}}</span>
-				</div>
-				<div class="gradient-overlay-metadata metadata-regular" ng-if="operation == 'view'">
-					<span ng-hide="post.class.name == null"><md-icon>people</md-icon> {{post.class.name}}</span>
+				<!--<div id="header_title" style="opacity: 0" class="gradient-overlay-metadata metadata-regular">-->
+				<!--	<h5 style="margin: 0">{{::post.title}}</h5>-->
+				<!--	<span style="font-weight:700; font-size:14px"><md-icon class="small-icon" style="color:white">people</md-icon> {{::post.class.name || 'No class'}}</span>-->
+				<!--	<span ng-if="::post.tags.length != 0"><md-icon class="small-icon" style="color:white">style</md-icon>{{::post.tags.join(', ')}}</span>-->
+				<!--</div>-->
+				<div class="gradient-overlay-metadata metadata-regular" ng-if="operation === 'view'">
+					<span ng-hide="::post.class.name == null"><md-icon>people</md-icon> {{::post.class.name}}</span>
 					<span><md-icon>event</md-icon> {{::formatDate(post.creationDate)}}</span>
 				</div>
-				<div ng-class="{'metadata-link': operation == 'view'}" ng-if="post.attachmentName">
-				<div class="md-chips gradient-overlay-metadata" style="position:absolute; padding: 0 40px 0 8px">
-					<md-chip>
-						<div class="md-chip-content">
-							<img ng-src="{{post.attachmentIcon}}" style="margin-right:4px"></img>
-							<span>{{post.attachmentName}}</span>
-							<button class="md-chip-remove" style="margin-right:-8px; pointer-events:initial" ng-click="clearLink()" ng-if="operation != 'view'">
+				<div ng-class="{'metadata-link': operation === 'view'}" ng-if="post.attachmentName">
+					<div class="md-chips gradient-overlay-metadata" style="position:absolute; padding: 0 40px 0 8px">
+						<md-chip>
+							<div class="md-chip-content">
+								<img ng-src="{{post.attachmentIcon}}" style="margin-right:4px"></img>
+								<span>{{post.attachmentName}}</span>
+								<button class="md-chip-remove" style="margin-right:-8px; pointer-events:initial" ng-click="clearLink()" ng-if="operation != 'view'">
                         		<md-icon style="color:rgb(66,66,66)">close</md-icon>
                      		</button>
-						</div>
-					</md-chip>
-				</div>
+							</div>
+						</md-chip>
+					</div>
 				</div>
 				<div id="header_link_input_container" class="gradient-overlay-metadata" ng-hide="operation == 'view'">
 					<md-input-container id="header_link_input" md-no-float ng-if="!post.attachmentName">
@@ -93,7 +93,7 @@
 				<input ng-model="post.title" ng-readonly="operation == 'view'" class="new-post-title md-title" placeholder="Title" md-autofocus>
 				<p class="post-card-creator md-subhead" style="margin:0" ng-hide="::post.creator.name == undefined || post.creator.name == myInfo.name"><span>By {{::post.creator.name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::post.creator.classOf}})</span>
 				</p>
-				<div contenteditable="{{operation != 'view'}}" ng-model="post.description" class="new-post-body" flex></div>
+				<div contenteditable="{{operation !== 'view'}}" ng-model="post.description" class="new-post-body" flex ng-if="!(operation === 'view' && post.description == '')"></div>
 			</div>
 		</div>
 	</md-dialog-content>

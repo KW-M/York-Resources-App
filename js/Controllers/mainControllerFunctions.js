@@ -67,7 +67,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          getFileTimer = setInterval(function () {
             if ($scope.sortedPosts.length === 0 || $scope.sortedPosts.length === loadedCounter) hideSpinner();
             if ((($scope.sortedPosts.length * 600) / (content_container.scrollWidth / 300)) < content_container.scrollHeight) angularGridInstance.postsGrid.refresh();
-            if (conurancyCounter === 0 && content_container.scrollHeight < content_container.clientHeight) $scope.loadPosts()
+            if (conurancyCounter === 0 && content_container.scrollHeight === content_container.clientHeight) $scope.loadPosts()
          }, 1000);
          $scope.queryParams.classPath = $location.path().replace(/\//g, "").replace(/-/g, " ").replace(/~/g, "-") || 'All Posts';
          $scope.selectedClass = $scope.findClassObject($scope.queryParams.classPath);
@@ -98,6 +98,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          if ($scope.allPosts.length != 0) sortPosts($scope.queryParams.q != previousSearch);
          $timeout(function () {
             $scope.selectedClass = $scope.selectedClass;
+            $scope.$broadcast('$$rebind::' + 'classPathChange');
          });
       }
    }
@@ -487,7 +488,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             for (var count = 0; count < max; count++) {
                console.log('got from gdrive - post #' + count)
                var post = addFullPost(postsArray[count])
-               localforage.setItem(post.id, post);
+               if (post.class.stared === true && navigator.webkitTemporaryStorage !== undefined) localforage.setItem(post.id, post);
             }
             $timeout(function () {
                $scope.sortedPosts = $scope.sortedPosts;
@@ -590,6 +591,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    function newPost(postObj, operation, event) {
       $scope.newPostScroll = 0;
+      postObj.loadStatus = 'Updating';
       var dialogConfig = {
             templateUrl: 'templates/createPost.html',
             controller: ['$scope', '$timeout', '$http', '$mdDialog', 'APIService', 'authorizationService', '$mdToast', "postObj", "operation", newPostController],
@@ -618,7 +620,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          // }//('#new_post_button'),
 
       $mdDialog.show(dialogConfig).then(function () {
-         //done
+         postObj.loadStatus = 'Loaded';
       });
 
       function onDialogLoaded() {
@@ -936,7 +938,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          }, null, 150, 'Trouble connecting, double check your username & remmber CaSe CoUnTs.', 1);
       }
    }
-
    $scope.openQuizletAssistWindow = function () {
       var quizWindow = window.open("", "_blank", "status=no,menubar=no,toolbar=no");
       quizWindow.resizeTo(9000, 140)
@@ -997,8 +998,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       }, 2000);
    };
    $scope.formatDate = function (date) {
-      console.log(date)
-      return (date.getMonth() + 1) + '/' + date.getDate() + '/' + (date.getFullYear() - 2000)
+      var newDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + (date.getFullYear() - 2000)
+      console.log(newDate,date)
+      return newDate.toString()
    }
 
    //----------------------------------------------------

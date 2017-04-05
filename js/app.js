@@ -1,11 +1,11 @@
 //define the root angular module (app) as a variable named "app"
-var app = angular.module('StudyHub', ['ngMaterial', 'ngRoute', 'angularGrid', 'ngSanitize']);
+var app = angular.module('StudyHub', ['ngMaterial', 'ngRoute', 'ngSanitize', 'angularGrid', 'angular.bind.notifier']);
 
 //universaly applying configurations/options for the angular module (app) named "app" above
 app.config(function ($mdThemingProvider, $mdIconProvider, $routeProvider, $locationProvider) {
     //$locationProvider.html5Mode(true);
 
-    //configuring cache (Localforage not Angular) 
+    //configuring cache (Localforage not Angular)
     localforage.config({
         name: 'StudyHub Offline Cache',
         storeName: 'StudyHub_Offline_Cache', // Should be alphanumeric, with underscores.

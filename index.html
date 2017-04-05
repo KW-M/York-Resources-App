@@ -62,7 +62,7 @@
             </div>
         </div>
         <script>
-            var tips = ["Try out the mobile version and add it to your home screen.", "Share from GDrive, right-click > Open With > StudyHub.", "Hand-write notes? on your phone, tap upload & snap a picture.", "Go to York Quizlet for a great resource & quick way to help.", "Click the star next to a classe's title to favorite it."]
+            var tips = ["Try out the mobile version, and add it to your home screen.", "Share from GDrive, right-click > Open With > StudyHub.", "Hand-write notes? on your phone, tap upload & snap a picture.", "Go to York Quizlet for a great resource & quick way to help.", "Click the star next to a clase's title to move it to the top of the list."]
             document.getElementById("tip_text").innerHTML = tips[Math.floor(Math.random() * tips.length)];
         </script>
         <link rel="stylesheet" href="css/style.css" />
@@ -71,7 +71,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
         <!-------------------------------------------------------->
         <!------------------- The top toolbar -------------------->
-        <md-toolbar class="md-whiteframe-z2 ng-cloak toolbar-top" ng-class="{'rainbow' : queryParams.classPath == 'Memes' }">
+        <md-toolbar class="md-whiteframe-z2 ng-cloak toolbar-top" ng-class=":classPathChange:{'rainbow' : queryParams.classPath == 'Memes' }">
             <div class="md-toolbar-tools">
                 <md-button class="md-icon-button" ng-click="::toggleSidebar()">
                     <md-icon>menu</md-icon>
@@ -191,57 +191,57 @@
                 </md-fab-actions>
             </md-fab-speed-dial>
             <div id="content_container">
-                <div class="content-padding content-top-bar" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}" ng-style="{'background-color': selectedClass.color + ' 1)'}">
+                <div class="content-padding content-top-bar" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm')}" ng-style=":classPathChange:{'background-color': selectedClass.color + ' 1)'}">
                     <div style="display: flex;align-items: center; margin-top: 12px;">
-                        <span class="md-display-1">{{queryParams.classPath}}</span>
-                        <md-button class="star-button" ng-if="selectedClass.stared != null" ng-click="userStarClass(selectedClass)" ng-disabled="offline">
-                            <md-icon style='color: white;font-size: 22px'>{{selectedClass.stared ? 'star' : 'star_outline'}}</md-icon>
-                            <span style="margin-left: 6px;">{{selectedClass.stared ? 'un' : ''}}Star Class</span>
+                        <span class="md-display-1">{{:classPathChange:queryParams.classPath}}</span>
+                        <md-button class="star-button" ng-if=":classPathChange:selectedClass.stared != null" ng-click="userStarClass(selectedClass)" ng-disabled="offline">
+                            <md-icon style='color: white;font-size: 22px'>{{:classPathChange:selectedClass.stared ? 'star' : 'star_outline'}}</md-icon>
+                            <span style="margin-left: 6px;">{{:classPathChange:selectedClass.stared ? 'un' : ''}}Star Class</span>
                         </md-button>
                     </div>
-                    <div style="padding-bottom:8px" ng-hide="queryParams.classPath == 'York Quizlet'"><span class="md-caption">{{selectedClass.rules || 'Do not post test or homework answers. Do post what will help other students get to the answers on their own.'}}</span></div>
-                    <div class="create-post-bar-top" ng-hide="queryParams.classPath == 'York Quizlet' || offline">
+                    <div style="padding-bottom:8px" ng-if=":classPathChange:queryParams.classPath !== 'York Quizlet'"><span class="md-caption">{{:classPathChange:selectedClass.rules || 'Do not post test or homework answers. Do post what will help other students get to the answers on their own.'}}</span></div>
+                    <div class="create-post-bar-top" ng-if=":classPathChange:queryParams.classPath !== 'York Quizlet' || offline">
                         <span md-ink-ripple="true" class="create-post-bar-text unselectable" flex ng-click="::newPost({},'new')">
                         <md-icon style="margin-top: -3px;">add_circle</md-icon>
                         <span>Share a resource...</span>
                         </span>
                         <span ng-click="::showDrivePicker('Upload')">
-                        <md-tooltip md-direction="::down">Upload</md-tooltip>
+                        <md-tooltip md-direction="down">Upload</md-tooltip>
                         <md-icon class="unselectable" style="color: black;">file_upload</md-icon>
                     </span>
                         <span ng-click="::showDrivePicker('Drive')">
-                        <md-tooltip md-direction="::down">Add Drive file</md-tooltip>
+                        <md-tooltip md-direction="down">Add Drive file</md-tooltip>
                         <md-icon class="unselectable" md-svg-icon="driveIcon"></md-icon>
                     </span>
                     </div>
                 </div>
-                <div class="content-padding" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'ugly-brown' : queryParams.classPath == 'Memes' , 'gt-sm': $mdMedia('gt-sm')}" style="padding-top: 34px; padding-bottom: 8px;" ng-hide="queryParams.classPath == 'York Quizlet'">
+                <div class="content-padding" ng-class="{'xs': $mdMedia('xs'), 'sm': $mdMedia('sm'), 'ugly-brown' : queryParams.classPath == 'Memes' , 'gt-sm': $mdMedia('gt-sm')}" style="padding-top: 34px; padding-bottom: 8px;">
                     <span ng-if="devMode">
                         <md-button ng-click="consoleLogInput(myInfo, true)">Log My Info</md-button>
                         <md-button ng-click="consoleLogInput({allPosts:allPosts,sortedPosts:sortedPosts,visiblePosts:visiblePosts})">Log Post Arrays</md-button>
                         <md-button ng-click="refreshLayout()">Refresh Layout</md-button>
                         <p>TotalPosts: {{allPosts.length}} Sorted: {{sortedPosts.length}}</p>
                     </span>
-                    <div name="Posts Grid" ng-if="queryParams.classPath !== 'Quizlet'">
-                        <div angular-grid="sortedPosts" id="layout_grid" ag-gutter-size="12" ag-id="postsGrid" ag-refresh-on-img-load="false" ag-scroll-container="#content_container" ag-infinite-scroll="loadPosts()" ag-infinite-scroll-delay="2500" ag-performant-scroll="false" ag-page-size="2">
-                            <div ng-repeat="post in sortedPosts track by post.id" ng-style="{'background-color': post.class.color + ' 0.6)'}" class="post-card" ng-if="post.loadStatus == 'Loaded'">
-                                <div class="post-card-header unselectable" md-ink-ripple="{{post.link != ''}}" ng-class="{'no-link': post.link == '', 'gDrive-type': post.type == 'gDrive'}" ng-click="openLink(post.link)" title="{{removeHttp(post.link)}}">
-                                    <img ng-src="{{post.previewImage||'https://ssl.gstatic.com/atari/images/simple-header-blended-small.png'}}" class="post-card-image unselectable"></img>
+                    <div name="Posts Grid" ng-if=":classPathChange:queryParams.classPath !== 'Quizlet'">
+                        <div id="layout_grid" angular-grid="sortedPosts" ag-id="postsGrid" ag-infinite-scroll="loadPosts()" ag-options="{gutterSize: 12, refreshOnImgLoad: false, scrollContainer: '#content_container'}">
+                            <div ng-repeat="post in sortedPosts track by post.id" ng-if="post.loadStatus === 'Loaded'" class="post-card" ng-style="::{'background-color': post.class.color + ' 0.6)'}">
+                                <div class="post-card-header unselectable" md-ink-ripple="{{::post.link != ''}}" ng-class="::{'no-link': post.link == '', 'gDrive-type': post.type == 'gDrive'}" ng-click="openLink(post.link)" title="{{::removeHttp(post.link)}}">
+                                    <img ng-src="{{::post.previewImage||'https://ssl.gstatic.com/atari/images/simple-header-blended-small.png'}}" class="post-card-image unselectable"></img>
                                     <div class="gradient-overlay">
                                         <div class="gradient-overlay-metadata metadata-regular unselectable" style="margin: 5px 0 2px 0;">
-                                            <span ng-if="post.class.name"><md-icon>class</md-icon> {{post.class.name}}</span>
-                                            <span ng-if="post.teachers"><md-icon>face</md-icon> {{post.teachers.join(' & ')}}</span>
+                                            <span ng-if="::post.class.name"><md-icon>class</md-icon> {{::post.class.name}}</span>
+                                            <span ng-if="::post.teachers"><md-icon>face</md-icon> {{::post.teachers.join(' & ')}}</span>
                                         </div>
                                         <div class="gradient-overlay-metadata metadata-regular unselectable" style="font-style: oblique">
-                                            <span ng-if="post.creationDate"><md-icon>today</md-icon> {{::formatDate(post.creationDate)}}</span>
-                                            <span ng-if="post.labels"><md-icon>local_offer</md-icon> {{post.labels.join(', ')}}</span>
+                                            <span ng-if="::post.creationDate"><md-icon>today</md-icon> {{::formatDate(post.creationDate)}}</span>
+                                            <span ng-if="::post.labels"><md-icon>local_offer</md-icon> {{::post.labels.join(', ')}}</span>
                                         </div>
                                         <div class="metadata-link">
-                                            <div class="gradient-overlay-metadata md-chips unselectable" ng-if="post.attachmentName" style="width:100%">
+                                            <div class="gradient-overlay-metadata md-chips unselectable" ng-if="::post.attachmentName" style="width:100%">
                                                 <md-chip>
                                                     <div class="md-chip-content unselectable">
-                                                        <img ng-src="{{post.attachmentIcon}}" style="margin-right:4px"></img>
-                                                        <span>{{post.attachmentName}}</span>
+                                                        <img ng-src="{{::post.attachmentIcon}}" style="margin-right:4px"></img>
+                                                        <span>{{::post.attachmentName}}</span>
                                                     </div>
                                                 </md-chip>
                                             </div>
@@ -250,9 +250,9 @@
                                 </div>
                                 <div>
                                     <div ng-click="newPost(post, 'view')" style="padding-top: 20px; cursor: pointer;">
-                                        <p class="post-card-title md-title">{{post.title}}</p>
+                                        <p class="post-card-title md-title">{{::post.title}}</p>
                                         <p class="post-card-creator unselectable"><span>By {{::post.creator.name}}</span><span style="float:right">(<md-icon class="small-icon">school</md-icon> {{::post.creator.classOf}})</span></p>
-                                        <p id="post_card_description" class="md-body-1" ng-bind-html="post.description" ng-if="post.description != ''" description-overflow></p>
+                                        <p id="post_card_description" class="md-body-1" ng-bind-html="::post.description" ng-if="::post.description != ''" description-overflow></p>
                                     </div>
                                     <md-card-actions layout="row" style="align-items: center;">
                                         <md-button id="like_thumb_button" aria-label="Like" ng-click="likePost(post)" ng-disabled="offline">
@@ -260,9 +260,9 @@
                                             <md-icon md-svg-src="images/thumb_outline.svg" ng-if="post.userLiked == false" style="margin-top: -8px"></md-icon>
                                             <md-icon ng-class="{'md-accent' : post.userLiked}" ng-if="post.userLiked == true" style="margin-top: -8px">thumb_up</md-icon>
                                         </md-button>
-                                        <md-button class="md-icon-button" area-label="Flag" ng-click="::unFlagPost(post,$index)" ng-if="post.flagged == true" ng-disabled="offline">
-                                            <md-icon class="md-warn">flag</md-icon>
-                                        </md-button>
+                                        <!--<md-button class="md-icon-button" area-label="Flag" ng-click="::unFlagPost(post,$index)" ng-if="post.flagged == true" ng-disabled="offline">-->
+                                        <!--    <md-icon class="md-warn">flag</md-icon>-->
+                                        <!--</md-button>-->
                                         <md-menu ng-if="post.creator.email == myInfo.email || devMode == true">
                                             <md-button ng-click="::$mdOpenMenu($event)" class="md-icon-button">
                                                 <md-icon>more_vert</md-icon>
@@ -276,10 +276,10 @@
                                                     <md-button ng-click="::deletePost(post)">
                                                         <md-icon>delete</md-icon>Delete</md-button>
                                                 </md-menu-item>
-                                                <!--<md-menu-item ng-if="post.flagged != true && post.creator.email != myInfo.email">-->
-                                                <!--    <md-button ng-click="::flagPost(post)">-->
-                                                <!--        <md-icon>flag</md-icon>Flag</md-button>-->
-                                                <!--</md-menu-item>-->
+                                                <md-menu-item ng-if="post.flagged != true && post.creator.email != myInfo.email">
+                                                    <md-button ng-click="::flagPost(post)">
+                                                        <md-icon>flag</md-icon>Flag</md-button>
+                                                </md-menu-item>
                                                 <md-menu-item ng-if="devMode == true">
                                                     <md-button ng-click="::logPostToConsole(post,$index)">
                                                         <md-icon>bug_report</md-icon>Debug Post</md-button>
@@ -295,7 +295,7 @@
                     </div>
                 </div>
                 <div class="footer-container">
-                    <div class="footer" ng-hide="queryParams.classPath == 'York Quizlet'">
+                    <div class="footer" ng-hide=":classPathChange:queryParams.classPath === 'York Quizlet'">
                         <div id="no_posts_footer" style="display: none;">
                             <h3 style="margin: 0;">It's so lonely here</h3>
                             <p style="margin: 0;font-size: 14px;font-weight: 200;">Be the first to post</p>
@@ -316,7 +316,7 @@
                         </div>
                         <md-progress-circular id="loading_spinner" style="display: none;margin: auto;" class="md-accent" md-mode="indeterminate" md-diameter="30px"></md-progress-circular>
                     </div>
-                    <div class="footer" ng-if="queryParams.classPath == 'York Quizlet'">
+                    <div class="footer" ng-if=":classPathChange:queryParams.classPath === 'York Quizlet'">
                         <h3>Quizlet Connect</h3>
                         <div style="margin: 0 8px">By connecting your Quizlet Account to StudyHub, you'll get access to a nearly all of the Quizlet sets made for York classes by York students in one searchable place. Connecting will also sync any public Quizlet sets you make with
                             the York Quizlet Class. Enter your Quizlet username below to connect.</div>
@@ -331,8 +331,6 @@
         </div>
         <!-------------------------------------------------------->
         <!---------------------- Libraries ----------------------->
-        <!-- Google API and Authentication Library -->
-        <!--<script src="https://apis.google.com/js/api.js"></script>-->
         <!-- Angular Material -->
         <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
         <!-- Angular Core Add-on Libraries -->
@@ -349,7 +347,9 @@
         <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-database.js"></script>
         <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase-messaging.js"></script>
         <!-- Other Libraries -->
+        <script src="Libraries/angular-bind-notify.min.js"></script>
         <script src="Libraries/detect-element-resize.js"></script>
+        <script src="Libraries/local-forage.min.js"></script>
         <script src="Libraries/angular-grid.js"></script>
         <!-------------------------------------------------------->
         <!------------------- Website Scripts -------------------->
@@ -542,7 +542,6 @@
                 }
             });
         </script>
-        <script src="Libraries/local-forge.min.js"></script>
         <!-- Controllers -->
         <script src="js/Controllers/mainControllerFunctions.js"></script>
         <script src="js/Controllers/subControllerFunctions.js"></script>

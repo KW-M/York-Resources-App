@@ -52,6 +52,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $scope.post.attachmentIcon = $scope.post.attachmentIcon || ''
         $scope.post.likes = $scope.post.likes || []
         $scope.post.previewImage = $scope.post.previewImage || $scope.getMaterialBackground() || '';
+        //if (operation === 'update')
         $scope.findType();
         $scope.sortLabels()
         hideSelectedLabels();
@@ -101,7 +102,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                                 document.dispatchEvent(new Event('linkPreviewLoaded'));
                             })
                         }
-                    }, function(){
+                    }, function () {
                         $scope.previewLoading = false;
                         $scope.post.previewImage = 'https://iread50shades.files.wordpress.com/2015/02/deadlink.png'
                     }, 150, 'Problem showing link preview, is your attachment link a valid URL?', 1);
@@ -153,6 +154,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $mdToast.hide();
         $scope.dialog_container.style.opacity = 0.8;
         $scope.dialog_container.style.pointerEvents = 'none';
+        $scope.post.loadStatus = 'Loaded'
         $timeout(function () {
             $mdToast.show({
                 template: '<md-toast><span style="font-size:18px;" flex>Posting</span><md-progress-circular class="md-accent" md-mode="indeterminate" style="margin-right: -12px;" md-diameter="32"></md-progress-circular></md-toast>',
@@ -168,6 +170,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 var createdPost = JSON.parse(postData.result.response.result);
                 console.log('Created Post:', createdPost)
                 addFireDatabaseRef(createdPost).then(function () {
+                    if ($scope.post.class.stared === true && navigator.webkitTemporaryStorage !== undefined) localforage.setItem($scope.post.id, $scope.post);
                     $mdDialog.hide();
                     resetAllLabels();
                     $scope.dialog_container.style.opacity = 1;
