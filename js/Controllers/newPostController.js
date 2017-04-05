@@ -170,7 +170,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 var createdPost = JSON.parse(postData.result.response.result);
                 console.log('Created Post:', createdPost)
                 addFireDatabaseRef(createdPost).then(function () {
-                    if (post.class.stared === true && navigator.webkitTemporaryStorage !== undefined) localforage.setItem(post.id, post);
+                    if ($scope.post.class.stared === true && navigator.webkitTemporaryStorage !== undefined) localforage.setItem($scope.post.id, $scope.post);
                     $mdDialog.hide();
                     resetAllLabels();
                     $scope.dialog_container.style.opacity = 1;
