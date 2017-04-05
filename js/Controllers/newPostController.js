@@ -5,7 +5,6 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     var linkChangeTimer = null;
     var originalPost = angular.copy(postObj);
     console.log(originalPost)
-    postObj.loadStatus = 'Updating';
     $scope.post = postObj;
     $scope.otherClass = {
         name: 'Other',
