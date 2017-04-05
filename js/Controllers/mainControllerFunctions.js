@@ -936,7 +936,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          }, null, 150, 'Trouble connecting, double check your username & remmber CaSe CoUnTs.', 1);
       }
    }
-
    $scope.openQuizletAssistWindow = function () {
       var quizWindow = window.open("", "_blank", "status=no,menubar=no,toolbar=no");
       quizWindow.resizeTo(9000, 140)
