@@ -21,7 +21,6 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     }
 
     function initializePost() {
-
         $scope.post.title = $scope.post.title || ''
         $scope.post.description = $scope.post.description || ''
         $scope.post.link = $scope.post.link || ''
@@ -103,7 +102,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                                 document.dispatchEvent(new Event('linkPreviewLoaded'));
                             })
                         }
-                    }, function(){
+                    }, function () {
                         $scope.previewLoading = false;
                         $scope.post.previewImage = 'https://iread50shades.files.wordpress.com/2015/02/deadlink.png'
                     }, 150, 'Problem showing link preview, is your attachment link a valid URL?', 1);
@@ -171,6 +170,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 var createdPost = JSON.parse(postData.result.response.result);
                 console.log('Created Post:', createdPost)
                 addFireDatabaseRef(createdPost).then(function () {
+                    if (post.class.stared === true && navigator.webkitTemporaryStorage !== undefined) localforage.setItem(post.id, post);
                     $mdDialog.hide();
                     resetAllLabels();
                     $scope.dialog_container.style.opacity = 1;
