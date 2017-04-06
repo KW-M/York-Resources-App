@@ -22,7 +22,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     }
 
     function initializePost() {
-        $scope.post.title = $scope.post.title || ''
+        $scope.post.title = $scope.post.title || '';
         $scope.post.description = $scope.post.description || ''
         $scope.post.link = $scope.post.link || ''
         $scope.post.labels = $scope.post.labels || []
@@ -132,7 +132,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 hideDelay: false,
                 parent: angular.element(dialogElement),
                 controller: function (scope) {
-                    scope.shareSelect = 'reader';
+                    scope.shareSelect = 'commenter';
                     scope.shareFile = function () {
                         if (scope.shareSelect != 'none') {
                             promiseQueue.addPromise('drive', APIService.shareFile($scope.post.attachmentId, scope.shareSelect), $scope.submit, $scope.submit, 150, "The attached file couln't be shared, please share it manualy.", 2);
