@@ -136,7 +136,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                     scope.shareFile = function () {
                         if (scope.shareSelect != 'none') {
                             promiseQueue.addPromise('drive', APIService.shareFile($scope.post.attachmentId, scope.shareSelect), $scope.submit, function () {
-                                setTimeout($scope.submit, 000);
+                                setTimeout($scope.submit, 10000);
                             }, 150, "The attached file couldn't be shared, please share it manualy.", 2);
                         } else {
                             $scope.submit()
