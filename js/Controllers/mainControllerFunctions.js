@@ -571,7 +571,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    function hideSpinner() {
       console.log("LoadCount:" + loadedCounter)
       console.log("layout:" + layout_grid)
-      console.log("La:" + layout_grid)
+      console.log("Laoutstyle:" + layout_grid.style)
       
       
       
