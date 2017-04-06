@@ -278,10 +278,10 @@
                                                     <md-button ng-click="::deletePost(post)">
                                                         <md-icon>delete</md-icon>Delete</md-button>
                                                 </md-menu-item>
-                                                <md-menu-item ng-if="post.flagged != true && post.creator.email != myInfo.email">
-                                                    <md-button ng-click="::flagPost(post)">
-                                                        <md-icon>flag</md-icon>Flag</md-button>
-                                                </md-menu-item>
+                                                <!--<md-menu-item ng-if="post.flagged != true && post.creator.email != myInfo.email">-->
+                                                <!--    <md-button ng-click="::flagPost(post)">-->
+                                                <!--        <md-icon>flag</md-icon>Flag</md-button>-->
+                                                <!--</md-menu-item>-->
                                                 <md-menu-item ng-if="devMode == true">
                                                     <md-button ng-click="::logPostToConsole(post,$index)">
                                                         <md-icon>bug_report</md-icon>Debug Post</md-button>
