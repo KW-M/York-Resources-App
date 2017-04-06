@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<style>
+		body {
+			font-family: roboto, helvetica, sans-serif;
+			font-size: 16px;
+			box-sizing: border-box;
+			text-align: center
+		}
+		
+		.md-button {
+			overflow: hidden;
+			color: rgb(25, 118, 210);
+			box-sizing: border-box;
+			text-decoration-line: none;
+			/*font-weight: bold;*/
+			display: inline-block;
+			min-height: 36px;
+			line-height: 36px;
+			vertical-align: middle;
+			-webkit-box-align: center;
+			-webkit-align-items: center;
+			-ms-grid-row-align: center;
+			align-items: center;
+			text-align: center;
+			border-radius: 3px;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			padding: 0 6px;
+			margin: 6px 8px;
+			background: transparent;
+			white-space: nowrap;
+			font-weight: 500;
+			font-size: 16px;
+			transition: all .6s cubic-bezier(.25, .8, .25, 1);
+			-webkit-transition: all .6s cubic-bezier(.25, .8, .25, 1);
+			/*background-color: rgba(158, 158, 158, 0.2);*/
+		}
+		
+		.md-button:hover {
+			background-color: rgb(25, 118, 210);
+			color: white;
+			box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+		}
+		
+		.link-text {
+			width: 8em;
+			overflow: hidden;
+			transition: width 0.6s ease;
+		}
+		
+		svg {
+			margin-left: -30px;
+			transition: margin-left 0.6s ease;
+		}
+		
+		.md-button:hover svg {
+			margin-left: 0;
+		}
+		
+		.md-button:hover .link-text {
+			width: 4.2em;
+		}
+	</style>
+
+	<body>
+		<h2>Introducing StudyHub</h2>
+		<p>Check it out at: <a href="http://studyhub.york.org" class="md-button"><span style="display: flex;
+    align-items: center;"><svg style="padding-right:4px" xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+</svg> <span class="link-text">studyhub.york.org</span></span></a></p>
+	</body>
+
+</html>

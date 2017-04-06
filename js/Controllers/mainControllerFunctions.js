@@ -148,6 +148,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          name: profile.getName(),
          profilePicture: profile.getImageUrl(),
       }
+      $scope.$broadcast('$$rebind::' + 'userChange');
 
       var progressTimeout = setInterval(function () {
          window.progressInitializationSpinner(2, 'increment')
@@ -166,8 +167,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             getStartupData.resolve();
             clearInterval(progressTimeout);
             window.progressInitializationSpinner(10, 'increment')
-            console.log($scope.myInfo.visits)
             if ($scope.myInfo.visits <= 1) $scope.openOnboardingDialog();
+            $scope.$broadcast('$$rebind::' + 'userChange');
          });
       }, null, 150, 'Problem initializing, try reloading the page.');
 
@@ -291,6 +292,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    //----------------------------------------------------
    //----------- Loading and Sorting Posts --------------
+
+   var footer_problem = document.getElementById("footer_problem");
+   var no_more_footer = document.getElementById("no_more_footer");
+   var no_posts_footer = document.getElementById("no_posts_footer");
+   var loading_spinner = document.getElementById("loading_spinner");
+
    var postsFullyLoaded = false;
    var conurancyCounter = 0;
    var loadedCounter = 0;
@@ -562,7 +569,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function hideSpinner() {
+      var layout_grid = document.getElementById("layout_grid");
       console.log("LoadCount:" + loadedCounter)
+
+
       if ($scope.sortedPosts.length === 0) {
          layout_grid.style.height = '0px';
          loading_spinner.style.display = 'none';
@@ -583,11 +593,6 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    //----------------------------------------------------
    //--------------- Creating Posts ---------------------
-   var layout_grid = document.getElementById("layout_grid");
-   var footer_problem = document.getElementById("footer_problem");
-   var no_more_footer = document.getElementById("no_more_footer");
-   var no_posts_footer = document.getElementById("no_posts_footer");
-   var loading_spinner = document.getElementById("loading_spinner");
 
    function newPost(postObj, operation, event) {
       $scope.newPostScroll = 0;
@@ -861,15 +866,18 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
    $scope.userStarClass = function (classObj) {
       classObj.stared = !classObj.stared;
+      $scope.$broadcast('$$rebind::' + 'userChange');
       if (typeof (starClickTimer[classObj.name]) == 'number') clearTimeout(starClickTimer[classObj.name]);
       starClickTimer[classObj.name] = setTimeout(function () {
          var trueClassObj = $scope.findClassObject(classObj.name)
          trueClassObj.stared = classObj.stared;
+         document.getElementById("sidenav_scroll").scrollTop = 0;
          for (var count = 0, max = $scope.myInfo.staredClasses.length; count < max; count++) {
             if ($scope.myInfo.staredClasses[count].name == classObj.name) {
                classObj.stared = false;
                trueClassObj.stared = false;
                $scope.myInfo.staredClasses.splice(count, 1);
+               $scope.$broadcast('$$rebind::' + 'userChange');
                count = max + 1;
             }
          }
@@ -877,6 +885,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             classObj.stared = true;
             trueClassObj.stared = true;
             $scope.myInfo.staredClasses.push(classObj)
+            $scope.$broadcast('$$rebind::' + 'userChange');
          }
          scopeUpdate(classObj.stared)
          promiseQueue.addPromise('drive', APIService.runGAScript('saveUserPrefs', {
@@ -888,10 +897,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             classObj.stared = data.result.response.result == 'true';
             trueClassObj.stared = classObj.stared;
             scopeUpdate(classObj.stared)
+            $scope.$broadcast('$$rebind::' + 'userChange');
          }, function (err) {
             classObj.stared = !classObj.stared;
             trueClassObj.stared = classObj.stared;
             scopeUpdate(classObj.stared)
+            $scope.$broadcast('$$rebind::' + 'userChange');
          }, 150, 'Problem adding favorite, try again.');
       }, 1000);
 
@@ -934,6 +945,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                      }
                   }
                });
+               $scope.$broadcast('$$rebind::' + 'userChange');
             }, 500)
          }, null, 150, 'Trouble connecting, double check your username & remmber CaSe CoUnTs.', 1);
       }
@@ -1138,7 +1150,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             }
          }
       }
-      return $q.defer().resolve().promise;
+      var promise = $q.defer()
+      promise.resolve()
+      return promise.promise;
    }
 
    function sendErrorEmail(error) {

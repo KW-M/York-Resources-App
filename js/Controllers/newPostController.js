@@ -2,6 +2,7 @@
 //   defined by the $md-dialog in the newPost function on mainController.
 function newPostController($scope, $timeout, $http, $mdDialog, APIService, authorizationService, $mdToast, postObj, operation) {
     console.log(postObj)
+    console.log(operation)
     var linkChangeTimer = null;
     var originalPost = angular.copy(postObj);
     console.log(originalPost)
@@ -21,7 +22,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     }
 
     function initializePost() {
-        $scope.post.title = $scope.post.title || ''
+        $scope.post.title = $scope.post.title || '';
         $scope.post.description = $scope.post.description || ''
         $scope.post.link = $scope.post.link || ''
         $scope.post.labels = $scope.post.labels || []
@@ -35,7 +36,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 catagory: '',
                 color: 'ff00ff'
         };
-        $scope.post.creator = (operation == 'new') ? ({
+        $scope.post.creator = (operation === 'new') ? ({
             classOf: $scope.myInfo.classOf,
             email: $scope.myInfo.email,
             me: true,
@@ -131,10 +132,12 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                 hideDelay: false,
                 parent: angular.element(dialogElement),
                 controller: function (scope) {
-                    scope.shareSelect = 'reader';
+                    scope.shareSelect = 'commenter';
                     scope.shareFile = function () {
                         if (scope.shareSelect != 'none') {
-                            promiseQueue.addPromise('drive', APIService.shareFile($scope.post.attachmentId, scope.shareSelect), $scope.submit, $scope.submit, 150, "The attached file couln't be shared, please share it manualy.", 2);
+                            promiseQueue.addPromise('drive', APIService.shareFile($scope.post.attachmentId, scope.shareSelect), $scope.submit, function () {
+                                setTimeout($scope.submit, 10000);
+                            }, 150, "The attached file couldn't be shared, please share it manualy.", 2);
                         } else {
                             $scope.submit()
                         }
