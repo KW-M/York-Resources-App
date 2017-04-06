@@ -135,7 +135,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
                     scope.shareSelect = 'commenter';
                     scope.shareFile = function () {
                         if (scope.shareSelect != 'none') {
-                            promiseQueue.addPromise('drive', APIService.shareFile($scope.post.attachmentId, scope.shareSelect), $scope.submit, $scope.submit, 150, "The attached file couln't be shared, please share it manualy.", 2);
+                            promiseQueue.addPromise('drive', APIService.shareFile($scope.post.attachmentId, scope.shareSelect), $scope.submit, $scope.submit, 150, "The attached file couln't be shared, please share it manualy.", 1);
                         } else {
                             $scope.submit()
                         }
