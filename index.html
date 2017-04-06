@@ -197,8 +197,8 @@
                     <div style="display: flex;align-items: center; margin-top: 12px;">
                         <span class="md-display-1">{{:classPathChange:queryParams.classPath}}</span>
                         <md-button class="star-button" ng-if=":classPathChange:selectedClass.stared != null" ng-click="userStarClass(selectedClass)" ng-disabled="offline">
-                            <md-icon style='color: white;font-size: 22px'>{{:classPathChange:selectedClass.stared ? 'star' : 'star_outline'}}</md-icon>
-                            <span style="margin-left: 6px;">{{:classPathChange:selectedClass.stared ? 'un' : ''}}Star Class</span>
+                            <md-icon style='color: white;font-size: 22px'>{{:classPathChange:userChange:selectedClass.stared ? 'star' : 'star_outline'}}</md-icon>
+                            <span style="margin-left: 6px;">{{:classPathChange:userChange:selectedClass.stared ? 'un' : ''}}Star Class</span>
                         </md-button>
                     </div>
                     <div style="padding-bottom:8px" ng-if=":classPathChange:queryParams.classPath !== 'York Quizlet'"><span class="md-caption">{{:classPathChange:selectedClass.rules || 'Do not post test or homework answers. Do post what will help other students get to the answers on their own.'}}</span></div>
