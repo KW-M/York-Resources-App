@@ -292,7 +292,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
 
    //----------------------------------------------------
    //----------- Loading and Sorting Posts --------------
-   var layout_grid = document.getElementById("layout_grid");
+
    var footer_problem = document.getElementById("footer_problem");
    var no_more_footer = document.getElementById("no_more_footer");
    var no_posts_footer = document.getElementById("no_posts_footer");
@@ -569,12 +569,10 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
 
    function hideSpinner() {
+      var layout_grid = document.getElementById("layout_grid");
       console.log("LoadCount:" + loadedCounter)
-      console.log("layout:" + layout_grid)
-      console.log("Laoutstyle:" + layout_grid.style)
-      
-      
-      
+
+
       if ($scope.sortedPosts.length === 0) {
          layout_grid.style.height = '0px';
          loading_spinner.style.display = 'none';
@@ -873,7 +871,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       starClickTimer[classObj.name] = setTimeout(function () {
          var trueClassObj = $scope.findClassObject(classObj.name)
          trueClassObj.stared = classObj.stared;
-         document.getElementById("Sidenav_Scroll").scrollTop = 0;
+         document.getElementById("sidenav_scroll").scrollTop = 0;
          for (var count = 0, max = $scope.myInfo.staredClasses.length; count < max; count++) {
             if ($scope.myInfo.staredClasses[count].name == classObj.name) {
                classObj.stared = false;
