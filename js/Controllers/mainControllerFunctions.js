@@ -889,10 +889,12 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             classObj.stared = data.result.response.result == 'true';
             trueClassObj.stared = classObj.stared;
             scopeUpdate(classObj.stared)
+            $scope.$broadcast('$$rebind::' + 'userChange');
          }, function (err) {
             classObj.stared = !classObj.stared;
             trueClassObj.stared = classObj.stared;
             scopeUpdate(classObj.stared)
+            $scope.$broadcast('$$rebind::' + 'userChange');
          }, 150, 'Problem adding favorite, try again.');
       }, 1000);
 

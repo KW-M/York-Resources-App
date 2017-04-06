@@ -225,7 +225,7 @@
                         <p>TotalPosts: {{allPosts.length}} Sorted: {{sortedPosts.length}}</p>
                     </span>
                     <div name="Posts Grid" ng-if=":classPathChange:queryParams.classPath !== 'Quizlet'">
-                        <div id="layout_grid" angular-grid="sortedPosts" ag-id="postsGrid" ag-infinite-scroll="loadPosts()" ag-options="{gutterSize: 12, refreshOnImgLoad: false, scrollContainer: '#content_container'}">
+                        <div id="layout_grid" angular-grid="sortedPosts" ag-id="postsGrid" ag-infinite-scroll="loadPosts()" ag-options="::{gutterSize: 12, refreshOnImgLoad: false, scrollContainer: '#content_container'}">
                             <div ng-repeat="post in sortedPosts track by post.id" ng-if="post.loadStatus === 'Loaded'" class="post-card" ng-style="::{'background-color': post.class.color + ' 0.6)'}">
                                 <div class="post-card-header unselectable" md-ink-ripple="{{::post.link != ''}}" ng-class="::{'no-link': post.link == '', 'gDrive-type': post.type == 'gDrive'}" ng-click="openLink(post.link)" title="{{::removeHttp(post.link)}}">
                                     <img ng-src="{{::post.previewImage||'https://ssl.gstatic.com/atari/images/simple-header-blended-small.png'}}" class="post-card-image unselectable"></img>
