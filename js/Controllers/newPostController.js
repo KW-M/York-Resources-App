@@ -2,6 +2,7 @@
 //   defined by the $md-dialog in the newPost function on mainController.
 function newPostController($scope, $timeout, $http, $mdDialog, APIService, authorizationService, $mdToast, postObj, operation) {
     console.log(postObj)
+    console.log(operation)
     var linkChangeTimer = null;
     var originalPost = angular.copy(postObj);
     console.log(originalPost)
