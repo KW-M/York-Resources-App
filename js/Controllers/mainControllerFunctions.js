@@ -1138,9 +1138,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             }
          }
       }
-      var 
-      return 
-      .resolve().promise;
+      var promise = $q.defer()
+      promise.resolve()
+      return promise.promise;
    }
 
    function sendErrorEmail(error) {
