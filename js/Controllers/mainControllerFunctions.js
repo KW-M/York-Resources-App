@@ -862,6 +862,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    }
    $scope.userStarClass = function (classObj) {
       classObj.stared = !classObj.stared;
+      $scope.$broadcast('$$rebind::' + 'userChange');
       if (typeof (starClickTimer[classObj.name]) == 'number') clearTimeout(starClickTimer[classObj.name]);
       starClickTimer[classObj.name] = setTimeout(function () {
          var trueClassObj = $scope.findClassObject(classObj.name)
@@ -871,6 +872,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                classObj.stared = false;
                trueClassObj.stared = false;
                $scope.myInfo.staredClasses.splice(count, 1);
+               $scope.$broadcast('$$rebind::' + 'userChange');
                count = max + 1;
             }
          }
@@ -878,6 +880,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             classObj.stared = true;
             trueClassObj.stared = true;
             $scope.myInfo.staredClasses.push(classObj)
+            $scope.$broadcast('$$rebind::' + 'userChange');
          }
          scopeUpdate(classObj.stared)
          promiseQueue.addPromise('drive', APIService.runGAScript('saveUserPrefs', {
