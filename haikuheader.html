@@ -33,21 +33,39 @@
 			white-space: nowrap;
 			font-weight: 500;
 			font-size: 16px;
-			-webkit-transition: box-shadow .4s cubic-bezier(.25, .8, .25, 1), background-color .4s cubic-bezier(.25, .8, .25, 1);
-			transition: box-shadow .4s cubic-bezier(.25, .8, .25, 1), background-color .4s cubic-bezier(.25, .8, .25, 1);
-			background-color: rgba(158, 158, 158, 0.2);
+			transition: all .6s cubic-bezier(.25, .8, .25, 1);
+			-webkit-transition: all .6s cubic-bezier(.25, .8, .25, 1);
+			/*background-color: rgba(158, 158, 158, 0.2);*/
 		}
 
 		.md-button:hover {
-			background-color: rgb(41, 98, 255);
+			background-color: rgb(25, 118, 210);
 			color: white;
 			box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
 		}
+        .link-text{
+          width: 8em;
+          overflow:hidden;
+          transition: width 0.6s ease;
+        }
+        svg {
+          width: initial;
+          overflow:hidden;
+          transition: width 0.6s ease;
+        }
+        .md-button:hover .link-text {
+        width: 4.2em;
+        }
+       
 	</style>
 
 	<body>
 		<h2>Introducing StudyHub</h2>
-		<p>Check it out at: <a href="http://studyhub.york.org" class="md-button">studyhub.york.org</a></p>
+		<p>Check it out at: <a href="http://studyhub.york.org" class="md-button"><span style="display: flex;
+    align-items: center;"><svg style="padding-right:4px" xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+</svg> <span class="link-text">studyhub.york.org</span></span></a></p>
 	</body>
 
 </html>
