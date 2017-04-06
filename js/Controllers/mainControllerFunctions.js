@@ -148,6 +148,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          name: profile.getName(),
          profilePicture: profile.getImageUrl(),
       }
+      $scope.$broadcast('$$rebind::' + 'userChange');
 
       var progressTimeout = setInterval(function () {
          window.progressInitializationSpinner(2, 'increment')
@@ -166,8 +167,8 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             getStartupData.resolve();
             clearInterval(progressTimeout);
             window.progressInitializationSpinner(10, 'increment')
-            console.log($scope.myInfo.visits)
             if ($scope.myInfo.visits <= 1) $scope.openOnboardingDialog();
+            $scope.$broadcast('$$rebind::' + 'userChange');
          });
       }, null, 150, 'Problem initializing, try reloading the page.');
 
@@ -934,6 +935,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
                      }
                   }
                });
+               $scope.$broadcast('$$rebind::' + 'userChange');
             }, 500)
          }, null, 150, 'Trouble connecting, double check your username & remmber CaSe CoUnTs.', 1);
       }
