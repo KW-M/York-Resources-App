@@ -363,7 +363,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
             Flagged = true;
 
          if ($scope.queryParams.classPath !== null && $scope.queryParams.classPath !== undefined) {
-            if ($scope.selectedClass !== false && ($scope.queryParams.classPath == 'Other' || $scope.selectedClass.stared != null)) Class = inputSet[count].class.name == $scope.queryParams.classPath;
+            if ($scope.selectedClass !== false && ($scope.queryParams.classPath === 'Other' || $scope.selectedClass.stared != null)) Class = inputSet[count].class.name == $scope.queryParams.classPath;
          } else {
             Class = inputSet[count].class.name !== 'Memes';
          }
