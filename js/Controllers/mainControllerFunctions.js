@@ -358,7 +358,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       var max = inputSet.length;
       for (var count = 0; count < max; count++) {
          var Type = true,
-            Class = true,
+            Class = inputSet[count].class.name !== 'Memes';,
             Creator = true,
             Flagged = true;
 
