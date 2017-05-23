@@ -7,6 +7,11 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
     var originalPost = angular.copy(postObj);
     console.log(originalPost)
     $scope.post = postObj;
+    $scope.memeClass = {
+        name: 'Memes',
+        catagory: 'Other',
+        color: 'FFB8D4'
+    };
     $scope.otherClass = {
         name: 'Other',
         catagory: 'Other',
@@ -32,11 +37,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $scope.post.creationDate = $scope.post.creationDate || new Date()
         $scope.post.updateDate = $scope.post.updateDate || new Date();
         if ($scope.queryParams.classPath === "Memes") {
-            $scope.post.class = {
-                name: 'Memes',
-                    catagory: 'Other',
-                    color: 'FFB8D4'
-            };
+            $scope.post.class = $scope.memeClass
         } else {
             $scope.post.class = $scope.post.class || {
                 name: '',
