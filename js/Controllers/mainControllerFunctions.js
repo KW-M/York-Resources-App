@@ -357,13 +357,14 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       var filteredOut = [];
       var max = inputSet.length;
       for (var count = 0; count < max; count++) {
+         console.log(inputSet[count].class.name)
          var Type = true,
-            Class = true,
+            Class = inputSet[count].class.name !== 'Memes',
             Creator = true,
             Flagged = true;
 
          if ($scope.queryParams.classPath !== null && $scope.queryParams.classPath !== undefined) {
-            if ($scope.selectedClass !== false && ($scope.queryParams.classPath == 'Other' || $scope.selectedClass.stared != null)) Class = inputSet[count].class.name == $scope.queryParams.classPath;
+            if ($scope.selectedClass !== false && ($scope.queryParams.classPath === 'Other' || $scope.selectedClass.stared != null)) Class = inputSet[count].class.name == $scope.queryParams.classPath;
          } else {
             Class = inputSet[count].class.name !== 'Memes';
          }
