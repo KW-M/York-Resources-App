@@ -48,8 +48,8 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
             } else {
                 var tempClass = {
                     name: $scope.selectedClass.name,
-                    catagory: $scope.selectedClass.name,
-                    color: 'ff00ff'
+                    catagory: $scope.selectedClass.catagory,
+                    color:  $scope.selectedClass.color,
                 };
             }
             $scope.post.class = $scope.post.class || tempClass;
@@ -300,7 +300,7 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         $scope.post.type = originalPost.type || 'noLink'
         $scope.post.updateDate = originalPost.updateDate || new Date()
         $scope.post.class = originalPost.class || {
-            Name: '',
+                Name: '',
                 Catagory: '',
                 Color: '#ffffff',
         }
