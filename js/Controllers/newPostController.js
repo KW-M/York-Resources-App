@@ -314,11 +314,12 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         })
     }
 
-$scope.changeOperation = function(operation) {
-     $timeout(function () {
-         $scope.operation = operation
-     })
-}
+    $scope.changeOperation = function (operation) {
+        console.log(operation)
+        $timeout(function () {
+            $scope.operation = operation
+        })
+    }
 
     $scope.classSelectDone = function () {
         $timeout(function () {
