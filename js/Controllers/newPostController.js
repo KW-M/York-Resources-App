@@ -39,11 +39,20 @@ function newPostController($scope, $timeout, $http, $mdDialog, APIService, autho
         if ($scope.queryParams.classPath === "Memes") {
             $scope.post.class = $scope.memeClass
         } else {
-            $scope.post.class = $scope.post.class || {
-                name: '',
+            if ($scope.selectedClass.stared === null) {
+                var tempClass = {
+                    name: '',
                     catagory: '',
                     color: 'ff00ff'
-            };
+                };
+            } else {
+                var tempClass = {
+                    name: $scope.selectedClass.name,
+                    catagory: $scope.selectedClass.name,
+                    color: 'ff00ff'
+                };
+            }
+            $scope.post.class = $scope.post.class || tempClass;
         }
 
         $scope.post.creator = (operation === 'new') ? ({
