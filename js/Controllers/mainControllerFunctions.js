@@ -1,6 +1,6 @@
 /*global app*/ /*global angular*/ /*global gapi*/ /*global google*/ /*global queue*/ /*global subControllerFunctions*/
 app.controller('AppController', controllerFunction)
-   //controllerFunction.$inject(['$scope', '$mdDialog', '$window', '$timeout', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', 'angularGridInstance'])
+//controllerFunction.$inject(['$scope', '$mdDialog', '$window', '$timeout', '$sce', '$mdSidenav', '$mdMedia', 'authorizationService', 'GoogleDriveService', '$q', '$location', 'angularGridInstance'])
 function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, $location, $http, $sce, $mdDialog, $mdPanel, $mdToast, $mdSidenav, $mdMedia, $mdTheming, authorizationService, APIService, angularGridInstance) {
    var content_container = document.getElementById("content_container");
    var self = this;
@@ -181,17 +181,25 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          }
       })
 
-      $q.all([getStartupData.promise, pickerPromise.promise]).then(function () {
-         window.progressInitializationSpinner(100, undefined)
-         console.log("Everything Loaded")
-         listenForURLChange();
-         authorizationService.hideSigninDialog();
-         document.dispatchEvent(new Event('userInitializatinDone'));
-         getDatabase();
-      })
    }
 
-   authorizationService.onLoad(window.signinDone)
+   setTimeout(function () {
+      // Demo mode overide functions
+      $scope.myInfo = {
+         email: 'me@york.org',
+         name: 'Me, Myself & I',
+         profilePicture: null,
+      }
+      $scope.classList = [];
+      $scope.sortedLabels = [];
+      $scope.$broadcast('$$rebind::' + 'userChange');
+      window.progressInitializationSpinner(100, undefined)
+      console.log("Everything Loaded")
+      listenForURLChange();
+      authorizationService.hideSigninDialog();
+      document.dispatchEvent(new Event('userInitializatinDone'));
+      $scope.openOnboardingDialog();
+   }, 3000)
 
    function initiateDrivePicker() {
       var uploadView = new google.picker.DocsUploadView().setParent("0B5NVuDykezpkUGd0LTRGc2hzM2s");
@@ -599,31 +607,31 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
       $scope.newPostScroll = 0;
       postObj.loadStatus = 'Updating';
       var dialogConfig = {
-            templateUrl: 'templates/createPost.html',
-            controller: ['$scope', '$timeout', '$http', '$mdDialog', 'APIService', 'authorizationService', '$mdToast', "postObj", "operation", newPostController],
-            locals: {
-               postObj: postObj,
-               operation: operation,
-            },
-            scope: $scope,
-            preserveScope: true,
-            onComplete: onDialogLoaded,
-            clickOutsideToClose: false,
-            fullscreen: $mdMedia('xs'),
-            parent: angular.element(document.body),
-         }
-         // openFrom: {
-         //    top: rect.top,
-         //    left: rect.left,
-         //    height: rect.height,
-         //    width: rect.width,
-         // },
-         // closeTo: {
-         //    top: rect.top,
-         //    left: rect.left,
-         //    height: rect.height,
-         //    width: rect.width,
-         // }//('#new_post_button'),
+         templateUrl: 'templates/createPost.html',
+         controller: ['$scope', '$timeout', '$http', '$mdDialog', 'APIService', 'authorizationService', '$mdToast', "postObj", "operation", newPostController],
+         locals: {
+            postObj: postObj,
+            operation: operation,
+         },
+         scope: $scope,
+         preserveScope: true,
+         onComplete: onDialogLoaded,
+         clickOutsideToClose: false,
+         fullscreen: $mdMedia('xs'),
+         parent: angular.element(document.body),
+      }
+      // openFrom: {
+      //    top: rect.top,
+      //    left: rect.left,
+      //    height: rect.height,
+      //    width: rect.width,
+      // },
+      // closeTo: {
+      //    top: rect.top,
+      //    left: rect.left,
+      //    height: rect.height,
+      //    width: rect.width,
+      // }//('#new_post_button'),
 
       $mdDialog.show(dialogConfig).then(function () {
          postObj.loadStatus = 'Loaded';
@@ -1012,7 +1020,7 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
    };
    $scope.formatDate = function (date) {
       var newDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + (date.getFullYear() - 2000)
-      console.log(newDate,date)
+      console.log(newDate, date)
       return newDate.toString()
    }
 
@@ -1033,10 +1041,11 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          })
       }
       scope.openOnboardingDialog = $scope.openOnboardingDialog;
-      scope.myEmail = $scope.myInfo.Email;
+      // scope.myEmail = $scope.myInfo.Email;
       scope.fullscreen = $mdMedia('xs');
       scope.onboardingPageNumber = 0;
    }
+
    $scope.openHelpDialog = function () { //called by the top right toolbar help button
       $mdDialog.show({
          templateUrl: 'templates/help.html',
@@ -1067,8 +1076,9 @@ function controllerFunction($scope, $rootScope, $window, $timeout, $filter, $q, 
          clickOutsideToClose: false,
          fullscreen: ($mdMedia('xs')),
       });
-      authorizationService.hideSigninDialog();
+      // authorizationService.hideSigninDialog();
    };
+
    $scope.closeDialog = function () {
       $mdDialog.hide();
    };
